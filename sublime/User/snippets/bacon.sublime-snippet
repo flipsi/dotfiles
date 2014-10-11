@@ -1,0 +1,10 @@
+<snippet>
+    <description>Bacon Ipsum (tastier than Lorem Ipsum)</description>
+	<content><![CDATA[
+Bacon ipsum dolor sit amet tenderloin sirloin prosciutto meatloaf shoulder bresaola sausage biltong ground round shank chicken. Drumstick short ribs shankle ham sausage doner. Pork chop chuck meatball capicola, shoulder bacon sirloin meatloaf. Ribeye short loin pig beef ribs capicola strip steak boudin hamburger. Bacon pig filet mignon pastrami, flank ground round shankle biltong pancetta brisket ribeye corned beef. Swine frankfurter bresaola, filet mignon corned beef ball tip pork loin capicola venison chicken strip steak t-bone ham hock jerky beef ribs. Frankfurter biltong pig filet mignon capicola pork belly leberkas tri-tip tongue ribeye short loin ground round meatloaf tail. Turducken ribeye shankle, sausage kielbasa venison salami pork loin. Drumstick andouille filet mignon ball tip kielbasa bresaola brisket tri-tip capicola shank sausage. Brisket sirloin biltong ball tip, ham hock shankle sausage chicken turkey kielbasa andouille bacon leberkas.
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>bacon</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

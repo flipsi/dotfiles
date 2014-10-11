@@ -1,0 +1,141 @@
+" This is a really bad vimrc. I should take the time to improve it...
+
+
+
+" VUNDLE ---------------------------------------------------------------
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+
+
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+Plugin 'terryma/vim-smooth-scroll'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList          - list configured plugins
+" :PluginInstall(!)    - install (update) plugins
+" :PluginSearch(!) foo - search (or refresh cache first) for foo
+" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+
+
+"-----------------------------------------------------------------------
+
+" show line numbers
+:set number
+
+"ignore case in search patterns
+:set ignorecase
+
+
+
+"-----------------------------------------------------------------------
+
+" hack: let vim realize the alt key in bash
+let c='a'
+while c <= 'z'
+  exec "set <m-".c.">=\e".c
+  exec "imap \e".c." <m-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+set timeout ttimeoutlen=50
+
+
+"-----------------------------------------------------------------------
+"-----------------------------------------------------------------------
+
+
+" KEYBINDINGS
+" ===========
+
+
+" quit vim quickly
+map Q ZQ
+
+
+" NEO arrow keys when in QWERTZ (now i use xmodmap)
+"noremap € <Up>
+"inoremap € <Up>
+"cnoremap € <Up>
+"noremap ð <Down>
+"inoremap ð <Down>
+"cnoremap ð <Down>
+"noremap ſ <Left>
+"inoremap ſ <Left>
+"cnoremap ſ <Left>
+"noremap đ <Right>
+"inoremap đ <Right>
+"cnoremap đ <Right>
+
+
+" scroll with alt+space and alt+m (does not work)
+map <m-Space> <C-D> 
+map <m-m> <C-U> 
+
+" smooth scroll
+noremap <silent> <c-u> :call smooth_scroll#up(15, 18, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(15, 18, 2)<CR>
+
+" escape insert mode 
+inoremap <m-i> <Esc>
+"inoremap » <Esc>
+cnoremap <m-i> <C-e><C-u><Esc>
+"cnoremap » <C-e><C-u><Esc>
+
+" move cursor
+noremap <m-h> <Left>
+noremap <m-l> <Right>
+nnoremap <m-b> b
+nnoremap <m-w> w
+inoremap <m-b> <Esc>bi
+inoremap <m-w> <Esc>wi
+
+" search 
+nnoremap - /
+nnoremap _ ?
+nnoremap ö /
+nnoremap Ö ?
+
+" goto mark 
+nnoremap ä ' 
+
+" change or yank to line end (l instead of $)
+map cl c$
+map yl y$
+
+" add new line above or below
+"noremap <m-o> :call append(line('.')-1, '')<CR>
+noremap <m-o> <Esc>o<Esc>k
+"noremap <m-S-o> :call append(line('.')+1, '')<CR>
+"noremap <m-O> <Esc>ifoobar
+
+
+" undo and redo
+noremap <A-u> :undo<CR>
+"noremap <A-S-u> :redo<CR>
+

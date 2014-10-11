@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+\\vspace{9pt}\\begin{center}\begin{tabular}{|c|c|${1:c|}}\hline
+\\rowcolor{grau} $0 	\\\\\\hline
+\end{tabular}\\end{center}\\vspace{9pt}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>tabular</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>text.tex.latex</scope>
+</snippet>

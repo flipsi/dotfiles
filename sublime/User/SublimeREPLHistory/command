@@ -1,0 +1,752 @@
+-2+2
+-demo()
+-2+2
+-2+22+22+22
+-3+4\n3+3
+-3+2\n7
+-sqrt(2)
+-help(round)
+-ls()
+-5+9
+-ls()
+-character()
+-character(0)
+-8
+-84
+-654+6854+684
+-peter<-c(172,20)
+-ls()
+-peter[1]
+-peter[2]
+-peter[0]
+-length(peter)
+-c(8,7)
+-8:7
+-4:11
+-sum(peter)
+-sum(peter[1:2])
+-sort(peter)
+-peter
+-x <- c(-10:-7,0,2:6)
+-x
+-x <- c(-10:-7,0,2:6)
+-q()
+-n
+-x <- c(-10:-7,0,2:6)
+-x
+-length(x)
+-head(x)
+-tail(x)
+-sum(x)
+-cumsum(x)
+-x+x
+-x
+-2*x
+-x*c(1,2)
+-x
+-x*c(1,2)
+-x+c(0,1,2)
+-x+c(0,1,2,0,0)
+-x
+-x*(x>0)
+-x>0
+-x*FALSE
+-x*TRUE
+-t(x)
+-x %
+-x %*
+-x %*%
+-3
+-x %*% t(x)
+-t(t(x))
+-t(t(t(x)))
+-t(x)*x
+-t(x)%*%x
+-x[x>0]
+-length(x[x>0])
+-x[7]
+-x[7:9]
+-z <- 0\nfor(i in 1:length(x)) {\nz <- z+i*x[i]\n}\nz/length(x)
+-x
+-plot(sin,xlim=c(0,3*pi),xlab="x",ylab="y",col="red")
+-plot(cos,xlim=c(0,3*pi),col="blue",add=TRUE)
+-plot(sin,xlim=c(0,3*pi),xlab="x",ylab="y",col="red")
+-plot(cos,xlim=c(0,3*pi),col="blue",add=TRUE)
+-f <- function(x) exp(-x*x/2)/sqrt(2*pi)\nplot(f,xlim=c(-3,3),xlab="x",ylab="f(x)")
+-help plot
+-help
+-?plot
+-plot(cos,xlim=c(0,3*pi),col="blue",add=TRUE)
+-plot(sin,xlim=c(0,3*pi),xlab="x",ylab="y",col="red")
+-plot(cos,xlim=c(0,3*pi),col="blue",add=TRUE)
+-plot(sin,xlim=c(0,3*pi),xlab="x",ylab="y",col="red")
+-plot(cos,xlim=c(0,3*pi),col="blue",add=TRUE)
+-s <- function(x) {\nm <- min(x)\nM <- max(x)\nif(m==M) return(x)\nb <- floor((m+M)/2)\nreturn(c(s(x[x<=b]),s(x[x>=b+1])))\n}\ns(x)
+-s
+-s(c(7,4,5))
+-min(c(7,4,5))
+-which(min(c(7,4,5)))
+-x1 <- c(4,3,6,1)
+-x1[x1<5]
+-x
+-?system.time()
+-log(10)
+-log(16)
+-log(e)
+-ld(e)
+-lb(e)
+-?log
+-log2(8)
+-f <- function(n) return(n*log2(n))
+-f(2323)
+-f(x)<1000
+-g <- function(n) {}
+-g <- function(n) {\nfor(i in 1:n) {\nif (f(i)>10000) return i\n}
+-g <- function(n) {\nfor(i in 1:n) {\nif (f(i)>10000) return(i)\n}
+-g <- function(n) {\nfor(i in 1:n) {\nif (f(i)>10000) return(i)\n}}
+-g <- function(n) {\nfor(i in 1:n) {\nif(f(i)>10000) return(i)\n}\n}
+-74
+-g
+-quit
+-f(1003)
+-f(1002)
+-1002*log2(1002)
+-f(1002)
+-f(1003)
+-f(7740)
+-f(7741)
+-f(62746)
+-f(62747)
+-log2(2^2000000)
+-g(2000000,1000000)
+-118649-62746
+-55903/118649
+-118649/55903
+-118649/62746
+-1414/1000
+-20/19
+-log2(100)
+-log2(100)
+-ceiling(log2(100))
+-plot(log2(n))
+-plot(log2)
+-plot(log2, xlim(c(0,10)))
+-plot(log2, xlim=(c(0,10)))
+-plot(log2, xlim=(c(0,40)))
+-plot(log2, xlim=(c(0,100)))
+-plot(sqrt, xlim=(c(0,100)),add=TRUE)
+-plot(log2, xlim=(c(0,100)))
+-plot(sqrt, xlim=(c(0,100)),add=TRUE, col="red")
+-plot(log2, xlim=(c(0,10000)))
+-plot(sqrt, xlim=(c(0,10000)),add=TRUE, col="red")
+-f(7741)
+-f(7740)
+-f(1002)
+-f(1003)
+-22/7
+-22/7/2^1
+-22/7/2^2
+-22/7/(2^2)
+-otto <- 42;
+-otto
+-ErzeugePZZG()
+-seed
+-G1
+-help
+-help()
+-seed
+-G1
+-G1();
+-G1
+-G1()
+-G1();
+-G2 <- ErzeugePZZG();
+-G2()
+-G1
+-G1()
+-G2()
+-G1()
+-x
+-G1
+-G1()
+-x
+-length(c(2,3,4))
+-hugo <- c(3,6,5)
+-hugo
+-append(hugo,9)
+-hugo
+-hugo <- append(hugo,9)
+-hugo
+-hugo[2]
+-sample
+-sample(2)
+-sample(5)
+-sample(10)
+-sample(10, 3)
+-sample(10, 3, replace=true)
+-sample(10, 3, replace=TRUE)
+-sampe(10,3)
+-sample(10,3)
+-sampe(2^30-1,50000,replace=TRUE)
+-sample(2^30-1,50000,replace=TRUE)
+-sample
+-help(sample)
+-hugo
+-sample(hugo)
+-hugo
+-sample(hugo,replace=TRUE)
+-hugo
+-sort(hugo)
+-hugo
+-hugo[x>4]
+-hugo[>4]
+-hugo[hugo>4]
+-hugo/2
+-hugo / 2
+-help(plot)
+-testcount
+-hugo
+-hugo <- (3,4,5)
+-hugo <- c(3,4,5)
+-hugo
+-otto <- c(7,1,4)
+-matrix(hugo,otto)
+-matrix(c(hugo,otto)
+-)
+-matrix(c(hugo,otto),3)
+-franz <- matrix(c(hugo,otto),3)
+-franz
+-append(franz,c(8,8,8))
+-matrix(append(franz,c(8,8,8)),3)
+-franz <- matrix(append(franz,c(8,8,8)),3)
+-franz
+-matrix(c(1,2,3,4,5,6,7,8),4)
+-matrix(c(1,2,3,4,5,6,7,8),2)
+-c(2,3) %*% c(4,2)
+-c(2,3) %*% t(c(4,2))
+-help(append)
+-matrix(c(0.724857591644266, 0.376265884542109, −0.688898738448311, 0.395906056529317, 0, −0.83766483663405), 2)
+-hugo
+-2
+-matrix(c(1,3,5,2,4,6),2)
+-matrix(c(0.724857591644266,0.376265884542109,−0.688898738448311,0.395906056529317,0,−0.83766483663405),2);
+-matrix(c(1,3,-5,2,-4,6),2)
+-matrix(c(1,3,-5,2,-4,6.5),2)
+-matrix(c(1,3,-5.64614981,2,-4,6.5),2)
+-m0
+-foo <- 1:6
+-foo
+-fips <- function() {return 43};
+-fips <- function() {return(43)};
+-fips
+-fips()
+-foo <- for (i in 1:5) {foo<-append(foo,fips())}
+-foo
+-rita <- c();
+-rita
+-for (i in 1:5) {rita<-append(rita,fips())}
+-rita
+-ei <- c();
+-foo <- function() {return(42)}
+-for (i in 1:10) {ei <- append(ei,foo())}
+-ei
+-for (i in 1:10) {ei <- append(ei,foo())};4
+-ei
+-4+3
+-5*10^5
+-5*10^5/2
+-zwei(1:6,v0)
+-class(x)
+-zwei(1:6,v0)
+-x <- zwei(1:6,v0)
+-class(x)
+-length(x)
+-x <- drei(1:6,v0)
+-x <- drei(1:6,m0)
+-class(x)
+-dim(x)
+-help(plot)
+-plot(0:3, test2D_ansiC, pch=".")
+-0.5:0.501
+-0.5:0.5001
+-plot(1:(testcount-2), tests3D_ansiC, ylim=c(0.5,0.6), pch=".")
+-length(tests3D_ansiC)
+-plot(1:999996, tests3D_ansiC, ylim=c(0.5,0.6), pch=".")
+-save.image("/media/Daten/Studium/Stochastik/programmieraufgabe02/saving.RData")
+-ls()
+-plot(1:999996, tests3D_ansiC, ylim=c(0.5,0.6), pch=".", xlabel="Stichprobe", ylabel="Zufallswert")
+-plot(1:999996, tests3D_ansiC, ylim=c(0.5,0.6), pch=".", xlab="Stichprobe", ylab="Zufallswert")
+-plot(1:999996, tests3D_sample, ylim=c(0.5,0.6), pch=".", xlab="Stichprobe", ylab="Zufallswert")
+-plot(1:999996, tests3D_ansiC, ylim=c(0.5,0.6), pch=".", xlab="Stichprobe", ylab="Zufallswert")
+-plot(1:999996, tests3D_sample, ylim=c(0.5,0.6), pch=".", xlab="Stichprobe", ylab="Zufallswert")
+-plot(1:999996, tests2D_ansiC, ylim=c(0.5,0.6), pch=".", xlab="Stichprobe", ylab="Zufallswert")
+-plot(1:999996, test2D_ansiC, ylim=c(0.5,0.6), pch=".", xlab="Stichprobe", ylab="Zufallswert")
+-plot(1:(testcount-1), test2D_ansiC, ylim=c(0.5,0.6), pch=".", xlab="Stichprobe", ylab="Zufallswert")
+-plot(1:(testcount-1), test2D_ansiC, ylim=c(0.5,0.501), pch=".", xlab="Stichprobe", ylab="Zufallswert")
+-plot(1:(testcount-1), test2D_sample, ylim=c(0.5,0.501), pch=".", xlab="Stichprobe", ylab="Zufallswert")
+-plot(1:(1999996), tests3D_ansiC, ylim=c(0.5,0.501), pch=".", xlab="Stichprobe", ylab="Zufallswert")
+-length(tests3D_ansiC)
+-plot(1:(199996), tests3D_ansiC, ylim=c(0.5,0.501), pch=".", xlab="Stichprobe", ylab="Zufallswert")
+-plot(1:(999996), tests3D_ansiC, ylim=c(0.5,0.501), pch=".", xlab="Stichprobe", ylab="Zufallswert")
+-plot(1:(999996), tests3D_sample, ylim=c(0.5,0.501), pch=".", xlab="Stichprobe", ylab="Zufallswert")
+-license
+-ls()
+-f <- function() {return("foo")}
+-function
+-;
+-f
+-f()
+-f();+
+-help()
+-load(url("/media/Daten/Studium/Stochastik/programmieraufgabe02/saving.RData"))
+-load(url("http:/media/Daten/Studium/Stochastik/programmieraufgabe02/saving.RData"))
+-load("/media/Daten/Studium/Stochastik/programmieraufgabe02/saving.RData")
+-ls()
+-test_ansiC
+-load("/media/Daten/Studium/Stochastik/programmieraufgabe02/saving.RData")
+-ls()
+-m0
+-4:7
+-replicate(10, G1())
+-replicate(10, G1())/2^30
+-replicate(10, G1())/2^31
+-replicate(100, G1())/2^31
+-help(matrix)
+-help(sample)
+-p <- 0.3;
+-ls()
+-pc
+-p
+-sample(c(1,0), 8, c(p,1-p));
+-sample(c(1,0), 8, prob=c(p,1-p));
+-sample(c(1,0), 8, TRUE, c(p,1-p));
+-sample(c(1,0), 800, TRUE, c(p,1-p));
+-Zuordnung(3,5,0.2)
+-Zuordnung(15,50,0.2)
+-Zuordnung(12,50,0.6)
+-dim(Zuordnung(12,50,0.6))
+-dim(Zuordnung(12,50,0.6))[0]
+-dim(Zuordnung(12,50,0.6))(0)
+-head(dim(Zuordnung(12,50,0.6)))
+-help(head)
+-head(dim(Zuordnung(12,50,0.6)),1)
+-tail(dim(Zuordnung(12,50,0.6)),1)
+-dim(Zuordnung(12,50,0.6))[0]
+-dim(Zuordnung(12,50,0.6))[1]
+-dim(Zuordnung(12,50,0.6))[2]
+-matrix(c(2,1,1,4,3,2),2))[1,2]
+-matrix(c(2,1,1,4,3,2),2))[c(1,2)]
+-matrix(c(2,1,1,4,3,2),2))[1][2]}
+-matrix(c(2,1,1,4,3,2),2))[1][2]
+-matrix(c(2,1,1,4,3,2),2)[1][2]
+-matrix(c(2,1,1,4,3,2),2)[1,2]
+-matrix(c(2,1,1,4,3,2),2)[2,3]
+-matrix(c(2,1,1,4,3,2),2)[2,1]
+-matrix(c(2,1,1,4,3,2),2)[1,2]
+-matrix(c(2,1,1,4,3,2),2)[1,3]
+-matrix(c(2,1,1,4,3,2),2)[2,2]
+-Zuordnung(4,10)
+-Zuordnung(4,10,0.3)
+-matrix
+-Zuordnung(4,10,0.3)
+-help(sample)
+-matrix(5,3)
+-seq(1,4)
+-seq(1,4,3)
+-help(seq)
+-matrix(5,3,0)
+-matrix(0,5,3)
+-tom <- matrix(0,5,6)
+-tom
+-tom[5,2]
+-tom[5,2] <- 7
+-tom
+-tom[5,2] <- 7
+-tom
+-tom[1,3] <- 3
+-tom
+-dim(tom)[1]
+-tom[1,3]
+-if (3 > 1 || TRUE) 42 else 13
+-if (3 > 1 || FALSE) 42 else 13
+-if (1 > 1 || FALSE) 42 else 13
+-if (1 > 1 || TRUE) 42 else 13
+-3 != 4
+-3 != 3
+-3 != "drei"
+-tim = 34
+-tim
+-timeee = function(x) {return(4*x)}
+-timeee(5)
+-anna = 4
+-anna
+-anna ++
+-anna
+-anna += 1
+-anna++;
+-anna++
+-anna
+-anna++
+-anna
+-anna = anna++
+-anna
+-TRUE ? "jaa" : "nein"
+-!TRUE
+-testfeld1 = Zuordnung(8,20);
+-testfeld1 = Zuordnung(8,20,0.3);
+-testfeld1
+-testfeld1 = Zuordnung(20,12,0.3);
+-testfeld1
+-testfeld1 = Zuordnung(20,12,0.4);
+-testfeld1
+-Verbunden(testfeld1)
+-1,]    0    1    1    0    0    0    1    1    0     1     1     0\n[11,]    0    1    1    0    0    0    1    1    0     1     1     0\n> testfeld1 = Zuordnung(20,12,0.5)
+-1,]    0    1    1    0    0    0    1    1    0     1     1     0\n[11,]    0    1    1    0    0    0    1    1    0     1     1     0\n> testfeld1 = Zuordnung(20,12,0.5);
+-testfeld1 = Zuordnung(20,12,0.5);
+-testfeld1
+-Verbunden(testfeld1)
+-testfeld2 = Zuordnung(20,12,0.4);
+-testfeld2
+-Verbunden(testfeld2)
+-testfeld2 = Zuordnung(20,12,0.4);
+-testfeld2
+-Verbunden(testfeld2)
+-testfeld3 = Zuordnung(20,12,0.4);
+-testfeld3
+-Verbunden(testfeld3)
+-testfeld3 = Zuordnung(20,12,0.4);
+-testfeld3
+-Verbunden(testfeld3)
+-Verbunden(testfeld2)
+-testfeld3 = Zuordnung(20,12,0.4);
+-testfeld3
+-Verbunden(testfeld3)
+-testfeld3 = Zuordnung(20,12,0.4);
+-testfeld3
+-Verbunden(testfeld3)
+-testfeld3 = Zuordnung(20,12,0.5);
+-testfeld3
+-Verbunden(testfeld3)
+-testfeld4 = Zuordnung(8,6,0.5)
+-testfeld4
+-Verbunden(testfeld4)
+-testfeld4 = Zuordnung(8,6,0.5)
+-testfeld4
+-Verbunden(testfeld4)
+-testfeld4 = Zuordnung(8,6,0.5)
+-testfeld4
+-Verbunden(testfeld4)
+-testfeld4
+-Verbunden(testfeld4)
+-testfeld4
+-Verbunden(testfeld4)
+-testfeld4
+-Verbunden(testfeld4)
+-testfeld4
+-Verbunden(testfeld4)
+-print("Gehe zu " + c(2,3) + "haha")
+-print("Gehe zu " . c(2,3) . "haha")
+-print("Gehe zu"); c(3,4);
+-testfeld4
+-Verbunden(testfeld4)
+-print(testfeld4)
+-testfeld4
+-Verbunden(testfeld4)
+-testfeld = Zuordnung(8,10,0.5)
+-testfeld
+-testfeld = Zuordnung(15,10,0.5)
+-testfeld
+-Verbunden(testfeld)
+-test = Zuordnung(12,20,0.5)
+-test
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(12,16,0.5)
+-test
+-test = Zuordnung(16,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(16,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(10,8,0.5)
+-Verbunden(test)
+-test
+-Verbunden(test)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(20,12,0.5)
+-test
+-Verbunden(test)
+-for (i in 1:50) {test = Zuordnung(30,30,0.5); Verbunden(test); }
+-for (i in 1:50) {test = Zuordnung(30,30,0.5); print(Verbunden(test)); }
+-for (i in 1:50) {test = Zuordnung(30,10,0.5); print(Verbunden(test)); }
+-mean(34)
+-mean(34,30)
+-mean(c(3,5,6))
+-mean(c(10,20))
+-mean(c(3, 6, 6))
+-help(replicate)
+-ergeb = replicate(6,Verbunden(Zuordnung(30,10,0.5)))
+-ergeb
+-mean(ergeb)
+-ergeb = replicate(6,Verbunden(Zuordnung(30,10,0.5)))
+-ergeb
+-mean(ergeb)
+-RelativeHaeufigkeit(50,15,15,0.5)
+-ergeb
+-mean(ergeb)
+-ergeb = replicate(6,Verbunden(Zuordnung(30,10,0.5)))
+-ergeb
+-mean(ergeb)
+-RelativeHaeufigkeit(50,15,15,0.5)
+-help(mean)
+-c(0:10,50)
+-mean(c(0:10,50))
+-mean(c(TRUE,FALSE,FALSE,TRUE,TRUE))
+-c(TRUE,FALSE,FALSE,TRUE,TRUE)
+-ergeb
+-mean(ergeb)
+-ergeb = RelativeHaeufigkeit(20,12,0.5,20)
+-mean(ergeb)
+-ergeb = RelativeHaeufigkeit(20,12,0.5,20)
+-RelativeHaeufigkeit(50,15,0.5,50)
+-RelativeHaeufigkeit(50,15,0.5,100)
+-RelativeHaeufigkeit(25,15,0.4,100)
+-RelativeHaeufigkeit(25,15,0.5,100)
+-RelativeHaeufigkeit(25,10,0.4,100)
+-RelativeHaeufigkeit(25,10,0.6,100)
+-RelativeHaeufigkeit(25,10,0.5,100)
+-RelativeHaeufigkeit(25,10,0.5,1000)
+-RelativeHaeufigkeit(25,15,0.5,1000)
+-RelativeHaeufigkeit(20,20,0.5,1000)
+-RelativeHaeufigkeit(20,20,0.6,1000)
+-RelativeHaeufigkeit(30,30,0.6,1000)
+-RelativeHaeufigkeit(30,30,0.5,1000)
+-RelativeHaeufigkeit(20,20,0.4,100)
+-RelativeHaeufigkeit(20,20,0.45,100)
+-RelativeHaeufigkeit(20,20,0.45,1000)
+-RelativeHaeufigkeit(20,20,0.55,1000)
+-RelativeHaeufigkeit(20,20,0.6,1000)
+-RelativeHaeufigkeit(5,5,0.6,25000)
+-system.time(RelativeHaeufigkeit(5,5,0.6,25000))
+-RelativeHaeufigkeit(20,20,0.6,4000)
+-system.time(RelativeHaeufigkeit(20,20,0.6,4000))
+-(3/5)^4
+-test = Zuordnung(18,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(18,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(18,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(18,12,0.5)
+-test
+-Verbunden(test)
+-test = Zuordnung(18,12,0.5)
+-Verbunden(test)
+-test = Zuordnung(18,12,0.5)
+-Verbunden(test)
+-test = Zuordnung(18,12,0.5)
+-Verbunden(test)
+-test = Zuordnung(18,12,0.5)
+-Verbunden(test)
+-test = Zuordnung(18,12,0.5)
+-Verbunden(test)
+-test
+-seq(0,1,1/10)
+-ps = seq(0,1,1/10)
+-RHs = for (p in ps) { RHs = append(RHs,RelativeHaeufigkeit(10,10,0.5,p))}
+-RHs = c();
+-RHs = for (p in ps) { RHs = append(RHs,RelativeHaeufigkeit(10,10,0.5,p))}
+-RHs = append(RHs, 2)
+-RHs
+-RHs = c();
+-RHs = for (p in ps) { RHs = append(RHs,RelativeHaeufigkeit(10,10,p,10000))}
+-RHs
+-RelativeHaeufigkeit(10,10,0.6,1000)
+-RHs = c();
+-for (p in ps) { RHs = append(RHs,RelativeHaeufigkeit(10,10,p,10000))}
+-RHs
+-plot(ps,RHs)
+-plot(ps,RHs,xlab="1-Wahrscheinlichkeit",ylab="Relative Häufigkeit der LR-Eigenschaft")
+-RHfuenf = c();
+-for (p in ps) { RHfuenf = append(RHfuenf,RelativeHaeufigkeit(5,5,p,25000))}
+-plot(ps,RHfuenf,xlab="1-Wahrscheinlichkeit",ylab="Relative Häufigkeit der LR-Eigenschaft")
+-RH20 = c();
+-for (p in ps) { RH20 = append(RH20,RelativeHaeufigkeit(5,5,p,4000))}
+-plot(ps,RH20,xlab="1-Wahrscheinlichkeit",ylab="Relative Häufigkeit der LR-Eigenschaft")
+-10/37
+-plot(ps,RH20,xlab="1-Wahrscheinlichkeit",ylab="Relative Häufigkeit der LR-Eigenschaft")
+-system.time(RelativeHaeufigkeit(20,20,0.5,2000))
+-help(dbinom)
+-dbinom(3,size=3,prob=0.5)
+-dbinom(2,size=3,prob=0.5)
+-dbinom(1,size=3,prob=0.5)
+-dbinom(0,size=3,prob=0.5)
+-dbinom(0,size=3,prob=0.7)
+-dbinom(3,size=3,prob=0.7)
+-dbinom(2,size=3,prob=1/5)
+-dbinom(x=2,size=3,prob=1/5)
+-dbinom(size=3,prob=1/5)
+-dbinom(x=2,size=3,prob=1/5)
+-pbinom(2,size=3,prob=1/5)
+-dbinom(x=1,size=3,prob=1/5)
+-dbinom(x=0,size=3,prob=1/5)
+-dbinom(x=0,size=3,prob=1/5)+dbinom(x=1,size=3,prob=5)+dbinom(x=2,size=3,prob=5)
+-dbinom(x=0,size=3,prob=1/5)+dbinom(x=1,size=3,prob=1/5)+dbinom(x=2,size=3,prob=1/5)
+-dbinom(2:3,size=3,prob=1/4)
+-pbinom(2:3,size=3,prob=1/4)
+-pbinom(2,size=3,prob=1/4)
+-pbinom(2,size=3,prob=1/4, lower.tail=TRUE)
+-pbinom(2,size=3,prob=1/4, lower.tail=FALSE)
+-pbinom(2,size=3,prob=1/5, lower.tail=FALSE)
+-pbinom(2,size=3,prob=1/5)
+-dbinom(x=0,size=3,prob=1/5)+dbinom(x=1,size=3,prob=1/5)+dbinom(x=2,size=3,prob=1/5)
+-pbinom(2,size=3,prob=1/5)
+-rgeom(10,0.3)
+-dexp(1,rate=1)
+-dexp(2,rate=1)
+-dexp(3,rate=1)
+-dexp(3,rate=2)
+-dexp(3,rate=4)
+-dexp(3,rate=0.1)
+-dexp(1,rate=0.1)
+-dexp(0,rate=0.1)
+-help(plot)
+-plot(dbinom(size=100, prob=1/2))
+-dbinom(size=100, prob=1/2)
+-dbinomplot = c();
+-dunif(min=0, max=1)
+-dunif(x=2, min=0, max=1)
+-dunif(x=0:0.2, min=0, max=1)
+-dunif(x=0.2, min=0, max=1)
+-dunif(x=0.3, min=0, max=1)
+-dunif(x=1, min=0, max=1)
+-dunif(x=0.1, min=0, max=1)
+-dunif(x<0.1, min=0, max=1)
+-dunif(x=c(0.1,0.2), min=0, max=1)
+-dunif(x=seq(0,1), min=0, max=1)
+-dunif(x=seq(0,1,1/200), min=0, max=1)
+-curve(dunif(x, min=0, max=1))
+-help(rbinom)
+-rbinom(x=2, n=3, p=0.4)
+-rbinom(x=2, n=2, p=0.4)
+-rbinom(n=2, p=0.4)
+-rbinom(size=2, n=3, prob=0.4)
+-rbinom(n=10, prob=0.4)
+-rbinom(n=4, size=10, prob=0.4)
+-rbinom(size=10, prob=0.4)
+-rbinom(n=10, prob=0.4)
+-rbinom(n=10, size=10, prob=0.4)
+-rbinom(n=10, size=1, prob=0.4)
+-rbinom(n=10, size=0, prob=0.4)
+-rbinom(n=10, size=2, prob=0.4)
+-rbinom(n=10, size=100, prob=0.4)
+-ErwartungswertBin(100,0.3,50000)
+-ErwartungswertBin(100,0.3,500000)
+-rbinom(n=10, size=100, prob=0.4)
+-ökjn
+-VarianzBin(100,0.3,50000)
+-VarianzBin(100,0.3,500000)
+-help(rgeom)
+-ErwartungswertGeo(0.7, 50000)
+-ErwartungswertGeo(0.7, 10000)
+-rgeom(0.7, 40000)
+-rgeom(prob=0.7, n=40000)
+-ErwartungswertGeo(0.7, 10000)
+-ErwartungswertGeo(0.7, 10)
+-rgeom(n=10, prob=0.7)
+-mean(rgeom(n=10, prob=0.7))
+-mean(rgeom(n=100, prob=0.7))
+-mean(rgeom(n=1000, prob=0.7))
+-mean(rgeom(n=10000, prob=0.7))
+-mean(rgeom(n=10000, prob=0.3))
+-ErwartungswertGeo(0.7, 10)
+-ErwartungswertBin(100,0.3,50000)
+-chris = 5;
+-chris
+-ErwartungswertGeo(0.7, 100)
+-ErwartungswertGeo(0.2, 100)
+-VarianzGeo(0.7, 100)
+-VarianzGeo(0.3, 100)
+-ErwartungswertUnif(10000,50,100)
+-runif(n=10000, min=50, max=100)
+-mean(runif(n=10000, min=50, max=100))
+-ErwartungswertUnif(50,10,10000)
+-ErwartungswertUnif(50,100,10000)
+-VarianzUnif(50,100,10000)
+-ErwartungswertExp(0.7,10000)
+-VarianzExp(0.7,10000)
+-VarianzN(0.7,10000)
+-VarianzN(60,10,10000)
+-ErwartungswertN(60,10,10000)
+-help(binom.test)
+-binom.test(x=3, n=10, p=0.5, alternative=t)
+-binom.test(x=3, n=10, p=0.5, alternative=two.sided)
+-binom.test(x=3, n=10, p=0.5, alternative="two.sided")
+-binom.test(x=5, n=10, p=0.5, alternative="two.sided")
+-binom.test(x=1, n=10, p=0.5, alternative="two.sided")

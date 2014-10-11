@@ -1,0 +1,5 @@
+{
+	"cmd": ["psql", "-f", "$file"],
+	"file_regex": "^psql:(.*):([0-9]*): ERROR:",
+	"selector": "source.plpgsql.postgres, source.sql"
+}

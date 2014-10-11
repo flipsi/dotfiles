@@ -1,0 +1,10 @@
+<snippet>
+    <description>Author ("Philipp Moers" and Email)</description>
+	<content><![CDATA[
+Author: Philipp Moers <soziflip funny character gmail dot com>
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>auth</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

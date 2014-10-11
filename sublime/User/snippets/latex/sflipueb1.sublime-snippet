@@ -1,0 +1,22 @@
+<snippet>
+	<content><![CDATA[
+% LaTeX-Code by sflip (sflip@online.de)
+
+\documentclass{/home/flip/stuff/LaTeX/sflipueb1}
+
+\begin{document}
+
+\header{${1:Philipp Moers}}{${2:Titel}}{${3:\\\\}}
+
+\section${4:*}{${5:erste Überschrift}}
+$0
+
+\end{document}
+
+]]>
+	</content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>sflipueb1</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>text.tex.latex</scope>
+</snippet>

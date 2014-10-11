@@ -1,0 +1,20 @@
+-- hoogle inside ghci
+:def hoogle \x -> return $ ":!hoogle \"" ++ x ++ "\""
+:def doc \x -> return $ ":!hoogle --info \"" ++ x ++ "\""
+
+-- load packages
+:m + Data.List
+:m + Data.Maybe
+:m + Data.Functor
+:m + Control.Applicative
+:m + Control.Monad
+
+-- set warnings to true
+:set -Wall
+-- ... but not type defaulting warning. they suck
+:set -fno-warn-type-defaults
+
+
+-- my prompt :)
+:set prompt "\nFunc! $ "
+

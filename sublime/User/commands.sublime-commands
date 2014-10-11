@@ -1,0 +1,187 @@
+[
+    // zoom
+    { "caption": "Zoom in", "command": "increase_font_size", "context": [{"key": "setting.command_mode"}] },
+    { "caption": "Zoom out", "command": "decrease_font_size", "context": [{"key": "setting.command_mode"}] },
+
+    // show whitespace
+    { "caption": "Whitespaces: Toggle all whitespaces", "command": "ws_toggle_whitespaces"},
+    { "caption": "Whitespaces: Toggle spaces", "command": "ws_toggle_spaces"},
+    { "caption": "Whitespaces: Toggle line endings", "command": "ws_toggle_line_endings"},
+
+    // fold
+    { "caption": "Fold Block", "command": "fold" },
+    { "caption": "Unfold Block", "command": "unfold" },
+    { "caption": "Fold All", "command": "fold_by_level", "args": {"level": 1} },
+    { "caption": "Fold Level 2", "command": "fold_by_level", "args": {"level": 2} },
+    { "caption": "Fold Level 3", "command": "fold_by_level", "args": {"level": 3} },
+    { "caption": "Fold Level 4", "command": "fold_by_level", "args": {"level": 4} },
+    { "caption": "Fold Level 5", "command": "fold_by_level", "args": {"level": 5} },
+    { "caption": "Fold Level 6", "command": "fold_by_level", "args": {"level": 6} },
+    { "caption": "Fold Level 7", "command": "fold_by_level", "args": {"level": 7} },
+    { "caption": "Fold Level 8", "command": "fold_by_level", "args": {"level": 8} },
+    { "caption": "Fold Level 9", "command": "fold_by_level", "args": {"level": 9} },
+
+    // restart sublime
+    { "caption": "Restart Sublime Text", "command": "restart" },
+
+    // reopen file with encoding
+    { "caption": "Reopen File with Encoding: UTF-8", "command": "reopen", "args": {"encoding": "utf-8" } },
+    { "caption": "Reopen File with Encoding: UTF-16 LE", "command": "reopen", "args": {"encoding": "utf-16 le" } },
+    { "caption": "Reopen File with Encoding: UTF-16 BE", "command": "reopen", "args": {"encoding": "utf-16 be" } },
+    { "caption": "Reopen File with Encoding: -" },
+    { "caption": "Reopen File with Encoding: Western (Windows 1252)", "command": "reopen", "args": {"encoding": "Western (Windows 1252)" } },
+    { "caption": "Reopen File with Encoding: Western (ISO 8859-1)", "command": "reopen", "args": {"encoding": "Western (ISO 8859-1)" } },
+    { "caption": "Reopen File with Encoding: Western (ISO 8859-3)", "command": "reopen", "args": {"encoding": "Western (ISO 8859-3)" } },
+    { "caption": "Reopen File with Encoding: Western (ISO 8859-15)", "command": "reopen", "args": {"encoding": "Western (ISO 8859-15)" } },
+    { "caption": "Reopen File with Encoding: Western (Mac Roman)", "command": "reopen", "args": {"encoding": "Western (Mac Roman)" } },
+    { "caption": "Reopen File with Encoding: DOS (CP 437)", "command": "reopen", "args": {"encoding": "DOS (CP 437)" } },
+    { "caption": "Reopen File with Encoding: Arabic (Windows 1256)", "command": "reopen", "args": {"encoding": "Arabic (Windows 1256)" } },
+    { "caption": "Reopen File with Encoding: Arabic (ISO 8859-6)", "command": "reopen", "args": {"encoding": "Arabic (ISO 8859-6)" } },
+    { "caption": "Reopen File with Encoding: Baltic (Windows 1257)", "command": "reopen", "args": {"encoding": "Baltic (Windows 1257)" } },
+    { "caption": "Reopen File with Encoding: Baltic (ISO 8859-4)", "command": "reopen", "args": {"encoding": "Baltic (ISO 8859-4)" } },
+    { "caption": "Reopen File with Encoding: Celtic (ISO 8859-14)", "command": "reopen", "args": {"encoding": "Celtic (ISO 8859-14)" } },
+    { "caption": "Reopen File with Encoding: Central European (Windows 1250)", "command": "reopen", "args": {"encoding": "Central European (Windows 1250)" } },
+    { "caption": "Reopen File with Encoding: Central European (ISO 8859-2)", "command": "reopen", "args": {"encoding": "Central European (ISO 8859-2)" } },
+    { "caption": "Reopen File with Encoding: Cyrillic (Windows 1251)", "command": "reopen", "args": {"encoding": "Cyrillic (Windows 1251)" } },
+    { "caption": "Reopen File with Encoding: Cyrillic (Windows 866)", "command": "reopen", "args": {"encoding": "Cyrillic (Windows 866)" } },
+    { "caption": "Reopen File with Encoding: Cyrillic (ISO 8859-5)", "command": "reopen", "args": {"encoding": "Cyrillic (ISO 8859-5)" } },
+    { "caption": "Reopen File with Encoding: Cyrillic (KOI8-R)", "command": "reopen", "args": {"encoding": "Cyrillic (KOI8-R)" } },
+    { "caption": "Reopen File with Encoding: Cyrillic (KOI8-U)", "command": "reopen", "args": {"encoding": "Cyrillic (KOI8-U)" } },
+    { "caption": "Reopen File with Encoding: Estonian (ISO 8859-13)", "command": "reopen", "args": {"encoding": "Estonian (ISO 8859-13)" } },
+    { "caption": "Reopen File with Encoding: Greek (Windows 1253)", "command": "reopen", "args": {"encoding": "Greek (Windows 1253)" } },
+    { "caption": "Reopen File with Encoding: Greek (ISO 8859-7)", "command": "reopen", "args": {"encoding": "Greek (ISO 8859-7)" } },
+    { "caption": "Reopen File with Encoding: Hebrew (Windows 1255)", "command": "reopen", "args": {"encoding": "Hebrew (Windows 1255)" } },
+    { "caption": "Reopen File with Encoding: Hebrew (ISO 8859-8)", "command": "reopen", "args": {"encoding": "Hebrew (ISO 8859-8)" } },
+    { "caption": "Reopen File with Encoding: Nordic (ISO 8859-10)", "command": "reopen", "args": {"encoding": "Nordic (ISO 8859-10)" } },
+    { "caption": "Reopen File with Encoding: Romanian (ISO 8859-16)", "command": "reopen", "args": {"encoding": "Romanian (ISO 8859-16)" } },
+    { "caption": "Reopen File with Encoding: Turkish (Windows 1254)", "command": "reopen", "args": {"encoding": "Turkish (Windows 1254)" } },
+    { "caption": "Reopen File with Encoding: Turkish (ISO 8859-9)", "command": "reopen", "args": {"encoding": "Turkish (ISO 8859-9)" } },
+    { "caption": "Reopen File with Encoding: Vietnamese (Windows 1258)", "command": "reopen", "args": {"encoding": "Vietnamese (Windows 1258)" } },
+    { "caption": "Reopen File with Encoding: -" },
+    { "caption": "Reopen File with Encoding: Hexadecimal", "command": "reopen", "args": {"encoding": "Hexadecimal" } },
+    
+    // save file with encoding
+    { "caption": "Save File with Encoding: UTF-8", "command": "save", "args": {"encoding": "utf-8" } },
+    { "caption": "Save File with Encoding: UTF-8 with BOM", "command": "save", "args": {"encoding": "utf-8 with bom" } },
+    { "caption": "Save File with Encoding: UTF-16 LE", "command": "save", "args": {"encoding": "utf-16 le" } },
+    { "caption": "Save File with Encoding: UTF-16 LE with BOM", "command": "save", "args": {"encoding": "utf-16 le with bom" } },
+    { "caption": "Save File with Encoding: UTF-16 BE", "command": "save", "args": {"encoding": "utf-16 be" } },
+    { "caption": "Save File with Encoding: UTF-16 BE with BOM", "command": "save", "args": {"encoding": "utf-16 be with bom" } },
+    { "caption": "Save File with Encoding: -" },
+    { "caption": "Save File with Encoding: Western (Windows 1252)", "command": "save", "args": {"encoding": "Western (Windows 1252)" } },
+    { "caption": "Save File with Encoding: Western (ISO 8859-1)", "command": "save", "args": {"encoding": "Western (ISO 8859-1)" } },
+    { "caption": "Save File with Encoding: Western (ISO 8859-3)", "command": "save", "args": {"encoding": "Western (ISO 8859-3)" } },
+    { "caption": "Save File with Encoding: Western (ISO 8859-15)", "command": "save", "args": {"encoding": "Western (ISO 8859-15)" } },
+    { "caption": "Save File with Encoding: Western (Mac Roman)", "command": "save", "args": {"encoding": "Western (Mac Roman)" } },
+    { "caption": "Save File with Encoding: DOS (CP 437)", "command": "save", "args": {"encoding": "DOS (CP 437)" } },
+    { "caption": "Save File with Encoding: Arabic (Windows 1256)", "command": "save", "args": {"encoding": "Arabic (Windows 1256)" } },
+    { "caption": "Save File with Encoding: Arabic (ISO 8859-6)", "command": "save", "args": {"encoding": "Arabic (ISO 8859-6)" } },
+    { "caption": "Save File with Encoding: Baltic (Windows 1257)", "command": "save", "args": {"encoding": "Baltic (Windows 1257)" } },
+    { "caption": "Save File with Encoding: Baltic (ISO 8859-4)", "command": "save", "args": {"encoding": "Baltic (ISO 8859-4)" } },
+    { "caption": "Save File with Encoding: Celtic (ISO 8859-14)", "command": "save", "args": {"encoding": "Celtic (ISO 8859-14)" } },
+    { "caption": "Save File with Encoding: Central European (Windows 1250)", "command": "save", "args": {"encoding": "Central European (Windows 1250)" } },
+    { "caption": "Save File with Encoding: Central European (ISO 8859-2)", "command": "save", "args": {"encoding": "Central European (ISO 8859-2)" } },
+    { "caption": "Save File with Encoding: Cyrillic (Windows 1251)", "command": "save", "args": {"encoding": "Cyrillic (Windows 1251)" } },
+    { "caption": "Save File with Encoding: Cyrillic (Windows 866)", "command": "save", "args": {"encoding": "Cyrillic (Windows 866)" } },
+    { "caption": "Save File with Encoding: Cyrillic (ISO 8859-5)", "command": "save", "args": {"encoding": "Cyrillic (ISO 8859-5)" } },
+    { "caption": "Save File with Encoding: Cyrillic (KOI8-R)", "command": "save", "args": {"encoding": "Cyrillic (KOI8-R)" } },
+    { "caption": "Save File with Encoding: Cyrillic (KOI8-U)", "command": "save", "args": {"encoding": "Cyrillic (KOI8-U)" } },
+    { "caption": "Save File with Encoding: Estonian (ISO 8859-13)", "command": "save", "args": {"encoding": "Estonian (ISO 8859-13)" } },
+    { "caption": "Save File with Encoding: Greek (Windows 1253)", "command": "save", "args": {"encoding": "Greek (Windows 1253)" } },
+    { "caption": "Save File with Encoding: Greek (ISO 8859-7)", "command": "save", "args": {"encoding": "Greek (ISO 8859-7)" } },
+    { "caption": "Save File with Encoding: Hebrew (Windows 1255)", "command": "save", "args": {"encoding": "Hebrew (Windows 1255)" } },
+    { "caption": "Save File with Encoding: Hebrew (ISO 8859-8)", "command": "save", "args": {"encoding": "Hebrew (ISO 8859-8)" } },
+    { "caption": "Save File with Encoding: Nordic (ISO 8859-10)", "command": "save", "args": {"encoding": "Nordic (ISO 8859-10)" } },
+    { "caption": "Save File with Encoding: Romanian (ISO 8859-16)", "command": "save", "args": {"encoding": "Romanian (ISO 8859-16)" } },
+    { "caption": "Save File with Encoding: Turkish (Windows 1254)", "command": "save", "args": {"encoding": "Turkish (Windows 1254)" } },
+    { "caption": "Save File with Encoding: Turkish (ISO 8859-9)", "command": "save", "args": {"encoding": "Turkish (ISO 8859-9)" } },
+    { "caption": "Save File with Encoding: Vietnamese (Windows 1258)", "command": "save", "args": {"encoding": "Vietnamese (Windows 1258)" } },
+    { "caption": "Save File with Encoding: -" },
+    { "caption": "Save File with Encoding: Hexadecimal", "command": "save", "args": {"encoding": "Hexadecimal" } },
+
+    // Build System
+    { "command": "new_build_system", "caption": "New Build System…" },
+    { "caption": "Set My Build System: Automatic", "command": "set_build_system", "args": { "file": "" } },
+    { "caption": "Set My Build System: PostgreSQL", "command": "set_build_system", "args": { "file": "Packages/User/buildsystems/psql.sublime-build" } },
+    { "caption": "Set My Build System: Show HTML in Firefox", "command": "set_build_system", "args": { "file": "Packages/User/buildsystems/firefox.sublime-build" } },
+    { "caption": "Set My Build System: Markdown", "command": "set_build_system", "args": { "file": "Packages/User/buildsystems/markdown.sublime-build" } },
+    { "caption": "Set My Build System: Python", "command": "set_build_system", "args": { "file": "Packages/Python/Python.sublime-build" } },
+    { "caption": "Set My Build System: Latex", "command": "set_build_system", "args": { "file": "Packages/LaTeXTools/LaTeX.sublime-build" } },
+    { "caption": "Set My Build System: Haskell", "command": "set_build_system", "args": { "file": "Packages/Haskell/Haskell.sublime-build" } },
+    { "caption": "Set My Build System: Scheme", "command": "set_build_system", "args": { "file": "Packages/Scheme/Scheme.sublime-build" } },
+    { "caption": "Set My Build System: Java", "command": "set_build_system", "args": { "file": "Packages/Java/JavaC.sublime-build" } },
+    { "caption": "Set My Build System: C", "command": "set_build_system", "args": { "file": "Packages/User/buildsystems/c.sublime-build" } },
+    { "caption": "Set My Build System: C++", "command": "set_build_system", "args": { "file": "Packages/C++/C++.sublime-build" } },
+
+    // show auto completion window
+    { "caption": "Show Autocompletions", "command": "auto_complete" },
+
+    // open key bindings
+    { "caption": "My Key Bindings",
+      "command": "open_file", "args": {"file": "${packages}/User/Default (Linux).sublime-keymap", "platform": "Linux"} },
+    // open settings
+    { "caption": "My Preferences (Settings)",
+      "command": "open_file", "args": {"file": "${packages}/User/Preferences.sublime-settings", "platform": "Linux"} },
+    // open commands
+    { "caption": "My Commands",
+      "command": "open_file", "args": {"file": "${packages}/User/commands.sublime-commands", "platform": "Linux"} },
+    
+    // choose dictionary for spell check
+    { "caption": "Set (spell check) dictionary: German", "command": "set_setting", "args": {"setting": "dictionary", "value": "Packages/Language - German/German.dic"}},
+    { "caption": "Set (spell check) dictionary: English (US)", "command": "set_setting", "args": {"setting": "dictionary", "value": "Packages/Language - English/en_US.dic"}},
+    { "caption": "Set (spell check) dictionary: English (GB)", "command": "set_setting", "args": {"setting": "dictionary", "value": "Packages/Language - English/en_GB.dic"}},
+
+    // fuzzy file navigation
+    { "caption": "FuzzyFileNav (from File)", "command": "fuzzy_start_from_file", "context": [{"key": "setting.command_mode"}] },
+    { "caption": "FuzzyFileNav (from Bookmarks)", "command": "fuzzy_bookmarks_load" },
+
+    // open / close project
+    { "caption": "Switch Project", "command": "prompt_select_project" },
+    { "caption": "Close Project", "command": "close_project" },
+
+    // set tab size
+    { "caption": "Set Tab Size: 1", "command": "set_setting", "args": {"setting": "tab_size", "value": 1}},
+    { "caption": "Set Tab Size: 2", "command": "set_setting", "args": {"setting": "tab_size", "value": 2}},
+    { "caption": "Set Tab Size: 3", "command": "set_setting", "args": {"setting": "tab_size", "value": 3}},
+    { "caption": "Set Tab Size: 4", "command": "set_setting", "args": {"setting": "tab_size", "value": 4}},
+    { "caption": "Set Tab Size: 8", "command": "set_setting", "args": {"setting": "tab_size", "value": 8}},
+
+    // reset window layout
+    { "caption": "Origami: Reset Layout (to only one Pane)",  
+      "command": "set_layout", "args": {"cols": [0.0, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1]] } },
+
+    // highlight line
+    { "caption": "Highlight Line", "command": "toggle_setting", "args": {"setting": "highlight_line"} },
+
+    // W3C HTML Validator
+    { "caption": "W3C HTML Validator", "command": "validate" }, // does not appear??
+
+    // python repl (console)
+    { "caption": "Python REPL Console",
+      "command": "show_panel", "args": {"panel": "console", "toggle": true} },
+
+    // run arbitrary shell commands with Shell Turtlestein
+    { "caption": "Run arbitrary Shell Command (Shell Turtlestein)",
+      "command": "shell_prompt" },
+
+    // manipulate text
+    { "caption": "Join Lines", "command": "join_lines" },
+    { "caption": "Duplicate Line", "command": "duplicate_line" },
+
+    // Replace
+    { "caption": ":s - Substitute/Replace", "command": "show_panel", "args": {"panel": "replace"} },
+    { "caption": ":b - Goto Tab", "command": "show_overlay", "args": {"overlay": "goto", "show_files": true} }, 
+
+    // permutation of selection
+    { "command": "sort_selection", "args": {"case_sensitive": false}, "caption": "Selection: Sort" },
+    { "command": "sort_selection", "args": {"case_sensitive": true}, "caption": "Selection: Sort (Case Sensitive)" },
+    { "command": "permute_selection", "args": {"operation": "reverse"}, "caption": "Selection: Permute Reverse" },
+    { "command": "permute_selection", "args": {"operation": "unique"}, "caption": "Selection: Permute Unique" },
+    { "command": "permute_selection", "args": {"operation": "shuffle"}, "caption": "Selection: Permute Shuffle" },
+
+    // Sublimerge
+    { "caption": "Sublimerge Quick Panel", "command": "sublimerge"},
+
+    // SublimeGit
+    { "caption": "Git: Commit all", "command": "git_commit", "args": {"add": true} }
+]

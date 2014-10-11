@@ -1,0 +1,46 @@
+" This is a configuration file for vimpc
+" vimpc is a client for MPD
+
+" Location: ~/.vimpcrc
+
+
+"""" Settings """"
+
+set ignorecase
+set noshowlists
+set groupignorethe
+set windows library,playlist
+set window playlist
+
+
+
+"""" Keybindings """"
+
+" quit vimpc
+map Q ZQ
+
+" Playback controls
+map <Space> :pause<CR>
+map o :next<CR>
+map O :previous<CR>
+
+
+" search
+map ö /
+
+" goto random line
+map r %
+
+
+" Goto Window
+map gl :library<CR>
+map gp :playlist<CR>
+map gb :browse<CR>
+map gh :help<CR>
+
+
+" delete all titles from the playlist except the current one
+" (does not work if the current one is the first or last in the playlist)
+alias crop playlist; normal fjVGdfkVggd;
+map c :crop<CR>
+

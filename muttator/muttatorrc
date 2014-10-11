@@ -1,0 +1,82 @@
+
+"remap escape key
+noremap » <Esc>
+inoremap » <Esc>
+cnoremap » <Esc>
+noremap <A-i> <Esc>
+nnoremap <A-i> <Esc>
+vnoremap <A-i> <Esc>
+inoremap <A-i> <Esc>
+cnoremap <A-i> <Esc>
+
+
+" NEO arrow keys when in QWERTZ
+noremap € <Up>
+inoremap € <Up>
+cnoremap € <Up>
+noremap ð <Down>
+inoremap ð <Down>
+cnoremap ð <Down>
+noremap ſ <Left>
+inoremap ſ <Left>
+cnoremap ſ <Left>
+noremap đ <Right>
+inoremap đ <Right>
+cnoremap đ <Right>
+
+" NEO move to eol / bol in QWERTZ
+inoremap æ <C-a>
+cnoremap æ <C-a>
+inoremap ŋ <C-e>
+cnoremap ŋ <C-e>
+
+" forward / backword one word (emacs style)
+inoremap <A-f> <C-Right>
+cnoremap <A-f> <C-Right>
+inoremap <A-b> <C-Left>
+cnoremap <A-b> <C-Left>
+
+" up and down in command history
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
+
+
+"delete last word
+inoremap <A-BS> <C-W>
+cnoremap <A-BS> <C-W>
+
+" switch tabs
+noremap <A-p> :tabprevious<CR>
+inoremap <A-p> <Esc>:tabprevious<CR>
+noremap <A-n> :tabnext<CR>
+inoremap <A-n> <Esc>:tabnext<CR>
+" move tab 
+noremap <A-S-p> i<C-S-PageUp>
+noremap <A-S-n> i<C-S-PageDown>
+" close tab
+noremap <A-w> :tabclose<CR>
+noremap d :tabclose<CR>
+
+"move cursor
+noremap <C-A-h> <left>
+noremap <C-A-l> <right>
+
+"delete last word
+inoremap <S-Space> <C-BS>
+cnoremap <S-Space> <C-W>
+
+"scroll up and down
+noremap <C-j> 5<down>
+noremap <C-k> 5<up>
+noremap <C-Space> <Space>
+noremap <C-u> <S-Space>
+
+" just to remember:
+" M open message in new tag
+" lr label as read
+
+
+
+
+

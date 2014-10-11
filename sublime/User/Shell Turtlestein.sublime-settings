@@ -1,0 +1,9 @@
+{
+    "surround_cmd": ["", ""],
+    "exec_args": { "path": "/opt/ghc-7.6.3/bin:/home/flip/.cabal/bin:$PATH"},
+    "cmd_settings": [],
+    "input_widget": {
+        // overridden for silly non-unixy OSes
+        "syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+    }
+}

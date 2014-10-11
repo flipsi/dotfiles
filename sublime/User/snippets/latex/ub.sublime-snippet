@@ -1,0 +1,28 @@
+<snippet>
+	<content><![CDATA[
+% Author: Philipp Moers <soziflip funny character gmail dot com>
+
+\documentclass[12pt, oneside, a4paper, numbers=enddot]{scrartcl}
+\input{/home/flip/daten/latex/sfliptex05/sfliptex05.tex}
+\usepackage{sectsty}
+% \allsectionsfont{\large\underline} % überschriftendesign
+\sectionfont{\large\underline} % überschriftendesign
+\subsectionfont{\normalsize}
+
+
+\begin{document}
+\selectlanguage{ngerman}
+
+
+\header{${0:Autor}}{${2:Fach}}{Übungsblatt ${3:Nummer}}
+
+
+\end{document}
+
+]]>
+	</content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>ub</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>text.tex.latex</scope>
+</snippet>

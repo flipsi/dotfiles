@@ -1,0 +1,137 @@
+" This is a configuration file for Vimperator, one of the greatest Firefox addons ever.
+" Location: ~/.vimperatorrc
+
+
+"""" SETTINGS """"
+
+" open new tabs in background
+set! browser.tabs.loadInBackground=false
+
+set editor='/usr/bin/subl'
+
+
+"""" KEYBINDINGS """"
+
+" remap escape key
+noremap » <Esc>
+inoremap » <Esc>
+cnoremap » <Esc>
+" leave insert mode in facebook chat
+inoremap <A-i> <Esc>
+
+" NEO movements in QWERTZ (use xmodmap instead)
+"noremap € <Up>
+"inoremap € <Up>
+"cnoremap € <Up>
+"noremap ð <Down>
+"inoremap ð <Down>
+"cnoremap ð <Down>
+"noremap ſ <Left>
+"inoremap ſ <Left>
+"cnoremap ſ <Left>
+"noremap đ <Right>
+"inoremap đ <Right>
+"cnoremap đ <Right>
+"inoremap æ <C-a>
+"cnoremap æ <C-a>
+"inoremap ŋ <C-e>
+"cnoremap ŋ <C-e>
+
+" forward / backword one word (emacs style)
+inoremap <A-f> <C-Right>
+cnoremap <A-f> <C-Right>
+inoremap <A-b> <C-Left>
+cnoremap <A-b> <C-Left>
+
+" jump to marking (')
+noremap ä '
+
+" up and down in command history
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
+" scrolling
+" smooziee addon needs to be installed
+" changed to n and N in the addon script
+let g:smooziee_scroll_amount="230"
+"command smoothScrollUp :js plugins.smooziee.smoothScrollBy(-230)
+"command smoothScrollDown :js plugins.smooziee.smoothScrollBy(230)
+"map <silent> <Up> :smoothScrollUp<CR>
+"map <silent> <Down> :smoothScrollDown<CR>
+
+" scroll down with alt space and up with alt m
+" DOES NOT WORK
+noremap <A-Space> <C-d>
+noremap <A-m> <C-d>
+
+" delete last word
+inoremap <A-BS> <C-W>
+cnoremap <A-BS> <C-W>
+
+" open quickmark in new tab
+noremap gt gn
+
+" switch tabs
+noremap <A-p> :tabprevious<CR>
+inoremap <A-p> <Esc>:tabprevious<CR>
+noremap <A-n> :tabnext<CR>
+inoremap <A-n> <Esc>:tabnext<CR>
+" move tab 
+noremap <A-S-p> <C-S-PageUp>
+noremap <A-S-n> <C-S-PageDown>
+" close tab
+noremap <A-w> :tabclose<CR>
+
+
+" forward and backward
+noremap <A-u> :back<CR>
+noremap <A-S-u> :forward<CR>
+
+" find dialog
+noremap / i<C-f>
+noremap \- i<C-f>
+noremap <C-f> i<C-f>
+noremap ö i<C-f>
+
+" Copy as usual
+noremap <C-c> i<C-c>
+" copy whole line after searching
+noremap <C-S-c> <Esc>cv$<C-c><Esc><Esc>
+" copy whole line after searching and open link in new tab
+noremap gc <Esc>cv$<C-c><Esc><Esc>t<C-v><Cr>
+
+" Noscript AddOn
+noremap st :noscript toggletemp<CR>
+noremap sp :noscript toggleperm<CR>
+noremap so :noscript popup<CR>
+
+" console
+noremap <A-:> i<C-S-i>
+noremap <A-;> i<C-S-k>
+inoremap <A-:> <Esc>i<C-S-i>
+inoremap <A-;> <Esc>i<C-S-k>
+
+
+" bookmarks sorted by date
+:js <<EOF
+    bmarksbydate = function() {
+        let bookmarksService = services.get("bookmarks");
+        let bookmarks = storage["bookmark-cache"].bookmarks;
+        let idToDate = Object.create(null);
+        for (let item of bookmarks)
+            idToDate[item.id] = bookmarksService.getItemDateAdded(item.id);
+        completion.listCompleter(function(context, tags, extra) {
+            completion.bookmark(context, tags, extra);
+            context.compare = function (a,b) (idToDate[b.item.id] - idToDate[a.item.id]);
+            }, undefined, undefined, undefined, undefined, CompletionContext.Filter.textAndDescription);
+    }
+EOF
+"command bmarksbydate js bmarksbydate()
+map <silent> b :js bmarksbydate()<CR>
+
+
+
+
+
+
+" echo "neo vimperatorrc sourced successfully"

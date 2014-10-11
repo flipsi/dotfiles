@@ -1,0 +1,59 @@
+<snippet>
+	<content><![CDATA[
+% LaTeX-Code by flip
+
+\documentclass{${1:scrartcl}}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{txfonts}
+\usepackage{courier}
+\usepackage{MnSymbol}
+\usepackage{booktabs}
+\usepackage{enumerate}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{multicol}
+\usepackage{ulem}
+\usepackage{wasysym}
+\usepackage{pifont}
+\usepackage{listings} 
+\usepackage{esvect}
+\usepackage{pgf}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shadows,arrows,automata}
+
+
+% Meine Commands:
+\newcommand{\bigO}{\ensuremath{\mathcal{O}}} % big-O notation/symbol
+\newcommand{\N}{\ensuremath{\mathbb{N}}} % natural numbers N
+\newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
+
+
+\begin{document}
+
+% Header:
+\setlength{\parindent}{0pt} 
+${2:Philipp Moers} \hfill \today\\\\[0.4cm]
+\begin{huge}
+\textbf{${3:Titel}}\linebreak
+\end{huge}
+\\\\\\rule{1\textwidth}{0.4pt}
+
+\section*{${4:erste Überschrift}}
+$0
+
+\end{document}
+
+]]>
+	</content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>newdoc</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>text.tex.latex</scope>
+</snippet>

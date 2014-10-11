@@ -1,0 +1,15 @@
+{
+    // Ignore errors, regex.
+    "ignore_errors":
+    [
+        // "Expected an identifier and instead saw 'undefined' \(a reserved word\)"
+        "was used before it was defined",
+        "Trailing whitespace",
+        "Expected exactly one space between ",
+        "Expected .* at column .* not column"
+        // "Use the function form of 'use strict'"
+    ],
+
+    "run_on_save": false,
+    "debug": true
+}

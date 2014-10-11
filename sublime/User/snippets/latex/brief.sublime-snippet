@@ -1,0 +1,119 @@
+<snippet>
+    <content><![CDATA[
+% ------------------------------------------------------------------------------
+% Author: Philipp Moers <soziflip funny character gmail dot com>
+% 
+% Latex Brief-Vorlage
+% 
+% ------------------------------------------------------------------------------
+
+\documentclass
+[
+    fontsize=12pt, % Schriftgröße
+    version=last,  % Neueste Version von KOMA-Skript verwenden
+    parskip=full   % Absatzgröße
+]
+{scrlttr2}
+
+\LoadLetterOption{DIN} % Einstellungen für DIN 676 laden
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{lmodern} % Latin Modern typeface (font)
+\usepackage[T1]{fontenc} % T1 font encoding for high quality font output
+\renewcommand{\familydefault}{\sfdefault} % Latin Modern's sans serif font family as default
+
+% \enlargethispage{4cm}   % frühzeitigen Seitenumbruch verhindern
+
+
+% ------------------------------------------------------------------------------
+%   Optionen und Einstellungen
+
+\KOMAoptions
+{
+% fromemail=true,       % Email wird im Briefkopf angezeigt
+% fromphone=true,       % Telefonnumer wird im Briefkopf angezeigt
+fromfax=false,            % Faxnummer wird im Briefkopf angezeit    % WHY DOES THAT NOT WORK
+% fromurl=true,         % URL wird im Briefkopf angezeigt
+% fromlogo=true,        % Logo wird im Briefkopf angezeigt
+% subject=titled,       % Druckt "Betrifft: " vor dem Betreff
+locfield=wide,          % Breite Absenderergänzung (location)
+fromalign=left,         % Ausrichtung des Briefkopfes
+fromrule=afteraddress,  % Trennlinie unter dem Briefkopf
+foldmarks=false
+}
+
+\setkomavar{fromname}{Philipp Moers} % Name
+\setkomavar{fromaddress}{Rathstraße 10\\\\72074 Tübingen} % Adresse
+\setkomavar{fromfax}[]{philipp.moers@live.de} % Faxnummer       % DIRTY HACK
+% \setkomavar{fromemail}[]{philipp.moers@live.de} % Email-Adresse
+\setkomavar{fromemail}[]{} % Email-Adresse
+\setkomavar{fromphone}[]{0178 55 678 00} % Telefonnummer
+\setkomavar{fromurl}[]{} % Website
+% \setkomavar{frombank}{}
+% \setkomavar{fromlogo}{\includegraphics{logo.png}}
+
+\setkomavar{location}{%
+    \raggedright\footnotesize{%
+    \usekomavar{fromname}\\\\
+    \usekomavar{fromaddress}\\\\
+    \usekomavar*{fromphone}\usekomavar{fromphone}\\\\
+    \usekomavar*{fromfax}\usekomavar{fromfax}\\\\
+    \usekomavar*{fromemail}\usekomavar{fromemail}
+    \usekomavar*{fromurl}\usekomavar{fromurl}}
+}
+
+\setkomavar{signature}{\usekomavar{fromname}\\\\}
+\renewcommand*{\raggedsignature}{\raggedright}
+
+% Geschäftszeichenzeile
+\setkomavar{yourref}{}          % Ihr Zeichen
+\setkomavar{yourmail}{}         % Ihr Schreiben vom
+\setkomavar{myref}{}            % Unser Zeichen
+\setkomavar{customer}{}         % Kundennummer
+\setkomavar{invoice}{}          % Rechnungsnummer
+\setkomavar{place}{Tübingen}    % Ort
+\setkomavar{date}{\today}       % Datum
+
+\setkomavar{title}{\vspace{9pt}}  % Ersatz für hässliche Titelzeile
+
+
+% ------------------------------------------------------------------------------
+%   Brief
+
+\begin{document}
+\begin{letter}
+% Zielanschrift
+{%
+    ${1:So ein Typ\\\\
+    Lustigstraße 123\\\\
+    80538 München\\\\
+    Deutschland}
+}
+
+\setkomavar{subject}{${2:Betreff}}
+
+\opening{${3:Sehr geehrte},}
+
+$0
+
+
+\closing{Mit freundlichen Grüßen}
+
+
+%   Anlagen
+% \textbf{Anlagen}\\\\
+% Anlage 1\\\\
+% Anlage 2\\\\
+
+
+\end{letter}
+\end{document}
+
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>brief</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>text.tex.latex</scope>
+</snippet>

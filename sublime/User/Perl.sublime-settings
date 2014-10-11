@@ -1,0 +1,7 @@
+{
+	"extensions":
+	[
+		"jq",
+		".htaccess"
+	]
+}

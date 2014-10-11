@@ -1,0 +1,514 @@
+{
+	"history":
+	[
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "prevView nextView",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "prevView nextView"
+			},
+			"key": "5c47105beb565e781221908569e9ae28",
+			"label": "prevView nextView"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "foo bar baz",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "foo bar baz"
+			},
+			"key": "ab07acbb1e496801937adfa772424bf7",
+			"label": "foo bar baz"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "h j k ö",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "h j k ö"
+			},
+			"key": "19c173d8a98cfa4f0aa540f71ad1cd34",
+			"label": "h j k ö"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"current": "5",
+					"padding": "1",
+					"step": "1"
+				},
+				"command": "insert_nums",
+				"text": "\\i(5,1)"
+			},
+			"key": "18a22e088843afa7c2e6de2a7cf9260b",
+			"label": "\\i(5,1)"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"current": "7",
+					"padding": "1",
+					"step": "1"
+				},
+				"command": "insert_nums",
+				"text": "\\i7"
+			},
+			"key": "b6c384162f197911307a06778c637692",
+			"label": "\\i7"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "Stufe \\i5",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "Stufe \\i5"
+			},
+			"key": "4c9c393c4b6c15f85a098c279eb91ec8",
+			"label": "Stufe \\i5"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"current": "5",
+					"padding": "1",
+					"step": "1"
+				},
+				"command": "insert_nums",
+				"text": "\\i5"
+			},
+			"key": "e1fdc4786f8236711e7a6b379e9af5a2",
+			"label": "\\i5"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "plus minus times division",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "plus minus times division"
+			},
+			"key": "13c876d788e3b9c2f94c50788a1a34bc",
+			"label": "plus minus times division"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "addition subtraction multiplication division",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "addition subtraction multiplication division"
+			},
+			"key": "7496b36741cbdc9b3ebd0a766623d20c",
+			"label": "addition subtraction multiplication division"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "above right below left",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "above right below left"
+			},
+			"key": "70d1e36de32cb5ea11e10c134cd83c1b",
+			"label": "above right below left"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "in out",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "in out"
+			},
+			"key": "6da7a4b301cb20665edc80530145adf1",
+			"label": "in out"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "Show or Hide ",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "Show or Hide "
+			},
+			"key": "3c2ffe50f41ab12858947d841dd07c40",
+			"label": "Show or Hide "
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "from from to to query query",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "from from to to query query"
+			},
+			"key": "14f2fcd398a4ba8f00a23ec2e3e09483",
+			"label": "from from to to query query"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "m2 m2 m3 m3",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "m2 m2 m3 m3"
+			},
+			"key": "f50df70f28de4850780135c1741ce7ea",
+			"label": "m2 m2 m3 m3"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "whitespaces spaces lineendings",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "whitespaces spaces lineendings"
+			},
+			"key": "06239a52199d1379df1402a433726260",
+			"label": "whitespaces spaces lineendings"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"clipboard": true,
+					"separator": "n"
+				},
+				"command": "text_pastry_insert_text",
+				"text": "p n"
+			},
+			"key": "1c983750912fa005e481364d80c650a2",
+			"label": "p n"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"current": "3",
+					"padding": "1",
+					"step": "1"
+				},
+				"command": "insert_nums",
+				"text": "\\i3"
+			},
+			"key": "4ef7939524b7fe2cf3e56a4077a56bbd",
+			"label": "\\i3"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "7 42 - 42 42 42 6",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "7 42 - 42 42 42 6"
+			},
+			"key": "e37ca0a58852b2886a216c8647382a28",
+			"label": "7 42 - 42 42 42 6"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "User Password Host Port Database",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "User Password Host Port Database"
+			},
+			"key": "393253274cf681a1e6fe65e23590854d",
+			"label": "User Password Host Port Database"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "codemirror observations",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "codemirror observations"
+			},
+			"key": "e780b958a4537f3ce38cd4e07a6a492d",
+			"label": "codemirror observations"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "user password host port database",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "user password host port database"
+			},
+			"key": "5df88a12ae52a4fa954cd26e3537c24c",
+			"label": "user password host port database"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "\\b",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "\\b"
+			},
+			"key": "33527f533368b7017111c12d487e7ffb",
+			"label": "\\b"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "b c d e",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "b c d e"
+			},
+			"key": "9945025aa383886df263104ecea0f6e1",
+			"label": "b c d e"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"current": "2",
+					"padding": "1",
+					"step": "1"
+				},
+				"command": "insert_nums",
+				"text": "\\i2"
+			},
+			"key": "7891b0b51759622728f621631ae19484",
+			"label": "\\i2"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "400 30  50",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "400 30  50"
+			},
+			"key": "46740da8e8d96d625ef3a55d2f470f64",
+			"label": "400 30  50"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "helpFlags longFlags recursiveFlags",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "helpFlags longFlags recursiveFlags"
+			},
+			"key": "57dc1a564c22d0445fbe0f36de097bca",
+			"label": "helpFlags longFlags recursiveFlags"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "1 2 3 foo bar baz",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "1 2 3 foo bar baz"
+			},
+			"key": "c4e95ce5f38e24ae55bd0c6edf4b60d1",
+			"label": "1 2 3 foo bar baz"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "foobar foobaz",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "foobar foobaz"
+			},
+			"key": "7658e9c83d48d07cb287b79c5508430f",
+			"label": "foobar foobaz"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "eins zwei drei",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "eins zwei drei"
+			},
+			"key": "cce48fa28e298ddb42632f107d45709e",
+			"label": "eins zwei drei"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"current": "1",
+					"padding": "1",
+					"step": "1"
+				},
+				"command": "insert_nums",
+				"text": "\\i1"
+			},
+			"key": "44af05471fdf9836e7c6ff77e952901b",
+			"label": "\\i1"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"current": "2",
+					"padding": "1",
+					"step": "5"
+				},
+				"command": "insert_nums",
+				"text": "\\i(2,5)"
+			},
+			"key": "be4158714cc5963e15ec3ad97b104d2d",
+			"label": "\\i(2,5)"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"current": "0",
+					"padding": "1",
+					"step": "1"
+				},
+				"command": "insert_nums",
+				"text": "\\i0"
+			},
+			"key": "2b698f4de9b83fa9de1b60d21eef2340",
+			"label": "\\i0"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"current": "1",
+					"padding": "1",
+					"step": "1"
+				},
+				"command": "insert_nums",
+				"text": "\\i"
+			},
+			"key": "1bd7ee1ce72751da4e64129f6d32db41",
+			"label": "\\i"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "true false",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "true false"
+			},
+			"key": "faddaebe9970aab800fb829bebbeddf8",
+			"label": "true false"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "foo bar baz hui quo azr",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "foo bar baz hui quo azr"
+			},
+			"key": "f7d1d94453cf2b2f35fcf8c2de358c9f",
+			"label": "foo bar baz hui quo azr"
+		}
+	],
+	"last_command":
+	{
+		"args":
+		{
+			"text": "foo bar baz hui quo azr",
+			"threshold": 3.0
+		},
+		"command": "text_pastry_insert_text",
+		"text": "foo bar baz hui quo azr"
+	}
+}

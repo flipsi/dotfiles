@@ -1,0 +1,12 @@
+<snippet>
+    <content><![CDATA[
+\\begin{figure}
+    \\caption{$0} 
+    \\label{$1}
+\\end{figure}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>fig</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>text.tex.latex</scope>
+</snippet>

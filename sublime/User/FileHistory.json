@@ -1,0 +1,1988 @@
+{
+    "35b75b20c0d17440df4976a39423f865": {
+        "opened": [
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/softeng/strichman/src/strichman/Circle.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/softeng/strichman/src/strichman/Strichman.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/softeng/strichman/src/strichman/Main.java"
+            }
+        ], 
+        "closed": [
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/coding/softeng/strichman/src/strichman/SimpleGraphic.java"
+            }
+        ]
+    }, 
+    "4ca61cc4f20a61424af8d0d03239d9f8": {
+        "opened": [
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/media/Daten/Studium/Algorithmen/uebungsblatt06/blatt06/redBlackTree/test/TreeVisualiser.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/media/Daten/Studium/Algorithmen/uebungsblatt06/blatt06/redBlackTree/test/VisualTest.java"
+            }
+        ], 
+        "closed": [
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/Downloads/yfiles-2.10-complete-eval/README.html"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.cache/.fr-QLYmXC/yfiles-2.10-complete-eval/README.html"
+            }
+        ]
+    }, 
+    "e48912b81efe561ede438a93e543e041": {
+        "opened": [
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/media/Daten/Studium/Algorithmen/uebungsblatt03/list/Sorting.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/media/Daten/Studium/Algorithmen/uebungsblatt03/list/ListTest.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/media/Daten/Studium/Algorithmen/uebungsblatt03/list/ListTester.java"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/media/Daten/Studium/Algorithmen/uebungsblatt03/list/List.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/media/Daten/Studium/Algorithmen/uebungsblatt03/list/ObjectWithDoubleKey.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/media/Daten/Studium/Algorithmen/uebungsblatt03/list/HasDoubleKey.java"
+            }
+        ], 
+        "closed": [
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/media/Daten/Studium/Algorithmen/uebungsblatt03/list/tools.pkg"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/User/flip-snippets/ich.sublime-snippet"
+            }
+        ]
+    }, 
+    "6ad350d816c8660e5717e69d2acfe814": {
+        "opened": [
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/impl/Tile.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/impl/Game.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/impl/ClientGame.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/messages/StartGameMessage.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/ConnectServerScreen.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/messages/ChooseOtherGameMessage.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/server/com/impl/ServerQueryThread.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/IModelListener.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/IGame.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/messages/GameOverMessage.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/IDesk.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/impl/K1Client.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/IClientGame.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/IClient.java"
+            }
+        ], 
+        "closed": [
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/impl/ServerGame.java"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/View.java"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/TilePanel.java"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/impl/Client.java"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/GameScreen.java"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/IServerGame.java"
+            }, 
+            {
+                "index": 4, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/server/impl/ServerGameController.java"
+            }, 
+            {
+                "index": 4, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/server/IServerGameController.java"
+            }, 
+            {
+                "index": 5, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/ChatPanel.java"
+            }, 
+            {
+                "index": 5, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/InfoPanel.java"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/impl/Desk.java"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/MenuScreen.java"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/messages/ServerOutMessage.java"
+            }, 
+            {
+                "index": 5, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/LoginScreen.java"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/provisorisch/Bag(KopieRev310).java"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/impl/FullPlayer.java"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/IFullPlayer.java"
+            }, 
+            {
+                "index": 4, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/impl/Player.java"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/media/Daten/Studium/Programmierprojekt (Qwirkle)/Miniprojekt (Logik) ALT/Game.java"
+            }, 
+            {
+                "index": 4, 
+                "group": 0, 
+                "filename": "/home/flip/coding/QwirkleLogik/src/qwirkleLogik/Game.java"
+            }
+        ]
+    }, 
+    "1f6dbcae202f42a59274934a32baa0d1": {
+        "opened": [], 
+        "closed": [
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/coding/AlgoUebung11/src/graph/Test.java"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/AlgoUebung11/src/graph/Graph.java"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/coding/AlgoUebung11/src/graph/BFSAlgorithm.java"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/coding/AlgoUebung11/src/graph/DijkstraAlgorithm.java"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/Default/Default (Linux).sublime-keymap"
+            }
+        ]
+    }, 
+    "bc1cc87ca9fc125cbc62bf1d38c256b1": {
+        "opened": [
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/AlgoUebung03/src/list/Sorting.java"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/media/Daten/Studium/Algorithmen/uebungsblatt01/BinarySearch.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/AlgoUebung03/src/list/ListTester.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/AlgoUebung03/src/list/List.java"
+            }
+        ], 
+        "closed": []
+    }, 
+    "20b2e05972dfe870f6ab3c5255afd2e3": {
+        "opened": [
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/AlgoUebung06/src/redBlackTree/test/VisualTest.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/AlgoUebung06/src/redBlackTree/test/TreeVisualiser.java"
+            }
+        ], 
+        "closed": [
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/coding/AlgoUebung06/src/redBlackTree/RBTest.java"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/coding/AlgoUebung06/src/redBlackTree/TreeNode.java"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/coding/AlgoUebung06/src/redBlackTree/RedBlackTree.java"
+            }
+        ]
+    }, 
+    "6a8168103d1e5adfbdf3f78544187871": {
+        "opened": [
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/HelpScreen.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/server/impl/ServerGameController.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/impl/ChatKI.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/MenuScreen.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/resources/qwirkle/ki/names-male.txt"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/messages/CheatMessage.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/messages/ChatToClientMessage.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/messages/EnterGameMessage.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/server/com/impl/ExistingServerException.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/messages/UpdateGameListMessage.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/server/com/impl/ClientHandler.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/messages/OtherNameMessage.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/ChatPanel.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/IGame.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/IClientGame.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/impl/Game.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/impl/Bag.java"
+            }
+        ], 
+        "closed": [
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/media/SmartDrive/urlaub_fam.txt"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/impl/ServerGame.java"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/InfoPanel.java"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/resources/qwirkle/qwirkle-help.html"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/resources/qwirkle/ki/msgs/niceMsgs.txt"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/messages/Message.java"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/impl/KI.java"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/messages/ChatToServerMessage.java"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/model/impl/ClientGame.java"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/resources/qwirkle/names-male.txt"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/resources/qwirkle/names.txt"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/Resources.java"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/utils/RandomNames.java"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/.bashrc"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/resources/qwirkle/qwirkle-manual.html"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/impl/K2Client.java"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/impl/K3Client.java"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/impl/KXClient.java"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/impl/K1Client.java"
+            }
+        ]
+    }, 
+    "global": {
+        "opened": [
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/File History/Default.sublime-keymap"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/User/fuzzy_file_nav.sublime-settings"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/User/FileHistory.json"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/bash/alias.sh"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/FileClose/README.md"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/Default/Default (Linux).sublime-keymap"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/GotoRecent/Default (Linux).sublime-keymap"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.bashrc"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/softwarequalitaet/uebung06/uebung06.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/latex/sfliptex05/sfliptex05.tex"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/coding/tests/python/frozensets.py"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung09/ex4_test.py"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung09/ex4.py"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung12/uebung12.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/shellskripte/evince.sh"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/softwarequalitaet/uebung10/uebung10.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.bash_history"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/etc/profile"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/Downloads/group_11/assignment_05/my_findZeroCrossings.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/Downloads/group_11/assignment_05/exercise_12.m"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bachelorthesis/tex/vorlagen/LaTeXtemplateBachelorArbeit/sec3.tex"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bachelorthesis/tex/vorlagen/LaTeXtemplateBachelorArbeit/sec2.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bachelorthesis/tex/vorlagen/LaTeXtemplateBachelorArbeit/sec1.tex"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bachelorthesis/tex/vorlagen/LaTeXtemplateBachelorArbeit/paper.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung11/uebung11.tex"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/technische-informatik/uebung11/uebung11.tex"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/softwarequalitaet/uebung09/uebung09.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/Downloads/Neues Textdokument.txt"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/coding/tests/matlab/image01.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/materialien/selection.py"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/Text Pastry/README.md"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/softwarequalitaet/uebung08/uebung08.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/User/snippets/LaTeX/sect.sublime-snippet"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/exercise_12.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/exercise_11.m"
+            }, 
+            {
+                "index": 5, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings"
+            }, 
+            {
+                "index": 4, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/User/Preferences.sublime-settings"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung11/ex4.sql"
+            }, 
+            {
+                "index": 4, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/Matlab/Matlab.tmLanguage"
+            }, 
+            {
+                "index": 6, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_detectCircles.m"
+            }, 
+            {
+                "index": 5, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_plotHoughSpaces.m"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_edgeDetection.m"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_houghTransform.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung11/ex3.sql"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_cannyEdge.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_marrhildrethEdge.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/Modulhandbuch_Bachelor_v1.5_1.10.2010-1.pdf"
+            }, 
+            {
+                "index": 5, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_sobelEdge.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_plotMarrhildreth.m"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_differenceOfGaussians.m"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_gaussKernel.m"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_findZeroCrossings.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/459823_BV Klausuraufgaben.pdf"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/Postgres PL pgSQL/Syntaxes/PL pgSQL (Postgres).tmLanguage"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/User/psql.sublime-build"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung08/ex3-1.sql"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung08/ex2-1.sql"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung11/ex2.sql"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/materialien/employee-secretary-engineer.sql"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/materialien/calendar.sql"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/materialien/correlation.sql"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/compareEdges.m"
+            }, 
+            {
+                "index": 4, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_plotSobel.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_laplaceEdge.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/softwarequalitaet/uebung05/uebung05.tex"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpRLXMHT.tex"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/media/FLIP4GB/_STICK GEFUNDEN_README.txt"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung10/uebung10.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/technische-informatik/uebung10/uebung10.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/tex/uebung04.tex"
+            }, 
+            {
+                "index": 5, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/my_box2DFFT.m"
+            }, 
+            {
+                "index": 4, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/my_compareBox.m"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/exercise_08.m"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/my_inverseFilter.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/exercise_10.m"
+            }, 
+            {
+                "index": 7, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung02/group_11/assignment_02/my_gaussFilter.m"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpw2LNAu.tex"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpZyBQlA.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmptu8VH0.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpHK5NnU.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpRtENa4.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpqRJABC.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpX68ywb.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpFxBAiN.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmp2eGvoS.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpKIxjhS.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpvNPEf6.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmp_a0Efz.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpTb7ECW.tex"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpO1Q5Nv.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpPHxxUj.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmprsU2OV.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpUg302e.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpIo47qN.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpOmneuc.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmp8TuGE7.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpmypXv1.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmp5H3bM8.sql"
+            }, 
+            {
+                "index": -1, 
+                "group": -1, 
+                "filename": "/tmp/tmpXrfhIW.sql"
+            }
+        ], 
+        "closed": [
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/UnicodeMath/README.md"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/displayfft2.m"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/my_box2DFFT_scalekernel.m"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/my_plotKernels.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/my_plotFFT2D.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildkommunikation/uebung03/dennis/a3.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildkommunikation/uebung03/dennis/createFilter.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildkommunikation/uebung03/dennis/plotRGBSplit.m"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildkommunikation/uebung03/dennis/displayfft2.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildkommunikation/uebung03/dennis/imfft.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildkommunikation/uebung03/a3.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/Dropbox/Bildkommunikation/uebung04/Dennis/A5.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/Dropbox/Bildkommunikation/uebung04/Dennis/bayer2rgb.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/script/db1script.tex"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung09/uebung09.tex"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/unix-linux/shellscripts/name.sh"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/unix-linux/shellscripts/obst.sh"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/unix-linux/shellscripts/summe.sh"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/shellskripte/internettest.sh"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/unix-linux/shellscripts/fileexists.sh"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung09/ex2.3.sql"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/FuzzyFileNav/fuzzy_file_nav.sublime-settings"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/VirtualBox VMs/Lubuntu 32bit (ULE)/Lubuntu 32bit (ULE).vbox"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/VirtualBox VMs/Lubuntu 64bit (ULE)/Lubuntu 64bit (ULE).vbox"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.VirtualBox/VirtualBox.xml"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/exercise_09.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/my_unsharpMasking.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/my_gauss2DFFT.m"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/my_compareGauss.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/technische-informatik/uebung08/uebung08.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/Downloads/ex 19.txt"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung09/ex2.4.sql"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung03/group_11/assignment_03/my_plotFFT2D.m"
+            }, 
+            {
+                "index": 5, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung03/group_11/assignment_03/displayfft2.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/provisorisch/uebung09.tex"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildkommunikation/uebung05/haus_tiff/Haus_01.tiff"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildkommunikation/uebung05/Blatt5a.pdf"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung09/ex2.1.sql"
+            }, 
+            {
+                "index": 4, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung03/group_11/assignment_03/exercise_07.m"
+            }, 
+            {
+                "index": 5, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung03/group_11/assignment_03/my_idealLowPassFilter.m"
+            }
+        ]
+    }, 
+    "bb3d5882193aaf30500796749bda6ed4": {
+        "opened": [
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/QwirkleLogik/src/qwirkleLogik/Player.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/QwirkleLogik/src/qwirkleLogik/Game.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/QwirkleLogik/src/qwirkleLogik/Main.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/QwirkleLogik/src/qwirkleLogik/Move.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/QwirkleLogik/src/qwirkleLogik/Coordinate.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/QwirkleLogik/src/qwirkleLogik/Tile.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/QwirkleLogik/src/qwirkleLogik/Bag.java"
+            }
+        ], 
+        "closed": [
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/coding/QwirkleLogik/src/qwirkleLogik/Desk.java"
+            }, 
+            {
+                "index": 6, 
+                "group": 0, 
+                "filename": "/media/Daten/Studium/Programmierprojekt (Qwirkle)/uebersicht.class.violet"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/media/Daten/Studium/Software Engineering/lernung.txt"
+            }
+        ]
+    }, 
+    "6b742d1d0f1fd1af46e5b7833ba51f47": {
+        "opened": [
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/Daten/Studium/Softwarequalit\u00e4t/junit-example/src/TestMath.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/Daten/Studium/Softwarequalit\u00e4t/junit-example/src/Math.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/Daten/Studium/Softwarequalit\u00e4t/junit-example/build.xml"
+            }
+        ], 
+        "closed": [
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.bashrc"
+            }
+        ]
+    }, 
+    "5ad8b65bdb72d50e00f65c72a5019d20": {
+        "opened": [
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/server/com/impl/ClientHandler.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/GameScreenListener.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/LoginScreen.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/GameOverScreen.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/server/com/impl/ExistingServerException.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/DeskScreen.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/GameScreen.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/MenuScreen.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/InfoPanel.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/messages/OtherNameMessage.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/messages/ChooseOtherGameMessage.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/impl/Client.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/server/com/impl/ServerCom.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/server/impl/Server.java"
+            }
+        ], 
+        "closed": [
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/ChooseGameScreen.java"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/GameOptionsScreen.java"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/LobbyScreen.java"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/ChatPanel.java"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/ColorDefinition.java"
+            }, 
+            {
+                "index": 5, 
+                "group": 0, 
+                "filename": "/home/flip/coding/Qwirkle/src/main/java/qwirkle/client/gui/ConnectServerScreen.java"
+            }
+        ]
+    }, 
+    "a9086229401c31ea489fcd43f8ea6116": {
+        "opened": [
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/pp/Miniprojekt (Logik)/Player.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/pp/Miniprojekt (Logik)/Main.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/pp/Miniprojekt (Logik)/Move.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/pp/Miniprojekt (Logik)/Bag.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/pp/Miniprojekt (Logik)/Tile.java"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/coding/pp/Miniprojekt (Logik)/Game.java"
+            }
+        ], 
+        "closed": []
+    }, 
+    "869cb1e8be3b5940a5e44dd87d132b42": {
+        "opened": [], 
+        "closed": []
+    }, 
+    "d6e0e0df286c162524880a5db77192b2": {
+        "opened": [], 
+        "closed": [
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildkommunikation/uebung03/dennis/a3.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildkommunikation/uebung03/dennis/createFilter.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildkommunikation/uebung03/dennis/plotRGBSplit.m"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildkommunikation/uebung03/dennis/displayfft2.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildkommunikation/uebung03/dennis/imfft.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildkommunikation/uebung03/a3.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/Dropbox/Bildkommunikation/uebung04/Dennis/A5.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/Dropbox/Bildkommunikation/uebung04/Dennis/bayer2rgb.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung09/ex4_test.py"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung09/ex4.py"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/script/db1script.tex"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung09/uebung09.tex"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/unix-linux/shellscripts/name.sh"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/unix-linux/shellscripts/obst.sh"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/unix-linux/shellscripts/summe.sh"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/shellskripte/internettest.sh"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/unix-linux/shellscripts/fileexists.sh"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung09/ex2.3.sql"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/User/fuzzy_file_nav.sublime-settings"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/FuzzyFileNav/fuzzy_file_nav.sublime-settings"
+            }
+        ]
+    }, 
+    "5842def22b4a3ffdd6e39446bf8a321d": {
+        "opened": [
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/provisorisch/dennis/xyz2lab.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/provisorisch/dennis/a1.m"
+            }
+        ], 
+        "closed": []
+    }, 
+    "d41d8cd98f00b204e9800998ecf8427e": {
+        "opened": [
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/File History/Default.sublime-keymap"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/User/fuzzy_file_nav.sublime-settings"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/User/FileHistory.json"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/bash/alias.sh"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/FileClose/README.md"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/Default/Default (Linux).sublime-keymap"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/GotoRecent/Default (Linux).sublime-keymap"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.bashrc"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/softwarequalitaet/uebung06/uebung06.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/latex/sfliptex05/sfliptex05.tex"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/coding/tests/python/frozensets.py"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung09/ex4_test.py"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung09/ex4.py"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung12/uebung12.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/shellskripte/evince.sh"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/softwarequalitaet/uebung10/uebung10.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.bash_history"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/etc/profile"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/Downloads/group_11/assignment_05/my_findZeroCrossings.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/Downloads/group_11/assignment_05/exercise_12.m"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bachelorthesis/tex/vorlagen/LaTeXtemplateBachelorArbeit/sec3.tex"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bachelorthesis/tex/vorlagen/LaTeXtemplateBachelorArbeit/sec2.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bachelorthesis/tex/vorlagen/LaTeXtemplateBachelorArbeit/sec1.tex"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bachelorthesis/tex/vorlagen/LaTeXtemplateBachelorArbeit/paper.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung11/uebung11.tex"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/technische-informatik/uebung11/uebung11.tex"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/softwarequalitaet/uebung09/uebung09.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/Downloads/Neues Textdokument.txt"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/coding/tests/matlab/image01.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/materialien/selection.py"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/Text Pastry/README.md"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/softwarequalitaet/uebung08/uebung08.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/User/snippets/LaTeX/sect.sublime-snippet"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/exercise_12.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/exercise_11.m"
+            }, 
+            {
+                "index": 5, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings"
+            }, 
+            {
+                "index": 4, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/User/Preferences.sublime-settings"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung11/ex4.sql"
+            }, 
+            {
+                "index": 4, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/Matlab/Matlab.tmLanguage"
+            }, 
+            {
+                "index": 6, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_detectCircles.m"
+            }, 
+            {
+                "index": 5, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_plotHoughSpaces.m"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_edgeDetection.m"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_houghTransform.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung11/ex3.sql"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_cannyEdge.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_marrhildrethEdge.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/Modulhandbuch_Bachelor_v1.5_1.10.2010-1.pdf"
+            }, 
+            {
+                "index": 5, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_sobelEdge.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung05/group_11/assignment_05/my_plotMarrhildreth.m"
+            }
+        ], 
+        "closed": [
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/UnicodeMath/README.md"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/displayfft2.m"
+            }, 
+            {
+                "index": 3, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/my_box2DFFT_scalekernel.m"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/my_plotKernels.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/my_plotFFT2D.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.VirtualBox/VirtualBox.xml"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/exercise_09.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/my_unsharpMasking.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/my_gauss2DFFT.m"
+            }, 
+            {
+                "index": 2, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/bildverarbeitung-1/uebung04/group_11/assignment_04/my_compareGauss.m"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/technische-informatik/uebung08/uebung08.tex"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/Downloads/ex 19.txt"
+            }, 
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/daten/studium/datenbanksysteme-1/uebung09/ex2.4.sql"
+            }
+        ]
+    }, 
+    "b00a9f0236d94f94606bb1ce5d9d11f0": {
+        "opened": [
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/Daten/Studium/Bildverarbeitung I/uebung01/group_11/assignment_01/my_showImage.m"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/Daten/Studium/Bildverarbeitung I/uebung01/group_11/assignment_01/my_RGBSplit.m"
+            }
+        ], 
+        "closed": [
+            {
+                "index": 0, 
+                "group": 0, 
+                "filename": "/home/flip/Daten/Studium/Bildverarbeitung I/uebung01/group_11/assignment_01/my_loadImage.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/Default/Default (Linux).sublime-keymap"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/Daten/Studium/Bildverarbeitung I/uebung01/group_11/assignment_01/exercise_01.m"
+            }, 
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/Daten/Studium/Datenbanksysteme I/uebung01/uebung01.tex"
+            }, 
+            {
+                "index": 4, 
+                "group": 0, 
+                "filename": "/home/flip/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap"
+            }
+        ]
+    }, 
+    "94f16a00e7819ff924513dbc292ddd48": {
+        "opened": [
+            {
+                "index": 1, 
+                "group": 0, 
+                "filename": "/home/flip/Dropbox/Bildkommunikation/uebung01/dennis/xyz2lab.m"
+            }, 
+            {
+                "index": -1, 
+                "group": 0, 
+                "filename": "/home/flip/Dropbox/Bildkommunikation/uebung01/dennis/a1.m"
+            }
+        ], 
+        "closed": []
+    }
+}

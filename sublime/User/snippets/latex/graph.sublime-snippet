@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[
+\\begin{figure}[h] \\centering \\begin{tikzpicture}[->,auto,node distance=2.5cm]
+	\\node[state, initial] 	(z1)$0 					{\$z_1\$};
+	\\node[state, accepting] (z2) [right of=z1] 		{\$z_2\$};
+	\\path	(z1) edge[right] 	node[above]{\$x\$}	(z2);
+\\end{tikzpicture} \\end{figure}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>graph</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>text.tex.latex</scope>
+</snippet>

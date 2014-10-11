@@ -1,0 +1,5 @@
+{
+    "shell": true,
+    "cmd": ["markdown $file > $file_base_name.html && html2text $file_base_name.html"],
+	"selector": "text.html.markdown"
+}

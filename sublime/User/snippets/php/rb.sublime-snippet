@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[
+<?php 
+	\$title = "$1";
+	require_once "{\$_SERVER['DOCUMENT_ROOT']}/meta/basic-head.php";
+ ?> $0
+<?php 
+	require_once "{\$_SERVER['DOCUMENT_ROOT']}/meta/basic-tail.php";
+ ?>]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>rb</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>text.html</scope>
+</snippet>

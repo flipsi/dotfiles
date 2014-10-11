@@ -1,0 +1,6 @@
+{
+    "add_to_PATH": ["/home/flip/.cabal/bin/"],
+    "enable_hdevtools": false,
+    "enable_auto_lint": true,
+    "inspect_modules": false
+}
