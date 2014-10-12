@@ -43,6 +43,9 @@ cnoremap <A-f> <C-Right>
 inoremap <A-b> <C-Left>
 cnoremap <A-b> <C-Left>
 
+" goto specific tab
+noremap W :buffer 
+
 " jump to marking (')
 noremap ä '
 

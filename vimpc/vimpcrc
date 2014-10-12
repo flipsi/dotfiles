@@ -31,8 +31,11 @@ map ö /
 " goto random line
 map r %
 
+" goto next or previous window
+map <a-n> gt
+map <a-p> gT
 
-" Goto Window
+" goto Window
 map gl :library<CR>
 map gp :playlist<CR>
 map gb :browse<CR>

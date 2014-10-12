@@ -262,3 +262,5 @@
    when: 1412701073
 - cmd: y
    when: 1412715324
+- cmd: function r\nranger\nend
+   when: 1413088360

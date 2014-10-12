@@ -52,6 +52,8 @@ filetype plugin indent on    " required
 "ignore case in search patterns
 :set ignorecase
 
+" statusline
+set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 
 
 "-----------------------------------------------------------------------
@@ -93,9 +95,9 @@ map Q ZQ
 "cnoremap đ <Right>
 
 
-" scroll with alt+space and alt+m (does not work)
-map <m-Space> <C-D> 
-map <m-m> <C-U> 
+" scroll (does not work)
+map <c-Space> <C-D> 
+map <c-m> <C-U> 
 
 " smooth scroll
 noremap <silent> <c-u> :call smooth_scroll#up(15, 18, 2)<CR>
@@ -124,9 +126,10 @@ nnoremap Ö ?
 " goto mark 
 nnoremap ä ' 
 
-" change or yank to line end (l instead of $)
+" movement to eol (l instead of $)
 map cl c$
 map yl y$
+map dl d$
 
 " add new line above or below
 "noremap <m-o> :call append(line('.')-1, '')<CR>
