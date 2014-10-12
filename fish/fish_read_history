@@ -1,0 +1,264 @@
+- cmd: ls
+   when: 1400623785
+- cmd: - cmd: whatis ifup 
+   when: 0
+- cmd:    when: 1400625685
+   when: 0
+- cmd: - cmd: function fish_prompt\\nset_color green\\necho -n '>( *) '\\nset_color brown\\necho -n (pwd) ' '\\nset_color normal\\nend
+   when: 0
+- cmd:    when: 1400625755
+   when: 0
+- cmd:    when: 1400632212
+   when: 0
+- cmd: - cmd: function fish_prompt --description 'Prompt anzeigen'\\n\\n# Just calculate these once, to save a few cycles when displaying the prompt\\nif not set -q __fish_prompt_hostname\\nset -g __fish_prompt_hostname (hostname|cut -d . -f 1)\\nend\\n\\nif not set -q __fish_prompt_normal\\nset -g __fish_prompt_normal (set_color normal)\\nend\\n\\nswitch $USER\\n\\ncase root\\n\\nif not set -q __fish_prompt_cwd\\nif set -q fish_color_cwd_root\\nset -g __fish_prompt_cwd (set_color $fish_color_cwd_root)\\nelse\\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\\nend\\nend\\n\\necho -n -s "$USER" @ "$__fish_prompt_hostname" ' ' "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '# '\\n\\ncase '*'\\n\\nif not set -q __fish_prompt_cwd\\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\\nend\\n\\necho -n -s "Shebang! " "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '> '\\n\\nend\\nend
+   when: 0
+- cmd:    when: 1400632264
+   when: 0
+- cmd: - cmd: function fish_prompt --description 'Prompt anzeigen'\\n\\n# Just calculate these once, to save a few cycles when displaying the prompt\\nif not set -q __fish_prompt_hostname\\nset -g __fish_prompt_hostname (hostname|cut -d . -f 1)\\nend\\n\\nif not set -q __fish_prompt_normal\\nset -g __fish_prompt_normal (set_color normal)\\nend\\n\\nswitch $USER\\n\\ncase root\\n\\nif not set -q __fish_prompt_cwd\\nif set -q fish_color_cwd_root\\nset -g __fish_prompt_cwd (set_color $fish_color_cwd_root)\\nelse\\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\\nend\\nend\\n\\necho -n -s "$USER" @ "$__fish_prompt_hostname" ' ' "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '# '\\n\\ncase '*'\\n\\nif not set -q __fish_prompt_cwd\\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\\nend\\n\\necho -n -s "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '> '\\n\\nend\\nend
+   when: 0
+- cmd:    when: 1400632308
+   when: 0
+- cmd: - cmd: function fish_prompt --description 'Prompt anzeigen'\\n\\n# Just calculate these once, to save a few cycles when displaying the prompt\\nif not set -q __fish_prompt_hostname\\nset -g __fish_prompt_hostname (hostname|cut -d . -f 1)\\nend\\n\\nif not set -q __fish_prompt_normal\\nset -g __fish_prompt_normal (set_color normal)\\nend\\n\\nswitch $USER\\n\\ncase root\\n\\nif not set -q __fish_prompt_cwd\\nif set -q fish_color_cwd_root\\nset -g __fish_prompt_cwd (set_color $fish_color_cwd_root)\\nelse\\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\\nend\\nend\\n\\necho -n -s "$USER" @ "$__fish_prompt_hostname" ' ' "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '# '\\n\\ncase '*'\\n\\nif not set -q __fish_prompt_cwd\\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\\nend\\necho -n -s ">( *)"\\necho -n -s "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '> '\\n\\nend\\nend
+   when: 0
+- cmd:    when: 1400632354
+   when: 0
+- cmd: - cmd: function fish_prompt --description 'Prompt anzeigen'\\n\\n# Just calculate these once, to save a few cycles when displaying the prompt\\nif not set -q __fish_prompt_hostname\\nset -g __fish_prompt_hostname (hostname|cut -d . -f 1)\\nend\\n\\nif not set -q __fish_prompt_normal\\nset -g __fish_prompt_normal (set_color normal)\\nend\\n\\nswitch $USER\\n\\ncase root\\n\\nif not set -q __fish_prompt_cwd\\nif set -q fish_color_cwd_root\\nset -g __fish_prompt_cwd (set_color $fish_color_cwd_root)\\nelse\\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\\nend\\nend\\n\\necho -n -s "$USER" @ "$__fish_prompt_hostname" ' ' "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '# '\\n\\ncase '*'\\n\\nif not set -q __fish_prompt_cwd\\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\\nend\\necho -n -s ">( *) "\\necho -n -s "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '> '\\n\\nend\\nend
+   when: 0
+- cmd:    when: 1400632369
+   when: 0
+- cmd: - cmd: function fish_user_keybindings\\nbind \\\\ea beginning-of-line \\nend
+   when: 0
+- cmd:    when: 1400634754
+   when: 0
+- cmd: - cmd: function fish_user_keybindings\\nbind \\\\ea beginning-of-line\\nend
+   when: 0
+- cmd:    when: 1400634855
+   when: 0
+- cmd: - cmd: function fish_user_keybindings\\nbind \\\\ea beginning-of-line\\nbind \\\\ee end-of-line\\nbind \\\\el forward-char\\nbind \\\\eh backward-char\\nbind \\\\ew forward-word\\nbind \\\\eb backward-word\\n#	bind \\\\ek kill-word\\nend
+   when: 0
+- cmd:    when: 1400635391
+   when: 0
+- cmd: - cmd: function fish_config --description Launch\\\\ fish\\\\'s\\\\ web\\\\ based\\\\ configuration\\n\\nset -l initial_tab\\nif count $argv >  /dev/null\\nset initial_tab $argv[1]\\nend\\neval $__fish_datadir/tools/web_config/webconfig.py $initial_tab\\nend
+   when: 0
+- cmd:    when: 1400636511
+   when: 0
+- cmd:     - /dev/null
+   when: 0
+- cmd: - cmd: function fish_user_keybindings --description "User Key Bindings"\\nbind \\\\ea beginning-of-line\\nbind \\\\ee end-of-line\\nbind \\\\el forward-char\\nbind \\\\eh backward-char\\nbind \\\\ew forward-word\\nbind \\\\eb backward-word\\nbind \\\\ek kill-word\\nend
+   when: 0
+- cmd:    when: 1400660972
+   when: 0
+- cmd:    when: 1400667592
+   when: 0
+- cmd: - cmd: function ll\\nls -lh $args\\nend
+   when: 0
+- cmd:    when: 1400668091
+   when: 0
+- cmd:    when: 1400668163
+   when: 0
+- cmd: - cmd: function llls -lh $args\\nend
+   when: 0
+- cmd:    when: 1400668175
+   when: 0
+- cmd: - cmd: function l\\nls -C --file-type $argv\\nend
+   when: 0
+- cmd:    when: 1400668187
+   when: 0
+- cmd: - cmd: function ll\\nls -lh --file-type $args\\nend
+   when: 0
+- cmd:    when: 1400668199
+   when: 0
+- cmd: - cmd: function apu --description 'Update and Upgrade with aptitude'\\nexec /home/flip/shellskripte/apu.sh\\nend
+   when: 0
+- cmd:    when: 1400711274
+   when: 0
+- cmd: - cmd: function apu --description 'Update and Upgrade with aptitude'\\n/home/flip/bash/apu.sh \\nend
+   when: 0
+- cmd:    when: 1400711369
+   when: 0
+- cmd:     - /home/flip/bash/apu.sh
+   when: 0
+- cmd: - cmd: function ll\\nls -lh $argv\\nend
+   when: 0
+- cmd:    when: 1400712015
+   when: 0
+- cmd: - cmd: function ll\\nls -lh --file-type $argv\\nend
+   when: 0
+- cmd:    when: 1400712444
+   when: 0
+- cmd: - cmd: function fish_user_key_bindings\\nbind \\\\ea beginning-of-line \\nend
+   when: 0
+- cmd:    when: 1400713433
+   when: 0
+- cmd: - cmd: function fish_user_key_bindings\\nbind \\\\ea beginning-of-line\\nbind \\\\ee end-of-line\\nbind \\\\el forward-char\\nbind \\\\eh backward-char \\nbind \\\\ew forward-word \\nbind \\\\ew backward-word \\nbind \\\\ek kill-word\\nbind \\\\e. history-token-search-backward \\nbind \\\\e: history-token-search-forward \\nend
+   when: 0
+- cmd:    when: 1400713589
+   when: 0
+- cmd: - cmd: function mv\\nmv -i $argv\\nend
+   when: 0
+- cmd:    when: 1400713975
+   when: 0
+- cmd: - cmd: function cp\\ncp -i\\nend
+   when: 0
+- cmd:    when: 1400713989
+   when: 0
+- cmd: - cmd: function mv\\n/bin/mv -i $argv\\nend
+   when: 0
+- cmd:    when: 1400714157
+   when: 0
+- cmd:     - /bin/mv
+   when: 0
+- cmd: - cmd: function cp\\n/bin/cp -i\\nend
+   when: 0
+- cmd:    when: 1400714169
+   when: 0
+- cmd:    paths:
+   when: 0
+- cmd:     - /bin/cp
+   when: 0
+- cmd: function mv\nmv -i $argv\nend
+   when: 1400713975
+- cmd: function cp\ncp -i\nend
+   when: 1400713989
+- cmd: function cp\n/bin/cp -i\nend
+   when: 1400714169
+   paths:
+    - /bin/cp
+- cmd: function cp\n/bin/cp -i $argv\nend
+   when: 1400714211
+   paths:
+    - /bin/cp
+- cmd: function mv\n/bin/mv -i $argv\nend
+   when: 1400760803
+   paths:
+    - /bin/mv
+- cmd: function rrm --description 'remove recursively and force'\n/bin/rm -rf $argv\nend
+   when: 1400760926
+   paths:
+    - /bin/rm
+- cmd: function mv\n/bin/mv -i $argv\nand echo "Moved successfully."\nor echo "Could not move!"\nend
+   when: 1401018734
+   paths:
+    - /bin/mv
+- cmd: function cp\n/bin/cp -i $argv\nand echo "Copied successfully."\nor echo "Could not copy!"\nend
+   when: 1401018762
+   paths:
+    - /bin/cp
+- cmd: function rrm --description 'remove recursively and force'\nif read_confirm\n/bin/rm -rf $argv\nend\nend
+   when: 1401019187
+   paths:
+    - /bin/rm
+- cmd: function fish_prompt --description 'Prompt anzeigen'\n\n# Just calculate these once, to save a few cycles when displaying the prompt\nif not set -q __fish_prompt_hostname\nset -g __fish_prompt_hostname (hostname|cut -d . -f 1)\nend\n\nif not set -q __fish_prompt_normal\nset -g __fish_prompt_normal (set_color normal)\nend\n\nswitch $USER\n\ncase root\n\nif not set -q __fish_prompt_cwd\nif set -q fish_color_cwd_root\nset -g __fish_prompt_cwd (set_color $fish_color_cwd_root)\nelse\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\nend\n\necho -n -s "$USER" @ "$__fish_prompt_hostname" ' ' "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '# '\n\ncase '*'\n\nif not set -q __fish_prompt_cwd\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\n\nset_color brown\necho ""# newline\necho -n -s ">( *) "\nset_color normal\necho -n -s "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '$ '\n\nend\nend
+   when: 1401059101
+- cmd: function fish_prompt --description 'Prompt anzeigen'\n\n# Just calculate these once, to save a few cycles when displaying the prompt\nif not set -q __fish_prompt_hostname\nset -g __fish_prompt_hostname (hostname|cut -d . -f 1)\nend\n\nif not set -q __fish_prompt_normal\nset -g __fish_prompt_normal (set_color normal)\nend\n\nswitch $USER\n\ncase root\n\nif not set -q __fish_prompt_cwd\nif set -q fish_color_cwd_root\nset -g __fish_prompt_cwd (set_color $fish_color_cwd_root)\nelse\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\nend\n\necho -n -s "$USER" @ "$__fish_prompt_hostname" ' ' "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '# '\n\ncase '*'\n\nif not set -q __fish_prompt_cwd\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\n\nset_color brown\necho ""# newline\necho -n -s ">( *) "\nset_color normal\necho -n -s "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" ' '\n\nend\nend
+   when: 1401059221
+- cmd: function gr\ngrep -Einr $argv\nend
+   when: 1401100975
+- cmd: function rrm --description 'remove recursively and force'\nif read_confirm\n/bin/rm -rf $argv\nand echo "Removed file(s)"\nelse\necho "Done Nothing."\nend\nend
+   when: 1401114712
+   paths:
+    - /bin/rm
+- cmd: function rrm --description 'remove recursively and force'\nif read_confirm\n/bin/rm -rf $argv\nand echo "Removed file(s)."\nelse\necho "Done Nothing."\nend\nend
+   when: 1401114764
+   paths:
+    - /bin/rm
+- cmd: function fish_prompt --description 'Prompt anzeigen'\n\n# Just calculate these once, to save a few cycles when displaying the prompt\nif not set -q __fish_prompt_hostname\nset -g __fish_prompt_hostname (hostname|cut -d . -f 1)\nend\n\nif not set -q __fish_prompt_normal\nset -g __fish_prompt_normal (set_color normal)\nend\n\nswitch $USER\n\ncase root\n\nif not set -q __fish_prompt_cwd\nif set -q fish_color_cwd_root\nset -g __fish_prompt_cwd (set_color $fish_color_cwd_root)\nelse\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\nend\n\necho -n -s "$USER" @ "$__fish_prompt_hostname" ' ' "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '# '\n\ncase '*'\n\nif not set -q __fish_prompt_cwd\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\n\nset_color brown\necho ""# newline\necho -n -s ">( *) "\nset_color normal\necho -n -s "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" ' $ '\n\nend\nend
+   when: 1401117230
+- cmd: function rm\n/bin/rm -i $argv\nand echo "File removed."\nor echo "Could not remove file."\nend
+   when: 1401180380
+   paths:
+    - /bin/rm
+- cmd: function rm\n/bin/rm -i $argv\nend
+   when: 1401180429
+   paths:
+    - /bin/rm
+- cmd: function cp\n/bin/cp -i -r $argv\nand echo "Copied successfully."\nor echo "Could not copy!"\nend
+   when: 1401556997
+   paths:
+    - /bin/cp
+- cmd: function notify-rooibostee\nsleep 6m\nand notify-send "Der Tee ist fertig!"\nand play -q /home/flip/daten/music-misc/splice-sidneysam-snippet.mp3 & \nend
+   when: 1401828558
+   paths:
+    - /home/flip/daten/music-misc/splice-sidneysam-snippet.mp3
+- cmd: function notify-rooibostee\nsleep 6m &\nand notify-send "Der Tee ist fertig!"\nand play -q /home/flip/daten/music-misc/splice-sidneysam-snippet.mp3\nend
+   when: 1401828590
+   paths:
+    - /home/flip/daten/music-misc/splice-sidneysam-snippet.mp3
+- cmd: function gr\ngrep -HEinr $argv\nend
+   when: 1401986993
+- cmd: function fish_user_key_bindings\nbind \\ea beginning-of-line\nbind \\ee end-of-line\nbind \\el forward-char\nbind \\eh backward-char\nbind \\ew forward-word\nbind \\ew backward-word\nbind \\ek kill-word\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nend
+   when: 1402052311
+- cmd: function fish_user_key_bindings\nbind \\ea beginning-of-line\nbind \\ee end-of-line\nbind \\el forward-char\nbind \\eh backward-char\nbind \\ew forward-word\nbind \\[1\\2C forward-word\nbind \\ew backward-word\nbind \\ek kill-word\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nend
+   when: 1402053038
+- cmd: function fish_user_key_bindings\nbind \\ea beginning-of-line\nbind \\ee end-of-line\nbind \\el forward-char\nbind \\eh backward-char\nbind \\ew forward-word\nbind \\[1\\;\\2C forward-word\nbind \\ew backward-word\nbind \\ek kill-word\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nend
+   when: 1402053097
+- cmd: function fish_user_key_bindings\nbind \\ea beginning-of-line\nbind \\ee end-of-line\nbind \\el forward-char\nbind \\eh backward-char\nbind \\ew forward-word\nbind \\[\\1\\;\\2C forward-word\nbind \\ew backward-word\nbind \\ek kill-word\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nend
+   when: 1402053207
+- cmd: function fish_user_key_bindings\n    # VIM movements\nbind \\ea beginning-of-line\nbind \\ee end-of-line\nbind \\el forward-char\nbind \\eh backward-char\nbind \\ew forward-word\nbind \\ew backward-word\nbind \\ek kill-word\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\n# NEO movements\nbind đ forward-char \nbind ſ backward-char \nbind ¶ delete-char \nbind ł backward-delete-char \nend
+   when: 1402272199
+- cmd: function fish_user_key_bindings\n    # emacs and other movements\nbind \\ea beginning-of-line\nbind \\ee end-of-line\nbind \\el forward-char\nbind \\eh backward-char\nbind \\ew forward-word\nbind \\ew backward-word\nbind \\ek kill-word\n# token search - great thing\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\n# NEO movements in QWERTZ\nbind € history-search-backward \nbind đ forward-char \nbind ð history-search-forward\nbind @ backward-delete-char \nbind ¶ delete-char  \nbind æ beginning-of-line \nbind ŋ end-of-line \nend \n
+   when: 1402309372
+- cmd: function fish_user_key_bindings\n\nbind \\ea beginning-of-line\nbind \\ee end-of-line\nbind \\el forward-char\nbind \\eh backward-char\nbind \\ew forward-word\nbind \\ew backward-word\nbind \\ek kill-word\n# token search - great thing\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\n# NEO movements in QWERTZ\nbind € history-search-backward\nbind đ forward-char\nbind ð history-search-forward\nbind ſ backward-char \nbind @ backward-delete-char\nbind ¶ delete-char\nbind æ beginning-of-line\nbind ŋ end-of-line\nend
+   when: 1402309411
+- cmd: function fish_user_key_bindings\n\nbind \\ea beginning-of-line\nbind \\ee end-of-line\nbind \\el forward-char\nbind \\eh backward-char\nbind \\ew forward-word\nbind \\ew backward-word\nbind \\ek kill-word\n# token search - great thing\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\n# NEO movements in QWERTZ\nbind € history-search-backward\nbind đ forward-char\nbind ð history-search-forward\nbind ſ backward-char\nbind ł backward-delete-char\nbind ¶ delete-char\nbind æ beginning-of-line\nbind ŋ end-of-line\nend
+   when: 1402596520
+- cmd: function apu --description 'Update and Upgrade with aptitude'\n/home/flip/shellskripte/apu.sh\nend
+   when: 1402865318
+   paths:
+    - /home/flip/shellskripte/apu.sh
+- cmd: function git-commit-all --description 'git add all and commit. also push if user wants it. argument is commit comment.'\nif not set -q argv\necho 'Please enter a commit comment!'\nelse\ngit add --all\ngit commit -m $argv\necho 'Also wanna push?'\nif read_confirm\ngit push\nend\nend\nend
+   when: 1406792959
+- cmd: function foo\nif not set -q argv\necho 'das war nichts'\nelse\necho 'jawoll'\nend\nend
+   when: 1406793134
+- cmd: function foo\nif count $argv\necho 'das war nichts'\nelse\necho 'jawoll'\nend\nend
+   when: 1406793281
+- cmd: function foo\nif count $argv == 0\necho 'das war nichts'\nelse\necho 'jawoll'\nend\nend
+   when: 1406793346
+- cmd: function foo\nif set -q argv\necho 'das war nichts'\nelse\necho 'jawoll'\nend\nend
+   when: 1406822011
+- cmd: function foo\nif set -q $argv\necho 'das war nichts'\nelse\necho 'jawoll'\nend\nend
+   when: 1406822022
+- cmd: function git-commit-all --description 'git add all and commit. also push if user wants it (prompt). argument is commit comment.'\nif not set -q $argv\necho 'Please enter a commit comment!'\nelse\ngit add --all\ngit commit -m $argv\necho 'Also wanna push?'\nwhile true\ngit push\nend\nend\nend
+   when: 1406822255
+- cmd: function git-commit-all --description 'git add all and commit. also push if user wants it (prompt). argument is commit comment.'\nif not set -q $argv\necho 'Please enter a commit comment!'\nelse\ngit add --all\ngit commit -m $argv\necho 'Also wanna git push?'\nwhile true\nread --local confirm\nswitch $confirm\ncase Yes yes Y y Ja ja J j\ngit push\ncase No no N n Nein nein\necho 'Pf, okay, then do it yourself.'\nend\nend\nend\nend
+   when: 1406822514
+- cmd: function git-commit-all --description 'git add all and commit. also push if user wants it (prompt). argument is commit comment.'\nif not set -q $argv\necho 'Please enter a commit comment!'\nelse\ngit add --all\ngit commit -m $argv\necho 'Also wanna git push?'\nread --local confirm\nswitch $confirm\ncase Yes yes Y y Ja ja J j\ngit push\ncase No no N n Nein nein\necho 'Pf, okay, then do it yourself.'\nend\nend\nend
+   when: 1406822776
+- cmd: function git-commit-all --description 'git add all and commit. also push if user wants it (prompt). argument is commit comment.'\nif not set -q $argv\necho 'Please enter a commit comment!'\nelse\ngit add --all\ngit commit -m $argv\necho 'Also wanna git push?'\nread --local --prompt 'Huh?' confirm\nswitch $confirm\ncase Yes yes Y y Ja ja J j\ngit push\ncase No no N n Nein nein\necho 'Pf, okay, then do it yourself.'\nend\nend\nend
+   when: 1406822836
+- cmd: n
+   when: 1407099606
+- cmd: j
+   when: 1410385689
+- cmd: y
+   when: 1410387816
+- cmd: j
+   when: 1410387951
+- cmd: y
+   when: 1410794117
+- cmd: y
+   when: 1411288726
+- cmd: y
+   when: 1412253622
+- cmd: y
+   when: 1412520532
+- cmd: function fish_user_key_bindings\n\nbind \\ea beginning-of-line\nbind \\ee end-of-line\nbind \\el forward-char\nbind \\eh backward-char\nbind \\ew forward-word\nbind \\eb backward-word\nbind \\ek kill-word\n# token search - great thing\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\n# NEO movements in QWERTZ\nbind € history-search-backward\nbind đ forward-char\nbind ð history-search-forward\nbind ſ backward-char\nbind ł backward-delete-char\nbind ¶ delete-char\nbind æ beginning-of-line\nbind ŋ end-of-line\nend
+   when: 1412531985
+- cmd: y
+   when: 1412543049
+- cmd: y
+   when: 1412547147
+- cmd: function fish_prompt --description 'Prompt anzeigen'\n\n# Just calculate these once, to save a few cycles when displaying the prompt\nif not set -q __fish_prompt_hostname\nset -g __fish_prompt_hostname (hostname|cut -d . -f 1)\nend\n\nif not set -q __fish_prompt_normal\nset -g __fish_prompt_normal (set_color normal)\nend\n\nswitch $USER\n\ncase root\n\nif not set -q __fish_prompt_cwd\nif set -q fish_color_cwd_root\nset -g __fish_prompt_cwd (set_color $fish_color_cwd_root)\nelse\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\nend\n\necho -n -s "$USER" @ "$__fish_prompt_hostname" ' ' "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '# '\n\ncase '*'\n\nif not set -q __fish_prompt_cwd\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\n\nset_color brown\necho ""# newline\necho -n -s " >( *) "\nset_color normal\necho -n -s "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" ' $ '\n\nend\nend
+   when: 1412632440
+- cmd: function le\nless $argv\nend
+   when: 1412634014
+- cmd: function fish_prompt --description 'Prompt anzeigen'\n\n# Just calculate these once, to save a few cycles when displaying the prompt\nif not set -q __fish_prompt_hostname\nset -g __fish_prompt_hostname (hostname|cut -d . -f 1)\nend\n\nif not set -q __fish_prompt_normal\nset -g __fish_prompt_normal (set_color normal)\nend\n\nswitch $USER\n\ncase root\n\nif not set -q __fish_prompt_cwd\nif set -q fish_color_cwd_root\nset -g __fish_prompt_cwd (set_color $fish_color_cwd_root)\nelse\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\nend\n\necho -n -s "$USER" @ "$__fish_prompt_hostname" ' ' "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '# '\n\ncase '*'\n\nif not set -q __fish_prompt_cwd\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\n\nset_color brown\necho ""# newline\necho -s " >( *) "\nset_color normal\necho -n -s "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" ' $ '\n\nend\nend
+   when: 1412636573
+- cmd: function fish_prompt --description 'Prompt anzeigen'\n\n# Just calculate these once, to save a few cycles when displaying the prompt\nif not set -q __fish_prompt_hostname\nset -g __fish_prompt_hostname (hostname|cut -d . -f 1)\nend\n\nif not set -q __fish_prompt_normal\nset -g __fish_prompt_normal (set_color normal)\nend\n\nswitch $USER\n\ncase root\n\nif not set -q __fish_prompt_cwd\nif set -q fish_color_cwd_root\nset -g __fish_prompt_cwd (set_color $fish_color_cwd_root)\nelse\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\nend\n\necho -n -s "$USER" @ "$__fish_prompt_hostname" ' ' "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '# '\n\ncase '*'\n\nif not set -q __fish_prompt_cwd\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\n\nset_color brown\n#echo ""# newline\necho -n -s " >( *) "\nset_color normal\necho -n -s "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" ' $ '\n\nend\nend
+   when: 1412636605
+- cmd: function fish_prompt --description 'Prompt anzeigen'\n\n# Just calculate these once, to save a few cycles when displaying the prompt\nif not set -q __fish_prompt_hostname\nset -g __fish_prompt_hostname (hostname|cut -d . -f 1)\nend\n\nif not set -q __fish_prompt_normal\nset -g __fish_prompt_normal (set_color normal)\nend\n\nswitch $USER\n\ncase root\n\nif not set -q __fish_prompt_cwd\nif set -q fish_color_cwd_root\nset -g __fish_prompt_cwd (set_color $fish_color_cwd_root)\nelse\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\nend\n\necho -n -s "$USER" @ "$__fish_prompt_hostname" ' ' "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '# '\n\ncase '*'\n\nif not set -q __fish_prompt_cwd\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\n\nset_color brown\necho ""# newline\necho -n -s " >( *) "\nset_color normal\necho -n -s "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" ' $ '\n\nend\nend
+   when: 1412636626
+- cmd: y
+   when: 1412701073
+- cmd: y
+   when: 1412715324
