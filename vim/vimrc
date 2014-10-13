@@ -76,8 +76,11 @@ set timeout ttimeoutlen=50
 " ===========
 
 
-" quit vim quickly
-map Q ZQ
+" Q to quit vim quickly
+" vim will prompt if the file was changed but not saved.
+" ZQ to quit anyway 
+" ZZ to save and quit
+map Q :quit<CR>
 
 
 " NEO arrow keys when in QWERTZ (now i use xmodmap)
@@ -139,6 +142,6 @@ noremap <m-o> <Esc>o<Esc>k
 
 
 " undo and redo
-noremap <A-u> :undo<CR>
-"noremap <A-S-u> :redo<CR>
+noremap <m-u> :undo<CR>
+"noremap <m-s-U> :redo<CR>
 

@@ -43,6 +43,8 @@ cnoremap <A-f> <C-Right>
 inoremap <A-b> <C-Left>
 cnoremap <A-b> <C-Left>
 
+" enter visual mode (without caret mode detour)
+
 " goto specific tab
 noremap W :buffer 
 
@@ -80,8 +82,10 @@ inoremap <A-p> <Esc>:tabprevious<CR>
 noremap <A-n> :tabnext<CR>
 inoremap <A-n> <Esc>:tabnext<CR>
 " move tab 
-noremap <A-S-p> <C-S-PageUp>
-noremap <A-S-n> <C-S-PageDown>
+"noremap <A-S-p> <C-S-PageUp>
+"noremap <A-S-n> <C-S-PageDown>
+noremap <A-S-p> :tabmove -1<CR>
+noremap <A-S-n> :tabmove +1<CR>
 " close tab
 noremap <A-w> :tabclose<CR>
 

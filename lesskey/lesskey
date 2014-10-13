@@ -1,6 +1,8 @@
 #command
 ö forw-search
 Ö back-search
+ä goto-mark
+
 
 #env
 LESS = -i -R

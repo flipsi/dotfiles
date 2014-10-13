@@ -264,3 +264,13 @@
    when: 1412715324
 - cmd: function r\nranger\nend
    when: 1413088360
+- cmd: function fish_user_key_bindings\nbind \\er ranger; and clear\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nend
+   when: 1413106771
+- cmd: function fish_user_key_bindings\nbind \\er (ranger; and clear)\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nend
+   when: 1413106789
+- cmd: function testtmux\nif test -z $TMUX\necho "check"\nelse\necho "leider nein"\nend\nend
+   when: 1413240206
+- cmd: function testtmux\nif test -n $TMUX\necho "check"\nelse\necho "leider nein"\nend\nend
+   when: 1413240327
+- cmd: echo $TMUX
+   when: 1413240368
