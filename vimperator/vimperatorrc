@@ -44,6 +44,7 @@ inoremap <A-b> <C-Left>
 cnoremap <A-b> <C-Left>
 
 " enter visual mode (without caret mode detour)
+noremap v cv
 
 " goto specific tab
 noremap W :buffer 

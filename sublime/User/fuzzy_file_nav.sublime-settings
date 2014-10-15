@@ -31,7 +31,7 @@
     "bookmarks": [
         {"name": "Home", "path": "/home/flip/"},
         {"name": "Sublime Packages", "path": "/home/flip/.config/sublime-text-2/Packages/"},
-        {"name": "Master Studium", "path": "/home/flip/daten/masterstudies/"},
+        {"name": "Master Studium", "path": "/home/flip/daten/masterstudies/modules/"},
         {"name": "Tests", "path": "/home/flip/daten/coding/tests/"},
         {"name": "Latex sfliptex05", "path": "/home/flip/daten/latex/sfliptex05"},
         {"name": "Lokaler Apache", "path": "/var/www/"},

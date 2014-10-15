@@ -274,3 +274,18 @@
    when: 1413240327
 - cmd: echo $TMUX
    when: 1413240368
+- cmd: function fish_user_key_bindings\nbind \\er ranger\nbind \\ee elinks\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nend
+   when: 1413242788
+   paths:
+    - ranger
+- cmd: function fish_user_key_bindings\nbind \\et tmux attach\nbind \\er ranger\nbind \\ee elinks\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nend
+   when: 1413242803
+   paths:
+    - tmux
+    - ranger
+- cmd: function fish_user_key_bindings\nbind \\et 'tmux attach'\nbind \\er ranger\nbind \\ee elinks\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nend
+   when: 1413242838
+- cmd: function fish_user_key_bindings\nbind \\er ranger\nbind \\ee elinks\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nend
+   when: 1413242981
+- cmd: y
+   when: 1413402610
