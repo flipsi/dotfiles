@@ -154,7 +154,21 @@
     { "caption": "Highlight Line", "command": "toggle_setting", "args": {"setting": "highlight_line"} },
 
     // W3C HTML Validator
-    { "caption": "W3C HTML Validator", "command": "validate" }, // does not appear??
+    { "caption": "Validate HTML 5", "command": "validatehtml5"},
+    { "caption": "Validate HTML 4.01 Strict", "command": "validatehtml4strict"},
+    { "caption": "Validate HTML 4.01 Transitional", "command": "validatehtml4transitional"},
+    { "caption": "Validate SVG 1.1", "command": "validatesvg11"},
+    { "caption": "Validate SVG 1.1 Tiny", "command": "validatesvg11tiny"},
+    { "caption": "Validate SVG 1.1 Basic", "command": "validatesvg11basic"},
+
+    // html css js formatting
+    { "caption": "Prettify (Auto format HTML/CSS/JavaScript", "command": "htmlprettify"},
+
+    // JavaScript Refactor
+    { "caption": "JavaScript Refactor: Goto definition", "command": "gotodefinition"},
+    { "caption": "JavaScript Refactor: Rename", "command": "renamevariable"},
+    { "caption": "JavaScript Refactor: Introduce Variable", "command": "introducevariable"},
+    { "caption": "JavaScript Refactor: Extract Method", "command": "extractmethod"},
 
     // python repl (console)
     { "caption": "Python REPL Console",

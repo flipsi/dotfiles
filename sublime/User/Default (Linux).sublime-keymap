@@ -177,6 +177,8 @@
     { "keys": ["ctrl+k", "u"], "command": "upper_case" },
     { "keys": ["ctrl+k", "l"], "command": "lower_case" },
     { "keys": ["ctrl+k", "t"], "command": "title_case" },
+    // toggle words (true/false etc.)
+    { "keys": ["alt+t"], "command": "toggle_word" },
     // toggle single or double quotes
     { "keys": ["alt+q"], "command": "change_quotes" },
     // add new line
@@ -185,8 +187,8 @@
     // duplicate line
     { "keys": ["alt+shift+d"], "command": "duplicate_line" },
     // move line up and down
-    { "keys": ["ctrl+shift+k"], "command": "swap_line_up" },
-    { "keys": ["ctrl+shift+j"], "command": "swap_line_down" },
+    { "keys": ["alt+shift+k"], "command": "swap_line_up" },
+    { "keys": ["alt+shift+j"], "command": "swap_line_down" },
     // join lines
     { "keys": ["ctrl+j"], "command": "join_lines" },
     // sort
@@ -265,29 +267,18 @@
     { "keys": ["ctrl+m", "H"], "command": "sublimerge_merge_right", "args": {"merge_all": true}},
 
 
-    //////////
-    // Gist //
-    //////////
+    /////////////////////////
+    // JavaScript Refactor //
+    /////////////////////////
 
-    // { "keys": ["ctrl+g", "n"], "command": "gist" },
-    // { "keys": ["ctrl+g", "p"], "command": "gist_private" },
-    // { "keys": ["ctrl+g", "u"], "command": "gist_update_file" },
-    // { "keys": ["ctrl+g", "o"], "command": "gist_list" },
-    // { "keys": ["ctrl+g", "i"], "command": "insert_gist_list" },
-    // { "keys": ["ctrl+g", "a"], "command": "gist_add_file" },
-
-    /////////
-    // Git //
-    /////////
-
-
+    { "keys": ["g", "d"], "command": "gotodefinition", "context": [{"key": "setting.command_mode"}] },
 
     /////////////////////
     // Tab Management  //
     /////////////////////
 
     // close tab
-    // { "keys": ["alt+w"], "command": "close" },
+    { "keys": ["Q"], "command": "close", "context": [{"key": "setting.command_mode"}] },
 
     // navigate through tabs
     { "keys": ["alt+p"], "command": "prev_view" },

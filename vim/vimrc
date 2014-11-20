@@ -1,5 +1,7 @@
 " This is a really bad vimrc. I should take the time to improve it...
 
+" PATHOGEN
+execute pathogen#infect()
 
 
 " VUNDLE ---------------------------------------------------------------
@@ -46,11 +48,19 @@ filetype plugin indent on    " required
 
 "-----------------------------------------------------------------------
 
+" ctrlp
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+
+
+
 " show line numbers
 :set number
 
-"ignore case in search patterns
+" search preferences
+:set incsearch
 :set ignorecase
+:set smartcase
 
 " statusline
 set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"

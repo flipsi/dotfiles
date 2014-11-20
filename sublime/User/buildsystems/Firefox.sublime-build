@@ -1,4 +1,0 @@
-{
-	"cmd": ["firefox", "$file"],
-	"selector": "text.html.basic"
-}

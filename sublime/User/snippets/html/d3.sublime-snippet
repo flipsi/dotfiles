@@ -1,9 +1,9 @@
 <snippet>
     <content><![CDATA[
-console.log($0);
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 ]]></content>
     <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>log</tabTrigger>
+    <tabTrigger>d3</tabTrigger>
     <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <scope>source.js, source.javascript, text.html</scope>
+    <scope>text.html</scope>
 </snippet>

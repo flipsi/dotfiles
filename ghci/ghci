@@ -13,8 +13,10 @@
 :set -Wall
 -- ... but not type defaulting warning. they suck
 :set -fno-warn-type-defaults
+-- ... but not missing top level type signatures. they suck
+:set -fno-warn-missing-signatures
 
 
 -- my prompt :)
-:set prompt "\nFunc! $ "
+:set prompt "\nFunc! "
 

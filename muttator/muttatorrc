@@ -11,18 +11,18 @@ cnoremap <A-i> <Esc>
 
 
 " NEO arrow keys when in QWERTZ
-noremap € <Up>
-inoremap € <Up>
-cnoremap € <Up>
-noremap ð <Down>
-inoremap ð <Down>
-cnoremap ð <Down>
-noremap ſ <Left>
-inoremap ſ <Left>
-cnoremap ſ <Left>
-noremap đ <Right>
-inoremap đ <Right>
-cnoremap đ <Right>
+"noremap € <Up>
+"inoremap € <Up>
+"cnoremap € <Up>
+"noremap ð <Down>
+"inoremap ð <Down>
+"cnoremap ð <Down>
+"noremap ſ <Left>
+"inoremap ſ <Left>
+"cnoremap ſ <Left>
+"noremap đ <Right>
+"inoremap đ <Right>
+"cnoremap đ <Right>
 
 " NEO move to eol / bol in QWERTZ
 inoremap æ <C-a>

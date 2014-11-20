@@ -9,7 +9,7 @@
 set ignorecase
 set noshowlists
 set groupignorethe
-set windows library,playlist
+set windows library,browse,lists,playlist
 set window playlist
 
 
