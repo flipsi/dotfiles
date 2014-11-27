@@ -1,6 +1,6 @@
 <snippet>
     <content><![CDATA[
-\\begin{figure}
+\\begin{figure}[h]
     \\caption{$0} 
     \\label{$1}
 \\end{figure}

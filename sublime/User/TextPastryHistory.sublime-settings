@@ -499,16 +499,44 @@
 			},
 			"key": "f7d1d94453cf2b2f35fcf8c2de358c9f",
 			"label": "foo bar baz hui quo azr"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "range i",
+					"threshold": 3.0
+				},
+				"command": "text_pastry_insert_text",
+				"text": "range i"
+			},
+			"key": "7b8bd764fec8c730afaa6a958f21c58e",
+			"label": "range i"
+		},
+		{
+			"data":
+			{
+				"args":
+				{
+					"text": "range \\i",
+					"threshold": 3
+				},
+				"command": "text_pastry_insert_text",
+				"text": "range \\i"
+			},
+			"key": "c80a318ec925b3dff840e7e01e617ea0",
+			"label": "range \\i"
 		}
 	],
 	"last_command":
 	{
 		"args":
 		{
-			"text": "foo bar baz hui quo azr",
-			"threshold": 3.0
+			"text": "range \\i",
+			"threshold": 3
 		},
 		"command": "text_pastry_insert_text",
-		"text": "foo bar baz hui quo azr"
+		"text": "range \\i"
 	}
 }
