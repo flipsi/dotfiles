@@ -31,9 +31,9 @@ function fish_prompt --description 'Prompt anzeigen'
 
 		set_color brown
 		echo ""		# newline
-		echo -n -s ">( *) "
+		echo -n -s " "
 		set_color normal
-		echo -n -s "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" ' $ '
+		echo -n -s "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" ' > '
 
 	end
 end

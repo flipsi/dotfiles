@@ -1,0 +1,4 @@
+{
+    "cmd": ["gnuplot", "-persist", "$file_name"],
+    "working_dir" : "$file_path"
+}

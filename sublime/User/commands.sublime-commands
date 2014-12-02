@@ -114,6 +114,9 @@
     { "caption": "Set My Build System: Scheme", "command": "set_build_system", "args": { "file": "Packages/Scheme/Scheme.sublime-build" } },
     { "caption": "Set My Build System: Show HTML in Firefox", "command": "set_build_system", "args": { "file": "Packages/User/buildsystems/firefox.sublime-build" } },
 
+    { "caption": "Run with NodeJS", "command": "nodelauncher" },
+
+
     // show auto completion window
     { "caption": "Show Autocompletions", "command": "auto_complete" },
 
