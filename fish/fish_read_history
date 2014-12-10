@@ -275,3 +275,5 @@
    when: 1417480156
 - cmd: function fish_prompt --description 'Prompt anzeigen'\n\n# Just calculate these once, to save a few cycles when displaying the prompt\nif not set -q __fish_prompt_hostname\nset -g __fish_prompt_hostname (hostname|cut -d . -f 1)\nend\n\nif not set -q __fish_prompt_normal\nset -g __fish_prompt_normal (set_color normal)\nend\n\nswitch $USER\n\ncase root\n\nif not set -q __fish_prompt_cwd\nif set -q fish_color_cwd_root\nset -g __fish_prompt_cwd (set_color $fish_color_cwd_root)\nelse\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\nend\n\necho -n -s "$USER" @ "$__fish_prompt_hostname" ' ' "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '# '\n\ncase '*'\n\nif not set -q __fish_prompt_cwd\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\n\nset_color brown\necho ""# newline\necho -n -s " "\nset_color normal\necho -n -s "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" ' > '\n\nend\nend
    when: 1417480262
+- cmd: y
+   when: 1418216721

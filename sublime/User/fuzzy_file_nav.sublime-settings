@@ -34,7 +34,7 @@
         {"name": "Sublime Packages", "path": "/home/flip/.config/sublime-text-2/Packages/"},
         {"name": "Bachelor Studium", "path": "/home/flip/daten/bachelorstudies/modules/"},
         {"name": "Master Studium", "path": "/home/flip/daten/masterstudies/modules/"},
-        {"name": "Tests", "path": "/home/flip/daten/coding/tests/"},
+        {"name": "Tests", "path": "/home/flip/daten/src-my/tests/"},
         {"name": "Latex sfliptex05", "path": "/home/flip/daten/latex/sfliptex05"},
         {"name": "Lokaler Apache", "path": "/var/www/html"},
         {"name": "PHP-Friends", "path": "/media/php-friends/"},

@@ -5,10 +5,11 @@
 \documentclass[12pt, oneside, a4paper, numbers=enddot]{scrartcl}
 \input{/home/flip/daten/latex/sfliptex05/sfliptex05.tex}
 \usepackage{sectsty}
+\usepackage{enumerate}
+\usepackage{paralist} % compactenum
 % \allsectionsfont{\large\underline} % überschriftendesign
 \sectionfont{\large\underline} % überschriftendesign
 \subsectionfont{\normalsize}
-
 
 \begin{document}
 \selectlanguage{ngerman}

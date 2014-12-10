@@ -52,6 +52,11 @@ filetype plugin indent on    " required
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 
+" use spaces not tabs
+:set expandtab
+" ... and use 4 of them
+:set tabstop=4
+
 
 
 " show line numbers
