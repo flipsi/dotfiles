@@ -1,0 +1,56 @@
+" config file for pentadactyl
+" author: sflip
+" ln -s <this file> ~/.pentadactylrc
+
+
+
+" SETTINGS
+
+" search preferences: ignore case, search all text
+set findflags='cL'
+
+" default search engine: google
+set defsearch='google'
+
+
+
+" QuickMarks
+
+qmark u https://uniworx.ifi.lmu.de/
+qmark f https://de-de.facebook.com/
+qmark g https://github.com/sflip
+qmark t https://twitter.com/
+
+
+
+" KEYBINDINGS
+
+" switch tabs"
+map <A-n> :tabnext<CR>
+map <A-p> :tabprevious<CR>
+
+" move tabs
+map <A-S-p> :tabmove -1<CR>
+map <A-S-n> :tabmove +1<CR>
+
+
+" emacs movements
+imap <A-f> <C-Right>
+cmap <A-f> <C-Right>
+imap <A-b> <C-Left>
+cmap <A-b> <C-Left>
+
+" delete word
+imap <A-k> <C-W>
+cmap <A-k> <C-W>
+imap <A-d> <C-Del>
+cmap <A-d> <C-Del>
+
+" search
+map ö /
+
+
+
+" NoScript
+map <A-s>p :set noscript-sites!=<A-Tab>
+map <A-s>t :set noscript-tempsites!=<A-Tab>

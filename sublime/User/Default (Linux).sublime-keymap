@@ -55,8 +55,8 @@
 
     // movements in insert mode with alt
     { "keys": ["alt+h"], "command": "move", "args": {"by": "characters", "forward": false} },
-    { "keys": ["alt+l"], "command": "move", "args": {"by": "characters", "forward": true} },
-    { "keys": ["alt+k"], "command": "move", "args": {"by": "lines", "forward": false} },
+    // { "keys": ["alt+l"], "command": "move", "args": {"by": "characters", "forward": true} },
+    // { "keys": ["alt+k"], "command": "move", "args": {"by": "lines", "forward": false} }, // kill (delete) word
     { "keys": ["alt+j"], "command": "move", "args": {"by": "lines", "forward": true} },
 
     // move to bol, eol
@@ -130,6 +130,7 @@
     { "keys": ["ctrl+shift+o"], "command": "prompt_open_folder" },
     // reopen file
     // { "keys": ["ctrl+shift+t"], "command": "goto_recent_file", "args": {"index": 0 } }, // works without this package
+    // { "keys": ["ctrl+shift+t"], "command": "reopen_last_file" }
 
     // fuzzy file navigation
     { "keys": ["alt+shift+,"], "command": "fuzzy_start_from_file" },
@@ -199,7 +200,7 @@
     { "keys": ["¶"], "command": "set_action_motion", "args": {"action": "vi_right_delete", "motion": null } },
     { "keys": ["ł"], "command": "set_action_motion", "args": {"action": "vi_left_delete", "motion": null } },
     { "keys": ["alt+d"], "command": "delete_word", "args": { "forward": true } },
-    { "keys": ["alt+backspace"], "command": "delete_word", "args": { "forward": false } },
+    { "keys": ["alt+k"], "command": "delete_word", "args": { "forward": false } },
 
     // to eol with l instead of $ (after d or c or y)
     { "keys": ["l"], "command": "set_motion", "args": {"motion": "vi_move_to_hard_eol", 

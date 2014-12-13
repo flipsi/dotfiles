@@ -1,6 +1,6 @@
 {
     // Location of home folder
-    "home": "/home/flip/",
+    "home": "/home/sflip/",
 
     // Patterns of files/folders to exclude
     "regex_exclude": [".*\\.(DS_Store|svn|git)$"],
@@ -30,8 +30,12 @@
     // Bookmarked paths
     "bookmarks": [
         {"name": "Home", "path": "/home/flip/"},
-        {"name": "tmp", "path": "/home/flip/tmp"},
+        {"name": "Home", "path": "/home/sflip/"},
+        {"name": "Dotfiles", "path": "/home/flip/dotfiles"},
+        {"name": "Dotfiles", "path": "/home/sflip/dotfiles"},
+        {"name": "tmp", "path": "/home/sflip/tmp"},
         {"name": "Sublime Packages", "path": "/home/flip/.config/sublime-text-2/Packages/"},
+        {"name": "Sublime Packages", "path": "/home/sflip/.config/sublime-text-3/Packages/"},
         {"name": "Bachelor Studium", "path": "/home/flip/daten/bachelorstudies/modules/"},
         {"name": "Master Studium", "path": "/home/flip/daten/masterstudies/modules/"},
         {"name": "Tests", "path": "/home/flip/daten/src-my/tests/"},

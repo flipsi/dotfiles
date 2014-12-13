@@ -1,7 +1,7 @@
 " This is a really bad vimrc. I should take the time to improve it...
 
 " PATHOGEN
-execute pathogen#infect()
+"execute pathogen#infect()
 
 
 " VUNDLE ---------------------------------------------------------------

@@ -277,3 +277,7 @@
    when: 1417480262
 - cmd: y
    when: 1418216721
+- cmd: function fish_user_key_bindings\nbind \\er ranger\nbind \\ee elinks\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nbind \\eh backward-char\nbind \\el forward-char\nbind \\ek backward-kill-word \nend
+   when: 1418417302
+- cmd: function fish_user_key_bindings\nbind \\er ranger\nbind \\ee elinks\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nbind \\eh backward-char\nbind \\el forward-char\nbind \\ek backward-kill-word \nend
+   when: 1418420405
