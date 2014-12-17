@@ -55,9 +55,9 @@
 
     // movements in insert mode with alt
     { "keys": ["alt+h"], "command": "move", "args": {"by": "characters", "forward": false} },
-    // { "keys": ["alt+l"], "command": "move", "args": {"by": "characters", "forward": true} },
+    { "keys": ["alt+l"], "command": "move", "args": {"by": "characters", "forward": true} },
     // { "keys": ["alt+k"], "command": "move", "args": {"by": "lines", "forward": false} }, // kill (delete) word
-    { "keys": ["alt+j"], "command": "move", "args": {"by": "lines", "forward": true} },
+    // { "keys": ["alt+j"], "command": "move", "args": {"by": "lines", "forward": true} },
 
     // move to bol, eol
     { "keys": ["ctrl+a"], "command": "move_to", "args": {"to": "bol", "extend": false} },
@@ -165,6 +165,8 @@
     // Text Editing //
     //////////////////
 
+    // select all
+    { "keys": ["ctrl+alt+a"], "command": "select_all" },
     // ctrl+d for marking next occurence of word... so
     // find next and leave this out should be
     { "keys": ["ctrl+alt+d"], "command": "find_under_expand_skip" },
@@ -338,7 +340,7 @@
     { "keys": ["ctrl+o", "d", "j"], "command": "destroy_pane", "args": {"direction": "down"} },
     { "keys": ["ctrl+o", "d", "h"], "command": "destroy_pane", "args": {"direction": "left"} },
     
-    { "keys": ["ctrl+o", "ctrl+z"], "command": "zoom_pane", "args": {"fraction": 0.9} },
+    { "keys": ["ctrl+o", "z"], "command": "zoom_pane", "args": {"fraction": 0.9} },
     { "keys": ["ctrl+o", "ctrl+shift+z"], "command": "unzoom_pane", "args": {} }
 
 ]

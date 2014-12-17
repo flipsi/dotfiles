@@ -281,3 +281,19 @@
    when: 1418417302
 - cmd: function fish_user_key_bindings\nbind \\er ranger\nbind \\ee elinks\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nbind \\eh backward-char\nbind \\el forward-char\nbind \\ek backward-kill-word \nend
    when: 1418420405
+- cmd: function mount-php-friends --description 'mount webspace to /media/php-friends/'\ncurlftpfs ftp://web2.php-friends.de /media/sflip/php-friends/\nand echo "Mounted successfully."\nor echo "Could not mount!"\nend
+   when: 1418565370
+   paths:
+    - /media/sflip/php-friends/
+- cmd: function umount-php-friends --description 'unmount webspace from /media/php-friends'\nfusermount -u /media/sflip/php-friends/\nand echo "Unmounted successfully."\nor echo "Could not unmount!"\nend
+   when: 1418566562
+   paths:
+    - /media/sflip/php-friends/
+- cmd: function umount-php-friends --description 'unmount webspace from /media/php-friends'\nfusermount -u /media/sflip/php-friends/\nand echo "Unmounted successfully."\nor echo "Could not unmount!"\nend
+   when: 1418566660
+   paths:
+    - /media/sflip/php-friends/
+- cmd: function mount-php-friends --description 'mount webspace to /media/php-friends/'\ncurlftpfs ftp://web2.php-friends.de /media/sflip/php-friends/\nand echo "Mounted successfully."\nor echo "Could not mount!"\nend
+   when: 1418566681
+   paths:
+    - /media/sflip/php-friends/

@@ -3,7 +3,8 @@
 % Author: Philipp Moers <soziflip funny character gmail dot com>
 
 \documentclass[12pt, oneside, a4paper, numbers=enddot]{scrartcl}
-\input{/home/flip/daten/latex/sfliptex05/sfliptex05.tex}
+% \input{/home/flip/daten/latex/sfliptex05/sfliptex05.tex}
+\input{/home/sflip/latex/sfliptex05/sfliptex05.tex}
 \usepackage{sectsty}
 \usepackage{enumerate}
 \usepackage{paralist} % compactenum

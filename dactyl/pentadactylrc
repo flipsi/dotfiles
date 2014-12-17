@@ -1,5 +1,5 @@
-" config file for pentadactyl
-" author: sflip
+" CONFIG FILE FOR PENTADACTYL
+" Author: Philipp Moers <soziflip funny character gmail dot com>
 " ln -s <this file> ~/.pentadactylrc
 
 
@@ -20,6 +20,7 @@ qmark u https://uniworx.ifi.lmu.de/
 qmark f https://de-de.facebook.com/
 qmark g https://github.com/sflip
 qmark t https://twitter.com/
+qmark y https://www.youtube.com/?gl=DE&hl=de
 
 
 
@@ -28,27 +29,41 @@ qmark t https://twitter.com/
 " switch tabs"
 map <A-n> :tabnext<CR>
 map <A-p> :tabprevious<CR>
+imap <A-n> <Esc>:tabnext<CR>
+imap <A-p> <Esc>:tabprevious<CR>
 
 " move tabs
 map <A-S-p> :tabmove -1<CR>
 map <A-S-n> :tabmove +1<CR>
 
+" jump to mark
+map ä '
+
+
+" movements
+imap <A-l> <Right>
+imap <A-h> <Left>
+cmap <A-l> <Right>
+cmap <A-h> <Left>
 
 " emacs movements
 imap <A-f> <C-Right>
-cmap <A-f> <C-Right>
 imap <A-b> <C-Left>
+cmap <A-f> <C-Right>
 cmap <A-b> <C-Left>
 
 " delete word
 imap <A-k> <C-W>
-cmap <A-k> <C-W>
 imap <A-d> <C-Del>
+cmap <A-k> <C-W>
 cmap <A-d> <C-Del>
 
 " search
 map ö /
 
+
+" Developer Tools (Console)
+map <A-:> <C-S-i>
 
 
 " NoScript
