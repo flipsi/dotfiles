@@ -140,8 +140,8 @@
     { "caption": "FuzzyFileNav (from Bookmarks)", "command": "fuzzy_bookmarks_load" },
 
     // open / close project
-    { "caption": "Switch Project", "command": "prompt_select_project" },
-    { "caption": "Close Project", "command": "close_project" },
+    // { "caption": "Switch Project", "command": "prompt_select_project" },
+    // { "caption": "Close Project", "command": "close_project" },
 
     // set tab size
     { "caption": "Set Tab Size: 1", "command": "set_setting", "args": {"setting": "tab_size", "value": 1}},
