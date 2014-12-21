@@ -1,6 +1,6 @@
-// X keyboard layout by Philipp Moers <soziflip funny character gmail dot com>
+// X keyboarlayout by Philipp Moers <soziflip funny character gmail dot com>
 
-// based on a keyboard map from an 'xkb/symbols/de' file
+// based on a keyboarmap from an 'xkb/symbols/de' file
 // this file should be named 'xkb/symbols/de_sflip' (or a symlink should)
 // location varies from distro to distro. on my machine it's /usr/share/X11
 
@@ -11,12 +11,12 @@
 // change to this layout with 
 //     setxkbmap -layout de_sflip
 
-// or make a keymap definition with 
+// or make a keymap with 
 //     setxkbmap <this file> -print > <definition file> 
 // which does not invoke xkbcomp, in order to get debug output from
 //     xkbcomp <definition file> $DISPLAY
 
-// to use fresh keymaps in X on updates, you may have to
+// to use fresh keymapsin X on updates, you may have to
 //     rm /var/lib/xkb/*.xkm
 
 
@@ -30,30 +30,35 @@ xkb_symbols "basic" {
 
     // vim movements with AltGr
 
-    key <AC06>  { [         h,          H,     Left,      Hstroke ] };
-    key <AC07>  { [         j,          J,     Down,      dead_horn ] };
-    key <AC08>  { [         k,          K,       Up,      ampersand ] };
-    key <AC09>  { [         l,          L,    Right,      Lstroke ] };
+    key <AC06>  { [ h, H, Left,   VoidSymbol ] };
+    key <AC07>  { [ j, J, Down,   VoidSymbol ] };
+    key <AC08>  { [ k, K, Up,     VoidSymbol ] };
+    key <AC09>  { [ l, L, Right,  VoidSymbol ] };
 
 
+    // pos1 and end
 
-    // numbers with left hand
+    key <AC01>  { [ a, A, Home,   ampersand  ] };
+    key <AC05>  { [ g, G, End,    VoidSymbol ] };
 
-    key <AD02>  { [         w,          W,        7,      Lstroke ] };
-    key <AD03>  { [         e,          E,        8,      EuroSign ] };
-    key <AD04>  { [         r,          R,        9,      registered ] };
-    key <AC02>  { [         s,          S,        4,      section ] };
-    key <AC03>  { [         d,          D,        5,      ETH ] };
-    key <AC04>  { [         f,          F,        6,      ordfeminine ] };
-    key <AB01>  { [         y,          Y,        0,      ampersand   ] };
-    key <AB02>  { [         x,          X,        1,      greater ] };
-    key <AB03>  { [         c,          C,        2,      copyright ] };
-    key <AB04>  { [         v,          V,        3,      leftsinglequotemark ]   };
+
+    // numbers and parentheses/braces/brackets with left hand
+
+    key <AD02>  { [ w, W, 7,      braceleft ] };
+    key <AD03>  { [ e, E, 8,      EuroSign ] };
+    key <AD04>  { [ r, R, 9,      braceright ] };
+    key <AC02>  { [ s, S, 4,      parenleft ] };
+    key <AC03>  { [ d, D, 5,      VoidSymbol ] };
+    key <AC04>  { [ f, F, 6,      parenright ] };
+    key <AB01>  { [ y, Y, 0,      dollar   ] };
+    key <AB02>  { [ x, X, 1,      bracketleft ] };
+    key <AB03>  { [ c, C, 2,      copyright ] };
+    key <AB04>  { [ v, V, 3,      bracketright ]   };
 
 
 
     // slash and questionmark like on english layout with AltGr
 
-    key <AB10>  { [     minus, underscore,    slash,    question  ] };
+    key <AB10>  { [ minus, underscore,    slash,    question  ] };
 
 };
