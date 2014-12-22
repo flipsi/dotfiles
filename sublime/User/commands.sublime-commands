@@ -1,4 +1,10 @@
 [
+    // select all
+    { "caption": "Select All", "command": "select_all"},
+
+    // select all occurences of a word
+    { "caption": "Select All Occurences of this Word", "command": "find_all_under"},
+
     // zoom
     { "caption": "Zoom in", "command": "increase_font_size", "context": [{"key": "setting.command_mode"}] },
     { "caption": "Zoom out", "command": "decrease_font_size", "context": [{"key": "setting.command_mode"}] },
@@ -7,6 +13,9 @@
     { "caption": "Whitespaces: Toggle all whitespaces", "command": "ws_toggle_whitespaces"},
     { "caption": "Whitespaces: Toggle spaces", "command": "ws_toggle_spaces"},
     { "caption": "Whitespaces: Toggle line endings", "command": "ws_toggle_line_endings"},
+    { "caption": "Whitespaces: draw in selection", "command": "set_setting", "args": {"setting": "draw_white_space", "value": "selection" }},
+    { "caption": "Whitespaces: draw everywhere", "command": "set_setting", "args": {"setting": "draw_white_space", "value": "all" }},
+    { "caption": "Whitespaces: do not draw", "command": "set_setting", "args": {"setting": "draw_white_space", "value": "none" }},
 
     // fold
     { "caption": "Fold Block", "command": "fold" },

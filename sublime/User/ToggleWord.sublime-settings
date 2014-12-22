@@ -1,0 +1,11 @@
+// User defined words
+{
+    "toggle_word_dict": [
+        ["left", "right"],
+        ["top", "bottom"],
+        ["up", "down"],
+        ["width", "height"],
+        ["red","orange","yellow","green","blue","purple"],
+        ["margin", "padding"],
+    ]
+}

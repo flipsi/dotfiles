@@ -21,6 +21,7 @@ qmark f https://de-de.facebook.com/
 qmark g https://github.com/sflip
 qmark t https://twitter.com/
 qmark y https://www.youtube.com/?gl=DE&hl=de
+qmark p file:///home/sflip/masterstudies/modules/informationsvisualisierung/project/pubdb/index.html
 
 
 
@@ -31,6 +32,13 @@ map <A-n> :tabnext<CR>
 map <A-p> :tabprevious<CR>
 imap <A-n> <Esc>:tabnext<CR>
 imap <A-p> <Esc>:tabprevious<CR>
+
+" LRU tabs
+" dirty hack (hold C and press Tab 2 times for plugin)
+map <C-Tab> <C-V>
+
+" find tab
+map <C-R> :buffer! 
 
 " move tabs
 map <A-S-p> :tabmove -1<CR>
