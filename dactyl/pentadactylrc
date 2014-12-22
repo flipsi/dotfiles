@@ -38,7 +38,7 @@ imap <A-p> <Esc>:tabprevious<CR>
 map <C-Tab> <C-V>
 
 " find tab
-map <C-R> :buffer! 
+map <C-f> :buffer! 
 
 " move tabs
 map <A-S-p> :tabmove -1<CR>
