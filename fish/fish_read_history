@@ -285,3 +285,5 @@
     - /media/sflip/php-friends/
 - cmd: function fish_user_key_bindings\nbind \\eo ranger\nbind \\ee elinks\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nbind \\eh backward-char\nbind \\el forward-char\nbind \\ek backward-kill-word\nend
    when: 1418894642
+- cmd: y
+   when: 1420025737

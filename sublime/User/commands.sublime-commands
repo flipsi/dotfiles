@@ -140,17 +140,20 @@
       "command": "open_file", "args": {"file": "${packages}/User/commands.sublime-commands", "platform": "Linux"} },
     
     // choose dictionary for spell check
-    { "caption": "Set (spell check) dictionary: German", "command": "set_setting", "args": {"setting": "dictionary", "value": "Packages/Language - German/German.dic"}},
-    { "caption": "Set (spell check) dictionary: English (US)", "command": "set_setting", "args": {"setting": "dictionary", "value": "Packages/Language - English/en_US.dic"}},
-    { "caption": "Set (spell check) dictionary: English (GB)", "command": "set_setting", "args": {"setting": "dictionary", "value": "Packages/Language - English/en_GB.dic"}},
+    // { "caption": "Set (spell check) dictionary: German", "command": "set_setting", "args": {"setting": "dictionary", "value": "Packages/Language - German/German.dic"}},
+    // { "caption": "Set (spell check) dictionary: English (US)", "command": "set_setting", "args": {"setting": "dictionary", "value": "Packages/Language - English/en_US.dic"}},
+    // { "caption": "Set (spell check) dictionary: English (GB)", "command": "set_setting", "args": {"setting": "dictionary", "value": "Packages/Language - English/en_GB.dic"}},
+    // { "caption": "Set (spell check) dictionary: German", "command": "set_setting", "args": {"setting": "dictionary", "value": "Packages/Dictionaries/German_de_DE.dic"}},
+    // { "caption": "Set (spell check) dictionary: English (American)", "command": "set_setting", "args": {"setting": "dictionary", "value": "Packages/Dictionaries/English (American).dic"}},
+    // { "caption": "Set (spell check) dictionary: English (British)", "command": "set_setting", "args": {"setting": "dictionary", "value": "Packages/Dictionaries/English (British).dic"}},
 
     // fuzzy file navigation
     { "caption": "FuzzyFileNav (from File)", "command": "fuzzy_start_from_file", "context": [{"key": "setting.command_mode"}] },
     { "caption": "FuzzyFileNav (from Bookmarks)", "command": "fuzzy_bookmarks_load" },
 
     // open / close project
-    // { "caption": "Switch Project", "command": "prompt_select_project" },
-    // { "caption": "Close Project", "command": "close_project" },
+    { "caption": "Switch Project", "command": "prompt_select_workspace" },
+    { "caption": "Close Project", "command": "close_workspace" },
 
     // set tab size
     { "caption": "Set Tab Size: 1", "command": "set_setting", "args": {"setting": "tab_size", "value": 1}},

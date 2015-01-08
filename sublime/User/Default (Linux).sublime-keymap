@@ -155,6 +155,8 @@
     { "keys": ["ctrl+j"], "command": "find_under_expand" },
     // find next and leave this out
     { "keys": ["ctrl+alt+j"], "command": "find_under_expand_skip" },
+    // select all of these words
+    { "keys": ["ctrl+k", "ctrl+j"], "command": "find_all_under" },
 
     // move to eol with l instead of $ (after d or c or y)
     { "keys": ["l"], "command": "set_motion", "args": {"motion": "vi_move_to_hard_eol", "motion_args": {"repeat": 1, "extend": true}, "inclusive": true, "clip_to_line": true }, "context": [{"key": "setting.command_mode"}, {"key": "vi_action", "operand": "vi_delete"} ] },

@@ -47,6 +47,10 @@ map <A-S-n> :tabmove +1<CR>
 " jump to mark
 map ä '
 
+" move in history
+map <A-u> :back<CR>
+map <A-S-u> :forward<CR>
+
 
 " movements
 imap <A-l> <Right>
@@ -65,6 +69,13 @@ imap <A-k> <C-W>
 imap <A-d> <C-Del>
 cmap <A-k> <C-W>
 cmap <A-d> <C-Del>
+
+
+" copy/paste like in gnome-terminal
+imap <C-S-v> <C-v><C-v>
+imap <C-S-c> <C-v><C-c>
+cmap <C-S-v> <C-v><C-v>
+cmap <C-S-c> <C-v><C-c>
 
 " search
 map ö /
