@@ -21,6 +21,7 @@ qmark f https://de-de.facebook.com/
 qmark g https://github.com/sflip
 qmark t https://twitter.com/
 qmark y https://www.youtube.com/?gl=DE&hl=de
+qmark z http://www.zdf.de/ZDFmediathek/hauptnavigation/startseite/#/hauptnavigation/live
 qmark p file:///home/sflip/masterstudies/modules/informationsvisualisierung/project/pubdb/index.html
 
 
@@ -36,9 +37,12 @@ imap <A-p> <Esc>:tabprevious<CR>
 " LRU tabs
 " dirty hack (hold C and press Tab 2 times for plugin)
 map <C-Tab> <C-V>
+" better pentadactyl only way
+map <C-#> :buffer! #<CR>
 
 " find tab
 map <C-f> :buffer! 
+nmap # :buffer! 
 
 " move tabs
 map <A-S-p> :tabmove -1<CR>
@@ -88,3 +92,4 @@ map <A-:> <C-S-i>
 " NoScript
 map <A-s>p :set noscript-sites!=<A-Tab>
 map <A-s>t :set noscript-tempsites!=<A-Tab>
+

@@ -31,6 +31,9 @@
     { "keys": ["ctrl+g", "s"], "command": "toggle_side_bar" },
     { "keys": ["ctrl+g", "m"], "command": "toggle_minimap" },
 
+    // line numbers
+    { "keys": ["ctrl+g", "l"], "command": "toggle_setting", "args": {"setting": "line_numbers"} },
+
     // word wrap
     { "keys": ["ctrl+g", "w"], "command": "toggle_setting", "args": {"setting": "word_wrap"} },
 
@@ -94,6 +97,7 @@
     // ... : to go to line
     // ... @ to go to function or section
     { "keys": ["ctrl+f"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true} },
+    { "keys": ["#"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true}, "context": [{"key": "setting.command_mode"}] },
     // goto function or section immediately
     { "keys": ["@"], "command": "show_overlay", "args": {"overlay": "goto", "text": "@"}, "context": [{"key": "setting.command_mode"}] },
     
@@ -289,6 +293,10 @@
     // move tabs
     { "keys": ["alt+shift+p"], "command": "move_tab", "args": { "position": "-1" } },
     { "keys": ["alt+shift+n"], "command": "move_tab", "args": { "position": "+1" } }, 
+
+    // switch to LRU tab
+    { "keys": ["ctrl+#"], "command": "next_view_in_stack" },
+    { "keys": ["ctrl+shift+#"], "command": "prev_view_in_stack" },
 
     // split window in groups
     {"keys": ["ctrl+o", "1"], "command": "set_layout", "args": {"cols": [0.0, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1]] } },

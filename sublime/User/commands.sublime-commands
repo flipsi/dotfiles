@@ -1,4 +1,5 @@
 [
+
     // select all
     { "caption": "Select All", "command": "select_all"},
 

@@ -12,6 +12,17 @@ set groupignorethe
 set windows library,browse,lists,playlist
 set window playlist
 
+hi tab greenbg
+hi status greenbg
+hi progress greenfg
+hi song whitefg
+hi id greenfg
+hi dir greenfg
+hi current greenfg
+hi match yellowfg
+hi partial greenfg
+hi full greenfg
+hi error redfg
 
 
 """" Keybindings """"
