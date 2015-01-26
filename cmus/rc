@@ -1,0 +1,27 @@
+bind -f common Q quit
+
+bind -f common L view playlist
+bind -f common B view browser
+
+bind -f common l win-activate
+
+bind -f common p player-play
+bind -f common s player-stop
+bind -f common space player-pause
+bind -f common o player-next
+bind -f common O player-prev
+
+bind -f common + vol +4%
+bind -f common - vol -4%
+
+bind -f common R toggle shuffle
+bind -f common S toggle repeat_current
+
+bind -f common a win-add-p
+bind -f playlist K win-mv-before
+bind -f playlist J win-mv-after
+bind -f playlist d win-remove
+bind -f common D clear -p
+
+bind -f common f win-sel-cur
+

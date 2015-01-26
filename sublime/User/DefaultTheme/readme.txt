@@ -1,0 +1,1 @@
+save these files as 'Default.sublime-theme' to apply changes to sidebar and such

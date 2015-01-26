@@ -1,55 +1,7 @@
 " This is a really bad vimrc. I should take the time to improve it...
 
-" PATHOGEN
-"execute pathogen#infect()
 
-
-" VUNDLE ---------------------------------------------------------------
-
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-
-
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-Plugin 'terryma/vim-smooth-scroll'
-" Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
-
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList          - list configured plugins
-" :PluginInstall(!)    - install (update) plugins
-" :PluginSearch(!) foo - search (or refresh cache first) for foo
-" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-
-
-"-----------------------------------------------------------------------
-
-" ctrlp
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+set nocompatible
 
 
 " use spaces not tabs
@@ -83,7 +35,6 @@ endw
 set timeout ttimeoutlen=50
 
 
-"-----------------------------------------------------------------------
 "-----------------------------------------------------------------------
 
 
