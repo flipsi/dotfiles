@@ -69,8 +69,8 @@ map <c-Space> <C-D>
 map <c-m> <C-U> 
 
 " smooth scroll
-noremap <silent> <c-u> :call smooth_scroll#up(15, 18, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(15, 18, 2)<CR>
+"noremap <silent> <c-u> :call smooth_scroll#up(15, 18, 2)<CR>
+"noremap <silent> <c-d> :call smooth_scroll#down(15, 18, 2)<CR>
 
 " escape insert mode 
 inoremap <m-i> <Esc>

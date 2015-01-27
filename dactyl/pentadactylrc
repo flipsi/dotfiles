@@ -34,7 +34,7 @@ map <A-p> :tabprevious<CR>
 imap <A-n> <Esc>:tabnext<CR>
 imap <A-p> <Esc>:tabprevious<CR>
 
-" LRU tabs
+" LRU tab
 " dirty hack (hold C and press Tab 2 times for plugin)
 map <C-Tab> <C-V>
 " better pentadactyl only way
@@ -44,9 +44,13 @@ map <C-#> :buffer! #<CR>
 map <C-f> :buffer! 
 nmap # :buffer! 
 
-" move tabs
+" move tab
 map <A-S-p> :tabmove -1<CR>
 map <A-S-n> :tabmove +1<CR>
+
+" close tab
+map q :tabclose<CR>
+
 
 " jump to mark
 map ä '

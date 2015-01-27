@@ -237,6 +237,19 @@
 
 
 
+    ////////////////////////////
+    // Advanced Editing Stuff //
+    ////////////////////////////
+
+    // Macros
+    { "keys": ["º", "<character>"], "command": "vi_begin_record_macro", "context": [{"key": "setting.command_mode"}] },
+    { "keys": ["º"], "command": "vi_end_record_macro", "context": [{"key": "setting.command_mode"}, {"key": "is_recording_macro"}] },
+    { "keys": ["µ", "<character>"], "command": "vi_replay_macro", "context": [{"key": "setting.command_mode"}] },
+
+    // HTML Prettify (Auto code style for HTML, CSS, JavaScript, JSON)
+    { "keys": ["ctrl+alt+i"], "command": "htmlprettify" },
+
+
     ///////////
     // Build //
     ///////////
@@ -285,7 +298,7 @@
     //////////////////////////////
 
     // close tab
-    { "keys": ["Q"], "command": "close", "context": [{"key": "setting.command_mode"}] },
+    { "keys": ["q"], "command": "close", "context": [{"key": "setting.command_mode"}] },
 
     // navigate through tabs
     { "keys": ["alt+p"], "command": "prev_view" },

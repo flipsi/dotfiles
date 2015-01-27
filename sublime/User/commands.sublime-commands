@@ -34,6 +34,11 @@
     // restart sublime
     { "caption": "Restart Sublime Text", "command": "restart" },
 
+    // Macros
+    { "caption": "Macro: Record Macro", "command": "vi_begin_record_macro", "context": [{"key": "setting.command_mode"}] },
+    { "caption": "Macro: End Record Macro", "command": "vi_end_record_macro", "context": [{"key": "setting.command_mode"}, {"key": "is_recording_macro"}] },
+    { "caption": "Macro: Replay Macro", "command": "vi_replay_macro", "context": [{"key": "setting.command_mode"}] },
+
     // reopen file with encoding
     { "caption": "Reopen File with Encoding: UTF-8", "command": "reopen", "args": {"encoding": "utf-8" } },
     { "caption": "Reopen File with Encoding: UTF-16 LE", "command": "reopen", "args": {"encoding": "utf-16 le" } },
