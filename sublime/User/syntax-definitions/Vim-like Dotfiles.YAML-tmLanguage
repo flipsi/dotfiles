@@ -1,0 +1,14 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+---
+name: Vim-like Dotfiles
+scopeName: text.vimlikedotfiles
+fileTypes: ['vimrc', 'pentadactylrc', 'vimperatorrc', 'vimpcrc']
+uuid: f5c1f79f-0481-40d2-9b21-74db3d61e14c
+
+patterns:
+- comment: comments
+  contentName: comment.line
+  begin: '"'
+  end: $
+  patterns:
+  - include: $self

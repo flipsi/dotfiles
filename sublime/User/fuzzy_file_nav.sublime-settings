@@ -43,7 +43,7 @@
         {"name": "Programming Tests", "path": "/home/flip/daten/src-my/tests/"},
         {"name": "Latex sfliptex05", "path": "/home/flip/daten/latex/sfliptex05"},
         {"name": "Lokaler Apache", "path": "/var/www/html"},
-        {"name": "PHP-Friends", "path": "/media/php-friends/"},
+        {"name": "PHP-Friends", "path": "/media/sflip/php-friends/"},
         {"name": "Root", "path": {"#multiconf#": [{"os:linux": "/"}, {"os:osx": "/"}]}}
     ]
 }
