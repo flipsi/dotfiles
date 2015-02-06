@@ -1,5 +1,5 @@
 " CONFIG FILE FOR PENTADACTYL
-" Author: Philipp Moers <soziflip funny character gmail dot com>
+" Author: Philipp Moers <soziflip gmail com>
 " ln -s <this file> ~/.pentadactylrc
 
 
@@ -27,6 +27,7 @@ qmark c http://www.cubetimer.com/
 qmark p file:///home/sflip/masterstudies/modules/informationsvisualisierung/project/pubdb/index.html
 
 " Styles
+highlight StatusLineNormal background-color: #DDD
 highlight Download[active] background-color: #FFEFB9
 
 
@@ -40,14 +41,11 @@ imap <A-n> <Esc>:tabnext<CR>
 imap <A-p> <Esc>:tabprevious<CR>
 
 " LRU tab
-" dirty hack (hold C and press Tab 2 times for plugin)
-map <C-Tab> <C-V>
-" better pentadactyl only way
-map <C-#> :buffer! #<CR>
+map <A-l> :buffer! #<CR>
+map # :buffer! #<CR>
 
 " find tab
-map <C-f> :buffer! 
-nmap # :buffer! 
+nmap <A-w> :buffer! 
 
 " move tab
 map <A-S-p> :tabmove -1<CR>

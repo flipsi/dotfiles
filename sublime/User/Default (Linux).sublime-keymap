@@ -3,7 +3,7 @@
     // Sublime-Text Key Bindings //
     ///////////////////////////////
 
-    // Author: Philipp Moers <soziflip funnycharacter gmail dot com>
+    // Author: Philipp Moers <soziflip gmail com>
 
     
 
@@ -92,20 +92,17 @@
     // and jump there with ä <char> because that's where original ' is located on an english keyboard
     { "keys": ["ä", "<character>"], "command": "vi_select_bookmark", "args": {"select_bol": true}, "context": [{"key": "setting.command_mode"}] },
 
-    // goto anything
+    // goto anything (find tab)
+    { "keys": ["alt+w"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true}, "context": [{"key": "setting.command_mode"}] },
     // ... # to go to keyword
     // ... : to go to line
     // ... @ to go to function or section
-    { "keys": ["ctrl+f"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true} },
-    { "keys": ["#"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true}, "context": [{"key": "setting.command_mode"}] },
-    // goto function or section immediately
     { "keys": ["@"], "command": "show_overlay", "args": {"overlay": "goto", "text": "@"}, "context": [{"key": "setting.command_mode"}] },
     
     
     // search for words 
-    // (/ and ? location on english keyboard)
-    { "keys": ["ö"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse":false}, "context": [{"key": "setting.command_mode"}]  },
-    { "keys": ["Ö"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse":true}, "context": [{"key": "setting.command_mode"}]  },
+    { "keys": ["ö"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": false}, "context": [{"key": "setting.command_mode"}]  },
+    { "keys": ["Ö"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": true}, "context": [{"key": "setting.command_mode"}]  },
 
 
 
@@ -221,21 +218,6 @@
     { "keys": ["shift+tab"], "command": "move", "args": {"by": "lines", "forward": false}, "context": [{ "key": "auto_complete_visible" }] },
     { "keys": ["alt+."], "command": "commit_completion", "context": [{ "key": "auto_complete_visible" }] },
 
-    // insert specific characters
-    { "keys": ["alt+ö", "s"], "command": "insert", "args": {"characters": "/"} },
-    { "keys": ["alt+ö", "a"], "command": "insert", "args": {"characters": "\\"} },
-    { "keys": ["alt+ö", "d"], "command": "insert", "args": {"characters": "{"} },
-    { "keys": ["alt+ö", "f"], "command": "insert", "args": {"characters": "}"} },
-    { "keys": ["alt+ö", "e"], "command": "insert", "args": {"characters": "["} },
-    { "keys": ["alt+ö", "r"], "command": "insert", "args": {"characters": "]"} },
-    { "keys": ["alt+ö", "u"], "command": "insert", "args": {"characters": "<"} },
-    { "keys": ["alt+ö", "i"], "command": "insert", "args": {"characters": ">"} },
-    { "keys": ["alt+ö", "c"], "command": "insert", "args": {"characters": "|"} },
-    { "keys": ["alt+ö", "j"], "command": "insert", "args": {"characters": "("} },
-    { "keys": ["alt+ö", "k"], "command": "insert", "args": {"characters": ")"} },
-    { "keys": ["alt+ö", "o"], "command": "insert", "args": {"characters": "="} },
-
-
 
     ////////////////////////////
     // Advanced Editing Stuff //
@@ -308,8 +290,10 @@
     { "keys": ["alt+shift+n"], "command": "move_tab", "args": { "position": "+1" } }, 
 
     // switch to LRU tab
-    { "keys": ["ctrl+#"], "command": "next_view_in_stack" },
-    { "keys": ["ctrl+shift+#"], "command": "prev_view_in_stack" },
+    { "keys": ["#"], "command": "next_view_in_stack", "context": [{"key": "setting.command_mode"}] },
+    { "keys": ["'"], "command": "prev_view_in_stack", "context": [{"key": "setting.command_mode"}] },
+    { "keys": ["alt+#"], "command": "next_view_in_stack" },
+    { "keys": ["alt+shift+#"], "command": "prev_view_in_stack" },
 
     // split window in groups
     {"keys": ["ctrl+o", "1"], "command": "set_layout", "args": {"cols": [0.0, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1]] } },
@@ -359,6 +343,14 @@
     
     // Origami: zoom
     { "keys": ["ctrl+o", "z"], "command": "zoom_pane", "args": {"fraction": 0.9} },
-    { "keys": ["ctrl+o", "Z"], "command": "unzoom_pane", "args": {} }
+    { "keys": ["ctrl+o", "Z"], "command": "unzoom_pane", "args": {} },
+
+
+    /////////////////
+    // Workarounds //
+    /////////////////
+
+    // if a mark is not set and you goto it, cursor ist lost. hit this and enter to get it back
+    { "keys": ["g", "G"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":10"}, "context": [{"key": "setting.command_mode"}] }
 
 ]

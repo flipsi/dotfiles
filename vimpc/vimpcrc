@@ -9,7 +9,7 @@
 set ignorecase
 set noshowlists
 set groupignorethe
-set windows library,browse,lists,playlist
+set windows library,browse,playlist
 set window playlist
 
 hi tab greenbg
