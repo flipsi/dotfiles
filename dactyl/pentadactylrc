@@ -34,6 +34,9 @@ highlight Download[active] background-color: #FFEFB9
 
 " KEYBINDINGS
 
+" reload this file"
+map <A-r> :source .pentadactylrc<CR>
+
 " switch tabs"
 map <A-n> :tabnext<CR>
 map <A-p> :tabprevious<CR>
@@ -56,10 +59,12 @@ map q :tabclose<CR>
 
 
 " misc views ("w"indows)
+nmap wa :tabopen about:addons<CR>
 nmap wd :downloads<CR>
+nmap wh :tab helpall<CR>
 nmap wi :history<CR>
 nmap wj :jumps<CR>
-nmap wh :tab helpall<CR>
+nmap wp :tabopen about:preferences<CR>
 
 " jump to mark
 map ä '

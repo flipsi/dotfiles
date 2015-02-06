@@ -46,15 +46,16 @@ map r %
 map <a-n> gt
 map <a-p> gT
 
-" goto Window
-map gl :library<CR>
-map gp :playlist<CR>
-map gb :browse<CR>
-map gh :help<CR>
+" goto window
+map wl :library<CR>
+map wp :playlist<CR>
+map wb :browse<CR>
+map wh :help<CR>
 
 
 " delete all titles from the playlist except the current one
 " (does not work if the current one is the first or last in the playlist)
 alias crop playlist; normal fjVGdfkVggd;
 map c :crop<CR>
+" better solution: toggle 'Single' so that playing stops after current song
 
