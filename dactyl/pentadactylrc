@@ -8,6 +8,8 @@
 
 " search preferences: ignore case, search all text
 set findflags='cL'
+" ... show results while typing"
+set incfind
 
 " default search engine: google
 set defsearch='google'
@@ -15,16 +17,19 @@ set defsearch='google'
 " editor (e.g. to edit source with gF)
 set editor='subl'
 
+" autocomplete when opening sites only with tab"
+set autocomplete=!/ex/(open|tabopen),.?
 
 " QuickMarks
 qmark u https://uniworx.ifi.lmu.de/
 qmark f https://de-de.facebook.com/
 qmark g https://github.com/sflip
 qmark t https://twitter.com/
-qmark y https://www.youtube.com/?gl=DE&hl=de
+qmark y https://accounts.google.com/ServiceLogin?uilel=3&service=youtube&passive=true&continue=http%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26nomobiletemp%3D1%26hl%3Dde_DE%26next%3D%252F&hl=de_DE&ltmpl=sso
 qmark z http://www.zdf.de/ZDFmediathek/hauptnavigation/startseite/#/hauptnavigation/sendung-verpasst
 qmark c http://www.cubetimer.com/
 qmark p file:///home/sflip/masterstudies/modules/informationsvisualisierung/project/pubdb/index.html
+qmark v http://localhost/projects/govp2/
 
 " Styles
 highlight StatusLineNormal background-color: #DDD

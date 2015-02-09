@@ -1,3 +1,3 @@
 function l
-	ls -C --file-type $argv
+	less -c $argv
 end

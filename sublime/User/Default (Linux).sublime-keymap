@@ -93,7 +93,7 @@
     { "keys": ["ä", "<character>"], "command": "vi_select_bookmark", "args": {"select_bol": true}, "context": [{"key": "setting.command_mode"}] },
 
     // goto anything (find tab)
-    { "keys": ["alt+w"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true}, "context": [{"key": "setting.command_mode"}] },
+    { "keys": ["alt+w"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true}},
     // ... # to go to keyword
     // ... : to go to line
     // ... @ to go to function or section

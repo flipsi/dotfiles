@@ -10,4 +10,4 @@ set PATH /home/flip/.cabal/bin $PATH
 set PATH /opt/cc0/bin $PATH
 
 set -x LESSOPEN "| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
-set -x LESS=" -R "
+set -x LESS " -c -R "

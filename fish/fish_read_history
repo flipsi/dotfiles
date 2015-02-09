@@ -287,3 +287,19 @@
    when: 1418894642
 - cmd: y
    when: 1420025737
+- cmd: jah
+   when: 1423418699
+- cmd: n
+   when: 1423419551
+- cmd: n
+   when: 1423419808
+- cmd: n
+   when: 1423419946
+- cmd: y
+   when: 1423420139
+- cmd: n
+   when: 1423420156
+- cmd: function l\nless $argv\nend
+   when: 1423440419
+- cmd: function l\nless -c $argv\nend
+   when: 1423441384
