@@ -108,13 +108,9 @@ cmap <C-S-c> <C-v><C-c>
 map ö /
 
 
-" Developer Tools (toggle)
-map <A-:><A-:> <C-S-i>
-" focus Console
-map <A-:> <C-S-k>
-map <A-:>k <C-S-k>
-" focus Inspector (which has console below somehow)
-map <A-:>i <C-S-c>
+" Developer Tools (console)
+map <C-A-i> <C-S-k>
+" <C-S-i> to hide
 
 
 " NoScript

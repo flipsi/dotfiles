@@ -1,4 +1,5 @@
 [
+    { "caption": ":b - Goto Tab", "command": "show_overlay", "args": {"overlay": "goto", "show_files": true} },
 
     // select all
     { "caption": "Select All", "command": "select_all"},
@@ -74,7 +75,7 @@
     { "caption": "Reopen File with Encoding: Vietnamese (Windows 1258)", "command": "reopen", "args": {"encoding": "Vietnamese (Windows 1258)" } },
     { "caption": "Reopen File with Encoding: -" },
     { "caption": "Reopen File with Encoding: Hexadecimal", "command": "reopen", "args": {"encoding": "Hexadecimal" } },
-    
+
     // save file with encoding
     { "caption": "Save File with Encoding: UTF-8", "command": "save", "args": {"encoding": "utf-8" } },
     { "caption": "Save File with Encoding: UTF-8 with BOM", "command": "save", "args": {"encoding": "utf-8 with bom" } },
@@ -144,7 +145,7 @@
     // open commands
     { "caption": "My Commands",
       "command": "open_file", "args": {"file": "${packages}/User/commands.sublime-commands", "platform": "Linux"} },
-    
+
     // choose dictionary for spell check
     // { "caption": "Set (spell check) dictionary: German", "command": "set_setting", "args": {"setting": "dictionary", "value": "Packages/Language - German/German.dic"}},
     // { "caption": "Set (spell check) dictionary: English (US)", "command": "set_setting", "args": {"setting": "dictionary", "value": "Packages/Language - English/en_US.dic"}},
@@ -169,7 +170,7 @@
     { "caption": "Set Tab Size: 8", "command": "set_setting", "args": {"setting": "tab_size", "value": 8}},
 
     // reset window layout
-    { "caption": "Origami: Reset Layout (to only one Pane)",  
+    { "caption": "Origami: Reset Layout (to only one Pane)",
       "command": "set_layout", "args": {"cols": [0.0, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1]] } },
 
     // highlight line
@@ -204,9 +205,11 @@
     { "caption": "Join Lines", "command": "join_lines" },
     { "caption": "Duplicate Line", "command": "duplicate_line" },
 
+    // Calculate Math in the text baby
+    { "caption": "Super Calculator", "command": "super_calculator" },
+
     // Replace
     { "caption": ":s - Substitute/Replace", "command": "show_panel", "args": {"panel": "replace"} },
-    { "caption": ":b - Goto Tab", "command": "show_overlay", "args": {"overlay": "goto", "show_files": true} }, 
 
     // permutation of selection
     { "command": "sort_selection", "args": {"case_sensitive": false}, "caption": "Selection: Sort" },

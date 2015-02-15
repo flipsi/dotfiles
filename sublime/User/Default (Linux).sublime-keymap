@@ -5,15 +5,18 @@
 
     // Author: Philipp Moers <soziflip gmail com>
 
-    
+
 
     ///////////
     // View  //
     ///////////
 
     // scroll up and down
-    { "keys": ["alt+space"], "command": "scroll_lines_fixed", "args": {"amount": -15} },
-    { "keys": ["alt+m"], "command": "scroll_lines_fixed", "args": {"amount": 15} },
+    { "keys": ["alt+space"], "command": "scroll_lines", "args": {"amount": -15} },
+    { "keys": ["alt+m"], "command": "scroll_lines", "args": {"amount": 15} },
+    // (scroll_lines_fixed is a plugin that keeps the cursor where it is when moving the viewport)
+    // { "keys": ["alt+space"], "command": "scroll_lines_fixed", "args": {"amount": -15} },
+    // { "keys": ["alt+m"], "command": "scroll_lines_fixed", "args": {"amount": 15} },
     { "keys": ["alt+up"], "command": "move", "args": {"by": "pages", "forward": false} },
     { "keys": ["alt+down"], "command": "move", "args": {"by": "pages", "forward": true} },
     { "keys": ["alt+right"], "command": "scroll_width", "args": {"amount": 15 } },
@@ -40,12 +43,16 @@
     // spell check
     { "keys": ["ctrl+g", "c"], "command": "toggle_setting", "args": {"setting": "spell_check"} },
 
+    // whitespaces
+    { "keys": ["ctrl+g", "a"], "command": "set_setting", "args": {"setting": "draw_white_space", "value": "all" }},
+    { "keys": ["ctrl+g", "A"], "command": "set_setting", "args": {"setting": "draw_white_space", "value": "selection" }},
+
     // fold
     { "keys": ["ctrl+g", "-"], "command": "fold" },
     { "keys": ["ctrl+g", "+"], "command": "unfold" },
 
 
-    
+
     /////////////
     // General //
     /////////////
@@ -58,10 +65,10 @@
     { "keys": ["shift+tab"], "command": "move", "args": {"by": "lines", "forward": false}, "context": [{ "key": "overlay_visible", "operator": "equal", "operand": true } ] },
 
     // python repl (console)
-    { "keys": ["alt+shift+."], "command": "show_panel", "args": {"panel": "console", "toggle": true} },
-    // { "keys": ["ctrl+n"], "command": "move", "args": {"by": "lines", "forward": true}, 
+    { "keys": ["ctrl+alt+i"], "command": "show_panel", "args": {"panel": "console", "toggle": true} },
+    // { "keys": ["ctrl+n"], "command": "move", "args": {"by": "lines", "forward": true},
     //   "context": [{ "key": "panel_visible", "operator": "equal", "operand": true } ] },
-    // { "keys": ["ctrl+p"], "command": "move", "args": {"by": "lines", "forward": false}, 
+    // { "keys": ["ctrl+p"], "command": "move", "args": {"by": "lines", "forward": false},
     //   "context": [{ "key": "panel_visible", "operator": "equal", "operand": true } ] },
 
     // hide/show build panel
@@ -70,7 +77,7 @@
 
     // run arbitrary shell command
     // { "keys": ["ctrl+alt+s"], "command": "shell_prompt"},
-    { "keys": ["ctrl+alt+s"], "command": "shell_command"},
+    { "keys": ["ctrl+alt+shift+i"], "command": "shell_command"},
 
     // enter insert mode also from visual mode
     { "keys": ["i"], "command": "enter_insert_mode", "context": [{"key": "setting.command_mode"}, { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": false } ] },
@@ -80,14 +87,14 @@
     ////////////////////////////////
     // Goto Anyting, Search, etc. //
     ////////////////////////////////
-    
+
     // reopen file
     { "keys": ["ctrl+u"], "command": "reopen_last_file" },
 
     // fuzzy file navigation
     { "keys": ["alt+shift+,"], "command": "fuzzy_start_from_file" },
     { "keys": ["alt+,"], "command": "fuzzy_bookmarks_load" },
-    
+
     // mark line in vim style with m <char>
     // and jump there with ä <char> because that's where original ' is located on an english keyboard
     { "keys": ["ä", "<character>"], "command": "vi_select_bookmark", "args": {"select_bol": true}, "context": [{"key": "setting.command_mode"}] },
@@ -98,9 +105,9 @@
     // ... : to go to line
     // ... @ to go to function or section
     { "keys": ["@"], "command": "show_overlay", "args": {"overlay": "goto", "text": "@"}, "context": [{"key": "setting.command_mode"}] },
-    
-    
-    // search for words 
+
+
+    // search for words
     { "keys": ["ö"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": false}, "context": [{"key": "setting.command_mode"}]  },
     { "keys": ["Ö"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": true}, "context": [{"key": "setting.command_mode"}]  },
 
@@ -141,7 +148,7 @@
 
     // move to braces
     { "keys": ["ctrl+k", "ctrl+k"], "command": "move_to", "args": {"to": "brackets"} },
-    
+
     // markandmove (multi cursoring with keyboard)
     // { "keys": ["ctrl+m"], "command": "mark_and_move_save" },
     // { "keys": ["ctrl+shift+m"], "command": "mark_and_move_recall" },
@@ -229,7 +236,7 @@
     { "keys": ["µ", "<character>"], "command": "vi_replay_macro", "context": [{"key": "setting.command_mode"}] },
 
     // HTML Prettify (Auto code style for HTML, CSS, JavaScript, JSON)
-    { "keys": ["ctrl+alt+i"], "command": "htmlprettify" },
+    { "keys": ["ctrl+alt+f"], "command": "htmlprettify" },
 
 
     ///////////
@@ -242,7 +249,7 @@
     { "keys": ["ctrl+b", "v"], "command": "build", "context": [{"key": "build_fake", "operator":"equal", "operand":true}] },
 
     // find errors (debugging)
-    { "keys": ["ctrl+alt+n"], "command": "next_result" }, 
+    { "keys": ["ctrl+alt+n"], "command": "next_result" },
     { "keys": ["ctrl+alt+shift+n"], "command": "prev_result" },
 
     // SublimeREPL
@@ -287,7 +294,7 @@
     { "keys": ["alt+n"], "command": "next_view" },
     // move tabs
     { "keys": ["alt+shift+p"], "command": "move_tab", "args": { "position": "-1" } },
-    { "keys": ["alt+shift+n"], "command": "move_tab", "args": { "position": "+1" } }, 
+    { "keys": ["alt+shift+n"], "command": "move_tab", "args": { "position": "+1" } },
 
     // switch to LRU tab
     { "keys": ["#"], "command": "next_view_in_stack", "context": [{"key": "setting.command_mode"}] },
@@ -319,28 +326,28 @@
     { "keys": ["ctrl+o", "l"], "command": "travel_to_pane", "args": {"direction": "right"} },
     { "keys": ["ctrl+o", "j"], "command": "travel_to_pane", "args": {"direction": "down"} },
     { "keys": ["ctrl+o", "h"], "command": "travel_to_pane", "args": {"direction": "left"} },
-    
+
     // Origami: move tab to another pane
     { "keys": ["ctrl+o", "ctrl+shift+k"], "command": "carry_file_to_pane", "args": {"direction": "up"} },
     { "keys": ["ctrl+o", "ctrl+shift+l"], "command": "carry_file_to_pane", "args": {"direction": "right"} },
     { "keys": ["ctrl+o", "ctrl+shift+j"], "command": "carry_file_to_pane", "args": {"direction": "down"} },
     { "keys": ["ctrl+o", "ctrl+shift+h"], "command": "carry_file_to_pane", "args": {"direction": "left"} },
-    
+
     // Origami: new view into file in another pane
     { "keys": ["ctrl+o", "ctrl+alt+k"], "command": "clone_file_to_pane", "args": {"direction": "up"} },
     { "keys": ["ctrl+o", "ctrl+alt+l"], "command": "clone_file_to_pane", "args": {"direction": "right"} },
     { "keys": ["ctrl+o", "ctrl+alt+j"], "command": "clone_file_to_pane", "args": {"direction": "down"} },
     { "keys": ["ctrl+o", "ctrl+alt+h"], "command": "clone_file_to_pane", "args": {"direction": "left"} },
-        
+
     // Origami: create pane with file
     { "keys": ["ctrl+o", "ctrl+k"], "command": "create_pane_with_file", "args": {"direction": "up"} },
     { "keys": ["ctrl+o", "ctrl+l"], "command": "create_pane_with_file", "args": {"direction": "right"} },
     { "keys": ["ctrl+o", "ctrl+j"], "command": "create_pane_with_file", "args": {"direction": "down"} },
     { "keys": ["ctrl+o", "ctrl+h"], "command": "create_pane_with_file", "args": {"direction": "left"} },
-    
+
     // Origami: destroy pane
     { "keys": ["ctrl+o", "d"], "command": "destroy_pane", "args": {"direction": "self"} },
-    
+
     // Origami: zoom
     { "keys": ["ctrl+o", "z"], "command": "zoom_pane", "args": {"fraction": 0.9} },
     { "keys": ["ctrl+o", "Z"], "command": "unzoom_pane", "args": {} },
@@ -351,6 +358,6 @@
     /////////////////
 
     // if a mark is not set and you goto it, cursor ist lost. hit this and enter to get it back
-    { "keys": ["g", "G"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":10"}, "context": [{"key": "setting.command_mode"}] }
+    { "keys": ["ctrl+g", "ctrl+g"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":"}, "context": [{"key": "setting.command_mode"}] }
 
 ]

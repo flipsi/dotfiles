@@ -1,6 +1,10 @@
 // User defined words
 {
-    "toggle_word_dict": [
+    "toggle_words_dict": [
+        ["true", "false"],
+        ["yes", "no"],
+        ["on", "off"],
+        ["0", "1"],
         ["left", "right"],
         ["top", "bottom"],
         ["up", "down"],
