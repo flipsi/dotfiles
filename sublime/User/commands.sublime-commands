@@ -142,6 +142,10 @@
     // open settings
     { "caption": "My Preferences (Settings)",
       "command": "open_file", "args": {"file": "${packages}/User/Preferences.sublime-settings", "platform": "Linux"} },
+    { "caption": "FileBrowser Preferences (Settings - Default)",
+      "command": "open_file", "args": {"file": "${packages}/FileBrowser/dired.sublime-settings", "platform": "Linux"} },
+    { "caption": "FileBrowser Preferences (Settings - User)",
+      "command": "open_file", "args": {"file": "${packages}/User/dired.sublime-settings", "platform": "Linux"} },
     // open commands
     { "caption": "My Commands",
       "command": "open_file", "args": {"file": "${packages}/User/commands.sublime-commands", "platform": "Linux"} },

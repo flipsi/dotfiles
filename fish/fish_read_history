@@ -303,3 +303,7 @@
    when: 1423440419
 - cmd: function l\nless -c $argv\nend
    when: 1423441384
+- cmd: y
+   when: 1424181283
+- cmd: y
+   when: 1424256057

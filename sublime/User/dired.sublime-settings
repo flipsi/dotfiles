@@ -1,0 +1,14 @@
+{
+	"color_scheme": "Packages/User/dired-custom.hidden-tmTheme",
+	"dired_jump_points":
+	{
+		"dotfiles": "/home/sflip/dotfiles/",
+		"home": "/home/sflip/",
+		"local apache document root": "/var/www/html/",
+		"masterstudies modules": "/home/sflip/masterstudies/modules/",
+		"sublime user dir": "/home/sflip/dotfiles/sublime/User/",
+		"tmp": "/home/sflip/tmp/"
+	},
+	"dired_show_hidden_files": false,
+	"dired_show_parent": true
+}

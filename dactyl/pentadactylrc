@@ -14,8 +14,8 @@ set incfind
 " default search engine: google
 set defsearch='google'
 
-" editor (e.g. to edit source with gF)
-set editor='subl'
+" editor (e.g. to edit source with gF or edit textfield with <C-i>)
+set editor='subl --wait'
 
 " autocomplete when opening sites only with tab"
 set autocomplete=!/ex/(open|tabopen),.?
@@ -110,7 +110,7 @@ map ö /
 
 " Developer Tools (console)
 map <C-A-i> <C-S-k>
-" <C-S-i> to hide
+map <C-A-o> <C-S-i> 
 
 
 " NoScript

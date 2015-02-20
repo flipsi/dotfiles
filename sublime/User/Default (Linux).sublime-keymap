@@ -6,6 +6,38 @@
     // Author: Philipp Moers <soziflip gmail com>
 
 
+    /////////////
+    // General //
+    /////////////
+
+    // command palette
+    { "keys": [":"], "command": "show_overlay", "args": {"overlay": "command_palette", "text": ""}, "context": [{"key": "setting.command_mode"}] },
+
+    // enter insert mode also from visual mode
+    { "keys": ["i"], "command": "enter_insert_mode", "context": [{"key": "setting.command_mode"}, { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": false } ] },
+
+    // navigation with tab in overlay
+    { "keys": ["tab"], "command": "move", "args": {"by": "lines", "forward": true}, "context": [{ "key": "overlay_visible", "operator": "equal", "operand": true } ] },
+    { "keys": ["shift+tab"], "command": "move", "args": {"by": "lines", "forward": false}, "context": [{ "key": "overlay_visible", "operator": "equal", "operand": true } ] },
+
+    // python repl (console)
+    { "keys": ["ctrl+alt+i"], "command": "show_panel", "args": {"panel": "console", "toggle": true} },
+    // { "keys": ["ctrl+n"], "command": "move", "args": {"by": "lines", "forward": true},
+    //   "context": [{ "key": "panel_visible", "operator": "equal", "operand": true } ] },
+    // { "keys": ["ctrl+p"], "command": "move", "args": {"by": "lines", "forward": false},
+    //   "context": [{ "key": "panel_visible", "operator": "equal", "operand": true } ] },
+
+    // hide/show build panel
+    { "keys": ["ctrl+alt+o"], "command": "show_panel", "args": {"panel": "output.exec"} },
+    { "keys": ["ctrl+alt+o"], "command": "hide_panel", "context": [{"key": "panel_visible"}]},
+
+    // run arbitrary shell command
+    // { "keys": ["ctrl+alt+s"], "command": "shell_prompt"},
+    { "keys": ["ctrl+f", "s"], "command": "shell_command"},
+
+    // git
+    { "keys": ["ctrl+f", "g"], "command": "git_status" },
+
 
     ///////////
     // View  //
@@ -52,49 +84,15 @@
     { "keys": ["ctrl+g", "+"], "command": "unfold" },
 
 
-
-    /////////////
-    // General //
-    /////////////
-
-    // command palette
-    { "keys": [":"], "command": "show_overlay", "args": {"overlay": "command_palette", "text": ""}, "context": [{"key": "setting.command_mode"}] },
-
-    // navigation with tab in overlay
-    { "keys": ["tab"], "command": "move", "args": {"by": "lines", "forward": true}, "context": [{ "key": "overlay_visible", "operator": "equal", "operand": true } ] },
-    { "keys": ["shift+tab"], "command": "move", "args": {"by": "lines", "forward": false}, "context": [{ "key": "overlay_visible", "operator": "equal", "operand": true } ] },
-
-    // python repl (console)
-    { "keys": ["ctrl+alt+i"], "command": "show_panel", "args": {"panel": "console", "toggle": true} },
-    // { "keys": ["ctrl+n"], "command": "move", "args": {"by": "lines", "forward": true},
-    //   "context": [{ "key": "panel_visible", "operator": "equal", "operand": true } ] },
-    // { "keys": ["ctrl+p"], "command": "move", "args": {"by": "lines", "forward": false},
-    //   "context": [{ "key": "panel_visible", "operator": "equal", "operand": true } ] },
-
-    // hide/show build panel
-    { "keys": ["ctrl+alt+o"], "command": "show_panel", "args": {"panel": "output.exec"} },
-    { "keys": ["ctrl+alt+o"], "command": "hide_panel", "context": [{"key": "panel_visible"}]},
-
-    // run arbitrary shell command
-    // { "keys": ["ctrl+alt+s"], "command": "shell_prompt"},
-    { "keys": ["ctrl+alt+shift+i"], "command": "shell_command"},
-
-    // enter insert mode also from visual mode
-    { "keys": ["i"], "command": "enter_insert_mode", "context": [{"key": "setting.command_mode"}, { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": false } ] },
-
-
-
     ////////////////////////////////
     // Goto Anyting, Search, etc. //
     ////////////////////////////////
 
-    // reopen file
-    { "keys": ["ctrl+u"], "command": "reopen_last_file" },
-
-    // fuzzy file navigation
-    { "keys": ["alt+shift+,"], "command": "fuzzy_start_from_file" },
-    { "keys": ["alt+,"], "command": "fuzzy_bookmarks_load" },
-
+    // FileBrowser
+    { "keys": ["alt+i"], "command": "dired", "args": { "immediate": true, "single_pane": true, "other_group": "left", "project": true } },
+    { "keys": ["a", "d"], "command": "dired_create", "args": { "which": "directory" }, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["a", "f"], "command": "dired_create", "args": { "which": "file" }, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["enter"], "command": "dired_select", "args": {"other_group": true, "and_close": true}, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
     // mark line in vim style with m <char>
     // and jump there with ä <char> because that's where original ' is located on an english keyboard
     { "keys": ["ä", "<character>"], "command": "vi_select_bookmark", "args": {"select_bol": true}, "context": [{"key": "setting.command_mode"}] },
@@ -106,180 +104,11 @@
     // ... @ to go to function or section
     { "keys": ["@"], "command": "show_overlay", "args": {"overlay": "goto", "text": "@"}, "context": [{"key": "setting.command_mode"}] },
 
-
     // search for words
     { "keys": ["ö"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": false}, "context": [{"key": "setting.command_mode"}]  },
     { "keys": ["Ö"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": true}, "context": [{"key": "setting.command_mode"}]  },
-
-
-
-    ////////////////////////////
-    // Movement and Selection //
-    ////////////////////////////
-
-    // NEO movements: (modified xmodmap instead)
-    // // move cursor up and down
-    // { "keys": ["€"], "command": "set_motion", "args": {
-    //     "motion": "move", "motion_args": {"by": "lines", "forward": false, "extend": true }, "linewise": true } },
-    // { "keys": ["ð"], "command": "set_motion", "args": {
-    //     "motion": "move", "motion_args": {"by": "lines", "forward": true, "extend": true }, "linewise": true } },
-    // // move cursor left or right
-    // { "keys": ["ſ"], "command": "move", "args": {"by": "characters", "forward": false} },
-    // { "keys": ["đ"], "command": "move", "args": {"by": "characters", "forward": true } },
-    // { "keys": ["ŋ"], "command": "move_to", "args": {"to": "eol", "extend": false} },
-    // { "keys": ["æ"], "command": "move_to", "args": {"to": "bol", "extend": false} },
-    { "keys": ["alt+b"], "command": "move", "args": {"by": "words", "forward": false} },
-    { "keys": ["alt+f"], "command": "move", "args": {"by": "words", "forward": true } },
-
-
-    // vi movements in insert mode with alt
-    { "keys": ["alt+h"], "command": "move", "args": {"by": "characters", "forward": false} },
-    { "keys": ["alt+l"], "command": "move", "args": {"by": "characters", "forward": true} },
-    // { "keys": ["alt+k"], "command": "move", "args": {"by": "lines", "forward": false} }, // kill (delete) word
-    // { "keys": ["alt+j"], "command": "move", "args": {"by": "lines", "forward": true} },
-
-    // repeat movement (e.g. after f<character>)
-    { "keys": [","], "command": "set_repeat_move_to_character_motion", "context": [{"key": "setting.command_mode"}] },
-    { "keys": [";"], "command": "set_repeat_move_to_character_motion", "args": {"reverse": true}, "context": [{"key": "setting.command_mode"}] },
-
-    // emacs bol/eol
-    { "keys": ["ctrl+a"], "command": "move_to", "args": {"to": "bol", "extend": false} },
-    { "keys": ["ctrl+e"], "command": "move_to", "args": {"to": "eol", "extend": false} },
-
-    // move to braces
-    { "keys": ["ctrl+k", "ctrl+k"], "command": "move_to", "args": {"to": "brackets"} },
-
-    // markandmove (multi cursoring with keyboard)
-    // { "keys": ["ctrl+m"], "command": "mark_and_move_save" },
-    // { "keys": ["ctrl+shift+m"], "command": "mark_and_move_recall" },
-    { "keys": ["ctrl+m"], "command": "mark_and_move_do_it_all" },
-    // multicursoring from multiple line selection
-    { "keys": ["ctrl+alt+m"], "command": "split_selection_into_lines" },
-
-    // select all
-    { "keys": ["ctrl+alt+a"], "command": "select_all" },
-
-    // select word
-    { "keys": ["ctrl+j"], "command": "find_under_expand" },
-    // find next and leave this out
-    { "keys": ["ctrl+alt+j"], "command": "find_under_expand_skip" },
-    // select all of these words
-    { "keys": ["ctrl+k", "ctrl+j"], "command": "find_all_under" },
-
-    // move to eol with l instead of $ (after d or c or y)
-    { "keys": ["l"], "command": "set_motion", "args": {"motion": "vi_move_to_hard_eol", "motion_args": {"repeat": 1, "extend": true}, "inclusive": true, "clip_to_line": true }, "context": [{"key": "setting.command_mode"}, {"key": "vi_action", "operand": "vi_delete"} ] },
-    { "keys": ["l"], "command": "set_motion", "args": {"motion": "vi_move_to_hard_eol", "motion_args": {"repeat": 1, "extend": true}, "inclusive": true, "clip_to_line": true }, "context": [{"key": "setting.command_mode"}, {"key": "vi_action", "operand": "enter_insert_mode"} ] },
-    { "keys": ["l"], "command": "set_motion", "args": {"motion": "vi_move_to_hard_eol", "motion_args": {"repeat": 1, "extend": true}, "inclusive": true, "clip_to_line": true }, "context": [{"key": "setting.command_mode"}, {"key": "vi_action", "operand": "vi_copy"} ] },
-
-
-    //////////////////
-    // Text Editing //
-    //////////////////
-
-    // undo and redo
-    { "keys": ["alt+u"], "command": "undo" },
-    { "keys": ["alt+shift+u"], "command": "redo" },
-
-    // toggle comment
-    { "keys": ["ctrl+ö"], "command": "toggle_comment", "args": { "block": false } },
-    { "keys": ["ctrl+shift+ö"], "command": "toggle_comment", "args": { "block": true } },
-
-    // indent
-    { "keys": ["ctrl+."], "command": "indent" },
-    { "keys": ["ctrl+,"], "command": "unindent" },
-
-    // change case
-    { "keys": ["ctrl+k", "u"], "command": "upper_case" },
-    { "keys": ["ctrl+k", "l"], "command": "lower_case" },
-    { "keys": ["ctrl+k", "t"], "command": "title_case" },
-    // transpose characters, words, etc.
-    { "keys": ["ctrl+t"], "command": "transpose_word" },
-    // toggle words (true/false etc.)
-    { "keys": ["alt+t"], "command": "toggle_word" },
-    // toggle single or double quotes
-    { "keys": ["alt+q"], "command": "change_quotes" },
-
-    // add new line
-    { "keys": ["alt+o"], "command": "run_macro_file", "args": {"file": "Packages/Default/Add Line.sublime-macro"} },
-    { "keys": ["alt+shift+o"], "command": "run_macro_file", "args": {"file": "Packages/Default/Add Line Before.sublime-macro"} },
-    // duplicate line
-    { "keys": ["alt+shift+d"], "command": "duplicate_line" },
-    // move line up and down
-    { "keys": ["alt+shift+k"], "command": "swap_line_up" },
-    { "keys": ["alt+shift+j"], "command": "swap_line_down" },
-    // join lines
-    // { "keys": ["ctrl+j"], "command": "join_lines" }, // J
-    // sort
-    { "keys": ["f9"], "command": "sort_lines", "args": {"case_sensitive": false} },
-    { "keys": ["shift+f9"], "command": "sort_lines", "args": {"case_sensitive": true} },
-
-    // delete
-    // { "keys": ["delete"], "command": "set_action_motion", "args": {"action": "vi_left_delete", "motion": null } },
-    { "keys": ["ctrl+d"], "command": "set_action_motion", "args": {"action": "vi_right_delete", "motion": null } },
-    { "keys": ["alt+k"], "command": "delete_word", "args": { "forward": false } },
-    { "keys": ["alt+d"], "command": "delete_word", "args": { "forward": true } },
-
-    // auto completion
-    { "keys": ["alt+."], "command": "auto_complete" },
-    { "keys": ["tab"], "command": "move", "args": {"by": "lines", "forward": true}, "context": [{ "key": "auto_complete_visible" }] },
-    { "keys": ["shift+tab"], "command": "move", "args": {"by": "lines", "forward": false}, "context": [{ "key": "auto_complete_visible" }] },
-    { "keys": ["alt+."], "command": "commit_completion", "context": [{ "key": "auto_complete_visible" }] },
-
-
-    ////////////////////////////
-    // Advanced Editing Stuff //
-    ////////////////////////////
-
-    // Macros
-    { "keys": ["º", "<character>"], "command": "vi_begin_record_macro", "context": [{"key": "setting.command_mode"}] },
-    { "keys": ["º"], "command": "vi_end_record_macro", "context": [{"key": "setting.command_mode"}, {"key": "is_recording_macro"}] },
-    { "keys": ["µ", "<character>"], "command": "vi_replay_macro", "context": [{"key": "setting.command_mode"}] },
-
-    // HTML Prettify (Auto code style for HTML, CSS, JavaScript, JSON)
-    { "keys": ["ctrl+alt+f"], "command": "htmlprettify" },
-
-
-    ///////////
-    // Build //
-    ///////////
-
-    { "keys": ["f7"], "command": "build" },
-    { "keys": ["ctrl+alt+b"], "command": "build" },
-    { "keys": ["ctrl+b", "p"], "command": "build_parts" },
-    { "keys": ["ctrl+b", "v"], "command": "build", "context": [{"key": "build_fake", "operator":"equal", "operand":true}] },
-
-    // find errors (debugging)
-    { "keys": ["ctrl+alt+n"], "command": "next_result" },
-    { "keys": ["ctrl+alt+shift+n"], "command": "prev_result" },
-
-    // SublimeREPL
-    { "keys": ["ctrl+f7"], "command": "repl_transfer_current", "args": {"scope": "file"}},
-
-
-    ////////////////////////////
-    // Sublimerge (Diff Tool) //
-    ////////////////////////////
-
-    // { "keys": ["ctrl+g", "m"], "command": "sublimerge"},
-    // { "keys": ["ctrl+g", "i"], "command": "sublimerge_toggle_edit"},
-
-    // navigate through differences
-    // { "keys": ["ctrl+g", "n"], "command": "sublimerge_go_down"},
-    // { "keys": ["ctrl+g", "N"], "command": "sublimerge_go_up"},
-
-    // choose left or right file to modify other
-    // { "keys": ["ctrl+g", "l"], "command": "sublimerge_merge_left"},
-    // { "keys": ["ctrl+g", "h"], "command": "sublimerge_merge_right"},
-    // { "keys": ["ctrl+g", "L"], "command": "sublimerge_merge_left", "args": {"merge_all": true}},
-    // { "keys": ["ctrl+g", "H"], "command": "sublimerge_merge_right", "args": {"merge_all": true}},
-
-
-    /////////////////////////
-    // JavaScript Refactor //
-    /////////////////////////
-
-    { "keys": ["g", "d"], "command": "gotodefinition", "context": [{"key": "setting.command_mode"}] },
-
+    // search in multiple files
+    { "keys": ["Ö"], "command": "show_panel", "args": {"panel": "find_in_files"} },
 
 
     //////////////////////////////
@@ -288,6 +117,9 @@
 
     // close tab
     { "keys": ["q"], "command": "close", "context": [{"key": "setting.command_mode"}] },
+
+    // reopen tab
+    { "keys": ["ctrl+u"], "command": "reopen_last_file" },
 
     // navigate through tabs
     { "keys": ["alt+p"], "command": "prev_view" },
@@ -298,7 +130,6 @@
 
     // switch to LRU tab
     { "keys": ["#"], "command": "next_view_in_stack", "context": [{"key": "setting.command_mode"}] },
-    { "keys": ["'"], "command": "prev_view_in_stack", "context": [{"key": "setting.command_mode"}] },
     { "keys": ["alt+#"], "command": "next_view_in_stack" },
     { "keys": ["alt+shift+#"], "command": "prev_view_in_stack" },
 
@@ -353,11 +184,173 @@
     { "keys": ["ctrl+o", "Z"], "command": "unzoom_pane", "args": {} },
 
 
+    ////////////////////////////
+    // Movement and Selection //
+    ////////////////////////////
+
+    // move cursor left or right
+    { "keys": ["alt+h"], "command": "move", "args": {"by": "characters", "forward": false} },
+    { "keys": ["alt+l"], "command": "move", "args": {"by": "characters", "forward": true} },
+    { "keys": ["alt+b"], "command": "move", "args": {"by": "words", "forward": false} },
+    { "keys": ["alt+f"], "command": "move", "args": {"by": "words", "forward": true } },
+
+    // repeat movement (e.g. after f<character>)
+    { "keys": [","], "command": "set_repeat_move_to_character_motion", "context": [{"key": "setting.command_mode"}] },
+    { "keys": [";"], "command": "set_repeat_move_to_character_motion", "args": {"reverse": true}, "context": [{"key": "setting.command_mode"}] },
+
+    // emacs bol/eol
+    { "keys": ["ctrl+a"], "command": "move_to", "args": {"to": "bol", "extend": false} },
+    { "keys": ["ctrl+e"], "command": "move_to", "args": {"to": "eol", "extend": false} },
+
+    // move to braces
+    { "keys": ["ctrl+k", "ctrl+k"], "command": "move_to", "args": {"to": "brackets"} },
+
+    // markandmove (multi cursoring with keyboard)
+    // { "keys": ["ctrl+m"], "command": "mark_and_move_save" },
+    // { "keys": ["ctrl+shift+m"], "command": "mark_and_move_recall" },
+    { "keys": ["ctrl+m"], "command": "mark_and_move_do_it_all" },
+    // multicursoring from multiple line selection
+    { "keys": ["ctrl+alt+m"], "command": "split_selection_into_lines" },
+
+    // select all
+    { "keys": ["ctrl+alt+a"], "command": "select_all" },
+
+    // select word
+    { "keys": ["ctrl+j"], "command": "find_under_expand" },
+    // select  next and leave this out
+    { "keys": ["ctrl+alt+j"], "command": "find_under_expand_skip" },
+    // select all of these words
+    { "keys": ["ctrl+k", "ctrl+j"], "command": "find_all_under" },
+
+    // move to eol with l instead of $ (after d or c or y)
+    { "keys": ["l"], "command": "set_motion", "args": {"motion": "vi_move_to_hard_eol", "motion_args": {"repeat": 1, "extend": true}, "inclusive": true, "clip_to_line": true }, "context": [{"key": "setting.command_mode"}, {"key": "vi_action", "operand": "vi_delete"} ] },
+    { "keys": ["l"], "command": "set_motion", "args": {"motion": "vi_move_to_hard_eol", "motion_args": {"repeat": 1, "extend": true}, "inclusive": true, "clip_to_line": true }, "context": [{"key": "setting.command_mode"}, {"key": "vi_action", "operand": "enter_insert_mode"} ] },
+    { "keys": ["l"], "command": "set_motion", "args": {"motion": "vi_move_to_hard_eol", "motion_args": {"repeat": 1, "extend": true}, "inclusive": true, "clip_to_line": true }, "context": [{"key": "setting.command_mode"}, {"key": "vi_action", "operand": "vi_copy"} ] },
+
+
+    //////////////////
+    // Text Editing //
+    //////////////////
+
+    // undo and redo
+    { "keys": ["alt+u"], "command": "undo" },
+    { "keys": ["alt+shift+u"], "command": "redo" },
+
+    // auto completion
+    { "keys": ["alt+."], "command": "auto_complete" },
+    { "keys": ["tab"], "command": "move", "args": {"by": "lines", "forward": true}, "context": [{ "key": "auto_complete_visible" }] },
+    { "keys": ["shift+tab"], "command": "move", "args": {"by": "lines", "forward": false}, "context": [{ "key": "auto_complete_visible" }] },
+    { "keys": ["alt+."], "command": "commit_completion", "context": [{ "key": "auto_complete_visible" }] },
+
+    // delete
+    // { "keys": ["delete"], "command": "set_action_motion", "args": {"action": "vi_left_delete", "motion": null } },
+    { "keys": ["ctrl+h"], "command": "left_delete" },
+    { "keys": ["ctrl+d"], "command": "set_action_motion", "args": {"action": "vi_right_delete", "motion": null } },
+    { "keys": ["alt+k"], "command": "delete_word", "args": { "forward": false } },
+    { "keys": ["alt+d"], "command": "delete_word", "args": { "forward": true } },
+
+    // replace/substitute
+    { "keys": ["alt+ö"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
+
+    // indent
+    { "keys": ["ctrl+."], "command": "indent" },
+    { "keys": ["ctrl+,"], "command": "unindent" },
+
+    // change case
+    { "keys": ["ctrl+k", "u"], "command": "upper_case" },
+    { "keys": ["ctrl+k", "l"], "command": "lower_case" },
+    { "keys": ["ctrl+k", "t"], "command": "title_case" },
+
+    // add new line
+    { "keys": ["alt+o"], "command": "run_macro_file", "args": {"file": "Packages/Default/Add Line.sublime-macro"} },
+    { "keys": ["alt+shift+o"], "command": "run_macro_file", "args": {"file": "Packages/Default/Add Line Before.sublime-macro"} },
+    // duplicate line
+    { "keys": ["alt+shift+d"], "command": "duplicate_line" },
+    // move line up and down
+    { "keys": ["alt+shift+k"], "command": "swap_line_up" },
+    { "keys": ["alt+shift+j"], "command": "swap_line_down" },
+    // join lines
+    // { "keys": ["ctrl+j"], "command": "join_lines" }, // J
+    
+    // toggle single or double quotes
+    { "keys": ["ctrl+k", "q"], "command": "change_quotes" },
+
+    // toggle comment
+    { "keys": ["ctrl+ö"], "command": "toggle_comment", "args": { "block": false } },
+    { "keys": ["ctrl+shift+ö"], "command": "toggle_comment", "args": { "block": true } },
+
+    // sort
+    { "keys": ["f9"], "command": "sort_lines", "args": {"case_sensitive": false} },
+    { "keys": ["shift+f9"], "command": "sort_lines", "args": {"case_sensitive": true} },
+
+    // transpose characters, words, etc. (swap)
+    { "keys": ["ctrl+k", "s"], "command": "transpose_word" },
+
+    // toggle words (true/false etc.)
+    { "keys": ["ctrl+t"], "command": "toggle_word" },
+    
+    // HTML Prettify (Auto code style for HTML, CSS, JavaScript, JSON)
+    { "keys": ["ctrl+k", "p"], "command": "htmlprettify" },
+
+    // Super Calculator
+    { "keys": ["ctrl+k", "c"], "command": "super_calculator" },
+
+    // Macros
+    { "keys": ["º", "<character>"], "command": "vi_begin_record_macro", "context": [{"key": "setting.command_mode"}] },
+    { "keys": ["º"], "command": "vi_end_record_macro", "context": [{"key": "setting.command_mode"}, {"key": "is_recording_macro"}] },
+    { "keys": ["µ", "<character>"], "command": "vi_replay_macro", "context": [{"key": "setting.command_mode"}] },
+
+
+    ///////////
+    // Build //
+    ///////////
+
+    { "keys": ["f7"], "command": "build" },
+    { "keys": ["ctrl+b", "ctrl+b"], "command": "build" },
+    { "keys": ["ctrl+alt+b"], "command": "build" },
+    { "keys": ["ctrl+b", "p"], "command": "build_parts" },
+    { "keys": ["ctrl+b", "v"], "command": "build", "context": [{"key": "build_fake", "operator":"equal", "operand":true}] },
+
+    // find errors (debugging)
+    { "keys": ["ctrl+alt+n"], "command": "next_result" },
+    { "keys": ["ctrl+alt+shift+n"], "command": "prev_result" },
+
+    // SublimeREPL
+    { "keys": ["ctrl+f7"], "command": "repl_transfer_current", "args": {"scope": "file"}},
+
+
+    ////////////////////////////
+    // Sublimerge (Diff Tool) //
+    ////////////////////////////
+
+    // { "keys": ["ctrl+g", "m"], "command": "sublimerge"},
+    // { "keys": ["ctrl+g", "i"], "command": "sublimerge_toggle_edit"},
+
+    // navigate through differences
+    // { "keys": ["ctrl+g", "n"], "command": "sublimerge_go_down"},
+    // { "keys": ["ctrl+g", "N"], "command": "sublimerge_go_up"},
+
+    // choose left or right file to modify other
+    // { "keys": ["ctrl+g", "l"], "command": "sublimerge_merge_left"},
+    // { "keys": ["ctrl+g", "h"], "command": "sublimerge_merge_right"},
+    // { "keys": ["ctrl+g", "L"], "command": "sublimerge_merge_left", "args": {"merge_all": true}},
+    // { "keys": ["ctrl+g", "H"], "command": "sublimerge_merge_right", "args": {"merge_all": true}},
+
+
+    /////////////////////////
+    // JavaScript Refactor //
+    /////////////////////////
+
+    { "keys": ["g", "d"], "command": "gotodefinition", "context": [{"key": "setting.command_mode"}] },
+
+
     /////////////////
     // Workarounds //
     /////////////////
 
+    // overwritten by "Super Calculator"
+    { "keys": ["alt+c"], "command": "toggle_case_sensitive", "context": [{ "key": "setting.is_widget", "operator": "equal", "operand": true } ] },
+
     // if a mark is not set and you goto it, cursor ist lost. hit this and enter to get it back
     { "keys": ["ctrl+g", "ctrl+g"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":"}, "context": [{"key": "setting.command_mode"}] }
-
 ]
