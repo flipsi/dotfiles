@@ -98,11 +98,12 @@
     { "keys": ["ä", "<character>"], "command": "vi_select_bookmark", "args": {"select_bol": true}, "context": [{"key": "setting.command_mode"}] },
 
     // goto anything (find tab)
-    { "keys": ["alt+w"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true}},
     // ... # to go to keyword
     // ... : to go to line
     // ... @ to go to function or section
+    { "keys": ["alt+w"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true}},
     { "keys": ["@"], "command": "show_overlay", "args": {"overlay": "goto", "text": "@"}, "context": [{"key": "setting.command_mode"}] },
+    // if a mark is not set and you goto it, cursor ist lost. hit this and enter to get it back
 
     // search for words
     { "keys": ["ö"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": false}, "context": [{"key": "setting.command_mode"}]  },
@@ -284,18 +285,18 @@
     { "keys": ["shift+f9"], "command": "sort_lines", "args": {"case_sensitive": true} },
 
     // transpose characters, words, etc. (swap)
-    { "keys": ["ctrl+k", "s"], "command": "transpose_word" },
+    { "keys": ["ctrl+t"], "command": "transpose_word" },
 
     // toggle words (true/false etc.)
-    { "keys": ["ctrl+t"], "command": "toggle_word" },
-    
+    { "keys": ["ctrl+k", "o"], "command": "toggle_word" },
+
     // HTML Prettify (Auto code style for HTML, CSS, JavaScript, JSON)
     { "keys": ["ctrl+k", "p"], "command": "htmlprettify" },
 
     // Super Calculator
     { "keys": ["ctrl+k", "c"], "command": "super_calculator" },
 
-    // Macros
+    // Macros (altgr+shift+m and altgr+m)
     { "keys": ["º", "<character>"], "command": "vi_begin_record_macro", "context": [{"key": "setting.command_mode"}] },
     { "keys": ["º"], "command": "vi_end_record_macro", "context": [{"key": "setting.command_mode"}, {"key": "is_recording_macro"}] },
     { "keys": ["µ", "<character>"], "command": "vi_replay_macro", "context": [{"key": "setting.command_mode"}] },
@@ -349,8 +350,6 @@
     /////////////////
 
     // overwritten by "Super Calculator"
-    { "keys": ["alt+c"], "command": "toggle_case_sensitive", "context": [{ "key": "setting.is_widget", "operator": "equal", "operand": true } ] },
+    { "keys": ["alt+c"], "command": "toggle_case_sensitive", "context": [{ "key": "setting.is_widget", "operator": "equal", "operand": true } ] }
 
-    // if a mark is not set and you goto it, cursor ist lost. hit this and enter to get it back
-    { "keys": ["ctrl+g", "ctrl+g"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":"}, "context": [{"key": "setting.command_mode"}] }
 ]

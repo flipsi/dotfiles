@@ -1,7 +1,22 @@
 [user]
-	email = soziflip@gmail.com
-	name = sflip
+	name = Philipp Moers
+    email = soziflip@gmail.com
+
+[core]
+    editor = subl
+
 [push]
 	default = matching
+
 [diff]
-    tool = vimdiff
+    tool = sublimerge
+
+[difftool "sublimerge"]
+    cmd = subl -n -w \"$REMOTE\" \"$LOCAL\" --command \"sublimerge_diff_views {\\\"left_read_only\\\": true, \\\"right_read_only\\\": true}\"
+
+[merge]
+    tool = sublimerge
+
+[mergetool "sublimerge"]
+    cmd = subl -n -w \"$REMOTE\" \"$BASE\" \"$LOCAL\" \"$MERGED\" --command \"sublimerge_diff_view\"
+

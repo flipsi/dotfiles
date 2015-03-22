@@ -6,7 +6,9 @@
 		"home": "/home/sflip/",
 		"local apache document root": "/var/www/html/",
 		"masterstudies modules": "/home/sflip/masterstudies/modules/",
+		"Coding Tests": "/home/sflip/src-my/tests/",
 		"sublime user dir": "/home/sflip/dotfiles/sublime/User/",
+		"sublime package dir": "/home/sflip/.config/sublime-text-3/Packages/",
 		"tmp": "/home/sflip/tmp/"
 	},
 	"dired_show_hidden_files": false,
