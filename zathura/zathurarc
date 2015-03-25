@@ -1,0 +1,6 @@
+set window-title-basename true
+
+map b toggle_statusbar
+map <F11> toggle_fullscreen
+#map f toggle_fullscreen
+#map F follow

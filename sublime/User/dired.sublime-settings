@@ -2,14 +2,15 @@
 	"color_scheme": "Packages/User/dired-custom.hidden-tmTheme",
 	"dired_jump_points":
 	{
-		"dotfiles": "/home/sflip/dotfiles/",
+		"root": "/",
 		"home": "/home/sflip/",
-		"local apache document root": "/var/www/html/",
+		"tmp": "/home/sflip/tmp/",
 		"masterstudies modules": "/home/sflip/masterstudies/modules/",
 		"Coding Tests": "/home/sflip/src-my/tests/",
+		"dotfiles": "/home/sflip/dotfiles/",
 		"sublime user dir": "/home/sflip/dotfiles/sublime/User/",
 		"sublime package dir": "/home/sflip/.config/sublime-text-3/Packages/",
-		"tmp": "/home/sflip/tmp/"
+		"local apache document root": "/var/www/html/"
 	},
 	"dired_show_hidden_files": false,
 	"dired_show_parent": true
