@@ -8,16 +8,25 @@
 
 " search preferences: ignore case, search all text
 set findflags='cL'
-" ... show results while typing"
+" ... show results while typing
 set incfind
 
-" default search engine: google
-set defsearch='google'
+" follow more hints like stack overflow upvote buttons
+"set hinttags+=a[class]
+set hinttags+=a
+set hinttags+=div[id=\"se-signup-legend\"]
 
 " editor (e.g. to edit source with gF or edit textfield with <C-i>)
 set editor='subl --wait'
 
-" autocomplete when opening sites only with tab"
+" default search engine
+set defsearch=duckduckgo
+"set defsearch=google
+
+" completions
+set complete=search,location,file,suggestion
+
+" autocomplete when opening sites only with tab
 set autocomplete=!/ex/(open|tabopen),.?
 
 " QuickMarks
@@ -32,8 +41,9 @@ qmark p file:///home/sflip/masterstudies/modules/informationsvisualisierung/proj
 qmark v http://localhost/projects/govp2/
 
 " Styles
-highlight StatusLineNormal background-color: #DDD
-highlight Download[active] background-color: #FFEFB9
+"highlight StatusLineNormal background-color: #DDD
+"highlight Download[active] background-color: #FFEFB9
+colorscheme solarized-light
 
 
 

@@ -261,8 +261,6 @@
    when: 1413242981
    paths:
     - ranger
-- cmd: n
-   when: 1414166356
 - cmd: function fish_user_key_bindings\nbind \\er ranger\nbind \\ee elinks\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nbind \\eh backward-char \nbind \\el forward-char\nend
    when: 1417479976
 - cmd: function fish_prompt --description 'Prompt anzeigen'\n\n# Just calculate these once, to save a few cycles when displaying the prompt\nif not set -q __fish_prompt_hostname\nset -g __fish_prompt_hostname (hostname|cut -d . -f 1)\nend\n\nif not set -q __fish_prompt_normal\nset -g __fish_prompt_normal (set_color normal)\nend\n\nswitch $USER\n\ncase root\n\nif not set -q __fish_prompt_cwd\nif set -q fish_color_cwd_root\nset -g __fish_prompt_cwd (set_color $fish_color_cwd_root)\nelse\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\nend\n\necho -n -s "$USER" @ "$__fish_prompt_hostname" ' ' "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '# '\n\ncase '*'\n\nif not set -q __fish_prompt_cwd\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\n\nset_color brown\necho ""# newline\necho -n -s ">( *) "\nset_color normal\necho -n -s "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" ' > '\n\nend\nend
@@ -271,8 +269,6 @@
    when: 1417480156
 - cmd: function fish_prompt --description 'Prompt anzeigen'\n\n# Just calculate these once, to save a few cycles when displaying the prompt\nif not set -q __fish_prompt_hostname\nset -g __fish_prompt_hostname (hostname|cut -d . -f 1)\nend\n\nif not set -q __fish_prompt_normal\nset -g __fish_prompt_normal (set_color normal)\nend\n\nswitch $USER\n\ncase root\n\nif not set -q __fish_prompt_cwd\nif set -q fish_color_cwd_root\nset -g __fish_prompt_cwd (set_color $fish_color_cwd_root)\nelse\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\nend\n\necho -n -s "$USER" @ "$__fish_prompt_hostname" ' ' "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '# '\n\ncase '*'\n\nif not set -q __fish_prompt_cwd\nset -g __fish_prompt_cwd (set_color $fish_color_cwd)\nend\n\nset_color brown\necho ""# newline\necho -n -s " "\nset_color normal\necho -n -s "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" ' > '\n\nend\nend
    when: 1417480262
-- cmd: y
-   when: 1418216721
 - cmd: function fish_user_key_bindings\nbind \\er ranger\nbind \\ee elinks\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nbind \\eh backward-char\nbind \\el forward-char\nbind \\ek backward-kill-word \nend
    when: 1418420405
 - cmd: function umount-php-friends --description 'unmount webspace from /media/php-friends'\nfusermount -u /media/sflip/php-friends/\nand echo "Unmounted successfully."\nor echo "Could not unmount!"\nend
@@ -285,18 +281,8 @@
     - /media/sflip/php-friends/
 - cmd: function fish_user_key_bindings\nbind \\eo ranger\nbind \\ee elinks\nbind \\e. history-token-search-backward\nbind \\e: history-token-search-forward\nbind \\eh backward-char\nbind \\el forward-char\nbind \\ek backward-kill-word\nend
    when: 1418894642
-- cmd: y
-   when: 1420025737
 - cmd: jah
    when: 1423418699
-- cmd: n
-   when: 1423419551
-- cmd: n
-   when: 1423419808
-- cmd: n
-   when: 1423419946
-- cmd: y
-   when: 1423420139
 - cmd: n
    when: 1423420156
 - cmd: function l\nless $argv\nend
@@ -304,6 +290,10 @@
 - cmd: function l\nless -c $argv\nend
    when: 1423441384
 - cmd: y
-   when: 1424181283
-- cmd: y
    when: 1424256057
+- cmd: function lll --description 'show directory listing with hidden files'\nls -lha $argv\nend
+   when: 1427373154
+- cmd: function ll\nls -lha --file-type $argv\nend
+   when: 1427373191
+- cmd: function ll\nls -lhA --file-type $argv\nend
+   when: 1427373257

@@ -4,6 +4,13 @@
 " Location: ~/.vimpcrc
 
 
+
+"""" Server """"
+
+connect 192.168.2.113 6600
+
+
+
 """" Settings """"
 
 set ignorecase

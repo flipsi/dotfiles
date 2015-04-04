@@ -1,0 +1,25 @@
+{
+	"javatar_gp": 0,
+	"jdk_version":
+	{
+		"use": ""
+	},
+	"message_id": 20,
+	"project_data":
+	{
+		"2": null,
+		"3":
+		{
+			"folders":
+			[
+				{
+					"path": "/home/sflip/src-my/tests/java/JavatarDemo"
+				}
+			],
+			"javatar":
+			{
+				"source_folder": "/home/sflip/src-my/tests/java/JavatarDemo/src"
+			}
+		}
+	}
+}

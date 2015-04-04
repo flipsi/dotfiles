@@ -1,5 +1,6 @@
 {
-	"color_scheme": "Packages/User/dired-custom.hidden-tmTheme",
+	// "color_scheme": "Packages/User/SublimeLinter/FreshCut (SL).tmTheme",
+	"color_scheme": "Packages/Dayle Rees Color Schemes/legacy/Goldfish.tmTheme",
 	"dired_jump_points":
 	{
 		"root": "/",
@@ -12,6 +13,8 @@
 		"sublime package dir": "/home/sflip/.config/sublime-text-3/Packages/",
 		"local apache document root": "/var/www/html/"
 	},
+    "dired_hijack_new_window": false,
+    "dired_reuse_view": true,
 	"dired_show_hidden_files": false,
 	"dired_show_parent": true
 }

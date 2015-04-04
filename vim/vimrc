@@ -26,13 +26,13 @@ set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 "-----------------------------------------------------------------------
 
 " hack: let vim realize the alt key in bash
-let c='a'
-while c <= 'z'
-  exec "set <m-".c.">=\e".c
-  exec "imap \e".c." <m-".c.">"
-  let c = nr2char(1+char2nr(c))
-endw
-set timeout ttimeoutlen=50
+"let c='a'
+"while c <= 'z'
+"  exec "set <m-".c.">=\e".c
+"  exec "imap \e".c." <m-".c.">"
+"  let c = nr2char(1+char2nr(c))
+"endw
+"set timeout ttimeoutlen=50
 
 
 "-----------------------------------------------------------------------
