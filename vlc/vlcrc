@@ -4023,7 +4023,7 @@ vod-server=any
 #repeat=0
 
 # Play and exit (boolean)
-#play-and-exit=0
+play-and-exit=1
 
 # Play and stop (boolean)
 #play-and-stop=0
@@ -4089,8 +4089,7 @@ album-art=2
 #intf=
 
 # Extra interface modules (string)
-# extraintf=ncurses
-extraintf=
+#extraintf=
 
 # Control interfaces (string)
 #control=

@@ -7,6 +7,9 @@
     // select all occurences of a word
     { "caption": "Select All Occurences of this Word", "command": "find_all_under"},
 
+    // move to braces
+    { "caption": "Move to matching brackets/braces", "command": "move_to", "args": {"to": "brackets"} },
+
     // zoom
     { "caption": "Zoom in", "command": "increase_font_size", "context": [{"key": "setting.command_mode"}] },
     { "caption": "Zoom out", "command": "decrease_font_size", "context": [{"key": "setting.command_mode"}] },
