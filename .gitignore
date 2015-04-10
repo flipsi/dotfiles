@@ -1,9 +1,23 @@
-#### fish
-####  common
+#### dactyl
 
+dactyl/pentadactyl/info
+
+
+#### fish
+
+fish/fish_history
 fish/fishd.*
+
+
+#### mutt
+
 mutt
 
+
+#### ranger
+
+ranger/bookmarks
+ranger/history
 
 
 #### sublime
@@ -17,13 +31,4 @@ sublime/User/Package Control.system-ca-bundle
 sublime/User/Package Control.cache/
 sublime/User/Package Control.ca-certs/
 
-
-#### fish
-
-fish/fish_history
-
-
-#### ranger
-
-ranger/bookmarks
 
