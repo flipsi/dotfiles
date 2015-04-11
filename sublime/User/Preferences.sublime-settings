@@ -11,7 +11,7 @@
 	"color_scheme": "Packages/User/SublimeLinter/Patriot (SL).tmTheme",
 	"default_encoding": "UTF-8",
 	"detect_slow_plugins": false,
-	"dictionary": "Packages/Dictionaries/German.dic",
+	"dictionary": "Packages/Language - English/en_US.dic",
 	"font_face": "Monospace",
 	"font_size": 10,
 	"highlight_line": true,
