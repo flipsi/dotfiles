@@ -28,6 +28,12 @@ xkb_symbols "basic" {
     include "de"
 
 
+    // additional escape key on capslock
+    // (most desktop environment have this option too)
+
+    key <AC00>  { [ Escape, Escape, Escape, Escape ] };
+
+
     // vim movements with AltGr
 
     key <AC06>  { [ h, H, Left,   VoidSymbol ] };
