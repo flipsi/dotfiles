@@ -13,3 +13,5 @@ set PATH ~/bin $PATH
 
 set -x LESSOPEN "| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 set -x LESS " -c -R "
+
+set -x MPD_HOST (ifconfig wlan0 | grep 'inet ' | sed 's/.*addr:\(.*\)  Bcast.*/\1/')

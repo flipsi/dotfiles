@@ -61,6 +61,7 @@
     { "caption": "Ruler: Column 120", "command": "set_setting", "args": {"setting": "rulers", "value": [120]}},
     { "caption": "Ruler: Column 80, 100", "command": "set_setting", "args": {"setting": "rulers", "value": [80, 100]}},
     { "caption": "Ruler: Column 100, 120", "command": "set_setting", "args": {"setting": "rulers", "value": [100, 120]}},
+    { "caption": "Ruler: Column 80, 100, 120", "command": "set_setting", "args": {"setting": "rulers", "value": [80, 100, 120]}},
 
     { "caption": "Word Wrap: Automatic Column", "command": "set_setting", "args": {"setting": "wrap_width", "value": 0}},
     { "caption": "Word Wrap: Column 70", "command": "set_setting", "args": {"setting": "wrap_width", "value": 71}},

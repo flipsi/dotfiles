@@ -81,6 +81,10 @@ nmap wi :history<CR>
 nmap wj :jumps<CR>
 nmap wp :tabopen about:preferences<CR>
 
+" really zoom everything
+map zi ZI
+map zo ZO
+
 " jump to mark
 map ä '
 
