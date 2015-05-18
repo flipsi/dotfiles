@@ -120,6 +120,7 @@
 
     // close tab
     { "keys": ["q"], "command": "close", "context": [{"key": "setting.command_mode"}] },
+    { "keys": ["Q"], "command": "close", "context": [{"key": "setting.command_mode"}] },
 
     // reopen tab
     { "keys": ["ctrl+u"], "command": "reopen_last_file" },
@@ -315,8 +316,8 @@
     { "keys": ["ctrl+b", "v"], "command": "build", "context": [{"key": "build_fake", "operator":"equal", "operand":true}] },
 
     // find errors (debugging)
-    { "keys": ["ctrl+alt+n"], "command": "next_result" },
-    { "keys": ["ctrl+alt+shift+n"], "command": "prev_result" },
+    { "keys": ["ctrl+n"], "command": "next_result" },
+    { "keys": ["ctrl+shift+n"], "command": "prev_result" },
 
     // SublimeREPL
     { "keys": ["ctrl+f7"], "command": "repl_transfer_current", "args": {"scope": "file"}},

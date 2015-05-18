@@ -8,6 +8,7 @@ set nocompatible
 :set expandtab
 " ... and use 4 of them
 :set tabstop=4
+:set shiftwidth=4
 
 
 

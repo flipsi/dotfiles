@@ -35,6 +35,9 @@
     { "caption": "Fold Level 8", "command": "fold_by_level", "args": {"level": 8} },
     { "caption": "Fold Level 9", "command": "fold_by_level", "args": {"level": 9} },
 
+    // new file    
+    { "caption": "New File", "command": "new_file" },
+
     // restart sublime
     { "caption": "Restart Sublime Text", "command": "restart" },
 
