@@ -1,23 +1,43 @@
-// X keyboard layout by Philipp Moers <soziflip funny character gmail dot com>
+// Author: Philipp Moers <soziflip gmail com>
 
-// based on a keyboarmap from an 'xkb/symbols/de' file
-// this file should be named 'xkb/symbols/de_sflip' (or a symlink should)
-// location varies from distro to distro. on my machine it's /usr/share/X11
-
-
-// (you can additionally update /usr/share/X11/xkb/rules/xfree86.lst)
+// This is a symbols file for X KeyBoard extension (XKB).
+// It contains a custom keyboard layout.
+// XKB should be used instead of the deprecated xmodmap.
 
 
-// change to this layout with 
-//     setxkbmap -layout de_sflip
+// INSTALLATION WITH ROOT ACCESS
 
-// or make a keymap with 
-//     setxkbmap <this file> -print > <definition file> 
-// which does not invoke xkbcomp, in order to get debug output from
-//     xkbcomp <definition file> $DISPLAY
+// save this file (or create a link) as
+//      /usr/share/X11/xkb/symbols/de_sflip
+// The xkb directory can be located somewhere else on other distros.
+// You can additionally update '/usr/share/X11/xkb/rules/xfree86.lst'.
 
-// to use fresh keymapsin X on updates, you may have to
+// Then change to the layout with
+//      setxkbmap de_sflip
+
+// To use this layout as the default layout for keyboards in X add the line
+//      Option "XkbLayout" "de_sflip"
+// to the keyboard section in
+//      /usr/share/X11/xorg.conf.d/10-evdev.conf 
+
+// If you make changes that are not recognized, try to delete this 'cache':
 //     rm /var/lib/xkb/*.xkm
+
+
+// INSTALLATION WITHOUT ROOT ACCESS
+
+// Make sure that this file is located in a symbols folder:
+//      ./dotfiles/xkb/symbols/de_sflip
+// Then call setxkbmap with the xkb directory and let it print the keymap-file
+// instead of implicitly calling xkbcomp, and pipe it manually:
+//     XKBDIR='./dotfiles/xkb/'
+//     setxkbmap de_sflip -I $XKBDIR -print | xkbcomp -I$XKBDIR - $DISPLAY
+
+
+// DEBUGGING
+
+// If there are errors in the file, use the piping method above 
+// in order to get debug output from xkbcomp
 
 
 
