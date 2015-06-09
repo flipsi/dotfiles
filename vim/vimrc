@@ -10,6 +10,10 @@ set nocompatible
 :set tabstop=4
 :set shiftwidth=4
 
+" smart indent
+set autoindent
+set smartindent
+imap <C-Return> <CR><CR><C-o>k<Tab>
 
 
 " show line numbers
@@ -22,6 +26,7 @@ set nocompatible
 
 " statusline
 set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
+
 
 
 "-----------------------------------------------------------------------

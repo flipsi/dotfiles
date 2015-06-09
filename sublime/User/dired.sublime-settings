@@ -5,6 +5,7 @@
 	{
 		"root": "/",
 		"home": "/home/sflip/",
+		"latex": "/home/sflip/latex/sfliptex05/",
 		"tmp": "/home/sflip/tmp/",
 		"masterstudies modules": "/home/sflip/masterstudies/modules/",
 		"Coding Tests": "/home/sflip/src-my/tests/",

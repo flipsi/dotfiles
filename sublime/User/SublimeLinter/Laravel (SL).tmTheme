@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>Laravel</string>
+	<string>Laravel Darker</string>
 	<key>settings</key>
 	<array>
 		<dict>
 			<key>settings</key>
 			<dict>
 				<key>background</key>
-				<string>#2E2C2B</string>
+				<string>#000000</string>
 				<key>caret</key>
 				<string>#F8F8F0</string>
 				<key>foreground</key>
@@ -18,9 +18,9 @@
 				<key>invisibles</key>
 				<string>#3B3A32</string>
 				<key>lineHighlight</key>
-				<string>#3B3633</string>
+				<string>#222222</string>
 				<key>selection</key>
-				<string>#161A1F</string>
+				<string>#444444</string>
 				<key>findHighlight</key>
 				<string>#FFE792</string>
 				<key>findHighlightForeground</key>
@@ -412,6 +412,6 @@
             </dict>
         </dict></array>
 	<key>uuid</key>
-	<string>B9A9A975-9D9D-489A-9053-DE4D932E91F5</string>
+	<string>FFC5C692-05C6-4E8A-820C-AE457C1FAAE2</string>
 </dict>
 </plist>
