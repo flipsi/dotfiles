@@ -52,7 +52,7 @@ for_window [class="sxiv"] fullscreen
 
 # set wallpaper
 # (not for window manager i3, which has nothing to do with wallpapers)
-exec --no-startup-id "feh --bg-scale /home/sflip/Wallpapers/03864_glowbehindhood_1366x768.jpg"
+exec --no-startup-id "feh --bg-scale ~/.i3/wallpaper"
 
 
 
