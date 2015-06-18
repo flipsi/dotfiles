@@ -11,7 +11,9 @@
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:NotoSans 10
+# font pango:Terminus 10
+# font pango:monospace 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -37,12 +39,20 @@ exec unclutter
 # set keyboard layout
 # OBSOLETE BECAUSE OF X CONFIGURATION
 # setxkbmap de_sflip
+
+
 # always on specific workspace
 assign [class="(?i)firefox"] web
+assign [class="(?i)tunderbird"] mail
 
 # always fullscreen / floating
 for_window [class="sxiv"] fullscreen 
 
+# split vertical by default
+default_orientation vertical
+
+# $mod+4 two times to get back to last recently used
+workspace_auto_back_and_forth yes
 
 
 
@@ -59,24 +69,25 @@ exec --no-startup-id "feh --bg-scale ~/.i3/wallpaper"
 
 # borders and gaps
 for_window [class="^.*"] border pixel
-gaps inner 10
-gaps outer 2
-smart_gaps on
+# gaps inner 10
+# gaps outer 2
+# smart_gaps on
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command i3status
+    status_command i3status --config ~/.i3/i3status
+    position top
     colors {
         background  #434343
         statusline  #EEEEEE
-        separator   #222222
+        separator   #FFC622
         #                   border   backgr   text
         focused_workspace   #B08200  #B08200  #000000 
         active_workspace    #434343  #434343  #000000 
         inactive_workspace  #434343  #434343  #B08200
-        client.urgent       #FFC622  #FFC622  #000000
+        urgent_workspace    #FFC622  #FFC622  #000000
     }
 }
 
@@ -87,7 +98,7 @@ client.focused          #B08200  #B08200  #000000  #FFC622
 client.focused_inactive #434343  #434343  #B08200  #434343
 client.unfocused        #434343  #434343  #B08200  #434343
 client.urgent           #FFC622  #FFC622  #000000  #FFC622
-client.placeholder      #FFC622  #FFC622  #000000  #FFC622
+client.background       #434343  #434343  #B08200  #FFC622
 
 
 
@@ -101,6 +112,12 @@ set $mod Mod4
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# change border
+bindsym $mod+b border toggle
+
+# hide/show bar
+bindsym $mod+Shift+b bar mode toggle
+
 
 # volume
 bindsym $mod+v exec       "amixer sset Master 3%-"
@@ -112,11 +129,11 @@ bindsym $mod+q kill
 
 
 # start dmenu (a program launcher)
-bindsym $mod+i exec dmenu_run
+bindsym $mod+Shift+i exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+Shift+i exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+i exec --no-startup-id i3-dmenu-desktop
 
 # start a terminal
 bindsym $mod+t exec "gnome-terminal --hide-menubar --command='tmux -2'"
@@ -147,11 +164,12 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split orientation
-bindsym $mod+u split vertical
-bindsym $mod+Shift+u split horizontal
+bindsym $mod+o split vertical
+bindsym $mod+Shift+o split horizontal
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+f fullscreen
+# bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 # bindsym $mod+s layout stacking
@@ -166,13 +184,33 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+u focus parent
 
 # focus the child container
-bindsym $mod+Shift+a focus child
+bindsym $mod+Shift+u focus child
+
+
+# switch to a specific window or workspace
+mode "goto" {
+   bindsym f [class="(?i)firefox"]  focus; mode "default"
+   bindsym s [class="(?i)sublime"]  focus; mode "default"
+   bindsym m workspace music; mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+w mode "goto"
+
+# mark/goto windows like in vim
+bindsym $mod+m exec i3-input -F 'mark %s' -P 'Mark name: '
+bindsym $mod+Shift+m exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
+
+# rename workspace
+bindsym $mod+comma exec i3-input -F 'rename workspace to %s' -P 'rename workspace to: '
 
 # switch to workspace
-bindsym $mod+b workspace back_and_forth
+bindsym $mod+numbersign workspace back_and_forth
 bindsym $mod+n workspace next
 bindsym $mod+p workspace prev
 bindsym $mod+1 workspace 1
@@ -186,18 +224,8 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
-# switch to workspace by quickmark
-mode "workspace" {
-   bindsym w workspace web; mode "default"
-
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+w mode "workspace"
-
 # move focused container to workspace
-bindsym $mod+Shift+b move container to workspace back_and_forth
+bindsym $mod+Shift+numbersign move container to workspace back_and_forth
 bindsym $mod+Shift+n move container to workspace next
 bindsym $mod+Shift+p move container to workspace prev
 bindsym $mod+Shift+1 move container to workspace 1

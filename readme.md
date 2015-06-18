@@ -41,6 +41,7 @@ These commands create symbolic links at the locations where the applications exp
     ### i3
     mkdir -p ~/.i3
     ln -s $DOTFILESDIR/i3/config ~/.i3/config
+    ln -s $DOTFILESDIR/i3/i3status ~/.i3/i3status
 
     ### lesskey
     lesskey $DOTFILESDIR/lesskey/lesskey
