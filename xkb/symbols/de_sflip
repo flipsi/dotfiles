@@ -15,10 +15,9 @@
 // Then change to the layout with
 //      setxkbmap de_sflip
 
-// To use this layout as the default layout for keyboards in X add the line
-//      Option "XkbLayout" "de_sflip"
-// to the keyboard section in
-//      /usr/share/X11/xorg.conf.d/10-evdev.conf 
+// To use this layout as the default layout for keyboards in X, edit
+//     /etc/default/keyboard
+// and set XKBLAYOUT to "de_sflip"
 
 // If you make changes that are not recognized, try to delete this 'cache':
 //     rm /var/lib/xkb/*.xkm
