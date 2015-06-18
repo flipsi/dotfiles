@@ -74,6 +74,17 @@ for_window [class="^.*"] border pixel
 # smart_gaps on
 
 
+
+# Colors
+#                       border   backgr   text     indicator
+client.focused          #B08200  #B08200  #000000  #FFC622
+client.focused_inactive #000000  #434343  #B08200  #434343
+client.unfocused        #000000  #434343  #B08200  #434343
+client.urgent           #FFC622  #FFC622  #000000  #FFC622
+client.background       #434343  #434343  #B08200  #FFC622
+
+
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
@@ -85,20 +96,11 @@ bar {
         separator   #FFC622
         #                   border   backgr   text
         focused_workspace   #B08200  #B08200  #000000 
-        active_workspace    #434343  #434343  #000000 
+        active_workspace    #FFC622  #434343  #FFC622 
         inactive_workspace  #434343  #434343  #B08200
         urgent_workspace    #FFC622  #FFC622  #000000
     }
 }
-
-
-
-#                       border   backgr   text     indicator
-client.focused          #B08200  #B08200  #000000  #FFC622
-client.focused_inactive #434343  #434343  #B08200  #434343
-client.unfocused        #434343  #434343  #B08200  #434343
-client.urgent           #FFC622  #FFC622  #000000  #FFC622
-client.background       #434343  #434343  #B08200  #FFC622
 
 
 
@@ -211,8 +213,8 @@ bindsym $mod+comma exec i3-input -F 'rename workspace to %s' -P 'rename workspac
 
 # switch to workspace
 bindsym $mod+numbersign workspace back_and_forth
-bindsym $mod+n workspace next
-bindsym $mod+p workspace prev
+bindsym $mod+n workspace next_on_output
+bindsym $mod+p workspace prev_on_output
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
@@ -239,8 +241,9 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-# move focused container to output
+# move to other output
 bindsym $mod+y move container to output right
+bindsym $mod+Shift+y move workspace to output right
 
 # reload the configuration file
 bindsym $mod+Shift+r reload
