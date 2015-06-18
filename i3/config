@@ -33,9 +33,6 @@ font pango:NotoSans 10
 ###############################################################################
 
 
-# hide mouse cursor
-exec unclutter
-
 # set keyboard layout
 # OBSOLETE BECAUSE OF X CONFIGURATION
 # setxkbmap de_sflip
@@ -105,25 +102,66 @@ bar {
 
 
 ###############################################################################
+###########  MOUSE  ###########################################################
+###############################################################################
+
+# hide mouse cursor
+exec unclutter
+
+# disable touchpad
+exec "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
+
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# focus when mouse moves
+focus_follows_mouse no
+
+
+
+###############################################################################
 ###########  KEYBINDINGS  #####################################################
 ###############################################################################
 
 set $mod Mod4
 
+# reload the configuration file
+bindsym $mod+Shift+r reload
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+# lock screen
+bindsym $mod+Escape exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper"
+
+# suspend
+bindsym $mod+Pause exec --no-startup-id "sudo pm-suspend; i3lock -t -i ~/.i3/wallpaper"
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+BackSpace restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Delete exit
+
+
+# toggle touchpad
+bindsym XF86TouchpadToggle   exec "~/shellscripts/xinput-toggle-enabled.sh"
+
+# set brightness
+bindsym $mod+Left   exec "~/shellscripts/brighten --dec"
+bindsym $mod+Right  exec "~/shellscripts/brighten"
+
+# set volume
+bindsym $mod+Down            exec "amixer sset Master 3%-"
+bindsym $mod+Up              exec "amixer sset Master 3%+"
+bindsym XF86AudioLowerVolume exec "amixer sset Master 3%-"
+bindsym XF86AudioRaiseVolume exec "amixer sset Master 3%+"
+
 
 # change border
 bindsym $mod+b border toggle
 
 # hide/show bar
 bindsym $mod+Shift+b bar mode toggle
-
-
-# volume
-bindsym $mod+v exec       "amixer sset Master 3%-"
-bindsym $mod+Shift+v exec "amixer sset Master 3%+"
 
 
 # kill focused window
@@ -138,7 +176,7 @@ bindsym $mod+Shift+i exec dmenu_run
 bindsym $mod+i exec --no-startup-id i3-dmenu-desktop
 
 # start a terminal
-bindsym $mod+t exec "gnome-terminal --hide-menubar --command='tmux -2'"
+bindsym $mod+o exec "gnome-terminal --hide-menubar --command='tmux -2'"
 
 
 # change focus
@@ -166,8 +204,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split orientation
-bindsym $mod+o split vertical
-bindsym $mod+Shift+o split horizontal
+# bindsym $mod+o split vertical
+# bindsym $mod+Shift+o split horizontal
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -245,15 +283,6 @@ bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+y move container to output right
 bindsym $mod+Shift+y move workspace to output right
 
-# reload the configuration file
-bindsym $mod+Shift+r reload
-
-
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-#bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Delete exit
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
