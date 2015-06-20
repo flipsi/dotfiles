@@ -15,6 +15,7 @@
 # i3-lock
 # dmenu
 # quickswitch [https://github.com/OliverUv/quickswitch-for-i3]
+# rofi [https://davedavenport.github.io/rofi/]
 
 
 ###############################################################################
@@ -44,6 +45,8 @@ mode "$reload_restart" {
     bindsym Escape mode "default"
 }
 
+# rofi options
+set $rofi_options -font 'Terminus 9' -bg '#575757' -fg '#000000' -hlbg '#B08200' -hlfg '#000000' -bg-active '#575757' -fg-active '#B08200' -hlfg-active '#000000' -hlbg-active '#B08200' -location 1 -kb-remove-word-back 'Alt+k'
 
 ###############################################################################
 ###########  LOOK  ############################################################
@@ -174,7 +177,7 @@ mode "$mode_system" {
 bindsym $mod+Left   exec "~/shellscripts/brighten --dec"
 bindsym $mod+Right  exec "~/shellscripts/brighten"
 
-# set volum
+# set volume
 bindsym $mod+Down            exec "amixer sset Master 1%-"
 bindsym $mod+Up              exec "amixer sset Master 1%+"
 bindsym XF86AudioLowerVolume exec "amixer sset Master 1%-"
@@ -198,6 +201,8 @@ bindsym $mod+Shift+o split horizontal; exec "gnome-terminal --hide-menubar --com
 bindsym $mod+Shift+d exec "dmenu_run -i -l 12 -nb '#575757' -sb '#B08200' -sf '#000000'"
 # start dmenu only with programs that have a .desktop-file
 bindsym $mod+d exec "i3-dmenu-desktop -dmenu='dmenu -i -l 12 -nb #575757 -sb #B08200 -sf #000000'"
+# start rofi (a program launcher)
+bindsym $mod+Return exec "rofi -show run $rofi_options"
 
 # kill focused container
 bindsym $mod+BackSpace kill
@@ -295,7 +300,8 @@ mode "goto" {
 }
 
 # switch to another workspace
-bindsym $mod+w exec "quickswitch --workspaces"
+bindsym $mod+w exec "rofi -show window $rofi_options"
+bindsym $mod+e exec "quickswitch --workspaces"
 bindsym $mod+numbersign workspace back_and_forth
 bindsym $mod+n workspace next_on_output
 bindsym $mod+p workspace prev_on_output
@@ -325,7 +331,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 # move container to new workspace (tmux 'break')
 bindsym $mod+Shift+n exec "quickswitch --journey -E"
 # move container to specific workspace
-bindsym $mod+e exec "quickswitch --journey"
+bindsym $mod+Shift+e exec "quickswitch --journey"
 bindsym $mod+Shift+numbersign move container to workspace back_and_forth
 
 # move container/workspace to other output
