@@ -7,11 +7,11 @@
 ###################
 
 general {
-    colors = true
-    color_good = "#FFC622" #some neon blue
+    colors         = true
+    color_good     = "#FFC622"
     color_degraded = "#FFC622"
-    color_bad = "#FF5555"
-    interval = 3
+    color_bad      = "#FF5555"
+    interval       = 3
 }
 
 ###################
@@ -39,41 +39,41 @@ order += "time"
 
 ## CPU sensor
 cpu_usage {
-    format = "CPU: %usage"
+    format = " CPU: %usage "
 }
 
 ## system load sensor
 load {
-    format = "RAM: %1min"
+    format = " RAM: %1min "
 }
 
 ## CPU temperature sensor
 cpu_temperature 0 {
-    format = "%degrees °C"
+    format = " %degrees °C "
 }
 
 ## VPN sensor
 run_watch VPN {
-    pidfile = "/var/run/vpnc/pid"
+    pidfile = " /var/run/vpnc/pid "
 }
 
 ## wlan sensor
 wireless wlan0 {
-    format_up = "WLAN: %quality at %essid IP: %ip"
-    format_down = "WWLAN: down"
+    format_up = " WLAN: %quality at %essid IP: %ip "
+    format_down = " WWLAN: down"
 }
 
 ## ethernet sensor
 ethernet eth0 {
     # if you use %speed, i3status requires root privileges
-    #format_up = "E: %ip (%speed)"
-    format_up = "E: %ip"
-    format_down = "E: down"
+    #format_up = " E: %ip (%speed)"
+    format_up = " E: %ip"
+    format_down = " E: down"
 }
 
 ## battery sensor
 battery 0 {
-    format = "%status %percentage %remaining"
+    format = " %status %percentage %remaining"
     last_full_capacity = true
 }
 
@@ -84,22 +84,24 @@ run_watch DHCP {
 
 ## time format
 time {
-    format = "%d.%m.%Y %H:%M"
+    format = " %d.%m.%Y %H:%M "
 }
 
 ## HDD sensor
 disk "/" {
-    format = "%free"
+    format = " %free "
 }
 
 ## HDD sensor
 disk "/home" {
-    format = "%free"
+    format = " %free "
 }
 
 ## audio volume sensor
 volume master {
-    format = "♪: %volume"
+    # format = " ♪: %volume"
+    # format = " ♫: %volume "
+    format = " VOLUME: %volume "
     device = "default"
     mixer = "Master"
     mixer_idx = 0
