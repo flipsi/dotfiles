@@ -48,6 +48,7 @@ mode "$reload_restart" {
 # rofi options
 set $rofi_options -font 'Terminus 9' -bg '#575757' -fg '#000000' -hlbg '#B08200' -hlfg '#000000' -bg-active '#575757' -fg-active '#B08200' -hlfg-active '#000000' -hlbg-active '#B08200' -location 1 -kb-remove-word-back 'Alt+k'
 
+
 ###############################################################################
 ###########  LOOK  ############################################################
 ###############################################################################
@@ -89,11 +90,11 @@ for_window [class="^.*"] border pixel 1
 
 # Colors
 #                       border   backgr   text     indicator
-client.focused          #B08200  #B08200  #000000  #FFC622
-client.focused_inactive #000000  #575757  #B08200  #575757
-client.unfocused        #000000  #575757  #B08200  #575757
+client.focused          #B08200  #B08200  #434343  #B08200
+client.focused_inactive #B08200  #575757  #B08200  #575757
+client.unfocused        #B08200  #575757  #B08200  #575757
 client.urgent           #E86969  #575757  #000000  #575757
-client.background       #575757  #575757  #B08200  #FFC622
+client.background       #434343  #575757  #B08200  #575757
 
 
 
@@ -108,12 +109,12 @@ bar {
     position top
     colors {
         background  #575757
-        statusline  #EEEEEE
+        statusline  #DDDDDD
         separator   #FFC622
         #                   border   backgr   text
-        focused_workspace   #B08200  #B08200  #000000 
-        active_workspace    #FFC622  #575757  #FFC622 
-        inactive_workspace  #575757  #575757  #B08200
+        focused_workspace   #FFC622  #575757  #FFC622 
+        active_workspace    #B08200  #575757  #DDDDDD 
+        inactive_workspace  #575757  #575757  #DDDDDD
         urgent_workspace    #FFC622  #FFC622  #000000
     }
 }
@@ -182,6 +183,28 @@ bindsym $mod+Down            exec "amixer sset Master 1%-"
 bindsym $mod+Up              exec "amixer sset Master 1%+"
 bindsym XF86AudioLowerVolume exec "amixer sset Master 1%-"
 bindsym XF86AudioRaiseVolume exec "amixer sset Master 1%+"
+
+
+# take a screenshot
+bindsym $mod+Print exec "gnome-screenshot"
+bindsym      Print exec "gnome-screenshot"
+
+
+
+###############################################################################
+###########  RULES FOR SPECIFIC APPS  #########################################
+###############################################################################
+
+# windows always floating/fullscreen
+for_window [class="(?i)gcolor2"]        floating enable 
+for_window [class="(?i)nemo"]           floating enable 
+for_window [title="(?i)sxiv"]           fullscreen
+
+# windows always on specific workspace
+assign [class="(?i)firefox"]            web
+assign [class="(?i)thunderbird"]        mail
+assign [class="(?i)sublime"]            edit
+assign [class="(?i)jetbrains-studio"]   dev
 
 
 
@@ -274,15 +297,6 @@ bindsym $mod+i exec "quickswitch -E"
 # rename workspace
 bindsym $mod+comma exec i3-input -F 'rename workspace to %s' -P 'rename workspace to: '
 
-# windows always floating
-for_window [class="(?i)nemo"]       floating enable 
-for_window [class="(?i)gcolor2"]    floating enable 
-
-# windows always on specific workspace
-assign [class="(?i)firefox"]        web
-assign [class="(?i)thunderbird"]    mail
-assign [class="(?i)sublime"]        edit
-
 # mark/goto windows like in vim
 bindsym $mod+m exec i3-input -F 'mark %s' -P 'Mark name: '
 bindsym $mod+Shift+m exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
@@ -317,6 +331,8 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move container to specific workspace
+bindsym $mod+Shift+n move container to workspace next_on_output
+bindsym $mod+Shift+p move container to workspace prev_on_output
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
@@ -329,7 +345,7 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # move container to new workspace (tmux 'break')
-bindsym $mod+Shift+n exec "quickswitch --journey -E"
+bindsym $mod+Shift+i exec "quickswitch --journey -E"
 # move container to specific workspace
 bindsym $mod+Shift+e exec "quickswitch --journey"
 bindsym $mod+Shift+numbersign move container to workspace back_and_forth

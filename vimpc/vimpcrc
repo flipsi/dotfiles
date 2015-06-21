@@ -19,16 +19,16 @@ set groupignorethe
 set windows library,browse,playlist
 set window playlist
 
-hi tab greenbg
-hi status greenbg
-hi progress greenfg
+hi tab yellowbg
+hi status yellowbg
+hi progress redfg
 hi song whitefg
-hi id greenfg
+hi id cyanfg
 hi dir greenfg
-hi current greenfg
-hi match yellowfg
-hi partial greenfg
-hi full greenfg
+hi current redfg
+hi match greenfg
+hi partial magentafg
+hi full magentafg
 hi error redfg
 
 
