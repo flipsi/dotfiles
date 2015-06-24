@@ -1,5 +1,5 @@
 function fish_user_key_bindings
-	bind \ei ranger
+	bind \eo ranger
 	bind \ee elinks
 	bind \e. history-token-search-backward
 	bind \e: history-token-search-forward

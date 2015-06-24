@@ -1,6 +1,24 @@
+set pages-per-row 1
+set incremental-search
 set window-title-basename true
+
+
+#set font terminus 8
+
+set default-bg "#2D2C2B"
+set default-fg "#DDDDDD"
+set statusbar-bg "#575757"
+set statusbar-fg "#DDDDDD"
+set inputbar-bg "#575757"
+set inputbar-fg "#DDDDDD"
+set recolor-darkcolor "#FFFFFF"
+set recolor-lightcolor "#2D2C2B"
+set recolor true
+
+set guioptions ''
 
 map b toggle_statusbar
 map <F11> toggle_fullscreen
 #map f toggle_fullscreen
 #map F follow
+

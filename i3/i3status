@@ -60,7 +60,7 @@ run_watch VPN {
 ## wlan sensor
 wireless wlan0 {
     format_up = " WLAN: %quality at %essid IP: %ip "
-    format_down = " WWLAN: down"
+    format_down = " WLAN: down"
 }
 
 ## ethernet sensor

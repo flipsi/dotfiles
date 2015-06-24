@@ -59,11 +59,12 @@ imap <A-n> <Esc>:tabnext<CR>
 imap <A-p> <Esc>:tabprevious<CR>
 
 " LRU tab
-map <A-l> :buffer! #<CR>
-map # :buffer! #<CR>
+"map # :buffer! #<CR>
+map <A-Space> :buffer! #<CR>
 
 " find tab
-nmap <A-w> :buffer! 
+"nmap <A-w> :buffer! 
+nmap # :buffer! 
 
 " move tab
 map <A-S-p> :tabmove -1<CR>
@@ -105,10 +106,10 @@ imap <A-b> <C-Left>
 cmap <A-f> <C-Right>
 cmap <A-b> <C-Left>
 
-" delete word
-imap <A-k> <C-W>
+" delete/kill word
+imap <A-BS> <C-W>
 imap <A-d> <C-Del>
-cmap <A-k> <C-W>
+cmap <A-BS> <C-W>
 cmap <A-d> <C-Del>
 
 

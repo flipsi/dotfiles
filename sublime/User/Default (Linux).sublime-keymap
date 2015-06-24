@@ -45,8 +45,8 @@
     ///////////
 
     // scroll up and down
-    { "keys": ["alt+space"], "command": "scroll_lines", "args": {"amount": -15} },
-    { "keys": ["alt+m"], "command": "scroll_lines", "args": {"amount": 15} },
+    { "keys": ["alt+j"], "command": "scroll_lines", "args": {"amount": -15} },
+    { "keys": ["alt+k"], "command": "scroll_lines", "args": {"amount": 15} },
     // (scroll_lines_fixed is a plugin that keeps the cursor where it is when moving the viewport)
     // { "keys": ["alt+space"], "command": "scroll_lines_fixed", "args": {"amount": -15} },
     // { "keys": ["alt+m"], "command": "scroll_lines_fixed", "args": {"amount": 15} },
@@ -103,7 +103,9 @@
     // ... # to go to keyword
     // ... : to go to line
     // ... @ to go to function or section
-    { "keys": ["alt+w"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true}},
+    // { "keys": ["alt+w"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true}},
+    { "keys": ["#"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true}, "context": [{"key": "setting.command_mode"}] },
+    { "keys": ["alt+#"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true}},
     { "keys": ["@"], "command": "show_overlay", "args": {"overlay": "goto", "text": "@"}, "context": [{"key": "setting.command_mode"}] },
     // if a mark is not set and you goto it, cursor ist lost. hit this and enter to get it back
 
@@ -133,9 +135,11 @@
     { "keys": ["alt+shift+n"], "command": "move_tab", "args": { "position": "+1" } },
 
     // switch to LRU tab
-    { "keys": ["#"], "command": "next_view_in_stack", "context": [{"key": "setting.command_mode"}] },
-    { "keys": ["alt+#"], "command": "next_view_in_stack" },
-    { "keys": ["alt+shift+#"], "command": "prev_view_in_stack" },
+    // { "keys": ["#"], "command": "next_view_in_stack", "context": [{"key": "setting.command_mode"}] },
+    // { "keys": ["alt+#"], "command": "next_view_in_stack" },
+    // { "keys": ["alt+shift+#"], "command": "prev_view_in_stack" },
+    { "keys": ["alt+space"], "command": "next_view_in_stack" },
+    { "keys": ["alt+shift+space"], "command": "prev_view_in_stack" },
 
     // split window in groups
     {"keys": ["ctrl+o", "1"], "command": "set_layout", "args": {"cols": [0.0, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1]] } },
@@ -250,7 +254,7 @@
     // { "keys": ["delete"], "command": "set_action_motion", "args": {"action": "vi_left_delete", "motion": null } },
     { "keys": ["ctrl+h"], "command": "left_delete" },
     { "keys": ["ctrl+d"], "command": "set_action_motion", "args": {"action": "vi_right_delete", "motion": null } },
-    { "keys": ["alt+k"], "command": "delete_word", "args": { "forward": false } },
+    { "keys": ["alt+backspace"], "command": "delete_word", "args": { "forward": false } },
     { "keys": ["alt+d"], "command": "delete_word", "args": { "forward": true } },
 
     // replace/substitute
