@@ -68,6 +68,10 @@ These commands create symbolic links at the locations where the applications exp
     ### tmux
     ln -s $DOTFILESDIR/tmux/tmux.conf ~/.tmux.conf
 
+    ### turses
+    mkdir ~/.turses
+    ln -s $DOTFILESDIR/turses/config ~/.turses/config
+
     ### vim
     ln -s $DOTFILESDIR/vim/vimrc ~/.vimrc
 
