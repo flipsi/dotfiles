@@ -13,7 +13,7 @@
 	"detect_slow_plugins": false,
 	"dictionary": "Packages/Dictionaries/German.dic",
 	"font_face": "Monospace",
-	"font_size": 10,
+	"font_size": 17,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":

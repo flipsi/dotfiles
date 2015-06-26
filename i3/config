@@ -46,7 +46,7 @@ mode "$reload_restart" {
 }
 
 # rofi options
-set $rofi_options -font 'Terminus 9' -bg '#575757' -fg '#000000' -hlbg '#B08200' -hlfg '#000000' -bg-active '#575757' -fg-active '#B08200' -hlfg-active '#000000' -hlbg-active '#B08200' -location 1 -kb-remove-word-back 'Alt+BackSpace'
+set $rofi_options -font 'monospace 8' -bg '#575757' -fg '#FFFFFF' -hlbg '#B08200' -hlfg '#000000' -bg-active '#575757' -fg-active '#B08200' -hlfg-active '#000000' -hlbg-active '#B08200' -location 1 -kb-remove-word-back 'Alt+BackSpace'
 
 
 ###############################################################################
@@ -66,8 +66,8 @@ exec --no-startup-id "feh --bg-scale ~/.i3/wallpaper"
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 # font pango:NotoSans 10
-font pango:Terminus 10
-# font pango:monospace 8
+# font pango:Terminus 10
+font pango:monospace 8
 # font pango:DejaVu Sans Mono 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
