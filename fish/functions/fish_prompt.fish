@@ -25,46 +25,20 @@ function fish_prompt --description 'Prompt anzeigen'
 
 	case '*'
 
-		if not set -q __fish_prompt_cwd
-			set -g __fish_prompt_cwd (set_color $fish_color_cwd)
-		end
-
 		set wd (pwd)
 
-		set color_key yellow
-		set color_value red
-		set something_different no
+		set color_user 	'8ADE33'
+		set color_host 	'8ADE33'
+		set color_wd 	'629FCF'
 
-		echo -e -n "\n "
-
-		# only show information when it differs from default
-		if test $__fish_prompt_hostname != "asterix"
-			set something_different yes
-			set_color $color_key
-			echo -n "host: "
-			set_color $color_value
-			echo -n $__fish_prompt_hostname " "
-		end
-		if test $USER != "sflip"
-			set something_different yes
-			set_color $color_key
-			echo -n "user: "
-			set_color $color_value
-			echo -n $USER " "
-		end
-		if test $wd != "/home/sflip"
-			set something_different yes
-			set_color $color_key
-			echo -n "directory: "
-			set_color $color_value
-			echo -n $wd " "
-		end
-
-		if test $something_different = "yes"
-			echo -e -n "\n\n "
-		end
-		set_color normal
-		echo -e -n -s '> '
+		set_color --bold $color_user
+		echo -n $USER"@"
+		set_color --bold $color_host
+		echo -n $__fish_prompt_hostname":"
+		set_color --bold $color_wd
+		echo -n $wd
+		set_color --bold normal
+		echo -e -n -s '\n> '
 
 	end
 end
