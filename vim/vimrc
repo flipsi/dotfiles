@@ -1,119 +1,63 @@
-" This is a really bad vimrc. I should take the time to improve it...
+" Author: Philipp Moers <soziflip gmail com>
+" A simple vimrc. With no dependencies
 
+
+" SETTINGS
 
 set nocompatible
 
-
-" use spaces not tabs
-:set expandtab
-" ... and use 4 of them
-:set tabstop=4
-:set shiftwidth=4
-
-" smart indent
-set autoindent
-set smartindent
-imap <C-Return> <CR><CR><C-o>k<Tab>
-
-
 " show line numbers
 :set number
+
+" statusline
+set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 
 " search preferences
 :set incsearch
 :set ignorecase
 :set smartcase
 
-" statusline
-set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
+" use 4 spaces instead of tabs
+:set expandtab
+:set tabstop=4
+:set shiftwidth=4
 
+" indent after open braces etc
+set autoindent
+set smartindent
 
-
-"-----------------------------------------------------------------------
-
-" hack: let vim realize the alt key in bash
-"let c='a'
-"while c <= 'z'
-"  exec "set <m-".c.">=\e".c
-"  exec "imap \e".c." <m-".c.">"
-"  let c = nr2char(1+char2nr(c))
-"endw
-"set timeout ttimeoutlen=50
-
-
-"-----------------------------------------------------------------------
 
 
 " KEYBINDINGS
-" ===========
 
-
-" Q to quit vim quickly
-" vim will prompt if the file was changed but not saved.
 " ZQ to quit anyway 
 " ZZ to save and quit
-map Q :quit<CR>
+" Q to quit vim quickly
+" vim will prompt if the file was changed but not saved.
+nnoremap Q :quit<CR>
 
-
-" NEO arrow keys when in QWERTZ (now i use xmodmap)
-"noremap € <Up>
-"inoremap € <Up>
-"cnoremap € <Up>
-"noremap ð <Down>
-"inoremap ð <Down>
-"cnoremap ð <Down>
-"noremap ſ <Left>
-"inoremap ſ <Left>
-"cnoremap ſ <Left>
-"noremap đ <Right>
-"inoremap đ <Right>
-"cnoremap đ <Right>
-
-
-" scroll (does not work)
-map <c-Space> <C-D> 
-map <c-m> <C-U> 
-
-" smooth scroll
-"noremap <silent> <c-u> :call smooth_scroll#up(15, 18, 2)<CR>
-"noremap <silent> <c-d> :call smooth_scroll#down(15, 18, 2)<CR>
-
-" escape insert mode 
-inoremap <m-i> <Esc>
-"inoremap » <Esc>
-cnoremap <m-i> <C-e><C-u><Esc>
-"cnoremap » <C-e><C-u><Esc>
-
-" move cursor
-noremap <m-h> <Left>
-noremap <m-l> <Right>
-nnoremap <m-b> b
-nnoremap <m-w> w
-inoremap <m-b> <Esc>bi
-inoremap <m-w> <Esc>wi
+" scroll (alt key)
+noremap <Esc>j <C-D> 
+noremap <Esc>k <C-U> 
 
 " search 
-nnoremap - /
-nnoremap _ ?
 nnoremap ö /
 nnoremap Ö ?
 
 " goto mark 
-nnoremap ä ' 
+nnoremap ä `
 
 " movement to eol (l instead of $)
-map cl c$
-map yl y$
-map dl d$
+nnoremap cl c$
+nnoremap yl y$
+nnoremap dl d$
+nnoremap vl v$
 
 " add new line above or below
-"noremap <m-o> :call append(line('.')-1, '')<CR>
-noremap <m-o> <Esc>o<Esc>k
-"noremap <m-S-o> :call append(line('.')+1, '')<CR>
-"noremap <m-O> <Esc>ifoobar
-
+noremap <Esc>o <Esc>o<Esc>k
+noremap <Esc>O <Esc>O<Esc>j
 
 " undo and redo
-noremap <m-u> :undo<CR>
-"noremap <m-s-U> :redo<CR>
+noremap <Esc>u :undo<CR>
+noremap <Esc>U :redo<CR>
 
