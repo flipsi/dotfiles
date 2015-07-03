@@ -1,6 +1,6 @@
 # Author: Philipp Moers <soziflip gmail com>
 
-# i3 config file (v4)
+# i3 config file
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
@@ -45,8 +45,19 @@ mode "$reload_restart" {
     bindsym Escape mode "default"
 }
 
+
+# path to my shellscripts
+set $SHELLSCRIPT_PATH /home/sflip/shellscripts
+
 # rofi options
-set $rofi_options -font 'monospace 8' -bg '#575757' -fg '#FFFFFF' -hlbg '#B08200' -hlfg '#000000' -bg-active '#575757' -fg-active '#B08200' -hlfg-active '#000000' -hlbg-active '#B08200' -location 1 -kb-remove-word-back 'Alt+BackSpace'
+set $ROFI_OPTIONS -font 'monospace 8' -bg '#575757' -fg '#FFFFFF' -hlbg '#B08200' -hlfg '#000000' -bg-active '#575757' -fg-active '#B08200' -hlfg-active '#000000' -hlbg-active '#B08200' -location 1 -kb-remove-word-back 'Alt+BackSpace'
+
+
+# start the gnome network manager, because it automatically connects to eduroam etc.
+# and kill it after a few seconds when it is not needed anymore
+exec --no-startup-id "timelimit -t 4 -T 5 nm-applet"
+
+
 
 
 ###############################################################################
@@ -137,7 +148,7 @@ exec unclutter
 exec "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
 
 # toggle touchpad
-bindsym XF86TouchpadToggle  exec "~/shellscripts/xinput-toggle-enabled.sh"
+bindsym XF86TouchpadToggle  exec "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
 
 
 # focus when mouse moves
@@ -176,13 +187,13 @@ mode "$mode_system" {
 
 
 # set display brightness
-bindsym XF86KbdBrightnessDown exec "~/shellscripts/kbdBrightnessDown.sh"
-bindsym XF86KbdBrightnessUp   exec "~/shellscripts/kbdBrightnessUp.sh"
+bindsym XF86KbdBrightnessDown exec "$SHELLSCRIPT_PATH/keyboard-brightness down"
+bindsym XF86KbdBrightnessUp   exec "$SHELLSCRIPT_PATH/keyboard-brightness up"
 
 
 # set display brightness
-bindsym $mod+Left   exec "~/shellscripts/brighten --dec"
-bindsym $mod+Right  exec "~/shellscripts/brighten"
+bindsym $mod+Left   exec "$SHELLSCRIPT_PATH/brighten --dec"
+bindsym $mod+Right  exec "$SHELLSCRIPT_PATH/brighten"
 
 # set volume
 bindsym $mod+Down            exec "amixer sset Master 1%-"
@@ -230,7 +241,7 @@ bindsym $mod+o       exec "gnome-terminal --hide-menubar --command='tmux -2'"
 # start dmenu only with programs that have a .desktop-file
 bindsym $mod+Return exec "i3-dmenu-desktop -dmenu='dmenu -i -l 12 -nb #575757 -sb #B08200 -sf #000000'"
 # start rofi (a program launcher)
-bindsym $mod+Shift+Return exec "rofi -show run $rofi_options"
+bindsym $mod+Shift+Return exec "rofi -show run $ROFI_OPTIONS"
 
 # kill focused container
 bindsym $mod+BackSpace kill
@@ -321,7 +332,7 @@ mode "goto" {
 bindsym $mod+g [urgent=latest] focus
 bindsym $mod+space workspace back_and_forth
 # bindsym $mod+numbersign workspace back_and_forth
-bindsym $mod+numbersign exec "rofi -show window $rofi_options"
+bindsym $mod+numbersign exec "rofi -show window $ROFI_OPTIONS"
 bindsym $mod+w exec "quickswitch --workspaces"
 bindsym $mod+n workspace next_on_output
 bindsym $mod+p workspace prev_on_output
