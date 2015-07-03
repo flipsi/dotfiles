@@ -198,8 +198,15 @@ bindsym $mod+Right  exec "$SHELLSCRIPT_PATH/brighten"
 # set volume
 bindsym $mod+Down            exec "amixer sset Master 1%-"
 bindsym $mod+Up              exec "amixer sset Master 1%+"
-bindsym XF86AudioLowerVolume exec "amixer sset Master 1%-"
-bindsym XF86AudioRaiseVolume exec "amixer sset Master 1%+"
+bindsym $mod+minus           exec "amixer sset Master 1%-"
+bindsym $mod+plus            exec "amixer sset Master 1%+"
+
+# control music player daemon (mpd)
+# bindsym XF86AudioLowerVolume exec "mpc volume +1"
+# bindsym XF86AudioRaiseVolume exec "mpc volume -1"
+# bindsym XF86AudioPlay        exec "mpc toggle"
+# bindsym XF86AudioNext        exec "mpc next"
+# bindsym XF86AudioPrev        exec "mpc prev"
 
 
 # take a screenshot

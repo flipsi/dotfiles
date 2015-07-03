@@ -11,7 +11,7 @@ general {
     color_good     = "#FFC622"
     color_degraded = "#B08200"
     color_bad      = "#FF5555"
-    interval       = 3
+    interval       = 2
 }
 
 ###################

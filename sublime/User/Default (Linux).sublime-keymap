@@ -92,6 +92,7 @@
     // FileBrowser
     { "keys": ["alt+i"], "command": "dired", "args": { "immediate": true, "single_pane": true, "other_group": "", "project": true } },
     { "keys": ["alt+shift+i"], "command": "dired", "args": { "immediate": false, "single_pane": true, "other_group": "", "project": true } },
+    { "keys": ["alt+i"], "command": "dired_jump", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
     { "keys": ["a", "d"], "command": "dired_create", "args": { "which": "directory" }, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
     { "keys": ["a", "f"], "command": "dired_create", "args": { "which": "file" }, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
     { "keys": ["enter"], "command": "dired_select", "args": {"other_group": true, "and_close": true}, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
