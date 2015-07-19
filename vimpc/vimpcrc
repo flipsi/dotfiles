@@ -16,7 +16,7 @@ connect 192.168.2.115 6600
 set ignorecase
 set noshowlists
 set groupignorethe
-set windows library,browse,playlist
+set windows library,playlist
 set window playlist
 
 hi tab yellowbg
@@ -36,6 +36,12 @@ hi error redfg
 
 " quit vimpc
 map Q ZQ
+
+
+" scroll
+map <a-j> <C-d> 
+map <a-k> <C-u> 
+
 
 " Playback controls
 map <Space> :pause<CR>

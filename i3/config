@@ -55,7 +55,7 @@ set $ROFI_OPTIONS -font 'monospace 8' -bg '#575757' -fg '#FFFFFF' -hlbg '#B08200
 
 # start the gnome network manager, because it automatically connects to eduroam etc.
 # and kill it after a few seconds when it is not needed anymore
-exec --no-startup-id "timelimit -t 4 -T 5 nm-applet"
+exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
 
 
 
@@ -222,13 +222,17 @@ bindsym      Print exec "gnome-screenshot"
 # windows always floating/fullscreen
 for_window [class="(?i)gcolor2"]        floating enable 
 for_window [class="(?i)nemo"]           floating enable 
-for_window [title="(?i)sxiv"]           fullscreen
+for_window [class="(?i)file-roller"]    floating enable 
+for_window [class="(?i)avd"]            floating enable 
+for_window [class="(?i)pokerstars"]     floating enable 
+for_window [class="(?i)sxiv"]           fullscreen
+for_window [class="(?i)mplayer"]        fullscreen
 
 # windows always on specific workspace
-assign [class="(?i)firefox"]            web
-assign [class="(?i)thunderbird"]        mail
-assign [class="(?i)sublime"]            edit
-assign [class="(?i)jetbrains-studio"]   dev
+# assign [class="(?i)firefox"]            web
+# assign [class="(?i)thunderbird"]        mail
+# assign [class="(?i)sublime"]            edit
+# assign [class="(?i)jetbrains-studio"]   dev
 
 
 
@@ -267,19 +271,20 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # focus the parent/child container
-bindsym $mod+u focus parent
-bindsym $mod+Shift+u focus child
+bindsym $mod+y focus parent
+bindsym $mod+Shift+y focus child
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+Shift+o layout toggle
+bindsym $mod+s layout toggle
+# bindsym $mod+s layout stacked
 
 # toggle tiling/floating
-bindsym $mod+Shift+a floating toggle
+bindsym $mod+a floating toggle
 # change focus between tiling/floating windows
-bindsym $mod+a focus mode_toggle
+bindsym $mod+e focus mode_toggle
 
 # send container to background
 bindsym $mod+Shift+z move scratchpad
@@ -376,8 +381,8 @@ bindsym $mod+Shift+numbersign move container to workspace back_and_forth
 bindsym $mod+Shift+space move container to workspace back_and_forth
 
 # move container/workspace to other output
-bindsym $mod+y       move container to output right; workspace back_and_forth
-bindsym $mod+Shift+y move workspace to output right
+bindsym $mod+u       move container to output down; workspace back_and_forth
+bindsym $mod+Shift+u move workspace to output down
 
 
 

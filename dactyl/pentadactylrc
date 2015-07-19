@@ -60,7 +60,8 @@ imap <A-p> <Esc>:tabprevious<CR>
 
 " LRU tab
 "map # :buffer! #<CR>
-map <A-Space> :buffer! #<CR>
+nmap <A-Space> :buffer! #<CR>
+imap <A-Space> <Esc>:buffer! #<CR>
 
 " find tab
 "nmap <A-w> :buffer! 

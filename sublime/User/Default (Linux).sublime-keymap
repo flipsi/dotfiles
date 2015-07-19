@@ -70,6 +70,9 @@
     // line numbers
     { "keys": ["ctrl+g", "l"], "command": "toggle_setting", "args": {"setting": "line_numbers"} },
 
+    // relative line numbers
+    {"keys": ["ctrl+g", "L"], "command": "toggle_setting", "args": {"setting": "vintage_lines.force_mode"}},
+
     // word wrap
     { "keys": ["ctrl+g", "w"], "command": "toggle_setting", "args": {"setting": "word_wrap"} },
 

@@ -9,7 +9,11 @@
 	default = simple
 
 [diff]
-    tool = sublimerge
+    tool = vimdiff
+    guitool = sublimerge
+
+[difftool "vimdiff"]
+    prompt = false
 
 [difftool "sublimerge"]
     cmd = subl -n -w \"$REMOTE\" \"$LOCAL\" --command \"sublimerge_diff_views {\\\"left_read_only\\\": true, \\\"right_read_only\\\": true}\"
