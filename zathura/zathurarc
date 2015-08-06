@@ -18,8 +18,8 @@ set recolor-lightcolor "#383736"
 
 set guioptions ''
 
-# map d 
-# map u 
+map d navigate next
+map u navigate previous
 map c set recolor
 map b toggle_statusbar
 map <F11> toggle_fullscreen
