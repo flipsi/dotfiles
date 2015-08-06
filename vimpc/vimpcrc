@@ -43,8 +43,8 @@ map Q ZQ
 
 
 " scroll
-"map <a-j> <C-d> 
-"map <a-k> <C-u> 
+map <a-j> <C-d>
+map <a-k> <C-u>
 
 
 " Playback controls
