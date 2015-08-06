@@ -23,6 +23,12 @@ set editor='subl --wait'
 set defsearch=duckduckgo
 "set defsearch=google
 
+" duckduckgo advanced search
+" \ to go to first result immediately
+map \\ :tabopen \ 
+" ! to use other search engine (like 'ebay' or 'osm') 
+map ! :tabopen !
+
 " completions
 set complete=search,location,file,suggestion
 
@@ -82,6 +88,7 @@ nmap wh :tab helpall<CR>
 nmap wi :history<CR>
 nmap wj :jumps<CR>
 nmap wp :tabopen about:preferences<CR>
+nmap ww :dialog passwords<CR>
 
 " zoom everything
 map + ZI

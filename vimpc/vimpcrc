@@ -7,7 +7,11 @@
 
 """" Server """"
 
-connect 192.168.2.115 6600
+" ...better set $MPD_HOST
+"connect 192.168.2.115 6600
+"connect localhost 6600
+"connect asterix 6600
+
 
 
 
@@ -39,8 +43,8 @@ map Q ZQ
 
 
 " scroll
-map <a-j> <C-d> 
-map <a-k> <C-u> 
+"map <a-j> <C-d> 
+"map <a-k> <C-u> 
 
 
 " Playback controls

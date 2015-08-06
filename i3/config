@@ -25,6 +25,7 @@
 
 # set second output (monitor) with a shell command like this
 # exec "xrandr --output HDMI2 --auto --right-of eDP1"
+exec "xrandr --output HDMI2 --auto --below eDP1"
 
 # set keyboard layout with a shell command like this
 # OBSOLETE because of X configuration
@@ -116,8 +117,11 @@ client.background       #434343  #575757  #B08200  #575757
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command i3status --config ~/.i3/i3status
-    position top
+    # status_command      i3status --config ~/.i3/i3status
+    # status_command      i3blocks -c ~/.i3/i3blocks
+    status_command      python3 ~/.i3/i3pystatus
+    position            top
+    workspace_buttons   yes
     colors {
         background  #575757
         statusline  #DDDDDD
@@ -186,7 +190,7 @@ mode "$mode_system" {
 }
 
 
-# set display brightness
+# set keyboard brightness
 bindsym XF86KbdBrightnessDown exec "$SHELLSCRIPT_PATH/keyboard-brightness down"
 bindsym XF86KbdBrightnessUp   exec "$SHELLSCRIPT_PATH/keyboard-brightness up"
 
@@ -194,6 +198,10 @@ bindsym XF86KbdBrightnessUp   exec "$SHELLSCRIPT_PATH/keyboard-brightness up"
 # set display brightness
 bindsym $mod+Left   exec "$SHELLSCRIPT_PATH/brighten --dec"
 bindsym $mod+Right  exec "$SHELLSCRIPT_PATH/brighten"
+
+
+# change audio output device
+bindsym $mod+v exec "$SHELLSCRIPT_PATH/switch-audio-output"
 
 # set volume
 bindsym $mod+Down            exec "amixer sset Master 1%-"
@@ -223,8 +231,10 @@ bindsym      Print exec "gnome-screenshot"
 for_window [class="(?i)gcolor2"]        floating enable 
 for_window [class="(?i)nemo"]           floating enable 
 for_window [class="(?i)file-roller"]    floating enable 
+for_window [class="(?i)pavucontrol"]    floating enable 
 for_window [class="(?i)avd"]            floating enable 
 for_window [class="(?i)pokerstars"]     floating enable 
+for_window [title="Print"]     floating enable 
 for_window [class="(?i)sxiv"]           fullscreen
 for_window [class="(?i)mplayer"]        fullscreen
 
@@ -242,6 +252,8 @@ for_window [class="(?i)mplayer"]        fullscreen
 
 # split vertically by default
 default_orientation vertical
+# new workspaces have this layout
+workspace_layout stacking
 
 
 # start a terminal

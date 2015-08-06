@@ -1,0 +1,10 @@
+aptitude install python3
+aptitude install python3-dev
+aptitude install libiw-dev
+aptitude install python3-pip
+pip install colour
+pip install basiciw
+pip install netifaces
+pip install i3pystatus
+
+

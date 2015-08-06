@@ -1,0 +1,147 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+from i3pystatus import Status
+
+
+
+status = Status(standalone=True)
+
+# Displays clock like this:
+# Tue 30 Jul 11:59:46 PM KW31
+#                          ^-- calendar week
+status.register("clock",
+    # format = " %a %-d %b %X KW%V",)
+    format = " %a %d.%m.%Y %H:%M:%S ",)
+
+# Shows the average load of the last minute and the last 5 minutes
+# (the default value for format is used)
+# status.register("load")
+
+
+
+# The battery monitor has many formatting options, see README for details
+
+# This would look like this, when discharging (or charging)
+# ↓14.22W 56.15% [77.81%] 2h:41m
+# And like this if full:
+# =14.22W 100.0% [91.21%]
+#
+# This would also display a desktop notification (via D-Bus) if the percentage
+# goes below 5 percent while discharging. The block will also color RED.
+# If you don't have a desktop notification demon yet, take a look at dunst:
+#   http://www.knopwob.org/dunst/
+status.register("battery",
+    format = " {status} {consumption:.1f}W {percentage:.2f}% [{percentage_design:.2f}%] {remaining:%E%hh:%Mm} ",
+    # format = " {bar} ",
+    alert = True,
+    alert_percentage = 5,
+    status = {
+        "DIS": "DISCHARGING",
+        "CHR": "CHARGING",
+        "FULL": "FULL",
+    },
+    on_leftclick = "gnome-power-statistics",
+    color = "#DDDDDD",
+    # full_color = "#AABF9B",
+    full_color = "#DDDDDD",
+    charging_color = "#AABF9B",
+    critical_color = "#F2935C",
+    )
+
+
+# Displays whether a DHCP client is running
+# status.register("runwatch",
+#     name = "DHCP",
+#     path = "/var/run/dhclient*.pid",)
+
+# Shows the address and up/down state of eth0. If it is up the address is shown in
+# green (the default value of color_up) and the CIDR-address is shown
+# (i.e. 10.10.10.42/24).
+# If it's down just the interface name (eth0) will be displayed in red
+# (defaults of format_down and color_down)
+#
+# Note: the network module requires PyPI package netifaces
+# status.register("network",
+#     interface = "eth0",
+#     format_up = "{v4cidr}",)
+
+# Note: requires both netifaces and basiciw (for essid and quality)
+status.register("network",
+    interface = "wlan0",
+    # hints = { "markup" : "pango" },
+    dynamic_color = False,
+    # format_up = " <span color=\"#199C25\">{essid}</span> {quality:03.0f}% ",
+    format_up = " {essid} {v4} {quality:02.0f}% ",
+    format_down = " WLAN down ",
+    # color_up = "#AABF9B",
+    color_up = "#DDDDDD",
+    color_down = "#F2935C",
+    upper_limit = 800.0,  )
+
+# Shows disk usage of /
+# Format:
+# 42/128G [86G]
+# status.register("disk",
+#     path = "/",
+#     format = "{used}/{total}G [{avail}G]",)
+
+
+# Shows your CPU temperature, if you have a Intel CPU
+status.register("temp",
+    format = " {temp:.0f}°C ",
+    )
+
+# Shows CPU usage
+status.register("cpu_usage",
+    format = " CPU: {usage}% ",
+    hints = { "separator" : False, "separator_block_width": 0} ,
+    )
+
+
+# some random jokes and shit
+# status.register("shell",
+#     command = "fortune",
+#     interval = 20,
+#     )
+
+
+# wheather
+# status.register("weather",
+#     format = " TEMP: {current_temp} ",
+#     location_code = "GMXX1002:1:GM",
+#     )
+
+
+# Shows pulseaudio default sink volume
+#
+# Note: requires libpulseaudio from PyPI
+status.register("pulseaudio",
+    format = " VOLUME: {volume} ",
+    on_leftclick     = "pavucontrol",
+    on_upscroll     = "amixer sset Master 1%+",
+    on_downscroll   = "amixer sset Master 1%-",
+    )
+
+# Shows mpd status
+# Format:
+# Cloud connected▶Reroute to Remain
+# status.register("mpd",
+#     format = " {status} {artist} - {title} ",
+#     status = {
+#         "pause": "▷",
+#         "play": "▶",
+#         "stop": "◾",
+#     },
+#     on_leftclick = "ario"
+#     ,)
+
+#  todo: fixe hard-coded host
+# status.register("shell",
+#     command = "mpc --host=192.168.2.115 | head -n 1",
+#     hints = { "separator" : False, "separator_block_width": 0} ,
+#     interval = 5,
+#     )
+
+
+status.run()
