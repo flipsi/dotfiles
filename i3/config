@@ -25,11 +25,19 @@
 
 # set second output (monitor) with a shell command like this
 # exec "xrandr --output HDMI2 --auto --right-of eDP1"
-exec "xrandr --output HDMI2 --auto --below eDP1"
+# exec "xrandr --output HDMI2 --auto --below eDP1"
 
 # set keyboard layout with a shell command like this
 # OBSOLETE because of X configuration
 # exec "setxkbmap de_sflip"
+
+# start cinnamon shit for gtk button design etc.
+exec --no-startup-id "cinnamon-settings-daemon"
+
+# be prompted for ssh passphrase only one time at login
+# ssh-agent seems to be invoked by my login manager or something
+# (instead of gnome keyring)
+exec --no-startup-id "ssh-add"
 
 # modifier key: windows/super
 set $mod Mod4
@@ -64,9 +72,6 @@ exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
 ###############################################################################
 ###########  LOOK  ############################################################
 ###############################################################################
-
-# start cinnamon shit for gtk button design etc.
-exec --no-startup-id "cinnamon-settings-daemon"
 
 # set wallpaper
 # NOTE:
