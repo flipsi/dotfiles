@@ -66,9 +66,19 @@ status.register("battery",
 #     interface = "eth0",
 #     format_up = "{v4cidr}",)
 
+
+# find out wlan interface name
+from netifaces import interfaces
+ifaces = interfaces()
+try:
+    i = ifaces.index('wlan0')
+except ValueError:
+    i = ifaces.index('wlp7s0')
+wlan_interface = ifaces[i]
+
 # Note: requires both netifaces and basiciw (for essid and quality)
 status.register("network",
-    interface = "wlan0",
+    interface = wlan_interface,
     # hints = { "markup" : "pango" },
     dynamic_color = False,
     # format_up = " <span color=\"#199C25\">{essid}</span> {quality:03.0f}% ",
@@ -77,7 +87,8 @@ status.register("network",
     # color_up = "#AABF9B",
     color_up = "#DDDDDD",
     color_down = "#F2935C",
-    upper_limit = 800.0,  )
+    upper_limit = 800.0,
+    )
 
 # Shows disk usage of /
 # Format:
