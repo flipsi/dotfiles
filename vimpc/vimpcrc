@@ -43,8 +43,8 @@ map Q ZQ
 
 
 " scroll
-map <a-j> <C-d>
-map <a-k> <C-u>
+map <A-j> <C-d>
+map <A-k> <C-u>
 
 
 " Playback controls
@@ -60,8 +60,8 @@ map ö /
 map r %
 
 " goto next or previous window
-map <a-n> gt
-map <a-p> gT
+map <A-n> gt
+map <A-p> gT
 
 " goto window
 map wl :library<CR>
