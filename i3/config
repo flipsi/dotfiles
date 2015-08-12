@@ -262,8 +262,8 @@ workspace_layout stacking
 
 
 # start a terminal
-# bindsym $mod+o       exec "gnome-terminal --hide-menubar --command='tmux -2'"
 bindsym $mod+o       exec "xfce4-terminal --command='tmux -2'"
+bindsym $mod+Shift+o       exec "gnome-terminal --hide-menubar --command='tmux -2'"
 
 # start dmenu (a program launcher)
 # bindsym $mod+Shift+d exec "dmenu_run -i -l 12 -nb '#575757' -sb '#B08200' -sf '#000000'"
