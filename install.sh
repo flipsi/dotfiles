@@ -13,6 +13,7 @@ Create symbolic links to these files where applications want them.
 Usage: install.sh [OPTIONS] TARGET
 
     OPTIONS:
+    -h | --help             print this help message
     -i | --interactive      if file(s) exist(s), ask what to do
     -f | --force            if file(s) exist(s), overwrite it/them
 
@@ -172,10 +173,11 @@ fi
 # get arguments
 INTERACTIVE=false
 FORCE=false
-TEMP=`getopt -o if --long interactive,force -n 'test.sh' -- "$@"`
+TEMP=`getopt -o hif --long help,interactive,force -n 'test.sh' -- "$@"`
 eval set -- "$TEMP"
 while true ; do
     case "$1" in
+        -h|--help) print_help_msg; exit 0 ;;
         -i|--interactive) INTERACTIVE=true; shift ;;
         -f|--force) FORCE=true ; shift ;;
         --) shift ; break ;;
