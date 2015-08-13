@@ -6,96 +6,52 @@ These are some configuration files ("dotfiles", "rc files", ...).
 I use git to version control and github to sync them. Feel free to have a look!
 
 
+## Usage
 
-## File Locations
+First clone this project via
 
-There is a directory for each application. The directory structure does not necessarily have to represent the structure of the original files. 
+    git clone https://github.com/sflip/dotfiles
 
-These commands create symbolic links at the locations where the applications expect their files (if you cd'ed  into the dotfiles directory):
+Then change into the cloned directory (this is important for the script to work!)
 
-    ### absolute path to this directory. adjust this!
-    DOTFILESDIR='/home/sflip/dotfiles'
+    cd ./dotfiles
 
-    ### cmus
-    mkdir -p ~/.cmus
-    ln -s $DOTFILESDIR/cmus/rc ~/.mpdconf
+Finally, install my configuration with the installation script
 
-    ### dactyl
-    ln -s $DOTFILESDIR/dactyl/pentadactyl ~/.pentadactyl
-    ln -s $DOTFILESDIR/dactyl/pentadactylrc ~/.pentadactylrc
+    ./install.sh [OPTIONS] TARGET
 
-    ### elinks
-    mkdir -p ~/.elinks
-    ln -s $DOTFILESDIR/elinks/elinks.conf ~/.elinks/elinks.conf
+where `TARGET` can either be an item from the targets listed below, or `all` to install every target.
 
-    ### fish
-    mkdir -p ~/.config
-    ln -s $DOTFILESDIR/fish ~/.config/fish
+### Example
 
-    ### ghci
-    ln -s $DOTFILESDIR/ghci/ghci ~/.ghci
+    ./install.sh -i vim
 
-    ### git
-    ln -s $DOTFILESDIR/git/gitconfig ~/.gitconfig
 
-    ### i3
-    mkdir -p ~/.i3
-    ln -s $DOTFILESDIR/i3/config ~/.i3/config
-    ln -s $DOTFILESDIR/i3/i3status ~/.i3/i3status
+## Targets
 
-    ### lesskey
-    lesskey $DOTFILESDIR/lesskey/lesskey
-
-    ### luakit
-    ln -s $DOTFILESDIR/luakit ~/.config/
-
-    ### mpd
-    ln -s $DOTFILESDIR/mpd/mpdconf ~/.mpdconf
-
-    ### muttator
-    ln -s $DOTFILESDIR/muttator/muttatorrc ~/.muttatorrc
-
-    ### ranger
-    mkdir -p ~/.config/ranger
-    ln -s $DOTFILESDIR/ranger/* ~/.config/ranger/
-    chmod u+x ~/.config/ranger.scope.sh
-
-    ### sublime text
-    mkdir -p ~/.config/sublime-text-3/Packages
-    ln -s $DOTFILESDIR/sublime/User ~/.config/sublime-text-3/Packages/User
-    ln -s $DOTFILESDIR/sublime/jsbeautifyrc ~/.jsbeautifyrc
-
-    ### tmux
-    ln -s $DOTFILESDIR/tmux/tmux.conf ~/.tmux.conf
-
-    ### turses
-    mkdir ~/.turses
-    ln -s $DOTFILESDIR/turses/config ~/.turses/config
-
-    ### vim
-    ln -s $DOTFILESDIR/vim/vimrc ~/.vimrc
-
-    ### vimpc (mpd client)
-    ln -s $DOTFILESDIR/vimpc/vimpcrc ~/.vimpcrc
-
-    ### vimperator
-    ln -s $DOTFILESDIR/vimperator/vimperatorrc ~/.vimperatorrc
-
-    ### vimus (mpd client)
-    ln -s $DOTFILESDIR/vimus/vimusrc ~/.vimusrc
-
-    ### vlc
-    mkdir ~/.config
-    ln -s $DOTFILESDIR/vlc ~/.config/vlc
-
-    ### X keyboard layout
-    ln -s $DOTFILESDIR/xkb/de_sflip /usr/share/X11/xkb/symbols/de_sflip
-    setxkbmap de_sflip
-
-    ### zathura
-    mkdir ~/.config/zathura
-    ln -s $DOTFILESDIR/zathura/zathurarc ~/.config/zathura/zathurarc
-
+* `cmus` music player for the terminal
+* `dactyl` vim-addons for mozilla applications (currently only pentadactyl for firefox)
+* `elinks` web browser for the terminal
+* `fish` great interactive shell
+* `ghci` repl for the glorious haskell compiler
+* `git` global git configuration
+* `i3` tiling window manager
+* `lesskey` keybindings and more for less
+* `luakit` lightweight web browser
+* `mpd` music player daemon
+* `muttator` vim-addon for thunderbird
+* `pentadactyl` vim-addon for firefox
+* `ranger` file manager for the terminal
+* `sublime-text-3` the text editor of my choice
+* `tmux` a must have for terminal junkies
+* `turses` twitter client for the terminal
+* `vim` the best reason not to use emacs
+* `vimpc` mpd client for the terminal
+* `vimperator` vim-addon for firefox
+* `vimus` mpd client for the terminal
+* `vlc` great media player
+* `xkb` keyboard layout for X
+* `zathura` pdf viewer
 
 ## Contact
 
