@@ -101,7 +101,7 @@ function create_link_for_target() {
             exit 0 ;;
 
         turses)
-            mkdir $HOME/.turses
+            mkdir -p $HOME/.turses
             create_link $PWD/turses/config $HOME/.turses/config
             exit 0 ;;
 
@@ -122,7 +122,7 @@ function create_link_for_target() {
             exit 0 ;;
 
         vlc)
-            mkdir $HOME/.config
+            mkdir -p $HOME/.config
             create_link $PWD/vlc $HOME/.config/vlc
             exit 0 ;;
 
@@ -132,7 +132,7 @@ function create_link_for_target() {
             exit 0 ;;
 
         zathura)
-            mkdir $HOME/.config/zathura
+            mkdir -p $HOME/.config/zathura
             create_link $PWD/zathura/zathurarc $HOME/.config/zathura/zathurarc
             exit 0 ;;
 
