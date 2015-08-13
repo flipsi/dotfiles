@@ -206,14 +206,10 @@ elif [[ $# -gt 1 ]]; then
     echo "Please specify exactly one target! It can be 'all'."
     exit 1
 else
-    if [[ $1 != all ]]; then
-        create_link_for_target $1
-    elif [[ $1 != dactyl ]]; then
+    if [[ $1 = dactyl ]]; then
         create_link_for_target pentadactyl
-    else
+    elif [[ $1 = all ]]; then
         create_link_for_target cmus
-        create_link_for_target mpd
-        create_link_for_target dactyl
         create_link_for_target elinks
         create_link_for_target fish
         create_link_for_target ghci
@@ -226,6 +222,7 @@ else
         create_link_for_target pentadactyl
         create_link_for_target ranger
         create_link_for_target sublime-text-3
+        create_link_for_target telegram-cli
         create_link_for_target tmux
         create_link_for_target turses
         create_link_for_target vim
@@ -234,7 +231,10 @@ else
         create_link_for_target vimus
         create_link_for_target vlc
         create_link_for_target xkb
+        create_link_for_target xmonad
         create_link_for_target zathura
+    else
+        create_link_for_target $1
     fi
     exit 0
 fi
