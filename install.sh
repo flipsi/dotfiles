@@ -18,9 +18,9 @@ Usage: install.sh [OPTIONS] TARGET
     -f | --force            if file(s) exist(s), overwrite it/them
 
     TARGET := { all | cmus | dactyl | elinks | fish | ghci | git | i3 | 
-                lesskey | luakit | mpd | mutt | muttator | pentadactyl | 
-                ranger | sublime-text-3 | telegram-cli | tmux | turses | vim | 
-                vimpc | vimperator | vimus | vlc | xkb | xmonad | zathura }
+                lesskey | luakit | mpd | muttator | pentadactyl | ranger | 
+                sublime-text-3 | telegram-cli | tmux | turses | vim | vimpc | 
+                vimperator | vimus | vlc | xkb | xmonad | zathura }
 EOF
 }
 
@@ -32,11 +32,6 @@ function create_link_for_target() {
         cmus)
             mkdir -p $HOME/.cmus
             create_link $PWD/cmus/rc $HOME/.cmus/rc
-            exit 0 ;;
-
-        dactyl)
-            create_link $PWD/dactyl/pentadactyl $HOME/.pentadactyl
-            create_link $PWD/dactyl/pentadactylrc $HOME/.pentadactylrc
             exit 0 ;;
 
         elinks)
@@ -96,6 +91,11 @@ function create_link_for_target() {
             create_link $PWD/sublime/jsbeautifyrc $HOME/.jsbeautifyrc
             exit 0 ;;
 
+        telegram-cli)
+            mkdir -p $HOME/.telegram-cli
+            create_link $PWD/telegram-cli/config $HOME/.telegram-cli/config
+            exit 0 ;;
+
         tmux)
             create_link $PWD/tmux/tmux.conf $HOME/.tmux.conf
             exit 0 ;;
@@ -131,14 +131,19 @@ function create_link_for_target() {
             setxkbmap de_sflip
             exit 0 ;;
 
+        xmonad)
+            mkdir -p $HOME/.xmonad
+            create_link $PWD/xmonad/xmonad.hs $HOME/.xmonad/xmonad.sh
+            exit 0 ;;
+
         zathura)
             mkdir -p $HOME/.config/zathura
             create_link $PWD/zathura/zathurarc $HOME/.config/zathura/zathurarc
             exit 0 ;;
 
         *)
-            # echo "Unknown target: $1"
-            print_help_msg
+            echo "Unknown target: $1"
+            echo "Type './install --help' for a list of valid targets."
             exit 1 ;;
     esac
 }
@@ -196,13 +201,17 @@ fi
 
 
 # we currently only handle one target
-if [[ $# -gt 1 ]]; then
+if [[ $# -eq 0 ]]; then
+    print_help_msg
+    exit 0
+elif [[ $# -gt 1 ]]; then
     echo "Please specify exactly one target! It can be 'all'."
-    # print_help_msg
     exit 1
 else
     if [[ $1 != all ]]; then
         create_link_for_target $1
+    elif [[ $1 != dactyl ]]; then
+        create_link_for_target pentadactyl
     else
         create_link_for_target cmus
         create_link_for_target mpd
