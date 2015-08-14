@@ -31,6 +31,9 @@
 # OBSOLETE because of X configuration
 # exec "setxkbmap de_sflip"
 
+# turn on num block
+exec --no-startup-id "numlockx"
+
 # start cinnamon shit for gtk button design etc.
 exec --no-startup-id "cinnamon-settings-daemon"
 
