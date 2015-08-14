@@ -147,12 +147,11 @@ status.register("pulseaudio",
 #     on_leftclick = "ario"
 #     ,)
 
-#  todo: fixe hard-coded host
-# status.register("shell",
-#     command = "mpc --host=192.168.2.115 | head -n 1",
-#     hints = { "separator" : False, "separator_block_width": 0} ,
-#     interval = 5,
-#     )
+status.register("shell",
+    command = "test -f ~/.mpd/pid && mpc current || true",
+    hints = { "separator" : False, "separator_block_width": 1} ,
+    interval = 5,
+    )
 
 
 status.run()
