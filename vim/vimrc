@@ -6,6 +6,9 @@
 
 set nocompatible
 
+" syntax highlighting
+:syntax on
+
 " show line numbers
 :set number
 
