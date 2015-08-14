@@ -44,7 +44,7 @@ set $mod Mod4
 
 # reload the configuration file
 # or restart i3 [preserves session]
-bindsym $mod+Shift+r mode "$reload_restart"
+bindsym $mod+F5 mode "$reload_restart"
 set $reload_restart Want it fresh? (l) reload config, (s) restart i3
 mode "$reload_restart" {
     bindsym l reload; mode "default"

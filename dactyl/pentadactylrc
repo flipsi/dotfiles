@@ -56,8 +56,8 @@ colorscheme solarized-light
 
 " KEYBINDINGS
 
-" reload this file"
-map <C-S-r> :source ~/.pentadactylrc<CR>
+" reload this config file
+map <F5> :source ~/.pentadactylrc<CR>
 
 " switch tabs"
 map <A-n> :tabnext<CR>
