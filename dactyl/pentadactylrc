@@ -29,8 +29,8 @@ map \\ :tabopen \
 " ! to use other search engine (like 'ebay' or 'osm') 
 map ! :tabopen !
 
-" completions
-set complete=search,location,file,suggestion
+" completions order
+set complete=search,bookmark,suggestion,file
 
 " autocomplete when opening sites only with tab
 set autocomplete=!/ex/(open|tabopen),.?
@@ -50,7 +50,8 @@ qmark v http://localhost/projects/govp2/
 " Styles
 "highlight StatusLineNormal background-color: #DDD
 "highlight Download[active] background-color: #FFEFB9
-colorscheme solarized-light
+"colorscheme solarized-light
+colorscheme sflorange
 
 
 

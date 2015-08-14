@@ -297,6 +297,7 @@
 
     // transpose characters, words, etc. (swap)
     { "keys": ["ctrl+t"], "command": "transpose_word" },
+    // { "keys": ["ctrl+t"], "command": "transpose_character" },
 
     // toggle words (true/false etc.)
     { "keys": ["ctrl+k", "o"], "command": "toggle_word" },
