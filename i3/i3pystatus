@@ -146,9 +146,8 @@ status.register("pulseaudio",
 #     },
 #     on_leftclick = "ario"
 #     ,)
-
 status.register("shell",
-    command = "test -f ~/.mpd/pid && mpc current || true",
+    command = "pgrep --exact mpd > /dev/null && mpc current || true",
     hints = { "separator" : False, "separator_block_width": 1} ,
     interval = 5,
     )
