@@ -1,8 +1,13 @@
 #command
+
+\ej forw-scroll
+\ek back-scroll
+
 ö forw-search
 Ö back-search
+
 ä goto-mark
 
 
 #env
-LESS = -i -R
+LESS = -i -c -R

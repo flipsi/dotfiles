@@ -70,6 +70,9 @@
     // line numbers
     { "keys": ["ctrl+g", "l"], "command": "toggle_setting", "args": {"setting": "line_numbers"} },
 
+    // relative line numbers
+    {"keys": ["ctrl+g", "L"], "command": "toggle_setting", "args": {"setting": "vintage_lines.force_mode"}},
+
     // word wrap
     { "keys": ["ctrl+g", "w"], "command": "toggle_setting", "args": {"setting": "word_wrap"} },
 
@@ -168,16 +171,16 @@
     { "keys": ["ctrl+o", "h"], "command": "travel_to_pane", "args": {"direction": "left"} },
 
     // Origami: move tab to another pane
-    { "keys": ["ctrl+o", "ctrl+shift+k"], "command": "carry_file_to_pane", "args": {"direction": "up"} },
-    { "keys": ["ctrl+o", "ctrl+shift+l"], "command": "carry_file_to_pane", "args": {"direction": "right"} },
-    { "keys": ["ctrl+o", "ctrl+shift+j"], "command": "carry_file_to_pane", "args": {"direction": "down"} },
-    { "keys": ["ctrl+o", "ctrl+shift+h"], "command": "carry_file_to_pane", "args": {"direction": "left"} },
+    { "keys": ["ctrl+o", "K"], "command": "carry_file_to_pane", "args": {"direction": "up"} },
+    { "keys": ["ctrl+o", "L"], "command": "carry_file_to_pane", "args": {"direction": "right"} },
+    { "keys": ["ctrl+o", "J"], "command": "carry_file_to_pane", "args": {"direction": "down"} },
+    { "keys": ["ctrl+o", "H"], "command": "carry_file_to_pane", "args": {"direction": "left"} },
 
     // Origami: new view into file in another pane
-    { "keys": ["ctrl+o", "ctrl+alt+k"], "command": "clone_file_to_pane", "args": {"direction": "up"} },
-    { "keys": ["ctrl+o", "ctrl+alt+l"], "command": "clone_file_to_pane", "args": {"direction": "right"} },
-    { "keys": ["ctrl+o", "ctrl+alt+j"], "command": "clone_file_to_pane", "args": {"direction": "down"} },
-    { "keys": ["ctrl+o", "ctrl+alt+h"], "command": "clone_file_to_pane", "args": {"direction": "left"} },
+    { "keys": ["ctrl+o", "alt+k"], "command": "clone_file_to_pane", "args": {"direction": "up"} },
+    { "keys": ["ctrl+o", "alt+l"], "command": "clone_file_to_pane", "args": {"direction": "right"} },
+    { "keys": ["ctrl+o", "alt+j"], "command": "clone_file_to_pane", "args": {"direction": "down"} },
+    { "keys": ["ctrl+o", "alt+h"], "command": "clone_file_to_pane", "args": {"direction": "left"} },
 
     // Origami: create pane with file
     { "keys": ["ctrl+o", "ctrl+k"], "command": "create_pane_with_file", "args": {"direction": "up"} },
@@ -294,6 +297,7 @@
 
     // transpose characters, words, etc. (swap)
     { "keys": ["ctrl+t"], "command": "transpose_word" },
+    // { "keys": ["ctrl+t"], "command": "transpose_character" },
 
     // toggle words (true/false etc.)
     { "keys": ["ctrl+k", "o"], "command": "toggle_word" },

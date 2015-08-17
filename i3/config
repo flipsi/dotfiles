@@ -25,17 +25,29 @@
 
 # set second output (monitor) with a shell command like this
 # exec "xrandr --output HDMI2 --auto --right-of eDP1"
+# exec "xrandr --output HDMI2 --auto --below eDP1"
 
 # set keyboard layout with a shell command like this
 # OBSOLETE because of X configuration
 # exec "setxkbmap de_sflip"
+
+# turn on num block
+exec --no-startup-id "numlockx"
+
+# start cinnamon shit for gtk button design etc.
+exec --no-startup-id "cinnamon-settings-daemon"
+
+# be prompted for ssh passphrase only one time at login
+# ssh-agent seems to be invoked by my login manager or something
+# (instead of gnome keyring)
+exec --no-startup-id "ssh-add"
 
 # modifier key: windows/super
 set $mod Mod4
 
 # reload the configuration file
 # or restart i3 [preserves session]
-bindsym $mod+Shift+r mode "$reload_restart"
+bindsym $mod+F5 mode "$reload_restart"
 set $reload_restart Want it fresh? (l) reload config, (s) restart i3
 mode "$reload_restart" {
     bindsym l reload; mode "default"
@@ -55,7 +67,7 @@ set $ROFI_OPTIONS -font 'monospace 8' -bg '#575757' -fg '#FFFFFF' -hlbg '#B08200
 
 # start the gnome network manager, because it automatically connects to eduroam etc.
 # and kill it after a few seconds when it is not needed anymore
-exec --no-startup-id "timelimit -t 4 -T 5 nm-applet"
+exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
 
 
 
@@ -63,9 +75,6 @@ exec --no-startup-id "timelimit -t 4 -T 5 nm-applet"
 ###############################################################################
 ###########  LOOK  ############################################################
 ###############################################################################
-
-# start cinnamon shit for gtk button design etc.
-exec --no-startup-id "cinnamon-settings-daemon"
 
 # set wallpaper
 # NOTE:
@@ -116,8 +125,11 @@ client.background       #434343  #575757  #B08200  #575757
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command i3status --config ~/.i3/i3status
-    position top
+    # status_command      i3status --config ~/.i3/i3status
+    # status_command      i3blocks -c ~/.i3/i3blocks
+    status_command      python3 ~/.i3/i3pystatus
+    position            top
+    workspace_buttons   yes
     colors {
         background  #575757
         statusline  #DDDDDD
@@ -186,7 +198,7 @@ mode "$mode_system" {
 }
 
 
-# set display brightness
+# set keyboard brightness
 bindsym XF86KbdBrightnessDown exec "$SHELLSCRIPT_PATH/keyboard-brightness down"
 bindsym XF86KbdBrightnessUp   exec "$SHELLSCRIPT_PATH/keyboard-brightness up"
 
@@ -194,6 +206,10 @@ bindsym XF86KbdBrightnessUp   exec "$SHELLSCRIPT_PATH/keyboard-brightness up"
 # set display brightness
 bindsym $mod+Left   exec "$SHELLSCRIPT_PATH/brighten --dec"
 bindsym $mod+Right  exec "$SHELLSCRIPT_PATH/brighten"
+
+
+# change audio output device
+bindsym $mod+v exec "$SHELLSCRIPT_PATH/switch-audio-output"
 
 # set volume
 bindsym $mod+Down            exec "amixer sset Master 1%-"
@@ -222,13 +238,19 @@ bindsym      Print exec "gnome-screenshot"
 # windows always floating/fullscreen
 for_window [class="(?i)gcolor2"]        floating enable 
 for_window [class="(?i)nemo"]           floating enable 
-for_window [title="(?i)sxiv"]           fullscreen
+for_window [class="(?i)file-roller"]    floating enable 
+for_window [class="(?i)pavucontrol"]    floating enable 
+for_window [class="(?i)avd"]            floating enable 
+for_window [class="(?i)pokerstars"]     floating enable 
+for_window [title="Print"]     floating enable 
+for_window [class="(?i)sxiv"]           fullscreen
+for_window [class="(?i)mplayer"]        fullscreen
 
 # windows always on specific workspace
-assign [class="(?i)firefox"]            web
-assign [class="(?i)thunderbird"]        mail
-assign [class="(?i)sublime"]            edit
-assign [class="(?i)jetbrains-studio"]   dev
+# assign [class="(?i)firefox"]            web
+# assign [class="(?i)thunderbird"]        mail
+# assign [class="(?i)sublime"]            edit
+# assign [class="(?i)jetbrains-studio"]   dev
 
 
 
@@ -238,10 +260,13 @@ assign [class="(?i)jetbrains-studio"]   dev
 
 # split vertically by default
 default_orientation vertical
+# new workspaces have this layout
+workspace_layout stacking
 
 
 # start a terminal
-bindsym $mod+o       exec "gnome-terminal --hide-menubar --command='tmux -2'"
+bindsym $mod+o       exec "xfce4-terminal --command='tmux -2'"
+bindsym $mod+Shift+o       exec "gnome-terminal --hide-menubar --command='tmux -2'"
 
 # start dmenu (a program launcher)
 # bindsym $mod+Shift+d exec "dmenu_run -i -l 12 -nb '#575757' -sb '#B08200' -sf '#000000'"
@@ -267,19 +292,20 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # focus the parent/child container
-bindsym $mod+u focus parent
-bindsym $mod+Shift+u focus child
+bindsym $mod+y focus parent
+bindsym $mod+Shift+y focus child
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+Shift+o layout toggle
+bindsym $mod+s layout toggle
+# bindsym $mod+s layout stacked
 
 # toggle tiling/floating
-bindsym $mod+Shift+a floating toggle
+bindsym $mod+a floating toggle
 # change focus between tiling/floating windows
-bindsym $mod+a focus mode_toggle
+bindsym $mod+e focus mode_toggle
 
 # send container to background
 bindsym $mod+Shift+z move scratchpad
@@ -376,8 +402,8 @@ bindsym $mod+Shift+numbersign move container to workspace back_and_forth
 bindsym $mod+Shift+space move container to workspace back_and_forth
 
 # move container/workspace to other output
-bindsym $mod+y       move container to output right; workspace back_and_forth
-bindsym $mod+Shift+y move workspace to output right
+bindsym $mod+u       move container to output down; workspace back_and_forth
+bindsym $mod+Shift+u move workspace to output down
 
 
 

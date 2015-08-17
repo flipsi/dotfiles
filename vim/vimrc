@@ -6,6 +6,9 @@
 
 set nocompatible
 
+" syntax highlighting
+:syntax on
+
 " show line numbers
 :set number
 
@@ -30,10 +33,12 @@ set smartindent
 
 " KEYBINDINGS
 
-" ZQ to quit anyway 
+" reload this config file
+nnoremap <F5> :source ~/.vimrc<CR>
+
+" ZQ to quit discarding changes 
 " ZZ to save and quit
-" Q to quit vim quickly
-" vim will prompt if the file was changed but not saved.
+" Q  to quit vim quickly (will prompt if the file was changed but not saved)
 nnoremap Q :quit<CR>
 
 " scroll (alt key)

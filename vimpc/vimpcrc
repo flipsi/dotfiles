@@ -7,7 +7,11 @@
 
 """" Server """"
 
-connect 192.168.2.115 6600
+" ...better set $MPD_HOST
+"connect 192.168.2.115 6600
+"connect localhost 6600
+"connect asterix 6600
+
 
 
 
@@ -16,7 +20,7 @@ connect 192.168.2.115 6600
 set ignorecase
 set noshowlists
 set groupignorethe
-set windows library,browse,playlist
+set windows library,playlist
 set window playlist
 
 hi tab yellowbg
@@ -37,25 +41,40 @@ hi error redfg
 " quit vimpc
 map Q ZQ
 
+
+" scroll
+map <A-j> <C-d>
+map <A-k> <C-u>
+
+
 " Playback controls
 map <Space> :pause<CR>
 map o :next<CR>
 map O :previous<CR>
 
+" add current song
+" set add end
+map @ :set add next<C-m>:add<C-m>:set add end<CR>
+
+" goto playlists current song
+map F :playlist<C-m>f
 
 " search
 map ö /
+map Ö :browse<C-m>gg/
 
 " goto random line
 map r %
 
 " goto next or previous window
-map <a-n> gt
-map <a-p> gT
+map <A-n> gt
+map <A-p> gT
 
 " goto window
 map wl :library<CR>
 map wp :playlist<CR>
+map ws :lists<CR>
+map wd :directory<CR>
 map wb :browse<CR>
 map wh :help<CR>
 

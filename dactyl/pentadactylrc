@@ -23,13 +23,20 @@ set editor='subl --wait'
 set defsearch=duckduckgo
 "set defsearch=google
 
-" completions
-set complete=search,location,file,suggestion
+" duckduckgo advanced search
+" \ to go to first result immediately
+map \\ :tabopen \ 
+" ! to use other search engine (like 'ebay' or 'osm') 
+map ! :tabopen !
+
+" completions order
+set complete=search,bookmark,suggestion,file
 
 " autocomplete when opening sites only with tab
 set autocomplete=!/ex/(open|tabopen),.?
 
 " QuickMarks
+qmark b https://finanzportal.fiducia.de/g14pepe/entry?rzid=XC&rzbk=0151
 qmark u https://uniworx.ifi.lmu.de/
 qmark f https://de-de.facebook.com/
 qmark g https://github.com/sflip
@@ -43,14 +50,15 @@ qmark v http://localhost/projects/govp2/
 " Styles
 "highlight StatusLineNormal background-color: #DDD
 "highlight Download[active] background-color: #FFEFB9
-colorscheme solarized-light
+"colorscheme solarized-light
+colorscheme sflorange
 
 
 
 " KEYBINDINGS
 
-" reload this file"
-map <C-S-r> :source ~/.pentadactylrc<CR>
+" reload this config file
+map <F5> :source ~/.pentadactylrc<CR>
 
 " switch tabs"
 map <A-n> :tabnext<CR>
@@ -60,7 +68,8 @@ imap <A-p> <Esc>:tabprevious<CR>
 
 " LRU tab
 "map # :buffer! #<CR>
-map <A-Space> :buffer! #<CR>
+nmap <A-Space> :buffer! #<CR>
+imap <A-Space> <Esc>:buffer! #<CR>
 
 " find tab
 "nmap <A-w> :buffer! 
@@ -81,6 +90,8 @@ nmap wh :tab helpall<CR>
 nmap wi :history<CR>
 nmap wj :jumps<CR>
 nmap wp :tabopen about:preferences<CR>
+nmap ws :dialog searchengines<CR>
+nmap ww :dialog passwords<CR>
 
 " zoom everything
 map + ZI

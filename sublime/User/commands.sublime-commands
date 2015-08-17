@@ -22,6 +22,9 @@
     { "caption": "Whitespaces: draw everywhere", "command": "set_setting", "args": {"setting": "draw_white_space", "value": "all" }},
     { "caption": "Whitespaces: do not draw", "command": "set_setting", "args": {"setting": "draw_white_space", "value": "none" }},
 
+    // toggle relative line numbers
+    { "caption": "View: Toggle Relative Line Numbers", "command": "toggle_setting", "args": {"setting": "vintage_lines.force_mode"}},
+
     // fold
     { "caption": "Fold Block", "command": "fold" },
     { "caption": "Unfold Block", "command": "unfold" },
