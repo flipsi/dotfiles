@@ -7,7 +7,7 @@ globals = {
     max_cmd_history     = 100,
     max_srch_history    = 100,
  -- proxy must now be set through proxy command; environment variable is broken
-    default_window_size = "800x600",
+    default_window_size = "900x600",
     term = "x-terminal-emulator",
 
  -- Disables loading of hostnames from /etc/hosts (for large host files)
