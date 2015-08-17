@@ -90,6 +90,7 @@ nmap wh :tab helpall<CR>
 nmap wi :history<CR>
 nmap wj :jumps<CR>
 nmap wp :tabopen about:preferences<CR>
+nmap ws :dialog searchengines<CR>
 nmap ww :dialog passwords<CR>
 
 " zoom everything
