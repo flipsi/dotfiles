@@ -79,7 +79,9 @@ function create_link_for_target() {
 
         ranger)
             mkdir -p $HOME/.config/ranger
-            create_link $PWD/ranger/* $HOME/.config/ranger/
+            create_link $PWD/ranger/rc.conf $HOME/.config/ranger/rc.conf
+            create_link $PWD/ranger/rifle.conf $HOME/.config/ranger/rifle.conf
+            create_link $PWD/ranger/scope.sh $HOME/.config/ranger/scope.sh
             chmod u+x $HOME/.config/ranger/scope.sh
             ;;
 

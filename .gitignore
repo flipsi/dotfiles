@@ -14,13 +14,6 @@ fish/fishd.*
 mutt
 
 
-#### ranger
-
-ranger/bookmarks
-ranger/history
-ranger/tagged
-
-
 #### sublime
 
 sublime/User/SublimeLinter/
