@@ -37,8 +37,9 @@ function create_link_for_target() {
             ;;
 
         fish)
-            mkdir -p $HOME/.config
-            create_link $PWD/fish $HOME/.config/fish
+            mkdir -p $HOME/.config/fish
+            create_link $PWD/fish/functions $HOME/.config/fish/functions
+            create_link $PWD/fish/config.fish $HOME/.config/fish/config.fish
             ;;
 
         ghci)
