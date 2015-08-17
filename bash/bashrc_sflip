@@ -1,0 +1,22 @@
+# Because everywhere is a .bashrc with shit in it,
+# I use an extra file: .bashrc_sflip
+# and source it in the original .bashrc
+
+# These is just some basic stuff that I miss
+# when I use bash instead of fish occasionally.
+
+bind '"\ei":"ranger\n"'
+
+alias ..='cd ..'
+
+alias g='grep --with-filename --line-number --recursive --ignore-case --extended-regexp'
+
+# (also note lesskey configuration)
+alias l='less'
+
+LS_OPTIONS='--color=auto --human-readable'
+alias ll='ls $LS_OPTIONS -l'
+alias lll='ls $LS_OPTIONS -la'
+
+alias o='open'
+

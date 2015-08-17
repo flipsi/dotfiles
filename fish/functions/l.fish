@@ -1,3 +1,3 @@
 function l
-	less -c $argv
+	less $argv
 end

@@ -14,7 +14,7 @@ Usage: install.sh [OPTIONS] TARGET
     -i | --interactive      if file(s) exist(s), ask what to do
     -f | --force            if file(s) exist(s), overwrite it/them
 
-    TARGET := { all | cmus | dactyl | elinks | fish | ghci | git | i3 | 
+    TARGET := { all | bash | cmus | dactyl | elinks | fish | ghci | git | i3 | 
                 lesskey | luakit | mpd | muttator | pentadactyl | ranger | 
                 sublime-text-3 | telegram-cli | tmux | turses | vim | vimpc | 
                 vimperator | vimus | vlc | xkb | xmonad | zathura }
@@ -25,6 +25,11 @@ EOF
 function create_link_for_target() {
     local TARGET="$1"
     case "$TARGET" in
+
+        bash)
+            local sourcestring="source $PWD/bash/bashrc_sflip"
+            grep "$sourcestring" $HOME/.bashrc > /dev/null || echo "$sourcestring" >> $HOME/.bashrc
+            ;;
 
         cmus)
             mkdir -p $HOME/.cmus
@@ -212,6 +217,7 @@ else
     if [[ $1 = dactyl ]]; then
         create_link_for_target pentadactyl
     elif [[ $1 = all ]]; then
+        create_link_for_target bash
         create_link_for_target cmus
         create_link_for_target elinks
         create_link_for_target fish
