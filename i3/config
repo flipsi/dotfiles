@@ -34,6 +34,9 @@
 # turn on num block
 exec --no-startup-id "numlockx"
 
+# turn off screensaver and display power management
+exec --no-startup-id "xset dpms 0 0 0 && xset s noblank && xset s off"
+
 # start cinnamon shit for gtk button design etc.
 exec --no-startup-id "cinnamon-settings-daemon"
 
