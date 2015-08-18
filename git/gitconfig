@@ -3,7 +3,7 @@
     email = soziflip@gmail.com
 
 [core]
-    editor = subl
+    editor = vim
 
 [push]
 	default = simple
