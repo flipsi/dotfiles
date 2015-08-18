@@ -29,6 +29,7 @@ where `TARGET` can either be an item from the targets listed below, or `all` to 
 
 ## Targets
 
+* `bash` basic stuff for bash, will be sourced additionally
 * `cmus` music player for the terminal
 * `dactyl` vim-addons for mozilla applications (currently only pentadactyl for firefox)
 * `elinks` web browser for the terminal
