@@ -19,9 +19,12 @@
 
 
 ###############################################################################
-###########  GENERAL  #########################################################
+###########  AUTOSTART  #######################################################
 ###############################################################################
 
+
+# composite manager for window overlays, smooth workspace changes, etc.
+exec --no-startup-id "compton -b"
 
 # set second output (monitor) with a shell command like this
 # exec "xrandr --output HDMI2 --auto --right-of eDP1"
@@ -37,13 +40,23 @@ exec --no-startup-id "numlockx"
 # turn off screensaver and display power management
 exec --no-startup-id "xset dpms 0 0 0 && xset s noblank && xset s off"
 
-# start cinnamon shit for gtk button design etc.
-exec --no-startup-id "cinnamon-settings-daemon"
-
 # be prompted for ssh passphrase only one time at login
 # ssh-agent seems to be invoked by my login manager or something
 # (instead of gnome keyring)
-exec --no-startup-id "ssh-add"
+exec "ssh-add"
+
+# start cinnamon shit for automount, gtk button design etc.
+exec --no-startup-id "cinnamon-settings-daemon"
+
+# start the gnome network manager, because it automatically connects to eduroam etc.
+# and kill it after a few seconds when it is not needed anymore
+exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
+
+
+
+###############################################################################
+###########  GENERAL  #########################################################
+###############################################################################
 
 # modifier key: windows/super
 set $mod Mod4
@@ -66,12 +79,6 @@ set $SHELLSCRIPT_PATH /home/sflip/shellscripts
 
 # rofi options
 set $ROFI_OPTIONS -font 'monospace 8' -bg '#575757' -fg '#FFFFFF' -hlbg '#B08200' -hlfg '#000000' -bg-active '#575757' -fg-active '#B08200' -hlfg-active '#000000' -hlbg-active '#B08200' -location 1 -kb-remove-word-back 'Alt+BackSpace'
-
-
-# start the gnome network manager, because it automatically connects to eduroam etc.
-# and kill it after a few seconds when it is not needed anymore
-exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
-
 
 
 
@@ -104,8 +111,10 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # font, it doesn’t scale on retina/hidpi displays.
 
 
-# borders and gaps
+# borders
 for_window [class="^.*"] border pixel 1
+
+# gaps (require the i3gaps fork)
 # gaps inner 10
 # gaps outer 2
 # smart_gaps on
