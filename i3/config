@@ -261,7 +261,7 @@ for_window [class="(?i)mplayer"]        fullscreen
 # split vertically by default
 default_orientation vertical
 # new workspaces have this layout
-workspace_layout stacking
+workspace_layout tabbed
 
 
 # start a terminal
