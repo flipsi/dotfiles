@@ -14,7 +14,7 @@ Usage: install.sh [OPTIONS] TARGET
     -i | --interactive      if file(s) exist(s), ask what to do
     -f | --force            if file(s) exist(s), overwrite it/them
 
-    TARGET := { all | cmus | dactyl | elinks | fish | ghci | git | i3 | 
+    TARGET := { all | bash | cmus | dactyl | elinks | fish | ghci | git | i3 | 
                 lesskey | luakit | mpd | muttator | pentadactyl | ranger | 
                 sublime-text-3 | telegram-cli | tmux | turses | vim | vimpc | 
                 vimperator | vimus | vlc | xkb | xmonad | zathura }
@@ -26,123 +26,131 @@ function create_link_for_target() {
     local TARGET="$1"
     case "$TARGET" in
 
+        bash)
+            local sourcestring="source $PWD/bash/bashrc_sflip"
+            grep "$sourcestring" $HOME/.bashrc > /dev/null || echo "$sourcestring" >> $HOME/.bashrc
+            ;;
+
         cmus)
             mkdir -p $HOME/.cmus
             create_link $PWD/cmus/rc $HOME/.cmus/rc
-            exit 0 ;;
+            ;;
 
         elinks)
             mkdir -p $HOME/.elinks
             create_link $PWD/elinks/elinks.conf $HOME/.elinks/elinks.conf
-            exit 0 ;;
+            ;;
 
         fish)
-            mkdir -p $HOME/.config
-            create_link $PWD/fish $HOME/.config/fish
-            exit 0 ;;
+            mkdir -p $HOME/.config/fish
+            create_link $PWD/fish/functions $HOME/.config/fish/functions
+            create_link $PWD/fish/config.fish $HOME/.config/fish/config.fish
+            ;;
 
         ghci)
             create_link $PWD/ghci/ghci $HOME/.ghci
-            exit 0 ;;
+            ;;
 
         git)
             create_link $PWD/git/gitconfig $HOME/.gitconfig
-            exit 0 ;;
+            ;;
 
         i3)
             mkdir -p $HOME/.i3
             create_link $PWD/i3/config $HOME/.i3/config
             # create_link $PWD/i3/i3status $HOME/.i3/i3status
             create_link $PWD/i3/i3pystatus $HOME/.i3/i3pystatus
-            exit 0 ;;
+            ;;
 
         lesskey)
             lesskey $PWD/lesskey/lesskey
-            exit 0 ;;
+            ;;
 
         luakit)
             create_link $PWD/luakit $HOME/.config/
-            exit 0 ;;
+            ;;
 
         mpd)
             create_link $PWD/mpd/mpdconf $HOME/.mpdconf
-            exit 0 ;;
+            ;;
 
         muttator)
             create_link $PWD/muttator/muttatorrc $HOME/.muttatorrc
-            exit 0 ;;
+            ;;
 
         pentadactyl)
             create_link $PWD/dactyl/pentadactyl $HOME/.pentadactyl
             create_link $PWD/dactyl/pentadactylrc $HOME/.pentadactylrc
-            exit 0 ;;
+            ;;
 
         ranger)
             mkdir -p $HOME/.config/ranger
-            create_link $PWD/ranger/* $HOME/.config/ranger/
+            create_link $PWD/ranger/rc.conf $HOME/.config/ranger/rc.conf
+            create_link $PWD/ranger/rifle.conf $HOME/.config/ranger/rifle.conf
+            create_link $PWD/ranger/scope.sh $HOME/.config/ranger/scope.sh
             chmod u+x $HOME/.config/ranger/scope.sh
-            exit 0 ;;
+            ;;
 
         sublime-text-3)
             mkdir -p $HOME/.config/sublime-text-3/Packages
             create_link $PWD/sublime/User $HOME/.config/sublime-text-3/Packages/User
             create_link $PWD/sublime/jsbeautifyrc $HOME/.jsbeautifyrc
-            exit 0 ;;
+            ;;
 
         telegram-cli)
             mkdir -p $HOME/.telegram-cli
             create_link $PWD/telegram-cli/config $HOME/.telegram-cli/config
-            exit 0 ;;
+            ;;
 
         tmux)
             create_link $PWD/tmux/tmux.conf $HOME/.tmux.conf
-            exit 0 ;;
+            ;;
 
         turses)
             mkdir -p $HOME/.turses
             create_link $PWD/turses/config $HOME/.turses/config
-            exit 0 ;;
+            ;;
 
         vim)
             create_link $PWD/vim/vimrc $HOME/.vimrc
-            exit 0 ;;
+            ;;
 
         vimpc)
             create_link $PWD/vimpc/vimpcrc $HOME/.vimpcrc
-            exit 0 ;;
+            ;;
 
         vimperator)
             create_link $PWD/vimperator/vimperatorrc $HOME/.vimperatorrc
-            exit 0 ;;
+            ;;
 
         vimus)
             create_link $PWD/vimus/vimusrc $HOME/.vimusrc
-            exit 0 ;;
+            ;;
 
         vlc)
             mkdir -p $HOME/.config
             create_link $PWD/vlc $HOME/.config/vlc
-            exit 0 ;;
+            ;;
 
         xkb)
             create_link $PWD/xkb/de_sflip /usr/share/X11/xkb/symbols/de_sflip
             setxkbmap de_sflip
-            exit 0 ;;
+            ;;
 
         xmonad)
             mkdir -p $HOME/.xmonad
             create_link $PWD/xmonad/xmonad.hs $HOME/.xmonad/xmonad.sh
-            exit 0 ;;
+            ;;
 
         zathura)
             mkdir -p $HOME/.config/zathura
             create_link $PWD/zathura/zathurarc $HOME/.config/zathura/zathurarc
-            exit 0 ;;
+            ;;
 
         *)
             echo "Unknown target: $1"
             echo "Type './install --help' for a list of valid targets."
-            exit 1 ;;
+            ;;
     esac
 }
 
@@ -209,6 +217,7 @@ else
     if [[ $1 = dactyl ]]; then
         create_link_for_target pentadactyl
     elif [[ $1 = all ]]; then
+        create_link_for_target bash
         create_link_for_target cmus
         create_link_for_target elinks
         create_link_for_target fish

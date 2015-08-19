@@ -10,4 +10,4 @@
 
 
 #env
-LESS = -i -R
+LESS = -i -c -R

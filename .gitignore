@@ -3,22 +3,9 @@
 dactyl/pentadactyl/info
 
 
-#### fish
-
-fish/fish_history
-fish/fishd.*
-
-
 #### mutt
 
 mutt
-
-
-#### ranger
-
-ranger/bookmarks
-ranger/history
-ranger/tagged
 
 
 #### sublime
