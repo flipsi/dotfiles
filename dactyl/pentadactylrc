@@ -124,9 +124,12 @@ cmap <A-BS> <C-W>
 cmap <A-d> <C-Del>
 
 
-" copy/paste like in gnome-terminal
+" copy/paste 
 imap <C-S-v> <C-v><C-v>
 imap <C-S-c> <C-v><C-c>
+vmap <C-S-v> <C-v><C-v>
+vmap <C-S-c> <C-v><C-c>
+vmap y <C-v><C-c>
 cmap <C-S-v> <C-v><C-v>
 cmap <C-S-c> <C-v><C-c>
 
