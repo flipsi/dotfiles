@@ -133,7 +133,7 @@ function create_link_for_target() {
             ;;
 
         xkb)
-            create_link $PWD/xkb/de_sflip /usr/share/X11/xkb/symbols/de_sflip
+            create_link $PWD/xkb/symbols/de_sflip /usr/share/X11/xkb/symbols/de_sflip
             setxkbmap de_sflip
             ;;
 
