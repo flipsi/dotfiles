@@ -50,6 +50,10 @@ noremap <Esc>k <C-U>
 nnoremap ö /
 nnoremap Ö ?
 
+" swap , and ; (makes more sense on german keyboard)
+nnoremap , ;
+nnoremap ; ,
+
 " goto mark 
 nnoremap ä `
 
