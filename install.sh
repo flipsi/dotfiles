@@ -103,6 +103,7 @@ function create_link_for_target() {
             ;;
 
         tmux)
+            create_link $PWD/tmux/tmux $HOME/.tmux
             create_link $PWD/tmux/tmux.conf $HOME/.tmux.conf
             ;;
 
