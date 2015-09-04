@@ -12,7 +12,7 @@
 
 # apart from i3, install...
 
-# i3-lock
+# i3lock
 # dmenu
 # quickswitch [https://github.com/OliverUv/quickswitch-for-i3]
 # rofi [https://davedavenport.github.io/rofi/]
@@ -207,8 +207,8 @@ bindsym XF86KbdBrightnessUp   exec "$SHELLSCRIPT_PATH/keyboard-brightness up"
 
 
 # set display brightness
-bindsym $mod+Left   exec "$SHELLSCRIPT_PATH/brighten --dec"
-bindsym $mod+Right  exec "$SHELLSCRIPT_PATH/brighten"
+bindsym $mod+Left   exec "xbacklight -dec 3"
+bindsym $mod+Right  exec "xbacklight -inc 3"
 
 
 # change audio output device
