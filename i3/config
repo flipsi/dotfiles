@@ -27,18 +27,22 @@
 # exec "xrandr --output HDMI2 --auto --right-of eDP1"
 # exec "xrandr --output HDMI2 --auto --below eDP1"
 
-# set keyboard layout with a shell command like this
-# OBSOLETE because of X configuration
-# exec "setxkbmap de_sflip"
+
+# composite manager
+exec "compton -b"
+
+# set keyboard layout 
+exec "setxkbmap de_sflip"
 
 # turn on num block
-exec --no-startup-id "numlockx"
+#exec --no-startup-id "numlockx"
 
 # turn off screensaver and display power management
 exec --no-startup-id "xset dpms 0 0 0 && xset s noblank && xset s off"
 
 # start cinnamon shit for gtk button design etc.
-exec --no-startup-id "cinnamon-settings-daemon"
+# TODO: start manjaro xfce daemons
+#exec --no-startup-id "cinnamon-settings-daemon"
 
 # be prompted for ssh passphrase only one time at login
 # ssh-agent seems to be invoked by my login manager or something
