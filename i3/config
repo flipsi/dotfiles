@@ -190,14 +190,15 @@ floating_modifier $mod
 # lock/exit/suspend etc.
 bindsym XF86PowerOff mode "$mode_system"
 bindsym $mod+Escape mode "$mode_system"
-set $mode_system Want to leave?  (e) logout, (l) lock, (s) suspend, (h) hibernate, (r) reboot, (p) poweroff
+set $mode_system Want to leave?  (e) logout, (u) switch user, (l) lock, (s) suspend, (h) hibernate, (r) reboot, (p) poweroff
 mode "$mode_system" {
     bindsym e exit
+    bindsym u exec --no-startup-id "i3exit switch_user"
     bindsym l exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper"; mode "default"
-    bindsym s exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper; sudo pm-suspend"; mode "default"
-    bindsym h exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper; sudo pm-hibernate"; mode "default"
-    bindsym r exec --no-startup-id "sudo reboot"
-    bindsym p exec --no-startup-id "sudo poweroff"
+    bindsym s exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper; i3exit suspend"; mode "default"
+    bindsym h exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper; i3exit hibernate"; mode "default"
+    bindsym r exec --no-startup-id "i3exit reboot"
+    bindsym p exec --no-startup-id "i3exit shutdown"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
