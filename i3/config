@@ -69,7 +69,7 @@ mode "$reload_restart" {
 set $SHELLSCRIPT_PATH /home/sflip/shellscripts
 
 # rofi options
-set $ROFI_OPTIONS -font 'monospace 8' -bg '#575757' -fg '#FFFFFF' -hlbg '#B08200' -hlfg '#000000' -bg-active '#575757' -fg-active '#B08200' -hlfg-active '#000000' -hlbg-active '#B08200' -location 1 -kb-remove-word-back 'Alt+BackSpace'
+set $ROFI_OPTIONS -font 'monospace 8' -bg '#1E1E1E' -fg '#FFFFFF' -hlbg '#83B45C' -hlfg '#000000' -bg-active '#1E1E1E' -fg-active '#83B45C' -hlfg-active '#000000' -hlbg-active '#83B45C' -location 1 -kb-remove-word-back 'Alt+BackSpace'
 
 
 # start the gnome network manager, because it automatically connects to eduroam etc.
@@ -117,11 +117,11 @@ for_window [class="^.*"] border pixel 1
 
 # Colors
 #                       border   backgr   text     indicator
-client.focused          #FFC622  #575757  #DDDDDD  #B08200
-client.focused_inactive #434343  #575757  #DDDDDD  #575757
-client.unfocused        #434343  #575757  #DDDDDD  #575757
-client.urgent           #E86969  #575757  #000000  #575757
-client.background       #434343  #575757  #B08200  #575757
+client.focused          #AFFF58  #1E1E1E  #DDDDDD  #83B45C
+client.focused_inactive #1A1A1A  #1E1E1E  #DDDDDD  #1E1E1E
+client.unfocused        #1A1A1A  #1E1E1E  #DDDDDD  #1E1E1E
+client.urgent           #E86969  #1E1E1E  #000000  #1E1E1E
+client.background       #1A1A1A  #1E1E1E  #83B45C  #1E1E1E
 
 
 
@@ -138,14 +138,14 @@ bar {
     position            top
     workspace_buttons   yes
     colors {
-        background  #575757
+        background  #1E1E1E
         statusline  #DDDDDD
-        separator   #FFC622
+        separator   #AFFF58
         #                   border   backgr   text
-        focused_workspace   #FFC622  #575757  #FFC622 
-        active_workspace    #B08200  #575757  #DDDDDD 
-        inactive_workspace  #575757  #575757  #DDDDDD
-        urgent_workspace    #FFC622  #FFC622  #000000
+        focused_workspace   #AFFF58  #1E1E1E  #AFFF58 
+        active_workspace    #83B45C  #1E1E1E  #DDDDDD 
+        inactive_workspace  #1E1E1E  #1E1E1E  #DDDDDD
+        urgent_workspace    #AFFF58  #AFFF58  #000000
     }
 }
 
@@ -277,9 +277,9 @@ bindsym $mod+o       exec "xfce4-terminal --command='tmux -2'"
 bindsym $mod+Shift+o       exec "gnome-terminal --hide-menubar --command='tmux -2'"
 
 # start dmenu (a program launcher)
-# bindsym $mod+Shift+d exec "dmenu_run -i -l 12 -nb '#575757' -sb '#B08200' -sf '#000000'"
+# bindsym $mod+Shift+d exec "dmenu_run -i -l 12 -nb '#1E1E1E' -sb '#83B45C' -sf '#000000'"
 # start dmenu only with programs that have a .desktop-file
-bindsym $mod+Return exec "i3-dmenu-desktop -dmenu='dmenu -i -l 12 -nb #575757 -sb #B08200 -sf #000000'"
+bindsym $mod+Return exec "i3-dmenu-desktop -dmenu='dmenu -i -l 12 -nb #1E1E1E -sb #83B45C -sf #000000'"
 # start rofi (a program launcher)
 bindsym $mod+Shift+Return exec "rofi -show run $ROFI_OPTIONS"
 
