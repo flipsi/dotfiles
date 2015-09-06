@@ -34,6 +34,7 @@ exec "compton -b"
 # set keyboard layout 
 exec "setxkbmap de_sflip"
 
+
 # turn on num block
 #exec --no-startup-id "numlockx"
 
@@ -164,7 +165,7 @@ exec unclutter
 
 
 # disable touchpad at start
-exec "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
+exec "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
 
 # toggle touchpad
 bindsym XF86TouchpadToggle  exec "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
@@ -258,8 +259,8 @@ for_window [class="(?i)mplayer"]        fullscreen
 assign [class="(?i)firefox"]            fox
 assign [class="(?i)chrom"]              chrome
 assign [class="(?i)thunderbird"]        mail
-assign [class="(?i)sublime"]            subl
-assign [class="(?i)jetbrains-studio"]   dev
+assign [class="(?i)subl"]               sublime
+assign [class="(?i)jetbrains-studio"]   development
 
 
 
