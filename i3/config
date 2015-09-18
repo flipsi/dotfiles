@@ -12,16 +12,17 @@
 
 # apart from i3, install...
 
-# i3-lock
+
+# i3lock
 # dmenu
 # quickswitch [https://github.com/OliverUv/quickswitch-for-i3]
 # rofi [https://davedavenport.github.io/rofi/]
 
 
+
 ###############################################################################
 ###########  AUTOSTART  #######################################################
 ###############################################################################
-
 
 # composite manager for window overlays, smooth workspace changes, etc.
 exec --no-startup-id "compton -b"
@@ -30,9 +31,8 @@ exec --no-startup-id "compton -b"
 # exec "xrandr --output HDMI2 --auto --right-of eDP1"
 # exec "xrandr --output HDMI2 --auto --below eDP1"
 
-# set keyboard layout with a shell command like this
-# OBSOLETE because of X configuration
-# exec "setxkbmap de_sflip"
+# set keyboard layout 
+exec "setxkbmap de_sflip"
 
 # turn on num block
 exec --no-startup-id "numlockx"
@@ -40,17 +40,39 @@ exec --no-startup-id "numlockx"
 # turn off screensaver and display power management
 exec --no-startup-id "xset dpms 0 0 0 && xset s noblank && xset s off"
 
+# start cinnamon shit for gtk button design etc.
+# TODO: start manjaro xfce daemons
+#exec --no-startup-id "cinnamon-settings-daemon"
+
 # be prompted for ssh passphrase only one time at login
 # ssh-agent seems to be invoked by my login manager or something
 # (instead of gnome keyring)
 exec "ssh-add"
 
-# start cinnamon shit for automount, gtk button design etc.
-exec --no-startup-id "cinnamon-settings-daemon"
-
 # start the gnome network manager, because it automatically connects to eduroam etc.
 # and kill it after a few seconds when it is not needed anymore
-exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
+# exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
+
+
+
+###############################################################################
+###########  MOUSE  ###########################################################
+###############################################################################
+
+# hide mouse cursor
+exec unclutter
+
+# disable touchpad at start
+exec "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
+
+# media key to toggle touchpad
+bindsym XF86TouchpadToggle  exec "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
+
+# focus when mouse moves
+focus_follows_mouse no
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
 
 
 
@@ -78,7 +100,7 @@ mode "$reload_restart" {
 set $SHELLSCRIPT_PATH /home/sflip/shellscripts
 
 # rofi options
-set $ROFI_OPTIONS -font 'monospace 8' -bg '#575757' -fg '#FFFFFF' -hlbg '#B08200' -hlfg '#000000' -bg-active '#575757' -fg-active '#B08200' -hlfg-active '#000000' -hlbg-active '#B08200' -location 1 -kb-remove-word-back 'Alt+BackSpace'
+set $ROFI_OPTIONS -font 'monospace 8' -bg '#1E1E1E' -fg '#FFFFFF' -hlbg '#83B45C' -hlfg '#000000' -bg-active '#1E1E1E' -fg-active '#83B45C' -hlfg-active '#000000' -hlbg-active '#83B45C' -location 1 -kb-remove-word-back 'Alt+BackSpace'
 
 
 
@@ -122,11 +144,11 @@ for_window [class="^.*"] border pixel 1
 
 # Colors
 #                       border   backgr   text     indicator
-client.focused          #FFC622  #575757  #DDDDDD  #B08200
-client.focused_inactive #434343  #575757  #DDDDDD  #575757
-client.unfocused        #434343  #575757  #DDDDDD  #575757
-client.urgent           #E86969  #575757  #000000  #575757
-client.background       #434343  #575757  #B08200  #575757
+client.focused          #AFFF58  #1E1E1E  #DDDDDD  #83B45C
+client.focused_inactive #1A1A1A  #1E1E1E  #DDDDDD  #1E1E1E
+client.unfocused        #1A1A1A  #1E1E1E  #DDDDDD  #1E1E1E
+client.urgent           #E86969  #1E1E1E  #000000  #1E1E1E
+client.background       #1A1A1A  #1E1E1E  #83B45C  #1E1E1E
 
 
 
@@ -143,14 +165,14 @@ bar {
     position            top
     workspace_buttons   yes
     colors {
-        background  #575757
+        background  #1E1E1E
         statusline  #DDDDDD
-        separator   #FFC622
+        separator   #AFFF58
         #                   border   backgr   text
-        focused_workspace   #FFC622  #575757  #FFC622 
-        active_workspace    #B08200  #575757  #DDDDDD 
-        inactive_workspace  #575757  #575757  #DDDDDD
-        urgent_workspace    #FFC622  #FFC622  #000000
+        focused_workspace   #AFFF58  #1E1E1E  #AFFF58 
+        active_workspace    #83B45C  #1E1E1E  #DDDDDD 
+        inactive_workspace  #1E1E1E  #1E1E1E  #DDDDDD
+        urgent_workspace    #AFFF58  #AFFF58  #000000
     }
 }
 
@@ -160,34 +182,11 @@ bindsym $mod+Shift+b bar mode toggle
 
 
 
-###############################################################################
-###########  MOUSE  ###########################################################
-###############################################################################
-
-# hide mouse cursor
-exec unclutter
-
-
-# disable touchpad at start
-exec "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
-
-# toggle touchpad
-bindsym XF86TouchpadToggle  exec "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
-
-
-# focus when mouse moves
-focus_follows_mouse no
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-
 
 
 ###############################################################################
 ###########  SYSTEM  ##########################################################
 ###############################################################################
-
 
 # exit i3 (logs you out of your X session)
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
@@ -195,14 +194,15 @@ floating_modifier $mod
 # lock/exit/suspend etc.
 bindsym XF86PowerOff mode "$mode_system"
 bindsym $mod+Escape mode "$mode_system"
-set $mode_system Want to leave?  (e) logout, (l) lock, (s) suspend, (h) hibernate, (r) reboot, (p) poweroff
+set $mode_system Want to leave?  (e) logout, (u) switch user, (l) lock, (s) suspend, (h) hibernate, (r) reboot, (p) poweroff
 mode "$mode_system" {
     bindsym e exit
+    bindsym u exec --no-startup-id "i3exit switch_user"
     bindsym l exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper"; mode "default"
-    bindsym s exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper; sudo pm-suspend"; mode "default"
-    bindsym h exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper; sudo pm-hibernate"; mode "default"
-    bindsym r exec --no-startup-id "sudo reboot"
-    bindsym p exec --no-startup-id "sudo poweroff"
+    bindsym s exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper; i3exit suspend"; mode "default"
+    bindsym h exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper; i3exit hibernate"; mode "default"
+    bindsym r exec --no-startup-id "i3exit reboot"
+    bindsym p exec --no-startup-id "i3exit shutdown"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -216,8 +216,8 @@ bindsym XF86KbdBrightnessUp   exec "$SHELLSCRIPT_PATH/keyboard-brightness up"
 
 
 # set display brightness
-bindsym $mod+Left   exec "$SHELLSCRIPT_PATH/brighten --dec"
-bindsym $mod+Right  exec "$SHELLSCRIPT_PATH/brighten"
+bindsym $mod+Left   exec "xbacklight -dec 3"
+bindsym $mod+Right  exec "xbacklight -inc 3"
 
 
 # change audio output device
@@ -259,10 +259,11 @@ for_window [class="(?i)sxiv"]           fullscreen
 for_window [class="(?i)mplayer"]        fullscreen
 
 # windows always on specific workspace
-# assign [class="(?i)firefox"]            web
-# assign [class="(?i)thunderbird"]        mail
-# assign [class="(?i)sublime"]            edit
-# assign [class="(?i)jetbrains-studio"]   dev
+assign [class="(?i)firefox"]            fox
+assign [class="(?i)chrom"]              chrome
+assign [class="(?i)thunderbird"]        mail
+assign [class="(?i)sublime"]            subl
+assign [class="(?i)jetbrains-studio"]   dev
 
 
 
@@ -273,7 +274,7 @@ for_window [class="(?i)mplayer"]        fullscreen
 # split vertically by default
 default_orientation vertical
 # new workspaces have this layout
-workspace_layout stacking
+workspace_layout tabbed
 
 
 # start a terminal
@@ -281,9 +282,9 @@ bindsym $mod+o       exec "xfce4-terminal --command='tmux -2'"
 bindsym $mod+Shift+o       exec "gnome-terminal --hide-menubar --command='tmux -2'"
 
 # start dmenu (a program launcher)
-# bindsym $mod+Shift+d exec "dmenu_run -i -l 12 -nb '#575757' -sb '#B08200' -sf '#000000'"
+# bindsym $mod+Shift+d exec "dmenu_run -i -l 12 -nb '#1E1E1E' -sb '#83B45C' -sf '#000000'"
 # start dmenu only with programs that have a .desktop-file
-bindsym $mod+Return exec "i3-dmenu-desktop -dmenu='dmenu -i -l 12 -nb #575757 -sb #B08200 -sf #000000'"
+bindsym $mod+Return exec "i3-dmenu-desktop -dmenu='dmenu -i -l 12 -nb #1E1E1E -sb #83B45C -sf #000000'"
 # start rofi (a program launcher)
 bindsym $mod+Shift+Return exec "rofi -show run $ROFI_OPTIONS"
 
@@ -315,9 +316,9 @@ bindsym $mod+s layout toggle
 # bindsym $mod+s layout stacked
 
 # toggle tiling/floating
-bindsym $mod+a floating toggle
+bindsym $mod+m floating toggle
 # change focus between tiling/floating windows
-bindsym $mod+e focus mode_toggle
+bindsym $mod+Tab focus mode_toggle
 
 # send container to background
 bindsym $mod+Shift+z move scratchpad
@@ -358,23 +359,23 @@ bindsym $mod+i exec "quickswitch -E"
 bindsym $mod+comma exec i3-input -F 'rename workspace to "%s"' -P 'rename workspace to: '
 
 # mark/goto windows like in vim
-bindsym $mod+m exec i3-input -F 'mark %s' -P 'Mark name: '
-bindsym $mod+Shift+m exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
+bindsym $mod+t exec i3-input -F 'mark %s' -P 'Mark name: '
+bindsym $mod+Shift+t exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
 
 # switch to a specific window or workspace
-bindsym $mod+t mode "goto"
-mode "goto" {
-   bindsym f [class="(?i)firefox"]  focus; mode "default"
-   bindsym s [class="(?i)sublime"]  focus; mode "default"
-   bindsym m workspace music; mode "default"
-
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+#bindsym $mod+t mode "goto"
+#mode "goto" {
+#   bindsym f [class="(?i)firefox"]  focus; mode "default"
+#   bindsym s [class="(?i)sublime"]  focus; mode "default"
+#   bindsym m workspace music; mode "default"
+#
+#    # back to normal: Enter or Escape
+#    bindsym Return mode "default"
+#    bindsym Escape mode "default"
+#}
 
 # switch to another workspace
-bindsym $mod+g [urgent=latest] focus
+bindsym $mod+e [urgent=latest] focus
 bindsym $mod+space workspace back_and_forth
 # bindsym $mod+numbersign workspace back_and_forth
 bindsym $mod+numbersign exec "rofi -show window $ROFI_OPTIONS"

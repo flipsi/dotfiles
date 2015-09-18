@@ -44,6 +44,7 @@ where `TARGET` can either be an item from the targets listed below, or `all` to 
 * `pentadactyl` vim-addon for firefox
 * `ranger` file manager for the terminal
 * `sublime-text-3` the text editor of my choice
+* `telegram-cli` a command line client for the messenger
 * `tmux` a must have for terminal junkies
 * `turses` twitter client for the terminal
 * `vim` the best reason not to use emacs
@@ -52,6 +53,7 @@ where `TARGET` can either be an item from the targets listed below, or `all` to 
 * `vimus` mpd client for the terminal
 * `vlc` great media player
 * `xkb` keyboard layout for X
+* `xmonad` a haskell based window manager
 * `zathura` pdf viewer
 
 ## Contact

@@ -70,11 +70,9 @@ status.register("battery",
 # find out wlan interface name
 from netifaces import interfaces
 ifaces = interfaces()
-try:
-    i = ifaces.index('wlan0')
-except ValueError:
-    i = ifaces.index('wlp7s0')
-wlan_interface = ifaces[i]
+for iface in ifaces:
+    if (iface.startswith('wlp') or iface.startswith('wlan')):
+        wlan_interface = iface
 
 # Note: requires both netifaces and basiciw (for essid and quality)
 status.register("network",

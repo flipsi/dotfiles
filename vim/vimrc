@@ -7,23 +7,24 @@
 set nocompatible
 
 " syntax highlighting
-:syntax on
+syntax on
 
-" show line numbers
-:set number
+" show relative line numbers
+set number
+set relativenumber
 
 " statusline
 set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 
 " search preferences
-:set incsearch
-:set ignorecase
-:set smartcase
+set incsearch
+set ignorecase
+set smartcase
 
 " use 4 spaces instead of tabs
-:set expandtab
-:set tabstop=4
-:set shiftwidth=4
+set expandtab
+set tabstop=4
+set shiftwidth=4
 
 " indent after open braces etc
 set autoindent
@@ -49,6 +50,10 @@ noremap <Esc>k <C-U>
 nnoremap ö /
 nnoremap Ö ?
 
+" swap , and ; (makes more sense on german keyboard)
+nnoremap , ;
+nnoremap ; ,
+
 " goto mark 
 nnoremap ä `
 
@@ -66,3 +71,7 @@ noremap <Esc>O <Esc>O<Esc>j
 noremap <Esc>u :undo<CR>
 noremap <Esc>U :redo<CR>
 
+" multiple buffers
+nnoremap # :buffer 
+nnoremap <Esc>n :bnext<CR>
+nnoremap <Esc>p :bprevious<CR>
