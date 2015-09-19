@@ -288,6 +288,7 @@ assign [class="(?i)thunderbird"]        mail
 assign [class="(?i)subl"]               sublime
 assign [class="(?i)jetbrains-studio"]   development
 assign [class="Telegram"]               telegram
+assign [class="(?i)kaffeine"]           tv
 
 
 

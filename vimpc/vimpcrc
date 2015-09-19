@@ -23,8 +23,8 @@ set groupignorethe
 set windows library,playlist
 set window playlist
 
-hi tab yellowbg
-hi status yellowbg
+hi tab greenbg
+hi status greenbg
 hi progress redfg
 hi song whitefg
 hi id cyanfg
