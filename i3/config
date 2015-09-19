@@ -41,9 +41,9 @@ exec "setxkbmap de_sflip"
 # turn off screensaver and display power management
 exec --no-startup-id "xset dpms 0 0 0 && xset s noblank && xset s off"
 
-# start cinnamon shit for gtk button design etc.
-# TODO: start manjaro xfce daemons
+# daemon for theme settings and shit
 #exec --no-startup-id "cinnamon-settings-daemon"
+exec --no-startup-id "xfsettingsd --sm-client-disable"
 
 # be prompted for ssh passphrase only one time at login
 # ssh-agent seems to be invoked by my login manager or something
@@ -95,7 +95,7 @@ exec --no-startup-id "feh --bg-scale ~/.i3/wallpaper"
 # is used in the bar {} block below.
 # font pango:NotoSans 10
 # font pango:Terminus 10
-font pango:monospace 8
+font pango:Monospace 8
 # font pango:DejaVu Sans Mono 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
@@ -245,6 +245,7 @@ bindsym      Print exec "gnome-screenshot"
 ###############################################################################
 
 # windows always floating/fullscreen
+for_window [class="(?i)thunar"]         floating enable 
 for_window [class="(?i)gcolor2"]        floating enable 
 for_window [class="(?i)nemo"]           floating enable 
 for_window [class="(?i)file-roller"]    floating enable 
@@ -261,6 +262,7 @@ assign [class="(?i)chrom"]              chrome
 assign [class="(?i)thunderbird"]        mail
 assign [class="(?i)subl"]               sublime
 assign [class="(?i)jetbrains-studio"]   development
+assign [class="Telegram"]               telegram
 
 
 
