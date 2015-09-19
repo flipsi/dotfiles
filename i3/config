@@ -12,31 +12,31 @@
 
 # apart from i3, install...
 
+
 # i3lock
 # dmenu
 # quickswitch [https://github.com/OliverUv/quickswitch-for-i3]
 # rofi [https://davedavenport.github.io/rofi/]
 
 
+
 ###############################################################################
-###########  GENERAL  #########################################################
+###########  AUTOSTART  #######################################################
 ###############################################################################
 
+# composite manager for window overlays, smooth workspace changes, etc.
+exec --no-startup-id "compton -b"
 
 # set second output (monitor) with a shell command like this
 # exec "xrandr --output HDMI2 --auto --right-of eDP1"
 # exec "xrandr --output HDMI2 --auto --below eDP1"
-
-
-# composite manager
-exec "compton -b"
 
 # set keyboard layout 
 exec "setxkbmap de_sflip"
 
 
 # turn on num block
-#exec --no-startup-id "numlockx"
+exec --no-startup-id "numlockx"
 
 # turn off screensaver and display power management
 exec --no-startup-id "xset dpms 0 0 0 && xset s noblank && xset s off"
@@ -48,7 +48,38 @@ exec --no-startup-id "xfsettingsd --sm-client-disable"
 # be prompted for ssh passphrase only one time at login
 # ssh-agent seems to be invoked by my login manager or something
 # (instead of gnome keyring)
-exec --no-startup-id "ssh-add"
+exec "ssh-add"
+
+# start the gnome network manager, because it automatically connects to eduroam etc.
+# and kill it after a few seconds when it is not needed anymore
+# exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
+
+
+
+###############################################################################
+###########  MOUSE  ###########################################################
+###############################################################################
+
+# hide mouse cursor
+exec unclutter
+
+# disable touchpad at start
+exec "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
+
+# media key to toggle touchpad
+bindsym XF86TouchpadToggle  exec "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
+
+# focus when mouse moves
+focus_follows_mouse no
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+
+
+###############################################################################
+###########  GENERAL  #########################################################
+###############################################################################
 
 # modifier key: windows/super
 set $mod Mod4
@@ -71,12 +102,6 @@ set $SHELLSCRIPT_PATH /home/sflip/shellscripts
 
 # rofi options
 set $ROFI_OPTIONS -font 'monospace 8' -bg '#1E1E1E' -fg '#FFFFFF' -hlbg '#83B45C' -hlfg '#000000' -bg-active '#1E1E1E' -fg-active '#83B45C' -hlfg-active '#000000' -hlbg-active '#83B45C' -location 1 -kb-remove-word-back 'Alt+BackSpace'
-
-
-# start the gnome network manager, because it automatically connects to eduroam etc.
-# and kill it after a few seconds when it is not needed anymore
-exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
-
 
 
 
@@ -109,8 +134,10 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # font, it doesn’t scale on retina/hidpi displays.
 
 
-# borders and gaps
+# borders
 for_window [class="^.*"] border pixel 1
+
+# gaps (require the i3gaps fork)
 # gaps inner 10
 # gaps outer 2
 # smart_gaps on
@@ -179,11 +206,9 @@ floating_modifier $mod
 
 
 
-
 ###############################################################################
 ###########  SYSTEM  ##########################################################
 ###############################################################################
-
 
 # exit i3 (logs you out of your X session)
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
