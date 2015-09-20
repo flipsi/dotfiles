@@ -54,26 +54,12 @@ exec "ssh-add"
 # and kill it after a few seconds when it is not needed anymore
 # exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
 
-
-
-###############################################################################
-###########  MOUSE  ###########################################################
-###############################################################################
-
 # hide mouse cursor
 exec unclutter
 
 # disable touchpad at start
 exec "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
-
-# media key to toggle touchpad
-bindsym XF86TouchpadToggle  exec "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
-
-# focus when mouse moves
-focus_follows_mouse no
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+exec "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'Device Enabled' 0"
 
 
 
@@ -81,8 +67,23 @@ floating_modifier $mod
 ###########  GENERAL  #########################################################
 ###############################################################################
 
+# path to my shellscripts
+set $SHELLSCRIPT_PATH /home/sflip/shellscripts
+
+# rofi options
+set $ROFI_OPTIONS -font 'monospace 8' -bg '#1E1E1E' -fg '#FFFFFF' -hlbg '#83B45C' -hlfg '#000000' -bg-active '#1E1E1E' -fg-active '#83B45C' -hlfg-active '#000000' -hlbg-active '#83B45C' -location 1 -kb-remove-word-back 'Alt+BackSpace'
+
 # modifier key: windows/super
 set $mod Mod4
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# focus when mouse moves
+focus_follows_mouse no
+
+# enable/disable touchpad
+bindsym XF86TouchpadToggle  exec "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
 
 # reload the configuration file
 # or restart i3 [preserves session]
@@ -95,13 +96,6 @@ mode "$reload_restart" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-
-
-# path to my shellscripts
-set $SHELLSCRIPT_PATH /home/sflip/shellscripts
-
-# rofi options
-set $ROFI_OPTIONS -font 'monospace 8' -bg '#1E1E1E' -fg '#FFFFFF' -hlbg '#83B45C' -hlfg '#000000' -bg-active '#1E1E1E' -fg-active '#83B45C' -hlfg-active '#000000' -hlbg-active '#83B45C' -location 1 -kb-remove-word-back 'Alt+BackSpace'
 
 
 
@@ -184,29 +178,6 @@ bindsym $mod+Shift+b bar mode toggle
 
 
 ###############################################################################
-###########  MOUSE  ###########################################################
-###############################################################################
-
-# hide mouse cursor
-exec unclutter
-
-
-# disable touchpad at start
-exec "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
-
-# toggle touchpad
-bindsym XF86TouchpadToggle  exec "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
-
-
-# focus when mouse moves
-focus_follows_mouse no
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-
-
-###############################################################################
 ###########  SYSTEM  ##########################################################
 ###############################################################################
 
@@ -260,8 +231,8 @@ bindsym $mod+plus            exec "amixer sset Master 1%+"
 
 
 # take a screenshot
-bindsym $mod+Print exec "gnome-screenshot"
-bindsym      Print exec "gnome-screenshot"
+bindsym $mod+Print exec "xfce4-screenshooter --fullscreen --open krita"
+bindsym      Print exec "xfce4-screenshooter --fullscreen --open krita"
 
 
 
