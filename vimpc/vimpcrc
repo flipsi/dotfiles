@@ -23,8 +23,8 @@ set groupignorethe
 set windows library,playlist
 set window playlist
 
-hi tab greenbg
-hi status greenbg
+hi tab greenfg
+hi status redbg
 hi progress redfg
 hi song whitefg
 hi id cyanfg
@@ -61,7 +61,7 @@ map F :playlist<C-m>f
 
 " search
 map ö /
-map Ö :browse<C-m>gg/
+map Ö :find 
 
 " goto random line
 map r %

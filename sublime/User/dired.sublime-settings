@@ -17,6 +17,7 @@
 		"sublime package dir": "/home/sflip/.config/sublime-text-3/Packages/",
 		"local apache document root": "/var/www/html/"
 	},
+    "dired_open_on_jump": false,
     "dired_hijack_new_window": false,
     "dired_reuse_view": true,
 	"dired_show_hidden_files": false,
