@@ -260,7 +260,13 @@ assign [class="(?i)thunderbird"]        mail
 assign [class="(?i)subl"]               sublime
 assign [class="(?i)jetbrains-studio"]   development
 assign [class="Telegram"]               telegram
+assign [class="(?i)skype"]              skype
+assign [class="(?i)pokerstars"]         poker
 assign [class="(?i)kaffeine"]           tv
+assign [class="(?i)qjackctl"]           sound
+assign [class="(?i)pavucontrol"]        sound
+assign [class="(?i)audacity"]           rec
+assign [class="(?i)ardour"]             rec
 
 
 
