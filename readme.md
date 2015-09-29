@@ -40,6 +40,7 @@ where `TARGET` can either be an item from the targets listed below, or `all` to 
 * `lesskey` keybindings and more for less
 * `luakit` lightweight web browser
 * `mpd` music player daemon
+* `mutt` a really nerdy mail client for the terminal
 * `muttator` vim-addon for thunderbird
 * `pentadactyl` vim-addon for firefox
 * `ranger` file manager for the terminal

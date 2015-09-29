@@ -1,0 +1,135 @@
+# passwort file wurde angelegt als '~/.mutt.credentials' mit dem inhalt
+#       set my_pass_gmail = ""
+#       set my_pass_microsoft = ""
+#       set my_pass_mailde = ""
+#       set my_pass_webde-pmoers = ""
+#       set my_pass_webde-keinschweinehund = ""
+# und verschlüsselt via 'gpg -e -r "Philipp Moers <philipp.moers@mail.de>" ~/.mutt.credentials"
+
+# passwörter einlesen
+source "gpg -dq ~/.mutt.credentials.gpg |"
+
+
+# path to mutt files
+set my_muttdir = "~/dotfiles/mutt"
+
+
+# hooks
+account-hook soziflip@imap.googlemail.com 'set imap_user=soziflip imap_pass=$my_pass_gmail'
+account-hook @mail.de 'set imap_user="philipp.moers@mail.de" imap_pass=$my_pass_mailde'
+account-hook pmoers@imap.web.de 'set imap_user=pmoers imap_pass=$my_pass_webde-pmoers'
+account-hook keinschweinehund@imap.web.de 'set imap_user=keinschweinehund imap_pass=$my_pass_webde-keinschweinehund'
+
+folder-hook soziflip@imap.googlemail.com 'source $my_muttdir/accounts/gmail'
+folder-hook philipp.moers@mail.de 'source $my_muttdir/accounts/mailde'
+folder-hook pmoers@imap.web.de 'source $my_muttdir/accounts/webde-pmoers'
+folder-hook keinschweinehund@imap.web.de 'source $my_muttdir/accounts/webde-keinschweinehund'
+
+
+# shortcuts zum wechseln der mailbox
+# macro index <esc>1 "<change-folder>imaps://soziflip@imap.googlemail.com<enter>"
+# macro index <esc>2 "<change-folder>imap://pmoers@imap.web.de<enter>"
+# macro index <esc>3 "<change-folder>imap://keinschweinehund@imap.web.de<enter>"
+# macro index t "c=<tab><tab><tab>"            #drücke t, um in den Ordnern des Postfaches zu navigieren
+# macro index ag 'source $my_muttdir/accounts/gmail'
+# macro index awp 'source $my_muttdir/accounts/webde-pmoers'
+# macro index awk 'source $my_muttdir/accounts/webde-keinschweinehund'
+macro index am '<sync-mailbox><enter-command>source $my_muttdir/accounts/mailde<enter><change-folder>!<enter>'
+macro index ag '<sync-mailbox><enter-command>source $my_muttdir/accounts/gmail<enter><change-folder>!<enter>'
+macro index awp '<sync-mailbox><enter-command>source $my_muttdir/accounts/webde-pmoers<enter><change-folder>!<enter>'
+macro index awk '<sync-mailbox><enter-command>source $my_muttdir/accounts/webde-keinschweinehund<enter><change-folder>!<enter>'
+
+
+#legt fest, welche Mailboxen zu Anfang bekannt sind und beim Start abgerufen werden sollen
+#mailboxes imaps://soziflip@imap.googlemail.com/ #siehe auch http://blog.mafr.de/2012/09/09/mutt-too-many-errors/
+mailboxes imaps://philipp.moers@mail.de
+# mailboxes imap://pmoers@imap.web.de           #sollte mutt nur langsam funktionieren, kannes eventuell hieran liegen
+# mailboxes imap://keinschweinehund@imap.web.de           #sollte mutt nur langsam funktionieren, kannes eventuell hieran liegen
+
+#Beim Start folgendes konto öffnen
+#source $my_muttdir/accounts/gmail
+source $my_muttdir/accounts/mailde
+
+
+
+
+set nobeep                                  # don't be noisy
+
+set sendmail="/usr/bin/msmtp"               #Pfad zu dem Programm, das die Mails verschicken soll
+set envelope_from=yes                       #übergibt msmtp automatisch den richtigen Absender
+set edit_hdrs                               #Empfänger u.a. auch im Editor bearbeiten
+set signature ="$my_muttdir/signature"          #Datei, die den Text der Signatur enthält
+set attribution="%f schrieb am %d:"         #Zitatkennzeichnung in unserer Muttersprache :)
+
+
+unset allow_8bit                            #u.U. verbesserte Darstellung von Umlauten
+set date_format="%a, %d. %b %H:%M"          #gibt an, wie das Datum formatiert wird
+set index_format="%4C %Z %D %-22.22F (%?l?%4l&%4c?) %s" #Format der Mail-Übersicht
+set folder_format="%2C %8s %d %t %N %f"     #Format des Datei-Browsers
+set pager_index_lines=10                    #Anzahl der angezeigten Mails in der Übersicht
+
+
+# HTML Mails anzeigen
+# (siehe mailcap)
+auto_view text/html
+
+
+#Editor, der zum Verfassen der E-Mail benutzt wird, hier Vim beginnend im Einfügemodus auf der ersten Leerzeile und Zeilenumbruch bei 70 Zeichen
+set editor="vim -c 'startinsert' -c 'set tw=70 et' -c 'set wrap' '+/^$'" 
+#set editor="subl -w" 
+
+
+# adressbuch mit abook
+# set alias_file='$my_muttdir/alias'
+# source $my_muttdir/alias
+# set query_command= "abook --mutt-query '%s'" macro index,pager A "<pipe-message>abook --add-email-quiet<return>" "add the sender address to abook"
+
+# adressbuch ohne abook
+source $my_muttdir/alias
+
+
+# prevent strange linebreaks
+set text_flowed = yes
+
+
+# my keybindings
+source $my_muttdir/keybindings
+
+
+# sort mails by thread and date
+set sort = threads
+set sort_browser = reverse-date
+# set sort_aux=date-sent
+# set sort_aux = last-date-received
+set sort_aux = reverse-last-date-received
+
+
+
+# Colors
+color attachment brightmagenta default
+color error brightred default # errors yell at you in red
+color hdrdefault yellow default # headers
+color indicator black white # currently selected message
+color markers yellow default # the + for wrapped pager lines
+color message brightred default # informational messages, not mail
+color normal white default # plain text
+color quoted green default # quoted text
+color search brightgreen default # hilite search patterns in the pager
+color signature red default # signature (after "-- ") is red
+color status default yellow # status bar 
+color tilde blue default # ~'s after message body
+color tree red default # thread tree in index menu is magenta
+color signature brightred default
+color underline yellow default
+color header red default ^(From|Subject): # Important headers
+color body red default "(ftp|http)://[^ ]+" # picks up URLs
+color body red default [-a-z_0-9.]+@[-a-z_0-9.]+
+# Coloring quoted text - coloring the first 7 levels:
+color quoted cyan default
+color quoted1 green default
+color quoted2 yellow default
+color quoted3 red default
+color quoted4 cyan default
+color quoted5 yellow default
+color quoted6 red default
+color quoted7 green default

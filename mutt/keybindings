@@ -1,0 +1,21 @@
+# abort command (instead of ESC) with \Cg
+
+bind generic gg first-entry
+bind index gg first-entry
+bind generic G last-entry
+bind index G last-entry
+
+bind index \Cf next-page
+bind index \Cb previous-page
+bind index \Cd noop
+bind index \Cu previous-page
+
+bind index / search
+bind pager / search
+bind index ö search
+bind pager ö search
+bind index N search-opposite
+bind pager N search-opposite
+
+bind pager j next-line
+bind pager k previous-line

@@ -1,0 +1,8 @@
+set from="keinschweinehund@web.de"
+set hostname="web.de"
+set imap_login="keinschweinehund"
+set imap_pass=$my_pass_webde-keinschweinehund
+set folder="imap://keinschweinehund@imap.web.de/"         #Mailbox, die aufgerufen wird
+set postponed="=Entwurf"      #Verzeichnis, in dem die Entwürfe abgelegt werden. Das = ist eine Abkürzung für den Inhalt von folder
+set record="=Gesendet"        #Verzeichnis für die versendeten Mails  
+set spoolfile="=INBOX"        #Verzeichnis, das zu Beginn aufgerufen werden soll

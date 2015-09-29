@@ -1,0 +1,3 @@
+text/html;                      elinks %s; nametemplate=%s.html
+text/html;                      elinks -dump %s; nametemplate=%s.html; copiousoutput
+text/html; html2text -width 70; copiousoutput; description=HTML Text; test=type html2text >/dev/null
