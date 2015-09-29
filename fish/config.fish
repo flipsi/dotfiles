@@ -18,3 +18,7 @@ set -x LESS " -c -R "
 #     set -x MPD_HOST (ifconfig wlan0 | grep 'inet ' | sed 's/.*addr:\(.*\)  Bcast.*/\1/')
 # end
 set -x MPD_HOST (hostname)
+
+# keychain takes care of ssh-agent and can also do gpg
+eval (command keychain --eval --quiet ~/.ssh/id_rsa)
+

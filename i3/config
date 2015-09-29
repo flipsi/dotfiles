@@ -45,11 +45,6 @@ exec --no-startup-id "xset dpms 0 0 0 && xset s noblank && xset s off"
 #exec --no-startup-id "cinnamon-settings-daemon"
 exec --no-startup-id "xfsettingsd --sm-client-disable"
 
-# be prompted for ssh passphrase only one time at login
-# ssh-agent seems to be invoked by my login manager or something
-# (instead of gnome keyring)
-exec "ssh-add"
-
 # start the gnome network manager, because it automatically connects to eduroam etc.
 # and kill it after a few seconds when it is not needed anymore
 # exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
