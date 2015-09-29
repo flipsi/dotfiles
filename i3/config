@@ -60,6 +60,7 @@ exec unclutter
 # disable touchpad at start
 exec "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
 exec "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'Device Enabled' 0"
+exec "xinput --set-prop 'FocalTechPS/2 FocalTech FocalTech Touchpad' 'Device Enabled' 0"
 
 
 
