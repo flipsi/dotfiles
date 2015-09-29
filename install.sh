@@ -17,7 +17,8 @@ Usage: install.sh [OPTIONS] TARGET
     TARGET := { all | bash | cmus | dactyl | elinks | fish | ghci | git | i3 | 
                 lesskey | luakit | mpd | mutt | muttator | pentadactyl | 
                 ranger | sublime-text-3 | telegram-cli | tmux | turses | vim | 
-                vimpc | vimperator | vimus | vlc | xkb | xmonad | zathura }
+                vimpc | vimperator | vimus | vlc | xfce4 | xkb | xmonad | 
+                zathura }
 EOF
 }
 
@@ -137,6 +138,13 @@ function create_link_for_target() {
             create_link $PWD/vlc $HOME/.config/vlc
             ;;
 
+        xfce4)
+            mkdir -p $HOME/.config/xfce4
+            mkdir -p $HOME/.config/xfce4/terminal
+            create_link $PWD/xfce4/terminal/terminalrc $HOME/.config/xfce4/terminal/terminalrc
+            create_link $PWD/xfce4/xfce4-screenshooter $HOME/.config/xfce4/xfce4-screenshooter
+            ;;
+
         xkb)
             create_link $PWD/xkb/symbols/de_sflip /usr/share/X11/xkb/symbols/de_sflip
             setxkbmap de_sflip
@@ -232,6 +240,7 @@ else
         create_link_for_target lesskey
         create_link_for_target luakit
         create_link_for_target mpd
+        create_link_for_target mutt
         create_link_for_target muttator
         create_link_for_target pentadactyl
         create_link_for_target ranger
@@ -244,6 +253,7 @@ else
         create_link_for_target vimperator
         create_link_for_target vimus
         create_link_for_target vlc
+        create_link_for_target xfce4
         create_link_for_target xkb
         create_link_for_target xmonad
         create_link_for_target zathura

@@ -53,6 +53,7 @@ where `TARGET` can either be an item from the targets listed below, or `all` to 
 * `vimperator` vim-addon for firefox
 * `vimus` mpd client for the terminal
 * `vlc` great media player
+* `xfce4` some tools of the xfce desktop environment
 * `xkb` keyboard layout for X
 * `xmonad` a haskell based window manager
 * `zathura` pdf viewer
