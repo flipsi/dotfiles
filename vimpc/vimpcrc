@@ -23,6 +23,8 @@ set groupignorethe
 set windows library,playlist
 set window playlist
 
+set songformat {%a - %t}|{%f} $E$R %b $H[$H%n$H]$H  $H[$H%l$H]$H
+
 hi tab greenfg
 hi status redbg
 hi progress redfg

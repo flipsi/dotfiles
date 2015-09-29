@@ -139,7 +139,7 @@ bind_to_address       "0.0.0.0"   # remote access does work
 # This setting enables automatic update of MPD's database when files in 
 # music_directory are changed.
 #
-#auto_update    "yes"
+auto_update    "yes"
 #
 # Limit the depth of the directories being watched, 0 means only watch
 # the music directory itself.  There is no limit by default.
@@ -358,6 +358,7 @@ audio_output {
 # This setting is off by default.
 #
 #replaygain			"album"
+replaygain			"auto"
 #
 # This setting sets the pre-amp used for files that have ReplayGain tags. By
 # default this setting is disabled.
@@ -383,6 +384,7 @@ audio_output {
 # equal "loudness". This setting is disabled by default.
 #
 #volume_normalization		"no"
+volume_normalization		"yes"
 #
 ###############################################################################
 
