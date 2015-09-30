@@ -1,8 +1,10 @@
 # don't show welcome message
 set fish_greeting ""
 
+# find out host once (useful for multiple things, but saves cycles)
+set hostname (hostname)
 
-# environment variables
+
 # set PATH /opt/ghc-7.8.2/bin $PATH
 # set PATH /opt/ghc-7.6.3/bin $PATH
 # set PATH /opt/haskell-platform-2013.2.0.0/bin/ $PATH
@@ -14,11 +16,16 @@ set PATH ~/bin $PATH
 set -x LESSOPEN "| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 set -x LESS " -c -R "
 
-# if test (hostname) = "asterix"
+
+# music player daemon
+# if test $hostname = "asterix"
 #     set -x MPD_HOST (ifconfig wlan0 | grep 'inet ' | sed 's/.*addr:\(.*\)  Bcast.*/\1/')
 # end
-set -x MPD_HOST (hostname)
+set -x MPD_HOST $hostname
+
 
 # keychain takes care of ssh-agent and can also do gpg
-eval (command keychain --eval --quiet ~/.ssh/id_rsa)
+if test $hostname = "asterix" -o $hostname = "obelix"
+    eval (command keychain --eval --quiet ~/.ssh/id_rsa)
+end
 
