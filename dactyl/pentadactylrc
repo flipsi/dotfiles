@@ -38,6 +38,7 @@ set autocomplete=!/ex/(open|tabopen),.?
 " QuickMarks
 qmark b https://finanzportal.fiducia.de/g14pepe/entry?rzid=XC&rzbk=0151
 qmark u https://uniworx.ifi.lmu.de/
+qmark o https://stackoverflow.com/users/login
 qmark f https://de-de.facebook.com/
 qmark g https://github.com/sflip
 qmark t https://twitter.com/
