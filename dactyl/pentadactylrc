@@ -59,7 +59,10 @@ colorscheme sflorange
 " KEYBINDINGS
 
 " reload this config file
-map <F5> :source ~/.pentadactylrc<CR>
+map <F5> :reloadconfig<CR>
+:command! reloadconfig
+        \ -description 'Source the configuration file for pentadactyl'
+        \ :source ~/.pentadactylrc
 
 " switch tabs"
 map <A-n> :tabnext<CR>
@@ -117,6 +120,10 @@ imap <A-f> <C-Right>
 imap <A-b> <C-Left>
 cmap <A-f> <C-Right>
 cmap <A-b> <C-Left>
+imap <C-p> <Up>
+imap <C-n> <Down>
+cmap <C-p> <Up>
+cmap <C-n> <Down>
 
 " delete/kill word
 imap <A-BS> <C-W>
@@ -141,9 +148,36 @@ map ö /
 " Developer Tools (console)
 map <C-A-i> <C-S-k>
 map <C-A-o> <C-S-i> 
+map ss :js!<CR>
 
 
 " NoScript
 map <A-s>p :set noscript-sites!=<A-Tab>
 map <A-s>t :set noscript-tempsites!=<A-Tab>
 
+
+" recoloring for white backgrounds
+" TODO: somehow this seems to affect the pentadactyl gui elements rather than the document. FIX THIS
+map sr :recolor<CR>
+:command! recolor
+        \ -description 'Replace white colors with some kind of grey'
+        \ :javascript <<EOF
+        \     var elms = document.querySelectorAll('*[style]');
+        \     Array.prototype.forEach.call(elms, function(elm) {
+        \       //var clr = elm.style.backgroundColor || '';
+        \       var clr = document.defaultView.getComputedStyle(elm, '').backgroundColor || '';
+        \       //if (clr && clr != 'transparent') alert(clr);
+        \       clr = clr.replace(/\s/g, '').toLowerCase();
+        \       switch (clr) {
+        \           case '#fff':
+        \           case '#ffffff':
+        \           case 'rgb(255,255,255)':
+        \           case 'rgba(255,255,255,0)':
+        \               elm.style.backgroundColor = '#ddd';
+        \           break;
+        \       }
+        \    });
+        \EOF
+map sR :unrecolor<CR>
+
+map st :js alert (document.title);<CR>
