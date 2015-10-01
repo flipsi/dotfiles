@@ -52,7 +52,8 @@ qmark v http://localhost/projects/govp2/
 "highlight StatusLineNormal background-color: #DDD
 "highlight Download[active] background-color: #FFEFB9
 "colorscheme solarized-light
-colorscheme sflorange
+"colorscheme sflorange
+colorscheme sfluen
 
 
 
@@ -180,4 +181,4 @@ map sr :recolor<CR>
         \EOF
 map sR :unrecolor<CR>
 
-map st :js alert (document.title);<CR>
+map st :echo document.title;<CR>
