@@ -66,7 +66,8 @@ exec "xinput --set-prop 'FocalTechPS/2 FocalTech FocalTech Touchpad' 'Device Ena
 # path to my shellscripts
 set $SHELLSCRIPT_PATH /home/sflip/shellscripts
 
-# rofi options
+# launcher options
+set $DMENU_OPTIONS -i -l 5 -nb '#1E1E1E' -sb '#83B45C' -sf '#000000'
 set $ROFI_OPTIONS -font 'monospace 8' -bg '#1E1E1E' -fg '#FFFFFF' -hlbg '#83B45C' -hlfg '#000000' -bg-active '#1E1E1E' -fg-active '#83B45C' -hlfg-active '#000000' -hlbg-active '#83B45C' -location 1 -kb-remove-word-back 'Alt+BackSpace'
 
 # modifier key: windows/super
@@ -280,12 +281,11 @@ workspace_layout tabbed
 bindsym $mod+o       exec "xfce4-terminal --command='tmux -2'"
 bindsym $mod+Shift+o       exec "gnome-terminal --hide-menubar --command='tmux -2'"
 
-# start dmenu (a program launcher)
-# bindsym $mod+Shift+d exec "dmenu_run -i -l 12 -nb '#1E1E1E' -sb '#83B45C' -sf '#000000'"
-# start dmenu only with programs that have a .desktop-file
-bindsym $mod+Return exec "i3-dmenu-desktop -dmenu='dmenu -i -l 12 -nb #1E1E1E -sb #83B45C -sf #000000'"
-# start rofi (a program launcher)
-bindsym $mod+Shift+Return exec "rofi -show run $ROFI_OPTIONS"
+# launch an application (that has a .desktop-file)
+bindsym $mod+Return exec "i3-dmenu-desktop -dmenu='dmenu $DMENU_OPTIONS'"
+# launch any application
+bindsym $mod+Shift+Return exec "dmenu_run $DMENU_OPTIONS"
+# bindsym $mod+Shift+Return exec "rofi -show run $ROFI_OPTIONS"
 
 # kill focused container
 bindsym $mod+BackSpace kill
