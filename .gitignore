@@ -3,6 +3,11 @@
 dactyl/pentadactyl/info
 
 
+#### ranger
+
+ranger/colorschemes/__init__.py
+ranger/colorschemes/__pycache__
+
 
 #### sublime
 
