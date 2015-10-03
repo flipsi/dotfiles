@@ -228,8 +228,10 @@ bindsym $mod+plus            exec "amixer sset Master 1%+"
 
 
 # take a screenshot
-bindsym $mod+Print exec "xfce4-screenshooter --fullscreen --open krita"
-bindsym      Print exec "xfce4-screenshooter --fullscreen --open krita"
+bindsym $mod+Print exec "xfce4-screenshooter --fullscreen --save ~/img-screenshots"
+bindsym      Print exec "xfce4-screenshooter --fullscreen --save ~/img-screenshots"
+bindsym $mod+Shift+Print exec "xfce4-screenshooter --fullscreen --open krita"
+bindsym      Shift+Print exec "xfce4-screenshooter --fullscreen --open krita"
 
 
 
