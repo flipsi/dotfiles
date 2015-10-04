@@ -65,6 +65,12 @@ map <F5> :reloadconfig<CR>
         \ -description 'Source the configuration file for pentadactyl'
         \ :source ~/.pentadactylrc
 
+" gui options
+map <C-g>s :set guioptions+=s<CR>
+map <C-g>S :set guioptions-=s<CR>
+map <C-g>t :set guioptions+=T<CR>
+map <C-g>T :set guioptions-=T<CR>
+
 " switch tabs"
 map <A-n> :tabnext<CR>
 map <A-p> :tabprevious<CR>
