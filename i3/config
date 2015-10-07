@@ -67,8 +67,8 @@ exec "xinput --set-prop 'FocalTechPS/2 FocalTech FocalTech Touchpad' 'Device Ena
 set $SHELLSCRIPT_PATH /home/sflip/shellscripts
 
 # launcher options
-set $DMENU_OPTIONS -i -l 5 -nb '#1E1E1E' -sb '#83B45C' -sf '#000000'
-set $ROFI_OPTIONS -font 'monospace 8' -bg '#1E1E1E' -fg '#FFFFFF' -hlbg '#83B45C' -hlfg '#000000' -bg-active '#1E1E1E' -fg-active '#83B45C' -hlfg-active '#000000' -hlbg-active '#83B45C' -location 1 -kb-remove-word-back 'Alt+BackSpace'
+set $DMENU_OPTIONS -i -l 5 -nb '#1E1E1E' -sb '#AFFF58' -sf '#000000'
+set $ROFI_OPTIONS -font 'monospace 8' -bg '#1E1E1E' -fg '#FFFFFF' -hlbg '#AFFF58' -hlfg '#000000' -bg-active '#1E1E1E' -fg-active '#AFFF58' -hlfg-active '#000000' -hlbg-active '#AFFF58' -location 1 -kb-remove-word-back 'Alt+BackSpace'
 
 # modifier key: windows/super
 set $mod Mod4
@@ -156,6 +156,13 @@ bar {
     status_command      python3 ~/.i3/i3pystatus
     position            top
     workspace_buttons   yes
+    # separator_symbol    " | "
+    # separator_symbol    " ǁ "
+    # separator_symbol    " ⠶ "
+    # separator_symbol    " ⣶ "
+    separator_symbol    " ⣿ "
+    # separator_symbol    " Ꙭ "
+    tray_output         none
     colors {
         background  #1E1E1E
         statusline  #DDDDDD
@@ -281,7 +288,7 @@ workspace_layout tabbed
 
 # start a terminal
 bindsym $mod+o       exec "xfce4-terminal --command='tmux -2'"
-bindsym $mod+Shift+o       exec "gnome-terminal --hide-menubar --command='tmux -2'"
+bindsym $mod+Shift+o exec "gnome-terminal --hide-menubar --command='tmux -2'"
 
 # launch an application (that has a .desktop-file)
 bindsym $mod+Return exec "i3-dmenu-desktop -dmenu='dmenu $DMENU_OPTIONS'"
@@ -411,13 +418,33 @@ bindsym $mod+Shift+0 move container to workspace 10
 # move container to new workspace (tmux 'break')
 bindsym $mod+Shift+i exec "quickswitch --journey -E"
 # move container to specific workspace
-bindsym $mod+Shift+w exec "quickswitch --journey"
-bindsym $mod+Shift+numbersign move container to workspace back_and_forth
+bindsym $mod+Shift+numbersign exec "quickswitch --journey"
+bindsym $mod+Shift+w          exec "quickswitch --journey"
 bindsym $mod+Shift+space move container to workspace back_and_forth
 
-# move container/workspace to other output
-bindsym $mod+u       move container to output down; workspace back_and_forth
-bindsym $mod+Shift+u move workspace to output down
 
+# move container to other output
+bindsym $mod+u mode "$move_container_to_output"
+set $move_container_to_output Move container to output (h) left, (l) right, (j) down, (k) up
+mode "$move_container_to_output" {
+    bindsym h move container to output left; workspace back_and_forth
+    bindsym l move container to output right; workspace back_and_forth
+    bindsym h move container to output down; workspace back_and_forth
+    bindsym k move container to output up; workspace back_and_forth
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
-
+# move workspace to other output
+bindsym $mod+Shift+u mode "$move_workspace_to_output"
+set $move_workspace_to_output Move workspace to output (h) left, (l) right, (j) down, (k) up
+mode "$move_workspace_to_output" {
+    bindsym h move workspace to output left
+    bindsym l move workspace to output right
+    bindsym j move workspace to output down
+    bindsym k move workspace to output up
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
