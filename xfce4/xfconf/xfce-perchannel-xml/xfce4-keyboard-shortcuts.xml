@@ -45,8 +45,9 @@
       <property name="&lt;Super&gt;Left" type="string" value="xbacklight -dec 3"/>
       <property name="&lt;Super&gt;Right" type="string" value="xbacklight -inc 3"/>
       <property name="Print" type="string" value="xfce4-screenshooter -f -d 0 -s /home/sflip/img-screenshots"/>
-      <property name="&lt;Super&gt;Return" type="string" value="xfce4-popup-whiskermenu"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;Return" type="string" value="xfce4-appfinder --collapsed"/>
+      <property name="&lt;Super&gt;Return" type="string" value="rofi -show run rofi -show run -font &apos;monospace 10&apos; -bg &apos;#1E1E1E&apos; -fg &apos;#FFFFFF&apos; -hlbg &apos;#AFFF58&apos; -hlfg &apos;#000000&apos; -bg-active &apos;#1E1E1E&apos; -fg-active &apos;#AFFF58&apos; -hlfg-active &apos;#000000&apos; -hlbg-active &apos;#AFFF58&apos;  -kb-remove-word-back &apos;Alt+BackSpace&apos;
+"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
