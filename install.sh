@@ -142,6 +142,7 @@ function create_link_for_target() {
         xfce4)
             mkdir -p $HOME/.config/xfce4
             mkdir -p $HOME/.config/xfce4/terminal
+            create_link $PWD/xfce4/xfconf $HOME/.config/xfce4/xfconf
             create_link $PWD/xfce4/terminal/terminalrc $HOME/.config/xfce4/terminal/terminalrc
             create_link $PWD/xfce4/xfce4-screenshooter $HOME/.config/xfce4/xfce4-screenshooter
             ;;
