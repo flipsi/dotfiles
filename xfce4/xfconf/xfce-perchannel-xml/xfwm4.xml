@@ -65,20 +65,21 @@
     <property name="unredirect_overlays" type="bool" value="true"/>
     <property name="urgent_blink" type="bool" value="false"/>
     <property name="use_compositing" type="bool" value="true"/>
-    <property name="workspace_count" type="int" value="4"/>
+    <property name="workspace_count" type="int" value="3"/>
     <property name="wrap_cycle" type="bool" value="true"/>
     <property name="wrap_layout" type="bool" value="true"/>
     <property name="wrap_resistance" type="int" value="10"/>
     <property name="wrap_windows" type="bool" value="false"/>
     <property name="wrap_workspaces" type="bool" value="false"/>
     <property name="workspace_names" type="array">
+      <value type="string" value="music"/>
+      <value type="string" value="fox"/>
       <value type="string" value="cli"/>
-      <value type="string" value="snd"/>
-      <value type="string" value="telegram"/>
-      <value type="string" value="Workspace 4"/>
-      <value type="string" value="Workspace 5"/>
-      <value type="string" value="Workspace 6"/>
+      <value type="string" value="sound"/>
+      <value type="string" value="rec"/>
+      <value type="string" value="netflix"/>
       <value type="string" value="Workspace 7"/>
+      <value type="string" value="tv"/>
     </property>
     <property name="tile_on_move" type="bool" value="true"/>
     <property name="titleless_maximize" type="bool" value="true"/>
