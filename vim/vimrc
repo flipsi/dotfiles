@@ -41,6 +41,7 @@ nnoremap <F5> :source ~/.vimrc<CR>
 " ZZ to save and quit
 " Q  to quit vim quickly (will prompt if the file was changed but not saved)
 nnoremap Q :quit<CR>
+nmap <C-D> Q
 
 " scroll (alt key)
 noremap <Esc>j <C-D> 

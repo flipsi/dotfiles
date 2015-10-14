@@ -8,6 +8,8 @@
 
 ä goto-mark
 
+^D quit
+
 
 #env
 LESS = -i -c -R
