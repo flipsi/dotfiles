@@ -23,12 +23,6 @@ set editor='subl --wait'
 set defsearch=duckduckgo
 "set defsearch=google
 
-" duckduckgo advanced search
-" \ to go to first result immediately
-map \\ :tabopen \ 
-" ! to use other search engine (like 'ebay' or 'osm') 
-map ! :tabopen !
-
 " completions order
 set complete=search,bookmark,suggestion,file
 
@@ -60,112 +54,121 @@ colorscheme sfluen
 " KEYBINDINGS
 
 " reload this config file
-map <F5> :reloadconfig<CR>
+noremap <F5> :reloadconfig<CR>
 :command! reloadconfig
         \ -description 'Source the configuration file for pentadactyl'
         \ :source ~/.pentadactylrc
 
 " gui options
-map <C-g>s :set guioptions+=s<CR>
-map <C-g>S :set guioptions-=s<CR>
-map <C-g>t :set guioptions+=T<CR>
-map <C-g>T :set guioptions-=T<CR>
+noremap <C-g>s :set guioptions+=s<CR>
+noremap <C-g>S :set guioptions-=s<CR>
+noremap <C-g>t :set guioptions+=T<CR>
+noremap <C-g>T :set guioptions-=T<CR>
 
 " switch tabs"
-map <A-n> :tabnext<CR>
-map <A-p> :tabprevious<CR>
-imap <A-n> <Esc>:tabnext<CR>
-imap <A-p> <Esc>:tabprevious<CR>
+noremap <A-n> :tabnext<CR>
+noremap <A-p> :tabprevious<CR>
+inoremap <A-n> <Esc>:tabnext<CR>
+inoremap <A-p> <Esc>:tabprevious<CR>
 
 " LRU tab
-"map # :buffer! #<CR>
-nmap <A-Space> :buffer! #<CR>
-imap <A-Space> <Esc>:buffer! #<CR>
+"noremap # :buffer! #<CR>
+nnoremap <A-Space> :buffer! #<CR>
+inoremap <A-Space> <Esc>:buffer! #<CR>
 
 " find tab
 "nmap <A-w> :buffer! 
-nmap # :buffer! 
+nnoremap # :buffer! 
 
 " move tab
-map <A-S-p> :tabmove -1<CR>
-map <A-S-n> :tabmove +1<CR>
+noremap <A-S-p> :tabmove -1<CR>
+noremap <A-S-n> :tabmove +1<CR>
 
 " close tab
-map q :tabclose<CR>
-
+nnoremap q :tabclose<CR>
 
 " misc views ("w"indows)
-nmap wa :tabopen about:addons<CR>
-nmap wd :downloads<CR>
-nmap wh :tab helpall<CR>
-nmap wi :history<CR>
-nmap wj :jumps<CR>
-nmap wp :tabopen about:preferences<CR>
-nmap ws :dialog searchengines<CR>
-nmap ww :dialog passwords<CR>
+nnoremap wa :tabopen about:addons<CR>
+nnoremap wd :downloads<CR>
+nnoremap wh :tab helpall<CR>
+nnoremap wi :history<CR>
+nnoremap wj :jumps<CR>
+nnoremap wp :tabopen about:preferences<CR>
+nnoremap ws :dialog searchengines<CR>
+nnoremap ww :dialog passwords<CR>
 
 " zoom everything
-map + ZI
-map \- ZO
+noremap + ZI
+noremap \- ZO
 
 " jump to mark
-map ä '
+noremap ä '
+
+" duckduckgo advanced search
+" \ to go to first result immediately
+noremap \\ :tabopen \ 
+" ! to use other search engine (like 'ebay' or 'osm') 
+noremap ! :tabopen !
 
 " move in history
-map <A-u> :back<CR>
-map <A-S-u> :forward<CR>
+noremap <A-u> :back<CR>
+noremap <A-S-u> :forward<CR>
 
+" scroll
+" (in addition to j/k and space/shift+space)
+nnoremap <A-j> <C-D>
+nnoremap <A-k> <C-U>
 
 " movements
-imap <A-l> <Right>
-imap <A-h> <Left>
-cmap <A-l> <Right>
-cmap <A-h> <Left>
+inoremap <A-l> <Right>
+inoremap <A-h> <Left>
+cnoremap <A-l> <Right>
+cnoremap <A-h> <Left>
 
 " emacs movements
-imap <A-f> <C-Right>
-imap <A-b> <C-Left>
-cmap <A-f> <C-Right>
-cmap <A-b> <C-Left>
-imap <C-p> <Up>
-imap <C-n> <Down>
-cmap <C-p> <Up>
-cmap <C-n> <Down>
+inoremap <A-f> <C-Right>
+inoremap <A-b> <C-Left>
+cnoremap <A-f> <C-Right>
+cnoremap <A-b> <C-Left>
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
 " delete/kill word
-imap <A-BS> <C-W>
-imap <A-d> <C-Del>
-cmap <A-BS> <C-W>
-cmap <A-d> <C-Del>
+inoremap <A-BS> <C-W>
+inoremap <A-d> <C-Del>
+cnoremap <A-BS> <C-W>
+cnoremap <A-d> <C-Del>
 
 
 " copy/paste 
-imap <C-S-v> <C-v><C-v>
-imap <C-S-c> <C-v><C-c>
-vmap <C-S-v> <C-v><C-v>
-vmap <C-S-c> <C-v><C-c>
-vmap y <C-v><C-c>
-cmap <C-S-v> <C-v><C-v>
-cmap <C-S-c> <C-v><C-c>
+inoremap <C-S-v> <C-v><C-v>
+inoremap <C-S-c> <C-v><C-c>
+vmap     <C-S-v> <C-v><C-v>
+vmap     <C-S-c> <C-v><C-c>
+vmap     y <C-v><C-c>
+cnoremap <C-S-v> <C-v><C-v>
+cnoremap <C-S-c> <C-v><C-c>
 
 " search
-map ö /
+noremap ö /
 
 
 " Developer Tools (console)
-map <C-A-i> <C-S-k>
-map <C-A-o> <C-S-i> 
-map ss :js!<CR>
+noremap <C-A-i> <C-S-k>
+noremap <C-A-o> <C-S-i> 
+noremap ss :js!<CR>
 
 
 " NoScript
-map <A-s>p :set noscript-sites!=<A-Tab>
-map <A-s>t :set noscript-tempsites!=<A-Tab>
+noremap <A-s>p :set noscript-sites!=<A-Tab>
+noremap <A-s>t :set noscript-tempsites!=<A-Tab>
 
 
 " recoloring for white backgrounds
 " TODO: somehow this seems to affect the pentadactyl gui elements rather than the document. FIX THIS
-map sr :recolor<CR>
+noremap sr :recolor<CR>
 :command! recolor
         \ -description 'Replace white colors with some kind of grey'
         \ :javascript <<EOF
