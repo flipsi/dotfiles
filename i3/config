@@ -256,9 +256,9 @@ for_window [class="(?i)file-roller"]    floating enable
 for_window [class="(?i)pavucontrol"]    floating enable 
 for_window [class="(?i)qjackctl"]       floating enable 
 for_window [class="(?i)avd"]            floating enable 
-for_window [class="lxqt-openssh-askpass"] floating enable 
+for_window [class="ssh-askpass"]        floating enable 
 for_window [class="(?i)pokerstars"]     floating enable 
-for_window [title="Print"]     floating enable 
+for_window [title="Print"]              floating enable 
 for_window [class="(?i)sxiv"]           fullscreen
 for_window [class="(?i)mplayer"]        fullscreen
 
