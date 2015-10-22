@@ -22,3 +22,5 @@ ColorPalette=#000000;#cc0000;#4e9a06;#c4a000;#3465a4;#75507b;#06989a;#d3d7cf;#55
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
 DropdownAlwaysShowTabs=FALSE
 TitleMode=TERMINAL_TITLE_REPLACE
+FontName=Monospace 11
+

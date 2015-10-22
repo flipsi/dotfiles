@@ -216,6 +216,10 @@ bindsym XF86KbdBrightnessUp   exec "$SHELLSCRIPT_PATH/keyboard-brightness up"
 bindsym $mod+Left   exec "xbacklight -dec 3"
 bindsym $mod+Right  exec "xbacklight -inc 3"
 
+# set xfce4-terminal font size (not possible by default)
+bindsym $mod+Control+plus   exec "$SHELLSCRIPT_PATH/xfce4-terminal-fontsize increase"
+bindsym $mod+Control+minus  exec "$SHELLSCRIPT_PATH/xfce4-terminal-fontsize decrease"
+
 
 # change audio output device
 bindsym $mod+v exec "$SHELLSCRIPT_PATH/switch-audio-output"
