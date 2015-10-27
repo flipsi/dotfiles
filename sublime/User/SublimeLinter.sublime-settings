@@ -30,6 +30,20 @@
 				"excludes":
 				[
 				]
+			},
+			"scalac":
+			{
+				"@disable": false,
+				"args":
+				[
+				],
+				"classpath": "",
+				"classpath_filename": "",
+				"excludes":
+				[
+				],
+				"lint": "",
+				"target_directory": ""
 			}
 		},
 		"mark_style": "outline",
@@ -61,7 +75,7 @@
 		},
 		"rc_search_limit": 5,
 		"shell_timeout": 10,
-		"show_errors_on_save": true,
+		"show_errors_on_save": false,
 		"show_marks_in_minimap": true,
 		"syntax_map":
 		{
