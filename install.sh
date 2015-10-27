@@ -16,9 +16,9 @@ Usage: install.sh [OPTIONS] TARGET
 
     TARGET := { all | bash | cmus | dactyl | elinks | fish | ghci | git | i3 | 
                 lesskey | luakit | mpd | mutt | muttator | pentadactyl | 
-                ranger | sublime-text-3 | telegram-cli | tmux | turses | vim | 
-                vimpc | vimperator | vimus | vlc | xfce4 | xkb | xmonad | 
-                zathura }
+                ranger | sublime-text-3 | telegram-cli | tmux | turses |
+                urlview | vim | vimpc | vimperator | vimus | vlc | xfce4 |
+                xkb | xmonad | zathura }
 EOF
 }
 
@@ -116,6 +116,10 @@ function create_link_for_target() {
         turses)
             mkdir -p $HOME/.turses
             create_link $PWD/turses/config $HOME/.turses/config
+            ;;
+
+        urlview)
+            create_link $PWD/urlview/urlview $HOME/.urlview
             ;;
 
         vim)
@@ -250,6 +254,7 @@ else
         create_link_for_target telegram-cli
         create_link_for_target tmux
         create_link_for_target turses
+        create_link_for_target urlview
         create_link_for_target vim
         create_link_for_target vimpc
         create_link_for_target vimperator

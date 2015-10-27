@@ -1,0 +1,3 @@
+# command to execute (%s is the url and should not be quoted)
+# COMMAND /etc/urlview/url_handler.sh %s
+COMMAND firefox %s

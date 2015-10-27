@@ -48,6 +48,7 @@ where `TARGET` can either be an item from the targets listed below, or `all` to 
 * `telegram-cli` a command line client for the messenger
 * `tmux` a must have for terminal junkies
 * `turses` twitter client for the terminal
+* `urlview` little tool to open urls, nice with tmux
 * `vim` the best reason not to use emacs
 * `vimpc` mpd client for the terminal
 * `vimperator` vim-addon for firefox
