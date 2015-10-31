@@ -18,5 +18,5 @@
 
 
 -- my prompt :)
-:set prompt "\nFunc! "
+:set prompt "\nghci> "
 
