@@ -7,7 +7,7 @@
 " open new tabs in background
 set! browser.tabs.loadInBackground=false
 
-set editor='/usr/bin/subl'
+set editor='/usr/bin/env subl'
 
 
 """" KEYBINDINGS """"
