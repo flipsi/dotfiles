@@ -6,6 +6,9 @@
 
 set nocompatible
 
+" disable powerline
+let g:powerline_loaded = 1
+
 " syntax highlighting
 syntax on
 
