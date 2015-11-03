@@ -6,14 +6,14 @@ set window-title-basename true
 #set font terminus 8
 
 # set default-bg "#2D2C2B"
-set default-bg "#383736"
+set default-bg "#1E1E1E"
 set default-fg "#DDDDDD"
-set statusbar-bg "#575757"
+set statusbar-bg "#1E1E1E"
 set statusbar-fg "#DDDDDD"
-set inputbar-bg "#575757"
+set inputbar-bg "#1E1E1E"
 set inputbar-fg "#DDDDDD"
 set recolor-darkcolor "#FFFFFF"
-set recolor-lightcolor "#383736"
+set recolor-lightcolor "#1E1E1E"
 # set recolor true
 
 set guioptions ''
