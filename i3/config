@@ -136,10 +136,10 @@ for_window [class="^.*"] border pixel 1
 
 # Colors
 #                       border   backgr   text     indicator
-client.focused          #AFFF58  #1E1E1E  #DDDDDD  #83B45C
-client.focused_inactive #1A1A1A  #1E1E1E  #DDDDDD  #1E1E1E
-client.unfocused        #1A1A1A  #1E1E1E  #DDDDDD  #1E1E1E
-client.urgent           #E86969  #1E1E1E  #000000  #1E1E1E
+client.focused          #1E1E1E  #1E1E1E  #AFFF58  #83B45C
+client.focused_inactive #1E1E1E  #1E1E1E  #83B45C  #1E1E1E
+client.unfocused        #1E1E1E  #1E1E1E  #DDDDDD  #1E1E1E
+client.urgent           #AFFF58  #83B45C  #000000  #1E1E1E
 client.background       #1A1A1A  #1E1E1E  #83B45C  #1E1E1E
 
 
@@ -169,9 +169,9 @@ bar {
         separator   #AFFF58
         #                   border   backgr   text
         focused_workspace   #AFFF58  #1E1E1E  #AFFF58 
-        active_workspace    #83B45C  #1E1E1E  #DDDDDD 
+        active_workspace    #1E1E1E  #1E1E1E  #83B45C
         inactive_workspace  #1E1E1E  #1E1E1E  #DDDDDD
-        urgent_workspace    #AFFF58  #AFFF58  #000000
+        urgent_workspace    #83B45C  #83B45C  #000000
     }
 }
 
