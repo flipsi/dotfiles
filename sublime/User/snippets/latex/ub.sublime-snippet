@@ -2,9 +2,8 @@
 	<content><![CDATA[
 % Author: Philipp Moers <soziflip gmail com>
 
-\documentclass[12pt, oneside, a4paper, numbers=enddot]{scrartcl}
-% \input{/home/flip/daten/latex/sfliptex05/sfliptex05.tex}
-\input{/home/sflip/latex/sfliptex05/sfliptex05.tex}
+\documentclass[12pt, oneside, a4paper, numbers=noenddot]{scrartcl}
+\input{sfliptex05.tex}
 \usepackage{sectsty}
 \usepackage{enumerate}
 \usepackage{paralist} % compactenum
