@@ -29,3 +29,7 @@ if test $hostname = "asterix" -o $hostname = "obelix"
     eval (command keychain --eval --quiet ~/.ssh/id_rsa)
 end
 
+
+fish_vi_mode
+fish_user_key_bindings
+#fish_user_key_bindings_vi
