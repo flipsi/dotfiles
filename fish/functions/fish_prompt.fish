@@ -1,3 +1,16 @@
+
+# Fish git prompt
+set __fish_git_prompt_showdirtystate 'yes'
+set __fish_git_prompt_showstashstate 'no' # does not work?
+set __fish_git_prompt_showupstream 'yes'
+set __fish_git_prompt_color_branch yellow
+set __fish_git_prompt_char_dirtystate '⚡'
+set __fish_git_prompt_char_stagedstate '→'
+set __fish_git_prompt_char_stashstate '' # '↩' # workaround for showstashstate
+set __fish_git_prompt_char_upstream_ahead '↑'
+set __fish_git_prompt_char_upstream_behind '↓'
+
+
 function fish_prompt --description 'Prompt anzeigen'
 	
 	# Just calculate these once, to save a few cycles when displaying the prompt
@@ -44,6 +57,10 @@ function fish_prompt --description 'Prompt anzeigen'
 		set wd (pwd)
 		set_color --bold '629FCF'
 		echo -n $wd
+
+		# git
+		set_color --bold normal
+		__fish_git_prompt
 
 		# prompt
 		set_color --bold normal
