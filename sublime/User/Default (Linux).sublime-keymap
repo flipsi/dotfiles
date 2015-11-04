@@ -131,7 +131,7 @@
     { "keys": ["ö"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": false}, "context": [{"key": "setting.command_mode"}]  },
     { "keys": ["Ö"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": true}, "context": [{"key": "setting.command_mode"}]  },
     // search in multiple files
-    { "keys": ["Ö"], "command": "show_panel", "args": {"panel": "find_in_files"},  "context": [{"key": "setting.command_mode"}, { "key": "selector", "operator": "not_equal", "operand": "text.dired"  }]  },
+    { "keys": ["/"], "command": "show_panel", "args": {"panel": "find_in_files"},  "context": [{"key": "setting.command_mode"}, { "key": "selector", "operator": "not_equal", "operand": "text.dired"  }]  },
 
 
     //////////////////////////////
