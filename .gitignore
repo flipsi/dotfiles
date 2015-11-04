@@ -16,7 +16,8 @@ ranger/colorschemes/__pycache__
 
 #### sublime
 
-#sublime/User/SublimeLinter/
+sublime/User/SublimeLinter/
+sublime/User/Color Highlighter/
 sublime/User/Package Control.sublime-settings
 sublime/User/Package Control.last-run
 sublime/User/Package Control.ca-list
