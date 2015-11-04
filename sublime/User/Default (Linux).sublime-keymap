@@ -93,15 +93,29 @@
     ////////////////////////////////
 
     // FileBrowser
-    { "keys": ["alt+i"], "command": "dired", "args": { "immediate": true, "single_pane": true, "other_group": "", "project": true } },
-    { "keys": ["alt+shift+i"], "command": "dired", "args": { "immediate": false, "single_pane": true, "other_group": "", "project": true } },
-    { "keys": ["alt+i"], "command": "dired_jump", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
-    { "keys": ["a", "d"], "command": "dired_create", "args": { "which": "directory" }, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
-    { "keys": ["a", "f"], "command": "dired_create", "args": { "which": "file" }, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
-    { "keys": ["enter"], "command": "dired_select", "args": {"other_group": true, "and_close": true}, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["alt+i"],        "command": "dired", "args": { "immediate": true, "single_pane": true, "other_group": "left", "project": false } },
+    { "keys": ["alt+shift+i"],  "command": "dired", "args": { "immediate": false, "single_pane": true, "other_group": "left", "project": true } },
+    { "keys": ["alt+i"],        "command": "dired_jump", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["g", "g"],       "command": "dired_move", "args": {"to": "bof"}, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" } ] },
+    { "keys": ["G"],            "command": "dired_move", "args": {"to": "eof"}, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" } ] },
+    { "keys": ["f"],            "command": "dired_goto", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["s"],            "command": "dired_mark", "args": { "mark": "toggle" }, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["d", "d"],       "command": "dired_copy_files", "args":{"cut": true}, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["y", "y"],       "command": "dired_copy_files", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["p", "p"],       "command": "dired_paste_files", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["x", "r"],       "command": "dired_delete", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["x", "t"],       "command": "dired_delete", "args": {"trash": true}, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["c", "w"],       "command": "dired_rename", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["a", "d"],       "command": "dired_create", "args": { "which": "directory" }, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["a", "f"],       "command": "dired_create", "args": { "which": "file" }, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["z", "h"],       "command": "dired_toggle_hidden_files", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] }, 
+    { "keys": ["Ö"],            "command": "dired_find_in_files", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["m"],            "command": "dired_edit_jump_point", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["ä"],            "command": "dired_jump", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+
     // mark line in vim style with m <char>
     // and jump there with ä <char> because that's where original ' is located on an english keyboard
-    { "keys": ["ä", "<character>"], "command": "vi_select_bookmark", "args": {"select_bol": true}, "context": [{"key": "setting.command_mode"}] },
+    { "keys": ["ä", "<character>"], "command": "vi_select_bookmark", "args": {"select_bol": true}, "context": [{ "key": "setting.command_mode" } , { "key": "selector", "operator": "not_equal", "operand": "text.dired"  } ] },
 
     // goto anything (find tab)
     // ... # to go to keyword
@@ -117,7 +131,7 @@
     { "keys": ["ö"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": false}, "context": [{"key": "setting.command_mode"}]  },
     { "keys": ["Ö"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": true}, "context": [{"key": "setting.command_mode"}]  },
     // search in multiple files
-    { "keys": ["Ö"], "command": "show_panel", "args": {"panel": "find_in_files"},  "context": [{"key": "setting.command_mode"}]  },
+    { "keys": ["Ö"], "command": "show_panel", "args": {"panel": "find_in_files"},  "context": [{"key": "setting.command_mode"}, { "key": "selector", "operator": "not_equal", "operand": "text.dired"  }]  },
 
 
     //////////////////////////////

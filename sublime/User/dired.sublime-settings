@@ -3,18 +3,25 @@
 	"dired_hijack_new_window": false,
 	"dired_jump_points":
 	{
-		"Coding Tests": 					"/home/sflip/src-my/test/",
-		"home": 							"/home/sflip/",
-		"dotfiles": 						"/home/sflip/dotfiles/",
-		"local apache document root": 		"/var/www/html/",
-		"masterstudies modules": 			"/home/sflip/masterstudies/modules/",
-		"root": 							"/",
-		"sublime package dir": 				"/home/sflip/.config/sublime-text-3/Packages/",
-		"sublime user dir": 				"/home/sflip/dotfiles/sublime/User/",
-		"tmp": 								"/home/sflip/tmp/"
+		"Coding Tests": "/home/sflip/src-my/test/",
+		"config": "/home/sflip/.config/",
+		"dotfiles": "/home/sflip/dotfiles/",
+		"home": "/home/sflip/",
+		"local apache document root": "/var/www/html/",
+		"masterstudies modules": "/home/sflip/masterstudies/modules/",
+		"root": "/",
+		"sublime package dir": "/home/sflip/.config/sublime-text-3/Packages/",
+		"sublime user dir": "/home/sflip/dotfiles/sublime/User/",
+		"tmp": "/home/sflip/tmp/"
 	},
 	"dired_open_on_jump": false,
 	"dired_reuse_view": true,
-	"dired_show_hidden_files": false,
-	"dired_show_parent": true
+	"dired_show_hidden_files": true,
+	"dired_show_parent": true,
+	"dired_to_copy":
+	[
+	],
+	"dired_to_move":
+	[
+	]
 }
