@@ -65,7 +65,14 @@ noremap <C-g>S :set guioptions-=s<CR>
 noremap <C-g>t :set guioptions+=T<CR>
 noremap <C-g>T :set guioptions-=T<CR>
 
-" switch tabs"
+" follow link in a new tab (instead of current tab with f)
+" ... in foreground
+noremap l ;t
+" ... in background
+noremap F ;b
+
+
+" switch tabs
 noremap <A-n> :tabnext<CR>
 noremap <A-p> :tabprevious<CR>
 inoremap <A-n> <Esc>:tabnext<CR>

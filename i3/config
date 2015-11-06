@@ -25,7 +25,7 @@
 ###############################################################################
 
 # composite manager for window overlays, smooth workspace changes, etc.
-exec --no-startup-id "compton -b"
+exec "compton -b"
 
 # set second output (monitor) with a shell command like this
 # exec "xrandr --output HDMI2 --auto --right-of eDP1"
@@ -39,7 +39,7 @@ exec "setxkbmap de_sflip"
 exec --no-startup-id "numlockx"
 
 # turn off screensaver and display power management
-exec --no-startup-id "xset dpms 0 0 0 && xset s noblank && xset s off"
+exec "xset dpms 0 0 0 && xset s noblank && xset s off"
 
 # daemon for theme settings and shit
 #exec --no-startup-id "cinnamon-settings-daemon"
@@ -50,7 +50,7 @@ exec --no-startup-id "xfsettingsd --sm-client-disable"
 # exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
 
 # hide mouse cursor
-exec unclutter
+exec --no-startup-id unclutter
 
 # disable touchpad at start
 exec "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
@@ -80,7 +80,7 @@ floating_modifier $mod
 focus_follows_mouse no
 
 # enable/disable touchpad
-bindsym XF86TouchpadToggle  exec "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
+bindsym XF86TouchpadToggle  exec --no-startup-id "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
 
 # reload the configuration file
 # or restart i3 [preserves session]
@@ -104,7 +104,7 @@ mode "$reload_restart" {
 # NOTE:
 # i3 is a window manager and hence has nothing to do with wallpapers
 # since desktops set their own, we still set a wallpaper here
-exec --no-startup-id "feh --bg-scale ~/.i3/wallpaper"
+exec "feh --bg-scale ~/.i3/wallpaper"
 
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -186,7 +186,7 @@ bindsym $mod+Shift+b bar mode toggle
 ###############################################################################
 
 # exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # lock/exit/suspend etc.
 bindsym XF86PowerOff mode "$mode_system"
@@ -208,43 +208,43 @@ mode "$mode_system" {
 
 
 # set keyboard brightness
-bindsym XF86KbdBrightnessDown exec "$SHELLSCRIPT_PATH/keyboard-brightness down"
-bindsym XF86KbdBrightnessUp   exec "$SHELLSCRIPT_PATH/keyboard-brightness up"
+bindsym XF86KbdBrightnessDown exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness down"
+bindsym XF86KbdBrightnessUp   exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness up"
 
 
 # set display brightness
-bindsym $mod+Left   exec "xbacklight -dec 3"
-bindsym $mod+Right  exec "xbacklight -inc 3"
+bindsym $mod+Left   exec --no-startup-id "xbacklight -dec 3"
+bindsym $mod+Right  exec --no-startup-id "xbacklight -inc 3"
 
 # set xfce4-terminal font size (not possible by default)
-bindsym $mod+Control+plus   exec "$SHELLSCRIPT_PATH/xfce4-terminal-fontsize increase"
-bindsym $mod+Control+minus  exec "$SHELLSCRIPT_PATH/xfce4-terminal-fontsize decrease"
+bindsym $mod+Control+plus   exec --no-startup-id "$SHELLSCRIPT_PATH/xfce4-terminal-fontsize increase"
+bindsym $mod+Control+minus  exec --no-startup-id "$SHELLSCRIPT_PATH/xfce4-terminal-fontsize decrease"
 
 
 # change audio output device
-bindsym $mod+v exec "$SHELLSCRIPT_PATH/switch-audio-output"
+bindsym $mod+v exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output"
 
 # set volume
-bindsym $mod+Down            exec "amixer sset Master 1%-"
-bindsym $mod+Up              exec "amixer sset Master 1%+"
-bindsym $mod+minus           exec "amixer sset Master 1%-"
-bindsym $mod+plus            exec "amixer sset Master 1%+"
+bindsym $mod+Down            exec --no-startup-id "amixer sset Master 1%-"
+bindsym $mod+Up              exec --no-startup-id "amixer sset Master 1%+"
+bindsym $mod+minus           exec --no-startup-id "amixer sset Master 1%-"
+bindsym $mod+plus            exec --no-startup-id "amixer sset Master 1%+"
 
 # control music player daemon (mpd)
-bindsym $mod+Shift+minus     exec "mpc volume -1"
-bindsym $mod+Shift+plus      exec "mpc volume +1"
-bindsym XF86AudioLowerVolume exec "mpc volume -1"
-bindsym XF86AudioRaiseVolume exec "mpc volume +1"
-bindsym XF86AudioPlay        exec "mpc toggle"
-bindsym XF86AudioNext        exec "mpc next"
-bindsym XF86AudioPrev        exec "mpc prev"
+bindsym $mod+Shift+minus     exec --no-startup-id "mpc volume -1"
+bindsym $mod+Shift+plus      exec --no-startup-id "mpc volume +1"
+bindsym XF86AudioLowerVolume exec --no-startup-id "mpc volume -1"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "mpc volume +1"
+bindsym XF86AudioPlay        exec --no-startup-id "mpc toggle"
+bindsym XF86AudioNext        exec --no-startup-id "mpc next"
+bindsym XF86AudioPrev        exec --no-startup-id "mpc prev"
 
 
 # take a screenshot
-bindsym $mod+Print exec "xfce4-screenshooter --fullscreen --save ~/img-screenshots"
-bindsym      Print exec "xfce4-screenshooter --fullscreen --save ~/img-screenshots"
-bindsym $mod+Shift+Print exec "xfce4-screenshooter --fullscreen --open krita"
-bindsym      Shift+Print exec "xfce4-screenshooter --fullscreen --open krita"
+bindsym $mod+Print       exec --no-startup-id "xfce4-screenshooter --fullscreen --save ~/img-screenshots"
+bindsym      Print       exec --no-startup-id "xfce4-screenshooter --fullscreen --save ~/img-screenshots"
+bindsym $mod+Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen --open krita"
+bindsym      Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen --open krita"
 
 
 
@@ -294,14 +294,14 @@ workspace_layout tabbed
 
 
 # start a terminal
-bindsym $mod+o       exec "xfce4-terminal --command='tmux -2'"
-bindsym $mod+Shift+o exec "gnome-terminal --hide-menubar --command='tmux -2'"
+bindsym $mod+o       exec --no-startup-id "xfce4-terminal --command='tmux -2'"
+bindsym $mod+Shift+o exec --no-startup-id "gnome-terminal --hide-menubar --command='tmux -2'"
 
 # launch an application (that has a .desktop-file)
-bindsym $mod+Return exec "i3-dmenu-desktop -dmenu='dmenu $DMENU_OPTIONS'"
+bindsym $mod+Return exec --no-startup-id "i3-dmenu-desktop -dmenu='dmenu $DMENU_OPTIONS'"
 # launch any application
-bindsym $mod+Shift+Return exec "dmenu_run $DMENU_OPTIONS"
-# bindsym $mod+Shift+Return exec "rofi -show run $ROFI_OPTIONS"
+bindsym $mod+Shift+Return exec --no-startup-id "dmenu_run $DMENU_OPTIONS"
+# bindsym $mod+Shift+Return exec --no-startup-id "rofi -show run $ROFI_OPTIONS"
 
 # kill focused container
 bindsym $mod+BackSpace kill
@@ -368,14 +368,14 @@ workspace_auto_back_and_forth yes
 
 
 # open new workspace
-bindsym $mod+i exec "quickswitch -E"
+bindsym $mod+i exec --no-startup-id "quickswitch -E"
 
 # rename workspace
-bindsym $mod+comma exec i3-input -F 'rename workspace to "%s"' -P 'rename workspace to: '
+bindsym $mod+comma exec --no-startup-id i3-input -F 'rename workspace to "%s"' -P 'rename workspace to: '
 
 # mark/goto windows like in vim
-bindsym $mod+t exec i3-input -F 'mark %s' -P 'Mark name: '
-bindsym $mod+Shift+t exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
+bindsym $mod+t exec --no-startup-id i3-input -F 'mark %s' -P 'Mark name: '
+bindsym $mod+Shift+t exec --no-startup-id i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
 
 # switch to a specific window or workspace
 #bindsym $mod+t mode "goto"
@@ -393,8 +393,8 @@ bindsym $mod+Shift+t exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
 bindsym $mod+e [urgent=latest] focus
 bindsym $mod+space workspace back_and_forth
 # bindsym $mod+numbersign workspace back_and_forth
-bindsym $mod+numbersign exec "rofi -show window $ROFI_OPTIONS"
-bindsym $mod+w exec "quickswitch --workspaces"
+bindsym $mod+numbersign exec --no-startup-id "rofi -show window $ROFI_OPTIONS"
+bindsym $mod+w exec --no-startup-id "quickswitch --workspaces"
 bindsym $mod+n workspace next_on_output
 bindsym $mod+p workspace prev_on_output
 bindsym $mod+1 workspace 1
@@ -423,10 +423,10 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # move container to new workspace (tmux 'break')
-bindsym $mod+Shift+i exec "quickswitch --journey -E"
+bindsym $mod+Shift+i exec --no-startup-id "quickswitch --journey -E"
 # move container to specific workspace
-bindsym $mod+Shift+numbersign exec "quickswitch --journey"
-bindsym $mod+Shift+w          exec "quickswitch --journey"
+bindsym $mod+Shift+numbersign exec --no-startup-id "quickswitch --journey"
+bindsym $mod+Shift+w          exec --no-startup-id "quickswitch --journey"
 bindsym $mod+Shift+space move container to workspace back_and_forth
 
 
