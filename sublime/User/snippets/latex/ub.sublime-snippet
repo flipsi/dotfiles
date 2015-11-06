@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-% Author: Philipp Moers <soziflip gmail com>
+% Author: Philipp Moers <soziflip@gmail.com>
 
 \documentclass[12pt, oneside, a4paper, numbers=noenddot]{scrartcl}
 \input{sfliptex05.tex}

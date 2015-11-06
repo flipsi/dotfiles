@@ -61,4 +61,4 @@ where `TARGET` can either be an item from the targets listed below, or `all` to 
 
 ## Contact
 
-Shoot me a mail to soziflip gmail com.
+Shoot me a mail: mailto:soziflip@gmail.com
