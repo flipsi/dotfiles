@@ -19,8 +19,9 @@
     cmd = subl -n -w \"$REMOTE\" \"$LOCAL\" --command \"sublimerge_diff_views {\\\"left_read_only\\\": true, \\\"right_read_only\\\": true}\"
 
 [merge]
-    tool = sublimerge
+    tool = vimdiff
 
 [mergetool "sublimerge"]
+    prompt = false
     cmd = subl -n -w \"$REMOTE\" \"$BASE\" \"$LOCAL\" \"$MERGED\" --command \"sublimerge_diff_view\"
 
