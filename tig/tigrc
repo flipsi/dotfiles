@@ -33,6 +33,8 @@ set refresh-mode = auto
 bind generic g none
 bind main    G none
 
+# quit
+bind generic <C-D> quit
 
 # reload config
 bind generic <F5> :source ~/.tigrc
