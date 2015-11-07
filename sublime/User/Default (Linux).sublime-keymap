@@ -3,7 +3,7 @@
     // Sublime-Text Key Bindings //
     ///////////////////////////////
 
-    // Author: Philipp Moers <soziflip gmail com>
+    // Author: Philipp Moers <soziflip@gmail.com>
 
 
     /////////////
@@ -100,6 +100,7 @@
     { "keys": ["G"],            "command": "dired_move", "args": {"to": "eof"}, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" } ] },
     { "keys": ["f"],            "command": "dired_goto", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
     { "keys": ["s"],            "command": "dired_mark", "args": { "mark": "toggle" }, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
+    { "keys": ["enter"],        "command": "dired_select", "args": {"and_close": true}, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
     { "keys": ["d", "d"],       "command": "dired_copy_files", "args":{"cut": true}, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
     { "keys": ["y", "y"],       "command": "dired_copy_files", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
     { "keys": ["p", "p"],       "command": "dired_paste_files", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },

@@ -1,4 +1,4 @@
-" Author: Philipp Moers <soziflip gmail com>
+" Author: Philipp Moers <soziflip@gmail.com>
 " A simple vimrc. With no dependencies
 
 
@@ -32,6 +32,9 @@ set shiftwidth=4
 " indent after open braces etc
 set autoindent
 set smartindent
+
+" allow to :edit multiple files in buffers without writing changes
+set hidden
 
 
 
