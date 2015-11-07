@@ -16,7 +16,7 @@ Usage: install.sh [OPTIONS] TARGET
 
     TARGET := { all | bash | cmus | dactyl | elinks | fish | ghci | git | i3 | 
                 lesskey | luakit | mpd | mutt | muttator | pentadactyl | 
-                ranger | sublime-text-3 | telegram-cli | tmux | turses |
+                ranger | sublime-text-3 | telegram-cli | tig | tmux | turses |
                 urlview | vim | vimpc | vimperator | vimus | vlc | xfce4 |
                 xkb | xmonad | zathura }
 EOF
@@ -106,6 +106,10 @@ function create_link_for_target() {
         telegram-cli)
             mkdir -p $HOME/.telegram-cli
             create_link $PWD/telegram-cli/config $HOME/.telegram-cli/config
+            ;;
+
+        tig)
+            create_link $PWD/tig/tigrc $HOME/.tigrc
             ;;
 
         tmux)
@@ -252,6 +256,7 @@ else
         create_link_for_target ranger
         create_link_for_target sublime-text-3
         create_link_for_target telegram-cli
+        create_link_for_target tig
         create_link_for_target tmux
         create_link_for_target turses
         create_link_for_target urlview

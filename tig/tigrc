@@ -1,0 +1,91 @@
+# Configuration File for
+#
+#   tig - an interface for git
+#
+# Author: Philipp Moers <soziflip@gmail.com>
+
+
+
+
+# beautiful diff view
+#set diff-options TODO
+
+
+# lines before/after lines that differ
+set diff-context = 0
+
+# case sensitivity in searches
+set ignore-case = true
+
+# when to refresh the views
+set refresh-mode = auto
+#set refresh-mode = periodic
+#set refresh-interval = 2
+
+
+
+
+
+# 'unbindings'
+bind generic g none
+bind main    G none
+
+
+# reload config
+bind generic <F5> :source ~/.tigrc
+
+# refresh views
+bind generic r refresh
+
+# original git status
+bind generic S !git status
+
+# views
+bind generic wm view-main
+bind generic wd view-diff
+bind generic wl view-log
+bind generic wt view-tree
+bind generic wf view-blob
+bind generic wb view-blame
+bind generic wr view-refs
+bind generic wp view-pager
+bind generic wh view-help
+bind generic ws view-status
+bind generic wc view-stage
+bind generic wa view-stash
+bind generic wg view-grep
+
+# view manipulation
+bind generic <Esc>j move-half-page-down
+bind generic <Esc>k move-half-page-up
+bind generic gg     move-first-line
+bind generic G      move-last-line
+bind generic m maximize
+
+# search
+bind generic ö search
+bind generic Ö search-back
+
+# quickly jump to the next diff chunk in the stage view
+#bind stage <Enter> :/^@@
+
+# add/stage/unstage and commit
+bind status s status-update
+bind stage  s status-update
+bind status c !git commit
+bind stage  c !git commit
+
+# amend to last commit
+bind status A !git commit --amend --no-edit
+           
+# remote commands
+bind generic f !git fetch
+bind generic p !git pull
+bind generic P !git push
+
+
+# more/less context
+bind diff  + :toggle diff-context +1
+bind diff  - :toggle diff-context -1
+bind stage + :toggle diff-context +1
+bind stage - :toggle diff-context -1
