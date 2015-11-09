@@ -50,7 +50,7 @@ exec --no-startup-id "xfsettingsd --sm-client-disable"
 # exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
 
 # hide mouse cursor
-exec --no-startup-id unclutter -idle 1 -jitter 80
+exec --no-startup-id unclutter -idle 1 -jitter 40
 
 # disable touchpad at start
 exec "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
