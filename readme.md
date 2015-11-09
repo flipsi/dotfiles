@@ -46,6 +46,7 @@ where `TARGET` can either be an item from the targets listed below, or `all` to 
 * `ranger` file manager for the terminal
 * `sublime-text-3` the text editor of my choice
 * `telegram-cli` a command line client for the messenger
+* `tig` ncurses interface for git
 * `tmux` a must have for terminal junkies
 * `turses` twitter client for the terminal
 * `urlview` little tool to open urls, nice with tmux
@@ -61,4 +62,4 @@ where `TARGET` can either be an item from the targets listed below, or `all` to 
 
 ## Contact
 
-Shoot me a mail to soziflip gmail com.
+Shoot me a mail: soziflip@gmail.com

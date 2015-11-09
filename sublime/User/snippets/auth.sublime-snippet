@@ -1,7 +1,7 @@
 <snippet>
     <description>Author ("Philipp Moers" and Email)</description>
 	<content><![CDATA[
-Author: Philipp Moers <soziflip gmail com>
+Author: Philipp Moers <soziflip@gmail.com>
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>auth</tabTrigger>

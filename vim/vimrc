@@ -1,4 +1,4 @@
-" Author: Philipp Moers <soziflip gmail com>
+" Author: Philipp Moers <soziflip@gmail.com>
 " A simple vimrc. With no dependencies
 
 
@@ -33,6 +33,9 @@ set shiftwidth=4
 set autoindent
 set smartindent
 
+" allow to :edit multiple files in buffers without writing changes
+set hidden
+
 
 
 " KEYBINDINGS
@@ -43,7 +46,7 @@ nnoremap <F5> :source ~/.vimrc<CR>
 " ZQ to quit discarding changes 
 " ZZ to save and quit
 " Q  to quit vim quickly (will prompt if the file was changed but not saved)
-nnoremap Q :quit<CR>
+nnoremap Q :quitall<CR>
 nmap <C-D> Q
 
 " scroll (alt key)
