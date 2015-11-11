@@ -31,6 +31,16 @@
 				[
 				]
 			},
+			"phplint":
+			{
+				"@disable": false,
+				"args":
+				[
+				],
+				"excludes":
+				[
+				]
+			},
 			"scalac":
 			{
 				"@disable": false,
