@@ -1,3 +1,3 @@
 function lll --description 'show directory listing with hidden files'
-	ls -lha $argv
+	ls -lhFa $argv
 end
