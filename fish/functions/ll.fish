@@ -1,3 +1,3 @@
 function ll
-	ls -lh --file-type $argv
+	ls -lhF $argv
 end
