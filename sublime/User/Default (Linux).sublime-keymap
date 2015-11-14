@@ -123,6 +123,9 @@
     // and jump there with ä <char> because that's where original ' is located on an english keyboard
     { "keys": ["ä", "<character>"], "command": "vi_select_bookmark", "args": {"select_bol": true}, "context": [{ "key": "setting.command_mode" } , { "key": "selector", "operator": "not_equal", "operand": "text.dired"  } ] },
 
+    // vim registers (also inspired from english keyboard)
+    { "keys": ["Ä", "<character>"], "command": "set_register", "context": [{"key": "setting.command_mode"}] },
+
     // goto anything (find tab)
     // ... # to go to keyword
     // ... : to go to line
