@@ -35,6 +35,10 @@
     // { "keys": ["ctrl+alt+s"], "command": "shell_prompt"},
     { "keys": ["ctrl+f", "s"], "command": "shell_command"},
 
+    // open terminal in directory of current file/project
+    { "keys": ["ctrl+f", "o"], "command": "open_terminal" },
+    { "keys": ["ctrl+f", "O"], "command": "open_terminal_project_folder" },
+
     // git
     { "keys": ["ctrl+f", "g"], "command": "git_status" },
 
