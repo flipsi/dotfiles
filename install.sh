@@ -15,10 +15,10 @@ Usage: install.sh [OPTIONS] TARGET
     -f | --force            if file(s) exist(s), overwrite it/them
 
     TARGET := { all | bash | cmus | dactyl | elinks | fish | ghci | git | i3 | 
-                lesskey | luakit | mpd | mutt | muttator | pentadactyl | 
-                ranger | sublime-text-3 | telegram-cli | tig | tmux | turses |
-                urlview | vim | vimpc | vimperator | vimus | vlc | xfce4 |
-                xkb | xmonad | zathura }
+                konsole | lesskey | luakit | mpd | mutt | muttator | 
+                pentadactyl | ranger | sublime-text-3 | telegram-cli | tig | 
+                tmux | turses | urlview | vim | vimpc | vimperator | vimus | 
+                vlc | xfce4 | xkb | xmonad | zathura }
 EOF
 }
 
@@ -61,6 +61,14 @@ function create_link_for_target() {
             create_link $PWD/i3/config $HOME/.i3/config
             # create_link $PWD/i3/i3status $HOME/.i3/i3status
             create_link $PWD/i3/i3pystatus $HOME/.i3/i3pystatus
+            ;;
+
+        konsole)
+            mkdir -p $HOME/.config
+            mkdir -p $HOME/.local/share/konsole
+            create_link $PWD/konsole/konsolerc $HOME/.config/konsolerc
+            create_link $PWD/konsole/NicNacPower.profile $HOME/.local/share/konsole/NicNacPower.profile
+            create_link $PWD/konsole/Tango-like.colorscheme $HOME/.local/share/konsole/Tango-like.colorscheme
             ;;
 
         lesskey)

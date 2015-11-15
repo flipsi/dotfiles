@@ -37,6 +37,7 @@ where `TARGET` can either be an item from the targets listed below, or `all` to 
 * `ghci` repl for the glorious haskell compiler
 * `git` global git configuration
 * `i3` tiling window manager
+* `konsole` a terminal emulator from kde
 * `lesskey` keybindings and more for less
 * `luakit` lightweight web browser
 * `mpd` music player daemon
@@ -62,4 +63,4 @@ where `TARGET` can either be an item from the targets listed below, or `all` to 
 
 ## Contact
 
-Shoot me a mail: soziflip@gmail.com
+If you have got any questions or comments, please just shoot me a mail: soziflip@gmail.com
