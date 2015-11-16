@@ -35,10 +35,15 @@
     // { "keys": ["ctrl+alt+s"], "command": "shell_prompt"},
     { "keys": ["ctrl+f", "s"], "command": "shell_command"},
 
+    // open terminal in directory of current file/project
+    { "keys": ["ctrl+f", "o"], "command": "open_terminal" },
+    { "keys": ["ctrl+f", "O"], "command": "open_terminal_project_folder" },
+
     // git
     { "keys": ["ctrl+f", "g"], "command": "git_status" },
 
     { "keys": [ "ctrl+shift+ü" ], "command": "view_in_browser", "args": { "browser": "chrome" } },
+
 
     ///////////
     // View  //
@@ -117,6 +122,9 @@
     // mark line in vim style with m <char>
     // and jump there with ä <char> because that's where original ' is located on an english keyboard
     { "keys": ["ä", "<character>"], "command": "vi_select_bookmark", "args": {"select_bol": true}, "context": [{ "key": "setting.command_mode" } , { "key": "selector", "operator": "not_equal", "operand": "text.dired"  } ] },
+
+    // vim registers (also inspired from english keyboard)
+    { "keys": ["Ä", "<character>"], "command": "set_register", "context": [{"key": "setting.command_mode"}] },
 
     // goto anything (find tab)
     // ... # to go to keyword
@@ -291,6 +299,8 @@
     // add new line
     { "keys": ["alt+o"], "command": "run_macro_file", "args": {"file": "Packages/Default/Add Line.sublime-macro"} },
     { "keys": ["alt+shift+o"], "command": "run_macro_file", "args": {"file": "Packages/Default/Add Line Before.sublime-macro"} },
+    // add new line
+    { "keys": ["alt+enter"],   "command": "append_semi_colon", "args": {"enter_new_line": "true"} },
     // duplicate line
     { "keys": ["alt+shift+d"], "command": "duplicate_line" },
     // move line up and down

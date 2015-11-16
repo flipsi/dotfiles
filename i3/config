@@ -294,8 +294,9 @@ workspace_layout tabbed
 
 
 # start a terminal
-bindsym $mod+o       exec --no-startup-id "xfce4-terminal --command='tmux -2'"
-bindsym $mod+Shift+o exec --no-startup-id "gnome-terminal --hide-menubar --command='tmux -2'"
+bindsym $mod+o       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower"
+bindsym $mod+Shift+o exec --no-startup-id "xfce4-terminal --command='tmux -2'"
+#bindsym $mod+Shift+o exec --no-startup-id "gnome-terminal --hide-menubar --command='tmux -2'"
 
 # launch an application (that has a .desktop-file)
 bindsym $mod+Return exec --no-startup-id "i3-dmenu-desktop -dmenu='dmenu $DMENU_OPTIONS'"

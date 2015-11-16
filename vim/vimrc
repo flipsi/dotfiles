@@ -13,11 +13,12 @@ let g:powerline_loaded = 1
 syntax on
 
 " show relative line numbers
-set number
-set relativenumber
+set nonumber
+set norelativenumber
 
 " statusline
 set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
+set ruler
 
 " search preferences
 set incsearch
@@ -40,6 +41,9 @@ set hidden
 
 " KEYBINDINGS
 
+" compatibility 
+nnoremap <C-g><C-g> <C-g>
+
 " reload this config file
 nnoremap <F5> :source ~/.vimrc<CR>
 
@@ -49,9 +53,19 @@ nnoremap <F5> :source ~/.vimrc<CR>
 nnoremap Q :quit<CR>
 nnoremap <C-D> :quitall<CR>
 
+" move intuitively when text is wrapped
+nnoremap j gj
+nnoremap k gk
+
 " scroll (alt key)
 noremap <Esc>j <C-D> 
 noremap <Esc>k <C-U> 
+
+" toggle line numbers 
+noremap <C-g>l :set number! <bar> :set relativenumber! <CR>
+
+" toggle word wrap
+nnoremap <C-g>w :set wrap! <CR>
 
 " search 
 nnoremap ö /

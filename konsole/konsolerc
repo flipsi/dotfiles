@@ -1,0 +1,19 @@
+[Desktop Entry]
+DefaultProfile=NicNacPower.profile
+
+[Favorite Profiles]
+Favorites=
+
+[KonsoleWindow]
+AllowMenuAccelerators=true
+ShowMenuBarByDefault=false
+
+[MainWindow]
+Height 1080=1059
+MenuBar=Disabled
+State=AAAA/wAAAAD9AAAAAAAAB34AAAQSAAAABAAAAAQAAAAIAAAACPwAAAAA
+ToolBarsMovable=Disabled
+Width 1920=1918
+
+[TabBar]
+TabBarVisibility=AlwaysHideTabBar
