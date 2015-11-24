@@ -15,6 +15,7 @@ set incfind
 "set hinttags+=a[class]
 set hinttags+=a
 set hinttags+=div[id=\"se-signup-legend\"]
+set hinttags+=label[class=\"switch-small\"]
 
 " editor (e.g. to edit source with gF or edit textfield with <C-i>)
 set editor='subl --wait'
