@@ -25,21 +25,21 @@
 ###############################################################################
 
 # composite manager for window overlays, smooth workspace changes, etc.
-exec "compton -b"
+exec --no-startup-id "compton -b"
 
 # set second output (monitor) with a shell command like this
 # exec "xrandr --output HDMI2 --auto --right-of eDP1"
 # exec "xrandr --output HDMI2 --auto --below eDP1"
 
 # set keyboard layout 
-exec "setxkbmap de_sflip"
+exec --no-startup-id "setxkbmap de_sflip"
 
 
 # turn on num block
 exec --no-startup-id "numlockx"
 
 # turn off screensaver and display power management
-exec "xset dpms 0 0 0 && xset s noblank && xset s off"
+exec --no-startup-id "xset dpms 0 0 0 && xset s noblank && xset s off"
 
 # daemon for theme settings and shit
 #exec --no-startup-id "cinnamon-settings-daemon"
@@ -50,12 +50,12 @@ exec --no-startup-id "xfsettingsd --sm-client-disable"
 # exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
 
 # hide mouse cursor
-exec --no-startup-id unclutter -idle 1 -jitter 40
+exec --no-startup-id unclutter -idle 1 -jitter 30
 
 # disable touchpad at start
-exec "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
-exec "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'Device Enabled' 0"
-exec "xinput --set-prop 'FocalTechPS/2 FocalTech FocalTech Touchpad' 'Device Enabled' 0"
+exec --no-startup-id "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
+exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'Device Enabled' 0"
+exec --no-startup-id "xinput --set-prop 'FocalTechPS/2 FocalTech FocalTech Touchpad' 'Device Enabled' 0"
 
 
 
@@ -104,7 +104,7 @@ mode "$reload_restart" {
 # NOTE:
 # i3 is a window manager and hence has nothing to do with wallpapers
 # since desktops set their own, we still set a wallpaper here
-exec "feh --bg-scale ~/.i3/wallpaper"
+exec --no-startup-id "feh --bg-scale ~/.i3/wallpaper"
 
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -375,7 +375,7 @@ bindsym $mod+i exec --no-startup-id "quickswitch -E"
 bindsym $mod+comma exec --no-startup-id i3-input -F 'rename workspace to "%s"' -P 'rename workspace to: '
 
 # mark/goto windows like in vim
-bindsym $mod+t exec --no-startup-id i3-input -F 'mark %s' -P 'Mark name: '
+bindsym $mod+t       exec --no-startup-id i3-input -F 'mark %s' -P 'Mark name: '
 bindsym $mod+Shift+t exec --no-startup-id i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
 
 # switch to a specific window or workspace
