@@ -437,7 +437,7 @@ set $move_container_to_output Move container to output (h) left, (l) right, (j) 
 mode "$move_container_to_output" {
     bindsym h move container to output left; workspace back_and_forth; mode "default"
     bindsym l move container to output right; workspace back_and_forth; mode "default"
-    bindsym h move container to output down; workspace back_and_forth; mode "default"
+    bindsym j move container to output down; workspace back_and_forth; mode "default"
     bindsym k move container to output up; workspace back_and_forth; mode "default"
     # back to normal: Enter or Escape
     bindsym Return mode "default"
