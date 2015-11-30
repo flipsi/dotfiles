@@ -82,6 +82,9 @@ floating_modifier $mod
 # focus when mouse moves
 focus_follows_mouse no
 
+# don't move mouse cursor when changing output
+mouse_warping none
+
 # enable/disable touchpad
 bindsym XF86TouchpadToggle  exec --no-startup-id "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
 
