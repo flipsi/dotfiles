@@ -139,9 +139,9 @@ for_window [class="^.*"] border pixel 1
 
 # Colors
 #                       border   backgr   text     indicator
-client.focused          #1E1E1E  #1E1E1E  #AFFF58  #83B45C
-client.focused_inactive #1E1E1E  #1E1E1E  #83B45C  #1E1E1E
-client.unfocused        #1E1E1E  #1E1E1E  #DDDDDD  #1E1E1E
+client.focused          #000000  #1E1E1E  #AFFF58  #83B45C
+client.focused_inactive #000000  #1E1E1E  #83B45C  #1E1E1E
+client.unfocused        #000000  #1E1E1E  #DDDDDD  #1E1E1E
 client.urgent           #AFFF58  #83B45C  #000000  #1E1E1E
 client.background       #1A1A1A  #1E1E1E  #83B45C  #1E1E1E
 
