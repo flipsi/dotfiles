@@ -5,8 +5,6 @@
 # These is just some basic stuff that I miss
 # when I use bash instead of fish occasionally.
 
-bind '"\ei":"ranger\n"'
-
 alias ..='cd ..'
 
 alias g='grep --with-filename --line-number --recursive --ignore-case --extended-regexp'
@@ -19,4 +17,8 @@ alias ll='ls $LS_OPTIONS -l'
 alias lll='ls $LS_OPTIONS -la'
 
 alias o='open'
+
+bind '"\ei":"ranger\n"'
+bind '"\es":"ll; echo; git status 2>/dev/null\n"'
+
 
