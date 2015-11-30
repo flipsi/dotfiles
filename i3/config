@@ -38,6 +38,9 @@ exec --no-startup-id "setxkbmap de_sflip"
 # turn on num block
 exec --no-startup-id "numlockx"
 
+# turn off pc speaker with annoying beep
+exec --no-startup-id "xset -b"
+
 # turn off screensaver and display power management
 exec --no-startup-id "xset dpms 0 0 0 && xset s noblank && xset s off"
 
