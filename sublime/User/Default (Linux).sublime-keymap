@@ -267,6 +267,9 @@
     // Text Editing //
     //////////////////
 
+    // save file
+    { "keys": ["alt+s"], "command": "save" },
+
     // undo and redo
     { "keys": ["alt+u"], "command": "undo" },
     { "keys": ["alt+shift+u"], "command": "redo" },
