@@ -14,6 +14,7 @@ set incfind
 " follow more hints like stack overflow upvote buttons
 "set hinttags+=a[class]
 set hinttags+=a
+set hinttags+=span[id=\"WMDE_Banner-close\"]
 set hinttags+=div[id=\"se-signup-legend\"]
 set hinttags+=label[class=\"switch-small\"]
 
