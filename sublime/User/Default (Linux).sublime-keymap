@@ -31,6 +31,10 @@
     { "keys": ["ctrl+alt+o"], "command": "show_panel", "args": {"panel": "output.exec"} },
     { "keys": ["ctrl+alt+o"], "command": "hide_panel", "context": [{"key": "panel_visible"}]},
 
+    // project management
+    { "keys": ["ctrl+f", "p", "p"], "command": "prompt_select_workspace" },
+    { "keys": ["ctrl+f", "p", "c"], "command": "close_workspace" },
+
     // run arbitrary shell command
     // { "keys": ["ctrl+alt+s"], "command": "shell_prompt"},
     { "keys": ["ctrl+f", "s"], "command": "shell_command"},
@@ -63,6 +67,9 @@
     // zoom
     { "keys": ["z", "i"], "command": "increase_font_size", "context": [{"key": "setting.command_mode"}] },
     { "keys": ["z", "o"], "command": "decrease_font_size", "context": [{"key": "setting.command_mode"}] },
+
+    // menu bar at the top
+    { "keys": ["ctrl+g", "u"],  "command": "toggle_menu" },
 
     // rulers
     { "keys": ["ctrl+g", "r"],  "command": "set_setting", "args": {"setting": "rulers", "value": [80, 100]}},
@@ -222,6 +229,9 @@
     ////////////////////////////
     // Movement and Selection //
     ////////////////////////////
+
+    // TODO
+    // move down faster with gj and gk
 
     // move cursor left or right
     { "keys": ["alt+h"], "command": "move", "args": {"by": "characters", "forward": false} },

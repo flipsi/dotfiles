@@ -1,0 +1,7 @@
+{
+    // The marker icon/text for unmodified files
+    "unmodified_marker": "CLEAN",
+
+    // The marker icon/text for modified files
+    "modified_marker": "MODIFIED SINCE OPENED"
+}
