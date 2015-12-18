@@ -11,6 +11,19 @@
 		"lint_mode": "load/save",
 		"linters":
 		{
+			"csslint":
+			{
+				"@disable": false,
+				"args":
+				[
+				],
+				"errors": "",
+				"excludes":
+				[
+				],
+				"ignore": "",
+				"warnings": ""
+			},
 			"htmlhint":
 			{
 				"@disable": false,
@@ -21,7 +34,27 @@
 				[
 				]
 			},
+			"jshint":
+			{
+				"@disable": false,
+				"args":
+				[
+				],
+				"excludes":
+				[
+				]
+			},
 			"jsl":
+			{
+				"@disable": false,
+				"args":
+				[
+				],
+				"excludes":
+				[
+				]
+			},
+			"php":
 			{
 				"@disable": false,
 				"args":
