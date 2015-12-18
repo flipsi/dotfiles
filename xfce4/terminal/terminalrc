@@ -18,9 +18,10 @@ MiscHighlightUrls=TRUE
 ScrollingLines=999999
 BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
 BackgroundDarkness=0.700000
-ColorPalette=#000000;#cc0000;#4e9a06;#c4a000;#3465a4;#75507b;#06989a;#d3d7cf;#555753;#ef2929;#8ae234;#fce94f;#739fcf;#ad7fa8;#34e2e2;#eeeeec
+ColorPalette=#000000000000;#cccc00000000;#4e4e9a9a0606;#c4c4a0a00000;#34346565a4a4;#757550507b7b;#060698989a9a;#d3d3d7d7cfcf;#555557575353;#efef29292929;#8a8ae2e23434;#fcfce9e94f4f;#73739f9fcfcf;#adad7f7fa8a8;#3434e2e2e2e2;#eeeeeeeeecec
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
 DropdownAlwaysShowTabs=FALSE
 TitleMode=TERMINAL_TITLE_REPLACE
 FontName=Monospace 11
+ColorCursor=#8787d7d75f5f
 

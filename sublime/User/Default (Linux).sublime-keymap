@@ -31,6 +31,10 @@
     { "keys": ["ctrl+alt+o"], "command": "show_panel", "args": {"panel": "output.exec"} },
     { "keys": ["ctrl+alt+o"], "command": "hide_panel", "context": [{"key": "panel_visible"}]},
 
+    // project management
+    { "keys": ["ctrl+f", "p", "p"], "command": "prompt_select_workspace" },
+    { "keys": ["ctrl+f", "p", "c"], "command": "close_workspace" },
+
     // run arbitrary shell command
     // { "keys": ["ctrl+alt+s"], "command": "shell_prompt"},
     { "keys": ["ctrl+f", "s"], "command": "shell_command"},
@@ -63,6 +67,9 @@
     // zoom
     { "keys": ["z", "i"], "command": "increase_font_size", "context": [{"key": "setting.command_mode"}] },
     { "keys": ["z", "o"], "command": "decrease_font_size", "context": [{"key": "setting.command_mode"}] },
+
+    // menu bar at the top
+    { "keys": ["ctrl+g", "u"],  "command": "toggle_menu" },
 
     // rulers
     { "keys": ["ctrl+g", "r"],  "command": "set_setting", "args": {"setting": "rulers", "value": [80, 100]}},
@@ -121,7 +128,7 @@
 
     // mark line in vim style with m <char>
     // and jump there with ä <char> because that's where original ' is located on an english keyboard
-    { "keys": ["ä", "<character>"], "command": "vi_select_bookmark", "args": {"select_bol": true}, "context": [{ "key": "setting.command_mode" } , { "key": "selector", "operator": "not_equal", "operand": "text.dired"  } ] },
+    { "keys": ["ä", "<character>"], "command": "vi_select_bookmark", "context": [{ "key": "setting.command_mode" } , { "key": "selector", "operator": "not_equal", "operand": "text.dired"  } ] },
 
     // vim registers (also inspired from english keyboard)
     { "keys": ["Ä", "<character>"], "command": "set_register", "context": [{"key": "setting.command_mode"}] },
@@ -223,6 +230,11 @@
     // Movement and Selection //
     ////////////////////////////
 
+    // move down faster with gj and gk
+    // (this is my own plugin 'MoveMore')
+    { "keys": ["g", "j"], "command": "move_more", "args": {"amount":  11 }, "context": [{"key": "setting.command_mode"}] },
+    { "keys": ["g", "k"], "command": "move_more", "args": {"amount": -11 }, "context": [{"key": "setting.command_mode"}] },
+
     // move cursor left or right
     { "keys": ["alt+h"], "command": "move", "args": {"by": "characters", "forward": false} },
     { "keys": ["alt+l"], "command": "move", "args": {"by": "characters", "forward": true} },
@@ -266,6 +278,9 @@
     //////////////////
     // Text Editing //
     //////////////////
+
+    // save file
+    { "keys": ["alt+s"], "command": "save" },
 
     // undo and redo
     { "keys": ["alt+u"], "command": "undo" },

@@ -75,6 +75,11 @@ nnoremap Ö ?
 nnoremap , ;
 nnoremap ; ,
 
+" swap implementations of ` and ' jump to markers
+" (by default, ' marked line, ` marked line and column)
+nnoremap ' `
+nnoremap ` '
+
 " goto mark 
 nnoremap ä `
 

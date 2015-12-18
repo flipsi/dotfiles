@@ -38,6 +38,9 @@ exec --no-startup-id "setxkbmap de_sflip"
 # turn on num block
 exec --no-startup-id "numlockx"
 
+# turn off pc speaker with annoying beep
+exec --no-startup-id "xset -b"
+
 # turn off screensaver and display power management
 exec --no-startup-id "xset dpms 0 0 0 && xset s noblank && xset s off"
 
@@ -78,6 +81,9 @@ floating_modifier $mod
 
 # focus when mouse moves
 focus_follows_mouse no
+
+# don't move mouse cursor when changing output
+mouse_warping none
 
 # enable/disable touchpad
 bindsym XF86TouchpadToggle  exec --no-startup-id "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
@@ -136,9 +142,9 @@ for_window [class="^.*"] border pixel 1
 
 # Colors
 #                       border   backgr   text     indicator
-client.focused          #1E1E1E  #1E1E1E  #AFFF58  #83B45C
-client.focused_inactive #1E1E1E  #1E1E1E  #83B45C  #1E1E1E
-client.unfocused        #1E1E1E  #1E1E1E  #DDDDDD  #1E1E1E
+client.focused          #000000  #1E1E1E  #AFFF58  #83B45C
+client.focused_inactive #000000  #1E1E1E  #83B45C  #1E1E1E
+client.unfocused        #000000  #1E1E1E  #DDDDDD  #1E1E1E
 client.urgent           #AFFF58  #83B45C  #000000  #1E1E1E
 client.background       #1A1A1A  #1E1E1E  #83B45C  #1E1E1E
 
@@ -156,11 +162,12 @@ bar {
     status_command      python3 ~/.i3/i3pystatus
     position            top
     workspace_buttons   yes
-    # separator_symbol    " | "
+    separator_symbol    " | "
+    # separator_symbol    " X "
     # separator_symbol    " ǁ "
     # separator_symbol    " ⠶ "
     # separator_symbol    " ⣶ "
-    separator_symbol    " ⣿ "
+    # separator_symbol    " ⣿ "
     # separator_symbol    " Ꙭ "
     tray_output         none
     colors {
@@ -437,7 +444,7 @@ set $move_container_to_output Move container to output (h) left, (l) right, (j) 
 mode "$move_container_to_output" {
     bindsym h move container to output left; workspace back_and_forth; mode "default"
     bindsym l move container to output right; workspace back_and_forth; mode "default"
-    bindsym h move container to output down; workspace back_and_forth; mode "default"
+    bindsym j move container to output down; workspace back_and_forth; mode "default"
     bindsym k move container to output up; workspace back_and_forth; mode "default"
     # back to normal: Enter or Escape
     bindsym Return mode "default"

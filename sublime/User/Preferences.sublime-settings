@@ -19,9 +19,9 @@
 	"ignored_packages":
 	[
 		"AdvancedNewFile",
-		"All Autocomplete",
 		"Automatic Backups",
 		"AutoSpell",
+		"Clickable URLs",
 		"CursorRuler",
 		"Diff",
 		"Diffy",
@@ -52,6 +52,7 @@
 		"Theme - Flatland",
 		"Theme - Reeder",
 		"UnicodeMath",
+		"Vintage MarioRicalde",
 		"VintageLines",
 		"Vintageous",
 		"WordHighlight",
