@@ -230,8 +230,10 @@
     // Movement and Selection //
     ////////////////////////////
 
-    // TODO
     // move down faster with gj and gk
+    // (this is my own plugin 'MoveMore')
+    { "keys": ["g", "j"], "command": "move_more", "args": {"amount":  11 }, "context": [{"key": "setting.command_mode"}] },
+    { "keys": ["g", "k"], "command": "move_more", "args": {"amount": -11 }, "context": [{"key": "setting.command_mode"}] },
 
     // move cursor left or right
     { "keys": ["alt+h"], "command": "move", "args": {"by": "characters", "forward": false} },
