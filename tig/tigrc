@@ -79,6 +79,8 @@ bind status s status-update
 bind stage  s status-update
 bind status c !git commit
 bind stage  c !git commit
+bind status R ?git reset --hard
+bind stage  R ?git reset --hard
 
 # amend to last commit
 bind status A !git commit --amend --no-edit
