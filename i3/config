@@ -264,7 +264,6 @@ for_window [class="(?i)thunar"]         floating enable
 for_window [class="(?i)gcolor2"]        floating enable 
 for_window [class="(?i)nemo"]           floating enable 
 for_window [class="(?i)file-roller"]    floating enable 
-for_window [class="(?i)pavucontrol"]    floating enable 
 for_window [class="(?i)qjackctl"]       floating enable 
 for_window [class="(?i)avd"]            floating enable 
 for_window [class="ssh-askpass"]        floating enable 
