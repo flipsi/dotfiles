@@ -57,6 +57,10 @@ nnoremap <C-D> :quitall<CR>
 nnoremap j gj
 nnoremap k gk
 
+" move faster
+nnoremap gj 10j
+nnoremap gk 10k
+
 " scroll (alt key)
 noremap <Esc>j <C-D> 
 noremap <Esc>k <C-U> 
