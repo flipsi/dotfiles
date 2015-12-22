@@ -39,6 +39,10 @@ bind generic <C-D> quit
 # reload config
 bind generic <F5> :source ~/.tigrc
 
+# move fast
+bind generic gj move-half-page-down
+bind generic gk move-half-page-up
+
 # refresh views
 bind generic r refresh
 

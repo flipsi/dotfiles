@@ -70,8 +70,8 @@ exec --no-startup-id "xinput --set-prop 'FocalTechPS/2 FocalTech FocalTech Touch
 set $SHELLSCRIPT_PATH /home/sflip/shellscripts
 
 # launcher options
-set $DMENU_OPTIONS -i -l 5 -nb '#1E1E1E' -sb '#AFFF58' -sf '#000000'
-set $ROFI_OPTIONS -font 'monospace 8' -bg '#1E1E1E' -fg '#FFFFFF' -hlbg '#AFFF58' -hlfg '#000000' -bg-active '#1E1E1E' -fg-active '#AFFF58' -hlfg-active '#000000' -hlbg-active '#AFFF58' -location 1 -kb-remove-word-back 'Alt+BackSpace'
+set $DMENU_OPTIONS -fn 'Monospace-8' -i -l 5 -nb '#1E1E1E' -sb '#AFFF58' -sf '#000000'
+set $ROFI_OPTIONS -font 'Monospace 8' -width 100 -bg '#1E1E1E' -fg '#FFFFFF' -hlbg '#AFFF58' -hlfg '#000000' -bg-active '#1E1E1E' -fg-active '#AFFF58' -hlfg-active '#000000' -hlbg-active '#AFFF58' -bc '#1E1E1E' -location 1 -kb-remove-word-back 'Alt+BackSpace'
 
 # modifier key: windows/super
 set $mod Mod4
@@ -117,18 +117,22 @@ exec --no-startup-id "feh --bg-scale ~/.i3/wallpaper"
 # is used in the bar {} block below.
 # font pango:NotoSans 10
 # font pango:Terminus 10
-font pango:Monospace 8
+font pango:Monospace 9
 # font pango:DejaVu Sans Mono 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 
+
 # Before i3 v4.8, we used to recommend this one as the default:
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, its unicode glyph coverage is limited, the old
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
+
 
 
 # borders
@@ -262,9 +266,12 @@ bindsym      Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen 
 # windows always floating/fullscreen
 for_window [class="(?i)thunar"]         floating enable 
 for_window [class="(?i)gcolor2"]        floating enable 
+for_window [class="(?i)gcolor2"]        move position 1250 150
+for_window [class="(?i)galculator"]     floating enable 
+for_window [class="(?i)galculator"]     move position 1250 450
+for_window [class="(?i)galculator"]     resize set 320 400 
 for_window [class="(?i)nemo"]           floating enable 
 for_window [class="(?i)file-roller"]    floating enable 
-for_window [class="(?i)pavucontrol"]    floating enable 
 for_window [class="(?i)qjackctl"]       floating enable 
 for_window [class="(?i)avd"]            floating enable 
 for_window [class="ssh-askpass"]        floating enable 
