@@ -53,6 +53,9 @@ nnoremap <F5> :source ~/.vimrc<CR>
 nnoremap Q :quit<CR>
 nnoremap <C-D> :quitall<CR>
 
+" save changes without quit
+nnoremap <Esc>s :write<CR>
+
 " move intuitively when text is wrapped
 nnoremap j gj
 nnoremap k gk
