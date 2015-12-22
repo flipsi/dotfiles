@@ -1,6 +1,7 @@
 colorscheme green
 
 bind -f common Q quit
+bind -f common ^D quit
 
 bind -f common L view playlist
 bind -f common B view browser
@@ -13,8 +14,8 @@ bind -f common space player-pause
 bind -f common o player-next
 bind -f common O player-prev
 
-bind -f common + vol +4%
-bind -f common - vol -4%
+bind -f common + vol +2%
+bind -f common - vol -2%
 
 bind -f common R toggle shuffle
 bind -f common S toggle repeat_current
