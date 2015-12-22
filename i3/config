@@ -266,6 +266,10 @@ bindsym      Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen 
 # windows always floating/fullscreen
 for_window [class="(?i)thunar"]         floating enable 
 for_window [class="(?i)gcolor2"]        floating enable 
+for_window [class="(?i)gcolor2"]        move position 1250 150
+for_window [class="(?i)galculator"]     floating enable 
+for_window [class="(?i)galculator"]     move position 1250 450
+for_window [class="(?i)galculator"]     resize set 320 400 
 for_window [class="(?i)nemo"]           floating enable 
 for_window [class="(?i)file-roller"]    floating enable 
 for_window [class="(?i)qjackctl"]       floating enable 
