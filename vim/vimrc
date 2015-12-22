@@ -90,6 +90,9 @@ nnoremap ` '
 " goto mark 
 nnoremap ä `
 
+" registers
+nnoremap Ä "
+
 " movement to eol (l instead of $)
 nnoremap cl c$
 nnoremap yl y$
