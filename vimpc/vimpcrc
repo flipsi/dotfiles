@@ -41,12 +41,16 @@ hi error redfg
 """" Keybindings """"
 
 " quit vimpc
-map Q ZQ
+map Q :quitall<CR>
+map <C-D> :quitall<CR>
 
+" move fast
+map gj 10j
+map gk 10k
 
 " scroll
-map <A-j> <C-D>
-map <A-k> <C-U>
+map <A-j> <C-F>
+map <A-k> <C-B>
 
 
 " Playback controls
