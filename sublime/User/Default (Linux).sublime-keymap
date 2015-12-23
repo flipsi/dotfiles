@@ -22,10 +22,9 @@
 
     // python repl (console)
     { "keys": ["ctrl+alt+i"], "command": "show_panel", "args": {"panel": "console", "toggle": true} },
-    // { "keys": ["ctrl+n"], "command": "move", "args": {"by": "lines", "forward": true},
-    //   "context": [{ "key": "panel_visible", "operator": "equal", "operand": true } ] },
-    // { "keys": ["ctrl+p"], "command": "move", "args": {"by": "lines", "forward": false},
-    //   "context": [{ "key": "panel_visible", "operator": "equal", "operand": true } ] },
+    { "keys": ["escape"], "command": "focus_group", "args": { "group": 0 }, "context": [{ "key": "panel_visible", "operator": "equal", "operand": true } ] },
+    // { "keys": ["ctrl+n"], "command": "move", "args": {"by": "lines", "forward": true}, "context": [{ "key": "panel_visible", "operator": "equal", "operand": true } ] },
+    // { "keys": ["ctrl+p"], "command": "move", "args": {"by": "lines", "forward": false}, "context": [{ "key": "panel_visible", "operator": "equal", "operand": true } ] },
 
     // hide/show build panel
     { "keys": ["ctrl+alt+o"], "command": "show_panel", "args": {"panel": "output.exec"} },
