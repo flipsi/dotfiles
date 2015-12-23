@@ -46,9 +46,6 @@ bind generic gk move-half-page-up
 # refresh views
 bind generic r refresh
 
-# original git status
-bind generic S !git status
-
 # views
 bind generic wm view-main
 bind generic wd view-diff
@@ -87,10 +84,16 @@ bind status R ?git reset --hard
 bind stage  R ?git reset --hard
 
 # amend to last commit
-bind status A !git commit --amend --no-edit
+bind status A ?git commit --amend --no-edit
+
+# stash
+bind status S ?git stash save --include-untracked
+bind stage  S ?git stash save --include-untracked
+bind stash  p ?git stash pop %(stash)
            
-# checkout refs
+# checkout/merge refs
 bind refs c	?git checkout %(branch)
+bind refs m ?git merge %(branch)
 
 # remote commands
 bind generic f !git fetch
