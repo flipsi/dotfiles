@@ -250,6 +250,16 @@ bindsym XF86AudioPlay        exec --no-startup-id "mpc toggle"
 bindsym XF86AudioNext        exec --no-startup-id "mpc next"
 bindsym XF86AudioPrev        exec --no-startup-id "mpc prev"
 
+# play a sound
+bindsym $mod+0 mode "$play_sound"
+set $play_sound play sound (s) scream, (t) tusch
+mode "$play_sound" {
+    bindsym t exec --no-startup-id "play /home/sflip/snd/tusch.mp3"; mode "default"
+    bindsym s exec --no-startup-id "play /home/sflip/snd/WilhelmScream.mp3"; mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
 # take a screenshot
 bindsym $mod+Print       exec --no-startup-id "xfce4-screenshooter --fullscreen --save ~/img-screenshots"
@@ -421,7 +431,7 @@ bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+#bindsym $mod+0 workspace 10
 
 # move container to specific workspace
 bindsym $mod+Shift+n move container to workspace next_on_output
