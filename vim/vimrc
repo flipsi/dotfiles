@@ -4,7 +4,12 @@
 
 " SETTINGS
 
+" who uses original vi anyway?
 set nocompatible
+
+" theme
+"colorscheme murphy
+colorscheme desert
 
 " disable powerline
 let g:powerline_loaded = 1

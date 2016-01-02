@@ -1,0 +1,14 @@
+" Author: Philipp Moers <soziflip@gmail.com>
+" A gvimrc for GUI only stuff
+
+
+" hide toolbar
+set guioptions-=T
+
+" hide menubar
+set guioptions-=m
+
+" font
+set guifont=Monospace
+
+
