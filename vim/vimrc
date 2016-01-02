@@ -8,7 +8,7 @@
 set nocompatible
 
 " encoding should be utf-8 on every OS
-set encoding=utf-8
+set     encoding=utf-8
 set fileencoding=utf-8
 
 " theme
@@ -50,19 +50,25 @@ set hidden
 
 " KEYBINDINGS
 
-" compatibility 
+" mappings with the alt key should be done twice:
+"      - with <Esc>* for terminal sequences, and
+"      - with <M-*>  for gvim
+
+" (for compatibility)
 nnoremap <C-g><C-g> <C-g>
 
 " reload this config file
 nnoremap <F5> :source ~/.vimrc<CR>
 
-" ZQ to quit discarding changes 
-" ZZ to save and quit
-" Q  to quit vim quickly (will prompt if the file was changed but not saved)
-nnoremap Q :quit<CR>
+" ZQ to quit discarding file changes 
+" ZZ to save file changes and quit
+" Q  to quit quickly (will prompt if the file was changed but not saved)
+" <C-D> to quit not only one but multiple windows
+nnoremap Q     :quit<CR>
 nnoremap <C-D> :quitall<CR>
 
 " save changes without quit
+nnoremap <M-s>  :write<CR>
 nnoremap <Esc>s :write<CR>
 
 " move intuitively when text is wrapped
@@ -74,7 +80,9 @@ nnoremap gj 10j
 nnoremap gk 10k
 
 " scroll (alt key)
+noremap <M-j>  <C-D> 
 noremap <Esc>j <C-D> 
+noremap <M-k>  <C-U> 
 noremap <Esc>k <C-U> 
 
 " toggle line numbers 
@@ -109,14 +117,20 @@ nnoremap dl d$
 nnoremap vl v$
 
 " add new line above or below
+noremap <M-o>  <Esc>o<Esc>k
 noremap <Esc>o <Esc>o<Esc>k
+noremap <M-O>  <Esc>O<Esc>j
 noremap <Esc>O <Esc>O<Esc>j
 
 " undo and redo
+noremap <M-u>  :undo<CR>
 noremap <Esc>u :undo<CR>
+noremap <M-U>  :redo<CR>
 noremap <Esc>U :redo<CR>
 
 " multiple buffers
 nnoremap # :buffer 
+nnoremap <M-n>  :bnext<CR>
 nnoremap <Esc>n :bnext<CR>
+nnoremap <M-p>  :bprevious<CR>
 nnoremap <Esc>p :bprevious<CR>
