@@ -7,6 +7,10 @@
 " who uses original vi anyway?
 set nocompatible
 
+" encoding should be utf-8 on every OS
+set encoding=utf-8
+set fileencoding=utf-8
+
 " theme
 "colorscheme murphy
 colorscheme desert
