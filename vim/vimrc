@@ -27,6 +27,7 @@ syntax on
 " show relative line numbers
 set nonumber
 set norelativenumber
+set numberwidth=6
 
 " highlight current line
 set cursorline
