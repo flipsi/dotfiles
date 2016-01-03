@@ -28,6 +28,9 @@ syntax on
 set nonumber
 set norelativenumber
 
+" highlight current line
+set cursorline
+
 " statusline
 set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 set ruler
@@ -69,7 +72,7 @@ set hidden
 
 
 " (for compatibility)
-nnoremap <C-g><C-g> <C-g>
+nnoremap <C-G><C-G> <C-G>
 
 " reload this config file
 nnoremap <F5> :source ~/.vimrc<CR>
@@ -92,10 +95,13 @@ noremap <M-k>  <C-U>
 noremap <Esc>k <C-U> 
 
 " toggle line numbers 
-noremap <C-g>l :set number! <bar> :set relativenumber! <CR>
+noremap <C-G>l :set number! <bar> :set relativenumber! <CR>
 
 " toggle word wrap
-nnoremap <C-g>w :set wrap! <CR>
+nnoremap <C-G>w :set wrap! <CR>
+
+" toggle highlight current line
+nnoremap <C-G>h :set cursorline!<CR>
 
 " registers
 nnoremap Ä "
