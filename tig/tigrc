@@ -81,7 +81,9 @@ bind stage  s status-update
 bind status c !git commit
 bind stage  c !git commit
 
-# reset and delete
+# checkout, reset and delete
+bind status C  ?git checkout -- %(file)
+bind stage  C  ?git checkout -- %(file)
 bind status R  ?git reset --hard
 bind stage  R  ?git reset --hard
 bind status xr ?rm -r %(file)
