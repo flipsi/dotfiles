@@ -2,6 +2,7 @@
 " A simple vimrc. With no dependencies
 
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS
 
@@ -60,6 +61,7 @@ set hidden
 "      - with <M-*>  for gvim
 
 
+
 """"""""""
 " GENERAL
 
@@ -95,6 +97,7 @@ nnoremap <C-g>w :set wrap! <CR>
 
 " registers
 nnoremap Ä "
+
 
 
 
@@ -145,6 +148,7 @@ nnoremap ä `
 
 
 
+
 """""""""""""""
 " TEXT EDITING
 
@@ -166,3 +170,15 @@ nnoremap <M-n>  :bnext<CR>
 nnoremap <Esc>n :bnext<CR>
 nnoremap <M-p>  :bprevious<CR>
 nnoremap <Esc>p :bprevious<CR>
+
+
+
+
+"""""""""""""""
+" USEFUL TOOLS
+
+
+" git
+nnoremap <C-F>g :!tig<CR>
+
+
