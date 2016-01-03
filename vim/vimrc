@@ -2,7 +2,9 @@
 " A simple vimrc. With no dependencies
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS
+
 
 " who uses original vi anyway?
 set nocompatible
@@ -48,11 +50,19 @@ set hidden
 
 
 
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEYBINDINGS
 
 " mappings with the alt key should be done twice:
 "      - with <Esc>* for terminal sequences, and
 "      - with <M-*>  for gvim
+
+
+""""""""""
+" GENERAL
+
 
 " (for compatibility)
 nnoremap <C-g><C-g> <C-g>
@@ -71,14 +81,6 @@ nnoremap <C-D> :quitall<CR>
 nnoremap <M-s>  :write<CR>
 nnoremap <Esc>s :write<CR>
 
-" move intuitively when text is wrapped
-nnoremap j gj
-nnoremap k gk
-
-" move faster
-nnoremap gj 10j
-nnoremap gk 10k
-
 " scroll (alt key)
 noremap <M-j>  <C-D> 
 noremap <Esc>j <C-D> 
@@ -91,6 +93,40 @@ noremap <C-g>l :set number! <bar> :set relativenumber! <CR>
 " toggle word wrap
 nnoremap <C-g>w :set wrap! <CR>
 
+" registers
+nnoremap Ä "
+
+
+
+"""""""""""
+" MOVEMENT
+
+
+" move intuitively when text is wrapped
+nnoremap j gj
+nnoremap k gk
+
+" move faster
+nnoremap gj 10j
+nnoremap gk 10k
+
+" move to BOL
+" smart BOL: the cursor moves to the first nonblank character on the line, 
+"            or, if already at that position, to the start of the line.
+"            (http://vim.wikia.com/wiki/Smart_home)
+noremap <expr> <silent> <C-A> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
+imap <silent> <C-A> <C-O><C-A>
+" move to EOL
+nnoremap <C-E> $
+vnoremap <C-E> $
+inoremap <C-E> <Esc>A
+cnoremap <C-A> <Home>
+" move to EOL with l instead of $
+nnoremap cl c$
+nnoremap yl y$
+nnoremap dl d$
+nnoremap vl v$
+
 " search 
 nnoremap ö /
 nnoremap Ö ?
@@ -99,7 +135,7 @@ nnoremap Ö ?
 nnoremap , ;
 nnoremap ; ,
 
-" swap implementations of ` and ' jump to markers
+" swap ` and ' (jump to markers)
 " (by default, ' marked line, ` marked line and column)
 nnoremap ' `
 nnoremap ` '
@@ -107,14 +143,10 @@ nnoremap ` '
 " goto mark 
 nnoremap ä `
 
-" registers
-nnoremap Ä "
 
-" movement to eol (l instead of $)
-nnoremap cl c$
-nnoremap yl y$
-nnoremap dl d$
-nnoremap vl v$
+
+"""""""""""""""
+" TEXT EDITING
 
 " add new line above or below
 noremap <M-o>  <Esc>o<Esc>k
