@@ -36,7 +36,10 @@ set cursorline
 set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 set ruler
 
-" show completions above commandline etc
+" completions behaviour
+set wildmode=list:longest,full
+
+" show command completions above commandline etc
 set wildmenu
 
 " scrolling
@@ -170,6 +173,13 @@ nnoremap ä `
 
 """""""""""""""
 " TEXT EDITING
+
+
+" autocompletion
+inoremap <M-.>    <C-N>
+inoremap <Esc>.   <C-N>
+inoremap <M-:>    <C-P>
+inoremap <Esc>:   <C-P>
 
 " add new line above or below
 noremap <M-o>  <Esc>o<Esc>k
