@@ -36,6 +36,8 @@ set ruler
 set incsearch
 set ignorecase
 set smartcase
+" never have to append 'g' to a search/substitute again
+set gdefault
 
 " use 4 spaces instead of tabs
 set expandtab
