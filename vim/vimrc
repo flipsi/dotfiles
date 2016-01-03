@@ -39,6 +39,12 @@ set ruler
 " show completions above commandline etc
 set wildmenu
 
+" scrolling
+" start scrolling when we're 8 lines away from margins
+set scrolloff=8         
+set sidescrolloff=15
+set sidescroll=1
+
 " search preferences
 set incsearch
 set ignorecase
