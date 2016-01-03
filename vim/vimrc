@@ -106,6 +106,7 @@ noremap <Esc>k <C-U>
 
 " toggle line numbers 
 noremap <C-G>l :set number! <bar> :set relativenumber! <CR>
+noremap <C-G>L :set relativenumber! <CR>
 
 " toggle word wrap
 nnoremap <C-G>w :set wrap! <CR>
