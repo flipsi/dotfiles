@@ -150,7 +150,7 @@ cnoremap <C-A> <Home>
 nnoremap cl c$
 nnoremap yl y$
 nnoremap dl d$
-nnoremap vl v$
+"nnoremap vl v$
 
 " search 
 nnoremap ö /
