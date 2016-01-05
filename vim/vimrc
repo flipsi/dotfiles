@@ -108,14 +108,14 @@ noremap <M-k>  <C-U>
 noremap <Esc>k <C-U> 
 
 " toggle line numbers 
-noremap <C-G>l :set number! <bar> :set relativenumber! <CR>
-noremap <C-G>L :set relativenumber! <CR>
+noremap <silent> <C-G>l :set number! <bar> :set relativenumber! <CR>
+noremap <silent> <C-G>L :set relativenumber! <CR>
 
 " toggle word wrap
-nnoremap <C-G>w :set wrap! <CR>
+nnoremap <silent> <C-G>w :set wrap! <CR>
 
 " toggle highlight current line
-nnoremap <C-G>h :set cursorline!<CR>
+nnoremap <silent> <C-G>h :set cursorline!<CR>
 
 " registers
 nnoremap Ä "
