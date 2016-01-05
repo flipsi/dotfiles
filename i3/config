@@ -18,6 +18,11 @@
 # quickswitch [https://github.com/OliverUv/quickswitch-for-i3]
 # rofi [https://davedavenport.github.io/rofi/]
 
+# my shellscripts [https://github.com/sflip/shellscripts]
+# path to my shellscripts
+set $SHELLSCRIPT_PATH /home/sflip/shellscripts
+
+
 
 
 ###############################################################################
@@ -30,6 +35,7 @@ exec --no-startup-id "compton -b"
 # set second output (monitor) with a shell command like this
 # exec "xrandr --output HDMI2 --auto --right-of eDP1"
 # exec "xrandr --output HDMI2 --auto --below eDP1"
+exec --no-startup-id "$SHELLSCRIPT_PATH/misc/obelix-i3-desktop-setup.sh"
 
 # set keyboard layout 
 exec --no-startup-id "setxkbmap de_sflip"
@@ -65,9 +71,6 @@ exec --no-startup-id "xinput --set-prop 'FocalTechPS/2 FocalTech FocalTech Touch
 ###############################################################################
 ###########  GENERAL  #########################################################
 ###############################################################################
-
-# path to my shellscripts
-set $SHELLSCRIPT_PATH /home/sflip/shellscripts
 
 # launcher options
 set $DMENU_OPTIONS -fn 'Monospace-8' -i -l 5 -nb '#1E1E1E' -sb '#AFFF58' -sf '#000000'
