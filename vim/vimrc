@@ -249,7 +249,13 @@ nnoremap <silent> <leader>L :wincmd L<CR>
 " USEFUL TOOLS
 
 
+" shell in dir of current file
+nnoremap <C-F>o :lcd %:p:h <bar> :!fish<CR>
+
 " git
 nnoremap <C-F>g :!tig<CR>
+
+
+
 
 
