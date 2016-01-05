@@ -67,6 +67,10 @@ set smartindent
 " allow to :edit multiple files in buffers without writing changes
 set hidden
 
+" puts new split windows to the bottom of the current
+set splitbelow
+" puts new vsplit windows to the right of the current
+set splitright
 
 
 
@@ -79,6 +83,9 @@ set hidden
 "      - with <M-*>  for gvim
 
 
+" leader key is space
+let mapleader=' '
+
 
 """"""""""
 " GENERAL
@@ -89,6 +96,7 @@ nnoremap <C-G><C-G> <C-G>
 
 " reload this config file
 nnoremap <F5> :source ~/.vimrc<CR>
+nnoremap <leader>lr :source ~/.vimrc<CR>
 
 " ZQ to quit discarding file changes 
 " ZZ to save file changes and quit
@@ -141,6 +149,7 @@ nnoremap gk 10k
 "            (http://vim.wikia.com/wiki/Smart_home)
 noremap <expr> <silent> <C-A> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 imap <silent> <C-A> <C-O><C-A>
+
 " move to EOL
 nnoremap <C-E> $
 vnoremap <C-E> $
@@ -168,6 +177,12 @@ nnoremap ` '
 " goto mark 
 nnoremap ä `
 
+" display all lines with keyword under cursor
+" and ask which one to jump to
+nmap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+
+" find git merge conflict markers
+nnoremap <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 
 
 
@@ -176,10 +191,16 @@ nnoremap ä `
 
 
 " autocompletion
-inoremap <M-.>    <C-N>
-inoremap <Esc>.   <C-N>
-inoremap <M-:>    <C-P>
-inoremap <Esc>:   <C-P>
+inoremap <M-.>  <C-N>
+inoremap <Esc>. <C-N>
+inoremap <M-:>  <C-P>
+inoremap <Esc>: <C-P>
+
+" indent lines
+nnoremap < <<
+nnoremap > >>
+vnoremap < <gv
+vnoremap > >gv
 
 " add new line above or below
 noremap <M-o>  <Esc>o<Esc>k
@@ -187,19 +208,40 @@ noremap <Esc>o <Esc>o<Esc>k
 noremap <M-O>  <Esc>O<Esc>j
 noremap <Esc>O <Esc>O<Esc>j
 
+" delete leading whitespace (can be prefixed with a count)
+nnoremap <silent> <leader>dsl :s:^\s\+::<CR>
+
 " undo and redo
 noremap <M-u>  :undo<CR>
 noremap <Esc>u :undo<CR>
 noremap <M-U>  :redo<CR>
 noremap <Esc>U :redo<CR>
 
-" multiple buffers
+
+
+""""""""""""""""""""""
+" BUFFERS AND WINDOWS
+
+
+" change buffer
 nnoremap # :buffer 
+nnoremap <Space><Space> :buffer #<CR>
 nnoremap <M-n>  :bnext<CR>
 nnoremap <Esc>n :bnext<CR>
 nnoremap <M-p>  :bprevious<CR>
 nnoremap <Esc>p :bprevious<CR>
 
+" change window
+nnoremap <silent> <leader>j :wincmd j<CR>
+nnoremap <silent> <leader>k :wincmd k<CR>
+nnoremap <silent> <leader>h :wincmd h<CR>
+nnoremap <silent> <leader>l :wincmd l<CR>
+
+" reorder windows
+nnoremap <silent> <leader>J :wincmd J<CR>
+nnoremap <silent> <leader>K :wincmd K<CR>
+nnoremap <silent> <leader>H :wincmd H<CR>
+nnoremap <silent> <leader>L :wincmd L<CR>
 
 
 
