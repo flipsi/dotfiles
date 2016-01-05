@@ -244,15 +244,31 @@ bindsym $mod+plus            exec --no-startup-id "amixer sset Master 1%+"
 # control music player daemon (mpd)
 bindsym $mod+Shift+minus     exec --no-startup-id "mpc volume -1"
 bindsym $mod+Shift+plus      exec --no-startup-id "mpc volume +1"
-bindsym XF86AudioLowerVolume exec --no-startup-id "mpc volume -1"
-bindsym XF86AudioRaiseVolume exec --no-startup-id "mpc volume +1"
+bindsym XF86AudioLowerVolume exec --no-startup-id "amixer sset Master 1%-"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 1%+"
 bindsym XF86AudioPlay        exec --no-startup-id "mpc toggle"
 bindsym XF86AudioNext        exec --no-startup-id "mpc next"
 bindsym XF86AudioPrev        exec --no-startup-id "mpc prev"
+bindsym $mod+0 mode "$mpd_control"
+set $mpd_control MPD: (space) play/pause, (n) next, (p) prev, (s) stop, (c) last, (+/-) volume
+mode "$mpd_control" {
+    bindsym space exec --no-startup-id "mpc toggle"
+    bindsym n     exec --no-startup-id "mpc next"
+    bindsym o     exec --no-startup-id "mpc next"
+    bindsym p     exec --no-startup-id "mpc prev"
+    bindsym O     exec --no-startup-id "mpc prev"
+    bindsym s     exec --no-startup-id "mpc stop"; mode "default"
+    bindsym c     exec --no-startup-id "mpc crop"; mode "default"
+    bindsym minus exec --no-startup-id "mpc volume -1"
+    bindsym plus  exec --no-startup-id "mpc volume +1"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
 # play a sound
-bindsym $mod+0 mode "$play_sound"
-set $play_sound play sound (s) scream, (t) tusch
+bindsym $mod+Shift+0 mode "$play_sound"
+set $play_sound Play sound: (s) scream, (t) tusch
 mode "$play_sound" {
     bindsym t exec --no-startup-id "play /home/sflip/snd/tusch.mp3"; mode "default"
     bindsym s exec --no-startup-id "play /home/sflip/snd/WilhelmScream.mp3"; mode "default"
@@ -445,7 +461,7 @@ bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+#bindsym $mod+Shift+0 move container to workspace 10
 
 # move container to new workspace (tmux 'break')
 bindsym $mod+Shift+i exec --no-startup-id "quickswitch --journey -E"
