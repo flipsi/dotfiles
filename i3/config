@@ -268,7 +268,7 @@ mode "$mpd_control" {
 
 # play a sound
 bindsym $mod+Shift+0 mode "$play_sound"
-set $play_sound Play sound: (s) scream, (t) tusch
+set $play_sound Play sound: (j) Jeopardy, (s) Scream, (t) Tusch
 mode "$play_sound" {
     bindsym j exec --no-startup-id "play /home/sflip/snd/jeopardy.mp3"; mode "default"
     bindsym s exec --no-startup-id "play /home/sflip/snd/WilhelmScream.mp3"; mode "default"
