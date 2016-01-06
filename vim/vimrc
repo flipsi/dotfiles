@@ -253,6 +253,10 @@ nnoremap <silent> <leader>K :wincmd K<CR>
 nnoremap <silent> <leader>H :wincmd H<CR>
 nnoremap <silent> <leader>L :wincmd L<CR>
 
+" move buffer to a new window
+nnoremap <silent> <C-w><C-l> :vsplit<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
+nnoremap <silent> <C-w><C-j> :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
+
 
 
 """""""""""""""
