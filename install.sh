@@ -15,7 +15,7 @@ Usage: install.sh [OPTIONS] TARGET
     -f | --force            if file(s) exist(s), overwrite it/them
 
     TARGET := { all | bash | cmus | dactyl | elinks | fish | ghci | git | i3 | 
-                konsole | lesskey | luakit | mpd | mutt | muttator | 
+                konsole | lesskey | luakit | mpd | mplayer | mutt | muttator | 
                 pentadactyl | ranger | sublime-text-3 | telegram-cli | tig | 
                 tmux | turses | urlview | vim | vimpc | vimperator | vimus | 
                 vlc | xfce4 | xkb | xmonad | zathura }
@@ -81,6 +81,12 @@ function create_link_for_target() {
 
         mpd)
             create_link $PWD/mpd/mpdconf $HOME/.mpdconf
+            ;;
+
+        mplayer)
+            mkdir -p $HOME/.mplayer
+            create_link $PWD/mplayer/config $HOME/.mplayer/config
+            create_link $PWD/mplayer/input.conf $HOME/.mplayer/input.conf
             ;;
 
         mutt)
@@ -259,6 +265,7 @@ else
         create_link_for_target lesskey
         create_link_for_target luakit
         create_link_for_target mpd
+        create_link_for_target mplayer
         create_link_for_target mutt
         create_link_for_target muttator
         create_link_for_target pentadactyl
