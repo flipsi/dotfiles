@@ -155,7 +155,6 @@
 
     // close tab
     { "keys": ["q"], "command": "close", "context": [{"key": "setting.command_mode"}] },
-    { "keys": ["Q"], "command": "close", "context": [{"key": "setting.command_mode"}] },
 
     // reopen tab
     { "keys": ["ctrl+u"], "command": "reopen_last_file" },
@@ -218,7 +217,7 @@
     { "keys": ["ctrl+o", "ctrl+h"], "command": "create_pane_with_file", "args": {"direction": "left"} },
 
     // Origami: destroy pane
-    { "keys": ["ctrl+o", "d"], "command": "destroy_pane", "args": {"direction": "self"} },
+    { "keys": ["Q"], "command": "destroy_pane", "args": {"direction": "self"}, "context": [{"key": "setting.command_mode"}] },
 
     // Origami: zoom
     { "keys": ["ctrl+o", "z"], "command": "zoom_pane", "args": {"fraction": 0.9} },

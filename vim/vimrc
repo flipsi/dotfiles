@@ -98,16 +98,26 @@ nnoremap <C-G><C-G> <C-G>
 nnoremap <F5> :source ~/.vimrc<CR>
 nnoremap <leader>lr :source ~/.vimrc<CR>
 
-" ZQ to quit discarding file changes 
-" ZZ to save file changes and quit
-" Q  to quit quickly (will prompt if the file was changed but not saved)
-" <C-D> to quit not only one but multiple windows
+" close file (not window)
+nnoremap q     :bdelete<CR>
+
+" quit window quickly
+" (no hidden mode: will prompt if the buffer was changed)
+" (   hidden mode: will not close the buffer)
 nnoremap Q     :quit<CR>
+
+" quit vim (mulitple windows)
 nnoremap <C-D> :quitall<CR>
 
 " save changes without quit
 nnoremap <M-s>  :write<CR>
 nnoremap <Esc>s :write<CR>
+
+" record macro ('complex repeat')
+nnoremap <leader>M q
+" replay macro ('complex repeat')
+nnoremap <leader>m @
+
 
 " scroll (alt key)
 noremap <M-j>  <C-D> 
