@@ -96,6 +96,9 @@ noremap <A-S-n> :tabmove +1<CR>
 " close tab
 nnoremap q :tabclose<CR>
 
+" manipulate url (so i don't accidently add a bookmark)
+nnoremap A O
+
 " misc views ("w"indows)
 nnoremap wa :tabopen about:addons<CR>
 nnoremap wd :downloads<CR>
