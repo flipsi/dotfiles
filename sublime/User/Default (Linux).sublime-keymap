@@ -193,28 +193,31 @@
     { "keys": ["ctrl+w", "ctrl+w"], "command": "set_layout", "args": {"cols": [0.0, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1]] } },
 
     // Origami: move focus
-    { "keys": ["ctrl+w", "k"], "command": "travel_to_pane", "args": {"direction": "up"} },
-    { "keys": ["ctrl+w", "l"], "command": "travel_to_pane", "args": {"direction": "right"} },
     { "keys": ["ctrl+w", "j"], "command": "travel_to_pane", "args": {"direction": "down"} },
+    { "keys": ["ctrl+w", "k"], "command": "travel_to_pane", "args": {"direction": "up"} },
+    { "keys": ["ctrl+h"],      "command": "travel_to_pane", "args": {"direction": "left"} },
     { "keys": ["ctrl+w", "h"], "command": "travel_to_pane", "args": {"direction": "left"} },
+    { "keys": ["ctrl+l"],      "command": "travel_to_pane", "args": {"direction": "right"} },
+    { "keys": ["ctrl+w", "l"], "command": "travel_to_pane", "args": {"direction": "right"} },
 
     // Origami: move tab to another pane
+    // (creates a new pane if there is no other)
     { "keys": ["ctrl+w", "K"], "command": "carry_file_to_pane", "args": {"direction": "up"} },
     { "keys": ["ctrl+w", "L"], "command": "carry_file_to_pane", "args": {"direction": "right"} },
     { "keys": ["ctrl+w", "J"], "command": "carry_file_to_pane", "args": {"direction": "down"} },
     { "keys": ["ctrl+w", "H"], "command": "carry_file_to_pane", "args": {"direction": "left"} },
 
     // Origami: new view into file in another pane
-    { "keys": ["ctrl+w", "alt+k"], "command": "clone_file_to_pane", "args": {"direction": "up"} },
-    { "keys": ["ctrl+w", "alt+l"], "command": "clone_file_to_pane", "args": {"direction": "right"} },
-    { "keys": ["ctrl+w", "alt+j"], "command": "clone_file_to_pane", "args": {"direction": "down"} },
-    { "keys": ["ctrl+w", "alt+h"], "command": "clone_file_to_pane", "args": {"direction": "left"} },
+    { "keys": ["ctrl+w", "ctrl+k"], "command": "clone_file_to_pane", "args": {"direction": "up"} },
+    { "keys": ["ctrl+w", "ctrl+l"], "command": "clone_file_to_pane", "args": {"direction": "right"} },
+    { "keys": ["ctrl+w", "ctrl+j"], "command": "clone_file_to_pane", "args": {"direction": "down"} },
+    { "keys": ["ctrl+w", "ctrl+h"], "command": "clone_file_to_pane", "args": {"direction": "left"} },
 
     // Origami: create pane with file
-    { "keys": ["ctrl+w", "ctrl+k"], "command": "create_pane_with_file", "args": {"direction": "up"} },
-    { "keys": ["ctrl+w", "ctrl+l"], "command": "create_pane_with_file", "args": {"direction": "right"} },
-    { "keys": ["ctrl+w", "ctrl+j"], "command": "create_pane_with_file", "args": {"direction": "down"} },
-    { "keys": ["ctrl+w", "ctrl+h"], "command": "create_pane_with_file", "args": {"direction": "left"} },
+    { "keys": ["ctrl+w", "alt+k"], "command": "create_pane_with_file", "args": {"direction": "up"} },
+    { "keys": ["ctrl+w", "alt+l"], "command": "create_pane_with_file", "args": {"direction": "right"} },
+    { "keys": ["ctrl+w", "alt+j"], "command": "create_pane_with_file", "args": {"direction": "down"} },
+    { "keys": ["ctrl+w", "alt+h"], "command": "create_pane_with_file", "args": {"direction": "left"} },
 
     // Origami: destroy pane
     { "keys": ["Q"], "command": "destroy_pane", "args": {"direction": "self"}, "context": [{"key": "setting.command_mode"}] },
@@ -292,7 +295,7 @@
 
     // delete
     // { "keys": ["delete"], "command": "set_action_motion", "args": {"action": "vi_left_delete", "motion": null } },
-    { "keys": ["ctrl+h"], "command": "left_delete" },
+    // { "keys": ["ctrl+h"], "command": "left_delete" },
     { "keys": ["ctrl+d"], "command": "set_action_motion", "args": {"action": "vi_right_delete", "motion": null } },
     { "keys": ["alt+backspace"], "command": "delete_word", "args": { "forward": false } },
     { "keys": ["alt+d"], "command": "delete_word", "args": { "forward": true } },
