@@ -155,7 +155,6 @@
 
     // close tab
     { "keys": ["q"], "command": "close", "context": [{"key": "setting.command_mode"}] },
-    { "keys": ["Q"], "command": "close", "context": [{"key": "setting.command_mode"}] },
 
     // reopen tab
     { "keys": ["ctrl+u"], "command": "reopen_last_file" },
@@ -175,54 +174,57 @@
     { "keys": ["alt+shift+space"], "command": "prev_view_in_stack" },
 
     // split window in groups
-    {"keys": ["ctrl+o", "1"], "command": "set_layout", "args": {"cols": [0.0, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1]] } },
-    {"keys": ["ctrl+o", "2"], "command": "set_layout", "args": {"cols": [0.0, 0.5, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1], [1, 0, 2, 1]] } },
-    {"keys": ["ctrl+o", "4"], "command": "set_layout", "args": {"cols": [0.0, 0.38, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1], [1, 0, 2, 1]] } },
-    {"keys": ["ctrl+o", "6"], "command": "set_layout", "args": {"cols": [0.0, 0.66, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1], [1, 0, 2, 1]] } },
-    {"keys": ["ctrl+o", "3"], "command": "set_layout", "args": {"cols": [0.0, 0.33, 0.66, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1], [1, 0, 2, 1], [2, 0, 3, 1]] } },
-    {"keys": ["ctrl+o", "7"], "command": "set_layout", "args": {"cols": [0.0, 1.0], "rows": [0.0, 0.5, 1.0], "cells": [[0, 0, 1, 1], [0, 1, 1, 2]] } },
-    {"keys": ["ctrl+o", "8"], "command": "set_layout", "args": {"cols": [0.0, 1.0], "rows": [0.0, 0.3, 1.0], "cells": [[0, 0, 1, 1], [0, 1, 1, 2]] } },
-    {"keys": ["ctrl+o", "9"], "command": "set_layout", "args": {"cols": [0.0, 1.0], "rows": [0.0, 0.33, 0.66, 1.0], "cells": [[0, 0, 1, 1], [0, 1, 1, 2], [0, 2, 1, 3]] } },
-    {"keys": ["ctrl+o", "5"], "command": "set_layout", "args": {"cols": [0.0, 0.5, 1.0], "rows": [0.0, 0.5, 1.0], "cells": [[0, 0, 1, 1], [1, 0, 2, 1], [0, 1, 1, 2], [1, 1, 2, 2] ] } },
+    {"keys": ["ctrl+w", "1"], "command": "set_layout", "args": {"cols": [0.0, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1]] } },
+    {"keys": ["ctrl+w", "2"], "command": "set_layout", "args": {"cols": [0.0, 0.5, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1], [1, 0, 2, 1]] } },
+    {"keys": ["ctrl+w", "4"], "command": "set_layout", "args": {"cols": [0.0, 0.38, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1], [1, 0, 2, 1]] } },
+    {"keys": ["ctrl+w", "6"], "command": "set_layout", "args": {"cols": [0.0, 0.66, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1], [1, 0, 2, 1]] } },
+    {"keys": ["ctrl+w", "3"], "command": "set_layout", "args": {"cols": [0.0, 0.33, 0.66, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1], [1, 0, 2, 1], [2, 0, 3, 1]] } },
+    {"keys": ["ctrl+w", "7"], "command": "set_layout", "args": {"cols": [0.0, 1.0], "rows": [0.0, 0.5, 1.0], "cells": [[0, 0, 1, 1], [0, 1, 1, 2]] } },
+    {"keys": ["ctrl+w", "8"], "command": "set_layout", "args": {"cols": [0.0, 1.0], "rows": [0.0, 0.3, 1.0], "cells": [[0, 0, 1, 1], [0, 1, 1, 2]] } },
+    {"keys": ["ctrl+w", "9"], "command": "set_layout", "args": {"cols": [0.0, 1.0], "rows": [0.0, 0.33, 0.66, 1.0], "cells": [[0, 0, 1, 1], [0, 1, 1, 2], [0, 2, 1, 3]] } },
+    {"keys": ["ctrl+w", "5"], "command": "set_layout", "args": {"cols": [0.0, 0.5, 1.0], "rows": [0.0, 0.5, 1.0], "cells": [[0, 0, 1, 1], [1, 0, 2, 1], [0, 1, 1, 2], [1, 1, 2, 2] ] } },
     // move tab to other group
-    { "keys": ["ctrl+o", "ctrl+shift+1"], "command": "move_to_group", "args": { "group": 0 } },
-    { "keys": ["ctrl+o", "ctrl+shift+2"], "command": "move_to_group", "args": { "group": 1 } },
-    { "keys": ["ctrl+o", "ctrl+shift+3"], "command": "move_to_group", "args": { "group": 2 } },
-    { "keys": ["ctrl+o", "ctrl+shift+4"], "command": "move_to_group", "args": { "group": 3 } },
+    { "keys": ["ctrl+w", "ctrl+shift+1"], "command": "move_to_group", "args": { "group": 0 } },
+    { "keys": ["ctrl+w", "ctrl+shift+2"], "command": "move_to_group", "args": { "group": 1 } },
+    { "keys": ["ctrl+w", "ctrl+shift+3"], "command": "move_to_group", "args": { "group": 2 } },
+    { "keys": ["ctrl+w", "ctrl+shift+4"], "command": "move_to_group", "args": { "group": 3 } },
 
     // reset panes
-    { "keys": ["ctrl+o", "ctrl+o"], "command": "set_layout", "args": {"cols": [0.0, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1]] } },
+    { "keys": ["ctrl+w", "ctrl+w"], "command": "set_layout", "args": {"cols": [0.0, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1]] } },
 
     // Origami: move focus
-    { "keys": ["ctrl+o", "k"], "command": "travel_to_pane", "args": {"direction": "up"} },
-    { "keys": ["ctrl+o", "l"], "command": "travel_to_pane", "args": {"direction": "right"} },
-    { "keys": ["ctrl+o", "j"], "command": "travel_to_pane", "args": {"direction": "down"} },
-    { "keys": ["ctrl+o", "h"], "command": "travel_to_pane", "args": {"direction": "left"} },
+    { "keys": ["ctrl+w", "j"], "command": "travel_to_pane", "args": {"direction": "down"} },
+    { "keys": ["ctrl+w", "k"], "command": "travel_to_pane", "args": {"direction": "up"} },
+    { "keys": ["ctrl+h"],      "command": "travel_to_pane", "args": {"direction": "left"} },
+    { "keys": ["ctrl+w", "h"], "command": "travel_to_pane", "args": {"direction": "left"} },
+    { "keys": ["ctrl+l"],      "command": "travel_to_pane", "args": {"direction": "right"} },
+    { "keys": ["ctrl+w", "l"], "command": "travel_to_pane", "args": {"direction": "right"} },
 
     // Origami: move tab to another pane
-    { "keys": ["ctrl+o", "K"], "command": "carry_file_to_pane", "args": {"direction": "up"} },
-    { "keys": ["ctrl+o", "L"], "command": "carry_file_to_pane", "args": {"direction": "right"} },
-    { "keys": ["ctrl+o", "J"], "command": "carry_file_to_pane", "args": {"direction": "down"} },
-    { "keys": ["ctrl+o", "H"], "command": "carry_file_to_pane", "args": {"direction": "left"} },
+    // (creates a new pane if there is no other)
+    { "keys": ["ctrl+w", "K"], "command": "carry_file_to_pane", "args": {"direction": "up"} },
+    { "keys": ["ctrl+w", "L"], "command": "carry_file_to_pane", "args": {"direction": "right"} },
+    { "keys": ["ctrl+w", "J"], "command": "carry_file_to_pane", "args": {"direction": "down"} },
+    { "keys": ["ctrl+w", "H"], "command": "carry_file_to_pane", "args": {"direction": "left"} },
 
     // Origami: new view into file in another pane
-    { "keys": ["ctrl+o", "alt+k"], "command": "clone_file_to_pane", "args": {"direction": "up"} },
-    { "keys": ["ctrl+o", "alt+l"], "command": "clone_file_to_pane", "args": {"direction": "right"} },
-    { "keys": ["ctrl+o", "alt+j"], "command": "clone_file_to_pane", "args": {"direction": "down"} },
-    { "keys": ["ctrl+o", "alt+h"], "command": "clone_file_to_pane", "args": {"direction": "left"} },
+    { "keys": ["ctrl+w", "ctrl+k"], "command": "clone_file_to_pane", "args": {"direction": "up"} },
+    { "keys": ["ctrl+w", "ctrl+l"], "command": "clone_file_to_pane", "args": {"direction": "right"} },
+    { "keys": ["ctrl+w", "ctrl+j"], "command": "clone_file_to_pane", "args": {"direction": "down"} },
+    { "keys": ["ctrl+w", "ctrl+h"], "command": "clone_file_to_pane", "args": {"direction": "left"} },
 
     // Origami: create pane with file
-    { "keys": ["ctrl+o", "ctrl+k"], "command": "create_pane_with_file", "args": {"direction": "up"} },
-    { "keys": ["ctrl+o", "ctrl+l"], "command": "create_pane_with_file", "args": {"direction": "right"} },
-    { "keys": ["ctrl+o", "ctrl+j"], "command": "create_pane_with_file", "args": {"direction": "down"} },
-    { "keys": ["ctrl+o", "ctrl+h"], "command": "create_pane_with_file", "args": {"direction": "left"} },
+    { "keys": ["ctrl+w", "alt+k"], "command": "create_pane_with_file", "args": {"direction": "up"} },
+    { "keys": ["ctrl+w", "alt+l"], "command": "create_pane_with_file", "args": {"direction": "right"} },
+    { "keys": ["ctrl+w", "alt+j"], "command": "create_pane_with_file", "args": {"direction": "down"} },
+    { "keys": ["ctrl+w", "alt+h"], "command": "create_pane_with_file", "args": {"direction": "left"} },
 
     // Origami: destroy pane
-    { "keys": ["ctrl+o", "d"], "command": "destroy_pane", "args": {"direction": "self"} },
+    { "keys": ["Q"], "command": "destroy_pane", "args": {"direction": "self"}, "context": [{"key": "setting.command_mode"}] },
 
     // Origami: zoom
-    { "keys": ["ctrl+o", "z"], "command": "zoom_pane", "args": {"fraction": 0.9} },
-    { "keys": ["ctrl+o", "Z"], "command": "unzoom_pane", "args": {} },
+    { "keys": ["ctrl+w", "z"], "command": "zoom_pane", "args": {"fraction": 0.9} },
+    { "keys": ["ctrl+w", "Z"], "command": "unzoom_pane", "args": {} },
 
 
     ////////////////////////////
@@ -293,7 +295,7 @@
 
     // delete
     // { "keys": ["delete"], "command": "set_action_motion", "args": {"action": "vi_left_delete", "motion": null } },
-    { "keys": ["ctrl+h"], "command": "left_delete" },
+    // { "keys": ["ctrl+h"], "command": "left_delete" },
     { "keys": ["ctrl+d"], "command": "set_action_motion", "args": {"action": "vi_right_delete", "motion": null } },
     { "keys": ["alt+backspace"], "command": "delete_word", "args": { "forward": false } },
     { "keys": ["alt+d"], "command": "delete_word", "args": { "forward": true } },
