@@ -136,6 +136,7 @@ function create_link_for_target() {
 
         vim)
             create_link $PWD/vim/vimrc $HOME/.vimrc
+            create_link $PWD/vim/gvimrc $HOME/.gvimrc
             ;;
 
         vimpc)

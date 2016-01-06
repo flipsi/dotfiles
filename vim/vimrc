@@ -2,9 +2,21 @@
 " A simple vimrc. With no dependencies
 
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS
 
+
+" we use vim, not vi
 set nocompatible
+
+" encoding should be utf-8 on every OS
+set     encoding=utf-8
+set fileencoding=utf-8
+
+" theme
+"colorscheme murphy
+colorscheme desert
 
 " disable powerline
 let g:powerline_loaded = 1
@@ -15,15 +27,33 @@ syntax on
 " show relative line numbers
 set nonumber
 set norelativenumber
+set numberwidth=6
+
+" highlight current line
+set cursorline
 
 " statusline
 set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 set ruler
 
+" completions behaviour
+set wildmode=list:longest,full
+
+" show command completions above commandline etc
+set wildmenu
+
+" scrolling
+" start scrolling when we're 8 lines away from margins
+set scrolloff=8         
+set sidescrolloff=15
+set sidescroll=1
+
 " search preferences
 set incsearch
 set ignorecase
 set smartcase
+" never have to append 'g' to a search/substitute again
+set gdefault
 
 " use 4 spaces instead of tabs
 set expandtab
@@ -37,24 +67,73 @@ set smartindent
 " allow to :edit multiple files in buffers without writing changes
 set hidden
 
+" puts new split windows to the bottom of the current
+set splitbelow
+" puts new vsplit windows to the right of the current
+set splitright
 
 
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEYBINDINGS
 
-" compatibility 
-nnoremap <C-g><C-g> <C-g>
+" mappings with the alt key should be done twice:
+"      - with <Esc>* for terminal sequences, and
+"      - with <M-*>  for gvim
+
+
+" leader key is space
+let mapleader=' '
+
+
+""""""""""
+" GENERAL
+
+
+" (for compatibility)
+nnoremap <C-G><C-G> <C-G>
 
 " reload this config file
 nnoremap <F5> :source ~/.vimrc<CR>
+nnoremap <leader>lr :source ~/.vimrc<CR>
 
-" ZQ to quit discarding changes 
-" ZZ to save and quit
-" Q  to quit vim quickly (will prompt if the file was changed but not saved)
-nnoremap Q :quit<CR>
+" ZQ to quit discarding file changes 
+" ZZ to save file changes and quit
+" Q  to quit quickly (will prompt if the file was changed but not saved)
+" <C-D> to quit not only one but multiple windows
+nnoremap Q     :quit<CR>
 nnoremap <C-D> :quitall<CR>
 
 " save changes without quit
+nnoremap <M-s>  :write<CR>
 nnoremap <Esc>s :write<CR>
+
+" scroll (alt key)
+noremap <M-j>  <C-D> 
+noremap <Esc>j <C-D> 
+noremap <M-k>  <C-U> 
+noremap <Esc>k <C-U> 
+
+" toggle line numbers 
+noremap <silent> <C-G>l :set number! <bar> :set relativenumber! <CR>
+noremap <silent> <C-G>L :set relativenumber! <CR>
+
+" toggle word wrap
+nnoremap <silent> <C-G>w :set wrap! <CR>
+
+" toggle highlight current line
+nnoremap <silent> <C-G>h :set cursorline!<CR>
+
+" registers
+nnoremap Ä "
+
+
+
+
+"""""""""""
+" MOVEMENT
+
 
 " move intuitively when text is wrapped
 nnoremap j gj
@@ -64,15 +143,23 @@ nnoremap k gk
 nnoremap gj 10j
 nnoremap gk 10k
 
-" scroll (alt key)
-noremap <Esc>j <C-D> 
-noremap <Esc>k <C-U> 
+" move to BOL
+" smart BOL: the cursor moves to the first nonblank character on the line, 
+"            or, if already at that position, to the start of the line.
+"            (http://vim.wikia.com/wiki/Smart_home)
+noremap <expr> <silent> <C-A> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
+imap <silent> <C-A> <C-O><C-A>
 
-" toggle line numbers 
-noremap <C-g>l :set number! <bar> :set relativenumber! <CR>
-
-" toggle word wrap
-nnoremap <C-g>w :set wrap! <CR>
+" move to EOL
+nnoremap <C-E> $
+vnoremap <C-E> $
+inoremap <C-E> <Esc>A
+cnoremap <C-A> <Home>
+" move to EOL with l instead of $
+nnoremap cl c$
+nnoremap yl y$
+nnoremap dl d$
+"nnoremap vl v$
 
 " search 
 nnoremap ö /
@@ -82,7 +169,7 @@ nnoremap Ö ?
 nnoremap , ;
 nnoremap ; ,
 
-" swap implementations of ` and ' jump to markers
+" swap ` and ' (jump to markers)
 " (by default, ' marked line, ` marked line and column)
 nnoremap ' `
 nnoremap ` '
@@ -90,24 +177,85 @@ nnoremap ` '
 " goto mark 
 nnoremap ä `
 
-" registers
-nnoremap Ä "
+" display all lines with keyword under cursor
+" and ask which one to jump to
+nmap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
-" movement to eol (l instead of $)
-nnoremap cl c$
-nnoremap yl y$
-nnoremap dl d$
-nnoremap vl v$
+" find git merge conflict markers
+nnoremap <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
+
+
+
+"""""""""""""""
+" TEXT EDITING
+
+
+" autocompletion
+inoremap <M-.>  <C-N>
+inoremap <Esc>. <C-N>
+inoremap <M-:>  <C-P>
+inoremap <Esc>: <C-P>
+
+" indent lines
+nnoremap < <<
+nnoremap > >>
+vnoremap < <gv
+vnoremap > >gv
 
 " add new line above or below
+noremap <M-o>  <Esc>o<Esc>k
 noremap <Esc>o <Esc>o<Esc>k
+noremap <M-O>  <Esc>O<Esc>j
 noremap <Esc>O <Esc>O<Esc>j
 
+" delete leading whitespace (can be prefixed with a count)
+nnoremap <silent> <leader>dsl :s:^\s\+::<CR>
+
 " undo and redo
+noremap <M-u>  :undo<CR>
 noremap <Esc>u :undo<CR>
+noremap <M-U>  :redo<CR>
 noremap <Esc>U :redo<CR>
 
-" multiple buffers
+
+
+""""""""""""""""""""""
+" BUFFERS AND WINDOWS
+
+
+" change buffer
 nnoremap # :buffer 
+nnoremap <Space><Space> :buffer #<CR>
+nnoremap <M-n>  :bnext<CR>
 nnoremap <Esc>n :bnext<CR>
+nnoremap <M-p>  :bprevious<CR>
 nnoremap <Esc>p :bprevious<CR>
+
+" change window
+nnoremap <silent> <leader>j :wincmd j<CR>
+nnoremap <silent> <leader>k :wincmd k<CR>
+nnoremap <silent> <leader>h :wincmd h<CR>
+nnoremap <silent> <leader>l :wincmd l<CR>
+
+" reorder windows
+nnoremap <silent> <leader>J :wincmd J<CR>
+nnoremap <silent> <leader>K :wincmd K<CR>
+nnoremap <silent> <leader>H :wincmd H<CR>
+nnoremap <silent> <leader>L :wincmd L<CR>
+
+
+
+"""""""""""""""
+" USEFUL TOOLS
+
+
+" shell in dir of current file
+nnoremap <C-F>o :lcd %:p:h <bar> :!fish<CR>
+
+" git
+nnoremap <C-F>g :!tig<CR>
+
+
+
+
+
