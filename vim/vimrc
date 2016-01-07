@@ -3,36 +3,25 @@
 " ~/.vimrc
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" we use vim, not vi
-set nocompatible
-
-" (this is required by Vundle) 
-filetype off
-
-
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS (not plugin specific)
 
+" we use vim, not vi
+set nocompatible
 
 " encoding should be utf-8 on every OS
 set     encoding=utf-8
 set fileencoding=utf-8
 
-" theme
-"colorscheme murphy
-colorscheme desert
-
-" disable powerline
-"let g:powerline_loaded = 1
-
 " syntax highlighting
 syntax on
 
-" show relative line numbers
+" theme (fallback, will be overwritten below)
+colorscheme desert
+
+" line numbers
 set nonumber
 set norelativenumber
 set numberwidth=6
@@ -41,7 +30,7 @@ set numberwidth=6
 set cursorline
 
 " statusline
-set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
+"set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 set ruler
 
 " completions behaviour
@@ -146,8 +135,6 @@ nnoremap <silent> <C-G>w :set wrap! <CR>
 " toggle highlight current line
 nnoremap <silent> <C-G>h :set cursorline!<CR>
 
-" registers
-nnoremap Ä "
 
 
 
@@ -245,7 +232,7 @@ noremap <Esc>U :redo<CR>
 
 
 " change buffer
-nnoremap # :buffer 
+"nnoremap # :buffer " use ctrlp instead
 nnoremap <Space><Space> :buffer #<CR>
 nnoremap <M-n>  :bnext<CR>
 nnoremap <Esc>n :bnext<CR>
@@ -297,41 +284,74 @@ nnoremap <C-F>g :!tig<CR>
 " and don't have ~/.vim/bundle under version control
 " (instead, call :BundleInstall)
 
+ 
+"""""""""""""""""""""""""""""""""""""""""
+
+" (this is required by Vundle and will be turned on at the end of this script) 
+filetype off
 
 " start vundle
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" let Vundle manage Vundle
-" required! 
-Bundle 'gmarik/vundle'
-" required!
-filetype plugin indent on
+" let Vundle manage Vundle (required!)
+Plugin 'gmarik/vundle'
 
 
 
 """""""""""""""""""""""""""""""""""""""""
-" EasyMotion
 
-Bundle 'easymotion/vim-easymotion'
+Plugin 'flazz/vim-colorschemes'
+
+colorscheme jellybeans
+
+"""""""""""""""""""""""""""""""""""""""""
+
+Plugin 'easymotion/vim-easymotion'
 
 " prefix
 map ä <Plug>(easymotion-prefix)
 
 
-
-"""""""""""""""""""""""""""""""""""""""""
-" NERD tree
-
-Bundle 'scrooloose/nerdtree'
-
-noremap <M-i>  :NERDTree<CR>
-noremap <Esc>i :NERDTree<CR>
-
-
-
 """""""""""""""""""""""""""""""""""""""""
 
+" https://powerline.readthedocs.org/en/latest/usage/other.html#vim-statusline
+"
+" instead of this deprecated vimscript plugin...:
+" Plugin 'Lokaltog/vim-powerline
+" ... we use this rewritten one in python:
+Plugin 'powerline/powerline'
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
+Plugin 'scrooloose/nerdtree'
+
+noremap <M-i>  :NERDTreeToggle<CR>
+noremap <Esc>i :NERDTreeToggle<CR>
+ 
+ 
+"""""""""""""""""""""""""""""""""""""""""
+
+Plugin 'vim-scripts/ctrlp.vim'
+
+let g:ctrlp_map = '#'
+nnoremap # :CtrlPMixed<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
+Plugin 'airblade/vim-gitgutter'
+
+nnoremap <C-G>g :GitGutterToggle<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
+
+
+" (after loading the plugins, this can be turned on again) 
+filetype plugin indent on
 
 
 
