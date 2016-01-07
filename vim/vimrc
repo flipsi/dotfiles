@@ -374,6 +374,8 @@ Plugin 'scrooloose/nerdcommenter'
 
 Plugin 'scrooloose/nerdtree'
 
+let NERDTreeWinSize=50
+
 noremap <M-i>  :NERDTreeToggle<CR>
 noremap <Esc>i :NERDTreeToggle<CR>
  
@@ -404,6 +406,20 @@ nnoremap <leader>sr :SyntasticReset<CR>
 Plugin 'airblade/vim-gitgutter'
 
 nnoremap <C-G>g :GitGutterToggle<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
+" Snippets
+
+" snippet engine
+Plugin 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-i>"
+let g:UltiSnipsJumpBackwardTrigger="<c-o>"
+
+" snippet packs
+Plugin 'honza/vim-snippets'
 
 
 """""""""""""""""""""""""""""""""""""""""
