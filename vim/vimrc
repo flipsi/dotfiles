@@ -342,6 +342,18 @@ map ä <Plug>(easymotion-prefix)
 "disable powerline
 let g:powerline_loaded = 1
  
+" on arch linux, installed python-powerline 
+" and fix import error with
+"let $PYTHONPATH="/usr/lib/python3.5/site-packages"
+ 
+
+
+" lightweight alternative to powerline
+
+Plugin 'bling/vim-airline'
+
+let g:airline#extensions#tabline#enabled = 1
+
 
 """""""""""""""""""""""""""""""""""""""""
 
