@@ -367,6 +367,11 @@ let g:airline#extensions#tabline#enabled = 1
 
 """""""""""""""""""""""""""""""""""""""""
 
+Plugin 'scrooloose/nerdcommenter'
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
 Plugin 'scrooloose/nerdtree'
 
 noremap <M-i>  :NERDTreeToggle<CR>
