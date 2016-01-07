@@ -341,7 +341,7 @@ noremap <Esc>i :NERDTreeToggle<CR>
  
 """""""""""""""""""""""""""""""""""""""""
 
-Plugin 'vim-scripts/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 
 let g:ctrlp_map = '#'
 nnoremap # :CtrlPMixed<CR>
@@ -349,7 +349,7 @@ nnoremap # :CtrlPMixed<CR>
 
 """""""""""""""""""""""""""""""""""""""""
 
-Plugin 'Syntastic'
+Plugin 'scrooloose/syntastic'
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
