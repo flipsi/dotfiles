@@ -433,6 +433,16 @@ let g:syntastic_quiet_messages = { "regex": [
 
 """""""""""""""""""""""""""""""""""""""""
 
+Plugin 'Chiel92/vim-autoformat'
+
+" install formatters on the system:
+" - js-beautify (for HTML, CSS, JavaScript, JSON)
+
+nnoremap <leader>sa :Autoformat<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
 Plugin 'airblade/vim-gitgutter'
 
 nnoremap <C-G>g :GitGutterToggle<CR>
