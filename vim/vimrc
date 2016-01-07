@@ -291,6 +291,7 @@ nnoremap <C-F>g :!tig<CR>
 nnoremap <leader>pl :PluginList<CR>
 nnoremap <leader>pi :PluginInstall<CR>
 nnoremap <leader>pc :PluginClean<CR>
+nnoremap <leader>pu :PluginUpdate<CR>
 nnoremap <leader>ps :PluginSearch 
 
 " (this is required by Vundle and will be turned on at the end of this script) 
