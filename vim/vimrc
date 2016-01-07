@@ -215,7 +215,7 @@ nnoremap <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 inoremap <M-.>  <C-N>
 inoremap <Esc>. <C-N>
 inoremap <M-:>  <C-P>
-inoremap <Esc>: <C-P>
+"inoremap <Esc>: <C-P>
 
 " indent lines
 nnoremap < <<
