@@ -54,6 +54,7 @@ function create_link_for_target() {
 
         git)
             create_link $PWD/git/gitconfig $HOME/.gitconfig
+            create_link $PWD/git/gitignore $HOME/.gitignore
             ;;
 
         i3)
