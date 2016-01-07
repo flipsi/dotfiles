@@ -392,6 +392,9 @@ Plugin 'kien/ctrlp.vim'
 let g:ctrlp_map = '#'
 nnoremap # :CtrlPMixed<CR>
 
+" also find hidden files
+let g:ctrlp_show_hidden = 1
+
 
 """""""""""""""""""""""""""""""""""""""""
 
