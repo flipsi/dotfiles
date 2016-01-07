@@ -97,7 +97,9 @@ let mapleader=' '
 nnoremap <C-G><C-G> <C-G>
 
 " open config file
-nnoremap <leader>ev :edit ~/.vimrc<CR>
+"nnoremap <leader>ev :edit ~/.vimrc<CR>
+" (use absolute path to dotfiles, not symlink for ctrlp)
+nnoremap <leader>ev :edit ~/dotfiles/vim/vimrc<CR>
 
 " reload config file
 nnoremap <leader>sv :source ~/.vimrc<CR>
@@ -271,8 +273,8 @@ nnoremap <silent> <leader>H :wincmd H<CR>
 nnoremap <silent> <leader>L :wincmd L<CR>
 
 " move buffer to a new window
-nnoremap <silent> <C-w><C-l> :vsplit<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
-nnoremap <silent> <C-w><C-j> :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
+nnoremap <silent> <leader><C-l> :vsplit<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
+nnoremap <silent> <leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 
 
@@ -281,10 +283,11 @@ nnoremap <silent> <C-w><C-j> :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 
 " shell in dir of current file
-nnoremap <leader>o :lcd %:p:h <bar> :!fish<CR>
+nnoremap <leader>if :lcd %:p:h <bar> :!fish<CR>
+nnoremap <leader>ib :lcd %:p:h <bar> :!bash<CR>
 
 " git
-nnoremap <leader>g :!tig<CR>
+nnoremap <leader>it :lcd %:p:h <bar> :!tig<CR>
 
 
 
