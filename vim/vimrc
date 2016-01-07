@@ -387,9 +387,14 @@ Plugin 'scrooloose/nerdtree'
 
 let NERDTreeWinSize=50
 
-noremap <silent><M-i>  :NERDTreeToggle<CR>
-noremap <silent><Esc>i :NERDTreeToggle<CR>
+" show/hide nerdtree
+noremap <silent> <M-i>  :NERDTreeToggle<CR>
+noremap <silent> <Esc>i :NERDTreeToggle<CR>
+" show nerdtree from current file
+noremap <silent> <Esc>I :lcd %:p:h <bar> :NERDTreeCWD<CR>
+noremap <silent> <M-I>  :lcd %:p:h <bar> :NERDTreeCWD<CR>
 
+" show/hide hidden files
 let NERDTreeMapToggleHidden='.'
 
 
