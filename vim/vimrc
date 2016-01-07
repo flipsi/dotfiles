@@ -206,6 +206,9 @@ nnoremap <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 " TEXT EDITING
 
 
+" change to insert mode from visual mode
+vnoremap i vi
+
 " autocompletion
 inoremap <M-.>  <C-N>
 inoremap <Esc>. <C-N>
