@@ -286,7 +286,10 @@ nnoremap <silent> <leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 nnoremap <leader>if :lcd %:p:h <bar> :!fish<CR>
 nnoremap <leader>ib :lcd %:p:h <bar> :!bash<CR>
 
-" git
+" file manager in dir of current file
+nnoremap <leader>ir :lcd %:p:h <bar> :!ranger<CR>
+
+" git interface
 nnoremap <leader>it :lcd %:p:h <bar> :!tig<CR>
 
 
