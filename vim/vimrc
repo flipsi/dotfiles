@@ -1,14 +1,22 @@
 " Author: Philipp Moers <soziflip@gmail.com>
-" A simple vimrc. With no dependencies
+"
+" ~/.vimrc
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" we use vim, not vi
+set nocompatible
+
+" (this is required by Vundle) 
+filetype off
+
 
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SETTINGS
+" SETTINGS (not plugin specific)
 
-
-" we use vim, not vi
-set nocompatible
 
 " encoding should be utf-8 on every OS
 set     encoding=utf-8
@@ -19,7 +27,7 @@ set fileencoding=utf-8
 colorscheme desert
 
 " disable powerline
-let g:powerline_loaded = 1
+"let g:powerline_loaded = 1
 
 " syntax highlighting
 syntax on
@@ -75,8 +83,10 @@ set splitright
 
 
 
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" KEYBINDINGS
+" KEYBINDINGS (not plugin specific)
 
 " mappings with the alt key should be done twice:
 "      - with <Esc>* for terminal sequences, and
@@ -85,6 +95,7 @@ set splitright
 
 " leader key is space
 let mapleader=' '
+
 
 
 """"""""""
@@ -185,7 +196,7 @@ nnoremap ' `
 nnoremap ` '
 
 " goto mark 
-nnoremap ä `
+nnoremap Ä `
 
 " display all lines with keyword under cursor
 " and ask which one to jump to
@@ -259,8 +270,8 @@ nnoremap <silent> <C-w><C-j> :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 
 
-"""""""""""""""
-" USEFUL TOOLS
+"""""""""""""""""""""""""
+" USEFUL EXTERNAL TOOLS
 
 
 " shell in dir of current file
@@ -269,6 +280,57 @@ nnoremap <C-F>o :lcd %:p:h <bar> :!fish<CR>
 " git
 nnoremap <C-F>g :!tig<CR>
 
+
+
+
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGINS (managed by Vundle)
+"
+" http://quyennguyen.com/code/Sync-Vim-With-Github-and-Vundle/
+" http://lepture.com/en/2012/vundle-vs-pathogen
+"
+" install vundle like this:
+"     git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+" and don't have ~/.vim/bundle under version control
+" (instead, call :BundleInstall)
+
+
+" start vundle
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+" required!
+filetype plugin indent on
+
+
+
+"""""""""""""""""""""""""""""""""""""""""
+" EasyMotion
+
+Bundle 'easymotion/vim-easymotion'
+
+" prefix
+map ä <Plug>(easymotion-prefix)
+
+
+
+"""""""""""""""""""""""""""""""""""""""""
+" NERD tree
+
+Bundle 'scrooloose/nerdtree'
+
+noremap <M-i>  :NERDTree<CR>
+noremap <Esc>i :NERDTree<CR>
+
+
+
+"""""""""""""""""""""""""""""""""""""""""
 
 
 
