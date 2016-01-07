@@ -337,8 +337,11 @@ map ä <Plug>(easymotion-prefix)
 " instead of this deprecated vimscript plugin...:
 " Plugin 'Lokaltog/vim-powerline
 " ... we use this rewritten one in python:
-Plugin 'powerline/powerline'
+"Plugin 'powerline/powerline'
 
+"disable powerline
+let g:powerline_loaded = 1
+ 
 
 """""""""""""""""""""""""""""""""""""""""
 
