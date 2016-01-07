@@ -203,7 +203,10 @@ nnoremap ` '
 " goto mark
 nnoremap Ä `
 
-" display all lines with keyword under cursor
+" find matching brackets/braces/parentheses
+nnoremap <leader>fb %
+
+" find all lines with keyword under cursor
 " and ask which one to jump to
 nmap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
@@ -256,6 +259,7 @@ noremap <Esc>U :redo<CR>
 "nnoremap # :buffer " use ctrlp instead
 nnoremap <Space><Space> :buffer #<CR>
 nnoremap <M-n>  :bnext<CR>
+
 nnoremap <Esc>n :bnext<CR>
 nnoremap <M-p>  :bprevious<CR>
 nnoremap <Esc>p :bprevious<CR>
