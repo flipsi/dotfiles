@@ -417,6 +417,7 @@ Plugin 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-i>"
 let g:UltiSnipsJumpBackwardTrigger="<c-o>"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "sflipsnippets"]
 
 " snippet packs
 Plugin 'honza/vim-snippets'
