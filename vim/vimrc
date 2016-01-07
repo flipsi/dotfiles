@@ -8,6 +8,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS (not plugin specific)
 
+
 " we use vim, not vi
 set nocompatible
 
@@ -77,6 +78,7 @@ set splitright
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEYBINDINGS (not plugin specific)
 
+
 " mappings with the alt key should be done twice:
 "      - with <Esc>* for terminal sequences, and
 "      - with <M-*>  for gvim
@@ -100,6 +102,12 @@ nnoremap <leader>ev :edit ~/.vimrc<CR>
 " reload config file
 nnoremap <leader>sv :source ~/.vimrc<CR>
 nnoremap <F5>       :source ~/.vimrc<CR>
+
+" open help in vertical window
+nnoremap <leader><C-h> :vertical help 
+
+" to follow links in help
+nnoremap <Return> <C-]>
 
 
 " close file (not window)
@@ -273,10 +281,10 @@ nnoremap <silent> <C-w><C-j> :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 
 " shell in dir of current file
-nnoremap <C-F>o :lcd %:p:h <bar> :!fish<CR>
+nnoremap <leader>o :lcd %:p:h <bar> :!fish<CR>
 
 " git
-nnoremap <C-F>g :!tig<CR>
+nnoremap <leader>g :!tig<CR>
 
 
 
@@ -287,8 +295,10 @@ nnoremap <C-F>g :!tig<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS (managed by Vundle)
 "
+"
 " http://quyennguyen.com/code/Sync-Vim-With-Github-and-Vundle/
 " http://lepture.com/en/2012/vundle-vs-pathogen
+"
 "
 " install vundle like this:
 "     git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
