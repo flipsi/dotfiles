@@ -109,7 +109,8 @@ nnoremap <F5>       :source ~/.vimrc<CR>
 nnoremap <leader><C-h> :vertical help 
 
 " to follow links in help
-nnoremap <Return> <C-]>
+nnoremap <M-Return>    <C-]>
+nnoremap <Esc><Return> <C-]>
 
 
 " close file (not window)
@@ -414,6 +415,20 @@ let g:syntastic_check_on_wq = 0
 
 nnoremap <leader>sc :SyntasticCheck<CR>
 nnoremap <leader>sr :SyntasticReset<CR>
+nnoremap <leader>si :SyntasticInfo<CR>
+
+" install linters on the system:
+" - pylint
+" - jslint
+" - csslint (but phpcs also can do css)
+" - phpcs (https://github.com/squizlabs/PHP_CodeSniffer)
+ let g:syntastic_php_checkers = ['phpcs', 'phplint', 'php']
+
+ " ignore these errors/warnings
+let g:syntastic_quiet_messages = { "regex": [
+    \ '\mMissing file doc comment',
+    \ '\mLine indented incorrectly;.*'
+    \ ] }
 
 
 """""""""""""""""""""""""""""""""""""""""
