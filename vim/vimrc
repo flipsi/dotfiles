@@ -150,6 +150,8 @@ nnoremap k gk
 " move faster
 nnoremap gj 10j
 nnoremap gk 10k
+vnoremap gj 10j
+vnoremap gk 10k
 
 " move to BOL
 " smart BOL: the cursor moves to the first nonblank character on the line, 
