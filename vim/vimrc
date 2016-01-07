@@ -282,10 +282,14 @@ nnoremap <C-F>g :!tig<CR>
 " install vundle like this:
 "     git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 " and don't have ~/.vim/bundle under version control
-" (instead, call :BundleInstall)
+" (instead, call :PluginInstall)
 
  
-"""""""""""""""""""""""""""""""""""""""""
+" some mappings for vundle itself
+nnoremap <leader>pl :PluginList<CR>
+nnoremap <leader>pi :PluginInstall<CR>
+nnoremap <leader>pc :PluginClean<CR>
+nnoremap <leader>ps :PluginSearch 
 
 " (this is required by Vundle and will be turned on at the end of this script) 
 filetype off
@@ -304,6 +308,7 @@ Plugin 'gmarik/vundle'
 Plugin 'flazz/vim-colorschemes'
 
 colorscheme jellybeans
+
 
 """""""""""""""""""""""""""""""""""""""""
 
@@ -337,6 +342,19 @@ Plugin 'vim-scripts/ctrlp.vim'
 
 let g:ctrlp_map = '#'
 nnoremap # :CtrlPMixed<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
+Plugin 'Syntastic'
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+nnoremap <leader>sc :SyntasticCheck<CR>
+nnoremap <leader>sr :SyntasticReset<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""
