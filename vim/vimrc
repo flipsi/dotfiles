@@ -94,9 +94,13 @@ let mapleader=' '
 " (for compatibility)
 nnoremap <C-G><C-G> <C-G>
 
-" reload this config file
-nnoremap <F5> :source ~/.vimrc<CR>
-nnoremap <leader>lr :source ~/.vimrc<CR>
+" open config file
+nnoremap <leader>ev :edit ~/.vimrc<CR>
+ 
+" reload config file
+nnoremap <leader>sv :source ~/.vimrc<CR>
+nnoremap <F5>       :source ~/.vimrc<CR>
+
 
 " close file (not window)
 nnoremap q     :bdelete<CR>
@@ -109,9 +113,11 @@ nnoremap Q     :quit<CR>
 " quit vim (mulitple windows)
 nnoremap <C-D> :quitall<CR>
 
+
 " save changes without quit
 nnoremap <M-s>  :write<CR>
 nnoremap <Esc>s :write<CR>
+
 
 " record macro ('complex repeat')
 nnoremap <leader>M q
