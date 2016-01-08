@@ -187,11 +187,11 @@ noremap! <C-f>  <Right>
 noremap! <C-d>  <Delete>
 " ... by words
 noremap! <M-b>  <S-Left>
-noremap! <Esc>b <S-Left>
 noremap! <M-f>  <S-Right>
-noremap! <Esc>f <S-Right>
 noremap! <M-d>  <S-Right><C-W>
-noremap! <Esc>d <S-Right><C-W>
+cnoremap <Esc>b <S-Left>
+cnoremap <Esc>f <S-Right>
+cnoremap <Esc>d <S-Right><C-W>
 
 
 " move to BOL
