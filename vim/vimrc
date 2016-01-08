@@ -1,10 +1,12 @@
 " Author: Philipp Moers <soziflip@gmail.com>
-" A simple vimrc. With no dependencies
+"
+" ~/.vimrc
+
 
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SETTINGS
+" SETTINGS (not plugin specific)
 
 
 " we use vim, not vi
@@ -14,17 +16,13 @@ set nocompatible
 set     encoding=utf-8
 set fileencoding=utf-8
 
-" theme
-"colorscheme murphy
-colorscheme desert
-
-" disable powerline
-let g:powerline_loaded = 1
-
 " syntax highlighting
 syntax on
 
-" show relative line numbers
+" theme (fallback, will be overwritten below)
+colorscheme desert
+
+" line numbers
 set nonumber
 set norelativenumber
 set numberwidth=6
@@ -33,7 +31,7 @@ set numberwidth=6
 set cursorline
 
 " statusline
-set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
+"set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 set ruler
 
 " completions behaviour
@@ -44,7 +42,7 @@ set wildmenu
 
 " scrolling
 " start scrolling when we're 8 lines away from margins
-set scrolloff=8         
+set scrolloff=8
 set sidescrolloff=15
 set sidescroll=1
 
@@ -75,8 +73,11 @@ set splitright
 
 
 
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" KEYBINDINGS
+" KEYBINDINGS (not plugin specific)
+
 
 " mappings with the alt key should be done twice:
 "      - with <Esc>* for terminal sequences, and
@@ -87,6 +88,7 @@ set splitright
 let mapleader=' '
 
 
+
 """"""""""
 " GENERAL
 
@@ -94,9 +96,22 @@ let mapleader=' '
 " (for compatibility)
 nnoremap <C-G><C-G> <C-G>
 
-" reload this config file
-nnoremap <F5> :source ~/.vimrc<CR>
-nnoremap <leader>lr :source ~/.vimrc<CR>
+" open config file
+"nnoremap <leader>ev :edit ~/.vimrc<CR>
+" (use absolute path to dotfiles, not symlink for ctrlp)
+nnoremap <leader>ev :edit ~/dotfiles/vim/vimrc<CR>
+
+" reload config file
+nnoremap <leader>sv :source ~/.vimrc<CR>
+nnoremap <F5>       :source ~/.vimrc<CR>
+
+" open help in vertical window
+nnoremap <leader><C-h> :vertical help 
+
+" to follow links in help
+nnoremap <M-Return>    <C-]>
+nnoremap <Esc><Return> <C-]>
+
 
 " close file (not window)
 nnoremap q     :bdelete<CR>
@@ -109,9 +124,11 @@ nnoremap Q     :quit<CR>
 " quit vim (mulitple windows)
 nnoremap <C-D> :quitall<CR>
 
+
 " save changes without quit
 nnoremap <M-s>  :write<CR>
 nnoremap <Esc>s :write<CR>
+
 
 " record macro ('complex repeat')
 nnoremap <leader>M q
@@ -120,12 +137,12 @@ nnoremap <leader>m @
 
 
 " scroll (alt key)
-noremap <M-j>  <C-D> 
-noremap <Esc>j <C-D> 
-noremap <M-k>  <C-U> 
-noremap <Esc>k <C-U> 
+noremap <M-j>  <C-D>
+noremap <Esc>j <C-D>
+noremap <M-k>  <C-U>
+noremap <Esc>k <C-U>
 
-" toggle line numbers 
+" toggle line numbers
 noremap <silent> <C-G>l :set number! <bar> :set relativenumber! <CR>
 noremap <silent> <C-G>L :set relativenumber! <CR>
 
@@ -135,8 +152,6 @@ nnoremap <silent> <C-G>w :set wrap! <CR>
 " toggle highlight current line
 nnoremap <silent> <C-G>h :set cursorline!<CR>
 
-" registers
-nnoremap Ä "
 
 
 
@@ -152,9 +167,11 @@ nnoremap k gk
 " move faster
 nnoremap gj 10j
 nnoremap gk 10k
+vnoremap gj 10j
+vnoremap gk 10k
 
 " move to BOL
-" smart BOL: the cursor moves to the first nonblank character on the line, 
+" smart BOL: the cursor moves to the first nonblank character on the line,
 "            or, if already at that position, to the start of the line.
 "            (http://vim.wikia.com/wiki/Smart_home)
 noremap <expr> <silent> <C-A> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
@@ -171,7 +188,7 @@ nnoremap yl y$
 nnoremap dl d$
 "nnoremap vl v$
 
-" search 
+" search
 nnoremap ö /
 nnoremap Ö ?
 
@@ -184,10 +201,13 @@ nnoremap ; ,
 nnoremap ' `
 nnoremap ` '
 
-" goto mark 
-nnoremap ä `
+" goto mark
+nnoremap Ä `
 
-" display all lines with keyword under cursor
+" find matching brackets/braces/parentheses
+nnoremap <leader>fb %
+
+" find all lines with keyword under cursor
 " and ask which one to jump to
 nmap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
@@ -200,11 +220,14 @@ nnoremap <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 " TEXT EDITING
 
 
+" change to insert mode from visual mode
+vnoremap i vi
+
 " autocompletion
 inoremap <M-.>  <C-N>
 inoremap <Esc>. <C-N>
 inoremap <M-:>  <C-P>
-inoremap <Esc>: <C-P>
+"inoremap <Esc>: <C-P>
 
 " indent lines
 nnoremap < <<
@@ -234,9 +257,10 @@ noremap <Esc>U :redo<CR>
 
 
 " change buffer
-nnoremap # :buffer 
+"nnoremap # :buffer " use ctrlp instead
 nnoremap <Space><Space> :buffer #<CR>
 nnoremap <M-n>  :bnext<CR>
+
 nnoremap <Esc>n :bnext<CR>
 nnoremap <M-p>  :bprevious<CR>
 nnoremap <Esc>p :bprevious<CR>
@@ -254,22 +278,218 @@ nnoremap <silent> <leader>H :wincmd H<CR>
 nnoremap <silent> <leader>L :wincmd L<CR>
 
 " move buffer to a new window
-nnoremap <silent> <C-w><C-l> :vsplit<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
-nnoremap <silent> <C-w><C-j> :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
+nnoremap <silent> <leader><C-l> :vsplit<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
+nnoremap <silent> <leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 
 
-"""""""""""""""
-" USEFUL TOOLS
+"""""""""""""""""""""""""
+" USEFUL EXTERNAL TOOLS
 
 
 " shell in dir of current file
-nnoremap <C-F>o :lcd %:p:h <bar> :!fish<CR>
+nnoremap <leader>if :lcd %:p:h <bar> :!fish<CR>
+nnoremap <leader>ib :lcd %:p:h <bar> :!bash<CR>
 
-" git
-nnoremap <C-F>g :!tig<CR>
+" file manager in dir of current file
+nnoremap <leader>ir :lcd %:p:h <bar> :!ranger<CR>
+
+" git interface
+nnoremap <leader>it :lcd %:p:h <bar> :!tig<CR>
 
 
+
+
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGINS (managed by Vundle)
+"
+"
+" http://quyennguyen.com/code/Sync-Vim-With-Github-and-Vundle/
+" http://lepture.com/en/2012/vundle-vs-pathogen
+"
+"
+" install vundle like this:
+"     git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+" and don't have ~/.vim/bundle under version control
+" (instead, call :PluginInstall)
+
+
+" some mappings for vundle itself
+nnoremap <leader>pl :PluginList<CR>
+nnoremap <leader>pi :PluginInstall<CR>
+nnoremap <leader>pc :PluginClean<CR>
+nnoremap <leader>pu :PluginUpdate<CR>
+nnoremap <leader>ps :PluginSearch 
+
+" (this is required by Vundle and will be turned on at the end of this script)
+filetype off
+
+" start vundle
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle (required!)
+Plugin 'gmarik/vundle'
+
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
+Plugin 'flazz/vim-colorschemes'
+
+colorscheme jellybeans
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
+Plugin 'easymotion/vim-easymotion'
+
+" prefix
+map ä <Plug>(easymotion-prefix)
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
+" https://powerline.readthedocs.org/en/latest/usage/other.html#vim-statusline
+"
+" instead of this deprecated vimscript plugin...:
+" Plugin 'Lokaltog/vim-powerline
+" ... we use this rewritten one in python:
+"Plugin 'powerline/powerline'
+
+"disable powerline
+let g:powerline_loaded = 1
+
+" on arch linux, installed python-powerline
+" and fix import error with
+"let $PYTHONPATH="/usr/lib/python3.5/site-packages"
+
+
+
+" lightweight alternative to powerline
+
+Plugin 'bling/vim-airline'
+
+let g:airline#extensions#tabline#enabled = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
+Plugin 'scrooloose/nerdcommenter'
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
+Plugin 'scrooloose/nerdtree'
+
+let NERDTreeWinSize=50
+
+" show/hide nerdtree
+noremap <silent> <M-i>  :NERDTreeToggle<CR>
+noremap <silent> <Esc>i :NERDTreeToggle<CR>
+" show nerdtree from current file
+noremap <silent> <Esc>I :lcd %:p:h <bar> :NERDTreeCWD<CR>
+noremap <silent> <M-I>  :lcd %:p:h <bar> :NERDTreeCWD<CR>
+
+" show/hide hidden files
+let NERDTreeMapToggleHidden='.'
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
+Plugin 'kien/ctrlp.vim'
+
+let g:ctrlp_map = '#'
+nnoremap # :CtrlPMixed<CR>
+
+" also find hidden files
+let g:ctrlp_show_hidden = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
+Plugin 'scrooloose/syntastic'
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+nnoremap <leader>sc :SyntasticCheck<CR>
+nnoremap <leader>sr :SyntasticReset<CR>
+nnoremap <leader>si :SyntasticInfo<CR>
+
+" install linters on the system:
+" - pylint
+" - jslint
+" - csslint (but phpcs also can do css)
+" - phpcs (https://github.com/squizlabs/PHP_CodeSniffer)
+ let g:syntastic_php_checkers = ['phpcs', 'phplint', 'php']
+
+ " ignore these errors/warnings
+let g:syntastic_quiet_messages = { "regex": [
+    \ '\mMissing file doc comment',
+    \ '\mLine indented incorrectly;.*'
+    \ ] }
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
+Plugin 'Chiel92/vim-autoformat'
+
+" install formatters on the system:
+" - js-beautify (for HTML, CSS, JavaScript, JSON)
+
+nnoremap <leader>sa :Autoformat<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
+Plugin 'airblade/vim-gitgutter'
+
+nnoremap <C-G>g :GitGutterToggle<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""
+"
+" Snippets
+
+" snippet engine
+Plugin 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-i>"
+let g:UltiSnipsJumpBackwardTrigger="<c-o>"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "sflipsnippets"]
+
+" snippet packs
+Plugin 'honza/vim-snippets'
+
+
+"""""""""""""""""""""""""""""""""""""""""
+"
+" Whitespace
+
+Plugin 'vim-scripts/ShowTrailingWhiteSpace'
+
+Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
+" don't check for trailing whitespace when writing file
+" (i want them sometimes, e.g. in my vimrc)
+let g:DeleteTrailingWhitespace = 0
+" delete trailing whitespace on demand for current line
+nnoremap <silent> <leader>dst :.DeleteTrailingWhitespace<CR>
+vnoremap <silent> <leader>dst :DeleteTrailingWhitespace<CR>
+" delete trailing whitespace on demand for whole file
+nnoremap <silent> <leader>dsT :%DeleteTrailingWhitespace<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""
+
+
+" (after loading the plugins, this can be turned on again)
+filetype plugin indent on
 
 
 
