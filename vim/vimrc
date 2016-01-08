@@ -106,7 +106,7 @@ nnoremap <leader>sv :source ~/.vimrc<CR>
 nnoremap <F5>       :source ~/.vimrc<CR>
 
 " open help in vertical window
-nnoremap <leader><C-h> :vertical help 
+cnoreabbrev <expr> h ((getcmdtype() is# ':' && getcmdline() is# 'h')?('vertical help'):('h'))
 
 " to follow links in help
 nnoremap <M-Return>    <C-]>
