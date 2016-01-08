@@ -13,10 +13,7 @@ function print_help_msg() {
     cat <<-EOF
 Set up a tmux session for a git project (or switch to it, if existing).
 
-Usage: tmux-project-session [OPTIONS] { NAME | [NAME] PATH }
-
-    OPTIONS:
-    -h | --help             Print this help message.
+Usage: tmux-project-session { NAME | [NAME] PATH }
 
     NAME := Name of the project.
     PATH := Path to the project. Should be a git project.
@@ -70,46 +67,41 @@ function create_project_session() {
 
 # GET ARGUMENTS
 
-# ...options
-TEMP=`getopt -o h --long help -n 'tmux-project-session' -- "$@"`
-eval set -- "$TEMP"
-while true ; do
-    case "$1" in
-        -h|--help) print_help_msg; exit 0 ;;
-        --) shift ; break ;;
-        *) echo "Internal error!" ; exit 1 ;;
-    esac
-done
 
-# ...wrong number of remaining arguments?
-if [[ $# -eq 0 ]]; then
+# no arguments?
+if [[ "$#" -eq 0 ]]; then
     print_help_msg
     exit 0
-elif [[ $# -gt 2 ]]; then
+
+# too many arguments?
+elif [[ "$#" -gt 2 ]]; then
     print_help_msg
     exit 1
-fi
-
-
 
 # name and path given?
-if [[ $# -eq 2 ]]; then
-    SESSION_NAME=$1
-    SESSION_PATH=$2
-
+elif [[ "$#" -eq 2 ]]; then
+    SESSION_NAME="$1"
+    SESSION_PATH="$2"
 
 # only one given?
-elif [[ $# -eq 1 ]]; then
+elif [[ "$#" -eq 1 ]]; then
+
+    # HELP
+    if [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]]
+    then
+        print_help_msg
+        exit 0
+    fi
 
     # NAME
-    if (tmux has-session -t $1 2>/dev/null); then
-        tmux switch-client -t $1
+    if (tmux has-session -t "$1" 2>/dev/null); then
+        tmux switch-client -t "$1"
         exit 0
 
     # PATH
     else
-        SESSION_NAME=$(basename $1)
-        SESSION_PATH=$1
+        SESSION_NAME=$(basename "$1")
+        SESSION_PATH="$1"
     fi
 fi
 
