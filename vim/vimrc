@@ -319,6 +319,10 @@ nnoremap <leader>it :lcd %:p:h <bar> :!tig<CR>
 " and don't have ~/.vim/bundle under version control
 " (instead, call :PluginInstall)
 
+" Note for fish users like me:
+" These commands throw some errors.
+" To fix this, execute the following before starting vim:
+"    set -x SHELL (which sh)
 
 " some mappings for vundle itself
 nnoremap <leader>pl :PluginList<CR>
