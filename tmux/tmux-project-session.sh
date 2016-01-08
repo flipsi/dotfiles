@@ -45,7 +45,17 @@ function create_project_session() {
 
     # (3) file-manager
     tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH} -n file-manager
-    tmux send-keys -t ${SESSION_NAME}:3 'ranger' C-m
+    if (command -v 'ranger' >/dev/null 2>&1); then
+        tmux send-keys -t ${SESSION_NAME}:3 'ranger' C-m
+    elif (command -v 'vifm' >/dev/null 2>&1); then
+        tmux send-keys -t ${SESSION_NAME}:3 'vifm' C-m
+    elif (command -v 'lfm' >/dev/null 2>&1); then
+        tmux send-keys -t ${SESSION_NAME}:3 'lfm' C-m
+    elif (command -v 'mc' >/dev/null 2>&1); then
+        tmux send-keys -t ${SESSION_NAME}:3 'mc' C-m
+    else
+        tmux send-keys -t ${SESSION_NAME}:3 'ls -la' C-m
+    fi
 
     # (4) version-control
     tmux new-window  -t ${SESSION_NAME} -c ${SESSION_PATH} -n version-control
