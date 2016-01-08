@@ -534,7 +534,7 @@ nnoremap <leader>sa :Autoformat<CR>
 "
 " show git status of lines on the left
 "
-Plugin 'airblade/vim-gitgutter'
+"Plugin 'airblade/vim-gitgutter'
 
 nnoremap <C-G>g :GitGutterToggle<CR>
 
