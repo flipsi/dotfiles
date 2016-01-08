@@ -153,6 +153,10 @@ nnoremap <silent> <C-G>w :set wrap! <CR>
 nnoremap <silent> <C-G>h :set cursorline!<CR>
 
 
+" spell checking
+nnoremap <silent> <C-G>ss :set spell!<CR>
+nnoremap <silent> <C-G>se :set spelllang=en<CR>
+nnoremap <silent> <C-G>sd :set spelllang=de<CR>
 
 
 
