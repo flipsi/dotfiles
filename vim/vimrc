@@ -385,6 +385,13 @@ colorscheme jellybeans
 
 """""""""""""""""""""""""""""""""""""""""
 "
+" allow plugins to utilize . command
+
+Plugin 'tpope/vim-repeat'
+
+
+"""""""""""""""""""""""""""""""""""""""""
+"
 " amazingly move everywhere
 
 Plugin 'easymotion/vim-easymotion'
