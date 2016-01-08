@@ -23,8 +23,8 @@ syntax on
 colorscheme desert
 
 " line numbers
-set nonumber
-set norelativenumber
+set number
+set relativenumber
 set numberwidth=6
 
 " highlight current line
@@ -136,6 +136,10 @@ nnoremap <leader>M q
 nnoremap <leader>m @
 
 
+" abort command in ex mode
+cnoremap <C-g>  <C-c>
+
+
 " scroll (alt key)
 noremap <M-j>  <C-D>
 noremap <Esc>j <C-D>
@@ -174,6 +178,22 @@ nnoremap gk 10k
 vnoremap gj 10j
 vnoremap gk 10k
 
+
+" move with emacs-keys like in most shells
+" (noremap! with the '!' is for insert and ex mode)
+" ... by characters
+noremap! <C-b>  <Left>
+noremap! <C-f>  <Right>
+noremap! <C-d>  <Delete>
+" ... by words
+noremap! <M-b>  <S-Left>
+noremap! <Esc>b <S-Left>
+noremap! <M-f>  <S-Right>
+noremap! <Esc>f <S-Right>
+noremap! <M-d>  <S-Right><C-W>
+noremap! <Esc>d <S-Right><C-W>
+
+
 " move to BOL
 " smart BOL: the cursor moves to the first nonblank character on the line,
 "            or, if already at that position, to the start of the line.
@@ -192,13 +212,20 @@ nnoremap yl y$
 nnoremap dl d$
 "nnoremap vl v$
 
+
 " search
 nnoremap ö /
 nnoremap Ö ?
 
+" search in multiple files
+" TODO improve
+nnoremap / :vimgrep 
+
+
 " swap , and ; (makes more sense on german keyboard)
 nnoremap , ;
 nnoremap ; ,
+
 
 " swap ` and ' (jump to markers)
 " (by default, ' marked line, ` marked line and column)

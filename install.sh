@@ -14,10 +14,10 @@ Usage: install.sh [OPTIONS] TARGET
     -i | --interactive      if file(s) exist(s), ask what to do
     -f | --force            if file(s) exist(s), overwrite it/them
 
-    TARGET := { all | bash | cmus | dactyl | elinks | fish | ghci | git | i3 | 
-                konsole | lesskey | luakit | mpd | mplayer | mutt | muttator | 
-                pentadactyl | ranger | sublime-text-3 | telegram-cli | tig | 
-                tmux | turses | urlview | vim | vimpc | vimperator | vimus | 
+    TARGET := { all | bash | cmus | dactyl | elinks | fish | ghci | git | i3 |
+                konsole | lesskey | luakit | mpd | mplayer | mutt | muttator |
+                pentadactyl | ranger | sublime-text-3 | telegram-cli | tig |
+                tmux | turses | urlview | vim | vimpc | vimperator | vimus |
                 vlc | xfce4 | xkb | xmonad | zathura }
 EOF
 }
@@ -146,6 +146,7 @@ function create_link_for_target() {
             create_link $PWD/vim/gvimrc $HOME/.gvimrc
             mkdir -p $HOME/.vim
             create_link $PWD/vim/vim/sflipsnippets $HOME/.vim/sflipsnippets
+            create_link $PWD/vim/vim/spell $HOME/.vim/spell
             ;;
 
         vimpc)
