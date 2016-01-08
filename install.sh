@@ -130,6 +130,9 @@ function create_link_for_target() {
         tmux)
             create_link $PWD/tmux/tmux $HOME/.tmux
             create_link $PWD/tmux/tmux.conf $HOME/.tmux.conf
+            if [ -d "$HOME/bin" ] ; then
+                create_link $PWD/tmux/tmux-project-session.sh $HOME/bin/tmux-project-session
+            fi
             ;;
 
         turses)
@@ -202,13 +205,13 @@ function create_link() {
     local LINKPATH="$2"
 
     if [[ $FORCE = true ]]; then
-        ln -sf $DESTPATH $LINKPATH
+        ln -nsf $DESTPATH $LINKPATH
 
     elif [[ $INTERACTIVE = true ]]; then
-        ln -si $DESTPATH $LINKPATH
+        ln -nsi $DESTPATH $LINKPATH
 
     else
-        ln -s $DESTPATH $LINKPATH
+        ln -ns $DESTPATH $LINKPATH
 
     fi
 }

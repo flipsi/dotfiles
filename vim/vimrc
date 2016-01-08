@@ -106,7 +106,7 @@ nnoremap <leader>sv :source ~/.vimrc<CR>
 nnoremap <F5>       :source ~/.vimrc<CR>
 
 " open help in vertical window
-nnoremap <leader><C-h> :vertical help 
+cnoreabbrev <expr> h ((getcmdtype() is# ':' && getcmdline() is# 'h')?('vertical help'):('h'))
 
 " to follow links in help
 nnoremap <M-Return>    <C-]>
@@ -187,11 +187,11 @@ noremap! <C-f>  <Right>
 noremap! <C-d>  <Delete>
 " ... by words
 noremap! <M-b>  <S-Left>
-noremap! <Esc>b <S-Left>
 noremap! <M-f>  <S-Right>
-noremap! <Esc>f <S-Right>
 noremap! <M-d>  <S-Right><C-W>
-noremap! <Esc>d <S-Right><C-W>
+cnoremap <Esc>b <S-Left>
+cnoremap <Esc>f <S-Right>
+cnoremap <Esc>d <S-Right><C-W>
 
 
 " move to BOL
@@ -464,9 +464,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-nnoremap <leader>sc :SyntasticCheck<CR>
-nnoremap <leader>sr :SyntasticReset<CR>
-nnoremap <leader>si :SyntasticInfo<CR>
+nnoremap <silent> <leader>sc :SyntasticCheck<CR>
+nnoremap <silent> <leader>sr :SyntasticReset<CR>
+nnoremap <silent> <leader>si :SyntasticInfo<CR>
 
 " install linters on the system:
 " - pylint
