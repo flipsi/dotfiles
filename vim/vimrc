@@ -510,7 +510,7 @@ Plugin 'edsono/vim-matchit'
 " Snippets
 
 " snippet engine
-"Plugin 'SirVer/ultisnips'
+Plugin 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-i>"
 let g:UltiSnipsJumpBackwardTrigger="<c-o>"
