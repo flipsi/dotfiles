@@ -23,8 +23,8 @@ syntax on
 colorscheme desert
 
 " line numbers
-set nonumber
-set norelativenumber
+set number
+set relativenumber
 set numberwidth=6
 
 " highlight current line
