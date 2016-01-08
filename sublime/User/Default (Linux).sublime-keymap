@@ -75,8 +75,8 @@
     { "keys": ["ctrl+g", "R"],  "command": "set_setting", "args": {"setting": "rulers", "value": []}},
 
     // side bars
-    { "keys": ["ctrl+g", "s"], "command": "toggle_side_bar" },
-    { "keys": ["ctrl+g", "m"], "command": "toggle_minimap" },
+    { "keys": ["ctrl+g", "S"], "command": "toggle_side_bar" },
+    { "keys": ["ctrl+g", "M"], "command": "toggle_minimap" },
 
     // line numbers
     { "keys": ["ctrl+g", "l"], "command": "toggle_setting", "args": {"setting": "line_numbers"} },
@@ -88,7 +88,7 @@
     { "keys": ["ctrl+g", "w"], "command": "toggle_setting", "args": {"setting": "word_wrap"} },
 
     // spell check
-    { "keys": ["ctrl+g", "c"], "command": "toggle_setting", "args": {"setting": "spell_check"} },
+    { "keys": ["ctrl+g", "s"], "command": "toggle_setting", "args": {"setting": "spell_check"} },
 
     // whitespaces
     { "keys": ["ctrl+g", "a"], "command": "set_setting", "args": {"setting": "draw_white_space", "value": "all" }},

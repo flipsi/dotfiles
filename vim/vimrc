@@ -153,6 +153,10 @@ nnoremap <silent> <C-G>w :set wrap! <CR>
 nnoremap <silent> <C-G>h :set cursorline!<CR>
 
 
+" spell checking
+nnoremap <silent> <C-G>ss :set spell!<CR>
+nnoremap <silent> <C-G>se :set spelllang=en<CR>
+nnoremap <silent> <C-G>sd :set spelllang=de<CR>
 
 
 
@@ -204,15 +208,18 @@ nnoremap ` '
 " goto mark
 nnoremap Ä `
 
-" find matching brackets/braces/parentheses
-nnoremap <leader>fb %
+" find matching element (brackets/braces/parentheses)
+nnoremap <leader>äb %
+
+" extended find matching element (e.g. HTML-tags with matchit plugin)
+nmap <leader>ää %
 
 " find all lines with keyword under cursor
 " and ask which one to jump to
-nmap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+nmap <leader>ä/ [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
 " find git merge conflict markers
-nnoremap <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
+nnoremap <leader>äc /\v^[<\|=>]{7}( .*\|$)<CR>
 
 
 
@@ -316,6 +323,10 @@ nnoremap <leader>it :lcd %:p:h <bar> :!tig<CR>
 " and don't have ~/.vim/bundle under version control
 " (instead, call :PluginInstall)
 
+" Note for fish users like me:
+" These commands throw some errors.
+" To fix this, execute the following before starting vim:
+"    set -x SHELL (which sh)
 
 " some mappings for vundle itself
 nnoremap <leader>pl :PluginList<CR>
@@ -337,6 +348,8 @@ Plugin 'gmarik/vundle'
 
 
 """""""""""""""""""""""""""""""""""""""""
+"
+" look and feel
 
 Plugin 'flazz/vim-colorschemes'
 
@@ -344,6 +357,8 @@ colorscheme jellybeans
 
 
 """""""""""""""""""""""""""""""""""""""""
+"
+" amazingly move everywhere
 
 Plugin 'easymotion/vim-easymotion'
 
@@ -352,6 +367,8 @@ map ä <Plug>(easymotion-prefix)
 
 
 """""""""""""""""""""""""""""""""""""""""
+"
+" sick statusline
 
 " https://powerline.readthedocs.org/en/latest/usage/other.html#vim-statusline
 "
@@ -377,11 +394,8 @@ let g:airline#extensions#tabline#enabled = 1
 
 
 """""""""""""""""""""""""""""""""""""""""
-
-Plugin 'scrooloose/nerdcommenter'
-
-
-"""""""""""""""""""""""""""""""""""""""""
+"
+"file browser
 
 Plugin 'scrooloose/nerdtree'
 
@@ -399,6 +413,9 @@ let NERDTreeMapToggleHidden='.'
 
 
 """""""""""""""""""""""""""""""""""""""""
+"
+" fuzzy find files etc
+" (like Sublimes 'Goto Anything')
 
 Plugin 'kien/ctrlp.vim'
 
@@ -410,6 +427,8 @@ let g:ctrlp_show_hidden = 1
 
 
 """""""""""""""""""""""""""""""""""""""""
+"
+" static code analysis
 
 "Plugin 'scrooloose/syntastic'
 
@@ -438,19 +457,25 @@ let g:syntastic_quiet_messages = { "regex": [
 
 """""""""""""""""""""""""""""""""""""""""
 
-Plugin 'Chiel92/vim-autoformat'
+" text editing made a little nicer
 
-" install formatters on the system:
-" - js-beautify (for HTML, CSS, JavaScript, JSON)
+" add and toggle comments with <leader>c<space>
+Plugin 'scrooloose/nerdcommenter'
 
-nnoremap <leader>sa :Autoformat<CR>
+" automagically add closing braces etc
+Plugin 'Raimondi/delimitMate'
 
+" add a ; at the end of a line
+"Plugin 'lfilho/cosco.vim'
+"inoremap <silent> ; <Esc>:call cosco#commaOrSemiColon()<CR>A<Return>
+inoremap <silent> ; <Esc>A;<Return>
+inoremap <silent> \; ;
 
-"""""""""""""""""""""""""""""""""""""""""
+" add/change/delete quotes/braces/... and more
+Plugin  'tpope/vim-surround'
 
-"Plugin 'airblade/vim-gitgutter'
-
-nnoremap <C-G>g :GitGutterToggle<CR>
+" % also matches HTML-tags/words etc
+Plugin 'edsono/vim-matchit'
 
 
 """""""""""""""""""""""""""""""""""""""""
@@ -469,8 +494,27 @@ Plugin 'honza/vim-snippets'
 
 
 """""""""""""""""""""""""""""""""""""""""
+
+Plugin 'Chiel92/vim-autoformat'
+
+" install formatters on the system:
+" - js-beautify (for HTML, CSS, JavaScript, JSON)
+
+nnoremap <leader>sa :Autoformat<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""
 "
-" Whitespace
+" show git status of lines on the left
+"
+Plugin 'airblade/vim-gitgutter'
+
+nnoremap <C-G>g :GitGutterToggle<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""
+"
+" handle whitespace
 
 Plugin 'vim-scripts/ShowTrailingWhiteSpace'
 
