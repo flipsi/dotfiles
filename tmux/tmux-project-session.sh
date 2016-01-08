@@ -1,0 +1,127 @@
+#!/usr/bin/bash
+
+# Author: Philipp Moers <soziflip@gmail.com>
+
+# Set up a tmux session for a git project
+# (or change to it, if it already exists)
+
+
+
+
+function print_help_msg() {
+
+    cat <<-EOF
+Set up a tmux session for a git project (or switch to it, if existing).
+
+Usage: tmux-project-session [OPTIONS] { NAME | [NAME] PATH }
+
+    OPTIONS:
+    -h | --help             Print this help message.
+
+    NAME := Name of the project.
+    PATH := Path to the project. Should be a git project.
+
+    If only NAME is given, a session with this name should already exist.
+    If only PATH is given and NAME is ommited, NAME will be guessed from PATH.
+EOF
+}
+
+
+
+function create_project_session() {
+
+    local SESSION_NAME="$1"
+    local SESSION_PATH="$2"
+
+    # create the session
+    tmux new-session -s ${SESSION_NAME} -c ${SESSION_PATH} -n ${SESSION_NAME} -d
+
+    # (1) fish
+    #tmux send-keys -t ${SESSION_NAME} 'pwd' C-m
+
+    # (2) vim
+    tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH} -n vim
+    tmux send-keys -t ${SESSION_NAME}:2 'vim' C-m
+
+    # (3) file-manager
+    tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH} -n file-manager
+    tmux send-keys -t ${SESSION_NAME}:3 'ranger' C-m
+
+    # (4) version-control
+    tmux new-window  -t ${SESSION_NAME} -c ${SESSION_PATH} -n version-control
+    if (command -v tig >/dev/null 2>&1); then
+        tmux send-keys -t ${SESSION_NAME}:4 'tig' C-m 's'
+    else
+        tmux send-keys -t ${SESSION_NAME}:4 'git status' C-m
+    fi
+
+    # which window should be started with
+    tmux select-window -t ${SESSION_NAME}:4
+
+    echo "Session ${SESSION_NAME} created."
+}
+
+
+
+
+
+# GET ARGUMENTS
+
+# ...options
+TEMP=`getopt -o h --long help -n 'tmux-project-session' -- "$@"`
+eval set -- "$TEMP"
+while true ; do
+    case "$1" in
+        -h|--help) print_help_msg; exit 0 ;;
+        --) shift ; break ;;
+        *) echo "Internal error!" ; exit 1 ;;
+    esac
+done
+
+# ...wrong number of remaining arguments?
+if [[ $# -eq 0 ]]; then
+    print_help_msg
+    exit 0
+elif [[ $# -gt 2 ]]; then
+    print_help_msg
+    exit 1
+fi
+
+
+
+# name and path given?
+if [[ $# -eq 2 ]]; then
+    SESSION_NAME=$1
+    SESSION_PATH=$2
+
+
+# only one given?
+elif [[ $# -eq 1 ]]; then
+
+    # NAME
+    if (tmux has-session -t $1 2>/dev/null); then
+        tmux switch-client -t $1
+        exit 0
+
+    # PATH
+    else
+        SESSION_NAME=$(basename $1)
+        SESSION_PATH=$1
+    fi
+fi
+
+
+# is it a git project?
+if ! [ -d "$SESSION_PATH/.git" ] ; then
+    echo "This seems not to be a git project, sorry. Aborting..."
+    exit 1
+fi
+
+
+if ! (tmux has-session -t ${SESSION_NAME} 2>/dev/null); then
+    create_project_session $SESSION_NAME $SESSION_PATH
+fi
+tmux switch-client -t ${SESSION_NAME}
+
+
+
