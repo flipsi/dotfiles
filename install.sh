@@ -205,13 +205,13 @@ function create_link() {
     local LINKPATH="$2"
 
     if [[ $FORCE = true ]]; then
-        ln -sf $DESTPATH $LINKPATH
+        ln -nsf $DESTPATH $LINKPATH
 
     elif [[ $INTERACTIVE = true ]]; then
-        ln -si $DESTPATH $LINKPATH
+        ln -nsi $DESTPATH $LINKPATH
 
     else
-        ln -s $DESTPATH $LINKPATH
+        ln -ns $DESTPATH $LINKPATH
 
     fi
 }
