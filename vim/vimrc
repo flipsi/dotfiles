@@ -464,9 +464,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-nnoremap <leader>sc :SyntasticCheck<CR>
-nnoremap <leader>sr :SyntasticReset<CR>
-nnoremap <leader>si :SyntasticInfo<CR>
+nnoremap <silent> <leader>sc :SyntasticCheck<CR>
+nnoremap <silent> <leader>sr :SyntasticReset<CR>
+nnoremap <silent> <leader>si :SyntasticInfo<CR>
 
 " install linters on the system:
 " - pylint
