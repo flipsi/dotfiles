@@ -43,26 +43,26 @@ function create_project_session() {
     fi
     tmux send-keys -t ${SESSION_NAME}:2 'vim' C-m
 
-    # (3) file-manager
-    tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH} -n file-manager
-    if (command -v 'ranger' >/dev/null 2>&1); then
-        tmux send-keys -t ${SESSION_NAME}:3 'ranger' C-m
-    elif (command -v 'vifm' >/dev/null 2>&1); then
-        tmux send-keys -t ${SESSION_NAME}:3 'vifm' C-m
-    elif (command -v 'lfm' >/dev/null 2>&1); then
-        tmux send-keys -t ${SESSION_NAME}:3 'lfm' C-m
-    elif (command -v 'mc' >/dev/null 2>&1); then
-        tmux send-keys -t ${SESSION_NAME}:3 'mc' C-m
-    else
-        tmux send-keys -t ${SESSION_NAME}:3 'ls -la' C-m
-    fi
-
-    # (4) version-control
+    # (3) version-control
     tmux new-window  -t ${SESSION_NAME} -c ${SESSION_PATH} -n version-control
     if (command -v tig >/dev/null 2>&1); then
-        tmux send-keys -t ${SESSION_NAME}:4 'tig' C-m 's'
+        tmux send-keys -t ${SESSION_NAME}:3 'tig' C-m 's'
     else
-        tmux send-keys -t ${SESSION_NAME}:4 'git status' C-m
+        tmux send-keys -t ${SESSION_NAME}:3 'git status' C-m
+    fi
+
+    # (4) file-manager
+    tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH} -n file-manager
+    if (command -v 'ranger' >/dev/null 2>&1); then
+        tmux send-keys -t ${SESSION_NAME}:4 'ranger' C-m
+    elif (command -v 'vifm' >/dev/null 2>&1); then
+        tmux send-keys -t ${SESSION_NAME}:4 'vifm' C-m
+    elif (command -v 'lfm' >/dev/null 2>&1); then
+        tmux send-keys -t ${SESSION_NAME}:4 'lfm' C-m
+    elif (command -v 'mc' >/dev/null 2>&1); then
+        tmux send-keys -t ${SESSION_NAME}:4 'mc' C-m
+    else
+        tmux send-keys -t ${SESSION_NAME}:4 'ls -la' C-m
     fi
 
     # (5)(6)(7) some shells for whatever
@@ -70,8 +70,10 @@ function create_project_session() {
     tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH}
     tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH}
 
-    # which window should be started with
-    tmux select-window -t ${SESSION_NAME}:4
+    # ('last' window)
+    tmux select-window -t ${SESSION_NAME}:2
+    # (active window)
+    tmux select-window -t ${SESSION_NAME}:3
 
     echo "Session ${SESSION_NAME} created."
 }
