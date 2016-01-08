@@ -55,6 +55,11 @@ function create_project_session() {
         tmux send-keys -t ${SESSION_NAME}:4 'git status' C-m
     fi
 
+    # (5)(6)(7) some shells for whatever
+    tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH}
+    tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH}
+    tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH}
+
     # which window should be started with
     tmux select-window -t ${SESSION_NAME}:4
 
