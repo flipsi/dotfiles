@@ -53,10 +53,15 @@ set smartcase
 " never have to append 'g' to a search/substitute again
 set gdefault
 
+" characters to show in list mode (like whitespace)
+" and wrap symbols that are always shown
+set listchars=space:·,tab:--,extends:>,precedes:<
+
 " use 4 spaces instead of tabs
 set expandtab
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
 
 " indent after open braces etc
 set autoindent
@@ -100,6 +105,7 @@ nnoremap <C-G><C-G> <C-G>
 "nnoremap <leader>ev :edit ~/.vimrc<CR>
 " (use absolute path to dotfiles, not symlink for ctrlp)
 nnoremap <leader>ev :edit ~/dotfiles/vim/vimrc<CR>
+nnoremap <leader>e3 :edit ~/dotfiles/i3/config<CR>
 
 " reload config file
 nnoremap <leader>sv :source ~/.vimrc<CR>
@@ -153,6 +159,9 @@ nnoremap <silent> <C-G>w :set wrap! <CR>
 
 " toggle highlight current line
 nnoremap <silent> <C-G>h :set cursorline!<CR>
+
+" toggle show listchars (like whitespace)
+nnoremap <silent> <C-G>a :set list!<CR>
 
 
 " spell checking
@@ -273,8 +282,16 @@ noremap <Esc>o <Esc>o<Esc>k
 noremap <M-O>  <Esc>O<Esc>j
 noremap <Esc>O <Esc>O<Esc>j
 
+
 " delete leading whitespace (can be prefixed with a count)
 nnoremap <silent> <leader>dsl :s:^\s\+::<CR>
+
+" change tab width
+:nnoremap <leader>tw2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+:nnoremap <leader>tw4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+:nnoremap <leader>tw8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
+" convert tabs so spaces with :retab
+
 
 " undo and redo
 noremap <M-u>  :undo<CR>
