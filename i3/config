@@ -93,11 +93,12 @@ bindsym XF86TouchpadToggle  exec --no-startup-id "$SHELLSCRIPT_PATH/xinput-toggl
 
 # reload the configuration file
 # or restart i3 [preserves session]
-bindsym $mod+F5 mode "$reload_restart"
-set $reload_restart Want it fresh? (l) reload config, (s) restart i3
-mode "$reload_restart" {
+bindsym $mod+F5 mode "$refresh"
+set $refresh Want it fresh? (l) reload config, (s) restart i3, (k) set keyboard layout
+mode "$refresh" {
     bindsym l reload; mode "default"
     bindsym s restart
+    bindsym k exec --no-startup-id "setxkbmap de_sflip"; mode "default"
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
