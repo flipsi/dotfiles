@@ -37,7 +37,7 @@ exec --no-startup-id "compton -b"
 # exec "xrandr --output HDMI2 --auto --below eDP1"
 exec --no-startup-id "$SHELLSCRIPT_PATH/misc/obelix-i3-desktop-setup.sh"
 
-# set keyboard layout 
+# set keyboard layout
 exec --no-startup-id "setxkbmap de_sflip"
 
 
@@ -182,7 +182,7 @@ bar {
         statusline  #DDDDDD
         separator   #AFFF58
         #                   border   backgr   text
-        focused_workspace   #AFFF58  #1E1E1E  #AFFF58 
+        focused_workspace   #AFFF58  #1E1E1E  #AFFF58
         active_workspace    #1E1E1E  #1E1E1E  #83B45C
         inactive_workspace  #1E1E1E  #1E1E1E  #DDDDDD
         urgent_workspace    #83B45C  #83B45C  #000000
@@ -295,19 +295,19 @@ bindsym      Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen 
 ###############################################################################
 
 # windows always floating/fullscreen
-for_window [class="(?i)thunar"]         floating enable 
-for_window [class="(?i)gcolor2"]        floating enable 
+for_window [class="(?i)thunar"]         floating enable
+for_window [class="(?i)gcolor2"]        floating enable
 for_window [class="(?i)gcolor2"]        move position 1250 150
-for_window [class="(?i)galculator"]     floating enable 
+for_window [class="(?i)galculator"]     floating enable
 for_window [class="(?i)galculator"]     move position 1250 450
-for_window [class="(?i)galculator"]     resize set 320 400 
-for_window [class="(?i)nemo"]           floating enable 
-for_window [class="(?i)file-roller"]    floating enable 
-for_window [class="(?i)qjackctl"]       floating enable 
-for_window [class="(?i)avd"]            floating enable 
-for_window [class="ssh-askpass"]        floating enable 
-for_window [class="(?i)pokerstars"]     floating enable 
-for_window [title="Print"]              floating enable 
+for_window [class="(?i)galculator"]     resize set 320 400
+for_window [class="(?i)nemo"]           floating enable
+for_window [class="(?i)file-roller"]    floating enable
+for_window [class="(?i)qjackctl"]       floating enable
+for_window [class="(?i)avd"]            floating enable
+for_window [class="ssh-askpass"]        floating enable
+for_window [class="(?i)pokerstars"]     floating enable
+for_window [title="Print"]              floating enable
 for_window [class="(?i)sxiv"]           fullscreen
 for_window [class="(?i)mplayer"]        fullscreen
 
@@ -334,14 +334,30 @@ assign [class="(?i)ardour"]             REC
 
 # split vertically by default
 default_orientation vertical
+
 # new workspaces have this layout
 workspace_layout tabbed
 
 
 # start a terminal
-bindsym $mod+o       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower"
-bindsym $mod+Shift+o exec --no-startup-id "xfce4-terminal --command='tmux -2'"
-#bindsym $mod+Shift+o exec --no-startup-id "gnome-terminal --hide-menubar --command='tmux -2'"
+bindsym $mod+o mode "$terminal"
+set $terminal Open a terminal: (o) default (k) konsole (x) xfce-terminal (g) gnome-terminal (t) terminology
+mode "$terminal" {
+    bindsym o       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower"; mode "default"
+    bindsym $mod+o  exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower"; mode "default"
+    bindsym k       exec --no-startup-id "konsole --fallback-profile"; mode "default"
+    bindsym Shift+k exec --no-startup-id "konsole --fallback-profile -e tmux -2"; mode "default"
+    bindsym x       exec --no-startup-id "xfce4-terminal"; mode "default"
+    bindsym Shift+x exec --no-startup-id "xfce4-terminal --command='tmux -2'"; mode "default"
+    bindsym g       exec --no-startup-id "gnome-terminal --hide-menubar"; mode "default"
+    bindsym Shift+g exec --no-startup-id "gnome-terminal --hide-menubar --command='tmux -2'"; mode "default"
+    bindsym t       exec --no-startup-id "terminology"; mode "default"
+    bindsym Shift+t exec --no-startup-id "terminology --exec 'tmux -2'"; mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
 # launch an application (that has a .desktop-file)
 bindsym $mod+Return exec --no-startup-id "i3-dmenu-desktop -dmenu='dmenu $DMENU_OPTIONS'"
@@ -384,7 +400,7 @@ bindsym $mod+Tab focus mode_toggle
 # send container to background
 bindsym $mod+Shift+z move scratchpad
 # and show it again
-bindsym $mod+z scratchpad show 
+bindsym $mod+z scratchpad show
 
 # resize container
 bindsym $mod+r mode "resize"
