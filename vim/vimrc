@@ -114,12 +114,10 @@ nnoremap <Esc><Return> <C-]>
 
 
 " close file (not window)
-nnoremap q     :bdelete<CR>
+nnoremap q :bdelete<CR>
 
-" quit window quickly
-" (no hidden mode: will prompt if the buffer was changed)
-" (   hidden mode: will not close the buffer)
-nnoremap Q     :quit<CR>
+" quit window
+nnoremap Q :quit<CR>
 
 " quit vim (mulitple windows)
 nnoremap <C-D> :quitall<CR>
@@ -294,22 +292,15 @@ noremap <Esc>U :redo<CR>
 "nnoremap # :buffer " use ctrlp instead
 nnoremap <Space><Space> :buffer #<CR>
 nnoremap <M-n>  :bnext<CR>
-
 nnoremap <Esc>n :bnext<CR>
 nnoremap <M-p>  :bprevious<CR>
 nnoremap <Esc>p :bprevious<CR>
 
 " change window
-nnoremap <silent> <leader>j :wincmd j<CR>
-nnoremap <silent> <leader>k :wincmd k<CR>
-nnoremap <silent> <leader>h :wincmd h<CR>
-nnoremap <silent> <leader>l :wincmd l<CR>
-
-" reorder windows
-nnoremap <silent> <leader>J :wincmd J<CR>
-nnoremap <silent> <leader>K :wincmd K<CR>
-nnoremap <silent> <leader>H :wincmd H<CR>
-nnoremap <silent> <leader>L :wincmd L<CR>
+nnoremap <silent> <C-j> :wincmd j<CR>
+nnoremap <silent> <C-k> :wincmd k<CR>
+nnoremap <silent> <C-h> :wincmd h<CR>
+nnoremap <silent> <C-l> :wincmd l<CR>
 
 " move buffer to a new window
 nnoremap <silent> <leader><C-l> :vsplit<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
