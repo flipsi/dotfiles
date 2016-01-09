@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # Author: Philipp Moers <soziflip@gmail.com>
 
@@ -13,10 +13,7 @@ function print_help_msg() {
     cat <<-EOF
 Set up a tmux session for a git project (or switch to it, if existing).
 
-Usage: tmux-project-session [OPTIONS] { NAME | [NAME] PATH }
-
-    OPTIONS:
-    -h | --help             Print this help message.
+Usage: tmux-project-session { NAME | [NAME] PATH }
 
     NAME := Name of the project.
     PATH := Path to the project. Should be a git project.
@@ -41,22 +38,42 @@ function create_project_session() {
 
     # (2) vim
     tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH} -n vim
+    if [[ $(basename $SHELL) = 'fish' ]]; then
+        tmux send-keys -t ${SESSION_NAME}:2 'set -x SHELL (which sh)' C-m
+    fi
     tmux send-keys -t ${SESSION_NAME}:2 'vim' C-m
 
-    # (3) file-manager
-    tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH} -n file-manager
-    tmux send-keys -t ${SESSION_NAME}:3 'ranger' C-m
-
-    # (4) version-control
+    # (3) version-control
     tmux new-window  -t ${SESSION_NAME} -c ${SESSION_PATH} -n version-control
     if (command -v tig >/dev/null 2>&1); then
-        tmux send-keys -t ${SESSION_NAME}:4 'tig' C-m 's'
+        tmux send-keys -t ${SESSION_NAME}:3 'tig' C-m 's'
     else
-        tmux send-keys -t ${SESSION_NAME}:4 'git status' C-m
+        tmux send-keys -t ${SESSION_NAME}:3 'git status' C-m
     fi
 
-    # which window should be started with
-    tmux select-window -t ${SESSION_NAME}:4
+    # (4) file-manager
+    tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH} -n file-manager
+    if (command -v 'ranger' >/dev/null 2>&1); then
+        tmux send-keys -t ${SESSION_NAME}:4 'ranger' C-m
+    elif (command -v 'vifm' >/dev/null 2>&1); then
+        tmux send-keys -t ${SESSION_NAME}:4 'vifm' C-m
+    elif (command -v 'lfm' >/dev/null 2>&1); then
+        tmux send-keys -t ${SESSION_NAME}:4 'lfm' C-m
+    elif (command -v 'mc' >/dev/null 2>&1); then
+        tmux send-keys -t ${SESSION_NAME}:4 'mc' C-m
+    else
+        tmux send-keys -t ${SESSION_NAME}:4 'ls -la' C-m
+    fi
+
+    # (5)(6)(7) some shells for whatever
+    tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH}
+    tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH}
+    tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH}
+
+    # ('last' window)
+    tmux select-window -t ${SESSION_NAME}:2
+    # (active window)
+    tmux select-window -t ${SESSION_NAME}:3
 
     echo "Session ${SESSION_NAME} created."
 }
@@ -67,46 +84,41 @@ function create_project_session() {
 
 # GET ARGUMENTS
 
-# ...options
-TEMP=`getopt -o h --long help -n 'tmux-project-session' -- "$@"`
-eval set -- "$TEMP"
-while true ; do
-    case "$1" in
-        -h|--help) print_help_msg; exit 0 ;;
-        --) shift ; break ;;
-        *) echo "Internal error!" ; exit 1 ;;
-    esac
-done
 
-# ...wrong number of remaining arguments?
-if [[ $# -eq 0 ]]; then
+# no arguments?
+if [[ "$#" -eq 0 ]]; then
     print_help_msg
     exit 0
-elif [[ $# -gt 2 ]]; then
+
+# too many arguments?
+elif [[ "$#" -gt 2 ]]; then
     print_help_msg
     exit 1
-fi
-
-
 
 # name and path given?
-if [[ $# -eq 2 ]]; then
-    SESSION_NAME=$1
-    SESSION_PATH=$2
-
+elif [[ "$#" -eq 2 ]]; then
+    SESSION_NAME="$1"
+    SESSION_PATH="$2"
 
 # only one given?
-elif [[ $# -eq 1 ]]; then
+elif [[ "$#" -eq 1 ]]; then
+
+    # HELP
+    if [[ "$1" = "-h" ]] || [[ "$1" = "--help" ]]
+    then
+        print_help_msg
+        exit 0
+    fi
 
     # NAME
-    if (tmux has-session -t $1 2>/dev/null); then
-        tmux switch-client -t $1
+    if (tmux has-session -t "$1" 2>/dev/null); then
+        tmux switch-client -t "$1"
         exit 0
 
     # PATH
     else
-        SESSION_NAME=$(basename $1)
-        SESSION_PATH=$1
+        SESSION_NAME=$(basename "$1")
+        SESSION_PATH="$1"
     fi
 fi
 

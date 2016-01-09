@@ -14,6 +14,7 @@
         <value type="int" value="6"/>
         <value type="int" value="5"/>
         <value type="int" value="8"/>
+        <value type="int" value="9"/>
         <value type="int" value="2"/>
         <value type="int" value="1"/>
       </property>
@@ -60,6 +61,7 @@
         <value type="string" value="xfce4-power-manager"/>
         <value type="string" value="pa-applet"/>
         <value type="string" value="xnoise"/>
+        <value type="string" value="notes"/>
         <value type="string" value="telegram"/>
       </property>
     </property>
@@ -82,6 +84,7 @@
       <property name="command" type="string" value="xfce4-mixer"/>
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
     </property>
+    <property name="plugin-9" type="string" value="applicationsmenu"/>
   </property>
   <property name="configver" type="int" value="2"/>
 </channel>
