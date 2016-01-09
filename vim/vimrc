@@ -35,9 +35,7 @@ set cursorline
 set ruler
 
 " completions behaviour
-set wildmode=list:longest,full
-
-" show command completions above commandline etc
+set wildmode=longest,full
 set wildmenu
 
 " scrolling
