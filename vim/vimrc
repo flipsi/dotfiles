@@ -64,6 +64,7 @@ set softtabstop=4
 " indent after open braces etc
 set autoindent
 set smartindent
+set smarttab
 
 " allow to :edit multiple files in buffers without writing changes
 set hidden
@@ -219,12 +220,12 @@ nnoremap dl d$
 
 
 " search
-nnoremap ö /
-nnoremap Ö ?
+"nnoremap ö /
+"nnoremap Ö ?
 
 " search in multiple files
 " TODO improve
-nnoremap / :vimgrep 
+nnoremap / :vimgrep<Space>
 
 
 " swap , and ; (makes more sense on german keyboard)
@@ -366,7 +367,7 @@ nnoremap <leader>pl :PluginList<CR>
 nnoremap <leader>pi :PluginInstall<CR>
 nnoremap <leader>pc :PluginClean<CR>
 nnoremap <leader>pu :PluginUpdate<CR>
-nnoremap <leader>ps :PluginSearch 
+nnoremap <leader>ps :PluginSearch<Space>
 
 " (this is required by Vundle and will be turned on at the end of this script)
 filetype off
@@ -385,8 +386,13 @@ Plugin 'gmarik/vundle'
 " look and feel
 
 Plugin 'flazz/vim-colorschemes'
+"colorscheme jellybeans
 
-colorscheme jellybeans
+Plugin 'christophermca/meta5'
+"colorscheme meta5
+
+Plugin 'joshdick/onedark.vim'
+colorscheme onedark
 
 
 """""""""""""""""""""""""""""""""""""""""
@@ -404,6 +410,17 @@ Plugin 'easymotion/vim-easymotion'
 
 " prefix
 map ä <Plug>(easymotion-prefix)
+
+
+"""""""""""""""""""""""""""""""""""""""""
+"
+" improved searching
+
+Plugin 'haya14busa/incsearch.vim'
+
+map ö  <Plug>(incsearch-forward)
+map Ö  <Plug>(incsearch-backward)
+map gö <Plug>(incsearch-stay)
 
 
 """""""""""""""""""""""""""""""""""""""""
@@ -554,14 +571,13 @@ nnoremap <C-G>g :GitGutterToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""
 "
-" handle whitespace
+" handle trailing whitespace
 
 Plugin 'vim-scripts/ShowTrailingWhiteSpace'
 
 Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
-" don't check for trailing whitespace when writing file
-" (i want them sometimes, e.g. in my vimrc)
-let g:DeleteTrailingWhitespace = 0
+" check for trailing whitespace when writing file
+let g:DeleteTrailingWhitespace = 1
 " delete trailing whitespace on demand for current line
 nnoremap <silent> <leader>dst :.DeleteTrailingWhitespace<CR>
 vnoremap <silent> <leader>dst :DeleteTrailingWhitespace<CR>
