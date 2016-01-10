@@ -16,6 +16,9 @@ set nocompatible
 set     encoding=utf-8
 set fileencoding=utf-8
 
+" command history size
+set history=9999
+
 " syntax highlighting
 syntax on
 
@@ -28,7 +31,8 @@ set numberwidth=6
 set cursorline
 
 " statusline
-"set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
+set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
+set showcmd
 set ruler
 
 " completions behaviour
@@ -70,6 +74,20 @@ set hidden
 set splitbelow
 " puts new vsplit windows to the right of the current
 set splitright
+
+
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FUNCTIONS
+
+
+" function to set cwd to filepath ----{{{
+function! SetCwdToFilePath()
+    execute "cd " . expand('%:p:h')
+endfunction
+" }}}
 
 
 
@@ -216,6 +234,22 @@ nnoremap dl d$
 "nnoremap vl v$
 
 
+" movement additions (operator pending mappings) --------------------{{{
+" new movements ('din(' deletes inside next parenthees)
+onoremap in( :<c-u>normal! f(vi(<cr>
+onoremap il( :<c-u>normal! F)vi(<cr>
+onoremap in{ :<c-u>normal! f{vi{<cr>
+onoremap il{ :<c-u>normal! F}vi{<cr>
+onoremap in) :<c-u>normal! f(vi(<cr>
+onoremap il) :<c-u>normal! F)vi(<cr>
+onoremap in} :<c-u>normal! f{vi{<cr>
+onoremap il} :<c-u>normal! F}vi{<cr>
+" using '[' interferes with native mappings
+onoremap in] :<c-u>normal! f[vi[<cr>
+onoremap il] :<c-u>normal! F]vi[<cr>
+" }}}
+
+
 " search
 " (fallback, will be overwritten in plugins section)
 nnoremap ö /
@@ -258,8 +292,15 @@ nnoremap <leader>äc /\v^[<\|=>]{7}( .*\|$)<CR>
 " TEXT EDITING
 
 
+" alternate way to quit insert mode
+inoremap jjj <Esc>jjj
+inoremap kkk <Esc>kkk
+
 " change to insert mode from visual mode
 vnoremap i vi
+
+" yank line without line break (in difference to yy)
+nnoremap Y ^y$
 
 " autocompletion
 " (fallback, will be overwritten in plugins section)
@@ -273,6 +314,10 @@ nnoremap < <<
 nnoremap > >>
 vnoremap < <gv
 vnoremap > >gv
+
+" move line up or down
+nnoremap - ddp
+nnoremap _ ddkP
 
 " add new line above or below
 noremap <M-o>  <Esc>o<Esc>k
@@ -328,14 +373,14 @@ nnoremap <silent> <leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 
 " shell in dir of current file
-nnoremap <leader>if :lcd %:p:h <bar> :!fish<CR>
-nnoremap <leader>ib :lcd %:p:h <bar> :!bash<CR>
+nnoremap <leader>if :call SetCwdToFilePath() <bar> :let $SHELL = '/usr/bin/fish' <bar>:!fish<CR>
+nnoremap <leader>ib :call SetCwdToFilePath() <bar> :!bash<CR>
 
 " file manager in dir of current file
-nnoremap <leader>ir :lcd %:p:h <bar> :!ranger<CR>
+nnoremap <leader>ir :call SetCwdToFilePath() <bar> :!ranger<CR>
 
 " git interface
-nnoremap <leader>it :lcd %:p:h <bar> :!tig<CR>
+nnoremap <leader>it :call SetCwdToFilePath() <bar> :!tig<CR>
 
 
 
@@ -390,7 +435,10 @@ Plugin 'joshdick/onedark.vim'
 
 
 """""""""""""""""""""""""""""""""""""""""
-"
+
+"copy to clipboard in visual mode
+vnoremap <C-c> "+y
+
 " TODO use something like this:
 " https://github.com/svermeulen/vim-easyclip
 
@@ -472,6 +520,7 @@ let g:powerline_loaded = 1
 Plugin 'bling/vim-airline'
 
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts=0
 
 
 " TODO simple statusline like this
@@ -490,8 +539,8 @@ let NERDTreeWinSize=50
 noremap <silent> <M-i>  :NERDTreeToggle<CR>
 noremap <silent> <Esc>i :NERDTreeToggle<CR>
 " show nerdtree from current file
-noremap <silent> <Esc>I :lcd %:p:h <bar> :NERDTreeCWD<CR>
-noremap <silent> <M-I>  :lcd %:p:h <bar> :NERDTreeCWD<CR>
+noremap <silent> <Esc>I :call SetCwdToFilePath() <bar> :NERDTreeCWD<CR>
+noremap <silent> <M-I>  :call SetCwdToFilePath() <bar> :NERDTreeCWD<CR>
 
 " show/hide hidden files
 let NERDTreeMapToggleHidden='.'
@@ -543,6 +592,13 @@ let g:syntastic_quiet_messages = { "regex": [
 """""""""""""""""""""""""""""""""""""""""
 
 " text editing made a little nicer
+
+" make the 0 register a stack (yank/delete multiple things without worrying)
+" lightweight alternative to yankring
+Plugin 'maxbrunsfeld/vim-yankstack'
+let g:yankstack_map_keys = 0
+nmap <C-p> <Plug>yankstack_substitute_older_paste
+nmap <C-n> <Plug>yankstack_substitute_newer_paste
 
 " add and toggle comments with <leader>c<space>
 Plugin 'scrooloose/nerdcommenter'
@@ -632,7 +688,28 @@ nnoremap <silent> <leader>dsT :%DeleteTrailingWhitespace<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""
+"
+" LaTeX stuff
 
+Plugin 'lervag/vimtex'
+
+let g:vimtex_view_method='zathura'
+"let g:vimtex_viewer_general='zathura'
+
+" YouCompleteMe integration
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers.tex = [
+    \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*,?)*',
+    \ 're!\\includegraphics([^]]*])?{[^}]*',
+    \ 're!\\(include|input){[^}]*'
+    \ ]
+
+nnoremap <leader>bl :VimtexCompileToggle<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""
 
 " finish vundle
 call vundle#end() " (required!)
