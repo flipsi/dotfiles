@@ -19,10 +19,6 @@ set fileencoding=utf-8
 " syntax highlighting
 syntax on
 
-" theme
-" (fallback, will be overwritten in plugins section)
-colorscheme desert
-
 " line numbers
 set number
 set relativenumber
@@ -266,9 +262,10 @@ nnoremap <leader>äc /\v^[<\|=>]{7}( .*\|$)<CR>
 vnoremap i vi
 
 " autocompletion
-inoremap <M-.>  <C-N>
-inoremap <Esc>. <C-N>
-inoremap <M-:>  <C-P>
+" (fallback, will be overwritten in plugins section)
+"inoremap <M-.>  <C-N>
+"inoremap <Esc>. <C-N>
+"inoremap <M-:>  <C-P>
 "inoremap <Esc>: <C-P>
 
 " indent lines
@@ -371,12 +368,12 @@ nnoremap <leader>pc :PluginClean<CR>
 nnoremap <leader>pu :PluginUpdate<CR>
 nnoremap <leader>ps :PluginSearch<Space>
 
-" (this is required by Vundle and will be turned on at the end of this script)
-filetype off
 
 " start vundle
+filetype off " (required!)
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+"call vundle#rc() " what is this instead of begin()?
+call vundle#begin()
 
 " let Vundle manage Vundle (required!)
 Plugin 'gmarik/vundle'
@@ -388,13 +385,8 @@ Plugin 'gmarik/vundle'
 " look and feel
 
 Plugin 'flazz/vim-colorschemes'
-"colorscheme jellybeans
-
 Plugin 'christophermca/meta5'
-"colorscheme meta5
-
 Plugin 'joshdick/onedark.vim'
-colorscheme onedark
 
 
 """""""""""""""""""""""""""""""""""""""""
@@ -577,13 +569,31 @@ Plugin 'edsono/vim-matchit'
 
 " snippet engine
 Plugin 'SirVer/ultisnips'
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-i>"
-let g:UltiSnipsJumpBackwardTrigger="<c-o>"
+let g:UltiSnipsExpandTrigger="<Esc>."
+"let g:UltiSnipsListSnippets="<Esc>."
+let g:UltiSnipsJumpForwardTrigger="<C-i>"
+let g:UltiSnipsJumpBackwardTrigger="<C-o>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "sflipsnippets"]
+
 
 " snippet packs
 Plugin 'honza/vim-snippets'
+
+
+"""""""""""""""""""""""""""""""""""""""""
+"
+" YouCompleteMe
+" advanced auto completion engine
+"
+" Remember: YCM is a plugin with a compiled component. If you update YCM using
+" Vundle and the ycm_support_libs library APIs have changed (happens rarely),
+" YCM will notify you to recompile it. You should then rerun the install
+" process.
+
+Plugin 'Valloric/YouCompleteMe'
+
+let g:ycm_key_list_select_completion = ['<C-N>', '<Down>', '<Tab>']
+let g:ycm_key_list_previous_completion=['<C-P>', '<Up>']
 
 
 """""""""""""""""""""""""""""""""""""""""
@@ -624,8 +634,17 @@ nnoremap <silent> <leader>dsT :%DeleteTrailingWhitespace<CR>
 """""""""""""""""""""""""""""""""""""""""
 
 
-" (after loading the plugins, this can be turned on again)
-filetype plugin indent on
+" finish vundle
+call vundle#end() " (required!)
+filetype plugin indent on " (required!)
 
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" apparently colorscheme must be set after vundle is done
+colorscheme desert " fallback
+"colorscheme jellybeans
+"colorscheme meta5
+colorscheme onedark
 
