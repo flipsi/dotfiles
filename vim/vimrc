@@ -390,7 +390,10 @@ Plugin 'joshdick/onedark.vim'
 
 
 """""""""""""""""""""""""""""""""""""""""
-"
+
+"copy to clipboard in visual mode
+vnoremap <C-c> "+y
+
 " TODO use something like this:
 " https://github.com/svermeulen/vim-easyclip
 
@@ -632,7 +635,28 @@ nnoremap <silent> <leader>dsT :%DeleteTrailingWhitespace<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""
+"
+" LaTeX stuff
 
+Plugin 'lervag/vimtex'
+
+let g:vimtex_view_method='zathura'
+"let g:vimtex_viewer_general='zathura'
+
+" YouCompleteMe integration
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers.tex = [
+    \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*,?)*',
+    \ 're!\\includegraphics([^]]*])?{[^}]*',
+    \ 're!\\(include|input){[^}]*'
+    \ ]
+
+nnoremap <leader>bl :VimtexCompileToggle<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""
 
 " finish vundle
 call vundle#end() " (required!)
