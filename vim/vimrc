@@ -399,6 +399,12 @@ colorscheme onedark
 
 """""""""""""""""""""""""""""""""""""""""
 "
+" TODO use something like this:
+" https://github.com/svermeulen/vim-easyclip
+
+
+"""""""""""""""""""""""""""""""""""""""""
+"
 " allow plugins to utilize . command
 
 Plugin 'tpope/vim-repeat'
@@ -442,6 +448,16 @@ nnoremap g* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 """""""""""""""""""""""""""""""""""""""""
 "
+" file searching and much more
+" http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
+" TODO CONFIGURE AND TEST
+
+"Plugin 'Shougo/vimproc.vim'
+"Plugin 'Shougo/unite.vim'
+
+
+"""""""""""""""""""""""""""""""""""""""""
+"
 " sick statusline
 
 " https://powerline.readthedocs.org/en/latest/usage/other.html#vim-statusline
@@ -459,12 +475,15 @@ let g:powerline_loaded = 1
 "let $PYTHONPATH="/usr/lib/python3.5/site-packages"
 
 
-
 " lightweight alternative to powerline
 
 Plugin 'bling/vim-airline'
 
 let g:airline#extensions#tabline#enabled = 1
+
+
+" TODO simple statusline like this
+" http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
 
 
 """""""""""""""""""""""""""""""""""""""""
