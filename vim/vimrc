@@ -19,10 +19,6 @@ set fileencoding=utf-8
 " syntax highlighting
 syntax on
 
-" theme
-" (fallback, will be overwritten in plugins section)
-colorscheme desert
-
 " line numbers
 set number
 set relativenumber
@@ -372,12 +368,12 @@ nnoremap <leader>pc :PluginClean<CR>
 nnoremap <leader>pu :PluginUpdate<CR>
 nnoremap <leader>ps :PluginSearch<Space>
 
-" (this is required by Vundle and will be turned on at the end of this script)
-filetype off
 
 " start vundle
+filetype off " (required!)
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+"call vundle#rc() " what is this instead of begin()?
+call vundle#begin()
 
 " let Vundle manage Vundle (required!)
 Plugin 'gmarik/vundle'
@@ -389,13 +385,8 @@ Plugin 'gmarik/vundle'
 " look and feel
 
 Plugin 'flazz/vim-colorschemes'
-"colorscheme jellybeans
-
 Plugin 'christophermca/meta5'
-"colorscheme meta5
-
 Plugin 'joshdick/onedark.vim'
-colorscheme onedark
 
 
 """""""""""""""""""""""""""""""""""""""""
@@ -643,8 +634,17 @@ nnoremap <silent> <leader>dsT :%DeleteTrailingWhitespace<CR>
 """""""""""""""""""""""""""""""""""""""""
 
 
-" (after loading the plugins, this can be turned on again)
-filetype plugin indent on
+" finish vundle
+call vundle#end() " (required!)
+filetype plugin indent on " (required!)
 
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" apparently colorscheme must be set after vundle is done
+colorscheme desert " fallback
+"colorscheme jellybeans
+"colorscheme meta5
+colorscheme onedark
 
