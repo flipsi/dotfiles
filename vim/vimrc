@@ -19,7 +19,8 @@ set fileencoding=utf-8
 " syntax highlighting
 syntax on
 
-" theme (fallback, will be overwritten below)
+" theme
+" (fallback, will be overwritten in plugins section)
 colorscheme desert
 
 " line numbers
@@ -35,9 +36,7 @@ set cursorline
 set ruler
 
 " completions behaviour
-set wildmode=list:longest,full
-
-" show command completions above commandline etc
+set wildmode=longest,full
 set wildmenu
 
 " scrolling
@@ -53,14 +52,20 @@ set smartcase
 " never have to append 'g' to a search/substitute again
 set gdefault
 
+" characters to show in list mode (like whitespace)
+" and wrap symbols that are always shown
+set listchars=space:·,tab:--,extends:>,precedes:<
+
 " use 4 spaces instead of tabs
 set expandtab
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
 
 " indent after open braces etc
 set autoindent
 set smartindent
+set smarttab
 
 " allow to :edit multiple files in buffers without writing changes
 set hidden
@@ -100,6 +105,7 @@ nnoremap <C-G><C-G> <C-G>
 "nnoremap <leader>ev :edit ~/.vimrc<CR>
 " (use absolute path to dotfiles, not symlink for ctrlp)
 nnoremap <leader>ev :edit ~/dotfiles/vim/vimrc<CR>
+nnoremap <leader>e3 :edit ~/dotfiles/i3/config<CR>
 
 " reload config file
 nnoremap <leader>sv :source ~/.vimrc<CR>
@@ -153,6 +159,9 @@ nnoremap <silent> <C-G>w :set wrap! <CR>
 
 " toggle highlight current line
 nnoremap <silent> <C-G>h :set cursorline!<CR>
+
+" toggle show listchars (like whitespace)
+nnoremap <silent> <C-G>a :set list!<CR>
 
 
 " spell checking
@@ -212,12 +221,13 @@ nnoremap dl d$
 
 
 " search
+" (fallback, will be overwritten in plugins section)
 nnoremap ö /
 nnoremap Ö ?
 
 " search in multiple files
-" TODO improve
-nnoremap / :vimgrep 
+" (fallback, will be overwritten in plugins section)
+nnoremap / :vimgrep<Space>
 
 
 " swap , and ; (makes more sense on german keyboard)
@@ -273,8 +283,16 @@ noremap <Esc>o <Esc>o<Esc>k
 noremap <M-O>  <Esc>O<Esc>j
 noremap <Esc>O <Esc>O<Esc>j
 
+
 " delete leading whitespace (can be prefixed with a count)
 nnoremap <silent> <leader>dsl :s:^\s\+::<CR>
+
+" change tab width
+:nnoremap <leader>tw2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+:nnoremap <leader>tw4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+:nnoremap <leader>tw8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
+" convert tabs so spaces with :retab
+
 
 " undo and redo
 noremap <M-u>  :undo<CR>
@@ -351,7 +369,7 @@ nnoremap <leader>pl :PluginList<CR>
 nnoremap <leader>pi :PluginInstall<CR>
 nnoremap <leader>pc :PluginClean<CR>
 nnoremap <leader>pu :PluginUpdate<CR>
-nnoremap <leader>ps :PluginSearch 
+nnoremap <leader>ps :PluginSearch<Space>
 
 " (this is required by Vundle and will be turned on at the end of this script)
 filetype off
@@ -370,8 +388,19 @@ Plugin 'gmarik/vundle'
 " look and feel
 
 Plugin 'flazz/vim-colorschemes'
+"colorscheme jellybeans
 
-colorscheme jellybeans
+Plugin 'christophermca/meta5'
+"colorscheme meta5
+
+Plugin 'joshdick/onedark.vim'
+colorscheme onedark
+
+
+"""""""""""""""""""""""""""""""""""""""""
+"
+" TODO use something like this:
+" https://github.com/svermeulen/vim-easyclip
 
 
 """""""""""""""""""""""""""""""""""""""""
@@ -393,6 +422,42 @@ map ä <Plug>(easymotion-prefix)
 
 """""""""""""""""""""""""""""""""""""""""
 "
+" improved searching
+
+Plugin 'haya14busa/incsearch.vim'
+
+"nnoremap ö  <Plug>(incsearch-forward)
+"nnoremap Ö  <Plug>(incsearch-backward)
+"nnoremap gö <Plug>(incsearch-stay)
+
+nnoremap ö :call incsearch#call()<CR>
+nnoremap Ö :call incsearch#call({'command': '?'})<CR>
+
+
+" searching in multiple files
+" install 'the_silver_searcher' package on the system
+Plugin 'rking/ag.vim'
+
+" always start in project root instead of cwd
+let g:ag_working_path_mode="r"
+
+nnoremap / :Ag<Space>
+" search for word under cursor
+nnoremap g* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""
+"
+" file searching and much more
+" http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
+" TODO CONFIGURE AND TEST
+
+"Plugin 'Shougo/vimproc.vim'
+"Plugin 'Shougo/unite.vim'
+
+
+"""""""""""""""""""""""""""""""""""""""""
+"
 " sick statusline
 
 " https://powerline.readthedocs.org/en/latest/usage/other.html#vim-statusline
@@ -410,12 +475,15 @@ let g:powerline_loaded = 1
 "let $PYTHONPATH="/usr/lib/python3.5/site-packages"
 
 
-
 " lightweight alternative to powerline
 
 Plugin 'bling/vim-airline'
 
 let g:airline#extensions#tabline#enabled = 1
+
+
+" TODO simple statusline like this
+" http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
 
 
 """""""""""""""""""""""""""""""""""""""""
@@ -539,14 +607,13 @@ nnoremap <C-G>g :GitGutterToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""
 "
-" handle whitespace
+" handle trailing whitespace
 
 Plugin 'vim-scripts/ShowTrailingWhiteSpace'
 
 Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
-" don't check for trailing whitespace when writing file
-" (i want them sometimes, e.g. in my vimrc)
-let g:DeleteTrailingWhitespace = 0
+" check for trailing whitespace when writing file
+let g:DeleteTrailingWhitespace = 1
 " delete trailing whitespace on demand for current line
 nnoremap <silent> <leader>dst :.DeleteTrailingWhitespace<CR>
 vnoremap <silent> <leader>dst :DeleteTrailingWhitespace<CR>

@@ -82,8 +82,10 @@ xkb_symbols "basic" {
 
 
 
-    // slash and questionmark like on english layout with AltGr
+    // greater, less, slash and questionmark like on english layout with AltGr
 
-    key <AB10>  { [ minus, underscore,    slash,    question  ] };
+    key <AB08>  { [ comma,  semicolon,  less,       0	        ] };
+    key <AB09>	{ [ period, colon,      greater,    dollar 	    ] };
+    key <AB10>  { [ minus,  underscore, slash,      question    ] };
 
 };
