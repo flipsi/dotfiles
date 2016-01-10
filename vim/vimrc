@@ -593,6 +593,12 @@ let g:syntastic_quiet_messages = { "regex": [
 
 " text editing made a little nicer
 
+" make the 0 register a stack (yank/delete multiple things without worrying)
+" lightweight alternative to yankring
+Plugin 'maxbrunsfeld/vim-yankstack'
+nmap <C-p> <Plug>yankstack_substitute_older_paste
+nmap <C-n> <Plug>yankstack_substitute_newer_paste
+
 " add and toggle comments with <leader>c<space>
 Plugin 'scrooloose/nerdcommenter'
 
