@@ -19,7 +19,8 @@ set fileencoding=utf-8
 " syntax highlighting
 syntax on
 
-" theme (fallback, will be overwritten below)
+" theme
+" (fallback, will be overwritten in plugins section)
 colorscheme desert
 
 " line numbers
@@ -220,11 +221,12 @@ nnoremap dl d$
 
 
 " search
-"nnoremap ö /
-"nnoremap Ö ?
+" (fallback, will be overwritten in plugins section)
+nnoremap ö /
+nnoremap Ö ?
 
 " search in multiple files
-" TODO improve
+" (fallback, will be overwritten in plugins section)
 nnoremap / :vimgrep<Space>
 
 
@@ -418,9 +420,24 @@ map ä <Plug>(easymotion-prefix)
 
 Plugin 'haya14busa/incsearch.vim'
 
-map ö  <Plug>(incsearch-forward)
-map Ö  <Plug>(incsearch-backward)
-map gö <Plug>(incsearch-stay)
+"nnoremap ö  <Plug>(incsearch-forward)
+"nnoremap Ö  <Plug>(incsearch-backward)
+"nnoremap gö <Plug>(incsearch-stay)
+
+nnoremap ö :call incsearch#call()<CR>
+nnoremap Ö :call incsearch#call({'command': '?'})<CR>
+
+
+" searching in multiple files
+" install 'the_silver_searcher' package on the system
+Plugin 'rking/ag.vim'
+
+" always start in project root instead of cwd
+let g:ag_working_path_mode="r"
+
+nnoremap / :Ag<Space>
+" search for word under cursor
+nnoremap g* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""
