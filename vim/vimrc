@@ -328,6 +328,10 @@ noremap <Esc>o <Esc>o<Esc>k
 noremap <M-O>  <Esc>O<Esc>j
 noremap <Esc>O <Esc>O<Esc>j
 
+" replace word under cursor with yank
+nnoremap <leader>rw viwp
+" replace line with yank
+nnoremap <leader>rl Vp
 
 " delete leading whitespace (can be prefixed with a count)
 nnoremap <silent> <leader>dsl :s:^\s\+::<CR>
