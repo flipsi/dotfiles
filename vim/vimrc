@@ -105,6 +105,7 @@ endfunction
 
 " leader key is space
 let mapleader=' '
+let maplocalleader=' '
 
 
 
@@ -257,6 +258,10 @@ nnoremap Ö ?
 " (fallback, will be overwritten in plugins section)
 nnoremap / :vimgrep<Space>
 
+" search for visual selection
+vnoremap * y/<C-R>"<CR>
+vnoremap / y/<C-R>"<CR>
+
 
 " swap , and ; (makes more sense on german keyboard)
 nnoremap , ;
@@ -295,7 +300,7 @@ inoremap jjj <Esc>jjj
 inoremap kkk <Esc>kkk
 
 " change to insert mode from visual mode
-vnoremap i vi
+"vnoremap i vi
 
 " yank line without line break (in difference to yy)
 nnoremap Y ^y$
@@ -460,7 +465,7 @@ map ä <Plug>(easymotion-prefix)
 
 """""""""""""""""""""""""""""""""""""""""
 "
-" improved searching
+" advanced searching
 
 Plugin 'haya14busa/incsearch.vim'
 
@@ -481,7 +486,10 @@ let g:ag_working_path_mode="r"
 
 nnoremap / :Ag<Space>
 " search for word under cursor
-nnoremap g* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <leader>* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+" search for visual selection
+xnoremap  / y:<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
+"nnoremap  K :<c-u>Ag <c-r>=shellescape(expand("<cword>"),1)<cr>:copen<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""
@@ -717,8 +725,15 @@ filetype plugin indent on " (required!)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " apparently colorscheme must be set after vundle is done
+
 colorscheme desert " fallback
+"colorscheme candycode
+"colorscheme dante
 "colorscheme jellybeans
+"colorscheme molokai
 "colorscheme meta5
+"colorscheme desertEx
+"colorscheme lucius
 colorscheme onedark
+
 
