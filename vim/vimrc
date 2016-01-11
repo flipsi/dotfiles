@@ -209,10 +209,8 @@ noremap! <C-d>  <Delete>
 " ... by words
 noremap! <M-b>  <S-Left>
 noremap! <M-f>  <S-Right>
-noremap! <M-d>  <S-Right><C-W>
 cnoremap <Esc>b <S-Left>
 cnoremap <Esc>f <S-Right>
-cnoremap <Esc>d <S-Right><C-W>
 
 
 " move to BOL
@@ -330,9 +328,9 @@ noremap <Esc>O <Esc>O<Esc>j
 nnoremap <silent> <leader>dsl :s:^\s\+::<CR>
 
 " change tab width
-:nnoremap <leader>tw2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
-:nnoremap <leader>tw4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
-:nnoremap <leader>tw8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
+nnoremap <leader>tw2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+nnoremap <leader>tw4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+nnoremap <leader>tw8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
 " convert tabs so spaces with :retab
 
 
@@ -436,7 +434,7 @@ Plugin 'joshdick/onedark.vim'
 
 """""""""""""""""""""""""""""""""""""""""
 
-"copy to clipboard in visual mode
+" copy to clipboard in visual mode
 vnoremap <C-c> "+y
 
 " TODO use something like this:
@@ -505,9 +503,9 @@ nnoremap g* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 " instead of this deprecated vimscript plugin...:
 " Plugin 'Lokaltog/vim-powerline
 " ... we use this rewritten one in python:
-"Plugin 'powerline/powerline'
+" Plugin 'powerline/powerline'
 
-"disable powerline
+" disable powerline if it is installed
 let g:powerline_loaded = 1
 
 " on arch linux, installed python-powerline
@@ -529,7 +527,7 @@ let g:airline_powerline_fonts=0
 
 """""""""""""""""""""""""""""""""""""""""
 "
-"file browser
+" file browser
 
 Plugin 'scrooloose/nerdtree'
 
@@ -580,13 +578,13 @@ nnoremap <silent> <leader>si :SyntasticInfo<CR>
 " - jslint
 " - csslint (but phpcs also can do css)
 " - phpcs (https://github.com/squizlabs/PHP_CodeSniffer)
- let g:syntastic_php_checkers = ['phpcs', 'phplint', 'php']
+let g:syntastic_php_checkers = ['phpcs', 'phplint', 'php']
 
- " ignore these errors/warnings
+" ignore these errors/warnings
 let g:syntastic_quiet_messages = { "regex": [
-    \ '\mMissing file doc comment',
-    \ '\mLine indented incorrectly;.*'
-    \ ] }
+   \ '\mMissing file doc comment',
+   \ '\mLine indented incorrectly;.*'
+   \ ] }
 
 
 """""""""""""""""""""""""""""""""""""""""
@@ -608,9 +606,8 @@ Plugin 'Raimondi/delimitMate'
 
 " add a ; at the end of a line
 "Plugin 'lfilho/cosco.vim'
-"inoremap <silent> ; <Esc>:call cosco#commaOrSemiColon()<CR>A<Return>
-inoremap <silent> ; <Esc>A;<Return>
-inoremap <silent> \; ;
+"inoremap <silent> <Esc><Return> <Esc>:call cosco#commaOrSemiColon()<CR>A<Return>
+inoremap <silent> <Esc><Return> <Esc>A;<Return>
 
 " add/change/delete quotes/braces/... and more
 Plugin  'tpope/vim-surround'
