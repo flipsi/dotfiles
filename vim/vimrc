@@ -12,6 +12,12 @@
 " we use vim, not vi
 set nocompatible
 
+" set timeout for escape sequences
+" (so that leaving insert mode does not last that long)
+set timeout ttimeoutlen=50
+" but mapping delay can be more
+set timeoutlen=1200
+
 " encoding should be utf-8 on every OS
 set     encoding=utf-8
 set fileencoding=utf-8
