@@ -16,6 +16,10 @@ set nocompatible
 set     encoding=utf-8
 set fileencoding=utf-8
 
+" reload files changed outside vim
+" (still have to change buffer or so)
+set autoread
+
 " command history size
 set history=9999
 
