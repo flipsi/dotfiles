@@ -241,31 +241,34 @@ bindsym $mod+Control+minus  exec --no-startup-id "$SHELLSCRIPT_PATH/xfce4-termin
 bindsym $mod+v exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output"
 
 # set volume
-bindsym $mod+Down            exec --no-startup-id "amixer sset Master 1%-"
-bindsym $mod+Up              exec --no-startup-id "amixer sset Master 1%+"
-bindsym $mod+minus           exec --no-startup-id "amixer sset Master 1%-"
-bindsym $mod+plus            exec --no-startup-id "amixer sset Master 1%+"
+bindsym $mod+Down            exec --no-startup-id "amixer sset Master 1%-"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym $mod+Up              exec --no-startup-id "amixer sset Master 1%+"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym $mod+minus           exec --no-startup-id "amixer sset Master 1%-"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym $mod+plus            exec --no-startup-id "amixer sset Master 1%+"; exec "pkill -USR1 -f 'i3pystatus'"
 
 # control music player daemon (mpd)
-bindsym $mod+Shift+minus     exec --no-startup-id "mpc volume -1"
-bindsym $mod+Shift+plus      exec --no-startup-id "mpc volume +1"
-bindsym XF86AudioLowerVolume exec --no-startup-id "amixer sset Master 1%-"
-bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 1%+"
-bindsym XF86AudioPlay        exec --no-startup-id "mpc toggle"
-bindsym XF86AudioNext        exec --no-startup-id "mpc next"
-bindsym XF86AudioPrev        exec --no-startup-id "mpc prev"
+bindsym $mod+Shift+minus     exec --no-startup-id "mpc volume -1"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym $mod+Shift+plus      exec --no-startup-id "mpc volume +1"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym XF86AudioLowerVolume exec --no-startup-id "amixer sset Master 1%-"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 1%+"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym XF86AudioPlay        exec --no-startup-id "mpc toggle"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym XF86AudioNext        exec --no-startup-id "mpc next"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym XF86AudioPrev        exec --no-startup-id "mpc prev"; exec "pkill -USR1 -f 'i3pystatus'"
 bindsym $mod+0 mode "$mpd_control"
-set $mpd_control MPD: (space) play/pause, (n) next, (p) prev, (s) stop, (c) last, (+/-) volume
+#set $mpd_control MPD: (space) play/pause, (n) next, (p) prev, (s) stop, (c) last, (+/-) volume
+set $mpd_control MPD Control
 mode "$mpd_control" {
-    bindsym space exec --no-startup-id "mpc toggle"
-    bindsym n     exec --no-startup-id "mpc next"
-    bindsym o     exec --no-startup-id "mpc next"
-    bindsym p     exec --no-startup-id "mpc prev"
-    bindsym O     exec --no-startup-id "mpc prev"
-    bindsym s     exec --no-startup-id "mpc stop"; mode "default"
-    bindsym c     exec --no-startup-id "mpc crop"; mode "default"
-    bindsym minus exec --no-startup-id "mpc volume -1"
-    bindsym plus  exec --no-startup-id "mpc volume +1"
+    bindsym space exec --no-startup-id "mpc toggle"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym n     exec --no-startup-id "mpc next"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym o     exec --no-startup-id "mpc next"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym p     exec --no-startup-id "mpc prev"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym O     exec --no-startup-id "mpc prev"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym s     exec --no-startup-id "mpc stop"; mode "default"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym c     exec --no-startup-id "mpc crop"; mode "default"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym minus exec --no-startup-id "mpc volume -1"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym plus  exec --no-startup-id "mpc volume +1"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym r     exec --no-startup-id "mpc random"
+    bindsym R     exec --no-startup-id "mpc random"
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -313,19 +316,19 @@ for_window [class="(?i)sxiv"]           fullscreen
 for_window [class="(?i)mplayer"]        fullscreen
 
 # windows always on specific workspace
-assign [class="(?i)firefox"]            FOX
-assign [class="(?i)chrom"]              CHROME
-assign [class="(?i)thunderbird"]        MAIL
-assign [class="(?i)subl"]               SUBLIME
-assign [class="(?i)jetbrains-studio"]   DEVELOPMENT
-assign [class="Telegram"]               TELEGRAM
-assign [class="(?i)skype"]              SKYPE
-assign [class="(?i)pokerstars"]         POKER
+assign [class="(?i)firefox"]            Fuchs
+assign [class="(?i)chrom"]              Netflix
+assign [class="(?i)thunderbird"]        Mail
+#assign [class="(?i)subl"]               Sublime
+#assign [class="(?i)jetbrains-studio"]   Development
+assign [class="Telegram"]               Telegram
+assign [class="(?i)skype"]              Skype
+assign [class="(?i)pokerstars"]         Poker
 assign [class="(?i)kaffeine"]           TV
-assign [class="(?i)qjackctl"]           SOUND
-assign [class="(?i)pavucontrol"]        SOUND
-assign [class="(?i)audacity"]           REC
-assign [class="(?i)ardour"]             REC
+assign [class="(?i)qjackctl"]           Sound
+assign [class="(?i)pavucontrol"]        Sound
+assign [class="(?i)audacity"]           Recording
+assign [class="(?i)ardour"]             Recording
 
 
 
