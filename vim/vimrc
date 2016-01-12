@@ -548,6 +548,7 @@ let g:airline_powerline_fonts=0
 Plugin 'scrooloose/nerdtree'
 
 let NERDTreeWinSize=50
+let NERDTreeQuitOnOpen=1
 
 " show/hide nerdtree
 noremap <silent> <M-i>  :NERDTreeToggle<CR>
