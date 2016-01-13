@@ -1,12 +1,34 @@
-" Author: Philipp Moers <soziflip@gmail.com>
+"  Author:  Philipp Moers
+"           soziflip@gmail.com
+"           github.com/sflip/dotfiles
 "
-" ~/.vimrc
-
-
-
-
+"  ~/.vimrc
+"
+"
+"  Configuration file for
+"
+"  __      _______ __  __
+"  \ \    / /_   _|  \/  |
+"   \ \  / /  | | | \  / |
+"    \ \/ /   | | | |\/| |
+"     \  /   _| |_| |  | |
+"      \/   |_____|_|  |_|
+"
+"
+"
+"  (What vim is? The best reason not to use emacs!)
+"
+"
+"
+"
+"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SETTINGS (not plugin specific)
+"                                                                              "
+"  SETTINGS SECTION                                                            "
+"  (not plugin specific)                                                       "
+"                                                                              "
+"                                                                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 " we use vim, not vi
@@ -30,7 +52,7 @@ set autoread
 set history=9999
 
 " syntax highlighting
-syntax on
+syntax enable
 
 " line numbers
 set number
@@ -89,13 +111,51 @@ set splitright
 
 
 
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" FUNCTIONS
+"                                                                              "
+"  FUNCTION  SECTION                                                           "
+"  (not plugin specific)                                                       "
+"                                                                              "
+"                                                                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" function to set cwd to filepath ----{{{
+" set cwd to filepath ----{{{
 function! SetCwdToFilePath()
     execute "cd " . expand('%:p:h')
+endfunction
+" }}}
+
+
+" toggle syntax highlighting ----{{{
+function! ToggleSyntax()
+   if exists("g:syntax_on")
+      syntax off
+   else
+      syntax enable
+   endif
+endfunction
+" }}}
+
+
+
+" insert a line some characterss above ----{{{
+function! InsertCharLine(char, num)
+    let char = a:char
+    let num = a:num - 1
+    execute "normal O\<Esc>i" . char . "\<Esc>vy" . num . "pj"
+endfunction
+" }}}
+
+
+" insert a box of characters around the word in the current line ----{{{
+function! InsertCharBox(char)
+    let char = a:char
+    execute "normal I" . char . " \<Esc>A " . char ."\<Esc>"
+    execute "normal VYPVr" . char . char . "\<Esc>"
+    execute "normal Yjp\<Esc>"
 endfunction
 " }}}
 
@@ -104,13 +164,19 @@ endfunction
 
 
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" KEYBINDINGS (not plugin specific)
+"                                                                              "
+"  KEYBINDINGS SECTION                                                         "
+"  (not plugin specific)                                                       "
+"                                                                              "
+"  mappings with the alt key should be done twice:                             "
+"      - with <Esc>* for terminal sequences, and                               "
+"      - with <M-*>  for gvim                                                  "
+"                                                                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" mappings with the alt key should be done twice:
-"      - with <Esc>* for terminal sequences, and
-"      - with <M-*>  for gvim
 
 
 " (non text edit) leader key is space
@@ -122,8 +188,8 @@ let maplocalleader=' '
 
 
 
-""""""""""
-" GENERAL
+"""""""""""
+" GENERAL "
 
 
 " (for compatibility)
@@ -147,21 +213,6 @@ cnoreabbrev <expr> h ((getcmdtype() is# ':' && getcmdline() is# 'h')?('vertical 
 " to follow links in help
 nnoremap <M-Enter>    <C-]>
 nnoremap <Esc><Enter> <C-]>
-
-
-" close file (not window)
-nnoremap q :bdelete<CR>
-
-" quit window
-nnoremap Q :quit<CR>
-
-" quit vim (mulitple windows)
-nnoremap <C-D> :quitall<CR>
-
-
-" save changes without quit
-nnoremap <M-s>  :write<CR>
-nnoremap <Esc>s :write<CR>
 
 
 " copy to clipboard in visual mode
@@ -194,8 +245,8 @@ noremap <Esc>k <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
 
 
 
-""""""""""""""""""
-" CHANGE SETTINGS
+"""""""""""""""""""
+" CHANGE SETTINGS "
 
 
 " change tab width
@@ -207,9 +258,12 @@ nnoremap <Leader>settw8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
 
 
 
-"""""""""""""""""""""""
-" CHANGE VISUAL THINGS
+""""""""""""""""""""""""
+" CHANGE VISUAL THINGS "
 
+
+" toggle syntax highlighting
+nmap <silent> <C-G>y :call ToggleSyntax()<CR>
 
 " toggle line numbers
 noremap <silent> <C-G>l :set number! <bar> :set relativenumber! <CR>
@@ -234,8 +288,8 @@ nnoremap <silent> <C-G>sd :set spelllang=de<CR>
 
 
 
-"""""""""""
-" MOVEMENT
+""""""""""""
+" MOVEMENT "
 
 
 " move intuitively when text is wrapped
@@ -297,19 +351,6 @@ onoremap il] :<c-u>normal! F]vi[<cr>
 " }}}
 
 
-" search
-" (fallback, will be overwritten in plugins section)
-nnoremap ö /
-nnoremap Ö ?
-
-" search in multiple files
-" (fallback, will be overwritten in plugins section)
-nnoremap / :vimgrep<Space>
-
-" search for visual selection
-vnoremap * y/<C-R>"<CR>
-vnoremap / y/<C-R>"<CR>
-
 
 " swap , and ; (repeat last f or F)
 " (makes more sense on german keyboard)
@@ -324,6 +365,25 @@ nnoremap ` '
 
 " goto mark
 nnoremap Ä `
+
+
+
+"""""""""""""""""""""""""
+" SEARCHING AND FINDING "
+
+
+" search
+" (fallback, will be overwritten in plugins section)
+nnoremap ö /
+nnoremap Ö ?
+
+" search in multiple files
+" (fallback, will be overwritten in plugins section)
+nnoremap / :vimgrep<Space>
+
+" search for visual selection
+vnoremap * y/<C-R>"<CR>
+vnoremap / y/<C-R>"<CR>
 
 
 " find matching element (brackets/braces/parentheses)
@@ -342,9 +402,10 @@ nnoremap <Leader>äc /\v^[<\|=>]{7}( .*\|$)<CR>
 
 
 
-"""""""""""""""
-" TEXT EDITING
-"
+""""""""""""""""
+" TEXT EDITING "
+
+
 " text edit leader is minus
 
 
@@ -385,6 +446,12 @@ noremap <M-O>  <Esc>O<Esc>j
 noremap <Esc>O <Esc>O<Esc>j
 
 
+" add a line of characters
+nnoremap -al :call InsertCharLine(input("Insert character: "), 80)<CR>
+" add a box of characters ('comment box')
+nnoremap -ab :call InsertCharBox(input("Insert character: "))<CR>
+
+
 " replace word under cursor with yank
 nnoremap -rw viwp
 nnoremap -rW viWp
@@ -402,6 +469,7 @@ nnoremap <silent> -dsd :.s:\v(\S)  (\S):\1 \2:<CR>
 nnoremap <silent> -dsD :%s:\v(\S)  (\S):\1 \2:<CR>
 
 
+
 " undo and redo
 noremap <M-u>  :undo<CR>
 noremap <Esc>u :undo<CR>
@@ -412,8 +480,8 @@ noremap <Esc>U :redo<CR>
 
 
 
-""""""""""""""""""""""
-" BUFFERS AND WINDOWS
+"""""""""""""""""""""""
+" BUFFERS AND WINDOWS "
 
 
 " change buffer
@@ -436,8 +504,9 @@ nnoremap <silent> <Leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 
 
-"""""""""""""""""""""""""
-" USEFUL EXTERNAL TOOLS
+
+""""""""""""""""""
+" EXTERNAL TOOLS "
 
 
 " shell in dir of current file
@@ -454,25 +523,57 @@ nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig<CR>
 
 
 
+""""""""""""""""""""""""
+" SAVING AND CLOSING   "
+
+
+" remember ZZ and ZQ
+
+" save changes without quit
+nnoremap <M-s>  :write<CR>
+nnoremap <Esc>s :write<CR>
+
+
+" close file (not window)
+nnoremap q :bdelete<CR>
+
+" quit window
+nnoremap Q :quit<CR>
+
+" quit vim (mulitple windows)
+" (this is how i exit most terminal applications)
+nnoremap <C-D> :quitall<CR>
+
+
+
+
+
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PLUGINS (managed by Vundle)
-"
-"
-" http://quyennguyen.com/code/Sync-Vim-With-Github-and-Vundle/
-" http://lepture.com/en/2012/vundle-vs-pathogen
-"
-"
-" install vundle like this:
-"     git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-" and don't have ~/.vim/bundle under version control
-" (instead, call :PluginInstall)
+"                                                                              "
+"  PLUGIN SECTION                                                              "
+"                                                                              "
+"  (Plugins managed by Vundle)                                                 "
+"                                                                              "
+"                                                                              "
+"  http://quyennguyen.com/code/Sync-Vim-With-Github-and-Vundle/                "
+"  http://lepture.com/en/2012/vundle-vs-pathogen                               "
+"                                                                              "
+"                                                                              "
+"  Install vundle like this:                                                   "
+"      git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle     "
+"  and don't have ~/.vim/bundle under version control                          "
+"  (instead, call :PluginInstall on each host)                                 "
+"                                                                              "
+"  Note for fish users like me:                                                "
+"  These commands throw some errors.                                           "
+"  To fix this, execute the following before starting vim:                     "
+"     set -x SHELL (which sh)                                                  "
+"                                                                              "
+"                                                                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Note for fish users like me:
-" These commands throw some errors.
-" To fix this, execute the following before starting vim:
-"    set -x SHELL (which sh)
 
 " some mappings for vundle itself
 nnoremap <Leader>pl :PluginList<CR>
@@ -493,73 +594,23 @@ Plugin 'gmarik/vundle'
 
 
 
-"""""""""""""""""""""""""""""""""""""""""
-"
-" look and feel
-
-Plugin 'flazz/vim-colorschemes'
-Plugin 'christophermca/meta5'
-Plugin 'joshdick/onedark.vim'
-
-
-"""""""""""""""""""""""""""""""""""""""""
-"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " allow plugins to utilize . command
 
 Plugin 'tpope/vim-repeat'
 
 
-"""""""""""""""""""""""""""""""""""""""""
-"
-" amazingly move everywhere
 
-Plugin 'easymotion/vim-easymotion'
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" look and feel
 
-" prefix
-map ä <Plug>(easymotion-prefix)
-
-
-"""""""""""""""""""""""""""""""""""""""""
-"
-" advanced searching
-
-Plugin 'haya14busa/incsearch.vim'
-
-"nnoremap ö  <Plug>(incsearch-forward)
-"nnoremap Ö  <Plug>(incsearch-backward)
-"nnoremap gö <Plug>(incsearch-stay)
-
-nnoremap ö :call incsearch#call()<CR>
-nnoremap Ö :call incsearch#call({'command': '?'})<CR>
+" colorschemes
+Plugin 'flazz/vim-colorschemes'
+Plugin 'christophermca/meta5'
+Plugin 'joshdick/onedark.vim'
 
 
-" searching in multiple files
-" install 'the_silver_searcher' package on the system
-Plugin 'rking/ag.vim'
-
-" always start in project root instead of cwd
-let g:ag_working_path_mode="r"
-
-nnoremap / :Ag<Space>
-" search for word under cursor
-nnoremap <Leader>* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
-" search for visual selection
-xnoremap  / y:<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
-"nnoremap  K :<c-u>Ag <c-r>=shellescape(expand("<cword>"),1)<cr>:copen<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""
-"
-" file searching and much more
-" http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
-" TODO CONFIGURE AND TEST
-
-"Plugin 'Shougo/vimproc.vim'
-"Plugin 'Shougo/unite.vim'
-
-
-"""""""""""""""""""""""""""""""""""""""""
-"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " sick statusline
 
 " https://powerline.readthedocs.org/en/latest/usage/other.html#vim-statusline
@@ -589,8 +640,81 @@ let g:airline_powerline_fonts=0
 " http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
 
 
-"""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" show git status of lines on the left
 "
+Plugin 'airblade/vim-gitgutter'
+
+nnoremap <C-G>g :GitGutterToggle<CR>
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" amazingly move everywhere
+
+Plugin 'easymotion/vim-easymotion'
+
+" prefix
+map ä <Plug>(easymotion-prefix)
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" advanced searching
+
+Plugin 'haya14busa/incsearch.vim'
+
+"nnoremap ö  <Plug>(incsearch-forward)
+"nnoremap Ö  <Plug>(incsearch-backward)
+"nnoremap gö <Plug>(incsearch-stay)
+
+nnoremap ö :call incsearch#call()<CR>
+nnoremap Ö :call incsearch#call({'command': '?'})<CR>
+
+
+" searching in multiple files
+" install 'the_silver_searcher' package on the system
+Plugin 'rking/ag.vim'
+
+" always start in project root instead of cwd
+let g:ag_working_path_mode="r"
+
+nnoremap / :Ag<Space>
+" search for word under cursor
+nnoremap <Leader>* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+" search for visual selection
+xnoremap  / y:<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
+"nnoremap  K :<c-u>Ag <c-r>=shellescape(expand("<cword>"),1)<cr>:copen<cr>
+
+
+" % also matches HTML-tags/words etc
+Plugin 'edsono/vim-matchit'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fuzzy find files etc
+" (like Sublimes 'Goto Anything')
+
+Plugin 'kien/ctrlp.vim'
+
+let g:ctrlp_map = '#'
+nnoremap # :CtrlPMixed<CR>
+
+" also find hidden files
+let g:ctrlp_show_hidden = 1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" file searching and much more
+" http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
+" TODO CONFIGURE AND TEST
+
+"Plugin 'Shougo/vimproc.vim'
+"Plugin 'Shougo/unite.vim'
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " file browser
 
 Plugin 'scrooloose/nerdtree'
@@ -607,22 +731,8 @@ noremap <silent> <Leader>T :call SetCwdToFilePath() <bar> :NERDTreeCWD<CR>
 let NERDTreeMapToggleHidden='.'
 
 
-"""""""""""""""""""""""""""""""""""""""""
-"
-" fuzzy find files etc
-" (like Sublimes 'Goto Anything')
 
-Plugin 'kien/ctrlp.vim'
-
-let g:ctrlp_map = '#'
-nnoremap # :CtrlPMixed<CR>
-
-" also find hidden files
-let g:ctrlp_show_hidden = 1
-
-
-"""""""""""""""""""""""""""""""""""""""""
-"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " static code analysis
 
 Plugin 'scrooloose/syntastic'
@@ -650,9 +760,9 @@ let g:syntastic_quiet_messages = { "regex": [
    \ ] }
 
 
-"""""""""""""""""""""""""""""""""""""""""
 
-" text editing made a little nicer
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" text editing
 
 " make the 0 register a stack (yank/delete multiple things without worrying)
 " lightweight alternative to yankring
@@ -663,6 +773,8 @@ nmap <C-n> <Plug>yankstack_substitute_newer_paste
 
 " add and toggle comments with <Leader>c<space>
 Plugin 'scrooloose/nerdcommenter'
+" duplicate a line and comment out the first one
+nmap <Leader>cd Y<Leader>ccp
 
 " automagically add closing braces etc
 Plugin 'Raimondi/delimitMate'
@@ -675,12 +787,9 @@ inoremap <silent> <Esc><Enter> <Esc>A;<Enter>
 " add/change/delete quotes/braces/... and more
 Plugin  'tpope/vim-surround'
 
-" % also matches HTML-tags/words etc
-Plugin 'edsono/vim-matchit'
 
 
-"""""""""""""""""""""""""""""""""""""""""
-"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Snippets
 
 " snippet engine
@@ -696,9 +805,7 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", "sflipsnippets"]
 Plugin 'honza/vim-snippets'
 
 
-"""""""""""""""""""""""""""""""""""""""""
-"
-" YouCompleteMe
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " advanced auto completion engine
 "
 " Remember: YCM is a plugin with a compiled component. If you update YCM using
@@ -712,7 +819,8 @@ let g:ycm_key_list_select_completion = ['<C-N>', '<Down>', '<Tab>']
 let g:ycm_key_list_previous_completion=['<C-P>', '<Up>']
 
 
-"""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" auto format
 
 Plugin 'Chiel92/vim-autoformat'
 
@@ -722,17 +830,7 @@ Plugin 'Chiel92/vim-autoformat'
 nnoremap <Leader>sa :Autoformat<CR>
 
 
-"""""""""""""""""""""""""""""""""""""""""
-"
-" show git status of lines on the left
-"
-Plugin 'airblade/vim-gitgutter'
-
-nnoremap <C-G>g :GitGutterToggle<CR>
-
-
-"""""""""""""""""""""""""""""""""""""""""
-"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " handle trailing whitespace
 
 Plugin 'vim-scripts/ShowTrailingWhiteSpace'
@@ -747,8 +845,7 @@ vnoremap <silent> -dst :DeleteTrailingWhitespace<CR>
 nnoremap <silent> -dsT :%DeleteTrailingWhitespace<CR>
 
 
-"""""""""""""""""""""""""""""""""""""""""
-"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LaTeX stuff
 
 Plugin 'lervag/vimtex'
@@ -769,7 +866,7 @@ let g:ycm_semantic_triggers.tex = [
 nnoremap <Leader>bl :VimtexCompileToggle<CR>
 
 
-"""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " finish vundle
 call vundle#end()
@@ -777,7 +874,6 @@ filetype plugin indent on
 
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " apparently colorscheme must be set after vundle is done
 
