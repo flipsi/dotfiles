@@ -120,7 +120,7 @@
     { "keys": ["c", "w"],       "command": "dired_rename", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
     { "keys": ["a", "d"],       "command": "dired_create", "args": { "which": "directory" }, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
     { "keys": ["a", "f"],       "command": "dired_create", "args": { "which": "file" }, "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
-    { "keys": ["z", "h"],       "command": "dired_toggle_hidden_files", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] }, 
+    { "keys": ["z", "h"],       "command": "dired_toggle_hidden_files", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
     { "keys": ["Ö"],            "command": "dired_find_in_files", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
     { "keys": ["m"],            "command": "dired_edit_jump_point", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
     { "keys": ["ä"],            "command": "dired_jump", "context": [{ "key": "selector", "operator": "equal", "operand": "text.dired" }, { "key": "setting.dired_rename_mode", "operand": false } ] },
@@ -324,7 +324,7 @@
     { "keys": ["alt+shift+j"], "command": "swap_line_down" },
     // join lines
     // { "keys": ["ctrl+j"], "command": "join_lines" }, // J
-    
+
     // toggle single or double quotes
     { "keys": ["ctrl+k", "q"], "command": "change_quotes" },
 

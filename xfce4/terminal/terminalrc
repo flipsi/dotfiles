@@ -24,4 +24,6 @@ DropdownAlwaysShowTabs=FALSE
 TitleMode=TERMINAL_TITLE_REPLACE
 FontName=Monospace 11
 ColorCursor=#8787d7d75f5f
+ShortcutsNoMenukey=TRUE
+ShortcutsNoMnemonics=TRUE
 

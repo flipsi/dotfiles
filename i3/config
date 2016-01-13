@@ -193,7 +193,7 @@ bar {
 
 
 # hide/show bar
-bindsym $mod+Shift+b bar mode toggle
+bindsym $mod+b bar mode toggle
 
 
 
@@ -270,6 +270,7 @@ mode "$mpd_control" {
     bindsym plus  exec --no-startup-id "mpc volume +1"; exec "pkill -USR1 -f 'i3pystatus'"
     bindsym r     exec --no-startup-id "mpc random"
     bindsym R     exec --no-startup-id "mpc random"
+    bindsym S     exec --no-startup-id "mpc single"
     # cancel
     bindsym $mod+0 mode "default"
     bindsym Return mode "default"
@@ -424,7 +425,7 @@ mode "resize" {
 }
 
 # change border
-bindsym $mod+b border toggle
+bindsym $mod+Shift+b border toggle
 
 
 
