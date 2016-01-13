@@ -169,11 +169,12 @@ nnoremap <leader>m @
 cnoremap <C-g>  <C-c>
 
 
-" scroll (alt key)
-noremap <M-j>  <C-D>
-noremap <Esc>j <C-D>
-noremap <M-k>  <C-U>
-noremap <Esc>k <C-U>
+" scroll a little smoother (but still without plugin)
+" (this actually is suggested in :help scroll-smooth)
+noremap <M-j>  <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
+noremap <Esc>j <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
+noremap <M-k>  <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
+noremap <Esc>k <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
 
 " toggle line numbers
 noremap <silent> <C-G>l :set number! <bar> :set relativenumber! <CR>
