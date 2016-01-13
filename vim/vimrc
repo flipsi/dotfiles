@@ -113,9 +113,12 @@ endfunction
 "      - with <M-*>  for gvim
 
 
-" leader key is space
+" (non text edit) leader key is space
 let mapleader=' '
 let maplocalleader=' '
+
+" text edit leader is minus
+
 
 
 
@@ -126,22 +129,24 @@ let maplocalleader=' '
 " (for compatibility)
 nnoremap <C-G><C-G> <C-G>
 
+
 " open config file
-"nnoremap <leader>ev :edit ~/.vimrc<CR>
+"nnoremap <Leader>ev :edit ~/.vimrc<CR>
 " (use absolute path to dotfiles, not symlink for ctrlp)
-nnoremap <leader>ev :edit ~/dotfiles/vim/vimrc<CR>
-nnoremap <leader>e3 :edit ~/dotfiles/i3/config<CR>
+nnoremap <Leader>ev :edit ~/dotfiles/vim/vimrc<CR>
+nnoremap <Leader>e3 :edit ~/dotfiles/i3/config<CR>
 
 " reload config file
-nnoremap <leader>sv :source ~/.vimrc<CR>
+nnoremap <Leader>sv :source ~/.vimrc<CR>
 nnoremap <F5>       :source ~/.vimrc<CR>
+
 
 " open help in vertical window
 cnoreabbrev <expr> h ((getcmdtype() is# ':' && getcmdline() is# 'h')?('vertical help'):('h'))
 
 " to follow links in help
-nnoremap <M-Return>    <C-]>
-nnoremap <Esc><Return> <C-]>
+nnoremap <M-Enter>    <C-]>
+nnoremap <Esc><Enter> <C-]>
 
 
 " close file (not window)
@@ -159,14 +164,24 @@ nnoremap <M-s>  :write<CR>
 nnoremap <Esc>s :write<CR>
 
 
+" copy to clipboard in visual mode
+"vnoremap <C-c> "+y
+vnoremap <C-c> "*y
+" paste from clipboard
+noremap  <C-v><C-v> "*p
+inoremap <C-v><C-v> <Esc>"*p
+
+
 " record macro ('complex repeat')
-nnoremap <leader>M q
+nnoremap <Leader>M q
 " replay macro ('complex repeat')
-nnoremap <leader>m @
+nnoremap <Leader>m @
 
 
 " abort command in ex mode
 cnoremap <C-g>  <C-c>
+
+
 
 
 " scroll a little smoother (but still without plugin)
@@ -175,6 +190,26 @@ noremap <M-j>  <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
 noremap <Esc>j <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
 noremap <M-k>  <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
 noremap <Esc>k <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
+
+
+
+
+""""""""""""""""""
+" CHANGE SETTINGS
+
+
+" change tab width
+nnoremap <Leader>settw2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+nnoremap <Leader>settw4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+nnoremap <Leader>settw8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
+" convert tabs so spaces with :retab
+
+
+
+
+"""""""""""""""""""""""
+" CHANGE VISUAL THINGS
+
 
 " toggle line numbers
 noremap <silent> <C-G>l :set number! <bar> :set relativenumber! <CR>
@@ -194,6 +229,8 @@ nnoremap <silent> <C-G>a :set list!<CR>
 nnoremap <silent> <C-G>ss :set spell!<CR>
 nnoremap <silent> <C-G>se :set spelllang=en<CR>
 nnoremap <silent> <C-G>sd :set spelllang=de<CR>
+
+
 
 
 
@@ -274,7 +311,8 @@ vnoremap * y/<C-R>"<CR>
 vnoremap / y/<C-R>"<CR>
 
 
-" swap , and ; (makes more sense on german keyboard)
+" swap , and ; (repeat last f or F)
+" (makes more sense on german keyboard)
 nnoremap , ;
 nnoremap ; ,
 
@@ -287,34 +325,38 @@ nnoremap ` '
 " goto mark
 nnoremap Ä `
 
-" find matching element (brackets/braces/parentheses)
-nnoremap <leader>äb %
 
+" find matching element (brackets/braces/parentheses)
+nnoremap <Leader>äb %
 " extended find matching element (e.g. HTML-tags with matchit plugin)
-nmap <leader>ää %
+nmap <Leader>ää %
 
 " find all lines with keyword under cursor
 " and ask which one to jump to
-nmap <leader>ä/ [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+nmap <Leader>ä/ [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
 " find git merge conflict markers
-nnoremap <leader>äc /\v^[<\|=>]{7}( .*\|$)<CR>
+nnoremap <Leader>äc /\v^[<\|=>]{7}( .*\|$)<CR>
+
+
 
 
 
 """""""""""""""
 " TEXT EDITING
+"
+" text edit leader is minus
 
 
 " alternate way to quit insert mode
-inoremap jjj <Esc>jjj
-inoremap kkk <Esc>kkk
+"inoremap jjj <Esc>jjj
+"inoremap kkk <Esc>kkk
 
 " change to insert mode from visual mode
 "vnoremap i vi
 
 " yank line without line break (in difference to yy)
-nnoremap Y ^y$
+"nnoremap Y ^y$
 
 " autocompletion
 " (fallback, will be overwritten in plugins section)
@@ -323,6 +365,7 @@ nnoremap Y ^y$
 "inoremap <M-:>  <C-P>
 "inoremap <Esc>: <C-P>
 
+
 " indent lines
 nnoremap < <<
 nnoremap > >>
@@ -330,8 +373,10 @@ vnoremap < <gv
 vnoremap > >gv
 
 " move line up or down
-nnoremap - ddp
-nnoremap _ ddkP
+nnoremap <silent> -k :m .-2<CR>==
+nnoremap <silent> -j :m .+1<CR>==
+vnoremap <silent> -j :m '>+1<CR>gv=gv
+vnoremap <silent> -k :m '<-2<CR>gv=gv
 
 " add new line above or below
 noremap <M-o>  <Esc>o<Esc>k
@@ -339,19 +384,22 @@ noremap <Esc>o <Esc>o<Esc>k
 noremap <M-O>  <Esc>O<Esc>j
 noremap <Esc>O <Esc>O<Esc>j
 
+
 " replace word under cursor with yank
-nnoremap <leader>rw viwp
+nnoremap -rw viwp
+nnoremap -rW viWp
 " replace line with yank
-nnoremap <leader>rl Vp
+nnoremap -rl Vp
+
+" correct typos like 'DAmnitypefast' to titlecase ('Damnitypefast')
+nnoremap -tt blgueea
+
 
 " delete leading whitespace (can be prefixed with a count)
-nnoremap <silent> <leader>dsl :s:^\s\+::<CR>
-
-" change tab width
-nnoremap <leader>tw2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
-nnoremap <leader>tw4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
-nnoremap <leader>tw8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
-" convert tabs so spaces with :retab
+nnoremap <silent> -dsl :s:^\s\+::<CR>
+" replace '  ' (double space) with ' ' (one space)
+nnoremap <silent> -dsd :.s:\v(\S)  (\S):\1 \2:<CR>
+nnoremap <silent> -dsD :%s:\v(\S)  (\S):\1 \2:<CR>
 
 
 " undo and redo
@@ -359,6 +407,8 @@ noremap <M-u>  :undo<CR>
 noremap <Esc>u :undo<CR>
 noremap <M-U>  :redo<CR>
 noremap <Esc>U :redo<CR>
+
+
 
 
 
@@ -381,8 +431,8 @@ nnoremap <silent> <C-h> :wincmd h<CR>
 nnoremap <silent> <C-l> :wincmd l<CR>
 
 " move buffer to a new window
-nnoremap <silent> <leader><C-l> :vsplit<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
-nnoremap <silent> <leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
+nnoremap <silent> <Leader><C-l> :vsplit<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
+nnoremap <silent> <Leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 
 
@@ -391,14 +441,14 @@ nnoremap <silent> <leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 
 " shell in dir of current file
-nnoremap <leader>if :call SetCwdToFilePath() <bar> :let $SHELL = '/usr/bin/fish' <bar>:!fish<CR>
-nnoremap <leader>ib :call SetCwdToFilePath() <bar> :!bash<CR>
+nnoremap <Leader>if :call SetCwdToFilePath() <bar> :let $SHELL = '/usr/bin/fish' <bar>:!fish<CR>
+nnoremap <Leader>ib :call SetCwdToFilePath() <bar> :!bash<CR>
 
 " file manager in dir of current file
-nnoremap <leader>ir :call SetCwdToFilePath() <bar> :!ranger<CR>
+nnoremap <Leader>ir :call SetCwdToFilePath() <bar> :!ranger<CR>
 
 " git interface
-nnoremap <leader>it :call SetCwdToFilePath() <bar> :!tig<CR>
+nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig<CR>
 
 
 
@@ -425,17 +475,17 @@ nnoremap <leader>it :call SetCwdToFilePath() <bar> :!tig<CR>
 "    set -x SHELL (which sh)
 
 " some mappings for vundle itself
-nnoremap <leader>pl :PluginList<CR>
-nnoremap <leader>pi :PluginInstall<CR>
-nnoremap <leader>pc :PluginClean<CR>
-nnoremap <leader>pu :PluginUpdate<CR>
-nnoremap <leader>ps :PluginSearch<Space>
+nnoremap <Leader>pl :PluginList<CR>
+nnoremap <Leader>pi :PluginInstall<CR>
+nnoremap <Leader>pc :PluginClean<CR>
+nnoremap <Leader>pu :PluginUpdate<CR>
+nnoremap <Leader>ps :PluginSearch<Space>
 
 
 " start vundle
-filetype off " (required!)
+filetype off
 set rtp+=~/.vim/bundle/vundle/
-"call vundle#rc() " what is this instead of begin()?
+"call vundle#rc()
 call vundle#begin()
 
 " let Vundle manage Vundle (required!)
@@ -450,15 +500,6 @@ Plugin 'gmarik/vundle'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'christophermca/meta5'
 Plugin 'joshdick/onedark.vim'
-
-
-"""""""""""""""""""""""""""""""""""""""""
-
-" copy to clipboard in visual mode
-vnoremap <C-c> "+y
-
-" TODO use something like this:
-" https://github.com/svermeulen/vim-easyclip
 
 
 """""""""""""""""""""""""""""""""""""""""
@@ -501,7 +542,7 @@ let g:ag_working_path_mode="r"
 
 nnoremap / :Ag<Space>
 " search for word under cursor
-nnoremap <leader>* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <Leader>* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 " search for visual selection
 xnoremap  / y:<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
 "nnoremap  K :<c-u>Ag <c-r>=shellescape(expand("<cword>"),1)<cr>:copen<cr>
@@ -558,11 +599,9 @@ let NERDTreeWinSize=50
 let NERDTreeQuitOnOpen=1
 
 " show/hide nerdtree
-noremap <silent> <M-i>  :NERDTreeToggle<CR>
-noremap <silent> <Esc>i :NERDTreeToggle<CR>
+noremap <silent> <Leader>t :NERDTreeToggle<CR>
 " show nerdtree from current file
-noremap <silent> <Esc>I :call SetCwdToFilePath() <bar> :NERDTreeCWD<CR>
-noremap <silent> <M-I>  :call SetCwdToFilePath() <bar> :NERDTreeCWD<CR>
+noremap <silent> <Leader>T :call SetCwdToFilePath() <bar> :NERDTreeCWD<CR>
 
 " show/hide hidden files
 let NERDTreeMapToggleHidden='.'
@@ -593,9 +632,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-nnoremap <silent> <leader>sc :SyntasticCheck<CR>
-nnoremap <silent> <leader>sr :SyntasticReset<CR>
-nnoremap <silent> <leader>si :SyntasticInfo<CR>
+nnoremap <silent> <Leader>sc :SyntasticCheck<CR>
+nnoremap <silent> <Leader>sr :SyntasticReset<CR>
+nnoremap <silent> <Leader>si :SyntasticInfo<CR>
 
 " install linters on the system:
 " - pylint
@@ -622,7 +661,7 @@ let g:yankstack_map_keys = 0
 nmap <C-p> <Plug>yankstack_substitute_older_paste
 nmap <C-n> <Plug>yankstack_substitute_newer_paste
 
-" add and toggle comments with <leader>c<space>
+" add and toggle comments with <Leader>c<space>
 Plugin 'scrooloose/nerdcommenter'
 
 " automagically add closing braces etc
@@ -630,8 +669,8 @@ Plugin 'Raimondi/delimitMate'
 
 " add a ; at the end of a line
 "Plugin 'lfilho/cosco.vim'
-"inoremap <silent> <Esc><Return> <Esc>:call cosco#commaOrSemiColon()<CR>A<Return>
-inoremap <silent> <Esc><Return> <Esc>A;<Return>
+"inoremap <silent> <Esc><Enter> <Esc>:call cosco#commaOrSemiColon()<CR>A<Enter>
+inoremap <silent> <Esc><Enter> <Esc>A;<Enter>
 
 " add/change/delete quotes/braces/... and more
 Plugin  'tpope/vim-surround'
@@ -680,7 +719,7 @@ Plugin 'Chiel92/vim-autoformat'
 " install formatters on the system:
 " - js-beautify (for HTML, CSS, JavaScript, JSON)
 
-nnoremap <leader>sa :Autoformat<CR>
+nnoremap <Leader>sa :Autoformat<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""
@@ -702,10 +741,10 @@ Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
 " check for trailing whitespace when writing file
 let g:DeleteTrailingWhitespace = 1
 " delete trailing whitespace on demand for current line
-nnoremap <silent> <leader>dst :.DeleteTrailingWhitespace<CR>
-vnoremap <silent> <leader>dst :DeleteTrailingWhitespace<CR>
+nnoremap <silent> -dst :.DeleteTrailingWhitespace<CR>
+vnoremap <silent> -dst :DeleteTrailingWhitespace<CR>
 " delete trailing whitespace on demand for whole file
-nnoremap <silent> <leader>dsT :%DeleteTrailingWhitespace<CR>
+nnoremap <silent> -dsT :%DeleteTrailingWhitespace<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""
@@ -727,14 +766,14 @@ let g:ycm_semantic_triggers.tex = [
     \ 're!\\(include|input){[^}]*'
     \ ]
 
-nnoremap <leader>bl :VimtexCompileToggle<CR>
+nnoremap <Leader>bl :VimtexCompileToggle<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""
 
 " finish vundle
-call vundle#end() " (required!)
-filetype plugin indent on " (required!)
+call vundle#end()
+filetype plugin indent on
 
 
 
@@ -742,7 +781,9 @@ filetype plugin indent on " (required!)
 
 " apparently colorscheme must be set after vundle is done
 
-colorscheme desert " fallback
+" 'desert' is the fallback colorscheme if the other is not installed
+colorscheme desert
+
 "colorscheme candycode
 "colorscheme dante
 "colorscheme jellybeans
