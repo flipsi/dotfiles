@@ -84,6 +84,9 @@ set smartcase
 " never have to append 'g' to a search/substitute again
 set gdefault
 
+" allow the cursor to move where there is no character
+set virtualedit=all
+
 " characters to show in list mode (like whitespace)
 " and wrap symbols that are always shown
 set listchars=space:·,tab:--,extends:>,precedes:<
@@ -208,7 +211,8 @@ nnoremap <F5>       :source ~/.vimrc<CR>
 
 
 " open help in vertical window
-cnoreabbrev <expr> h ((getcmdtype() is# ':' && getcmdline() is# 'h')?('vertical help'):('h'))
+cnoreabbrev <expr> h ((getcmdtype() is# ':' && getcmdline() is# 'h')
+                 \ ?('vertical help'):('h'))
 
 " to follow links in help
 nnoremap <M-Enter>    <C-]>
@@ -255,6 +259,8 @@ nnoremap <Leader>settw4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
 nnoremap <Leader>settw8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
 " convert tabs so spaces with :retab
 
+" go into paste mode
+nnoremap <Leader>setp :set paste! <bar> :set paste?<CR>
 
 
 
@@ -386,6 +392,9 @@ vnoremap * y/<C-R>"<CR>
 vnoremap / y/<C-R>"<CR>
 
 
+" find trailing whitespace
+nnoremap <Leader>äst /\v\s+$<CR>
+
 " find matching element (brackets/braces/parentheses)
 nnoremap <Leader>äb %
 " extended find matching element (e.g. HTML-tags with matchit plugin)
@@ -393,11 +402,15 @@ nmap <Leader>ää %
 
 " find all lines with keyword under cursor
 " and ask which one to jump to
-nmap <Leader>ä/ [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+nmap <Leader>ä/ [I:let nr = input("Which one: ")
+            \   <Bar> exe "normal " . nr ."[\t"<CR>
 
 " find git merge conflict markers
 nnoremap <Leader>äc /\v^[<\|=>]{7}( .*\|$)<CR>
 
+
+" for now, these jumping 'find' keymaps should also be usable with ö
+nmap <Leader>ö <Leader>ä
 
 
 
@@ -469,6 +482,10 @@ nnoremap <silent> -dsd :.s:\v(\S)  (\S):\1 \2:<CR>
 nnoremap <silent> -dsD :%s:\v(\S)  (\S):\1 \2:<CR>
 
 
+" duplicate a line and comment out the first one
+" (fallback, will be overwritten in plugins section)
+nmap <Leader>cd YI#<Esc>p
+
 
 " undo and redo
 noremap <M-u>  :undo<CR>
@@ -484,9 +501,14 @@ noremap <Esc>U :redo<CR>
 " BUFFERS AND WINDOWS "
 
 
-" change buffer
-"nnoremap # :buffer " use ctrlp instead
+" change buffer by searching
+" (fallback, will be overwritten in plugins section)
+nnoremap # :buffer<Space>
+
+" change to LRU buffer
 nnoremap <Space><Space> :buffer #<CR>
+
+" circle through buffers
 nnoremap <M-n>  :bnext<CR>
 nnoremap <Esc>n :bnext<CR>
 nnoremap <M-p>  :bprevious<CR>
@@ -510,7 +532,8 @@ nnoremap <silent> <Leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 
 " shell in dir of current file
-nnoremap <Leader>if :call SetCwdToFilePath() <bar> :let $SHELL = '/usr/bin/fish' <bar>:!fish<CR>
+nnoremap <Leader>if :call SetCwdToFilePath() <bar>
+             \ :let $SHELL = '/usr/bin/fish' <bar> :!fish<CR>
 nnoremap <Leader>ib :call SetCwdToFilePath() <bar> :!bash<CR>
 
 " file manager in dir of current file
@@ -575,22 +598,31 @@ nnoremap <C-D> :quitall<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
+" The plugin section is only executed when Vundle is installed,
+" so I can use my vimrc as a stripped-down version or hosts/users without Vundle
+" without errors.
+if isdirectory(expand("~/.vim/bundle/vundle"))
+
+
+    " start vundle
+    filetype off
+    set rtp+=~/.vim/bundle/vundle/
+    "call vundle#rc()
+    call vundle#begin()
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" let Vundle manage Vundle (required!)
+Plugin 'gmarik/vundle'
+
 " some mappings for vundle itself
 nnoremap <Leader>pl :PluginList<CR>
 nnoremap <Leader>pi :PluginInstall<CR>
 nnoremap <Leader>pc :PluginClean<CR>
 nnoremap <Leader>pu :PluginUpdate<CR>
 nnoremap <Leader>ps :PluginSearch<Space>
-
-
-" start vundle
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-"call vundle#rc()
-call vundle#begin()
-
-" let Vundle manage Vundle (required!)
-Plugin 'gmarik/vundle'
 
 
 
@@ -699,6 +731,8 @@ Plugin 'kien/ctrlp.vim'
 
 let g:ctrlp_map = '#'
 nnoremap # :CtrlPMixed<CR>
+nnoremap <Leader>eo :CtrlPRoot<CR>
+nnoremap <Leader>eb :CtrlPBuffer<CR>
 
 " also find hidden files
 let g:ctrlp_show_hidden = 1
@@ -835,6 +869,9 @@ nnoremap <Leader>sa :Autoformat<CR>
 
 Plugin 'vim-scripts/ShowTrailingWhiteSpace'
 
+" (has a bug)
+"Plugin 'vim-scripts/JumpToTrailingWhiteSpace'
+
 Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
 " check for trailing whitespace when writing file
 let g:DeleteTrailingWhitespace = 1
@@ -866,27 +903,35 @@ let g:ycm_semantic_triggers.tex = [
 nnoremap <Leader>bl :VimtexCompileToggle<CR>
 
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" finish vundle
-call vundle#end()
-filetype plugin indent on
+
+    " finish vundle
+    call vundle#end()
+    filetype plugin indent on
 
 
+    " apparently colorscheme must be set after vundle is done
 
+    "colorscheme candycode
+    "colorscheme dante
+    "colorscheme jellybeans
+    "colorscheme molokai
+    "colorscheme meta5
+    "colorscheme desertEx
+    "colorscheme lucius
+    colorscheme onedark
 
-" apparently colorscheme must be set after vundle is done
+else
 
-" 'desert' is the fallback colorscheme if the other is not installed
-colorscheme desert
+    " disable powerline if it is installed
+    let g:powerline_loaded = 1
 
-"colorscheme candycode
-"colorscheme dante
-"colorscheme jellybeans
-"colorscheme molokai
-"colorscheme meta5
-"colorscheme desertEx
-"colorscheme lucius
-colorscheme onedark
+    " 'desert' is the fallback colorscheme if the other is not installed
+    colorscheme desert
+
+endif
+
 
 
