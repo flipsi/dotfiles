@@ -51,6 +51,13 @@ set autoread
 " command history size
 set history=9999
 
+" undo persistent over file close
+" (the undodir needs to exist!)
+set undofile
+set undodir=~/.vim/undodir
+set undolevels=1000
+set undoreload=10000
+
 " syntax highlighting
 syntax enable
 
@@ -66,6 +73,7 @@ set cursorline
 set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 set showcmd
 set ruler
+set laststatus=2
 
 " completions behaviour
 set wildmode=longest,full
@@ -358,10 +366,12 @@ onoremap il] :<c-u>normal! F]vi[<cr>
 
 
 
-" swap , and ; (repeat last f or F)
+" swap , and ;
 " (makes more sense on german keyboard)
 nnoremap , ;
 nnoremap ; ,
+nnoremap g, g;
+nnoremap g; g,
 
 
 " swap ` and ' (jump to markers)
@@ -663,7 +673,6 @@ let g:powerline_loaded = 1
 " lightweight alternative to powerline
 
 Plugin 'bling/vim-airline'
-
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts=0
 
