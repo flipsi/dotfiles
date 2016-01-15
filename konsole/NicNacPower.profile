@@ -16,7 +16,7 @@ MiddleClickPasteMode=1
 OpenLinksByDirectClickEnabled=false
 
 [Keyboard]
-KeyBindings=linux
+KeyBindings=default
 
 [Scrolling]
 HistoryMode=2

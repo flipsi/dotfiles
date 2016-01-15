@@ -15,6 +15,7 @@ set incfind
 "set hinttags+=a[class]
 set hinttags+=a
 set hinttags+=span[id=\"WMDE_Banner-close\"]
+set hinttags+=span[class$=\"js-cloudsave-load-btn\"]
 set hinttags+=div[id=\"se-signup-legend\"]
 set hinttags+=label[class=\"switch-small\"]
 
@@ -87,8 +88,8 @@ nnoremap <A-Space> :buffer! #<CR>
 inoremap <A-Space> <Esc>:buffer! #<CR>
 
 " find tab
-"nmap <A-w> :buffer! 
-nnoremap # :buffer! 
+"nmap <A-w> :buffer!
+nnoremap # :buffer!
 
 " move tab
 noremap <A-S-p> :tabmove -1<CR>
@@ -119,8 +120,8 @@ noremap ä '
 
 " duckduckgo advanced search
 " \ to go to first result immediately
-noremap \\ :tabopen \ 
-" ! to use other search engine (like 'ebay' or 'osm') 
+noremap \\ :tabopen \
+" ! to use other search engine (like 'ebay' or 'osm')
 noremap ! :tabopen !
 
 " move in history
@@ -155,7 +156,7 @@ cnoremap <A-BS> <C-W>
 cnoremap <A-d> <C-Del>
 
 
-" copy/paste 
+" copy/paste
 inoremap <C-S-v> <C-v><C-v>
 inoremap <C-S-c> <C-v><C-c>
 vmap     <C-S-v> <C-v><C-v>
@@ -170,7 +171,7 @@ noremap ö /
 
 " Developer Tools (console)
 noremap <C-A-i> <C-S-k>
-noremap <C-A-o> <C-S-i> 
+noremap <C-A-o> <C-S-i>
 noremap ss :js!<CR>
 
 

@@ -1,26 +1,65 @@
-" Author: Philipp Moers <soziflip@gmail.com>
+"  Author:  Philipp Moers
+"           soziflip@gmail.com
+"           github.com/sflip/dotfiles
 "
-" ~/.vimrc
-
-
-
-
+"  ~/.vimrc
+"
+"
+"  Configuration file for
+"
+"  __      _______ __  __
+"  \ \    / /_   _|  \/  |
+"   \ \  / /  | | | \  / |
+"    \ \/ /   | | | |\/| |
+"     \  /   _| |_| |  | |
+"      \/   |_____|_|  |_|
+"
+"
+"
+"  (What vim is? The best reason not to use emacs!)
+"
+"
+"
+"
+"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SETTINGS (not plugin specific)
+"                                                                              "
+"  SETTINGS SECTION                                                            "
+"  (not plugin specific)                                                       "
+"                                                                              "
+"                                                                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 " we use vim, not vi
 set nocompatible
 
+" set timeout for escape sequences
+" (so that leaving insert mode does not last that long)
+set timeout ttimeoutlen=50
+" but mapping delay can be more
+set timeoutlen=1200
+
 " encoding should be utf-8 on every OS
 set     encoding=utf-8
 set fileencoding=utf-8
 
+" reload files changed outside vim
+" (still have to change buffer or so)
+set autoread
+
 " command history size
 set history=9999
 
+" undo persistent over file close
+" (the undodir needs to exist!)
+set undofile
+set undodir=~/.vim/undodir
+set undolevels=1000
+set undoreload=10000
+
 " syntax highlighting
-syntax on
+syntax enable
 
 " line numbers
 set number
@@ -34,6 +73,7 @@ set cursorline
 set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 set showcmd
 set ruler
+set laststatus=2
 
 " completions behaviour
 set wildmode=longest,full
@@ -51,6 +91,9 @@ set ignorecase
 set smartcase
 " never have to append 'g' to a search/substitute again
 set gdefault
+
+" allow the cursor to move where there is no character
+set virtualedit=all
 
 " characters to show in list mode (like whitespace)
 " and wrap symbols that are always shown
@@ -79,13 +122,51 @@ set splitright
 
 
 
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" FUNCTIONS
+"                                                                              "
+"  FUNCTION  SECTION                                                           "
+"  (not plugin specific)                                                       "
+"                                                                              "
+"                                                                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" function to set cwd to filepath ----{{{
+" set cwd to filepath ----{{{
 function! SetCwdToFilePath()
     execute "cd " . expand('%:p:h')
+endfunction
+" }}}
+
+
+" toggle syntax highlighting ----{{{
+function! ToggleSyntax()
+   if exists("g:syntax_on")
+      syntax off
+   else
+      syntax enable
+   endif
+endfunction
+" }}}
+
+
+
+" insert a line some characterss above ----{{{
+function! InsertCharLine(char, num)
+    let char = a:char
+    let num = a:num - 1
+    execute "normal O\<Esc>i" . char . "\<Esc>vy" . num . "pj"
+endfunction
+" }}}
+
+
+" insert a box of characters around the word in the current line ----{{{
+function! InsertCharBox(char)
+    let char = a:char
+    execute "normal I" . char . " \<Esc>A " . char ."\<Esc>"
+    execute "normal VYPVr" . char . char . "\<Esc>"
+    execute "normal Yjp\<Esc>"
 endfunction
 " }}}
 
@@ -94,75 +175,109 @@ endfunction
 
 
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" KEYBINDINGS (not plugin specific)
+"                                                                              "
+"  KEYBINDINGS SECTION                                                         "
+"  (not plugin specific)                                                       "
+"                                                                              "
+"  mappings with the alt key should be done twice:                             "
+"      - with <Esc>* for terminal sequences, and                               "
+"      - with <M-*>  for gvim                                                  "
+"                                                                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" mappings with the alt key should be done twice:
-"      - with <Esc>* for terminal sequences, and
-"      - with <M-*>  for gvim
 
 
-" leader key is space
+" (non text edit) leader key is space
 let mapleader=' '
+let maplocalleader=' '
+
+" text edit leader is minus
 
 
 
-""""""""""
-" GENERAL
+
+"""""""""""
+" GENERAL "
 
 
 " (for compatibility)
 nnoremap <C-G><C-G> <C-G>
 
+
 " open config file
-"nnoremap <leader>ev :edit ~/.vimrc<CR>
+"nnoremap <Leader>ev :edit ~/.vimrc<CR>
 " (use absolute path to dotfiles, not symlink for ctrlp)
-nnoremap <leader>ev :edit ~/dotfiles/vim/vimrc<CR>
-nnoremap <leader>e3 :edit ~/dotfiles/i3/config<CR>
+nnoremap <Leader>ev :edit ~/dotfiles/vim/vimrc<CR>
+nnoremap <Leader>e3 :edit ~/dotfiles/i3/config<CR>
 
 " reload config file
-nnoremap <leader>sv :source ~/.vimrc<CR>
+nnoremap <Leader>sv :source ~/.vimrc<CR>
 nnoremap <F5>       :source ~/.vimrc<CR>
 
+
 " open help in vertical window
-cnoreabbrev <expr> h ((getcmdtype() is# ':' && getcmdline() is# 'h')?('vertical help'):('h'))
+cnoreabbrev <expr> h ((getcmdtype() is# ':' && getcmdline() is# 'h')
+                 \ ?('vertical help'):('h'))
 
 " to follow links in help
-nnoremap <M-Return>    <C-]>
-nnoremap <Esc><Return> <C-]>
+nnoremap <M-Enter>    <C-]>
+nnoremap <Esc><Enter> <C-]>
 
 
-" close file (not window)
-nnoremap q :bdelete<CR>
-
-" quit window
-nnoremap Q :quit<CR>
-
-" quit vim (mulitple windows)
-nnoremap <C-D> :quitall<CR>
-
-
-" save changes without quit
-nnoremap <M-s>  :write<CR>
-nnoremap <Esc>s :write<CR>
+" copy to clipboard in visual mode
+"vnoremap <C-c> "+y
+vnoremap <C-c> "*y
+" paste from clipboard
+noremap  <C-v><C-v> "*p
+inoremap <C-v><C-v> <Esc>"*p
 
 
 " record macro ('complex repeat')
-nnoremap <leader>M q
+nnoremap <Leader>M q
 " replay macro ('complex repeat')
-nnoremap <leader>m @
+nnoremap <Leader>m @
 
 
 " abort command in ex mode
 cnoremap <C-g>  <C-c>
 
 
-" scroll (alt key)
-noremap <M-j>  <C-D>
-noremap <Esc>j <C-D>
-noremap <M-k>  <C-U>
-noremap <Esc>k <C-U>
+
+
+" scroll a little smoother (but still without plugin)
+" (this actually is suggested in :help scroll-smooth)
+noremap <M-j>  <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
+noremap <Esc>j <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
+noremap <M-k>  <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
+noremap <Esc>k <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
+
+
+
+
+"""""""""""""""""""
+" CHANGE SETTINGS "
+
+
+" change tab width
+nnoremap <Leader>settw2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+nnoremap <Leader>settw4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+nnoremap <Leader>settw8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
+" convert tabs so spaces with :retab
+
+" go into paste mode
+nnoremap <Leader>setp :set paste! <bar> :set paste?<CR>
+
+
+
+""""""""""""""""""""""""
+" CHANGE VISUAL THINGS "
+
+
+" toggle syntax highlighting
+nmap <silent> <C-G>y :call ToggleSyntax()<CR>
 
 " toggle line numbers
 noremap <silent> <C-G>l :set number! <bar> :set relativenumber! <CR>
@@ -185,8 +300,10 @@ nnoremap <silent> <C-G>sd :set spelllang=de<CR>
 
 
 
-"""""""""""
-" MOVEMENT
+
+
+""""""""""""
+" MOVEMENT "
 
 
 " move intuitively when text is wrapped
@@ -209,10 +326,8 @@ noremap! <C-d>  <Delete>
 " ... by words
 noremap! <M-b>  <S-Left>
 noremap! <M-f>  <S-Right>
-noremap! <M-d>  <S-Right><C-W>
 cnoremap <Esc>b <S-Left>
 cnoremap <Esc>f <S-Right>
-cnoremap <Esc>d <S-Right><C-W>
 
 
 " move to BOL
@@ -250,19 +365,13 @@ onoremap il] :<c-u>normal! F]vi[<cr>
 " }}}
 
 
-" search
-" (fallback, will be overwritten in plugins section)
-nnoremap ö /
-nnoremap Ö ?
 
-" search in multiple files
-" (fallback, will be overwritten in plugins section)
-nnoremap / :vimgrep<Space>
-
-
-" swap , and ; (makes more sense on german keyboard)
+" swap , and ;
+" (makes more sense on german keyboard)
 nnoremap , ;
 nnoremap ; ,
+nnoremap g, g;
+nnoremap g; g,
 
 
 " swap ` and ' (jump to markers)
@@ -273,34 +382,65 @@ nnoremap ` '
 " goto mark
 nnoremap Ä `
 
-" find matching element (brackets/braces/parentheses)
-nnoremap <leader>äb %
 
+
+"""""""""""""""""""""""""
+" SEARCHING AND FINDING "
+
+
+" search
+" (fallback, will be overwritten in plugins section)
+nnoremap ö /
+nnoremap Ö ?
+
+" search in multiple files
+" (fallback, will be overwritten in plugins section)
+nnoremap / :vimgrep<Space>
+
+" search for visual selection
+vnoremap * y/<C-R>"<CR>
+vnoremap / y/<C-R>"<CR>
+
+
+" find trailing whitespace
+nnoremap <Leader>äst /\v\s+$<CR>
+
+" find matching element (brackets/braces/parentheses)
+nnoremap <Leader>äb %
 " extended find matching element (e.g. HTML-tags with matchit plugin)
-nmap <leader>ää %
+nmap <Leader>ää %
 
 " find all lines with keyword under cursor
 " and ask which one to jump to
-nmap <leader>ä/ [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+nmap <Leader>ä/ [I:let nr = input("Which one: ")
+            \   <Bar> exe "normal " . nr ."[\t"<CR>
 
 " find git merge conflict markers
-nnoremap <leader>äc /\v^[<\|=>]{7}( .*\|$)<CR>
+nnoremap <Leader>äc /\v^[<\|=>]{7}( .*\|$)<CR>
+
+
+" for now, these jumping 'find' keymaps should also be usable with ö
+nmap <Leader>ö <Leader>ä
 
 
 
-"""""""""""""""
-" TEXT EDITING
+
+""""""""""""""""
+" TEXT EDITING "
+
+
+" text edit leader is minus
 
 
 " alternate way to quit insert mode
-inoremap jjj <Esc>jjj
-inoremap kkk <Esc>kkk
+"inoremap jjj <Esc>jjj
+"inoremap kkk <Esc>kkk
 
 " change to insert mode from visual mode
-vnoremap i vi
+"vnoremap i vi
 
 " yank line without line break (in difference to yy)
-nnoremap Y ^y$
+"nnoremap Y ^y$
 
 " autocompletion
 " (fallback, will be overwritten in plugins section)
@@ -309,6 +449,7 @@ nnoremap Y ^y$
 "inoremap <M-:>  <C-P>
 "inoremap <Esc>: <C-P>
 
+
 " indent lines
 nnoremap < <<
 nnoremap > >>
@@ -316,8 +457,10 @@ vnoremap < <gv
 vnoremap > >gv
 
 " move line up or down
-nnoremap - ddp
-nnoremap _ ddkP
+nnoremap <silent> -k :m .-2<CR>==
+nnoremap <silent> -j :m .+1<CR>==
+vnoremap <silent> -j :m '>+1<CR>gv=gv
+vnoremap <silent> -k :m '<-2<CR>gv=gv
 
 " add new line above or below
 noremap <M-o>  <Esc>o<Esc>k
@@ -326,14 +469,32 @@ noremap <M-O>  <Esc>O<Esc>j
 noremap <Esc>O <Esc>O<Esc>j
 
 
-" delete leading whitespace (can be prefixed with a count)
-nnoremap <silent> <leader>dsl :s:^\s\+::<CR>
+" add a line of characters
+nnoremap -al :call InsertCharLine(input("Insert character: "), 80)<CR>
+" add a box of characters ('comment box')
+nnoremap -ab :call InsertCharBox(input("Insert character: "))<CR>
 
-" change tab width
-:nnoremap <leader>tw2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
-:nnoremap <leader>tw4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
-:nnoremap <leader>tw8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
-" convert tabs so spaces with :retab
+
+" replace word under cursor with yank
+nnoremap -rw viwp
+nnoremap -rW viWp
+" replace line with yank
+nnoremap -rl Vp
+
+" correct typos like 'DAmnitypefast' to titlecase ('Damnitypefast')
+nnoremap -tt blgueea
+
+
+" delete leading whitespace (can be prefixed with a count)
+nnoremap <silent> -dsl :s:^\s\+::<CR>
+" replace '  ' (double space) with ' ' (one space)
+nnoremap <silent> -dsd :.s:\v(\S)  (\S):\1 \2:<CR>
+nnoremap <silent> -dsD :%s:\v(\S)  (\S):\1 \2:<CR>
+
+
+" duplicate a line and comment out the first one
+" (fallback, will be overwritten in plugins section)
+nmap <Leader>cd YI#<Esc>p
 
 
 " undo and redo
@@ -344,13 +505,20 @@ noremap <Esc>U :redo<CR>
 
 
 
-""""""""""""""""""""""
-" BUFFERS AND WINDOWS
 
 
-" change buffer
-"nnoremap # :buffer " use ctrlp instead
+"""""""""""""""""""""""
+" BUFFERS AND WINDOWS "
+
+
+" change buffer by searching
+" (fallback, will be overwritten in plugins section)
+nnoremap # :buffer<Space>
+
+" change to LRU buffer
 nnoremap <Space><Space> :buffer #<CR>
+
+" circle through buffers
 nnoremap <M-n>  :bnext<CR>
 nnoremap <Esc>n :bnext<CR>
 nnoremap <M-p>  :bprevious<CR>
@@ -363,24 +531,51 @@ nnoremap <silent> <C-h> :wincmd h<CR>
 nnoremap <silent> <C-l> :wincmd l<CR>
 
 " move buffer to a new window
-nnoremap <silent> <leader><C-l> :vsplit<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
-nnoremap <silent> <leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
+nnoremap <silent> <Leader><C-l> :vsplit<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
+nnoremap <silent> <Leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 
 
-"""""""""""""""""""""""""
-" USEFUL EXTERNAL TOOLS
+
+""""""""""""""""""
+" EXTERNAL TOOLS "
 
 
 " shell in dir of current file
-nnoremap <leader>if :call SetCwdToFilePath() <bar> :let $SHELL = '/usr/bin/fish' <bar>:!fish<CR>
-nnoremap <leader>ib :call SetCwdToFilePath() <bar> :!bash<CR>
+nnoremap <Leader>if :call SetCwdToFilePath() <bar>
+             \ :let $SHELL = '/usr/bin/fish' <bar> :!fish<CR>
+nnoremap <Leader>ib :call SetCwdToFilePath() <bar> :!bash<CR>
 
 " file manager in dir of current file
-nnoremap <leader>ir :call SetCwdToFilePath() <bar> :!ranger<CR>
+nnoremap <Leader>ir :call SetCwdToFilePath() <bar> :!ranger<CR>
 
 " git interface
-nnoremap <leader>it :call SetCwdToFilePath() <bar> :!tig<CR>
+nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig<CR>
+
+
+
+
+
+""""""""""""""""""""""""
+" SAVING AND CLOSING   "
+
+
+" remember ZZ and ZQ
+
+" save changes without quit
+nnoremap <M-s>  :write<CR>
+nnoremap <Esc>s :write<CR>
+
+
+" close file (not window)
+nnoremap q :bdelete<CR>
+
+" quit window
+nnoremap Q :quit<CR>
+
+" quit vim (mulitple windows)
+" (this is how i exit most terminal applications)
+nnoremap <C-D> :quitall<CR>
 
 
 
@@ -389,69 +584,113 @@ nnoremap <leader>it :call SetCwdToFilePath() <bar> :!tig<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PLUGINS (managed by Vundle)
-"
-"
-" http://quyennguyen.com/code/Sync-Vim-With-Github-and-Vundle/
-" http://lepture.com/en/2012/vundle-vs-pathogen
-"
-"
-" install vundle like this:
-"     git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-" and don't have ~/.vim/bundle under version control
-" (instead, call :PluginInstall)
+"                                                                              "
+"  PLUGIN SECTION                                                              "
+"                                                                              "
+"  (Plugins managed by Vundle)                                                 "
+"                                                                              "
+"                                                                              "
+"  http://quyennguyen.com/code/Sync-Vim-With-Github-and-Vundle/                "
+"  http://lepture.com/en/2012/vundle-vs-pathogen                               "
+"                                                                              "
+"                                                                              "
+"  Install vundle like this:                                                   "
+"      git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle     "
+"  and don't have ~/.vim/bundle under version control                          "
+"  (instead, call :PluginInstall on each host)                                 "
+"                                                                              "
+"  Note for fish users like me:                                                "
+"  These commands throw some errors.                                           "
+"  To fix this, execute the following before starting vim:                     "
+"     set -x SHELL (which sh)                                                  "
+"                                                                              "
+"                                                                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Note for fish users like me:
-" These commands throw some errors.
-" To fix this, execute the following before starting vim:
-"    set -x SHELL (which sh)
 
-" some mappings for vundle itself
-nnoremap <leader>pl :PluginList<CR>
-nnoremap <leader>pi :PluginInstall<CR>
-nnoremap <leader>pc :PluginClean<CR>
-nnoremap <leader>pu :PluginUpdate<CR>
-nnoremap <leader>ps :PluginSearch<Space>
+" The plugin section is only executed when Vundle is installed,
+" so I can use my vimrc as a stripped-down version or hosts/users without Vundle
+" without errors.
+if isdirectory(expand("~/.vim/bundle/vundle"))
 
 
-" start vundle
-filetype off " (required!)
-set rtp+=~/.vim/bundle/vundle/
-"call vundle#rc() " what is this instead of begin()?
-call vundle#begin()
+    " start vundle
+    filetype off
+    set rtp+=~/.vim/bundle/vundle/
+    "call vundle#rc()
+    call vundle#begin()
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " let Vundle manage Vundle (required!)
 Plugin 'gmarik/vundle'
 
+" some mappings for vundle itself
+nnoremap <Leader>pl :PluginList<CR>
+nnoremap <Leader>pi :PluginInstall<CR>
+nnoremap <Leader>pc :PluginClean<CR>
+nnoremap <Leader>pu :PluginUpdate<CR>
+nnoremap <Leader>ps :PluginSearch<Space>
 
 
-"""""""""""""""""""""""""""""""""""""""""
-"
-" look and feel
 
-Plugin 'flazz/vim-colorschemes'
-Plugin 'christophermca/meta5'
-Plugin 'joshdick/onedark.vim'
-
-
-"""""""""""""""""""""""""""""""""""""""""
-
-"copy to clipboard in visual mode
-vnoremap <C-c> "+y
-
-" TODO use something like this:
-" https://github.com/svermeulen/vim-easyclip
-
-
-"""""""""""""""""""""""""""""""""""""""""
-"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " allow plugins to utilize . command
 
 Plugin 'tpope/vim-repeat'
 
 
-"""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" look and feel
+
+" colorschemes
+Plugin 'flazz/vim-colorschemes'
+Plugin 'christophermca/meta5'
+Plugin 'joshdick/onedark.vim'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" sick statusline
+
+" https://powerline.readthedocs.org/en/latest/usage/other.html#vim-statusline
 "
+" instead of this deprecated vimscript plugin...:
+" Plugin 'Lokaltog/vim-powerline
+" ... we use this rewritten one in python:
+" Plugin 'powerline/powerline'
+
+" disable powerline if it is installed
+let g:powerline_loaded = 1
+
+" on arch linux, installed python-powerline
+" and fix import error with
+"let $PYTHONPATH="/usr/lib/python3.5/site-packages"
+
+
+" lightweight alternative to powerline
+
+Plugin 'bling/vim-airline'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts=0
+
+
+" TODO simple statusline like this
+" http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" show git status of lines on the left
+"
+Plugin 'airblade/vim-gitgutter'
+
+nnoremap <C-G>g :GitGutterToggle<CR>
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " amazingly move everywhere
 
 Plugin 'easymotion/vim-easymotion'
@@ -460,9 +699,9 @@ Plugin 'easymotion/vim-easymotion'
 map ä <Plug>(easymotion-prefix)
 
 
-"""""""""""""""""""""""""""""""""""""""""
-"
-" improved searching
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" advanced searching
 
 Plugin 'haya14busa/incsearch.vim'
 
@@ -483,11 +722,32 @@ let g:ag_working_path_mode="r"
 
 nnoremap / :Ag<Space>
 " search for word under cursor
-nnoremap g* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <Leader>* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+" search for visual selection
+xnoremap  / y:<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
+"nnoremap  K :<c-u>Ag <c-r>=shellescape(expand("<cword>"),1)<cr>:copen<cr>
 
 
-"""""""""""""""""""""""""""""""""""""""""
-"
+" % also matches HTML-tags/words etc
+Plugin 'edsono/vim-matchit'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fuzzy find files etc
+" (like Sublimes 'Goto Anything')
+
+Plugin 'kien/ctrlp.vim'
+
+let g:ctrlp_map = '#'
+nnoremap # :CtrlPMixed<CR>
+nnoremap <Leader>eo :CtrlPRoot<CR>
+nnoremap <Leader>eb :CtrlPBuffer<CR>
+
+" also find hidden files
+let g:ctrlp_show_hidden = 1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " file searching and much more
 " http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
 " TODO CONFIGURE AND TEST
@@ -496,72 +756,26 @@ nnoremap g* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 "Plugin 'Shougo/unite.vim'
 
 
-"""""""""""""""""""""""""""""""""""""""""
-"
-" sick statusline
 
-" https://powerline.readthedocs.org/en/latest/usage/other.html#vim-statusline
-"
-" instead of this deprecated vimscript plugin...:
-" Plugin 'Lokaltog/vim-powerline
-" ... we use this rewritten one in python:
-"Plugin 'powerline/powerline'
-
-"disable powerline
-let g:powerline_loaded = 1
-
-" on arch linux, installed python-powerline
-" and fix import error with
-"let $PYTHONPATH="/usr/lib/python3.5/site-packages"
-
-
-" lightweight alternative to powerline
-
-Plugin 'bling/vim-airline'
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts=0
-
-
-" TODO simple statusline like this
-" http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
-
-
-"""""""""""""""""""""""""""""""""""""""""
-"
-"file browser
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" file browser
 
 Plugin 'scrooloose/nerdtree'
 
 let NERDTreeWinSize=50
+let NERDTreeQuitOnOpen=1
 
 " show/hide nerdtree
-noremap <silent> <M-i>  :NERDTreeToggle<CR>
-noremap <silent> <Esc>i :NERDTreeToggle<CR>
+noremap <silent> <Leader>t :NERDTreeToggle<CR>
 " show nerdtree from current file
-noremap <silent> <Esc>I :call SetCwdToFilePath() <bar> :NERDTreeCWD<CR>
-noremap <silent> <M-I>  :call SetCwdToFilePath() <bar> :NERDTreeCWD<CR>
+noremap <silent> <Leader>T :call SetCwdToFilePath() <bar> :NERDTreeCWD<CR>
 
 " show/hide hidden files
 let NERDTreeMapToggleHidden='.'
 
 
-"""""""""""""""""""""""""""""""""""""""""
-"
-" fuzzy find files etc
-" (like Sublimes 'Goto Anything')
 
-Plugin 'kien/ctrlp.vim'
-
-let g:ctrlp_map = '#'
-nnoremap # :CtrlPMixed<CR>
-
-" also find hidden files
-let g:ctrlp_show_hidden = 1
-
-
-"""""""""""""""""""""""""""""""""""""""""
-"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " static code analysis
 
 Plugin 'scrooloose/syntastic'
@@ -571,27 +785,27 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-nnoremap <silent> <leader>sc :SyntasticCheck<CR>
-nnoremap <silent> <leader>sr :SyntasticReset<CR>
-nnoremap <silent> <leader>si :SyntasticInfo<CR>
+nnoremap <silent> <Leader>sc :SyntasticCheck<CR>
+nnoremap <silent> <Leader>sr :SyntasticReset<CR>
+nnoremap <silent> <Leader>si :SyntasticInfo<CR>
 
 " install linters on the system:
 " - pylint
 " - jslint
 " - csslint (but phpcs also can do css)
 " - phpcs (https://github.com/squizlabs/PHP_CodeSniffer)
- let g:syntastic_php_checkers = ['phpcs', 'phplint', 'php']
+let g:syntastic_php_checkers = ['phpcs', 'phplint', 'php']
 
- " ignore these errors/warnings
+" ignore these errors/warnings
 let g:syntastic_quiet_messages = { "regex": [
-    \ '\mMissing file doc comment',
-    \ '\mLine indented incorrectly;.*'
-    \ ] }
+   \ '\mMissing file doc comment',
+   \ '\mLine indented incorrectly;.*'
+   \ ] }
 
 
-"""""""""""""""""""""""""""""""""""""""""
 
-" text editing made a little nicer
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" text editing
 
 " make the 0 register a stack (yank/delete multiple things without worrying)
 " lightweight alternative to yankring
@@ -600,27 +814,25 @@ let g:yankstack_map_keys = 0
 nmap <C-p> <Plug>yankstack_substitute_older_paste
 nmap <C-n> <Plug>yankstack_substitute_newer_paste
 
-" add and toggle comments with <leader>c<space>
+" add and toggle comments with <Leader>c<space>
 Plugin 'scrooloose/nerdcommenter'
+" duplicate a line and comment out the first one
+nmap <Leader>cd Y<Leader>ccp
 
 " automagically add closing braces etc
 Plugin 'Raimondi/delimitMate'
 
 " add a ; at the end of a line
 "Plugin 'lfilho/cosco.vim'
-"inoremap <silent> ; <Esc>:call cosco#commaOrSemiColon()<CR>A<Return>
-inoremap <silent> ; <Esc>A;<Return>
-inoremap <silent> \; ;
+"inoremap <silent> <Esc><Enter> <Esc>:call cosco#commaOrSemiColon()<CR>A<Enter>
+inoremap <silent> <Esc><Enter> <Esc>A;<Enter>
 
 " add/change/delete quotes/braces/... and more
 Plugin  'tpope/vim-surround'
 
-" % also matches HTML-tags/words etc
-Plugin 'edsono/vim-matchit'
 
 
-"""""""""""""""""""""""""""""""""""""""""
-"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Snippets
 
 " snippet engine
@@ -636,9 +848,7 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", "sflipsnippets"]
 Plugin 'honza/vim-snippets'
 
 
-"""""""""""""""""""""""""""""""""""""""""
-"
-" YouCompleteMe
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " advanced auto completion engine
 "
 " Remember: YCM is a plugin with a compiled component. If you update YCM using
@@ -652,43 +862,36 @@ let g:ycm_key_list_select_completion = ['<C-N>', '<Down>', '<Tab>']
 let g:ycm_key_list_previous_completion=['<C-P>', '<Up>']
 
 
-"""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" auto format
 
 Plugin 'Chiel92/vim-autoformat'
 
 " install formatters on the system:
 " - js-beautify (for HTML, CSS, JavaScript, JSON)
 
-nnoremap <leader>sa :Autoformat<CR>
+nnoremap <Leader>sa :Autoformat<CR>
 
 
-"""""""""""""""""""""""""""""""""""""""""
-"
-" show git status of lines on the left
-"
-Plugin 'airblade/vim-gitgutter'
-
-nnoremap <C-G>g :GitGutterToggle<CR>
-
-
-"""""""""""""""""""""""""""""""""""""""""
-"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " handle trailing whitespace
 
 Plugin 'vim-scripts/ShowTrailingWhiteSpace'
+
+" (has a bug)
+"Plugin 'vim-scripts/JumpToTrailingWhiteSpace'
 
 Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
 " check for trailing whitespace when writing file
 let g:DeleteTrailingWhitespace = 1
 " delete trailing whitespace on demand for current line
-nnoremap <silent> <leader>dst :.DeleteTrailingWhitespace<CR>
-vnoremap <silent> <leader>dst :DeleteTrailingWhitespace<CR>
+nnoremap <silent> -dst :.DeleteTrailingWhitespace<CR>
+vnoremap <silent> -dst :DeleteTrailingWhitespace<CR>
 " delete trailing whitespace on demand for whole file
-nnoremap <silent> <leader>dsT :%DeleteTrailingWhitespace<CR>
+nnoremap <silent> -dsT :%DeleteTrailingWhitespace<CR>
 
 
-"""""""""""""""""""""""""""""""""""""""""
-"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LaTeX stuff
 
 "Plugin 'lervag/vimtex'
@@ -706,22 +909,38 @@ let g:ycm_semantic_triggers.tex = [
     \ 're!\\(include|input){[^}]*'
     \ ]
 
-nnoremap <leader>bl :VimtexCompileToggle<CR>
-
-
-"""""""""""""""""""""""""""""""""""""""""
-
-" finish vundle
-call vundle#end() " (required!)
-filetype plugin indent on " (required!)
+nnoremap <Leader>bl :VimtexCompileToggle<CR>
 
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" apparently colorscheme must be set after vundle is done
-colorscheme desert " fallback
-"colorscheme jellybeans
-"colorscheme meta5
-colorscheme onedark
+
+    " finish vundle
+    call vundle#end()
+    filetype plugin indent on
+
+
+    " apparently colorscheme must be set after vundle is done
+
+    "colorscheme candycode
+    "colorscheme dante
+    "colorscheme jellybeans
+    "colorscheme molokai
+    "colorscheme meta5
+    "colorscheme desertEx
+    "colorscheme lucius
+    colorscheme onedark
+
+else
+
+    " disable powerline if it is installed
+    let g:powerline_loaded = 1
+
+    " 'desert' is the fallback colorscheme if the other is not installed
+    colorscheme desert
+
+endif
+
+
 

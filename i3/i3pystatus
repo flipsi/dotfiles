@@ -4,8 +4,19 @@
 from i3pystatus import Status
 
 
+# The i3pystatus process can be notified about updates with
+#       pkill -USR1 -f 'i3pystatus'"
+
+
 
 status = Status(standalone=True)
+
+
+# Colors
+COLOR_DEFAULT = "#DDDDDD";
+COLOR_GREEN   = "#AABF9B";
+COLOR_RED     = "#F2935C";
+
 
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
@@ -25,6 +36,7 @@ status.register("clock",
 
 # This would look like this, when discharging (or charging)
 # ↓14.22W 56.15% [77.81%] 2h:41m
+
 # And like this if full:
 # =14.22W 100.0% [91.21%]
 #
@@ -36,18 +48,20 @@ status.register("battery",
     format = "{status} {consumption:.1f}W {percentage:.2f}% [{percentage_design:.2f}%] {remaining:%E%hh:%Mm}",
     # format = " {bar} ",
     alert = True,
-    alert_percentage = 5,
+    alert_format_title = "Der liebe Akku meldet:",
+    alert_format_body = "Der Saft wird langsam knapp!",
+    alert_percentage = 15,
     status = {
-        "DIS": "DISCHARGING",
-        "CHR": "CHARGING",
-        "FULL": "FULL",
+        "DIS": "Der Saft läuft aus!",
+        "CHR": "Aaah, frischer Saft!",
+        "FULL": "Alles easy.",
     },
-    on_leftclick = "gnome-power-statistics",
-    color = "#DDDDDD",
-    # full_color = "#AABF9B",
-    full_color = "#DDDDDD",
-    charging_color = "#AABF9B",
-    critical_color = "#F2935C",
+    on_leftclick = "xfce4-power-manager-settings",
+    color = COLOR_DEFAULT,
+    full_color = COLOR_DEFAULT,
+    charging_color = COLOR_GREEN,
+    critical_color = COLOR_RED,
+    interval = 4,
 )
 
 
@@ -83,10 +97,11 @@ status.register("network",
     # format_up = " <span color=\"#199C25\">{essid}</span> {quality:03.0f}% ",
     format_up = "{essid} {v4} {quality:02.0f}%",
     format_down = " WLAN down ",
-    # color_up = "#AABF9B",
-    color_up = "#DDDDDD",
-    color_down = "#F2935C",
+    # color_up = COLOR_GREEN,
+    color_up = COLOR_DEFAULT,
+    color_down = COLOR_RED,
     upper_limit = 800.0,
+    interval = 4,
 )
 
 # Shows disk usage of /
@@ -97,9 +112,22 @@ status.register("network",
 #     format = "{used}/{total}G [{avail}G]",)
 
 
+# Show memory usage
+status.register("mem",
+    format = "MEM: {percent_used_mem}%",
+    warn_percentage = 30,
+    alert_percentage = 60,
+    color = COLOR_DEFAULT,
+    warn_color = COLOR_RED,
+    alert_color = "#FF0000",
+    interval = 4,
+)
+
+
 # Shows your CPU temperature, if you have a Intel CPU
 status.register("temp",
-    format = "{temp:.0f}°C",
+    format = "{temp:.0f}°C ",
+    hints = { "separator" : False, "separator_block_width": 0} ,
 )
 
 # Shows CPU usage
@@ -127,7 +155,7 @@ status.register("cpu_usage",
 #
 # Note: requires libpulseaudio from PyPI
 status.register("pulseaudio",
-    format = "VOLUME: {volume}",
+    format = "Volume: {volume}",
     on_leftclick     = "pavucontrol",
     on_upscroll     = "amixer sset Master 1%+",
     on_downscroll   = "amixer sset Master 1%-",
@@ -158,13 +186,13 @@ status.register("shell",
                     sed '2d' | 
                     sed 's/repeat: .*//' | 
                     tr '\\n' '-' | 
-                    sed 's/-volume: \\(.*\\)%.*/ - VOLUME: \\1/' | 
-                    sed 's/\\(.*\\)/\\U\\1/g' || true""",
+                    sed 's/-volume: \\(.*\\)%.*/ | Volume: \\1, System-/' || true""",
 
     # note: the shell.py script does throw errors on empty strings. i hacked 
     #       it to accept them, so that there is nothing displayed without mpd.
-    # hints = { "separator" : False, "separator_block_width": 1} ,
-    interval = 3,
+
+    hints = { "separator" : False, "separator_block_width": 0} ,
+    interval = 7,
 )
 
 

@@ -41,7 +41,7 @@ function create_project_session() {
     if [[ $(basename $SHELL) = 'fish' ]]; then
         tmux send-keys -t ${SESSION_NAME}:2 'set -x SHELL (which sh)' C-m
     fi
-    tmux send-keys -t ${SESSION_NAME}:2 'vim' C-m
+    tmux send-keys -t ${SESSION_NAME}:2 'vim --servername VIM' C-m
 
     # (3) version-control
     tmux new-window  -t ${SESSION_NAME} -c ${SESSION_PATH} -n version-control

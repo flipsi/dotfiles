@@ -4,7 +4,7 @@
   <property name="window-width" type="int" value="800"/>
   <property name="window-height" type="int" value="600"/>
   <property name="last" type="empty">
-    <property name="window-width" type="int" value="640"/>
-    <property name="window-height" type="int" value="500"/>
+    <property name="window-width" type="int" value="698"/>
+    <property name="window-height" type="int" value="793"/>
   </property>
 </channel>

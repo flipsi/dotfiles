@@ -99,7 +99,8 @@ mode "$refresh" {
     bindsym l reload; mode "default"
     bindsym s restart
     bindsym k exec --no-startup-id "setxkbmap de_sflip"; mode "default"
-    # back to normal: Enter or Escape
+    # cancel
+    bindsym $mod+F5 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -192,7 +193,7 @@ bar {
 
 
 # hide/show bar
-bindsym $mod+Shift+b bar mode toggle
+bindsym $mod+b bar mode toggle
 
 
 
@@ -216,8 +217,8 @@ mode "$mode_system" {
     bindsym r exec --no-startup-id "i3exit reboot"
     bindsym p exec --no-startup-id "i3exit shutdown"
     bindsym Shift+p exec --no-startup-id "$SHELLSCRIPT_PATH/poweroff-wait-playback"; mode "default"
-
-    # back to normal: Enter or Escape
+    # cancel
+    bindsym $mod+Escape mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -241,32 +242,37 @@ bindsym $mod+Control+minus  exec --no-startup-id "$SHELLSCRIPT_PATH/xfce4-termin
 bindsym $mod+v exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output"
 
 # set volume
-bindsym $mod+Down            exec --no-startup-id "amixer sset Master 1%-"
-bindsym $mod+Up              exec --no-startup-id "amixer sset Master 1%+"
-bindsym $mod+minus           exec --no-startup-id "amixer sset Master 1%-"
-bindsym $mod+plus            exec --no-startup-id "amixer sset Master 1%+"
+bindsym $mod+Down            exec --no-startup-id "amixer sset Master 1%-"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym $mod+Up              exec --no-startup-id "amixer sset Master 1%+"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym $mod+minus           exec --no-startup-id "amixer sset Master 1%-"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym $mod+plus            exec --no-startup-id "amixer sset Master 1%+"; exec "pkill -USR1 -f 'i3pystatus'"
 
 # control music player daemon (mpd)
-bindsym $mod+Shift+minus     exec --no-startup-id "mpc volume -1"
-bindsym $mod+Shift+plus      exec --no-startup-id "mpc volume +1"
-bindsym XF86AudioLowerVolume exec --no-startup-id "amixer sset Master 1%-"
-bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 1%+"
-bindsym XF86AudioPlay        exec --no-startup-id "mpc toggle"
-bindsym XF86AudioNext        exec --no-startup-id "mpc next"
-bindsym XF86AudioPrev        exec --no-startup-id "mpc prev"
+bindsym $mod+Shift+minus     exec --no-startup-id "mpc volume -1"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym $mod+Shift+plus      exec --no-startup-id "mpc volume +1"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym XF86AudioLowerVolume exec --no-startup-id "amixer sset Master 1%-"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 1%+"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym XF86AudioPlay        exec --no-startup-id "mpc toggle"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym XF86AudioNext        exec --no-startup-id "mpc next"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym XF86AudioPrev        exec --no-startup-id "mpc prev"; exec "pkill -USR1 -f 'i3pystatus'"
 bindsym $mod+0 mode "$mpd_control"
-set $mpd_control MPD: (space) play/pause, (n) next, (p) prev, (s) stop, (c) last, (+/-) volume
+#set $mpd_control MPD: (space) play/pause, (n) next, (p) prev, (s) stop, (c) last, (+/-) volume
+set $mpd_control MPD Control
 mode "$mpd_control" {
-    bindsym space exec --no-startup-id "mpc toggle"
-    bindsym n     exec --no-startup-id "mpc next"
-    bindsym o     exec --no-startup-id "mpc next"
-    bindsym p     exec --no-startup-id "mpc prev"
-    bindsym O     exec --no-startup-id "mpc prev"
-    bindsym s     exec --no-startup-id "mpc stop"; mode "default"
-    bindsym c     exec --no-startup-id "mpc crop"; mode "default"
-    bindsym minus exec --no-startup-id "mpc volume -1"
-    bindsym plus  exec --no-startup-id "mpc volume +1"
-    # back to normal: Enter or Escape
+    bindsym space exec --no-startup-id "mpc toggle"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym n     exec --no-startup-id "mpc next"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym o     exec --no-startup-id "mpc next"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym p     exec --no-startup-id "mpc prev"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym O     exec --no-startup-id "mpc prev"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym s     exec --no-startup-id "mpc stop"; mode "default"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym c     exec --no-startup-id "mpc crop"; mode "default"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym minus exec --no-startup-id "mpc volume -1"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym plus  exec --no-startup-id "mpc volume +1"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym r     exec --no-startup-id "mpc random"
+    bindsym R     exec --no-startup-id "mpc random"
+    bindsym S     exec --no-startup-id "mpc single"
+    # cancel
+    bindsym $mod+0 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -278,7 +284,8 @@ mode "$play_sound" {
     bindsym j exec --no-startup-id "play /home/sflip/snd/jeopardy.mp3"; mode "default"
     bindsym s exec --no-startup-id "play /home/sflip/snd/WilhelmScream.mp3"; mode "default"
     bindsym t exec --no-startup-id "play /home/sflip/snd/tusch.mp3"; mode "default"
-    # back to normal: Enter or Escape
+    # cancel
+    bindsym $mod+Shift+0 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -313,19 +320,19 @@ for_window [class="(?i)sxiv"]           fullscreen
 for_window [class="(?i)mplayer"]        fullscreen
 
 # windows always on specific workspace
-assign [class="(?i)firefox"]            FOX
-assign [class="(?i)chrom"]              CHROME
-assign [class="(?i)thunderbird"]        MAIL
-assign [class="(?i)subl"]               SUBLIME
-assign [class="(?i)jetbrains-studio"]   DEVELOPMENT
-assign [class="Telegram"]               TELEGRAM
-assign [class="(?i)skype"]              SKYPE
-assign [class="(?i)pokerstars"]         POKER
+assign [class="(?i)firefox"]            Fuchs
+assign [class="(?i)chrom"]              Netflix
+assign [class="(?i)thunderbird"]        Mail
+#assign [class="(?i)subl"]               Sublime
+#assign [class="(?i)jetbrains-studio"]   Development
+assign [class="Telegram"]               Telegram
+assign [class="(?i)skype"]              Skype
+assign [class="(?i)pokerstars"]         Poker
 assign [class="(?i)kaffeine"]           TV
-assign [class="(?i)qjackctl"]           SOUND
-assign [class="(?i)pavucontrol"]        SOUND
-assign [class="(?i)audacity"]           REC
-assign [class="(?i)ardour"]             REC
+assign [class="(?i)qjackctl"]           Sound
+assign [class="(?i)pavucontrol"]        Sound
+assign [class="(?i)audacity"]           Recording
+assign [class="(?i)ardour"]             Recording
 
 
 
@@ -354,8 +361,8 @@ mode "$terminal" {
     bindsym Shift+g exec --no-startup-id "gnome-terminal --hide-menubar --command='tmux -2'"; mode "default"
     bindsym t       exec --no-startup-id "terminology"; mode "default"
     bindsym Shift+t exec --no-startup-id "terminology --exec 'tmux -2'"; mode "default"
-
-    # back to normal: Enter or Escape
+    # cancel
+    #bindsym $mod+o mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -411,14 +418,14 @@ mode "resize" {
     bindsym k resize grow   height $steps px or $steps ppt
     bindsym j resize shrink height $steps px or $steps ppt
     bindsym l resize grow   width  $steps px or $steps ppt
-
-    # back to normal: Enter or Escape
+    # cancel
+    bindsym $mod+r mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
 # change border
-bindsym $mod+b border toggle
+bindsym $mod+Shift+b border toggle
 
 
 
@@ -446,8 +453,8 @@ bindsym $mod+Shift+t exec --no-startup-id i3-input -F '[con_mark=%s] focus' -P '
 #   bindsym f [class="(?i)firefox"]  focus; mode "default"
 #   bindsym s [class="(?i)sublime"]  focus; mode "default"
 #   bindsym m workspace music; mode "default"
-#
-#    # back to normal: Enter or Escape
+#    # cancel
+#    bindsym $mod+t mode "default"
 #    bindsym Return mode "default"
 #    bindsym Escape mode "default"
 #}
@@ -501,7 +508,8 @@ mode "$move_container_to_output" {
     bindsym l move container to output right; workspace back_and_forth; mode "default"
     bindsym j move container to output down; workspace back_and_forth; mode "default"
     bindsym k move container to output up; workspace back_and_forth; mode "default"
-    # back to normal: Enter or Escape
+    # cancel
+    bindsym $mod+u mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -514,7 +522,8 @@ mode "$move_workspace_to_output" {
     bindsym l move workspace to output right; mode "default"
     bindsym j move workspace to output down; mode "default"
     bindsym k move workspace to output up; mode "default"
-    # back to normal: Enter or Escape
+    # cancel
+    bindsym $mod+Shift+u mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }

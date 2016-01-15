@@ -30,7 +30,6 @@
       <property name="&lt;Primary&gt;&lt;Alt&gt;Delete" type="string" value="xflock4"/>
       <property name="XF86Mail" type="string" value="exo-open --launch MailReader"/>
       <property name="XF86WWW" type="string" value="exo-open --launch WebBrowser"/>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;p" type="string" value="xfce4-display-settings --minimal"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;f" type="string" value="exo-open --launch FileManager"/>
       <property name="&lt;Primary&gt;Escape" type="string" value="xfdesktop --menu"/>
       <property name="override" type="bool" value="true"/>
@@ -48,6 +47,7 @@
       <property name="&lt;Super&gt;Escape" type="string" value="xfce4-session-logout"/>
       <property name="&lt;Super&gt;minus" type="string" value="amixer sset Master 1%-"/>
       <property name="&lt;Super&gt;plus" type="string" value="amixer sset Master 1%+"/>
+      <property name="&lt;Primary&gt;&lt;Shift&gt;&lt;Alt&gt;p" type="string" value="xfce4-display-settings"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
