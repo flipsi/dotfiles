@@ -498,10 +498,12 @@ nmap <Leader>cd YI#<Esc>p
 
 
 " undo and redo
-noremap <M-u>  :undo<CR>
-noremap <Esc>u :undo<CR>
-noremap <M-U>  :redo<CR>
-noremap <Esc>U :redo<CR>
+" (in difference to :undo and :redo, :earlier and :later also make changes
+" reachable if we branch, i.e. go back in history and make other changes)
+noremap <M-u>  :earlier<CR>
+noremap <Esc>u :earlier<CR>
+noremap <M-U>  :later<CR>
+noremap <Esc>U :later<CR>
 
 
 
