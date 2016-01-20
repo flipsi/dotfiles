@@ -34,6 +34,9 @@
 " we use vim, not vi
 set nocompatible
 
+" edit runtimepath
+set runtimepath+=~/.vim/syntax
+
 " set timeout for escape sequences
 " (so that leaving insert mode does not last that long)
 set timeout ttimeoutlen=50
