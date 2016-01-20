@@ -34,6 +34,9 @@
 " we use vim, not vi
 set nocompatible
 
+" edit runtimepath
+set runtimepath+=~/.vim/syntax
+
 " set timeout for escape sequences
 " (so that leaving insert mode does not last that long)
 set timeout ttimeoutlen=50
@@ -169,6 +172,47 @@ function! InsertCharBox(char)
     execute "normal Yjp\<Esc>"
 endfunction
 " }}}
+
+
+
+" ranger as a file chooser ----{{{
+function! RangerChooser()
+    let temp = tempname()
+    " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
+    " with ranger 1.4.2 through 1.5.0 instead.
+    "exec 'silent !ranger --choosefile=' . shellescape(temp)
+    if has("gui_running")
+        exec 'silent !xterm -e ranger --choosefiles=' . shellescape(temp)
+    else
+        exec 'silent !ranger --choosefiles=' . shellescape(temp)
+    endif
+    if !filereadable(temp)
+        redraw!
+        " Nothing to read.
+        return
+    endif
+    let names = readfile(temp)
+    if empty(names)
+        redraw!
+        " Nothing to open.
+        return
+    endif
+    " Edit the first item.
+    exec 'edit ' . fnameescape(names[0])
+    " Add any remaning items to the arg list/buffer list.
+    for name in names[1:]
+        exec 'argadd ' . fnameescape(name)
+    endfor
+    redraw!
+endfunction
+command! -bar RangerChooser call RangerChooser()
+" }}}
+
+
+
+
+
+
 
 
 
@@ -498,10 +542,12 @@ nmap <Leader>cd YI#<Esc>p
 
 
 " undo and redo
-noremap <M-u>  :undo<CR>
-noremap <Esc>u :undo<CR>
-noremap <M-U>  :redo<CR>
-noremap <Esc>U :redo<CR>
+" (in difference to :undo and :redo, :earlier and :later also make changes
+" reachable if we branch, i.e. go back in history and make other changes)
+noremap <M-u>  :earlier<CR>
+noremap <Esc>u :earlier<CR>
+noremap <M-U>  :later<CR>
+noremap <Esc>U :later<CR>
 
 
 
@@ -547,7 +593,8 @@ nnoremap <Leader>if :call SetCwdToFilePath() <bar>
 nnoremap <Leader>ib :call SetCwdToFilePath() <bar> :!bash<CR>
 
 " file manager in dir of current file
-nnoremap <Leader>ir :call SetCwdToFilePath() <bar> :!ranger<CR>
+"nnoremap <Leader>ir :call SetCwdToFilePath() <bar> :!ranger<CR>
+nnoremap <Leader>ir :call SetCwdToFilePath() <bar> :RangerChooser<CR>
 
 " git interface
 nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig<CR>
@@ -609,7 +656,7 @@ nnoremap <C-D> :quitall<CR>
 
 
 " The plugin section is only executed when Vundle is installed,
-" so I can use my vimrc as a stripped-down version or hosts/users without Vundle
+" so I can use my vimrc as a stripped-down version on hosts/users without Vundle
 " without errors.
 if isdirectory(expand("~/.vim/bundle/vundle"))
 
@@ -673,6 +720,8 @@ let g:powerline_loaded = 1
 " lightweight alternative to powerline
 
 Plugin 'bling/vim-airline'
+let g:airline_detect_modified=1
+let g:airline_detect_paste=1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts=0
 
@@ -912,6 +961,11 @@ let g:ycm_semantic_triggers.tex = [
 nnoremap <Leader>bl :VimtexCompileToggle<CR>
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" scala stuff
+
+Plugin 'derekwyatt/vim-scala'
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -937,7 +991,7 @@ else
     " disable powerline if it is installed
     let g:powerline_loaded = 1
 
-    " 'desert' is the fallback colorscheme if the other is not installed
+    " 'desert' is the fallback colorscheme
     colorscheme desert
 
 endif

@@ -385,7 +385,7 @@ bindsym $mod+l focus right
 
 # move focused container
 bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
+bindsym $mod+Shift+j move down; resize shrink height 15 px or 15 ppt
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
