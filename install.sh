@@ -150,6 +150,8 @@ function create_link_for_target() {
             mkdir -p $HOME/.vim
             create_link $PWD/vim/vim/sflipsnippets $HOME/.vim/sflipsnippets
             create_link $PWD/vim/vim/spell $HOME/.vim/spell
+            create_link $PWD/vim/vim/syntax $HOME/.vim/syntax
+            create_link $PWD/vim/vim/filetype.vim $HOME/.vim/filetype.vim
             ;;
 
         vimpc)

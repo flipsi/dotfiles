@@ -14,9 +14,6 @@ set PATH /opt/cc0/bin $PATH
 set PATH ~/.cabal/bin $PATH
 set PATH ~/bin $PATH
 
-set -x LESSOPEN "| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
-set -x LESS " -c -R "
-
 
 # music player daemon
 # if test $hostname = "asterix"

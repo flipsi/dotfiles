@@ -12,4 +12,5 @@
 
 
 #env
-LESS = -i -c -R
+LESS = -i -c -r
+LESSOPEN = | /usr/bin/src-hilite-lesspipe.sh %s
