@@ -258,7 +258,7 @@
     // { "keys": ["ctrl+shift+m"], "command": "mark_and_move_recall" },
     { "keys": ["ctrl+m"], "command": "mark_and_move_do_it_all" },
     // multicursoring from multiple line selection
-    { "keys": ["ctrl+alt+v"], "command": "split_selection_into_lines" },
+    { "keys": ["ctrl+v"], "command": "split_selection_into_lines", "context": [{"key": "setting.command_mode"}, { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": false } ] },
 
     // select all
     { "keys": ["ctrl+alt+a"], "command": "select_all" },
