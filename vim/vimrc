@@ -496,6 +496,10 @@ nmap <Leader>ö <Leader>ä
 "inoremap <M-:>  <C-P>
 "inoremap <Esc>: <C-P>
 
+" increment/decrement number
+nnoremap +  <C-A>
+nnoremap -- <C-X>
+
 
 " indent lines
 nnoremap < <<

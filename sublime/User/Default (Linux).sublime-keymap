@@ -298,7 +298,7 @@
     { "keys": ["l"], "command": "set_motion", "args": {"motion": "vi_move_to_hard_eol", "motion_args": {"repeat": 1, "extend": true}, "inclusive": true, "clip_to_line": true }, "context": [{"key": "setting.command_mode"}, {"key": "vi_action", "operand": "enter_insert_mode"} ] },
     { "keys": ["l"], "command": "set_motion", "args": {"motion": "vi_move_to_hard_eol", "motion_args": {"repeat": 1, "extend": true}, "inclusive": true, "clip_to_line": true }, "context": [{"key": "setting.command_mode"}, {"key": "vi_action", "operand": "vi_copy"} ] },
 
-
+    
     //////////////////
     // Text Editing //
     //////////////////
@@ -347,8 +347,8 @@
     { "keys": ["alt+shift+j"], "command": "swap_line_down" },
     { "keys": ["-", "k"], "command": "swap_line_up", "context": [{"key": "setting.command_mode"}] },
     { "keys": ["-", "j"], "command": "swap_line_down", "context": [{"key": "setting.command_mode"}] },
-    // join lines
-    // { "keys": ["ctrl+j"], "command": "join_lines" }, // J
+    // join lines with J
+    // { "keys": ["ctrl+j"], "command": "join_lines" },
 
     // toggle single or double quotes
     { "keys": ["-", "q"], "command": "change_quotes", "context": [{"key": "setting.command_mode"}] },
@@ -370,6 +370,10 @@
 
     // HTML Prettify (Auto code style for HTML, CSS, JavaScript, JSON)
     { "keys": ["-", "p"], "command": "htmlprettify", "context": [{"key": "setting.command_mode"}] },
+
+    // increment and decrement numbers
+    { "keys": ["+"],      "args": {"action": "increment_number_by_1"}, "command": "run_emmet_action", "context": [ {"key": "emmet_action_enabled.increment_number_by_1"}, {"key": "setting.command_mode"} ] },
+    { "keys": ["-", "-"], "args": {"action": "decrement_number_by_1"}, "command": "run_emmet_action", "context": [ {"key": "emmet_action_enabled.decrement_number_by_1"}, {"key": "setting.command_mode"} ] },
 
     // Super Calculator
     { "keys": ["-", "c"], "command": "super_calculator", "context": [{"key": "setting.command_mode"}] },
