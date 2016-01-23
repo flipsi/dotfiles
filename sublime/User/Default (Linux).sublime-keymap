@@ -258,6 +258,10 @@
     // emacs bol/eol
     { "keys": ["ctrl+a"], "command": "move_to", "args": {"to": "bol", "extend": false} },
     { "keys": ["ctrl+e"], "command": "move_to", "args": {"to": "eol", "extend": false} },
+    { "keys": ["ctrl+a"], "command": "set_motion", "args": {"motion": "move_to", "motion_args": {"to": "bol", "extend": true }},
+        "context": [{ "key": "setting.command_mode"}, { "key": "vi_has_repeat_digit", "operand": false} ] },
+    { "keys": ["ctrl+e"], "command": "set_motion", "args": {"motion": "vi_move_to_hard_eol", "motion_args": {"repeat": 1, "extend": true}, "inclusive": true, "clip_to_line": true },
+        "context": [{"key": "setting.command_mode"}] },
 
     // move to braces
     { "keys": ["ctrl+k", "ctrl+k"], "command": "move_to", "args": {"to": "brackets"} },
