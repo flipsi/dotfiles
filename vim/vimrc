@@ -34,6 +34,9 @@
 " we use vim, not vi
 set nocompatible
 
+" execute external commands with bash (fish makes problems with vundle)
+set shell=/usr/bin/bash
+
 " edit runtimepath
 set runtimepath+=~/.vim/syntax
 
@@ -338,7 +341,7 @@ nnoremap <silent> <C-G>a :set list!<CR>
 
 
 " spell checking
-nnoremap <silent> <C-G>ss :set spell!<CR>
+nnoremap <silent> <C-G>ss :set spell! <bar> :set spell? <CR>
 nnoremap <silent> <C-G>se :set spelllang=en<CR>
 nnoremap <silent> <C-G>sd :set spelllang=de<CR>
 
@@ -426,6 +429,9 @@ nnoremap ` '
 " goto mark
 nnoremap Ä `
 
+" goto last edit
+nnoremap <Leader>. '.
+
 
 
 """""""""""""""""""""""""
@@ -492,6 +498,10 @@ nmap <Leader>ö <Leader>ä
 "inoremap <Esc>. <C-N>
 "inoremap <M-:>  <C-P>
 "inoremap <Esc>: <C-P>
+
+" increment/decrement number
+nnoremap +  <C-A>
+nnoremap -- <C-X>
 
 
 " indent lines
@@ -645,11 +655,6 @@ nnoremap <C-D> :quitall<CR>
 "      git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle     "
 "  and don't have ~/.vim/bundle under version control                          "
 "  (instead, call :PluginInstall on each host)                                 "
-"                                                                              "
-"  Note for fish users like me:                                                "
-"  These commands throw some errors.                                           "
-"  To fix this, execute the following before starting vim:                     "
-"     set -x SHELL (which sh)                                                  "
 "                                                                              "
 "                                                                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -909,6 +914,18 @@ Plugin 'Valloric/YouCompleteMe'
 
 let g:ycm_key_list_select_completion = ['<C-N>', '<Down>', '<Tab>']
 let g:ycm_key_list_previous_completion=['<C-P>', '<Up>']
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" align stuff
+
+Plugin 'junegunn/vim-easy-align'
+
+" Start interactive EasyAlign in visual mode (e.g. vip-l=)
+xmap -l <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. -lG=)
+nmap -l <Plug>(EasyAlign)
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
