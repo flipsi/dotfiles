@@ -64,7 +64,7 @@
 	"rulers":
 	[
 	],
-    "scroll_past_end": true,
+	"scroll_past_end": true,
 	"show_encoding": true,
 	"show_full_path": false,
 	"show_tab_close_buttons": false,
