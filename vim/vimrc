@@ -338,7 +338,7 @@ nnoremap <silent> <C-G>a :set list!<CR>
 
 
 " spell checking
-nnoremap <silent> <C-G>ss :set spell!<CR>
+nnoremap <silent> <C-G>ss :set spell! <bar> :set spell? <CR>
 nnoremap <silent> <C-G>se :set spelllang=en<CR>
 nnoremap <silent> <C-G>sd :set spelllang=de<CR>
 
@@ -425,6 +425,9 @@ nnoremap ` '
 
 " goto mark
 nnoremap Ä `
+
+" goto last edit
+nnoremap <Leader>. '.
 
 
 

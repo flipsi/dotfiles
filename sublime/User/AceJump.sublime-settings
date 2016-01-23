@@ -1,0 +1,4 @@
+{
+    // Characters to be used as labels in order they'll appear
+    "labels": ",.;:0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ(){}[]<>|$",
+}
