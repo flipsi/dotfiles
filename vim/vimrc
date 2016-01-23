@@ -34,6 +34,9 @@
 " we use vim, not vi
 set nocompatible
 
+" execute external commands with bash (fish makes problems with vundle)
+set shell=/usr/bin/bash
+
 " edit runtimepath
 set runtimepath+=~/.vim/syntax
 
@@ -653,11 +656,6 @@ nnoremap <C-D> :quitall<CR>
 "  and don't have ~/.vim/bundle under version control                          "
 "  (instead, call :PluginInstall on each host)                                 "
 "                                                                              "
-"  Note for fish users like me:                                                "
-"  These commands throw some errors.                                           "
-"  To fix this, execute the following before starting vim:                     "
-"     set -x SHELL (which sh)                                                  "
-"                                                                              "
 "                                                                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -916,6 +914,18 @@ Plugin 'Valloric/YouCompleteMe'
 
 let g:ycm_key_list_select_completion = ['<C-N>', '<Down>', '<Tab>']
 let g:ycm_key_list_previous_completion=['<C-P>', '<Up>']
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" align stuff
+
+Plugin 'junegunn/vim-easy-align'
+
+" Start interactive EasyAlign in visual mode (e.g. vip-l=)
+xmap -l <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. -lG=)
+nmap -l <Plug>(EasyAlign)
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

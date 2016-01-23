@@ -298,7 +298,10 @@
     { "keys": ["l"], "command": "set_motion", "args": {"motion": "vi_move_to_hard_eol", "motion_args": {"repeat": 1, "extend": true}, "inclusive": true, "clip_to_line": true }, "context": [{"key": "setting.command_mode"}, {"key": "vi_action", "operand": "enter_insert_mode"} ] },
     { "keys": ["l"], "command": "set_motion", "args": {"motion": "vi_move_to_hard_eol", "motion_args": {"repeat": 1, "extend": true}, "inclusive": true, "clip_to_line": true }, "context": [{"key": "setting.command_mode"}, {"key": "vi_action", "operand": "vi_copy"} ] },
 
-    
+    // jump to matching html tag
+    { "keys": ["ä", "t"], "args": {"action": "matching_pair"}, "command": "run_emmet_action", "context": [{ "key": "emmet_action_enabled.matching_pair", "key": "setting.command_mode" }] },
+
+
     //////////////////
     // Text Editing //
     //////////////////
@@ -329,6 +332,10 @@
     // indent
     { "keys": [">"], "command": "indent", "context": [{"key": "setting.command_mode"}] },
     { "keys": ["<"], "command": "unindent", "context": [{"key": "setting.command_mode"}] },
+
+    // auto align things
+    // { "keys": ["-", "l"], "command": "align_tab", "args" : { "user_input" : "=/f" }, "context": [{"key": "setting.command_mode"}] },
+    { "keys": ["-", "l"], "command": "align_tab", "context": [{"key": "setting.command_mode"}] },
 
     // change case
     { "keys": ["g", "U"], "command": "upper_case", "context": [{ "key": "selection_empty", "operator": "equal", "operand": false, "match_all": false }] },
@@ -367,6 +374,9 @@
 
     // toggle words (false/false etc.)
     { "keys": ["-", "o"], "command": "toggle_word", "context": [{"key": "setting.command_mode"}] },
+
+    // change an html tag
+    { "keys": ["c", "a", "t"], "command": "rename_tag", "context": [{ "key": "emmet_action_enabled.rename_tag", "key": "setting.command_mode"}, { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": false } ] },
 
     // HTML Prettify (Auto code style for HTML, CSS, JavaScript, JSON)
     { "keys": ["-", "p"], "command": "htmlprettify", "context": [{"key": "setting.command_mode"}] },
