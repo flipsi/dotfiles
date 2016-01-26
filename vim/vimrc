@@ -740,6 +740,8 @@ let g:airline_powerline_fonts=0
 "
 Plugin 'airblade/vim-gitgutter'
 
+let g:gitgutter_max_signs = 4000
+
 nnoremap <C-G>g :GitGutterToggle<CR>
 
 
