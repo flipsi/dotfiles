@@ -26,3 +26,8 @@ if test $hostname = "asterix" -o $hostname = "obelix"
     eval (command keychain --eval --quiet ~/.ssh/id_rsa)
 end
 
+
+# correct typos the fun way
+# https://github.com/nvbn/thefuck
+# (the following does not work, so i added the function manually)
+#eval (thefuck --alias)
