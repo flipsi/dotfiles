@@ -373,7 +373,7 @@
     // { "keys": ["ctrl+t"], "command": "transpose_character" },
 
     // toggle words (false/false etc.)
-    { "keys": ["-", "o"], "command": "toggle_word", "context": [{"key": "setting.command_mode"}] },
+    { "keys": ["-", "t", "w"], "command": "toggle_word", "context": [{"key": "setting.command_mode"}] },
 
     // change an html tag
     { "keys": ["c", "a", "t"], "command": "rename_tag", "context": [{ "key": "emmet_action_enabled.rename_tag", "key": "setting.command_mode"}, { "key": "selection_empty", "operator": "equal", "operand": true, "match_all": false } ] },

@@ -19,6 +19,9 @@ set hinttags+=span[class$=\"js-cloudsave-load-btn\"]
 set hinttags+=div[id=\"se-signup-legend\"]
 set hinttags+=label[class=\"switch-small\"]
 
+" let some keys through for some sites
+set passkeys+=gabrielecirulli.github.io/2048/:<Up><Down><Left><Right>
+
 " editor (e.g. to edit source with gF or edit textfield with <C-i>)
 set editor='subl --wait'
 
@@ -98,7 +101,7 @@ noremap <A-S-n> :tabmove +1<CR>
 " close tab
 nnoremap q :tabclose<CR>
 
-" manipulate url (so i don't accidently add a bookmark)
+" append to url like in ranger (so i don't accidently add a bookmark)
 nnoremap A O
 
 " misc views ("w"indows)
@@ -117,6 +120,7 @@ noremap \- ZO
 
 " jump to mark
 noremap ä '
+noremap Ä '
 
 " duckduckgo advanced search
 " \ to go to first result immediately

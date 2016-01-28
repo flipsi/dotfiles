@@ -85,6 +85,11 @@ set laststatus=2
 set wildmode=longest,full
 set wildmenu
 
+" ignore some files
+set wildignore+=*.o,*.obj
+set wildignore+=*.pyc
+set wildignore+=*.swp
+
 " scrolling
 " start scrolling when we're 8 lines away from margins
 set scrolloff=8
@@ -157,8 +162,23 @@ endfunction
 " }}}
 
 
+" make columns after &textwidth visible or invisible ----{{{
+function! ToggleColorColumn()
+    let col = &textwidth
+    let expr = join(range(col + 1, 255), ',')
+    if &colorcolumn == "" || &colorcolumn != expr
+       execute "set colorcolumn=" . expr
+    else
+       execute "set colorcolumn="
+    endif
+endfunction
+" }}}
 
-" insert a line some characterss above ----{{{
+"... and call this function when &textwidth is changed
+autocmd OptionSet textwidth :call ToggleColorColumn()
+
+
+" insert a line some characters above ----{{{
 function! InsertCharLine(char, num)
     let char = a:char
     let num = a:num - 1
@@ -292,7 +312,9 @@ nnoremap <Leader>m @
 cnoremap <C-g>  <C-c>
 
 
-
+" scroll with arrow keys if i lay back
+nnoremap <Down> <C-E>
+nnoremap <Up>   <C-Y>
 
 " scroll a little smoother (but still without plugin)
 " (this actually is suggested in :help scroll-smooth)
@@ -333,6 +355,10 @@ noremap <silent> <C-G>L :set relativenumber! <CR>
 " toggle word wrap
 nnoremap <silent> <C-G>w :set wrap! <CR>
 
+" toggle vertical ruler
+nnoremap <silent> <C-G>r :call ToggleColorColumn()<CR>
+nnoremap <silent> <C-G>R :highlight ColorColumn ctermbg=234<CR>
+
 " toggle highlight current line
 nnoremap <silent> <C-G>h :set cursorline!<CR>
 
@@ -341,9 +367,10 @@ nnoremap <silent> <C-G>a :set list!<CR>
 
 
 " spell checking
-nnoremap <silent> <C-G>ss :set spell! <bar> :set spell? <CR>
-nnoremap <silent> <C-G>se :set spelllang=en<CR>
-nnoremap <silent> <C-G>sd :set spelllang=de<CR>
+nnoremap <C-G>ss :set spell! <bar> :set spell? <CR>
+nnoremap <C-G>se :set spelllang=en<CR>
+nnoremap <C-G>sd :set spelllang=de<CR>
+nmap <C-G>sg <C-G>sd
 
 
 
@@ -516,11 +543,11 @@ nnoremap <silent> -j :m .+1<CR>==
 vnoremap <silent> -j :m '>+1<CR>gv=gv
 vnoremap <silent> -k :m '<-2<CR>gv=gv
 
-" add new line above or below
-noremap <M-o>  <Esc>o<Esc>k
-noremap <Esc>o <Esc>o<Esc>k
-noremap <M-O>  <Esc>O<Esc>j
-noremap <Esc>O <Esc>O<Esc>j
+" add new line above or below (this works without mappings)
+"noremap <M-o>  <Esc>o<Esc>k
+"noremap <Esc>o <Esc>o<Esc>k
+"noremap <M-O>  <Esc>O<Esc>j
+"noremap <Esc>O <Esc>O<Esc>j
 
 
 " add a line of characters
@@ -626,9 +653,12 @@ nnoremap <Esc>s :write<CR>
 
 " close file (not window)
 nnoremap q :bdelete<CR>
+nnoremap <Leader>qq :bdelete!<CR>
 
 " quit window
 nnoremap Q :quit<CR>
+" quit all other windows
+nnoremap <Leader>Q :only<CR>
 
 " quit vim (mulitple windows)
 " (this is how i exit most terminal applications)
@@ -740,6 +770,8 @@ let g:airline_powerline_fonts=0
 "
 Plugin 'airblade/vim-gitgutter'
 
+let g:gitgutter_max_signs = 4000
+
 nnoremap <C-G>g :GitGutterToggle<CR>
 
 
@@ -793,9 +825,26 @@ Plugin 'edsono/vim-matchit'
 Plugin 'kien/ctrlp.vim'
 
 let g:ctrlp_map = '#'
-nnoremap # :CtrlPMixed<CR>
+let g:ctrlp_cmd = 'CtrlPMixed'
 nnoremap <Leader>eo :CtrlPRoot<CR>
 nnoremap <Leader>eb :CtrlPBuffer<CR>
+
+" change appearance
+"let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:10'
+let g:ctrlp_match_window = 'top,order:ttb,min:1,max:10,results:10'
+
+" custom key bindings when ctrlp prompt is open
+let g:ctrlp_prompt_mappings = {
+    \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<tab>'],
+    \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<s-tab>'],
+    \ 'PrtExpandDir()':       [],
+    \ 'ToggleFocus()':        [],
+    \ 'ToggleRegex()':        ['<c-r>', '<esc>r'],
+    \ 'ToggleType(1)':        ['<c-l>', '<c-up>'],
+    \ 'ToggleType(-1)':       ['<c-h>', '<c-down>'],
+    \ 'PrtCurLeft()':         ['<c-b>', '<left>', '<c-^>'],
+    \ 'PrtCurRight()':        ['<c-f>', '<right>'],
+    \ }
 
 " also find hidden files
 let g:ctrlp_show_hidden = 1
@@ -882,8 +931,56 @@ Plugin 'Raimondi/delimitMate'
 inoremap <silent> <Esc><Enter> <Esc>A;<Enter>
 
 " add/change/delete quotes/braces/... and more
-Plugin  'tpope/vim-surround'
+Plugin 'tpope/vim-surround'
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" change 'true' to 'false' etc. in the blink of an eye
+
+Plugin 'vim-scripts/toggle_words.vim'
+
+noremap <silent> -tw :ToggleWord<CR>
+
+let g:toggle_words_dict = {
+    \ 'css': [
+    \     ["div", "span"],
+    \     ["head", "body"],
+    \     ['inline', 'block', 'none'],
+    \     ['margin', 'padding'],
+    \     ['relative', 'absolute', 'fixed', 'static'],
+    \ ],
+    \ 'html': [
+    \     ["div", "span"],
+    \     ["head", "body"],
+    \     ["header", "footer"],
+    \ ],
+    \ 'tex': [
+    \     ['chapter', 'section', 'subsection']
+    \ ],
+    \ '*': [
+    \     ["0", "1"],
+    \     ["black", "white"],
+    \     ["dark", "light"],
+    \     ["deep", "shallow"],
+    \     ["get", "set"],
+    \     ["head", "tail"],
+    \     ["header", "footer"],
+    \     ["left", "right"],
+    \     ["love", "hate"],
+    \     ["min", "max"],
+    \     ["next", "previous"],
+    \     ["on", "off"],
+    \     ["open", "close"],
+    \     ["red","orange","yellow","green","blue","purple"],
+    \     ["strong", "weak"],
+    \     ["this", "that"],
+    \     ["top", "bottom"],
+    \     ["true", "false"],
+    \     ["up", "down"],
+    \     ["width", "height"],
+    \     ["yes", "no"],
+    \ ],
+    \ }
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -998,10 +1095,10 @@ Plugin 'derekwyatt/vim-scala'
     "colorscheme dante
     "colorscheme jellybeans
     "colorscheme molokai
-    "colorscheme meta5
+    colorscheme meta5
     "colorscheme desertEx
     "colorscheme lucius
-    colorscheme onedark
+    "colorscheme onedark
 
 else
 

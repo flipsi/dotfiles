@@ -141,7 +141,11 @@ font pango:Monospace 9
 
 
 # borders
-for_window [class="^.*"] border pixel 1
+#for_window [class="^.*"] border pixel 1
+new_window pixel 0
+new_float  normal
+hide_edge_borders both
+
 
 # gaps (require the i3gaps fork)
 # gaps inner 10
