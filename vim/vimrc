@@ -162,8 +162,23 @@ endfunction
 " }}}
 
 
+" make columns after &textwidth visible or invisible ----{{{
+function! ToggleColorColumn()
+    let col = &textwidth
+    let expr = join(range(col + 1, 255), ',')
+    if &colorcolumn == "" || &colorcolumn != expr
+       execute "set colorcolumn=" . expr
+    else
+       execute "set colorcolumn="
+    endif
+endfunction
+" }}}
 
-" insert a line some characterss above ----{{{
+"... and call this function when &textwidth is changed
+autocmd OptionSet textwidth :call ToggleColorColumn()
+
+
+" insert a line some characters above ----{{{
 function! InsertCharLine(char, num)
     let char = a:char
     let num = a:num - 1
@@ -339,6 +354,10 @@ noremap <silent> <C-G>L :set relativenumber! <CR>
 
 " toggle word wrap
 nnoremap <silent> <C-G>w :set wrap! <CR>
+
+" toggle vertical ruler
+nnoremap <silent> <C-G>r :call ToggleColorColumn()<CR>
+nnoremap <silent> <C-G>R :highlight ColorColumn ctermbg=234<CR>
 
 " toggle highlight current line
 nnoremap <silent> <C-G>h :set cursorline!<CR>
