@@ -85,6 +85,11 @@ set laststatus=2
 set wildmode=longest,full
 set wildmenu
 
+" ignore some files
+set wildignore+=*.o,*.obj
+set wildignore+=*.pyc
+set wildignore+=*.swp
+
 " scrolling
 " start scrolling when we're 8 lines away from margins
 set scrolloff=8
@@ -343,9 +348,10 @@ nnoremap <silent> <C-G>a :set list!<CR>
 
 
 " spell checking
-nnoremap <silent> <C-G>ss :set spell! <bar> :set spell? <CR>
-nnoremap <silent> <C-G>se :set spelllang=en<CR>
-nnoremap <silent> <C-G>sd :set spelllang=de<CR>
+nnoremap <C-G>ss :set spell! <bar> :set spell? <CR>
+nnoremap <C-G>se :set spelllang=en<CR>
+nnoremap <C-G>sd :set spelllang=de<CR>
+nmap <C-G>sg <C-G>sd
 
 
 
@@ -797,9 +803,26 @@ Plugin 'edsono/vim-matchit'
 Plugin 'kien/ctrlp.vim'
 
 let g:ctrlp_map = '#'
-nnoremap # :CtrlPMixed<CR>
+let g:ctrlp_cmd = 'CtrlPMixed'
 nnoremap <Leader>eo :CtrlPRoot<CR>
 nnoremap <Leader>eb :CtrlPBuffer<CR>
+
+" change appearance
+"let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:10'
+let g:ctrlp_match_window = 'top,order:ttb,min:1,max:10,results:10'
+
+" custom key bindings when ctrlp prompt is open
+let g:ctrlp_prompt_mappings = {
+    \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<tab>'],
+    \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<s-tab>'],
+    \ 'PrtExpandDir()':       [],
+    \ 'ToggleFocus()':        [],
+    \ 'ToggleRegex()':        ['<c-r>', '<esc>r'],
+    \ 'ToggleType(1)':        ['<c-l>', '<c-up>'],
+    \ 'ToggleType(-1)':       ['<c-h>', '<c-down>'],
+    \ 'PrtCurLeft()':         ['<c-b>', '<left>', '<c-^>'],
+    \ 'PrtCurRight()':        ['<c-f>', '<right>'],
+    \ }
 
 " also find hidden files
 let g:ctrlp_show_hidden = 1
