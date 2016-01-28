@@ -292,7 +292,9 @@ nnoremap <Leader>m @
 cnoremap <C-g>  <C-c>
 
 
-
+" scroll with arrow keys if i lay back
+nnoremap <Down> <C-E>
+nnoremap <Up>   <C-Y>
 
 " scroll a little smoother (but still without plugin)
 " (this actually is suggested in :help scroll-smooth)
@@ -516,11 +518,11 @@ nnoremap <silent> -j :m .+1<CR>==
 vnoremap <silent> -j :m '>+1<CR>gv=gv
 vnoremap <silent> -k :m '<-2<CR>gv=gv
 
-" add new line above or below
-noremap <M-o>  <Esc>o<Esc>k
-noremap <Esc>o <Esc>o<Esc>k
-noremap <M-O>  <Esc>O<Esc>j
-noremap <Esc>O <Esc>O<Esc>j
+" add new line above or below (this works without mappings)
+"noremap <M-o>  <Esc>o<Esc>k
+"noremap <Esc>o <Esc>o<Esc>k
+"noremap <M-O>  <Esc>O<Esc>j
+"noremap <Esc>O <Esc>O<Esc>j
 
 
 " add a line of characters
