@@ -119,6 +119,7 @@ noremap \- ZO
 
 " jump to mark
 noremap ä '
+noremap Ä '
 
 " duckduckgo advanced search
 " \ to go to first result immediately
