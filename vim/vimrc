@@ -909,8 +909,56 @@ Plugin 'Raimondi/delimitMate'
 inoremap <silent> <Esc><Enter> <Esc>A;<Enter>
 
 " add/change/delete quotes/braces/... and more
-Plugin  'tpope/vim-surround'
+Plugin 'tpope/vim-surround'
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" change 'true' to 'false' etc. in the blink of an eye
+
+Plugin 'vim-scripts/toggle_words.vim'
+
+noremap <silent> -tw :ToggleWord<CR>
+
+let g:toggle_words_dict = {
+    \ 'css': [
+    \     ["div", "span"],
+    \     ["head", "body"],
+    \     ['inline', 'block', 'none'],
+    \     ['margin', 'padding'],
+    \     ['relative', 'absolute', 'fixed', 'static'],
+    \ ],
+    \ 'html': [
+    \     ["div", "span"],
+    \     ["head", "body"],
+    \     ["header", "footer"],
+    \ ],
+    \ 'tex': [
+    \     ['chapter', 'section', 'subsection']
+    \ ],
+    \ '*': [
+    \     ["0", "1"],
+    \     ["black", "white"],
+    \     ["dark", "light"],
+    \     ["deep", "shallow"],
+    \     ["get", "set"],
+    \     ["head", "tail"],
+    \     ["header", "footer"],
+    \     ["left", "right"],
+    \     ["love", "hate"],
+    \     ["min", "max"],
+    \     ["next", "previous"],
+    \     ["on", "off"],
+    \     ["open", "close"],
+    \     ["red","orange","yellow","green","blue","purple"],
+    \     ["strong", "weak"],
+    \     ["this", "that"],
+    \     ["top", "bottom"],
+    \     ["true", "false"],
+    \     ["up", "down"],
+    \     ["width", "height"],
+    \     ["yes", "no"],
+    \ ],
+    \ }
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1025,10 +1073,10 @@ Plugin 'derekwyatt/vim-scala'
     "colorscheme dante
     "colorscheme jellybeans
     "colorscheme molokai
-    "colorscheme meta5
+    colorscheme meta5
     "colorscheme desertEx
     "colorscheme lucius
-    colorscheme onedark
+    "colorscheme onedark
 
 else
 
