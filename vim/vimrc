@@ -634,9 +634,12 @@ nnoremap <Esc>s :write<CR>
 
 " close file (not window)
 nnoremap q :bdelete<CR>
+nnoremap <Leader>qq :bdelete!<CR>
 
 " quit window
 nnoremap Q :quit<CR>
+" quit all other windows
+nnoremap <Leader>Q :only<CR>
 
 " quit vim (mulitple windows)
 " (this is how i exit most terminal applications)
