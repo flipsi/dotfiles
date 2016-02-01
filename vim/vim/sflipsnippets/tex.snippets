@@ -1,0 +1,29 @@
+priority -40
+
+extends texmath
+
+snippet ub "Übungsblatt" b
+% Author: Philipp Moers <soziflip@gmail.com>
+
+\documentclass[12pt, oneside, a4paper, numbers=enddot]{scrartcl}
+\input{sfliptex05.tex}
+\usepackage{sectsty}
+\usepackage{enumerate}
+\usepackage{paralist} % compactenum
+% \allsectionsfont{\large\underline} % überschriftendesign
+\sectionfont{\large\underline} % überschriftendesign
+\subsectionfont{\normalsize}
+
+\begin{document}
+\selectlanguage{ngerman}
+
+
+\header{${1:Philipp Moers <soziflip@gmail.com>}}{${2:Fach}}{Übungsblatt ${3:N}}
+
+
+${0}
+
+
+\end{document}
+endsnippet
+
