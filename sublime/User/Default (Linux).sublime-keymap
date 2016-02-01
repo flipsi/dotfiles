@@ -332,6 +332,8 @@
     // indent
     { "keys": [">"], "command": "indent", "context": [{"key": "setting.command_mode"}] },
     { "keys": ["<"], "command": "unindent", "context": [{"key": "setting.command_mode"}] },
+    { "keys": ["ctrl+."], "command": "indent" },
+    { "keys": ["ctrl+,"], "command": "unindent" },
 
     // auto align things
     // { "keys": ["-", "l"], "command": "align_tab", "args" : { "user_input" : "=/f" }, "context": [{"key": "setting.command_mode"}] },
