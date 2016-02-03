@@ -275,14 +275,12 @@ nnoremap <C-G><C-G> <C-G>
 
 
 " open config file
-"nnoremap <Leader>ev :edit ~/.vimrc<CR>
-" (use absolute path to dotfiles, not symlink for ctrlp)
-nnoremap <Leader>ev :edit ~/dotfiles/vim/vimrc<CR>
-nnoremap <Leader>e3 :edit ~/dotfiles/i3/config<CR>
+nnoremap <Leader>ev :edit $MYVIMRC<CR>
+nnoremap <Leader>e3 :edit ~/.i3/config<CR>
 
 " reload config file
-nnoremap <Leader>sv :source ~/.vimrc<CR>
-nnoremap <F5>       :source ~/.vimrc<CR>
+nnoremap <Leader>sv :source $MYVIMRC<CR>
+nnoremap <F5>       :source $MYVIMRC<CR>
 
 
 " open help in vertical window
