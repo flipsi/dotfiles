@@ -49,6 +49,7 @@ qmark z http://www.zdf.de/ZDFmediathek/hauptnavigation/startseite/#/hauptnavigat
 qmark c http://www.cubetimer.com/
 qmark p file:///home/sflip/masterstudies/modules/informationsvisualisierung/project/pubdb/index.html
 qmark v http://localhost/projects/govp2/
+qmark w http://workspace.brainworks.de/#page-14279-portalseiten
 
 " Styles
 "highlight StatusLineNormal background-color: #DDD
