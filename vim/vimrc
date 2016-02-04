@@ -46,6 +46,9 @@ set timeout ttimeoutlen=50
 " but mapping delay can be more
 set timeoutlen=1200
 
+" don't draw everything (e.g. when playing macros)
+set lazyredraw
+
 " encoding should be utf-8 on every OS
 set     encoding=utf-8
 set fileencoding=utf-8
@@ -130,6 +133,14 @@ set splitbelow
 set splitright
 
 
+" allows cursor change in tmux mode
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 
 
 
@@ -730,6 +741,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'christophermca/meta5'
 Plugin 'joshdick/onedark.vim'
+Plugin 'sjl/badwolf'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -939,6 +951,16 @@ Plugin 'tpope/vim-surround'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" move visual selections around (even blocks)
+
+Plugin 'shinokada/dragvisuals.vim'
+vmap <expr> H  DVB_Drag('left')
+vmap <expr> L  DVB_Drag('right')
+vmap <expr> J  DVB_Drag('down')
+vmap <expr> K  DVB_Drag('up')
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " change 'true' to 'false' etc. in the blink of an eye
 
 Plugin 'vim-scripts/toggle_words.vim'
@@ -1086,23 +1108,36 @@ Plugin 'derekwyatt/vim-scala'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Graphical undo tree
 
+Plugin 'sjl/gundo.vim'
+
+let g:gundo_preview_height = 25
+let g:gundo_right = 1
+let g:gundo_preview_bottom = 1
+let g:gundo_return_on_revert = 0
+
+nnoremap <Leader>ut :GundoToggle<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     " finish vundle
     call vundle#end()
     filetype plugin indent on
 
 
-    " apparently colorscheme must be set after vundle is done
+    " colorscheme must be set after vundle is done
 
     "colorscheme candycode
     "colorscheme dante
     "colorscheme jellybeans
     "colorscheme molokai
-    colorscheme meta5
+    "colorscheme meta5
     "colorscheme desertEx
     "colorscheme lucius
     "colorscheme onedark
+    colorscheme badwolf
 
 else
 
