@@ -46,6 +46,9 @@ set timeout ttimeoutlen=50
 " but mapping delay can be more
 set timeoutlen=1200
 
+" don't draw everything (e.g. when playing macros)
+set lazyredraw
+
 " encoding should be utf-8 on every OS
 set     encoding=utf-8
 set fileencoding=utf-8
@@ -941,6 +944,16 @@ inoremap <silent> <Esc><Enter> <Esc>A;<Enter>
 
 " add/change/delete quotes/braces/... and more
 Plugin 'tpope/vim-surround'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" move visual selections around (even blocks)
+
+Plugin 'shinokada/dragvisuals.vim'
+vmap <expr> H  DVB_Drag('left')
+vmap <expr> L  DVB_Drag('right')
+vmap <expr> J  DVB_Drag('down')
+vmap <expr> K  DVB_Drag('up')
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
