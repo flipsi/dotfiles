@@ -1082,7 +1082,19 @@ Plugin 'derekwyatt/vim-scala'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Graphical undo tree
 
+Plugin 'sjl/gundo.vim'
+
+let g:gundo_preview_height = 25
+let g:gundo_right = 1
+let g:gundo_preview_bottom = 1
+let g:gundo_return_on_revert = 0
+
+nnoremap <Leader>ut :GundoToggle<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     " finish vundle
     call vundle#end()
