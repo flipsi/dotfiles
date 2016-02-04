@@ -732,6 +732,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'christophermca/meta5'
 Plugin 'joshdick/onedark.vim'
+Plugin 'sjl/badwolf'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1101,16 +1102,17 @@ nnoremap <Leader>ut :GundoToggle<CR>
     filetype plugin indent on
 
 
-    " apparently colorscheme must be set after vundle is done
+    " colorscheme must be set after vundle is done
 
     "colorscheme candycode
     "colorscheme dante
     "colorscheme jellybeans
     "colorscheme molokai
-    colorscheme meta5
+    "colorscheme meta5
     "colorscheme desertEx
     "colorscheme lucius
     "colorscheme onedark
+    colorscheme badwolf
 
 else
 
