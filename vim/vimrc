@@ -526,8 +526,9 @@ nmap <Leader>ö <Leader>ä
 " change to insert mode from visual mode
 "vnoremap i vi
 
-" yank line without line break (in difference to yy)
-"nnoremap Y ^y$
+" yank/delete line without line break (in difference to yy/dd)
+nnoremap Y ^y$
+nnoremap D ^d$
 
 " autocompletion
 " (fallback, will be overwritten in plugins section)
