@@ -286,7 +286,8 @@ nnoremap <C-G><C-G> <C-G>
 
 
 " open config file
-nnoremap <Leader>ev :edit $MYVIMRC<CR>
+"nnoremap <Leader>ev :edit ~/dotfiles/vim/vimrc<CR>
+nnoremap <Leader>ev :execute 'edit ' . resolve(expand($MYVIMRC))<CR>
 nnoremap <Leader>e3 :edit ~/.i3/config<CR>
 
 " reload config file
@@ -773,6 +774,19 @@ let g:airline_powerline_fonts=0
 
 " TODO simple statusline like this
 " http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" do some git from within vim
+
+Plugin 'tpope/vim-fugitive'
+
+nmap <Leader>gg <Leader>gs
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>ga :Gwrite<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gb :Gblame<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
