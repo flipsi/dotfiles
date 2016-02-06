@@ -600,6 +600,17 @@ noremap <Esc>U :later<CR>
 
 
 
+"""""""""""""""""""""""
+" DIFF AND MERGE
+
+" jump to next/previous change
+nnoremap dn ]c
+nnoremap dN [c
+
+" remember do and dp
+
+
+
 
 """""""""""""""""""""""
 " BUFFERS AND WINDOWS "
@@ -790,9 +801,8 @@ nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gb :Gblame<CR>
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " show git status of lines on the left
-"
+
 Plugin 'airblade/vim-gitgutter'
 
 let g:gitgutter_max_signs = 4000
