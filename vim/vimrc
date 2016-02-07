@@ -299,7 +299,7 @@ nnoremap <F5>       :source $MYVIMRC<CR>
 cnoreabbrev <expr> h ((getcmdtype() is# ':' && getcmdline() is# 'h')
                  \ ?('vertical help'):('h'))
 
-" to follow links in help
+" to follow links in help and jump to definition (ctags)
 nnoremap <M-Enter>    <C-]>
 nnoremap <Esc><Enter> <C-]>
 
@@ -894,19 +894,40 @@ let g:ctrlp_show_hidden = 1
 "Plugin 'Shougo/unite.vim'
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" tags (variables, functions, ...) overview
+
+ Plugin 'majutsushi/tagbar'
+
+" install 'ctags' package on the system
+
+" if I leave tagbar open but unfocused, q closes vim. that not what i want...
+" so i autoclose and autofocus tagbar, which is cooler anyway
+
+let g:tagbar_compact = 1
+let g:tagbar_autoclose = 1
+
+"let g:tagbar_map_close = 'Q'
+
+noremap <silent> <Leader>tt :TagbarToggle<CR>
+
+"autocmd FileType vim nested :TagbarOpen()<CR>
+
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " file browser
 
 Plugin 'scrooloose/nerdtree'
 
-let NERDTreeWinSize=50
-let NERDTreeQuitOnOpen=1
+let NERDTreeWinSize = 50
+let NERDTreeQuitOnOpen = 1
+let NERDTreeWinPos = 'right'
 
 " show/hide nerdtree
-noremap <silent> <Leader>t :NERDTreeToggle<CR>
+noremap <silent> <Leader>tn :NERDTreeToggle<CR>
 " show nerdtree from current file
-noremap <silent> <Leader>T :call SetCwdToFilePath() <bar> :NERDTreeCWD<CR>
+noremap <silent> <Leader>tN :call SetCwdToFilePath() <bar> :NERDTreeCWD<CR>
 
 " show/hide hidden files
 let NERDTreeMapToggleHidden='.'
