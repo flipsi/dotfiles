@@ -554,12 +554,16 @@ nnoremap <silent> -j :m .+1<CR>==
 vnoremap <silent> -j :m '>+1<CR>gv=gv
 vnoremap <silent> -k :m '<-2<CR>gv=gv
 
-" add new line above or below (this works without mappings)
+" add new line above or below
+"(this works without mappings, except that we arein insert mode afterwards)
 "noremap <M-o>  <Esc>o<Esc>k
 "noremap <Esc>o <Esc>o<Esc>k
 "noremap <M-O>  <Esc>O<Esc>j
 "noremap <Esc>O <Esc>O<Esc>j
 
+" add space (a few newlines) below
+"nnoremap <Enter> :.+1insert \n\n\n<CR>
+nnoremap -as mno<Esc>o<Esc>o<Esc>o<Esc>`n
 
 " add a line of characters
 nnoremap -al :call InsertCharLine(input("Insert character: "), 80)<CR>
