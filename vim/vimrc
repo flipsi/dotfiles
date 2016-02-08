@@ -820,6 +820,14 @@ let g:gitgutter_max_signs = 4000
 nnoremap <C-G>g :GitGutterToggle<CR>
 
 
+" commit messages are special
+augroup gitcommit
+    autocmd!
+    autocmd filetype gitcommit setlocal nonumber norelativenumber
+    autocmd filetype gitcommit setlocal textwidth=50
+    autocmd filetype gitcommit setlocal colorcolumn=""
+augroup END
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " amazingly move everywhere
