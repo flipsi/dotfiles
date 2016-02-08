@@ -1121,7 +1121,8 @@ Plugin 'Chiel92/vim-autoformat'
 " install formatters on the system:
 " - js-beautify (for HTML, CSS, JavaScript, JSON)
 
-nnoremap <Leader>sa :Autoformat<CR>
+nnoremap -af :Autoformat<CR>
+vnoremap -af :Autoformat<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
