@@ -880,7 +880,9 @@ Plugin 'edsono/vim-matchit'
 Plugin 'kien/ctrlp.vim'
 
 let g:ctrlp_map = '#'
-let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_cmd = 'CtrlPMRUFiles'
+nnoremap <Leader>er :CtrlPMRUFiles<CR>
+nnoremap <Leader>em :CtrlPMixed<CR>
 nnoremap <Leader>eo :CtrlPRoot<CR>
 nnoremap <Leader>eb :CtrlPBuffer<CR>
 
@@ -893,6 +895,7 @@ let g:ctrlp_prompt_mappings = {
     \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<tab>'],
     \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<s-tab>'],
     \ 'PrtExpandDir()':       [],
+    \ 'AcceptSelection("v")': ['<Esc><Enter>', '<c-v>', '<RightMouse>'],
     \ 'ToggleFocus()':        [],
     \ 'ToggleRegex()':        ['<c-r>', '<esc>r'],
     \ 'ToggleType(1)':        ['<c-l>', '<c-up>'],
