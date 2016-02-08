@@ -571,11 +571,17 @@ nnoremap -al :call InsertCharLine(input("Insert character: "), 80)<CR>
 nnoremap -ab :call InsertCharBox(input("Insert character: "))<CR>
 
 
+" substitute occurences of selection in this buffer (append /c for confirmation)
+" (to change only this occurence, use c. by default they are the same)
+vnoremap s y:%s/<C-R>"/
+
+
 " replace word under cursor with yank
 nnoremap -rw viwp
 nnoremap -rW viWp
 " replace line with yank
 nnoremap -rl Vp
+
 
 " correct typos like 'DAmnitypefast' to titlecase ('Damnitypefast')
 nnoremap -tt blgueea
@@ -677,7 +683,7 @@ nnoremap <M-s>  :write<CR>
 nnoremap <Esc>s :write<CR>
 
 
-" close file (not window)
+" close buffer (not window)
 nnoremap q :bdelete<CR>
 nnoremap <Leader>qq :bdelete!<CR>
 
@@ -1004,10 +1010,10 @@ Plugin 'tpope/vim-surround'
 " move visual selections around (even blocks)
 
 Plugin 'shinokada/dragvisuals.vim'
-vmap <expr> H  DVB_Drag('left')
-vmap <expr> L  DVB_Drag('right')
-vmap <expr> J  DVB_Drag('down')
-vmap <expr> K  DVB_Drag('up')
+vmap <expr> <C-H>  DVB_Drag('left')
+vmap <expr> <C-L>  DVB_Drag('right')
+vmap <expr> <C-J>  DVB_Drag('down')
+vmap <expr> <C-K>  DVB_Drag('up')
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1123,11 +1129,10 @@ Plugin 'vim-scripts/ShowTrailingWhiteSpace'
 Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
 " check for trailing whitespace when writing file
 let g:DeleteTrailingWhitespace = 1
-" delete trailing whitespace on demand for current line
-nnoremap <silent> -dst :.DeleteTrailingWhitespace<CR>
+" delete trailing whitespace for selected line
 vnoremap <silent> -dst :DeleteTrailingWhitespace<CR>
-" delete trailing whitespace on demand for whole file
-nnoremap <silent> -dsT :%DeleteTrailingWhitespace<CR>
+" delete trailing whitespace for whole buffer
+nnoremap <silent> -dst :%DeleteTrailingWhitespace<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
