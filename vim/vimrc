@@ -571,11 +571,17 @@ nnoremap -al :call InsertCharLine(input("Insert character: "), 80)<CR>
 nnoremap -ab :call InsertCharBox(input("Insert character: "))<CR>
 
 
+" substitute occurences of selection in this file (append /c for confirmation)
+" (to change only this occurence, use c. by default they are the same)
+vnoremap s y:%s/<C-R>"/
+
+
 " replace word under cursor with yank
 nnoremap -rw viwp
 nnoremap -rW viWp
 " replace line with yank
 nnoremap -rl Vp
+
 
 " correct typos like 'DAmnitypefast' to titlecase ('Damnitypefast')
 nnoremap -tt blgueea
