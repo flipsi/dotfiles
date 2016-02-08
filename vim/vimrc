@@ -1081,6 +1081,12 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", "sflipsnippets"]
 Plugin 'honza/vim-snippets'
 
 
+" make html snippets work in php
+" (this is a hack. but the 'ultisnips extends' approach does not work)
+" http://stackoverflow.com/questions/12471398/how-to-enable-snippet-for-html-in-php-files
+autocmd filetype php set filetype=php.html
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " advanced auto completion engine
 "
