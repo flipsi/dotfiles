@@ -571,7 +571,7 @@ nnoremap -al :call InsertCharLine(input("Insert character: "), 80)<CR>
 nnoremap -ab :call InsertCharBox(input("Insert character: "))<CR>
 
 
-" substitute occurences of selection in this file (append /c for confirmation)
+" substitute occurences of selection in this buffer (append /c for confirmation)
 " (to change only this occurence, use c. by default they are the same)
 vnoremap s y:%s/<C-R>"/
 
@@ -683,7 +683,7 @@ nnoremap <M-s>  :write<CR>
 nnoremap <Esc>s :write<CR>
 
 
-" close file (not window)
+" close buffer (not window)
 nnoremap q :bdelete<CR>
 nnoremap <Leader>qq :bdelete!<CR>
 
@@ -1129,11 +1129,10 @@ Plugin 'vim-scripts/ShowTrailingWhiteSpace'
 Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
 " check for trailing whitespace when writing file
 let g:DeleteTrailingWhitespace = 1
-" delete trailing whitespace on demand for current line
-nnoremap <silent> -dst :.DeleteTrailingWhitespace<CR>
+" delete trailing whitespace for selected line
 vnoremap <silent> -dst :DeleteTrailingWhitespace<CR>
-" delete trailing whitespace on demand for whole file
-nnoremap <silent> -dsT :%DeleteTrailingWhitespace<CR>
+" delete trailing whitespace for whole buffer
+nnoremap <silent> -dst :%DeleteTrailingWhitespace<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
