@@ -148,6 +148,7 @@ function create_link_for_target() {
             create_link $PWD/vim/vimrc $HOME/.vimrc
             create_link $PWD/vim/gvimrc $HOME/.gvimrc
             mkdir -p $HOME/.vim
+            mkdir -p $HOME/.vim/undodir
             create_link $PWD/vim/vim/sflipsnippets $HOME/.vim/sflipsnippets
             create_link $PWD/vim/vim/spell $HOME/.vim/spell
             create_link $PWD/vim/vim/syntax $HOME/.vim/syntax

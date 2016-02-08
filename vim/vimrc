@@ -286,21 +286,20 @@ nnoremap <C-G><C-G> <C-G>
 
 
 " open config file
-"nnoremap <Leader>ev :edit ~/.vimrc<CR>
-" (use absolute path to dotfiles, not symlink for ctrlp)
-nnoremap <Leader>ev :edit ~/dotfiles/vim/vimrc<CR>
-nnoremap <Leader>e3 :edit ~/dotfiles/i3/config<CR>
+"nnoremap <Leader>ev :edit ~/dotfiles/vim/vimrc<CR>
+nnoremap <Leader>ev :execute 'edit ' . resolve(expand($MYVIMRC))<CR>
+nnoremap <Leader>e3 :edit ~/.i3/config<CR>
 
 " reload config file
-nnoremap <Leader>sv :source ~/.vimrc<CR>
-nnoremap <F5>       :source ~/.vimrc<CR>
+nnoremap <Leader>sv :source $MYVIMRC<CR>
+nnoremap <F5>       :source $MYVIMRC<CR>
 
 
 " open help in vertical window
 cnoreabbrev <expr> h ((getcmdtype() is# ':' && getcmdline() is# 'h')
                  \ ?('vertical help'):('h'))
 
-" to follow links in help
+" to follow links in help and jump to definition (ctags)
 nnoremap <M-Enter>    <C-]>
 nnoremap <Esc><Enter> <C-]>
 
@@ -527,8 +526,9 @@ nmap <Leader>ö <Leader>ä
 " change to insert mode from visual mode
 "vnoremap i vi
 
-" yank line without line break (in difference to yy)
-"nnoremap Y ^y$
+" yank/delete line without line break (in difference to yy/dd)
+nnoremap Y ^y$
+nnoremap D ^d$
 
 " autocompletion
 " (fallback, will be overwritten in plugins section)
@@ -554,12 +554,16 @@ nnoremap <silent> -j :m .+1<CR>==
 vnoremap <silent> -j :m '>+1<CR>gv=gv
 vnoremap <silent> -k :m '<-2<CR>gv=gv
 
-" add new line above or below (this works without mappings)
+" add new line above or below
+"(this works without mappings, except that we arein insert mode afterwards)
 "noremap <M-o>  <Esc>o<Esc>k
 "noremap <Esc>o <Esc>o<Esc>k
 "noremap <M-O>  <Esc>O<Esc>j
 "noremap <Esc>O <Esc>O<Esc>j
 
+" add space (a few newlines) below
+"nnoremap <Enter> :.+1insert \n\n\n<CR>
+nnoremap -as mno<Esc>o<Esc>o<Esc>o<Esc>`n
 
 " add a line of characters
 nnoremap -al :call InsertCharLine(input("Insert character: "), 80)<CR>
@@ -567,11 +571,17 @@ nnoremap -al :call InsertCharLine(input("Insert character: "), 80)<CR>
 nnoremap -ab :call InsertCharBox(input("Insert character: "))<CR>
 
 
+" substitute occurences of selection in this buffer (append /c for confirmation)
+" (to change only this occurence, use c. by default they are the same)
+vnoremap s y:%s/<C-R>"/
+
+
 " replace word under cursor with yank
 nnoremap -rw viwp
 nnoremap -rW viWp
 " replace line with yank
 nnoremap -rl Vp
+
 
 " correct typos like 'DAmnitypefast' to titlecase ('Damnitypefast')
 nnoremap -tt blgueea
@@ -597,6 +607,17 @@ noremap <Esc>u :earlier<CR>
 noremap <M-U>  :later<CR>
 noremap <Esc>U :later<CR>
 
+
+
+
+"""""""""""""""""""""""
+" DIFF AND MERGE
+
+" jump to next/previous change
+nnoremap dn ]c
+nnoremap dN [c
+
+" remember do and dp
 
 
 
@@ -662,7 +683,7 @@ nnoremap <M-s>  :write<CR>
 nnoremap <Esc>s :write<CR>
 
 
-" close file (not window)
+" close buffer (not window)
 nnoremap q :bdelete<CR>
 nnoremap <Leader>qq :bdelete!<CR>
 
@@ -778,8 +799,20 @@ let g:airline_powerline_fonts=0
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" do some git from within vim
+
+Plugin 'tpope/vim-fugitive'
+
+nmap <Leader>gg <Leader>gs
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>ga :Gwrite<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gb :Gblame<CR>
+
+
 " show git status of lines on the left
-"
+
 Plugin 'airblade/vim-gitgutter'
 
 let g:gitgutter_max_signs = 4000
@@ -871,19 +904,40 @@ let g:ctrlp_show_hidden = 1
 "Plugin 'Shougo/unite.vim'
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" tags (variables, functions, ...) overview
+
+ Plugin 'majutsushi/tagbar'
+
+" install 'ctags' package on the system
+
+" if I leave tagbar open but unfocused, q closes vim. that not what i want...
+" so i autoclose and autofocus tagbar, which is cooler anyway
+
+let g:tagbar_compact = 1
+let g:tagbar_autoclose = 1
+
+"let g:tagbar_map_close = 'Q'
+
+noremap <silent> <Leader>tt :TagbarToggle<CR>
+
+"autocmd FileType vim nested :TagbarOpen()<CR>
+
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " file browser
 
 Plugin 'scrooloose/nerdtree'
 
-let NERDTreeWinSize=50
-let NERDTreeQuitOnOpen=1
+let NERDTreeWinSize = 50
+let NERDTreeQuitOnOpen = 1
+let NERDTreeWinPos = 'right'
 
 " show/hide nerdtree
-noremap <silent> <Leader>t :NERDTreeToggle<CR>
+noremap <silent> <Leader>tn :NERDTreeToggle<CR>
 " show nerdtree from current file
-noremap <silent> <Leader>T :call SetCwdToFilePath() <bar> :NERDTreeCWD<CR>
+noremap <silent> <Leader>tN :call SetCwdToFilePath() <bar> :NERDTreeCWD<CR>
 
 " show/hide hidden files
 let NERDTreeMapToggleHidden='.'
@@ -899,10 +953,16 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "active_filetypes": ["ruby", "php"],
+    \ "passive_filetypes": ["python", "tex"] }
 
 nnoremap <silent> <Leader>sc :SyntasticCheck<CR>
 nnoremap <silent> <Leader>sr :SyntasticReset<CR>
+nnoremap <silent> <Leader>st :SyntasticToggleMode<CR>
 nnoremap <silent> <Leader>si :SyntasticInfo<CR>
+
 
 " install linters on the system:
 " - pylint
@@ -950,10 +1010,10 @@ Plugin 'tpope/vim-surround'
 " move visual selections around (even blocks)
 
 Plugin 'shinokada/dragvisuals.vim'
-vmap <expr> H  DVB_Drag('left')
-vmap <expr> L  DVB_Drag('right')
-vmap <expr> J  DVB_Drag('down')
-vmap <expr> K  DVB_Drag('up')
+vmap <expr> <C-H>  DVB_Drag('left')
+vmap <expr> <C-L>  DVB_Drag('right')
+vmap <expr> <C-J>  DVB_Drag('down')
+vmap <expr> <C-K>  DVB_Drag('up')
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1069,11 +1129,10 @@ Plugin 'vim-scripts/ShowTrailingWhiteSpace'
 Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
 " check for trailing whitespace when writing file
 let g:DeleteTrailingWhitespace = 1
-" delete trailing whitespace on demand for current line
-nnoremap <silent> -dst :.DeleteTrailingWhitespace<CR>
+" delete trailing whitespace for selected line
 vnoremap <silent> -dst :DeleteTrailingWhitespace<CR>
-" delete trailing whitespace on demand for whole file
-nnoremap <silent> -dsT :%DeleteTrailingWhitespace<CR>
+" delete trailing whitespace for whole buffer
+nnoremap <silent> -dst :%DeleteTrailingWhitespace<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1147,3 +1206,4 @@ endif
 
 
 
+" vim:tw=80:sw=4:
