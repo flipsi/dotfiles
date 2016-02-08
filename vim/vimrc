@@ -92,6 +92,7 @@ set wildmenu
 set wildignore+=*.o,*.obj
 set wildignore+=*.pyc
 set wildignore+=*.swp
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 
 " scrolling
 " start scrolling when we're 8 lines away from margins
@@ -886,9 +887,14 @@ nnoremap <Leader>em :CtrlPMixed<CR>
 nnoremap <Leader>eo :CtrlPRoot<CR>
 nnoremap <Leader>eb :CtrlPBuffer<CR>
 
+" ignore some stuff
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+    \ }
+
 " change appearance
 "let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:10'
-let g:ctrlp_match_window = 'top,order:ttb,min:1,max:10,results:10'
+let g:ctrlp_match_window = 'top,order:ttb,min:1,max:8,results:8'
 
 " custom key bindings when ctrlp prompt is open
 let g:ctrlp_prompt_mappings = {
