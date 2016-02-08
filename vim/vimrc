@@ -809,6 +809,8 @@ nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>ga :Gwrite<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gp :Gpull<CR>
+nnoremap <Leader>gP :Gpush<CR>
 
 
 " show git status of lines on the left
@@ -819,6 +821,14 @@ let g:gitgutter_max_signs = 4000
 
 nnoremap <C-G>g :GitGutterToggle<CR>
 
+
+" commit messages are special
+augroup gitcommit
+    autocmd!
+    autocmd filetype gitcommit setlocal nonumber norelativenumber
+    autocmd filetype gitcommit setlocal textwidth=50
+    autocmd filetype gitcommit setlocal colorcolumn=""
+augroup END
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1081,6 +1091,12 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", "sflipsnippets"]
 Plugin 'honza/vim-snippets'
 
 
+" make html snippets work in php
+" (this is a hack. but the 'ultisnips extends' approach does not work)
+" http://stackoverflow.com/questions/12471398/how-to-enable-snippet-for-html-in-php-files
+autocmd filetype php set filetype=php.html
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " advanced auto completion engine
 "
@@ -1115,7 +1131,8 @@ Plugin 'Chiel92/vim-autoformat'
 " install formatters on the system:
 " - js-beautify (for HTML, CSS, JavaScript, JSON)
 
-nnoremap <Leader>sa :Autoformat<CR>
+nnoremap -af :Autoformat<CR>
+vnoremap -af :Autoformat<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
