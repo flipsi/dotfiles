@@ -468,7 +468,7 @@ nnoremap ` '
 nnoremap Ä `
 
 " goto last edit
-nnoremap <Leader>. '.
+nnoremap <Leader>. '.zz
 
 
 
@@ -491,24 +491,21 @@ vnoremap / y/<C-R>"<CR>
 
 
 " find trailing whitespace
-nnoremap <Leader>äst /\v\s+$<CR>
+nnoremap <Leader>fst /\v\s+$<CR>
 
 " find matching element (brackets/braces/parentheses)
-nnoremap <Leader>äb %
+nnoremap <Leader>fb %
 " extended find matching element (e.g. HTML-tags with matchit plugin)
-nmap <Leader>ää %
+nmap <Leader>fm %
+nmap <Leader>ff %
 
-" find all lines with keyword under cursor
-" and ask which one to jump to
-nmap <Leader>ä/ [I:let nr = input("Which one: ")
+" find all lines with keyword under cursor and ask which one to jump to
+nmap <Leader>fj [I:let nr = input("Which one: ")
             \   <Bar> exe "normal " . nr ."[\t"<CR>
 
 " find git merge conflict markers
-nnoremap <Leader>äc /\v^[<\|=>]{7}( .*\|$)<CR>
+nnoremap <Leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 
-
-" for now, these jumping 'find' keymaps should also be usable with ö
-nmap <Leader>ö <Leader>ä
 
 
 
