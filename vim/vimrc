@@ -520,9 +520,9 @@ nmap <Leader>ö <Leader>ä
 " text edit leader is minus
 
 
-" alternate way to quit insert mode
-"inoremap jjj <Esc>jjj
-"inoremap kkk <Esc>kkk
+" alternative way to quit insert mode
+inoremap jk <Esc>
+cnoremap jk <C-c>
 
 " change to insert mode from visual mode
 "vnoremap i vi
@@ -677,26 +677,30 @@ nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig<CR>
 " SAVING AND CLOSING   "
 
 
-" remember ZZ and ZQ
 
-" save changes without quit
-nnoremap <M-s>  :write<CR>
-nnoremap <Esc>s :write<CR>
+" write changes
+nnoremap <Leader>w :update<CR>
+nnoremap <Leader>WW :update!<CR>
 
-
-" close buffer (not window)
+" quit current buffer
 nnoremap q :bdelete<CR>
-nnoremap <Leader>qq :bdelete!<CR>
+nnoremap <Leader>qq :bdelete<CR>
+nnoremap <Leader>QQ :bdelete!<CR>
 
-" quit window
+" quit all buffers (not vim)
+nnoremap <Leader>qa :bufdo bdelete<CR>
+
+" quit current window
 nnoremap Q :quit<CR>
-" quit all other windows
-nnoremap <Leader>Q :only<CR>
+" quit all windows but current
+nnoremap <Leader>qo :only<CR>
 
 " quit vim (mulitple windows)
 " (this is how i exit most terminal applications)
 nnoremap <C-D> :quitall<CR>
+nnoremap <Leader><C-D><C-D> :quitall!<CR>
 
+" remember ZZ and ZQ
 
 
 
