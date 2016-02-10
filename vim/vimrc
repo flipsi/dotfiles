@@ -594,7 +594,7 @@ nnoremap <silent> -dsD :%s:\v(\S)  (\S):\1 \2:<CR>
 
 " duplicate a line and comment out the first one
 " (fallback, will be overwritten in plugins section)
-nmap <Leader>cd YI#<Esc>p
+nnoremap <Leader>cd yyI#<Esc>p
 
 
 " undo and redo
@@ -1032,7 +1032,7 @@ nmap <C-n> <Plug>yankstack_substitute_newer_paste
 " add and toggle comments with <Leader>c<space>
 Plugin 'scrooloose/nerdcommenter'
 " duplicate a line and comment out the first one
-nmap <Leader>cd Y<Leader>ccp
+nmap <Leader>cd yy<Leader>ccp
 
 " automagically add closing braces etc
 Plugin 'Raimondi/delimitMate'
