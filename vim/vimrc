@@ -902,6 +902,7 @@ Plugin 'kien/ctrlp.vim'
 
 let g:ctrlp_map = '#'
 let g:ctrlp_cmd = 'CtrlPMRUFiles'
+nnoremap #          :CtrlPMRUFiles<CR>
 nnoremap <Leader>er :CtrlPMRUFiles<CR>
 nnoremap <Leader>em :CtrlPMixed<CR>
 nnoremap <Leader>eo :CtrlPRoot<CR>
