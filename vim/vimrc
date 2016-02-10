@@ -608,8 +608,8 @@ noremap <Esc>U :later<CR>
 
 
 
-"""""""""""""""""""""""
-" DIFF AND MERGE
+""""""""""""""""""
+" DIFF AND MERGE "
 
 " jump to next/previous change
 nnoremap dn ]c
@@ -617,6 +617,25 @@ nnoremap dN [c
 
 " remember do and dp
 
+
+
+
+""""""""""""""""""""""""""
+" BUILDING AND DEBUGGING "
+
+
+" make
+nnoremap <Leader>bm :make<CR>
+
+" jump to (syntastic) errors
+nnoremap <Leader>sf :lfirst<CR>
+nnoremap <Leader>sn :lnext<CR>
+nnoremap <Leader>sN :lprevious<CR>
+
+" close the location list (which contains syntastic errors)
+nnoremap <Leader>sl :lclose<CR>
+" reopen the location list (which contains syntastic errors)
+nnoremap <Leader>sL :lopen<CR>
 
 
 
