@@ -684,10 +684,10 @@ nnoremap <Leader>sf :lfirst<CR>
 nnoremap <Leader>sn :lnext<CR>
 nnoremap <Leader>sN :lprevious<CR>
 
-" close the location list (which contains syntastic errors)
-nnoremap <Leader>sl :lclose<CR>
-" reopen the location list (which contains syntastic errors)
-nnoremap <Leader>sL :lopen<CR>
+" close location list (which contains syntastic errors) and quickfix window
+nnoremap <silent> <Leader>sl :lclose<bar>:cclose<CR>
+" reopen location list (which contains syntastic errors)
+nnoremap <silent> <Leader>sL :lopen<CR>
 
 
 
