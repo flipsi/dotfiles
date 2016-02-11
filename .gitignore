@@ -20,6 +20,7 @@ ranger/**/*.pyo
 sublime/User/SublimeLinter/
 sublime/User/Color Highlighter/
 sublime/User/Package Control.*
+sublime/User/Package Control.cache
 
 
 #### xfce4
