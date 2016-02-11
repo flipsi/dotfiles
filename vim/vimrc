@@ -20,6 +20,9 @@
 "
 "
 "
+" open/close a fold with zo/zc
+" open/close all folds with zR/zM
+"
 "
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -29,6 +32,8 @@
 "                                                                              "
 "                                                                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" {{{
 
 
 " we use vim, not vi
@@ -134,6 +139,7 @@ set splitbelow
 set splitright
 
 
+
 " allows cursor change in tmux mode
 if exists('$TMUX')
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -143,6 +149,9 @@ else
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
+
+
+" }}}
 
 
 
@@ -155,15 +164,17 @@ endif
 "                                                                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" {{{
 
-" set cwd to filepath ----{{{
+
+" set cwd to filepath {{{
 function! SetCwdToFilePath()
     execute "cd " . expand('%:p:h')
 endfunction
 " }}}
 
 
-" toggle syntax highlighting ----{{{
+" toggle syntax highlighting {{{
 function! ToggleSyntax()
    if exists("g:syntax_on")
       syntax off
@@ -174,7 +185,7 @@ endfunction
 " }}}
 
 
-" make columns after &textwidth visible or invisible ----{{{
+" make columns after &textwidth visible or invisible {{{
 function! ToggleColorColumn()
     let col = &textwidth
     let expr = join(range(col + 1, 255), ',')
@@ -190,7 +201,7 @@ endfunction
 autocmd OptionSet textwidth :call ToggleColorColumn()
 
 
-" insert a line some characters above ----{{{
+" insert a line some characters above {{{
 function! InsertCharLine(char, num)
     let char = a:char
     let num = a:num - 1
@@ -199,7 +210,7 @@ endfunction
 " }}}
 
 
-" insert a box of characters around the word in the current line ----{{{
+" insert a box of characters around the word in the current line {{{
 function! InsertCharBox(char)
     let char = a:char
     execute "normal I" . char . " \<Esc>A " . char ."\<Esc>"
@@ -210,7 +221,7 @@ endfunction
 
 
 
-" ranger as a file chooser ----{{{
+" ranger as a file chooser {{{
 function! RangerChooser()
     let temp = tempname()
     " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
@@ -251,7 +262,7 @@ command! -bar RangerChooser call RangerChooser()
 
 
 
-
+" }}}
 
 
 
@@ -266,6 +277,7 @@ command! -bar RangerChooser call RangerChooser()
 "                                                                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" {{{
 
 
 
@@ -280,6 +292,8 @@ let maplocalleader=' '
 
 """""""""""
 " GENERAL "
+
+" {{{
 
 
 " (for compatibility)
@@ -335,10 +349,14 @@ noremap <M-k>  <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
 noremap <Esc>k <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
 
 
+" }}}
+
 
 
 """""""""""""""""""
 " CHANGE SETTINGS "
+
+" {{{
 
 
 " change tab width
@@ -351,9 +369,14 @@ nnoremap <Leader>settw8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
 nnoremap <Leader>setp :set paste! <bar> :set paste?<CR>
 
 
+" }}}
+
+
 
 """"""""""""""""""""""""
 " CHANGE VISUAL THINGS "
+
+" {{{
 
 
 " toggle syntax highlighting
@@ -385,10 +408,14 @@ nmap <C-G>sg <C-G>sd
 
 
 
+" }}}
+
 
 
 """"""""""""
 " MOVEMENT "
+
+" {{{
 
 
 " move intuitively when text is wrapped
@@ -434,7 +461,7 @@ nnoremap dl d$
 "nnoremap vl v$
 
 
-" movement additions (operator pending mappings) --------------------{{{
+" movement additions (operator pending mappings) {{{
 " new movements ('din(' deletes inside next parenthees)
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F)vi(<cr>
@@ -471,9 +498,14 @@ nnoremap Ä `
 nnoremap <Leader>. '.zz
 
 
+" }}}
+
+
 
 """""""""""""""""""""""""
 " SEARCHING AND FINDING "
+
+" {{{
 
 
 " search
@@ -508,10 +540,14 @@ nnoremap <Leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 
 
 
+" }}}
+
 
 
 """"""""""""""""
 " TEXT EDITING "
+
+" {{{
 
 
 " text edit leader is minus
@@ -525,6 +561,10 @@ cnoremap jk <C-c>
 "vnoremap i vi
 
 " yank/delete line without line break (in difference to yy/dd)
+" TODO:
+" D seems to be reset by some plugin and does not work. mapping this at
+" the end of this vimrc does not work either. this is annoying.
+ " current workaround: source vimrc once again
 nnoremap Y ^y$
 nnoremap D ^d$
 
@@ -608,8 +648,15 @@ noremap <Esc>U :later<CR>
 
 
 
+" }}}
+
+
+
 """"""""""""""""""
 " DIFF AND MERGE "
+
+" {{{
+
 
 " jump to next/previous change
 nnoremap dn ]c
@@ -619,9 +666,14 @@ nnoremap dN [c
 
 
 
+" }}}
+
+
 
 """"""""""""""""""""""""""
 " BUILDING AND DEBUGGING "
+
+" {{{
 
 
 " make
@@ -639,8 +691,14 @@ nnoremap <Leader>sL :lopen<CR>
 
 
 
+" }}}
+
+
+
 """""""""""""""""""""""
 " BUFFERS AND WINDOWS "
+
+" {{{
 
 
 " change buffer by searching
@@ -668,9 +726,14 @@ nnoremap <silent> <Leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 
 
+" }}}
+
+
 
 """"""""""""""""""
 " EXTERNAL TOOLS "
+
+" {{{
 
 
 " shell in dir of current file
@@ -687,10 +750,14 @@ nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig<CR>
 
 
 
+" }}}
+
 
 
 """"""""""""""""""""""""
 " SAVING AND CLOSING   "
+
+" {{{
 
 
 
@@ -719,6 +786,11 @@ nnoremap <Leader><C-D><C-D> :quitall!<CR>
 " remember ZZ and ZQ
 
 
+" }}}
+
+
+
+" }}}
 
 
 
@@ -742,6 +814,8 @@ nnoremap <Leader><C-D><C-D> :quitall!<CR>
 "                                                                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" {{{
+
 
 " The plugin section is only executed when Vundle is installed,
 " so I can use my vimrc as a stripped-down version on hosts/users without Vundle
@@ -758,6 +832,7 @@ if isdirectory(expand("~/.vim/bundle/vundle"))
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" {{{
 
 " let Vundle manage Vundle (required!)
 Plugin 'gmarik/vundle'
@@ -771,15 +846,17 @@ nnoremap <Leader>ps :PluginSearch<Space>
 
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" allow plugins to utilize . command
+" allow plugins to utilize . command {{{
 
 Plugin 'tpope/vim-repeat'
 
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" look and feel
+" look and feel {{{
 
 " colorschemes
 Plugin 'flazz/vim-colorschemes'
@@ -788,8 +865,9 @@ Plugin 'joshdick/onedark.vim'
 Plugin 'sjl/badwolf'
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" sick statusline
+" sick statusline {{{
 
 " https://powerline.readthedocs.org/en/latest/usage/other.html#vim-statusline
 "
@@ -819,8 +897,9 @@ let g:airline_powerline_fonts=0
 " http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" do some git from within vim
+" do some git from within vim {{{
 
 Plugin 'tpope/vim-fugitive'
 
@@ -852,8 +931,9 @@ augroup gitcommit
 augroup END
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" amazingly move everywhere
+" amazingly move everywhere {{{
 
 Plugin 'easymotion/vim-easymotion'
 
@@ -862,8 +942,9 @@ map ä <Plug>(easymotion-prefix)
 
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" advanced searching
+" advanced searching {{{
 
 Plugin 'haya14busa/incsearch.vim'
 
@@ -894,9 +975,9 @@ xnoremap  / y:<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
 Plugin 'edsono/vim-matchit'
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" fuzzy find files etc
-" (like Sublimes 'Goto Anything')
+" fuzzy find files etc (like Sublimes 'Goto Anything') {{{
 
 Plugin 'kien/ctrlp.vim'
 
@@ -935,8 +1016,9 @@ let g:ctrlp_prompt_mappings = {
 let g:ctrlp_show_hidden = 1
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" file searching and much more
+" file searching and much more {{{
 " http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
 " TODO CONFIGURE AND TEST
 
@@ -944,8 +1026,9 @@ let g:ctrlp_show_hidden = 1
 "Plugin 'Shougo/unite.vim'
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" tags (variables, functions, ...) overview
+" tags (variables, functions, ...) overview {{{
 
  Plugin 'majutsushi/tagbar'
 
@@ -965,8 +1048,9 @@ noremap <silent> <Leader>tt :TagbarToggle<CR>
 
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" file browser
+" file browser {{{
 
 Plugin 'scrooloose/nerdtree'
 
@@ -984,8 +1068,9 @@ let NERDTreeMapToggleHidden='.'
 
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" static code analysis
+" static code analysis {{{
 
 Plugin 'scrooloose/syntastic'
 
@@ -1019,8 +1104,9 @@ let g:syntastic_quiet_messages = { "regex": [
 
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" text editing
+" text editing {{{
 
 " make the 0 register a stack (yank/delete multiple things without worrying)
 " lightweight alternative to yankring
@@ -1046,8 +1132,9 @@ inoremap <silent> <Esc><Enter> <Esc>A;<Enter>
 Plugin 'tpope/vim-surround'
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" move visual selections around (even blocks)
+" move visual selections around (even blocks) {{{
 
 Plugin 'shinokada/dragvisuals.vim'
 vmap <expr> <C-H>  DVB_Drag('left')
@@ -1056,8 +1143,9 @@ vmap <expr> <C-J>  DVB_Drag('down')
 vmap <expr> <C-K>  DVB_Drag('up')
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" change 'true' to 'false' etc. in the blink of an eye
+" change 'true' to 'false' etc. in the blink of an eye {{{
 
 Plugin 'vim-scripts/toggle_words.vim'
 
@@ -1105,8 +1193,9 @@ let g:toggle_words_dict = {
     \ }
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Snippets
+" Snippets {{{
 
 " snippet engine
 Plugin 'SirVer/ultisnips'
@@ -1127,8 +1216,9 @@ Plugin 'honza/vim-snippets'
 autocmd filetype php set filetype=php.html
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" advanced auto completion engine
+" advanced auto completion engine {{{
 "
 " Remember: YCM is a plugin with a compiled component. If you update YCM using
 " Vundle and the ycm_support_libs library APIs have changed (happens rarely),
@@ -1141,8 +1231,9 @@ let g:ycm_key_list_select_completion = ['<C-N>', '<Down>', '<Tab>']
 let g:ycm_key_list_previous_completion=['<C-P>', '<Up>']
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" align stuff
+" align stuff {{{
 
 Plugin 'junegunn/vim-easy-align'
 
@@ -1153,8 +1244,9 @@ xmap -l <Plug>(EasyAlign)
 nmap -l <Plug>(EasyAlign)
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" auto format
+" auto format {{{
 
 Plugin 'Chiel92/vim-autoformat'
 
@@ -1165,8 +1257,9 @@ nnoremap -af :Autoformat<CR>
 vnoremap -af :Autoformat<CR>
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" handle trailing whitespace
+" handle trailing whitespace {{{
 
 Plugin 'vim-scripts/ShowTrailingWhiteSpace'
 
@@ -1182,8 +1275,9 @@ vnoremap <silent> -dst :DeleteTrailingWhitespace<CR>
 nnoremap <silent> -dst :%DeleteTrailingWhitespace<CR>
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" LaTeX stuff
+" LaTeX stuff {{{
 
 Plugin 'lervag/vimtex'
 
@@ -1203,14 +1297,16 @@ let g:ycm_semantic_triggers.tex = [
 nnoremap <Leader>bl :VimtexCompileToggle<CR>
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" scala stuff
+" scala stuff {{{
 
 Plugin 'derekwyatt/vim-scala'
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Graphical undo tree
+" Graphical undo tree {{{
 
 Plugin 'sjl/gundo.vim'
 
@@ -1222,6 +1318,7 @@ let g:gundo_return_on_revert = 0
 nnoremap <Leader>ut :GundoToggle<CR>
 
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     " finish vundle
@@ -1252,5 +1349,9 @@ else
 endif
 
 
+" }}}
 
-" vim:tw=80:sw=4:
+
+
+
+" vim:tw=80:sw=4:fdm=marker:
