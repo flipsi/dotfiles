@@ -20,11 +20,669 @@
 "
 "
 "
-" open/close a fold with zo/zc
-" open/close all folds with zR/zM
 "
 "
 "
+"
+" In case you open this file in vim and don't know how to use folds:
+" - open/close a fold with zo/zc
+" - open/close all folds with zR/zM
+"
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                              "
+" README                                                                       "
+"                                                                              "
+"                                                                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" {{{
+"
+"
+" Vim becomes especially powerful with plugins.
+" I use   VUNDLE    to manage my plugins.
+" It seems to be best package manager for me. For a discussion see here:
+"       http://quyennguyen.com/code/Sync-Vim-With-Github-and-Vundle/
+"       http://lepture.com/en/2012/vundle-vs-pathogen
+
+" I install vundle like this:
+"
+"       git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+"
+" and don't have ~/.vim/bundle under version control, because this is a bad
+" idea. Instead, I use the install.sh script provided in this repository to
+" install some of the vim configuration files and from inside vim I call
+" :PluginInstall on each host to let vundle handle the plugins.
+"
+"
+" I want my vimrc to be sourced without errors out of the box.
+" So there are two modes:
+"       a mastery of the world mode ('mastery') with all my plugins,
+"       a stripped mode ('stripped') without plugins.
+" I use the stripped mode on some other systems than home, VMs or as root.
+"
+"
+" This vimrc is divided in several sections.
+"
+"       a PLUGIN SECTION
+"                           where plugins are listed configured.
+"                           It can contain settings and keymaps that are
+"                           specific to a particular plugin.
+"                           It is only executed in mastery mode.
+"       an SETTINGS SECTION
+"                           that contains some options not specific to a
+"                           plugin.
+"                           Also, settings that are no options are made here
+"                           (e.g. colorscheme)
+"                           It is executed in both modes.
+"       a FUNCTION SECTION
+"                           with some useful functions.
+"                           It is executed in both modes.
+"       a KEYMAP SECTION
+"                           where characters are bound.
+"                           It is executed in both modes.
+"                           Also, it may contain fallback keymaps for plugin
+"                           specific things if we are in stripped mode.
+"                           It must be executed after the plugin section.
+"                           Mappings with the alt key should be done twice:                             "
+"                           - with <Esc>* for terminal sequences, and
+"                           - with <M-*>  for gvim
+"                           Leader key convention:
+"                           - general leader is space (' ')
+"                           - text edit leader is minus ('-')
+"                           The leader key may set several times in this file
+"                           since the execution time of the mapping matters.
+"
+"
+" }}}
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                              "
+" SETUP                                                                        "
+"                                                                              "
+"                                                                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" basic setup {{{
+
+" we use vim, not vi
+set nocompatible
+
+" execute external commands with bash (fish makes problems with vundle)
+set shell=/usr/bin/bash
+
+" edit runtimepath
+set runtimepath+=~/.vim/syntax
+
+
+" }}}
+" mode {{{
+
+" compute if we should use mastery of the world or stripped mode
+" (TODO: current implementation is very simple and should be improved)
+function! ComputeMyMode()
+    if isdirectory(expand("~/.vim/bundle/vundle"))
+        return 'mastery'
+    else
+        return 'stripped'
+    endif
+endfunction
+"
+" ... and compute this only once
+let s:MyMode = ComputeMyMode()
+
+" test which mode will be used
+if s:MyMode == 'mastery'
+    "echo 'Loading configuration with plugins...'
+else
+    "echo 'Loading configuration without plugins...'
+endif
+
+" }}}
+" leader {{{
+
+let mapleader=' '
+let maplocalleader=' '
+
+" }}}
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                              "
+"  PLUGIN SECTION                                                              "
+"                                                                              "
+"                                                                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" {{{
+
+
+if s:MyMode == 'mastery'
+
+
+    " start vundle
+    filetype off
+    set rtp+=~/.vim/bundle/vundle/
+    "call vundle#rc()
+    call vundle#begin()
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" let Vundle manage Vundle (required!) {{{
+
+Plugin 'gmarik/vundle'
+
+" package control mappings from vundle itself
+nnoremap <Leader>pl :PluginList<CR>
+nnoremap <Leader>pi :PluginInstall<CR>
+nnoremap <Leader>pc :PluginClean<CR>
+nnoremap <Leader>pu :PluginUpdate<CR>
+nnoremap <Leader>ps :PluginSearch<Space>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" allow plugins to utilize . command {{{
+
+Plugin 'tpope/vim-repeat'
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" look and feel {{{
+
+" colorschemes
+Plugin 'flazz/vim-colorschemes'
+Plugin 'christophermca/meta5'
+Plugin 'joshdick/onedark.vim'
+Plugin 'sjl/badwolf'
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" statusline {{{
+
+" https://powerline.readthedocs.org/en/latest/usage/other.html#vim-statusline
+"
+" instead of this deprecated vimscript plugin...:
+" Plugin 'Lokaltog/vim-powerline
+" ... we use this rewritten one in python:
+" Plugin 'powerline/powerline'
+
+" disable powerline if it is installed
+let g:powerline_loaded = 1
+
+" on arch linux, installed python-powerline
+" and fix import error with
+"let $PYTHONPATH="/usr/lib/python3.5/site-packages"
+
+
+" lightweight alternative to powerline
+
+Plugin 'bling/vim-airline'
+let g:airline_detect_modified=1
+let g:airline_detect_paste=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts=0
+
+
+" TODO simple statusline like this
+" http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" do some git from within vim {{{
+
+Plugin 'tpope/vim-fugitive'
+
+nmap <Leader>gg <Leader>gs
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gr :Gread<CR>
+nnoremap <Leader>gw :Gwrite<CR>
+nnoremap <Leader>ga :Gwrite<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gp :Gpull<CR>
+nnoremap <Leader>gP :Gpush<CR>
+
+
+" show git status of lines on the left
+
+Plugin 'airblade/vim-gitgutter'
+
+let g:gitgutter_max_signs = 4000
+
+nnoremap <C-G>g :GitGutterToggle<CR>
+
+
+" commit messages are special
+augroup gitcommit
+    autocmd!
+    autocmd filetype gitcommit setlocal nonumber norelativenumber
+    autocmd filetype gitcommit setlocal textwidth=50
+    autocmd filetype gitcommit setlocal colorcolumn=""
+augroup END
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" amazingly move everywhere {{{
+
+Plugin 'easymotion/vim-easymotion'
+
+" prefix
+map ä <Plug>(easymotion-prefix)
+
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" advanced searching {{{
+
+Plugin 'haya14busa/incsearch.vim'
+
+"nnoremap ö  <Plug>(incsearch-forward)
+"nnoremap Ö  <Plug>(incsearch-backward)
+"nnoremap gö <Plug>(incsearch-stay)
+
+nnoremap ö :call incsearch#call()<CR>
+nnoremap Ö :call incsearch#call({'command': '?'})<CR>
+
+
+" searching in multiple files
+" install 'the_silver_searcher' package on the system
+Plugin 'rking/ag.vim'
+
+" always start in project root instead of cwd
+let g:ag_working_path_mode="r"
+
+nnoremap / :Ag<Space>
+" search for word under cursor
+nnoremap <Leader>* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+" search for visual selection
+xnoremap  / y:<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
+"nnoremap  K :<c-u>Ag <c-r>=shellescape(expand("<cword>"),1)<cr>:copen<cr>
+
+
+" % also matches HTML-tags/words etc
+Plugin 'edsono/vim-matchit'
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fuzzy find files etc (like Sublimes 'Goto Anything') {{{
+
+Plugin 'kien/ctrlp.vim'
+
+let g:ctrlp_map = '#'
+let g:ctrlp_cmd = 'CtrlPMRUFiles'
+nnoremap #          :CtrlPMRUFiles<CR>
+nnoremap <Leader>er :CtrlPMRUFiles<CR>
+nnoremap <Leader>em :CtrlPMixed<CR>
+nnoremap <Leader>eo :CtrlPRoot<CR>
+nnoremap <Leader>eb :CtrlPBuffer<CR>
+
+" ignore some stuff
+let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+            \ }
+
+" change appearance
+"let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:10'
+let g:ctrlp_match_window = 'top,order:ttb,min:1,max:8,results:8'
+
+" custom key bindings when ctrlp prompt is open
+let g:ctrlp_prompt_mappings = {
+            \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<tab>'],
+            \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<s-tab>'],
+            \ 'PrtExpandDir()':       [],
+            \ 'AcceptSelection("v")': ['<Esc><Enter>', '<c-v>', '<RightMouse>'],
+            \ 'ToggleFocus()':        [],
+            \ 'ToggleRegex()':        ['<c-r>', '<esc>r'],
+            \ 'ToggleType(1)':        ['<c-l>', '<c-up>'],
+            \ 'ToggleType(-1)':       ['<c-h>', '<c-down>'],
+            \ 'PrtCurLeft()':         ['<c-b>', '<left>', '<c-^>'],
+            \ 'PrtCurRight()':        ['<c-f>', '<right>'],
+            \ }
+
+" also find hidden files
+let g:ctrlp_show_hidden = 1
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" file searching and much more {{{
+" http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
+" TODO CONFIGURE AND TEST
+
+"Plugin 'Shougo/vimproc.vim'
+"Plugin 'Shougo/unite.vim'
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" tags (variables, functions, ...) overview {{{
+
+Plugin 'majutsushi/tagbar'
+
+" install 'ctags' package on the system
+
+" if I leave tagbar open but unfocused, q closes vim. that not what i want...
+" so i autoclose and autofocus tagbar, which is cooler anyway
+
+let g:tagbar_compact = 1
+let g:tagbar_autoclose = 1
+
+"let g:tagbar_map_close = 'Q'
+
+noremap <silent> <Leader>tt :TagbarToggle<CR>
+
+"autocmd FileType vim nested :TagbarOpen()<CR>
+
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" file browser {{{
+
+Plugin 'scrooloose/nerdtree'
+
+let NERDTreeWinSize = 50
+let NERDTreeQuitOnOpen = 1
+let NERDTreeWinPos = 'right'
+
+" show/hide nerdtree
+noremap <silent> <Leader>tn :NERDTreeToggle<CR>
+" show nerdtree from current file
+noremap <silent> <Leader>tN :call SetCwdToFilePath() <bar> :NERDTreeCWD<CR>
+
+" show/hide hidden files
+let NERDTreeMapToggleHidden='.'
+
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" static code analysis {{{
+
+Plugin 'scrooloose/syntastic'
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {
+            \ "mode": "active",
+            \ "active_filetypes": ["ruby", "php"],
+            \ "passive_filetypes": ["python", "tex"] }
+
+nnoremap <silent> <Leader>sc :SyntasticCheck<CR>
+nnoremap <silent> <Leader>sr :SyntasticReset<CR>
+nnoremap <silent> <Leader>st :SyntasticToggleMode<CR>
+nnoremap <silent> <Leader>si :SyntasticInfo<CR>
+
+
+" install linters on the system:
+" - pylint
+" - jslint
+" - csslint (but phpcs also can do css)
+" - phpcs (https://github.com/squizlabs/PHP_CodeSniffer)
+let g:syntastic_php_checkers = ['phpcs', 'phplint', 'php']
+
+" ignore these errors/warnings
+let g:syntastic_quiet_messages = { "regex": [
+            \ '\mMissing file doc comment',
+            \ '\mLine indented incorrectly;.*'
+            \ ] }
+
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" text editing {{{
+
+" make the 0 register a stack (yank/delete multiple things without worrying)
+" lightweight alternative to yankring
+Plugin 'maxbrunsfeld/vim-yankstack'
+let g:yankstack_map_keys = 0
+nmap <C-p> <Plug>yankstack_substitute_older_paste
+nmap <C-n> <Plug>yankstack_substitute_newer_paste
+"call yankstack#setup()
+
+" add and toggle comments with <Leader>c<space>
+Plugin 'scrooloose/nerdcommenter'
+" duplicate a line and comment out the first one
+nmap <Leader>cd yy<Leader>ccp
+
+" automagically add closing braces etc
+Plugin 'Raimondi/delimitMate'
+
+" add a ; at the end of a line
+"Plugin 'lfilho/cosco.vim'
+"inoremap <silent> <Esc><Enter> <Esc>:call cosco#commaOrSemiColon()<CR>A<Enter>
+inoremap <silent> <Esc><Enter> <Esc>A;<Enter>
+
+" add/change/delete quotes/braces/... and more
+Plugin 'tpope/vim-surround'
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" move visual selections around (even blocks) {{{
+
+Plugin 'shinokada/dragvisuals.vim'
+vmap <expr> <C-H>  DVB_Drag('left')
+vmap <expr> <C-L>  DVB_Drag('right')
+vmap <expr> <C-J>  DVB_Drag('down')
+vmap <expr> <C-K>  DVB_Drag('up')
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" change 'true' to 'false' etc. in the blink of an eye {{{
+
+Plugin 'vim-scripts/toggle_words.vim'
+
+noremap <silent> -tw :ToggleWord<CR>
+
+let g:toggle_words_dict = {
+            \ 'css': [
+            \     ["div", "span"],
+            \     ["head", "body"],
+            \     ['inline', 'block', 'none'],
+            \     ['margin', 'padding'],
+            \     ['relative', 'absolute', 'fixed', 'static'],
+            \ ],
+            \ 'html': [
+            \     ["div", "span"],
+            \     ["head", "body"],
+            \     ["header", "footer"],
+            \ ],
+            \ 'tex': [
+            \     ['chapter', 'section', 'subsection']
+            \ ],
+            \ '*': [
+            \     ["0", "1"],
+            \     ["black", "white"],
+            \     ["dark", "light"],
+            \     ["deep", "shallow"],
+            \     ["get", "set"],
+            \     ["head", "tail"],
+            \     ["header", "footer"],
+            \     ["left", "right"],
+            \     ["love", "hate"],
+            \     ["min", "max"],
+            \     ["next", "previous"],
+            \     ["on", "off"],
+            \     ["open", "close"],
+            \     ["red","orange","yellow","green","blue","purple"],
+            \     ["strong", "weak"],
+            \     ["this", "that"],
+            \     ["top", "bottom"],
+            \     ["true", "false"],
+            \     ["up", "down"],
+            \     ["width", "height"],
+            \     ["yes", "no"],
+            \ ],
+            \ }
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Snippets {{{
+
+" snippet engine
+Plugin 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger="<Esc>."
+"let g:UltiSnipsListSnippets="<Esc>."
+let g:UltiSnipsJumpForwardTrigger="<C-i>"
+let g:UltiSnipsJumpBackwardTrigger="<C-o>"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "sflipsnippets"]
+
+
+" snippet packs
+Plugin 'honza/vim-snippets'
+
+
+" make html snippets work in php
+" (this is a hack. but the 'ultisnips extends' approach does not work)
+" http://stackoverflow.com/questions/12471398/how-to-enable-snippet-for-html-in-php-files
+autocmd filetype php set filetype=php.html
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" advanced auto completion engine {{{
+"
+" Remember: YCM is a plugin with a compiled component. If you update YCM using
+" Vundle and the ycm_support_libs library APIs have changed (happens rarely),
+" YCM will notify you to recompile it. You should then rerun the install
+" process.
+
+Plugin 'Valloric/YouCompleteMe'
+
+let g:ycm_key_list_select_completion = ['<C-N>', '<Down>', '<Tab>']
+let g:ycm_key_list_previous_completion=['<C-P>', '<Up>']
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" align stuff {{{
+
+Plugin 'junegunn/vim-easy-align'
+
+" Start interactive EasyAlign in visual mode (e.g. vip-l=)
+xmap -l <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. -lG=)
+nmap -l <Plug>(EasyAlign)
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" auto format {{{
+
+Plugin 'Chiel92/vim-autoformat'
+
+" install formatters on the system:
+" - js-beautify (for HTML, CSS, JavaScript, JSON)
+
+nnoremap -af :Autoformat<CR>
+vnoremap -af :Autoformat<CR>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" handle trailing whitespace {{{
+
+Plugin 'vim-scripts/ShowTrailingWhiteSpace'
+
+" (has a bug)
+"Plugin 'vim-scripts/JumpToTrailingWhiteSpace'
+
+Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
+" check for trailing whitespace when writing file
+let g:DeleteTrailingWhitespace = 1
+" delete trailing whitespace for selected line
+vnoremap <silent> -dst :DeleteTrailingWhitespace<CR>
+" delete trailing whitespace for whole buffer
+nnoremap <silent> -dst :%DeleteTrailingWhitespace<CR>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" LaTeX stuff {{{
+
+Plugin 'lervag/vimtex'
+
+let g:vimtex_view_method='zathura'
+"let g:vimtex_viewer_general='zathura'
+
+" YouCompleteMe integration
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers.tex = [
+            \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*,?)*',
+            \ 're!\\includegraphics([^]]*])?{[^}]*',
+            \ 're!\\(include|input){[^}]*'
+            \ ]
+
+nnoremap <Leader>bl :VimtexCompileToggle<CR>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" scala stuff {{{
+
+Plugin 'derekwyatt/vim-scala'
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Graphical undo tree {{{
+
+Plugin 'sjl/gundo.vim'
+
+let g:gundo_preview_height = 25
+let g:gundo_right = 1
+let g:gundo_preview_bottom = 1
+let g:gundo_return_on_revert = 0
+
+nnoremap <Leader>ut :GundoToggle<CR>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    " finish vundle
+    call vundle#end()
+    filetype plugin indent on
+
+
+    " fix compatibility issues with D mapping
+    " (must be executed before the D custom mapping
+    " but cannot be executed in the vundle block)
+    call yankstack#setup()
+
+endif
+
+
+" disable powerline if it is installed
+let g:powerline_loaded = 1
+
+
+" }}}
+
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                              "
 "  SETTINGS SECTION                                                            "
@@ -35,15 +693,6 @@
 
 " {{{
 
-
-" we use vim, not vi
-set nocompatible
-
-" execute external commands with bash (fish makes problems with vundle)
-set shell=/usr/bin/bash
-
-" edit runtimepath
-set runtimepath+=~/.vim/syntax
 
 " set timeout for escape sequences
 " (so that leaving insert mode does not last that long)
@@ -139,8 +788,25 @@ set splitbelow
 set splitright
 
 
+" colorscheme {{{
+if s:MyMode == 'mastery'
+    "colorscheme candycode
+    "colorscheme dante
+    "colorscheme jellybeans
+    "colorscheme molokai
+    "colorscheme meta5
+    "colorscheme desertEx
+    "colorscheme lucius
+    "colorscheme onedark
+    colorscheme badwolf
+else
+    " fallback colorscheme
+    colorscheme desert
+endif
+" }}}
 
-" allows cursor change in tmux mode
+
+" allows cursor change in tmux mode {{{
 if exists('$TMUX')
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
@@ -148,11 +814,11 @@ else
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
+" }}}
 
 
 
 " }}}
-
 
 
 
@@ -268,12 +934,9 @@ command! -bar RangerChooser call RangerChooser()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                              "
-"  KEYBINDINGS SECTION                                                         "
+"  KEYMAP SECTION                                                              "
 "  (not plugin specific)                                                       "
 "                                                                              "
-"  mappings with the alt key should be done twice:                             "
-"      - with <Esc>* for terminal sequences, and                               "
-"      - with <M-*>  for gvim                                                  "
 "                                                                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -281,12 +944,7 @@ command! -bar RangerChooser call RangerChooser()
 
 
 
-" (non text edit) leader key is space
 let mapleader=' '
-let maplocalleader=' '
-
-" text edit leader is minus
-
 
 
 
@@ -312,7 +970,7 @@ nnoremap <F5>       :source $MYVIMRC<CR>
 
 " open help in vertical window
 cnoreabbrev <expr> h ((getcmdtype() is# ':' && getcmdline() is# 'h')
-                 \ ?('vertical help'):('h'))
+            \ ?('vertical help'):('h'))
 
 " to follow links in help and jump to definition (ctags)
 nnoremap <M-Enter>    <C-]>
@@ -509,13 +1167,15 @@ nnoremap <Leader>. '.zz
 
 
 " search
-" (fallback, will be overwritten in plugins section)
-nnoremap ö /
-nnoremap Ö ?
+if s:MyMode == 'stripped'
+    nnoremap ö /
+    nnoremap Ö ?
+endif
 
 " search in multiple files
-" (fallback, will be overwritten in plugins section)
-nnoremap / :vimgrep<Space>
+if s:MyMode == 'stripped'
+    nnoremap / :vimgrep<Space>
+endif
 
 " search for visual selection
 vnoremap * y/<C-R>"<CR>
@@ -561,19 +1221,16 @@ cnoremap jk <C-c>
 "vnoremap i vi
 
 " yank/delete line without line break (in difference to yy/dd)
-" TODO:
-" D seems to be reset by some plugin and does not work. mapping this at
-" the end of this vimrc does not work either. this is annoying.
- " current workaround: source vimrc once again
 nnoremap Y ^y$
-nnoremap D ^d$
+nnoremap D ^d$j
 
 " autocompletion
-" (fallback, will be overwritten in plugins section)
-"inoremap <M-.>  <C-N>
-"inoremap <Esc>. <C-N>
-"inoremap <M-:>  <C-P>
-"inoremap <Esc>: <C-P>
+if s:MyMode == 'stripped'
+    inoremap <M-.>  <C-N>
+    inoremap <Esc>. <C-N>
+    inoremap <M-:>  <C-P>
+    inoremap <Esc>: <C-P>
+endif
 
 " increment/decrement number
 nnoremap +  <C-A>
@@ -633,8 +1290,9 @@ nnoremap <silent> -dsD :%s:\v(\S)  (\S):\1 \2:<CR>
 
 
 " duplicate a line and comment out the first one
-" (fallback, will be overwritten in plugins section)
-nnoremap <Leader>cd yyI#<Esc>p
+if s:MyMode == 'stripped'
+    nnoremap <Leader>cd yyI#<Esc>p
+endif
 
 
 " undo and redo
@@ -702,8 +1360,9 @@ nnoremap <silent> <Leader>sL :lopen<CR>
 
 
 " change buffer by searching
-" (fallback, will be overwritten in plugins section)
-nnoremap # :buffer<Space>
+if s:MyMode == 'stripped'
+    nnoremap # :buffer<Space>
+endif
 
 " change to LRU buffer
 nnoremap <Space><Space> :buffer #<CR>
@@ -738,7 +1397,7 @@ nnoremap <silent> <Leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 " shell in dir of current file
 nnoremap <Leader>if :call SetCwdToFilePath() <bar>
-             \ :let $SHELL = '/usr/bin/fish' <bar> :!fish<CR>
+            \ :let $SHELL = '/usr/bin/fish' <bar> :!fish<CR>
 nnoremap <Leader>ib :call SetCwdToFilePath() <bar> :!bash<CR>
 
 " file manager in dir of current file
@@ -788,565 +1447,6 @@ nnoremap <Leader><C-D><C-D> :quitall!<CR>
 
 " }}}
 
-
-
-" }}}
-
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                                                              "
-"  PLUGIN SECTION                                                              "
-"                                                                              "
-"  (Plugins managed by Vundle)                                                 "
-"                                                                              "
-"                                                                              "
-"  http://quyennguyen.com/code/Sync-Vim-With-Github-and-Vundle/                "
-"  http://lepture.com/en/2012/vundle-vs-pathogen                               "
-"                                                                              "
-"                                                                              "
-"  Install vundle like this:                                                   "
-"      git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle     "
-"  and don't have ~/.vim/bundle under version control                          "
-"  (instead, call :PluginInstall on each host)                                 "
-"                                                                              "
-"                                                                              "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" {{{
-
-
-" The plugin section is only executed when Vundle is installed,
-" so I can use my vimrc as a stripped-down version on hosts/users without Vundle
-" without errors.
-if isdirectory(expand("~/.vim/bundle/vundle"))
-
-
-    " start vundle
-    filetype off
-    set rtp+=~/.vim/bundle/vundle/
-    "call vundle#rc()
-    call vundle#begin()
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" {{{
-
-" let Vundle manage Vundle (required!)
-Plugin 'gmarik/vundle'
-
-" some mappings for vundle itself
-nnoremap <Leader>pl :PluginList<CR>
-nnoremap <Leader>pi :PluginInstall<CR>
-nnoremap <Leader>pc :PluginClean<CR>
-nnoremap <Leader>pu :PluginUpdate<CR>
-nnoremap <Leader>ps :PluginSearch<Space>
-
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" allow plugins to utilize . command {{{
-
-Plugin 'tpope/vim-repeat'
-
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" look and feel {{{
-
-" colorschemes
-Plugin 'flazz/vim-colorschemes'
-Plugin 'christophermca/meta5'
-Plugin 'joshdick/onedark.vim'
-Plugin 'sjl/badwolf'
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" sick statusline {{{
-
-" https://powerline.readthedocs.org/en/latest/usage/other.html#vim-statusline
-"
-" instead of this deprecated vimscript plugin...:
-" Plugin 'Lokaltog/vim-powerline
-" ... we use this rewritten one in python:
-" Plugin 'powerline/powerline'
-
-" disable powerline if it is installed
-let g:powerline_loaded = 1
-
-" on arch linux, installed python-powerline
-" and fix import error with
-"let $PYTHONPATH="/usr/lib/python3.5/site-packages"
-
-
-" lightweight alternative to powerline
-
-Plugin 'bling/vim-airline'
-let g:airline_detect_modified=1
-let g:airline_detect_paste=1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts=0
-
-
-" TODO simple statusline like this
-" http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" do some git from within vim {{{
-
-Plugin 'tpope/vim-fugitive'
-
-nmap <Leader>gg <Leader>gs
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gd :Gdiff<CR>
-nnoremap <Leader>ga :Gwrite<CR>
-nnoremap <Leader>gc :Gcommit<CR>
-nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gp :Gpull<CR>
-nnoremap <Leader>gP :Gpush<CR>
-
-
-" show git status of lines on the left
-
-Plugin 'airblade/vim-gitgutter'
-
-let g:gitgutter_max_signs = 4000
-
-nnoremap <C-G>g :GitGutterToggle<CR>
-
-
-" commit messages are special
-augroup gitcommit
-    autocmd!
-    autocmd filetype gitcommit setlocal nonumber norelativenumber
-    autocmd filetype gitcommit setlocal textwidth=50
-    autocmd filetype gitcommit setlocal colorcolumn=""
-augroup END
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" amazingly move everywhere {{{
-
-Plugin 'easymotion/vim-easymotion'
-
-" prefix
-map ä <Plug>(easymotion-prefix)
-
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" advanced searching {{{
-
-Plugin 'haya14busa/incsearch.vim'
-
-"nnoremap ö  <Plug>(incsearch-forward)
-"nnoremap Ö  <Plug>(incsearch-backward)
-"nnoremap gö <Plug>(incsearch-stay)
-
-nnoremap ö :call incsearch#call()<CR>
-nnoremap Ö :call incsearch#call({'command': '?'})<CR>
-
-
-" searching in multiple files
-" install 'the_silver_searcher' package on the system
-Plugin 'rking/ag.vim'
-
-" always start in project root instead of cwd
-let g:ag_working_path_mode="r"
-
-nnoremap / :Ag<Space>
-" search for word under cursor
-nnoremap <Leader>* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
-" search for visual selection
-xnoremap  / y:<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
-"nnoremap  K :<c-u>Ag <c-r>=shellescape(expand("<cword>"),1)<cr>:copen<cr>
-
-
-" % also matches HTML-tags/words etc
-Plugin 'edsono/vim-matchit'
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" fuzzy find files etc (like Sublimes 'Goto Anything') {{{
-
-Plugin 'kien/ctrlp.vim'
-
-let g:ctrlp_map = '#'
-let g:ctrlp_cmd = 'CtrlPMRUFiles'
-nnoremap #          :CtrlPMRUFiles<CR>
-nnoremap <Leader>er :CtrlPMRUFiles<CR>
-nnoremap <Leader>em :CtrlPMixed<CR>
-nnoremap <Leader>eo :CtrlPRoot<CR>
-nnoremap <Leader>eb :CtrlPBuffer<CR>
-
-" ignore some stuff
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-    \ }
-
-" change appearance
-"let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:10'
-let g:ctrlp_match_window = 'top,order:ttb,min:1,max:8,results:8'
-
-" custom key bindings when ctrlp prompt is open
-let g:ctrlp_prompt_mappings = {
-    \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<tab>'],
-    \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<s-tab>'],
-    \ 'PrtExpandDir()':       [],
-    \ 'AcceptSelection("v")': ['<Esc><Enter>', '<c-v>', '<RightMouse>'],
-    \ 'ToggleFocus()':        [],
-    \ 'ToggleRegex()':        ['<c-r>', '<esc>r'],
-    \ 'ToggleType(1)':        ['<c-l>', '<c-up>'],
-    \ 'ToggleType(-1)':       ['<c-h>', '<c-down>'],
-    \ 'PrtCurLeft()':         ['<c-b>', '<left>', '<c-^>'],
-    \ 'PrtCurRight()':        ['<c-f>', '<right>'],
-    \ }
-
-" also find hidden files
-let g:ctrlp_show_hidden = 1
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" file searching and much more {{{
-" http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
-" TODO CONFIGURE AND TEST
-
-"Plugin 'Shougo/vimproc.vim'
-"Plugin 'Shougo/unite.vim'
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" tags (variables, functions, ...) overview {{{
-
- Plugin 'majutsushi/tagbar'
-
-" install 'ctags' package on the system
-
-" if I leave tagbar open but unfocused, q closes vim. that not what i want...
-" so i autoclose and autofocus tagbar, which is cooler anyway
-
-let g:tagbar_compact = 1
-let g:tagbar_autoclose = 1
-
-"let g:tagbar_map_close = 'Q'
-
-noremap <silent> <Leader>tt :TagbarToggle<CR>
-
-"autocmd FileType vim nested :TagbarOpen()<CR>
-
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" file browser {{{
-
-Plugin 'scrooloose/nerdtree'
-
-let NERDTreeWinSize = 50
-let NERDTreeQuitOnOpen = 1
-let NERDTreeWinPos = 'right'
-
-" show/hide nerdtree
-noremap <silent> <Leader>tn :NERDTreeToggle<CR>
-" show nerdtree from current file
-noremap <silent> <Leader>tN :call SetCwdToFilePath() <bar> :NERDTreeCWD<CR>
-
-" show/hide hidden files
-let NERDTreeMapToggleHidden='.'
-
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" static code analysis {{{
-
-Plugin 'scrooloose/syntastic'
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = {
-    \ "mode": "active",
-    \ "active_filetypes": ["ruby", "php"],
-    \ "passive_filetypes": ["python", "tex"] }
-
-nnoremap <silent> <Leader>sc :SyntasticCheck<CR>
-nnoremap <silent> <Leader>sr :SyntasticReset<CR>
-nnoremap <silent> <Leader>st :SyntasticToggleMode<CR>
-nnoremap <silent> <Leader>si :SyntasticInfo<CR>
-
-
-" install linters on the system:
-" - pylint
-" - jslint
-" - csslint (but phpcs also can do css)
-" - phpcs (https://github.com/squizlabs/PHP_CodeSniffer)
-let g:syntastic_php_checkers = ['phpcs', 'phplint', 'php']
-
-" ignore these errors/warnings
-let g:syntastic_quiet_messages = { "regex": [
-   \ '\mMissing file doc comment',
-   \ '\mLine indented incorrectly;.*'
-   \ ] }
-
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" text editing {{{
-
-" make the 0 register a stack (yank/delete multiple things without worrying)
-" lightweight alternative to yankring
-Plugin 'maxbrunsfeld/vim-yankstack'
-let g:yankstack_map_keys = 0
-nmap <C-p> <Plug>yankstack_substitute_older_paste
-nmap <C-n> <Plug>yankstack_substitute_newer_paste
-
-" add and toggle comments with <Leader>c<space>
-Plugin 'scrooloose/nerdcommenter'
-" duplicate a line and comment out the first one
-nmap <Leader>cd yy<Leader>ccp
-
-" automagically add closing braces etc
-Plugin 'Raimondi/delimitMate'
-
-" add a ; at the end of a line
-"Plugin 'lfilho/cosco.vim'
-"inoremap <silent> <Esc><Enter> <Esc>:call cosco#commaOrSemiColon()<CR>A<Enter>
-inoremap <silent> <Esc><Enter> <Esc>A;<Enter>
-
-" add/change/delete quotes/braces/... and more
-Plugin 'tpope/vim-surround'
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" move visual selections around (even blocks) {{{
-
-Plugin 'shinokada/dragvisuals.vim'
-vmap <expr> <C-H>  DVB_Drag('left')
-vmap <expr> <C-L>  DVB_Drag('right')
-vmap <expr> <C-J>  DVB_Drag('down')
-vmap <expr> <C-K>  DVB_Drag('up')
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" change 'true' to 'false' etc. in the blink of an eye {{{
-
-Plugin 'vim-scripts/toggle_words.vim'
-
-noremap <silent> -tw :ToggleWord<CR>
-
-let g:toggle_words_dict = {
-    \ 'css': [
-    \     ["div", "span"],
-    \     ["head", "body"],
-    \     ['inline', 'block', 'none'],
-    \     ['margin', 'padding'],
-    \     ['relative', 'absolute', 'fixed', 'static'],
-    \ ],
-    \ 'html': [
-    \     ["div", "span"],
-    \     ["head", "body"],
-    \     ["header", "footer"],
-    \ ],
-    \ 'tex': [
-    \     ['chapter', 'section', 'subsection']
-    \ ],
-    \ '*': [
-    \     ["0", "1"],
-    \     ["black", "white"],
-    \     ["dark", "light"],
-    \     ["deep", "shallow"],
-    \     ["get", "set"],
-    \     ["head", "tail"],
-    \     ["header", "footer"],
-    \     ["left", "right"],
-    \     ["love", "hate"],
-    \     ["min", "max"],
-    \     ["next", "previous"],
-    \     ["on", "off"],
-    \     ["open", "close"],
-    \     ["red","orange","yellow","green","blue","purple"],
-    \     ["strong", "weak"],
-    \     ["this", "that"],
-    \     ["top", "bottom"],
-    \     ["true", "false"],
-    \     ["up", "down"],
-    \     ["width", "height"],
-    \     ["yes", "no"],
-    \ ],
-    \ }
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Snippets {{{
-
-" snippet engine
-Plugin 'SirVer/ultisnips'
-let g:UltiSnipsExpandTrigger="<Esc>."
-"let g:UltiSnipsListSnippets="<Esc>."
-let g:UltiSnipsJumpForwardTrigger="<C-i>"
-let g:UltiSnipsJumpBackwardTrigger="<C-o>"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "sflipsnippets"]
-
-
-" snippet packs
-Plugin 'honza/vim-snippets'
-
-
-" make html snippets work in php
-" (this is a hack. but the 'ultisnips extends' approach does not work)
-" http://stackoverflow.com/questions/12471398/how-to-enable-snippet-for-html-in-php-files
-autocmd filetype php set filetype=php.html
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" advanced auto completion engine {{{
-"
-" Remember: YCM is a plugin with a compiled component. If you update YCM using
-" Vundle and the ycm_support_libs library APIs have changed (happens rarely),
-" YCM will notify you to recompile it. You should then rerun the install
-" process.
-
-Plugin 'Valloric/YouCompleteMe'
-
-let g:ycm_key_list_select_completion = ['<C-N>', '<Down>', '<Tab>']
-let g:ycm_key_list_previous_completion=['<C-P>', '<Up>']
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" align stuff {{{
-
-Plugin 'junegunn/vim-easy-align'
-
-" Start interactive EasyAlign in visual mode (e.g. vip-l=)
-xmap -l <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. -lG=)
-nmap -l <Plug>(EasyAlign)
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" auto format {{{
-
-Plugin 'Chiel92/vim-autoformat'
-
-" install formatters on the system:
-" - js-beautify (for HTML, CSS, JavaScript, JSON)
-
-nnoremap -af :Autoformat<CR>
-vnoremap -af :Autoformat<CR>
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" handle trailing whitespace {{{
-
-Plugin 'vim-scripts/ShowTrailingWhiteSpace'
-
-" (has a bug)
-"Plugin 'vim-scripts/JumpToTrailingWhiteSpace'
-
-Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
-" check for trailing whitespace when writing file
-let g:DeleteTrailingWhitespace = 1
-" delete trailing whitespace for selected line
-vnoremap <silent> -dst :DeleteTrailingWhitespace<CR>
-" delete trailing whitespace for whole buffer
-nnoremap <silent> -dst :%DeleteTrailingWhitespace<CR>
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" LaTeX stuff {{{
-
-Plugin 'lervag/vimtex'
-
-let g:vimtex_view_method='zathura'
-"let g:vimtex_viewer_general='zathura'
-
-" YouCompleteMe integration
-if !exists('g:ycm_semantic_triggers')
-    let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers.tex = [
-    \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*,?)*',
-    \ 're!\\includegraphics([^]]*])?{[^}]*',
-    \ 're!\\(include|input){[^}]*'
-    \ ]
-
-nnoremap <Leader>bl :VimtexCompileToggle<CR>
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" scala stuff {{{
-
-Plugin 'derekwyatt/vim-scala'
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Graphical undo tree {{{
-
-Plugin 'sjl/gundo.vim'
-
-let g:gundo_preview_height = 25
-let g:gundo_right = 1
-let g:gundo_preview_bottom = 1
-let g:gundo_return_on_revert = 0
-
-nnoremap <Leader>ut :GundoToggle<CR>
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    " finish vundle
-    call vundle#end()
-    filetype plugin indent on
-
-
-    " colorscheme must be set after vundle is done
-
-    "colorscheme candycode
-    "colorscheme dante
-    "colorscheme jellybeans
-    "colorscheme molokai
-    "colorscheme meta5
-    "colorscheme desertEx
-    "colorscheme lucius
-    "colorscheme onedark
-    colorscheme badwolf
-
-else
-
-    " disable powerline if it is installed
-    let g:powerline_loaded = 1
-
-    " 'desert' is the fallback colorscheme
-    colorscheme desert
-
-endif
 
 
 " }}}
