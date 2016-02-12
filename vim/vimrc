@@ -1101,6 +1101,7 @@ imap <silent> <C-A> <C-O><C-A>
 " move to EOL
 nnoremap <C-E> $
 vnoremap <C-E> $
+onoremap <C-E> $
 inoremap <C-E> <Esc>A
 cnoremap <C-A> <Home>
 " move to EOL with l instead of $
