@@ -112,7 +112,8 @@
 set nocompatible
 
 " execute external commands with bash (fish makes problems with vundle)
-set shell=/usr/bin/bash
+"set shell=/usr/bin/bash
+let &shell=system('which bash | tr -d "\n"')
 
 " edit runtimepath
 set runtimepath+=~/.vim/syntax
