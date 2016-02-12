@@ -106,7 +106,8 @@
 "                                                                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" basic setup {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BASIC SETUP {{{
 
 " we use vim, not vi
 set nocompatible
@@ -120,7 +121,8 @@ set runtimepath+=~/.vim/syntax
 
 
 " }}}
-" mode {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MY MODE {{{
 
 " compute if we should use mastery of the world or stripped mode
 " (TODO: current implementation is very simple and should be improved)
@@ -143,7 +145,8 @@ else
 endif
 
 " }}}
-" leader {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" LEADER KEY {{{
 
 let mapleader=' '
 let maplocalleader=' '
@@ -863,7 +866,6 @@ function! ToggleColorColumn()
     endif
 endfunction
 " }}}
-
 "... and call this function when &textwidth is changed
 autocmd OptionSet textwidth :call ToggleColorColumn()
 
@@ -949,10 +951,8 @@ let mapleader=' '
 
 
 
-"""""""""""
-" GENERAL "
-
-" {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GENERAL {{{
 
 
 " (for compatibility)
@@ -992,8 +992,14 @@ nnoremap <Leader>M q
 nnoremap <Leader>m @
 
 
-" abort command in ex mode
+" alternative way to go back to normal mode
+inoremap jk <Esc>
+cnoremap jk <C-c>
 cnoremap <C-g>  <C-c>
+
+" change to insert mode from visual mode
+" (this disables text objects)
+"vnoremap i vi
 
 
 " scroll with arrow keys if i lay back
@@ -1009,13 +1015,8 @@ noremap <Esc>k <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
 
 
 " }}}
-
-
-
-"""""""""""""""""""
-" CHANGE SETTINGS "
-
-" {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CHANGE SETTINGS {{{
 
 
 " change tab width
@@ -1029,13 +1030,8 @@ nnoremap <Leader>setp :set paste! <bar> :set paste?<CR>
 
 
 " }}}
-
-
-
-""""""""""""""""""""""""
-" CHANGE VISUAL THINGS "
-
-" {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CHANGE VISUAL THINGS {{{
 
 
 " toggle syntax highlighting
@@ -1066,15 +1062,9 @@ nnoremap <C-G>sd :set spelllang=de<CR>
 nmap <C-G>sg <C-G>sd
 
 
-
 " }}}
-
-
-
-""""""""""""
-" MOVEMENT "
-
-" {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MOVEMENT {{{
 
 
 " move intuitively when text is wrapped
@@ -1158,13 +1148,8 @@ nnoremap <Leader>. '.zz
 
 
 " }}}
-
-
-
-"""""""""""""""""""""""""
-" SEARCHING AND FINDING "
-
-" {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SEARCHING AND FINDING {{{
 
 
 " search
@@ -1180,7 +1165,9 @@ endif
 
 " search for visual selection
 vnoremap * y/<C-R>"<CR>
-vnoremap / y/<C-R>"<CR>
+if s:MyMode == 'stripped'
+    vnoremap / y/<C-R>"<CR>
+endif
 
 
 " find trailing whitespace
@@ -1202,24 +1189,12 @@ nnoremap <Leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 
 
 " }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TEXT EDITING {{{
 
 
+" text edit leader is minus ('-')
 
-""""""""""""""""
-" TEXT EDITING "
-
-" {{{
-
-
-" text edit leader is minus
-
-
-" alternative way to quit insert mode
-inoremap jk <Esc>
-cnoremap jk <C-c>
-
-" change to insert mode from visual mode
-"vnoremap i vi
 
 " yank/delete line without line break (in difference to yy/dd)
 nnoremap Y ^y$
@@ -1240,8 +1215,8 @@ nnoremap -- <C-X>
 
 " indent lines
 nnoremap < <<
-nnoremap > >>
 vnoremap < <gv
+nnoremap > >>
 vnoremap > >gv
 
 " move line up or down
@@ -1249,6 +1224,7 @@ nnoremap <silent> -k :m .-2<CR>==
 nnoremap <silent> -j :m .+1<CR>==
 vnoremap <silent> -j :m '>+1<CR>gv=gv
 vnoremap <silent> -k :m '<-2<CR>gv=gv
+
 
 " add new line above or below
 "(this works without mappings, except that we arein insert mode afterwards)
@@ -1305,16 +1281,9 @@ noremap <M-U>  :later<CR>
 noremap <Esc>U :later<CR>
 
 
-
-
 " }}}
-
-
-
-""""""""""""""""""
-" DIFF AND MERGE "
-
-" {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" DIFF AND MERGE {{{
 
 
 " jump to next/previous change
@@ -1324,15 +1293,9 @@ nnoremap dN [c
 " remember do and dp
 
 
-
 " }}}
-
-
-
-""""""""""""""""""""""""""
-" BUILDING AND DEBUGGING "
-
-" {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BUILDING AND DEBUGGING {{{
 
 
 " make
@@ -1349,15 +1312,9 @@ nnoremap <silent> <Leader>sl :lclose<bar>:cclose<CR>
 nnoremap <silent> <Leader>sL :lopen<CR>
 
 
-
 " }}}
-
-
-
-"""""""""""""""""""""""
-" BUFFERS AND WINDOWS "
-
-" {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BUFFERS AND WINDOWS {{{
 
 
 " change buffer by searching
@@ -1385,15 +1342,9 @@ nnoremap <silent> <Leader><C-l> :vsplit<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 nnoremap <silent> <Leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 
-
 " }}}
-
-
-
-""""""""""""""""""
-" EXTERNAL TOOLS "
-
-" {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" EXTERNAL TOOLS {{{
 
 
 " shell in dir of current file
@@ -1409,15 +1360,9 @@ nnoremap <Leader>ir :call SetCwdToFilePath() <bar> :RangerChooser<CR>
 nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig<CR>
 
 
-
 " }}}
-
-
-
-""""""""""""""""""""""""
-" SAVING AND CLOSING   "
-
-" {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SAVING AND CLOSING {{{
 
 
 
@@ -1447,6 +1392,7 @@ nnoremap <Leader><C-D><C-D> :quitall!<CR>
 
 
 " }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 
