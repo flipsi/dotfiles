@@ -1253,9 +1253,13 @@ nnoremap -al :call InsertCharLine(input("Insert character: "), 80)<CR>
 nnoremap -ab :call InsertCharBox(input("Insert character: "))<CR>
 
 
-" substitute occurences of selection in this buffer (append /c for confirmation)
+" substitute occurences of selection in this buffer with confirmation
 " (to change only this occurence, use c. by default they are the same)
-vnoremap s y:%s/<C-R>"/
+vnoremap s y:%s/<C-R>"//c<Left><Left>
+vmap -s s
+
+" substitute (last) search
+nnoremap -ss :%s:<C-R>/:
 
 
 " replace word under cursor with yank
