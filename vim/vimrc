@@ -718,12 +718,14 @@ set autoread
 " command history size
 set history=9999
 
-" undo persistent over file close
+" persistent undo over file close
 " (the undodir needs to exist!)
-set undofile
-set undodir=~/.vim/undodir
-set undolevels=1000
-set undoreload=10000
+if has ('persistent_undo')
+    set undofile
+    set undodir=~/.vim/undodir
+    set undolevels=1000
+    set undoreload=10000
+endif
 
 " syntax highlighting
 syntax enable
