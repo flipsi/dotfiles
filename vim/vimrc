@@ -980,6 +980,13 @@ nnoremap <M-Enter>    <C-]>
 nnoremap <Esc><Enter> <C-]>
 
 
+" visual block mode is more useful than visual mode
+nnoremap v <C-v>
+nnoremap <C-v> v
+
+" leave visual mode quickly
+vnoremap v <C-c>
+
 " copy to clipboard in visual mode
 "vnoremap <C-c> "+y
 vnoremap <C-c> "*y
