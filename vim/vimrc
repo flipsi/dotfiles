@@ -328,9 +328,31 @@ xnoremap  / y:<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
 Plugin 'edsono/vim-matchit'
 
 
-" hide everything except search string etc
+" hide (fold) everything except search string etc
 Plugin 'embear/vim-foldsearch'
 
+let g:foldsearch_highlight = 0
+let g:foldsearch_disable_mappings = 1
+
+" show last search
+nnoremap <Leader>zs :Fs<CR>
+nnoremap <Leader>z/ :Fs<CR>
+nnoremap <Leader>zö :Fs<CR>
+nnoremap <Leader>zz :Fs<CR>
+
+" show word under cursor
+nnoremap <Leader>z* :Fw<CR>
+nnoremap <Leader>zw :Fw<CR>
+
+" change context size (number of lines around matches)
+nnoremap <Leader>z+ :Fi<CR>
+nnoremap <Leader>zi :Fi<CR>
+nnoremap <Leader>z- :Fd<CR>
+nnoremap <Leader>zd :Fd<CR>
+
+" restore folds
+nnoremap <Leader>ze :Fe<CR>
+nnoremap <Leader>Z  :Fe<CR>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
