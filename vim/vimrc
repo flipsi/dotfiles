@@ -152,7 +152,16 @@ let mapleader=' '
 let maplocalleader=' '
 
 " }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AUTOMATICALLY SOURCE VIMRC ON SAVE {{{
 
+augroup reload_vimrc
+    autocmd!
+    autocmd BufWritePost vimrc source $MYVIMRC
+    autocmd BufWritePost vimrc AirlineRefresh
+augroup END
+
+" }}}
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -317,6 +326,10 @@ xnoremap  / y:<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
 
 " % also matches HTML-tags/words etc
 Plugin 'edsono/vim-matchit'
+
+
+" hide everything except search string etc
+Plugin 'embear/vim-foldsearch'
 
 
 " }}}
@@ -489,10 +502,10 @@ Plugin 'tpope/vim-surround'
 
 " this is an improved version of dragvisuals
 Plugin 'zirrostig/vim-schlepp'
-vmap <unique> <up>    <Plug>SchleppUp
-vmap <unique> <down>  <Plug>SchleppDown
-vmap <unique> <left>  <Plug>SchleppLeft
-vmap <unique> <right> <Plug>SchleppRight
+vmap <up>    <Plug>SchleppUp
+vmap <down>  <Plug>SchleppDown
+vmap <left>  <Plug>SchleppLeft
+vmap <right> <Plug>SchleppRight
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -940,7 +953,6 @@ command! -bar RangerChooser call RangerChooser()
 
 
 " }}}
-
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
