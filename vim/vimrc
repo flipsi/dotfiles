@@ -344,6 +344,9 @@ nnoremap <Leader>zz :Fs<CR>
 nnoremap <Leader>z* :Fw<CR>
 nnoremap <Leader>zw :Fw<CR>
 
+" show visual selection
+vnoremap <Leader>z y:Fp<Space>\V<C-R>"<CR>
+
 " change context size (number of lines around matches)
 nnoremap <Leader>z+ :Fi<CR>
 nnoremap <Leader>zi :Fi<CR>
