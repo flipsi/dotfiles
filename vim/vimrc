@@ -616,9 +616,8 @@ autocmd filetype php set filetype=php.html
 
 Plugin 'Valloric/YouCompleteMe'
 
-let g:ycm_key_list_select_completion = ['<C-N>', '<Down>', '<Tab>']
-let g:ycm_key_list_previous_completion=['<C-P>', '<Up>']
-
+let g:ycm_key_list_select_completion   = ['<C-N>', '<Down>', '<Tab>', '<Enter>']
+let g:ycm_key_list_previous_completion = ['<C-P>', '<Up>']
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
