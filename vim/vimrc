@@ -1032,6 +1032,7 @@ vnoremap v <C-c>
 " copy to clipboard in visual mode
 "vnoremap <C-c> "+y
 vnoremap <C-c> "*y
+nnoremap <C-c> gg0VG"*y
 " paste from clipboard
 noremap  <C-v><C-v> "*p
 inoremap <C-v><C-v> <Esc>"*p
