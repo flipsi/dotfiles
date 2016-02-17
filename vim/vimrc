@@ -487,12 +487,18 @@ Plugin 'tpope/vim-surround'
 "vmap <expr> <C-J>  DVB_Drag('down')
 "vmap <expr> <C-K>  DVB_Drag('up')
 
+
 " this is an improved version of dragvisuals
 Plugin 'zirrostig/vim-schlepp'
-vmap <unique> <up>    <Plug>SchleppUp
-vmap <unique> <down>  <Plug>SchleppDown
-vmap <unique> <left>  <Plug>SchleppLeft
-vmap <unique> <right> <Plug>SchleppRight
+
+vmap <up>    <Plug>SchleppUp
+vmap <down>  <Plug>SchleppDown
+vmap <left>  <Plug>SchleppLeft
+vmap <right> <Plug>SchleppRight
+
+" duplicate selection
+"vmap D <Plug>SchleppDup
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
