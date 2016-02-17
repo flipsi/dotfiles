@@ -671,6 +671,23 @@ nnoremap <silent> -dst :%DeleteTrailingWhitespace<CR>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" colors (hex codes and such) {{{
+
+" make #DD8844 appear orange etc
+Plugin 'ap/vim-css-color'
+
+" launch colorpicker and insert color code
+Plugin 'blindFS/vim-colorpicker'
+nnoremap <Leader>cp :ColorPicker<CR>
+
+" alternative colorpicker
+" (readme is looking good, but throws errors)
+"Plugin 'KabbAmine/vCoolor.vim'
+"nnoremap <Leader>cp :VCoolor<CR>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LaTeX stuff {{{
 
 Plugin 'lervag/vimtex'
