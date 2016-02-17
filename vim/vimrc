@@ -152,7 +152,16 @@ let mapleader=' '
 let maplocalleader=' '
 
 " }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AUTOMATICALLY SOURCE VIMRC ON SAVE {{{
 
+augroup reload_vimrc
+    autocmd!
+    autocmd BufWritePost vimrc source $MYVIMRC
+    autocmd BufWritePost vimrc AirlineRefresh
+augroup END
+
+" }}}
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -318,6 +327,35 @@ xnoremap  / y:<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
 " % also matches HTML-tags/words etc
 Plugin 'edsono/vim-matchit'
 
+
+" hide (fold) everything except search string etc
+Plugin 'embear/vim-foldsearch'
+
+let g:foldsearch_highlight = 0
+let g:foldsearch_disable_mappings = 1
+
+" show last search
+nnoremap <Leader>zs :Fs<CR>
+nnoremap <Leader>z/ :Fs<CR>
+nnoremap <Leader>zö :Fs<CR>
+nnoremap <Leader>zz :Fs<CR>
+
+" show word under cursor
+nnoremap <Leader>z* :Fw<CR>
+nnoremap <Leader>zw :Fw<CR>
+
+" show visual selection
+vnoremap <Leader>z y:Fp<Space>\V<C-R>"<CR>
+
+" change context size (number of lines around matches)
+nnoremap <Leader>z+ :Fi<CR>
+nnoremap <Leader>zi :Fi<CR>
+nnoremap <Leader>z- :Fd<CR>
+nnoremap <Leader>zd :Fd<CR>
+
+" restore folds
+nnoremap <Leader>ze :Fe<CR>
+nnoremap <Leader>Z  :Fe<CR>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -584,9 +622,8 @@ autocmd filetype php set filetype=php.html
 
 Plugin 'Valloric/YouCompleteMe'
 
-let g:ycm_key_list_select_completion = ['<C-N>', '<Down>', '<Tab>']
-let g:ycm_key_list_previous_completion=['<C-P>', '<Up>']
-
+let g:ycm_key_list_select_completion   = ['<C-N>', '<Down>', '<Tab>', '<Enter>']
+let g:ycm_key_list_previous_completion = ['<C-P>', '<Up>']
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -946,7 +983,6 @@ command! -bar RangerChooser call RangerChooser()
 
 
 " }}}
-
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
