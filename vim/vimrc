@@ -525,12 +525,18 @@ Plugin 'tpope/vim-surround'
 "vmap <expr> <C-J>  DVB_Drag('down')
 "vmap <expr> <C-K>  DVB_Drag('up')
 
+
 " this is an improved version of dragvisuals
 Plugin 'zirrostig/vim-schlepp'
+
 vmap <up>    <Plug>SchleppUp
 vmap <down>  <Plug>SchleppDown
 vmap <left>  <Plug>SchleppLeft
 vmap <right> <Plug>SchleppRight
+
+" duplicate selection
+vmap <Enter> <Plug>SchleppDup
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -665,6 +671,23 @@ nnoremap <silent> -dst :%DeleteTrailingWhitespace<CR>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" colors (hex codes and such) {{{
+
+" make #DD8844 appear orange etc
+Plugin 'ap/vim-css-color'
+
+" launch colorpicker and insert color code
+Plugin 'blindFS/vim-colorpicker'
+nnoremap <Leader>cp :ColorPicker<CR>
+
+" alternative colorpicker
+" (readme is looking good, but throws errors)
+"Plugin 'KabbAmine/vCoolor.vim'
+"nnoremap <Leader>cp :VCoolor<CR>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LaTeX stuff {{{
 
 Plugin 'lervag/vimtex'
@@ -750,6 +773,11 @@ set timeoutlen=1200
 " don't draw everything (e.g. when playing macros)
 set lazyredraw
 
+" disable all bells
+set noerrorbells
+set novisualbell
+set t_vb=
+
 " encoding should be utf-8 on every OS
 set     encoding=utf-8
 set fileencoding=utf-8
@@ -780,6 +808,9 @@ set numberwidth=6
 
 " highlight current line
 set cursorline
+" ... but not in insert mode
+autocmd InsertEnter * set nocursorline
+autocmd InsertLeave * set cursorline
 
 " statusline
 set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
@@ -900,6 +931,40 @@ endfunction
 " }}}
 
 
+" get a list of buffers {{{
+function! GetBufferList()
+  redir =>buflist
+  silent! ls!
+  redir END
+  return buflist
+endfunction
+" }}}
+
+
+" toggle quickfix or location list {{{
+function! ToggleList(bufname, pfx)
+  let buflist = GetBufferList()
+  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if bufwinnr(bufnum) != -1
+      exec(a:pfx.'close')
+      return
+    endif
+  endfor
+  if a:pfx == 'l' && len(getloclist(0)) == 0
+      echohl ErrorMsg
+      echo "Location List is Empty."
+      return
+  endif
+  let winnr = winnr()
+  exec(a:pfx.'open')
+  if winnr() != winnr
+    wincmd p
+  endif
+endfunction
+
+" }}}
+
+
 " make columns after &textwidth visible or invisible {{{
 function! ToggleColorColumn()
     let col = &textwidth
@@ -1002,6 +1067,21 @@ let mapleader=' '
 " (for compatibility)
 nnoremap <C-G><C-G> <C-G>
 
+" refresh screen the phat way
+" TODO make it work
+"if s:MyMode == 'stripped'
+     "command! MyRefresh :nohlsearch<bar>
+                    "\   :diffupdate<bar>
+                    "\   :syntax sync fromstart <bar>
+                    "\   :redraw!<CR>
+"else
+     "command! MyRefresh :nohlsearch<bar>
+                    "\   :diffupdate<bar>
+                    "\   :syntax sync fromstart <bar>
+                    "\   :redraw!<bar>
+                    "\   :AirlineRefresh<CR>
+"endif
+"nnoremap <Leader><F5> :MyRefresh<CR>
 
 " open config file
 "nnoremap <Leader>ev :edit ~/dotfiles/vim/vimrc<CR>
@@ -1052,6 +1132,10 @@ cnoremap <C-g>  <C-c>
 " change to insert mode from visual mode
 " (this disables text objects)
 "vnoremap i vi
+
+" have the up/down search functionality with C-p too
+cnoremap <C-n> <down>
+cnoremap <C-p> <up>
 
 
 " scroll with arrow keys if i lay back
@@ -1223,6 +1307,11 @@ if s:MyMode == 'stripped'
 endif
 
 
+" find next and previous occurence like usual when we searched backwards
+nnoremap <expr> n  'Nn'[v:searchforward]
+nnoremap <expr> N  'nN'[v:searchforward]
+
+
 " find trailing whitespace
 nnoremap <Leader>fst /\v\s+$<CR>
 
@@ -1279,12 +1368,15 @@ vnoremap <silent> -j :m '>+1<CR>gv=gv
 vnoremap <silent> -k :m '<-2<CR>gv=gv
 
 
-" add new line above or below
+" add new lines above or below
 "(this works without mappings, except that we arein insert mode afterwards)
 "noremap <M-o>  <Esc>o<Esc>k
 "noremap <Esc>o <Esc>o<Esc>k
 "noremap <M-O>  <Esc>O<Esc>j
 "noremap <Esc>O <Esc>O<Esc>j
+nnoremap <S-Enter> :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[j
+nnoremap <Enter> :<c-u>put =repeat(nr2char(10), v:count1)<cr>k
+
 
 " add space (a few newlines) below
 "nnoremap <Enter> :.+1insert \n\n\n<CR>
@@ -1397,6 +1489,14 @@ nnoremap <silent> <C-l> :wincmd l<CR>
 " move buffer to a new window
 nnoremap <silent> <Leader><C-l> :vsplit<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 nnoremap <silent> <Leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
+
+
+" clear windows (close quickfix and location list)
+nnoremap <BS> :lclose <Bar> :cclose <CR>
+
+" toggle quickfix or location list
+nnoremap <silent> <Leader>tf :call ToggleList("Quickfix List", 'c')<CR>
+nnoremap <silent> <Leader>tl :call ToggleList("Location List", 'l')<CR>
 
 
 " }}}
