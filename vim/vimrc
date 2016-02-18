@@ -535,7 +535,7 @@ vmap <left>  <Plug>SchleppLeft
 vmap <right> <Plug>SchleppRight
 
 " duplicate selection
-"vmap D <Plug>SchleppDup
+vmap <Enter> <Plug>SchleppDup
 
 
 " }}}
@@ -773,6 +773,11 @@ set timeoutlen=1200
 " don't draw everything (e.g. when playing macros)
 set lazyredraw
 
+" disable all bells
+set noerrorbells
+set novisualbell
+set t_vb=
+
 " encoding should be utf-8 on every OS
 set     encoding=utf-8
 set fileencoding=utf-8
@@ -803,6 +808,9 @@ set numberwidth=6
 
 " highlight current line
 set cursorline
+" ... but not in insert mode
+autocmd InsertEnter * set nocursorline
+autocmd InsertLeave * set cursorline
 
 " statusline
 set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
@@ -1059,6 +1067,21 @@ let mapleader=' '
 " (for compatibility)
 nnoremap <C-G><C-G> <C-G>
 
+" refresh screen the phat way
+" TODO make it work
+"if s:MyMode == 'stripped'
+     "command! MyRefresh :nohlsearch<bar>
+                    "\   :diffupdate<bar>
+                    "\   :syntax sync fromstart <bar>
+                    "\   :redraw!<CR>
+"else
+     "command! MyRefresh :nohlsearch<bar>
+                    "\   :diffupdate<bar>
+                    "\   :syntax sync fromstart <bar>
+                    "\   :redraw!<bar>
+                    "\   :AirlineRefresh<CR>
+"endif
+"nnoremap <Leader><F5> :MyRefresh<CR>
 
 " open config file
 "nnoremap <Leader>ev :edit ~/dotfiles/vim/vimrc<CR>
@@ -1108,6 +1131,10 @@ cnoremap <C-g>  <C-c>
 " change to insert mode from visual mode
 " (this disables text objects)
 "vnoremap i vi
+
+" have the up/down search functionality with C-p too
+cnoremap <C-n> <down>
+cnoremap <C-p> <up>
 
 
 " scroll with arrow keys if i lay back
@@ -1279,6 +1306,11 @@ if s:MyMode == 'stripped'
 endif
 
 
+" find next and previous occurence like usual when we searched backwards
+nnoremap <expr> n  'Nn'[v:searchforward]
+nnoremap <expr> N  'nN'[v:searchforward]
+
+
 " find trailing whitespace
 nnoremap <Leader>fst /\v\s+$<CR>
 
@@ -1335,12 +1367,15 @@ vnoremap <silent> -j :m '>+1<CR>gv=gv
 vnoremap <silent> -k :m '<-2<CR>gv=gv
 
 
-" add new line above or below
+" add new lines above or below
 "(this works without mappings, except that we arein insert mode afterwards)
 "noremap <M-o>  <Esc>o<Esc>k
 "noremap <Esc>o <Esc>o<Esc>k
 "noremap <M-O>  <Esc>O<Esc>j
 "noremap <Esc>O <Esc>O<Esc>j
+nnoremap <S-Enter> :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[j
+nnoremap <Enter> :<c-u>put =repeat(nr2char(10), v:count1)<cr>k
+
 
 " add space (a few newlines) below
 "nnoremap <Enter> :.+1insert \n\n\n<CR>
