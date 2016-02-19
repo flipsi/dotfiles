@@ -514,6 +514,13 @@ inoremap <silent> <Esc><Enter> <Esc>A;<Enter>
 " add/change/delete quotes/braces/... and more
 Plugin 'tpope/vim-surround'
 
+" swap ('transpose') two words or arbitrary things
+" ('cx<Movement>' on the first word, and on the second)
+" ('X' in visual mode)
+Plugin 'tommcdo/vim-exchange'
+" swap this word and the word before
+nmap cxx cxiwb.
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1492,7 +1499,7 @@ nnoremap <silent> <Leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 
 " clear windows (close quickfix and location list)
-nnoremap <BS> :lclose <Bar> :cclose <CR>
+nnoremap <silent> <BS> :lclose <Bar> :cclose <CR>
 
 " toggle quickfix or location list
 nnoremap <silent> <Leader>tf :call ToggleList("Quickfix List", 'c')<CR>
