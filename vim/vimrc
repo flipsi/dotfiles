@@ -515,12 +515,13 @@ inoremap <silent> <Esc><Enter> <Esc>A;<Enter>
 Plugin 'tpope/vim-surround'
 
 " swap ('transpose') two words or arbitrary things
-" ('cx<Movement>' on the first word, and on the second)
-" ('X' in visual mode)
 Plugin 'tommcdo/vim-exchange'
 " swap this word and the word before
-nmap cxx cxiwb.
-
+nmap <Leader>x <Plug>(Exchange)
+xmap <Leader>x <Plug>(Exchange)
+nmap <Leader>xc <Plug>(ExchangeClear)
+nmap <Leader>xl <Plug>(ExchangeLine)
+nmap <Leader>xx <Leader>xiwb.
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
