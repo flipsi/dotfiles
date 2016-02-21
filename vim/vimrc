@@ -107,7 +107,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" BASIC SETUP {{{
+" basic setup {{{
 
 " we use vim, not vi
 set nocompatible
@@ -122,7 +122,7 @@ set runtimepath+=~/.vim/syntax
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MY MODE {{{
+" my mode {{{
 
 " compute if we should use mastery of the world or stripped mode
 " (TODO: current implementation is very simple and should be improved)
@@ -146,14 +146,14 @@ endif
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" LEADER KEY {{{
+" leader key {{{
 
 let mapleader=' '
 let maplocalleader=' '
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" AUTOMATICALLY SOURCE VIMRC ON SAVE {{{
+" automatically source vimrc on save {{{
 
 augroup reload_vimrc
     autocmd!
@@ -162,8 +162,18 @@ augroup reload_vimrc
 augroup END
 
 " }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" cursor to the last line when reopening a file {{{
 
+augroup line_jump_on_open
+    au!
+    au BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     execute 'normal! g`"zvzz' |
+        \ endif
+augroup END
 
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                              "
 "  PLUGIN SECTION                                                              "
@@ -650,6 +660,8 @@ nmap -l <Plug>(EasyAlign)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " auto format {{{
 
+" (also remember ==)
+
 Plugin 'Chiel92/vim-autoformat'
 
 " install formatters on the system:
@@ -657,6 +669,8 @@ Plugin 'Chiel92/vim-autoformat'
 
 nnoremap -af :Autoformat<CR>
 vnoremap -af :Autoformat<CR>
+nmap <Leader>af -af
+vmap <Leader>af -af
 
 
 " }}}
@@ -791,7 +805,7 @@ set     encoding=utf-8
 set fileencoding=utf-8
 
 " reload files changed outside vim
-" (still have to change buffer or so)
+" (still have to change buffer or call :checktime)
 set autoread
 
 " command history size
@@ -806,8 +820,16 @@ if has ('persistent_undo')
     set undoreload=10000
 endif
 
+" custom dictionary
+" (add words with zg and remove them with zw)
+set spellfile=~/.vim/spellfile.utf-8.add,~/.vim/spellfile.local.utf-8.add
+
 " syntax highlighting
 syntax enable
+
+" highlight conflict markers
+" TODO make it work. seems not to.
+"match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " line numbers
 set number
@@ -816,9 +838,12 @@ set numberwidth=6
 
 " highlight current line
 set cursorline
-" ... but not in insert mode
-autocmd InsertEnter * set nocursorline
-autocmd InsertLeave * set cursorline
+" ... but not in insert mode or inactive windows
+augroup cursorline
+    au!
+    au WinLeave,InsertEnter * set nocursorline
+    au WinEnter,InsertLeave * set cursorline
+augroup END
 
 " statusline
 set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
@@ -854,8 +879,8 @@ set virtualedit=all
 
 " characters to show in list mode (like whitespace)
 " and wrap symbols that are always shown
-set listchars=space:·,tab:--,extends:>,precedes:<
-
+set listchars=space:·,tab:--,extends:❯,precedes:❮
+set showbreak=↪
 " use 4 spaces instead of tabs
 set expandtab
 set tabstop=4
@@ -877,6 +902,9 @@ set splitright
 
 
 " colorscheme {{{
+
+set background=dark
+
 if s:MyMode == 'mastery'
     "colorscheme candycode
     "colorscheme dante
@@ -891,6 +919,7 @@ else
     " fallback colorscheme
     colorscheme desert
 endif
+
 " }}}
 
 
@@ -912,7 +941,7 @@ endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                              "
-"  FUNCTION  SECTION                                                           "
+"  FUNCTION SECTION                                                            "
 "  (not plugin specific)                                                       "
 "                                                                              "
 "                                                                              "
@@ -1101,10 +1130,6 @@ nnoremap <Leader>sv :source $MYVIMRC<CR>
 nnoremap <F5>       :source $MYVIMRC<CR>
 
 
-" open help in vertical window
-cnoreabbrev <expr> h ((getcmdtype() is# ':' && getcmdline() is# 'h')
-            \ ?('vertical help'):('h'))
-
 " to follow links in help and jump to definition (ctags)
 nnoremap <M-Enter>    <C-]>
 nnoremap <Esc><Enter> <C-]>
@@ -1114,8 +1139,12 @@ nnoremap <Esc><Enter> <C-]>
 nnoremap v <C-v>
 nnoremap <C-v> v
 
+" alternative for visual line mode
+nnoremap vv V
+
 " leave visual mode quickly
 vnoremap v <C-c>
+
 
 " copy to clipboard in visual mode
 "vnoremap <C-c> "+y
@@ -1141,14 +1170,9 @@ cnoremap <C-g>  <C-c>
 " (this disables text objects)
 "vnoremap i vi
 
-" have the up/down search functionality with C-p too
-cnoremap <C-n> <down>
-cnoremap <C-p> <up>
-
-
 " scroll with arrow keys if i lay back
-nnoremap <Down> <C-E>
-nnoremap <Up>   <C-Y>
+"nnoremap <Down> <C-E>
+"nnoremap <Up>   <C-Y>
 
 " scroll a little smoother (but still without plugin)
 " (this actually is suggested in :help scroll-smooth)
@@ -1156,6 +1180,28 @@ noremap <M-j>  <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
 noremap <Esc>j <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
 noremap <M-k>  <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
 noremap <Esc>k <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MAKE THE COMMAND MODE A LITTLE NICER {{{
+" (there may be other command mode things elsewhere that are more general)
+
+
+" open help in vertical window
+cnoreabbrev <expr> h ((getcmdtype() is# ':' && getcmdline() is# 'h')
+            \ ?('vertical help'):('h'))
+
+" write changes with root permissions
+cnoremap w!! w !sudo tee % >/dev/null
+"cnoreabbrev w!! w !sudo tee % >/dev/null
+
+" have the up/down search functionality with C-p too
+cnoremap <C-n> <down>
+cnoremap <C-p> <up>
+
+
+
 
 
 " }}}
@@ -1292,6 +1338,12 @@ nnoremap Ä `
 nnoremap <Leader>. '.zz
 
 
+" center line when jumping around
+nnoremap <c-o> <c-o>zz
+nnoremap <c-i> <c-i>zz
+
+
+
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SEARCHING AND FINDING {{{
@@ -1318,6 +1370,11 @@ endif
 " find next and previous occurence like usual when we searched backwards
 nnoremap <expr> n  'Nn'[v:searchforward]
 nnoremap <expr> N  'nN'[v:searchforward]
+
+" keep search matches in the middle of the window
+" TODO decide if i really want that and combine with the thing above
+"nnoremap n nzzzv
+"nnoremap N Nzzzv
 
 
 " find trailing whitespace
@@ -1370,10 +1427,15 @@ nnoremap > >>
 vnoremap > >gv
 
 " move line up or down
-nnoremap <silent> -k :m .-2<CR>==
-nnoremap <silent> -j :m .+1<CR>==
+nnoremap <silent> -k :m .-2<CR>
+nnoremap <silent> -j :m .+1<CR>
 vnoremap <silent> -j :m '>+1<CR>gv=gv
 vnoremap <silent> -k :m '<-2<CR>gv=gv
+
+
+" split line (opposite of 'J'oin lines)
+" (regular 'S' can be done with 'cc' instead)
+nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
 
 " add new lines above or below
@@ -1404,12 +1466,22 @@ vmap -s s
 " substitute (last) search
 nnoremap -ss :%s:<C-R>/:
 
+" enter substitution mode quickly
+nnoremap -sl :s:
+nnoremap <C-S> :%s:
+
 
 " replace word under cursor with yank
 nnoremap -rw viwp
 nnoremap -rW viWp
 " replace line with yank
+"nnoremap -rl Vp
 nnoremap -rl Vp
+
+
+" sort lines
+nnoremap -o vip:sort<CR>
+vnoremap -o :sort<CR>
 
 
 " correct typos like 'DAmnitypefast' to titlecase ('Damnitypefast')
@@ -1462,6 +1534,13 @@ nnoremap <Leader>bm :make<CR>
 nnoremap <Leader>sf :lfirst<CR>
 nnoremap <Leader>sn :lnext<CR>
 nnoremap <Leader>sN :lprevious<CR>
+
+" jump through lists
+nnoremap <left>  :cprev<cr>
+nnoremap <right> :cnext<cr>
+nnoremap <up>    :lprev<cr>
+nnoremap <down>  :lnext<cr>
+
 
 " close location list (which contains syntastic errors) and quickfix window
 nnoremap <silent> <Leader>sl :lclose<bar>:cclose<CR>
@@ -1529,6 +1608,9 @@ nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SAVING AND CLOSING {{{
 
+
+" check for file changes (and 'reload' them or get asked with autoread)
+nnoremap <Leader>rl :checktime<CR>
 
 
 " write changes
