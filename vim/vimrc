@@ -376,8 +376,8 @@ nnoremap <Leader>Z  :Fe<CR>
 Plugin 'kien/ctrlp.vim'
 
 let g:ctrlp_map = '#'
-let g:ctrlp_cmd = 'CtrlPMRUFiles'
-nnoremap #          :CtrlPMRUFiles<CR>
+let g:ctrlp_cmd = 'CtrlPBuffer'
+nnoremap #          :CtrlPBuffer<CR>
 nnoremap <Leader>er :CtrlPMRUFiles<CR>
 nnoremap <Leader>em :CtrlPMixed<CR>
 nnoremap <Leader>eo :CtrlPRoot<CR>
@@ -1570,8 +1570,8 @@ nnoremap > >>
 vnoremap > >gv
 
 " move line up or down
-nnoremap <silent> -k :m .-2<CR>
-nnoremap <silent> -j :m .+1<CR>
+nnoremap <silent> -k :m .-2<CR>==
+nnoremap <silent> -j :m .+1<CR>==
 vnoremap <silent> -j :m '>+1<CR>gv=gv
 vnoremap <silent> -k :m '<-2<CR>gv=gv
 
@@ -1619,7 +1619,7 @@ nnoremap -rw viwp
 nnoremap -rW viWp
 " replace line with yank
 "nnoremap -rl Vp
-nnoremap -rl Vp
+nnoremap -rl v$p
 
 
 " sort lines
