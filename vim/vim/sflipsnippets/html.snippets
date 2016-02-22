@@ -1,3 +1,46 @@
 snippet alert "script tag with shouting"
 <script>alert($0);</script>
 endsnippet
+
+snippet doc "a quick html document"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<title>$1</title>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="author" content="sflip">
+
+	<!--<link href="style.css" rel="stylesheet" type="text/css" media="screen">-->
+    <!--<script src="//code.jquery.com/jquery-1.12.0.min.js" charset="utf-8"></script>-->
+    <!--<script src="script.js" charset="utf-8"></script>-->
+
+	<style>
+		body {
+			background-color: #${2:DDDDDD}
+		}
+		h1 {
+			text-decoration: underline
+		}
+	</style>
+
+</head>
+<body>
+
+	<h1>$1</h1>
+
+	$0
+
+</body>
+endsnippet
+
+snippet t "an arbitrary html tag (one line)"
+<$1>$0</$1>
+endsnippet
+
+snippet tag "an arbitrary html tag"
+<$1>
+	$0
+</$1>
+endsnippet
