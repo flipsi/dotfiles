@@ -510,8 +510,10 @@ nmap <C-p> <Plug>yankstack_substitute_older_paste
 nmap <C-n> <Plug>yankstack_substitute_newer_paste
 "call yankstack#setup()
 
-" add and toggle comments with <Leader>c<space>
+" add and toggle comments with <Leader>c<space> etc
 Plugin 'scrooloose/nerdcommenter'
+" use leading space
+let g:NERDSpaceDelims = 1
 " duplicate a line and comment out the first one
 nmap <Leader>cd yy<Leader>ccp
 
@@ -1023,6 +1025,40 @@ endfunction
 " }}}
 "... and call this function when &textwidth is changed
 autocmd OptionSet textwidth :call ToggleColorColumn()
+
+
+" comment the current line / visual selection with html syntax {{{
+function! ToggleHTMLComment(mode)
+
+    " visual mode
+    if a:mode == "v"
+        let lineFrom = getpos("'<")[1]
+        let lineTo   = getpos("'>")[1]
+        let range    = lineFrom . "," . lineTo
+        let text     = join(getline(lineFrom, lineTo))
+
+    " normal mode
+    elseif a:mode == "n"
+        let range = "."
+        let text = getline(".")
+
+    endif
+
+    " do the toggle
+    if matchstr(text, '\V<!--') == ""
+        " comment
+        " .substitute:\v^(\s*)(.*)$:\1<!-- \2 -->:
+        " execute range . escape("substitute:\v^(\s*)(.*)$:\1<!-- \2 -->:", '\')
+        execute range . "substitute:\\v^(\\s*)(.*)$:\\1<!-- \\2 -->:"
+    else
+        " uncomment
+        " .substitute:\v\<!--\s*(.*\S)\s*--\>:\1:
+        " execute range . escape("substitute:\v\<!--\s*(.*\S)\s*--\>:\1:", '\')
+        execute range . "substitute:\\v\\<!--\\s*(.*\\S)\\s*--\\>:\\1:"
+    endif
+
+endfunction
+" }}}
 
 
 " insert a line some characters above {{{
@@ -1689,6 +1725,11 @@ nnoremap <silent> -dsl :s:^\s\+::<CR>
 nnoremap <silent> -dsd :.s:\v(\S)  (\S):\1 \2:<CR>
 nnoremap <silent> -dsD :%s:\v(\S)  (\S):\1 \2:<CR>
 
+
+" add/remove an html comment
+" (this is useful when syntax is set to php and nerdcommenter fucks up)
+nnoremap <silent> <Leader>ch :call ToggleHTMLComment("n")<CR>
+vnoremap <silent> <Leader>ch :call ToggleHTMLComment("v")<CR>
 
 " duplicate a line and comment out the first one
 if s:MyMode == 'stripped'
