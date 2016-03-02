@@ -842,13 +842,18 @@ set number
 set relativenumber
 set numberwidth=6
 
-" highlight current line
-set cursorline
+" highlight current cursor position
+let g:cursorposition = 1
+if g:cursorposition
+    set cursorline cursorcolumn
+endif
 " ... but not in insert mode or inactive windows
-augroup cursorline
+augroup cursorposition
     au!
-    au WinLeave,InsertEnter * set nocursorline
-    au WinEnter,InsertLeave * set cursorline
+    au WinLeave,InsertEnter * set nocursorline nocursorcolumn
+    au WinEnter,InsertLeave * if g:cursorposition
+    au WinEnter,InsertLeave *     set cursorline cursorcolumn
+    au WinEnter,InsertLeave * endif
 augroup END
 
 " statusline
@@ -1486,8 +1491,9 @@ nnoremap <silent> <C-G>w :set wrap! <CR>
 nnoremap <silent> <C-G>r :call ToggleColorColumn()<CR>
 nnoremap <silent> <C-G>R :highlight ColorColumn ctermbg=234<CR>
 
-" toggle highlight current line
-nnoremap <silent> <C-G>h :set cursorline!<CR>
+" toggle highlight current cursor position
+" (switch to insert mode to apply changes)
+nnoremap <silent> <C-G>h :let g:cursorposition = 1 - g:cursorposition <CR>
 
 " toggle show listchars (like whitespace)
 nnoremap <silent> <C-G>a :set list!<CR>
