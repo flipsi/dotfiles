@@ -1642,7 +1642,7 @@ nnoremap <Leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 
 " yank/delete line without line break (in difference to yy/dd)
 nnoremap Y ^y$
-nnoremap D ^d$j
+nnoremap D 0d$j
 
 " autocompletion
 if s:MyMode == 'stripped'
