@@ -249,7 +249,8 @@ let g:powerline_loaded = 1
 
 " lightweight alternative to powerline
 
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
 let g:airline#extensions#tabline#enabled = 1
@@ -922,6 +923,8 @@ if s:MyMode == 'mastery'
     "colorscheme lucius
     "colorscheme onedark
     colorscheme badwolf
+    "let g:airline_theme='serene'
+    let g:airline_theme='tomorrow'
 else
     " fallback colorscheme
     colorscheme desert
