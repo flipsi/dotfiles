@@ -1029,7 +1029,14 @@ function! ToggleColorColumn()
 endfunction
 " }}}
 "... and call this function when &textwidth is changed
-autocmd OptionSet textwidth :call ToggleColorColumn()
+augroup colorcolumn
+    au!
+    au OptionSet textwidth if &textwidth != 0
+    au OptionSet textwidth      call ToggleColorColumn()
+    au OptionSet textwidth else
+    au OptionSet textwidth      set colorcolumn=
+    au OptionSet textwidth endif
+augroup END
 
 
 " comment the current line / visual selection with html syntax {{{
@@ -1459,17 +1466,24 @@ cnoremap <C-p> <up>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" CHANGE SETTINGS {{{
+" CHANGE SETTINGS/OPTIONS {{{
 
+
+" change text width
+nnoremap <Leader>ow0 :set textwidth=0<CR>
+nnoremap <Leader>ow7 :set textwidth=78<CR>
+nnoremap <Leader>ow8 :set textwidth=80<CR>
+nnoremap <Leader>ow1 :set textwidth=100<CR>
+nnoremap <Leader>ow2 :set textwidth=120<CR>
 
 " change tab width
-nnoremap <Leader>settw2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
-nnoremap <Leader>settw4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
-nnoremap <Leader>settw8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
+nnoremap <Leader>ot2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+nnoremap <Leader>ot4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+nnoremap <Leader>ot8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
 " convert tabs so spaces with :retab
 
-" go into paste mode
-nnoremap <Leader>setp :set paste! <bar> :set paste?<CR>
+" toggle paste mode
+nnoremap <Leader>op :set paste! <bar> :set paste?<CR>
 
 
 " }}}
