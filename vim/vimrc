@@ -914,14 +914,15 @@ set background=dark
 
 if s:MyMode == 'mastery'
     "colorscheme candycode
-    "colorscheme dante
+    colorscheme dante
     "colorscheme jellybeans
     "colorscheme molokai
     "colorscheme meta5
     "colorscheme desertEx
     "colorscheme lucius
     "colorscheme onedark
-    colorscheme badwolf
+    "colorscheme badwolf
+    let g:airline_theme='bubblegum'
 else
     " fallback colorscheme
     colorscheme desert
