@@ -38,7 +38,8 @@ function create_project_session() {
 
     # (2) vim
     tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH} -n vim
-    tmux send-keys -t ${SESSION_NAME}:2 'vim --servername VIM' C-m
+    #tmux send-keys -t ${SESSION_NAME}:2 'vim --servername VIM' C-m
+    tmux send-keys -t ${SESSION_NAME}:2 'vim' C-m
 
     # (3) version-control
     tmux new-window  -t ${SESSION_NAME} -c ${SESSION_PATH} -n version-control
