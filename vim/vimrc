@@ -510,8 +510,10 @@ nmap <C-p> <Plug>yankstack_substitute_older_paste
 nmap <C-n> <Plug>yankstack_substitute_newer_paste
 "call yankstack#setup()
 
-" add and toggle comments with <Leader>c<space>
+" add and toggle comments with <Leader>c<space> etc
 Plugin 'scrooloose/nerdcommenter'
+" use leading space
+let g:NERDSpaceDelims = 1
 " duplicate a line and comment out the first one
 nmap <Leader>cd yy<Leader>ccp
 
@@ -840,13 +842,18 @@ set number
 set relativenumber
 set numberwidth=6
 
-" highlight current line
-set cursorline
+" highlight current cursor position
+let g:cursorposition = 1
+if g:cursorposition
+    set cursorline cursorcolumn
+endif
 " ... but not in insert mode or inactive windows
-augroup cursorline
+augroup cursorposition
     au!
-    au WinLeave,InsertEnter * set nocursorline
-    au WinEnter,InsertLeave * set cursorline
+    au WinLeave,InsertEnter * set nocursorline nocursorcolumn
+    au WinEnter,InsertLeave * if g:cursorposition
+    au WinEnter,InsertLeave *     set cursorline cursorcolumn
+    au WinEnter,InsertLeave * endif
 augroup END
 
 " statusline
@@ -1024,6 +1031,40 @@ endfunction
 " }}}
 "... and call this function when &textwidth is changed
 autocmd OptionSet textwidth :call ToggleColorColumn()
+
+
+" comment the current line / visual selection with html syntax {{{
+function! ToggleHTMLComment(mode)
+
+    " visual mode
+    if a:mode == "v"
+        let lineFrom = getpos("'<")[1]
+        let lineTo   = getpos("'>")[1]
+        let range    = lineFrom . "," . lineTo
+        let text     = join(getline(lineFrom, lineTo))
+
+    " normal mode
+    elseif a:mode == "n"
+        let range = "."
+        let text = getline(".")
+
+    endif
+
+    " do the toggle
+    if matchstr(text, '\V<!--') == ""
+        " comment
+        " .substitute:\v^(\s*)(.*)$:\1<!-- \2 -->:
+        " execute range . escape("substitute:\v^(\s*)(.*)$:\1<!-- \2 -->:", '\')
+        execute range . "substitute:\\v^(\\s*)(.*)$:\\1<!-- \\2 -->:"
+    else
+        " uncomment
+        " .substitute:\v\<!--\s*(.*\S)\s*--\>:\1:
+        " execute range . escape("substitute:\v\<!--\s*(.*\S)\s*--\>:\1:", '\')
+        execute range . "substitute:\\v\\<!--\\s*(.*\\S)\\s*--\\>:\\1:"
+    endif
+
+endfunction
+" }}}
 
 
 " insert a line some characters above {{{
@@ -1451,8 +1492,9 @@ nnoremap <silent> <C-G>w :set wrap! <CR>
 nnoremap <silent> <C-G>r :call ToggleColorColumn()<CR>
 nnoremap <silent> <C-G>R :highlight ColorColumn ctermbg=234<CR>
 
-" toggle highlight current line
-nnoremap <silent> <C-G>h :set cursorline!<CR>
+" toggle highlight current cursor position
+" (switch to insert mode to apply changes)
+nnoremap <silent> <C-G>h :let g:cursorposition = 1 - g:cursorposition <CR>
 
 " toggle show listchars (like whitespace)
 nnoremap <silent> <C-G>a :set list!<CR>
@@ -1690,6 +1732,11 @@ nnoremap <silent> -dsl :s:^\s\+::<CR>
 nnoremap <silent> -dsd :.s:\v(\S)  (\S):\1 \2:<CR>
 nnoremap <silent> -dsD :%s:\v(\S)  (\S):\1 \2:<CR>
 
+
+" add/remove an html comment
+" (this is useful when syntax is set to php and nerdcommenter fucks up)
+nnoremap <silent> <Leader>ch :call ToggleHTMLComment("n")<CR>
+vnoremap <silent> <Leader>ch :call ToggleHTMLComment("v")<CR>
 
 " duplicate a line and comment out the first one
 if s:MyMode == 'stripped'
