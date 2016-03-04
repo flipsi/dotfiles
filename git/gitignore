@@ -1,4 +1,5 @@
 # global gitignore file
 *.swp
+sftp-config.json
 
 
