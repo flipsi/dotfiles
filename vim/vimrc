@@ -249,7 +249,8 @@ let g:powerline_loaded = 1
 
 " lightweight alternative to powerline
 
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
 let g:airline#extensions#tabline#enabled = 1
@@ -920,16 +921,18 @@ set splitright
 set background=dark
 
 if s:MyMode == 'mastery'
-    "colorscheme candycode
-    colorscheme dante
-    "colorscheme jellybeans
-    "colorscheme molokai
-    "colorscheme meta5
-    "colorscheme desertEx
-    "colorscheme lucius
-    "colorscheme onedark
-    "colorscheme badwolf
-    let g:airline_theme='bubblegum'
+    " colorscheme candycode
+    " colorscheme dante
+    " colorscheme jellybeans
+    colorscheme molokai
+    " colorscheme meta5
+    " colorscheme desertEx
+    " colorscheme lucius
+    " colorscheme onedark
+    " colorscheme badwolf
+    " let g:airline_theme='bubblegum'
+    " let g:airline_theme='serene'
+    let g:airline_theme='tomorrow'
 else
     " fallback colorscheme
     colorscheme desert
@@ -1844,7 +1847,7 @@ nnoremap <Leader>ib :call SetCwdToFilePath() <bar> :!bash<CR>
 nnoremap <Leader>ir :call SetCwdToFilePath() <bar> :RangerChooser<CR>
 
 " git interface
-nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig<CR>
+nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig status<CR>
 
 
 " }}}
