@@ -494,7 +494,10 @@ let g:syntastic_php_checkers = ['phpcs', 'phplint', 'php']
 " ignore these errors/warnings
 let g:syntastic_quiet_messages = { "regex": [
             \ '\mMissing file doc comment',
-            \ '\mLine indented incorrectly;.*'
+            \ '\mLine indented incorrectly;.*',
+            \ '\mLine exceeds 85 characters;.*',
+            \ '\mYou must use .* style comments.*',
+            \ '\mShort PHP opening tag used;'
             \ ] }
 
 
@@ -1860,7 +1863,7 @@ nnoremap <Leader>ib :call SetCwdToFilePath() <bar> :!bash<CR>
 nnoremap <Leader>ir :call SetCwdToFilePath() <bar> :RangerChooser<CR>
 
 " git interface
-nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig<CR>
+nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig status<CR>
 
 
 " }}}
