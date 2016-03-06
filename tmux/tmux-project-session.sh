@@ -43,7 +43,7 @@ function create_project_session() {
     # (3) version-control
     tmux new-window  -t ${SESSION_NAME} -c ${SESSION_PATH} -n version-control
     if (command -v tig >/dev/null 2>&1); then
-        tmux send-keys -t ${SESSION_NAME}:3 'tig' C-m 's'
+        tmux send-keys -t ${SESSION_NAME}:3 'tig status' C-m
     else
         tmux send-keys -t ${SESSION_NAME}:3 'git status' C-m
     fi

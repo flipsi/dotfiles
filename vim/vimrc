@@ -1846,7 +1846,7 @@ nnoremap <Leader>ib :call SetCwdToFilePath() <bar> :!bash<CR>
 nnoremap <Leader>ir :call SetCwdToFilePath() <bar> :RangerChooser<CR>
 
 " git interface
-nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig<CR>
+nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig status<CR>
 
 
 " }}}
