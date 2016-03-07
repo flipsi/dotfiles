@@ -1712,8 +1712,8 @@ nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 "noremap <Esc>o <Esc>o<Esc>k
 "noremap <M-O>  <Esc>O<Esc>j
 "noremap <Esc>O <Esc>O<Esc>j
-nnoremap <S-Enter> :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[j
-nnoremap <Enter> :<c-u>put =repeat(nr2char(10), v:count1)<cr>k
+" nnoremap <somekey> :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[j
+nnoremap K :<c-u>put =repeat(nr2char(10), v:count1)<cr>k
 
 
 " add space (a few newlines) below
