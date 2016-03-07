@@ -924,20 +924,31 @@ set splitright
 set background=dark
 
 if s:MyMode == 'mastery'
-    "colorscheme candycode
-    "colorscheme dante
-    "colorscheme jellybeans
-    "colorscheme molokai
-    "colorscheme meta5
-    "colorscheme desertEx
-    "colorscheme lucius
-    "colorscheme onedark
+
+    " colorscheme candycode
+    " colorscheme dante
+    " colorscheme jellybeans
+    " colorscheme meta5
+    " colorscheme desertEx
+    " colorscheme lucius
+    " colorscheme onedark
+    colorscheme molokai
     colorscheme badwolf
-    "let g:airline_theme='serene'
-    let g:airline_theme='tomorrow'
+
+    " let g:airline_theme='serene'
+    " let g:airline_theme='kalisi'
+    " let g:airline_theme='lucius'
+    " let g:airline_theme='tomorrow'
+    let g:airline_theme='base16_summerfruit'
+
+    highlight CursorLine   ctermbg=235
+    highlight CursorColumn ctermbg=235
+
 else
+
     " fallback colorscheme
     colorscheme desert
+
 endif
 
 " }}}
