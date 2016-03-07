@@ -8,6 +8,13 @@ set guioptions-=T
 " hide menubar
 set guioptions-=m
 
+" hide scrollbars
+set guioptions-=r
+set guioptions-=R
+set guioptions-=l
+set guioptions-=L
+set guioptions-=b
+
 " font
 set guifont=Monospace
 
