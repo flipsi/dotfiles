@@ -387,6 +387,7 @@ nnoremap <Leader>eb :CtrlPBuffer<CR>
 " ignore some stuff
 let g:ctrlp_custom_ignore = {
             \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+            \ 'file': '\v\.(class)$',
             \ }
 
 " change appearance
