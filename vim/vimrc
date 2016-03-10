@@ -1503,6 +1503,10 @@ nnoremap <Leader>ot8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
 " toggle paste mode
 nnoremap <Leader>op :set paste! <bar> :set paste?<CR>
 
+" ... but ignore typos
+nnoremap <Leader>o <NOP>
+
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
