@@ -307,6 +307,17 @@ Plugin 'easymotion/vim-easymotion'
 map ä <Plug>(easymotion-prefix)
 
 
+" make f and t clever (i.e. repeatable. ',' and ';' will not be needed anymore.)
+Plugin 'rhysd/clever-f.vim'
+
+let g:clever_f_across_no_line = 0
+" let g:clever_f_ignore_case = 1
+let g:clever_f_smart_case = 1
+" let g:clever_f_timeout_ms = 2000
+let g:clever_f_fix_key_direction = 0
+let g:clever_f_repeat_last_char_inputs = ["\<CR>", "\<Tab>"]
+let g:clever_f_chars_match_any_signs = 'ö'
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
