@@ -62,9 +62,12 @@ exec --no-startup-id "xfsettingsd --sm-client-disable"
 exec --no-startup-id unclutter -idle 1 -jitter 30
 
 # disable touchpad at start
-exec --no-startup-id "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
-exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'Device Enabled' 0"
-exec --no-startup-id "xinput --set-prop 'FocalTechPS/2 FocalTech FocalTech Touchpad' 'Device Enabled' 0"
+# exec --no-startup-id "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
+# exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'Device Enabled' 0"
+# exec --no-startup-id "xinput --set-prop 'FocalTechPS/2 FocalTech FocalTech Touchpad' 'Device Enabled' 0"
+
+# disable touchpad when typing
+exec --no-startup-id "syndaemon -d -k -i 1.2"
 
 
 
@@ -182,7 +185,7 @@ bar {
     # separator_symbol    " ⣶ "
     # separator_symbol    " ⣿ "
     # separator_symbol    " Ꙭ "
-    tray_output         none
+    # tray_output         none
     colors {
         background  #1E1E1E
         statusline  #DDDDDD

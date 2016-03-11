@@ -43,12 +43,11 @@ qmark g https://github.com/sflip
 qmark h http://172.16.103.1/network/portal.php
 qmark b http://172.16.20.1/network/portal.php
 qmark l http://localhost:80/portalseiten/brainportal/portal
+qmark p http://sflip.bplaced.de/
 qmark t https://twitter.com/
 qmark y https://accounts.google.com/ServiceLogin?uilel=3&service=youtube&passive=true&continue=http%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26nomobiletemp%3D1%26hl%3Dde_DE%26next%3D%252F&hl=de_DE&ltmpl=sso
 qmark z http://www.zdf.de/ZDFmediathek/hauptnavigation/startseite/#/hauptnavigation/sendung-verpasst
 qmark c http://www.cubetimer.com/
-qmark p file:///home/sflip/masterstudies/modules/informationsvisualisierung/project/pubdb/index.html
-qmark v http://localhost/projects/govp2/
 qmark w http://workspace.brainworks.de/#page-14279-portalseiten
 
 " Styles
@@ -94,7 +93,7 @@ inoremap <A-Space> <Esc>:buffer! #<CR>
 
 " find tab
 "nmap <A-w> :buffer!
-nnoremap # :buffer!
+nnoremap # :buffer! 
 
 " move tab
 noremap <A-S-p> :tabmove -1<CR>

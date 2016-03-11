@@ -307,6 +307,17 @@ Plugin 'easymotion/vim-easymotion'
 map ä <Plug>(easymotion-prefix)
 
 
+" make f and t clever (i.e. repeatable. ',' and ';' will not be needed anymore.)
+Plugin 'rhysd/clever-f.vim'
+
+let g:clever_f_across_no_line = 0
+" let g:clever_f_ignore_case = 1
+let g:clever_f_smart_case = 1
+" let g:clever_f_timeout_ms = 2000
+let g:clever_f_fix_key_direction = 0
+let g:clever_f_repeat_last_char_inputs = ["\<CR>", "\<Tab>"]
+let g:clever_f_chars_match_any_signs = 'ö'
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -387,6 +398,7 @@ nnoremap <Leader>eb :CtrlPBuffer<CR>
 " ignore some stuff
 let g:ctrlp_custom_ignore = {
             \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+            \ 'file': '\v\.(class)$',
             \ }
 
 " change appearance
@@ -924,21 +936,35 @@ set splitright
 set background=dark
 
 if s:MyMode == 'mastery'
+
     " colorscheme candycode
     " colorscheme dante
     " colorscheme jellybeans
     colorscheme molokai
+    " colorscheme candycode
+    " colorscheme dante
+    " colorscheme jellybeans
     " colorscheme meta5
     " colorscheme desertEx
     " colorscheme lucius
     " colorscheme onedark
     " colorscheme badwolf
+
     " let g:airline_theme='bubblegum'
     " let g:airline_theme='serene'
+    " let g:airline_theme='kalisi'
+    " let g:airline_theme='lucius'
     let g:airline_theme='tomorrow'
+    " let g:airline_theme='base16_summerfruit'
+
+    highlight CursorLine   ctermbg=235
+    highlight CursorColumn ctermbg=235
+
 else
+
     " fallback colorscheme
     colorscheme desert
+
 endif
 
 " }}}
@@ -1036,7 +1062,14 @@ function! ToggleColorColumn()
 endfunction
 " }}}
 "... and call this function when &textwidth is changed
-autocmd OptionSet textwidth :call ToggleColorColumn()
+augroup colorcolumn
+    au!
+    au OptionSet textwidth if &textwidth != 0
+    au OptionSet textwidth      call ToggleColorColumn()
+    au OptionSet textwidth else
+    au OptionSet textwidth      set colorcolumn=
+    au OptionSet textwidth endif
+augroup END
 
 
 " comment the current line / visual selection with html syntax {{{
@@ -1466,17 +1499,28 @@ cnoremap <C-p> <up>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" CHANGE SETTINGS {{{
+" CHANGE SETTINGS/OPTIONS {{{
 
+
+" change text width
+nnoremap <Leader>ow0 :set textwidth=0<CR>
+nnoremap <Leader>ow7 :set textwidth=78<CR>
+nnoremap <Leader>ow8 :set textwidth=80<CR>
+nnoremap <Leader>ow1 :set textwidth=100<CR>
+nnoremap <Leader>ow2 :set textwidth=120<CR>
 
 " change tab width
-nnoremap <Leader>settw2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
-nnoremap <Leader>settw4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
-nnoremap <Leader>settw8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
+nnoremap <Leader>ot2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+nnoremap <Leader>ot4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+nnoremap <Leader>ot8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
 " convert tabs so spaces with :retab
 
-" go into paste mode
-nnoremap <Leader>setp :set paste! <bar> :set paste?<CR>
+" toggle paste mode
+nnoremap <Leader>op :set paste! <bar> :set paste?<CR>
+
+" ... but ignore typos
+nnoremap <Leader>o <NOP>
+
 
 
 " }}}
@@ -1649,7 +1693,7 @@ nnoremap <Leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 
 " yank/delete line without line break (in difference to yy/dd)
 nnoremap Y ^y$
-nnoremap D ^d$j
+nnoremap D 0d$j
 
 " autocompletion
 if s:MyMode == 'stripped'
@@ -1688,8 +1732,8 @@ nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 "noremap <Esc>o <Esc>o<Esc>k
 "noremap <M-O>  <Esc>O<Esc>j
 "noremap <Esc>O <Esc>O<Esc>j
-nnoremap <S-Enter> :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[j
-nnoremap <Enter> :<c-u>put =repeat(nr2char(10), v:count1)<cr>k
+" nnoremap <somekey> :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[j
+nnoremap K :<c-u>put =repeat(nr2char(10), v:count1)<cr>k
 
 
 " add space (a few newlines) below
