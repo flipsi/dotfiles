@@ -321,6 +321,48 @@ let g:clever_f_chars_match_any_signs = 'ö'
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" custom text objects {{{
+
+Plugin 'kana/vim-textobj-user'
+
+" quotes (aq/iq)
+Plugin 'beloglazov/vim-textobj-quotes'
+
+" functions (af/if)
+Plugin 'kana/vim-textobj-function'
+
+" lines with ( [ { pairs (ac/ic)
+" Plugin 'Chun-Yang/vim-textobj-chunk'
+
+" css rules (ac/ic)
+Plugin 'jasonlong/vim-textobj-css'
+
+" HTML/XML attributes (ax/ix)
+Plugin 'whatyouhide/vim-textobj-xmlattr'
+
+" PHP Tags (aP/iP)
+Plugin 'akiyan/vim-textobj-php'
+
+" folds (az/iz)
+Plugin 'kana/vim-textobj-fold'
+
+" git hunks (ih)
+Plugin 'gilligan/textobj-gitgutter'
+
+" entire buffer / 'all' (aa/ia)
+Plugin 'kana/vim-textobj-entire'
+let g:textobj_entire_no_default_key_mappings = 1
+omap aE <Plug>(textobj-entire-a)
+vmap aE <Plug>(textobj-entire-a)
+omap iE <Plug>(textobj-entire-i)
+vmap iE <Plug>(textobj-entire-i)
+" load dynamically with :TextobjEntireDefaultKeyMappings
+
+" note that vimtext also defines mappings ic/id/ie/i$
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " advanced searching {{{
 
 Plugin 'haya14busa/incsearch.vim'
