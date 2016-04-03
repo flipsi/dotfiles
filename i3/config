@@ -336,6 +336,7 @@ assign [class="Telegram"]               Telegram
 assign [class="(?i)skype"]              Skype
 assign [class="(?i)pokerstars"]         Poker
 assign [class="(?i)kaffeine"]           TV
+assign [class="(?i)mediathek"]          TV
 assign [class="(?i)qjackctl"]           Sound
 assign [class="(?i)pavucontrol"]        Sound
 assign [class="(?i)audacity"]           Recording
