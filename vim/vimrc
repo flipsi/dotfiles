@@ -230,6 +230,18 @@ Plugin 'sjl/badwolf'
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" distraction free mode {{{
+
+Plugin 'junegunn/goyo.vim'
+
+let g:goyo_width="120"
+let g:goyo_height="100%"
+
+nnoremap <C-G>f :Goyo<CR>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " statusline {{{
 
 " https://powerline.readthedocs.org/en/latest/usage/other.html#vim-statusline
