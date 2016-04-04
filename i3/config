@@ -421,7 +421,7 @@ bindsym $mod+z scratchpad show
 # resize container
 bindsym $mod+r mode "resize"
 mode "resize" {
-    set $steps "3"
+    set $steps 3
     bindsym h resize shrink width  $steps px or $steps ppt
     bindsym k resize grow   height $steps px or $steps ppt
     bindsym j resize shrink height $steps px or $steps ppt
