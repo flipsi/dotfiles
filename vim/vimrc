@@ -752,6 +752,13 @@ vmap <Leader>af -af
 " handle trailing whitespace {{{
 
 Plugin 'vim-scripts/ShowTrailingWhiteSpace'
+let g:ShowTrailingWhitespace = 1
+command! -bar ShowTrailingWhitespaceOn  call ShowTrailingWhitespace#Set(1,1)
+command! -bar ShowTrailingWhitespaceOff call ShowTrailingWhitespace#Set(0,1)
+command! -bar ShowTrailingWhitespaceToggle call ShowTrailingWhitespace#Toggle(0)
+        \ <Bar>echo (ShowTrailingWhitespace#IsSet() ?
+        \ 'Show trailing whitespace' : 'Not showing trailing whitespace')
+nnoremap <silent> <C-G>A :ShowTrailingWhitespaceToggle<CR>
 
 " (has a bug)
 "Plugin 'vim-scripts/JumpToTrailingWhiteSpace'
@@ -1010,6 +1017,7 @@ if s:MyMode == 'mastery'
 
     highlight CursorLine   ctermbg=235
     highlight CursorColumn ctermbg=235
+    highlight ShowTrailingWhitespace ctermbg=238
 
 else
 
