@@ -23,7 +23,8 @@ COLOR_RED     = "#F2935C";
 #                          ^-- calendar week
 status.register("clock",
     # format = " %a %-d %b %X KW%V",)
-    format = " %a %d.%m.%Y  %H:%M:%S  "
+    format = " %a %d.%m.%Y  %H:%M:%S  ",
+    on_rightclick = "sudo poweroff"
 )
 
 # Shows the average load of the last minute and the last 5 minutes
