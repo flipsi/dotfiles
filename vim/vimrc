@@ -230,6 +230,18 @@ Plugin 'sjl/badwolf'
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" distraction free mode {{{
+
+Plugin 'junegunn/goyo.vim'
+
+let g:goyo_width="120"
+let g:goyo_height="100%"
+
+nnoremap <C-G>f :Goyo<CR>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " statusline {{{
 
 " https://powerline.readthedocs.org/en/latest/usage/other.html#vim-statusline
@@ -740,6 +752,13 @@ vmap <Leader>af -af
 " handle trailing whitespace {{{
 
 Plugin 'vim-scripts/ShowTrailingWhiteSpace'
+let g:ShowTrailingWhitespace = 1
+command! -bar ShowTrailingWhitespaceOn  call ShowTrailingWhitespace#Set(1,1)
+command! -bar ShowTrailingWhitespaceOff call ShowTrailingWhitespace#Set(0,1)
+command! -bar ShowTrailingWhitespaceToggle call ShowTrailingWhitespace#Toggle(0)
+        \ <Bar>echo (ShowTrailingWhitespace#IsSet() ?
+        \ 'Show trailing whitespace' : 'Not showing trailing whitespace')
+nnoremap <silent> <C-G>A :ShowTrailingWhitespaceToggle<CR>
 
 " (has a bug)
 "Plugin 'vim-scripts/JumpToTrailingWhiteSpace'
@@ -919,6 +938,7 @@ set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
 set showcmd
 set ruler
 set laststatus=2
+set noshowmode
 
 " completions behaviour
 set wildmode=longest,full
@@ -1001,6 +1021,7 @@ if s:MyMode == 'mastery'
 
     highlight CursorLine   ctermbg=235
     highlight CursorColumn ctermbg=235
+    highlight ShowTrailingWhitespace ctermbg=238
 
 else
 
