@@ -228,6 +228,12 @@ Plugin 'joshdick/onedark.vim'
 Plugin 'sjl/badwolf'
 
 
+" cycle through colorschemes
+Plugin 'vim-scripts/ScrollColors'
+nnoremap <C-G>c :NEXTCOLOR<CR>
+nnoremap <C-G>C :PREVCOLOR<CR>
+
+
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " distraction free mode {{{
