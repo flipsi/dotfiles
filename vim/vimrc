@@ -397,10 +397,13 @@ nnoremap Ö :call incsearch#call({'command': '?'})<CR>
 " install 'the_silver_searcher' package on the system
 Plugin 'rking/ag.vim'
 
+" command to execute
+let g:ag_prg="ag --vimgrep --smart-case"
 " always start in project root instead of cwd
 let g:ag_working_path_mode="r"
 
-nnoremap / :Ag<Space>
+" type a search pattern
+nnoremap / :Ag<Space>""<Left>
 " search for word under cursor
 nnoremap <Leader>* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 " search for visual selection
