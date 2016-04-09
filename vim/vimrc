@@ -616,6 +616,14 @@ nmap <Leader>xc <Plug>(ExchangeClear)
 nmap <Leader>xl <Plug>(ExchangeLine)
 nmap <Leader>xx <Leader>xiwb.
 
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" edit quickfix list (make changes directly after global search or linting) {{{
+
+Plugin 'Olical/vim-enmasse'
+
+
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " move visual selections around (even blocks) {{{
