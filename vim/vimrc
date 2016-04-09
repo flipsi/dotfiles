@@ -1821,7 +1821,11 @@ nnoremap -ab :call InsertCharBox(input("Insert character: "))<CR>
 
 " substitute occurences of selection in this buffer with confirmation
 " (to change only this occurence, use c. by default they are the same)
-vnoremap s y:%s/<C-R>"//c<Left><Left>
+"vnoremap s y:%s/<C-R>"//c<Left><Left>
+" (these are actually two substitutions, so that we start at the current line.
+"  solution taken from http://stackoverflow.com/a/7608016 )
+vnoremap s y:,$s/<C-R>"//c<Bar>1,''-&&
+    \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 vmap -s s
 
 " substitute (last) search
