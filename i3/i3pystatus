@@ -23,7 +23,7 @@ COLOR_RED     = "#F2935C";
 #                          ^-- calendar week
 status.register("clock",
     # format = " %a %-d %b %X KW%V",)
-    format = " %a %d.%m.%Y  %H:%M:%S  ",
+    format = "%a %d.%m.%Y %H:%M:%S  ",
     on_rightclick = "sudo poweroff"
 )
 
@@ -46,7 +46,7 @@ status.register("clock",
 # If you don't have a desktop notification demon yet, take a look at dunst:
 #   http://www.knopwob.org/dunst/
 status.register("battery",
-    format = " {status} {consumption:.1f}W {percentage:.2f}% [{percentage_design:.2f}%] {remaining:%E%hh:%Mm}",
+    format = "{status} {consumption:.1f}W {percentage:.2f}% [{percentage_design:.2f}%] {remaining:%E%hh:%Mm}",
     # format = " {bar} ",
     alert = True,
     alert_format_title = "Der liebe Akku meldet:",
@@ -96,8 +96,8 @@ status.register("network",
     # hints = { "markup" : "pango" },
     dynamic_color = False,
     # format_up = " <span color=\"#199C25\">{essid}</span> {quality:03.0f}% ",
-    format_up = " {essid} {v4} {quality:02.0f}%",
-    format_down = " WLAN down ",
+    format_up = "{essid} {v4} {quality:02.0f}%",
+    format_down = " WLAN down ",
     # color_up = COLOR_GREEN,
     color_up = COLOR_DEFAULT,
     color_down = COLOR_RED,
@@ -133,7 +133,7 @@ status.register("temp",
 
 # Shows CPU usage
 status.register("cpu_usage",
-    format = " CPU: {usage}% ",
+    format = "CPU: {usage}% ",
     hints = { "separator" : False, "separator_block_width": 0} ,
 )
 
@@ -156,10 +156,10 @@ status.register("cpu_usage",
 #
 # Note: requires libpulseaudio from PyPI
 status.register("pulseaudio",
-    format = "  {volume}",
-    on_leftclick    = "pavucontrol",
-    on_upscroll     = "amixer sset Master 1%+; pkill -USR1 -f 'i3pystatus'",
-    on_downscroll   = "amixer sset Master 1%-; pkill -USR1 -f 'i3pystatus'",
+    format = "Volume: {volume}",
+    on_leftclick     = "pavucontrol",
+    on_upscroll     = "amixer sset Master 1%+",
+    on_downscroll   = "amixer sset Master 1%-",
 )
 
 # Shows mpd status
@@ -187,18 +187,13 @@ status.register("shell",
                     sed '2d' | 
                     sed 's/repeat: .*//' | 
                     tr '\\n' '-' | 
-                    sed 's/-volume: \\(.*\\)%.*/   \\1  /' || true""",
+                    sed 's/-volume: \\(.*\\)%.*/ | Volume: \\1, System-/' || true""",
 
     # note: the shell.py script does throw errors on empty strings. i hacked 
     #       it to accept them, so that there is nothing displayed without mpd.
 
     hints = { "separator" : False, "separator_block_width": 0} ,
     interval = 7,
-
-    on_leftclick    = "mpc next; pkill -USR1 -f 'i3pystatus'",
-    on_rightclick   = "mpc prev; pkill -USR1 -f 'i3pystatus'",
-    on_upscroll     = "mpc volume +1; pkill -USR1 -f 'i3pystatus'",
-    on_downscroll   = "mpc volume -1; pkill -USR1 -f 'i3pystatus'",
 )
 
 
