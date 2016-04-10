@@ -33,39 +33,6 @@ status.register("clock",
 
 
 
-# The battery monitor has many formatting options, see README for details
-
-# This would look like this, when discharging (or charging)
-# ↓14.22W 56.15% [77.81%] 2h:41m
-
-# And like this if full:
-# =14.22W 100.0% [91.21%]
-#
-# This would also display a desktop notification (via D-Bus) if the percentage
-# goes below 5 percent while discharging. The block will also color RED.
-# If you don't have a desktop notification demon yet, take a look at dunst:
-#   http://www.knopwob.org/dunst/
-status.register("battery",
-    format = " {status} {consumption:.1f}W {percentage:.2f}% [{percentage_design:.2f}%] {remaining:%E%hh:%Mm}",
-    # format = " {bar} ",
-    alert = True,
-    alert_format_title = "Der liebe Akku meldet:",
-    alert_format_body = "Der Saft wird langsam knapp!",
-    alert_percentage = 15,
-    status = {
-        "DIS": "Der Saft läuft aus!",
-        "CHR": "Aaah, frischer Saft!",
-        "FULL": "Alles easy.",
-    },
-    on_leftclick = "xfce4-power-manager-settings",
-    color = COLOR_DEFAULT,
-    full_color = COLOR_DEFAULT,
-    charging_color = COLOR_GREEN,
-    critical_color = COLOR_RED,
-    interval = 4,
-)
-
-
 # Displays whether a DHCP client is running
 # status.register("runwatch",
 #     name = "DHCP",
