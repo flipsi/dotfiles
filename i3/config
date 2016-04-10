@@ -77,8 +77,8 @@ exec --no-startup-id "syndaemon -d -k -i 1.2"
 ###############################################################################
 
 # launcher options
-set $DMENU_OPTIONS -fn 'Monospace-8' -i -l 5 -nb '#1E1E1E' -sb '#AFFF58' -sf '#000000'
-set $ROFI_OPTIONS -font 'Monospace 8' -width 100 -bg '#1E1E1E' -fg '#FFFFFF' -hlbg '#AFFF58' -hlfg '#000000' -bg-active '#1E1E1E' -fg-active '#AFFF58' -hlfg-active '#000000' -hlbg-active '#AFFF58' -bc '#1E1E1E' -location 1 -kb-remove-word-back 'Alt+BackSpace'
+set $DMENU_OPTIONS -fn 'Monospace-8' -i -l 5 -nb '#000000' -sb '#AFFF58' -sf '#000000'
+set $ROFI_OPTIONS -font 'Monospace 8' -width 100 -bg '#000000' -fg '#FFFFFF' -hlbg '#AFFF58' -hlfg '#000000' -bg-active '#000000' -fg-active '#AFFF58' -hlfg-active '#000000' -hlbg-active '#AFFF58' -bc '#000000' -location 1 -kb-remove-word-back 'Alt+BackSpace'
 
 # modifier key: windows/super
 set $mod Mod4
@@ -160,11 +160,11 @@ hide_edge_borders both
 
 # Colors
 #                       border   backgr   text     indicator
-client.focused          #000000  #1E1E1E  #AFFF58  #83B45C
-client.focused_inactive #000000  #1E1E1E  #83B45C  #1E1E1E
-client.unfocused        #000000  #1E1E1E  #DDDDDD  #1E1E1E
-client.urgent           #AFFF58  #83B45C  #000000  #1E1E1E
-client.background       #1A1A1A  #1E1E1E  #83B45C  #1E1E1E
+client.focused          #000000  #000000  #AFFF58  #83B45C
+client.focused_inactive #000000  #000000  #83B45C  #000000
+client.unfocused        #000000  #000000  #DDDDDD  #000000
+client.urgent           #AFFF58  #83B45C  #000000  #000000
+client.background       #1A1A1A  #000000  #83B45C  #000000
 
 
 
@@ -189,13 +189,13 @@ bar {
     # separator_symbol    " Ꙭ "
     # tray_output         none
     colors {
-        background  #1E1E1E
+        background  #000000
         statusline  #DDDDDD
         separator   #AFFF58
         #                   border   backgr   text
-        focused_workspace   #AFFF58  #1E1E1E  #AFFF58
-        active_workspace    #1E1E1E  #1E1E1E  #83B45C
-        inactive_workspace  #1E1E1E  #1E1E1E  #DDDDDD
+        focused_workspace   #AFFF58  #000000  #AFFF58
+        active_workspace    #000000  #000000  #83B45C
+        inactive_workspace  #000000  #000000  #DDDDDD
         urgent_workspace    #83B45C  #83B45C  #000000
     }
 }
