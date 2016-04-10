@@ -1,5 +1,5 @@
 [Appearance]
-ColorScheme=Tango-like
+ColorScheme=Tango-like with Black
 Font=monospace,11,-1,2,50,0,0,0,0,0
 
 [General]
