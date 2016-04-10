@@ -17,6 +17,7 @@
 # dmenu
 # quickswitch [https://github.com/OliverUv/quickswitch-for-i3]
 # rofi [https://davedavenport.github.io/rofi/]
+# Fontawesome (ttf-font-awesome package)
 
 # my shellscripts [https://github.com/sflip/shellscripts]
 # path to my shellscripts
@@ -125,8 +126,9 @@ exec --no-startup-id "feh --bg-scale ~/.i3/wallpaper"
 # is used in the bar {} block below.
 # font pango:NotoSans 10
 # font pango:Terminus 10
-font pango:Monospace 9
+# font pango:Monospace 9
 # font pango:DejaVu Sans Mono 8
+font pango:Monospace 9, Awesome 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -327,20 +329,20 @@ for_window [class="(?i)sxiv"]           fullscreen
 for_window [class="(?i)mplayer"]        fullscreen
 
 # windows always on specific workspace
-assign [class="(?i)firefox"]            Fuchs
-assign [class="(?i)chrom"]              Netflix
-assign [class="(?i)thunderbird"]        Mail
+assign [class="(?i)firefox"]            
+assign [class="(?i)chrom"]              
+assign [class="(?i)thunderbird"]        
 #assign [class="(?i)subl"]               Sublime
 #assign [class="(?i)jetbrains-studio"]   Development
-assign [class="Telegram"]               Telegram
-assign [class="(?i)skype"]              Skype
-assign [class="(?i)pokerstars"]         Poker
-assign [class="(?i)kaffeine"]           TV
-assign [class="(?i)mediathek"]          TV
-assign [class="(?i)qjackctl"]           Sound
-assign [class="(?i)pavucontrol"]        Sound
-assign [class="(?i)audacity"]           Recording
-assign [class="(?i)ardour"]             Recording
+assign [class="Telegram"]               
+assign [class="(?i)skype"]              
+assign [class="(?i)pokerstars"]         
+assign [class="(?i)kaffeine"]           
+assign [class="(?i)mediathek"]          
+assign [class="(?i)qjackctl"]           
+assign [class="(?i)pavucontrol"]        
+assign [class="(?i)audacity"]           
+assign [class="(?i)ardour"]             
 
 
 
