@@ -602,7 +602,7 @@ Plugin 'Raimondi/delimitMate'
 " add a ; at the end of a line
 "Plugin 'lfilho/cosco.vim'
 "inoremap <silent> <Esc><Enter> <Esc>:call cosco#commaOrSemiColon()<CR>A<Enter>
-inoremap <silent> <Esc><Enter> <Esc>A;<Enter>
+inoremap <silent> <Esc><Enter> <Esc>A;
 
 " add/change/delete quotes/braces/... and more
 Plugin 'tpope/vim-surround'
