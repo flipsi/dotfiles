@@ -2,6 +2,11 @@
 
 # Configuration file for mplayer
 
+screenw = 1920
+screenh = 1080
+
+zoom=yes
+
 
 
 

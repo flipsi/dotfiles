@@ -46,7 +46,7 @@ qmark y https://accounts.google.com/ServiceLogin?uilel=3&service=youtube&passive
 qmark z http://www.zdf.de/ZDFmediathek/hauptnavigation/startseite/#/hauptnavigation/sendung-verpasst
 qmark c http://www.cubetimer.com/
 qmark p http://sflip.bplaced.de/
-qmark l http://localhost/~sflip/projects/sflipontheweb/
+qmark l http://localhost/~sflip/
 
 " Styles
 "highlight StatusLineNormal background-color: #DDD
