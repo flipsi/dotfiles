@@ -837,7 +837,7 @@ Plugin 'derekwyatt/vim-scala'
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Graphical undo tree {{{
+" graphical undo tree {{{
 
 Plugin 'sjl/gundo.vim'
 
@@ -847,6 +847,16 @@ let g:gundo_preview_bottom = 1
 let g:gundo_return_on_revert = 0
 
 nnoremap <Leader>ut :GundoToggle<CR>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" sync with remotes (sftp etc) {{{
+
+Plugin 'eshion/vim-sync'
+
+nnoremap <Leader>su <ESC>:call SyncUploadFile()<CR>
+nnoremap <Leader>sd <ESC>:call SyncDownloadFile()<CR>
 
 
 " }}}
