@@ -983,10 +983,15 @@ set gdefault
 " allow the cursor to move where there is no character
 set virtualedit=all
 
-" characters to show in list mode (like whitespace)
+" characters to show in list mode
+if v:version > 704 || v:version == 704 && has("patch711")
+    set listchars=space:·,tab:--,extends:❯,precedes:❮
+else
+    set listchars=tab:--,extends:❯,precedes:❮
+endif
 " and wrap symbols that are always shown
-set listchars=space:·,tab:--,extends:❯,precedes:❮
 set showbreak=↪
+
 " use 4 spaces instead of tabs
 set expandtab
 set tabstop=4
@@ -1137,15 +1142,18 @@ function! ToggleColorColumn()
     endif
 endfunction
 " }}}
+
 "... and call this function when &textwidth is changed
-augroup colorcolumn
-    au!
-    au OptionSet textwidth if &textwidth != 0
-    au OptionSet textwidth      call ToggleColorColumn()
-    au OptionSet textwidth else
-    au OptionSet textwidth      set colorcolumn=
-    au OptionSet textwidth endif
-augroup END
+if v:version > 704 || v:version == 704 && has("patch786") " if has ('patch-7.4.786')
+    augroup colorcolumn
+        au!
+        au OptionSet textwidth if &textwidth != 0
+        au OptionSet textwidth      call ToggleColorColumn()
+        au OptionSet textwidth else
+        au OptionSet textwidth      set colorcolumn=
+        au OptionSet textwidth endif
+    augroup END
+endif
 
 
 " comment the current line / visual selection with html syntax {{{
