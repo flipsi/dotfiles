@@ -329,6 +329,7 @@ for_window [class="(?i)mplayer"]        fullscreen
 # windows always on specific workspace
 assign [class="(?i)firefox"]            Fuchs
 assign [class="(?i)chrom"]              Netflix
+assign [class="(?i)pale moon"]          Web
 assign [class="(?i)thunderbird"]        Mail
 #assign [class="(?i)subl"]               Sublime
 #assign [class="(?i)jetbrains-studio"]   Development
