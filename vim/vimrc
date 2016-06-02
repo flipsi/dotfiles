@@ -1203,11 +1203,12 @@ endfunction
 " }}}
 
 
-" insert a line some characters above {{{
+" insert a line some characters below {{{
 function! InsertCharLine(char, num)
     let char = a:char
-    let num = a:num - 1
-    execute "normal O\<Esc>i" . char . "\<Esc>vy" . num . "pj"
+    let num = a:num
+    let linenumber = line(".")
+    call append(linenumber, repeat(char, num))
 endfunction
 " }}}
 
@@ -1215,9 +1216,14 @@ endfunction
 " insert a box of characters around the word in the current line {{{
 function! InsertCharBox(char)
     let char = a:char
-    execute "normal I" . char . " \<Esc>A " . char ."\<Esc>"
-    execute "normal VYPVr" . char . char . "\<Esc>"
-    execute "normal Yjp\<Esc>"
+    let linenumber = line(".")
+    let line = getline(".")
+    let len = strlen(line) + 2 + 2
+    let borderline = repeat(char, len)
+    execute '.substitute/^/' . char . ' /'
+    execute '.substitute/$/ ' . char . '/'
+    call append(linenumber, repeat(char, len))
+    call append(linenumber-1, repeat(char, len))
 endfunction
 " }}}
 
