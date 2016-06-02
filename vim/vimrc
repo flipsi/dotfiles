@@ -323,6 +323,8 @@ Plugin 'easymotion/vim-easymotion'
 
 " prefix
 map ä <Plug>(easymotion-prefix)
+" keys to move to target
+let g:EasyMotion_keys = 'asdfgh,.qwertuiocvbnmjkl'
 
 
 " make f and t clever (i.e. repeatable. ',' and ';' will not be needed anymore.)
