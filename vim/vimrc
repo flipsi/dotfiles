@@ -703,7 +703,8 @@ let g:toggle_words_dict = {
 
 " snippet engine
 Plugin 'SirVer/ultisnips'
-let g:UltiSnipsExpandTrigger="<Esc>."
+"let g:UltiSnipsExpandTrigger="<Esc>."
+let g:UltiSnipsExpandTrigger="<C-k>"
 "let g:UltiSnipsListSnippets="<Esc>."
 let g:UltiSnipsJumpForwardTrigger="<C-i>"
 let g:UltiSnipsJumpBackwardTrigger="<C-o>"
