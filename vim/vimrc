@@ -739,6 +739,16 @@ let g:ycm_key_list_previous_completion = ['<C-P>', '<Up>']
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" generate docs {{{
+
+" generate javascript docs
+Plugin 'heavenshell/vim-jsdoc'
+" nnoremap <silent> -adj ?function<cr>:noh<cr><Plug>(jsdoc)
+nnoremap <silent> -adj :JsDoc<CR>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " align stuff {{{
 
 Plugin 'junegunn/vim-easy-align'
