@@ -703,12 +703,11 @@ let g:toggle_words_dict = {
 
 " snippet engine
 Plugin 'SirVer/ultisnips'
-"let g:UltiSnipsExpandTrigger="<Esc>."
-let g:UltiSnipsExpandTrigger="<C-k>"
-"let g:UltiSnipsListSnippets="<Esc>."
-let g:UltiSnipsJumpForwardTrigger="<C-i>"
-let g:UltiSnipsJumpBackwardTrigger="<C-o>"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "sflipsnippets"]
+let g:UltiSnipsExpandTrigger='<C-k>'
+"let g:UltiSnipsListSnippets='<Esc>.'
+let g:UltiSnipsJumpForwardTrigger='<C-i>'
+let g:UltiSnipsJumpBackwardTrigger='<C-o>'
+let g:UltiSnipsSnippetDirectories=['UltiSnips', 'sflipsnippets']
 
 
 " snippet packs
@@ -731,7 +730,7 @@ autocmd filetype php set filetype=php.html
 " process.
 
 Plugin 'Valloric/YouCompleteMe'
-
+let g:ycm_key_invoke_completion = '<Esc>.'
 let g:ycm_key_list_select_completion   = ['<C-N>', '<Down>', '<Tab>', '<Enter>']
 let g:ycm_key_list_previous_completion = ['<C-P>', '<Up>']
 
@@ -1770,12 +1769,10 @@ nnoremap Y ^y$
 nnoremap D 0d$j
 
 " autocompletion
-if s:MyMode == 'stripped'
-    inoremap <M-.>  <C-N>
-    inoremap <Esc>. <C-N>
-    inoremap <M-:>  <C-P>
-    inoremap <Esc>: <C-P>
-endif
+inoremap <M-.>  <C-N>
+inoremap <Esc>. <C-N>
+inoremap <M-:>  <C-P>
+inoremap <Esc>: <C-P>
 
 " increment/decrement number
 nnoremap +  <C-A>
