@@ -323,6 +323,8 @@ Plugin 'easymotion/vim-easymotion'
 
 " prefix
 map ä <Plug>(easymotion-prefix)
+" keys to move to target
+let g:EasyMotion_keys = 'asdfgh,.qwertuiocvbnmjkl'
 
 
 " make f and t clever (i.e. repeatable. ',' and ';' will not be needed anymore.)
@@ -546,6 +548,7 @@ Plugin 'scrooloose/syntastic'
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
+let g:syntastic_loc_list_height = 4
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {
@@ -738,6 +741,16 @@ Plugin 'Valloric/YouCompleteMe'
 let g:ycm_key_invoke_completion = '<Esc>.'
 let g:ycm_key_list_select_completion   = ['<C-N>', '<Down>', '<Tab>', '<Enter>']
 let g:ycm_key_list_previous_completion = ['<C-P>', '<Up>']
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" generate docs {{{
+
+" generate javascript docs
+Plugin 'heavenshell/vim-jsdoc'
+" nnoremap <silent> -adj ?function<cr>:noh<cr><Plug>(jsdoc)
+nnoremap <silent> -adj :JsDoc<CR>
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -988,10 +1001,15 @@ set gdefault
 " allow the cursor to move where there is no character
 set virtualedit=all
 
-" characters to show in list mode (like whitespace)
+" characters to show in list mode
+if v:version > 704 || v:version == 704 && has("patch711")
+    set listchars=space:·,tab:--,extends:❯,precedes:❮
+else
+    set listchars=tab:--,extends:❯,precedes:❮
+endif
 " and wrap symbols that are always shown
-set listchars=space:·,tab:--,extends:❯,precedes:❮
 set showbreak=↪
+
 " use 4 spaces instead of tabs
 set expandtab
 set tabstop=4
@@ -1142,15 +1160,18 @@ function! ToggleColorColumn()
     endif
 endfunction
 " }}}
+
 "... and call this function when &textwidth is changed
-augroup colorcolumn
-    au!
-    au OptionSet textwidth if &textwidth != 0
-    au OptionSet textwidth      call ToggleColorColumn()
-    au OptionSet textwidth else
-    au OptionSet textwidth      set colorcolumn=
-    au OptionSet textwidth endif
-augroup END
+if v:version > 704 || v:version == 704 && has("patch786") " if has ('patch-7.4.786')
+    augroup colorcolumn
+        au!
+        au OptionSet textwidth if &textwidth != 0
+        au OptionSet textwidth      call ToggleColorColumn()
+        au OptionSet textwidth else
+        au OptionSet textwidth      set colorcolumn=
+        au OptionSet textwidth endif
+    augroup END
+endif
 
 
 " comment the current line / visual selection with html syntax {{{
@@ -1187,11 +1208,12 @@ endfunction
 " }}}
 
 
-" insert a line some characters above {{{
+" insert a line some characters below {{{
 function! InsertCharLine(char, num)
     let char = a:char
-    let num = a:num - 1
-    execute "normal O\<Esc>i" . char . "\<Esc>vy" . num . "pj"
+    let num = a:num
+    let linenumber = line(".")
+    call append(linenumber, repeat(char, num))
 endfunction
 " }}}
 
@@ -1199,9 +1221,14 @@ endfunction
 " insert a box of characters around the word in the current line {{{
 function! InsertCharBox(char)
     let char = a:char
-    execute "normal I" . char . " \<Esc>A " . char ."\<Esc>"
-    execute "normal VYPVr" . char . char . "\<Esc>"
-    execute "normal Yjp\<Esc>"
+    let linenumber = line(".")
+    let line = getline(".")
+    let len = strlen(line) + 2 + 2
+    let borderline = repeat(char, len)
+    execute '.substitute/^/' . char . ' /'
+    execute '.substitute/$/ ' . char . '/'
+    call append(linenumber, repeat(char, len))
+    call append(linenumber-1, repeat(char, len))
 endfunction
 " }}}
 
