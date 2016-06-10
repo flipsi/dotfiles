@@ -36,18 +36,17 @@ function create_project_session() {
     # (1) fish
     #tmux send-keys -t ${SESSION_NAME} 'pwd' C-m
 
-    # (2) vim
-    tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH} -n vim
-    #tmux send-keys -t ${SESSION_NAME}:2 'vim --servername VIM' C-m
-    tmux send-keys -t ${SESSION_NAME}:2 'vim' C-m
-
-    # (3) version-control
+    # (2) version-control
     tmux new-window  -t ${SESSION_NAME} -c ${SESSION_PATH} -n version-control
     if (command -v tig >/dev/null 2>&1); then
-        tmux send-keys -t ${SESSION_NAME}:3 'tig status' C-m
+        tmux send-keys -t ${SESSION_NAME}:2 'tig status' C-m
     else
-        tmux send-keys -t ${SESSION_NAME}:3 'git status' C-m
+        tmux send-keys -t ${SESSION_NAME}:2 'git status' C-m
     fi
+
+    # (3) vim
+    tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH} -n vim
+    tmux send-keys -t ${SESSION_NAME}:3 'vim' C-m
 
     # (4) file-manager
     tmux new-window -t ${SESSION_NAME} -c ${SESSION_PATH} -n file-manager

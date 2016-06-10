@@ -564,18 +564,23 @@ nnoremap <silent> <Leader>si :SyntasticInfo<CR>
 
 " install linters on the system:
 " - pylint
-" - jslint
+" - jslint / jshint
 " - csslint (but phpcs also can do css)
 " - phpcs (https://github.com/squizlabs/PHP_CodeSniffer)
+
 let g:syntastic_php_checkers = ['phpcs', 'phplint', 'php']
+" let g:syntastic_javascript_checkers = ['jshint', 'jslint']
+let g:syntastic_javascript_checkers = ['jshint']
 
 " ignore these errors/warnings
 let g:syntastic_quiet_messages = { "regex": [
             \ '\mMissing file doc comment',
             \ '\mLine indented incorrectly;.*',
+            \ '\mBad line breaking before .+..',
             \ '\mLine exceeds 85 characters;.*',
             \ '\mYou must use .* style comments.*',
-            \ '\mShort PHP opening tag used;'
+            \ '\mShort PHP opening tag used;',
+            \ '\m.$. was used before it was defined.'
             \ ] }
 
 
@@ -605,7 +610,7 @@ Plugin 'Raimondi/delimitMate'
 " add a ; at the end of a line
 "Plugin 'lfilho/cosco.vim'
 "inoremap <silent> <Esc><Enter> <Esc>:call cosco#commaOrSemiColon()<CR>A<Enter>
-inoremap <silent> <Esc><Enter> <Esc>A;
+inoremap <silent> <Esc><Enter> <Esc>A;<Esc>^
 
 " add/change/delete quotes/braces/... and more
 Plugin 'tpope/vim-surround'
@@ -733,7 +738,7 @@ autocmd filetype php set filetype=php.html
 " process.
 
 Plugin 'Valloric/YouCompleteMe'
-
+let g:ycm_key_invoke_completion = '<Esc>.'
 let g:ycm_key_list_select_completion   = ['<C-N>', '<Down>', '<Tab>', '<Enter>']
 let g:ycm_key_list_previous_completion = ['<C-P>', '<Up>']
 
@@ -1800,12 +1805,10 @@ nnoremap Y ^y$
 nnoremap D 0d$j
 
 " autocompletion
-if s:MyMode == 'stripped'
-    inoremap <M-.>  <C-N>
-    inoremap <Esc>. <C-N>
-    inoremap <M-:>  <C-P>
-    inoremap <Esc>: <C-P>
-endif
+inoremap <M-.>  <C-N>
+inoremap <Esc>. <C-N>
+inoremap <M-:>  <C-P>
+inoremap <Esc>: <C-P>
 
 " increment/decrement number
 nnoremap +  <C-A>
