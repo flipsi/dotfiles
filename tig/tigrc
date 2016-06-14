@@ -99,6 +99,8 @@ bind stash  p ?git stash pop %(stash)
 # checkout/merge refs
 bind refs c	?git checkout %(branch)
 bind refs m ?git merge %(branch)
+bind refs b !git checkout -b %(prompt)
+bind refs d ?git branch -d %(branch)
 
 # remote commands
 bind generic f !git fetch
