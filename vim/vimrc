@@ -304,6 +304,8 @@ Plugin 'airblade/vim-gitgutter'
 let g:gitgutter_max_signs = 4000
 
 nnoremap <C-G>g :GitGutterToggle<CR>
+nnoremap <Up>   :GitGutterPrevHunk<CR>
+nnoremap <Down> :GitGutterNextHunk<CR>
 
 
 " commit messages are special
@@ -1935,11 +1937,37 @@ nnoremap <Leader>sf :lfirst<CR>
 nnoremap <Leader>sn :lnext<CR>
 nnoremap <Leader>sN :lprevious<CR>
 
-" jump through lists
-nnoremap <left>  :cprev<cr>
-nnoremap <right> :cnext<cr>
-nnoremap <up>    :lprev<cr>
-nnoremap <down>  :lnext<cr>
+" perform a :cnext or :lnext
+" so we jump through both quickfix and location list with one keystroke
+" @param direction: 0 for next, 1 for previous
+" @param switch: 0 for the same list as before, 1 for the other
+let g:jumplist = 'quickfixlist'
+function! JumpThroughList(direction, switch)
+    if (a:switch == 1)
+        if (g:jumplist == 'quickfixlist')
+            let g:jumplist = 'locationlist'
+        else
+            let g:jumplist = 'quickfixlist'
+        endif
+    endif
+    if (a:direction == 1)
+        if (g:jumplist == 'quickfixlist')
+            silent! cprevious
+        else
+            silent! lprevious
+        endif
+    else
+        if (g:jumplist == 'quickfixlist')
+            silent! cnext
+        else
+            silent! lnext
+        endif
+    endif
+endfunction
+nnoremap <silent> <Left>          :call JumpThroughList(1, 0)<CR>
+nnoremap <silent> <Right>         :call JumpThroughList(0, 0)<CR>
+nnoremap <silent> <Leader><Left>  :call JumpThroughList(1, 1)<CR>
+nnoremap <silent> <Leader><Right> :call JumpThroughList(0, 1)<CR>
 
 
 " close location list (which contains syntastic errors) and quickfix window
