@@ -6,6 +6,11 @@
 
 
 
+# look
+color cursor            white    color236
+color title-blur		black	    green
+color title-focus		black	    green       bold
+color section			black	    green
 
 # beautiful diff view
 #set diff-options TODO
