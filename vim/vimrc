@@ -607,6 +607,9 @@ Plugin 'scrooloose/nerdcommenter'
 let g:NERDSpaceDelims = 1
 " duplicate a line and comment out the first one
 nmap <Leader>cd yy<Leader>ccp
+" do not comment on new lines (except when already in insert mode)
+nnoremap o o<C-w>
+nnoremap O O<C-w>
 
 " automagically add closing braces etc
 Plugin 'Raimondi/delimitMate'
