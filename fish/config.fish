@@ -5,13 +5,6 @@ set fish_greeting ""
 set hostname (hostname)
 
 
-# set PATH /opt/ghc-7.8.2/bin $PATH
-# set PATH /opt/ghc-7.6.3/bin $PATH
-# set PATH /opt/haskell-platform-2013.2.0.0/bin/ $PATH
-# set PATH /usr/local/haskell/ghc-7.8.3-x86_64/bin/ $PATH
-set PATH /usr/local/bin $PATH
-set PATH /opt/cc0/bin $PATH
-set PATH ~/.cabal/bin $PATH
 set PATH ~/bin $PATH
 
 

@@ -6,6 +6,11 @@
 
 
 
+# look
+color cursor            white    color236
+color title-blur		black	    green
+color title-focus		black	    green       bold
+color section			black	    green
 
 # beautiful diff view
 #set diff-options TODO
@@ -99,6 +104,8 @@ bind stash  p ?git stash pop %(stash)
 # checkout/merge refs
 bind refs c	?git checkout %(branch)
 bind refs m ?git merge %(branch)
+bind refs b !git checkout -b %(prompt)
+bind refs d ?git branch -d %(branch)
 
 # remote commands
 bind generic f !git fetch

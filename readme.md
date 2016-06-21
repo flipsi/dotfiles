@@ -1,7 +1,7 @@
 sflip's Configuration Files
 ===========================
 
-These are some configuration files ("dotfiles", "rc files", ...). 
+These are some configuration files ("dotfiles", "rc files", ...).
 
 I use git to version control and github to sync them. Feel free to have a look!
 

@@ -10,9 +10,13 @@ set __fish_git_prompt_char_stashstate '' # '↩' # workaround for showstashstate
 set __fish_git_prompt_char_upstream_ahead '↑'
 set __fish_git_prompt_char_upstream_behind '↓'
 
+# some colors
+set __fish_my_color_red     '#FF4141'
+set __fish_my_color_green   '#8ADE33'
+set __fish_my_color_blue    '#629FCF'
 
 function fish_prompt --description 'Prompt anzeigen'
-	
+
 	# Just calculate these once, to save a few cycles when displaying the prompt
 	if not set -q __fish_prompt_hostname
 		set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
@@ -38,31 +42,30 @@ function fish_prompt --description 'Prompt anzeigen'
 
 	case '*'
 
-
 		# user
-		set_color --bold '8ADE33'
+		set_color --bold $__fish_my_color_green
 		echo -n $USER'@'
 
 		# host
-		if test $__fish_prompt_hostname = 'asterix'
-			set_color --bold '8ADE33'
-		else
-			set_color --bold 'F16161'
-		end
+        set_color --bold $__fish_my_color_green
 		echo -n $__fish_prompt_hostname
-		set_color '8ADE33'
+		set_color $__fish_my_color_green
 		echo -n ':'
 
-		# wd
+		# working directory
 		set wd (pwd)
-		set_color --bold '629FCF'
+        if set -q RANGER_LEVEL
+            set_color --bold $__fish_my_color_blue
+        else
+            set_color --bold $__fish_my_color_red
+        end
 		echo -n $wd
 
 		# git
 		set_color --bold normal
 		__fish_git_prompt
 
-		# prompt
+		# prompt (on newline)
 		set_color --bold normal
 		echo -e -n -s '\n> '
 
