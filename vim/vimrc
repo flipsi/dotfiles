@@ -93,6 +93,7 @@
 "                           Leader key convention:
 "                           - general leader is space (' ')
 "                           - text edit leader is minus ('-')
+"                           - interface leader is control+g ('<C-G>')
 "                           The leader key may set several times in this file
 "                           since the execution time of the mapping matters.
 "
@@ -114,7 +115,8 @@
 " we use vim, not vi
 set nocompatible
 
-" execute external commands with bash (fish makes problems with vundle)
+" execute external commands with bash
+" (fish is not posix compatible and makes problems)
 "set shell=/usr/bin/bash
 let &shell=system('which bash | tr -d "\n"')
 
@@ -380,7 +382,7 @@ omap iE <Plug>(textobj-entire-i)
 vmap iE <Plug>(textobj-entire-i)
 " load dynamically with :TextobjEntireDefaultKeyMappings
 
-" note that vimtext also defines mappings ic/id/ie/i$
+" note that vimtex also defines mappings ic/id/ie/i$
 
 
 " }}}
@@ -824,6 +826,13 @@ nnoremap <Leader>cp :ColorPicker<CR>
 " (readme is looking good, but throws errors)
 "Plugin 'KabbAmine/vCoolor.vim'
 "nnoremap <Leader>cp :VCoolor<CR>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fish stuff {{{
+
+Plugin 'dag/vim-fish'
 
 
 " }}}
