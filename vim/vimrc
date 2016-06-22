@@ -298,6 +298,15 @@ nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gp :Gpull<CR>
 nnoremap <Leader>gP :Gpush<CR>
 
+" in Gdiff view, navigate and stage/checkout easily
+augroup gitdiff
+    au!
+    au BufRead fugitive://* nnoremap <buffer> <Down>  ]c
+    au BufRead fugitive://* nnoremap <buffer> <Up>    [c
+    au BufRead fugitive://* nnoremap <buffer> <Left>  do
+    au BufRead fugitive://* nnoremap <buffer> <Right> dp
+augroup END
+
 
 " show git status of lines on the left
 
