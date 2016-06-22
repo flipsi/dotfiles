@@ -92,6 +92,9 @@ focus_follows_mouse no
 # don't move mouse cursor when changing output
 mouse_warping none
 
+# close container with middle click on title bar
+bindsym --release button2 kill
+
 # enable/disable touchpad
 bindsym XF86TouchpadToggle  exec --no-startup-id "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
 
@@ -330,6 +333,7 @@ for_window [class="(?i)mplayer"]        fullscreen
 
 # windows always on specific workspace
 assign [class="(?i)firefox"]            
+assign [class="(?i)pale moon"]          
 assign [class="(?i)chrom"]              
 assign [class="(?i)thunderbird"]        
 #assign [class="(?i)subl"]               Sublime

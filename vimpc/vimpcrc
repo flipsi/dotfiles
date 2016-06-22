@@ -57,7 +57,7 @@ map <A-k> <C-B>
 map <Space> :pause<CR>
 map o :next<CR>
 map O :previous<CR>
-map ss :stop<CR>
+map s :stop<CR>
 
 " add current song
 " set add end
@@ -94,6 +94,6 @@ map c :crop<CR>
 
 
 " change playlist format (when font is huge)
-map setf :set songformat %t<CR>
-map setF :set songformat {%a - %t}|{%f} $E$R %b $H[$H%n$H]$H  $H[$H%l$H]$H<CR>
+map zf :set songformat %t<CR>
+map zF :set songformat {%a - %t}|{%f} $E$R %b $H[$H%n$H]$H  $H[$H%l$H]$H<CR>
 

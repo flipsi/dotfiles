@@ -93,6 +93,7 @@
 "                           Leader key convention:
 "                           - general leader is space (' ')
 "                           - text edit leader is minus ('-')
+"                           - interface leader is control+g ('<C-G>')
 "                           The leader key may set several times in this file
 "                           since the execution time of the mapping matters.
 "
@@ -114,7 +115,8 @@
 " we use vim, not vi
 set nocompatible
 
-" execute external commands with bash (fish makes problems with vundle)
+" execute external commands with bash
+" (fish is not posix compatible and makes problems)
 "set shell=/usr/bin/bash
 let &shell=system('which bash | tr -d "\n"')
 
@@ -296,6 +298,15 @@ nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gp :Gpull<CR>
 nnoremap <Leader>gP :Gpush<CR>
 
+" in Gdiff view, navigate and stage/checkout easily
+augroup gitdiff
+    au!
+    au BufRead fugitive://* nnoremap <buffer> <Down>  ]c
+    au BufRead fugitive://* nnoremap <buffer> <Up>    [c
+    au BufRead fugitive://* nnoremap <buffer> <Left>  do
+    au BufRead fugitive://* nnoremap <buffer> <Right> dp
+augroup END
+
 
 " show git status of lines on the left
 
@@ -304,6 +315,8 @@ Plugin 'airblade/vim-gitgutter'
 let g:gitgutter_max_signs = 4000
 
 nnoremap <C-G>g :GitGutterToggle<CR>
+nnoremap <Up>   :GitGutterPrevHunk<CR>
+nnoremap <Down> :GitGutterNextHunk<CR>
 
 
 " commit messages are special
@@ -323,6 +336,8 @@ Plugin 'easymotion/vim-easymotion'
 
 " prefix
 map ä <Plug>(easymotion-prefix)
+" keys to move to target
+let g:EasyMotion_keys = 'asdfgh,.qwertuiocvbnmjkl'
 
 
 " make f and t clever (i.e. repeatable. ',' and ';' will not be needed anymore.)
@@ -376,7 +391,7 @@ omap iE <Plug>(textobj-entire-i)
 vmap iE <Plug>(textobj-entire-i)
 " load dynamically with :TextobjEntireDefaultKeyMappings
 
-" note that vimtext also defines mappings ic/id/ie/i$
+" note that vimtex also defines mappings ic/id/ie/i$
 
 
 " }}}
@@ -546,6 +561,7 @@ Plugin 'scrooloose/syntastic'
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
+let g:syntastic_loc_list_height = 4
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {
@@ -561,18 +577,23 @@ nnoremap <silent> <Leader>si :SyntasticInfo<CR>
 
 " install linters on the system:
 " - pylint
-" - jslint
+" - jslint / jshint
 " - csslint (but phpcs also can do css)
 " - phpcs (https://github.com/squizlabs/PHP_CodeSniffer)
+
 let g:syntastic_php_checkers = ['phpcs', 'phplint', 'php']
+" let g:syntastic_javascript_checkers = ['jshint', 'jslint']
+let g:syntastic_javascript_checkers = ['jshint']
 
 " ignore these errors/warnings
 let g:syntastic_quiet_messages = { "regex": [
             \ '\mMissing file doc comment',
             \ '\mLine indented incorrectly;.*',
+            \ '\mBad line breaking before .+..',
             \ '\mLine exceeds 85 characters;.*',
             \ '\mYou must use .* style comments.*',
-            \ '\mShort PHP opening tag used;'
+            \ '\mShort PHP opening tag used;',
+            \ '\m.$. was used before it was defined.'
             \ ] }
 
 
@@ -595,6 +616,9 @@ Plugin 'scrooloose/nerdcommenter'
 let g:NERDSpaceDelims = 1
 " duplicate a line and comment out the first one
 nmap <Leader>cd yy<Leader>ccp
+" do not comment on new lines (except when already in insert mode)
+nnoremap o o<C-w>
+nnoremap O O<C-w>
 
 " automagically add closing braces etc
 Plugin 'Raimondi/delimitMate'
@@ -602,7 +626,7 @@ Plugin 'Raimondi/delimitMate'
 " add a ; at the end of a line
 "Plugin 'lfilho/cosco.vim'
 "inoremap <silent> <Esc><Enter> <Esc>:call cosco#commaOrSemiColon()<CR>A<Enter>
-inoremap <silent> <Esc><Enter> <Esc>A;<Enter>
+inoremap <silent> <Esc><Enter> <Esc>A;<Esc>^
 
 " add/change/delete quotes/braces/... and more
 Plugin 'tpope/vim-surround'
@@ -703,11 +727,11 @@ let g:toggle_words_dict = {
 
 " snippet engine
 Plugin 'SirVer/ultisnips'
-let g:UltiSnipsExpandTrigger="<Esc>."
-"let g:UltiSnipsListSnippets="<Esc>."
-let g:UltiSnipsJumpForwardTrigger="<C-i>"
-let g:UltiSnipsJumpBackwardTrigger="<C-o>"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "sflipsnippets"]
+let g:UltiSnipsExpandTrigger='<C-k>'
+"let g:UltiSnipsListSnippets='<Esc>.'
+let g:UltiSnipsJumpForwardTrigger='<C-i>'
+let g:UltiSnipsJumpBackwardTrigger='<C-o>'
+let g:UltiSnipsSnippetDirectories=['UltiSnips', 'sflipsnippets']
 
 
 " snippet packs
@@ -730,9 +754,19 @@ autocmd filetype php set filetype=php.html
 " process.
 
 Plugin 'Valloric/YouCompleteMe'
-
+let g:ycm_key_invoke_completion = '<Esc>.'
 let g:ycm_key_list_select_completion   = ['<C-N>', '<Down>', '<Tab>', '<Enter>']
 let g:ycm_key_list_previous_completion = ['<C-P>', '<Up>']
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" generate docs {{{
+
+" generate javascript docs
+Plugin 'heavenshell/vim-jsdoc'
+" nnoremap <silent> -adj ?function<cr>:noh<cr><Plug>(jsdoc)
+nnoremap <silent> -adj :JsDoc<CR>
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -783,6 +817,7 @@ nnoremap <silent> <C-G>A :ShowTrailingWhitespaceToggle<CR>
 Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
 " check for trailing whitespace when writing file
 let g:DeleteTrailingWhitespace = 1
+let g:DeleteTrailingWhitespace_Action = 'ask'
 " delete trailing whitespace for selected line
 vnoremap <silent> -dst :DeleteTrailingWhitespace<CR>
 " delete trailing whitespace for whole buffer
@@ -804,6 +839,13 @@ nnoremap <Leader>cp :ColorPicker<CR>
 " (readme is looking good, but throws errors)
 "Plugin 'KabbAmine/vCoolor.vim'
 "nnoremap <Leader>cp :VCoolor<CR>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fish stuff {{{
+
+Plugin 'dag/vim-fish'
 
 
 " }}}
@@ -983,10 +1025,15 @@ set gdefault
 " allow the cursor to move where there is no character
 set virtualedit=all
 
-" characters to show in list mode (like whitespace)
+" characters to show in list mode
+if v:version > 704 || v:version == 704 && has("patch711")
+    set listchars=space:·,tab:--,extends:❯,precedes:❮
+else
+    set listchars=tab:--,extends:❯,precedes:❮
+endif
 " and wrap symbols that are always shown
-set listchars=space:·,tab:--,extends:❯,precedes:❮
 set showbreak=↪
+
 " use 4 spaces instead of tabs
 set expandtab
 set tabstop=4
@@ -1137,15 +1184,18 @@ function! ToggleColorColumn()
     endif
 endfunction
 " }}}
+
 "... and call this function when &textwidth is changed
-augroup colorcolumn
-    au!
-    au OptionSet textwidth if &textwidth != 0
-    au OptionSet textwidth      call ToggleColorColumn()
-    au OptionSet textwidth else
-    au OptionSet textwidth      set colorcolumn=
-    au OptionSet textwidth endif
-augroup END
+if v:version > 704 || v:version == 704 && has("patch786") " if has ('patch-7.4.786')
+    augroup colorcolumn
+        au!
+        au OptionSet textwidth if &textwidth != 0
+        au OptionSet textwidth      call ToggleColorColumn()
+        au OptionSet textwidth else
+        au OptionSet textwidth      set colorcolumn=
+        au OptionSet textwidth endif
+    augroup END
+endif
 
 
 " comment the current line / visual selection with html syntax {{{
@@ -1182,11 +1232,12 @@ endfunction
 " }}}
 
 
-" insert a line some characters above {{{
+" insert a line some characters below {{{
 function! InsertCharLine(char, num)
     let char = a:char
-    let num = a:num - 1
-    execute "normal O\<Esc>i" . char . "\<Esc>vy" . num . "pj"
+    let num = a:num
+    let linenumber = line(".")
+    call append(linenumber, repeat(char, num))
 endfunction
 " }}}
 
@@ -1194,9 +1245,14 @@ endfunction
 " insert a box of characters around the word in the current line {{{
 function! InsertCharBox(char)
     let char = a:char
-    execute "normal I" . char . " \<Esc>A " . char ."\<Esc>"
-    execute "normal VYPVr" . char . char . "\<Esc>"
-    execute "normal Yjp\<Esc>"
+    let linenumber = line(".")
+    let line = getline(".")
+    let len = strlen(line) + 2 + 2
+    let borderline = repeat(char, len)
+    execute '.substitute/^/' . char . ' /'
+    execute '.substitute/$/ ' . char . '/'
+    call append(linenumber, repeat(char, len))
+    call append(linenumber-1, repeat(char, len))
 endfunction
 " }}}
 
@@ -1769,12 +1825,10 @@ nnoremap Y ^y$
 nnoremap D 0d$j
 
 " autocompletion
-if s:MyMode == 'stripped'
-    inoremap <M-.>  <C-N>
-    inoremap <Esc>. <C-N>
-    inoremap <M-:>  <C-P>
-    inoremap <Esc>: <C-P>
-endif
+inoremap <M-.>  <C-N>
+inoremap <Esc>. <C-N>
+inoremap <M-:>  <C-P>
+inoremap <Esc>: <C-P>
 
 " increment/decrement number
 nnoremap +  <C-A>
@@ -1905,11 +1959,37 @@ nnoremap <Leader>sf :lfirst<CR>
 nnoremap <Leader>sn :lnext<CR>
 nnoremap <Leader>sN :lprevious<CR>
 
-" jump through lists
-nnoremap <left>  :cprev<cr>
-nnoremap <right> :cnext<cr>
-nnoremap <up>    :lprev<cr>
-nnoremap <down>  :lnext<cr>
+" perform a :cnext or :lnext
+" so we jump through both quickfix and location list with one keystroke
+" @param direction: 0 for next, 1 for previous
+" @param switch: 0 for the same list as before, 1 for the other
+let g:jumplist = 'quickfixlist'
+function! JumpThroughList(direction, switch)
+    if (a:switch == 1)
+        if (g:jumplist == 'quickfixlist')
+            let g:jumplist = 'locationlist'
+        else
+            let g:jumplist = 'quickfixlist'
+        endif
+    endif
+    if (a:direction == 1)
+        if (g:jumplist == 'quickfixlist')
+            silent! cprevious
+        else
+            silent! lprevious
+        endif
+    else
+        if (g:jumplist == 'quickfixlist')
+            silent! cnext
+        else
+            silent! lnext
+        endif
+    endif
+endfunction
+nnoremap <silent> <Left>          :call JumpThroughList(1, 0)<CR>
+nnoremap <silent> <Right>         :call JumpThroughList(0, 0)<CR>
+nnoremap <silent> <Leader><Left>  :call JumpThroughList(1, 1)<CR>
+nnoremap <silent> <Leader><Right> :call JumpThroughList(0, 1)<CR>
 
 
 " close location list (which contains syntastic errors) and quickfix window
