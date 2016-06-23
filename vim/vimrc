@@ -298,6 +298,15 @@ nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gp :Gpull<CR>
 nnoremap <Leader>gP :Gpush<CR>
 
+" in Gdiff view, navigate and stage/checkout easily
+augroup gitdiff
+    au!
+    au BufRead fugitive://* nnoremap <buffer> <Down>  ]c
+    au BufRead fugitive://* nnoremap <buffer> <Up>    [c
+    au BufRead fugitive://* nnoremap <buffer> <Left>  do
+    au BufRead fugitive://* nnoremap <buffer> <Right> dp
+augroup END
+
 
 " show git status of lines on the left
 
@@ -808,6 +817,7 @@ nnoremap <silent> <C-G>A :ShowTrailingWhitespaceToggle<CR>
 Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
 " check for trailing whitespace when writing file
 let g:DeleteTrailingWhitespace = 1
+let g:DeleteTrailingWhitespace_Action = 'ask'
 " delete trailing whitespace for selected line
 vnoremap <silent> -dst :DeleteTrailingWhitespace<CR>
 " delete trailing whitespace for whole buffer
