@@ -14,6 +14,9 @@ set hostname (hostname)
 set PATH ~/bin $PATH
 
 
+# edit files with vim
+set -x EDITOR vim
+
 # music player daemon
 # if test $hostname = "asterix"
 #     set -x MPD_HOST (ifconfig wlan0 | grep 'inet ' | sed 's/.*addr:\(.*\)  Bcast.*/\1/')
