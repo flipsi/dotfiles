@@ -298,6 +298,15 @@ nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gp :Gpull<CR>
 nnoremap <Leader>gP :Gpush<CR>
 
+" in Gdiff view, navigate and stage/checkout easily
+augroup gitdiff
+    au!
+    au BufRead fugitive://* nnoremap <buffer> <Down>  ]c
+    au BufRead fugitive://* nnoremap <buffer> <Up>    [c
+    au BufRead fugitive://* nnoremap <buffer> <Left>  do
+    au BufRead fugitive://* nnoremap <buffer> <Right> dp
+augroup END
+
 
 " show git status of lines on the left
 
@@ -692,6 +701,7 @@ let g:toggle_words_dict = {
             \     ["dark", "light"],
             \     ["deep", "shallow"],
             \     ["get", "set"],
+            \     ["hard", "soft"],
             \     ["head", "tail"],
             \     ["header", "footer"],
             \     ["left", "right"],
@@ -808,6 +818,7 @@ nnoremap <silent> <C-G>A :ShowTrailingWhitespaceToggle<CR>
 Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
 " check for trailing whitespace when writing file
 let g:DeleteTrailingWhitespace = 1
+let g:DeleteTrailingWhitespace_Action = 'ask'
 " delete trailing whitespace for selected line
 vnoremap <silent> -dst :DeleteTrailingWhitespace<CR>
 " delete trailing whitespace for whole buffer
@@ -1635,11 +1646,10 @@ nnoremap <Leader>ow8 :set textwidth=80<CR>
 nnoremap <Leader>ow1 :set textwidth=100<CR>
 nnoremap <Leader>ow2 :set textwidth=120<CR>
 
-" change tab width
+" change tab width (soft)
 nnoremap <Leader>ot2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 nnoremap <Leader>ot4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
 nnoremap <Leader>ot8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
-" convert tabs so spaces with :retab
 
 " toggle paste mode
 nnoremap <Leader>op :set paste! <bar> :set paste?<CR>
@@ -1834,6 +1844,15 @@ nnoremap < <<
 vnoremap < <gv
 nnoremap > >>
 vnoremap > >gv
+
+" change tab width (hard)
+nnoremap -rt2 :set noexpandtab <bar> :retab! <bar>
+            \ :set expandtab tabstop=2 <bar> :retab <CR>
+nnoremap -rt4 :set noexpandtab <bar> :retab! <bar>
+            \ :set expandtab tabstop=4 <bar> :retab <CR>
+nnoremap -rt8 :set noexpandtab <bar> :retab! <bar>
+            \ :set expandtab tabstop=8 <bar> :retab <CR>
+
 
 " move line up or down
 nnoremap <silent> -k :m .-2<CR>==
