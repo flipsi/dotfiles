@@ -1,3 +1,6 @@
+# QUICKFIX FOR LOCALE ISSUE
+set -x LANG de_DE.UTF-8
+
 # don't show welcome message
 set fish_greeting ""
 
