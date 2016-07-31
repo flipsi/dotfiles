@@ -34,3 +34,15 @@ end
 # https://github.com/nvbn/thefuck
 # (the following does not work, so i added the function manually)
 #eval (thefuck --alias)
+
+
+# ask to start X on login
+if set -q $DISPLAY
+    set answer no
+    read -p 'echo "Start X? Type (y)es or (n)o: "' -l answer
+    if test $answer = "y" -o $answer = "yes"
+        startx >/tmp/startx ^&1
+    end
+end
+
+
