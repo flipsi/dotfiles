@@ -36,17 +36,20 @@ set complete=search,bookmark,suggestion,file
 set autocomplete=!/ex/(open|tabopen),.?
 
 " QuickMarks
-qmark b https://finanzportal.fiducia.de/g14pepe/entry?rzid=XC&rzbk=0151
-qmark u https://uniworx.ifi.lmu.de/
-qmark o https://stackoverflow.com/users/login
-qmark f https://de-de.facebook.com/
-qmark g https://github.com/sflip
-qmark t https://twitter.com/
-qmark y https://accounts.google.com/ServiceLogin?uilel=3&service=youtube&passive=true&continue=http%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26nomobiletemp%3D1%26hl%3Dde_DE%26next%3D%252F&hl=de_DE&ltmpl=sso
-qmark z http://www.zdf.de/ZDFmediathek/hauptnavigation/startseite/#/hauptnavigation/sendung-verpasst
+qmark b https://www.banking-rb-mnord.de/banking-private/entry
 qmark c http://www.cubetimer.com/
+qmark e http://www.heise.de/
+qmark f https://de-de.facebook.com/
+qmark g https://github.com/sflip/dotfiles
+qmark h https://www.heute.de/
+qmark l http://localhost/~sflip/projects/
+qmark o https://stackoverflow.com/users/login
 qmark p http://sflip.bplaced.de/
-qmark l http://localhost/~sflip/
+qmark t https://twitter.com/
+qmark v http://www.hoerzu.de/tv-programm/
+qmark y https://accounts.google.com/ServiceLogin?uilel=3&service=youtube&passive=true&continue=http%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26nomobiletemp%3D1%26hl%3Dde_DE%26next%3D%252F&hl=de_DE&ltmpl=sso
+qmark z http://fishshell.com/docs/current/index.html
+qmark 3 http://i3wm.org/docs/userguide.html
 
 " Styles
 "highlight StatusLineNormal background-color: #DDD
