@@ -23,7 +23,7 @@ set hinttags+=label[class=\"switch-small\"]
 set passkeys+=gabrielecirulli.github.io/2048/:<Up><Down><Left><Right>
 
 " editor (e.g. to edit source with gF or edit textfield with <C-i>)
-set editor='subl --wait'
+set editor='gvim -f'
 
 " default search engine
 set defsearch=duckduckgo
