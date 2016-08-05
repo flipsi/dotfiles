@@ -1024,7 +1024,7 @@ set smartcase
 set gdefault
 
 " allow the cursor to move where there is no character
-set virtualedit=all
+set virtualedit=block,insert,onemore
 
 " characters to show in list mode
 if v:version > 704 || v:version == 704 && has("patch711")
