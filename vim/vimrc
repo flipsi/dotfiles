@@ -1918,7 +1918,8 @@ vnoremap -o :sort<CR>
 
 
 " correct typos like 'DAmnitypefast' to titlecase ('Damnitypefast')
-nnoremap -tt blgueea
+nnoremap -tu blguee
+inoremap -tu <Esc>blgueea
 
 
 " delete leading whitespace (can be prefixed with a count)
