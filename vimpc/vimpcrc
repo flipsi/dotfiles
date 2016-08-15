@@ -33,8 +33,8 @@ hi id cyanfg
 hi dir greenfg
 hi current redfg
 hi match greenfg
-hi partial magentafg
-hi full magentafg
+hi partial redfg
+hi full redfg
 hi error redfg
 
 
