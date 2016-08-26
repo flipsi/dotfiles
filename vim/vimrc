@@ -1550,6 +1550,11 @@ nnoremap <C-G><C-G> <C-G>
 "endif
 "nnoremap <Leader><F5> :MyRefresh<CR>
 
+
+" show absolute path of current file (':help filename-modifiers')
+nnoremap <Leader><C-G> :echo expand("%:~")<CR>
+
+
 " open config file
 "nnoremap <Leader>ev :edit ~/dotfiles/vim/vimrc<CR>
 nnoremap <Leader>ev :execute 'edit ' . resolve(expand($MYVIMRC))<CR>
@@ -1917,7 +1922,8 @@ vnoremap -o :sort<CR>
 
 
 " correct typos like 'DAmnitypefast' to titlecase ('Damnitypefast')
-nnoremap -tt blgueea
+nnoremap -tu blguee
+inoremap -tu <Esc>blgueea
 
 
 " delete leading whitespace (can be prefixed with a count)
