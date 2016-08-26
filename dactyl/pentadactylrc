@@ -36,6 +36,7 @@ set complete=search,bookmark,suggestion,file
 set autocomplete=!/ex/(open|tabopen),.?
 
 " QuickMarks
+qmark a https://samepage.io/app/#!/dfc459b1427fd0594c20d29dfde8a057b7fb9ff4/pages
 qmark b https://www.banking-rb-mnord.de/banking-private/entry
 qmark c http://www.cubetimer.com/
 qmark e http://www.heise.de/
