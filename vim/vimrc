@@ -546,7 +546,9 @@ let NERDTreeWinPos = 'right'
 " show/hide nerdtree
 noremap <silent> <Leader>tn :NERDTreeToggle<CR>
 " show nerdtree from current file
-noremap <silent> <Leader>tN :call SetCwdToFilePath() <bar> :NERDTreeCWD<CR>
+noremap <silent> <Leader>tn :NERDTreeFind<CR>
+" show/hide nerdtree
+noremap <silent> <Leader>tN :NERDTreeToggle<CR>
 
 " show/hide hidden files
 let NERDTreeMapToggleHidden='.'
@@ -2062,8 +2064,9 @@ nnoremap <Leader>if :call SetCwdToFilePath() <bar>
 nnoremap <Leader>ib :call SetCwdToFilePath() <bar> :!bash<CR>
 
 " file manager in dir of current file
-"nnoremap <Leader>ir :call SetCwdToFilePath() <bar> :!ranger<CR>
-nnoremap <Leader>ir :call SetCwdToFilePath() <bar> :RangerChooser<CR>
+"nnoremap <Leader>iR :call SetCwdToFilePath() <bar> :!ranger<CR>
+nnoremap <Leader>ir :RangerChooser<CR>
+nnoremap <Leader>iR :call SetCwdToFilePath() <bar> :RangerChooser<CR>
 
 " git interface
 nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig status<CR>
