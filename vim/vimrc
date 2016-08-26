@@ -710,6 +710,7 @@ let g:toggle_words_dict = {
             \     ["next", "previous"],
             \     ["on", "off"],
             \     ["open", "close"],
+            \     ["present", "absent"],
             \     ["red","orange","yellow","green","blue","purple"],
             \     ["strong", "weak"],
             \     ["this", "that"],
