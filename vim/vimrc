@@ -880,6 +880,13 @@ Plugin 'derekwyatt/vim-scala'
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" other special stuff {{{
+
+Plugin 'chase/vim-ansible-yaml'
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Graphical undo tree {{{
 
 Plugin 'sjl/gundo.vim'
