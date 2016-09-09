@@ -1057,6 +1057,16 @@ set splitbelow
 " puts new vsplit windows to the right of the current
 set splitright
 
+" improve quickfix and location list
+augroup quickfixbuffer
+    au!
+    " automatically close quickfix or location list when alone
+    au WinEnter * if winnr('$') == 1  && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"
+    au WinEnter *     bdelete
+    au WinEnter * endif
+augroup END
+
+
 
 " }}}
 
