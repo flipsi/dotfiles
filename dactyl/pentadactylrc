@@ -11,6 +11,9 @@ set findflags='cL'
 " ... show results while typing
 set incfind
 
+" follow hints with letters instead of numbers
+set hintkeys=fjdkslghaöeiruncmv
+
 " follow more hints like stack overflow upvote buttons
 "set hinttags+=a[class]
 set hinttags+=a
@@ -36,10 +39,11 @@ set complete=search,bookmark,suggestion,file
 set autocomplete=!/ex/(open|tabopen),.?
 
 " QuickMarks
+qmark a https://www.fromatob.com/
 qmark b https://www.banking-rb-mnord.de/banking-private/entry
-qmark c http://www.cubetimer.com/
+qmark c http://catchinside.de/index.php?option=com_users&view=login
 qmark e http://www.heise.de/
-qmark f https://de-de.facebook.com/
+qmark f https://de-de.facebook.com/groups/901248313307453/
 qmark g https://github.com/sflip/dotfiles
 qmark h https://www.heute.de/
 qmark l http://localhost/~sflip/projects/
@@ -129,6 +133,8 @@ noremap Ä '
 noremap \\ :tabopen \
 " ! to use other search engine (like 'ebay' or 'osm')
 noremap ! :tabopen !
+" search google with current duckduckgo search term (badly implemented)
+noremap gs gi<C-A><C-S-Right><C-S-Right><C-S-Right><C-S-Right><C-S-Right><C-S-Right><C-S-Right><C-S-Right><C-S-Right><C-v><C-c><Esc>:open<Space>google<Space><C-v><C-v><CR>
 
 " move in history
 noremap <A-u> :back<CR>
