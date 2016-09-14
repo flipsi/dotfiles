@@ -1035,7 +1035,11 @@ if v:version > 704 || v:version == 704 && has("patch711")
 else
     set listchars=tab:--,extends:❯,precedes:❮
 endif
-" and wrap symbols that are always shown
+
+" how it looks like if we wrap lines
+if v:version > 704 || v:version == 704 && has("patch338")
+    set breakindent
+endif
 set showbreak=↪
 
 " use 4 spaces instead of tabs
