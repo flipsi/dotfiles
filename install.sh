@@ -130,9 +130,8 @@ function create_link_for_target() {
         tmux)
             create_link $PWD/tmux/tmux $HOME/.tmux
             create_link $PWD/tmux/tmux.conf $HOME/.tmux.conf
-            if [ -d "$HOME/bin" ] ; then
-                create_link $PWD/tmux/tmux-project-session.sh $HOME/bin/tmux-project-session
-            fi
+            mkdir -p $HOME/bin
+            create_link $PWD/tmux/tmux-project-session.sh $HOME/bin/tmux-project-session
             ;;
 
         turses)
@@ -142,6 +141,8 @@ function create_link_for_target() {
 
         urlview)
             create_link $PWD/urlview/urlview $HOME/.urlview
+            mkdir -p $HOME/bin
+            create_link $PWD/urlview/url_handler.sh $HOME/bin/url_handler.sh
             ;;
 
         vim)
