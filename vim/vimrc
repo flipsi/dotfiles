@@ -2113,7 +2113,7 @@ nnoremap Q :quit<CR>
 " quit all windows but current
 nnoremap <Leader>qo :only<CR>
 
-" quit vim (mulitple windows)
+" quit vim (multiple windows)
 " (this is how i exit most terminal applications)
 nnoremap <C-D> :quitall<CR>
 nnoremap <Leader><C-D><C-D> :quitall!<CR>
