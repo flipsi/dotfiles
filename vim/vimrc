@@ -612,6 +612,7 @@ nmap <C-p> <Plug>yankstack_substitute_older_paste
 nmap <C-n> <Plug>yankstack_substitute_newer_paste
 "call yankstack#setup()
 
+
 " add and toggle comments with <Leader>c<space> etc
 Plugin 'scrooloose/nerdcommenter'
 " use leading space
@@ -622,16 +623,34 @@ nmap <Leader>cd yy<Leader>ccp
 nnoremap o o<Esc>S
 nnoremap O O<Esc>S
 
+
 " automagically add closing braces etc
 Plugin 'Raimondi/delimitMate'
+
 
 " add a ; at the end of a line
 "Plugin 'lfilho/cosco.vim'
 "inoremap <silent> <Esc><Enter> <Esc>:call cosco#commaOrSemiColon()<CR>A<Enter>
 inoremap <silent> <Esc><Enter> <Esc>A;<Esc>^
 
+
 " add/change/delete quotes/braces/... and more
 Plugin 'tpope/vim-surround'
+" toggle quotes {{{
+function! ToggleQuotesWithVimSurround()
+    let pos_cursor = getpos(".")[2]
+    let linepart   = strpart(getline("."), pos_cursor - 1)
+    let pos_single = stridx(linepart, "'")
+    let pos_double = stridx(linepart, '"')
+    if pos_single >= 0 && (pos_double < 0 || pos_single < pos_double)
+        normal cs'"
+    elseif pos_double >= 0 && (pos_single < 0 || pos_double < pos_single)
+        normal cs"'
+    endif
+endfunction
+" }}}
+nnoremap <silent> -tq :call ToggleQuotesWithVimSurround()<CR>
+
 
 " swap ('transpose') two words or arbitrary things
 Plugin 'tommcdo/vim-exchange'
@@ -683,44 +702,60 @@ noremap <silent> -tw :ToggleWord<CR>
 
 let g:toggle_words_dict = {
             \ 'css': [
-            \     ["div", "span"],
-            \     ["head", "body"],
+            \     ['div', 'span'],
+            \     ['head', 'body'],
             \     ['inline', 'block', 'none'],
             \     ['margin', 'padding'],
             \     ['relative', 'absolute', 'fixed', 'static'],
             \ ],
             \ 'html': [
-            \     ["div", "span"],
-            \     ["head", "body"],
-            \     ["header", "footer"],
+            \     ['div', 'span'],
+            \     ['head', 'body'],
+            \     ['header', 'footer'],
             \ ],
             \ 'tex': [
             \     ['chapter', 'section', 'subsection']
             \ ],
             \ '*': [
-            \     ["0", "1"],
-            \     ["black", "white"],
-            \     ["dark", "light"],
-            \     ["deep", "shallow"],
-            \     ["get", "set"],
-            \     ["hard", "soft"],
-            \     ["head", "tail"],
-            \     ["header", "footer"],
-            \     ["left", "right"],
-            \     ["love", "hate"],
-            \     ["min", "max"],
-            \     ["next", "previous"],
-            \     ["on", "off"],
-            \     ["open", "close"],
-            \     ["present", "absent"],
-            \     ["red","orange","yellow","green","blue","purple"],
-            \     ["strong", "weak"],
-            \     ["this", "that"],
-            \     ["top", "bottom"],
-            \     ["true", "false"],
-            \     ["up", "down"],
-            \     ["width", "height"],
-            \     ["yes", "no"],
+            \     ['0', '1'],
+            \     ['big', 'little'],
+            \     ['black', 'white'],
+            \     ['clean', 'dirty'],
+            \     ['dark', 'light'],
+            \     ['deep', 'shallow'],
+            \     ['fast', 'slow'],
+            \     ['fat', 'thin'],
+            \     ['get', 'set'],
+            \     ['good', 'bad'],
+            \     ['happy', 'sad'],
+            \     ['hard', 'soft'],
+            \     ['head', 'tail'],
+            \     ['high', 'low'],
+            \     ['header', 'footer'],
+            \     ['in', 'out'],
+            \     ['inner', 'outer'],
+            \     ['left', 'right'],
+            \     ['light', 'dark'],
+            \     ['long', 'short'],
+            \     ['love', 'hate'],
+            \     ['many', 'few'],
+            \     ['min', 'max'],
+            \     ['new', 'old'],
+            \     ['next', 'previous'],
+            \     ['on', 'off'],
+            \     ['open', 'close'],
+            \     ['present', 'absent'],
+            \     ['question', 'answer'],
+            \     ['red','orange','yellow','green','blue','purple'],
+            \     ['single', 'double', 'multi'],
+            \     ['strong', 'weak'],
+            \     ['this', 'that'],
+            \     ['top', 'bottom'],
+            \     ['true', 'false'],
+            \     ['up', 'down'],
+            \     ['wide', 'narrow'],
+            \     ['width', 'height'],
+            \     ['yes', 'no'],
             \ ],
             \ }
 
