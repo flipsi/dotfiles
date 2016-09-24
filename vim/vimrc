@@ -543,8 +543,6 @@ let NERDTreeWinSize = 50
 let NERDTreeQuitOnOpen = 1
 let NERDTreeWinPos = 'right'
 
-" show/hide nerdtree
-noremap <silent> <Leader>tn :NERDTreeToggle<CR>
 " show nerdtree from current file
 noremap <silent> <Leader>tn :NERDTreeFind<CR>
 " show/hide nerdtree
@@ -570,6 +568,9 @@ let g:syntastic_mode_map = {
             \ "mode": "active",
             \ "active_filetypes": ["ruby", "php"],
             \ "passive_filetypes": ["python", "tex"] }
+" let g:syntastic_cpp_compiler = 'clang++'
+" let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+let g:syntastic_c_cppcheck_args = ' -std=c++11 -stdlib=libc++'
 
 nnoremap <silent> <Leader>sc :SyntasticCheck<CR>
 nnoremap <silent> <Leader>sr :SyntasticReset<CR>
@@ -796,6 +797,7 @@ Plugin 'Valloric/YouCompleteMe'
 let g:ycm_key_invoke_completion = '<Esc>.'
 let g:ycm_key_list_select_completion   = ['<C-N>', '<Down>', '<Tab>', '<Enter>']
 let g:ycm_key_list_previous_completion = ['<C-P>', '<Up>']
+" let g:ycm_show_diagnostics_ui = 0
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1964,29 +1966,53 @@ nnoremap -al :call InsertCharLine(input("Insert character: "), 80)<CR>
 nnoremap -ab :call InsertCharBox(input("Insert character: "))<CR>
 
 
-" substitute occurences of selection in this buffer with confirmation
-" (to change only this occurence, use c. by default they are the same)
-"vnoremap s y:%s/<C-R>"//c<Left><Left>
-" (these are actually two substitutions, so that we start at the current line.
-"  solution taken from http://stackoverflow.com/a/7608016 )
-vnoremap s y:,$s/<C-R>"//c<Bar>1,''-&&
-    \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+" enter substitution mode quickly
+nnoremap <C-S> :%s::<Left>
+
+" substitute last search
+nnoremap -sö :%s:<C-R>/::<Left>
+nmap     -s/ sö
+
+" in visual mode, use 's' for substitution
+" (to change only a single occurence, use 'c'. by default they are the same)
+" text edit leader versions of these should not differ
 vmap -s s
 
-" substitute (last) search
-nnoremap -ss :%s:<C-R>/:
+" substitute occurences of selection in this buffer
+vnoremap <C-S>         yms:%s:\V\C<C-R>":<C-R>":c<Bar>norm!`s
+    \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+" the same, but with keyword matching
+vnoremap <Leader><C-S> yms:%s:\V\C\<<C-R>"\>:<C-R>":c<Bar>norm!`s
+    \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 
-" enter substitution mode quickly
-nnoremap -sl :s:
-nnoremap <C-S> :%s:
+" substitute occurences of selection in this buffer from current line and below
+vnoremap s             yms:,$s:\V\C<C-R>":<C-R>":c<Bar>norm!`s
+    \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+" the same, but with keyword matching
+vnoremap <Leader>s     yms:,$s:\V\C\<<C-R>"\>:<C-R>":c<Bar>norm!`s
+    \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+
+" " (these are actually two substitutions, so that we start at the current line
+" " but continue from the first. source: http://stackoverflow.com/a/7608016)
+" vnoremap s             yms:,$s:\V\C<C-R>":<C-R>":c<Bar>1,''-&&<Bar>norm!`s
+    " \ <Left><Left><Left><Left><Left><Left><Left><Left><Left>
+    " \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+" " the same, but with keyword matching
+" vnoremap <Leader>s     yms:,$s:\V\C\<<C-R>"\>:<C-R>":c<Bar>1,''-&&<Bar>norm!`s
+    " \ <Left><Left><Left><Left><Left><Left><Left><Left><Left>
+    " \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+
+" substitution motions and text objects
+nmap -se  ves
+nmap -sE  vEs
+nmap -siw viw<Leader>s
+nmap -siW viWs
 
 
-" replace word under cursor with yank
+" replace something with yank
 nnoremap -rw viwp
 nnoremap -rW viWp
-" replace line with yank
-"nnoremap -rl Vp
-nnoremap -rl v$p
+nnoremap -rl v$hp
 
 
 " sort lines
@@ -2001,9 +2027,11 @@ inoremap -tu <Esc>blgueea
 
 " delete leading whitespace (can be prefixed with a count)
 nnoremap <silent> -dsl :s:^\s\+::<CR>
-" replace '  ' (double space) with ' ' (one space)
-nnoremap <silent> -dsd :.s:\v(\S)  (\S):\1 \2:<CR>
-nnoremap <silent> -dsD :%s:\v(\S)  (\S):\1 \2:<CR>
+" replace double/multiple spaces with one space
+nnoremap <silent> -dsd :.s:\v(\S) {2}(\S):\1 \2:<CR>
+nnoremap <silent> -dsD :%s:\v(\S) {2}(\S):\1 \2:<CR>
+nnoremap <silent> -dsm :.s:\v(\S) {2,}(\S):\1 \2:<CR>
+nnoremap <silent> -dsM :.s:\v(\S) {2,}(\S):\1 \2:<CR>
 
 
 " add/remove an html comment
