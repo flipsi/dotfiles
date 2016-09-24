@@ -543,8 +543,6 @@ let NERDTreeWinSize = 50
 let NERDTreeQuitOnOpen = 1
 let NERDTreeWinPos = 'right'
 
-" show/hide nerdtree
-noremap <silent> <Leader>tn :NERDTreeToggle<CR>
 " show nerdtree from current file
 noremap <silent> <Leader>tn :NERDTreeFind<CR>
 " show/hide nerdtree
@@ -570,6 +568,9 @@ let g:syntastic_mode_map = {
             \ "mode": "active",
             \ "active_filetypes": ["ruby", "php"],
             \ "passive_filetypes": ["python", "tex"] }
+" let g:syntastic_cpp_compiler = 'clang++'
+" let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+let g:syntastic_c_cppcheck_args = ' -std=c++11 -stdlib=libc++'
 
 nnoremap <silent> <Leader>sc :SyntasticCheck<CR>
 nnoremap <silent> <Leader>sr :SyntasticReset<CR>
@@ -612,6 +613,7 @@ nmap <C-p> <Plug>yankstack_substitute_older_paste
 nmap <C-n> <Plug>yankstack_substitute_newer_paste
 "call yankstack#setup()
 
+
 " add and toggle comments with <Leader>c<space> etc
 Plugin 'scrooloose/nerdcommenter'
 " use leading space
@@ -622,16 +624,34 @@ nmap <Leader>cd yy<Leader>ccp
 nnoremap o o<Esc>S
 nnoremap O O<Esc>S
 
+
 " automagically add closing braces etc
 Plugin 'Raimondi/delimitMate'
+
 
 " add a ; at the end of a line
 "Plugin 'lfilho/cosco.vim'
 "inoremap <silent> <Esc><Enter> <Esc>:call cosco#commaOrSemiColon()<CR>A<Enter>
 inoremap <silent> <Esc><Enter> <Esc>A;<Esc>^
 
+
 " add/change/delete quotes/braces/... and more
 Plugin 'tpope/vim-surround'
+" toggle quotes {{{
+function! ToggleQuotesWithVimSurround()
+    let pos_cursor = getpos(".")[2]
+    let linepart   = strpart(getline("."), pos_cursor - 1)
+    let pos_single = stridx(linepart, "'")
+    let pos_double = stridx(linepart, '"')
+    if pos_single >= 0 && (pos_double < 0 || pos_single < pos_double)
+        normal cs'"
+    elseif pos_double >= 0 && (pos_single < 0 || pos_double < pos_single)
+        normal cs"'
+    endif
+endfunction
+" }}}
+nnoremap <silent> -tq :call ToggleQuotesWithVimSurround()<CR>
+
 
 " swap ('transpose') two words or arbitrary things
 Plugin 'tommcdo/vim-exchange'
@@ -683,44 +703,60 @@ noremap <silent> -tw :ToggleWord<CR>
 
 let g:toggle_words_dict = {
             \ 'css': [
-            \     ["div", "span"],
-            \     ["head", "body"],
+            \     ['div', 'span'],
+            \     ['head', 'body'],
             \     ['inline', 'block', 'none'],
             \     ['margin', 'padding'],
             \     ['relative', 'absolute', 'fixed', 'static'],
             \ ],
             \ 'html': [
-            \     ["div", "span"],
-            \     ["head", "body"],
-            \     ["header", "footer"],
+            \     ['div', 'span'],
+            \     ['head', 'body'],
+            \     ['header', 'footer'],
             \ ],
             \ 'tex': [
             \     ['chapter', 'section', 'subsection']
             \ ],
             \ '*': [
-            \     ["0", "1"],
-            \     ["black", "white"],
-            \     ["dark", "light"],
-            \     ["deep", "shallow"],
-            \     ["get", "set"],
-            \     ["hard", "soft"],
-            \     ["head", "tail"],
-            \     ["header", "footer"],
-            \     ["left", "right"],
-            \     ["love", "hate"],
-            \     ["min", "max"],
-            \     ["next", "previous"],
-            \     ["on", "off"],
-            \     ["open", "close"],
-            \     ["present", "absent"],
-            \     ["red","orange","yellow","green","blue","purple"],
-            \     ["strong", "weak"],
-            \     ["this", "that"],
-            \     ["top", "bottom"],
-            \     ["true", "false"],
-            \     ["up", "down"],
-            \     ["width", "height"],
-            \     ["yes", "no"],
+            \     ['0', '1'],
+            \     ['big', 'little'],
+            \     ['black', 'white'],
+            \     ['clean', 'dirty'],
+            \     ['dark', 'light'],
+            \     ['deep', 'shallow'],
+            \     ['fast', 'slow'],
+            \     ['fat', 'thin'],
+            \     ['get', 'set'],
+            \     ['good', 'bad'],
+            \     ['happy', 'sad'],
+            \     ['hard', 'soft'],
+            \     ['head', 'tail'],
+            \     ['high', 'low'],
+            \     ['header', 'footer'],
+            \     ['in', 'out'],
+            \     ['inner', 'outer'],
+            \     ['left', 'right'],
+            \     ['light', 'dark'],
+            \     ['long', 'short'],
+            \     ['love', 'hate'],
+            \     ['many', 'few'],
+            \     ['min', 'max'],
+            \     ['new', 'old'],
+            \     ['next', 'previous'],
+            \     ['on', 'off'],
+            \     ['open', 'close'],
+            \     ['present', 'absent'],
+            \     ['question', 'answer'],
+            \     ['red','orange','yellow','green','blue','purple'],
+            \     ['single', 'double', 'multi'],
+            \     ['strong', 'weak'],
+            \     ['this', 'that'],
+            \     ['top', 'bottom'],
+            \     ['true', 'false'],
+            \     ['up', 'down'],
+            \     ['wide', 'narrow'],
+            \     ['width', 'height'],
+            \     ['yes', 'no'],
             \ ],
             \ }
 
@@ -761,6 +797,7 @@ Plugin 'Valloric/YouCompleteMe'
 let g:ycm_key_invoke_completion = '<Esc>.'
 let g:ycm_key_list_select_completion   = ['<C-N>', '<Down>', '<Tab>', '<Enter>']
 let g:ycm_key_list_previous_completion = ['<C-P>', '<Up>']
+" let g:ycm_show_diagnostics_ui = 0
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1605,13 +1642,38 @@ nnoremap vv V
 vnoremap v <C-c>
 
 
-" copy to clipboard in visual mode
-"vnoremap <C-c> "+y
-vnoremap <C-c> "*y
-nnoremap <C-c> gg0VG"*y
-" paste from clipboard
-noremap  <C-v><C-v> "*p
-inoremap <C-v><C-v> <Esc>"*p
+" copy to clipboard / primary selection in visual modemode
+vnoremap <C-c>      "*ygv"+y
+nnoremap <C-c> gg0VG"*ygv"+y
+mode
+" paste from clipboard / primary selection {{{
+function! PasteFromGUI()
+    let clipbrd = @+
+    let primary = @*
+    if len(primary) == 0
+        normal "+P
+    elseif len(clipbrd) == 0
+        normal "*P
+    elseif primary == clipbrd
+        normal "*P
+    else
+        ec "Paste (c)lipboard (default)    " . strtrans(strpart(clipbrd, 0, 50))
+        ec "or    (p)rimary selection?     " . strtrans(strpart(primary, 0, 50))
+        let c = getchar()
+        if nr2char(c) == 'q' || c == 27 || c == 3 || c == 7
+            redraw
+        elseif nr2char(c) == 'c' || nr2char(c) == '+' || c == 13 || c == 22
+            normal "+P
+            redraw
+        elseif nr2char(c) == 'p' || nr2char(c) == 's' || nr2char(c) == '*'
+            normal "*P
+            redraw
+        endif
+    endif
+endfunction
+" }}}
+noremap <silent> <C-v><C-v> :call PasteFromGUI()<CR>
+imap <C-v><C-v> <Esc><C-v><C-v>
 
 
 " record macro ('complex repeat')
@@ -1915,29 +1977,53 @@ nnoremap -al :call InsertCharLine(input("Insert character: "), 80)<CR>
 nnoremap -ab :call InsertCharBox(input("Insert character: "))<CR>
 
 
-" substitute occurences of selection in this buffer with confirmation
-" (to change only this occurence, use c. by default they are the same)
-"vnoremap s y:%s/<C-R>"//c<Left><Left>
-" (these are actually two substitutions, so that we start at the current line.
-"  solution taken from http://stackoverflow.com/a/7608016 )
-vnoremap s y:,$s/<C-R>"//c<Bar>1,''-&&
-    \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+" enter substitution mode quickly
+nnoremap <C-S> :%s::<Left>
+
+" substitute last search
+nnoremap -sö :%s:<C-R>/::<Left>
+nmap     -s/ sö
+
+" in visual mode, use 's' for substitution
+" (to change only a single occurence, use 'c'. by default they are the same)
+" text edit leader versions of these should not differ
 vmap -s s
 
-" substitute (last) search
-nnoremap -ss :%s:<C-R>/:
+" substitute occurences of selection in this buffer
+vnoremap <C-S>         yms:%s:\V\C<C-R>":<C-R>":c<Bar>norm!`s
+    \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+" the same, but with keyword matching
+vnoremap <Leader><C-S> yms:%s:\V\C\<<C-R>"\>:<C-R>":c<Bar>norm!`s
+    \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 
-" enter substitution mode quickly
-nnoremap -sl :s:
-nnoremap <C-S> :%s:
+" substitute occurences of selection in this buffer from current line and below
+vnoremap s             yms:,$s:\V\C<C-R>":<C-R>":c<Bar>norm!`s
+    \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+" the same, but with keyword matching
+vnoremap <Leader>s     yms:,$s:\V\C\<<C-R>"\>:<C-R>":c<Bar>norm!`s
+    \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+
+" " (these are actually two substitutions, so that we start at the current line
+" " but continue from the first. source: http://stackoverflow.com/a/7608016)
+" vnoremap s             yms:,$s:\V\C<C-R>":<C-R>":c<Bar>1,''-&&<Bar>norm!`s
+    " \ <Left><Left><Left><Left><Left><Left><Left><Left><Left>
+    " \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+" " the same, but with keyword matching
+" vnoremap <Leader>s     yms:,$s:\V\C\<<C-R>"\>:<C-R>":c<Bar>1,''-&&<Bar>norm!`s
+    " \ <Left><Left><Left><Left><Left><Left><Left><Left><Left>
+    " \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+
+" substitution motions and text objects
+nmap -se  ves
+nmap -sE  vEs
+nmap -siw viw<Leader>s
+nmap -siW viWs
 
 
-" replace word under cursor with yank
+" replace something with yank
 nnoremap -rw viwp
 nnoremap -rW viWp
-" replace line with yank
-"nnoremap -rl Vp
-nnoremap -rl v$p
+nnoremap -rl v$hp
 
 
 " sort lines
@@ -1952,9 +2038,11 @@ inoremap -tu <Esc>blgueea
 
 " delete leading whitespace (can be prefixed with a count)
 nnoremap <silent> -dsl :s:^\s\+::<CR>
-" replace '  ' (double space) with ' ' (one space)
-nnoremap <silent> -dsd :.s:\v(\S)  (\S):\1 \2:<CR>
-nnoremap <silent> -dsD :%s:\v(\S)  (\S):\1 \2:<CR>
+" replace double/multiple spaces with one space
+nnoremap <silent> -dsd :.s:\v(\S) {2}(\S):\1 \2:<CR>
+nnoremap <silent> -dsD :%s:\v(\S) {2}(\S):\1 \2:<CR>
+nnoremap <silent> -dsm :.s:\v(\S) {2,}(\S):\1 \2:<CR>
+nnoremap <silent> -dsM :.s:\v(\S) {2,}(\S):\1 \2:<CR>
 
 
 " add/remove an html comment
