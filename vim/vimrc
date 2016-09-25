@@ -975,8 +975,13 @@ set timeout ttimeoutlen=50
 " but mapping delay can be more
 set timeoutlen=1200
 
+" always assume modern terminal
+set ttyfast
 " don't draw everything (e.g. when playing macros)
 set lazyredraw
+
+" allow mouse usage for bad days
+set mouse=a
 
 " disable all bells
 set noerrorbells
@@ -986,10 +991,15 @@ set t_vb=
 " encoding should be utf-8 on every OS
 set     encoding=utf-8
 set fileencoding=utf-8
+" <EOL> line ending philosophies to try
+" set fileformats=unix,dos,mac
 
 " reload files changed outside vim
 " (still have to change buffer or call :checktime)
 set autoread
+
+" automatically change working directory to current file
+" set autochdir
 
 " command history size
 set history=9999
@@ -1010,9 +1020,12 @@ set spellfile=~/.vim/spellfile.utf-8.add,~/.vim/spellfile.local.utf-8.add
 " syntax highlighting
 syntax enable
 
+" highlight matching bracket when typing
+set showmatch
+set matchtime=4
+
 " highlight conflict markers
-" TODO make it work. seems not to.
-"match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " line numbers
 set number
@@ -1089,6 +1102,9 @@ set softtabstop=4
 set autoindent
 set smartindent
 set smarttab
+
+" allow <BS> to delete everything
+set backspace=indent,eol,start
 
 " allow to :edit multiple files in buffers without writing changes
 set hidden
