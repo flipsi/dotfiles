@@ -1121,15 +1121,6 @@ set splitbelow
 " puts new vsplit windows to the right of the current
 set splitright
 
-" improve quickfix and location list
-augroup quickfixbuffer
-    au!
-    " automatically close quickfix or location list when alone
-    au WinEnter * if winnr('$') == 1  && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"
-    au WinEnter *     bdelete
-    au WinEnter * endif
-augroup END
-
 
 
 " }}}
@@ -1253,6 +1244,30 @@ function! ToggleList(bufname, pfx)
   endif
 endfunction
 " }}}
+
+
+" return 1 iff the active window contains a quickfix buffer and there are no
+" other windows with normal buffers.
+function! IsOrphanQuickfixList()
+    let winnr = winnr("$")
+    while winnr >= 1
+        if getbufvar(winbufnr(winnr), "&buftype") == ""
+            return 0
+        endif
+        let winnr -=1
+    endwhile
+    return getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"
+endfunction
+" improve quickfix/location list
+augroup quickfix
+    au!
+    " automatically close quickfix/location list when alone
+    au BufEnter * if IsOrphanQuickfixList()
+    au BufEnter *     bdelete
+    au BufEnter * endif
+augroup END
+
+
 
 
 " make columns after &textwidth visible or invisible {{{
