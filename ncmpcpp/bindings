@@ -1,0 +1,125 @@
+# Author: Philipp Moers <soziflip@gmail.com>
+
+# keybindings for ncmpcpp
+
+
+
+# general
+
+def_key "ctrl-d"
+    quit
+def_key "Q"
+    quit
+
+def_key "q"
+    next_screen
+def_key "alt-n"
+    next_screen
+def_key "alt-p"
+    previous_screen
+
+def_key "s"
+    select_item
+    scroll_down
+
+
+# movement
+
+def_key "j"
+    scroll_down
+def_key "k"
+    scroll_up
+
+def_key "alt-k"
+    page_up
+def_key "alt-j"
+    page_down
+
+def_key "h"
+    previous_column
+def_key "l"
+    next_column
+
+def_key "g"
+    move_home
+def_key "G"
+    move_end
+
+
+# playback
+
+def_key "space"
+    pause
+def_key "backspace"
+    stop
+
+def_key "o"
+    next
+def_key "O"
+    previous
+
+def_key "R"
+  toggle_random
+def_key "S"
+  toggle_single
+
+def_key "+"
+    volume_up
+def_key "-"
+    volume_down
+
+def_key "."
+    show_lyrics
+
+def_key "J"
+    move_sort_order_down
+def_key "K"
+    move_sort_order_up
+
+
+# search (in current screen)
+
+def_key "ö"
+    find
+def_key "ö"
+    find_item_forward
+
+def_key "n"
+    next_found_item
+def_key "N"
+    previous_found_item
+
+
+# find (music)
+
+def_key "f"
+    show_search_engine
+def_key "f"
+    require_screen "search_engine"
+    start_searching
+def_key "F"
+    require_screen "search_engine"
+    reset_search_engine
+
+
+# playlist
+
+def_key "p"
+    show_playlist
+
+def_key "c"
+    require_screen "playlist"
+    jump_to_playing_song
+
+def_key "d"
+    require_screen "playlist"
+    delete_playlist_items
+
+def_key "D"
+    clear_main_playlist
+
+
+# media library
+
+def_key "m"
+    show_media_library

@@ -50,13 +50,18 @@ function setup_screen_layout
 end
 
 
-function start_mpd_if_music_is_accessible
+function start_musicserver_if_music_is_accessible
     set mountpoints /mnt/extern /media/sflip/extern /media/sflip/Extern
-    pgrep -x mpd >/dev/null
-    if test $status -gt 0
+    if not nc -z localhost 6600
         for m in $mountpoints
-            if mountpoint -q /mnt/extern
-                mpd
+            if mountpoint -q $m
+                # if command -v mopidyctl >/dev/null
+                    # systemctl start mopidy
+                if command -v mopidy >/dev/null
+                    nohup mopidy >/tmp/mopidy.log &
+                else
+                    mpd
+                end
                 return 0
             end
         end
@@ -67,10 +72,10 @@ function start_mpd_if_music_is_accessible
 end
 
 
-function setup_mpd
+function setup_musicserver
     set try_again_after 0 1 3 5 15
     for t in $try_again_after
-        if start_mpd_if_music_is_accessible
+        if start_musicserver_if_music_is_accessible
             return 0
         else
             sleep $t
@@ -83,5 +88,5 @@ end
 
 setup_screen_resolution
 setup_screen_layout
-setup_mpd
+setup_musicserver
 

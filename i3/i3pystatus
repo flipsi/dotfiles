@@ -194,7 +194,7 @@ status.register("shell",
     # command = "pgrep --exact mpd > /dev/null && mpc status | sed '2d' | sed 's/repeat: .*//' | tr '\n' '-' | sed 's/-volume: \(.*\)%.*/ - VOLUME: \1/' | sed 's/\(.*\)/\U\1/g'|| true",
     # (...but the backslash sequences in sed must be escaped 
     #  so python does not interpret them)
-    command = """pgrep --exact mpd > /dev/null && 
+    command = """pgrep --exact 'mpd|mopidy' > /dev/null && 
                     mpc status | 
                     sed '2d' | 
                     sed 's/repeat: .*//' | 

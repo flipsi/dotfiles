@@ -15,10 +15,10 @@ Usage: install.sh [OPTIONS] TARGET
     -f | --force            if file(s) exist(s), overwrite it/them
 
     TARGET := { all | bash | cmus | dactyl | elinks | fish | ghci | git | i3 |
-                konsole | lesskey | luakit | mpd | mplayer | mutt | muttator |
-                pentadactyl | ranger | sublime-text-3 | telegram-cli | tig |
-                tmux | turses | urlview | vim | vimpc | vimperator | vimus |
-                vlc | xfce4 | xkb | xmonad | zathura }
+                konsole | lesskey | luakit | mopidy |mpd | mplayer | mutt |
+                muttator | ncmpcpp | pentadactyl | ranger | sublime-text-3 |
+                telegram-cli | tig | tmux | turses | urlview | vim | vimpc |
+                vimperator | vimus | vlc | xfce4 | xkb | xmonad | zathura }
 EOF
 }
 
@@ -82,7 +82,21 @@ function create_link_for_target() {
             create_link $PWD/luakit $HOME/.config/
             ;;
 
+        mopidy)
+            # USER:
+            create_link /mnt/extern/data/music $HOME/.music
+            mkdir -p $HOME/.config/mopidy
+            create_link $PWD/mopidy/mopidy.conf $HOME/.config/mopidy/mopidy.conf
+            mopidy local scan
+            # SERVICE:
+            # create_link /mnt/extern/data/music /var/lib/mopidy/media
+            # mkdir -p /etc/mopidy
+            # create_link $PWD/mopidy/mopidy.conf /etc/mopidy/mopidy.conf
+            # mopidyctl local scan
+            ;;
+
         mpd)
+            create_link /mnt/extern/data/music $HOME/.mpd/music
             create_link $PWD/mpd/mpdconf $HOME/.mpdconf
             ;;
 
@@ -98,6 +112,12 @@ function create_link_for_target() {
 
         muttator)
             create_link $PWD/muttator/muttatorrc $HOME/.muttatorrc
+            ;;
+
+        ncmpcpp)
+            mkdir -p $HOME/.ncmpcpp
+            create_link $PWD/ncmpcpp/config $HOME/.ncmpcpp/config
+            create_link $PWD/ncmpcpp/bindings $HOME/.ncmpcpp/bindings
             ;;
 
         pentadactyl)
