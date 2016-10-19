@@ -63,7 +63,8 @@ function create_link_for_target() {
             # create_link $PWD/i3/i3status $HOME/.i3/i3status
             create_link $PWD/i3/i3pystatus $HOME/.i3/i3pystatus
             mkdir -p $HOME/bin
-            create_link $PWD/i3/i3-init.sh $HOME/bin/i3-init.sh
+            create_link $PWD/i3/i3-initialize.sh $HOME/bin/i3-initialize.sh
+            create_link $PWD/i3/i3-terminate.sh $HOME/bin/i3-terminate.sh
             ;;
 
         konsole)
