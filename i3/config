@@ -27,29 +27,35 @@ set $SHELLSCRIPT_PATH /home/sflip/shellscripts
 
 
 ###############################################################################
+###########  INITIAL SETUP  ###################################################
+###############################################################################
+
+# some setup logic I rather do with a shell script
+exec "/home/sflip/bin/i3-initialize.sh"
+
+# set keyboard layout
+exec "setxkbmap de_sflip"
+
+# turn off pc speaker with annoying beep
+exec "xset -b"
+
+# turn off screensaver and display power management
+exec "xset dpms 0 0 0 && xset s noblank && xset s off"
+
+
+
+###############################################################################
 ###########  AUTOSTART  #######################################################
 ###############################################################################
 
 # composite manager for window overlays, smooth workspace changes, etc.
 exec --no-startup-id "compton -b"
 
-# set second output (monitor) with a shell command like this
-# exec "xrandr --output HDMI2 --auto --right-of eDP1"
-# exec "xrandr --output HDMI2 --auto --below eDP1"
-exec --no-startup-id "$SHELLSCRIPT_PATH/misc/obelix-i3-desktop-setup.sh"
-
-# set keyboard layout
-exec --no-startup-id "setxkbmap de_sflip"
-
-
 # turn on num block
 exec --no-startup-id "numlockx"
 
-# turn off pc speaker with annoying beep
-exec --no-startup-id "xset -b"
-
-# turn off screensaver and display power management
-exec --no-startup-id "xset dpms 0 0 0 && xset s noblank && xset s off"
+# power manager takes care of lid closing, standby, display brightness etc.
+exec --no-startup-id "xfce4-power-manager"
 
 # daemon for theme settings and shit
 #exec --no-startup-id "cinnamon-settings-daemon"
@@ -181,6 +187,7 @@ bar {
     # status_command      i3status --config ~/.i3/i3status
     # status_command      i3blocks -c ~/.i3/i3blocks
     status_command      python3 ~/.i3/i3pystatus
+    # output              HDMI2
     position            top
     workspace_buttons   yes
     separator_symbol    " | "
@@ -219,7 +226,7 @@ bindsym $mod+b bar mode toggle
 # lock/exit/suspend etc.
 bindsym XF86PowerOff mode "$mode_system"
 bindsym $mod+Escape mode "$mode_system"
-set $mode_system Want to leave?  (e) logout, (u) switch user, (l) lock, (s) suspend, (h) hibernate, (r) reboot, (p) poweroff (P) poweroff after song
+set $mode_system Want to leave?  (e) logout, (u) switch user, (l) lock, (s) suspend, (h) hibernate, (r) reboot, (p) poweroff (o) poweroff smoothly
 mode "$mode_system" {
     bindsym e exit
     bindsym u exec --no-startup-id "i3exit switch_user"
@@ -228,7 +235,7 @@ mode "$mode_system" {
     bindsym h exec --no-startup-id "i3exit hibernate"; mode "default"
     bindsym r exec --no-startup-id "i3exit reboot"
     bindsym p exec --no-startup-id "i3exit shutdown"
-    bindsym Shift+p exec --no-startup-id "$SHELLSCRIPT_PATH/poweroff-wait-playback"; mode "default"
+    bindsym o exec --no-startup-id "/home/sflip/bin/i3-terminate.sh"; exec --no-startup-id "i3-nagbar -t warning -m 'About to Poweroff... ' -b Abort 'pkill -f i3-terminate.sh'"; mode "default"
     # cancel
     bindsym $mod+Escape mode "default"
     bindsym Return mode "default"

@@ -15,6 +15,7 @@ set hostname (hostname)
 # set PATH /opt/cc0/bin $PATH
 # set PATH ~/.cabal/bin $PATH
 set PATH ~/bin $PATH
+set PATH ~/shellscripts $PATH
 
 
 # edit files with vim
