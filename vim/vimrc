@@ -96,6 +96,8 @@
 "                           - interface leader is control+g ('<C-G>')
 "                           The leader key may set several times in this file
 "                           since the execution time of the mapping matters.
+"       a LOCAL SECTION
+"                           where potential other vimrc files are loaded.
 "
 "
 " }}}
@@ -2249,5 +2251,20 @@ nnoremap <Leader><C-D><C-D> :quitall!<CR>
 
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                              "
+" LOCAL SECTION                                                                "
+"                                                                              "
+"                                                                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" check for local vimrc files and source them
+for filename in ['~/.vimrc.local', './.vimrc.local', './vimrc.local']
+    if filereadable(glob(filename))
+        exec 'source ' . glob(filename)
+    endif
+endfor
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim:tw=80:sw=4:fdm=marker:
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
