@@ -13,10 +13,9 @@
 #music_directory		"/var/lib/mpd/music"
 
 # In order to use the same config with version control on multiple systems...
-# ~/.mpd/music should be a symlink to the mounted music directory
-# on asterix:   /media/sflip/extern/data/music
-# on obelix:    /mnt/extern/data/music
-music_directory         "~/.mpd/music"
+# music_directory should be a symlink to the mounted music directory
+# music_directory         "/mnt/extern/data/music"
+music_directory         "~/.music"
 #
 # This setting sets the MPD internal playlist directory. The purpose of this
 # directory is storage for playlists created by MPD. The server will use 

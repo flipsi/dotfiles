@@ -6,6 +6,7 @@ set hostname (hostname)
 
 
 set PATH ~/bin $PATH
+set PATH ~/shellscripts $PATH
 
 
 # edit files with vim

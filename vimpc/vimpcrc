@@ -55,23 +55,22 @@ map <A-k> <C-B>
 
 " Playback controls
 map <Space> :pause<CR>
+map <Backspace> :stop<CR>
 map o :next<CR>
 map O :previous<CR>
-map s :stop<CR>
 
 " add current song
 " set add end
 map @ :set add next<C-m>:add<C-m>:set add end<CR>
 
-" goto playlists current song
-map F :playlist<C-m>f
+" goto current
+map c f
+" goto random
+map r %
 
 " search
 map ö /
-map Ö :find 
-
-" goto random line
-map r %
+map f :find 
 
 " goto next or previous window
 map <A-n> gt
@@ -79,17 +78,24 @@ map <A-p> gT
 
 " goto window
 map wl :library<CR>
+map m :library<CR>
 map wp :playlist<CR>
+map p :playlist<CR>
 map ws :lists<CR>
 map wd :directory<CR>
 map wb :browse<CR>
 map wh :help<CR>
 
+" select
+map s v
+
+" show information for selected song
+map i e
 
 " delete all titles from the playlist except the current one
 " (does not work if the current one is the first or last in the playlist)
 alias crop playlist; normal fjVGdfkVggd;
-map c :crop<CR>
+"map c :crop<CR>
 " better solution: toggle 'Single' so that playing stops after current song
 
 
