@@ -639,6 +639,9 @@ inoremap <silent> <Esc><Enter> <Esc>A;<Esc>^
 
 " add/change/delete quotes/braces/... and more
 Plugin 'tpope/vim-surround'
+" add quotes quickly
+nmap -q ysiw'
+vmap -q S'
 " toggle quotes {{{
 function! ToggleQuotesWithVimSurround()
     let pos_cursor = getpos(".")[2]
@@ -662,7 +665,7 @@ nmap <Leader>x <Plug>(Exchange)
 xmap <Leader>x <Plug>(Exchange)
 nmap <Leader>xc <Plug>(ExchangeClear)
 nmap <Leader>xl <Plug>(ExchangeLine)
-nmap <Leader>xx <Leader>xiwb.
+nmap <Leader>xx <Leader>xiw
 
 
 " }}}
@@ -691,8 +694,9 @@ vmap <down>  <Plug>SchleppDown
 vmap <left>  <Plug>SchleppLeft
 vmap <right> <Plug>SchleppRight
 
-" duplicate selection
-vmap <Enter> <Plug>SchleppDup
+" duplicate
+" (delete selection with x. by default, x and d do the same)
+vmap -u <Plug>SchleppDup
 
 
 " }}}
@@ -721,11 +725,14 @@ let g:toggle_words_dict = {
             \ ],
             \ '*': [
             \     ['0', '1'],
+            \     ['add', 'remove'],
             \     ['big', 'little'],
             \     ['black', 'white'],
             \     ['clean', 'dirty'],
+            \     ['create', 'delete'],
             \     ['dark', 'light'],
             \     ['deep', 'shallow'],
+            \     ['dynamic', 'static'],
             \     ['fast', 'slow'],
             \     ['fat', 'thin'],
             \     ['get', 'set'],
@@ -736,9 +743,12 @@ let g:toggle_words_dict = {
             \     ['high', 'low'],
             \     ['header', 'footer'],
             \     ['in', 'out'],
+            \     ['initialize', 'terminate'],
+            \     ['initialization', 'termination'],
             \     ['inner', 'outer'],
             \     ['left', 'right'],
             \     ['light', 'dark'],
+            \     ['local', 'global'],
             \     ['long', 'short'],
             \     ['love', 'hate'],
             \     ['many', 'few'],
@@ -750,6 +760,7 @@ let g:toggle_words_dict = {
             \     ['present', 'absent'],
             \     ['question', 'answer'],
             \     ['red','orange','yellow','green','blue','purple'],
+            \     ['setup', 'teardown'],
             \     ['single', 'double', 'multi'],
             \     ['strong', 'weak'],
             \     ['this', 'that'],
@@ -911,6 +922,33 @@ let g:ycm_semantic_triggers.tex = [
             \ ]
 
 nnoremap <Leader>bl :VimtexCompileToggle<CR>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" R stuff {{{
+
+if v:version > 704 || v:version == 704 && has("patch1829")
+    Plugin 'jalvesaq/Nvim-R'
+    " use with tmux
+    let R_in_buffer = 0
+    let R_applescript = 0
+    let R_tmux_split = 1
+    let R_vsplit = 1
+    let R_rconsole_width = 80
+    " custom keybindings
+    let R_user_maps_only = 1
+    augroup NvimR
+        au!
+        au FileType r nmap <C-r>s           <Plug>RStart
+        au FileType r nmap <C-r>q           <Plug>RClose
+        au FileType r nmap <C-r><C-l>       <Plug>RClearConsole
+        au FileType r nmap <Leader><Enter>  <Plug>RSendFile
+        au FileType r nmap <Enter>          <Plug>RSendLine
+        au FileType r xmap <Enter>          <Plug>RSendSelection
+    augroup END
+endif
+
 
 
 " }}}
@@ -1123,29 +1161,52 @@ set splitright
 
 " colorscheme {{{
 
-set background=dark
-
 if s:MyMode == 'mastery'
 
+    " DARK THEMES
+
+    set background=dark
+
+    colorscheme badwolf
     " colorscheme candycode
     " colorscheme dante
+    " colorscheme desertEx
     " colorscheme jellybeans
     " colorscheme meta5
-    " colorscheme desertEx
-    " colorscheme lucius
+    " colorscheme molokai
     " colorscheme onedark
-    colorscheme molokai
-    colorscheme badwolf
+    " colorscheme pride
+    " colorscheme seoul256
+    " colorscheme up
 
-    " let g:airline_theme='serene'
+    let g:airline_theme='base16_summerfruit'
+    " let g:airline_theme='behelit'
     " let g:airline_theme='kalisi'
     " let g:airline_theme='lucius'
+    " let g:airline_theme='serene'
     " let g:airline_theme='tomorrow'
-    let g:airline_theme='base16_summerfruit'
 
-    highlight CursorLine   ctermbg=235
-    highlight CursorColumn ctermbg=235
+    highlight CursorLine   ctermbg=234
+    highlight CursorColumn ctermbg=234
+    highlight ColorColumn  ctermbg=234
     highlight ShowTrailingWhitespace ctermbg=238
+
+    " LIGHT THEMES
+
+    set background=light
+
+    " colorscheme lucius
+    " colorscheme peaksea
+    " colorscheme seoul256-light
+
+    " let g:airline_theme='bubblegum'
+    " let g:airline_theme='lucius'
+    " let g:airline_theme='sol'
+
+    " highlight CursorLine   ctermbg=252
+    " highlight CursorColumn ctermbg=252
+    " highlight ColorColumn  ctermbg=250
+    " highlight ShowTrailingWhitespace ctermbg=250
 
 else
 
@@ -1698,10 +1759,15 @@ noremap <silent> <C-v><C-v> :call PasteFromGUI()<CR>
 imap <C-v><C-v> <Esc><C-v><C-v>
 
 
-" record macro ('complex repeat')
-nnoremap <Leader>M q
-" replay macro ('complex repeat')
-nnoremap <Leader>m @
+" macro ('complex repeat') helper mappings
+nnoremap @{ :nmap <Leader<Left><Right>>rm @}<CR>qq
+nnoremap @} q:nmap <Leader<Left><Right>>rm @{<CR>:echo ''<CR>
+" record macro (start and stop)
+nmap     <Leader>rm @{
+nnoremap <Leader>rM q
+" replay macro
+nnoremap <Leader>m @q
+nnoremap <Leader>M @
 
 
 " alternative way to go back to normal mode
@@ -1754,6 +1820,7 @@ cnoremap <C-p> <up>
 
 " change text width
 nnoremap <Leader>ow0 :set textwidth=0<CR>
+nnoremap <Leader>ow5 :set textwidth=50<CR>
 nnoremap <Leader>ow7 :set textwidth=78<CR>
 nnoremap <Leader>ow8 :set textwidth=80<CR>
 nnoremap <Leader>ow1 :set textwidth=100<CR>
@@ -1785,7 +1852,7 @@ noremap <silent> <C-G>l :set number! <bar> :set relativenumber! <CR>
 noremap <silent> <C-G>L :set relativenumber! <CR>
 
 " toggle word wrap
-nnoremap <silent> <C-G>w :set wrap! <CR>
+nnoremap <silent> <C-G>w :setlocal wrap! <bar> :set wrap? <CR>
 
 " toggle vertical ruler
 nnoremap <silent> <C-G>r :call ToggleColorColumn()<CR>
@@ -1800,9 +1867,9 @@ nnoremap <silent> <C-G>a :set list!<CR>
 
 
 " spell checking
-nnoremap <C-G>ss :set spell! <bar> :set spell? <CR>
-nnoremap <C-G>se :set spelllang=en<CR>
-nnoremap <C-G>sd :set spelllang=de<CR>
+nnoremap <C-G>ss :setlocal spell! <bar> :set spell? <CR>
+nnoremap <C-G>se :setlocal spelllang=en<CR>
+nnoremap <C-G>sd :setlocal spelllang=de<CR>
 nmap <C-G>sg <C-G>sd
 
 
@@ -1869,7 +1936,7 @@ nnoremap ` '
 nnoremap Ä `
 
 " goto last edit
-nnoremap <Leader>. '.zz
+nnoremap <Leader>. '.zzzv
 
 
 " center line when jumping around
@@ -1966,18 +2033,24 @@ nnoremap -rt4 :set noexpandtab <bar> :retab! <bar>
 nnoremap -rt8 :set noexpandtab <bar> :retab! <bar>
             \ :set expandtab tabstop=8 <bar> :retab <CR>
 
+" autoformat
+nnoremap <Enter> gqap
+vnoremap <Enter> gq
 
 " move line up or down
-nnoremap <silent> -k :m .-2<CR>==
-nnoremap <silent> -j :m .+1<CR>==
+nnoremap <silent> -k :m .-2<CR>
+nnoremap <silent> -j :m .+1<CR>
 vnoremap <silent> -j :m '>+1<CR>gv=gv
 vnoremap <silent> -k :m '<-2<CR>gv=gv
 
 
 " split line (opposite of 'J'oin lines)
 " (regular 'S' can be done with 'cc' instead)
-nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
+nnoremap S i<cr><esc>^mqgk:silent! s/\v +$//<cr>:noh<cr>`q
 
+" duplicate line or selection
+nnoremap -u yyp
+vnoremap -u yp
 
 " add new lines above or below
 "(this works without mappings, except that we arein insert mode afterwards)
@@ -2107,6 +2180,9 @@ nnoremap dN [c
 " make
 nnoremap <Leader>bm :make<CR>
 
+" execute shell script
+nnoremap <Leader>bs :!./%<CR>
+
 " jump to (syntastic) errors
 nnoremap <Leader>sf :lfirst<CR>
 nnoremap <Leader>sn :lnext<CR>
@@ -2193,11 +2269,17 @@ nnoremap <silent> <Leader>tl :call ToggleList("Location List", 'l')<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EXTERNAL TOOLS {{{
 
+" search the web
+vnoremap <Leader>isl :<C-w>!$BROWSER 'https://dict.leo.org/ende/?lang=en&search=<C-R>*'<CR>
+vnoremap <Leader>isd :<C-w>!$BROWSER 'https://duckduckgo.com/?q=<C-R>*'<CR>
+vnoremap <Leader>isg :<C-w>!$BROWSER 'https://google.com/?q=<C-R>*'<CR>
 
 " shell in dir of current file
-nnoremap <Leader>if :call SetCwdToFilePath() <bar>
-            \ :let $SHELL = '/usr/bin/fish' <bar> :!fish<CR>
-nnoremap <Leader>ib :call SetCwdToFilePath() <bar> :!bash<CR>
+nnoremap <Leader>if :!fish<CR>
+nnoremap <Leader>iF :let $SHELL = '/usr/bin/fish' <bar>
+            \ execute '!cd ' . expand('%:p:h') . '; fish'<CR>
+nnoremap <Leader>ib :!bash<CR>
+nnoremap <Leader>iB :execute '!cd ' . expand('%:p:h') . '; bash'<CR>
 
 " file manager in dir of current file
 "nnoremap <Leader>iR :call SetCwdToFilePath() <bar> :!ranger<CR>
