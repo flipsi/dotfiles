@@ -1213,7 +1213,6 @@ if s:MyMode == 'mastery'
     " let g:airline_theme='lucius'
     " let g:airline_theme='serene'
     let g:airline_theme='tomorrow'
-    " let g:airline_theme='base16_summerfruit'
 
     highlight CursorLine   ctermbg=234
     highlight CursorColumn ctermbg=234
