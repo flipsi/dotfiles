@@ -365,12 +365,14 @@ Plugin 'beloglazov/vim-textobj-quotes'
 
 " functions (af/if)
 Plugin 'kana/vim-textobj-function'
+Plugin 'thinca/vim-textobj-function-javascript'
 
 " lines with ( [ { pairs (ac/ic)
 " Plugin 'Chun-Yang/vim-textobj-chunk'
 
 " css rules (ac/ic)
 Plugin 'jasonlong/vim-textobj-css'
+" Plugin 'stephenway/vim-textobj-css'
 
 " HTML/XML attributes (ax/ix)
 Plugin 'whatyouhide/vim-textobj-xmlattr'
@@ -618,8 +620,14 @@ nmap <C-n> <Plug>yankstack_substitute_newer_paste
 
 " add and toggle comments with <Leader>c<space> etc
 Plugin 'scrooloose/nerdcommenter'
-" use leading space
+" use leading space, but delete trailing space
 let g:NERDSpaceDelims = 1
+let g:NERDTrimTrailingWhitespace = 1
+" do not nest by default
+let g:NERDDefaultNesting = 1
+let g:NERDAltDelims_javascript = 0
+" comment a paragraph
+nmap <Leader>cap vap<Leader>ci
 " duplicate a line and comment out the first one
 nmap <Leader>cd yy<Leader>ccp
 " do not comment on new lines (except when already in insert mode)
@@ -897,6 +905,13 @@ nnoremap <Leader>cp :ColorPicker<CR>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" lots of syntax support {{{
+
+Plugin 'sheerun/vim-polyglot'
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fish stuff {{{
 
 Plugin 'dag/vim-fish'
@@ -1018,6 +1033,7 @@ set timeoutlen=1200
 " always assume modern terminal
 set ttyfast
 " don't draw everything (e.g. when playing macros)
+set ttyfast
 set lazyredraw
 
 " allow mouse usage for bad days
@@ -1193,7 +1209,7 @@ if s:MyMode == 'mastery'
 
     " LIGHT THEMES
 
-    set background=light
+    " set background=light
 
     " colorscheme lucius
     " colorscheme peaksea
