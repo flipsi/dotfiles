@@ -30,7 +30,7 @@ set $SHELLSCRIPT_PATH /home/sflip/shellscripts
 ###############################################################################
 
 # some setup logic I rather do with a shell script
-exec "i3-init.sh"
+exec "/home/sflip/bin/i3-initialize.sh"
 
 # set keyboard layout
 exec "setxkbmap de_sflip"
@@ -224,7 +224,7 @@ bindsym $mod+b bar mode toggle
 # lock/exit/suspend etc.
 bindsym XF86PowerOff mode "$mode_system"
 bindsym $mod+Escape mode "$mode_system"
-set $mode_system Want to leave?  (e) logout, (u) switch user, (l) lock, (s) suspend, (h) hibernate, (r) reboot, (p) poweroff (P) poweroff after song
+set $mode_system Want to leave?  (e) logout, (u) switch user, (l) lock, (s) suspend, (h) hibernate, (r) reboot, (p) poweroff (o) poweroff smoothly
 mode "$mode_system" {
     bindsym e exit
     bindsym u exec --no-startup-id "i3exit switch_user"
@@ -233,7 +233,7 @@ mode "$mode_system" {
     bindsym h exec --no-startup-id "i3exit hibernate"; mode "default"
     bindsym r exec --no-startup-id "i3exit reboot"
     bindsym p exec --no-startup-id "i3exit shutdown"
-    bindsym Shift+p exec --no-startup-id "$SHELLSCRIPT_PATH/poweroff-wait-playback"; mode "default"
+    bindsym o exec --no-startup-id "/home/sflip/bin/i3-terminate.sh"; exec --no-startup-id "i3-nagbar -t warning -m 'About to Poweroff... ' -b Abort 'pkill -f i3-terminate.sh'"; mode "default"
     # cancel
     bindsym $mod+Escape mode "default"
     bindsym Return mode "default"

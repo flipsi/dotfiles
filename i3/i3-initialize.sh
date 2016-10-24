@@ -86,7 +86,9 @@ end
 
 
 
+
 setup_screen_resolution
 setup_screen_layout
 setup_musicserver
+
 
