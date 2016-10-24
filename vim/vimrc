@@ -597,11 +597,15 @@ let g:syntastic_javascript_checkers = ['jshint']
 
 " ignore these errors/warnings
 let g:syntastic_quiet_messages = { "regex": [
+            \ '\m.* is already defined.',
             \ '\mMissing file doc comment',
             \ '\mLine indented incorrectly;.*',
-            \ '\mBad line breaking before .+..',
+            \ '\mBad line breaking before.*',
+            \ '\m.const. is available in ES6.*',
+            \ '\m.let. is available in ES6.*',
             \ '\mLine exceeds 85 characters;.*',
             \ '\mYou must use .* style comments.*',
+            \ '\mDon.t use adjoining classes.',
             \ '\mShort PHP opening tag used;',
             \ '\m.$. was used before it was defined.'
             \ ] }
