@@ -234,8 +234,8 @@ Plugin 'sjl/badwolf'
 
 " cycle through colorschemes
 Plugin 'vim-scripts/ScrollColors'
-nnoremap <C-G>c :NEXTCOLOR<CR>
-nnoremap <C-G>C :PREVCOLOR<CR>
+nnoremap <C-G><Down> :NEXTCOLOR<CR>
+nnoremap <C-G><Up>   :PREVCOLOR<CR>
 
 
 " }}}
@@ -317,8 +317,8 @@ Plugin 'airblade/vim-gitgutter'
 let g:gitgutter_max_signs = 4000
 
 nnoremap <C-G>g :GitGutterToggle<CR>
-nnoremap <Up>   :GitGutterPrevHunk<CR>
-nnoremap <Down> :GitGutterNextHunk<CR>
+nnoremap <Up>   :GitGutterPrevHunk<CR>zv
+nnoremap <Down> :GitGutterNextHunk<CR>zv
 
 
 " commit messages are special
@@ -1467,6 +1467,37 @@ command! -bar RangerChooser call RangerChooser()
 
 
 
+" change search mode (what happens when hitting n) {{{
+" http://vim.wikia.com/wiki/Make_search_results_appear_in_the_middle_of_the_screen
+function! s:SearchMode()
+  if !exists('s:searchmode') || s:searchmode == 0
+    echo 'Search next: scroll hit to middle if not on same page'
+    nnoremap <silent> n n:call <SID>MaybeMiddle()<CR>zv
+    nnoremap <silent> N N:call <SID>MaybeMiddle()<CR>zv
+    let s:searchmode = 1
+  elseif s:searchmode == 1
+    echo 'Search next: scroll hit to middle'
+    nnoremap n nzzzv
+    nnoremap N Nzzzv
+    let s:searchmode = 2
+  else
+    echo 'Search next: normal'
+    " nunmap n
+    " nunmap N
+    nnoremap n nzv
+    nnoremap N Nzv
+    let s:searchmode = 0
+  endif
+endfunction
+" If cursor is on top or bottom, scroll to middle line.
+function! s:MaybeMiddle()
+  if winline() == &scrolloff + 1 || winline() == winheight(0) - &scrolloff
+    normal! zzzv
+  endif
+endfunction
+
+" }}}
+
 
 
 
@@ -1652,12 +1683,22 @@ endfunction " }}}
 
 " Mappings {{{
 
+" add highlighted word
 nnoremap <silent> <leader>1 :call HiInterestingWord(1)<cr>
 nnoremap <silent> <leader>2 :call HiInterestingWord(2)<cr>
 nnoremap <silent> <leader>3 :call HiInterestingWord(3)<cr>
 nnoremap <silent> <leader>4 :call HiInterestingWord(4)<cr>
 nnoremap <silent> <leader>5 :call HiInterestingWord(5)<cr>
 nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
+
+" remove highlighted words
+nnoremap <silent> <leader>0
+    \ :silent! call matchdelete(86751)<bar>
+    \ :silent! call matchdelete(86752)<bar>
+    \ :silent! call matchdelete(86753)<bar>
+    \ :silent! call matchdelete(86754)<bar>
+    \ :silent! call matchdelete(86755)<bar>
+    \ :silent! call matchdelete(86756)<cr>
 
 " }}}
 " Default Highlights {{{
@@ -1723,6 +1764,8 @@ nnoremap <C-G><C-G> <C-G>
 " show absolute path of current file (':help filename-modifiers')
 nnoremap <Leader><C-G> :echo expand("%:~")<CR>
 
+" if in a git directory and there are dirty files, open them
+nnoremap <Leader>eg :silent! args `git diff --name-only`<CR>
 
 " open config file
 "nnoremap <Leader>ev :edit ~/dotfiles/vim/vimrc<CR>
@@ -1737,6 +1780,10 @@ nnoremap <F5>       :source $MYVIMRC<CR>
 " to follow links in help and jump to definition (ctags)
 nnoremap <M-Enter>    <C-]>
 nnoremap <Esc><Enter> <C-]>
+augroup helpmap
+    au!
+    au BufReadPost */vim/*/doc/*,*/\.vim/bundle/*doc/* nnoremap <Enter> <C-]>
+augroup END
 
 
 " visual block mode is more useful than visual mode
@@ -1885,7 +1932,7 @@ nnoremap <silent> <C-G>R :highlight ColorColumn ctermbg=234<CR>
 
 " toggle highlight current cursor position
 " (switch to insert mode to apply changes)
-nnoremap <silent> <C-G>h :let g:cursorposition = 1 - g:cursorposition <CR>
+nnoremap <silent> <C-G>c :let g:cursorposition = 1 - g:cursorposition <CR>
 
 " toggle show listchars (like whitespace)
 nnoremap <silent> <C-G>a :set list!<CR>
@@ -1994,13 +2041,20 @@ endif
 
 
 " find next and previous occurence like usual when we searched backwards
-nnoremap <expr> n  'Nn'[v:searchforward]
-nnoremap <expr> N  'nN'[v:searchforward]
+" nnoremap <expr> n  'Nn'[v:searchforward]
+" nnoremap <expr> N  'nN'[v:searchforward]
 
-" keep search matches in the middle of the window
-" TODO decide if i really want that and combine with the thing above
-"nnoremap n nzzzv
-"nnoremap N Nzzzv
+" keep search matches in the middle of the window and open folds
+" nnoremap n nzzzv
+" nnoremap N Nzzzv
+" nnoremap * *zzzv
+" nnoremap g* g*zzzv
+" nnoremap g# g#zzzv
+silent call <SID>SearchMode()
+nnoremap <silent> <Leader>on :call <SID>SearchMode()<CR>
+nmap * *nN
+nmap g* g*nN
+nmap g# g#nN
 
 
 " find trailing whitespace
@@ -2061,10 +2115,11 @@ nnoremap <Enter> gqap
 vnoremap <Enter> gq
 
 " move line up or down
-nnoremap <silent> -k :m .-2<CR>
-nnoremap <silent> -j :m .+1<CR>
-vnoremap <silent> -j :m '>+1<CR>gv=gv
-vnoremap <silent> -k :m '<-2<CR>gv=gv
+" (:m closes folds https://groups.google.com/forum/#!topic/vim_dev/QGgbjv4uyZc)
+nnoremap <silent> -k :set fdm=manual<CR>:m .-2<CR>:set fdm=marker<CR>
+nnoremap <silent> -j :set fdm=manual<CR>:m .+1<CR>:set fdm=marker<CR>
+vnoremap <silent> -j <Esc>:set fdm=manual<CR>gv:m '>+1<CR>gv=gv:set fdm=marker<CR>
+vnoremap <silent> -k <Esc>:set fdm=manual<CR>gv:m '<-2<CR>gv=gv:set fdm=marker<CR>
 
 
 " split line (opposite of 'J'oin lines)
