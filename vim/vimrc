@@ -1,6 +1,6 @@
 "  Author:  Philipp Moers
 "           soziflip@gmail.com
-"           github.com/sflip/dotfiles
+"           http://github.com/sflip/dotfiles
 "
 "  ~/.vimrc
 "
@@ -87,7 +87,7 @@
 "                           Also, it may contain fallback keymaps for plugin
 "                           specific things if we are in stripped mode.
 "                           It must be executed after the plugin section.
-"                           Mappings with the alt key should be done twice:                             "
+"                           Mappings with the alt key should be done twice:
 "                           - with <Esc>* for terminal sequences, and
 "                           - with <M-*>  for gvim
 "                           Leader key convention:
@@ -180,6 +180,8 @@ augroup line_jump_on_open
 augroup END
 
 " }}}
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                              "
 "  PLUGIN SECTION                                                              "
@@ -234,8 +236,8 @@ Plugin 'sjl/badwolf'
 
 " cycle through colorschemes
 Plugin 'vim-scripts/ScrollColors'
-nnoremap <C-G>c :NEXTCOLOR<CR>
-nnoremap <C-G>C :PREVCOLOR<CR>
+nnoremap <C-G><Down> :NEXTCOLOR<CR>
+nnoremap <C-G><Up>   :PREVCOLOR<CR>
 
 
 " }}}
@@ -317,8 +319,8 @@ Plugin 'airblade/vim-gitgutter'
 let g:gitgutter_max_signs = 4000
 
 nnoremap <C-G>g :GitGutterToggle<CR>
-nnoremap <Up>   :GitGutterPrevHunk<CR>
-nnoremap <Down> :GitGutterNextHunk<CR>
+nnoremap <Up>   :GitGutterPrevHunk<CR>zv
+nnoremap <Down> :GitGutterNextHunk<CR>zv
 
 
 " commit messages are special
@@ -475,12 +477,13 @@ Plugin 'kien/ctrlp.vim'
 let g:ctrlp_map = '#'
 let g:ctrlp_cmd = 'CtrlPBuffer'
 nnoremap #          :CtrlPBuffer<CR>
+nnoremap <Leader>#  :CtrlPRoot<CR>
 nnoremap <Leader>er :CtrlPMRUFiles<CR>
 nnoremap <Leader>em :CtrlPMixed<CR>
 nnoremap <Leader>eo :CtrlPRoot<CR>
 nnoremap <Leader>eb :CtrlPBuffer<CR>
 
-" ignore some stuff
+" ignore some stuff (in addition to 'wildignore')
 let g:ctrlp_custom_ignore = {
             \ 'dir':  '\v[\/]\.(git|hg|svn)$',
             \ 'file': '\v\.(class)$',
@@ -828,6 +831,7 @@ autocmd filetype php set filetype=php.html
 " process.
 
 Plugin 'Valloric/YouCompleteMe'
+" let g:ycm_server_python_interpreter = '/usr/bin/python3'
 let g:ycm_key_invoke_completion = '<Esc>.'
 let g:ycm_key_list_select_completion   = ['<C-N>', '<Down>', '<Tab>', '<Enter>']
 let g:ycm_key_list_previous_completion = ['<C-P>', '<Up>']
@@ -1134,10 +1138,14 @@ set wildmode=longest,full
 set wildmenu
 
 " ignore some files
-set wildignore+=*.o,*.obj
-set wildignore+=*.pyc
+set wildignorecase
 set wildignore+=*.swp
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+set wildignore+=*.o,*.obj,*.pyc,*.class
+set wildignore+=*.pdf,*.doc,*.docx,*.xls,*.xlsx,*.ppt,*.pptx,*.odt,*.ods
+set wildignore+=*.jpg,*.jpeg,*.png
+set wildignore+=*.mp3,*.mp4,*.mpg,*.mpeg,*.flv,*.wav
+set wildignore+=*.aux,*.bbl,*.blg,*.fdb_latexmk,*.fls,*.lof,*.out,*.toc
 
 " scrolling
 " start scrolling when we're 8 lines away from margins
@@ -1483,6 +1491,37 @@ command! -bar RangerChooser call RangerChooser()
 
 
 
+" change search mode (what happens when hitting n) {{{
+" http://vim.wikia.com/wiki/Make_search_results_appear_in_the_middle_of_the_screen
+function! s:SearchMode()
+  if !exists('s:searchmode') || s:searchmode == 0
+    echo 'Search next: scroll hit to middle if not on same page'
+    nnoremap <silent> n n:call <SID>MaybeMiddle()<CR>zv
+    nnoremap <silent> N N:call <SID>MaybeMiddle()<CR>zv
+    let s:searchmode = 1
+  elseif s:searchmode == 1
+    echo 'Search next: scroll hit to middle'
+    nnoremap n nzzzv
+    nnoremap N Nzzzv
+    let s:searchmode = 2
+  else
+    echo 'Search next: normal'
+    " nunmap n
+    " nunmap N
+    nnoremap n nzv
+    nnoremap N Nzv
+    let s:searchmode = 0
+  endif
+endfunction
+" If cursor is on top or bottom, scroll to middle line.
+function! s:MaybeMiddle()
+  if winline() == &scrolloff + 1 || winline() == winheight(0) - &scrolloff
+    normal! zzzv
+  endif
+endfunction
+
+" }}}
+
 
 
 
@@ -1668,12 +1707,22 @@ endfunction " }}}
 
 " Mappings {{{
 
+" add highlighted word
 nnoremap <silent> <leader>1 :call HiInterestingWord(1)<cr>
 nnoremap <silent> <leader>2 :call HiInterestingWord(2)<cr>
 nnoremap <silent> <leader>3 :call HiInterestingWord(3)<cr>
 nnoremap <silent> <leader>4 :call HiInterestingWord(4)<cr>
 nnoremap <silent> <leader>5 :call HiInterestingWord(5)<cr>
 nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
+
+" remove highlighted words
+nnoremap <silent> <leader>0
+    \ :silent! call matchdelete(86751)<bar>
+    \ :silent! call matchdelete(86752)<bar>
+    \ :silent! call matchdelete(86753)<bar>
+    \ :silent! call matchdelete(86754)<bar>
+    \ :silent! call matchdelete(86755)<bar>
+    \ :silent! call matchdelete(86756)<cr>
 
 " }}}
 " Default Highlights {{{
@@ -1691,8 +1740,6 @@ hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
 
 
 " }}}
-
-
 
 
 
@@ -1739,6 +1786,8 @@ nnoremap <C-G><C-G> <C-G>
 " show absolute path of current file (':help filename-modifiers')
 nnoremap <Leader><C-G> :echo expand("%:~")<CR>
 
+" if in a git directory and there are dirty files, open them
+nnoremap <Leader>eg :silent! args `git diff --name-only`<CR>
 
 " open config file
 "nnoremap <Leader>ev :edit ~/dotfiles/vim/vimrc<CR>
@@ -1753,6 +1802,11 @@ nnoremap <F5>       :source $MYVIMRC<CR>
 " to follow links in help and jump to definition (ctags)
 nnoremap <M-Enter>    <C-]>
 nnoremap <Esc><Enter> <C-]>
+augroup map_enter_help
+    au!
+    au BufReadPost */vim/*/doc/*,*/\.vim/bundle/*doc/*
+                \ nnoremap <buffer> <Enter> <C-]>
+augroup END
 
 
 " visual block mode is more useful than visual mode
@@ -1901,7 +1955,7 @@ nnoremap <silent> <C-G>R :highlight ColorColumn ctermbg=234<CR>
 
 " toggle highlight current cursor position
 " (switch to insert mode to apply changes)
-nnoremap <silent> <C-G>h :let g:cursorposition = 1 - g:cursorposition <CR>
+nnoremap <silent> <C-G>c :let g:cursorposition = 1 - g:cursorposition <CR>
 
 " toggle show listchars (like whitespace)
 nnoremap <silent> <C-G>a :set list!<CR>
@@ -1924,10 +1978,10 @@ nnoremap j gj
 nnoremap k gk
 
 " move faster
-nnoremap gj 10j
-nnoremap gk 10k
-vnoremap gj 10j
-vnoremap gk 10k
+nnoremap gj 8j
+nnoremap gk 8k
+vnoremap gj 8j
+vnoremap gk 8k
 
 
 " move with emacs-keys like in most shells
@@ -2010,13 +2064,20 @@ endif
 
 
 " find next and previous occurence like usual when we searched backwards
-nnoremap <expr> n  'Nn'[v:searchforward]
-nnoremap <expr> N  'nN'[v:searchforward]
+" nnoremap <expr> n  'Nn'[v:searchforward]
+" nnoremap <expr> N  'nN'[v:searchforward]
 
-" keep search matches in the middle of the window
-" TODO decide if i really want that and combine with the thing above
-"nnoremap n nzzzv
-"nnoremap N Nzzzv
+" keep search matches in the middle of the window and open folds
+" nnoremap n nzzzv
+" nnoremap N Nzzzv
+" nnoremap * *zzzv
+" nnoremap g* g*zzzv
+" nnoremap g# g#zzzv
+silent call <SID>SearchMode()
+nnoremap <silent> <Leader>on :call <SID>SearchMode()<CR>
+nmap * *nN
+nmap g* g*nN
+nmap g# g#nN
 
 
 " find trailing whitespace
@@ -2072,15 +2133,22 @@ nnoremap -rt4 :set noexpandtab <bar> :retab! <bar>
 nnoremap -rt8 :set noexpandtab <bar> :retab! <bar>
             \ :set expandtab tabstop=8 <bar> :retab <CR>
 
-" autoformat
-nnoremap <Enter> gqap
-vnoremap <Enter> gq
+" autoformat with enter in normal buffers
+augroup map_enter_autoformat
+    au!
+    au BufReadPost *
+                \ if ! strchars(&buftype) |
+                \   nnoremap <buffer> <Enter> gqap |
+                \   vnoremap <buffer> <Enter> gq |
+                \ endif
+augroup END
 
 " move line up or down
-nnoremap <silent> -k :m .-2<CR>
-nnoremap <silent> -j :m .+1<CR>
-vnoremap <silent> -j :m '>+1<CR>gv=gv
-vnoremap <silent> -k :m '<-2<CR>gv=gv
+" (:m closes folds https://groups.google.com/forum/#!topic/vim_dev/QGgbjv4uyZc)
+nnoremap <silent> -k :set fdm=manual<CR>:m .-2<CR>:set fdm=marker<CR>
+nnoremap <silent> -j :set fdm=manual<CR>:m .+1<CR>:set fdm=marker<CR>
+vnoremap <silent> -j <Esc>:set fdm=manual<CR>gv:m '>+1<CR>gv=gv:set fdm=marker<CR>
+vnoremap <silent> -k <Esc>:set fdm=manual<CR>gv:m '<-2<CR>gv=gv:set fdm=marker<CR>
 
 
 " split line (opposite of 'J'oin lines)
@@ -2317,10 +2385,9 @@ vnoremap <Leader>isl :<C-w>!$BROWSER 'https://dict.leo.org/ende/?lang=en&search=
 vnoremap <Leader>isd :<C-w>!$BROWSER 'https://duckduckgo.com/?q=<C-R>*'<CR>
 vnoremap <Leader>isg :<C-w>!$BROWSER 'https://google.com/?q=<C-R>*'<CR>
 
-" shell in dir of current file
+" shell in cwd or dir of current file
 nnoremap <Leader>if :!fish<CR>
-nnoremap <Leader>iF :let $SHELL = '/usr/bin/fish' <bar>
-            \ execute '!cd ' . expand('%:p:h') . '; fish'<CR>
+nnoremap <Leader>iF :execute '!cd ' . expand('%:p:h') . '; fish'<CR>
 nnoremap <Leader>ib :!bash<CR>
 nnoremap <Leader>iB :execute '!cd ' . expand('%:p:h') . '; bash'<CR>
 
@@ -2382,6 +2449,7 @@ nnoremap <Leader><C-D><C-D> :quitall!<CR>
 "                                                                              "
 "                                                                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" {{{
 
 " check for local vimrc files and source them
 for filename in ['~/.vimrc.local', './.vimrc.local', './vimrc.local']
@@ -2390,6 +2458,8 @@ for filename in ['~/.vimrc.local', './.vimrc.local', './vimrc.local']
     endif
 endfor
 
+
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim:tw=80:sw=4:fdm=marker:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
