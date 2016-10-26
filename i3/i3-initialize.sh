@@ -86,9 +86,10 @@ end
 
 
 
+if not pgrep -x palemoon; nohup palemoon &; end
 
 # setup_screen_resolution
-# setup_screen_layout
+setup_screen_layout
 setup_musicserver
 
 
