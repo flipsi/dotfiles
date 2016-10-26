@@ -282,6 +282,7 @@ mode "$mpd_control" {
     bindsym p     exec --no-startup-id "mpc prev"; exec "pkill -USR1 -f 'i3pystatus'"
     bindsym O     exec --no-startup-id "mpc prev"; exec "pkill -USR1 -f 'i3pystatus'"
     bindsym s     exec --no-startup-id "mpc stop"; mode "default"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym BackSpace exec --no-startup-id "mpc stop"; mode "default"; exec "pkill -USR1 -f 'i3pystatus'"
     bindsym c     exec --no-startup-id "mpc crop"; mode "default"; exec "pkill -USR1 -f 'i3pystatus'"
     bindsym minus exec --no-startup-id "mpc volume -1"; exec "pkill -USR1 -f 'i3pystatus'"
     bindsym plus  exec --no-startup-id "mpc volume +1"; exec "pkill -USR1 -f 'i3pystatus'"
