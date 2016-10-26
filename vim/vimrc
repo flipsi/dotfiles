@@ -1,6 +1,6 @@
 "  Author:  Philipp Moers
 "           soziflip@gmail.com
-"           github.com/sflip/dotfiles
+"           http://github.com/sflip/dotfiles
 "
 "  ~/.vimrc
 "
@@ -87,7 +87,7 @@
 "                           Also, it may contain fallback keymaps for plugin
 "                           specific things if we are in stripped mode.
 "                           It must be executed after the plugin section.
-"                           Mappings with the alt key should be done twice:                             "
+"                           Mappings with the alt key should be done twice:
 "                           - with <Esc>* for terminal sequences, and
 "                           - with <M-*>  for gvim
 "                           Leader key convention:
@@ -180,6 +180,8 @@ augroup line_jump_on_open
 augroup END
 
 " }}}
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                              "
 "  PLUGIN SECTION                                                              "
@@ -475,12 +477,13 @@ Plugin 'kien/ctrlp.vim'
 let g:ctrlp_map = '#'
 let g:ctrlp_cmd = 'CtrlPBuffer'
 nnoremap #          :CtrlPBuffer<CR>
+nnoremap <Leader>#  :CtrlPRoot<CR>
 nnoremap <Leader>er :CtrlPMRUFiles<CR>
 nnoremap <Leader>em :CtrlPMixed<CR>
 nnoremap <Leader>eo :CtrlPRoot<CR>
 nnoremap <Leader>eb :CtrlPBuffer<CR>
 
-" ignore some stuff
+" ignore some stuff (in addition to 'wildignore')
 let g:ctrlp_custom_ignore = {
             \ 'dir':  '\v[\/]\.(git|hg|svn)$',
             \ 'file': '\v\.(class)$',
@@ -824,6 +827,7 @@ autocmd filetype php set filetype=php.html
 " process.
 
 Plugin 'Valloric/YouCompleteMe'
+" let g:ycm_server_python_interpreter = '/usr/bin/python3'
 let g:ycm_key_invoke_completion = '<Esc>.'
 let g:ycm_key_list_select_completion   = ['<C-N>', '<Down>', '<Tab>', '<Enter>']
 let g:ycm_key_list_previous_completion = ['<C-P>', '<Up>']
@@ -1123,10 +1127,14 @@ set wildmode=longest,full
 set wildmenu
 
 " ignore some files
-set wildignore+=*.o,*.obj
-set wildignore+=*.pyc
+set wildignorecase
 set wildignore+=*.swp
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+set wildignore+=*.o,*.obj,*.pyc,*.class
+set wildignore+=*.pdf,*.doc,*.docx,*.xls,*.xlsx,*.ppt,*.pptx,*.odt,*.ods
+set wildignore+=*.jpg,*.jpeg,*.png
+set wildignore+=*.mp3,*.mp4,*.mpg,*.mpeg,*.flv,*.wav
+set wildignore+=*.aux,*.bbl,*.blg,*.fdb_latexmk,*.fls,*.lof,*.out,*.toc
 
 " scrolling
 " start scrolling when we're 8 lines away from margins
@@ -1719,8 +1727,6 @@ hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
 
 
 
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                              "
 "  KEYMAP SECTION                                                              "
@@ -1780,9 +1786,10 @@ nnoremap <F5>       :source $MYVIMRC<CR>
 " to follow links in help and jump to definition (ctags)
 nnoremap <M-Enter>    <C-]>
 nnoremap <Esc><Enter> <C-]>
-augroup helpmap
+augroup map_enter_help
     au!
-    au BufReadPost */vim/*/doc/*,*/\.vim/bundle/*doc/* nnoremap <Enter> <C-]>
+    au BufReadPost */vim/*/doc/*,*/\.vim/bundle/*doc/*
+                \ nnoremap <buffer> <Enter> <C-]>
 augroup END
 
 
@@ -1955,10 +1962,10 @@ nnoremap j gj
 nnoremap k gk
 
 " move faster
-nnoremap gj 10j
-nnoremap gk 10k
-vnoremap gj 10j
-vnoremap gk 10k
+nnoremap gj 8j
+nnoremap gk 8k
+vnoremap gj 8j
+vnoremap gk 8k
 
 
 " move with emacs-keys like in most shells
@@ -2110,9 +2117,15 @@ nnoremap -rt4 :set noexpandtab <bar> :retab! <bar>
 nnoremap -rt8 :set noexpandtab <bar> :retab! <bar>
             \ :set expandtab tabstop=8 <bar> :retab <CR>
 
-" autoformat
-nnoremap <Enter> gqap
-vnoremap <Enter> gq
+" autoformat with enter in normal buffers
+augroup map_enter_autoformat
+    au!
+    au BufReadPost *
+                \ if ! strchars(&buftype) |
+                \   nnoremap <buffer> <Enter> gqap |
+                \   vnoremap <buffer> <Enter> gq |
+                \ endif
+augroup END
 
 " move line up or down
 " (:m closes folds https://groups.google.com/forum/#!topic/vim_dev/QGgbjv4uyZc)
@@ -2356,10 +2369,9 @@ vnoremap <Leader>isl :<C-w>!$BROWSER 'https://dict.leo.org/ende/?lang=en&search=
 vnoremap <Leader>isd :<C-w>!$BROWSER 'https://duckduckgo.com/?q=<C-R>*'<CR>
 vnoremap <Leader>isg :<C-w>!$BROWSER 'https://google.com/?q=<C-R>*'<CR>
 
-" shell in dir of current file
+" shell in cwd or dir of current file
 nnoremap <Leader>if :!fish<CR>
-nnoremap <Leader>iF :let $SHELL = '/usr/bin/fish' <bar>
-            \ execute '!cd ' . expand('%:p:h') . '; fish'<CR>
+nnoremap <Leader>iF :execute '!cd ' . expand('%:p:h') . '; fish'<CR>
 nnoremap <Leader>ib :!bash<CR>
 nnoremap <Leader>iB :execute '!cd ' . expand('%:p:h') . '; bash'<CR>
 
@@ -2421,6 +2433,7 @@ nnoremap <Leader><C-D><C-D> :quitall!<CR>
 "                                                                              "
 "                                                                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" {{{
 
 " check for local vimrc files and source them
 for filename in ['~/.vimrc.local', './.vimrc.local', './vimrc.local']
@@ -2429,6 +2442,8 @@ for filename in ['~/.vimrc.local', './.vimrc.local', './vimrc.local']
     endif
 endfor
 
+
+" }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim:tw=80:sw=4:fdm=marker:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
