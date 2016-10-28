@@ -828,6 +828,7 @@ autocmd filetype php set filetype=php.html
 
 Plugin 'Valloric/YouCompleteMe'
 " let g:ycm_server_python_interpreter = '/usr/bin/python3'
+" let g:ycm_path_to_python_interpreter = '/usr/bin/python3'
 let g:ycm_key_invoke_completion = '<Esc>.'
 let g:ycm_key_list_select_completion   = ['<C-N>', '<Down>', '<Tab>', '<Enter>']
 let g:ycm_key_list_previous_completion = ['<C-P>', '<Up>']
@@ -2287,7 +2288,7 @@ nnoremap <Leader>sN :lprevious<CR>
 " so we jump through both quickfix and location list with one keystroke
 " @param direction: 0 for next, 1 for previous
 " @param switch: 0 for the same list as before, 1 for the other
-let g:jumplist = 'quickfixlist'
+let g:jumplist = 'locationlist'
 function! JumpThroughList(direction, switch)
     if (a:switch == 1)
         if (g:jumplist == 'quickfixlist')
@@ -2435,11 +2436,19 @@ nnoremap <Leader><C-D><C-D> :quitall!<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " {{{
 
-" check for local vimrc files and source them
-for filename in ['~/.vimrc.local', './.vimrc.local', './vimrc.local']
-    if filereadable(glob(filename))
-        exec 'source ' . glob(filename)
-    endif
+" Check for local vimrc files and source them.
+" (project files take precedence over global files)
+" (non-hidden files take precedence over hidden files)
+" (child directory takes precedence over parent directory)
+" TODO: is 7 levels enough? should find a cool way to do start at /
+for filename in ['~/.vimrc.local', '.vimrc.local', 'vimrc.local']
+    for parentdir in ['../../../../../../../', '../../../../../../',
+    \ '../../../../../', '../../../../', '../../../', '../../', '../', './']
+        let filename_with_dir = parentdir . filename
+        if filereadable(glob(filename_with_dir))
+            exec 'source ' . glob(filename_with_dir)
+        endif
+    endfor
 endfor
 
 
