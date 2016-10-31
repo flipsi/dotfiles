@@ -291,12 +291,11 @@ let g:airline_powerline_fonts=0
 
 Plugin 'tpope/vim-fugitive'
 
-nmap <Leader>gg <Leader>gs
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gd :Gdiff<CR>
-nnoremap <Leader>gr :Gread<CR>
+nnoremap <Leader>gU :Gread<CR>
 nnoremap <Leader>gw :Gwrite<CR>
-nnoremap <Leader>ga :Gwrite<CR>
+nnoremap <Leader>gA :Gwrite<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gp :Gpull<CR>
@@ -318,12 +317,24 @@ Plugin 'airblade/vim-gitgutter'
 
 let g:gitgutter_max_signs = 4000
 
-nnoremap <C-G>g     :GitGutterToggle<CR>
-nnoremap <Down>     :GitGutterNextHunk<CR>zv
-nnoremap <Up>       :GitGutterPrevHunk<CR>zv
-nnoremap <Leader>gn :GitGutterNextHunk<CR>zv
-nnoremap <Leader>gN :GitGutterPrevHunk<CR>zv
-nnoremap <Leader>gf gg:GitGutterNextHunk<CR>zv
+" do not map ic/ac text objects etc because I decide how I use them
+let g:gitgutter_map_keys = 0
+
+omap ih <Plug>GitGutterTextObjectInnerPending
+omap ah <Plug>GitGutterTextObjectOuterPending
+xmap ih <Plug>GitGutterTextObjectInnerVisual
+xmap ah <Plug>GitGutterTextObjectOuterVisual
+
+nnoremap <C-G>g       :GitGutterToggle<CR>
+nnoremap <Leader>gg gg:GitGutterNextHunk<CR>zv
+nnoremap <Leader>gG  G:GitGutterPrevHunk<CR>zv
+nnoremap <Leader>gn   :GitGutterNextHunk<CR>zv
+nnoremap <Leader>gN   :GitGutterPrevHunk<CR>zv
+nnoremap <Down>       :GitGutterNextHunk<CR>zv
+nnoremap <Up>         :GitGutterPrevHunk<CR>zv
+nnoremap <Leader>ga   :GitGutterStageHunk<CR>
+nnoremap <Leader>gu   :GitGutterUndoHunk<CR>
+nnoremap <Leader>gi   :GitGutterPreviewHunk<CR>
 
 
 " commit messages are special
@@ -391,10 +402,10 @@ Plugin 'akiyan/vim-textobj-php'
 " folds (az/iz)
 Plugin 'kana/vim-textobj-fold'
 
-" git hunks (ih)
-Plugin 'gilligan/textobj-gitgutter'
-omap ah <Plug>(textobj-gitgutter-i)
-vmap ah <Plug>(textobj-gitgutter-i)
+" git hunks (ih) (now managed by gitgutter plugin)
+" Plugin 'gilligan/textobj-gitgutter'
+" omap ah <Plug>(textobj-gitgutter-i)
+" vmap ah <Plug>(textobj-gitgutter-i)
 
 " entire buffer / 'all' (aa/ia)
 Plugin 'kana/vim-textobj-entire'
@@ -1333,8 +1344,7 @@ endfunction
 
 " redraw the screen in case some git things don't keep up with shit {{{
 function! GitRedraw()
-    silent! GitGutterToggle
-    silent! GitGutterToggle
+    GitGutterAll
 endfunction
 " }}}
 
@@ -2311,7 +2321,8 @@ nnoremap <Leader>bm :make<CR>
 nnoremap <Leader>bs :!./%<CR>
 
 " jump to (syntastic) errors
-nnoremap <Leader>sf :lfirst<CR>
+nnoremap <Leader>sg :lfirst<CR>
+nnoremap <Leader>sG :llast<CR>
 nnoremap <Leader>sn :lnext<CR>
 nnoremap <Leader>sN :lprevious<CR>
 
@@ -2473,15 +2484,22 @@ nnoremap <Leader><C-D><C-D> :quitall!<CR>
 " (project files take precedence over global files)
 " (non-hidden files take precedence over hidden files)
 " (child directory takes precedence over parent directory)
-" TODO: is 7 levels enough? should find a cool way to do start at /
-for filename in ['~/.vimrc.local', '.vimrc.local', 'vimrc.local']
-    for parentdir in ['../../../../../../../', '../../../../../../',
-    \ '../../../../../', '../../../../', '../../../', '../../', '../', './']
-        let filename_with_dir = parentdir . filename
-        if filereadable(glob(filename_with_dir))
-            exec 'source ' . glob(filename_with_dir)
+let vimrcs = []
+for vimrc_name in ['vimrc.local', '.vimrc.local']
+    let dir = getcwd()
+    while dir != '/'
+        let vimrc = glob(dir . '/' . vimrc_name)
+        if filereadable(vimrc)
+            let vimrcs = vimrcs + [vimrc]
         endif
-    endfor
+        let dir = fnamemodify(dir . '..', ':h')
+    endwhile
+endfor
+let vimrcs = vimrcs + ['~/.vimrc.local']
+for vimrc in reverse(vimrcs)
+    if filereadable(vimrc)
+        exec 'source ' . vimrc
+    endif
 endfor
 
 
