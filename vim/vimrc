@@ -2457,15 +2457,22 @@ nnoremap <Leader><C-D><C-D> :quitall!<CR>
 " (project files take precedence over global files)
 " (non-hidden files take precedence over hidden files)
 " (child directory takes precedence over parent directory)
-" TODO: is 7 levels enough? should find a cool way to do start at /
-for filename in ['~/.vimrc.local', '.vimrc.local', 'vimrc.local']
-    for parentdir in ['../../../../../../../', '../../../../../../',
-    \ '../../../../../', '../../../../', '../../../', '../../', '../', './']
-        let filename_with_dir = parentdir . filename
-        if filereadable(glob(filename_with_dir))
-            exec 'source ' . glob(filename_with_dir)
+let vimrcs = []
+for vimrc_name in ['vimrc.local', '.vimrc.local']
+    let dir = getcwd()
+    while dir != '/'
+        let vimrc = glob(dir . '/' . vimrc_name)
+        if filereadable(vimrc)
+            let vimrcs = vimrcs + [vimrc]
         endif
-    endfor
+        let dir = fnamemodify(dir . '..', ':h')
+    endwhile
+endfor
+let vimrcs = vimrcs + ['~/.vimrc.local']
+for vimrc in reverse(vimrcs)
+    if filereadable(vimrc)
+        exec 'source ' . vimrc
+    endif
 endfor
 
 
