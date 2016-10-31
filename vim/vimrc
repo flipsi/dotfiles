@@ -318,9 +318,12 @@ Plugin 'airblade/vim-gitgutter'
 
 let g:gitgutter_max_signs = 4000
 
-nnoremap <C-G>g :GitGutterToggle<CR>
-nnoremap <Up>   :GitGutterPrevHunk<CR>zv
-nnoremap <Down> :GitGutterNextHunk<CR>zv
+nnoremap <C-G>g     :GitGutterToggle<CR>
+nnoremap <Down>     :GitGutterNextHunk<CR>zv
+nnoremap <Up>       :GitGutterPrevHunk<CR>zv
+nnoremap <Leader>gn :GitGutterNextHunk<CR>zv
+nnoremap <Leader>gN :GitGutterPrevHunk<CR>zv
+nnoremap <Leader>gf gg:GitGutterNextHunk<CR>zv
 
 
 " commit messages are special
@@ -390,6 +393,8 @@ Plugin 'kana/vim-textobj-fold'
 
 " git hunks (ih)
 Plugin 'gilligan/textobj-gitgutter'
+omap ah <Plug>(textobj-gitgutter-i)
+vmap ah <Plug>(textobj-gitgutter-i)
 
 " entire buffer / 'all' (aa/ia)
 Plugin 'kana/vim-textobj-entire'
@@ -832,6 +837,7 @@ autocmd filetype php set filetype=php.html
 
 Plugin 'Valloric/YouCompleteMe'
 " let g:ycm_server_python_interpreter = '/usr/bin/python3'
+" let g:ycm_path_to_python_interpreter = '/usr/bin/python3'
 let g:ycm_key_invoke_completion = '<Esc>.'
 let g:ycm_key_list_select_completion   = ['<C-N>', '<Down>', '<Tab>', '<Enter>']
 let g:ycm_key_list_previous_completion = ['<C-P>', '<Up>']
@@ -1322,6 +1328,16 @@ function! GetBufferList()
   return buflist
 endfunction
 " }}}
+
+
+
+" redraw the screen in case some git things don't keep up with shit {{{
+function! GitRedraw()
+    silent! GitGutterToggle
+    silent! GitGutterToggle
+endfunction
+" }}}
+
 
 
 " toggle quickfix or location list {{{
@@ -2303,7 +2319,7 @@ nnoremap <Leader>sN :lprevious<CR>
 " so we jump through both quickfix and location list with one keystroke
 " @param direction: 0 for next, 1 for previous
 " @param switch: 0 for the same list as before, 1 for the other
-let g:jumplist = 'quickfixlist'
+let g:jumplist = 'locationlist'
 function! JumpThroughList(direction, switch)
     if (a:switch == 1)
         if (g:jumplist == 'quickfixlist')
@@ -2380,24 +2396,26 @@ nnoremap <silent> <Leader>tl :call ToggleList("Location List", 'l')<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EXTERNAL TOOLS {{{
 
-" search the web
-vnoremap <Leader>isl :<C-w>!$BROWSER 'https://dict.leo.org/ende/?lang=en&search=<C-R>*'<CR>
-vnoremap <Leader>isd :<C-w>!$BROWSER 'https://duckduckgo.com/?q=<C-R>*'<CR>
-vnoremap <Leader>isg :<C-w>!$BROWSER 'https://google.com/?q=<C-R>*'<CR>
+" search the web with selection
+vnoremap <Leader>isl :<C-w>!$BROWSER 'https://dict.leo.org/ende/?lang=en&search=<C-R>*'<CR><CR>
+vnoremap <Leader>isd :<C-w>!$BROWSER 'https://duckduckgo.com/?q=<C-R>*'<CR><CR>
+vnoremap <Leader>isg :<C-w>!$BROWSER 'https://google.com/?q=<C-R>*'<CR><CR>
 
-" shell in cwd or dir of current file
-nnoremap <Leader>if :!fish<CR>
-nnoremap <Leader>iF :execute '!cd ' . expand('%:p:h') . '; fish'<CR>
-nnoremap <Leader>ib :!bash<CR>
-nnoremap <Leader>iB :execute '!cd ' . expand('%:p:h') . '; bash'<CR>
+" shell in working dir or dir of current file
+nnoremap <Leader>if :!fish<CR><CR>
+nnoremap <Leader>iF :execute '!cd ' . expand('%:p:h') . '; fish'<CR><CR>
+nnoremap <Leader>ib :!bash<CR><CR>
+nnoremap <Leader>iB :execute '!cd ' . expand('%:p:h') . '; bash'<CR><CR>
 
-" file manager in dir of current file
+" file manager in working dir or dir of current file
 "nnoremap <Leader>iR :call SetCwdToFilePath() <bar> :!ranger<CR>
 nnoremap <Leader>ir :RangerChooser<CR>
-nnoremap <Leader>iR :call SetCwdToFilePath() <bar> :RangerChooser<CR>
+nnoremap <Leader>iR :call SetCwdToFilePath() <bar> RangerChooser<CR>
 
-" git interface
-nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig status<CR>
+" git interface in working dir or dir of current file
+nnoremap <Leader>it :!tig status <CR> :call GitRedraw()<CR>
+nnoremap <Leader>iT :execute '!cd ' . expand('%:p:h') . '; tig status'<CR>
+                                    \ :call GitRedraw()<CR>
 
 
 " }}}
@@ -2451,11 +2469,19 @@ nnoremap <Leader><C-D><C-D> :quitall!<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " {{{
 
-" check for local vimrc files and source them
-for filename in ['~/.vimrc.local', './.vimrc.local', './vimrc.local']
-    if filereadable(glob(filename))
-        exec 'source ' . glob(filename)
-    endif
+" Check for local vimrc files and source them.
+" (project files take precedence over global files)
+" (non-hidden files take precedence over hidden files)
+" (child directory takes precedence over parent directory)
+" TODO: is 7 levels enough? should find a cool way to do start at /
+for filename in ['~/.vimrc.local', '.vimrc.local', 'vimrc.local']
+    for parentdir in ['../../../../../../../', '../../../../../../',
+    \ '../../../../../', '../../../../', '../../../', '../../', '../', './']
+        let filename_with_dir = parentdir . filename
+        if filereadable(glob(filename_with_dir))
+            exec 'source ' . glob(filename_with_dir)
+        endif
+    endfor
 endfor
 
 
