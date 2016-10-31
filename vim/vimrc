@@ -318,9 +318,12 @@ Plugin 'airblade/vim-gitgutter'
 
 let g:gitgutter_max_signs = 4000
 
-nnoremap <C-G>g :GitGutterToggle<CR>
-nnoremap <Up>   :GitGutterPrevHunk<CR>zv
-nnoremap <Down> :GitGutterNextHunk<CR>zv
+nnoremap <C-G>g     :GitGutterToggle<CR>
+nnoremap <Down>     :GitGutterNextHunk<CR>zv
+nnoremap <Up>       :GitGutterPrevHunk<CR>zv
+nnoremap <Leader>gn :GitGutterNextHunk<CR>zv
+nnoremap <Leader>gN :GitGutterPrevHunk<CR>zv
+nnoremap <Leader>gf gg:GitGutterNextHunk<CR>zv
 
 
 " commit messages are special
@@ -390,6 +393,8 @@ Plugin 'kana/vim-textobj-fold'
 
 " git hunks (ih)
 Plugin 'gilligan/textobj-gitgutter'
+omap ah <Plug>(textobj-gitgutter-i)
+vmap ah <Plug>(textobj-gitgutter-i)
 
 " entire buffer / 'all' (aa/ia)
 Plugin 'kana/vim-textobj-entire'
@@ -1307,6 +1312,16 @@ function! GetBufferList()
   return buflist
 endfunction
 " }}}
+
+
+
+" redraw the screen in case some git things don't keep up with shit {{{
+function! GitRedraw()
+    silent! GitGutterToggle
+    silent! GitGutterToggle
+endfunction
+" }}}
+
 
 
 " toggle quickfix or location list {{{
@@ -2365,24 +2380,26 @@ nnoremap <silent> <Leader>tl :call ToggleList("Location List", 'l')<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EXTERNAL TOOLS {{{
 
-" search the web
-vnoremap <Leader>isl :<C-w>!$BROWSER 'https://dict.leo.org/ende/?lang=en&search=<C-R>*'<CR>
-vnoremap <Leader>isd :<C-w>!$BROWSER 'https://duckduckgo.com/?q=<C-R>*'<CR>
-vnoremap <Leader>isg :<C-w>!$BROWSER 'https://google.com/?q=<C-R>*'<CR>
+" search the web with selection
+vnoremap <Leader>isl :<C-w>!$BROWSER 'https://dict.leo.org/ende/?lang=en&search=<C-R>*'<CR><CR>
+vnoremap <Leader>isd :<C-w>!$BROWSER 'https://duckduckgo.com/?q=<C-R>*'<CR><CR>
+vnoremap <Leader>isg :<C-w>!$BROWSER 'https://google.com/?q=<C-R>*'<CR><CR>
 
-" shell in cwd or dir of current file
-nnoremap <Leader>if :!fish<CR>
-nnoremap <Leader>iF :execute '!cd ' . expand('%:p:h') . '; fish'<CR>
-nnoremap <Leader>ib :!bash<CR>
-nnoremap <Leader>iB :execute '!cd ' . expand('%:p:h') . '; bash'<CR>
+" shell in working dir or dir of current file
+nnoremap <Leader>if :!fish<CR><CR>
+nnoremap <Leader>iF :execute '!cd ' . expand('%:p:h') . '; fish'<CR><CR>
+nnoremap <Leader>ib :!bash<CR><CR>
+nnoremap <Leader>iB :execute '!cd ' . expand('%:p:h') . '; bash'<CR><CR>
 
-" file manager in dir of current file
+" file manager in working dir or dir of current file
 "nnoremap <Leader>iR :call SetCwdToFilePath() <bar> :!ranger<CR>
 nnoremap <Leader>ir :RangerChooser<CR>
-nnoremap <Leader>iR :call SetCwdToFilePath() <bar> :RangerChooser<CR>
+nnoremap <Leader>iR :call SetCwdToFilePath() <bar> RangerChooser<CR>
 
-" git interface
-nnoremap <Leader>it :call SetCwdToFilePath() <bar> :!tig status<CR>
+" git interface in working dir or dir of current file
+nnoremap <Leader>it :!tig status <CR> :call GitRedraw()<CR>
+nnoremap <Leader>iT :execute '!cd ' . expand('%:p:h') . '; tig status'<CR>
+                                    \ :call GitRedraw()<CR>
 
 
 " }}}
