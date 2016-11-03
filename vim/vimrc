@@ -452,7 +452,7 @@ xnoremap  / y:<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
 
 
 " % also matches HTML-tags/words etc
-Plugin 'edsono/vim-matchit'
+Plugin 'matchit.zip'
 
 
 " hide (fold) everything except search string etc
@@ -2041,7 +2041,7 @@ nnoremap ` '
 nnoremap Ä `
 
 " goto last edit
-nnoremap <Leader>. '.zzzv
+nnoremap <Leader>. `.zzzv
 
 
 " center line when jumping around

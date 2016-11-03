@@ -98,6 +98,9 @@ alias crop playlist; normal fjVGdfkVggd;
 "map c :crop<CR>
 " better solution: toggle 'Single' so that playing stops after current song
 
+" delete all titles from the playlist except the from current artist
+map C :library<CR>ggvfkdjjvGdf:playlist<CR>
+
 
 " change playlist format (when font is huge)
 map zf :set songformat %t<CR>
