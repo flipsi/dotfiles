@@ -187,7 +187,8 @@ bar {
     # status_command      i3status --config ~/.i3/i3status
     # status_command      i3blocks -c ~/.i3/i3blocks
     status_command      python3 ~/.i3/i3pystatus
-    # output              HDMI2
+    output              VGA-1
+    mode                dock # dock|hide|invisible
     position            top
     workspace_buttons   yes
     separator_symbol    " | "
