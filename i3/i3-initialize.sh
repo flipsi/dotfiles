@@ -87,6 +87,7 @@ end
 
 
 if not pgrep -x palemoon; nohup palemoon &; end
+if not pgrep -x konsole; nohup konsole --hide-menubar --hide-tabbar --profile NicNacPower &; end
 
 # setup_screen_resolution
 setup_screen_layout
