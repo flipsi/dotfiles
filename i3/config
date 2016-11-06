@@ -82,13 +82,13 @@ exec --no-startup-id "syndaemon -d -k -i 1.2"
 ###############################################################################
 
 # launcher options
-set $DMENU_OPTIONS   -l 5 -fn 'Monospace-11' -i -nb '#000000' -sb '#AFFF58' -sf '#000000'
-set $DMENU_OPTIONS_2 -l 5 -fn 'Monospace-11' -i -nb \#000000 -sb \#AFFF58 -sf \#000000
-set $ROFI_OPTIONS -lines 5 -font 'Monospace 10' -width 100 -location 1 \
-    -color-normal '#000000,#FFFFFF,#000000,#AFFF58,#000000' \
-    -color-urgent '#000000,#FFFFFF,#000000,#AFFF58,#000000' \
-    -color-active '#000000,#FFFFFF,#000000,#AFFF58,#000000' \
-    -color-window '#000000,#000000' \
+set $DMENU_OPTIONS   -l 5 -fn 'Monospace-9' -i -nb '#1E1E1E' -sb '#AFFF58' -sf '#1E1E1E'
+set $DMENU_OPTIONS_2 -l 5 -fn 'Monospace-9' -i -nb \#1E1E1E -sb \#AFFF58 -sf \#1E1E1E
+set $ROFI_OPTIONS -lines 5 -font 'Monospace 9' -width 100 -location 1 \
+    -color-normal '#1E1E1E,#FFFFFF,#1E1E1E,#AFFF58,#1E1E1E' \
+    -color-urgent '#1E1E1E,#FFFFFF,#1E1E1E,#AFFF58,#1E1E1E' \
+    -color-active '#1E1E1E,#FFFFFF,#1E1E1E,#AFFF58,#1E1E1E' \
+    -color-window '#1E1E1E,#1E1E1E' \
     -kb-remove-word-back 'Alt+BackSpace'
 
 
@@ -161,9 +161,9 @@ font pango:Monospace 9
 
 # borders
 #for_window [class="^.*"] border pixel 1
-new_window pixel 0
+new_window pixel 1
 new_float  normal
-hide_edge_borders both
+# hide_edge_borders both
 
 
 # gaps (require the i3gaps fork)
@@ -174,9 +174,9 @@ hide_edge_borders both
 
 # Colors
 #                       border   backgr   text     indicator
-client.focused          #000000  #1E1E1E  #AFFF58  #83B45C
-client.focused_inactive #000000  #1E1E1E  #83B45C  #1E1E1E
-client.unfocused        #000000  #1E1E1E  #DDDDDD  #1E1E1E
+client.focused          #1E1E1E  #1E1E1E  #AFFF58  #83B45C
+client.focused_inactive #1E1E1E  #1E1E1E  #83B45C  #1E1E1E
+client.unfocused        #1E1E1E  #1E1E1E  #DDDDDD  #1E1E1E
 client.urgent           #AFFF58  #83B45C  #000000  #1E1E1E
 client.background       #1A1A1A  #1E1E1E  #83B45C  #1E1E1E
 
