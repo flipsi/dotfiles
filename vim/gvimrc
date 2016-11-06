@@ -8,6 +8,9 @@ set guioptions-=T
 " hide menubar
 set guioptions-=m
 
+" hide tabbar
+set guioptions-=e
+
 " hide scrollbars
 set guioptions-=r
 set guioptions-=R

@@ -21,7 +21,10 @@
 "
 "
 "
+" If you are reading this configuration file on whe web and want use it right
+" away, start vim like this:
 "
+"       bash -c "vim -u <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/vim/vimrc) FILE"
 "
 "
 " In case you open this file in vim and don't know how to use folds:
@@ -626,7 +629,8 @@ let g:syntastic_quiet_messages = { "regex": [
             \ '\mYou must use .* style comments.*',
             \ '\mDon.t use adjoining classes.',
             \ '\mShort PHP opening tag used;',
-            \ '\m.$. was used before it was defined.'
+            \ '\m.$. was used before it was defined.',
+            \ '\mpossible unwanted space at "{"'
             \ ] }
 
 
@@ -634,6 +638,14 @@ let g:syntastic_quiet_messages = { "regex": [
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " text editing {{{
+
+
+" replace some motion or text object or selection with current yank
+Plugin 'ReplaceWithRegister'
+nmap -rr <Plug>ReplaceWithRegisterOperator
+nmap -re <Plug>ReplaceWithRegisterLine
+xmap -r  <Plug>ReplaceWithRegisterVisual
+
 
 " make the 0 register a stack (yank/delete multiple things without worrying)
 " lightweight alternative to yankring
@@ -780,6 +792,7 @@ let g:toggle_words_dict = {
             \     ['happy', 'sad'],
             \     ['hard', 'soft'],
             \     ['head', 'tail'],
+            \     ['hide', 'show'],
             \     ['high', 'low'],
             \     ['header', 'footer'],
             \     ['in', 'out'],
@@ -959,6 +972,8 @@ Plugin 'lervag/vimtex'
 
 let g:vimtex_view_method='zathura'
 "let g:vimtex_viewer_general='zathura'
+let g:vimtex_quickfix_ignore_all_warnings=1
+let g:vimtex_quickfix_mode=0
 
 " YouCompleteMe integration
 if !exists('g:ycm_semantic_triggers')
@@ -1278,6 +1293,12 @@ else
 
     " fallback colorscheme
     colorscheme desert
+
+    let g:cursorposition = 0
+    set nocursorcolumn nocursorline
+    highlight CursorLine   ctermbg=233
+    highlight CursorColumn ctermbg=233
+    highlight ColorColumn  ctermbg=233
 
 endif
 
@@ -1849,7 +1870,7 @@ vnoremap v <C-c>
 " copy to clipboard / primary selection in visual modemode
 vnoremap <C-c>      "*ygv"+y
 nnoremap <C-c> gg0VG"*ygv"+y
-mode
+
 " paste from clipboard / primary selection {{{
 function! PasteFromGUI()
     let clipbrd = @+
@@ -2071,7 +2092,7 @@ nnoremap <c-i> <c-i>zz
 " SEARCHING AND FINDING {{{
 
 
-" search
+" search in this buffer
 if s:MyMode == 'stripped'
     nnoremap ö /
     nnoremap Ö ?
@@ -2079,7 +2100,8 @@ endif
 
 " search in multiple files
 if s:MyMode == 'stripped'
-    nnoremap / :vimgrep<Space>
+    nnoremap / :call ToggleList("Quickfix List", 'c')<CR>
+             \ :vimgrep // **/*<Left><Left><Left><Left><Left><Left>
 endif
 
 " search for visual selection
@@ -2105,6 +2127,9 @@ nmap * *nN
 nmap g* g*nN
 nmap g# g#nN
 
+
+" find lines that are too long
+nnoremap <Leader>fw :exec '/\v^.{' . &textwidth . '}.'<CR>
 
 " find trailing whitespace
 nnoremap <Leader>fst /\v\s+$<CR>
@@ -2264,6 +2289,13 @@ nnoremap -tu blguee
 inoremap -tu <Esc>blgueea
 
 
+if s:MyMode == 'stripped'
+    " delete trailing whitespace for selected line
+    vnoremap <silent> -dst <Esc>:.s:\v\s+$::<CR>
+    " delete trailing whitespace for whole buffer
+    nnoremap <silent> -dst :%s:\v\s+$::<CR>
+endif
+
 " delete leading whitespace (can be prefixed with a count)
 nnoremap <silent> -dsl :s:^\s\+::<CR>
 " replace double/multiple spaces with one space
@@ -2370,9 +2402,10 @@ nnoremap <silent> <Leader>sL :lopen<CR>
 " BUFFERS AND WINDOWS {{{
 
 
-" change buffer by searching
+" change or open new buffer by searching for file name
 if s:MyMode == 'stripped'
-    nnoremap # :buffer<Space>
+    nnoremap # :buffers<CR>:buffer<Space>
+    nnoremap <Leader># :edit<Space>
 endif
 
 " change to LRU buffer
