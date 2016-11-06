@@ -10,6 +10,7 @@ bind -f common l win-activate
 
 bind -f common p player-play
 bind -f common s player-stop
+bind -f common backspace player-stop
 bind -f common space player-pause
 bind -f common o player-next
 bind -f common O player-prev
