@@ -49,6 +49,7 @@ qmark h https://www.heute.de/
 qmark l http://localhost/~sflip/projects/
 qmark o https://stackoverflow.com/users/login
 qmark p http://sflip.bplaced.de/
+qmark s https://scholar.google.com/
 qmark t https://twitter.com/
 qmark v http://www.hoerzu.de/tv-programm/
 qmark y https://accounts.google.com/ServiceLogin?uilel=3&service=youtube&passive=true&continue=http%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26nomobiletemp%3D1%26hl%3Dde_DE%26next%3D%252F&hl=de_DE&ltmpl=sso
@@ -73,7 +74,7 @@ noremap <F5> :reloadconfig<CR>
         \ :source ~/.pentadactylrc
 
 " gui options
-noremap <C-g>s :set guioptions+=s<CR>
+noremap <C-g>s :set guioptions-=s<BAR>set guioptions+=s<CR>
 noremap <C-g>S :set guioptions-=s<CR>
 noremap <C-g>t :set guioptions+=T<CR>
 noremap <C-g>T :set guioptions-=T<CR>
@@ -134,7 +135,7 @@ noremap \\ :tabopen \
 " ! to use other search engine (like 'ebay' or 'osm')
 noremap ! :tabopen !
 " search google with current duckduckgo search term (badly implemented)
-noremap gs gi<C-A><C-S-Right><C-S-Right><C-S-Right><C-S-Right><C-S-Right><C-S-Right><C-S-Right><C-S-Right><C-S-Right><C-v><C-c><Esc>:open<Space>google<Space><C-v><C-v><CR>
+noremap gs gi<C-A>g! <CR>
 
 " move in history
 noremap <A-u> :back<CR>
@@ -188,8 +189,8 @@ noremap ss :js!<CR>
 
 
 " NoScript
-noremap <A-s>p :set noscript-sites!=<A-Tab>
-noremap <A-s>t :set noscript-tempsites!=<A-Tab>
+"noremap <A-s>p :set noscript-sites!=<A-Tab>
+"noremap <A-s>t :set noscript-tempsites!=<A-Tab>
 
 
 " recoloring for white backgrounds
