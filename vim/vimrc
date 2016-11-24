@@ -125,6 +125,9 @@ set nocompatible
 set shell=/bin/bash
 " let &shell=system('which bash | tr -d "\n"')
 
+" always search recursively (e.g. when using :find)
+set path+=**
+
 " edit runtimepath
 set runtimepath+=~/.vim/syntax
 
@@ -239,8 +242,7 @@ Plugin 'sjl/badwolf'
 
 " cycle through colorschemes
 Plugin 'vim-scripts/ScrollColors'
-nnoremap <C-G><Down> :NEXTCOLOR<CR>
-nnoremap <C-G><Up>   :PREVCOLOR<CR>
+nnoremap <C-G>o :COLORSCROLL<CR>
 
 
 " }}}
@@ -517,13 +519,13 @@ let g:ctrlp_prompt_mappings = {
             \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<tab>'],
             \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<s-tab>'],
             \ 'PrtExpandDir()':       [],
-            \ 'AcceptSelection("v")': ['<Esc><Enter>', '<c-v>', '<RightMouse>'],
+            \ 'AcceptSelection("v")': ['<Esc><Enter>', '<c-l>', '<c-v>', '<RightMouse>'],
             \ 'ToggleFocus()':        [],
             \ 'ToggleRegex()':        ['<c-r>', '<esc>r'],
-            \ 'ToggleType(1)':        ['<c-l>', '<c-up>'],
-            \ 'ToggleType(-1)':       ['<c-h>', '<c-down>'],
-            \ 'PrtCurLeft()':         ['<c-b>', '<left>', '<c-^>'],
-            \ 'PrtCurRight()':        ['<c-f>', '<right>'],
+            \ 'ToggleType(1)':        ['<right>', '<c-up>'],
+            \ 'ToggleType(-1)':       ['<left>', '<c-down>'],
+            \ 'PrtCurLeft()':         ['<c-b>', '<c-^>'],
+            \ 'PrtCurRight()':        ['<c-f>'],
             \ }
 
 " also find hidden files
@@ -641,10 +643,11 @@ let g:syntastic_quiet_messages = { "regex": [
 
 
 " replace some motion or text object or selection with current yank
-Plugin 'ReplaceWithRegister'
-nmap -rr <Plug>ReplaceWithRegisterOperator
-nmap -re <Plug>ReplaceWithRegisterLine
-xmap -r  <Plug>ReplaceWithRegisterVisual
+" Plugin 'ReplaceWithRegister'
+" nmap -rr <Plug>ReplaceWithRegisterOperator
+" nmap -re <Plug>ReplaceWithRegisterLine
+" xmap -r  <Plug>ReplaceWithRegisterVisual
+" I DON'T REALLY USE THIS BUT v3wp or -rw OCCASIONALLY
 
 
 " make the 0 register a stack (yank/delete multiple things without worrying)
@@ -691,9 +694,12 @@ inoremap <silent> <Esc><Enter> <Esc>A;<Esc>^
 
 " add/change/delete quotes/braces/... and more
 Plugin 'tpope/vim-surround'
-" add quotes quickly
-nmap -q ysiw'
+" surround consistently in both modes and more comfortably on german keyboard
+nmap -s ys
+vmap -s S
+" surround with quotes quickly
 vmap -q S'
+nmap -q ysiw'
 " toggle quotes {{{
 function! ToggleQuotesWithVimSurround()
     let pos_cursor = getpos(".")[2]
@@ -787,6 +793,7 @@ let g:toggle_words_dict = {
             \     ['dynamic', 'static'],
             \     ['fast', 'slow'],
             \     ['fat', 'thin'],
+            \     ['forward', 'backward'],
             \     ['get', 'set'],
             \     ['good', 'bad'],
             \     ['happy', 'sad'],
@@ -806,6 +813,7 @@ let g:toggle_words_dict = {
             \     ['love', 'hate'],
             \     ['many', 'few'],
             \     ['min', 'max'],
+            \     ['more', 'less'],
             \     ['new', 'old'],
             \     ['next', 'previous'],
             \     ['on', 'off'],
@@ -859,7 +867,7 @@ autocmd filetype php set filetype=php.html
 " YCM will notify you to recompile it. You should then rerun the install
 " process.
 
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 " let g:ycm_server_python_interpreter = '/usr/bin/python3'
 " let g:ycm_path_to_python_interpreter = '/usr/bin/python3'
 let g:ycm_key_invoke_completion = '<Esc>.'
@@ -1133,8 +1141,8 @@ set spellfile=~/.vim/spellfile.utf-8.add,~/.vim/spellfile.local.utf-8.add
 syntax enable
 
 " highlight matching bracket when typing
-set showmatch
-set matchtime=4
+" set showmatch
+" set matchtime=4
 
 " highlight conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -1177,7 +1185,7 @@ set wildignore+=*.o,*.obj,*.pyc,*.class
 set wildignore+=*.pdf,*.doc,*.docx,*.xls,*.xlsx,*.ppt,*.pptx,*.odt,*.ods
 set wildignore+=*.jpg,*.jpeg,*.png
 set wildignore+=*.mp3,*.mp4,*.mpg,*.mpeg,*.flv,*.wav
-set wildignore+=*.aux,*.bbl,*.blg,*.fdb_latexmk,*.fls,*.lof,*.out,*.toc
+set wildignore+=*.aux,*.bbl,*.blg,*.fdb_latexmk,*.fls,*.loe,*.lof,*.out,*.toc
 
 " scrolling
 " start scrolling when we're 8 lines away from margins
@@ -2204,11 +2212,16 @@ vnoremap <silent> -k <Esc>:set fdm=manual<CR>gv:m '<-2<CR>gv=gv:set fdm=marker<C
 
 " split line (opposite of 'J'oin lines)
 " (regular 'S' can be done with 'cc' instead)
-nnoremap S i<cr><esc>^mqgk:silent! s/\v +$//<cr>:noh<cr>`q
+nnoremap S i<CR><esc>
+            \ ^mq
+            \ :let searchregister=@/<CR>
+            \ :silent! .-1s/\v +$//<CR>:nohlsearch<CR>
+            \ :let @/=searchregister<CR>
+            \ `q
 
 " duplicate line or selection
 nnoremap -u yyp
-vnoremap -u yp
+vnoremap -u yP
 
 " add new lines above or below
 "(this works without mappings, except that we arein insert mode afterwards)
@@ -2231,16 +2244,11 @@ nnoremap -ab :call InsertCharBox(input("Insert character: "))<CR>
 
 
 " enter substitution mode quickly
-nnoremap <C-S> :%s::<Left>
+nnoremap <C-S><C-S> :%s::<Left>
 
-" substitute last search
-nnoremap -sö :%s:<C-R>/::<Left>
-nmap     -s/ sö
 
 " in visual mode, use 's' for substitution
 " (to change only a single occurence, use 'c'. by default they are the same)
-" text edit leader versions of these should not differ
-vmap -s s
 
 " substitute occurences of selection in this buffer
 vnoremap <C-S>         yms:%s:\V\C<C-R>":<C-R>":c<Bar>norm!`s
@@ -2267,10 +2275,10 @@ vnoremap <Leader>s     yms:,$s:\V\C\<<C-R>"\>:<C-R>":c<Bar>norm!`s
     " \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 
 " substitution motions and text objects
-nmap -se  ves
-nmap -sE  vEs
-nmap -siw viw<Leader>s
-nmap -siW viWs
+nmap <C-S>e ves
+nmap <C-S>E vEs
+nmap <C-S>w viw<Leader>s
+nmap <C-S>W viWs
 
 
 " replace something with yank
@@ -2405,7 +2413,7 @@ nnoremap <silent> <Leader>sL :lopen<CR>
 " change or open new buffer by searching for file name
 if s:MyMode == 'stripped'
     nnoremap # :buffers<CR>:buffer<Space>
-    nnoremap <Leader># :edit<Space>
+    nnoremap <Leader># :find<Space>
 endif
 
 " change to LRU buffer
@@ -2428,11 +2436,11 @@ nnoremap <silent> <Leader><C-l> :vsplit<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 nnoremap <silent> <Leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 
-" clear windows (close quickfix and location list)
-nnoremap <silent> <BS> :lclose <Bar> :cclose <CR>
+" clear windows (close quickfix and location list) and refresh screen
+nnoremap <silent> <BS> :lclose <Bar> :cclose <Bar> :redraw! <CR>
 
 " toggle quickfix or location list
-nnoremap <silent> <Leader>tf :call ToggleList("Quickfix List", 'c')<CR>
+nnoremap <silent> <Leader>tq :call ToggleList("Quickfix List", 'c')<CR>
 nnoremap <silent> <Leader>tl :call ToggleList("Location List", 'l')<CR>
 
 
