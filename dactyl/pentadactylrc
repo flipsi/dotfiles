@@ -13,6 +13,7 @@ set incfind
 
 " follow hints with letters instead of numbers
 set hintkeys=fjdkslghaöeiruncmv
+hi -a Hint font-size: 11pt !important;
 
 " follow more hints like stack overflow upvote buttons
 "set hinttags+=a[class]
