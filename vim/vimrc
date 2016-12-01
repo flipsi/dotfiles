@@ -1240,11 +1240,12 @@ if s:MyMode == 'mastery'
 
     set background=dark
 
-    colorscheme badwolf
+    " colorscheme badwolf
     " colorscheme candycode
     " colorscheme dante
     " colorscheme desertEx
     " colorscheme jellybeans
+    colorscheme luna-term
     " colorscheme meta5
     " colorscheme molokai
     " colorscheme onedark
@@ -1252,17 +1253,19 @@ if s:MyMode == 'mastery'
     " colorscheme seoul256
     " colorscheme up
 
-    let g:airline_theme='base16_summerfruit'
+    " let g:airline_theme='base16_summerfruit'
     " let g:airline_theme='behelit'
     " let g:airline_theme='kalisi'
     " let g:airline_theme='lucius'
     " let g:airline_theme='serene'
     " let g:airline_theme='tomorrow'
+    " let g:airline_theme='ubaryd'
+    let g:airline_theme='zenburn'
 
-    highlight CursorLine   ctermbg=234
-    highlight CursorColumn ctermbg=234
-    highlight ColorColumn  ctermbg=234
-    highlight ShowTrailingWhitespace ctermbg=238
+    highlight CursorLine   ctermbg=235
+    highlight CursorColumn ctermbg=235
+    highlight ColorColumn  ctermbg=235
+    highlight ShowTrailingWhitespace ctermbg=237
 
     " LIGHT THEMES
 
