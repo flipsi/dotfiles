@@ -16,7 +16,7 @@ set recolor-darkcolor "#FFFFFF"
 set recolor-lightcolor "#1E1E1E"
 # set recolor true
 
-set guioptions ''
+set guioptions 's'
 
 map d navigate next
 map u navigate previous

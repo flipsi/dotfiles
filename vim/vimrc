@@ -353,6 +353,19 @@ augroup END
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" handle unicode and digraphs easily {{{
+
+Plugin 'chrisbra/unicode.vim'
+
+" inspect character under cursor
+nnoremap ga :UnicodeName<CR>
+
+" complete unicode with <C-X><C-Z>
+" complete digraph with <C-X><C-G>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " amazingly move everywhere {{{
 
 Plugin 'easymotion/vim-easymotion'
@@ -373,6 +386,19 @@ let g:clever_f_smart_case = 1
 let g:clever_f_fix_key_direction = 0
 let g:clever_f_repeat_last_char_inputs = ["\<CR>", "\<Tab>"]
 let g:clever_f_chars_match_any_signs = 'ö'
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" movements and text objects for parts of words {{{
+
+" move with ,w in wordsLikeThisWord or words_like_this_word
+Plugin 'bkad/CamelCaseMotion'
+
+" call camelcasemotion#CreateMotionMappings(',') " DOES NOT WORK HERE
+
+" also handle dashes with this plugin (hence w should move over them)
+set iskeyword+=-
 
 
 " }}}
@@ -531,6 +557,9 @@ let g:ctrlp_prompt_mappings = {
 " also find hidden files
 let g:ctrlp_show_hidden = 1
 
+" only cache if we're in huge projects
+let g:ctrlp_use_caching = 2000
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -581,6 +610,16 @@ noremap <silent> <Leader>tN :NERDTreeToggle<CR>
 
 " show/hide hidden files
 let NERDTreeMapToggleHidden='.'
+
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" close all other buffers {{{
+
+Plugin 'vim-scripts/BufOnly.vim'
+
+nmap <Leader>qo :BufOnly<CR>
 
 
 
@@ -654,9 +693,9 @@ let g:syntastic_quiet_messages = { "regex": [
 " lightweight alternative to yankring
 Plugin 'maxbrunsfeld/vim-yankstack'
 let g:yankstack_map_keys = 0
-nmap <C-p> <Plug>yankstack_substitute_older_paste
-nmap <C-n> <Plug>yankstack_substitute_newer_paste
-"call yankstack#setup()
+nmap <Leader>pp <Plug>yankstack_substitute_older_paste
+nmap <Leader>nn <Plug>yankstack_substitute_newer_paste
+"call yankstack#setup() " DOES NOT WORK HERE
 
 
 " add and toggle comments with <Leader>c<space> etc
@@ -724,6 +763,36 @@ xmap <Leader>x <Plug>(Exchange)
 nmap <Leader>xc <Plug>(ExchangeClear)
 nmap <Leader>xl <Plug>(ExchangeLine)
 nmap <Leader>xx <Leader>xiw
+
+
+" " find and replace tool for multiple files (IDE like)
+" " (helptags are buggy according to vundle)
+" Plugin 'brooth/far.vim'
+" nnoremap <Leader>SS :Far  **<Left><Left><Left>
+" vnoremap <Leader>SS :Far *  **<Left><Left><Left>
+" nnoremap <Leader>SD :Fardo<CR>
+
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" multiple cursor like in Sublime {{{
+
+" SEEMS NOT TO WORK PROPERLY FOR ME
+
+" Plugin 'terryma/vim-multiple-cursors'
+
+" let g:multi_cursor_use_default_mapping=0
+
+" " (only single keystrokes are possible at the moment)
+" let g:multi_cursor_next_key='<C-n>'
+" let g:multi_cursor_prev_key='<C-p>'
+" let g:multi_cursor_skip_key='<C-x>'
+" let g:multi_cursor_quit_key='<Esc>'
+" nnoremap -<C-c> :call multiple_cursors#quit()<CR>
+
+" let g:multi_cursor_exit_from_visual_mode=1
+" let g:multi_cursor_exit_from_insert_mode=0
 
 
 " }}}
@@ -1058,11 +1127,14 @@ nnoremap <Leader>ut :GundoToggle<CR>
     call vundle#end()
     filetype plugin indent on
 
+    " THE FOLLOWING MUST BE EXECUTED AFTER VUNDLE FINISHED:
+
+    call camelcasemotion#CreateMotionMappings(',')
 
     " fix compatibility issues with D mapping
-    " (must be executed before the D custom mapping
-    " but cannot be executed in the vundle block)
+    " (must be executed before the D custom mapping)
     call yankstack#setup()
+
 
 endif
 
@@ -1123,6 +1195,9 @@ set autoread
 
 " command history size
 set history=9999
+
+" do not create swap files (they annoy me more than they help)
+set noswapfile
 
 " persistent undo over file close
 " (the undodir needs to exist!)
@@ -1227,6 +1302,9 @@ set autoindent
 set smartindent
 set smarttab
 
+" 1 space, not 2, when joining sentences
+set nojoinspaces
+
 " allow <BS> to delete everything
 set backspace=indent,eol,start
 
@@ -1251,15 +1329,15 @@ if s:MyMode == 'mastery'
 
     set background=dark
 
+    " colorscheme apprentice
     " colorscheme badwolf
+    " colorscheme blackboard
     " colorscheme candycode
     " colorscheme dante
     " colorscheme desertEx
+    " colorscheme iceberg
     " colorscheme jellybeans
-    colorscheme molokai
-    " colorscheme candycode
-    " colorscheme dante
-    " colorscheme jellybeans
+    colorscheme luna-term
     " colorscheme meta5
     " colorscheme molokai
     " colorscheme onedark
@@ -1273,12 +1351,14 @@ if s:MyMode == 'mastery'
     " let g:airline_theme='kalisi'
     " let g:airline_theme='lucius'
     " let g:airline_theme='serene'
-    let g:airline_theme='tomorrow'
+    " let g:airline_theme='tomorrow'
+    " let g:airline_theme='ubaryd'
+    let g:airline_theme='zenburn'
 
-    highlight CursorLine   ctermbg=234
-    highlight CursorColumn ctermbg=234
-    highlight ColorColumn  ctermbg=234
-    highlight ShowTrailingWhitespace ctermbg=238
+    highlight CursorLine   ctermbg=235
+    highlight CursorColumn ctermbg=235
+    highlight ColorColumn  ctermbg=235
+    highlight ShowTrailingWhitespace ctermbg=237
 
     " LIGHT THEMES
 
@@ -1449,6 +1529,22 @@ if v:version > 704 || v:version == 704 && has("patch786") " if has ('patch-7.4.7
         au OptionSet textwidth endif
     augroup END
 endif
+
+
+" Search for current word and replace with given text for files in arglist. {{{
+" http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers
+function! Replace(bang, replace)
+    let flag = 'ge'
+    if !a:bang
+        let flag .= 'c'
+    endif
+    let search = '\<' . escape(expand('<cword>'), '/\.*$^~[') . '\>'
+    let replace = escape(a:replace, '/\&~')
+    execute 'argdo %s/' . search . '/' . replace . '/' . flag
+endfunction
+command! -nargs=1 -bang Replace :call Replace(<bang>0, <q-args>)
+
+" }}}
 
 
 " comment the current line / visual selection with html syntax {{{
@@ -1877,7 +1973,7 @@ vnoremap v <C-c>
 
 " copy to clipboard / primary selection in visual modemode
 vnoremap <C-c>      "*ygv"+y
-nnoremap <C-c> gg0VG"*ygv"+y
+nnoremap <C-c> gg0VG"*ygv"+y<C-o><C-o>
 
 " paste from clipboard / primary selection {{{
 function! PasteFromGUI()
@@ -2169,6 +2265,10 @@ nnoremap <Leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 nnoremap Y ^y$
 nnoremap D 0d$j
 
+" select last pasted/edited text
+nnoremap gV `[v`]
+
+
 " autocompletion
 inoremap <M-.>  <C-N>
 inoremap <Esc>. <C-N>
@@ -2279,6 +2379,13 @@ nmap <C-S>e ves
 nmap <C-S>E vEs
 nmap <C-S>w viw<Leader>s
 nmap <C-S>W viWs
+
+
+" substitute word under cursor in multiple files (add them with ':arg **' before)
+" (instead of using the far plugin)
+nnoremap <Leader>SW :call Replace(0, input('Replace '.expand('<cword>').' with: '))<CR>
+" ... and then ':wa'
+
 
 
 " replace something with yank
@@ -2478,9 +2585,12 @@ nnoremap <Leader>iT :execute '!cd ' . expand('%:p:h') . '; tig status'<CR>
 " check for file changes (and 'reload' them or get asked with autoread)
 nnoremap <Leader>rl :checktime<CR>
 
+" discard changes ('reset')
+nnoremap <Leader>rs :e!<CR>
+
 
 " write changes
-nnoremap <Leader>w :update<CR>
+nnoremap <Leader>w  :update<CR>
 nnoremap <Leader>WW :update!<CR>
 
 " quit current buffer
@@ -2494,14 +2604,17 @@ nnoremap <Leader>qa :bufdo bdelete<CR>
 " quit current window
 nnoremap Q :quit<CR>
 " quit all windows but current
-nnoremap <Leader>qo :only<CR>
+nnoremap <Leader>qO :only<CR>
+nnoremap <Leader>QO :only<CR>
 
 " quit vim (multiple windows)
 " (this is how i exit most terminal applications)
-nnoremap <C-D> :quitall<CR>
+nnoremap <C-D>              :quitall<CR>
 nnoremap <Leader><C-D><C-D> :quitall!<CR>
 
-" remember ZZ and ZQ
+" ... but ignore typos
+nnoremap <Leader>q <NOP>
+
 
 
 " }}}
