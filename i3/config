@@ -105,7 +105,9 @@ focus_follows_mouse no
 mouse_warping none
 
 # close container with middle click on title bar
-bindsym --release button2 kill
+# (mod2 numlock, so this should work in both cases https://github.com/i3/i3/issues/2523)
+bindsym --release      button2 kill
+bindsym --release Mod2+button2 kill
 
 # enable/disable touchpad
 bindsym XF86TouchpadToggle  exec --no-startup-id "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
@@ -331,9 +333,9 @@ bindsym      Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen 
 for_window [class="(?i)thunar"]         floating enable
 for_window [class="(?i)pavucontrol"]    floating enable
 for_window [class="(?i)gcolor2"]        floating enable
-for_window [class="(?i)gcolor2"]        move position 1250 150
+for_window [class="(?i)gcolor2"]        move position 750 150
 for_window [class="(?i)galculator"]     floating enable
-for_window [class="(?i)galculator"]     move position 1250 450
+for_window [class="(?i)galculator"]     move position 750 450
 for_window [class="(?i)galculator"]     resize set 320 400
 for_window [class="(?i)nemo"]           floating enable
 for_window [class="(?i)file-roller"]    floating enable
@@ -415,7 +417,8 @@ bindsym $mod+l focus right
 
 # move focused container
 bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down; resize shrink height 15 px or 15 ppt
+bindsym $mod+Shift+j move down
+# bindsym $mod+Shift+j move down; resize shrink height 15 px or 15 ppt
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
@@ -443,7 +446,7 @@ bindsym $mod+z scratchpad show
 # resize container
 bindsym $mod+r mode "resize"
 mode "resize" {
-    set $steps 3
+    set $steps 5
     bindsym h resize shrink width  $steps px or $steps ppt
     bindsym k resize grow   height $steps px or $steps ppt
     bindsym j resize shrink height $steps px or $steps ppt

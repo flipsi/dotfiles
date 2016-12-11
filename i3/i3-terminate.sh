@@ -24,7 +24,7 @@ end
 
 # terminate some applications gently
 function terminate_apps
-    set apps palemoon thunderbird vim
+    set apps firefox palemoon thunderbird vim
     for app in $apps
         if pgrep -x $app > /dev/null
             notify-send "Asking $app to terminate..."
