@@ -38,8 +38,8 @@ function setup_screen_layout
                 if xrandr | grep "$primary_screen connected" >/dev/null
                     xrandr --output $secondary_screen --auto --below $primary_screen --auto
                     i3-msg restart
-                    if test -f ~/.i3/wallpaper
-                        feh --bg-scale ~/.i3/wallpaper
+                    if test -f $HOME/.i3/wallpaper
+                        feh --bg-scale $HOME/.i3/wallpaper
                     end
                     break
                 end
@@ -76,6 +76,7 @@ function setup_musicserver
     set try_again_after 0 1 3 5 15
     for t in $try_again_after
         if start_musicserver_if_music_is_accessible
+            nohup $HOME/.i3/i3pystatus-mpd-notification.sh >/dev/null &
             return 0
         else
             sleep $t
