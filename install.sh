@@ -62,6 +62,7 @@ function create_link_for_target() {
             create_link $PWD/i3/config $HOME/.i3/config
             # create_link $PWD/i3/i3status $HOME/.i3/i3status
             create_link $PWD/i3/i3pystatus $HOME/.i3/i3pystatus
+            create_link $PWD/i3/i3pystatus-mpd-notification.sh $HOME/.i3/i3pystatus-mpd-notification.sh
             mkdir -p $HOME/bin
             create_link $PWD/i3/i3-initialize.sh $HOME/bin/i3-initialize.sh
             create_link $PWD/i3/i3-terminate.sh $HOME/bin/i3-terminate.sh
@@ -151,10 +152,14 @@ function create_link_for_target() {
             ;;
 
         tmux)
-            create_link $PWD/tmux/tmux $HOME/.tmux
             create_link $PWD/tmux/tmux.conf $HOME/.tmux.conf
             mkdir -p $HOME/bin
             create_link $PWD/tmux/tmux-project-session.sh $HOME/bin/tmux-project-session
+            mkdir -p $HOME/.tmux/plugins
+            if test ! -d $HOME/.tmux/plugins/tpm; then
+                git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+                # tmux command "run-shell '~/.tmux/plugins/tpm/bindings/install_plugins'"
+            fi
             ;;
 
         turses)
@@ -178,6 +183,10 @@ function create_link_for_target() {
             create_link $PWD/vim/vim/spellfile.utf-8.add $HOME/.vim/spellfile.utf-8.add
             create_link $PWD/vim/vim/syntax $HOME/.vim/syntax
             create_link $PWD/vim/vim/filetype.vim $HOME/.vim/filetype.vim
+            if test ! -d $HOME/.vim/bundle/vundle; then
+                git clone https://github.com/gmarik/vundle.git $HOME/.vim/bundle/vundle
+                vim -c "exec ':PluginInstall' | qall"
+            fi
             ;;
 
         vimpc)

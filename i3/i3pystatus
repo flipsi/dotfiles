@@ -92,8 +92,8 @@ status.register("disk",
 # Show memory usage
 status.register("mem",
     format = "MEM: {percent_used_mem}%",
-    warn_percentage = 30,
-    alert_percentage = 60,
+    warn_percentage = 50,
+    alert_percentage = 70,
     color = COLOR_DEFAULT,
     warn_color = COLOR_RED,
     alert_color = "#FF0000",
@@ -137,9 +137,9 @@ status.register("cpu_usage",
 # Note: requires libpulseaudio from PyPI
 status.register("pulseaudio",
     format = "  {volume}",
-    on_leftclick    = "pavucontrol",
-    on_upscroll     = "amixer sset Master 1%+; pkill -USR1 -f 'i3pystatus'",
-    on_downscroll   = "amixer sset Master 1%-; pkill -USR1 -f 'i3pystatus'",
+    on_leftclick     = "pavucontrol",
+    on_upscroll     = "amixer sset Master 1%+; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
+    on_downscroll   = "amixer sset Master 1%-; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
 )
 
 # Shows mpd status
@@ -169,16 +169,15 @@ status.register("shell",
                     tr '\\n' '-' | 
                     sed 's/-volume: \\(.*\\)%.*/ | \\1 /' || true""",
 
-    # note: the shell.py script does throw errors on empty strings. i hacked 
+    # note: the shell.py script does throw errors on empty strings. i hacked
     #       it to accept them, so that there is nothing displayed without mpd.
 
     hints = { "separator" : False, "separator_block_width": 0} ,
-    interval = 7,
-
-    on_leftclick    = "mpc next; pkill -USR1 -f 'i3pystatus'",
-    on_rightclick   = "mpc prev; pkill -USR1 -f 'i3pystatus'",
-    on_upscroll     = "mpc volume +1; pkill -USR1 -f 'i3pystatus'",
-    on_downscroll   = "mpc volume -1; pkill -USR1 -f 'i3pystatus'",
+    interval = 120, # we will be notified by ./i3pystatus-mpd-notification.sh
+    on_leftclick    = "mpc next; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
+    on_rightclick   = "mpc prev; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
+    on_upscroll     = "mpc volume +1; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
+    on_downscroll   = "mpc volume -1; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
 )
 
 

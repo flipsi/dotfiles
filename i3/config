@@ -106,7 +106,9 @@ focus_follows_mouse no
 mouse_warping none
 
 # close container with middle click on title bar
-bindsym --release button2 kill
+# (mod2 numlock, so this should work in both cases https://github.com/i3/i3/issues/2523)
+bindsym --release      button2 kill
+bindsym --release Mod2+button2 kill
 
 # enable/disable touchpad
 bindsym XF86TouchpadToggle  exec --no-startup-id "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
@@ -222,7 +224,7 @@ bar {
 # hide/show bar
 bindsym $mod+b bar mode toggle
 
-
+set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
 
 ###############################################################################
 ###########  SYSTEM  ##########################################################
@@ -269,33 +271,33 @@ bindsym $mod+Control+minus  exec --no-startup-id "$SHELLSCRIPT_PATH/xfce4-termin
 bindsym $mod+v exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output"
 
 # set volume
-bindsym $mod+Down            exec --no-startup-id "amixer sset Master 1%-"; exec "pkill -USR1 -f 'i3pystatus'"
-bindsym $mod+Up              exec --no-startup-id "amixer sset Master 1%+"; exec "pkill -USR1 -f 'i3pystatus'"
-bindsym $mod+minus           exec --no-startup-id "amixer sset Master 1%-"; exec "pkill -USR1 -f 'i3pystatus'"
-bindsym $mod+plus            exec --no-startup-id "amixer sset Master 1%+"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym $mod+Down            exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
+bindsym $mod+Up              exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
+bindsym $mod+minus           exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
+bindsym $mod+plus            exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
 
 # control music player daemon (mpd)
-bindsym $mod+Shift+minus     exec --no-startup-id "mpc volume -1"; exec "pkill -USR1 -f 'i3pystatus'"
-bindsym $mod+Shift+plus      exec --no-startup-id "mpc volume +1"; exec "pkill -USR1 -f 'i3pystatus'"
-bindsym XF86AudioLowerVolume exec --no-startup-id "amixer sset Master 1%-"; exec "pkill -USR1 -f 'i3pystatus'"
-bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 1%+"; exec "pkill -USR1 -f 'i3pystatus'"
-bindsym XF86AudioPlay        exec --no-startup-id "mpc toggle"; exec "pkill -USR1 -f 'i3pystatus'"
-bindsym XF86AudioNext        exec --no-startup-id "mpc next"; exec "pkill -USR1 -f 'i3pystatus'"
-bindsym XF86AudioPrev        exec --no-startup-id "mpc prev"; exec "pkill -USR1 -f 'i3pystatus'"
+bindsym $mod+Shift+minus     exec --no-startup-id "mpc volume -1"; exec "$UPDATE_STATUSBAR"
+bindsym $mod+Shift+plus      exec --no-startup-id "mpc volume +1"; exec "$UPDATE_STATUSBAR"
+bindsym XF86AudioLowerVolume exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
+bindsym XF86AudioPlay        exec --no-startup-id "mpc toggle"; exec "$UPDATE_STATUSBAR"
+bindsym XF86AudioNext        exec --no-startup-id "mpc next"; exec "$UPDATE_STATUSBAR"
+bindsym XF86AudioPrev        exec --no-startup-id "mpc prev"; exec "$UPDATE_STATUSBAR"
 bindsym $mod+0 mode "$mpd_control"
 #set $mpd_control MPD: (space) play/pause, (n) next, (p) prev, (s) stop, (c) last, (+/-) volume
 set $mpd_control MPD Control
 mode "$mpd_control" {
-    bindsym space exec --no-startup-id "mpc toggle"; exec "pkill -USR1 -f 'i3pystatus'"
-    bindsym n     exec --no-startup-id "mpc next"; exec "pkill -USR1 -f 'i3pystatus'"
-    bindsym o     exec --no-startup-id "mpc next"; exec "pkill -USR1 -f 'i3pystatus'"
-    bindsym p     exec --no-startup-id "mpc prev"; exec "pkill -USR1 -f 'i3pystatus'"
-    bindsym O     exec --no-startup-id "mpc prev"; exec "pkill -USR1 -f 'i3pystatus'"
-    bindsym s     exec --no-startup-id "mpc stop"; mode "default"; exec "pkill -USR1 -f 'i3pystatus'"
-    bindsym BackSpace exec --no-startup-id "mpc stop"; mode "default"; exec "pkill -USR1 -f 'i3pystatus'"
-    bindsym c     exec --no-startup-id "mpc crop"; mode "default"; exec "pkill -USR1 -f 'i3pystatus'"
-    bindsym minus exec --no-startup-id "mpc volume -1"; exec "pkill -USR1 -f 'i3pystatus'"
-    bindsym plus  exec --no-startup-id "mpc volume +1"; exec "pkill -USR1 -f 'i3pystatus'"
+    bindsym space exec --no-startup-id "mpc toggle"; exec "$UPDATE_STATUSBAR"
+    bindsym n     exec --no-startup-id "mpc next"; exec "$UPDATE_STATUSBAR"
+    bindsym o     exec --no-startup-id "mpc next"; exec "$UPDATE_STATUSBAR"
+    bindsym p     exec --no-startup-id "mpc prev"; exec "$UPDATE_STATUSBAR"
+    bindsym O     exec --no-startup-id "mpc prev"; exec "$UPDATE_STATUSBAR"
+    bindsym s     exec --no-startup-id "mpc stop"; mode "default"; exec "$UPDATE_STATUSBAR"
+    bindsym BackSpace exec --no-startup-id "mpc stop"; mode "default"; exec "$UPDATE_STATUSBAR"
+    bindsym c     exec --no-startup-id "mpc crop"; mode "default"; exec "$UPDATE_STATUSBAR"
+    bindsym minus exec --no-startup-id "mpc volume -1"; exec "$UPDATE_STATUSBAR"
+    bindsym plus  exec --no-startup-id "mpc volume +1"; exec "$UPDATE_STATUSBAR"
     bindsym r     exec --no-startup-id "mpc random"
     bindsym R     exec --no-startup-id "mpc random"
     bindsym S     exec --no-startup-id "mpc single"
@@ -333,9 +335,9 @@ bindsym      Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen 
 # windows always floating/fullscreen
 for_window [class="(?i)thunar"]         floating enable
 for_window [class="(?i)gcolor2"]        floating enable
-for_window [class="(?i)gcolor2"]        move position 1250 150
+for_window [class="(?i)gcolor2"]        move position 750 150
 for_window [class="(?i)galculator"]     floating enable
-for_window [class="(?i)galculator"]     move position 1250 450
+for_window [class="(?i)galculator"]     move position 750 450
 for_window [class="(?i)galculator"]     resize set 320 400
 for_window [class="(?i)nemo"]           floating enable
 for_window [class="(?i)file-roller"]    floating enable
@@ -419,7 +421,8 @@ bindsym $mod+l focus right
 
 # move focused container
 bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down; resize shrink height 15 px or 15 ppt
+bindsym $mod+Shift+j move down
+# bindsym $mod+Shift+j move down; resize shrink height 15 px or 15 ppt
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
@@ -447,7 +450,7 @@ bindsym $mod+z scratchpad show
 # resize container
 bindsym $mod+r mode "resize"
 mode "resize" {
-    set $steps 3
+    set $steps 5
     bindsym h resize shrink width  $steps px or $steps ppt
     bindsym k resize grow   height $steps px or $steps ppt
     bindsym j resize shrink height $steps px or $steps ppt

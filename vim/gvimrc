@@ -19,6 +19,10 @@ set guioptions-=L
 set guioptions-=b
 
 " font
-set guifont=Monospace
+" set guifont=Monospace
+set guifont=Monospace\ 14
+
+" FIX colors
+colorscheme badwolf
 
 
