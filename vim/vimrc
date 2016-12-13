@@ -456,9 +456,8 @@ vmap iE <Plug>(textobj-entire-i)
 
 Plugin 'haya14busa/incsearch.vim'
 
-"nnoremap ö  <Plug>(incsearch-forward)
-"nnoremap Ö  <Plug>(incsearch-backward)
-"nnoremap gö <Plug>(incsearch-stay)
+" nnoremap ö  <Plug>(incsearch-forward)
+" nnoremap Ö  <Plug>(incsearch-backward)
 
 nnoremap ö :call incsearch#call()<CR>
 nnoremap Ö :call incsearch#call({'command': '?'})<CR>
@@ -474,11 +473,14 @@ let g:ag_prg="ag --vimgrep --smart-case"
 let g:ag_working_path_mode="r"
 
 " type a search pattern
-nnoremap / :Ag<Space>""<Left>
+nnoremap <Leader>ö :Ag<Space>""<Left>
 " search for word under cursor
-nnoremap <Leader>* :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <Leader>+ :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+nmap <Leader>* <Leader>+
 " search for visual selection
-xnoremap  / y:<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
+xnoremap <Leader>ö y:<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
+xmap <Leader>* <Leader>ö
+xmap <Leader>+ <Leader>ö
 "nnoremap  K :<c-u>Ag <c-r>=shellescape(expand("<cword>"),1)<cr>:copen<cr>
 
 
@@ -1208,6 +1210,9 @@ syntax enable
 " set showmatch
 " set matchtime=4
 
+" do not wrap lines until I say so
+set nowrap
+
 " highlight conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
@@ -1261,8 +1266,9 @@ set sidescroll=1
 set incsearch
 set ignorecase
 set smartcase
-" never have to append 'g' to a search/substitute again
 set gdefault
+set nohlsearch
+set nowrapscan
 
 " allow the cursor to move where there is no character
 set virtualedit=block,insert,onemore
@@ -1519,10 +1525,29 @@ if v:version > 704 || v:version == 704 && has("patch786") " if has ('patch-7.4.7
 endif
 
 
+
+" Search across newlines {{{
+" separated with whitespace (if no '!'),
+" or with non-word characters (if '!' added to command).
+" http://vim.wikia.com/wiki/Search_across_multiple_lines
+function! SearchMultiLine(bang, ...)
+  if a:0 > 0
+    let sep = (a:bang) ? '\_W\+' : '\_s\+'
+    let @/ = join(a:000, sep)
+  endif
+endfunction
+command! -bang -nargs=* -complete=tag SearchMultiLine call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
+
+" }}}
+
+
+
 " Search for current word and replace with given text for files in arglist. {{{
 " http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers
 function! Replace(bang, replace)
-    let flag = 'ge'
+    " (we use 'gdefault')
+    " let flag = 'ge'
+    let flag = 'gge'
     if !a:bang
         let flag .= 'c'
     endif
@@ -2068,6 +2093,10 @@ nnoremap <Leader>ot8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
 " toggle paste mode
 nnoremap <Leader>op :set paste! <bar> :set paste?<CR>
 
+" toggle search preferences
+nnoremap <Leader>os :set hlsearch! <bar> :set hlsearch?<CR>
+nnoremap <Leader>oS :set wrapscan! <bar> :set wrapscan?<CR>
+
 " ... but ignore typos
 nnoremap <Leader>o <NOP>
 
@@ -2093,8 +2122,7 @@ nnoremap <silent> <C-G>r :call ToggleColorColumn()<CR>
 nnoremap <silent> <C-G>R :highlight ColorColumn ctermbg=234<CR>
 
 " toggle highlight current cursor position
-" (switch to insert mode to apply changes)
-nnoremap <silent> <C-G>c :let g:cursorposition = 1 - g:cursorposition <CR>
+nnoremap <silent> <C-G>c :let g:cursorposition = 1 - g:cursorposition <CR>i<Esc>
 
 " toggle show listchars (like whitespace)
 nnoremap <silent> <C-G>a :set list!<CR>
@@ -2184,6 +2212,11 @@ nnoremap <c-i> <c-i>zz
 " SEARCHING AND FINDING {{{
 
 
+" restart search from BOF/EOF
+" (is useful when 'nowrapscan' is set)
+nmap gö ggn
+nmap gÖ GN
+
 " search in this buffer
 if s:MyMode == 'stripped'
     nnoremap ö /
@@ -2192,15 +2225,11 @@ endif
 
 " search in multiple files
 if s:MyMode == 'stripped'
-    nnoremap / :call ToggleList("Quickfix List", 'c')<CR>
-             \ :vimgrep // **/*<Left><Left><Left><Left><Left><Left>
+    nnoremap <Leader>ö
+            \ :call ToggleList("Quickfix List", 'c')<CR>
+            \ :vimgrep // **/*<Left><Left><Left><Left><Left><Left>
 endif
 
-" search for visual selection
-vnoremap * y/<C-R>"<CR>
-if s:MyMode == 'stripped'
-    vnoremap / y/<C-R>"<CR>
-endif
 
 
 " find next and previous occurence like usual when we searched backwards
@@ -2210,14 +2239,25 @@ endif
 " keep search matches in the middle of the window and open folds
 " nnoremap n nzzzv
 " nnoremap N Nzzzv
-" nnoremap * *zzzv
-" nnoremap g* g*zzzv
-" nnoremap g# g#zzzv
 silent call <SID>SearchMode()
 nnoremap <silent> <Leader>on :call <SID>SearchMode()<CR>
-nmap * *nN
-nmap g* g*nN
-nmap g# g#nN
+
+
+
+" search across newlines
+nnoremap <Leader>fn :SearchMultiLine<Space>
+
+
+" find word under cursor
+nnoremap *  *zv
+nnoremap +  #zv
+nnoremap g+ #gg/<C-P><CR>zv
+
+" find visual selection
+" (i use this instead of g* and g# anyway)
+xnoremap *  y/\V<C-R>"<CR>zv
+xnoremap +  y?\V<C-R>"<CR>zv
+xnoremap g+ ygg/\V<C-R>"<CR>zv
 
 
 " find lines that are too long
@@ -2238,6 +2278,11 @@ nmap <Leader>fj [I:let nr = input("Which one: ")
 
 " find git merge conflict markers
 nnoremap <Leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
+
+
+" count occurrences
+nnoremap ,* *<C-O>:%s///ggn<CR>
+xnoremap ,* y:%s/\V<C-R>"//ggn<CR>
 
 
 
@@ -2264,7 +2309,7 @@ inoremap <M-:>  <C-P>
 inoremap <Esc>: <C-P>
 
 " increment/decrement number
-nnoremap +  <C-A>
+nnoremap -i <C-A>
 nnoremap -- <C-X>
 
 
@@ -2362,18 +2407,24 @@ vnoremap <Leader>s     yms:,$s:\V\C\<<C-R>"\>:<C-R>":c<Bar>norm!`s
     " \ <Left><Left><Left><Left><Left><Left><Left><Left><Left>
     " \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 
-" substitution motions and text objects
-nmap <C-S>e ves
-nmap <C-S>E vEs
-nmap <C-S>w viw<Leader>s
-nmap <C-S>W viWs
-
+" substitute motions
+for mov in ['e', 'E', 'b', 'B']
+    exe "nmap \<C-S>" . mov . " v" . mov . "\<C-S>"
+endfor
+" substitute text objects
+nmap <C-S>iw viw<Leader><C-S>
+nmap <C-S>iW viW<C-S>
+"substitute word under cursor
+nmap <C-S>w viw<Leader><C-S>
+nmap <C-S>W viW<C-S>
 
 " substitute word under cursor in multiple files (add them with ':arg **' before)
 " (instead of using the far plugin)
-nnoremap <Leader>SW :call Replace(0, input('Replace '.expand('<cword>').' with: '))<CR>
+nnoremap <C-S>a :call Replace(0, input('Replace '.expand('<cword>').' with: '))<CR>
 " ... and then ':wa'
 
+" substitute last search
+nmap <C-S>ö gggn<C-S>
 
 
 " replace something with yank
@@ -2532,7 +2583,8 @@ nnoremap <silent> <Leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
 
 
 " clear windows (close quickfix and location list) and refresh screen
-nnoremap <silent> <BS> :lclose <Bar> :cclose <Bar> :redraw! <CR>
+nnoremap <silent> <BS> :nohlsearch \| :lclose \| :cclose \| :redraw! <CR>
+xmap <silent> <BS> <BS>gv
 
 " toggle quickfix or location list
 nnoremap <silent> <Leader>tq :call ToggleList("Quickfix List", 'c')<CR>
