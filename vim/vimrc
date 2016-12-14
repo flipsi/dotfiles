@@ -664,16 +664,25 @@ let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_quiet_messages = { "regex": [
             \ '\m.* is already defined.',
             \ '\mMissing file doc comment',
+            \ '\mFile is being conditionally included;',
+            \ '\mFile is being unconditionally included;',
             \ '\mLine indented incorrectly;.*',
-            \ '\mBad line breaking before.*',
-            \ '\m.const. is available in ES6.*',
-            \ '\m.let. is available in ES6.*',
+            \ '\mMulti-line IF statement not indented correctly;.*',
+            \ '\mEach line in a multi-line IF statement must begin with a boolean operator.*',
+            \ '\mOpening brace should be on a new line.*',
+            \ '\mBad line breaking before .+..',
+            \ '\mInline control structures are discouraged',
+            \ '\mClosing parenthesis of a multi-line IF statement must be on a new line',
             \ '\mLine exceeds 85 characters;.*',
             \ '\mYou must use .* style comments.*',
             \ '\mDon.t use adjoining classes.',
+            \ '\mDon.t use IDs in selectors.',
+            \ '\mHeading (h.) should not be qualified.',
             \ '\mShort PHP opening tag used;',
             \ '\m.$. was used before it was defined.',
-            \ '\mpossible unwanted space at "{"'
+            \ '\mpossible unwanted space at "{"',
+            \ '\mFunction name .* is prefixed with a package name but does not begin with a capital letter',
+            \ '\m.$. was used before it was defined.'
             \ ] }
 
 
