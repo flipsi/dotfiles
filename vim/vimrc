@@ -224,6 +224,13 @@ nnoremap <Leader>ps :PluginSearch<Space>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fix FocusLost and FocusGained events in tmux {{{
+
+Plugin 'tmux-plugins/vim-tmux-focus-events'
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " allow plugins to utilize . command {{{
 
 Plugin 'tpope/vim-repeat'
@@ -1241,10 +1248,10 @@ endif
 " ... but not in insert mode or inactive windows
 augroup cursorposition
     au!
-    au WinLeave,InsertEnter * set nocursorline nocursorcolumn
-    au WinEnter,InsertLeave * if g:cursorposition
-    au WinEnter,InsertLeave *     set cursorline cursorcolumn
-    au WinEnter,InsertLeave * endif
+    au WinLeave,InsertEnter,FocusLost   * set nocursorline nocursorcolumn
+    au WinEnter,InsertLeave,FocusGained * if g:cursorposition
+    au WinEnter,InsertLeave,FocusGained *     set cursorline cursorcolumn
+    au WinEnter,InsertLeave,FocusGained * endif
 augroup END
 
 " statusline
