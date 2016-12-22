@@ -87,9 +87,16 @@ end
 
 
 
+function autostart
+    if not pgrep -x konsole; nohup konsole --hide-menubar --hide-tabbar --profile NicNacPower &; end
+    if not pgrep -x firefox; nohup firefox &; end
+end
+
+
 
 setup_screen_resolution
 setup_screen_layout
 setup_musicserver
+autostart
 
 

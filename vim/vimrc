@@ -224,6 +224,13 @@ nnoremap <Leader>ps :PluginSearch<Space>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fix FocusLost and FocusGained events in tmux {{{
+
+Plugin 'tmux-plugins/vim-tmux-focus-events'
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " allow plugins to utilize . command {{{
 
 Plugin 'tpope/vim-repeat'
@@ -634,7 +641,7 @@ Plugin 'scrooloose/syntastic'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height = 4
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {
             \ "mode": "active",
@@ -1249,10 +1256,10 @@ endif
 " ... but not in insert mode or inactive windows
 augroup cursorposition
     au!
-    au WinLeave,InsertEnter * set nocursorline nocursorcolumn
-    au WinEnter,InsertLeave * if g:cursorposition
-    au WinEnter,InsertLeave *     set cursorline cursorcolumn
-    au WinEnter,InsertLeave * endif
+    au WinLeave,InsertEnter,FocusLost   * set nocursorline nocursorcolumn
+    au WinEnter,InsertLeave,FocusGained * if g:cursorposition
+    au WinEnter,InsertLeave,FocusGained *     set cursorline cursorcolumn
+    au WinEnter,InsertLeave,FocusGained * endif
 augroup END
 
 " statusline
