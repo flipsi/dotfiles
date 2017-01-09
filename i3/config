@@ -352,11 +352,16 @@ for_window [class="(?i)mplayer"]        fullscreen
 # windows always on specific workspace
 assign [class="(?i)firefox"]            
 assign [class="(?i)pale moon"]          
-assign [class="(?i)chrome"]             
-assign [class="(?i)thunderbird"]        
+assign [class="(?i)chrom" instance="crx_hjaaapkoiljkjpgpfgckfielajkdjhik"]  
+assign [class="(?i)chrom" instance="crx_kddchekfnnagpejaneebcigegenogifj"]  
+assign [class="(?i)chrom" instance="crx_bijddemhindilkbmbnihifilglcjjnai"]  
+assign [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"]  
+assign [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"]  
+assign [class="(?i)chrom" instance="crx_lgeboohgcoglieeoikhidodnmdfcalmh"]  
+assign [class="(?i)chrom"]              
+assign [class="(?i)thunderbird"]        
+assign [class="(?i)jetbrains-studio"]   
 assign [class="(?i)jdownloader"]        
-#assign [class="(?i)subl"]               Sublime
-#assign [class="(?i)jetbrains-studio"]   Development
 assign [class="Telegram"]               
 assign [class="(?i)skype"]              
 assign [class="(?i)pokerstars"]         
