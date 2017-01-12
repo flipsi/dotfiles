@@ -145,8 +145,10 @@ function create_link_for_target() {
             ;;
 
         telegram-desktop)
+            mkdir -p $HOME/.TelegramDesktop/tdata
             mkdir -p $HOME/.local/share/TelegramDesktop/tdata
             create_link $PWD/telegram-desktop/shortcuts-custom.json $HOME/.local/share/TelegramDesktop/tdata/shortcuts-custom.json
+            create_link $PWD/telegram-desktop/shortcuts-custom.json $HOME/.TelegramDesktop/tdata/shortcuts-custom.json
             ;;
 
         telegram-cli)
