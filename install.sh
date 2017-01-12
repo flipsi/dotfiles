@@ -17,14 +17,16 @@ Usage: install.sh [OPTIONS] TARGET
     TARGET := { all | bash | cmus | dactyl | elinks | fish | ghci | git | i3 |
                 konsole | lesskey | luakit | mopidy |mpd | mplayer | mutt |
                 muttator | ncmpcpp | pentadactyl | ranger | sublime-text-3 |
-                telegram-cli | tig | tmux | turses | urlview | vim | vimpc |
-                vimperator | vimus | vlc | xfce4 | xkb | xmonad | zathura }
+                telegram-desktop | telegram-cli | tig | tmux | turses |
+                urlview | vim | vimpc | vimperator | vimus | vlc | xfce4 | xkb |
+                xmonad | zathura }
 EOF
 }
 
 
 function create_link_for_target() {
     local TARGET="$1"
+    TARGET=`echo $TARGET | sed 's#/$##'`
     case "$TARGET" in
 
         bash)
@@ -140,6 +142,11 @@ function create_link_for_target() {
             mkdir -p $HOME/.config/sublime-text-3/Packages
             create_link $PWD/sublime/User $HOME/.config/sublime-text-3/Packages/User
             create_link $PWD/sublime/jsbeautifyrc $HOME/.jsbeautifyrc
+            ;;
+
+        telegram-desktop)
+            mkdir -p $HOME/.local/share/TelegramDesktop/tdata
+            create_link $PWD/telegram-desktop/shortcuts-custom.json $HOME/.local/share/TelegramDesktop/tdata/shortcuts-custom.json
             ;;
 
         telegram-cli)
