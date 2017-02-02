@@ -1292,6 +1292,7 @@ set nowrapscan
 " allow the cursor to move where there is no character
 set virtualedit=block,insert,onemore
 
+
 " characters to show in list mode
 if v:version > 704 || v:version == 704 && has("patch711")
     set listchars=space:·,tab:--,extends:❯,precedes:❮
@@ -1304,6 +1305,10 @@ if v:version > 704 || v:version == 704 && has("patch338")
     set breakindent
 endif
 set showbreak=↪
+
+" how other stuff looks like
+set fillchars+=vert:│
+" set fillchars+=fold:─
 
 " use 4 spaces instead of tabs
 set expandtab
@@ -2003,7 +2008,7 @@ nnoremap vv V
 vnoremap v <C-c>
 
 
-" copy to clipboard / primary selection in visual modemode
+" copy to clipboard / primary selection in visual mode
 vnoremap <C-c>      "*ygv"+y
 nnoremap <C-c> gg0VG"*ygv"+y<C-o><C-o>
 
@@ -2034,7 +2039,7 @@ function! PasteFromGUI()
 endfunction
 " }}}
 noremap <silent> <C-v><C-v> :call PasteFromGUI()<CR>
-imap <C-v><C-v> <Esc><C-v><C-v>
+imap <C-v><C-v> <C-o><C-v><C-v>
 
 
 " macro ('complex repeat') helper mappings
@@ -2583,6 +2588,7 @@ endif
 
 " change to LRU buffer
 nnoremap <Space><Space> :buffer #<CR>
+nnoremap <Space><Tab>   :buffer #<CR>
 
 " circle through buffers
 nnoremap <M-n>  :bnext<CR>
