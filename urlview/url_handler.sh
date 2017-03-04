@@ -9,7 +9,7 @@
 
 
 # set BROWSER (e.g. in /etc/environment) to overwrite
-# BROWSER=firefox
+BROWSER=firefox
 
 # checked browsers if BROWSER is not set
 BROWSERS=`cat <<END
