@@ -1,17 +1,30 @@
 # Author: Philipp Moers <soziflip@gmail.com>
-# colorscheme for ranger: sfluen
+# colorscheme for ranger: sflea
+
 
 # This file is part of ranger, the console file manager.
 # License: GNU GPL version 3, see the file "AUTHORS" for details.
 
+import curses
 from ranger.gui.colorscheme import ColorScheme
 from ranger.gui.color import *
 
 class Default(ColorScheme):
     progress_bar_color = blue
 
+    ACCENT         = 30
+    ACCENT_DARK    = 23
+    GRAY_BRIGHTEST = 252
+    GRAY_BRIGHT    = 245
+    GRAY_MIDDLE    = 242
+    GRAY_DARK      = 239
+    GRAY_DARKEST   = 237
+
+
     def use(self, context):
         fg, bg, attr = default_colors
+
+        red = 210 # more decent red
 
         if context.reset:
             return default_colors
@@ -24,17 +37,20 @@ class Default(ColorScheme):
             if context.empty or context.error:
                 bg = red
             if context.border:
-                fg = default
+                #  fg = default
+                fg = self.ACCENT_DARK
             if context.media:
                 if context.image:
                     fg = yellow
                 else:
-                    fg = blue
+                    fg = self.ACCENT
+            if context.document:
+                fg = 192
             if context.container:
                 fg = red
             if context.directory:
                 attr |= bold
-                fg = green
+                fg = self.GRAY_BRIGHT
             elif context.executable and not \
                     any((context.media, context.container,
                         context.fifo, context.socket)):
@@ -48,7 +64,7 @@ class Default(ColorScheme):
                 if context.device:
                     attr |= bold
             if context.link:
-                fg = context.good and cyan or magenta
+                fg = context.good and self.ACCENT or magenta
             if context.tag_marker and not context.selected:
                 attr |= bold
                 if fg in (red, magenta):
@@ -56,14 +72,16 @@ class Default(ColorScheme):
                 else:
                     fg = red
             if not context.selected and (context.cut or context.copied):
-                fg = black
+                bg = self.GRAY_DARKEST
+                fg = self.GRAY_BRIGHTEST
                 attr |= bold
             if context.main_column:
                 if context.selected:
                     attr |= bold
                 if context.marked:
                     attr |= bold
-                    fg = yellow
+                    bg = yellow
+                    fg = self.GRAY_DARKEST
             if context.badinfo:
                 if attr & reverse:
                     bg = magenta
@@ -73,19 +91,19 @@ class Default(ColorScheme):
         elif context.in_titlebar:
             attr |= bold
             if context.hostname:
-                fg = context.bad and red or green
+                fg = context.bad and red or self.ACCENT_DARK
             elif context.directory:
-                fg = blue
+                fg = self.GRAY_BRIGHT
             elif context.tab:
                 if context.good:
-                    bg = green
+                    bg = self.ACCENT_DARK
             elif context.link:
                 fg = cyan
 
         elif context.in_statusbar:
             if context.permissions:
                 if context.good:
-                    fg = cyan
+                    fg = self.GRAY_BRIGHT
                 elif context.bad:
                     fg = magenta
             if context.marked:
@@ -111,7 +129,7 @@ class Default(ColorScheme):
 
         if context.in_taskview:
             if context.title:
-                fg = blue
+                fg = self.ACCENT
 
             if context.selected:
                 attr |= reverse
@@ -132,16 +150,16 @@ class Default(ColorScheme):
             elif context.vcsunknown:
                 fg = red
             elif context.vcsstaged:
-                fg = green
+                fg = self.ACCENT
             elif context.vcssync:
-                fg = green
+                fg = self.ACCENT
             elif context.vcsignored:
                 fg = default
 
         elif context.vcsremote and not context.selected:
             attr &= ~bold
             if context.vcssync:
-                fg = green
+                fg = self.ACCENT
             elif context.vcsbehind:
                 fg = red
             elif context.vcsahead:

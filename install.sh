@@ -37,6 +37,7 @@ function create_link_for_target() {
         cmus)
             mkdir -p $HOME/.cmus
             create_link $PWD/cmus/rc $HOME/.cmus/rc
+            create_link $PWD/cmus/sflea.theme $HOME/.cmus/sflea.theme
             ;;
 
         elinks)

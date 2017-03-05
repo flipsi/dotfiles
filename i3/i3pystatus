@@ -14,7 +14,8 @@ status = Status(standalone=True)
 
 # Colors
 COLOR_DEFAULT = "#DDDDDD";
-COLOR_GREEN   = "#AABF9B";
+#  COLOR_GREEN   = "#AABF9B";
+COLOR_GREEN   = "#009C9C";
 COLOR_RED     = "#F2935C";
 
 

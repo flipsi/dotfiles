@@ -2,7 +2,7 @@
 " ----------------------------------------------------------------------
 "
 " Mantainer: sflip <soziflip@gmail.com>
-" Name: sfluen
+" Name: sflea
 
 " Credits to
 " claytron <robots@claytron.com>
@@ -43,6 +43,8 @@ hi s_yellow_back background-color: #B08200 !important;
 hi s_green_back background-color: #83B45 !important;
 hi s_green_back_light background-color: #AFFF58 !important;
 hi s_green_back_light2 background-color: #89C745 !important;
+hi s_turquoise_back_light background-color: #00AFAF !important;
+hi s_turquoise_back_light2 background-color: #005F5F !important;
 hi s_red_back background-color: #DC482F !important;
 hi s_red_back_light background-color: #EF7C68 !important;
 hi s_magenta_back background-color: #d33682 !important;
@@ -54,7 +56,7 @@ hi s_green2_back background-color: #7CB102 !important;
 " Gradient backgrounds                                              {{{2
 " ----------------------------------------------------------------------
 hi s_comp_title background: -moz-linear-gradient(60deg, #575757, #6E6E6E) !important;
-hi s_comp_sep background: -moz-linear-gradient(60deg, #AFFF58, #6E6E6E) !important;
+hi s_comp_sep background: -moz-linear-gradient(60deg, #00AFAF, #6E6E6E) !important;
 
 " Status Line                                                       {{{1
 " ----------------------------------------------------------------------
@@ -70,7 +72,7 @@ hi StatusQuestion -a color: inherit !important; background-color: inherit !impor
 " ----------------------------------------------------------------------
 hi -l=light_text,s_base0_back Normal
 " selected in command line
-hi -l=s_base02,s_green_back_light2 CompItem[selected]
+hi -l=s_base02,s_turquoise_back_light CompItem[selected]
 " background is s_base03
 hi CompItem:nth-child(2n+1) -a background: rgba(91, 91, 91, .24);
 hi -l=s_base3,s_comp_title CompTitle
@@ -92,9 +94,9 @@ hi -l=s_base3,s_red_back CmdErrorMsg
 " Hints                                                             {{{1
 " ----------------------------------------------------------------------
 " The hint background is s_base3, the outline is s_base03
-hi -l=s_base03 Hint -a outline: 1px solid rgba(57, 57, 57, .5); background: rgba(131, 180, 92, .8);
-hi -l=s_base03,s_green_back_light2 HintElem
-hi -l=s_base03,s_green_back_light HintActive
+hi -l=s_base03 Hint -a outline: 1px solid rgba(0, 175, 175, .5); background: rgba(0, 175, 175, .8);
+hi -l=s_base03,s_turquoise_back_light2 HintElem
+hi -l=s_base03,s_turquoise_back_light HintActive
 
 " Other                                                             {{{1
 " ----------------------------------------------------------------------
@@ -109,7 +111,7 @@ hi -l=s_blue_back FrameIndicator -a
 hi -l=s_base0,s_base03_back LinkInfo -a
 hi -l=s_base3,s_base2_back LineNr
 hi -l=s_blue Tag -a
-hi -l=s_base3,s_green_back EditorBlink1
+hi -l=s_base3,s_turquoise_back_light EditorBlink1
 hi -l=s_base01 EditorBlink2
 hi -l=s_base2,s_base3_back EditorEditing>*
 hi -l=s_base2,s_base3_back EditorEditing

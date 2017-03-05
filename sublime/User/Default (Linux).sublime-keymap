@@ -308,6 +308,7 @@
 
     // save file
     { "keys": ["alt+s"], "command": "save" },
+    { "keys": ["ctrl+space", "w"], "command": "save" },
 
     // undo and redo
     { "keys": ["alt+u"], "command": "undo" },
