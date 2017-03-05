@@ -1,4 +1,4 @@
-colorscheme green
+colorscheme sflea
 
 bind -f common Q quit
 bind -f common ^D quit

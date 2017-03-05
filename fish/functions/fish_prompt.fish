@@ -11,9 +11,18 @@ set __fish_git_prompt_char_upstream_ahead '↑'
 set __fish_git_prompt_char_upstream_behind '↓'
 
 # some colors
-set __fish_my_color_red     '#FF4141'
-set __fish_my_color_green   '#8ADE33'
-set __fish_my_color_blue    '#629FCF'
+set __fish_my_color_gray_dark       '#4C4C4C'
+set __fish_my_color_gray_middle     '#636363'
+set __fish_my_color_gray_bright     '#878787'
+set __fish_my_color_red             '#FF8787'
+set __fish_my_color_green           '#8ADE33'
+set __fish_my_color_blue            '#629FCF'
+
+# accent colors
+set __fish_my_color_accent          '#00AFAF'
+set __fish_my_color_accent_dark     '#005F5F'
+
+
 
 function fish_prompt --description 'Prompt anzeigen'
 
@@ -43,21 +52,21 @@ function fish_prompt --description 'Prompt anzeigen'
 	case '*'
 
 		# user
-		set_color --bold $__fish_my_color_green
+		set_color --bold $__fish_my_color_accent_dark
 		echo -n $USER'@'
 
 		# host
-        set_color --bold $__fish_my_color_green
+        set_color --bold $__fish_my_color_accent_dark
 		echo -n $__fish_prompt_hostname
-		set_color $__fish_my_color_green
-		echo -n ':'
+		set_color $__fish_my_color_accent_dark
+		echo -n ' '
 
 		# working directory
 		set wd (pwd)
         if set -q RANGER_LEVEL
-            set_color --bold $__fish_my_color_blue
+            set_color --bold $__fish_my_color_gray_bright
         else
-            set_color --bold $__fish_my_color_red
+            set_color --italics $__fish_my_color_gray_dark
         end
 		echo -n $wd
 

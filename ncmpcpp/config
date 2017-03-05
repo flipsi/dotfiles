@@ -1,0 +1,6 @@
+state_line_color = "cyan"
+main_window_color = "white"
+progressbar_color = "cyan"
+progressbar_elapsed_color = "cyan"
+statusbar_color = "red"
+active_column_color = "cyan"

@@ -82,12 +82,12 @@ exec --no-startup-id "syndaemon -d -k -i 1.2"
 ###############################################################################
 
 # launcher options
-set $DMENU_OPTIONS   -l 5 -fn 'Monospace-9' -i -nb '#1E1E1E' -sb '#AFFF58' -sf '#1E1E1E'
-set $DMENU_OPTIONS_2 -l 5 -fn 'Monospace-9' -i -nb \#1E1E1E -sb \#AFFF58 -sf \#1E1E1E
+set $DMENU_OPTIONS   -l 5 -fn 'Monospace-9' -i -nb '#1E1E1E' -sb '#00AFAF' -sf '#1E1E1E'
+set $DMENU_OPTIONS_2 -l 5 -fn 'Monospace-9' -i -nb \#1E1E1E -sb \#00AFAF -sf \#1E1E1E
 set $ROFI_OPTIONS -lines 5 -font 'Monospace 9' -width 100 -location 1 \
-    -color-normal '#1E1E1E,#FFFFFF,#1E1E1E,#AFFF58,#1E1E1E' \
-    -color-urgent '#1E1E1E,#FFFFFF,#1E1E1E,#AFFF58,#1E1E1E' \
-    -color-active '#1E1E1E,#FFFFFF,#1E1E1E,#AFFF58,#1E1E1E' \
+    -color-normal '#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E' \
+    -color-urgent '#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E' \
+    -color-active '#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E' \
     -color-window '#1E1E1E,#1E1E1E' \
     -kb-remove-word-back 'Alt+BackSpace'
 
@@ -175,12 +175,17 @@ new_float  normal
 
 
 # Colors
+
+# accent colors:
+#       sfluen    #AFFF58         sfluen_dark #83B45C
+#       sflea     #00AFAF         sflea_dark  #005F5F
+
 #                       border   backgr   text     indicator
-client.focused          #1E1E1E  #1E1E1E  #AFFF58  #83B45C
-client.focused_inactive #1E1E1E  #1E1E1E  #83B45C  #1E1E1E
+client.focused          #005F5F  #005F5F  #1E1E1E  #FF0000
+client.focused_inactive #1E1E1E  #1E1E1E  #005F5F  #1E1E1E
 client.unfocused        #1E1E1E  #1E1E1E  #DDDDDD  #1E1E1E
-client.urgent           #AFFF58  #83B45C  #000000  #1E1E1E
-client.background       #1A1A1A  #1E1E1E  #83B45C  #1E1E1E
+client.urgent           #00AFAF  #00AFAF  #000000  #1E1E1E
+client.background       #1A1A1A  #1E1E1E  #005F5F  #1E1E1E
 
 
 
@@ -208,12 +213,12 @@ bar {
     colors {
         background  #1E1E1E
         statusline  #DDDDDD
-        separator   #AFFF58
+        separator   #005F5F
         #                   border   backgr   text
-        focused_workspace   #AFFF58  #1E1E1E  #AFFF58
-        active_workspace    #1E1E1E  #1E1E1E  #83B45C
+        focused_workspace   #005F5F  #005F5F  #1E1E1E
+        active_workspace    #1E1E1E  #1E1E1E  #005F5F
         inactive_workspace  #1E1E1E  #1E1E1E  #DDDDDD
-        urgent_workspace    #83B45C  #83B45C  #000000
+        urgent_workspace    #00AFAF  #00AFAF  #000000
     }
 }
 
