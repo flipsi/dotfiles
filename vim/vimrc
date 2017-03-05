@@ -578,7 +578,7 @@ let g:ctrlp_use_caching = 2000
 " (prefixing a word with ' makes it non-fuzzy)
 
 " install 'fzf' package on the system. or:
-" Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 
 Plugin 'junegunn/fzf.vim'
 
@@ -605,7 +605,9 @@ nnoremap <Leader>eo :FzfGFiles<CR>
 nnoremap <Leader>eg :FzfGFiles?<CR>
 nnoremap <Leader>er :FzfHistory<CR>
 nnoremap <Leader>eb :FzfBuffers<CR>
-nnoremap <Leader>el :FzfLocate<Space>
+
+let g:fzf_tags_command = 'ctags -R -f .tags'
+nnoremap <Leader>et :FzfTags<CR>
 
 " type a search pattern
 nnoremap <Leader>ö :FzfAg<CR>
@@ -1270,6 +1272,9 @@ if has ('persistent_undo')
     set undolevels=1000
     set undoreload=10000
 endif
+
+" meta files (like tagfiles)
+set tags+=.tags
 
 " custom dictionary
 " (add words with zg and remove them with zw)

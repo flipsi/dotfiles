@@ -91,9 +91,9 @@ echo 'Choose action: [c]opy filepath
         # fzf -q $pattern
         if command -v ag >/dev/null ^&1
             ag -l --silent -g "$pattern" | fzf | read file
-            # ag -l --silent -g "$pattern" | sed -e 's:/[^/]*$::' | uniq | fzf | read file
+            # ag -l --silent -g "$pattern" | sed -e 's:/[^/]*$::' | uniq | fzf --cycle | read file
         else
-            find -L -name '.git' -prune -o -path "*$pattern*" -print | fzf | read file
+            find -L -name '.git' -prune -o -path "*$pattern*" -print | fzf --cycle | read file
         end
     else # locate mode
         if test -z $pattern
@@ -101,7 +101,7 @@ echo 'Choose action: [c]opy filepath
             __fzf_wrapper_help
             return 1
         else
-            locate -i $pattern | fzf | read file
+            locate -i $pattern | fzf --cycle | read file
         end
     end
 

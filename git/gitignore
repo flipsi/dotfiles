@@ -1,6 +1,7 @@
 # global gitignore file
-*.swp
-sftp-config.json
 *.bak
+*.swp
+.tags
+sftp-config.json
 
 
