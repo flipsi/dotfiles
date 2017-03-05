@@ -131,6 +131,7 @@ function create_link_for_target() {
 
         ranger)
             mkdir -p $HOME/.config/ranger
+            create_link $PWD/ranger/commands.py $HOME/.config/ranger/commands.py
             create_link $PWD/ranger/rc.conf $HOME/.config/ranger/rc.conf
             create_link $PWD/ranger/rifle.conf $HOME/.config/ranger/rifle.conf
             create_link $PWD/ranger/scope.sh $HOME/.config/ranger/scope.sh
@@ -145,8 +146,10 @@ function create_link_for_target() {
             ;;
 
         telegram-desktop)
+            mkdir -p $HOME/.TelegramDesktop/tdata
             mkdir -p $HOME/.local/share/TelegramDesktop/tdata
             create_link $PWD/telegram-desktop/shortcuts-custom.json $HOME/.local/share/TelegramDesktop/tdata/shortcuts-custom.json
+            create_link $PWD/telegram-desktop/shortcuts-custom.json $HOME/.TelegramDesktop/tdata/shortcuts-custom.json
             ;;
 
         telegram-cli)

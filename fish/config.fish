@@ -22,6 +22,9 @@ if status --is-login
     # edit files with vim
     set -x EDITOR vim
 
+    # setup fzf to use ag instead of find
+    set -x FZF_DEFAULT_COMMAND 'ag -g ""'
+
     # music player daemon
     # if test $hostname = "asterix"
     #     set -x MPD_HOST (ifconfig wlan0 | grep 'inet ' | sed 's/.*addr:\(.*\)  Bcast.*/\1/')
