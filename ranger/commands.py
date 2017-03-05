@@ -20,16 +20,19 @@ class fzf(Command):
             return
         if False:
             # only directories
-            fzf = self.fm.execute_command(command + " | sed -e 's:/[^/]*$::' | uniq | fzf", stdout=PIPE)
+            fzf = self.fm.execute_command(command + " | sed -e 's:/[^/]*$::' | uniq | fzf --cycle", stdout=PIPE)
         else:
-            fzf = self.fm.execute_command(command + " | fzf", stdout=PIPE)
+            fzf = self.fm.execute_command(command + " | fzf --cycle", stdout=PIPE)
         stdout, stderr = fzf.communicate()
-        file = stdout.decode('utf-8').rstrip('\n')
-        if (os.path.isdir(file)):
-            self.fm.cd(file)
+        if not stdout:
+            return 1
         else:
-            file = os.path.abspath(file) # somehow, otherwise wrong file selected
-            self.fm.select_file(file)
+            file = stdout.decode('utf-8').rstrip('\n')
+            if (os.path.isdir(file)):
+                self.fm.cd(file)
+            else:
+                file = os.path.abspath(file) # somehow, otherwise wrong file selected
+                self.fm.select_file(file)
 
 
 
