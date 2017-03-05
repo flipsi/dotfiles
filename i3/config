@@ -65,7 +65,7 @@ exec --no-startup-id "xfsettingsd --sm-client-disable"
 # exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
 
 # hide mouse cursor
-exec --no-startup-id unclutter -idle 1 -jitter 30
+exec --no-startup-id unclutter -idle 4 -jitter 30
 
 # disable touchpad at start
 # exec --no-startup-id "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
@@ -346,10 +346,20 @@ for_window [class="(?i)pokerstars"]     floating enable
 for_window [title="Print"]              floating enable
 for_window [class="(?i)sxiv"]           fullscreen
 for_window [class="(?i)mplayer"]        fullscreen
+for_window [window_role="(?i)vlc-main"] floating enable
+for_window [window_role="(?i)vlc-main"] resize set 750 450
+# for_window [window_role="(?i)vlc-main"] move position 800 150
 
 # windows always on specific workspace
+assign [class="(?i)chrom" instance="crx_kddchekfnnagpejaneebcigegenogifj"]  Banking
+assign [class="(?i)chrom" instance="crx_lgeboohgcoglieeoikhidodnmdfcalmh"]  Handy
+assign [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"]  Notes
+assign [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"]  Todo
+assign [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"]  Netflix
+assign [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"]  Kalender
+assign [class="(?i)chrom" instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"]  Signal
+assign [class="(?i)chrom"]              Chrömchen
 assign [class="(?i)firefox"]            Fuchs
-assign [class="(?i)chrome"]             Netflix
 assign [class="(?i)pale moon"]          Web
 assign [class="(?i)thunderbird"]        Mail
 #assign [class="(?i)subl"]               Sublime
@@ -378,18 +388,20 @@ workspace_layout tabbed
 
 # start a terminal
 bindsym $mod+o mode "$terminal"
-set $terminal Open a terminal: (o) default (k) konsole (x) xfce-terminal (g) gnome-terminal (t) terminology
+set $terminal Open a terminal: (o) default (k) konsole (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
 mode "$terminal" {
     bindsym o       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower"; mode "default"
     bindsym $mod+o  exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower"; mode "default"
-    bindsym k       exec --no-startup-id "konsole --fallback-profile"; mode "default"
-    bindsym Shift+k exec --no-startup-id "konsole --fallback-profile -e tmux -2"; mode "default"
-    bindsym x       exec --no-startup-id "xfce4-terminal"; mode "default"
-    bindsym Shift+x exec --no-startup-id "xfce4-terminal --command='tmux -2'"; mode "default"
-    bindsym g       exec --no-startup-id "gnome-terminal --hide-menubar"; mode "default"
-    bindsym Shift+g exec --no-startup-id "gnome-terminal --hide-menubar --command='tmux -2'"; mode "default"
-    bindsym t       exec --no-startup-id "terminology"; mode "default"
-    bindsym Shift+t exec --no-startup-id "terminology --exec 'tmux -2'"; mode "default"
+    bindsym k       exec --no-startup-id "konsole --fallback-profile -e tmux -2"; mode "default"
+    bindsym Shift+k exec --no-startup-id "konsole --fallback-profile"; mode "default"
+    bindsym x       exec --no-startup-id "xfce4-terminal --command='tmux -2'"; mode "default"
+    bindsym Shift+x exec --no-startup-id "xfce4-terminal"; mode "default"
+    bindsym g       exec --no-startup-id "gnome-terminal --hide-menubar --command='tmux -2'"; mode "default"
+    bindsym Shift+g exec --no-startup-id "gnome-terminal --hide-menubar"; mode "default"
+    bindsym r       exec --no-startup-id "cool-retro-term -e tmux -2"; mode "default"
+    bindsym Shift+r exec --no-startup-id "cool-retro-term"; mode "default"
+    bindsym t       exec --no-startup-id "terminology --exec 'tmux -2'"; mode "default"
+    bindsym Shift+t exec --no-startup-id "terminology"; mode "default"
     # cancel
     #bindsym $mod+o mode "default"
     bindsym Return mode "default"
@@ -407,6 +419,7 @@ bindsym $mod+Shift+Return exec --no-startup-id "rofi -show run $ROFI_OPTIONS"
 
 # kill focused container
 bindsym $mod+BackSpace kill
+bindsym $mod+Shift+q kill
 
 
 # change focus
