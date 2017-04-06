@@ -17,6 +17,10 @@
 # dmenu
 # quickswitch [https://github.com/OliverUv/quickswitch-for-i3]
 # rofi [https://davedavenport.github.io/rofi/]
+# compton
+# unclutter
+# syndaemon
+# numlockx
 
 # my shellscripts [https://github.com/sflip/shellscripts]
 # path to my shellscripts
@@ -241,7 +245,7 @@ bindsym $mod+Escape mode "$mode_system"
 set $mode_system Want to leave?  (e) logout, (u) switch user, (l) lock, (s) suspend, (h) hibernate, (r) reboot, (p) poweroff (o) poweroff smoothly
 mode "$mode_system" {
     bindsym e exit
-    bindsym u exec --no-startup-id "i3exit switch_user"
+    bindsym u exec --no-startup-id "i3exit switch_user"; mode "default"
     bindsym l exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper"; mode "default"
     bindsym s exec --no-startup-id "i3exit suspend"; mode "default"
     bindsym h exec --no-startup-id "i3exit hibernate"; mode "default"
@@ -374,6 +378,7 @@ assign [class="(?i)skype"]              Skype
 assign [class="(?i)pokerstars"]         Poker
 assign [class="(?i)kaffeine"]           TV
 assign [class="(?i)mediathek"]          TV
+assign [class="(?i)spotify"]            Mucke
 assign [class="(?i)qjackctl"]           Sound
 assign [class="(?i)audacity"]           Recording
 assign [class="(?i)ardour"]             Recording
