@@ -202,7 +202,21 @@ function create_link_for_target() {
             ;;
 
         mutt )
-            create_link "$PWD/mutt/muttrc" "$HOME/.muttrc"
+            mkdir -p "$HOME/.mutt"
+            mkdir -p "$HOME/.mutt/mail"
+            mkdir -p "$HOME/.mutt/cache"
+            mkdir -p "$HOME/.mutt/credentials"
+            create_link "$PWD/mutt/muttrc" "$HOME/mutt/muttrc"
+            create_link "$PWD/mutt/accounts" "$HOME/.mutt/accounts"
+            create_link "$PWD/mutt/keybindings" "$HOME/.mutt/keybindings"
+            create_link "$PWD/mutt/colors" "$HOME/.mutt/colors"
+            create_link "$PWD/mutt/mailcap" "$HOME/.mutt/mailcap"
+            create_link "$PWD/mutt/signature" "$HOME/.mutt/signature"
+            create_link "$PWD/mutt/offlineimaprc" "$HOME/.offlineimaprc"
+            create_link "$PWD/mutt/offlineimapcredentials.py" "$HOME/.mutt/offlineimapcredentials.py"
+            create_link "$PWD/mutt/msmtprc" "$HOME/.msmtprc"
+            create_link "$PWD/mutt/notmuch-config" "$HOME/.notmuch-config"
+            create_link "$PWD/mutt/proofread.zsh" "$HOME/.mutt/proofread.zsh"
             ;;
 
         muttator )
@@ -354,6 +368,10 @@ function package_install_target() {
 
         i3 )
             LIST_OF_SYSTEM_PACKAGES="i3-wm i3exit i3status i3lock dmenu quickswitch-i3 rofi compton unclutter syndaemon numlockx"
+            ;;
+
+        mutt )
+            LIST_OF_SYSTEM_PACKAGES="mutt msmtp offlineimap notmuch notmuch-mutt goobook"
             ;;
 
         taskwarrior )

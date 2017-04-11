@@ -1,0 +1,28 @@
+color attachment brightmagenta default
+color error brightred default # errors yell at you in red
+color hdrdefault yellow default # headers
+color indicator black white # currently selected message
+color markers yellow default # the + for wrapped pager lines
+color message brightred default # informational messages, not mail
+color normal white default # plain text
+color quoted green default # quoted text
+color search brightgreen default # hilite search patterns in the pager
+color signature red default # signature (after "-- ") is red
+color status default yellow # status bar
+color tilde blue default # ~'s after message body
+color tree red default # thread tree in index menu is magenta
+color signature brightred default
+color underline yellow default
+color header red default ^(From|Subject): # Important headers
+color body red default "(ftp|http)://[^ ]+" # picks up URLs
+color body red default [-a-z_0-9.]+@[-a-z_0-9.]+
+# Coloring quoted text - coloring the first 7 levels:
+color quoted cyan default
+color quoted1 green default
+color quoted2 yellow default
+color quoted3 red default
+color quoted4 cyan default
+color quoted5 yellow default
+color quoted6 red default
+color quoted7 green default
+color sidebar_new yellow default

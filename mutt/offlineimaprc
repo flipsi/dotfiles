@@ -1,0 +1,108 @@
+# offlineimap configuration file for mutt. test with 'offlineimap -o --dry-run'
+
+[general]
+
+accounts = mail.de, gmail.com
+
+ui = ttyui
+fsync = False
+pythonfile = ~/.mutt/offlineimapcredentials.py
+
+# prevent race conditions! (according to man page)
+maxsyncaccounts = 1
+maxconnections = 1
+
+## this will locally replicate the IMAP folder structure, instead of the default separator '.' that flattens it.
+## (needs to be in every local repo conf)
+# sep = /
+
+
+
+[mbnames]
+enabled = yes
+filename = ~/.mutt/mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
+
+
+
+###########
+# mail.de #
+###########
+
+[Account mail.de]
+localrepository = mail.de-local
+remoterepository = mail.de-remote
+status_backend = sqlite
+postsynchook = notmuch new
+
+[Repository mail.de-local]
+type = Maildir
+localfolders = ~/.mutt/mail/mail.de
+sep = /
+
+[Repository mail.de-remote]
+type = IMAP
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+auth_mechanisms = LOGIN
+remotehost = imap.mail.de
+remoteuser = "philipp.moers@mail.de"
+remotepasseval = get_password("mail.de")
+# folderfilter = lambda folder: not re.search('(^Spam$|^Archives)', folder)
+folderfilter = lambda folder: folder not in [
+    'Bulk',
+    'Spam',
+    ]
+
+
+
+#############
+# gmail.com #
+#############
+
+[Account gmail.com]
+localrepository = gmail.com-local
+remoterepository = gmail.com-remote
+status_backend = sqlite
+postsynchook = notmuch new
+
+[Repository gmail.com-local]
+type = Maildir
+localfolders = ~/.mutt/mail/gmail.com
+sep = /
+nametrans = lambda folder: {
+    'Archive':      '[Gmail]/All Mail',
+    'Drafts':       '[Gmail]/Drafts',
+    'Sent':         '[Gmail]/Sent Mail',
+    'Starred':      '[Gmail]/Starred',
+    'Trash':        '[Gmail]/Trash',
+    }.get(folder, folder)
+
+[Repository gmail.com-remote]
+type = Gmail
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+auth_mechanisms = LOGIN
+remotehost = imap.gmail.com
+remoteuser = soziflip@gmail.com
+remotepasseval = get_password("gmail.com")
+realdelete = no
+# folderfilter = lambda folder: re.search('(^INBOX$|Sent Mail$|Drafts$|Trash$)', folder)
+# folderfilter = lambda folder: folder in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail']
+folderfilter = lambda folder: folder not in [
+    '[Gmail]/Important',
+    '[Gmail]/Spam',
+    ]
+# folderfilter = lambda folder: ( not re.search('^[Gmail]/Important$',    folder) and
+#                               not re.search('^[Gmail]/Spam$',         folder) )
+# TODO test this dry!!!
+nametrans = lambda folder: {
+    '[Gmail]/All Mail':     'Archive',
+    '[Gmail]/Drafts':       'Drafts',
+    '[Gmail]/Sent Mail':    'Sent',
+    '[Gmail]/Starred':      'Starred',
+    '[Gmail]/Trash':        'Trash',
+    }.get(folder, folder)
