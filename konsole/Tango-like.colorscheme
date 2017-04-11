@@ -1,5 +1,5 @@
 [Background]
-Color=50,50,50
+Color=36,36,36
 
 [BackgroundFaint]
 Color=0,0,0
@@ -90,5 +90,5 @@ Color=255,255,255
 
 [General]
 Description=Tango-like
-Opacity=0.6
+Opacity=1
 Wallpaper=
