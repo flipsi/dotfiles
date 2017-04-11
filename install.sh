@@ -317,7 +317,7 @@ function create_link_for_target() {
 
         xmonad )
             mkdir -p "$HOME/.xmonad"
-            create_link "$PWD/xmonad/xmonad.hs" "$HOME/.xmonad/xmonad.sh"
+            create_link "$PWD/xmonad/xmonad.hs" "$HOME/.xmonad/xmonad.hs"
             ;;
 
         zathura )
