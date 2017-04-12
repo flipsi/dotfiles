@@ -1,8 +1,10 @@
-# offlineimap configuration file for mutt. test with 'offlineimap -o --dry-run'
+# offlineimap configuration file for mutt.
+# test with 'offlineimap -o --dry-run'
+# (the error "getfolder() asked for a nonexisting folder" can be ignored)
 
 [general]
 
-accounts = mail.de, gmail.com
+accounts = mail.de, gmail.com, web.de-pmoers
 
 ui = ttyui
 fsync = False
@@ -106,3 +108,69 @@ nametrans = lambda folder: {
     '[Gmail]/Starred':      'Starred',
     '[Gmail]/Trash':        'Trash',
     }.get(folder, folder)
+
+
+
+#################
+# web.de-pmoers #
+#################
+
+[Account web.de-pmoers]
+localrepository = web.de-pmoers-local
+remoterepository = web.de-pmoers-remote
+status_backend = sqlite
+postsynchook = notmuch new
+
+[Repository web.de-pmoers-local]
+type = Maildir
+localfolders = ~/.mutt/mail/web.de-pmoers
+#sep = /
+
+[Repository web.de-pmoers-remote]
+type = IMAP
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+auth_mechanisms = LOGIN
+remotehost = imap.web.de
+remoteuser = "pmoers"
+remotepasseval = get_password("web.de-pmoers")
+folderfilter = lambda folder: folder in [
+    'INBOX',
+    'Sent',
+    'Drafts',
+    'Trash',
+    ]
+
+
+
+###########################
+# web.de-keinschweinehund #
+###########################
+
+[Account web.de-keinschweinehund]
+localrepository = web.de-keinschweinehund-local
+remoterepository = web.de-keinschweinehund-remote
+status_backend = sqlite
+postsynchook = notmuch new
+
+[Repository web.de-keinschweinehund-local]
+type = Maildir
+localfolders = ~/.mutt/mail/web.de-keinschweinehund
+#sep = /
+
+[Repository web.de-keinschweinehund-remote]
+type = IMAP
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+auth_mechanisms = LOGIN
+remotehost = imap.web.de
+remoteuser = "keinschweinehund"
+remotepasseval = get_password("web.de-keinschweinehund")
+folderfilter = lambda folder: folder in [
+    'INBOX',
+    'Sent',
+    'Drafts',
+    'Trash',
+    ]
+
+

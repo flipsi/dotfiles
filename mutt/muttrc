@@ -193,12 +193,14 @@ source $my_muttdir/accounts/$my_default_account.muttrc
 # source $my_muttdir/mailboxes
 ## ...instead of the the above, add them manually (i don't want every synced folder)
 mailboxes \
-    =gmail.com/INBOX \
-    =gmail.com/Sent \
-    =gmail.com/Drafts \
     =mail.de/INBOX \
+    =gmail.com/INBOX \
+    =web.de-pmoers/INBOX \
+    =web.de-keinschweinehund/INBOX \
     =mail.de/Sent \
+    =gmail.com/Sent \
     =mail.de/Drafts \
+    =gmail.com/Drafts \
 
 
 

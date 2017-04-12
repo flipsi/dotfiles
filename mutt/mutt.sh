@@ -62,7 +62,7 @@ case $MODE in
         exit $?
         ;;
     ask )
-        read -n 1 -p "Sync (default) or use [o]ffline mode? " user_input
+        read -n 1 -p "Sync (default) or use [o]ffline mode? " user_input; echo
         case $user_input in
             q )
                 exit 0
@@ -133,7 +133,7 @@ case $LAST_TIME_ACTION in
         ;;
     ask )
         while true; do
-            read -n 1 -p "Sync? " user_input
+            read -n 1 -p "Sync? " user_input; echo
             case $user_input in
                 [Nn]* ) exit 0;;
                 * )     eval $OFFLINEIMAP_COMMAND_FULL; break;;
