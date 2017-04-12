@@ -18,7 +18,8 @@ from subprocess import check_output
 def get_password(account):
   account = path.basename(account)
   credentialfile = path.expanduser("~") + "/.mutt/credentials/%s.gpg" % account
-  args = ["gpg", "--use-agent", "--quiet", "--batch", "-d", credentialfile]
+  #  args = ["gpg", "--use-agent", "--quiet", "--batch", "-d", credentialfile]
+  args = ["gpg", "--use-agent", "--quiet",  "-d", credentialfile]
   try:
     return check_output(args).strip()
   except CalledProcessError:

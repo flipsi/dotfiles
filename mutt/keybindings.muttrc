@@ -32,6 +32,8 @@ bind index K previous-thread
 bind pager j next-line
 bind pager k previous-line
 
+# remember <tab> to jump to next unread message!
+
 
 
 ################

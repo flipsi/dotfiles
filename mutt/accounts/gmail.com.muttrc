@@ -10,8 +10,3 @@ set postponed = "=gmail.com/Drafts/"
 set trash     = "=gmail.com/Trash/"
 
 set sendmail  = "/usr/bin/msmtp -a gmail.com"
-
-
-
-
-# vim:syntax=muttrc

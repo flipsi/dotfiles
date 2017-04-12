@@ -2,6 +2,11 @@
 # Author: Philipp Moers <soziflip@gmail.com>
 
 
+# mutt is configured to use offlineimap, i.e. a local copy of the account's imap folders.
+
+# USE THE mutt.sh SCRIPT INSTEAD OF THE mutt BINARY!
+
+
 
 # some urls i used to write this mess:
 
@@ -9,14 +14,12 @@
 # https://hynek.me/articles/my-mutt-gmail-setup/
 # https://pbrisbin.com/posts/two_accounts_in_mutt/
 # https://pbrisbin.com/posts/mutt_gmail_offlineimap/
+# http://bkanuka.com/articles/offlineimap-mutt/
 # http://marcorucci.tumblr.com/post/34416884082/backup-gmail-with-offlineimap-folders-and-labels
 # http://blog.mafr.de/2012/09/09/mutt-too-many-errors/
 # https://baptiste-wicht.com/posts/2014/07/a-mutt-journey-download-mails-with-offlineimap.html
 # https://atechnologyjobisnoexcuse.com/2010/04/google-contacts-in-mutt-and-vim/
 
-
-# mutt is configured to use offlineimap, i.e. a local copy of the account's imap folders.
-# sync this with 'offlineimap -o' once a day or so, and with 'offlineimap -o -q' every few minutes.
 
 
 
@@ -57,9 +60,9 @@ set smart_wrap                                            # don't wrap within wo
 set text_flowed                                           # prevent strange linebreaks in replies
 
 unset move                                                # don't ask on move
-# set delete                                              # don't ask on delete
+set delete                                                # don't ask on delete
 set delete_untag                                          # untag msgs when deleting
-unset mark_old                                            # read/unread is enough (disable old)
+# unset mark_old                                            # read/unread is enough (disable old)
 # unset confirmappend
 
 
@@ -136,6 +139,7 @@ color sidebar_new   color241        color233
 
 # source $my_muttdir/colors/old_yellowish
 source $my_muttdir/colors/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc
+# source $my_muttdir/colors/badwolf.muttrc
 
 
 
@@ -143,7 +147,7 @@ source $my_muttdir/colors/mutt-colors-solarized/mutt-colors-solarized-dark-256.m
 # keybindings #
 ###############
 
-source $my_muttdir/keybindings
+source $my_muttdir/keybindings.muttrc
 
 
 
@@ -175,11 +179,11 @@ set reverse_realname = no                                           # still use 
 
 
 # set account specific options on folder change
-folder-hook mail.de/*        source $my_muttdir/accounts/mail.de
-folder-hook gmail.com/*      source $my_muttdir/accounts/gmail.com
+folder-hook mail.de/*        source $my_muttdir/accounts/mail.de.muttrc
+folder-hook gmail.com/*      source $my_muttdir/accounts/gmail.com.muttrc
 
 # use default account now
-source $my_muttdir/accounts/$my_default_account
+source $my_muttdir/accounts/$my_default_account.muttrc
 
 
 ## mailboxes in sidebar (or change folder with c)

@@ -98,7 +98,7 @@ folderfilter = lambda folder: folder not in [
     ]
 # folderfilter = lambda folder: ( not re.search('^[Gmail]/Important$',    folder) and
 #                               not re.search('^[Gmail]/Spam$',         folder) )
-# TODO test this dry!!!
+# TODO: change Trash so that sync is cool
 nametrans = lambda folder: {
     '[Gmail]/All Mail':     'Archive',
     '[Gmail]/Drafts':       'Drafts',
