@@ -5,6 +5,23 @@
 # own every few seconds
 
 
+
+
+# abort if there is already an instance running
+# http://stackoverflow.com/a/185473/4568748
+LOCKFILE=/tmp/$(basename $0).lock
+if [ -e ${LOCKFILE} ] && kill -0 `cat ${LOCKFILE}`; then
+    echo "already running"
+    exit
+fi
+# make sure the lockfile is removed when we exit and then claim it
+trap "rm -f ${LOCKFILE}; exit" INT TERM EXIT
+echo $$ > ${LOCKFILE}
+
+
+
+
+
 # time interval in seconds to check again when there is no mpd
 SLEEP_NO_MPD=100
 
