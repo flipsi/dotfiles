@@ -299,6 +299,8 @@ function create_link_for_target() {
             create_link "$PWD/vim/vim/spellfile.utf-8.add" "$HOME/.vim/spellfile.utf-8.add"
             create_link "$PWD/vim/vim/syntax" "$HOME/.vim/syntax"
             create_link "$PWD/vim/vim/filetype.vim" "$HOME/.vim/filetype.vim"
+            mkdir -p "$HOME/bin"
+            create_link "$PWD/vim/bin/goobook-query-mail.sh" "$HOME/bin/goobook-query-mail.sh"
             ;;
 
         vimpc )
@@ -429,7 +431,6 @@ function package_install_target() {
                 ;;
 
             tmux )
-                mkdir -p "$HOME/.tmux/plugins"
                 if test ! -d "$HOME/.tmux/plugins/tpm"; then
                     git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
                     tmux command "run-shell '~/.tmux/plugins/tpm/bindings/install_plugins'"

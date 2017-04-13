@@ -2702,6 +2702,11 @@ nnoremap <Leader>it :!tig status <CR> :call GitRedraw()<CR>
 nnoremap <Leader>iT :execute '!cd ' . expand('%:p:h') . '; tig status'<CR>
                                     \ :call GitRedraw()<CR>
 
+" insert google contacts with name and mail addresses (with goobook)
+nnoremap <Leader>igm         :r!goobook-query-mail.sh<space>
+" inoremap <Leader>igm <Esc>diw:r!goobook-query-mail.sh<space><C-R>"<CR><CR>
+
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
