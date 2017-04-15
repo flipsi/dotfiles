@@ -228,7 +228,7 @@ bar {
 
 
 # hide/show bar
-bindsym $mod+b bar mode toggle
+bindsym $mod+Shift+b bar mode toggle
 
 set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
 
@@ -481,7 +481,7 @@ mode "resize" {
 }
 
 # change border
-bindsym $mod+Shift+b border toggle
+bindsym $mod+b border toggle
 
 
 

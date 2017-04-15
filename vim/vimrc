@@ -2664,8 +2664,14 @@ nnoremap <silent> <C-h> :wincmd h<CR>
 nnoremap <silent> <C-l> :wincmd l<CR>
 
 " move buffer to a new window
-nnoremap <silent> <Leader><C-l> :vsplit<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
-nnoremap <silent> <Leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
+nnoremap <silent> <Leader><C-l> :vsplit<CR><C-W>w:bprevious<CR><C-W>w<CR>
+nnoremap <silent> <Leader><C-j>  :split<CR><C-W>w:bprevious<CR><C-W>w<CR>
+
+" resize window faster
+nnoremap <silent> <C-w>+ :resize +3<CR>
+nnoremap <silent> <C-w>- :resize -3<CR>
+nnoremap <silent> <C-w>> 5<C-W>>
+nnoremap <silent> <C-w>< 5<C-W><
 
 
 " clear windows (close quickfix and location list) and refresh screen
@@ -2733,7 +2739,7 @@ nnoremap <Leader>QQ :bdelete!<CR>
 nnoremap <Leader>qa :bufdo bdelete<CR>
 
 " quit current window
-nnoremap Q :quit<CR>
+nnoremap Q :quit<CR>:buffer #<CR>
 " quit all windows but current
 nnoremap <Leader>qO :only<CR>
 nnoremap <Leader>QO :only<CR>
