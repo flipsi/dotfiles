@@ -50,6 +50,7 @@ SUPPORTED_TARGETS=(\
     tig \
     tmux \
     turses \
+    urxvt \
     urlview \
     vim \
     vimpc \
@@ -289,6 +290,16 @@ function create_link_for_target() {
             create_link "$PWD/urlview/url_handler.sh" "$HOME/bin/url_handler.sh"
             ;;
 
+        urxvt )
+            local sourcestring="#include "\""$PWD/urxvt/Xresources"\"
+            if [[ $UNINSTALL != true ]]; then
+                grep "$sourcestring" "$HOME/.Xresources" > /dev/null || echo "$sourcestring" >> "$HOME/.Xresources"
+                xrdb -all "$HOME/.Xresources"
+            else
+                sed -i -- "/^${sourcestring//\//\\/}$/d" "$HOME/.Xresources"
+            fi
+            ;;
+
         vim )
             create_link "$PWD/vim/vimrc" "$HOME/.vimrc"
             create_link "$PWD/vim/gvimrc" "$HOME/.gvimrc"
@@ -380,6 +391,10 @@ function package_install_target() {
 
         taskwarrior )
             LIST_OF_SYSTEM_PACKAGES="task"
+            ;;
+
+        urxvt )
+            LIST_OF_SYSTEM_PACKAGES="rxvt-unicode urxvt-perls urxvt-resize-font-git"
             ;;
 
         vim )

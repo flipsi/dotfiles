@@ -1,0 +1,128 @@
+! set $TERM variable
+URxvt.termName: xterm-256color
+
+! Window
+! URxvt.borderLess: true
+! URxvt.scrollstyle: rxvt
+URxvt.scrollBar: false
+URxvt.internalBorder: 0
+URxvt.externalBorder: 0
+URxvt.iconFile: /usr/share/icons/Faenza/apps/16/terminal.png
+
+! Fonts
+! URxvt.font: xft:Monospace:size=11
+! URxvt.font: xft:Inconsolata:size=12
+URxvt.font: xft:Terminus:size=13
+! URxvt.font: xft:Dejavu Sans Mono:size=11
+
+
+
+
+! extensions
+
+! URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select,resize-font
+URxvt.perl-ext-common:      default,clipboard,resize-font
+
+! change font size with control and plus/minus
+URxvt.resize-font.bigger: C-0x2b
+URxvt.resize-font.smaller: C-0x2d
+
+! URxvt.url-select.launcher:  firefox
+! URxvt.url-select.underline: false
+! URxvt.keysym.C-Shift-U: perl:url-select:select_next
+! URxvt.keysym.C-Shift-A: perl:keyboard-select:activate
+! URxvt.keysym.C-Shift-S: perl:keyboard-select:search
+
+
+
+
+! keybindings and stuff
+
+
+! allow ctrl-shift-keybindings (https://wilmer.gaa.st/blog/archives/36-rxvt-unicode-and-ISO-14755-mode.html)
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+URxvt*metaSendsEscape: true
+URxvt*backarrowKey: false
+URxvt*modifier: meta
+
+! unbind some keys
+URxvt.keysym.M-s: builtin:
+
+! Copy and Paste
+URxvt.clipboard.autocopy: true
+! URxvt.keysym.M-c: perl:clipboard:copy
+! URxvt.keysym.M-v: perl:clipboard:paste
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.C-C: perl:clipboard:copy
+URxvt.keysym.C-V: perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.copyCommand: xsel -ib
+URxvt.pasteCommand: xsel -ob
+
+
+!! zoom font size
+! urxvt.perl-lib:                     ~/.urxvt/urxvt-font
+! urxvt.keysym.C-Plus:                perl:font:increment
+! urxvt.keysym.Control-Shift-Down:    perl:font:decrement
+! urxvt.perl-ext-common:              font
+
+
+urxvt.keysym.Home:          \033[1~
+urxvt.keysym.End:           \033[4~
+urxvt.keysym.Control-Up:    \033[1;5A
+urxvt.keysym.Control-Down:  \033[1;5B
+urxvt.keysym.Control-Left:  \033[1;5D
+urxvt.keysym.Control-Right: \033[1;5C
+
+
+
+
+
+
+! Colors
+
+URxvt.depth: 32
+URxvt.background: rgb:2424/2424/2424
+URxvt.foreground: rgb:baba/bdbd/b6b6
+
+!! some nice colorscheme
+! URxvt.color0:  #333333
+! URxvt.color8:  #666666
+! URxvt.color1:  #A94952
+! URxvt.color9:  #ED6975
+! URxvt.color2:  #63A939
+! URxvt.color10: #B8ED69
+! URxvt.color3:  #A99F49
+! URxvt.color11: #EDE169
+! URxvt.color4:  #4983A9
+! URxvt.color12: #69B8ED
+! URxvt.color5:  #A94983
+! URxvt.color13: #ED69B8
+! URxvt.color6:  #49A99F
+! URxvt.color14: #69EDE1
+! URxvt.color7:  #AAAAAA
+! URxvt.color15: #EEEEEE
+
+!! Tango colortheme
+!! Strange - it matches tango from gnome-terminal, but looks different
+URxvt.color0: rgb:00/00/00
+URxvt.color1: rgb:CC/00/00
+URxvt.color2: rgb:4E/9A/06
+URxvt.color3: rgb:C4/A0/00
+URxvt.color4: rgb:34/65/A4
+URxvt.color5: rgb:75/50/7B
+URxvt.color6: rgb:06/98/9A
+URxvt.color7: rgb:D3/D7/CF
+URxvt.color8: rgb:55/57/53
+URxvt.color9: rgb:EF/29/29
+URxvt.color10: rgb:8A/E2/34
+URxvt.color11: rgb:FC/E9/4F
+URxvt.color12: rgb:72/9F/CF
+URxvt.color13: rgb:AD/7F/A8
+URxvt.color14: rgb:34/E2/E2
+URxvt.color15: rgb:EE/EE/EC
+URxvt.colorBD: rgb:ff/ff/ff
+
+
