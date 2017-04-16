@@ -88,7 +88,7 @@ end
 
 
 function autostart
-    if not pgrep -x konsole; nohup konsole --hide-menubar --hide-tabbar --profile NicNacPower &; end
+    if not pgrep -x urxvt; nohup urxvt -e tmux -2 new-session -A -s main &; end
     if not pgrep -x firefox; nohup firefox &; end
 end
 
@@ -96,7 +96,7 @@ end
 
 setup_screen_resolution
 setup_screen_layout
-autostart
 setup_musicserver
+autostart
 
 

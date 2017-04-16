@@ -1,3 +1,8 @@
+! author: "Philipp Moers" <soziflip@gmail.com>
+! urxvt Xresources config file
+! load with xrdb -all <filename>
+
+
 ! set $TERM variable
 URxvt.termName: xterm-256color
 

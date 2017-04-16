@@ -399,19 +399,21 @@ workspace_layout tabbed
 
 # start a terminal
 bindsym $mod+o mode "$terminal"
-set $terminal Open a terminal: (o) default (k) konsole (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
+set $terminal Open a terminal: (o) default (u) urxvt (k) konsole (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
 mode "$terminal" {
-    bindsym o       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower"; mode "default"
-    bindsym $mod+o  exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower"; mode "default"
-    bindsym k       exec --no-startup-id "konsole --fallback-profile -e tmux -2"; mode "default"
+    bindsym o       exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
+    bindsym $mod+o  exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
+    bindsym u       exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
+    bindsym Shift+u exec --no-startup-id "urxvt"; mode "default"
+    bindsym k       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower -e 'tmux -2 new-session -A -s main'"; mode "default"
     bindsym Shift+k exec --no-startup-id "konsole --fallback-profile"; mode "default"
-    bindsym x       exec --no-startup-id "xfce4-terminal --command='tmux -2'"; mode "default"
+    bindsym x       exec --no-startup-id "xfce4-terminal --command='tmux -2 new-session -A -s main'"; mode "default"
     bindsym Shift+x exec --no-startup-id "xfce4-terminal"; mode "default"
-    bindsym g       exec --no-startup-id "gnome-terminal --hide-menubar --command='tmux -2'"; mode "default"
+    bindsym g       exec --no-startup-id "gnome-terminal --hide-menubar --command='tmux -2 new-session -A -s main'"; mode "default"
     bindsym Shift+g exec --no-startup-id "gnome-terminal --hide-menubar"; mode "default"
-    bindsym r       exec --no-startup-id "cool-retro-term -e tmux -2"; mode "default"
+    bindsym r       exec --no-startup-id "cool-retro-term -e tmux -2 new-session -A -s main"; mode "default"
     bindsym Shift+r exec --no-startup-id "cool-retro-term"; mode "default"
-    bindsym t       exec --no-startup-id "terminology --exec 'tmux -2'"; mode "default"
+    bindsym t       exec --no-startup-id "terminology --exec 'tmux -2 new-session -A -s main'"; mode "default"
     bindsym Shift+t exec --no-startup-id "terminology"; mode "default"
     # cancel
     #bindsym $mod+o mode "default"
