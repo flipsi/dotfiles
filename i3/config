@@ -86,9 +86,9 @@ exec --no-startup-id "syndaemon -d -k -i 1.2"
 ###############################################################################
 
 # launcher options
-set $DMENU_OPTIONS   -l 5 -fn 'Monospace-9' -i -nb '#1E1E1E' -sb '#00AFAF' -sf '#1E1E1E'
-set $DMENU_OPTIONS_2 -l 5 -fn 'Monospace-9' -i -nb \#1E1E1E -sb \#00AFAF -sf \#1E1E1E
-set $ROFI_OPTIONS -lines 5 -font 'Monospace 9' -width 100 -location 1 \
+set $DMENU_OPTIONS   -l 5 -fn 'Terminus-10' -i -nb '#1E1E1E' -sb '#00AFAF' -sf '#1E1E1E'
+set $DMENU_OPTIONS_2 -l 5 -fn 'Terminus-10' -i -nb \#1E1E1E -sb \#00AFAF -sf \#1E1E1E
+set $ROFI_OPTIONS -lines 5 -font 'Terminus 10' -width 100 -location 1 \
     -color-normal '#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E' \
     -color-urgent '#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E' \
     -color-active '#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E' \
