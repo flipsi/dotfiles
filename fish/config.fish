@@ -22,6 +22,9 @@ if status --is-login
     # edit files with vim
     set -x EDITOR vim
 
+    # web browser
+    set -x BROWSER firefox
+
     # setup fzf to use ag instead of find
     set -x FZF_DEFAULT_COMMAND 'ag -g ""'
 

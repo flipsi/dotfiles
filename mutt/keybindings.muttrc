@@ -1,0 +1,82 @@
+
+##############
+# Navigation #
+##############
+
+bind generic,index gg first-entry
+bind generic,index G last-entry
+bind pager gg top
+bind pager G bottom
+
+
+bind index \Cf next-page
+bind index \Cb previous-page
+# bind index \Cd noop
+# bind index \Cu previous-page
+bind generic,pager,index <Esc>j half-down
+bind generic,pager,index <Esc>k half-up
+
+# bind generic,pager / search
+# bind generic,pager ? search-reverse
+bind generic,pager ö search
+# bind generic,pager Ö search-reverse
+bind generic,pager,index n search-next
+bind generic,pager,index N search-opposite
+
+bind index j next-entry
+bind index k previous-entry
+macro index gj "<next-entry><next-entry><next-entry><next-entry><next-entry><next-entry><next-entry>"
+macro index gk "<previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry>"
+bind index J next-thread
+bind index K previous-thread
+bind pager j next-line
+bind pager k previous-line
+
+# remember <tab> to jump to next unread message!
+
+
+
+################
+# Mail actions #
+################
+
+bind pager r reply
+bind pager R group-reply
+bind index d delete-message
+bind index u undelete-message
+bind index D delete-pattern
+bind index U undelete-pattern
+bind index S save-message
+bind index b bounce-message
+bind index t toggle-new
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+
+
+########
+# Misc #
+########
+
+# abort command (instead of ESC) with \Cg
+bind index \Cd quit
+
+# search mails
+macro generic,index Ö \
+     "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt -r --prompt search<enter>\
+     <change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>" \
+     "notmuch: search mail"
+
+# sync local mails with remotes
+macro generic,index \Cs \
+    "<enter-command>unset wait_key<enter><shell-escape>echo 'syncing maildir...'; offlineimap -o -u quiet -q<enter>" \
+    "run offlineimap to sync all mail"
+
+# goobook
+macro index,pager A "<pipe-message>goobook add<return>" "add sender to google contacts"
+bind editor <Tab> complete-query
+
+# sidebar
+macro index,pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+bind index,pager \Cp sidebar-prev
+bind index,pager \Cn sidebar-next
+bind index,pager \Cl sidebar-open

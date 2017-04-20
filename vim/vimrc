@@ -354,7 +354,7 @@ augroup gitcommit
     autocmd!
     autocmd filetype gitcommit setlocal nonumber norelativenumber
     autocmd filetype gitcommit setlocal textwidth=50
-    autocmd filetype gitcommit setlocal colorcolumn=""
+    autocmd filetype gitcommit setlocal colorcolumn=50
 augroup END
 
 
@@ -695,7 +695,7 @@ Plugin 'scrooloose/syntastic'
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_loc_list_height = 4
+let g:syntastic_loc_list_height = 5
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {
@@ -717,10 +717,13 @@ nnoremap <silent> <Leader>si :SyntasticInfo<CR>
 " - jslint / jshint
 " - csslint (but phpcs also can do css)
 " - phpcs (https://github.com/squizlabs/PHP_CodeSniffer)
+" - fsc
+" - scalac
 
 let g:syntastic_php_checkers = ['phpcs', 'phplint', 'php']
 " let g:syntastic_javascript_checkers = ['jshint', 'jslint']
 let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_scala_checkers = ['fsc']
 
 " ignore these errors/warnings
 let g:syntastic_quiet_messages = { "regex": [
@@ -750,6 +753,16 @@ let g:syntastic_quiet_messages = { "regex": [
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" read the docs {{{
+
+Plugin 'thinca/vim-ref'
+
+":Ref STUFF
+
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " text editing {{{
 
 
@@ -759,6 +772,10 @@ let g:syntastic_quiet_messages = { "regex": [
 " nmap -re <Plug>ReplaceWithRegisterLine
 " xmap -r  <Plug>ReplaceWithRegisterVisual
 " I DON'T REALLY USE THIS BUT v3wp or -rw OCCASIONALLY
+
+
+" preview register contents
+Plugin 'junegunn/vim-peekaboo'
 
 
 " make the 0 register a stack (yank/delete multiple things without worrying)
@@ -869,9 +886,18 @@ nmap <Leader>xx <Leader>xiw
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" edit quickfix list (make changes directly after global search or linting) {{{
+" better quickfix window {{{
 
+
+" edit quickfix list (make changes directly after global search or linting)
 Plugin 'Olical/vim-enmasse'
+
+
+" automatically resize quickfix window
+Plugin 'blueyed/vim-qf_resize'
+
+" let g:qf_resize_min_height = 1
+let g:qf_resize_max_height = 5
 
 
 " }}}
@@ -925,6 +951,7 @@ let g:toggle_words_dict = {
             \ '*': [
             \     ['0', '1'],
             \     ['add', 'remove'],
+            \     ['begin', 'end'],
             \     ['big', 'little'],
             \     ['black', 'white'],
             \     ['clean', 'dirty'],
@@ -1030,6 +1057,22 @@ nnoremap <silent> -adj :JsDoc<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " align stuff {{{
 
+" show indentation level
+Plugin 'Yggdroot/indentLine'
+let g:indentLine_enabled = 1
+let g:indentLine_char = '┊'
+nnoremap <C-G>I :IndentLinesToggle<CR>
+
+" Does not work. TODO: Fix it!
+augroup indentline_enabled
+    au!
+    au BufWinEnter */vim/*/doc/*,*/\.vim/bundle/*doc/*
+                \ IndentLinesDisable
+                " \ echo 'jaaa' | IndentLinesDisable
+augroup END
+
+
+" align plugin
 Plugin 'junegunn/vim-easy-align'
 
 " Start interactive EasyAlign in visual mode (e.g. vip-l=)
@@ -1056,6 +1099,14 @@ nmap <Leader>af -af
 vmap <Leader>af -af
 
 
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" don't worry about 'shiftwidth' and 'expandtab' etc. {{{
+
+Plugin 'tpope/vim-sleuth'
+
+
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " handle trailing whitespace {{{
@@ -1072,10 +1123,18 @@ nnoremap <silent> <C-G>A :ShowTrailingWhitespaceToggle<CR>
 " (has a bug)
 "Plugin 'vim-scripts/JumpToTrailingWhiteSpace'
 
+
 Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
+
 " check for trailing whitespace when writing file
 let g:DeleteTrailingWhitespace = 1
 let g:DeleteTrailingWhitespace_Action = 'ask'
+
+" enable/disable plugin
+nnoremap <Leader>dst :let g:DeleteTrailingWhitespace = 1 - g:DeleteTrailingWhitespace<CR>
+            \ :echo g:DeleteTrailingWhitespace == 1 ?
+            \ 'DeleteTrailingWhitespace enabled' :
+            \ 'DeleteTrailingWhitespace disabled'<CR>
 " delete trailing whitespace for selected line
 vnoremap <silent> -dst :DeleteTrailingWhitespace<CR>
 " delete trailing whitespace for whole buffer
@@ -1101,21 +1160,20 @@ nnoremap <Leader>cp :ColorPicker<CR>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" lots of syntax support {{{
+" Language specific stuff {{{
+
 
 Plugin 'sheerun/vim-polyglot'
 
 
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" fish stuff {{{
+
+" Language: fish
 
 Plugin 'dag/vim-fish'
 
 
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" LaTeX stuff {{{
+
+" Language: LaTeX
 
 Plugin 'lervag/vimtex'
 
@@ -1137,9 +1195,8 @@ let g:ycm_semantic_triggers.tex = [
 nnoremap <Leader>bl :VimtexCompileToggle<CR>
 
 
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" R stuff {{{
+
+" Language: R
 
 if v:version > 704 || v:version == 704 && has("patch1829")
     Plugin 'jalvesaq/Nvim-R'
@@ -1164,11 +1221,17 @@ endif
 
 
 
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" scala stuff {{{
+" Language: Scala
 
 Plugin 'derekwyatt/vim-scala'
+Plugin 'derekwyatt/vim-sbt'
+
+Plugin 'ensime/ensime-sbt', { 'branch': '2.0', 'for': 'scala' }
+Plugin 'ensime/ensime-server', { 'branch': '2.0', 'for': 'scala' }
+Plugin 'ensime/ensime-vim', { 'for': 'scala' }
+
+" TODO: integrate into my workflow
+
 
 
 " }}}
@@ -1369,6 +1432,7 @@ set fillchars+=vert:│
 " set fillchars+=fold:─
 
 " use 4 spaces instead of tabs
+" (otherwise handled by sleuth)
 set expandtab
 set tabstop=4
 set shiftwidth=4
@@ -1436,6 +1500,7 @@ if s:MyMode == 'mastery'
     highlight CursorColumn ctermbg=235
     highlight ColorColumn  ctermbg=235
     highlight ShowTrailingWhitespace ctermbg=237
+    let g:indentLine_color_term = 237
 
     " LIGHT THEMES
 
@@ -1471,15 +1536,32 @@ endif
 " }}}
 
 
-" allows cursor change in tmux mode {{{
 
-if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+" cursor change in insert mode (from block to i-beam) {{{
+
+" http://stackoverflow.com/questions/6488683/how-do-i-change-the-vim-cursor-in-insert-normal-mode
+
+" escape sequence depends on the terminal ('konsole', 'urxvt')
+let terminal='urxvt'
+
+
+
+if terminal == 'konsole'
+    " (this also resets the terminal font size, which is annoying)
+    if exists('$TMUX')
+        let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+        let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+    else
+        let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+        let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    endif
+elseif terminal == 'urxvt'
+    let &t_SI = "\e[6 q"
+    let &t_EI = "\e[2 q"
 endif
+
+
 
 " }}}
 
@@ -2204,7 +2286,7 @@ nnoremap <silent> <C-G>w :setlocal wrap! <bar> :set wrap? <CR>
 
 " toggle vertical ruler
 nnoremap <silent> <C-G>r :call ToggleColorColumn()<CR>
-nnoremap <silent> <C-G>R :highlight ColorColumn ctermbg=234<CR>
+nnoremap <silent> <C-G>R :highlight ColorColumn ctermbg=233<CR>
 
 " toggle highlight current cursor position
 nnoremap <silent> <C-G>c :let g:cursorposition = 1 - g:cursorposition <CR>i<Esc>
@@ -2218,6 +2300,10 @@ nnoremap <C-G>ss :setlocal spell! <bar> :set spell? <CR>
 nnoremap <C-G>se :setlocal spelllang=en<CR>
 nnoremap <C-G>sd :setlocal spelllang=de<CR>
 nmap <C-G>sg <C-G>sd
+
+" ... but ignore typos
+nnoremap <C-G> <NOP>
+
 
 
 " }}}
@@ -2354,8 +2440,7 @@ nnoremap <Leader>fst /\v\s+$<CR>
 " find matching element (brackets/braces/parentheses)
 nnoremap <Leader>fb %
 " extended find matching element (e.g. HTML-tags with matchit plugin)
-nmap <Leader>fm %
-nmap <Leader>ff %
+nmap <Leader>f<Leader> %
 
 " find all lines with keyword under cursor and ask which one to jump to
 nmap <Leader>fj [I:let nr = input("Which one: ")
@@ -2450,6 +2535,9 @@ vnoremap -u yP
 " nnoremap <somekey> :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[j
 nnoremap K :<c-u>put =repeat(nr2char(10), v:count1)<cr>k
 
+" align next column in duplicated line when i don't use replace mode
+" (very bad " implementation)
+nnoremap -L kWjdwgE
 
 " add space (a few newlines) below
 "nnoremap <Enter> :.+1insert \n\n\n<CR>
@@ -2664,8 +2752,14 @@ nnoremap <silent> <C-h> :wincmd h<CR>
 nnoremap <silent> <C-l> :wincmd l<CR>
 
 " move buffer to a new window
-nnoremap <silent> <Leader><C-l> :vsplit<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
-nnoremap <silent> <Leader><C-j>  :split<CR><C-W>w<CR>:bprevious<CR><C-W>w<CR>
+nnoremap <silent> <Leader><C-l> :vsplit<CR><C-W>w:bprevious<CR><C-W>w<CR>
+nnoremap <silent> <Leader><C-j>  :split<CR><C-W>w:bprevious<CR><C-W>w<CR>
+
+" resize window faster
+nnoremap <silent> <C-w>+ :resize +3<CR>
+nnoremap <silent> <C-w>- :resize -3<CR>
+nnoremap <silent> <C-w>> 5<C-W>>
+nnoremap <silent> <C-w>< 5<C-W><
 
 
 " clear windows (close quickfix and location list) and refresh screen
@@ -2702,6 +2796,11 @@ nnoremap <Leader>it :!tig status <CR> :call GitRedraw()<CR>
 nnoremap <Leader>iT :execute '!cd ' . expand('%:p:h') . '; tig status'<CR>
                                     \ :call GitRedraw()<CR>
 
+" insert google contacts with name and mail addresses (with goobook)
+nnoremap <Leader>igm         :r!goobook-query-mail.sh<space>
+" inoremap <Leader>igm <Esc>diw:r!goobook-query-mail.sh<space><C-R>"<CR><CR>
+
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -2728,7 +2827,7 @@ nnoremap <Leader>QQ :bdelete!<CR>
 nnoremap <Leader>qa :bufdo bdelete<CR>
 
 " quit current window
-nnoremap Q :quit<CR>
+nnoremap Q :quit<CR>:buffer #<CR>
 " quit all windows but current
 nnoremap <Leader>qO :only<CR>
 nnoremap <Leader>QO :only<CR>

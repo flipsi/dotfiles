@@ -1,0 +1,176 @@
+# offlineimap configuration file for mutt.
+# test with 'offlineimap -o --dry-run'
+# (the error "getfolder() asked for a nonexisting folder" can be ignored)
+
+[general]
+
+accounts = mail.de, gmail.com, web.de-pmoers
+
+ui = ttyui
+fsync = False
+pythonfile = ~/.mutt/offlineimapcredentials.py
+
+# prevent race conditions! (according to man page)
+maxsyncaccounts = 1
+maxconnections = 1
+
+## this will locally replicate the IMAP folder structure, instead of the default separator '.' that flattens it.
+## (needs to be in every local repo conf)
+# sep = /
+
+
+
+[mbnames]
+enabled = yes
+filename = ~/.mutt/mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
+
+
+
+###########
+# mail.de #
+###########
+
+[Account mail.de]
+localrepository = mail.de-local
+remoterepository = mail.de-remote
+status_backend = sqlite
+postsynchook = notmuch new
+
+[Repository mail.de-local]
+type = Maildir
+localfolders = ~/.mutt/mail/mail.de
+sep = /
+
+[Repository mail.de-remote]
+type = IMAP
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+auth_mechanisms = LOGIN
+remotehost = imap.mail.de
+remoteuser = "philipp.moers@mail.de"
+remotepasseval = get_password("mail.de")
+# folderfilter = lambda folder: not re.search('(^Spam$|^Archives)', folder)
+folderfilter = lambda folder: folder not in [
+    'Bulk',
+    'Spam',
+    ]
+
+
+
+#############
+# gmail.com #
+#############
+
+[Account gmail.com]
+localrepository = gmail.com-local
+remoterepository = gmail.com-remote
+status_backend = sqlite
+postsynchook = notmuch new
+
+[Repository gmail.com-local]
+type = Maildir
+localfolders = ~/.mutt/mail/gmail.com
+sep = /
+nametrans = lambda folder: {
+    'Archive':      '[Gmail]/All Mail',
+    'Drafts':       '[Gmail]/Drafts',
+    'Sent':         '[Gmail]/Sent Mail',
+    'Starred':      '[Gmail]/Starred',
+    'Trash':        '[Gmail]/Trash',
+    }.get(folder, folder)
+
+[Repository gmail.com-remote]
+type = Gmail
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+auth_mechanisms = LOGIN
+remotehost = imap.gmail.com
+remoteuser = soziflip@gmail.com
+remotepasseval = get_password("gmail.com")
+realdelete = no
+# folderfilter = lambda folder: re.search('(^INBOX$|Sent Mail$|Drafts$|Trash$)', folder)
+# folderfilter = lambda folder: folder in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail']
+folderfilter = lambda folder: folder not in [
+    '[Gmail]/Important',
+    '[Gmail]/Spam',
+    ]
+# folderfilter = lambda folder: ( not re.search('^[Gmail]/Important$',    folder) and
+#                               not re.search('^[Gmail]/Spam$',         folder) )
+# TODO: change Trash so that sync is cool
+nametrans = lambda folder: {
+    '[Gmail]/All Mail':     'Archive',
+    '[Gmail]/Drafts':       'Drafts',
+    '[Gmail]/Sent Mail':    'Sent',
+    '[Gmail]/Starred':      'Starred',
+    '[Gmail]/Trash':        'Trash',
+    }.get(folder, folder)
+
+
+
+#################
+# web.de-pmoers #
+#################
+
+[Account web.de-pmoers]
+localrepository = web.de-pmoers-local
+remoterepository = web.de-pmoers-remote
+status_backend = sqlite
+postsynchook = notmuch new
+
+[Repository web.de-pmoers-local]
+type = Maildir
+localfolders = ~/.mutt/mail/web.de-pmoers
+#sep = /
+
+[Repository web.de-pmoers-remote]
+type = IMAP
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+auth_mechanisms = LOGIN
+remotehost = imap.web.de
+remoteuser = "pmoers"
+remotepasseval = get_password("web.de-pmoers")
+folderfilter = lambda folder: folder in [
+    'INBOX',
+    'Sent',
+    'Drafts',
+    'Trash',
+    ]
+
+
+
+###########################
+# web.de-keinschweinehund #
+###########################
+
+[Account web.de-keinschweinehund]
+localrepository = web.de-keinschweinehund-local
+remoterepository = web.de-keinschweinehund-remote
+status_backend = sqlite
+postsynchook = notmuch new
+
+[Repository web.de-keinschweinehund-local]
+type = Maildir
+localfolders = ~/.mutt/mail/web.de-keinschweinehund
+#sep = /
+
+[Repository web.de-keinschweinehund-remote]
+type = IMAP
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+auth_mechanisms = LOGIN
+remotehost = imap.web.de
+remoteuser = "keinschweinehund"
+remotepasseval = get_password("web.de-keinschweinehund")
+folderfilter = lambda folder: folder in [
+    'INBOX',
+    'Sent',
+    'Drafts',
+    'Trash',
+    ]
+
+

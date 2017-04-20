@@ -18,6 +18,10 @@
 # quickswitch [https://github.com/OliverUv/quickswitch-for-i3]
 # rofi [https://davedavenport.github.io/rofi/]
 # Fontawesome (ttf-font-awesome package)
+# compton
+# unclutter
+# syndaemon
+# numlockx
 
 # my shellscripts [https://github.com/sflip/shellscripts]
 # path to my shellscripts
@@ -83,9 +87,9 @@ exec --no-startup-id "syndaemon -d -k -i 1.2"
 ###############################################################################
 
 # launcher options
-set $DMENU_OPTIONS   -l 5 -fn 'Monospace-9' -i -nb '#1E1E1E' -sb '#00AFAF' -sf '#1E1E1E'
-set $DMENU_OPTIONS_2 -l 5 -fn 'Monospace-9' -i -nb \#1E1E1E -sb \#00AFAF -sf \#1E1E1E
-set $ROFI_OPTIONS -lines 5 -font 'Monospace 9' -width 100 -location 1 \
+set $DMENU_OPTIONS   -l 5 -fn 'Terminus-10' -i -nb '#1E1E1E' -sb '#00AFAF' -sf '#1E1E1E'
+set $DMENU_OPTIONS_2 -l 5 -fn 'Terminus-10' -i -nb \#1E1E1E -sb \#00AFAF -sf \#1E1E1E
+set $ROFI_OPTIONS -lines 5 -font 'Terminus 10' -width 100 -location 1 \
     -color-normal '#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E' \
     -color-urgent '#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E' \
     -color-active '#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E' \
@@ -142,11 +146,11 @@ exec --no-startup-id "feh --bg-scale ~/.i3/wallpaper"
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-# font pango:NotoSans 10
-# font pango:Terminus 10
 # font pango:Monospace 9
+# font pango:Inconsolata 10
+font pango:Terminus 10, Awesome 10
 # font pango:DejaVu Sans Mono 8
-font pango:Monospace 9, Awesome 10
+# font pango:NotoSans 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -227,7 +231,7 @@ bar {
 
 
 # hide/show bar
-bindsym $mod+b bar mode toggle
+bindsym $mod+Shift+b bar mode toggle
 
 set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
 
@@ -244,7 +248,7 @@ bindsym $mod+Escape mode "$mode_system"
 set $mode_system Want to leave?  (e) logout, (u) switch user, (l) lock, (s) suspend, (h) hibernate, (r) reboot, (p) poweroff (o) poweroff smoothly
 mode "$mode_system" {
     bindsym e exit
-    bindsym u exec --no-startup-id "i3exit switch_user"
+    bindsym u exec --no-startup-id "i3exit switch_user"; mode "default"
     bindsym l exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper"; mode "default"
     bindsym s exec --no-startup-id "i3exit suspend"; mode "default"
     bindsym h exec --no-startup-id "i3exit hibernate"; mode "default"
@@ -395,19 +399,21 @@ workspace_layout tabbed
 
 # start a terminal
 bindsym $mod+o mode "$terminal"
-set $terminal Open a terminal: (o) default (k) konsole (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
+set $terminal Open a terminal: (o) default (u) urxvt (k) konsole (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
 mode "$terminal" {
-    bindsym o       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower"; mode "default"
-    bindsym $mod+o  exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower"; mode "default"
-    bindsym k       exec --no-startup-id "konsole --fallback-profile -e tmux -2"; mode "default"
+    bindsym o       exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
+    bindsym $mod+o  exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
+    bindsym u       exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
+    bindsym Shift+u exec --no-startup-id "urxvt"; mode "default"
+    bindsym k       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower -e 'tmux -2 new-session -A -s main'"; mode "default"
     bindsym Shift+k exec --no-startup-id "konsole --fallback-profile"; mode "default"
-    bindsym x       exec --no-startup-id "xfce4-terminal --command='tmux -2'"; mode "default"
+    bindsym x       exec --no-startup-id "xfce4-terminal --command='tmux -2 new-session -A -s main'"; mode "default"
     bindsym Shift+x exec --no-startup-id "xfce4-terminal"; mode "default"
-    bindsym g       exec --no-startup-id "gnome-terminal --hide-menubar --command='tmux -2'"; mode "default"
+    bindsym g       exec --no-startup-id "gnome-terminal --hide-menubar --command='tmux -2 new-session -A -s main'"; mode "default"
     bindsym Shift+g exec --no-startup-id "gnome-terminal --hide-menubar"; mode "default"
-    bindsym r       exec --no-startup-id "cool-retro-term -e tmux -2"; mode "default"
+    bindsym r       exec --no-startup-id "cool-retro-term -e tmux -2 new-session -A -s main"; mode "default"
     bindsym Shift+r exec --no-startup-id "cool-retro-term"; mode "default"
-    bindsym t       exec --no-startup-id "terminology --exec 'tmux -2'"; mode "default"
+    bindsym t       exec --no-startup-id "terminology --exec 'tmux -2 new-session -A -s main'"; mode "default"
     bindsym Shift+t exec --no-startup-id "terminology"; mode "default"
     # cancel
     #bindsym $mod+o mode "default"
@@ -478,7 +484,7 @@ mode "resize" {
 }
 
 # change border
-bindsym $mod+Shift+b border toggle
+bindsym $mod+b border toggle
 
 
 

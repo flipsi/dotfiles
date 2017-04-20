@@ -96,7 +96,10 @@ bind stage  R  ?git reset --hard
 bind status xr ?rm -r %(file)
 
 # amend to last commit
-bind status A ?git commit --amend --no-edit
+bind status A ?git commit --amend
+# amend to older commit
+bind main A ?git amend-old %(commit)
+bind diff A ?git amend-old %(commit)
 
 # stash
 bind status S ?git stash save --include-untracked

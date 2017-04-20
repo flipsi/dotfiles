@@ -36,18 +36,20 @@
       <property name="&lt;Primary&gt;&lt;Alt&gt;x" type="string" value="xkill"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;m" type="string" value="xfce4-taskmanager"/>
       <property name="XF86Calculator" type="string" value="galculator"/>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="xfce4-terminal --drop-down"/>
       <property name="&lt;Super&gt;o" type="string" value="xfce4-terminal --command=&quot;tmux -2&quot;"/>
       <property name="XF86TouchpadToggle" type="string" value="/home/sflip/shellscripts/xinput-toggle-enabled"/>
       <property name="&lt;Super&gt;Left" type="string" value="xbacklight -dec 3"/>
       <property name="&lt;Super&gt;Right" type="string" value="xbacklight -inc 3"/>
       <property name="Print" type="string" value="xfce4-screenshooter -f -d 0 -s /home/sflip/img-screenshots"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;Return" type="string" value="xfce4-appfinder --collapsed"/>
-      <property name="&lt;Super&gt;Return" type="string" value="rofi -show run rofi -show run -font &apos;monospace 10&apos; -bg &apos;#1E1E1E&apos; -fg &apos;#FFFFFF&apos; -hlbg &apos;#AFFF58&apos; -hlfg &apos;#000000&apos; -bg-active &apos;#1E1E1E&apos; -fg-active &apos;#AFFF58&apos; -hlfg-active &apos;#000000&apos; -hlbg-active &apos;#AFFF58&apos;  -kb-remove-word-back &apos;Alt+BackSpace&apos; "/>
       <property name="&lt;Super&gt;Escape" type="string" value="xfce4-session-logout"/>
       <property name="&lt;Super&gt;minus" type="string" value="amixer sset Master 1%-"/>
       <property name="&lt;Super&gt;plus" type="string" value="amixer sset Master 1%+"/>
       <property name="&lt;Primary&gt;&lt;Shift&gt;&lt;Alt&gt;p" type="string" value="xfce4-display-settings"/>
+      <property name="&lt;Super&gt;Return" type="string" value="rofi -combi-modi window,drun -show combi -lines 5 -font &apos;Monospace 10&apos; -width 50 -location 0    -color-normal &apos;#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E&apos;     -color-urgent &apos;#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E&apos;     -color-active &apos;#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E&apos;     -color-window &apos;#1E1E1E,#1E1E1E&apos;     -kb-remove-word-back &apos;Alt+BackSpace&apos;"/>
+      <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="xfce4-terminal --drop-down --command=&quot;tmux -2&quot;"/>
+      <property name="F12" type="string" value="xfce4-terminal --drop-down --command=&quot;tmux -2&quot;"/>
+      <property name="&lt;Super&gt;comma" type="string" value="xfce4-settings-manager"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
@@ -144,18 +146,11 @@
       <property name="Escape" type="string" value="cancel_key"/>
       <property name="&lt;Alt&gt;Delete" type="string" value="del_workspace_key"/>
       <property name="&lt;Shift&gt;&lt;Alt&gt;Page_Down" type="string" value="lower_window_key"/>
-      <property name="&lt;Alt&gt;F6" type="string" value="stick_window_key"/>
-      <property name="&lt;Alt&gt;F9" type="string" value="hide_window_key"/>
       <property name="&lt;Control&gt;&lt;Shift&gt;&lt;Alt&gt;Up" type="string" value="move_window_up_key"/>
       <property name="&lt;Control&gt;&lt;Alt&gt;Down" type="string" value="down_workspace_key"/>
       <property name="&lt;Control&gt;&lt;Shift&gt;&lt;Alt&gt;Left" type="string" value="move_window_left_key"/>
-      <property name="Left" type="string" value="left_key"/>
-      <property name="Down" type="string" value="down_key"/>
       <property name="&lt;Control&gt;&lt;Shift&gt;&lt;Alt&gt;Right" type="string" value="move_window_right_key"/>
-      <property name="Right" type="string" value="right_key"/>
-      <property name="&lt;Super&gt;Tab" type="string" value="switch_window_key"/>
       <property name="&lt;Shift&gt;&lt;Alt&gt;Page_Up" type="string" value="raise_window_key"/>
-      <property name="Up" type="string" value="up_key"/>
       <property name="&lt;Control&gt;&lt;Alt&gt;d" type="string" value="show_desktop_key"/>
       <property name="override" type="bool" value="true"/>
       <property name="&lt;Super&gt;BackSpace" type="string" value="close_window_key"/>
@@ -193,6 +188,14 @@
       <property name="&lt;Super&gt;space" type="string" value="cycle_windows_key"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;space" type="string" value="cycle_reverse_windows_key"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;m" type="string" value="move_window_key"/>
+      <property name="&lt;Super&gt;Tab" type="string" value="switch_window_key"/>
+      <property name="&lt;Shift&gt;&lt;Super&gt;f" type="string" value="fill_window_key"/>
+      <property name="&lt;Super&gt;s" type="string" value="stick_window_key"/>
+      <property name="&lt;Super&gt;z" type="string" value="hide_window_key"/>
+      <property name="k" type="string" value="up_key"/>
+      <property name="j" type="string" value="down_key"/>
+      <property name="h" type="string" value="left_key"/>
+      <property name="l" type="string" value="right_key"/>
     </property>
   </property>
   <property name="providers" type="array">

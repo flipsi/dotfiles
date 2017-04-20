@@ -1,135 +1,209 @@
-# passwort file wurde angelegt als '~/.mutt.credentials' mit dem inhalt
-#       set my_pass_gmail = ""
-#       set my_pass_microsoft = ""
-#       set my_pass_mailde = ""
-#       set my_pass_webde-pmoers = ""
-#       set my_pass_webde-keinschweinehund = ""
-# und verschlüsselt via 'gpg -e -r "Philipp Moers <philipp.moers@mail.de>" ~/.mutt.credentials"
+# Mutt configuration file
+# Author: Philipp Moers <soziflip@gmail.com>
 
-# passwörter einlesen
-source "gpg -dq ~/.mutt.credentials.gpg |"
 
+# mutt is configured to use offlineimap, i.e. a local copy of the account's imap folders.
+
+# USE THE mutt.sh SCRIPT INSTEAD OF THE mutt BINARY!
+
+
+
+# some urls i used to write this mess:
+
+# http://stevelosh.com/blog/2012/10/the-homely-mutt/
+# https://hynek.me/articles/my-mutt-gmail-setup/
+# https://pbrisbin.com/posts/two_accounts_in_mutt/
+# https://pbrisbin.com/posts/mutt_gmail_offlineimap/
+# http://bkanuka.com/articles/offlineimap-mutt/
+# http://marcorucci.tumblr.com/post/34416884082/backup-gmail-with-offlineimap-folders-and-labels
+# http://blog.mafr.de/2012/09/09/mutt-too-many-errors/
+# https://baptiste-wicht.com/posts/2014/07/a-mutt-journey-download-mails-with-offlineimap.html
+# https://atechnologyjobisnoexcuse.com/2010/04/google-contacts-in-mutt-and-vim/
+
+
+
+
+####################
+# general settings #
+####################
 
 # path to mutt files
-set my_muttdir = "~/dotfiles/mutt"
+set my_muttdir = "~/.mutt"
 
 
-# hooks
-account-hook soziflip@imap.googlemail.com 'set imap_user=soziflip imap_pass=$my_pass_gmail'
-account-hook @mail.de 'set imap_user="philipp.moers@mail.de" imap_pass=$my_pass_mailde'
-account-hook pmoers@imap.web.de 'set imap_user=pmoers imap_pass=$my_pass_webde-pmoers'
-account-hook keinschweinehund@imap.web.de 'set imap_user=keinschweinehund imap_pass=$my_pass_webde-keinschweinehund'
-
-folder-hook soziflip@imap.googlemail.com 'source $my_muttdir/accounts/gmail'
-folder-hook philipp.moers@mail.de 'source $my_muttdir/accounts/mailde'
-folder-hook pmoers@imap.web.de 'source $my_muttdir/accounts/webde-pmoers'
-folder-hook keinschweinehund@imap.web.de 'source $my_muttdir/accounts/webde-keinschweinehund'
+set      charset  = "utf-8"
+set send_charset  = "utf-8"
+unset allow_8bit
 
 
-# shortcuts zum wechseln der mailbox
-# macro index <esc>1 "<change-folder>imaps://soziflip@imap.googlemail.com<enter>"
-# macro index <esc>2 "<change-folder>imap://pmoers@imap.web.de<enter>"
-# macro index <esc>3 "<change-folder>imap://keinschweinehund@imap.web.de<enter>"
-# macro index t "c=<tab><tab><tab>"            #drücke t, um in den Ordnern des Postfaches zu navigieren
-# macro index ag 'source $my_muttdir/accounts/gmail'
-# macro index awp 'source $my_muttdir/accounts/webde-pmoers'
-# macro index awk 'source $my_muttdir/accounts/webde-keinschweinehund'
-macro index am '<sync-mailbox><enter-command>source $my_muttdir/accounts/mailde<enter><change-folder>!<enter>'
-macro index ag '<sync-mailbox><enter-command>source $my_muttdir/accounts/gmail<enter><change-folder>!<enter>'
-macro index awp '<sync-mailbox><enter-command>source $my_muttdir/accounts/webde-pmoers<enter><change-folder>!<enter>'
-macro index awk '<sync-mailbox><enter-command>source $my_muttdir/accounts/webde-keinschweinehund<enter><change-folder>!<enter>'
-
-
-#legt fest, welche Mailboxen zu Anfang bekannt sind und beim Start abgerufen werden sollen
-#mailboxes imaps://soziflip@imap.googlemail.com/ #siehe auch http://blog.mafr.de/2012/09/09/mutt-too-many-errors/
-mailboxes imaps://philipp.moers@mail.de
-# mailboxes imap://pmoers@imap.web.de           #sollte mutt nur langsam funktionieren, kannes eventuell hieran liegen
-# mailboxes imap://keinschweinehund@imap.web.de           #sollte mutt nur langsam funktionieren, kannes eventuell hieran liegen
-
-#Beim Start folgendes konto öffnen
-#source $my_muttdir/accounts/gmail
-source $my_muttdir/accounts/mailde
+# never check mail automatically
+set mail_check = 0
 
 
 
-
-set nobeep                                  # don't be noisy
-
-set sendmail="/usr/bin/msmtp"               #Pfad zu dem Programm, das die Mails verschicken soll
-set envelope_from=yes                       #übergibt msmtp automatisch den richtigen Absender
-set edit_hdrs                               #Empfänger u.a. auch im Editor bearbeiten
-set signature ="$my_muttdir/signature"          #Datei, die den Text der Signatur enthält
-set attribution="%f schrieb am %d:"         #Zitatkennzeichnung in unserer Muttersprache :)
+#########################
+# reading mail settings #
+#########################
 
 
-unset allow_8bit                            #u.U. verbesserte Darstellung von Umlauten
-set date_format="%a, %d. %b %H:%M"          #gibt an, wie das Datum formatiert wird
-set index_format="%4C %Z %D %-22.22F (%?l?%4l&%4c?) %s" #Format der Mail-Übersicht
-set folder_format="%2C %8s %d %t %N %f"     #Format des Datei-Browsers
-set pager_index_lines=10                    #Anzahl der angezeigten Mails in der Übersicht
+set sort = threads                                        # sort mails by thread and date
+set sort_browser = reverse-date                           # sort mails by thread and date
+set sort_aux = reverse-last-date-received                 # date-sent | last-date-received | reverse-last-date-received
+
+set date_format = "%a, %d. %b %H:%M"                      # use nice date format
+set index_format = "%4C %Z %D %-22.22F (%?l?%4l&%4c?) %s" # how mail list is displayed
+set folder_format = "%2C %8s %d %t %N %f"                 # how file browser is displayed
+set pager_index_lines = 10                                # number of mails in overview
+set pager_stop                                            # don't open next mail when scrolling
+unset markers                                             # don't indicate wrapped lines
+set smart_wrap                                            # don't wrap within words
+set text_flowed                                           # prevent strange linebreaks in replies
+
+unset move                                                # don't ask on move
+set delete                                                # don't ask on delete
+set delete_untag                                          # untag msgs when deleting
+# unset mark_old                                            # read/unread is enough (disable old)
+# unset confirmappend
 
 
-# HTML Mails anzeigen
-# (siehe mailcap)
+
+# view special content and attachements
 auto_view text/html
+set mailcap_path = $my_muttdir/mailcap
 
 
-#Editor, der zum Verfassen der E-Mail benutzt wird, hier Vim beginnend im Einfügemodus auf der ersten Leerzeile und Zeilenumbruch bei 70 Zeichen
-set editor="vim -c 'startinsert' -c 'set tw=70 et' -c 'set wrap' '+/^$'" 
-#set editor="subl -w" 
+
+###########################
+# composing mail settings #
+###########################
+
+set copy                                                  # keep copy on send
+
+unset reply_self                                          # always reply to others
+set fast_reply                                            # skip recipients and subject dialog when replying
+
+set envelope_from                                         # übergibt msmtp automatisch den richtigen Absender
+set edit_hdrs                                             # edit headers of outgoing messages in vim
+set edit_headers                                          # edit headers of outgoing messages in vim
+
+set signature = "$my_muttdir/signature"                   # append this to every mail
+set attribution = "\n%f wrote on %d:"                       # include quotations like this
 
 
-# adressbuch mit abook
+# write mails in vim
+set editor="vim -c 'startinsert' -c 'set tw=80 et' -c 'set wrap' '+/^$'"
+
+
+# gpg settings
+# set pgp_use_gpg_agent = yes
+
+
+
+
+# address book with abook
 # set alias_file='$my_muttdir/alias'
 # source $my_muttdir/alias
 # set query_command= "abook --mutt-query '%s'" macro index,pager A "<pipe-message>abook --add-email-quiet<return>" "add the sender address to abook"
 
-# adressbuch ohne abook
-source $my_muttdir/alias
+# address book without abook
+# source $my_muttdir/alias
 
-
-# prevent strange linebreaks
-set text_flowed = yes
-
-
-# my keybindings
-source $my_muttdir/keybindings
-
-
-# sort mails by thread and date
-set sort = threads
-set sort_browser = reverse-date
-# set sort_aux=date-sent
-# set sort_aux = last-date-received
-set sort_aux = reverse-last-date-received
+# address book with goobook lookup (google contacts cli)
+set query_command="goobook query %s"
 
 
 
-# Colors
-color attachment brightmagenta default
-color error brightred default # errors yell at you in red
-color hdrdefault yellow default # headers
-color indicator black white # currently selected message
-color markers yellow default # the + for wrapped pager lines
-color message brightred default # informational messages, not mail
-color normal white default # plain text
-color quoted green default # quoted text
-color search brightgreen default # hilite search patterns in the pager
-color signature red default # signature (after "-- ") is red
-color status default yellow # status bar 
-color tilde blue default # ~'s after message body
-color tree red default # thread tree in index menu is magenta
-color signature brightred default
-color underline yellow default
-color header red default ^(From|Subject): # Important headers
-color body red default "(ftp|http)://[^ ]+" # picks up URLs
-color body red default [-a-z_0-9.]+@[-a-z_0-9.]+
-# Coloring quoted text - coloring the first 7 levels:
-color quoted cyan default
-color quoted1 green default
-color quoted2 yellow default
-color quoted3 red default
-color quoted4 cyan default
-color quoted5 yellow default
-color quoted6 red default
-color quoted7 green default
+
+
+#################
+# look and feel #
+#################
+
+
+unset beep                                                # don't be noisy
+unset beep_new                                            # don't be noisy
+
+set quit                                                  # don't ask on quit
+unset wait_key                                            # don't annoy me
+
+set menu_scroll                                           # don't do huge scroll jumps, but scroll line by line
+
+# sidebar
+set sidebar_width = 32
+set sidebar_visible = yes
+# set sidebar_sort = no
+# set sidebar_format = "%B [%N/%S]"
+# set sidebar_delim   = '  │'
+color sidebar_new   color241        color233
+
+
+# source $my_muttdir/colors/old_yellowish
+source $my_muttdir/colors/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc
+# source $my_muttdir/colors/badwolf.muttrc
+
+
+
+###############
+# keybindings #
+###############
+
+source $my_muttdir/keybindings.muttrc
+
+
+
+
+
+####################
+# account settings #
+####################
+
+
+set my_default_account = "mail.de"
+
+
+set header_cache     = "$my_muttdir/cache/headers"
+set message_cachedir = "$my_muttdir/cache/headers"
+
+
+# NOTE: these settings are overwritten in accounts/XXX!
+# set realname         = "Philipp Moers"
+set mbox_type        = Maildir                                      # maildir format (in addition to repositories in offlineimaprc?)
+set folder           = "$my_muttdir/mail"                           # use local folder (offlineimap)
+# set sendmail         = "$my_muttdir/proofread.zsh /usr/bin/msmtp"   # proofread before send
+set sendmail_wait    = 0                                            # don't send mails in background to catch errors
+
+set use_from         = yes                                          # autodetect from
+set envelope_from    = yes                                          # reply with same account
+set reverse_name     = yes                                          # reply with same account
+set reverse_realname = no                                           # still use name from config
+
+
+# set account specific options on folder change
+folder-hook mail.de/*        source $my_muttdir/accounts/mail.de.muttrc
+folder-hook gmail.com/*      source $my_muttdir/accounts/gmail.com.muttrc
+
+# use default account now
+source $my_muttdir/accounts/$my_default_account.muttrc
+
+
+## mailboxes in sidebar (or change folder with c)
+## ...automatically get list of mailboxes
+# set imap_check_subscribed
+## ...instead of the the above, add them from offlineimap generated file
+# source $my_muttdir/mailboxes
+## ...instead of the the above, add them manually (i don't want every synced folder)
+mailboxes \
+    =mail.de/INBOX \
+    =gmail.com/INBOX \
+    =web.de-pmoers/INBOX \
+    =web.de-keinschweinehund/INBOX \
+    =mail.de/Sent \
+    =gmail.com/Sent \
+    =mail.de/Drafts \
+    =gmail.com/Drafts \
+
+
+
+
+
+

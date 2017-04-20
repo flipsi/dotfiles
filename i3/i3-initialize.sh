@@ -58,7 +58,7 @@ function start_musicserver_if_music_is_accessible
                 # if command -v mopidyctl >/dev/null
                     # systemctl start mopidy
                 if command -v mopidy >/dev/null
-                    nohup mopidy >/tmp/mopidy.log &
+                    nohup mopidy --option spotify/password=(gpg --for-your-eyes-only --quiet --no-tty -d $HOME/.config/mopidy/spotify.password.gpg) >/tmp/mopidy.log ^&1 &
                 else
                     mpd
                 end
@@ -88,7 +88,7 @@ end
 
 
 function autostart
-    if not pgrep -x konsole; nohup konsole --hide-menubar --hide-tabbar --profile NicNacPower &; end
+    if not pgrep -x urxvt; nohup urxvt -e tmux -2 new-session -A -s main &; end
     if not pgrep -x firefox; nohup firefox &; end
 end
 
@@ -97,6 +97,7 @@ end
 # setup_screen_resolution
 setup_screen_layout
 setup_musicserver
+tmux-system-sessions
 autostart
 
 

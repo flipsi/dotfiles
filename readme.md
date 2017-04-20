@@ -1,9 +1,7 @@
-sflip's Configuration Files
-===========================
+sflip's dotfiles
+================
 
-These are some configuration files ("dotfiles", "rc files", ...).
-
-I use git to version control and github to sync them. Feel free to have a look!
+These files pretty much constitute my digital home.
 
 
 ## Usage
@@ -12,55 +10,32 @@ First clone this project via
 
     git clone https://github.com/sflip/dotfiles
 
-Then change into the cloned directory (this is important for the script to work!)
+Then, install my configuration (symlinks/packages) with the installation script
 
-    cd ./dotfiles
+    cd dotfiles
+    ./install.sh [OPTIONS] TARGET...
 
-Finally, install my configuration with the installation script
+where a `TARGET` can be one or more items from the list printed with `-l`.
+Note that `-ap` also installs some additional packages, not listed with `-l`.
 
-    ./install.sh [OPTIONS] TARGET
+    OPTIONS:
+    -h | --help             Don't do anything, just print this help message.
+    -l | --list-targets     Don't do anything, just list supported targets.
+    -a | --all              Install almost everything. TARGET will be ignored.
+    -i | --interactive      If configuration exists, ask what to do.
+    -f | --force            If configuration exists, overwrite it.
+    -u | --uninstall        Remove configuration.
+    -p | --package-install  Also (un-)install the corresponding system packages.
 
-where `TARGET` can either be an item from the targets listed below, or `all` to install every target.
 
 ### Example
 
     ./install.sh -i vim
 
 
-## Targets
-
-* `bash` basic stuff for bash, will be sourced additionally
-* `cmus` music player for the terminal
-* `dactyl` vim-addons for mozilla applications (currently only pentadactyl for firefox)
-* `elinks` web browser for the terminal
-* `fish` great interactive shell
-* `ghci` repl for the glorious haskell compiler
-* `git` global git configuration
-* `i3` tiling window manager
-* `konsole` a terminal emulator from kde
-* `lesskey` keybindings and more for less
-* `luakit` lightweight web browser
-* `mpd` music player daemon
-* `mutt` a really nerdy mail client for the terminal
-* `muttator` vim-addon for thunderbird
-* `pentadactyl` vim-addon for firefox
-* `ranger` file manager for the terminal
-* `sublime-text-3` the text editor of my choice
-* `telegram-cli` a command line client for the messenger
-* `tig` ncurses interface for git
-* `tmux` a must have for terminal junkies
-* `turses` twitter client for the terminal
-* `urlview` little tool to open urls, nice with tmux
-* `vim` the best reason not to use emacs
-* `vimpc` mpd client for the terminal
-* `vimperator` vim-addon for firefox
-* `vimus` mpd client for the terminal
-* `vlc` great media player
-* `xfce4` some tools of the xfce desktop environment
-* `xkb` keyboard layout for X
-* `xmonad` a haskell based window manager
-* `zathura` pdf viewer
-
 ## Contact
 
-If you have got any questions or comments, please just shoot me a mail: soziflip@gmail.com
+Bugs? Questions? Comments?
+Do not hesitate
+[create a Github issue](https://github.com/sflip/dotfiles/issues/new) or
+[shoot me a mail](mailto://soziflip@gmail.com)!

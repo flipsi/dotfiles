@@ -5,10 +5,12 @@
     <property name="known_applications" type="array">
       <value type="string" value="Blueman"/>
       <value type="string" value="Dropbox"/>
+      <value type="string" value="Electron"/>
       <value type="string" value="Konsole"/>
       <value type="string" value="nm-applet"/>
       <value type="string" value="notify-send"/>
       <value type="string" value="Spotify"/>
+      <value type="string" value="Thunderbird"/>
       <value type="string" value="xfce4-power-manager"/>
     </property>
   </property>
