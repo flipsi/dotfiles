@@ -37,7 +37,6 @@ footer = "\n"
 [Account mail.de]
 localrepository = mail.de-local
 remoterepository = mail.de-remote
-status_backend = sqlite
 postsynchook = notmuch new
 
 [Repository mail.de-local]
@@ -68,7 +67,6 @@ folderfilter = lambda folder: folder not in [
 [Account gmail.com]
 localrepository = gmail.com-local
 remoterepository = gmail.com-remote
-status_backend = sqlite
 postsynchook = notmuch new
 
 [Repository gmail.com-local]
@@ -118,7 +116,6 @@ nametrans = lambda folder: {
 [Account web.de-pmoers]
 localrepository = web.de-pmoers-local
 remoterepository = web.de-pmoers-remote
-status_backend = sqlite
 postsynchook = notmuch new
 
 [Repository web.de-pmoers-local]
@@ -150,7 +147,6 @@ folderfilter = lambda folder: folder in [
 [Account web.de-keinschweinehund]
 localrepository = web.de-keinschweinehund-local
 remoterepository = web.de-keinschweinehund-remote
-status_backend = sqlite
 postsynchook = notmuch new
 
 [Repository web.de-keinschweinehund-local]
