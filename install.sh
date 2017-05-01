@@ -297,6 +297,7 @@ function create_link_for_target() {
                 grep "$sourcestring" "$HOME/.Xresources" > /dev/null || echo "$sourcestring" >> "$HOME/.Xresources"
                 xrdb -all "$HOME/.Xresources"
             else
+                touch "$HOME/.Xresources"
                 sed -i -- "/^${sourcestring//\//\\/}$/d" "$HOME/.Xresources"
             fi
             ;;
