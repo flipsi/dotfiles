@@ -207,7 +207,7 @@ function create_link_for_target() {
             mkdir -p "$HOME/.mutt/mail"
             mkdir -p "$HOME/.mutt/cache"
             mkdir -p "$HOME/.mutt/credentials"
-            create_link "$PWD/mutt/muttrc" "$HOME/mutt/muttrc"
+            create_link "$PWD/mutt/muttrc" "$HOME/.mutt/muttrc"
             create_link "$PWD/mutt/accounts" "$HOME/.mutt/accounts"
             create_link "$PWD/mutt/keybindings.muttrc" "$HOME/.mutt/keybindings.muttrc"
             create_link "$PWD/mutt/colors" "$HOME/.mutt/colors"
