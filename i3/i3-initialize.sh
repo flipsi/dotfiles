@@ -86,6 +86,24 @@ function setup_musicserver
 end
 
 
+function desktop_session
+    # daemon for theme settings and shit
+    if command -v gnome-session >/dev/null
+        if not pgrep -x gnome-session; nohup gnome-session &; end
+    else if command -v xfsettingsd >/dev/null
+        xfsettingsd --replace --sm-client-disable
+    else if command -v cinnamon-settings-daemon >/dev/null
+        if not pgrep -x cinnamon-settings-daemon; nohup cinnamon-settings-daemon &; end
+    end
+    # power manager takes care of lid closing, standby, display brightness etc.
+    if command -v xfce4-power-manager >/dev/null
+        if not pgrep -x xfce4-power-manager; nohup xfce4-power-manager &; end
+    end
+    # start the gnome network manager, because it automatically connects to eduroam etc.
+    # and kill it after a few seconds when it is not needed anymore
+    #timelimit -t 30 -T 35 nm-applet
+end
+
 
 function autostart
     if not pgrep -x urxvt; nohup urxvt -e tmux -2 new-session -A -s main &; end
@@ -96,6 +114,7 @@ end
 
 setup_screen_resolution
 setup_screen_layout
+desktop_session
 setup_musicserver
 tmux-system-sessions
 autostart

@@ -56,17 +56,6 @@ exec "xset dpms 0 0 0 && xset s noblank && xset s off"
 # composite manager for window overlays, smooth workspace changes, etc.
 exec --no-startup-id "compton -b"
 
-# power manager takes care of lid closing, standby, display brightness etc.
-exec --no-startup-id "xfce4-power-manager"
-
-# daemon for theme settings and shit
-#exec --no-startup-id "cinnamon-settings-daemon"
-exec --no-startup-id "xfsettingsd --sm-client-disable"
-
-# start the gnome network manager, because it automatically connects to eduroam etc.
-# and kill it after a few seconds when it is not needed anymore
-# exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
-
 # hide mouse cursor
 # exec --no-startup-id unclutter -idle 4 -jitter 30
 
