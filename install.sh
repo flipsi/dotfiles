@@ -25,6 +25,7 @@ EOF
 
 
 SUPPORTED_TARGETS=(\
+    autostart \
     bash \
     cmus \
     elinks \
@@ -117,6 +118,17 @@ function create_link() {
 function create_link_for_target() {
     local TARGET="$1"
     case "$TARGET" in
+
+        autostart )
+            mkdir -p "$HOME/bin"
+            mkdir -p "$HOME/.config/autostart"
+            create_link "$PWD/autostart/numlockx.sh" "$HOME/bin/autostart-numlockx.sh"
+            create_link "$PWD/autostart/numlockx.desktop" "$HOME/.config/autostart/numlockx.desktop"
+            create_link "$PWD/autostart/syndaemon.sh" "$HOME/bin/autostart-syndaemon.sh"
+            create_link "$PWD/autostart/syndaemon.desktop" "$HOME/.config/autostart/syndaemon.desktop"
+            create_link "$PWD/autostart/unclutter.sh" "$HOME/bin/autostart-unclutter.sh"
+            create_link "$PWD/autostart/unclutter.desktop" "$HOME/.config/autostart/unclutter.desktop"
+            ;;
 
         bash )
             local sourcestring="source $PWD/bash/bashrc_sflip"

@@ -19,7 +19,6 @@
 # rofi [https://davedavenport.github.io/rofi/]
 # compton
 # unclutter
-# syndaemon
 # numlockx
 
 # my shellscripts [https://github.com/sflip/shellscripts]
@@ -39,6 +38,9 @@ exec "/home/sflip/bin/i3-initialize.sh"
 # set keyboard layout
 exec "setxkbmap de_sflip"
 
+# turn on num block
+# exec --no-startup-id "numlockx"
+
 # turn off pc speaker with annoying beep
 exec "xset -b"
 
@@ -54,9 +56,6 @@ exec "xset dpms 0 0 0 && xset s noblank && xset s off"
 # composite manager for window overlays, smooth workspace changes, etc.
 exec --no-startup-id "compton -b"
 
-# turn on num block
-exec --no-startup-id "numlockx"
-
 # power manager takes care of lid closing, standby, display brightness etc.
 exec --no-startup-id "xfce4-power-manager"
 
@@ -69,7 +68,7 @@ exec --no-startup-id "xfsettingsd --sm-client-disable"
 # exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
 
 # hide mouse cursor
-exec --no-startup-id unclutter -idle 4 -jitter 30
+# exec --no-startup-id unclutter -idle 4 -jitter 30
 
 # disable touchpad at start
 # exec --no-startup-id "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
@@ -77,7 +76,10 @@ exec --no-startup-id unclutter -idle 4 -jitter 30
 # exec --no-startup-id "xinput --set-prop 'FocalTechPS/2 FocalTech FocalTech Touchpad' 'Device Enabled' 0"
 
 # disable touchpad when typing
-exec --no-startup-id "syndaemon -d -k -i 1.2"
+# exec --no-startup-id "syndaemon -d -k -i 1.2"
+
+
+# (ALSO SEE 'autostart' TARGET IN DOTFILES!)
 
 
 
