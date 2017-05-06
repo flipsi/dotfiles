@@ -6,7 +6,7 @@
 # Prepare files with passwords for each account:
 #   vim ~/.mutt/credentials/ACCOUNT
 # Encrypt them with GPG:
-#   gpg -e -r 'Philipp Moers <philipp.moers@mail.de>' ~/.mutt/credentials/ACCOUNT
+#   gpg -e -r 'Philipp Moers <soziflip@gmail.com>' ~/.mutt/credentials/ACCOUNT
 # And get rid of the cleartext password files:
 #   shred ~/.mutt/credentials/ACCOUNT; rm -f ~/.mutt/credentials/ACCOUNT
 

@@ -34,7 +34,7 @@ set $SHELLSCRIPT_PATH /home/sflip/shellscripts
 ###############################################################################
 
 # some setup logic I rather do with a shell script
-exec "/home/sflip/bin/i3-initialize.sh"
+exec "/home/sflip/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"
 
 # set keyboard layout
 exec "setxkbmap de_sflip"
@@ -53,6 +53,9 @@ exec "xset dpms 0 0 0 && xset s noblank && xset s off"
 
 # composite manager for window overlays, smooth workspace changes, etc.
 exec --no-startup-id "compton -b"
+
+# clipboard can have multiple entries
+exec --no-startup-id "clipmenud"
 
 # turn on num block
 exec --no-startup-id "numlockx"
@@ -232,6 +235,29 @@ bar {
 bindsym $mod+Shift+b bar mode toggle
 
 set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
+
+
+
+
+###############################################################################
+###########  HELPER  ##########################################################
+###############################################################################
+
+# do something with the clipboard
+bindsym $mod+c mode "$mode_clipboard"
+set $mode_clipboard Clipboard: (c) choose (p) get password
+mode "$mode_clipboard" {
+    bindsym $mod+c exec --no-startup-id "clipmenu $DMENU_OPTIONS"; mode "default";
+    bindsym      c exec --no-startup-id "clipmenu $DMENU_OPTIONS"; mode "default";
+    bindsym      p exec --no-startup-id "passmenu $DMENU_OPTIONS"; mode "default";
+    # cancel
+    bindsym $mod+Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+
 
 ###############################################################################
 ###########  SYSTEM  ##########################################################
