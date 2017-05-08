@@ -276,11 +276,11 @@ set $mode_system Want to leave?  (e) logout, (u) switch user, (l) lock, (s) susp
 mode "$mode_system" {
     bindsym e exit
     bindsym u exec --no-startup-id "i3exit switch_user"; mode "default"
-    bindsym l exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper"; mode "default"
-    bindsym s exec --no-startup-id "i3exit suspend"; mode "default"
-    bindsym h exec --no-startup-id "i3exit hibernate"; mode "default"
-    bindsym r exec --no-startup-id "i3exit reboot"
-    bindsym p exec --no-startup-id "i3exit shutdown"
+    bindsym l exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper # has to be png"; mode "default"
+    bindsym s exec --no-startup-id "systemctl suspend"; mode "default"
+    bindsym h exec --no-startup-id "systemctl hibernate"; mode "default"
+    bindsym r exec --no-startup-id "systemctl reboot"
+    bindsym p exec --no-startup-id "systemctl poweroff
     bindsym o exec --no-startup-id "/home/sflip/bin/i3-terminate.sh"; exec --no-startup-id "i3-nagbar -t warning -m 'About to Poweroff... ' -b Abort 'pkill -f i3-terminate.sh'"; mode "default"
     # cancel
     bindsym $mod+Escape mode "default"
@@ -402,9 +402,10 @@ assign [class="(?i)firefox"]            Fuchs
 assign [class="(?i)pale moon"]          Web
 assign [class="(?i)thunderbird"]        Mail
 #assign [class="(?i)subl"]               Sublime
-#assign [class="(?i)jetbrains-studio"]   Development
+assign [class="(?i)jetbrains-idea"]     Development
 assign [class="Telegram"]               Telegram
 assign [class="(?i)skype"]              Skype
+assign [class="(?i)slack"]              Slack
 assign [class="(?i)pokerstars"]         Poker
 assign [class="(?i)kaffeine"]           TV
 assign [class="(?i)mediathek"]          TV
