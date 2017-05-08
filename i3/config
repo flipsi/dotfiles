@@ -252,8 +252,8 @@ set $mode_clipboard Clipboard: (c) choose (p) get password
 mode "$mode_clipboard" {
     bindsym $mod+c exec --no-startup-id "clipmenu $DMENU_OPTIONS"; mode "default";
     bindsym      c exec --no-startup-id "clipmenu $DMENU_OPTIONS"; mode "default";
-    bindsym      P exec --no-startup-id "passmenu $DMENU_OPTIONS"; mode "default";
-    bindsym      p exec --no-startup-id "rofi-pass $ROFI_OPTIONS"; mode "default";
+    bindsym Shift+p exec --no-startup-id "passmenu $DMENU_OPTIONS"; mode "default";
+    bindsym       p exec --no-startup-id "rofi-pass $ROFI_OPTIONS"; mode "default";
     # cancel
     bindsym $mod+Escape mode "default"
     bindsym Return mode "default"
