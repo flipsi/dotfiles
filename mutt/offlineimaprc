@@ -4,7 +4,7 @@
 
 [general]
 
-accounts = mail.de, gmail.com, web.de-pmoers
+accounts = onpage.org, mail.de, gmail.com, web.de-pmoers
 
 ui = ttyui
 fsync = False
@@ -27,6 +27,40 @@ header = "mailboxes "
 peritem = "+%(accountname)s/%(foldername)s"
 sep = " "
 footer = "\n"
+
+
+
+##############
+# onpage.org #
+##############
+
+[Account onpage.org]
+localrepository = onpage.org-local
+remoterepository = onpage.org-remote
+postsynchook = notmuch new
+
+[Repository onpage.org-local]
+type = Maildir
+localfolders = ~/.mutt/mail/onpage.org
+nametrans = lambda foldername: re.sub('sent', '[Gmail].Sent Mail',
+    re.sub('draft', '[Gmail].Drafts',
+    re.sub('trash', '[Gmail].Trash',
+    foldername)))
+
+[Repository onpage.org-remote]
+type = IMAP
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+auth_mechanisms = PLAIN, LOGIN
+remotehost = imap.gmail.com
+remoteuser = philipp.moers@onpage.org
+remotepasseval = get_password("onpage.org")
+nametrans = lambda foldername: re.sub('.*Sent.*', 'sent',
+    re.sub('.*Drafts', 'draft',
+    re.sub('.*Trash', 'trash',
+    foldername)))
+folderfilter = lambda folder: re.search('(^INBOX|Sent Mail$|Drafts$|Trash$)', folder)
+# TODO: only INBOX is synced that way. fix it!
 
 
 
