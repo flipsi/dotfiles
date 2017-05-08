@@ -39,7 +39,7 @@ exec "/home/sflip/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"
 exec "setxkbmap de_sflip"
 
 # turn on num block
-# exec --no-startup-id "numlockx"
+exec --no-startup-id "numlockx"
 
 # turn off pc speaker with annoying beep
 exec "xset -b"
@@ -57,10 +57,8 @@ exec "xset dpms 0 0 0 && xset s noblank && xset s off"
 exec --no-startup-id "compton -b"
 
 # clipboard can have multiple entries
-exec --no-startup-id "clipmenud"
+# exec --no-startup-id "clipmenud"
 
-# turn on num block
-exec --no-startup-id "numlockx"
 
 # power manager takes care of lid closing, standby, display brightness etc.
 exec --no-startup-id "xfce4-power-manager"

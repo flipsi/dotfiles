@@ -122,8 +122,12 @@ function create_link_for_target() {
         autostart )
             mkdir -p "$HOME/bin"
             mkdir -p "$HOME/.config/autostart"
+            create_link "$PWD/autostart/clipmenud.sh" "$HOME/bin/autostart-clipmenud.sh"
+            create_link "$PWD/autostart/clipmenud.desktop" "$HOME/.config/autostart/clipmenud.desktop"
             create_link "$PWD/autostart/numlockx.sh" "$HOME/bin/autostart-numlockx.sh"
             create_link "$PWD/autostart/numlockx.desktop" "$HOME/.config/autostart/numlockx.desktop"
+            create_link "$PWD/autostart/setxkbmap.sh" "$HOME/bin/autostart-setxkbmap.sh"
+            create_link "$PWD/autostart/setxkbmap.desktop" "$HOME/.config/autostart/setxkbmap.desktop"
             create_link "$PWD/autostart/syndaemon.sh" "$HOME/bin/autostart-syndaemon.sh"
             create_link "$PWD/autostart/syndaemon.desktop" "$HOME/.config/autostart/syndaemon.desktop"
             create_link "$PWD/autostart/unclutter.sh" "$HOME/bin/autostart-unclutter.sh"
