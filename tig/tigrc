@@ -73,6 +73,7 @@ bind generic <Esc>j move-half-page-down
 bind generic <Esc>k move-half-page-up
 bind generic gg     move-first-line
 bind generic G      move-last-line
+bind main    G      move-last-line
 bind generic m maximize
 
 # search
