@@ -33,7 +33,7 @@ if status --is-login
 
 
     # keychain takes care of ssh-agent and can also do gpg
-    if test $hostname = "asterix" -o $hostname = "obelix"
+    if command -v keychain >/dev/null
         eval (command keychain --eval --quiet ~/.ssh/id_rsa)
     end
 
