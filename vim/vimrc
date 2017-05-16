@@ -2286,7 +2286,17 @@ nnoremap <silent> <C-G>w :setlocal wrap! <bar> :set wrap? <CR>
 
 " toggle vertical ruler
 nnoremap <silent> <C-G>r :call ToggleColorColumn()<CR>
-nnoremap <silent> <C-G>R :highlight ColorColumn ctermbg=233<CR>
+nnoremap <silent> <C-G>R :highlight ColorColumn ctermbg=235
+                  \ <Bar> highlight clear BGdd8844
+                  \ <Bar> highlight clear BG000000
+                  \ <Bar> highlight clear BGffa724
+                  \ <Bar> highlight clear BGaeee00
+                  \ <Bar> highlight clear BG8cffba
+                  \ <Bar> highlight clear BGb88853
+                  \ <Bar> highlight clear BGff9eb8
+                  \ <Bar> highlight clear BGff2c4b
+                  \ <CR>
+
 
 " toggle highlight current cursor position
 nnoremap <silent> <C-G>c :let g:cursorposition = 1 - g:cursorposition <CR>i<Esc>
