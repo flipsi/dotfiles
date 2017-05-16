@@ -461,6 +461,8 @@ vmap iE <Plug>(textobj-entire-i)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " advanced searching {{{
 
+Plugin 'google/vim-searchindex'
+
 Plugin 'haya14busa/incsearch.vim'
 
 " nnoremap ö  <Plug>(incsearch-forward)
@@ -2403,6 +2405,11 @@ if s:MyMode == 'stripped'
     nnoremap ö /
     nnoremap Ö ?
 endif
+
+" number of occurences
+nnoremap <Leader>nö  :%s:<C-R>/::ng<CR>
+" xnoremap <Leader>nö y:%s:<C-R>0::ng<CR>
+xnoremap <Leader>nö y/<C-R>0<CR><C-o>:%s:<C-R>/::ng<CR>
 
 " search in multiple files
 if s:MyMode == 'stripped'
