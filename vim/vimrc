@@ -1114,6 +1114,17 @@ nmap <Leader>af -af
 vmap <Leader>af -af
 
 
+" coercion:
+" - MixedCase (crm),
+" - camelCase (crc),
+" - snake_case (crs),
+" - UPPER_CASE (cru),
+" - dash-case (cr-),
+" - dot.case (cr.),
+" - space case (cr<space>),
+" - Title Case (crt)
+Plugin 'tpope/vim-abolish'
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
