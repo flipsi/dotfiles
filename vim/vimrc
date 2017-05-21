@@ -461,7 +461,7 @@ vmap iE <Plug>(textobj-entire-i)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " advanced searching {{{
 
-Plugin 'google/vim-searchindex'
+" Plugin 'google/vim-searchindex'
 
 Plugin 'haya14busa/incsearch.vim'
 
