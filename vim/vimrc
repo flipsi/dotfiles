@@ -609,7 +609,8 @@ nnoremap <Leader>er :FzfHistory<CR>
 nnoremap <Leader>eb :FzfBuffers<CR>
 
 let g:fzf_tags_command = 'ctags -R -f .tags'
-nnoremap <Leader>et :FzfTags<CR>
+nnoremap <Leader>et  :FzfTags<CR>
+xnoremap <Leader>et y:FzfTags <C-R>"<CR>
 
 " type a search pattern
 nnoremap <Leader>ö :FzfAg<CR>
@@ -639,11 +640,23 @@ nnoremap <Leader>h<Leader>  :FzfHelptags<CR>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" tags (variables, functions, ...) overview {{{
-
-Plugin 'majutsushi/tagbar'
+" tags (variables, functions, ...) {{{
 
 " install 'ctags' package on the system
+
+" generate tag file manually
+" (fails with '–exclude=@.gitignore' when the file does not exist!)
+nnoremap <Leader>eT :!ctags -R -f .tags .<CR>
+
+
+" generate tag file automagically
+Plugin 'craigemery/vim-autotag'
+
+let g:autotagTagsFile=".tags"
+
+
+
+Plugin 'majutsushi/tagbar'
 
 " if I leave tagbar open but unfocused, q closes vim. that not what i want...
 " so i autoclose and autofocus tagbar, which is cooler anyway
@@ -703,7 +716,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {
             \ "mode": "active",
             \ "active_filetypes": ["ruby", "php"],
-            \ "passive_filetypes": ["python", "tex"] }
+            \ "passive_filetypes": ["python", "tex", "scala"] }
 " let g:syntastic_cpp_compiler = 'clang++'
 " let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 let g:syntastic_c_cppcheck_args = ' -std=c++11 -stdlib=libc++'
@@ -1194,7 +1207,10 @@ let g:ycm_semantic_triggers.tex = [
             \ 're!\\(include|input){[^}]*'
             \ ]
 
-nnoremap <Leader>bl :VimtexCompileToggle<CR>
+augroup map_latex
+    au!
+    au FileType latex nnoremap <Leader>bl :VimtexCompileToggle<CR>
+augroup END
 
 
 
@@ -1228,12 +1244,57 @@ endif
 Plugin 'derekwyatt/vim-scala'
 Plugin 'derekwyatt/vim-sbt'
 
-Plugin 'ensime/ensime-sbt', { 'branch': '2.0', 'for': 'scala' }
-Plugin 'ensime/ensime-server', { 'branch': '2.0', 'for': 'scala' }
-Plugin 'ensime/ensime-vim', { 'for': 'scala' }
+" Plugin 'ensime/ensime-sbt', { 'branch': '2.0', 'for': 'scala' }
+" Plugin 'ensime/ensime-server', { 'branch': '2.0', 'for': 'scala' }
+" Plugin 'ensime/ensime-vim', { 'for': 'scala' }
+" augroup map_scala
+    " au!
+    " au FileType scala
+                " \ nnoremap <Leader>9d :EnDeclaration<CR> |
+                " \ nnoremap <Leader>9D :EnDeclarationSplit v<CR> |
+                " \ nnoremap <Leader>9x :EnDocBrowse<CR> |
+                " \ nnoremap <Leader>9t :EnType<CR> |
+                " \ " nnoremap <Leader>9t :EnInspectType<CR> |
+                " \ nnoremap <Leader>9T :EnTypeCheck<CR> |
+                " \ nnoremap <Leader>9ö :EnSearch<Space> |
+                " \ nnoremap <Leader>9r :EnRename<CR> |
+                " \ nnoremap <Leader>9i :EnOrganizeImports<CR> |
+                " \ nnoremap <Leader>9I :EnSugestImport<CR> |
+                " \ nnoremap <Leader>9 <NOP>
+" augroup END
 
-" TODO: integrate into my workflow
+" scala and ctags:
+" https://advancedweb.hu/2017/01/10/vim-scala-ag-ctags/
+" plugin that also creates ctags for libaries (can be slow and huge files):
+" Plugin 'ceedubs/sbt-ctags'
 
+" show sbt errors in the quickfix window
+" Plugin 'dscleaver/sbt-quickfix'
+" (does not work and is not necessary: https://gist.github.com/nkpart/5945278)
+augroup quickfix_scala
+    au!
+    au FileType scala set errorformat=
+                \%E\ %#[error]\ %f:%l:\ %m,%C\ %#[error]\ %p^,%-C%.%#,%Z,
+                \%W\ %#[warn]\ %f:%l:\ %m,%C\ %#[warn]\ %p^,%-C%.%#,%Z,
+                \%-G%.%#
+    au FileType scala let g:jumplist = 'quickfixlist'
+    au FileType scala nnoremap <Leader>bb :call ScalaBuild(1)<CR>
+    au FileType scala nnoremap <Leader>bl :call ScalaBuild(0)<CR>
+    au FileType scala nnoremap <Leader>be :execute "edit " . g:cfile_escaped<CR>
+augroup END
+
+function! ScalaBuild(startSBT)
+    if a:startSBT == 1
+        :!sbt -Dsbt.log.noformat=true test it:test
+    endif
+    " let g:cfile = './target/streams/compile/compileIncremental/\$global/streams/out'
+    " let l:cfile = './target/streams/test/compileIncremental/\$global/streams/out'
+    " let g:cfile = './target/streams/it/compileIncremental/\$global/streams/out'
+    let g:cfile = system('ag -l "\[(error|warn)\]" target/streams/ | head -n 1')
+    let g:cfile_escaped = substitute(g:cfile, "\\$", "\\\\$", "g")
+    execute "cfile " . g:cfile_escaped
+    call ToggleList("Quickfix List", 'c')
+endfunction
 
 
 " }}}
@@ -2139,6 +2200,8 @@ augroup map_enter_help
     au BufReadPost */vim/*/doc/*,*/\.vim/bundle/*doc/*
                 \ nnoremap <buffer> <Enter> <C-]>
 augroup END
+nnoremap <Leader><Down> :tn<CR>
+nnoremap <Leader><Up>   :tp<CR>
 
 
 " visual block mode is more useful than visual mode

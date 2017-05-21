@@ -1,9 +1,12 @@
 # global gitignore file
+
+# backup and swap files
 *.bak
 *.swp
+
+# IDE and editor files etc.
 .tags
-sftp-config.json
-
 .idea
-
-
+.ensime
+.ensime_cache
+sftp-config.json

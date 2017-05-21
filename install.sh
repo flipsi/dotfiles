@@ -44,6 +44,7 @@ SUPPORTED_TARGETS=(\
     ncmpcpp \
     pentadactyl \
     ranger \
+    sbt \
     sublime-text-3 \
     taskwarrior \
     telegram-cli \
@@ -264,6 +265,12 @@ function create_link_for_target() {
             create_link "$PWD/ranger/colorschemes" "$HOME/.config/ranger/colorschemes"
             ;;
 
+        sbt )
+            create_link "$PWD/sbt/sbtconfig" "$HOME/.sbtconfig"
+            mkdir -p "$HOME/.sbt/plugins"
+            create_link "$PWD/sbt/plugins.sbt" "$HOME/.sbt/0.13/plugins/plugins.sbt"
+            ;;
+
         sublime-text-3 )
             mkdir -p "$HOME/.config/sublime-text-3/Packages"
             create_link "$PWD/sublime/User" "$HOME/.config/sublime-text-3/Packages/User"
@@ -322,6 +329,7 @@ function create_link_for_target() {
         vim )
             create_link "$PWD/vim/vimrc" "$HOME/.vimrc"
             create_link "$PWD/vim/gvimrc" "$HOME/.gvimrc"
+            create_link "$PWD/vim/ctags" "$HOME/.ctags"
             mkdir -p "$HOME/.vim"
             mkdir -p "$HOME/.vim/undodir"
             create_link "$PWD/vim/vim/sflipsnippets" "$HOME/.vim/sflipsnippets"
