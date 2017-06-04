@@ -2876,6 +2876,11 @@ nnoremap <silent> <Leader>tl :call ToggleList("Location List", 'l')<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EXTERNAL TOOLS {{{
 
+" copy current filepath (to clipboard and fucking everywhere)
+nnoremap <Leader>iP :let @" = expand("%:~")<CR>
+            \       :let @+ = expand("%:~")<CR>
+            \       :let @* = expand("%:~")<CR>
+
 " search the web with selection
 vnoremap <Leader>isl :<C-w>!$BROWSER 'https://dict.leo.org/ende/?lang=en&search=<C-R>*'<CR><CR>
 vnoremap <Leader>isd :<C-w>!$BROWSER 'https://duckduckgo.com/?q=<C-R>*'<CR><CR>
