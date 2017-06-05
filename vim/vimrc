@@ -1603,6 +1603,8 @@ if s:MyMode == 'mastery'
     highlight CursorColumn ctermbg=235
     highlight ColorColumn  ctermbg=235
     highlight ShowTrailingWhitespace ctermbg=237
+    highlight Error ctermbg=234
+    highlight Search ctermbg=236 ctermfg=white
     let g:indentLine_color_term = 237
 
     " LIGHT THEMES
