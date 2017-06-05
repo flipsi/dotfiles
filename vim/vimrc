@@ -2518,9 +2518,12 @@ endif
 
 " restart search from BOF/EOF
 " (is useful when 'nowrapscan' is set)
-" TODO: delete BOF/EOF from jumplist
-nmap gö ggn
-nmap gÖ GN
+" nmap gö 1Gn
+nmap gÖ G$N
+" nmap gö :keepjumps normal 1G<CR>n " does not work
+" nmap gÖ :keepjumps normal G$<CR>N " does not work
+nmap gö :ijump! 1    /<C-R>/<CR>
+" nmap gÖ :ijump! 9999 /<C-R>/<CR> " does not work
 
 
 " number of occurrences
