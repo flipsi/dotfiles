@@ -37,6 +37,12 @@ if status --is-login
         eval (command keychain --eval --quiet ~/.ssh/id_rsa)
     end
 
+    # abbreviations
+    if not set -q __abbr_init
+      set -gx __abbr_init
+      source $HOME/.config/fish/abbr.fish
+    end
+
 
     # correct typos the fun way
     # https://github.com/nvbn/thefuck
