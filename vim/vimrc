@@ -1499,7 +1499,7 @@ set wildignore+=*.aux,*.bbl,*.blg,*.fdb_latexmk,*.fls,*.loe,*.lof,*.out,*.toc
 
 " scrolling
 " start scrolling when we're 8 lines away from margins
-set scrolloff=8
+set scrolloff=5
 set sidescrolloff=15
 set sidescroll=1
 
@@ -1930,9 +1930,9 @@ command! -bar RangerChooser call RangerChooser()
 " http://vim.wikia.com/wiki/Make_search_results_appear_in_the_middle_of_the_screen
 function! s:SearchMode()
   if !exists('s:searchmode') || s:searchmode == 0
-    echo 'Search next: scroll hit to middle if not on same page'
-    nnoremap <silent> n n:call <SID>MaybeMiddle()<CR>zv
-    nnoremap <silent> N N:call <SID>MaybeMiddle()<CR>zv
+    echo 'Search next: scroll as few times as possible (smart)'
+    nnoremap <silent> n n:call <SID>MaybeScroll()<CR>zv
+    nnoremap <silent> N N:call <SID>MaybeScroll()<CR>zv
     let s:searchmode = 1
   elseif s:searchmode == 1
     echo 'Search next: scroll hit to middle'
@@ -1948,10 +1948,12 @@ function! s:SearchMode()
     let s:searchmode = 0
   endif
 endfunction
-" If cursor is on top or bottom, scroll to middle line.
-function! s:MaybeMiddle()
-  if winline() == &scrolloff + 1 || winline() == winheight(0) - &scrolloff
-    normal! zzzv
+" If cursor is on top, scroll to bottom, if it is on bottom, scroll to top
+function! s:MaybeScroll()
+  if winline() == &scrolloff + 1
+    normal! zb
+  elseif winline() == winheight(0) - &scrolloff
+    normal! zt
   endif
 endfunction
 
