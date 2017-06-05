@@ -252,6 +252,12 @@ Plugin 'vim-scripts/ScrollColors'
 nnoremap <C-G>o :COLORSCROLL<CR>
 
 
+" " highlight different bracket pairs with different colors
+" " DOES NOT WORK
+" Plugin 'kien/rainbow_parentheses.vim'
+" nnoremap <C-G>b :RainbowParenthesesToggle<CR>
+
+
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " distraction free mode {{{
@@ -462,6 +468,7 @@ vmap iE <Plug>(textobj-entire-i)
 " advanced searching {{{
 
 " Plugin 'google/vim-searchindex'
+
 
 Plugin 'haya14busa/incsearch.vim'
 
@@ -1399,6 +1406,19 @@ set fileencoding=utf-8
 " (still have to change buffer or call :checktime)
 set autoread
 
+" automatically save buffer when it loses focus
+if s:MyMode == 'mastery'
+    let g:autosave = 1
+else
+    let g:autosave = 0
+endif
+augroup autosave
+    au!
+    au BufLeave,FocusLost * if g:autosave
+    au BufLeave,FocusLost *     silent! wall
+    au BufLeave,FocusLost * endif
+augroup END
+
 " automatically change working directory to current file
 " set autochdir
 
@@ -1567,9 +1587,11 @@ if s:MyMode == 'mastery'
     " colorscheme seoul256
     " colorscheme Tomorrow-Night
     " colorscheme up
+    " colorscheme woju
 
     " let g:airline_theme='base16_summerfruit'
     " let g:airline_theme='behelit'
+    " let g:airline_theme='distinguished'
     " let g:airline_theme='kalisi'
     " let g:airline_theme='lucius'
     " let g:airline_theme='serene'
@@ -2342,6 +2364,12 @@ nnoremap <Leader>ot8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
 
 " toggle paste mode
 nnoremap <Leader>op :set paste! <bar> :set paste?<CR>
+
+" toggle autosave ('autowrite')
+nnoremap <silent> <Leader>oW :let g:autosave = 1 - g:autosave <CR>
+            \ :echo g:autosave == 1 ?
+            \ 'autosave enabled' :
+            \ 'autosave disabled'<CR>
 
 " toggle search preferences
 nnoremap <Leader>os :set hlsearch! <bar> :set hlsearch?<CR>
