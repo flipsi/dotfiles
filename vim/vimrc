@@ -2259,7 +2259,7 @@ vnoremap v <C-c>
 
 " copy to clipboard / primary selection in visual mode
 vnoremap <C-c>      "*ygv"+y
-nnoremap <C-c> gg0VG"*ygv"+y<C-o><C-o>
+nnoremap <C-c>     V"*ygv"+y
 
 " paste from clipboard / primary selection {{{
 function! PasteFromGUI()
