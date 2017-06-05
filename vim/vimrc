@@ -471,10 +471,21 @@ vmap iE <Plug>(textobj-entire-i)
 
 
 Plugin 'haya14busa/incsearch.vim'
+let g:incsearch#emacs_like_keymap = 1
+let g:incsearch_cli_key_mappings = {
+\   "\<C-n>": {
+\     'key': '<Over>(buffer-complete)',
+\     'noremap': 1
+\   },
+\   "\<C-p>": {
+\     'key': '<Over>(buffer-complete-prev)',
+\     'noremap': 1
+\   },
+\ }
+" TODO: <C-k> and <C-j> to scroll through old searches. use arrows until fix.
 
 " nnoremap ö  <Plug>(incsearch-forward)
 " nnoremap Ö  <Plug>(incsearch-backward)
-
 nnoremap ö :call incsearch#call()<CR>
 nnoremap Ö :call incsearch#call({'command': '?'})<CR>
 
@@ -598,12 +609,20 @@ let g:fzf_command_prefix = 'Fzf'
 " layout [ down / up / left / right ]
 let g:fzf_layout = { 'down': '~20%' }
 
-
 " extra interactive key bindings
+" (scroll with <C-k> and <C-j>
 let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-l': 'vsplit',
-  \ 'ctrl-v': 'vsplit' }
+  \ 'ctrl-v': 'vsplit',
+  \ }
+" \ 'ctrl-k': 'previous-history',
+" \ 'ctrl-j': 'next-history',
+
+" enable per-command history
+" (scroll through history with <C-p> and <C-n>)
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
 
 " open files by name
 nnoremap <Leader>fi :FzfFiles<CR>
@@ -1057,7 +1076,7 @@ autocmd filetype php set filetype=php.html
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" advanced auto completion engine {{{
+" advanced autocompletion engine {{{
 "
 " Remember: YCM is a plugin with a compiled component. If you update YCM using
 " Vundle and the ycm_support_libs library APIs have changed (happens rarely),
@@ -1071,6 +1090,13 @@ let g:ycm_key_invoke_completion = '<Esc>.'
 let g:ycm_key_list_select_completion   = ['<C-N>', '<Down>', '<Tab>', '<Enter>']
 let g:ycm_key_list_previous_completion = ['<C-P>', '<Up>']
 " let g:ycm_show_diagnostics_ui = 0
+
+
+" autocompletion in command mode
+Plugin 'vim-scripts/CmdlineComplete'
+cmap <C-p> <Plug>CmdlineCompleteBackward
+cmap <C-n> <Plug>CmdlineCompleteForward
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -2341,9 +2367,9 @@ autocmd FileType help wincmd L
 cnoremap w!! w !sudo tee % >/dev/null
 "cnoreabbrev w!! w !sudo tee % >/dev/null
 
-" have the up/down search functionality with C-p too
-cnoremap <C-n> <down>
-cnoremap <C-p> <up>
+" have the up/down search functionality without reaching to the arrow keys
+cnoremap <C-j> <down>
+cnoremap <C-k> <up>
 
 
 
