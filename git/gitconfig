@@ -1,13 +1,16 @@
 [user]
-	name = Philipp Moers
+    name = Philipp Moers
     email = soziflip@gmail.com
 
 [core]
     editor = vim
     excludesfile = "~/.gitignore"
 
+[fetch]
+    prune = true
+
 [push]
-	default = simple
+    default = simple
 
 [diff]
     tool = vimdiff
@@ -25,4 +28,3 @@
 [mergetool "sublimerge"]
     prompt = false
     cmd = subl -n -w \"$REMOTE\" \"$BASE\" \"$LOCAL\" \"$MERGED\" --command \"sublimerge_diff_view\"
-
