@@ -1603,6 +1603,7 @@ if s:MyMode == 'mastery'
     highlight CursorColumn ctermbg=235
     highlight ColorColumn  ctermbg=235
     highlight ShowTrailingWhitespace ctermbg=237
+    highlight Todo ctermbg=234
     highlight Error ctermbg=234
     highlight Search ctermbg=236 ctermfg=white
     let g:indentLine_color_term = 237
@@ -2508,21 +2509,26 @@ nnoremap <c-i> <c-i>zz
 " SEARCHING AND FINDING {{{
 
 
-" restart search from BOF/EOF
-" (is useful when 'nowrapscan' is set)
-nmap gö ggn
-nmap gÖ GN
-
 " search in this buffer
 if s:MyMode == 'stripped'
     nnoremap ö /
     nnoremap Ö ?
 endif
 
-" number of occurences
-nnoremap <Leader>nö  :%s:<C-R>/::ng<CR>
-" xnoremap <Leader>nö y:%s:<C-R>0::ng<CR>
-xnoremap <Leader>nö y/<C-R>0<CR><C-o>:%s:<C-R>/::ng<CR>
+
+" restart search from BOF/EOF
+" (is useful when 'nowrapscan' is set)
+" TODO: delete BOF/EOF from jumplist
+nmap gö ggn
+nmap gÖ GN
+
+
+" number of occurrences
+nnoremap <Leader>n* *<C-O>:%s///ngg<CR>
+nnoremap <Leader>nö  :%s:<C-R>/::ngg<CR>
+xnoremap <Leader>nö y:%s:\V<C-R>"::ngg<CR>
+
+
 
 " search in multiple files
 if s:MyMode == 'stripped'
@@ -2578,12 +2584,6 @@ nmap <Leader>fj [I:let nr = input("Which one: ")
 
 " find git merge conflict markers
 nnoremap <Leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
-
-
-" count occurrences
-nnoremap ,* *<C-O>:%s///ggn<CR>
-xnoremap ,* y:%s/\V<C-R>"//ggn<CR>
-
 
 
 " }}}
@@ -2689,14 +2689,14 @@ nnoremap <C-S><C-S> :%s::<Left>
 " in visual mode, use 's' for substitution
 " (to change only a single occurence, use 'c'. by default they are the same)
 
-" substitute occurences of selection in this buffer
+" substitute occurrences of selection in this buffer
 vnoremap <C-S>         yms:%s:\V\C<C-R>":<C-R>":c<Bar>norm!`s
     \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 " the same, but with keyword matching
 vnoremap <Leader><C-S> yms:%s:\V\C\<<C-R>"\>:<C-R>":c<Bar>norm!`s
     \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 
-" substitute occurences of selection in this buffer from current line and below
+" substitute occurrences of selection in this buffer from current line and below
 vnoremap s             yms:,$s:\V\C<C-R>":<C-R>":c<Bar>norm!`s
     \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 " the same, but with keyword matching
