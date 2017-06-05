@@ -115,6 +115,9 @@ bind refs m ?git merge %(branch)
 bind refs b !git checkout -b %(prompt)
 bind refs d ?git branch -d %(branch)
 
+# copy commit id to clipboard
+bind generic y !bash -c "printf %(commit) | xsel -b"
+
 # remote commands
 bind generic f !git fetch
 bind generic p !git pull
