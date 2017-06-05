@@ -359,8 +359,9 @@ nnoremap <Leader>gi   :GitGutterPreviewHunk<CR>
 augroup gitcommit
     autocmd!
     autocmd filetype gitcommit setlocal nonumber norelativenumber
-    autocmd filetype gitcommit setlocal textwidth=50
     autocmd filetype gitcommit setlocal colorcolumn=50
+    autocmd filetype gitcommit setlocal textwidth=50
+    autocmd filetype gitcommit normal gg
 augroup END
 
 
