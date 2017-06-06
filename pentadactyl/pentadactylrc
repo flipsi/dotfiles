@@ -69,7 +69,7 @@ colorscheme sflea
 " KEYBINDINGS
 
 " reload this config file
-noremap <F5> :reloadconfig<CR>
+nmap -builtin <F5> :reloadconfig<CR>
 :command! reloadconfig
         \ -description 'Source the configuration file for pentadactyl'
         \ :source ~/.pentadactylrc
@@ -78,128 +78,128 @@ noremap <F5> :reloadconfig<CR>
 cmap -builtin jk <esc>
 
 " gui options
-noremap <C-g>s :set guioptions-=s<BAR>set guioptions+=s<CR>
-noremap <C-g>S :set guioptions-=s<CR>
-noremap <C-g>t :set guioptions+=T<CR>
-noremap <C-g>T :set guioptions-=T<CR>
+nmap -builtin <C-g>s :set guioptions-=s<BAR>set guioptions+=s<CR>
+nmap -builtin <C-g>S :set guioptions-=s<CR>
+nmap -builtin <C-g>t :set guioptions+=T<CR>
+nmap -builtin <C-g>T :set guioptions-=T<CR>
 
 " follow link in a new tab (instead of current tab with f)
 " ... in foreground
-noremap l ;t
+nmap -builtin l ;t
 " ... in background
-noremap F ;b
+nmap -builtin F ;b
 
 
 " switch tabs
-noremap <A-n> :tabnext<CR>
-noremap <A-p> :tabprevious<CR>
-inoremap <A-n> <Esc>:tabnext<CR>
-inoremap <A-p> <Esc>:tabprevious<CR>
+nmap -builtin <A-n> :tabnext<CR>
+nmap -builtin <A-p> :tabprevious<CR>
+imap -builtin <A-n> <Esc>:tabnext<CR>
+imap -builtin <A-p> <Esc>:tabprevious<CR>
 
 " LRU tab
-"noremap # :buffer! #<CR>
-nnoremap <A-Space> :buffer! #<CR>
-inoremap <A-Space> <Esc>:buffer! #<CR>
+"nmap -builtin # :buffer! #<CR>
+nmap -builtin <A-Space> :buffer! #<CR>
+imap -builtin <A-Space> <Esc>:buffer! #<CR>
 
 " find tab
 "nmap <A-w> :buffer!
-nnoremap # :buffer! 
+nmap -builtin # :buffer! 
 
 " move tab
-noremap <A-S-p> :tabmove -1<CR>
-noremap <A-S-n> :tabmove +1<CR>
+nmap -builtin <A-S-p> :tabmove -1<CR>
+nmap -builtin <A-S-n> :tabmove +1<CR>
 
 " close tab
-nnoremap q :tabclose<CR>
+nmap -builtin q :tabclose<CR>
 
 " append to url like in ranger (so i don't accidently add a bookmark)
-nnoremap A O
+nmap -builtin A O
 
 " misc views ("w"indows)
-nnoremap wa :tabopen about:addons<CR>
-nnoremap wd :downloads<CR>
-nnoremap wh :tab helpall<CR>
-nnoremap wi :history<CR>
-nnoremap wj :jumps<CR>
-nnoremap wp :tabopen about:preferences<CR>
-nnoremap ws :dialog searchengines<CR>
-nnoremap ww :dialog passwords<CR>
+nmap -builtin wa :tabopen about:addons<CR>
+nmap -builtin wd :downloads<CR>
+nmap -builtin wh :tab helpall<CR>
+nmap -builtin wi :history<CR>
+nmap -builtin wj :jumps<CR>
+nmap -builtin wp :tabopen about:preferences<CR>
+nmap -builtin ws :dialog searchengines<CR>
+nmap -builtin ww :dialog passwords<CR>
 
 " zoom everything
-noremap + ZI
-noremap \- ZO
+nmap -builtin + ZI
+nmap -builtin \- ZO
 
 " jump to mark
-noremap ä '
-noremap Ä '
+nmap -builtin ä '
+nmap -builtin Ä '
 
 " duckduckgo advanced search
 " \ to go to first result immediately
-noremap \\ :tabopen \
+nmap -builtin \\ :tabopen \
 " ! to use other search engine (like 'ebay' or 'osm')
-noremap ! :tabopen !
+nmap -builtin ! :tabopen !
 " search google with current duckduckgo search term (badly implemented)
-noremap gs gi<C-A>g! <CR>
+nmap -builtin gs gi<C-A>g! <CR>
 
 " move in history
-noremap <A-u> :back<CR>
-noremap <A-S-u> :forward<CR>
+nmap -builtin <A-u> :back<CR>
+nmap -builtin <A-S-u> :forward<CR>
 
 " scroll
 " (in addition to j/k and space/shift+space)
-nnoremap <A-j> <C-D>
-nnoremap <A-k> <C-U>
+nmap -builtin <A-j> <C-D>
+nmap -builtin <A-k> <C-U>
 
 " movements
-inoremap <A-l> <Right>
-inoremap <A-h> <Left>
-cnoremap <A-l> <Right>
-cnoremap <A-h> <Left>
+imap -builtin <A-l> <Right>
+imap -builtin <A-h> <Left>
+cmap -builtin <A-l> <Right>
+cmap -builtin <A-h> <Left>
 
 " emacs movements
-inoremap <A-f> <C-Right>
-inoremap <A-b> <C-Left>
-cnoremap <A-f> <C-Right>
-cnoremap <A-b> <C-Left>
-inoremap <C-p> <Up>
-inoremap <C-n> <Down>
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
+imap -builtin <A-f> <C-Right>
+imap -builtin <A-b> <C-Left>
+cmap -builtin <A-f> <C-Right>
+cmap -builtin <A-b> <C-Left>
+imap -builtin <C-p> <Up>
+imap -builtin <C-n> <Down>
+cmap -builtin <C-p> <Up>
+cmap -builtin <C-n> <Down>
 
 " delete/kill word
-inoremap <A-BS> <C-W>
-inoremap <A-d> <C-Del>
-cnoremap <A-BS> <C-W>
-cnoremap <A-d> <C-Del>
+imap -builtin <A-BS> <C-W>
+imap -builtin <A-d> <C-Del>
+cmap -builtin <A-BS> <C-W>
+cmap -builtin <A-d> <C-Del>
 
 
 " copy/paste
-inoremap <C-S-v> <C-v><C-v>
-inoremap <C-S-c> <C-v><C-c>
+imap -builtin <C-S-v> <C-v><C-v>
+imap -builtin <C-S-c> <C-v><C-c>
 vmap     <C-S-v> <C-v><C-v>
 vmap     <C-S-c> <C-v><C-c>
 vmap     y <C-v><C-c>
-cnoremap <C-S-v> <C-v><C-v>
-cnoremap <C-S-c> <C-v><C-c>
+cmap -builtin <C-S-v> <C-v><C-v>
+cmap -builtin <C-S-c> <C-v><C-c>
 
 " search
-noremap ö /
+nmap -builtin ö /
 
 
 " Developer Tools (console)
-noremap <C-A-i> <C-S-k>
-noremap <C-A-o> <C-S-i>
-noremap ss :js!<CR>
+nmap -builtin <C-A-i> <C-S-k>
+nmap -builtin <C-A-o> <C-S-i>
+nmap -builtin ss :js!<CR>
 
 
 " NoScript
-"noremap <A-s>p :set noscript-sites!=<A-Tab>
-"noremap <A-s>t :set noscript-tempsites!=<A-Tab>
+"nmap -builtin <A-s>p :set noscript-sites!=<A-Tab>
+"nmap -builtin <A-s>t :set noscript-tempsites!=<A-Tab>
 
 
 " recoloring for white backgrounds
 " TODO: somehow this seems to affect the pentadactyl gui elements rather than the document. FIX THIS
-noremap sr :recolor<CR>
+nmap -builtin sr :recolor<CR>
 :command! recolor
         \ -description 'Replace white colors with some kind of grey'
         \ :javascript <<EOF
