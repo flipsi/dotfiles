@@ -2840,7 +2840,7 @@ nnoremap dN [c
 nnoremap <Leader>bm :make<CR>
 
 " execute shell script
-nnoremap <Leader>bs :!./%<CR>
+nnoremap <Leader>bs :!chmod u+x % && ./%<CR>
 
 " jump to (syntastic) errors
 nnoremap <Leader>sg :lfirst<CR>
