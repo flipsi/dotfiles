@@ -35,7 +35,7 @@
 
 // DEBUGGING
 
-// If there are errors in the file, use the piping method above 
+// If there are errors in the file, use the piping method above
 // in order to get debug output from xkbcomp
 
 
@@ -47,10 +47,17 @@ xkb_symbols "basic" {
     include "de"
 
 
-    // additional escape key on capslock
-    // (most desktop environment have this option too)
 
-    key <AC00>  { [ Escape, Escape, Escape, Escape ] };
+    // change capslock/control/escape
+
+    // original capslock:
+    //replace key <AC00> { [ Escape ] };
+    replace key <AC00> { [ Control_L ] };
+
+    // original control:
+    //replace key <AA00> { [ Caps_Lock ] };
+    replace key <AA00> { [ Escape ] };
+
 
 
     // vim movements with AltGr
@@ -61,10 +68,12 @@ xkb_symbols "basic" {
     key <AC09>  { [ l, L, Right,  VoidSymbol ] };
 
 
-    // pos1 and end
+
+    // pos1 and end easily in home row
 
     key <AC01>  { [ a, A, Home,   ampersand  ] };
     key <AC05>  { [ g, G, End,    VoidSymbol ] };
+
 
 
     // numbers and parentheses/braces/brackets with left hand
