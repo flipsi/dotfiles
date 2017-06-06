@@ -136,6 +136,27 @@ mode "$refresh" {
     bindsym Escape mode "default"
 }
 
+# change keyboard layout
+bindsym $mod+Shift+F6 mode "$change_keyboard_layout"
+set $change_keyboard_layout Keyboard layout: (F1) de (F2) de_sflip (F3) us (F4) neo (F5) dvorak (F6) programmer dvorak
+mode "$change_keyboard_layout" {
+    bindsym $mod+Shift+F6 exec "setxkbmap de_sflip"; mode "default"
+    bindsym F1 exec "setxkbmap de"; mode "default"
+    bindsym F2 exec "setxkbmap de_sflip"; mode "default"
+    bindsym F3 exec "setxkbmap us"; mode "default"
+    bindsym F4 exec "setxkbmap neo"; mode "default"
+    bindsym F5 exec "setxkbmap dvorak"; mode "default"
+    bindsym F6 exec "setxkbmap -layout us -variant dvp"; mode "default"
+    # cancel
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+# show keyboard layout
+set $keyboard_layout_image_source http://programmer-dvorak.appspot.com/img/KB_Programmer_Dvorak.png
+set $keyboard_layout_image /home/sflip/img/KB_Programmer_Dvorak.png
+exec "test -f $keyboard_layout_image || curl $keyboard_layout_image_source > $keyboard_layout_image"
+bindsym $mod+F6 exec --no-startup-id "pkill -fx 'sxiv $keyboard_layout_image' || sxiv $keyboard_layout_image"
+
 
 
 ###############################################################################
