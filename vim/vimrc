@@ -2664,15 +2664,18 @@ nnoremap -rt4 :set noexpandtab <bar> :retab! <bar>
 nnoremap -rt8 :set noexpandtab <bar> :retab! <bar>
             \ :set expandtab tabstop=8 <bar> :retab <CR>
 
-" autoformat with enter in normal buffers
-augroup map_enter_autoformat
-    au!
-    au BufReadPost *
-                \ if ! strchars(&buftype) |
-                \   nnoremap <buffer> <Enter> gqap |
-                \   vnoremap <buffer> <Enter> gq |
-                \ endif
-augroup END
+" yank line with Enter (i do that so often)
+nnoremap <Enter> yy
+
+" " autoformat with enter in normal buffers
+" augroup map_enter_autoformat
+"     au!
+"     au BufReadPost *
+"                 \ if ! strchars(&buftype) |
+"                 \   nnoremap <buffer> <Enter> gqap |
+"                 \   vnoremap <buffer> <Enter> gq |
+"                 \ endif
+" augroup END
 
 " move line up or down
 " (:m closes folds https://groups.google.com/forum/#!topic/vim_dev/QGgbjv4uyZc)
