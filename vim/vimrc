@@ -344,12 +344,12 @@ xmap ih <Plug>GitGutterTextObjectInnerVisual
 xmap ah <Plug>GitGutterTextObjectOuterVisual
 
 nnoremap <C-G>g       :GitGutterToggle<CR>
-nnoremap <Leader>gg gg:GitGutterNextHunk<CR>zv
-nnoremap <Leader>gG  G:GitGutterPrevHunk<CR>zv
-nnoremap <Leader>gn   :GitGutterNextHunk<CR>zv
-nnoremap <Leader>gN   :GitGutterPrevHunk<CR>zv
-nnoremap <Down>       :GitGutterNextHunk<CR>zv
-nnoremap <Up>         :GitGutterPrevHunk<CR>zv
+nnoremap <Leader>gg gg:GitGutterNextHunk<CR>ztzv
+nnoremap <Leader>gG  G:GitGutterPrevHunk<CR>ztzv
+nnoremap <Leader>gn   :GitGutterNextHunk<CR>ztzv
+nnoremap <Leader>gN   :GitGutterPrevHunk<CR>ztzv
+nnoremap <Down>       :GitGutterNextHunk<CR>ztzv
+nnoremap <Up>         :GitGutterPrevHunk<CR>ztzv
 nnoremap <Leader>ga   :GitGutterStageHunk<CR>
 nnoremap <Leader>gu   :GitGutterUndoHunk<CR>
 nnoremap <Leader>gi   :GitGutterPreviewHunk<CR>
