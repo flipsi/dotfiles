@@ -224,9 +224,46 @@ nnoremap <Leader>ps :PluginSearch<Space>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" fix FocusLost and FocusGained events in tmux {{{
+" tmux integration {{{
 
+
+" fix FocusLost and FocusGained events in tmux
 Plugin 'tmux-plugins/vim-tmux-focus-events'
+
+
+" " don't worry about tmux panes and vim splits
+" Plugin 'christoomey/vim-tmux-navigator'
+" let g:tmux_navigator_save_on_switch = 1
+" let g:tmux_navigator_no_mappings = 1
+" nnoremap <silent> {Left-Mapping}     :TmuxNavigateLeft<cr>
+" nnoremap <silent> {Down-Mapping}     :TmuxNavigateDown<cr>
+" nnoremap <silent> {Up-Mapping}       :TmuxNavigateUp<cr>
+" nnoremap <silent> {Right-Mapping}    :TmuxNavigateRight<cr>
+" nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+
+
+" run tmux commands from within vim
+Plugin 'benmills/vimux'
+let g:VimuxHeight = "22"
+let g:VimuxOrientation = "v"
+let VimuxUseNearest = 1
+nnoremap <Leader>vo     :call VimuxRunCommand("git status --short")<CR>
+nnoremap <Leader>vr     :call VimuxRunCommand("ranger")<CR>
+nnoremap <Leader>vl     :VimuxRunLastCommand<CR>
+nnoremap <Leader>vv     :VimuxRunLastCommand<CR>
+nnoremap <Leader>vq     :VimuxCloseRunner<CR>
+nnoremap <Leader>vx     :VimuxCloseRunner<CR>
+nnoremap <Leader>vz     :call VimuxZoomRunner()<CR>
+nnoremap <Leader>vc     :VimuxInterruptRunner<CR>
+nnoremap <Leader>vi     :VimuxInspectRunner<CR>
+nnoremap <Leader>v<C-b> :VimuxInspectRunner<CR>
+" MORE SPECIFIC MAPPING IN OTHER VIMRC SECTIONS (which makes more sense)
+
+
+" autocompletion from words visible in tmux panes
+Plugin 'wellle/tmux-complete.vim'
+" <C-x><C-u> and then <C-u> or <C-n> a few times
+
 
 
 " }}}
@@ -1301,6 +1338,10 @@ endif
 
 
 " Language: Scala
+
+nnoremap <Leader>vst :call VimuxRunCommand("sbt test")<CR>
+nnoremap <Leader>vsi :call VimuxRunCommand("sbt it:test")<CR>
+nnoremap <Leader>vsc :call VimuxRunCommand("sbt console")<CR>
 
 Plugin 'derekwyatt/vim-scala'
 Plugin 'derekwyatt/vim-sbt'
@@ -2852,7 +2893,11 @@ nnoremap dN [c
 nnoremap <Leader>bm :make<CR>
 
 " execute shell script
-nnoremap <Leader>bs :!chmod u+x % && ./%<CR>
+if s:MyMode == 'mastery'
+    nnoremap <Leader>bs :call VimuxRunCommand("bash -c 'chmod u+x " . bufname("%") . " && ./" . bufname("%") . "'")<CR>
+else
+    nnoremap <Leader>bs :!chmod u+x % && ./%<CR>
+endif
 
 " jump to (syntastic) errors
 nnoremap <Leader>sg :lfirst<CR>
