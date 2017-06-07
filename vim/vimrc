@@ -2599,7 +2599,7 @@ endif
 nmap gÖ G$N
 " nmap gö :keepjumps normal 1G<CR>n " does not work
 " nmap gÖ :keepjumps normal G$<CR>N " does not work
-nmap gö :ijump! 1    /<C-R>/<CR>
+nmap <silent> gö :ijump! 1    /<C-R>/<CR>zv
 " nmap gÖ :ijump! 9999 /<C-R>/<CR> " does not work
 
 
