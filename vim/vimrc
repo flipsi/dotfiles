@@ -840,13 +840,19 @@ let g:NERDTrimTrailingWhitespace = 1
 " do not nest by default
 let g:NERDDefaultNesting = 1
 let g:NERDAltDelims_javascript = 0
+" align multiline comments
+let g:NERDDefaultAlign = 'left'
+nmap -c <Leader>c
 " comment text objects and movements
 for mov in ['j', 'k', 'gg', 'G', '(', ')', '{', '}', 'as', 'is', 'ap', 'ip']
     exe "nmap \<Leader\>c" . mov . " V" . mov . "\<Plug\>NERDCommenterInvert"
+    exe "nmap -c"          . mov . " V" . mov . "\<Plug\>NERDCommenterComment"
 endfor
 for i in range(1, 50)
     exe "nmap \<Leader\>c" . i . "j V" . i . "j\<Plug\>NERDCommenterInvert"
     exe "nmap \<Leader\>c" . i . "k V" . i . "k\<Plug\>NERDCommenterInvert"
+    exe "nmap -c"          . i . "j V" . i . "j\<Plug\>NERDCommenterComment"
+    exe "nmap -c"          . i . "k V" . i . "k\<Plug\>NERDCommenterComment"
 endfor
 " duplicate a line and comment out the first one
 nmap <Leader>cd yy<Leader>ccp
