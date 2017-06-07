@@ -1445,7 +1445,7 @@ endif
 augroup autosave
     au!
     au BufLeave,FocusLost * if g:autosave
-    au BufLeave,FocusLost *     silent! wall
+    au BufLeave,FocusLost *     silent! update
     au BufLeave,FocusLost * endif
 augroup END
 
