@@ -3019,6 +3019,7 @@ nnoremap <Leader><C-D><C-D> :quitall!<CR>
 
 " ... but ignore typos
 nnoremap <Leader>q <NOP>
+nnoremap <Leader>Q <NOP>
 
 
 
