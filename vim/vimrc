@@ -654,6 +654,9 @@ nnoremap <Leader>:          :FzfHistory:<CR>
 nnoremap <Leader>/          :FzfHistory/<CR>
 nnoremap <Leader>h<Leader>  :FzfHelptags<CR>
 
+" autocomplete lines like a boss, even across multiple files
+imap <C-x><C-l> <plug>(fzf-complete-line)
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
