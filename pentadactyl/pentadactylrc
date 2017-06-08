@@ -74,9 +74,6 @@ nmap -builtin <F5> :reloadconfig<CR>
         \ -description 'Source the configuration file for pentadactyl'
         \ :source ~/.pentadactylrc
 
-" jk as additional escape
-cmap -builtin jk <esc>
-
 " gui options
 nmap -builtin <C-g>s :set guioptions-=s<BAR>set guioptions+=s<CR>
 nmap -builtin <C-g>S :set guioptions-=s<CR>
