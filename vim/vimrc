@@ -895,7 +895,7 @@ for i in range(1, 50)
     exe "nmap -c"          . i . "k V" . i . "k\<Plug\>NERDCommenterComment"
 endfor
 " duplicate a line and comment out the first one
-nmap <Leader>cd yy<Leader>ccp
+nmap <Leader>cd <Leader>cyp
 " do not comment on new lines (except when already in insert mode)
 nnoremap o o<Esc>S
 nnoremap O O<Esc>S
