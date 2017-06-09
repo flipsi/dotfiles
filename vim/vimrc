@@ -2663,6 +2663,10 @@ silent call <SID>SearchMode()
 nnoremap <silent> <Leader>on :call <SID>SearchMode()<CR>
 
 
+" 'goto definition' with viewport adjustments
+nmap gd gdztzv
+nmap gD gDztzv
+
 
 " search across newlines
 nnoremap <Leader>fn :SearchMultiLine<Space>
