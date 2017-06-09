@@ -244,19 +244,19 @@ Plugin 'tmux-plugins/vim-tmux-focus-events'
 
 " run tmux commands from within vim
 Plugin 'benmills/vimux'
-let g:VimuxHeight = "22"
+let g:VimuxHeight = "24"
 let g:VimuxOrientation = "v"
 let VimuxUseNearest = 1
-nnoremap <Leader>vo     :call VimuxRunCommand("git status --short")<CR>
-nnoremap <Leader>vr     :call VimuxRunCommand("ranger")<CR>
-nnoremap <Leader>vl     :VimuxRunLastCommand<CR>
-nnoremap <Leader>vv     :VimuxRunLastCommand<CR>
-nnoremap <Leader>vq     :VimuxCloseRunner<CR>
-nnoremap <Leader>vx     :VimuxCloseRunner<CR>
-nnoremap <Leader>vz     :call VimuxZoomRunner()<CR>
-nnoremap <Leader>vc     :VimuxInterruptRunner<CR>
-nnoremap <Leader>vi     :VimuxInspectRunner<CR>
-nnoremap <Leader>v<C-b> :VimuxInspectRunner<CR>
+nnoremap <Leader>bo         :VimuxRunCommand ""<Left>
+nnoremap <Leader>bb         :VimuxRunLastCommand<CR>
+nnoremap <Leader>bl         :VimuxRunLastCommand<CR>
+nnoremap <Leader>bq         :VimuxCloseRunner<CR>
+nnoremap <Leader>bx         :VimuxCloseRunner<CR>
+nnoremap <Leader>bz         :call VimuxZoomRunner()<CR>
+nnoremap <Leader>bc         :VimuxInterruptRunner<CR>
+nnoremap <Leader>b<C-c>     :VimuxInterruptRunner<CR>
+nnoremap <Leader>b<C-b>     :VimuxInspectRunner<CR>
+nnoremap <Leader><C-b><C-b> :VimuxInspectRunner<CR>
 " MORE SPECIFIC MAPPING IN OTHER VIMRC SECTIONS (which makes more sense)
 
 
@@ -995,8 +995,15 @@ Plugin 'AndrewRadev/linediff.vim'
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" better quickfix window {{{
+" run make or jobs asynchronously {{{
 
+Plugin 'tpope/vim-dispatch'
+
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" better quickfix window {{{
 
 " edit quickfix list (make changes directly after global search or linting)
 Plugin 'Olical/vim-enmasse'
@@ -1353,10 +1360,6 @@ endif
 
 " Language: Scala
 
-nnoremap <Leader>vst :call VimuxRunCommand("sbt test")<CR>
-nnoremap <Leader>vsi :call VimuxRunCommand("sbt it:test")<CR>
-nnoremap <Leader>vsc :call VimuxRunCommand("sbt console")<CR>
-
 Plugin 'derekwyatt/vim-scala'
 Plugin 'derekwyatt/vim-sbt'
 
@@ -1387,30 +1390,43 @@ Plugin 'derekwyatt/vim-sbt'
 " show sbt errors in the quickfix window
 " Plugin 'dscleaver/sbt-quickfix'
 " (does not work and is not necessary: https://gist.github.com/nkpart/5945278)
-augroup quickfix_scala
+
+augroup scala_on_read
     au!
     au FileType scala set errorformat=
                 \%E\ %#[error]\ %f:%l:\ %m,%C\ %#[error]\ %p^,%-C%.%#,%Z,
                 \%W\ %#[warn]\ %f:%l:\ %m,%C\ %#[warn]\ %p^,%-C%.%#,%Z,
                 \%-G%.%#
     au FileType scala let g:jumplist = 'quickfixlist'
-    au FileType scala nnoremap <Leader>bb :call ScalaBuild(1)<CR>
-    au FileType scala nnoremap <Leader>bl :call ScalaBuild(0)<CR>
-    au FileType scala nnoremap <Leader>be :execute "edit " . g:cfile_escaped<CR>
+    au FileType scala nnoremap <Leader>bt :call VimuxRunCommand("sbt test")<CR>
+    au FileType scala nnoremap <Leader>bi :call VimuxRunCommand("sbt it:test")<CR>
+    au FileType scala nnoremap <Leader>bc :call VimuxRunCommand("sbt console")<CR>
+    au FileType scala nnoremap <Leader>bd :call ScalaBuild(1)<CR>
+    au FileType scala nnoremap <Leader>be :call ScalaBuild(0)<CR>
+    au FileType scala nnoremap <Leader>bE :execute "edit " . g:cfile_escaped<CR>
 augroup END
 
 function! ScalaBuild(startSBT)
     if a:startSBT == 1
-        :!sbt -Dsbt.log.noformat=true test it:test
+        :!sbt -Dsbt.log.noformat=true compile 2>&1 >/tmp/sbt.out
     endif
     " let g:cfile = './target/streams/compile/compileIncremental/\$global/streams/out'
     " let l:cfile = './target/streams/test/compileIncremental/\$global/streams/out'
     " let g:cfile = './target/streams/it/compileIncremental/\$global/streams/out'
-    let g:cfile = system('ag -l "\[(error|warn)\]" target/streams/ | head -n 1')
-    let g:cfile_escaped = substitute(g:cfile, "\\$", "\\\\$", "g")
+    " let g:cfile = './target/streams/compile/parse/$global/streams/out'
+    " let g:cfile = system('ag -l "\[(error|warn)\]" target/streams/ | head -n 1')
+    " let g:cfile_escaped = substitute(g:cfile, "\\$", "\\\\$", "g")
+    let g:cfile_escaped = '/tmp/sbt.out'
     execute "cfile " . g:cfile_escaped
     call ToggleList("Quickfix List", 'c')
 endfunction
+
+" augroup scala_on_write
+    " au!
+    " au BufWritePost *.scala Dispatch! sbt -Dsbt.log.noformat=true parse
+" augroup END
+
+
 
 
 " }}}
@@ -3029,7 +3045,8 @@ nnoremap <Leader>ib :!bash<CR><CR>
 nnoremap <Leader>iB :execute '!cd ' . expand('%:p:h') . '; bash'<CR><CR>
 
 " file manager in working dir or dir of current file
-"nnoremap <Leader>iR :call SetCwdToFilePath() <bar> :!ranger<CR>
+" nnoremap <Leader>ir :call VimuxRunCommand("ranger")<CR>
+" nnoremap <Leader>ir :exe "!ranger " . shellescape(expand("%p:h"))
 nnoremap <Leader>ir :RangerChooser<CR>
 nnoremap <Leader>iR :call RangerChooser(expand('%:p:h'))<CR>
 
