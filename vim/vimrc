@@ -2739,7 +2739,8 @@ nnoremap -rt8 :set noexpandtab <bar> :retab! <bar>
             \ :set expandtab tabstop=8 <bar> :retab <CR>
 
 " yank line with Enter (i do that so often)
-nnoremap <Enter> yy
+" CANNOT MAP THIS BECAUSE OF SPECIAL PLUGIN BUFFERS AND STUFF
+" nnoremap <Enter> yy
 
 " " autoformat with enter in normal buffers
 " augroup map_enter_autoformat
