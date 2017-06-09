@@ -1981,15 +1981,15 @@ endfunction
 
 
 " ranger as a file chooser {{{
-function! RangerChooser()
+function! RangerChooser(starting_dir)
     let temp = tempname()
     " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
     " with ranger 1.4.2 through 1.5.0 instead.
     "exec 'silent !ranger --choosefile=' . shellescape(temp)
     if has("gui_running")
-        exec 'silent !xterm -e ranger --choosefiles=' . shellescape(temp)
+        exec 'silent !xterm -e ranger --choosefiles=' . shellescape(temp) . ' ' . a:starting_dir
     else
-        exec 'silent !ranger --choosefiles=' . shellescape(temp)
+        exec 'silent !ranger --choosefiles=' . shellescape(temp) . ' ' . a:starting_dir
     endif
     if !filereadable(temp)
         redraw!
@@ -2010,7 +2010,7 @@ function! RangerChooser()
     endfor
     redraw!
 endfunction
-command! -bar RangerChooser call RangerChooser()
+command! -bar RangerChooser call RangerChooser(getcwd())
 " }}}
 
 
@@ -3025,7 +3025,7 @@ nnoremap <Leader>iB :execute '!cd ' . expand('%:p:h') . '; bash'<CR><CR>
 " file manager in working dir or dir of current file
 "nnoremap <Leader>iR :call SetCwdToFilePath() <bar> :!ranger<CR>
 nnoremap <Leader>ir :RangerChooser<CR>
-nnoremap <Leader>iR :call SetCwdToFilePath() <bar> RangerChooser<CR>
+nnoremap <Leader>iR :call RangerChooser(expand('%:p:h'))<CR>
 
 " git interface in working dir or dir of current file
 nnoremap <Leader>it :!tig status <CR> :call GitRedraw()<CR>
