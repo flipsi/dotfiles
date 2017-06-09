@@ -3052,8 +3052,8 @@ nnoremap <Leader>iB :execute '!cd ' . expand('%:p:h') . '; bash'<CR><CR>
 " file manager in working dir or dir of current file
 " nnoremap <Leader>ir :call VimuxRunCommand("ranger")<CR>
 " nnoremap <Leader>ir :exe "!ranger " . shellescape(expand("%p:h"))
-nnoremap <Leader>ir :RangerChooser<CR>
-nnoremap <Leader>iR :call RangerChooser(expand('%:p:h'))<CR>
+nnoremap <Leader>ir :call RangerChooser(expand('%:p:h'))<CR>
+nnoremap <Leader>iR :RangerChooser<CR>
 
 " git interface in working dir or dir of current file
 nnoremap <Leader>it :!tig status <CR> :call GitRedraw()<CR>
