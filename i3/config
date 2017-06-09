@@ -154,7 +154,7 @@ mode "$change_keyboard_layout" {
 # show keyboard layout
 set $keyboard_layout_image_source http://programmer-dvorak.appspot.com/img/KB_Programmer_Dvorak.png
 set $keyboard_layout_image /home/sflip/img/KB_Programmer_Dvorak.png
-exec "test -f $keyboard_layout_image || curl $keyboard_layout_image_source > $keyboard_layout_image"
+exec "test -f $keyboard_layout_image || $( sleep 20 && curl $keyboard_layout_image_source > $keyboard_layout_image )"
 bindsym $mod+F6 exec --no-startup-id "pkill -fx 'sxiv $keyboard_layout_image' || sxiv $keyboard_layout_image"
 
 
