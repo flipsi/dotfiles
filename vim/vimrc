@@ -910,12 +910,23 @@ inoremap <silent> <Esc><Enter> <Esc>A;<Esc>^
 
 " add/change/delete quotes/braces/... and more
 Plugin 'tpope/vim-surround'
+
 " surround consistently in both modes and more comfortably on german keyboard
 nmap -s ys
 vmap -s S
-" surround with quotes quickly
+
+" surround with quotes/parentheses/brackets quickly
 vmap -q S'
+vmap -Q S"
 nmap -q ysiw'
+nmap -Q ysiw"
+vmap -b S)
+vmap -B S}
+nmap -b ysiw)
+nmap -B ysiw}
+nmap dq ds'
+nmap dQ ds"
+
 " toggle quotes {{{
 function! ToggleQuotesWithVimSurround()
     let pos_cursor = getpos(".")[2]
