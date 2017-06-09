@@ -2383,6 +2383,9 @@ endfunction
 " }}}
 noremap <silent> <C-v><C-v> :call PasteFromGUI()<CR>
 imap <C-v><C-v> <C-o><C-v><C-v>
+noremap <silent> <C-v>j o<Esc>:call PasteFromGUI()<CR>
+noremap <silent> <C-v>k O<Esc>:call PasteFromGUI()<CR>
+
 
 
 " macro ('complex repeat') helper mappings
