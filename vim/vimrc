@@ -506,6 +506,7 @@ vmap iE <Plug>(textobj-entire-i)
 " advanced searching {{{
 
 " Plugin 'google/vim-searchindex'
+" Plugin 'osyo-manga/vim-anzu'
 
 
 Plugin 'haya14busa/incsearch.vim'
@@ -538,12 +539,14 @@ let g:ag_prg="ag --vimgrep --smart-case"
 let g:ag_working_path_mode="r"
 
 " type a search pattern
-nnoremap <Leader>Ö :Ag<Space>""<Left>
+nnoremap <Leader>Ö :let g:jumplist = 'quickfixlist'<CR>
+                 \ :Ag<Space>""<Left>
 " search for word under cursor
 " nnoremap <Leader>+ :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 " nmap     <Leader>* <Leader>+
 " search for visual selection
-xnoremap <Leader>Ö y:<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
+xnoremap <Leader>Ö y:let g:jumplist = 'quickfixlist'<CR>
+                 \ :<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
 " xmap     <Leader>* <Leader>ö
 " xmap     <Leader>+ <Leader>ö
 "nnoremap  K :<c-u>Ag <c-r>=shellescape(expand("<cword>"),1)<cr>:copen<cr>
