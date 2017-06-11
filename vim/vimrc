@@ -1398,8 +1398,8 @@ augroup scala_on_read
                 \%W\ %#[warn]\ %f:%l:\ %m,%C\ %#[warn]\ %p^,%-C%.%#,%Z,
                 \%-G%.%#
     au FileType scala let g:jumplist = 'quickfixlist'
-    au FileType scala nnoremap <Leader>bt :call VimuxRunCommand("sbt test")<CR>
-    au FileType scala nnoremap <Leader>bi :call VimuxRunCommand("sbt it:test")<CR>
+    au FileType scala nnoremap <Leader>bt :call VimuxRunCommand("sbt test \| tee /tmp/sbt.out")<CR>
+    au FileType scala nnoremap <Leader>bi :call VimuxRunCommand("sbt it:test \| tee /tmp/sbt.out")<CR>
     au FileType scala nnoremap <Leader>bc :call VimuxRunCommand("sbt console")<CR>
     au FileType scala nnoremap <Leader>bd :call ScalaBuild(1)<CR>
     au FileType scala nnoremap <Leader>be :call ScalaBuild(0)<CR>
