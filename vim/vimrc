@@ -1418,14 +1418,28 @@ Plugin 'derekwyatt/vim-sbt'
 
 augroup scala_on_read
     au!
-    au FileType scala set errorformat=
+    au FileType scala call SetupScala()
+augroup END
+function! SetupScala()
+    set errorformat=
                 \%E\ %#[error]\ %f:%l:\ %m,%C\ %#[error]\ %p^,%-C%.%#,%Z,
                 \%W\ %#[warn]\ %f:%l:\ %m,%C\ %#[warn]\ %p^,%-C%.%#,%Z,
                 \%-G%.%#
-    au FileType scala nnoremap <Leader>bt :call MakeWithVimux("sbt test")<CR>
-    au FileType scala nnoremap <Leader>bi :call MakeWithVimux("sbt it:test")<CR>
-    au FileType scala nnoremap <Leader>bc :call VimuxRunCommand("sbt console")<CR>
-augroup END
+    " the lines above work for compiler errors
+    " the lines below are for testing errors but do not work yet
+    " (for example because the file path is not absolute)
+    " (also, I'm a noob with the efm matching syntax)
+                " \%E\ \%#[info]%.%#was\ not\ equal\ to%.%#(%f:%l),%Z,
+                " \%E\ \%#[info]\ %.%#\ was\ not\ equal\ to\ %.%#\ (%f:%l),%Z,
+                " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
+    match ErrorMsg '\*\*\* FAILED \*\*\*'
+    nnoremap <Leader>bC :call MakeWithVimux("sbt compile")<CR>
+    nnoremap <Leader>bt :call MakeWithVimux("sbt test")<CR>
+    nnoremap <Leader>bi :call MakeWithVimux("sbt it:test")<CR>
+    nnoremap <Leader>bc :call VimuxRunCommand("sbt console")<CR>
+    nnoremap <Leader>bE :call MakeWithVimuxOpenErrors('buffer')<CR>gg/\*\*\* FAILED \*\*\*<CR>
+    nnoremap <Leader>fe /\*\*\* FAILED \*\*\*<CR>
+endfunction
 
 " augroup scala_on_write
     " au!
@@ -2707,6 +2721,10 @@ nmap <Leader>fj [I:let nr = input("Which one: ")
 
 " find git merge conflict markers
 nnoremap <Leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
+
+" find errors and stuff
+nnoremap <Leader>fe /\v(error\|fail)<CR>
+
 
 
 " }}}
