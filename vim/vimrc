@@ -257,7 +257,28 @@ nnoremap <Leader>bc         :VimuxInterruptRunner<CR>
 nnoremap <Leader>b<C-c>     :VimuxInterruptRunner<CR>
 nnoremap <Leader>b<C-b>     :VimuxInspectRunner<CR>
 nnoremap <Leader><C-b><C-b> :VimuxInspectRunner<CR>
+nnoremap <Leader>be         :call MakeWithVimuxOpenErrors('quickfix')<CR>
+nnoremap <Leader>bE         :call MakeWithVimuxOpenErrors('buffer')<CR>
 " MORE SPECIFIC MAPPING IN OTHER VIMRC SECTIONS (which makes more sense)
+
+" build/debug with vimux
+" param command: the shell command to execute
+let g:makewithvimux_outfile = '/tmp/vim.make.out'
+function! MakeWithVimux(command)
+    call VimuxRunCommand(a:command . ' | tee ' . g:makewithvimux_outfile)
+endfunction
+function! MakeWithVimuxOpenErrors(where)
+    exec 'cfile ' . g:makewithvimux_outfile
+    if a:where == 'quickfix'
+        let g:jumplist = 'quickfixlist'
+        call ToggleList("Quickfix List", 'c')
+    elseif a:where == 'buffer'
+        execute "edit " . g:makewithvimux_outfile
+    endif
+endfunction
+
+
+
 
 
 " autocompletion from words visible in tmux panes
@@ -1391,35 +1412,20 @@ Plugin 'derekwyatt/vim-sbt'
 " Plugin 'dscleaver/sbt-quickfix'
 " (does not work and is not necessary: https://gist.github.com/nkpart/5945278)
 
+" :!sbt -Dsbt.log.noformat=true compile 2>&1 >/tmp/sbt.out
+" let g:cfile = system('ag -l "\[(error|warn)\]" target/streams/ | head -n 1')
+" let g:cfile_escaped = substitute(g:cfile, "\\$", "\\\\$", "g")
+
 augroup scala_on_read
     au!
     au FileType scala set errorformat=
                 \%E\ %#[error]\ %f:%l:\ %m,%C\ %#[error]\ %p^,%-C%.%#,%Z,
                 \%W\ %#[warn]\ %f:%l:\ %m,%C\ %#[warn]\ %p^,%-C%.%#,%Z,
                 \%-G%.%#
-    au FileType scala let g:jumplist = 'quickfixlist'
-    au FileType scala nnoremap <Leader>bt :call VimuxRunCommand("sbt test \| tee /tmp/sbt.out")<CR>
-    au FileType scala nnoremap <Leader>bi :call VimuxRunCommand("sbt it:test \| tee /tmp/sbt.out")<CR>
+    au FileType scala nnoremap <Leader>bt :call MakeWithVimux("sbt test")<CR>
+    au FileType scala nnoremap <Leader>bi :call MakeWithVimux("sbt it:test")<CR>
     au FileType scala nnoremap <Leader>bc :call VimuxRunCommand("sbt console")<CR>
-    au FileType scala nnoremap <Leader>bd :call ScalaBuild(1)<CR>
-    au FileType scala nnoremap <Leader>be :call ScalaBuild(0)<CR>
-    au FileType scala nnoremap <Leader>bE :execute "edit " . g:cfile_escaped<CR>
 augroup END
-
-function! ScalaBuild(startSBT)
-    if a:startSBT == 1
-        :!sbt -Dsbt.log.noformat=true compile 2>&1 >/tmp/sbt.out
-    endif
-    " let g:cfile = './target/streams/compile/compileIncremental/\$global/streams/out'
-    " let l:cfile = './target/streams/test/compileIncremental/\$global/streams/out'
-    " let g:cfile = './target/streams/it/compileIncremental/\$global/streams/out'
-    " let g:cfile = './target/streams/compile/parse/$global/streams/out'
-    " let g:cfile = system('ag -l "\[(error|warn)\]" target/streams/ | head -n 1')
-    " let g:cfile_escaped = substitute(g:cfile, "\\$", "\\\\$", "g")
-    let g:cfile_escaped = '/tmp/sbt.out'
-    execute "cfile " . g:cfile_escaped
-    call ToggleList("Quickfix List", 'c')
-endfunction
 
 " augroup scala_on_write
     " au!
