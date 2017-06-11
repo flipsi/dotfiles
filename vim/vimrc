@@ -1433,9 +1433,11 @@ function! SetupScala()
                 " \%E\ \%#[info]\ %.%#\ was\ not\ equal\ to\ %.%#\ (%f:%l),%Z,
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
-    nnoremap <Leader>bC :call MakeWithVimux("sbt compile")<CR>
-    nnoremap <Leader>bt :call MakeWithVimux("sbt test")<CR>
-    nnoremap <Leader>bi :call MakeWithVimux("sbt it:test")<CR>
+    nnoremap <Leader>bd :call MakeWithVimux("sbt -Dsbt.log.noformat=true compile")<CR>
+    nnoremap <Leader>bt :call MakeWithVimux("sbt -Dsbt.log.noformat=true test")<CR>
+    nnoremap <Leader>bi :call MakeWithVimux("sbt -Dsbt.log.noformat=true it:test")<CR>
+    nnoremap <Leader>bT :call VimuxRunCommand("sbt test")<CR>
+    nnoremap <Leader>bI :call VimuxRunCommand("sbt it:test")<CR>
     nnoremap <Leader>bc :call VimuxRunCommand("sbt console")<CR>
     nnoremap <Leader>bE :call MakeWithVimuxOpenErrors('buffer')<CR>gg/\*\*\* FAILED \*\*\*<CR>
     nnoremap <Leader>fe /\*\*\* FAILED \*\*\*<CR>
