@@ -3,4 +3,6 @@ main_window_color = "white"
 progressbar_color = "cyan"
 progressbar_elapsed_color = "cyan"
 statusbar_color = "red"
-active_column_color = "cyan"
+# active_column_color = "green" # deprecated in 0.9
+current_item_inactive_column_prefix = $(cyan)$r
+current_item_inactive_column_suffix = $/r$(end)
