@@ -58,7 +58,11 @@ function start_musicserver_if_music_is_accessible
                 # if command -v mopidyctl >/dev/null
                     # systemctl start mopidy
                 if command -v mopidy >/dev/null
-                    nohup mopidy --option spotify/password=(gpg --for-your-eyes-only --quiet --no-tty -d $HOME/.config/mopidy/spotify.password.gpg) >/tmp/mopidy.log ^&1 &
+                    # nohup mopidy --option spotify/password=(gpg --for-your-eyes-only --quiet --no-tty -d $HOME/.config/mopidy/spotify.password.gpg) >/tmp/mopidy.log ^&1 &
+                    nohup mopidy \
+                        --option spotify/password=(pass spotify/soziflip+spotify@gmail.com  | head -n1) \
+                        --option spotify/client_secret=(pass spotify/mopidy | head -n1) \
+                        >/tmp/mopidy.log ^&1 &
                 else
                     mpd
                 end
