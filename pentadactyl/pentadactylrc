@@ -34,7 +34,7 @@ set defsearch=duckduckgo
 "set defsearch=google
 
 " completions order
-set complete=search,bookmark,suggestion,file
+set complete=search,bookmark,file,suggestion
 
 " autocomplete when opening sites only with tab
 set autocomplete=!/ex/(open|tabopen),.?
