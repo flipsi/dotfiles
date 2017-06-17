@@ -489,6 +489,10 @@ Plugin 'beloglazov/vim-textobj-quotes'
 Plugin 'kana/vim-textobj-function'
 Plugin 'thinca/vim-textobj-function-javascript'
 
+" function arguments (aa/ia)
+" (somehow required one more keystroke)
+Plugin 'gaving/vim-textobj-argument'
+
 " lines with ( [ { pairs (ac/ic)
 " Plugin 'Chun-Yang/vim-textobj-chunk'
 
