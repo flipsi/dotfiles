@@ -43,11 +43,13 @@ set autocomplete=!/ex/(open|tabopen),.?
 qmark a https://www.fromatob.com/
 qmark b https://www.banking-rb-mnord.de/banking-private/entry
 qmark c http://catchinside.de/index.php?option=com_users&view=login
+qmark d http://drive.google.com/drive/
 qmark e http://www.heise.de/
 qmark f https://de-de.facebook.com/groups/901248313307453/
 qmark g https://github.com/sflip/dotfiles
 qmark h https://www.heute.de/
 qmark l http://localhost/~sflip/projects/
+qmark n https://www.zdf.de/sendung-verpasst#abends
 qmark o https://stackoverflow.com/users/login
 qmark p http://sflip.bplaced.de/
 qmark s https://scholar.google.com/
