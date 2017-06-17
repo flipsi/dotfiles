@@ -2364,7 +2364,21 @@ nnoremap <C-G><C-G> <C-G>
 nnoremap <Leader><C-G> :echo expand("%:~")<CR>
 
 " if in a git directory and there are dirty files, open them
-nnoremap <Leader>eG :silent! args `git diff --name-only`<CR>
+" nnoremap <Leader>eG :silent! args `git diff --name-only`<CR>:bd#<CR>
+function! EditGitDirtyFiles()
+    let numberOfGitDirtyFiles = system("git status --porcelain 2>/dev/null \| egrep '^(M\| M)' \| wc -l")
+    if numberOfGitDirtyFiles != 0
+        silent! args `git diff --name-only`
+        " if vim was just started, let's get rid of the first unnamed buffer:
+        if empty(getbufinfo()[0]['name'])
+            bd 1
+        endif
+        " TODO: avoid error with already openend windows
+    else
+        echo 'Working directory clean'
+    endif
+endfunction
+nnoremap <Leader>eG :call EditGitDirtyFiles()<CR>
 
 " open config file
 "nnoremap <Leader>ev :edit ~/dotfiles/vim/vimrc<CR>
