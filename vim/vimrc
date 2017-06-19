@@ -2828,8 +2828,10 @@ nnoremap S i<CR><esc>
             \ :let @/=searchregister<CR>
             \ `q
 
-" duplicate line or selection
-nnoremap -u yyp
+" duplicate code
+nnoremap -uu yyp
+nnoremap -ul yyp
+nnoremap -up yap<S-}>p
 vnoremap -u yP
 
 " add new lines above or below
