@@ -2450,15 +2450,18 @@ noremap <silent> <C-v>k O<Esc>:call PasteFromGUI()<CR>
 
 
 
-" macro ('complex repeat') helper mappings
-nnoremap @{ :nmap <Leader<Left><Right>>rm @}<CR>qq
-nnoremap @} q:nmap <Leader<Left><Right>>rm @{<CR>:echo ''<CR>
-" record macro (start and stop)
-nmap     <Leader>rm @{
-nnoremap <Leader>rM q
-" replay macro
-nnoremap <Leader>m @q
-nnoremap <Leader>M @
+" macro ('complex repeat') without worrying about registers
+" record macro (start and stop) with <Leader>Q
+" replay macro with <Leader>q
+" nnoremap @{ :nmap <Leader<Left><Right>>Q @}<CR>qq
+" nnoremap @} q:nmap <Leader<Left><Right>>Q @{<CR>:echo ''<CR>
+" nmap     <Leader>Q @{
+" nnoremap <Leader>q @q
+
+" macro ('complex repeat') with registers
+nnoremap qq @@
+nnoremap q @
+nnoremap Q q
 
 
 " alternative way to go back to normal mode
@@ -3133,7 +3136,6 @@ nnoremap <Leader>w  :update<CR>
 nnoremap <Leader>WW :update!<CR>
 
 " quit current buffer
-nnoremap q :bdelete<CR>
 nnoremap <Leader>qq :bdelete<CR>
 nnoremap <Leader>QQ :bdelete!<CR>
 
@@ -3141,10 +3143,9 @@ nnoremap <Leader>QQ :bdelete!<CR>
 nnoremap <Leader>qa :bufdo bdelete<CR>
 
 " quit current window
-nnoremap Q :quit<CR>:buffer #<CR>
+nnoremap <Leader>qw :quit<CR>:buffer #<CR>
 " quit all windows but current
-nnoremap <Leader>qO :only<CR>
-nnoremap <Leader>QO :only<CR>
+nnoremap <Leader>qW :only<CR>
 
 " quit vim (multiple windows)
 " (this is how i exit most terminal applications)
