@@ -2032,10 +2032,11 @@ function! RangerChooser(starting_dir)
     " with ranger 1.4.2 through 1.5.0 instead.
     "exec 'silent !ranger --choosefile=' . shellescape(temp)
     if has("gui_running")
-        exec 'silent !xterm -e ranger --choosefiles=' . shellescape(temp) . ' ' . a:starting_dir
+        let command = 'silent !xterm -e ranger'
     else
-        exec 'silent !ranger --choosefiles=' . shellescape(temp) . ' ' . a:starting_dir
+        let command = 'silent !ranger'
     endif
+    exec command . ' --choosefiles=' . shellescape(temp) . ' --cmd="set viewmode\!" ' . a:starting_dir
     if !filereadable(temp)
         redraw!
         " Nothing to read.
