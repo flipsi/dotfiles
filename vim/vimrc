@@ -2459,15 +2459,16 @@ noremap <silent> <C-v>k O<Esc>:call PasteFromGUI()<CR>
 " nnoremap <Leader>q @q
 
 " macro ('complex repeat') with registers
-nnoremap qq @@
-nnoremap q @
-nnoremap Q q
+" (remapping q is bad, because it is used to close stuff like plugin windows)
+nnoremap Q @
+nnoremap QQ @@
+
 
 
 " alternative way to go back to normal mode
 inoremap jk <Esc>
 cnoremap jk <C-c>
-cnoremap <C-g>  <C-c>
+cnoremap <C-g> <C-c>
 
 " change to insert mode from visual mode
 " (this disables text objects)
@@ -3138,6 +3139,14 @@ nnoremap <Leader>WW :update!<CR>
 " quit current buffer
 nnoremap <Leader>qq :bdelete<CR>
 nnoremap <Leader>QQ :bdelete!<CR>
+augroup map_q_in_read_only_buffers
+    au!
+    au BufReadPost * if &readonly
+    au BufReadPost *   nnoremap <buffer> q :bd<CR>
+    au BufReadPost * endif
+    au BufReadPost fugitive://* nnoremap <buffer> q :bd<CR>
+augroup END
+
 
 " quit all buffers (not vim)
 nnoremap <Leader>qa :bufdo bdelete<CR>
