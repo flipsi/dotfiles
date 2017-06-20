@@ -1331,6 +1331,20 @@ Plugin 'sheerun/vim-polyglot'
 Plugin 'dag/vim-fish'
 
 
+" Language: javascript
+
+augroup javascript_on_read
+    au!
+    au FileType javascript call SetupJavascript()
+augroup END
+function! SetupJavascript()
+    nnoremap <Leader>bi :call VimuxRunCommand("npm install")<CR>
+    nnoremap <Leader>bs :call VimuxRunCommand("npm start")<CR>
+    nnoremap <Leader>btt :call VimuxRunCommand("npm test")<CR>
+    nnoremap <Leader>btu :call VimuxRunCommand("npm test-unit")<CR>
+    nnoremap <Leader>bti :call VimuxRunCommand("npm test-int")<CR>
+endfunction
+
 
 " Language: LaTeX
 
@@ -1437,14 +1451,16 @@ function! SetupScala()
                 " \%E\ \%#[info]\ %.%#\ was\ not\ equal\ to\ %.%#\ (%f:%l),%Z,
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
-    nnoremap <Leader>bd :call MakeWithVimux("sbt -Dsbt.log.noformat=true compile")<CR>
-    nnoremap <Leader>bt :call MakeWithVimux("sbt -Dsbt.log.noformat=true test")<CR>
-    nnoremap <Leader>bi :call MakeWithVimux("sbt -Dsbt.log.noformat=true it:test")<CR>
-    nnoremap <Leader>bT :call VimuxRunCommand("sbt test")<CR>
-    nnoremap <Leader>bI :call VimuxRunCommand("sbt it:test")<CR>
-    nnoremap <Leader>bc :call VimuxRunCommand("sbt console")<CR>
-    nnoremap <Leader>bE :call MakeWithVimuxOpenErrors('buffer')<CR>gg/\*\*\* FAILED \*\*\*<CR>
-    nnoremap <Leader>fe /\*\*\* FAILED \*\*\*<CR>
+    nnoremap <Leader>bd  :call MakeWithVimux("sbt -Dsbt.log.noformat=true compile")<CR>
+    nnoremap <Leader>btt :call MakeWithVimux("sbt -Dsbt.log.noformat=true test it:test")<CR>
+    nnoremap <Leader>btu :call MakeWithVimux("sbt -Dsbt.log.noformat=true test")<CR>
+    nnoremap <Leader>bti :call MakeWithVimux("sbt -Dsbt.log.noformat=true it:test")<CR>
+    nnoremap <Leader>btT :call VimuxRunCommand("sbt test it:test")<CR>
+    nnoremap <Leader>btU :call VimuxRunCommand("sbt test")<CR>
+    nnoremap <Leader>btI :call VimuxRunCommand("sbt it:test")<CR>
+    nnoremap <Leader>bc  :call VimuxRunCommand("sbt console")<CR>
+    nnoremap <Leader>bE  :call MakeWithVimuxOpenErrors('buffer')<CR>gg/\*\*\* FAILED \*\*\*<CR>
+    nnoremap <Leader>fe  /\*\*\* FAILED \*\*\*<CR>
 endfunction
 
 " augroup scala_on_write
@@ -2988,11 +3004,19 @@ nnoremap dN [c
 nnoremap <Leader>bm :make<CR>
 
 " execute shell script
-if s:MyMode == 'mastery'
-    nnoremap <Leader>bs :call VimuxRunCommand("bash -c 'chmod u+x " . bufname("%") . " && ./" . bufname("%") . "'")<CR>
-else
-    nnoremap <Leader>bs :!chmod u+x % && ./%<CR>
-endif
+augroup shellscript_on_read
+    au!
+    au FileType sh      call SetupShellscript()
+    au FileType fish    call SetupShellscript()
+augroup END
+function! SetupShellscript()
+    if s:MyMode == 'mastery'
+        nnoremap <Leader>bs :call VimuxRunCommand("bash -c 'chmod u+x " . expand("%:~") . " && " . expand("%:~") . "'")<CR>
+    else
+        nnoremap <Leader>bs :!chmod u+x % && ./%<CR>
+    endif
+endfunction
+
 
 " jump to (syntastic) errors
 nnoremap <Leader>sg :lfirst<CR>
