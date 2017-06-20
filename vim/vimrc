@@ -374,8 +374,8 @@ nnoremap <Leader>gw :Gwrite<CR>
 nnoremap <Leader>gA :Gwrite<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gp :Gpull<CR>
-nnoremap <Leader>gP :Gpush<CR>
+nnoremap <Leader>gpp :Gpull<CR>
+nnoremap <Leader>gpu :Gpush<CR>
 
 " in Gdiff view, navigate and stage/checkout easily
 augroup gitdiff

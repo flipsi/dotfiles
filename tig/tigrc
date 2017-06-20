@@ -120,8 +120,9 @@ bind generic y !bash -c "printf %(commit) | xsel -b"
 
 # remote commands
 bind generic f !git fetch
-bind generic p !git pull
-bind generic P !git push
+bind generic pp !git pull
+bind generic pu !git push
+bind generic pU !git push -u %(remote) %(branch)
 
 
 # more/less context

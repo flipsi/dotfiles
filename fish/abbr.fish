@@ -1,7 +1,6 @@
 abbr fi     fzf_wrapper --find --ranger
 abbr fl     fzf_wrapper --locate --ranger
 abbr g      git
-abbr gP     git push
 abbr ga     git add
 abbr gaa    git add --all
 abbr gb     git branch --verbose
@@ -14,9 +13,9 @@ abbr ge     git checkout
 abbr gl     tig log
 abbr glh    git --no-pager log -n 1
 abbr go     git clone --recursive
-abbr gp     git pull
+abbr gpp    git pull
 abbr gpu    git push
-abbr gup    git push --set-upstream
+abbr gpU    git push -u
 abbr gr     grep --with-filename --line-number --recursive --ignore-case --extended-regexp
 abbr gs     git status
 abbr gsa    git stash save
