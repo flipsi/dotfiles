@@ -39,6 +39,7 @@ set refresh-mode = auto
 # 'unbindings'
 bind generic g none
 bind main    G none
+bind generic p none
 
 # quit
 bind generic <C-D> quit
