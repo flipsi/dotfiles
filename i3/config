@@ -168,6 +168,7 @@ bindsym $mod+F6 exec --no-startup-id "pkill -fx 'sxiv $keyboard_layout_image' ||
 # i3 is a window manager and hence has nothing to do with wallpapers
 # since desktops set their own, we still set a wallpaper here
 exec --no-startup-id "feh --bg-scale ~/.i3/wallpaper"
+exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
 bindsym $mod+F7 exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
 
 
