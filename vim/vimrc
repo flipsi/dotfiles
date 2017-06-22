@@ -248,6 +248,7 @@ let g:VimuxHeight = "24"
 let g:VimuxOrientation = "v"
 let VimuxUseNearest = 1
 nnoremap <Leader>bo         :VimuxRunCommand ""<Left>
+nnoremap <Leader>bO         :VimuxRunCommand " " . expand('%')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 nnoremap <Leader>bb         :VimuxRunLastCommand<CR>
 nnoremap <Leader>bl         :VimuxRunLastCommand<CR>
 nnoremap <Leader>bq         :VimuxCloseRunner<CR>
