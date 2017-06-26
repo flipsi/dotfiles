@@ -1625,7 +1625,7 @@ set relativenumber
 set numberwidth=6
 
 " highlight current cursor position
-let g:cursorposition = 1
+let g:cursorposition = 0
 if g:cursorposition
     set cursorline cursorcolumn
 endif
@@ -1735,13 +1735,14 @@ if s:MyMode == 'mastery'
 
     " colorscheme apprentice
     " colorscheme badwolf
-    " colorscheme blackboard
+    colorscheme blackboard
+    " colorscheme blacklight
     " colorscheme candycode
     " colorscheme dante
     " colorscheme desertEx
     " colorscheme iceberg
     " colorscheme jellybeans
-    colorscheme luna-term
+    " colorscheme luna-term
     " colorscheme meta5
     " colorscheme molokai
     " colorscheme onedark
@@ -1755,11 +1756,14 @@ if s:MyMode == 'mastery'
     " let g:airline_theme='behelit'
     " let g:airline_theme='distinguished'
     " let g:airline_theme='kalisi'
+    " let g:airline_theme='laederon'
     " let g:airline_theme='lucius'
+    let g:airline_theme='minimalist'
     " let g:airline_theme='serene'
     " let g:airline_theme='tomorrow'
     " let g:airline_theme='ubaryd'
-    let g:airline_theme='zenburn'
+    " let g:airline_theme='wombat'
+    " let g:airline_theme='zenburn'
 
     highlight CursorLine   ctermbg=235
     highlight CursorColumn ctermbg=235
@@ -1768,6 +1772,8 @@ if s:MyMode == 'mastery'
     highlight Todo ctermbg=234
     highlight Error ctermbg=234
     highlight Search ctermbg=236 ctermfg=white
+    hi Conceal ctermbg=237
+    let g:indentLine_setColors = 1
     let g:indentLine_color_term = 237
 
     " LIGHT THEMES
