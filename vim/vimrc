@@ -352,13 +352,24 @@ let g:powerline_loaded = 1
 
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
 let g:airline#extensions#tabline#enabled = 1
+
+"let g:airline_section_y = g:airline_section_a
+let g:airline_section_a = '%{fnamemodify(getcwd(), ":t")}'
+
 let g:airline_powerline_fonts=0
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.linenr = ''
+let g:airline_symbols.maxlinenr = ''
 
 
-" TODO simple statusline like this
+
+" simple statusline
 " http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
 
 
