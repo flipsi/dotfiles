@@ -30,6 +30,8 @@ abbr m      man
 abbr o      open
 abbr p      pass
 abbr pe     pass edit
+abbr pgp    pass git pull
+abbr pgpu   pass git push
 abbr pg     pgrep
 abbr pk     pkill
 abbr rrm    rm -rf
