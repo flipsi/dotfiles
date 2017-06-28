@@ -190,8 +190,60 @@ map('<c-i>', 'history_forward');
 ////////////////////////////////////////////////////////////////////////////////
 // quickmarks
 
-// TODO: implement
+let quickmarks = [
+    ['a',  'https://www.fromatob.com/'],
+    ['b',  'https://www.banking-rb-mnord.de/banking-private/entry'],
+    ['c',  'http://catchinside.de/index.php?option=com_users&view=login'],
+    ['d',  'http://drive.google.com/drive/'],
+    ['e',  'http://www.heise.de/'],
+    ['f',  'https://de-de.facebook.com/groups/901248313307453/'],
+    ['g',  'https://github.com/'],
+    ['h',  'https://www.heute.de/'],
+    ['wg', 'https://github.com/onpage-org/'],
+    ['wj', 'https://onpage.atlassian.net/projects/DEV/issues'],
+    ['wc', 'https://onpage.atlassian.net/wiki/discover/all-updates'],
+    ['l',  'http://localhost/~sflip/projects/'],
+    ['m',  'https://mail.google.com/mail/u/0/#inbox'],
+    ['n',  'https://www.zdf.de/sendung-verpasst#abends'],
+    ['o',  'https://stackoverflow.com/questions/tagged/vim'],
+    ['p',  'http://sflip.bplaced.de/'],
+    ['q',  'https://docs.google.com/spreadsheets/d/17QbADpr9nn7VAdhotSqMic64NTFAM3o-qTYI3qDPdvw/edit#gid=0'],
+    ['s',  'https://scholar.google.com/'],
+    ['t',  'https://twitter.com/'],
+    ['v',  'http://www.hoerzu.de/tv-programm/'],
+    ['y',  'https://accounts.google.com/ServiceLogin?uilel=3&service=youtube&passive=true&continue=http%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26nomobiletemp%3D1%26hl%3Dde_DE%26next%3D%252F&hl=de_DE&ltmpl=sso'],
+    ['zf', 'http://fishshell.com/docs/current/index.html'],
+    ['zi', 'http://i3wm.org/docs/userguide.html']
+];
 
+let mapQuickmark = function(quickmark, url) {
+
+  const goCommand = `quickmark_go_${quickmark}`;
+  vimfx.addCommand({
+    name: goCommand,
+    description: `Open quickmark ${url}`,
+  }, ({
+    vim
+  }) => {
+    vim.window.gBrowser.loadURI(url);
+  });
+  map(`go${quickmark}`, goCommand, true);
+
+  const gnCommand = `quickmark_gn_${quickmark}`;
+  vimfx.addCommand({
+    name: gnCommand,
+    description: `Open quickmark ${url}`,
+  }, ({
+    vim
+  }) => {
+    vim.window.gBrowser.loadTabs([url])
+  });
+  map(`gn${quickmark}`, gnCommand, true);
+};
+
+quickmarks.forEach(q => {
+  mapQuickmark(q[0], q[1]);
+});
 
 
 
