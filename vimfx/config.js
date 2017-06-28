@@ -13,7 +13,8 @@
 
 // add a mapping (keybinding) for a command
 let map = (shortcut, command, custom=false) => {
-    // unmap(shortcut);
+    unmap(shortcut);
+    shortcut.length > 1 ? unmap(shortcut[0]) : null;
     const setting = `${custom ? 'custom.' : ''}mode.normal.${command}`;
     const shortcuts = vimfx.get(setting).split(' ');
     if (!shortcuts.includes(shortcut)) {
@@ -23,13 +24,30 @@ let map = (shortcut, command, custom=false) => {
 };
 
 // remove a mapping
-let unmap = (shortcut, command=null) => {
-    // TODO: loop through all commands and find shorcut to remove it, so that command becomes obsolete
-    const setting = `mode.normal.${command}`;
-    var shortcuts = vimfx.get(setting).split(' ');
-    shortcuts = shortcuts.filter(s => s != shortcut);
-    vimfx.set(setting, shortcuts.join(' '));
+let unmap = (shortcut) => {
+    for (var i = 0, len = unmap_commands.length; i < len; i++) {
+        var command = unmap_commands[i];
+        var setting = `mode.normal.${command}`;
+        var shortcuts = vimfx.get(setting).split(' ');
+        if (shortcuts.includes(shortcut)) {
+            shortcuts = shortcuts.filter(s => s != shortcut);
+            vimfx.set(setting, shortcuts.join(' '));
+            break;
+        }
+    }
 };
+
+// commands to check for unmappings
+const unmap_commands = [
+    'scroll_half_page_down',
+    'scroll_half_page_up',
+    'scroll_right',
+    'tab_new',
+    'tab_new_after_current',
+    'tab_select_next',
+    'window_new'
+];
+
 
 
 
@@ -63,7 +81,6 @@ let {commands} = vimfx.modes.normal;
 
 
 
-// unmap('window');
 
 ////////////////////////////////////////////////////////////////////////////////
 // where not to use vimfx bindings
@@ -101,8 +118,6 @@ map('Ä', 'scroll_to_mark');
 ////////////////////////////////////////////////////////////////////////////////
 // tab (buffer) management
 
-unmap('d', 'scroll_half_page_down');
-unmap('u', 'scroll_half_page_up');
 
 map('qq', 'tab_close');
 map('dd', 'tab_close');
@@ -128,17 +143,13 @@ map('<a-N>', 'tab_move_forward');
 map('<a-P>', 'tab_move_backward');
 
 
-unmap('T', 'tab_new_after_current');
 map('T', 'tab_duplicate');
 
-unmap('gt', 'tab_select_next');
 map('gt', 'tab_new_after_current');
 
 
 ////////////////////////////////////////////////////////////////////////////////
 // follow links
-
-unmap('l', 'scroll_right');
 
 map('f', 'follow');
 map('l', 'follow_in_focused_tab');
@@ -249,8 +260,6 @@ quickmarks.forEach(q => {
 
 ////////////////////////////////////////////////////////////////////////////////
 // windows
-
-unmap('w', 'window_new');
 
 vimfx.addCommand({
     name: 'goto_downloads',
