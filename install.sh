@@ -55,6 +55,7 @@ SUPPORTED_TARGETS=(\
     urxvt \
     urlview \
     vim \
+    vimfx \
     vimpc \
     vimperator \
     vimus \
@@ -340,6 +341,19 @@ function create_link_for_target() {
             create_link "$PWD/vim/vim/filetype.vim" "$HOME/.vim/filetype.vim"
             mkdir -p "$HOME/bin"
             create_link "$PWD/vim/bin/goobook-query-mail.sh" "$HOME/bin/goobook-query-mail.sh"
+            ;;
+
+        vimfx )
+            mkdir -p "$HOME/.config/vimfx"
+            create_link "$PWD/vimfx/config.js" "$HOME/.config/vimfx/config.js"
+            create_link "$PWD/vimfx/frame.js" "$HOME/.config/vimfx/frame.js"
+            local sourcestring="@import url("\""$PWD/vimfx/userChrome.css"\"");"
+            local userChromeCssFilepath=$(find ~/.mozilla/firefox -name userChrome.css)
+            if [[ $UNINSTALL != true ]]; then
+                grep "${sourcestring}" "${userChromeCssFilepath}" > /dev/null || echo "$sourcestring" >> "${userChromeCssFilepath}"
+            else
+                sed -i -- "/^${sourcestring//\//\\/}$/d" "${userChromeCssFilepath}"
+            fi
             ;;
 
         vimpc )

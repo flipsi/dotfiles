@@ -1,0 +1,14 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+#VimFxMarkersContainer .marker {
+  font-size: 14px !important;
+  text-transform: lowercase !important;
+  opacity: 0.8 !important; /* Warning: Might be slow! */
+  background-color: #00AFAF !important;
+}
+#VimFxMarkersContainer .marker--matched,
+#VimFxMarkersContainer .marker-char--matched,
+#VimFxMarkersContainer .marker--highlighted {
+  background-color: #005F5F !important;
+}
+
