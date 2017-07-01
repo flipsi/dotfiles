@@ -1632,7 +1632,7 @@ set relativenumber
 set numberwidth=6
 
 " highlight current cursor position
-let g:cursorposition = 0
+let g:cursorposition = 1
 if g:cursorposition
     set cursorline cursorcolumn
 endif
@@ -1772,16 +1772,24 @@ if s:MyMode == 'mastery'
     " let g:airline_theme='wombat'
     " let g:airline_theme='zenburn'
 
-    highlight CursorLine   ctermbg=235
-    highlight CursorColumn ctermbg=235
-    highlight ColorColumn  ctermbg=235
-    highlight ShowTrailingWhitespace ctermbg=237
-    highlight Todo ctermbg=234
-    highlight Error ctermbg=234
-    highlight Search ctermbg=236 ctermfg=white
-    hi Conceal ctermbg=237
     let g:indentLine_setColors = 1
-    let g:indentLine_color_term = 237
+    let g:indentLine_color_term = 236
+
+    highlight CursorLine              ctermbg=236 cterm=NONE
+    highlight CursorColumn            ctermbg=236
+    highlight ColorColumn             ctermbg=235
+    highlight ShowTrailingWhitespace  ctermbg=235
+    highlight Folded                  ctermbg=235
+    highlight LineNr                  ctermfg=237
+    highlight CursorLineNr            ctermfg=23
+    highlight Conceal                 ctermbg=237
+  " highlight Search                  ctermbg=237 ctermfg=white
+    highlight Error                   ctermbg=234
+    highlight Todo                    ctermbg=197
+    highlight EasyMotionTarget        ctermfg=38
+    highlight EasyMotionTarget2First  ctermfg=38
+    highlight EasyMotionTarget2Second ctermfg=23
+
 
     " LIGHT THEMES
 
