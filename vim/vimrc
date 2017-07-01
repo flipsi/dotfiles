@@ -247,8 +247,8 @@ Plugin 'benmills/vimux'
 let g:VimuxHeight = "24"
 let g:VimuxOrientation = "v"
 let VimuxUseNearest = 1
-nnoremap <Leader>bo         :VimuxRunCommand ""<Left>
-nnoremap <Leader>bO         :VimuxRunCommand " " . expand('%')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+nnoremap <Leader>bo         :VimuxRunCommand "clear; "<Left>
+nnoremap <Leader>bf         :VimuxRunCommand "clear;  " . expand('%')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 nnoremap <Leader>bb         :VimuxRunLastCommand<CR>
 nnoremap <Leader>bl         :VimuxRunLastCommand<CR>
 nnoremap <Leader>bq         :VimuxCloseRunner<CR>
@@ -1357,11 +1357,11 @@ augroup javascript_on_read
     au FileType javascript call SetupJavascript()
 augroup END
 function! SetupJavascript()
-    nnoremap <Leader>bi :call VimuxRunCommand("npm install")<CR>
-    nnoremap <Leader>bs :call VimuxRunCommand("npm start")<CR>
-    nnoremap <Leader>btt :call VimuxRunCommand("npm test")<CR>
-    nnoremap <Leader>btu :call VimuxRunCommand("npm test-unit")<CR>
-    nnoremap <Leader>bti :call VimuxRunCommand("npm test-int")<CR>
+    nnoremap <Leader>bi  :call VimuxRunCommand("clear; npm install")<CR>
+    nnoremap <Leader>bs  :call VimuxRunCommand("clear; npm start")<CR>
+    nnoremap <Leader>btt :call VimuxRunCommand("clear; npm test")<CR>
+    nnoremap <Leader>btu :call VimuxRunCommand("clear; npm test-unit")<CR>
+    nnoremap <Leader>bti :call VimuxRunCommand("clear; npm test-int")<CR>
 endfunction
 
 
@@ -1470,14 +1470,14 @@ function! SetupScala()
                 " \%E\ \%#[info]\ %.%#\ was\ not\ equal\ to\ %.%#\ (%f:%l),%Z,
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
-    nnoremap <Leader>bd  :call MakeWithVimux("sbt -Dsbt.log.noformat=true compile")<CR>
-    nnoremap <Leader>btt :call MakeWithVimux("sbt -Dsbt.log.noformat=true test it:test")<CR>
-    nnoremap <Leader>btu :call MakeWithVimux("sbt -Dsbt.log.noformat=true test")<CR>
-    nnoremap <Leader>bti :call MakeWithVimux("sbt -Dsbt.log.noformat=true it:test")<CR>
-    nnoremap <Leader>btT :call VimuxRunCommand("sbt test it:test")<CR>
-    nnoremap <Leader>btU :call VimuxRunCommand("sbt test")<CR>
-    nnoremap <Leader>btI :call VimuxRunCommand("sbt it:test")<CR>
-    nnoremap <Leader>bc  :call VimuxRunCommand("sbt console")<CR>
+    nnoremap <Leader>bd  :call MakeWithVimux("clear; sbt -Dsbt.log.noformat=true compile")<CR>
+    nnoremap <Leader>btt :call MakeWithVimux("clear; sbt -Dsbt.log.noformat=true test it:test")<CR>
+    nnoremap <Leader>btu :call MakeWithVimux("clear; sbt -Dsbt.log.noformat=true test")<CR>
+    nnoremap <Leader>bti :call MakeWithVimux("clear; sbt -Dsbt.log.noformat=true it:test")<CR>
+    nnoremap <Leader>btT :call VimuxRunCommand("clear; sbt test it:test")<CR>
+    nnoremap <Leader>btU :call VimuxRunCommand("clear; sbt test")<CR>
+    nnoremap <Leader>btI :call VimuxRunCommand("clear; sbt it:test")<CR>
+    nnoremap <Leader>bc  :call VimuxRunCommand("clear; sbt console")<CR>
     nnoremap <Leader>bE  :call MakeWithVimuxOpenErrors('buffer')<CR>gg/\*\*\* FAILED \*\*\*<CR>
     nnoremap <Leader>fe  /\*\*\* FAILED \*\*\*<CR>
 endfunction
