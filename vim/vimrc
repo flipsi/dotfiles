@@ -1258,6 +1258,13 @@ vnoremap -af :Autoformat<CR>
 nmap <Leader>af -af
 vmap <Leader>af -af
 
+" the shit above does not work for json. do this instead:
+augroup json_map_autoformat
+    au!
+    au FileType json nnoremap -af :%!python -m json.tool<CR>
+    au FileType json nmap <Leader>af -af
+augroup END
+
 
 " coercion:
 " - MixedCase (crm),
