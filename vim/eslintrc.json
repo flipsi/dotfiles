@@ -1,0 +1,39 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "settings": {
+        "ecmascript": 6,
+        "jsx": true
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "camelcase": 1,
+        "no-array-constructor": 1,
+        "no-loop-func": 1,
+        "no-new-func": 1,
+        "no-new-object": 1,
+        "no-underscore-dangle": 0,
+        "no-unused-vars": 1,
+        "no-useless-escape": 1,
+        "no-var": 1,
+        "object-shorthand": 1,
+        "prefer-arrow-callback": 1,
+        "arrow-spacing": 1,
+        "arrow-parens": 0,
+        "arrow-body-style": 1,
+        "prefer-const": 1,
+        "prefer-rest-params": 1,
+        "prefer-spread": 1,
+        "prefer-template": 1,
+        "quotes": 0,
+        "space-before-blocks": 1,
+        "space-before-function-paren": 1,
+        "strict": 0,
+        "template-curly-spacing": 1
+    }
+}
