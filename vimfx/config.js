@@ -112,6 +112,9 @@ map('<a-k>', 'scroll_half_page_up');
 map('<c-d>', 'scroll_half_page_down');
 map('<c-u>', 'scroll_half_page_up');
 
+map('<c-f>', 'scroll_page_down');
+map('<c-b>', 'scroll_page_up');
+
 map('Ä', 'scroll_to_mark');
 
 
