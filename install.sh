@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Author: Philipp Moers <soziflip@gmail.com>
+# Author: "Philipp Moers" <soziflip@gmail.com>
 
 
 function print_help_msg() {
@@ -383,7 +383,9 @@ function create_link_for_target() {
             ;;
 
         xkb )
-            create_link "$PWD/xkb/symbols/de_sflip" "/usr/share/X11/xkb/symbols/de_sflip"
+            if [[ $(whoami) = 'root' ]]; then
+                create_link "$PWD/xkb/symbols/de_sflip" "/usr/share/X11/xkb/symbols/de_sflip"
+            fi
             setxkbmap de_sflip
             ;;
 
