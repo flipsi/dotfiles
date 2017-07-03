@@ -13,7 +13,7 @@ It git clones ${repo_url} to ~/dotfiles and runs the 'install.sh' script, or git
 The list of remote hosts is read from ~/.ssh/known_hosts.
 ~/.ssh/config should be configured correctly for logins and such.
 
-Usage: install-remote.sh
+Usage: install-remote.sh [OPTIONS]
 
     OPTIONS:
     -h       | --help             Don't do anything, just print this help message.
@@ -22,7 +22,7 @@ Usage: install-remote.sh
     -b=host  | --blacklist=host   Skip <host>. Can be provided multiple times.
     -o=host  | --only=host        Only run on <host>. Overwrites --regex and --blacklist.
     -c=rev   | --checkout=rev     Checkout a specific revision (branch or commit).
-    -i       | --install          Also run './install.sh --all' after pull, not only after clone.
+    -i       | --install          Also run 'install.sh --all' after pull, not only after clone.
                                   Should be done to update symlinks.
 
 EOF
