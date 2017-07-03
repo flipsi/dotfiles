@@ -449,7 +449,7 @@ assign [class="(?i)ardour"]             Recording
 default_orientation vertical
 
 # new workspaces have this layout
-workspace_layout tabbed
+workspace_layout stacked
 
 
 # start a terminal
