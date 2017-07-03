@@ -21,6 +21,7 @@ Usage: install-remote.sh
     -r=regex | --regex=pattern    All hosts must match <pattern>.
     -b=host  | --blacklist=host   Skip <host>. Can be provided multiple times.
     -o=host  | --only=host        Only run on <host>. Overwrites --regex and --blacklist.
+    -c=rev   | --checkout=rev     Checkout a specific revision (branch or commit).
     -i       | --install          Also run './install.sh --all' after pull, not only after checkout.
                                   Should be done to update symlinks.
 
@@ -40,10 +41,6 @@ do
       dry_run=true
       shift
       ;;
-    -i|--install)
-      run_install_script=true
-      shift
-      ;;
     -r=*|--regex=*)
       host_regex="${i#*=}"
       shift
@@ -54,6 +51,14 @@ do
       ;;
     -o=*|--only=*)
       only_host=("${i#*=}")
+      shift
+      ;;
+    -c=*|--checkout=*)
+      checkout_revision="${i#*=}"
+      shift
+      ;;
+    -i|--install)
+      run_install_script=true
       shift
       ;;
     *)
@@ -135,6 +140,9 @@ function processHost() {
 function installDotfiles() {
     local host="$1"
     ssh ${host} "git clone ${repo_url} dotfiles" >> ${logfile} 2>&1
+    if [[ -n ${checkout_revision} ]]; then
+        ssh ${host} "cd dotfiles; git checkout ${checkout_revision}" >> ${logfile} 2>&1
+    fi
     ssh ${host} "dotfiles/install.sh --all" >> ${logfile} 2>&1
 }
 
@@ -151,6 +159,9 @@ function updateDotfiles() {
         ssh ${host} 'cd dotfiles; git stash save remote-update' >> ${logfile} 2>&1
         ssh ${host} 'cd dotfiles; git pull' >> ${logfile} 2>&1
         ssh ${host} 'cd dotfiles; git stash pop remote-update' | tee --append ${logfile} ; echo >> ${logfile} 2>&1
+    fi
+    if [[ -n ${checkout_revision} ]]; then
+        ssh ${host} "cd dotfiles; git checkout ${checkout_revision}" >> ${logfile} 2>&1
     fi
     if [[ ${run_install_script} = true ]]; then
         ssh ${host} "dotfiles/install.sh --all" >> ${logfile} 2>&1
