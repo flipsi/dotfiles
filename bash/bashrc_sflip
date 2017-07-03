@@ -18,7 +18,9 @@ alias lll='ls $LS_OPTIONS -la'
 
 alias o='open'
 
-bind '"\ei":"ranger\n"'
-bind '"\es":"ll; echo; git status --short 2>/dev/null\n"'
+if [ -t 1 ]; then
+    bind '"\ei":"ranger\n"'
+    bind '"\es":"ll; echo; git status --short 2>/dev/null\n"'
+fi
 
 
