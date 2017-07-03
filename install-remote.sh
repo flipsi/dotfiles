@@ -22,7 +22,7 @@ Usage: install-remote.sh
     -b=host  | --blacklist=host   Skip <host>. Can be provided multiple times.
     -o=host  | --only=host        Only run on <host>. Overwrites --regex and --blacklist.
     -c=rev   | --checkout=rev     Checkout a specific revision (branch or commit).
-    -i       | --install          Also run './install.sh --all' after pull, not only after checkout.
+    -i       | --install          Also run './install.sh --all' after pull, not only after clone.
                                   Should be done to update symlinks.
 
 EOF
