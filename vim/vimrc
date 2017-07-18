@@ -249,8 +249,8 @@ let g:VimuxOrientation = "v"
 let VimuxUseNearest = 1
 nnoremap <Leader>bo         :VimuxRunCommand "clear; "<Left>
 nnoremap <Leader>bf         :VimuxRunCommand "clear;  " . expand('%')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
-nnoremap <Leader>bb         :VimuxRunLastCommand<CR>
-nnoremap <Leader>bl         :VimuxRunLastCommand<CR>
+nnoremap <Leader>bb         :update<CR>:VimuxRunLastCommand<CR>
+nnoremap <Leader>bl         :update<CR>:VimuxRunLastCommand<CR>
 nnoremap <Leader>bq         :VimuxCloseRunner<CR>
 nnoremap <Leader>bx         :VimuxCloseRunner<CR>
 nnoremap <Leader>bz         :call VimuxZoomRunner()<CR>
