@@ -4,7 +4,7 @@
 
 [general]
 
-accounts = mail.de, gmail.com, web.de-pmoers
+accounts = onpage.org, mail.de, gmail.com, web.de-pmoers
 
 ui = ttyui
 fsync = False
@@ -30,6 +30,40 @@ footer = "\n"
 
 
 
+##############
+# onpage.org #
+##############
+
+[Account onpage.org]
+localrepository = onpage.org-local
+remoterepository = onpage.org-remote
+postsynchook = notmuch new
+
+[Repository onpage.org-local]
+type = Maildir
+localfolders = ~/.mutt/mail/onpage.org
+nametrans = lambda foldername: re.sub('sent', '[Gmail].Sent Mail',
+    re.sub('draft', '[Gmail].Drafts',
+    re.sub('trash', '[Gmail].Trash',
+    foldername)))
+
+[Repository onpage.org-remote]
+type = IMAP
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+auth_mechanisms = PLAIN, LOGIN
+remotehost = imap.gmail.com
+remoteuser = philipp.moers@onpage.org
+remotepasseval = get_password("onpage.org")
+nametrans = lambda foldername: re.sub('.*Sent.*', 'sent',
+    re.sub('.*Drafts', 'draft',
+    re.sub('.*Trash', 'trash',
+    foldername)))
+folderfilter = lambda folder: re.search('(^INBOX|Sent Mail$|Drafts$|Trash$)', folder)
+# TODO: only INBOX is synced that way. fix it!
+
+
+
 ###########
 # mail.de #
 ###########
@@ -37,7 +71,6 @@ footer = "\n"
 [Account mail.de]
 localrepository = mail.de-local
 remoterepository = mail.de-remote
-status_backend = sqlite
 postsynchook = notmuch new
 
 [Repository mail.de-local]
@@ -68,7 +101,6 @@ folderfilter = lambda folder: folder not in [
 [Account gmail.com]
 localrepository = gmail.com-local
 remoterepository = gmail.com-remote
-status_backend = sqlite
 postsynchook = notmuch new
 
 [Repository gmail.com-local]
@@ -118,7 +150,6 @@ nametrans = lambda folder: {
 [Account web.de-pmoers]
 localrepository = web.de-pmoers-local
 remoterepository = web.de-pmoers-remote
-status_backend = sqlite
 postsynchook = notmuch new
 
 [Repository web.de-pmoers-local]
@@ -150,7 +181,6 @@ folderfilter = lambda folder: folder in [
 [Account web.de-keinschweinehund]
 localrepository = web.de-keinschweinehund-local
 remoterepository = web.de-keinschweinehund-remote
-status_backend = sqlite
 postsynchook = notmuch new
 
 [Repository web.de-keinschweinehund-local]

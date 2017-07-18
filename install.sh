@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Author: Philipp Moers <soziflip@gmail.com>
+# Author: "Philipp Moers" <soziflip@gmail.com>
 
 
 function print_help_msg() {
@@ -25,6 +25,7 @@ EOF
 
 
 SUPPORTED_TARGETS=(\
+    autostart \
     bash \
     cmus \
     elinks \
@@ -43,6 +44,7 @@ SUPPORTED_TARGETS=(\
     ncmpcpp \
     pentadactyl \
     ranger \
+    sbt \
     sublime-text-3 \
     taskwarrior \
     telegram-cli \
@@ -53,6 +55,7 @@ SUPPORTED_TARGETS=(\
     urxvt \
     urlview \
     vim \
+    vimfx \
     vimpc \
     vimperator \
     vimus \
@@ -118,6 +121,21 @@ function create_link_for_target() {
     local TARGET="$1"
     case "$TARGET" in
 
+        autostart )
+            mkdir -p "$HOME/bin"
+            mkdir -p "$HOME/.config/autostart"
+            create_link "$PWD/autostart/clipmenud.sh" "$HOME/bin/autostart-clipmenud.sh"
+            create_link "$PWD/autostart/clipmenud.desktop" "$HOME/.config/autostart/clipmenud.desktop"
+            create_link "$PWD/autostart/numlockx.sh" "$HOME/bin/autostart-numlockx.sh"
+            create_link "$PWD/autostart/numlockx.desktop" "$HOME/.config/autostart/numlockx.desktop"
+            create_link "$PWD/autostart/setxkbmap.sh" "$HOME/bin/autostart-setxkbmap.sh"
+            create_link "$PWD/autostart/setxkbmap.desktop" "$HOME/.config/autostart/setxkbmap.desktop"
+            create_link "$PWD/autostart/syndaemon.sh" "$HOME/bin/autostart-syndaemon.sh"
+            create_link "$PWD/autostart/syndaemon.desktop" "$HOME/.config/autostart/syndaemon.desktop"
+            create_link "$PWD/autostart/unclutter.sh" "$HOME/bin/autostart-unclutter.sh"
+            create_link "$PWD/autostart/unclutter.desktop" "$HOME/.config/autostart/unclutter.desktop"
+            ;;
+
         bash )
             local sourcestring="source $PWD/bash/bashrc_sflip"
             if [[ $UNINSTALL != true ]]; then
@@ -141,7 +159,9 @@ function create_link_for_target() {
         fish )
             mkdir -p "$HOME/.config/fish"
             create_link "$PWD/fish/functions" "$HOME/.config/fish/functions"
+            create_link "$PWD/fish/completions" "$HOME/.config/fish/completions"
             create_link "$PWD/fish/config.fish" "$HOME/.config/fish/config.fish"
+            create_link "$PWD/fish/abbr.fish" "$HOME/.config/fish/abbr.fish"
             ;;
 
         ghci )
@@ -207,7 +227,7 @@ function create_link_for_target() {
             mkdir -p "$HOME/.mutt/mail"
             mkdir -p "$HOME/.mutt/cache"
             mkdir -p "$HOME/.mutt/credentials"
-            create_link "$PWD/mutt/muttrc" "$HOME/mutt/muttrc"
+            create_link "$PWD/mutt/muttrc" "$HOME/.mutt/muttrc"
             create_link "$PWD/mutt/accounts" "$HOME/.mutt/accounts"
             create_link "$PWD/mutt/keybindings.muttrc" "$HOME/.mutt/keybindings.muttrc"
             create_link "$PWD/mutt/colors" "$HOME/.mutt/colors"
@@ -245,6 +265,12 @@ function create_link_for_target() {
             create_link "$PWD/ranger/scope.sh" "$HOME/.config/ranger/scope.sh"
             chmod u+x "$HOME/.config/ranger/scope.sh"
             create_link "$PWD/ranger/colorschemes" "$HOME/.config/ranger/colorschemes"
+            ;;
+
+        sbt )
+            create_link "$PWD/sbt/sbtconfig" "$HOME/.sbtconfig"
+            mkdir -p "$HOME/.sbt/plugins"
+            create_link "$PWD/sbt/plugins.sbt" "$HOME/.sbt/0.13/plugins/plugins.sbt"
             ;;
 
         sublime-text-3 )
@@ -297,6 +323,7 @@ function create_link_for_target() {
                 grep "$sourcestring" "$HOME/.Xresources" > /dev/null || echo "$sourcestring" >> "$HOME/.Xresources"
                 xrdb -all "$HOME/.Xresources"
             else
+                touch "$HOME/.Xresources"
                 sed -i -- "/^${sourcestring//\//\\/}$/d" "$HOME/.Xresources"
             fi
             ;;
@@ -304,6 +331,8 @@ function create_link_for_target() {
         vim )
             create_link "$PWD/vim/vimrc" "$HOME/.vimrc"
             create_link "$PWD/vim/gvimrc" "$HOME/.gvimrc"
+            create_link "$PWD/vim/ctags" "$HOME/.ctags"
+            create_link "$PWD/vim/eslintrc.json" "$HOME/.eslintrc.json"
             mkdir -p "$HOME/.vim"
             mkdir -p "$HOME/.vim/undodir"
             create_link "$PWD/vim/vim/sflipsnippets" "$HOME/.vim/sflipsnippets"
@@ -313,6 +342,19 @@ function create_link_for_target() {
             create_link "$PWD/vim/vim/filetype.vim" "$HOME/.vim/filetype.vim"
             mkdir -p "$HOME/bin"
             create_link "$PWD/vim/bin/goobook-query-mail.sh" "$HOME/bin/goobook-query-mail.sh"
+            ;;
+
+        vimfx )
+            mkdir -p "$HOME/.config/vimfx"
+            create_link "$PWD/vimfx/config.js" "$HOME/.config/vimfx/config.js"
+            create_link "$PWD/vimfx/frame.js" "$HOME/.config/vimfx/frame.js"
+            local sourcestring="@import url("\""$PWD/vimfx/userChrome.css"\"");"
+            local userChromeCssFilepath=$(find ~/.mozilla/firefox -name userChrome.css)
+            if [[ $UNINSTALL != true ]]; then
+                grep "${sourcestring}" "${userChromeCssFilepath}" > /dev/null || echo "$sourcestring" >> "${userChromeCssFilepath}"
+            else
+                sed -i -- "/^${sourcestring//\//\\/}$/d" "${userChromeCssFilepath}"
+            fi
             ;;
 
         vimpc )
@@ -341,7 +383,9 @@ function create_link_for_target() {
             ;;
 
         xkb )
-            create_link "$PWD/xkb/symbols/de_sflip" "/usr/share/X11/xkb/symbols/de_sflip"
+            if [[ $(whoami) = 'root' ]]; then
+                create_link "$PWD/xkb/symbols/de_sflip" "/usr/share/X11/xkb/symbols/de_sflip"
+            fi
             setxkbmap de_sflip
             ;;
 
@@ -387,7 +431,7 @@ function package_install_target() {
             ;;
 
         mutt )
-            LIST_OF_SYSTEM_PACKAGES="mutt msmtp offlineimap notmuch notmuch-mutt goobook"
+            LIST_OF_SYSTEM_PACKAGES="mutt msmtp offlineimap notmuch notmuch-mutt goobook elinks"
             ;;
 
         taskwarrior )

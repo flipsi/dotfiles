@@ -39,6 +39,7 @@ set refresh-mode = auto
 # 'unbindings'
 bind generic g none
 bind main    G none
+bind generic p none
 
 # quit
 bind generic <C-D> quit
@@ -73,6 +74,7 @@ bind generic <Esc>j move-half-page-down
 bind generic <Esc>k move-half-page-up
 bind generic gg     move-first-line
 bind generic G      move-last-line
+bind main    G      move-last-line
 bind generic m maximize
 
 # search
@@ -83,6 +85,8 @@ bind generic Ö search-back
 #bind stage <Enter> :/^@@
 
 # add/stage/unstage and commit
+bind status a status-update
+bind stage  a status-update
 bind status s status-update
 bind stage  s status-update
 bind status c !git commit
@@ -112,10 +116,17 @@ bind refs m ?git merge %(branch)
 bind refs b !git checkout -b %(prompt)
 bind refs d ?git branch -d %(branch)
 
+# rename branch
+bind refs R ?git branch -m %(branch) %(prompt)
+
+# copy commit id to clipboard
+bind generic y !bash -c "printf %(commit) | xsel -b"
+
 # remote commands
 bind generic f !git fetch
-bind generic p !git pull
-bind generic P !git push
+bind generic pp !git pull
+bind generic pu !git push
+bind generic pU !git push -u %(remote) %(branch)
 
 
 # more/less context

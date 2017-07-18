@@ -20,7 +20,6 @@
 # Fontawesome (ttf-font-awesome package)
 # compton
 # unclutter
-# syndaemon
 # numlockx
 
 # my shellscripts [https://github.com/sflip/shellscripts]
@@ -35,10 +34,13 @@ set $SHELLSCRIPT_PATH /home/sflip/shellscripts
 ###############################################################################
 
 # some setup logic I rather do with a shell script
-exec "/home/sflip/bin/i3-initialize.sh"
+exec "/home/sflip/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"
 
 # set keyboard layout
 exec "setxkbmap de_sflip"
+
+# turn on num block
+exec --no-startup-id "numlockx"
 
 # turn off pc speaker with annoying beep
 exec "xset -b"
@@ -55,8 +57,9 @@ exec "xset dpms 0 0 0 && xset s noblank && xset s off"
 # composite manager for window overlays, smooth workspace changes, etc.
 exec --no-startup-id "compton -b"
 
-# turn on num block
-exec --no-startup-id "numlockx"
+# clipboard can have multiple entries
+# exec --no-startup-id "clipmenud"
+
 
 # power manager takes care of lid closing, standby, display brightness etc.
 exec --no-startup-id "xfce4-power-manager"
@@ -70,7 +73,7 @@ exec --no-startup-id "xfsettingsd --sm-client-disable"
 # exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
 
 # hide mouse cursor
-exec --no-startup-id unclutter -idle 4 -jitter 30
+# exec --no-startup-id unclutter -idle 4 -jitter 30
 
 # disable touchpad at start
 # exec --no-startup-id "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
@@ -78,7 +81,10 @@ exec --no-startup-id unclutter -idle 4 -jitter 30
 # exec --no-startup-id "xinput --set-prop 'FocalTechPS/2 FocalTech FocalTech Touchpad' 'Device Enabled' 0"
 
 # disable touchpad when typing
-exec --no-startup-id "syndaemon -d -k -i 1.2"
+# exec --no-startup-id "syndaemon -d -k -i 1.2"
+
+
+# (ALSO SEE 'autostart' TARGET IN DOTFILES!)
 
 
 
@@ -131,6 +137,27 @@ mode "$refresh" {
     bindsym Escape mode "default"
 }
 
+# change keyboard layout
+bindsym $mod+Shift+F6 mode "$change_keyboard_layout"
+set $change_keyboard_layout Keyboard layout: (F1) de (F2) de_sflip (F3) us (F4) neo (F5) dvorak (F6) programmer dvorak
+mode "$change_keyboard_layout" {
+    bindsym $mod+Shift+F6 exec "setxkbmap de_sflip"; mode "default"
+    bindsym F1 exec "setxkbmap de"; mode "default"
+    bindsym F2 exec "setxkbmap de_sflip"; mode "default"
+    bindsym F3 exec "setxkbmap us"; mode "default"
+    bindsym F4 exec "setxkbmap neo"; mode "default"
+    bindsym F5 exec "setxkbmap dvorak"; mode "default"
+    bindsym F6 exec "setxkbmap -layout us -variant dvp"; mode "default"
+    # cancel
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+# show keyboard layout
+set $keyboard_layout_image_source http://programmer-dvorak.appspot.com/img/KB_Programmer_Dvorak.png
+set $keyboard_layout_image /home/sflip/img/KB_Programmer_Dvorak.png
+exec "test -f $keyboard_layout_image || $( sleep 20 && curl $keyboard_layout_image_source > $keyboard_layout_image )"
+bindsym $mod+F6 exec --no-startup-id "pkill -fx 'sxiv $keyboard_layout_image' || sxiv $keyboard_layout_image"
+
 
 
 ###############################################################################
@@ -142,6 +169,8 @@ mode "$refresh" {
 # i3 is a window manager and hence has nothing to do with wallpapers
 # since desktops set their own, we still set a wallpaper here
 exec --no-startup-id "feh --bg-scale ~/.i3/wallpaper"
+exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
+bindsym $mod+F7 exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
 
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -235,6 +264,30 @@ bindsym $mod+Shift+b bar mode toggle
 
 set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
 
+
+
+
+###############################################################################
+###########  HELPER  ##########################################################
+###############################################################################
+
+# do something with the clipboard
+bindsym $mod+c mode "$mode_clipboard"
+set $mode_clipboard Clipboard: (c) choose (p) get password
+mode "$mode_clipboard" {
+    bindsym $mod+c exec --no-startup-id "clipmenu $DMENU_OPTIONS"; mode "default";
+    bindsym      c exec --no-startup-id "clipmenu $DMENU_OPTIONS"; mode "default";
+    bindsym Shift+p exec --no-startup-id "passmenu $DMENU_OPTIONS"; mode "default";
+    bindsym       p exec --no-startup-id "rofi-pass $ROFI_OPTIONS"; mode "default";
+    # cancel
+    bindsym $mod+Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+
+
 ###############################################################################
 ###########  SYSTEM  ##########################################################
 ###############################################################################
@@ -249,11 +302,11 @@ set $mode_system Want to leave?  (e) logout, (u) switch user, (l) lock, (s) susp
 mode "$mode_system" {
     bindsym e exit
     bindsym u exec --no-startup-id "i3exit switch_user"; mode "default"
-    bindsym l exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper"; mode "default"
-    bindsym s exec --no-startup-id "i3exit suspend"; mode "default"
-    bindsym h exec --no-startup-id "i3exit hibernate"; mode "default"
-    bindsym r exec --no-startup-id "i3exit reboot"
-    bindsym p exec --no-startup-id "i3exit shutdown"
+    bindsym l exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper.png # has to be png"; mode "default"
+    bindsym s exec --no-startup-id "systemctl suspend"; mode "default"
+    bindsym h exec --no-startup-id "systemctl hibernate"; mode "default"
+    bindsym r exec --no-startup-id "systemctl reboot"
+    bindsym p exec --no-startup-id "systemctl poweroff
     bindsym o exec --no-startup-id "/home/sflip/bin/i3-terminate.sh"; exec --no-startup-id "i3-nagbar -t warning -m 'About to Poweroff... ' -b Abort 'pkill -f i3-terminate.sh'"; mode "default"
     # cancel
     bindsym $mod+Escape mode "default"
@@ -297,19 +350,19 @@ bindsym $mod+0 mode "$mpd_control"
 #set $mpd_control MPD: (space) play/pause, (n) next, (p) prev, (s) stop, (c) last, (+/-) volume
 set $mpd_control MPD Control
 mode "$mpd_control" {
-    bindsym space exec --no-startup-id "mpc toggle"; exec "$UPDATE_STATUSBAR"
-    bindsym n     exec --no-startup-id "mpc next"; exec "$UPDATE_STATUSBAR"
-    bindsym o     exec --no-startup-id "mpc next"; exec "$UPDATE_STATUSBAR"
-    bindsym p     exec --no-startup-id "mpc prev"; exec "$UPDATE_STATUSBAR"
-    bindsym O     exec --no-startup-id "mpc prev"; exec "$UPDATE_STATUSBAR"
-    bindsym s     exec --no-startup-id "mpc stop"; mode "default"; exec "$UPDATE_STATUSBAR"
-    bindsym BackSpace exec --no-startup-id "mpc stop"; mode "default"; exec "$UPDATE_STATUSBAR"
-    bindsym c     exec --no-startup-id "mpc crop"; mode "default"; exec "$UPDATE_STATUSBAR"
-    bindsym minus exec --no-startup-id "mpc volume -1"; exec "$UPDATE_STATUSBAR"
-    bindsym plus  exec --no-startup-id "mpc volume +1"; exec "$UPDATE_STATUSBAR"
-    bindsym r     exec --no-startup-id "mpc random"
-    bindsym R     exec --no-startup-id "mpc random"
-    bindsym S     exec --no-startup-id "mpc single"
+    bindsym space            exec --no-startup-id "mpc toggle"; exec "$UPDATE_STATUSBAR"
+    bindsym n                exec --no-startup-id "mpc next"; exec "$UPDATE_STATUSBAR"
+    bindsym o                exec --no-startup-id "mpc next"; exec "$UPDATE_STATUSBAR"
+    bindsym p                exec --no-startup-id "mpc prev"; exec "$UPDATE_STATUSBAR"
+    bindsym O                exec --no-startup-id "mpc prev"; exec "$UPDATE_STATUSBAR"
+    bindsym s                exec --no-startup-id "mpc stop"; mode "default"; exec "$UPDATE_STATUSBAR"
+    bindsym BackSpace        exec --no-startup-id "mpc stop"; mode "default"; exec "$UPDATE_STATUSBAR"
+    bindsym c                exec --no-startup-id "mpc crop"; mode "default"; exec "$UPDATE_STATUSBAR"
+    bindsym minus            exec --no-startup-id "mpc volume -1"; exec "$UPDATE_STATUSBAR"
+    bindsym plus             exec --no-startup-id "mpc volume +1"; exec "$UPDATE_STATUSBAR"
+    bindsym r                exec --no-startup-id "mpc random"
+    bindsym R                exec --no-startup-id "mpc random"
+    bindsym Shift+S          exec --no-startup-id "mpc single"; mode "default"
     # cancel
     bindsym $mod+0 mode "default"
     bindsym Return mode "default"
@@ -320,9 +373,10 @@ mode "$mpd_control" {
 bindsym $mod+Shift+0 mode "$play_sound"
 set $play_sound Play sound: (j) Jeopardy, (s) Scream, (t) Tusch
 mode "$play_sound" {
-    bindsym j exec --no-startup-id "play /home/sflip/snd/jeopardy.mp3"; mode "default"
-    bindsym s exec --no-startup-id "play /home/sflip/snd/WilhelmScream.mp3"; mode "default"
-    bindsym t exec --no-startup-id "play /home/sflip/snd/tusch.mp3"; mode "default"
+    bindsym j                exec --no-startup-id "play /home/sflip/snd/jeopardy.mp3"; mode "default"
+    bindsym s                exec --no-startup-id "play /home/sflip/snd/WilhelmScream.mp3"; mode "default"
+    bindsym t                exec --no-startup-id "play /home/sflip/snd/tusch.mp3"; mode "default"
+    bindsym BackSpace        exec --no-startup-id "pkill -f 'play /home/sflip/snd/'"; mode "default"
     # cancel
     bindsym $mod+Shift+0 mode "default"
     bindsym Return mode "default"
@@ -394,15 +448,15 @@ assign [class="(?i)ardour"]             
 default_orientation vertical
 
 # new workspaces have this layout
-workspace_layout tabbed
+workspace_layout stacked
 
 
 # start a terminal
 bindsym $mod+o mode "$terminal"
 set $terminal Open a terminal: (o) default (u) urxvt (k) konsole (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
 mode "$terminal" {
-    bindsym o       exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
-    bindsym $mod+o  exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
+    bindsym o       exec --no-startup-id "gnome-terminal --hide-menubar --command='tmux -2 new-session -A -s main'"; mode "default"
+    bindsym $mod+o  exec --no-startup-id "gnome-terminal --hide-menubar --command='tmux -2 new-session -A -s main'"; mode "default"
     bindsym u       exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
     bindsym Shift+u exec --no-startup-id "urxvt"; mode "default"
     bindsym k       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower -e 'tmux -2 new-session -A -s main'"; mode "default"

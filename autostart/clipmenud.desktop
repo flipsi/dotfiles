@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=clipmenud
+GenericName=clipmenud
+Comment=Clipboard Manager
+Exec=/home/sflip/bin/autostart-clipmenud.sh
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true

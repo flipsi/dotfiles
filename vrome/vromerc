@@ -1,0 +1,129 @@
+""" .vromerc
+""" as a remote file (local files are deprecated according to
+""" https://github.com/jinzhu/vrome/wiki/Customize-Vrome
+
+
+
+" SETTINGS
+
+
+" customize next/prev page pattern
+set nextpattern=["Next Page", "^\\s*Next\\s*$", "^>$", "^More$", "(^(>>|››|»)\\|?)|((»|››|>>)\\|?$)"]
+set previouspattern=["Previous Page", "^\\s*Prev(ious)?\\s*$", "^<$", "(^(<<|‹‹|«)\\|?)|((<<|‹‹|«)\\|?$)"]
+
+
+" set no status line -- i.e keys don't show as you type. enabled by default
+" set showstatus=0
+
+" search engines
+set searchengines ={"duckduckgo":"https://duckduckgo.com/?q={{keyword}}&ia=about"}
+set searchengines+={"google":"https://www.google.com/search?q={{keyword}}"}
+set searchengines+={"wikipedia":"https://www.wikipedia.org/wiki/Special:Search/{{keyword}}"}
+
+" Change default search engine, default is google.
+set defaultsearch=duckduckgo
+
+" Follow new opened tab or not. 1 follow, 0 doesn't
+set follow_new_tab=1
+
+" Disable autocomplete
+" set noautocomplete
+
+" Disable autofocusing of elements during page load
+set disable_autofocus
+
+" Disable Vrome in those sites
+set disablesites+=mail.google.com
+set disablesites+=reader.google.com
+
+" Set your hintkeys instead of the default 0123456789
+" set hintkeys=jlkhfsdagwerui
+set hintkeys=fjdkslghaöeiruncmv
+set useletters=1
+
+" The server port is what external server running on
+" The external server is used to support launch the external editor in insert mode.
+" Please refer "Support External Editor" https://github.com/jinzhu/vrome/wiki/Support-External-Editor for more
+set server_port=30000
+
+" editor (e.g. to edit source with gF or edit textfield with <C-i>)
+set editor='gvim -f'
+
+
+" QuickMarks
+set qm_a  https://www.fromatob.com/
+set qm_b  https://www.banking-rb-mnord.de/banking-private/entry
+set qm_c  http://catchinside.de/index.php?option=com_users&view=login
+set qm_d  http://drive.google.com/drive/
+set qm_e  http://www.heise.de/
+set qm_f  https://de-de.facebook.com/groups/901248313307453/
+set qm_g  https://github.com/
+set qm_h  https://www.heute.de/
+set qm_l  http://localhost/~sflip/projects/
+set qm_n  https://www.zdf.de/sendung-verpasst#abends
+set qm_o  https://stackoverflow.com/users/login
+set qm_p  http://sflip.bplaced.de/
+set qm_q  https://docs.google.com/spreadsheets/d/17QbADpr9nn7VAdhotSqMic64NTFAM3o-qTYI3qDPdvw/edit#gid=0
+set qm_s  https://scholar.google.com/
+set qm_t  https://twitter.com/
+set qm_v  http://www.hoerzu.de/tv-programm/
+set qm_wc https://onpage.atlassian.net/wiki/discover/all-updates
+set qm_wg https://github.com/onpage-org/
+set qm_wj https://onpage.atlassian.net/projects/DEV/issues
+set qm_y  https://accounts.google.com/ServiceLogin?uilel=3&service=youtube&passive=true&continue=http%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26nomobiletemp%3D1%26hl%3Dde_DE%26next%3D%252F&hl=de_DE&ltmpl=sso
+set qm_z  http://fishshell.com/docs/current/index.html
+set qm_3  http://i3wm.org/docs/userguide.html
+
+
+
+" KEYBINDINGS
+
+
+" Scrolling
+map <M-j> <C-d>
+map <M-k> <C-u>
+
+" zooming
+map + zI
+map - zO
+
+" move in history
+map <M-u> H
+map <M-S-u> L
+
+" follow link in new tab
+map l F
+
+" switch tabs
+map <M-n> gt
+map <M-p> gT
+imap <M-n> <Esc>:gt
+imap <M-p> <Esc>gT
+
+" LRU tab
+map <M-Space> <C-^>
+imap <M-Space> <Esc><C-^>
+
+" move tab
+map <M-S-p> :tabmove -1<CR>
+map <M-S-n> :tabmove +1<CR>
+
+" close tab
+" map dd :quit<CR>
+map dd dc
+
+" Dialog Extend Mode, Change hotkey for go next / previous / next 10 / previous 10 matched item in autocomplete
+set autocomplete_prev=<S-Tab>
+set autocomplete_next=<Tab>
+set autocomplete_prev_10=<Up>
+set autocomplete_next_10=<Down>
+
+
+" search
+map ö /
+
+
+
+
+
+" vim:syntax=vim:ft=vim:

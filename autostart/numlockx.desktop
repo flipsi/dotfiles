@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=numlockx
+GenericName=numlockx
+Comment=Enable Num Block
+Exec=/home/sflip/bin/autostart-numlockx.sh
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true

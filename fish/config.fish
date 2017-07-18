@@ -28,16 +28,24 @@ if status --is-login
     # setup fzf to use ag instead of find
     set -x FZF_DEFAULT_COMMAND 'ag -g ""'
 
-    # music player daemon
+    # # music player daemon
     # if test $hostname = "asterix"
     #     set -x MPD_HOST (ifconfig wlan0 | grep 'inet ' | sed 's/.*addr:\(.*\)  Bcast.*/\1/')
+    # else
+        # set -x MPD_HOST $hostname
+        set -x MPD_HOST localhost
     # end
-    set -x MPD_HOST $hostname
 
 
     # keychain takes care of ssh-agent and can also do gpg
-    if test $hostname = "asterix" -o $hostname = "obelix"
+    if command -v keychain >/dev/null
         eval (command keychain --eval --quiet ~/.ssh/id_rsa)
+    end
+
+    # abbreviations
+    if not set -q __abbr_init
+      set -gx __abbr_init
+      source $HOME/.config/fish/abbr.fish
     end
 
 
