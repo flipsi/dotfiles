@@ -2824,6 +2824,8 @@ nnoremap D 0d$j
 " select last pasted/edited text
 nnoremap gV `[v`]
 
+" change case of word under cursor
+nnoremap cC viw~
 
 " autocompletion
 inoremap <M-.>  <C-N>
