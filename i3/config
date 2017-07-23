@@ -479,7 +479,7 @@ mode "$terminal" {
 # launch an application (that has a .desktop-file)
 # bindsym $mod+Return exec --no-startup-id "i3-dmenu-desktop -dmenu='dmenu $DMENU_OPTIONS'"
 # bindsym $mod+Return exec --no-startup-id "rofi -show drun $ROFI_OPTIONS"
-bindsym $mod+Return exec --no-startup-id "rofi -combi-modi window,drun -show combi $ROFI_OPTIONS"
+bindsym $mod+Return exec --no-startup-id "rofi -show combi -combi-modi window,drun $ROFI_OPTIONS"
 
 # launch any application
 # bindsym $mod+Shift+Return exec --no-startup-id "dmenu_run $DMENU_OPTIONS"
