@@ -426,6 +426,7 @@ assign [class="(?i)chrom"]              Chrömchen
 assign [class="(?i)firefox"]            Fuchs
 assign [class="(?i)pale moon"]          Web
 assign [class="(?i)thunderbird"]        Mail
+assign [class="(?i)filezilla"]          Filezilla
 #assign [class="(?i)subl"]               Sublime
 assign [class="(?i)jetbrains-idea"]     Development
 assign [class="Telegram"]               Telegram
