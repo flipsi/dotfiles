@@ -193,7 +193,7 @@ source $my_muttdir/accounts/$my_default_account.muttrc
 # source $my_muttdir/mailboxes
 ## ...instead of the the above, add them manually (i don't want every synced folder)
 mailboxes \
-    =onpage.org/INBOX \
+    =ryte.com/INBOX \
     =mail.de/INBOX \
     =gmail.com/INBOX \
     =web.de-pmoers/INBOX \
