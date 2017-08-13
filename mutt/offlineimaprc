@@ -4,7 +4,7 @@
 
 [general]
 
-accounts = onpage.org, mail.de, gmail.com, web.de-pmoers
+accounts = ryte.com, mail.de, gmail.com, web.de-pmoers
 
 ui = ttyui
 fsync = False
@@ -31,30 +31,30 @@ footer = "\n"
 
 
 ##############
-# onpage.org #
+# ryte.com #
 ##############
 
-[Account onpage.org]
-localrepository = onpage.org-local
-remoterepository = onpage.org-remote
+[Account ryte.com]
+localrepository = ryte.com-local
+remoterepository = ryte.com-remote
 postsynchook = notmuch new
 
-[Repository onpage.org-local]
+[Repository ryte.com-local]
 type = Maildir
-localfolders = ~/.mutt/mail/onpage.org
+localfolders = ~/.mutt/mail/ryte.com
 nametrans = lambda foldername: re.sub('sent', '[Gmail].Sent Mail',
     re.sub('draft', '[Gmail].Drafts',
     re.sub('trash', '[Gmail].Trash',
     foldername)))
 
-[Repository onpage.org-remote]
+[Repository ryte.com-remote]
 type = IMAP
 ssl = yes
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 auth_mechanisms = PLAIN, LOGIN
 remotehost = imap.gmail.com
-remoteuser = philipp.moers@onpage.org
-remotepasseval = get_password("onpage.org")
+remoteuser = p.moers@ryte.com
+remotepasseval = get_password("ryte.com")
 nametrans = lambda foldername: re.sub('.*Sent.*', 'sent',
     re.sub('.*Drafts', 'draft',
     re.sub('.*Trash', 'trash',

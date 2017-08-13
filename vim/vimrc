@@ -1047,7 +1047,7 @@ Plugin 'Olical/vim-enmasse'
 
 
 " automatically resize quickfix window
-Plugin 'blueyed/vim-qf_resize'
+" Plugin 'blueyed/vim-qf_resize'
 
 " let g:qf_resize_min_height = 1
 let g:qf_resize_max_height = 5
@@ -1765,7 +1765,8 @@ if s:MyMode == 'mastery'
     " let g:airline_theme='kalisi'
     " let g:airline_theme='laederon'
     " let g:airline_theme='lucius'
-    let g:airline_theme='minimalist'
+    " let g:airline_theme='minimalist'
+    let g:airline_theme='raven'
     " let g:airline_theme='serene'
     " let g:airline_theme='tomorrow'
     " let g:airline_theme='ubaryd'
@@ -2464,10 +2465,11 @@ nnoremap vv V
 vnoremap v <C-c>
 
 
-" copy to clipboard / primary selection in visual mode
-vnoremap         <C-c>     "*ygv"+y
-nnoremap         <C-c>    V"*ygv"+y
+" copy to clipboard / primary selection
+nnoremap         <C-c>     "+y
+nnoremap    <C-c><C-c>    V"*ygv"+y
 nnoremap <Leader><C-c> ggVG"*ygv"+y<C-o><C-o>
+vnoremap         <C-c>     "*ygv"+y
 
 " paste from clipboard / primary selection {{{
 function! PasteFromGUI()

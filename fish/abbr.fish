@@ -10,8 +10,10 @@ abbr gd     git diff
 abbr gda    git diff --cached
 abbr gdc    git diff --cached
 abbr ge     git checkout
+abbr gf     git fetch --prune
 abbr gl     tig log
 abbr glh    git --no-pager log -n 1
+abbr gli    git --no-pager log -n 1 \| head -n 1 \| cut -d\" \" -f2 \| xsel --clipboard
 abbr go     git clone --recursive
 abbr gpp    git pull
 abbr gpu    git push
@@ -21,6 +23,9 @@ abbr gs     git status
 abbr gsa    git stash save
 abbr gsi    git stash save --include-untracked
 abbr gsp    git stash pop
+abbr gu     git submodule
+abbr gus    git submodule status
+abbr gup    git submodule update
 abbr k      setxkbmap de_sflip
 abbr h      htop
 abbr l      less
@@ -38,12 +43,18 @@ abbr rrm    rm -rf
 abbr se     sudoedit
 abbr t      translate-shell :de
 abbr te     translate-shell de:en
+abbr tf     translate-shell de:fr
 abbr v      vim
 abbr x      xrandr
-abbr yo     systemctl start
-abbr yp     systemctl stop
-abbr ys     systemctl status
+abbr xo     xrandr --output
+abbr s      systemctl status
+abbr sa     systemctl start
+abbr sd     systemctl disable
+abbr se     systemctl enable
+abbr so     systemctl stop
+abbr u      unison
 abbr y      yaourt
 abbr yr     yaourt -R
+abbr ys     yaourt -S
 abbr yu     yaourt -Syu --noconfirm
 abbr yua    yaourt -Syua --noconfirm

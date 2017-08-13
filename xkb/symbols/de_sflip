@@ -97,4 +97,9 @@ xkb_symbols "basic" {
     key <AB09>	{ [ period, colon,      greater,    dollar 	    ] };
     key <AB10>  { [ minus,  underscore, slash,      question    ] };
 
+
+    // write backticks more easily
+
+    key <AD01> { [ q,       Q,          at,         grave       ] };
+
 };
