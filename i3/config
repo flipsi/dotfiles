@@ -385,10 +385,10 @@ mode "$play_sound" {
 }
 
 # take a screenshot
-bindsym $mod+Print       exec --no-startup-id "xfce4-screenshooter --fullscreen --save ~/img-screenshots"
-bindsym      Print       exec --no-startup-id "xfce4-screenshooter --fullscreen --save ~/img-screenshots"
-bindsym $mod+Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen --open krita"
-bindsym      Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen --open krita"
+bindsym $mod+Print       exec --no-startup-id "xfce4-screenshooter --window --save ~/img-screenshots"
+bindsym      Print       exec --no-startup-id "xfce4-screenshooter --window --save ~/img-screenshots"
+bindsym $mod+Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen --save ~/img-screenshots""
+bindsym      Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen --save ~/img-screenshots""
 
 
 
