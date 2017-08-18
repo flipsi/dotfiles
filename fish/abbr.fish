@@ -49,9 +49,8 @@ abbr x      xrandr
 abbr xo     xrandr --output
 abbr s      systemctl status
 abbr sa     systemctl start
-abbr sd     systemctl disable
-abbr se     systemctl enable
 abbr so     systemctl stop
+abbr sr     systemctl restart
 abbr u      unison
 abbr y      yaourt
 abbr yr     yaourt -R
