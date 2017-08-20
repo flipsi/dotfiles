@@ -24,9 +24,8 @@ abbr gsa    git stash save
 abbr gsi    git stash save --include-untracked
 abbr gsp    git stash pop
 abbr gu     git submodule
-abbr gus    git submodule status
 abbr gup    git submodule update
-abbr k      setxkbmap de_sflip
+abbr gus    git submodule status
 abbr h      htop
 abbr l      less
 abbr ll     ls -lhF
@@ -35,23 +34,23 @@ abbr m      man
 abbr o      open
 abbr p      pass
 abbr pe     pass edit
+abbr pg     pgrep
 abbr pgp    pass git pull
 abbr pgpu   pass git push
-abbr pg     pgrep
 abbr pk     pkill
 abbr rrm    rm -rf
 abbr se     sudoedit
-abbr t      translate-shell :de
-abbr te     translate-shell de:en
-abbr tf     translate-shell de:fr
-abbr v      vim
-abbr x      xrandr
-abbr xo     xrandr --output
 abbr s      systemctl status
 abbr sa     systemctl start
 abbr so     systemctl stop
 abbr sr     systemctl restart
+abbr t      translate-shell :de
+abbr te     translate-shell de:en
+abbr tf     translate-shell de:fr
 abbr u      unison
+abbr v      vim
+abbr x      xrandr
+abbr xo     xrandr --output
 abbr y      yaourt
 abbr yr     yaourt -R
 abbr ys     yaourt -S
