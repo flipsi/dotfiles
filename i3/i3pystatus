@@ -58,7 +58,7 @@ status.register("battery",
     status = {
         "DIS": "DISCHARGING",
         "CHR": "CHARGING",
-        "FULL": "",
+        "FULL": "FULL",
     },
     on_leftclick = "xfce4-power-manager-settings",
     color = COLOR_DEFAULT,
