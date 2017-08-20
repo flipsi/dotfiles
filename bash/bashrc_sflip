@@ -9,6 +9,10 @@ alias ..='cd ..'
 
 alias g='grep --with-filename --line-number --recursive --ignore-case --extended-regexp'
 
+alias gs='git status'
+
+alias h='htop'
+
 # (also note lesskey configuration)
 alias l='less'
 
@@ -23,4 +27,5 @@ if [ -t 1 ]; then
     bind '"\es":"ll; echo; git status --short 2>/dev/null\n"'
 fi
 
-
+# allow aliases with sudo
+alias sudo='sudo '
