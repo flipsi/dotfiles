@@ -1252,13 +1252,18 @@ Plugin 'Chiel92/vim-autoformat'
 
 " install formatters on the system:
 " - js-beautify (for HTML, CSS, JavaScript, JSON)
+" - scalafmt (for scala)
 
 nnoremap -af :Autoformat<CR>
 vnoremap -af :Autoformat<CR>
 nmap <Leader>af -af
 vmap <Leader>af -af
 
-" the shit above does not work for json. do this instead:
+let g:formatdef_scalafmt = "'scalafmt --stdin'"
+let g:formatters_scala = ['scalafmt']
+
+
+" autoformat for json does not work out with the plugin above. do this instead:
 augroup json_map_autoformat
     au!
     au FileType json nnoremap -af :%!python -m json.tool<CR>
