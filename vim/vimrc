@@ -1470,14 +1470,14 @@ function! SetupScala()
                 " \%E\ \%#[info]\ %.%#\ was\ not\ equal\ to\ %.%#\ (%f:%l),%Z,
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
-    nnoremap <Leader>bd  :call MakeWithVimux("clear; sbt -Dsbt.log.noformat=true compile")<CR>
-    nnoremap <Leader>btt :call MakeWithVimux("clear; sbt -Dsbt.log.noformat=true test it:test")<CR>
-    nnoremap <Leader>btu :call MakeWithVimux("clear; sbt -Dsbt.log.noformat=true test")<CR>
-    nnoremap <Leader>bti :call MakeWithVimux("clear; sbt -Dsbt.log.noformat=true it:test")<CR>
-    nnoremap <Leader>btT :call VimuxRunCommand("clear; sbt test it:test")<CR>
-    nnoremap <Leader>btU :call VimuxRunCommand("clear; sbt test")<CR>
-    nnoremap <Leader>btI :call VimuxRunCommand("clear; sbt it:test")<CR>
-    nnoremap <Leader>bc  :call VimuxRunCommand("clear; sbt console")<CR>
+    nnoremap <Leader>bd  :call MakeWithVimux("set TERM xterm-color; clear; sbt -Dsbt.log.noformat=true compile")<CR>
+    nnoremap <Leader>btt :call MakeWithVimux("set TERM xterm-color; clear; sbt -Dsbt.log.noformat=true test it:test")<CR>
+    nnoremap <Leader>btu :call MakeWithVimux("set TERM xterm-color; clear; sbt -Dsbt.log.noformat=true test")<CR>
+    nnoremap <Leader>bti :call MakeWithVimux("set TERM xterm-color; clear; sbt -Dsbt.log.noformat=true it:test")<CR>
+    nnoremap <Leader>btT :call VimuxRunCommand("set TERM xterm-color; clear; sbt test it:test")<CR>
+    nnoremap <Leader>btU :call VimuxRunCommand("set TERM xterm-color; clear; sbt test")<CR>
+    nnoremap <Leader>btI :call VimuxRunCommand("set TERM xterm-color; clear; sbt it:test")<CR>
+    nnoremap <Leader>bc  :call VimuxRunCommand("set TERM xterm-color; clear; sbt console")<CR>
     nnoremap <Leader>bE  :call MakeWithVimuxOpenErrors('buffer')<CR>gg/\*\*\* FAILED \*\*\*<CR>
     nnoremap <Leader>fe  /\*\*\* FAILED \*\*\*<CR>
 endfunction
