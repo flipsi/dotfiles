@@ -106,6 +106,16 @@ status.register("network",
     interval = 4,
 )
 
+# online status
+status.register("shell",
+    command = "fping -q -c1 -t900 8.8.8.8 && echo 'ONLINE ' || (echo 'OFFLINE ' && false)",
+    interval = 9,
+    error_color = COLOR_RED,
+    on_leftclick = "nm-applet",
+    on_rightclick = "nm-connection-editor",
+    on_middleclick = "pkill nm-applet",
+)
+
 # Shows disk usage of /
 status.register("disk",
    path = "/home/",
