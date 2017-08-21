@@ -1493,6 +1493,16 @@ endfunction
 " augroup END
 
 
+" Language: SQL
+augroup sql_on_read
+    au!
+    au FileType sql call SetupSQL()
+augroup END
+function! SetupSQL()
+    nnoremap <Leader>bm  :call VimuxRunCommand("\\. " . expand('%:p'))<CR>
+    nnoremap <Leader>bp  :call VimuxRunCommand("\\i " . expand('%:p'))<CR>
+endfunction
+
 
 
 " }}}
