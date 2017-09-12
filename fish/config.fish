@@ -45,6 +45,9 @@ if status --is-login
       source $HOME/.config/fish/abbr.fish
     end
 
+    # configuration for fish-command-timer
+    set fish_command_timer_color        '#005F5F'
+    set fish_command_timer_time_format  '%b %d %I:%M%p'
 
     # correct typos the fun way
     # https://github.com/nvbn/thefuck

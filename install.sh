@@ -486,6 +486,16 @@ function package_install_target() {
 
         case "$TARGET" in
 
+            fish )
+                if test ! -d "$HOME/opt/fish-command-timer"; then
+                    echo "Installing fish-command-timer"
+                    mkdir -p "$HOME/opt/fish-command-timer/"
+                    curl https://raw.githubusercontent.com/jichu4n/fish-command-timer/master/conf.d/fish_command_timer.fish > "$HOME/opt/fish-command-timer/fish-command-timer.fish"
+                    mkdir -p "$HOME/.config/fish/conf.d/"
+                    create_link "$HOME/opt/fish-command-timer/fish-command-timer.fish" "$HOME/.config/fish/conf.d/"
+                fi
+                ;;
+
             git )
                 if test ! -d "$HOME/opt/git-amend-old"; then
                     echo "Installing git-amend-old"
