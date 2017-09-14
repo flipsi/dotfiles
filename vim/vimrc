@@ -2904,6 +2904,9 @@ vnoremap <silent> -j <Esc>:set fdm=manual<CR>gv:m '>+1<CR>gv=gv:set fdm=marker<C
 vnoremap <silent> -k <Esc>:set fdm=manual<CR>gv:m '<-2<CR>gv=gv:set fdm=marker<CR>
 
 
+" join line above (instead of below)
+nnoremap <Leader>J kddpkJ
+
 " split line (opposite of 'J'oin lines)
 " (regular 'S' can be done with 'cc' instead)
 nnoremap S i<CR><esc>
