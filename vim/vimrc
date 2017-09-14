@@ -1425,6 +1425,8 @@ endif
 
 Plugin 'derekwyatt/vim-scala'
 Plugin 'derekwyatt/vim-sbt'
+Plugin 'mdreves/vim-scaladoc'
+nnoremap <leader>sd :call scaladoc#Search(expand("<cword>"))<CR>
 
 " Plugin 'ensime/ensime-sbt', { 'branch': '2.0', 'for': 'scala' }
 " Plugin 'ensime/ensime-server', { 'branch': '2.0', 'for': 'scala' }
@@ -1476,9 +1478,12 @@ function! SetupScala()
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
     nnoremap <Leader>bd  :call MakeWithVimux("set TERM xterm-color; clear; sbt -Dsbt.log.noformat=true compile")<CR>
+    nnoremap <Leader>bs  :call MakeWithVimux("set TERM xterm-color; clear; sbt -Dsbt.log.noformat=true run")<CR>
     nnoremap <Leader>btt :call MakeWithVimux("set TERM xterm-color; clear; sbt -Dsbt.log.noformat=true test it:test")<CR>
     nnoremap <Leader>btu :call MakeWithVimux("set TERM xterm-color; clear; sbt -Dsbt.log.noformat=true test")<CR>
     nnoremap <Leader>bti :call MakeWithVimux("set TERM xterm-color; clear; sbt -Dsbt.log.noformat=true it:test")<CR>
+    nnoremap <Leader>bD  :call VimuxRunCommand("set TERM xterm-color; clear; sbt compile")<CR>
+    nnoremap <Leader>bS  :call VimuxRunCommand("set TERM xterm-color; clear; sbt run")<CR>
     nnoremap <Leader>btT :call VimuxRunCommand("set TERM xterm-color; clear; sbt test it:test")<CR>
     nnoremap <Leader>btU :call VimuxRunCommand("set TERM xterm-color; clear; sbt test")<CR>
     nnoremap <Leader>btI :call VimuxRunCommand("set TERM xterm-color; clear; sbt it:test")<CR>
@@ -1491,6 +1496,9 @@ endfunction
     " au!
     " au BufWritePost *.scala Dispatch! sbt -Dsbt.log.noformat=true parse
 " augroup END
+
+
+" TODO: find fzf scala docs
 
 
 " Language: SQL
