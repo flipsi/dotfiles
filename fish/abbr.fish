@@ -1,9 +1,19 @@
+abbr d      docker
+abbr da     docker-compose start
+abbr do     docker-compose stop
+abbr dce    docker-compose exec
+abbr dcl    docker-compose logs
+abbr dcp    docker-compose pull
+abbr dcu    docker-compose up
 abbr fi     fzf_wrapper --find --ranger
 abbr fl     fzf_wrapper --locate --ranger
 abbr g      git
 abbr ga     git add
 abbr gaa    git add --all
 abbr gb     git branch --verbose
+abbr gbd    git branch -d
+abbr gbD    git branch -D
+abbr gbm    git branch -m
 abbr gc     git commit
 abbr gca    git commit --amend
 abbr gd     git diff
@@ -16,8 +26,8 @@ abbr glh    git --no-pager log -n 1
 abbr gli    git --no-pager log -n 1 \| head -n 1 \| cut -d\" \" -f2 \| xsel --clipboard
 abbr go     git clone --recursive
 abbr gpp    git pull
-abbr gpu    git push
-abbr gpU    git push -u
+abbr gpu    git push -u
+abbr gpU    git push
 abbr gr     grep --with-filename --line-number --recursive --ignore-case --extended-regexp
 abbr gs     git status
 abbr gsa    git stash save
