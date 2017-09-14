@@ -22,7 +22,7 @@ path="$1"    # Full path of the selected file
 width="$2"   # Width of the preview pane (number of fitting characters)
 height="$3"  # Height of the preview pane (number of fitting characters)
 
-maxln=200    # Stop after $maxln lines.  Can be used like ls | head -n $maxln
+maxln=5000    # Stop after $maxln bytes.
 
 # Find out something about the file:
 mimetype=$(file --mime-type -Lb "$path")
@@ -37,7 +37,7 @@ try() { output=$(eval '"$@"'); }
 dump() { echo "$output"; }
 
 # a common post-processing function used after most commands
-trim() { head -n "$maxln"; }
+trim() { head -c "$maxln"; }
 
 # wraps highlight to treat exit code 141 (killed by SIGPIPE) as success
 highlight() { command highlight "$@"; test $? = 0 -o $? = 141; }
@@ -75,7 +75,7 @@ case "$mimetype" in
         # try highlight --out-format=ansi -i "$path" && { dump | trim; exit 5; }
         try highlight --out-format=ansi < "$path" && { dump | trim; exit 5; }
         # try /home/sflip/src/godlygeek/vim-files/macros/vimcat.sh "$path" && { dump | trim; exit 5; }
-        try cat "$path" && { dump | trim | fmt -s -w $width; exit 5; }
+        try head -c "$maxln" "$path" && { dump | trim | fmt -s -w $width; exit 5; }
         exit 2;;
     # Ascii-previews of images:
     image/*)
