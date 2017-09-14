@@ -214,7 +214,7 @@ let quickmarks = [
     ['g',  'https://github.com/'],
     ['h',  'https://www.heute.de/'],
     ['wg', 'https://github.com/onpage-org/'],
-    ['wj', 'https://onpage.atlassian.net/projects/DEV/issues'],
+    ['wj', 'https://onpage.atlassian.net/secure/RapidBoard.jspa?rapidView=7'],
     ['wc', 'https://onpage.atlassian.net/wiki/discover/all-updates'],
     ['wq', 'https://docs.google.com/spreadsheets/d/17QbADpr9nn7VAdhotSqMic64NTFAM3o-qTYI3qDPdvw/edit#gid=0'],
     ['l',  'http://localhost/~sflip/projects/'],
