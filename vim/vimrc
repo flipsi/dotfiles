@@ -1729,8 +1729,8 @@ endif
 set showbreak=↪
 
 " how other stuff looks like
-set fillchars+=vert:│
-" set fillchars+=fold:─
+set fillchars+=vert:\ "
+set fillchars+=fold:─
 
 " use 4 spaces instead of tabs
 " (otherwise handled by sleuth)
@@ -1812,7 +1812,9 @@ if s:MyMode == 'mastery'
     highlight ColorColumn             ctermbg=235
     highlight ShowTrailingWhitespace  ctermbg=235
     highlight Folded                  ctermbg=235
-    highlight LineNr                  ctermfg=237
+    highlight VertSplit               ctermfg=238
+    highlight Folded                  ctermfg=238
+    highlight LineNr                  ctermfg=238
     highlight CursorLineNr            ctermfg=23
     highlight Conceal                 ctermbg=237
   " highlight Search                  ctermbg=237 ctermfg=white
