@@ -2762,6 +2762,9 @@ cnoremap <C-A> <Home>
 " move to EOL with l instead of $
 onoremap l $
 
+" ... but current character movement is useful sometimes
+nnoremap ch cl
+nnoremap yh yl
 
 " swap , and ;
 " (makes more sense on german keyboard)
