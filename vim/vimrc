@@ -477,12 +477,13 @@ let g:clever_f_chars_match_any_signs = 'ö'
 " movements and text objects for parts of words {{{
 
 " move with ,w in wordsLikeThisWord or words_like_this_word
-Plugin 'bkad/CamelCaseMotion'
+" Plugin 'bkad/CamelCaseMotion'
 
 " call camelcasemotion#CreateMotionMappings(',') " DOES NOT WORK HERE
 
 " also handle dashes with this plugin (hence w should move over them)
-set iskeyword+=-
+" (this breaks toggle_words for many cases)
+" set iskeyword+=-
 
 
 " }}}
@@ -1545,7 +1546,7 @@ nnoremap <Leader>ut :GundoToggle<CR>
 
     " THE FOLLOWING MUST BE EXECUTED AFTER VUNDLE FINISHED:
 
-    call camelcasemotion#CreateMotionMappings(',')
+    " call camelcasemotion#CreateMotionMappings(',')
 
     " fix compatibility issues with D mapping
     " (must be executed before the D custom mapping)
