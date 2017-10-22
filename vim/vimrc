@@ -849,7 +849,7 @@ nmap <Leader>qo :BufOnly<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " static code analysis {{{
 
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -911,6 +911,33 @@ let g:syntastic_quiet_messages = { "regex": [
             \ '\mFunction name .* is prefixed with a package name but does not begin with a capital letter',
             \ '\m.$. was used before it was defined.'
             \ ] }
+
+
+
+" asynchronous alternative to syntastic
+Plugin 'w0rp/ale'
+
+let g:ale_list_window_size = 5
+let g:ale_lint_on_enter = 0
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\}
+
+nnoremap <silent> <Leader>sc :ALELint<CR>
+nnoremap <silent> <Leader>sn :ALENext<CR>
+nnoremap <silent> <Leader>sN :ALEPrevious<CR>
+nnoremap <silent> <Leader>sp :ALEPrevious<CR>
+nnoremap <silent> <Leader>sr :ALEDisable<CR>
+nnoremap <silent> <Leader>st :ALEToggle<CR>
+nnoremap <silent> <Leader>si :ALEInfo<CR>
+
+highlight ALEErrorSign      ctermfg=203
+highlight ALEWarningSign    ctermfg=227
+highlight ALEInfoSign       ctermfg=227
+
+
+" evaluate expression live, which is awesome
+" Plugin 'metakirby5/codi.vim'
 
 
 
@@ -3137,8 +3164,8 @@ endfunction
 " jump to (syntastic) errors
 nnoremap <Leader>sg :lfirst<CR>
 nnoremap <Leader>sG :llast<CR>
-nnoremap <Leader>sn :lnext<CR>
-nnoremap <Leader>sN :lprevious<CR>
+" nnoremap <Leader>sn :lnext<CR>
+" nnoremap <Leader>sN :lprevious<CR>
 
 " perform a :cnext or :lnext
 " so we jump through both quickfix and location list with one keystroke
