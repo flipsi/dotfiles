@@ -460,8 +460,9 @@ map ä <Plug>(easymotion-prefix)
 let g:EasyMotion_keys = 'asdfgh,.qwertuiocvbnmjkl'
 
 
+
 " make f and t clever (i.e. repeatable. ',' and ';' will not be needed anymore.)
-Plugin 'rhysd/clever-f.vim'
+" Plugin 'rhysd/clever-f.vim'
 
 let g:clever_f_across_no_line = 0
 " let g:clever_f_ignore_case = 1
@@ -470,6 +471,41 @@ let g:clever_f_smart_case = 1
 let g:clever_f_fix_key_direction = 0
 let g:clever_f_repeat_last_char_inputs = ["\<CR>", "\<Tab>"]
 let g:clever_f_chars_match_any_signs = 'ö'
+
+
+
+" like f but with two characters
+Plugin 'justinmk/vim-sneak'
+
+" interactive mode like easymotion
+" let g:sneak#label = 1
+
+" movement repeatable with same keystroke like clever-f
+" (i don't really like this, as it makes movements unpredictable)
+" let g:sneak#s_next = 1
+
+" , always forwards ; always backwards
+" let g:sneak#absolute_dir = 1
+
+" use smartcase;
+let g:sneak#use_ic_scs = 1
+
+nmap f <Plug>Sneak_s
+xmap f <Plug>Sneak_s
+omap f <Plug>Sneak_s
+
+nmap äf <Plug>Sneak_S
+nmap F <Plug>Sneak_S
+xmap F <Plug>Sneak_S
+omap F <Plug>Sneak_S
+
+nmap , <Plug>Sneak_;
+nmap ; <Plug>Sneak_,
+
+
+autocmd ColorScheme * hi Sneak      ctermfg=38 ctermbg=black
+autocmd ColorScheme * hi SneakScope ctermfg=38 ctermbg=black
+
 
 
 " }}}
@@ -2729,8 +2765,8 @@ onoremap l $
 
 " swap , and ;
 " (makes more sense on german keyboard)
-nnoremap , ;
-nnoremap ; ,
+" nnoremap , ;
+" nnoremap ; ,
 nnoremap g, g;
 nnoremap g; g,
 
