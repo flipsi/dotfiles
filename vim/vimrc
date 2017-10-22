@@ -605,25 +605,18 @@ nnoremap Ö :call incsearch#call({'command': '?'})<CR>
 
 " searching in multiple files
 " install 'the_silver_searcher' package on the system
-Plugin 'rking/ag.vim'
+Plugin 'mileszs/ack.vim'
 
 " command to execute
-let g:ag_prg="ag --vimgrep --smart-case"
-" always start in project root instead of cwd
-let g:ag_working_path_mode="r"
+let g:ackprg="ag --vimgrep --smart-case"
 
 " type a search pattern
 nnoremap <Leader>Ö :let g:jumplist = 'quickfixlist'<CR>
-                 \ :Ag<Space>""<Left>
-" search for word under cursor
-" nnoremap <Leader>+ :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
-" nmap     <Leader>* <Leader>+
+                 \ :Ack!<Space>""<Left>
+
 " search for visual selection
 xnoremap <Leader>Ö y:let g:jumplist = 'quickfixlist'<CR>
-                 \ :<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
-" xmap     <Leader>* <Leader>ö
-" xmap     <Leader>+ <Leader>ö
-"nnoremap  K :<c-u>Ag <c-r>=shellescape(expand("<cword>"),1)<cr>:copen<cr>
+                 \ :<c-u>Ack! "-Q" "<C-R>""<CR>
 
 
 " % also matches HTML-tags/words etc
