@@ -1151,6 +1151,7 @@ let g:toggle_words_dict = {
             \     ['red','orange','yellow','green','blue','purple'],
             \     ['setup', 'teardown'],
             \     ['single', 'double', 'multi'],
+            \     ['start', 'stop'],
             \     ['strong', 'weak'],
             \     ['testing', 'production'],
             \     ['this', 'that'],
