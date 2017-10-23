@@ -431,15 +431,6 @@ nnoremap <Leader>gu   :GitGutterUndoHunk<CR>
 nnoremap <Leader>gi   :GitGutterPreviewHunk<CR>
 
 
-" commit messages are special
-augroup gitcommit
-    autocmd!
-    autocmd filetype gitcommit setlocal nonumber norelativenumber
-    autocmd filetype gitcommit setlocal colorcolumn=50
-    autocmd filetype gitcommit setlocal textwidth=50
-    autocmd filetype gitcommit normal gg
-augroup END
-
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -3339,7 +3330,25 @@ nnoremap <Leader>Q <NOP>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FILETYPE SPECIFIC SETTINGS {{{
 
+augroup FILETYPE_SPECIFIC_SETTINGS_QUICKFIX
+    autocmd!
+    autocmd filetype qf setlocal norelativenumber
+    autocmd filetype qf setlocal colorcolumn=
+augroup END
+
+augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
+    autocmd!
+    autocmd filetype gitcommit setlocal nonumber norelativenumber
+    autocmd filetype gitcommit setlocal colorcolumn=50
+    autocmd filetype gitcommit setlocal textwidth=50
+    autocmd filetype gitcommit normal gg
+augroup END
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 " }}}
