@@ -500,8 +500,26 @@ nmap , <Plug>Sneak_;
 nmap ; <Plug>Sneak_,
 
 
-autocmd ColorScheme * hi Sneak      ctermfg=38 ctermbg=black
-autocmd ColorScheme * hi SneakScope ctermfg=38 ctermbg=black
+autocmd ColorScheme * hi Sneak      ctermfg=38 ctermbg=236
+autocmd ColorScheme * hi SneakScope ctermfg=38 ctermbg=236
+
+
+
+" make f only match interesting characters
+" Plugin 'svermeulen/vim-NotableFt'
+
+" nmap , <Plug>NotableFtRepeatSearchForward
+" nmap ; <Plug>NotableFtRepeatSearchBackward
+" nmap f <Plug>NotableFtSearchFForward
+" nmap s <Plug>NotableFtSearchFBackward
+" nmap F <Plug>NotableFtSearchFBackward
+" nmap t <Plug>NotableFtSearchTForward
+" nmap T <Plug>NotableFtSearchTBackward
+
+
+
+" highlight characters for f
+" Plugin 'unblevable/quick-scope'
 
 
 
