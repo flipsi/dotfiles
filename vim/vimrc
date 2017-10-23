@@ -3379,6 +3379,11 @@ augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
     autocmd filetype gitcommit normal gg
 augroup END
 
+augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
+    autocmd!
+    autocmd! FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
+augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
