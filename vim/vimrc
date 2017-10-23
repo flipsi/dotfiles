@@ -1364,7 +1364,8 @@ command! -bar ShowTrailingWhitespaceOff call ShowTrailingWhitespace#Set(0,1)
 command! -bar ShowTrailingWhitespaceToggle call ShowTrailingWhitespace#Toggle(0)
         \ <Bar>echo (ShowTrailingWhitespace#IsSet() ?
         \ 'Show trailing whitespace' : 'Not showing trailing whitespace')
-nnoremap <silent> <C-G>A :ShowTrailingWhitespaceToggle<CR>
+nnoremap <silent> <C-G>A  :ShowTrailingWhitespaceToggle<CR>
+nnoremap <silent> <C-G>st :ShowTrailingWhitespaceToggle<CR>
 
 " (has a bug)
 "Plugin 'vim-scripts/JumpToTrailingWhiteSpace'
