@@ -1668,7 +1668,9 @@ else
 endif
 augroup autosave
     au!
-    au BufLeave,FocusLost * if g:autosave
+    au BufLeave,FocusLost * if (g:autosave && !exists("b:local_autosave"))
+                          \ || (g:autosave && exists("b:local_autosave") && b:local_autosave)
+                          \ || (!g:autosave && exists("b:local_autosave") && b:local_autosave)
     au BufLeave,FocusLost *     silent! update
     au BufLeave,FocusLost * endif
 augroup END
@@ -2674,7 +2676,14 @@ nnoremap <Leader>ot8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
 nnoremap <Leader>op :set paste! <bar> :set paste?<CR>
 
 " toggle autosave ('autowrite')
-nnoremap <silent> <Leader>oW :let g:autosave = 1 - g:autosave <CR>
+nnoremap <silent> <Leader>oWW
+            \ :if !exists("b:local_autosave") <bar> let b:local_autosave = 0 <bar> endif <CR>
+            \ :let b:local_autosave = 1 - b:local_autosave <CR>
+            \ :echo b:local_autosave == 1 ?
+            \ 'autosave enabled for local buffer' :
+            \ 'autosave disabled for local buffer'<CR>
+nnoremap <silent> <Leader>oWA
+            \ :let g:autosave = 1 - g:autosave <CR>
             \ :echo g:autosave == 1 ?
             \ 'autosave enabled' :
             \ 'autosave disabled'<CR>
@@ -3343,6 +3352,7 @@ augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
     autocmd filetype gitcommit setlocal nonumber norelativenumber
     autocmd filetype gitcommit setlocal colorcolumn=50
     autocmd filetype gitcommit setlocal textwidth=50
+    autocmd filetype gitcommit let b:local_autosave = 0
     autocmd filetype gitcommit normal gg
 augroup END
 
