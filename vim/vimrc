@@ -491,7 +491,7 @@ nmap f <Plug>Sneak_s
 xmap f <Plug>Sneak_s
 omap f <Plug>Sneak_s
 
-nmap äf <Plug>Sneak_S
+nmap s <Plug>Sneak_S
 nmap F <Plug>Sneak_S
 xmap F <Plug>Sneak_S
 omap F <Plug>Sneak_S
@@ -1623,6 +1623,10 @@ nnoremap <Leader>ut :GundoToggle<CR>
     " fix compatibility issues with D mapping
     " (must be executed before the D custom mapping)
     call yankstack#setup()
+
+    " fix s mapping
+    " (must be executed after yankstack#setup())
+    nmap s <Plug>Sneak_S
 
 
 endif
