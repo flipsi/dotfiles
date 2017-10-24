@@ -502,6 +502,7 @@ function package_install_target() {
                     git clone https://github.com/colinodell/git-amend-old "$HOME/opt/git-amend-old"
                     create_link "$HOME/opt/git-amend-old/git-amend-old" "$HOME/bin/git-amend-old"
                 fi
+                gem install git-rc # git release
                 ;;
 
             mopidy )
