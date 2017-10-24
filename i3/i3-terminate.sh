@@ -77,6 +77,6 @@ terminate_apps
 if set -q action
     i3exit $action
 else
-    poweroff
+    systemctl poweroff
 end
 
