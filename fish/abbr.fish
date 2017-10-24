@@ -10,7 +10,7 @@ abbr fl     fzf_wrapper --locate --ranger
 abbr g      git
 abbr ga     git add
 abbr gaa    git add --all
-abbr gb     git branch --verbose
+abbr gb     git branch --verbose --all
 abbr gbd    git branch -d
 abbr gbD    git branch -D
 abbr gbm    git branch -m
@@ -20,6 +20,7 @@ abbr gd     git diff
 abbr gda    git diff --cached
 abbr gdc    git diff --cached
 abbr ge     git checkout
+abbr geb    git checkout -b
 abbr gf     git fetch --prune
 abbr gl     tig log
 abbr glh    git --no-pager log -n 1
