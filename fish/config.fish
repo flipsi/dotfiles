@@ -13,6 +13,8 @@ if status --is-login
     set hostname (hostname)
 
     # some more stuff in PATH
+    set -x PATH ~/.cargo/bin $PATH
+    set -x PATH ~/.gem/ruby/2.4.0/bin $PATH
     set -x PATH ~/bin $PATH
     set -x PATH ~/shellscripts $PATH
 
