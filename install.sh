@@ -269,8 +269,8 @@ function create_link_for_target() {
 
         sbt )
             create_link "$PWD/sbt/sbtconfig" "$HOME/.sbtconfig"
-            mkdir -p "$HOME/.sbt/plugins"
-            create_link "$PWD/sbt/plugins.sbt" "$HOME/.sbt/0.13/plugins/plugins.sbt"
+            mkdir -p "$HOME/.sbt/1.0/plugins"
+            create_link "$PWD/sbt/plugins.sbt" "$HOME/.sbt/1.0/plugins/plugins.sbt"
             ;;
 
         sublime-text-3 )
