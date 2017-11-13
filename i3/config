@@ -426,23 +426,23 @@ assign [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"]  Todo
 assign [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"]  Netflix
 assign [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"]  Kalender
 assign [class="(?i)chrom" instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"]  Signal
-assign [class="(?i)chrom"]              Chrömchen
-assign [class="(?i)firefox"]            Fuchs
-assign [class="(?i)pale moon"]          Web
-assign [class="(?i)thunderbird"]        Mail
-assign [class="(?i)filezilla"]          Filezilla
-#assign [class="(?i)subl"]               Sublime
-assign [class="(?i)jetbrains-idea"]     Development
-assign [class="Telegram"]               Telegram
-assign [class="(?i)skype"]              Skype
-assign [class="(?i)slack"]              Slack
-assign [class="(?i)pokerstars"]         Poker
-assign [class="(?i)kaffeine"]           TV
-assign [class="(?i)mediathek"]          TV
-assign [class="(?i)spotify"]            Mucke
-assign [class="(?i)qjackctl"]           Sound
-assign [class="(?i)audacity"]           Recording
-assign [class="(?i)ardour"]             Recording
+assign [class="(?i)chrom"]                                                  Chrömchen
+assign [class="(?i)firefox"]                                                Fuchs
+assign [class="(?i)pale moon"]                                              Web
+assign [class="(?i)gnome-terminal"]                                         Terminal
+assign [class="(?i)thunderbird"]                                            Mail
+assign [class="(?i)filezilla"]                                              Filezilla
+assign [class="(?i)jetbrains-idea"]                                         Development
+assign [class="Telegram"]                                                   Telegram
+assign [class="(?i)skype"]                                                  Skype
+assign [class="(?i)slack"]                                                  Slack
+assign [class="(?i)pokerstars"]                                             Poker
+assign [class="(?i)kaffeine"]                                               TV
+assign [class="(?i)mediathek"]                                              TV
+assign [class="(?i)spotify"]                                                Mucke
+assign [class="(?i)qjackctl"]                                               Sound
+assign [class="(?i)audacity"]                                               Recording
+assign [class="(?i)ardour"]                                                 Recording
 
 
 
