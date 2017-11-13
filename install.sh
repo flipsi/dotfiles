@@ -44,6 +44,7 @@ SUPPORTED_TARGETS=(\
     ncmpcpp \
     pentadactyl \
     ranger \
+    screen \
     sbt \
     sublime-text-3 \
     taskwarrior \
@@ -271,6 +272,10 @@ function create_link_for_target() {
             create_link "$PWD/sbt/sbtconfig" "$HOME/.sbtconfig"
             mkdir -p "$HOME/.sbt/1.0/plugins"
             create_link "$PWD/sbt/plugins.sbt" "$HOME/.sbt/1.0/plugins/plugins.sbt"
+            ;;
+
+        screen )
+            create_link "$PWD/screen/screenrc" "$HOME/.screenrc"
             ;;
 
         sublime-text-3 )

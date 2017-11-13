@@ -1,0 +1,27 @@
+# screen config file
+
+defscrollback 5000
+
+startup_message off
+
+hardstatus off
+hardstatus alwayslastline
+hardstatus string '%{= kc}[ %{w}%H %{c}][%= %{= kw}%?%-Lw%?%{c}(%{W}%n*%f%t%?(%u)%?%{c})%{w}%?%+Lw%?%?%= %{c}][%{w}%c %{c}]'
+
+term screen-256color
+
+altscreen on
+
+
+escape ^Bb
+
+bind x kill
+
+bind ^u copy
+
+# start window numbers at 1 instead of 0
+bind i  screen 1
+bind ^i screen 1
+bind 0 select 10
+screen 1
+
