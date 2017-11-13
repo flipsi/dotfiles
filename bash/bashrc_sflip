@@ -9,7 +9,12 @@ alias ..='cd ..'
 
 alias g='grep --with-filename --line-number --recursive --ignore-case --extended-regexp'
 
-alias gs='git status'
+alias  gs='git status'
+alias  ge='git checkout'
+alias sge='sudo git checkout'
+alias  gl='git log'
+alias  gp='git pull'
+alias sgp='sudo git pull'
 
 alias h='htop'
 
@@ -21,6 +26,8 @@ alias ll='ls $LS_OPTIONS -l'
 alias lll='ls $LS_OPTIONS -la'
 
 alias o='open'
+alias v='vim'
+alias se='sudoedit'
 
 if [ -t 1 ]; then
     bind '"\ei":"ranger\n"'
