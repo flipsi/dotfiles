@@ -488,13 +488,13 @@ Plugin 'justinmk/vim-sneak'
 let g:sneak#use_ic_scs = 1
 
 nmap f <Plug>Sneak_s
-xmap f <Plug>Sneak_s
-omap f <Plug>Sneak_s
+xmap z <Plug>Sneak_s
+omap z <Plug>Sneak_s
 
 nmap s <Plug>Sneak_S
 nmap F <Plug>Sneak_S
-xmap F <Plug>Sneak_S
-omap F <Plug>Sneak_S
+xmap Z <Plug>Sneak_S
+omap Z <Plug>Sneak_S
 
 nmap , <Plug>Sneak_;
 nmap ; <Plug>Sneak_,
