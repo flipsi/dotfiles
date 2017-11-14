@@ -25,7 +25,7 @@ if status --is-login
     set -x BROWSER firefox
 
     # setup fzf to use ag instead of find
-    set -x FZF_DEFAULT_COMMAND 'ag -g ""'
+    set -x FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git -f -g ""'
 
     # # music player daemon
     # if test $hostname = "asterix"
