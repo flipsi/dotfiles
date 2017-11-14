@@ -70,6 +70,7 @@ SUPPORTED_TARGETS=(\
 ADDITIONAL_PACKAGE_TARGETS=(\
     atool \
     fzf \
+    fd \
     pydf \
     rar \
     ripgrep \
@@ -355,6 +356,7 @@ function create_link_for_target() {
             create_link "$PWD/vimfx/frame.js" "$HOME/.config/vimfx/frame.js"
             local sourcestring="@import url("\""$PWD/vimfx/userChrome.css"\"");"
             local userChromeCssFilepath=$(find ~/.mozilla/firefox -name userChrome.css)
+            # TODO: create profile chrome/userChrome.css if not exists
             if [[ $UNINSTALL != true ]]; then
                 grep "${sourcestring}" "${userChromeCssFilepath}" > /dev/null || echo "$sourcestring" >> "${userChromeCssFilepath}"
             else
@@ -435,6 +437,10 @@ function package_install_target() {
             LIST_OF_SYSTEM_PACKAGES="i3-wm i3exit i3status i3lock dmenu quickswitch-i3 rofi compton unclutter syndaemon numlockx"
             ;;
 
+        fd )
+            LIST_OF_SYSTEM_PACKAGES="fd-find"
+            ;;
+
         mutt )
             LIST_OF_SYSTEM_PACKAGES="mutt msmtp offlineimap notmuch notmuch-mutt goobook elinks"
             ;;
@@ -473,22 +479,34 @@ function package_install_target() {
     if [[ "$UNINSTALL" != true ]]; then
         echo "Installing ${TARGET}......"
 
-        if [[ "$PLATFORM" = arch ]]; then
-            if [[ "$FORCE" != true ]]; then
-                sudo pacman --needed --confirm -S $LIST_OF_SYSTEM_PACKAGES
-            else
-                sudo pacman --noconfirm -S $LIST_OF_SYSTEM_PACKAGES
-            fi
-        elif [[ "$PLATFORM" = ubuntu ]]; then
-            if [[ "$FORCE" != true ]]; then
-                sudo apt install $LIST_OF_SYSTEM_PACKAGES
-            else
-                sudo apt --assume-yes install $LIST_OF_SYSTEM_PACKAGES
-            fi
-        elif [[ "$PLATFORM" = osx ]]; then
-            brew install $LIST_OF_SYSTEM_PACKAGES
-        fi
+        case "$TARGET" in
 
+            fd )
+                cargo install $LIST_OF_SYSTEM_PACKAGES
+                ;;
+
+            * )
+
+                if [[ "$PLATFORM" = arch ]]; then
+                    if [[ "$FORCE" != true ]]; then
+                        sudo pacman --needed --confirm -S $LIST_OF_SYSTEM_PACKAGES
+                    else
+                        sudo pacman --noconfirm -S $LIST_OF_SYSTEM_PACKAGES
+                    fi
+                elif [[ "$PLATFORM" = ubuntu ]]; then
+                    if [[ "$FORCE" != true ]]; then
+                        sudo apt install $LIST_OF_SYSTEM_PACKAGES
+                    else
+                        sudo apt --assume-yes install $LIST_OF_SYSTEM_PACKAGES
+                    fi
+                elif [[ "$PLATFORM" = osx ]]; then
+                    brew install $LIST_OF_SYSTEM_PACKAGES
+                fi
+                ;;
+
+        esac
+
+        # ADDITIONAL STUFF
         case "$TARGET" in
 
             fish )
@@ -535,6 +553,7 @@ function package_install_target() {
     else
         echo "Uninstalling ${TARGET}......"
 
+        # ADDITIONAL STUFF AND SPECIAL CASES
         case "$TARGET" in
 
             bash )
@@ -554,21 +573,31 @@ function package_install_target() {
 
         esac
 
-        if [[ "$PLATFORM" = arch ]]; then
-            if [[ "$FORCE" != true ]]; then
-                sudo pacman --confirm -R $LIST_OF_SYSTEM_PACKAGES
-            else
-                sudo pacman --noconfirm -R $LIST_OF_SYSTEM_PACKAGES
-            fi
-        elif [[ "$PLATFORM" = ubuntu ]]; then
-            if [[ "$FORCE" != true ]]; then
-                sudo apt remove $LIST_OF_SYSTEM_PACKAGES
-            else
-                sudo apt --assume-yes remove $LIST_OF_SYSTEM_PACKAGES
-            fi
-        elif [[ "$PLATFORM" = osx ]]; then
-            brew uninstall $LIST_OF_SYSTEM_PACKAGES
-        fi
+        # UNINSTALL PACKAGE
+        case "$TARGET" in
+
+            fd )
+                cargo uninstall $LIST_OF_SYSTEM_PACKAGES
+                ;;
+
+            * )
+                if [[ "$PLATFORM" = arch ]]; then
+                    if [[ "$FORCE" != true ]]; then
+                        sudo pacman --confirm -R $LIST_OF_SYSTEM_PACKAGES
+                    else
+                        sudo pacman --noconfirm -R $LIST_OF_SYSTEM_PACKAGES
+                    fi
+                elif [[ "$PLATFORM" = ubuntu ]]; then
+                    if [[ "$FORCE" != true ]]; then
+                        sudo apt remove $LIST_OF_SYSTEM_PACKAGES
+                    else
+                        sudo apt --assume-yes remove $LIST_OF_SYSTEM_PACKAGES
+                    fi
+                elif [[ "$PLATFORM" = osx ]]; then
+                    brew uninstall $LIST_OF_SYSTEM_PACKAGES
+                fi
+                ;;
+        esac
     fi
 }
 
