@@ -6,7 +6,7 @@ startup_message off
 
 hardstatus off
 hardstatus alwayslastline
-hardstatus string '%{= kc}[ %{w}%H %{c}][%= %{= kw}%?%-Lw%?%{c}(%{W}%n*%f%t%?(%u)%?%{c})%{w}%?%+Lw%?%?%= %{c}][%{w}%c %{c}]'
+hardstatus string '%{= kc}[%{w}%H%{c}][%= %{= kw}%?%-Lw%?%{c}(%{W}%n*%f%t%?(%u)%?%{c})%{w}%?%+Lw%?%?%= %{c}][%{w}%c%{c}]'
 
 term screen-256color
 
