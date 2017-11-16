@@ -43,6 +43,7 @@ SUPPORTED_TARGETS=(\
     muttator \
     ncmpcpp \
     pentadactyl \
+    psql \
     ranger \
     screen \
     sbt \
@@ -257,6 +258,10 @@ function create_link_for_target() {
         pentadactyl )
             create_link "$PWD/pentadactyl/pentadactyl" "$HOME/.pentadactyl"
             create_link "$PWD/pentadactyl/pentadactylrc" "$HOME/.pentadactylrc"
+            ;;
+
+        psql )
+            create_link "$PWD/psql/psqlrc" "$HOME/.psqlrc"
             ;;
 
         ranger )
