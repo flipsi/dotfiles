@@ -6,10 +6,16 @@
 # when I use bash instead of fish occasionally.
 
 alias ..='cd ..'
+alias cde='cd /etc'
+alias cdl='cd /var/log'
+alias cdo='cd /opt'
+alias cdw='cd /var/www'
 
 alias g='grep --with-filename --line-number --recursive --ignore-case --extended-regexp'
 
 alias  gs='git status'
+alias  gd='git diff'
+alias gdc='git diff --cached'
 alias  ge='git checkout'
 alias sge='sudo git checkout'
 alias  gl='git log'
