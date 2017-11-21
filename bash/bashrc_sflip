@@ -42,3 +42,13 @@ fi
 
 # allow aliases with sudo
 alias sudo='sudo '
+
+
+# attach to screen session if shell is interactive and there a screen session
+if [ -t 1 ]; then
+    if command -v screen >/dev/null 2>&1; then
+        if [ -z $STY ]; then
+            screen -x
+        fi
+    fi
+fi
