@@ -12,6 +12,10 @@
 [push]
     default = simple
 
+[alias]
+    l         = log --pretty=format:"%C(blue)%ad\\ %C(yellow)%h\\ %C(green)%cn%C(red)%d\\ %C(reset)%s" --decorate --date=short
+    ll        = log --pretty=format:"%C(blue)%ad\\ %C(yellow)%h\\ %C(green)%cn%C(red)%d\\ %C(reset)%s" --decorate --date=short --numstat
+
 [diff]
     tool = vimdiff
     guitool = sublimerge
