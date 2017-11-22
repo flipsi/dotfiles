@@ -66,7 +66,8 @@ bind generic wp view-pager
 bind generic wh view-help
 bind generic ws view-status
 bind generic wc view-stage
-bind generic wa view-stash
+bind generic wA view-stash # see git/misc/git-branch-is-the-new-stash.md
+bind generic wa view-refs
 bind generic wg view-grep
 
 # view manipulation
@@ -85,8 +86,8 @@ bind generic Ö search-back
 #bind stage <Enter> :/^@@
 
 # add/stage/unstage and commit
-bind status a status-update
-bind stage  a status-update
+bind status a none
+bind stage  a none
 bind status s status-update
 bind stage  s status-update
 bind status c !git commit
@@ -106,9 +107,12 @@ bind main A ?git amend-old %(commit)
 bind diff A ?git amend-old %(commit)
 
 # stash
-bind status S ?git stash save --include-untracked
-bind stage  S ?git stash save --include-untracked
-bind stash  p ?git stash pop %(stash)
+bind status aS ?git stash save --include-untracked
+bind stage  aS ?git stash save --include-untracked
+bind stash  aP ?git stash pop %(stash)
+bind status as ?git save %(prompt)
+bind stage  as ?git save %(prompt)
+bind refs   ap ?git pop-prefix %(branch)
 
 # checkout/merge refs
 bind refs c	?git checkout %(branch)

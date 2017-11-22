@@ -10,6 +10,9 @@ abbr fl     fzf_wrapper --locate --ranger
 abbr g      git
 abbr ga     git add
 abbr gaa    git add --all
+abbr gas    git save
+# abbr gap    git pop  # because of autocompletion, the following is better:
+abbr gap    git rebase \(git rev-parse --abbrev-ref HEAD\) stash/
 abbr gb     git branch --verbose --all
 abbr gbd    git branch -d
 abbr gbD    git branch -D
