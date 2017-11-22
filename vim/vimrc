@@ -1672,7 +1672,9 @@ set ttyfast
 set lazyredraw
 
 " allow mouse usage for bad days
-set mouse=a
+if has('mouse')
+    set mouse=a
+endif
 
 " disable all bells
 set noerrorbells
@@ -1868,6 +1870,7 @@ if s:MyMode == 'mastery'
     " colorscheme jellybeans
     " colorscheme luna-term
     " colorscheme meta5
+    " colorscheme materialbox
     " colorscheme molokai
     " colorscheme onedark
     " colorscheme pride
@@ -2012,7 +2015,7 @@ endfunction
 
 " get a list of buffers {{{
 function! GetBufferList()
-  redir =>buflist
+  silent! redir =>buflist
   silent! ls!
   redir END
   return buflist
@@ -2023,7 +2026,9 @@ endfunction
 
 " redraw the screen in case some git things don't keep up with shit {{{
 function! GitRedraw()
-    GitGutterAll
+    if exists(':GitGutterAll') == 2
+        GitGutterAll
+    endif
 endfunction
 " }}}
 
