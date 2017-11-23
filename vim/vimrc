@@ -1905,7 +1905,7 @@ if s:MyMode == 'mastery'
     highlight VertSplit               ctermfg=238
     highlight Folded                  ctermfg=238
     highlight LineNr                  ctermfg=238
-    highlight CursorLineNr            ctermfg=23
+    highlight SignColumn              ctermbg=none
     highlight Conceal                 ctermbg=237
   " highlight Search                  ctermbg=237 ctermfg=white
     highlight Error                   ctermbg=234
