@@ -1751,7 +1751,7 @@ set relativenumber
 set numberwidth=6
 
 " highlight current cursor position
-let g:cursorposition = 1
+let g:cursorposition = 0
 if g:cursorposition
     set cursorline cursorcolumn
 endif
