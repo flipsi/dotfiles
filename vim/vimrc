@@ -1125,10 +1125,10 @@ Plugin 'Olical/vim-enmasse'
 
 
 " automatically resize quickfix window
-" Plugin 'blueyed/vim-qf_resize'
+Plugin 'blueyed/vim-qf_resize'
 
-" let g:qf_resize_min_height = 1
-let g:qf_resize_max_height = 5
+let g:qf_resize_min_height = 1
+let g:qf_resize_max_height = 8
 
 
 " }}}
