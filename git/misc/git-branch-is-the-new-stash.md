@@ -13,6 +13,7 @@ Inspired by: [this blog post](https://codingkilledthecat.wordpress.com/2012/04/2
 - 'chains of stashes' are possible
 - flexibility: you can rebase/cherry-pick/merge/...
 - flexibility: stash only certain dirty changes, not all
+- push to and pull from remotes
 - no stack semantic (not appropriate for me)
 - it's harder to forget about branches that about stashes
 - you don't need to learn the stashing concept and syntax, and you are probably
