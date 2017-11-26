@@ -33,7 +33,7 @@ abbr gpp    git pull
 abbr gpu    git push -u
 abbr gpU    git push
 abbr gr     grep --with-filename --line-number --recursive --ignore-case --extended-regexp
-abbr gs     git status
+abbr gs     tig status
 abbr gsa    git stash save
 abbr gsi    git stash save --include-untracked
 abbr gsp    git stash pop
