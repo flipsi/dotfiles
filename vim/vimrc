@@ -1221,6 +1221,7 @@ let g:toggle_words_dict = {
             \     ['new', 'old'],
             \     ['next', 'previous'],
             \     ['on', 'off'],
+            \     ['online', 'offline'],
             \     ['open', 'close'],
             \     ['present', 'absent'],
             \     ['question', 'answer'],
