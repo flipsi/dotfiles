@@ -369,6 +369,12 @@ function create_link_for_target() {
             fi
             ;;
 
+        vimium )
+            echo "PLEASE OPEN THE VIMIUM EXTENSION'S OPTIONS IN THE BROWSER AND PASTE THE FOLLOWING:"
+            echo
+            cat vimium/custom-key-bindings.vim
+            ;;
+
         vimpc )
             create_link "$PWD/vimpc/vimpcrc" "$HOME/.vimpcrc"
             ;;
