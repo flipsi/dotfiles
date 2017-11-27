@@ -372,7 +372,7 @@ function create_link_for_target() {
         vimium )
             echo "PLEASE OPEN THE VIMIUM EXTENSION'S OPTIONS IN THE BROWSER AND PASTE THE FOLLOWING:"
             echo
-            cat vimium/custom-key-bindings.vim
+            cat "$PWD/vimium/custom-key-bindings.vim"
             ;;
 
         vimpc )
