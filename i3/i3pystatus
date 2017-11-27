@@ -85,6 +85,8 @@ status.register("battery",
 # Note: the network module requires PyPI package netifaces
 
 # find out interface names
+wifi_interface = ""
+cable_interface = ""
 # Note: requires both netifaces and basiciw (for essid and quality)
 from netifaces import interfaces
 ifaces = interfaces()
