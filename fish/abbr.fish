@@ -30,8 +30,8 @@ abbr glh    git --no-pager log -n 1
 abbr gli    git --no-pager log -n 1 \| head -n 1 \| cut -d\" \" -f2 \| xsel --clipboard
 abbr go     git clone --recursive
 abbr gpp    git pull
-abbr gpu    git push -u
-abbr gpU    git push
+abbr gpu    git push
+abbr gpuu   git push -u
 abbr gr     grep --with-filename --line-number --recursive --ignore-case --extended-regexp
 abbr gs     tig status
 abbr gsa    git stash save
