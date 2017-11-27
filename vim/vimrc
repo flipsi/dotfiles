@@ -1901,10 +1901,10 @@ if s:MyMode == 'mastery'
     highlight CursorLine              ctermbg=236 cterm=NONE
     highlight CursorColumn            ctermbg=236
     highlight ColorColumn             ctermbg=235
-    highlight DiffAdd                 ctermbg=237
-    highlight DiffDelete              ctermbg=237
-    highlight DiffChange              ctermbg=237
-    highlight DiffText                ctermbg=240
+    highlight DiffAdd                 ctermbg=234
+    highlight DiffDelete              ctermbg=234
+    highlight DiffChange              ctermbg=234
+    highlight DiffText                ctermbg=233
     highlight ShowTrailingWhitespace  ctermbg=235
     highlight Folded                  ctermbg=235
     highlight VertSplit               ctermfg=238
