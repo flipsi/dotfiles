@@ -216,7 +216,7 @@ Plugin 'gmarik/vundle'
 
 " package control mappings from vundle itself
 nnoremap <Leader>pl :PluginList<CR>
-nnoremap <Leader>pi :PluginInstall<CR>
+nnoremap <Leader>pi :PluginInstall<CR>:smile<CR>
 nnoremap <Leader>pc :PluginClean<CR>
 nnoremap <Leader>pu :PluginUpdate<CR>
 nnoremap <Leader>ps :PluginSearch<Space>
