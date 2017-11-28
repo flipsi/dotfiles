@@ -828,7 +828,7 @@ noremap <silent> <Leader>tt :TagbarToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " file browser {{{
 
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'
 
 let NERDTreeWinSize = 50
 let NERDTreeQuitOnOpen = 1
@@ -841,6 +841,10 @@ noremap <silent> <Leader>tN :NERDTreeToggle<CR>
 
 " show/hide hidden files
 let NERDTreeMapToggleHidden='.'
+
+
+" pimp netrw
+" Plugin 'tpope/vim-vinegar'
 
 
 
@@ -3290,6 +3294,47 @@ xmap <silent> <BS> <BS>gv
 " toggle quickfix or location list
 nnoremap <silent> <Leader>tq :call ToggleList("Quickfix List", 'c')<CR>
 nnoremap <silent> <Leader>tl :call ToggleList("Location List", 'l')<CR>
+
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" builtin file explorer (netrw) {{{
+" (who needs NERDTree anyway)
+
+" let g:netrw_liststyle = 1
+" let g:netrw_winsize = 31
+let g:netrw_liststyle = 0
+let g:netrw_winsize = 16
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+
+let g:netrw_is_toggled = 0
+
+
+" toggle netrw and start from current file
+nnoremap <silent> <Leader>te :exe ':Lexplore! ' . expand('%:p:h')<CR>
+" toggle netrw and start from working (project) dir
+nnoremap <silent> <Leader>tE :Lexplore!<CR>
+
+
+augroup netrw_autocmds
+    autocmd!
+    autocmd filetype netrw call NetrwMappings()
+augroup END
+
+function! NetrwMappings()
+    silent! nunmap <buffer> qL
+    silent! nunmap <buffer> qF
+    silent! nunmap <buffer> qf
+    silent! nunmap <buffer> qb
+    silent! nunmap <buffer> q
+    nnoremap <buffer> q :bd<CR>
+    nnoremap <buffer> h :help netrw-quickmap<CR>
+    nmap     <buffer> u -
+    " TODO: nnoremap u or locally unmap all - bindings to prevent odd bugs
+endfunction
+
 
 
 " }}}
