@@ -93,10 +93,6 @@
 "                           Mappings with the alt key should be done twice:
 "                           - with <Esc>* for terminal sequences, and
 "                           - with <M-*>  for gvim
-"                           Leader key convention:
-"                           - general leader is space (' ')
-"                           - text edit leader is minus ('-')
-"                           - interface leader is control+g ('<C-G>')
 "                           The leader key may set several times in this file
 "                           since the execution time of the mapping matters.
 "       a LOCAL SECTION
@@ -160,8 +156,16 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " leader key {{{
 
+" general leader key
 let mapleader=' '
 let maplocalleader=' '
+
+" leader key for text edit
+let s:editleader = '-'
+
+" leader key for changing the interface
+let s:interfaceleader = '<C-G>'
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -971,9 +975,9 @@ Plugin 'thinca/vim-ref'
 
 " replace some motion or text object or selection with current yank
 " Plugin 'ReplaceWithRegister'
-" nmap -rr <Plug>ReplaceWithRegisterOperator
-" nmap -re <Plug>ReplaceWithRegisterLine
-" xmap -r  <Plug>ReplaceWithRegisterVisual
+" exec 'nmap ' . s:editleader . 'rr <Plug>ReplaceWithRegisterOperator'
+" exec 'nmap ' . s:editleader . 're <Plug>ReplaceWithRegisterLine'
+" exec 'xmap ' . s:editleader . 'r  <Plug>ReplaceWithRegisterVisual'
 " I DON'T REALLY USE THIS BUT v3wp or -rw OCCASIONALLY
 
 
@@ -1000,18 +1004,18 @@ let g:NERDDefaultNesting = 1
 let g:NERDAltDelims_javascript = 0
 " align multiline comments
 let g:NERDDefaultAlign = 'left'
-" nmap -c <Leader>c
-" xmap -c <Leader>c
+" exec 'nmap ' . s:editleader . 'c <Leader>c'
+" exec 'xmap ' . s:editleader . 'c <Leader>c'
 " comment text objects and movements
 for mov in ['j', 'k', 'gg', 'G', '(', ')', '{', '}', 'as', 'is', 'ap', 'ip']
     exe "nmap \<Leader\>c" . mov . " V" . mov . "\<Plug\>NERDCommenterInvert"
-    exe "nmap -c"          . mov . " V" . mov . "\<Plug\>NERDCommenterComment"
+    exe "nmap " . s:editleader . "c"    . mov . " V" . mov . "\<Plug\>NERDCommenterComment"
 endfor
 for i in range(1, 50)
     exe "nmap \<Leader\>c" . i . "j V" . i . "j\<Plug\>NERDCommenterInvert"
     exe "nmap \<Leader\>c" . i . "k V" . i . "k\<Plug\>NERDCommenterInvert"
-    exe "nmap -c"          . i . "j V" . i . "j\<Plug\>NERDCommenterComment"
-    exe "nmap -c"          . i . "k V" . i . "k\<Plug\>NERDCommenterComment"
+    exe "nmap " . s:editleader . "c"   . i . "j V" . i . "j\<Plug\>NERDCommenterComment"
+    exe "nmap " . s:editleader . "c"   . i . "k V" . i . "k\<Plug\>NERDCommenterComment"
 endfor
 " duplicate a line and comment out the first one
 nmap <Leader>cd <Leader>cyp
@@ -1034,18 +1038,18 @@ inoremap <silent> <Esc><Enter> <Esc>A;<Esc>^
 Plugin 'tpope/vim-surround'
 
 " surround consistently in both modes and more comfortably on german keyboard
-nmap -s ys
-vmap -s S
+exec 'nmap ' . s:editleader . 's ys'
+exec 'vmap ' . s:editleader . 's S'
 
 " surround with quotes/parentheses/brackets quickly
-vmap -q S'
-vmap -Q S"
-nmap -q ysiw'
-nmap -Q ysiw"
-vmap -b S)
-vmap -B S}
-nmap -b ysiw)
-nmap -B ysiw}
+exec 'vmap ' . s:editleader . 'q S'''
+exec 'vmap ' . s:editleader . 'Q S"'
+exec 'nmap ' . s:editleader . 'q ysiw'''
+exec 'nmap ' . s:editleader . 'Q ysiw"'
+exec 'vmap ' . s:editleader . 'b S)'
+exec 'vmap ' . s:editleader . 'B S}'
+exec 'nmap ' . s:editleader . 'b ysiw)'
+exec 'nmap ' . s:editleader . 'B ysiw}'
 nmap dq ds'
 nmap dQ ds"
 
@@ -1062,7 +1066,7 @@ function! ToggleQuotesWithVimSurround()
     endif
 endfunction
 " }}}
-nnoremap <silent> -tq :call ToggleQuotesWithVimSurround()<CR>
+exec 'nnoremap <silent> ' . s:editleader . 'tq :call ToggleQuotesWithVimSurround()<CR>'
 
 
 " swap ('transpose') two words or arbitrary things
@@ -1099,7 +1103,7 @@ nmap <Leader>xx <Leader>xiw
 " let g:multi_cursor_prev_key='<C-p>'
 " let g:multi_cursor_skip_key='<C-x>'
 " let g:multi_cursor_quit_key='<Esc>'
-" nnoremap -<C-c> :call multiple_cursors#quit()<CR>
+" exec 'nnoremap ' . s:editleader . '<C-c> :call multiple_cursors#quit()<CR>'
 
 " let g:multi_cursor_exit_from_visual_mode=1
 " let g:multi_cursor_exit_from_insert_mode=0
@@ -1156,7 +1160,7 @@ vmap <right> <Plug>SchleppRight
 
 " duplicate
 " (delete selection with x. by default, x and d do the same)
-vmap -u <Plug>SchleppDup
+exec 'vmap ' . s:editleader . 'u <Plug>SchleppDup'
 
 
 " }}}
@@ -1165,7 +1169,7 @@ vmap -u <Plug>SchleppDup
 
 Plugin 'vim-scripts/toggle_words.vim'
 
-noremap <silent> -tw :ToggleWord<CR>
+exec 'noremap <silent> ' . s:editleader . 'tw :ToggleWord<CR>'
 
 let g:toggle_words_dict = {
             \ 'css': [
@@ -1301,8 +1305,8 @@ cmap <C-n> <Plug>CmdlineCompleteForward
 
 " generate javascript docs
 Plugin 'heavenshell/vim-jsdoc'
-" nnoremap <silent> -adj ?function<cr>:noh<cr><Plug>(jsdoc)
-nnoremap <silent> -adj :JsDoc<CR>
+" exec 'nnoremap <silent> ' . s:editleader . 'adj ?function<cr>:noh<cr><Plug>(jsdoc)'
+exec 'nnoremap <silent> ' . s:editleader . 'adj :JsDoc<CR>'
 
 
 " }}}
@@ -1328,10 +1332,10 @@ augroup END
 Plugin 'junegunn/vim-easy-align'
 
 " Start interactive EasyAlign in visual mode (e.g. vip-l=)
-xmap -l <Plug>(EasyAlign)
+exec 'xmap ' . s:editleader . 'l <Plug>(EasyAlign)'
 
 " Start interactive EasyAlign for a motion/text object (e.g. -lG=)
-nmap -l <Plug>(EasyAlign)
+exec 'nmap ' . s:editleader . 'l <Plug>(EasyAlign)'
 
 
 " }}}
@@ -1346,8 +1350,8 @@ Plugin 'Chiel92/vim-autoformat'
 " - js-beautify (for HTML, CSS, JavaScript, JSON)
 " - scalafmt (for scala)
 
-nnoremap -af :Autoformat<CR>
-vnoremap -af :Autoformat<CR>
+exec 'nnoremap ' . s:editleader . 'af :Autoformat<CR>'
+exec 'vnoremap ' . s:editleader . 'af :Autoformat<CR>'
 nmap <Leader>af -af
 vmap <Leader>af -af
 
@@ -1412,9 +1416,9 @@ nnoremap <Leader>dst :let g:DeleteTrailingWhitespace = 1 - g:DeleteTrailingWhite
             \ 'DeleteTrailingWhitespace enabled' :
             \ 'DeleteTrailingWhitespace disabled'<CR>
 " delete trailing whitespace for selected line
-vnoremap <silent> -dst :DeleteTrailingWhitespace<CR>
+exec 'vnoremap <silent> ' . s:editleader . 'dst :DeleteTrailingWhitespace<CR>'
 " delete trailing whitespace for whole buffer
-nnoremap <silent> -dst :%DeleteTrailingWhitespace<CR>
+exec 'nnoremap <silent> ' . s:editleader . 'dst :%DeleteTrailingWhitespace<CR>'
 
 
 " }}}
@@ -2980,8 +2984,8 @@ inoremap <M-:>  <C-P>
 inoremap <Esc>: <C-P>
 
 " increment/decrement number
-nnoremap -i <C-A>
-nnoremap -- <C-X>
+exec 'nnoremap ' . s:editleader . 'i <C-A>'
+exec 'nnoremap ' . s:editleader . '- <C-X>'
 
 
 " indent lines
@@ -2989,12 +2993,12 @@ vnoremap < <gv
 vnoremap > >gv
 
 " change tab width (hard)
-nnoremap -rt2 :set noexpandtab <bar> :retab! <bar>
-            \ :set expandtab tabstop=2 <bar> :retab <CR>
-nnoremap -rt4 :set noexpandtab <bar> :retab! <bar>
-            \ :set expandtab tabstop=4 <bar> :retab <CR>
-nnoremap -rt8 :set noexpandtab <bar> :retab! <bar>
-            \ :set expandtab tabstop=8 <bar> :retab <CR>
+exec 'nnoremap ' . s:editleader . 'rt2 :set noexpandtab <bar> :retab! <bar>'
+                                    \ ':set expandtab tabstop=2 <bar> :retab <CR>'
+exec 'nnoremap ' . s:editleader . 'rt4 :set noexpandtab <bar> :retab! <bar>'
+                                    \ ':set expandtab tabstop=4 <bar> :retab <CR>'
+exec 'nnoremap ' . s:editleader . 'rt8 :set noexpandtab <bar> :retab! <bar>'
+                                    \ ':set expandtab tabstop=8 <bar> :retab <CR>'
 
 " yank line with Enter (i do that so often)
 " CANNOT MAP THIS BECAUSE OF SPECIAL PLUGIN BUFFERS AND STUFF
@@ -3012,10 +3016,10 @@ nnoremap -rt8 :set noexpandtab <bar> :retab! <bar>
 
 " move line up or down
 " (:m closes folds https://groups.google.com/forum/#!topic/vim_dev/QGgbjv4uyZc)
-nnoremap <silent> -k :set fdm=manual<CR>:m .-2<CR>:set fdm=marker<CR>
-nnoremap <silent> -j :set fdm=manual<CR>:m .+1<CR>:set fdm=marker<CR>
-vnoremap <silent> -j <Esc>:set fdm=manual<CR>gv:m '>+1<CR>gv=gv:set fdm=marker<CR>
-vnoremap <silent> -k <Esc>:set fdm=manual<CR>gv:m '<-2<CR>gv=gv:set fdm=marker<CR>
+exec 'nnoremap <silent> ' . s:editleader . 'k :set fdm=manual<CR>:m .-2<CR>:set fdm=marker<CR>'
+exec 'nnoremap <silent> ' . s:editleader . 'j :set fdm=manual<CR>:m .+1<CR>:set fdm=marker<CR>'
+" exec 'vnoremap <silent> ' . s:editleader . 'j <Esc>:set fdm=manual<CR>gv:m \'>+1<CR>gv=gv:set fdm=marker<CR>'
+" exec 'vnoremap <silent> ' . s:editleader . 'k <Esc>:set fdm=manual<CR>gv:m \'<-2<CR>gv=gv:set fdm=marker<CR>'
 
 
 " join line above (instead of below)
@@ -3031,10 +3035,10 @@ nnoremap S i<CR><esc>
             \ `q
 
 " duplicate code
-nnoremap -uu yyp
-nnoremap -ul yyp
-nnoremap -up yap<S-}>p
-vnoremap -u yP
+exec 'nnoremap ' . s:editleader . 'uu yyp'
+exec 'nnoremap ' . s:editleader . 'ul yyp'
+exec 'nnoremap ' . s:editleader . 'up yap<S-}>p'
+exec 'vnoremap ' . s:editleader . 'u yP'
 
 " add new lines above or below
 "(this works without mappings, except that we arein insert mode afterwards)
@@ -3047,20 +3051,20 @@ nnoremap K :<c-u>put =repeat(nr2char(10), v:count1)<cr>k
 
 " align next column in duplicated line when i don't use replace mode
 " (very bad " implementation)
-nnoremap -L kWjdwgE
+exec 'nnoremap ' . s:editleader . 'L kWjdwgE'
 
 " add space (a few newlines) below
 "nnoremap <Enter> :.+1insert \n\n\n<CR>
-nnoremap -as mno<Esc>o<Esc>o<Esc>o<Esc>`n
+exec 'nnoremap ' . s:editleader . 'as mno<Esc>o<Esc>o<Esc>o<Esc>`n'
 
 " add a line of characters
-nnoremap -al :call InsertCharLine(input("Insert character: "), 80)<CR>
+exec 'nnoremap ' . s:editleader . 'al :call InsertCharLine(input("Insert character: "), 80)<CR>'
 " add a box of characters ('comment box')
-nnoremap -ab :call InsertCharBox(input("Insert character: "))<CR>
+exec 'nnoremap ' . s:editleader . 'ab :call InsertCharBox(input("Insert character: "))<CR>'
 " add a line of characters below, just as long as the current line
-nnoremap -au- yyp^v$r-
-nnoremap -au= yyp^v$r=
-nnoremap -au# yyp^v$r#
+exec 'nnoremap ' . s:editleader . 'au- yyp^v$r-'
+exec 'nnoremap ' . s:editleader . 'au= yyp^v$r='
+exec 'nnoremap ' . s:editleader . 'au# yyp^v$r#'
 
 " enter substitution mode quickly
 nnoremap <C-S><C-S> :%s::<Left>
@@ -3114,39 +3118,39 @@ nmap <C-S>ö gggn<C-S>
 
 
 " replace something with yank
-nnoremap -rw viwp
-nnoremap -rW viWp
-nnoremap -rl v$hp
+exec 'nnoremap ' . s:editleader . 'rw viwp'
+exec 'nnoremap ' . s:editleader . 'rW viWp'
+exec 'nnoremap ' . s:editleader . 'rl v$hp'
 
 
 " sort lines
-nnoremap -o vip:sort<CR>
-vnoremap -o :sort<CR>
+exec 'nnoremap ' . s:editleader . 'o vip:sort<CR>'
+exec 'vnoremap ' . s:editleader . 'o :sort<CR>'
 
 
 " correct typos like 'DAmnitypefast' to titlecase ('Damnitypefast')
-nnoremap -tu blguee
-inoremap -tu <Esc>blgueea
+exec 'nnoremap ' . s:editleader . 'tu blguee'
+exec 'inoremap ' . s:editleader . 'tu <Esc>blgueea'
 
 
 if s:MyMode == 'stripped'
     " delete trailing whitespace for selected line
-    vnoremap <silent> -dst <Esc>:.s:\v\s+$::<CR>
+    exec 'vnoremap <silent> ' . s:editleader . 'dst <Esc>:.s:\v\s+$::<CR>'
     " delete trailing whitespace for whole buffer
-    nnoremap <silent> -dst :%s:\v\s+$::<CR>
+    exec 'nnoremap <silent> ' . s:editleader . 'dst :%s:\v\s+$::<CR>'
 endif
 
 " delete leading whitespace (can be prefixed with a count)
-nnoremap <silent> -dsl :s:^\s\+::<CR>
+exec 'nnoremap <silent> ' . s:editleader . 'dsl :s:^\s\+::<CR>'
 " replace double/multiple spaces with one space
-nnoremap <silent> -dsd :.s:\v(\S) {2}(\S):\1 \2:<CR>
-nnoremap <silent> -dsD :%s:\v(\S) {2}(\S):\1 \2:<CR>
-nnoremap <silent> -dsm :.s:\v(\S) {2,}(\S):\1 \2:<CR>
-nnoremap <silent> -dsM :.s:\v(\S) {2,}(\S):\1 \2:<CR>
+exec 'nnoremap <silent> ' . s:editleader . 'dsd :.s:\v(\S) {2}(\S):\1 \2:<CR>'
+exec 'nnoremap <silent> ' . s:editleader . 'dsD :%s:\v(\S) {2}(\S):\1 \2:<CR>'
+exec 'nnoremap <silent> ' . s:editleader . 'dsm :.s:\v(\S) {2,}(\S):\1 \2:<CR>'
+exec 'nnoremap <silent> ' . s:editleader . 'dsM :.s:\v(\S) {2,}(\S):\1 \2:<CR>'
 
 
 " convert a vim plugin github url into appropriate format for vundle
-nnoremap -pi :.s:\m.*http.*github\.com/\([^/]*/[^/]*\).*:Plugin '\1':<CR>
+exec 'nnoremap ' . s:editleader . 'pi :.s:\m.*http.*github\.com/\([^/]*/[^/]*\).*:Plugin ''\1'':<CR>'
 
 
 " add/remove an html comment
