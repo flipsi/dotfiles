@@ -164,7 +164,7 @@ let maplocalleader=' '
 let s:editleader = '-'
 
 " leader key for changing the interface
-let s:interfaceleader = '<C-G>'
+let s:uileader = '<C-G>'
 
 
 " }}}
@@ -1397,8 +1397,8 @@ command! -bar ShowTrailingWhitespaceOff call ShowTrailingWhitespace#Set(0,1)
 command! -bar ShowTrailingWhitespaceToggle call ShowTrailingWhitespace#Toggle(0)
         \ <Bar>echo (ShowTrailingWhitespace#IsSet() ?
         \ 'Show trailing whitespace' : 'Not showing trailing whitespace')
-nnoremap <silent> <C-G>A  :ShowTrailingWhitespaceToggle<CR>
-nnoremap <silent> <C-G>st :ShowTrailingWhitespaceToggle<CR>
+exec 'nnoremap <silent> ' . s:uileader . 'A  :ShowTrailingWhitespaceToggle<CR>'
+exec 'nnoremap <silent> ' . s:uileader . 'st :ShowTrailingWhitespaceToggle<CR>'
 
 " (has a bug)
 "Plugin 'vim-scripts/JumpToTrailingWhiteSpace'
@@ -2531,7 +2531,9 @@ iabbrev todo TODO
 
 
 " (for compatibility)
-nnoremap <C-G><C-G> <C-G>
+if s:uileader == '<C-G>'
+    nnoremap <C-G><C-G> <C-G>
+endif
 
 " refresh screen the phat way
 " TODO make it work
@@ -2750,44 +2752,44 @@ nnoremap <Leader>o <NOP>
 
 
 " toggle syntax highlighting
-nmap <silent> <C-G>y :call ToggleSyntax()<CR>
+exec 'nmap <silent> ' . s:uileader . 'y :call ToggleSyntax()<CR>'
 
 " toggle line numbers
-noremap <silent> <C-G>l :set number! <bar> :set relativenumber! <CR>
-noremap <silent> <C-G>L :set relativenumber! <CR>
+exec 'noremap <silent> ' . s:uileader . 'l :set number! <bar> :set relativenumber! <CR>'
+exec 'noremap <silent> ' . s:uileader . 'L :set relativenumber! <CR>'
 
 " toggle word wrap
-nnoremap <silent> <C-G>w :setlocal wrap! <bar> :set wrap? <CR>
+exec 'nnoremap <silent> ' . s:uileader . 'w :setlocal wrap! <bar> :set wrap? <CR>'
 
 " toggle vertical ruler
-nnoremap <silent> <C-G>r :call ToggleColorColumn()<CR>
-nnoremap <silent> <C-G>R :highlight ColorColumn ctermbg=235
-                  \ <Bar> highlight clear BGdd8844
-                  \ <Bar> highlight clear BG000000
-                  \ <Bar> highlight clear BGffa724
-                  \ <Bar> highlight clear BGaeee00
-                  \ <Bar> highlight clear BG8cffba
-                  \ <Bar> highlight clear BGb88853
-                  \ <Bar> highlight clear BGff9eb8
-                  \ <Bar> highlight clear BGff2c4b
-                  \ <CR>
+exec 'nnoremap <silent> ' . s:uileader . 'r :call ToggleColorColumn()<CR>'
+exec 'nnoremap <silent> ' . s:uileader . 'R :highlight ColorColumn ctermbg=235'
+                  \ '<Bar> highlight clear BGdd8844'
+                  \ '<Bar> highlight clear BG000000'
+                  \ '<Bar> highlight clear BGffa724'
+                  \ '<Bar> highlight clear BGaeee00'
+                  \ '<Bar> highlight clear BG8cffba'
+                  \ '<Bar> highlight clear BGb88853'
+                  \ '<Bar> highlight clear BGff9eb8'
+                  \ '<Bar> highlight clear BGff2c4b'
+                  \ '<CR>'
 
 
 " toggle highlight current cursor position
-nnoremap <silent> <C-G>c :let g:cursorposition = 1 - g:cursorposition <CR>i<Esc>
+exec 'nnoremap <silent> ' . s:uileader . 'c :let g:cursorposition = 1 - g:cursorposition <CR>i<Esc>'
 
 " toggle show listchars (like whitespace)
-nnoremap <silent> <C-G>a :set list!<CR>
+exec 'nnoremap <silent> ' . s:uileader . 'a :set list!<CR>'
 
 
 " spell checking
-nnoremap <C-G>ss :setlocal spell! <bar> :set spell? <CR>
-nnoremap <C-G>se :setlocal spelllang=en<CR>
-nnoremap <C-G>sd :setlocal spelllang=de<CR>
-nmap <C-G>sg <C-G>sd
+exec 'nnoremap ' . s:uileader . 'ss :setlocal spell! <bar> :set spell? <CR>'
+exec 'nnoremap ' . s:uileader . 'se :setlocal spelllang=en<CR>'
+exec 'nnoremap ' . s:uileader . 'sd :setlocal spelllang=de<CR>'
+exec 'nmap ' . s:uileader . 'sg <C-G>sd'
 
 " ... but ignore typos
-nnoremap <C-G> <NOP>
+exec 'nnoremap ' . s:uileader . ' <NOP>'
 
 
 
