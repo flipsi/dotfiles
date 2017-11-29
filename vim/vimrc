@@ -312,7 +312,7 @@ Plugin 'sjl/badwolf'
 
 " cycle through colorschemes
 Plugin 'vim-scripts/ScrollColors'
-nnoremap <C-G>o :COLORSCROLL<CR>
+exec 'nnoremap ' . s:uileader . 'o :COLORSCROLL<CR>'
 
 
 " " highlight different bracket pairs with different colors
@@ -330,7 +330,7 @@ Plugin 'junegunn/goyo.vim'
 let g:goyo_width="120"
 let g:goyo_height="100%"
 
-nnoremap <C-G>f :Goyo<CR>
+exec 'nnoremap ' . s:uileader . 'f :Goyo<CR>'
 
 
 " }}}
@@ -418,12 +418,13 @@ let g:gitgutter_sign_modified_removed = '∙'
 " do not map ic/ac text objects etc because I decide how I use them
 let g:gitgutter_map_keys = 0
 
+exec 'nnoremap ' . s:uileader . 'g :GitGutterToggle<CR>'
+
 omap ih <Plug>GitGutterTextObjectInnerPending
 omap ah <Plug>GitGutterTextObjectOuterPending
 xmap ih <Plug>GitGutterTextObjectInnerVisual
 xmap ah <Plug>GitGutterTextObjectOuterVisual
 
-nnoremap <C-G>g       :GitGutterToggle<CR>
 nnoremap <Leader>gg gg:GitGutterNextHunk<CR>ztzv
 nnoremap <Leader>gG  G:GitGutterPrevHunk<CR>ztzv
 nnoremap <Leader>gn   :GitGutterNextHunk<CR>ztzv
@@ -1317,7 +1318,7 @@ exec 'nnoremap <silent> ' . s:editleader . 'adj :JsDoc<CR>'
 Plugin 'Yggdroot/indentLine'
 let g:indentLine_enabled = 1
 let g:indentLine_char = '┊'
-nnoremap <C-G>I :IndentLinesToggle<CR>
+exec 'nnoremap ' . s:uileader . 'I :IndentLinesToggle<CR>'
 
 " Does not work. TODO: Fix it!
 augroup indentline_enabled
@@ -1352,8 +1353,8 @@ Plugin 'Chiel92/vim-autoformat'
 
 exec 'nnoremap ' . s:editleader . 'af :Autoformat<CR>'
 exec 'vnoremap ' . s:editleader . 'af :Autoformat<CR>'
-nmap <Leader>af -af
-vmap <Leader>af -af
+exec 'nmap '     . mapleader  . 'af ' . s:editleader . 'af'
+exec 'vmap '     . mapleader  . 'af ' . s:editleader . 'af'
 
 let g:formatdef_scalafmt = "'scalafmt --stdin'"
 let g:formatters_scala = ['scalafmt']
@@ -1362,8 +1363,8 @@ let g:formatters_scala = ['scalafmt']
 " autoformat for json does not work out with the plugin above. do this instead:
 augroup json_map_autoformat
     au!
-    au FileType json nnoremap -af :%!python -m json.tool<CR>
-    au FileType json nmap <Leader>af -af
+    au FileType json 'nnoremap ' . s:editleader . 'af :%!python -m json.tool<CR>'
+    au FileType json exec 'nmap ' . mapleader . 'af ' . s:editleader . 'af'
 augroup END
 
 
@@ -2786,7 +2787,7 @@ exec 'nnoremap <silent> ' . s:uileader . 'a :set list!<CR>'
 exec 'nnoremap ' . s:uileader . 'ss :setlocal spell! <bar> :set spell? <CR>'
 exec 'nnoremap ' . s:uileader . 'se :setlocal spelllang=en<CR>'
 exec 'nnoremap ' . s:uileader . 'sd :setlocal spelllang=de<CR>'
-exec 'nmap ' . s:uileader . 'sg <C-G>sd'
+exec 'nmap '     . s:uileader . 'sg ' . s:uileader . 'sd'
 
 " ... but ignore typos
 exec 'nnoremap ' . s:uileader . ' <NOP>'
