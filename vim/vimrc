@@ -3329,9 +3329,10 @@ function! NetrwMappings()
     silent! nunmap <buffer> qf
     silent! nunmap <buffer> qb
     silent! nunmap <buffer> q
-    nnoremap <buffer> q :bd<CR>
-    nnoremap <buffer> h :help netrw-quickmap<CR>
-    nmap     <buffer> u -
+    nnoremap <buffer> q   :bd<CR>
+    nnoremap <buffer> h   :help netrw-quickmap<CR>
+    nmap     <buffer> .   gh
+    nmap     <buffer> u   -
     " TODO: nnoremap u or locally unmap all - bindings to prevent odd bugs
 endfunction
 
