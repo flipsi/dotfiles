@@ -299,6 +299,10 @@ Plugin 'tpope/vim-repeat'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " look and feel {{{
 
+" make gvim colorschemes work in terminal
+Plugin 'godlygeek/csapprox'
+
+
 " colorschemes
 Plugin 'flazz/vim-colorschemes'
 Plugin 'christophermca/meta5'
