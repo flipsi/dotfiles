@@ -3391,8 +3391,9 @@ nnoremap <Leader>w  :update<CR>
 nnoremap <Leader>WW :update!<CR>
 
 " quit current buffer
-nnoremap <Leader>qq :bdelete<CR>
-nnoremap <Leader>QQ :bdelete!<CR>
+nnoremap <Leader><BS> :bdelete<CR>
+nnoremap <Leader>qq   :bdelete<CR>
+nnoremap <Leader>QQ   :bdelete!<CR>
 augroup map_q_in_read_only_buffers
     au!
     au BufReadPost * if &readonly
