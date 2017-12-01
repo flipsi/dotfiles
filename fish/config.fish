@@ -45,10 +45,13 @@ if status --is-login
     if not set -q __abbr_init
       set -gx __abbr_init
       source $HOME/.config/fish/abbr.fish
-      source $HOME/.config/fish/abbr.local.fish
+      if test -f $HOME/.config/fish/abbr.local.fish
+          source $HOME/.config/fish/abbr.local.fish
+      end
     end
 
     # configuration for fish-command-timer
+    set fish_command_timer_enabled      1
     set fish_command_timer_color        '#005F5F'
     set fish_command_timer_time_format  '%b %d %I:%M%p'
 
