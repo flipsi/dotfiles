@@ -1367,6 +1367,14 @@ augroup json_map_autoformat
 augroup END
 
 
+
+" change wrapping of function arguments
+Plugin 'FooSoft/vim-argwrap'
+
+nnoremap <silent> -tf :ArgWrap<CR>
+
+
+
 " coercion:
 " - MixedCase (crm),
 " - camelCase (crc),
