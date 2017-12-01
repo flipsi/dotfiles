@@ -449,6 +449,23 @@ assign [class="(?i)audacity"]                                               Reco
 assign [class="(?i)ardour"]                                                 Recording
 
 
+# kill specific apps (e.g. when memory really full again and the system hangs)
+bindsym $mod+Shift+BackSpace mode "$kill"
+set $kill Kill: (f) firefox (g) chrome
+mode "$kill" {
+    bindsym g       exec --no-startup-id "pkill    chrome"; mode "default"
+    bindsym G       exec --no-startup-id "pkill -9 chrome"; mode "default"
+    bindsym f       exec --no-startup-id "pkill    firefox"; mode "default"
+    bindsym F       exec --no-startup-id "pkill -9 firefox"; mode "default"
+    bindsym j       exec --no-startup-id "pkill    java"; mode "default"
+    bindsym J       exec --no-startup-id "pkill -9 java"; mode "default"
+    # cancel
+    #bindsym $mod+o mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
 
 ###############################################################################
 ###########  INTRA WORKSPACE  #################################################

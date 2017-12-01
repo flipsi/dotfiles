@@ -45,6 +45,7 @@ if status --is-login
     if not set -q __abbr_init
       set -gx __abbr_init
       source $HOME/.config/fish/abbr.fish
+      source $HOME/.config/fish/abbr.local.fish
     end
 
     # configuration for fish-command-timer
