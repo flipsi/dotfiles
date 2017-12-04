@@ -2299,6 +2299,27 @@ endfunction
 
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" send buffer via slack {{{
+function! SendBufferViaSlack(channel)
+    let content = getline(1, '$')
+    exec "write !slackcat -c " . a:channel
+endfunction
+" }}}
+
+
+" send buffer via slack after choosing channel interactively {{{
+function! SendBufferViaSlackChooseChannel()
+    let content = system("slackcat --list")
+    echo content
+    let choice = input("Which channel: ")
+    call SendBufferViaSlack(choice)
+endfunction
+nnoremap <Leader>iS :call SendBufferViaSlackChooseChannel()<CR>
+" }}}
+
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
