@@ -2050,6 +2050,20 @@ endfunction
 " }}}
 
 
+" get selected text {{{
+function! s:get_visual_selection()
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+    if len(lines) == 0
+        return ''
+    endif
+    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+    return join(lines, "\n")
+endfunction
+" }}}
+
 
 " redraw the screen in case some git things don't keep up with shit {{{
 function! GitRedraw()
@@ -2299,24 +2313,22 @@ endfunction
 
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" send buffer via slack {{{
-function! SendBufferViaSlack(channel)
-    let content = getline(1, '$')
-    exec "write !slackcat -c " . a:channel
+" send text via slack (optional arguments: channel, content) {{{
+function! SendViaSlack(...)
+    let channel = (a:0 >= 1) ? a:1 : '___interactive___'
+    let content = (a:0 >= 2) ? a:2 : getline(1, '$')
+    let content = substitute(content, '"', '\\"', 'g')
+    if channel == '___interactive___'
+        " let channels = system("slackcat --list")
+        " echo channels
+        " let channel = input("Which channel: ")
+    endif
+    " echo "lala " . channel . " lulul " . content
+    " exec "write !slackcat -c " . channel
+    call system("echo '" . content . "' > /tmp/was")
 endfunction
-" }}}
-
-
-" send buffer via slack after choosing channel interactively {{{
-function! SendBufferViaSlackChooseChannel()
-    let content = system("slackcat --list")
-    echo content
-    let choice = input("Which channel: ")
-    call SendBufferViaSlack(choice)
-endfunction
-nnoremap <Leader>iS :call SendBufferViaSlackChooseChannel()<CR>
+nnoremap <Leader>iS  :call SendViaSlack()<CR>
+vnoremap <Leader>iS y:call SendViaSlack('___interactive___', @")<CR>
 " }}}
 
 
