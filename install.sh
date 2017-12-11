@@ -33,6 +33,7 @@ SUPPORTED_TARGETS=(\
     ghci \
     git \
     i3 \
+    kitty \
     konsole \
     lesskey \
     luakit \
@@ -185,6 +186,11 @@ function create_link_for_target() {
             mkdir -p "$HOME/bin"
             create_link "$PWD/i3/i3-initialize.sh" "$HOME/bin/i3-initialize.sh"
             create_link "$PWD/i3/i3-terminate.sh" "$HOME/bin/i3-terminate.sh"
+            ;;
+
+        kitty )
+            mkdir -p "$HOME/.config/kitty"
+            create_link "$PWD/kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf"
             ;;
 
         konsole )
