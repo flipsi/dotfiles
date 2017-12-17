@@ -7,12 +7,17 @@
 
 
 # look
-color cursor            white       color236
-color header            red         default
-color title-blur        black       color172
-color title-focus       black       color172       bold
-color section           black       color172
-color status            color172    default
+color cursor                white       color237
+color header                color167    default
+color title-blur            color106    color236
+color title-focus           color106    color236    bold
+color section               color172    color236
+color status                color167    default
+color search-result         black       color106
+color diff-stat             color66     default
+color diff-add-highlight    color142    default     standout
+color diff-del-highlight    color167    default     standout
+
 
 # beautiful diff view
 #set diff-options TODO

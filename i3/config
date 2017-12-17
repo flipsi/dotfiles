@@ -209,15 +209,27 @@ new_float  normal
 # accent colors:
 # sfluen          #AFFF58         sfluen_dark #83B45C
 # sflea           #00AFAF         sflea_dark  #005F5F
-# gruvbox_bright_yellow    #FABD2F
-# gruvbox_neutral_yellow   #D79921
+# gruvbox_bright_red     "#FB4934"
+# gruvbox_bright_green   "#B8BB26"
+# gruvbox_bright_yellow  "#FABD2F"
+# gruvbox_bright_blue    "#83A598"
+# gruvbox_bright_purple  "#D3869B"
+# gruvbox_bright_aqua    "#8EC07C"
+# gruvbox_bright_orange  "#FE8019"
+# gruvbox_neutral_red    "#CC241D"
+# gruvbox_neutral_green  "#98971A"
+# gruvbox_neutral_yellow "#D79921"
+# gruvbox_neutral_blue   "#458588"
+# gruvbox_neutral_purple "#B16286"
+# gruvbox_neutral_aqua   "#689D6A"
+# gruvbox_neutral_orange "#D65D0E"
 
 #                       border   backgr   text     indicator
-client.focused          #D79921  #D79921  #1E1E1E  #FF0000
-client.focused_inactive #1E1E1E  #1E1E1E  #D79921  #1E1E1E
+client.focused          #FB4934  #FB4934  #1E1E1E  #FF0000
+client.focused_inactive #1E1E1E  #1E1E1E  #FB4934  #1E1E1E
 client.unfocused        #1E1E1E  #1E1E1E  #DDDDDD  #1E1E1E
-client.urgent           #FABD2F  #FABD2F  #000000  #1E1E1E
-client.background       #1A1A1A  #1E1E1E  #D79921  #1E1E1E
+client.urgent           #B8BB26  #B8BB26  #000000  #1E1E1E
+client.background       #1A1A1A  #1E1E1E  #FB4934  #1E1E1E
 
 
 
@@ -245,12 +257,12 @@ bar {
     colors {
         background  #1E1E1E
         statusline  #DDDDDD
-        separator   #D79921
+        separator   #B8BB26
         #                   border   backgr   text
-        focused_workspace   #D79921  #D79921  #1E1E1E
-        active_workspace    #1E1E1E  #1E1E1E  #D79921
+        focused_workspace   #FB4934  #FB4934  #1E1E1E
+        active_workspace    #1E1E1E  #1E1E1E  #FB4934
         inactive_workspace  #1E1E1E  #1E1E1E  #DDDDDD
-        urgent_workspace    #FABD2F  #FABD2F  #000000
+        urgent_workspace    #B8BB26  #B8BB26  #000000
     }
 }
 

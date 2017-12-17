@@ -12,14 +12,45 @@ from ranger.gui.color import *
 class Default(ColorScheme):
     progress_bar_color = blue
 
-    ACCENT         = 214
-    ACCENT_DARK    = 172
-    GRAY_BRIGHTEST = 252
-    GRAY_BRIGHT    = 245
-    GRAY_MIDDLE    = 242
-    GRAY_DARK      = 239
-    GRAY_DARKEST   = 237
+    GRUVBOX_DARK0_HARD      = 234
+    GRUVBOX_DARK0           = 235
+    GRUVBOX_DARK0_SOFT      = 236
+    GRUVBOX_DARK1           = 237
+    GRUVBOX_DARK2           = 239
+    GRUVBOX_DARK3           = 241
+    GRUVBOX_DARK4           = 243
+    GRUVBOX_GRAY_245        = 245
+    GRUVBOX_GRAY_244        = 244
+    GRUVBOX_LIGHT0_HARD     = 230
+    GRUVBOX_LIGHT0          = 229
+    GRUVBOX_LIGHT0_SOFT     = 228
+    GRUVBOX_LIGHT1          = 223
+    GRUVBOX_LIGHT2          = 250
+    GRUVBOX_LIGHT3          = 248
+    GRUVBOX_LIGHT4          = 246
+    GRUVBOX_LIGHT4          = 246
+    GRUVBOX_BRIGHT_RED      = 167
+    GRUVBOX_BRIGHT_GREEN    = 142
+    GRUVBOX_BRIGHT_YELLOW   = 214
+    GRUVBOX_BRIGHT_BLUE     = 109
+    GRUVBOX_BRIGHT_PURPLE   = 175
+    GRUVBOX_BRIGHT_AQUA     = 108
+    GRUVBOX_BRIGHT_ORANGE   = 208
+    GRUVBOX_NEUTRAL_RED     = 124
+    GRUVBOX_NEUTRAL_GREEN   = 106
+    GRUVBOX_NEUTRAL_YELLOW  = 172
+    GRUVBOX_NEUTRAL_BLUE    = 66
+    GRUVBOX_NEUTRAL_PURPLE  = 132
+    GRUVBOX_NEUTRAL_AQUA    = 72
+    GRUVBOX_NEUTRAL_ORANGE  = 166
 
+    ACCENT         = GRUVBOX_BRIGHT_YELLOW
+    ACCENT_DARK    = GRUVBOX_NEUTRAL_YELLOW
+    GRAY_BRIGHTEST = GRUVBOX_LIGHT4
+    GRAY_BRIGHT    = GRUVBOX_LIGHT1
+    GRAY_MIDDLE    = GRUVBOX_GRAY_245
+    GRAY_DARK      = GRUVBOX_DARK2
+    GRAY_DARKEST   = GRUVBOX_DARK1
 
     def use(self, context):
         fg, bg, attr = default_colors
@@ -38,7 +69,7 @@ class Default(ColorScheme):
                 bg = red
             if context.border:
                 #  fg = default
-                fg = self.ACCENT_DARK
+                fg = self.GRUVBOX_NEUTRAL_GREEN
             if context.media:
                 if context.image:
                     fg = yellow
@@ -50,7 +81,7 @@ class Default(ColorScheme):
                 fg = red
             if context.directory:
                 attr |= bold
-                fg = self.GRAY_BRIGHT
+                fg = self.GRAY_MIDDLE
             elif context.executable and not \
                     any((context.media, context.container,
                         context.fifo, context.socket)):
@@ -93,7 +124,7 @@ class Default(ColorScheme):
             if context.hostname:
                 fg = context.bad and red or self.ACCENT_DARK
             elif context.directory:
-                fg = self.GRAY_BRIGHT
+                fg = self.GRAY_MIDDLE
             elif context.tab:
                 if context.good:
                     bg = self.ACCENT_DARK
