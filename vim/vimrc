@@ -790,6 +790,23 @@ nnoremap <Leader>h<Leader>  :FzfHelptags<CR>
 imap <C-x><C-l> <plug>(fzf-complete-line)
 
 
+" adjust colors to colorscheme: gruvbox
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+
+
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " file searching and much more {{{
@@ -1884,11 +1901,12 @@ if s:MyMode == 'mastery'
 
     " colorscheme apprentice
     " colorscheme badwolf
-    colorscheme blackboard
+    " colorscheme blackboard
     " colorscheme blacklight
     " colorscheme candycode
     " colorscheme dante
     " colorscheme desertEx
+    colorscheme gruvbox
     " colorscheme iceberg
     " colorscheme jellybeans
     " colorscheme luna-term
@@ -1902,8 +1920,9 @@ if s:MyMode == 'mastery'
     " colorscheme up
     " colorscheme woju
 
+    let g:airline_theme='base16'
     " let g:airline_theme='base16_summerfruit'
-    let g:airline_theme='base16_grayscale'
+    " let g:airline_theme='base16_grayscale'
     " let g:airline_theme='behelit'
     " let g:airline_theme='distinguished'
     " let g:airline_theme='kalisi'

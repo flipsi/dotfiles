@@ -6,6 +6,15 @@ set fish_greeting ""
 # only do this stuff when login shell...
 if status --is-login
 
+    # change colors
+    fish_my_colors gruvbox
+
+    # modify the terminal's 256 color palette to use the gruvbox theme
+    set -l GRUVBOX_SCRIPT ~/.vim/bundle/gruvbox/gruvbox_256palette.sh
+    if test -f $GRUVBOX_SCRIPT
+        bash $GRUVBOX_SCRIPT
+    end
+
     # change colors of ls
     # eval (dircolors -c LS_COLORS)
     set -x LS_COLORS (bash -c 'eval `dircolors ~/.dircolors`; echo $LS_COLORS')
@@ -56,9 +65,9 @@ if status --is-login
     end
 
     # configuration for fish-command-timer
-    set fish_command_timer_enabled      1
-    set fish_command_timer_color        '#005F5F'
-    set fish_command_timer_time_format  '%b %d %I:%M%p'
+    set -x fish_command_timer_enabled      1
+    set -x fish_command_timer_color        $fish_my_color_gray_middle
+    set -x fish_command_timer_time_format  '%b %d %I:%M%p'
 
     # correct typos the fun way
     # https://github.com/nvbn/thefuck

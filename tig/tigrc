@@ -8,11 +8,11 @@
 
 # look
 color cursor            white       color236
-color header			red	        default
-color title-blur		black	    color23
-color title-focus		black	    color23       bold
-color section			black	    color23
-color status			color23	    default
+color header            red         default
+color title-blur        black       color172
+color title-focus       black       color172       bold
+color section           black       color172
+color status            color172    default
 
 # beautiful diff view
 #set diff-options TODO
@@ -115,7 +115,7 @@ bind stage  as ?git save %(prompt)
 bind refs   ap ?git pop-prefix %(branch)
 
 # checkout/merge refs
-bind refs c	?git checkout %(branch)
+bind refs c ?git checkout %(branch)
 bind refs m ?git merge %(branch)
 bind refs b !git checkout -b %(prompt)
 bind refs d ?git branch -d %(branch)

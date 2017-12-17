@@ -92,14 +92,8 @@ exec --no-startup-id "xfsettingsd --sm-client-disable"
 ###############################################################################
 
 # launcher options
-set $DMENU_OPTIONS   -l 5 -fn 'PragmataPro Mono-10' -i -nb '#1E1E1E' -sb '#00AFAF' -sf '#1E1E1E'
-set $DMENU_OPTIONS_2 -l 5 -fn 'PragmataPro Mono-10' -i -nb \#1E1E1E -sb \#00AFAF -sf \#1E1E1E
-set $ROFI_OPTIONS -lines 5 -font 'PragmataPro Mono 10' -width 100 -location 1 \
-    -color-normal '#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E' \
-    -color-urgent '#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E' \
-    -color-active '#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E' \
-    -color-window '#1E1E1E,#1E1E1E' \
-    -kb-remove-word-back 'Alt+BackSpace'
+set $DMENU_OPTIONS   -l 5 -fn 'PragmataPro Mono-10' -i -nb '#282828' -sb '#FABD2F' -sf '#282828'
+set $DMENU_OPTIONS_2 -l 5 -fn 'PragmataPro Mono-10' -i -nb \#282828 -sb \#FABD2F -sf \#282828
 
 
 # modifier key: windows/super
@@ -213,15 +207,17 @@ new_float  normal
 # Colors
 
 # accent colors:
-#       sfluen    #AFFF58         sfluen_dark #83B45C
-#       sflea     #00AFAF         sflea_dark  #005F5F
+# sfluen          #AFFF58         sfluen_dark #83B45C
+# sflea           #00AFAF         sflea_dark  #005F5F
+# gruvbox_bright_yellow    #FABD2F
+# gruvbox_neutral_yellow   #D79921
 
 #                       border   backgr   text     indicator
-client.focused          #005F5F  #005F5F  #1E1E1E  #FF0000
-client.focused_inactive #1E1E1E  #1E1E1E  #005F5F  #1E1E1E
+client.focused          #D79921  #D79921  #1E1E1E  #FF0000
+client.focused_inactive #1E1E1E  #1E1E1E  #D79921  #1E1E1E
 client.unfocused        #1E1E1E  #1E1E1E  #DDDDDD  #1E1E1E
-client.urgent           #00AFAF  #00AFAF  #000000  #1E1E1E
-client.background       #1A1A1A  #1E1E1E  #005F5F  #1E1E1E
+client.urgent           #FABD2F  #FABD2F  #000000  #1E1E1E
+client.background       #1A1A1A  #1E1E1E  #D79921  #1E1E1E
 
 
 
@@ -249,18 +245,20 @@ bar {
     colors {
         background  #1E1E1E
         statusline  #DDDDDD
-        separator   #005F5F
+        separator   #D79921
         #                   border   backgr   text
-        focused_workspace   #005F5F  #005F5F  #1E1E1E
-        active_workspace    #1E1E1E  #1E1E1E  #005F5F
+        focused_workspace   #D79921  #D79921  #1E1E1E
+        active_workspace    #1E1E1E  #1E1E1E  #D79921
         inactive_workspace  #1E1E1E  #1E1E1E  #DDDDDD
-        urgent_workspace    #00AFAF  #00AFAF  #000000
+        urgent_workspace    #FABD2F  #FABD2F  #000000
     }
 }
 
 
 # hide/show bar
 bindsym $mod+Shift+b bar mode toggle
+
+# TODO: toggle tray?
 
 set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
 
@@ -278,7 +276,7 @@ mode "$mode_clipboard" {
     bindsym $mod+c exec --no-startup-id "clipmenu $DMENU_OPTIONS"; mode "default";
     bindsym      c exec --no-startup-id "clipmenu $DMENU_OPTIONS"; mode "default";
     bindsym Shift+p exec --no-startup-id "passmenu $DMENU_OPTIONS"; mode "default";
-    bindsym       p exec --no-startup-id "rofi-pass $ROFI_OPTIONS"; mode "default";
+    bindsym       p exec --no-startup-id "rofi-pass"; mode "default";
     # cancel
     bindsym $mod+Escape mode "default"
     bindsym Return mode "default"
@@ -507,11 +505,11 @@ mode "$terminal" {
 # launch an application (that has a .desktop-file)
 # bindsym $mod+Return exec --no-startup-id "i3-dmenu-desktop -dmenu='dmenu $DMENU_OPTIONS'"
 # bindsym $mod+Return exec --no-startup-id "rofi -show drun $ROFI_OPTIONS"
-bindsym $mod+Return exec --no-startup-id "rofi -show combi -combi-modi window,drun $ROFI_OPTIONS"
+bindsym $mod+Return exec --no-startup-id "rofi -show combi -combi-modi window,drun"
 
 # launch any application
 # bindsym $mod+Shift+Return exec --no-startup-id "dmenu_run $DMENU_OPTIONS"
-bindsym $mod+Shift+Return exec --no-startup-id "rofi -show run $ROFI_OPTIONS"
+bindsym $mod+Shift+Return exec --no-startup-id "rofi -show run"
 
 # kill focused container
 bindsym $mod+BackSpace kill

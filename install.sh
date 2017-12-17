@@ -284,6 +284,11 @@ function create_link_for_target() {
             create_link "$PWD/ranger/colorschemes" "$HOME/.config/ranger/colorschemes"
             ;;
 
+        rofi )
+            mkdir -p "$HOME/.config/rofi"
+            create_link "$PWD/rofi/config" "$HOME/.config/rofi/config"
+            ;;
+
         sbt )
             create_link "$PWD/sbt/sbtconfig" "$HOME/.sbtconfig"
             mkdir -p "$HOME/.sbt/1.0/plugins"
