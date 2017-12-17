@@ -155,6 +155,10 @@ function create_link_for_target() {
             create_link "$PWD/cmus/sflea.theme" "$HOME/.cmus/sflea.theme"
             ;;
 
+        dircolors )
+            create_link "$PWD/dircolors/dircolors" "$HOME/.dircolors"
+            ;;
+
         elinks )
             mkdir -p "$HOME/.elinks"
             create_link "$PWD/elinks/elinks.conf" "$HOME/.elinks/elinks.conf"

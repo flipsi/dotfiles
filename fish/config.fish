@@ -6,6 +6,11 @@ set fish_greeting ""
 # only do this stuff when login shell...
 if status --is-login
 
+    # change colors of ls
+    # eval (dircolors -c LS_COLORS)
+    set -x LS_COLORS (bash -c 'eval `dircolors ~/.dircolors`; echo $LS_COLORS')
+
+
     # QUICKFIX FOR LOCALE ISSUE
     set -x LANG de_DE.UTF-8
 
