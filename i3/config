@@ -409,6 +409,9 @@ for_window [class="(?i)galculator"]     floating enable
 for_window [class="(?i)galculator"]     move position 750 450
 for_window [class="(?i)galculator"]     resize set 320 400
 for_window [class="(?i)nemo"]           floating enable
+for_window [class="(?i)nautilus"]       floating enable
+for_window [class="(?i)nautilus"]       resize set 920 600
+for_window [class="(?i)nautilus"]       move position 550 250
 for_window [class="(?i)file-roller"]    floating enable
 for_window [class="(?i)qjackctl"]       floating enable
 for_window [class="(?i)avd"]            floating enable
@@ -428,7 +431,9 @@ assign [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"]  Note
 assign [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"]  Todo
 assign [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"]  Netflix
 assign [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"]  Kalender
+assign [class="(?i)chrom" instance="crx_hjpceadhnpnpdelkidbjdmoodafopfkp"]  Kalender
 assign [class="(?i)chrom" instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"]  Signal
+assign [class="(?i)chrom" instance="crx_afbjehlnjihfcebhifoapfibhcgakelg"]  Github
 assign [class="(?i)chrom"]                                                  Chrömchen
 assign [class="(?i)firefox"]                                                Fuchs
 assign [class="(?i)pale moon"]                                              Web
