@@ -1196,6 +1196,7 @@ let g:toggle_words_dict = {
             \ '*': [
             \     ['0', '1'],
             \     ['add', 'remove'],
+            \     ['and', 'or'],
             \     ['ascending', 'descending'],
             \     ['ASC', 'DESC'],
             \     ['begin', 'end'],
