@@ -246,6 +246,8 @@ bar {
     # separator_symbol    " ⣿ "
     # separator_symbol    " Ꙭ "
     # tray_output         none
+    # tray_output         HDMI2
+    tray_padding        3
     colors {
         background  #1E1E1E
         statusline  #DDDDDD
