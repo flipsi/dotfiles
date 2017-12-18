@@ -55,6 +55,7 @@ exec "xset dpms 0 0 0 && xset s noblank && xset s off"
 
 # composite manager for window overlays, smooth workspace changes, etc.
 exec --no-startup-id "compton -b"
+# exec --no-startup-id "compton -b --active-opacity 0.9 -i 0.9"
 
 # clipboard can have multiple entries
 # exec --no-startup-id "clipmenud"
@@ -254,6 +255,8 @@ bar {
     # separator_symbol    " ⣿ "
     # separator_symbol    " Ꙭ "
     # tray_output         none
+    # tray_output         HDMI2
+    tray_padding        3
     colors {
         background  #1E1E1E
         statusline  #DDDDDD
@@ -417,6 +420,9 @@ for_window [class="(?i)galculator"]     floating enable
 for_window [class="(?i)galculator"]     move position 750 450
 for_window [class="(?i)galculator"]     resize set 320 400
 for_window [class="(?i)nemo"]           floating enable
+for_window [class="(?i)nautilus"]       floating enable
+for_window [class="(?i)nautilus"]       resize set 920 600
+for_window [class="(?i)nautilus"]       move position 550 250
 for_window [class="(?i)file-roller"]    floating enable
 for_window [class="(?i)qjackctl"]       floating enable
 for_window [class="(?i)avd"]            floating enable
@@ -436,7 +442,9 @@ assign [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"]  Note
 assign [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"]  Todo
 assign [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"]  Netflix
 assign [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"]  Kalender
+assign [class="(?i)chrom" instance="crx_hjpceadhnpnpdelkidbjdmoodafopfkp"]  Kalender
 assign [class="(?i)chrom" instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"]  Signal
+assign [class="(?i)chrom" instance="crx_afbjehlnjihfcebhifoapfibhcgakelg"]  Github
 assign [class="(?i)chrom"]                                                  Chrömchen
 assign [class="(?i)firefox"]                                                Fuchs
 assign [class="(?i)pale moon"]                                              Web
