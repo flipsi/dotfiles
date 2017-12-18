@@ -3228,6 +3228,8 @@ function! NetrwMappings()
     nmap     <buffer> .   gh
     nmap     <buffer> u   -
     " TODO: nnoremap u or locally unmap all - bindings to prevent odd bugs
+    nmap     <buffer> af  %
+    nmap     <buffer> ad  d
 endfunction
 
 
