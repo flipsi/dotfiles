@@ -504,8 +504,8 @@ nmap , <Plug>Sneak_;
 nmap ; <Plug>Sneak_,
 
 
-autocmd ColorScheme * hi Sneak      ctermfg=38 ctermbg=236
-autocmd ColorScheme * hi SneakScope ctermfg=38 ctermbg=236
+autocmd ColorScheme * hi Sneak      ctermfg=72 ctermbg=236
+autocmd ColorScheme * hi SneakScope ctermfg=72 ctermbg=236
 
 
 
@@ -1957,9 +1957,9 @@ if s:MyMode == 'mastery'
   " highlight Search                  ctermbg=237 ctermfg=white
     highlight Error                   ctermbg=234
     highlight Todo                    ctermbg=197
-    highlight EasyMotionTarget        ctermfg=38
-    highlight EasyMotionTarget2First  ctermfg=38
-    highlight EasyMotionTarget2Second ctermfg=23
+    highlight EasyMotionTarget        ctermfg=72
+    highlight EasyMotionTarget2First  ctermfg=72
+    highlight EasyMotionTarget2Second ctermfg=108
 
 
     " LIGHT THEMES
