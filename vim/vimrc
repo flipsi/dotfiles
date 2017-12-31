@@ -1942,21 +1942,24 @@ if s:MyMode == 'mastery'
 
     highlight CursorLine              ctermbg=236 cterm=NONE
     highlight CursorColumn            ctermbg=236
-    highlight ColorColumn             ctermbg=235
+    highlight ColorColumn             ctermbg=237
     highlight DiffAdd                 ctermbg=234
     highlight DiffDelete              ctermbg=234
     highlight DiffChange              ctermbg=234
     highlight DiffText                ctermbg=233
     highlight ShowTrailingWhitespace  ctermbg=235
-    highlight Folded                  ctermbg=235
     highlight VertSplit               ctermfg=238
     highlight Folded                  ctermfg=238
-    highlight LineNr                  ctermfg=238
-    highlight SignColumn              ctermbg=none
+    highlight LineNr                  ctermbg=237 ctermfg=243
+    " highlight SignColumn              ctermbg=237
+    " highlight GitGutterAdd            ctermbg=235
+    " highlight GitGutterChange         ctermbg=235
+    " highlight GitGutterDelete         ctermbg=235
+    " highlight GitGutterChangeDelete   ctermbg=235
     highlight Conceal                 ctermbg=237
-  " highlight Search                  ctermbg=237 ctermfg=white
-    highlight Error                   ctermbg=234
-    highlight Todo                    ctermbg=197
+    " highlight Search                  ctermbg=237 ctermfg=white
+    highlight Error                   ctermbg=162
+    highlight Todo                    ctermfg=132
     highlight EasyMotionTarget        ctermfg=72
     highlight EasyMotionTarget2First  ctermfg=72
     highlight EasyMotionTarget2Second ctermfg=108
