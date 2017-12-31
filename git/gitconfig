@@ -35,3 +35,9 @@
 [mergetool "sublimerge"]
     prompt = false
     cmd = subl -n -w \"$REMOTE\" \"$BASE\" \"$LOCAL\" \"$MERGED\" --command \"sublimerge_diff_view\"
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
