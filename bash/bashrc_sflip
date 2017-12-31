@@ -53,6 +53,7 @@ alias sudo='sudo '
 
 
 # attach to screen session if shell is interactive and there a screen session
+# TODO: start screen (optionally) when not local and not in tmux
 if [ -t 1 ]; then
     if command -v screen >/dev/null 2>&1; then
         if [ -z $STY ]; then

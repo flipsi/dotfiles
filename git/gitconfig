@@ -22,6 +22,7 @@
 [diff]
     tool = vimdiff
     guitool = sublimerge
+    ; wsErrorHighlight = context
 
 [difftool "vimdiff"]
     prompt = false

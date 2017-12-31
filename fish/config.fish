@@ -8,6 +8,7 @@ if status --is-login
 
     # QUICKFIX FOR LOCALE ISSUE
     set -x LANG de_DE.UTF-8
+    # set -x LANG en_US.UTF-8
 
     # find out host once (useful for multiple things, but saves cycles)
     set hostname (hostname)
