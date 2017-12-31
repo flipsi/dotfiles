@@ -13,6 +13,7 @@
 # apart from i3, install...
 
 
+# dex
 # i3lock
 # dmenu
 # quickswitch [https://github.com/OliverUv/quickswitch-for-i3]
@@ -53,6 +54,14 @@ exec "xset dpms 0 0 0 && xset s noblank && xset s off"
 ###########  AUTOSTART  #######################################################
 ###############################################################################
 
+
+# ALSO SEE 'autostart' TARGET IN DOTFILES AND LOOK INTO 'dex'
+# THIS MAKES A LOT OF THE FOLLOWING STUFF OBSOLETE
+
+# autostart .desktop files the convenient way
+# https://faq.i3wm.org/question/2155/how-can-i-use-autostart-desktop-files-in-i3.1.html
+exec --no-startup-id "dex -ae i3"
+
 # composite manager for window overlays, smooth workspace changes, etc.
 exec --no-startup-id "compton -b"
 # exec --no-startup-id "compton -b --active-opacity 0.9 -i 0.9"
@@ -60,12 +69,11 @@ exec --no-startup-id "compton -b"
 # clipboard can have multiple entries
 # exec --no-startup-id "clipmenud"
 
-
 # power manager takes care of lid closing, standby, display brightness etc.
-exec --no-startup-id "xfce4-power-manager"
+# exec --no-startup-id "xfce4-power-manager"
 
 # daemon for theme settings and shit
-#exec --no-startup-id "cinnamon-settings-daemon"
+# exec --no-startup-id "cinnamon-settings-daemon"
 exec --no-startup-id "xfsettingsd --sm-client-disable"
 
 # start the gnome network manager, because it automatically connects to eduroam etc.
