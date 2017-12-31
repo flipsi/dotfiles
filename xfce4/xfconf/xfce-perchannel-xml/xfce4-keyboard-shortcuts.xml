@@ -49,7 +49,7 @@
       <property name="&lt;Super&gt;Return" type="string" value="rofi -combi-modi window,drun -show combi -lines 5 -font &apos;Monospace 10&apos; -width 50 -location 0    -color-normal &apos;#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E&apos;     -color-urgent &apos;#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E&apos;     -color-active &apos;#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E&apos;     -color-window &apos;#1E1E1E,#1E1E1E&apos;     -kb-remove-word-back &apos;Alt+BackSpace&apos;"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="xfce4-terminal --drop-down --command=&quot;tmux -2&quot;"/>
       <property name="F12" type="string" value="xfce4-terminal --drop-down --command=&quot;tmux -2&quot;"/>
-      <property name="&lt;Super&gt;comma" type="string" value="xfce4-settings-manager"/>
+      <property name="&lt;Super&gt;period" type="string" value="xfce4-settings-manager"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

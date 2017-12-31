@@ -55,6 +55,14 @@ function sleep_music
             mpc current --wait > /dev/null
         end
     end
+    if pgrep -x cmus > /dev/null
+        notify-send "Waiting for music to end..."
+        # TODO: implement
+    end
+    if pgrep -x spotify > /dev/null
+        notify-send "Waiting for music to end..."
+        # TODO: implement (not gonna happen)
+    end
     # check other players (these should kill themselves after playback)
     set mediaplayers mplayer vlc
     for player in $mediaplayers
@@ -74,6 +82,10 @@ notify-send 'Terminating...'
 
 sleep_music
 terminate_apps
+
+# to hopefully have nice wallpaper at next boot
+random-wallpaper.sh
+
 if set -q action
     i3exit $action
 else
