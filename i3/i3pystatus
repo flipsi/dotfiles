@@ -13,21 +13,21 @@ status = Status(standalone=True)
 
 
 # Colors
-COLOR_DEFAULT = "#DDDDDD";
-#  COLOR_GREEN   = "#AABF9B";
-COLOR_GREEN   = "#009C9C";
-COLOR_RED     = "#F2935C";
+COLOR_DEFAULT = "#BDAE93";
+COLOR_GREEN   = "#B8BB26";
+COLOR_RED     = "#FB4934";
 
 
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
 #                          ^-- calendar week
 status.register("clock",
-    # format = " %a %-d %b %X KW%V",)
-    format = "%a %d.%m.%Y %H:%M:%S ",
-    on_leftclick = "xfce4-display-settings",
-    on_rightclick = "xfce4-settings-manager",
-    on_middleclick = "sudo poweroff",
+   # format = " %a %-d %b %X KW%V",)
+   format = "%a %d.%m.%Y %H:%M:%S ",
+   on_leftclick = "xfce4-display-settings",
+   on_rightclick = "xfce4-settings-manager",
+   on_middleclick = "sudo poweroff",
+   color = COLOR_DEFAULT,
 )
 
 # Shows the average load of the last minute and the last 5 minutes
@@ -140,6 +140,7 @@ status.register("disk",
    on_leftclick = "thunar",
    format = " {avail}G",
    interval = 9,
+   color = COLOR_DEFAULT,
 )
 status.register("disk",
    path = "/",
@@ -147,6 +148,7 @@ status.register("disk",
    on_leftclick = "thunar",
    interval = 9,
    hints = { "separator" : False, "separator_block_width": 0} ,
+   color = COLOR_DEFAULT,
 )
 
 # Show memory usage
@@ -154,12 +156,12 @@ status.register("mem",
     format = "MEM: {percent_used_mem}%",
     warn_percentage = 60,
     alert_percentage = 80,
-    color = COLOR_DEFAULT,
-    warn_color = COLOR_RED,
-    alert_color = "#FF0000",
     on_leftclick = "xfce4-terminal --execute htop",
     interval = 9,
     hints = { "separator" : False, "separator_block_width": 0} ,
+    color = COLOR_DEFAULT,
+    warn_color = COLOR_RED,
+    alert_color = "#FF0000",
 )
 
 
@@ -168,6 +170,7 @@ status.register("temp",
     format = "{temp:.0f}°C ",
     on_leftclick = "xfce4-terminal --execute htop",
     hints = { "separator" : False, "separator_block_width": 0} ,
+    color = COLOR_DEFAULT,
 )
 
 # Shows CPU usage
@@ -175,6 +178,7 @@ status.register("cpu_usage",
     format = "CPU: {usage}% ",
     on_leftclick = "xfce4-terminal --execute htop",
     hints = { "separator" : False, "separator_block_width": 0} ,
+    color = COLOR_DEFAULT,
 )
 
 
@@ -200,6 +204,8 @@ status.register("pulseaudio",
     on_leftclick     = "pavucontrol",
     on_upscroll     = "amixer sset Master 1%+; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
     on_downscroll   = "amixer sset Master 1%-; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
+    color_unmuted = COLOR_DEFAULT,
+    color_muted = COLOR_RED,
 )
 
 # Shows mpd status
@@ -238,6 +244,7 @@ status.register("shell",
     on_rightclick   = "mpc prev; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
     on_upscroll     = "mpc volume +1; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
     on_downscroll   = "mpc volume -1; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
+    color = COLOR_DEFAULT,
 )
 
 

@@ -218,6 +218,7 @@ new_float  normal
 # accent colors:
 # sfluen          #AFFF58         sfluen_dark #83B45C
 # sflea           #00AFAF         sflea_dark  #005F5F
+# gruvbox_light_3        "#BDAE93";
 # gruvbox_bright_red     "#FB4934"
 # gruvbox_bright_green   "#B8BB26"
 # gruvbox_bright_yellow  "#FABD2F"
@@ -267,12 +268,12 @@ bar {
     tray_padding        3
     colors {
         background  #1E1E1E
-        statusline  #DDDDDD
+        statusline  #BDAE93
         separator   #B8BB26
         #                   border   backgr   text
         focused_workspace   #FB4934  #FB4934  #1E1E1E
         active_workspace    #1E1E1E  #1E1E1E  #FB4934
-        inactive_workspace  #1E1E1E  #1E1E1E  #DDDDDD
+        inactive_workspace  #1E1E1E  #1E1E1E  #BDAE93
         urgent_workspace    #B8BB26  #B8BB26  #000000
     }
 }
