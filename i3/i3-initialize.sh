@@ -30,21 +30,25 @@ end
 
 
 function setup_screen_layout
-    set primary_screens LVDS0 LVDS1 LVDS-0 LVDS-1 eDP1
-    set secondary_screens VGA0 VGA1 VGA-0 VGA-1 HDMI1 HDMI2 HDMI-1 HDMI-2
-    for secondary_screen in $secondary_screens
-        if xrandr | grep "$secondary_screen connected" >/dev/null
-            for primary_screen in $primary_screens
-                if xrandr | grep "$primary_screen connected" >/dev/null
-                    xrandr --output $secondary_screen --auto --below $primary_screen --auto
-                    i3-msg restart
-                    if test -f $HOME/.i3/wallpaper
-                        feh --bg-scale $HOME/.i3/wallpaper
+    if test -f $HOME/bin/i3-initialize-arandr.local.sh
+        $HOME/bin/i3-initialize-arandr.local.sh
+    else
+        set primary_screens LVDS0 LVDS1 LVDS-0 LVDS-1 eDP1
+        set secondary_screens VGA0 VGA1 VGA-0 VGA-1 HDMI1 HDMI2 HDMI-1 HDMI-2
+        for secondary_screen in $secondary_screens
+            if xrandr | grep "$secondary_screen connected" >/dev/null
+                for primary_screen in $primary_screens
+                    if xrandr | grep "$primary_screen connected" >/dev/null
+                        xrandr --output $secondary_screen --auto --below $primary_screen --auto
+                        i3-msg restart
+                        if test -f $HOME/.i3/wallpaper
+                            feh --bg-scale $HOME/.i3/wallpaper
+                        end
+                        break
                     end
-                    break
                 end
+                break
             end
-            break
         end
     end
 end
