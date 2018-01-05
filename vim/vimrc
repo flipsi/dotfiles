@@ -1110,6 +1110,11 @@ nmap <Leader>xx <Leader>xiw
 " nnoremap <Leader>SD :Fardo<CR>
 
 
+Plugin 'bergercookie/vim-debugstring'
+
+nmap <Leader>ad <Plug>DumpDebugString
+
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
