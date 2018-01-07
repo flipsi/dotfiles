@@ -95,6 +95,8 @@ bind status a none
 bind stage  a none
 bind status s status-update
 bind stage  s status-update
+bind status S @bash -c 'git diff-files --quiet && git reset HEAD || git add --all'
+bind stage  S @bash -c 'git diff-files --quiet && git reset HEAD || git add --all'
 bind status c !git commit
 bind stage  c !git commit
 
