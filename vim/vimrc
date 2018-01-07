@@ -1648,11 +1648,19 @@ endfunction
 
 
 " Language: SQL
+
+Plugin 'vim-scripts/SQLComplete.vim'
+Plugin 'vim-scripts/dbext.vim'
+let g:ftplugin_sql_omni_key = '<C-x>'
+
 augroup sql_on_read
     au!
     au FileType sql call SetupSQL()
 augroup END
 function! SetupSQL()
+    imap <buffer> <C-x><C-x>    <C-\><C-O>:call sqlcomplete#Map('syntax')<CR><C-X><C-O>
+    imap <buffer> <C-x><C-k>    <C-\><C-O>:call sqlcomplete#Map('keyword')<CR><C-X><C-O>
+    imap <buffer> <C-x>R        <C-\><C-O>:call sqlcomplete#Map('ResetCache')<CR><C-X><C-O>
     nnoremap <Leader>bm  :call VimuxRunCommand("\\. " . expand('%:p'))<CR>
     nnoremap <Leader>bp  :call VimuxRunCommand("\\i " . expand('%:p'))<CR>
 endfunction
