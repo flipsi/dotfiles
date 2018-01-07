@@ -1,4 +1,4 @@
-# screen config file
+# GNU screen (a worse tmux) config file
 
 defscrollback 5000
 
@@ -12,8 +12,17 @@ term screen-256color
 
 altscreen on
 
-
+# bind prefix key
 escape ^Bb
+
+# splits (not like tmux panes but like vim windows!)
+bind o split
+bind O split -v
+bind j focus down
+bind k focus up
+bind h focus left
+bind l focus right
+bind ! remove
 
 bind x kill
 
