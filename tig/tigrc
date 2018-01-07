@@ -115,6 +115,7 @@ bind diff A ?git amend-old %(commit)
 bind status aS ?git stash save --include-untracked
 bind stage  aS ?git stash save --include-untracked
 bind stash  aP ?git stash pop %(stash)
+bind diff   aP ?git stash pop %(stash)
 bind status as ?git save %(prompt)
 bind stage  as ?git save %(prompt)
 bind refs   ap ?git pop-prefix %(branch)
