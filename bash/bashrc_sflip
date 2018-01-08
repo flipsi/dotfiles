@@ -53,6 +53,15 @@ fi
 alias sudo='sudo '
 
 
+# custom prompt
+PS1=\
+'\n'\
+'\[\033[01;33m\]\u@\h '\
+'\[\033[01;30m\]\w'\
+'\[\033[01;31m\] $(if [ -d .git ]; then echo -n "( "; git rev-parse --sq --abbrev-ref HEAD; echo -n ")"; fi)'\
+'\[\033[00m\]\n> '
+
+
 # attach to screen session if shell is interactive and there a screen session
 # TODO: start screen (optionally) when not local and not in tmux
 if [ -t 1 ]; then
