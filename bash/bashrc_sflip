@@ -19,6 +19,7 @@ alias gdc='git diff --cached'
 alias  ge='git checkout'
 alias sge='sudo git checkout'
 alias  gl='git log'
+alias  gf='git fetch'
 alias  gp='git pull'
 alias sgp='sudo git pull'
 
