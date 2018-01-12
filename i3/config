@@ -297,10 +297,11 @@ set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
 bindsym $mod+c mode "$mode_clipboard"
 set $mode_clipboard Clipboard: (c) choose (p) get password
 mode "$mode_clipboard" {
-    bindsym $mod+c exec --no-startup-id "clipmenu $DMENU_OPTIONS"; mode "default";
-    bindsym      c exec --no-startup-id "clipmenu $DMENU_OPTIONS"; mode "default";
-    bindsym Shift+p exec --no-startup-id "passmenu $DMENU_OPTIONS"; mode "default";
+    bindsym  $mod+c exec --no-startup-id "CM_LAUNCHER=rofi clipmenu"; mode "default";
+    bindsym       c exec --no-startup-id "CM_LAUNCHER=rofi clipmenu"; mode "default";
+    bindsym Shift+c exec --no-startup-id "CM_LAUNCHER=dmenu clipmenu $DMENU_OPTIONS"; mode "default";
     bindsym       p exec --no-startup-id "rofi-pass"; mode "default";
+    bindsym Shift+p exec --no-startup-id "passmenu $DMENU_OPTIONS"; mode "default";
     # cancel
     bindsym $mod+Escape mode "default"
     bindsym Return mode "default"

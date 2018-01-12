@@ -42,6 +42,9 @@ if status --is-login
     # setup fzf to use ag instead of find
     set -x FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git -f -g ""'
 
+    # use rofi instead of dmenu
+    set -x CM_LAUNCHER "rofi"
+
     # # music player daemon
     # if test $hostname = "asterix"
     #     set -x MPD_HOST (ifconfig wlan0 | grep 'inet ' | sed 's/.*addr:\(.*\)  Bcast.*/\1/')
