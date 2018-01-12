@@ -1,6 +1,0 @@
-[submodule "tmux/tmux/plugins/tmux-urlview"]
-	path = tmux/tmux/plugins/tmux-urlview
-	url = https://github.com/tmux-plugins/tmux-urlview
-[submodule "tmux/tmux/plugins/tmux-yank"]
-	path = tmux/tmux/plugins/tmux-yank
-	url = https://github.com/tmux-plugins/tmux-yank
