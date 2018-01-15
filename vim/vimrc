@@ -1966,7 +1966,7 @@ if s:MyMode == 'mastery'
     highlight DiffText                ctermbg=233
     highlight ShowTrailingWhitespace  ctermbg=235
     highlight VertSplit               ctermfg=238
-    highlight Folded                  ctermfg=238
+    highlight Folded                  ctermfg=238 ctermfg=248
     highlight LineNr                  ctermbg=237 ctermfg=243
     " highlight SignColumn              ctermbg=237
     " highlight GitGutterAdd            ctermbg=235
