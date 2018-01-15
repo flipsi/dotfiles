@@ -34,7 +34,7 @@ function terminate_apps
         if pgrep -x $app > /dev/null
             notify-send "Pressing $app to terminate..."
             pkill -15 -x $app
-            sleep 1
+            sleep 5
         end
         if pgrep -x $app > /dev/null
             notify-send "Forcing $app to terminate..."
