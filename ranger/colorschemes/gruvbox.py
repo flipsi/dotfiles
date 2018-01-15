@@ -55,8 +55,6 @@ class Default(ColorScheme):
     def use(self, context):
         fg, bg, attr = default_colors
 
-        red = 210 # more decent red
-
         if context.reset:
             return default_colors
 
@@ -66,19 +64,18 @@ class Default(ColorScheme):
             else:
                 attr = normal
             if context.empty or context.error:
-                bg = red
+                bg = self.GRUVBOX_BRIGHT_RED
             if context.border:
-                #  fg = default
                 fg = self.GRUVBOX_NEUTRAL_GREEN
             if context.media:
                 if context.image:
-                    fg = yellow
+                    fg = self.GRUVBOX_BRIGHT_YELLOW
                 else:
                     fg = self.ACCENT
             if context.document:
-                fg = 192
+                fg = self.GRUVBOX_BRIGHT_AQUA
             if context.container:
-                fg = red
+                fg = self.GRUVBOX_BRIGHT_RED
             if context.directory:
                 attr |= bold
                 fg = self.GRAY_MIDDLE
@@ -86,22 +83,22 @@ class Default(ColorScheme):
                     any((context.media, context.container,
                         context.fifo, context.socket)):
                 attr |= bold
-                #fg = magenta
+                #fg = self.GRUVBOX_BRIGHT_PURPLE
             if context.socket:
-                fg = magenta
+                fg = self.GRUVBOX_BRIGHT_PURPLE
                 attr |= bold
             if context.fifo or context.device:
-                fg = yellow
+                fg = self.GRUVBOX_BRIGHT_YELLOW
                 if context.device:
                     attr |= bold
             if context.link:
-                fg = context.good and self.ACCENT or magenta
+                fg = context.good and self.ACCENT or self.GRUVBOX_BRIGHT_PURPLE
             if context.tag_marker and not context.selected:
                 attr |= bold
-                if fg in (red, magenta):
-                    fg = white
+                if fg in (self.GRUVBOX_BRIGHT_RED, self.GRUVBOX_BRIGHT_PURPLE):
+                    fg = self.GRUVBOX_LIGHT0
                 else:
-                    fg = red
+                    fg = self.GRUVBOX_BRIGHT_RED
             if not context.selected and (context.cut or context.copied):
                 bg = self.GRAY_DARKEST
                 fg = self.GRAY_BRIGHTEST
@@ -111,46 +108,46 @@ class Default(ColorScheme):
                     attr |= bold
                 if context.marked:
                     attr |= bold
-                    bg = yellow
+                    bg = self.GRUVBOX_BRIGHT_YELLOW
                     fg = self.GRAY_DARKEST
             if context.badinfo:
                 if attr & reverse:
-                    bg = magenta
+                    bg = self.GRUVBOX_BRIGHT_PURPLE
                 else:
-                    fg = magenta
+                    fg = self.GRUVBOX_BRIGHT_PURPLE
 
         elif context.in_titlebar:
             attr |= bold
             if context.hostname:
-                fg = context.bad and red or self.ACCENT_DARK
+                fg = context.bad and self.GRUVBOX_BRIGHT_RED or self.ACCENT_DARK
             elif context.directory:
                 fg = self.GRAY_MIDDLE
             elif context.tab:
                 if context.good:
                     bg = self.ACCENT_DARK
             elif context.link:
-                fg = cyan
+                fg = self.GRUVBOX_BRIGHT_AQUA
 
         elif context.in_statusbar:
             if context.permissions:
                 if context.good:
                     fg = self.GRAY_BRIGHT
                 elif context.bad:
-                    fg = magenta
+                    fg = self.GRUVBOX_BRIGHT_PURPLE
             if context.marked:
                 attr |= bold | reverse
-                fg = yellow
+                fg = self.GRUVBOX_BRIGHT_YELLOW
             if context.message:
                 if context.bad:
                     attr |= bold
-                    fg = red
+                    fg = self.GRUVBOX_BRIGHT_RED
             if context.loaded:
                 bg = self.progress_bar_color
             if context.vcsinfo:
-                fg = blue
+                fg = self.GRUVBOX_NEUTRAL_BLUE
                 attr &= ~bold
             if context.vcscommit:
-                fg = yellow
+                fg = self.GRUVBOX_BRIGHT_YELLOW
                 attr &= ~bold
 
 
@@ -175,11 +172,11 @@ class Default(ColorScheme):
         if context.vcsfile and not context.selected:
             attr &= ~bold
             if context.vcsconflict:
-                fg = magenta
+                fg = self.GRUVBOX_BRIGHT_PURPLE
             elif context.vcschanged:
-                fg = red
+                fg = self.GRUVBOX_BRIGHT_RED
             elif context.vcsunknown:
-                fg = red
+                fg = self.GRUVBOX_BRIGHT_RED
             elif context.vcsstaged:
                 fg = self.ACCENT
             elif context.vcssync:
@@ -192,12 +189,12 @@ class Default(ColorScheme):
             if context.vcssync:
                 fg = self.ACCENT
             elif context.vcsbehind:
-                fg = red
+                fg = self.GRUVBOX_BRIGHT_RED
             elif context.vcsahead:
                 fg = blue
             elif context.vcsdiverged:
-                fg = magenta
+                fg = self.GRUVBOX_BRIGHT_PURPLE
             elif context.vcsunknown:
-                fg = red
+                fg = self.GRUVBOX_BRIGHT_RED
 
         return fg, bg, attr
