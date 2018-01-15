@@ -1110,10 +1110,10 @@ nmap <Leader>xx <Leader>xiw
 " nnoremap <Leader>SD :Fardo<CR>
 
 
-" add "printf" statements with shortcut
-Plugin 'bergercookie/vim-debugstring'
+" " add "printf" statements with shortcut
+" Plugin 'bergercookie/vim-debugstring'
 
-nmap <Leader>ad <Plug>DumpDebugString
+" nmap <Leader>ad <Plug>DumpDebugString
 
 
 
