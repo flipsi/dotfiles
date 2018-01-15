@@ -71,9 +71,9 @@ class Default(ColorScheme):
                 if context.image:
                     fg = self.GRUVBOX_BRIGHT_YELLOW
                 else:
-                    fg = self.ACCENT
+                    fg = self.GRUVBOX_BRIGHT_ORANGE
             if context.document:
-                fg = self.GRUVBOX_BRIGHT_AQUA
+                fg = self.GRUVBOX_BRIGHT_BLUE
             if context.container:
                 fg = self.GRUVBOX_BRIGHT_RED
             if context.directory:
@@ -92,7 +92,7 @@ class Default(ColorScheme):
                 if context.device:
                     attr |= bold
             if context.link:
-                fg = context.good and self.ACCENT or self.GRUVBOX_BRIGHT_PURPLE
+                fg = context.good and self.GRUVBOX_LIGHT1 or self.GRUVBOX_NEUTRAL_PURPLE
             if context.tag_marker and not context.selected:
                 attr |= bold
                 if fg in (self.GRUVBOX_BRIGHT_RED, self.GRUVBOX_BRIGHT_PURPLE):
@@ -131,7 +131,7 @@ class Default(ColorScheme):
         elif context.in_statusbar:
             if context.permissions:
                 if context.good:
-                    fg = self.GRAY_BRIGHT
+                    fg = self.GRUVBOX_GRAY_244
                 elif context.bad:
                     fg = self.GRUVBOX_BRIGHT_PURPLE
             if context.marked:
@@ -144,10 +144,10 @@ class Default(ColorScheme):
             if context.loaded:
                 bg = self.progress_bar_color
             if context.vcsinfo:
-                fg = self.GRUVBOX_NEUTRAL_BLUE
+                fg = self.GRUVBOX_NEUTRAL_ORANGE
                 attr &= ~bold
             if context.vcscommit:
-                fg = self.GRUVBOX_BRIGHT_YELLOW
+                fg = self.GRUVBOX_GRAY_244
                 attr &= ~bold
 
 
