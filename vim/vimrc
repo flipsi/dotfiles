@@ -2429,6 +2429,43 @@ hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
 " }}}
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" handle binary documents {{{
+
+augroup read_special_files
+    au!
+    au BufWinEnter  *.{doc,docx,epub,odp,odt,pdf,rtf}
+                \ call s:filter_special_files()
+augroup END
+
+fu! s:filter_special_files() abort
+    if get(b:, 'did_filter_special_file', 0)
+        return
+    endif
+    let fname = shellescape(expand('%:p'), 1)
+    let ext = expand('%:e')
+    let ext2cmd = {
+    \               'doc' : '%!antiword '.fname,
+    \               'docx': '%!pandoc -f docx -t markdown '.fname,
+    \               'epub': '%!pandoc -f epub -t markdown '.fname,
+    \               'odp' : '%!odt2txt '.fname,
+    \               'odt' : '%!odt2txt '.fname,
+    \               'pdf' : '%!pdftotext -nopgbrk -layout -q -eol unix '.fname.' -',
+    \               'rtf' : '%!unrtf --text',
+    \             }
+    if has_key(ext2cmd, ext)
+        setl ma noro
+        sil exe ext2cmd[ext]
+        let b:did_filter_special_file = 1
+        setl noma ro nomod
+    endif
+endfu
+
+" }}}
+
+
+
 " }}}
 
 
