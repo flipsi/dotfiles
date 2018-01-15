@@ -5,6 +5,7 @@
 *.swp
 
 # IDE and editor files etc.
+.session.vim
 .tags
 .idea
 .ensime

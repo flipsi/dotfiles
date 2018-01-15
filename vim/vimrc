@@ -224,6 +224,29 @@ nnoremap <Leader>ps :PluginSearch<Space>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim sessions {{{
+
+" make sessions more convenient and automatically updated
+Plugin 'tpope/vim-obsession'
+
+let g:session_file_name = '.session.vim'
+
+" start session
+nnoremap <Leader>se :exe 'Obsession' . g:session_file_name<CR>
+
+" automatically load sessions if started without args
+autocmd VimEnter * nested
+            \ if !argc() && empty(v:this_session) |
+            \   if filereadable(g:session_file_name) |
+            \     exe 'source' . g:session_file_name |
+          " \   elseif |
+          " \     exe 'Obsession' . g:session_file_name |
+            \   endif |
+            \ endif
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tmux integration {{{
 
 
