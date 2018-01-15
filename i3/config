@@ -448,7 +448,8 @@ for_window [window_role="(?i)vlc-main"] resize set 750 450
 # windows always on specific workspace
 assign [class="(?i)chrom" instance="crx_kddchekfnnagpejaneebcigegenogifj"]  Banking
 assign [class="(?i)chrom" instance="crx_lgeboohgcoglieeoikhidodnmdfcalmh"]  Handy
-assign [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"]  Notes
+assign [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"]  Trello
+assign [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  Trello
 assign [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"]  Todo
 assign [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"]  Netflix
 assign [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"]  Kalender
