@@ -881,6 +881,8 @@ noremap <silent> <Leader>tt :TagbarToggle<CR>
 " sugar for unix shell commands like move/rename/delete/find files etc.
 Plugin 'tpope/vim-eunuch'
 
+nnoremap <Leader>rn :Rename <C-R>=expand("%:t")<CR>
+
 
 " Plugin 'scrooloose/nerdtree'
 
