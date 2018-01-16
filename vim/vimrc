@@ -876,7 +876,11 @@ noremap <silent> <Leader>tt :TagbarToggle<CR>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" file browser {{{
+" file management {{{
+
+" sugar for unix shell commands like move/rename/delete/find files etc.
+Plugin 'tpope/vim-eunuch'
+
 
 " Plugin 'scrooloose/nerdtree'
 
