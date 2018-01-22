@@ -415,6 +415,7 @@ nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gpp :Gpull<CR>
 nnoremap <Leader>gpu :Gpush<CR>
+nnoremap <Leader>gpU :exe ':Git push -u ' . system('git remote \| head -n1') . ' ' . system('git rev-parse --abbrev-ref HEAD')
 nnoremap <Leader>geb :exe ':Git checkout -b ' . input('Branch name: ')<CR>
 
 " in Gdiff view, navigate and stage/checkout easily
