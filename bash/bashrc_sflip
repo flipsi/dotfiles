@@ -36,6 +36,14 @@ alias lll='ls $LS_OPTIONS -la'
 
 alias o='open'
 alias v='vim -u <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/vim/vimrc)'
+alias v=v
+function v() {
+    vimrc=/tmp/sflip.vimrc.vim
+    if [[ ! -f $vimrc ]]; then
+        curl https://raw.githubusercontent.com/sflip/dotfiles/master/vim/vimrc > $vimrc
+    fi
+    vim -u $vimrc $1
+}
 alias se=se
 function se() {
     vimrc=/tmp/sflip.vimrc.vim
