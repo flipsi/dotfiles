@@ -1822,7 +1822,8 @@ set spellfile=~/.vim/spellfile.utf-8.add,~/.vim/spellfile.local.utf-8.add
 
 " syntax highlighting
 syntax enable
-set synmaxcol=300
+let g:synmaxcol=300
+exe 'set synmaxcol=' . g:synmaxcol
 
 " highlight matching bracket when typing
 " set showmatch
@@ -2748,6 +2749,8 @@ nnoremap <Leader>o <NOP>
 
 " toggle syntax highlighting
 nmap <silent> <C-G>y :call ToggleSyntax()<CR>
+" toggle syntax highlighting after g:synmaxcol characters
+nmap <silent> <C-G>Y :let &synmaxcol = g:synmaxcol - &synmaxcol <CR>
 
 " toggle line numbers
 noremap <silent> <C-G>l :set number! <bar> :set relativenumber! <CR>
