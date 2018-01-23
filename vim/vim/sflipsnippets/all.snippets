@@ -29,12 +29,17 @@ priority -55
 #endsnippet
 
 snippet auth "Name and email address"
-author: "Philipp Moers" <${1:soziflip@gmail.com}>
+Author: "Philipp Moers" <${1:soziflip+${2:tag}@gmail.com}>
 $0
 endsnippet
 
-snippet icke  "Name and email address"
-"Philipp Moers" <${1:soziflip@gmail.com}>
+snippet icke "Name and email address"
+"Philipp Moers" <${1:soziflip+${2:tag}@gmail.com}>
+$0
+endsnippet
+
+snippet sozi "email address"
+soziflip+${1:tag}@gmail.com
 $0
 endsnippet
 
