@@ -183,13 +183,10 @@ function create_link_for_target() {
 
         i3 )
             mkdir -p "$HOME/.i3"
+            create_link "$PWD/i3/bin" "$HOME/.i3/bin"
             create_link "$PWD/i3/config" "$HOME/.i3/config"
             # create_link "$PWD/i3/i3status" "$HOME/.i3/i3status"
             create_link "$PWD/i3/i3pystatus" "$HOME/.i3/i3pystatus"
-            create_link "$PWD/i3/i3pystatus-mpd-notification.sh" "$HOME/.i3/i3pystatus-mpd-notification.sh"
-            mkdir -p "$HOME/bin"
-            create_link "$PWD/i3/i3-initialize.sh" "$HOME/bin/i3-initialize.sh"
-            create_link "$PWD/i3/i3-terminate.sh" "$HOME/bin/i3-terminate.sh"
             ;;
 
         kitty )

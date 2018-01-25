@@ -132,7 +132,7 @@ set $refresh Want it fresh? (l) reload config, (s) restart i3, (i) initialize-sc
 mode "$refresh" {
     bindsym l reload; mode "default"
     bindsym s restart
-    bindsym i exec --no-startup-id "/home/sflip/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"; mode "default"
+    bindsym i exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"; mode "default"
     bindsym k exec --no-startup-id "setxkbmap de_sflip"; mode "default"
     # cancel
     bindsym $mod+F5 mode "default"
