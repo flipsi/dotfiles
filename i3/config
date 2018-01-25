@@ -449,39 +449,39 @@ for_window [window_role="(?i)vlc-main"] resize set 750 450
 
 # windows always on specific workspace
 assign [class="(?i)chrom" instance="crx_kddchekfnnagpejaneebcigegenogifj"]  Banking
+assign [class="(?i)chrom"]                                                  Chrome
+assign [class="(?i)filezilla"]                                              Filezilla
+assign [class="(?i)firefox"]                                                Fuchs
+assign [class="(?i)chrom" instance="crx_afbjehlnjihfcebhifoapfibhcgakelg"]  Github
 assign [class="(?i)chrom" instance="crx_lgeboohgcoglieeoikhidodnmdfcalmh"]  Handy
-assign [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"]  Trello
-assign [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  Trello
-assign [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"]  Todo
 assign [class="(?i)chrom" instance="crx_elofdcljcpfajijdjlcbjclkdggnklhg"]  Inbox
+assign [class="(?i)jetbrains-idea"]                                         IntelliJ
 assign [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"]  Kalender
 assign [class="(?i)chrom" instance="crx_hjpceadhnpnpdelkidbjdmoodafopfkp"]  Kalender
-assign [class="(?i)chrom" instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"]  Signal
-assign [class="(?i)chrom" instance="crx_afbjehlnjihfcebhifoapfibhcgakelg"]  Github
+assign [class="gnome-calendar"]                                             Kalender
+assign [class="(?i)thunderbird"]                                            Mail
+assign [class="(?i)spotify"]                                                Mucke
 assign [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"]  Netflix
-assign [class="(?i)chrom" instance="crx_mldpchjnjlkioecpffkohnhjlgbkcfkf"]  TV
-assign [class="(?i)chrom"]                                                  Chrome
-assign [class="(?i)firefox"]                                                Fuchs
-assign [class="(?i)pale moon"]                                              Web
+assign [class="(?i)pokerstars"]                                             Poker
+assign [class="(?i)audacity"]                                               Recording
+assign [class="(?i)ardour"]                                                 Recording
+assign [class="(?i)chrom" instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"]  Signal
+assign [class="(?i)skype"]                                                  Skype
+assign [class="(?i)slack"]                                                  Slack
+assign [class="(?i)qjackctl"]                                               Sound
 assign [class="(?i)spotify"]                                                Spotify
+assign [class="(?i)kaffeine"]                                               TV
+assign [class="(?i)mediathek"]                                              TV
+assign [class="(?i)chrom" instance="crx_mldpchjnjlkioecpffkohnhjlgbkcfkf"]  TV
+for_window [class="Spotify"] move to workspace                              Spotify
+assign [class="Telegram"]                                                   Telegram
 assign [class="(?i)gnome-terminal"]                                         Terminal
 assign [class="(?i)urxvt"]                                                  Terminal
 assign [class="(?i)cool-retro-term"]                                        Terminal
-assign [class="gnome-calendar"]                                             Kalender
-assign [class="(?i)thunderbird"]                                            Mail
-assign [class="(?i)filezilla"]                                              Filezilla
-assign [class="(?i)jetbrains-idea"]                                         IntelliJ
-assign [class="Telegram"]                                                   Telegram
-assign [class="(?i)skype"]                                                  Skype
-assign [class="(?i)slack"]                                                  Slack
-assign [class="(?i)pokerstars"]                                             Poker
-assign [class="(?i)kaffeine"]                                               TV
-assign [class="(?i)mediathek"]                                              TV
-assign [class="(?i)spotify"]                                                Mucke
-assign [class="(?i)qjackctl"]                                               Sound
-assign [class="(?i)audacity"]                                               Recording
-assign [class="(?i)ardour"]                                                 Recording
-for_window [class="Spotify"] move to workspace                              Spotify
+assign [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"]  Todo
+assign [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"]  Trello
+assign [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  Trello
+assign [class="(?i)pale moon"]                                              Web
 
 
 # kill specific apps (e.g. when memory really full again and the system hangs)
