@@ -453,21 +453,24 @@ assign [class="(?i)chrom" instance="crx_lgeboohgcoglieeoikhidodnmdfcalmh"]  Hand
 assign [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"]  Trello
 assign [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  Trello
 assign [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"]  Todo
-assign [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"]  Netflix
+assign [class="(?i)chrom" instance="crx_elofdcljcpfajijdjlcbjclkdggnklhg"]  Inbox
 assign [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"]  Kalender
 assign [class="(?i)chrom" instance="crx_hjpceadhnpnpdelkidbjdmoodafopfkp"]  Kalender
 assign [class="(?i)chrom" instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"]  Signal
 assign [class="(?i)chrom" instance="crx_afbjehlnjihfcebhifoapfibhcgakelg"]  Github
-assign [class="(?i)chrom"]                                                  Chrömchen
+assign [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"]  Netflix
+assign [class="(?i)chrom" instance="crx_mldpchjnjlkioecpffkohnhjlgbkcfkf"]  TV
+assign [class="(?i)chrom"]                                                  Chrome
 assign [class="(?i)firefox"]                                                Fuchs
 assign [class="(?i)pale moon"]                                              Web
+assign [class="(?i)spotify"]                                                Spotify
 assign [class="(?i)gnome-terminal"]                                         Terminal
 assign [class="(?i)urxvt"]                                                  Terminal
 assign [class="(?i)cool-retro-term"]                                        Terminal
 assign [class="gnome-calendar"]                                             Kalender
 assign [class="(?i)thunderbird"]                                            Mail
 assign [class="(?i)filezilla"]                                              Filezilla
-assign [class="(?i)jetbrains-idea"]                                         Development
+assign [class="(?i)jetbrains-idea"]                                         IntelliJ
 assign [class="Telegram"]                                                   Telegram
 assign [class="(?i)skype"]                                                  Skype
 assign [class="(?i)slack"]                                                  Slack
@@ -478,6 +481,7 @@ assign [class="(?i)spotify"]                                                Muck
 assign [class="(?i)qjackctl"]                                               Sound
 assign [class="(?i)audacity"]                                               Recording
 assign [class="(?i)ardour"]                                                 Recording
+for_window [class="Spotify"] move to workspace                              Spotify
 
 
 # kill specific apps (e.g. when memory really full again and the system hangs)
