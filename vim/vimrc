@@ -2422,7 +2422,7 @@ endfunction
 " send buffer via slack {{{
 function! SendBufferViaSlack(channel)
     let content = getline(1, '$')
-    exec "write !slackcat -c " . a:channel
+    exec "write !slackcat --channel " . a:channel . " --filename " . expand("%:t")
 endfunction
 " }}}
 
