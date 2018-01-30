@@ -2429,8 +2429,8 @@ endfunction
 
 " send buffer via slack after choosing channel interactively {{{
 function! SendBufferViaSlackChooseChannel()
-    let content = system("slackcat --list")
-    echo content
+    " let content = system("slackcat --list")
+    " echo content
     let choice = input("Which channel: ")
     call SendBufferViaSlack(choice)
 endfunction
