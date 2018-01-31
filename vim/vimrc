@@ -771,7 +771,6 @@ let g:fzf_layout = { 'down': '~20%' }
 " (scroll with <C-k> and <C-j>
 let g:fzf_action = {
   \ 'ctrl-x': 'split',
-  \ 'ctrl-j': 'split',
   \ 'ctrl-l': 'vsplit',
   \ 'ctrl-v': 'vsplit',
   \ }
