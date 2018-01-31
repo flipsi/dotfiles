@@ -19,6 +19,7 @@ abbr gbD    git branch -D
 abbr gbm    git branch -m
 abbr gc     git commit
 abbr gca    git commit --amend
+abbr gcl    git clone --recursive
 abbr gd     git diff
 abbr gda    git diff --cached
 abbr gdc    git diff --cached
@@ -28,7 +29,6 @@ abbr gf     git fetch --prune
 abbr gl     tig log
 abbr glh    git --no-pager log -n 1
 abbr gli    git --no-pager log -n 1 \| head -n 1 \| cut -d\" \" -f2 \| xsel --clipboard
-abbr go     git clone --recursive
 abbr gpp    git pull
 abbr gpu    git push
 abbr gpuu   git push -u \(git remote \| head -n1\) \(git rev-parse --abbrev-ref HEAD\)
