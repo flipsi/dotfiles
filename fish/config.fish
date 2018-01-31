@@ -2,9 +2,48 @@
 set fish_greeting ""
 
 
+#########################
+# environment variables #
+#########################
 
-# only do this stuff when login shell...
-if status --is-login
+# QUICKFIX FOR LOCALE ISSUE
+set -x LANG de_DE.UTF-8
+# set -x LANG en_US.UTF-8
+
+# some more stuff in PATH
+set -x PATH ~/.cargo/bin $PATH
+set -x PATH ~/.gem/ruby/2.4.0/bin $PATH
+set -x PATH ~/.i3/bin $PATH
+set -x PATH ~/bin $PATH
+set -x PATH ~/shellscripts $PATH
+
+# edit files with vim
+set -x EDITOR vim
+
+# web browser
+set -x BROWSER firefox
+
+# setup fzf to use ag instead of find
+set -x FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git -f -g ""'
+
+# use rofi instead of dmenu
+set -x CM_LAUNCHER "rofi"
+
+# # music player daemon
+# if test $hostname = "asterix"
+#     set -x MPD_HOST (ifconfig wlan0 | grep 'inet ' | sed 's/.*addr:\(.*\)  Bcast.*/\1/')
+# else
+    # set -x MPD_HOST $hostname
+    set -x MPD_HOST localhost
+# end
+
+
+
+####################################
+# login and interactive shell only #
+####################################
+
+if status --is-interactive; and status --is-login
 
     # change colors
     fish_my_colors gruvbox
@@ -19,48 +58,15 @@ if status --is-login
     # eval (dircolors -c LS_COLORS)
     set -x LS_COLORS (bash -c 'eval `dircolors ~/.dircolors`; echo $LS_COLORS')
 
-
-    # QUICKFIX FOR LOCALE ISSUE
-    set -x LANG de_DE.UTF-8
-    # set -x LANG en_US.UTF-8
-
     # find out host once (useful for multiple things, but saves cycles)
     set hostname (hostname)
-
-    # some more stuff in PATH
-    set -x PATH ~/.cargo/bin $PATH
-    set -x PATH ~/.gem/ruby/2.4.0/bin $PATH
-    set -x PATH ~/.i3/bin $PATH
-    set -x PATH ~/bin $PATH
-    set -x PATH ~/shellscripts $PATH
-
-    # edit files with vim
-    set -x EDITOR vim
-
-    # web browser
-    set -x BROWSER firefox
-
-    # setup fzf to use ag instead of find
-    set -x FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git -f -g ""'
-
-    # use rofi instead of dmenu
-    set -x CM_LAUNCHER "rofi"
-
-    # # music player daemon
-    # if test $hostname = "asterix"
-    #     set -x MPD_HOST (ifconfig wlan0 | grep 'inet ' | sed 's/.*addr:\(.*\)  Bcast.*/\1/')
-    # else
-        # set -x MPD_HOST $hostname
-        set -x MPD_HOST localhost
-    # end
-
 
     # keychain takes care of ssh-agent and can also do gpg
     if command -v keychain >/dev/null
         eval (command keychain --eval --quiet ~/.ssh/id_rsa)
     end
 
-    # abbreviations
+    # load abbreviations
     if not set -q __abbr_init
       set -gx __abbr_init
       source $HOME/.config/fish/abbr.fish
