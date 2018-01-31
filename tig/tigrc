@@ -5,6 +5,9 @@
 # Author: Philipp Moers <soziflip@gmail.com>
 
 
+# window settings
+set main-view = line-number:no,interval=5 id:yes author:full date:default commit-title:yes,graph,refs,overflow=no
+
 
 # look
 color cursor                white       color237
@@ -17,6 +20,7 @@ color search-result         black       color106
 color diff-stat             color66     default
 color diff-add-highlight    color142    default     standout
 color diff-del-highlight    color167    default     standout
+color graph-commit		    color124	default
 
 
 # beautiful diff view
