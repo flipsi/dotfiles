@@ -124,7 +124,7 @@ end
 
 
 if test -f $HOME/bin/i3-initialize-arandr.local.sh
-    $HOME/bin/i3-initialize-arandr.local.sh
+    eval $HOME/bin/i3-initialize-arandr.local.sh
 else
     setup_screen_resolution
     setup_screen_layout
