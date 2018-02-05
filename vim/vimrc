@@ -267,8 +267,8 @@ Plugin 'tmux-plugins/vim-tmux-focus-events'
 
 " run tmux commands from within vim
 Plugin 'benmills/vimux'
-let g:VimuxHeight = "24"
-let g:VimuxOrientation = "v"
+let g:VimuxHeight = "50"
+let g:VimuxOrientation = "h"
 let VimuxUseNearest = 1
 nnoremap <Leader>bo         :VimuxRunCommand "clear; "<Left>
 nnoremap <Leader>bf         :VimuxRunCommand "clear;  " . expand('%')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
