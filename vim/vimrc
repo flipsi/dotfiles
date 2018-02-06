@@ -3460,9 +3460,9 @@ augroup END
 nnoremap <Leader>qa :bufdo bdelete<CR>
 
 " quit current window
-nnoremap <Leader>qw :quit<CR>:buffer #<CR>
+nnoremap <Leader>qW :quit<CR>:buffer #<CR>
 " quit all windows but current
-nnoremap <Leader>qW :only<CR>
+nnoremap <Leader>qw :only<CR>
 
 " quit vim (multiple windows)
 " (this is how i exit most terminal applications)
