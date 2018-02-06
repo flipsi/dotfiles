@@ -289,9 +289,13 @@ nnoremap <Leader>bE         :call MakeWithVimuxOpenErrors('buffer')<CR>
 " param command: the shell command to execute
 let g:makewithvimux_outfile = '/tmp/vim.make.out'
 function! MakeWithVimux(command)
-    call VimuxRunCommand(a:command . ' | tee ' . g:makewithvimux_outfile)
+    let command = a:command . ' | tee ' . g:makewithvimux_outfile
+    call VimuxRunCommand(command)
 endfunction
 function! MakeWithVimuxOpenErrors(where)
+    " remove terminal color escape sequences that fuck with errorformat
+    exec  ':silent !sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" ' . g:makewithvimux_outfile
+    redraw!
     exec 'cfile ' . g:makewithvimux_outfile
     if a:where == 'quickfix'
         let g:jumplist = 'quickfixlist'
@@ -1654,19 +1658,13 @@ function! SetupScala()
                 " \%E\ \%#[info]\ %.%#\ was\ not\ equal\ to\ %.%#\ (%f:%l),%Z,
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
-    nnoremap <Leader>bd  :call VimuxRunCommand("set TERM xterm-color; clear; sbt compile")<CR>
-    nnoremap <Leader>bs  :call VimuxRunCommand("set TERM xterm-color; clear; sbt run")<CR>
-    nnoremap <Leader>btt :call VimuxRunCommand("set TERM xterm-color; clear; sbt test it:test")<CR>
-    nnoremap <Leader>btu :call VimuxRunCommand("set TERM xterm-color; clear; sbt test")<CR>
-    nnoremap <Leader>bti :call VimuxRunCommand("set TERM xterm-color; clear; sbt it:test")<CR>
-    nnoremap <Leader>bto :call VimuxRunCommand("set TERM xterm-color; clear; " . CalculateSbtTestOnlyCommand())<CR>
-    nnoremap <Leader>br  :call VimuxRunCommand("set TERM xterm-color; clear; sbt console")<CR>
-    nnoremap <Leader>bD  :call MakeWithVimux("set TERM xterm-color; clear; sbt -Dsbt.log.noformat=true compile")<CR>
-    nnoremap <Leader>bS  :call MakeWithVimux("set TERM xterm-color; clear; sbt -Dsbt.log.noformat=true run")<CR>
-    nnoremap <Leader>btT :call MakeWithVimux("set TERM xterm-color; clear; sbt -Dsbt.log.noformat=true test it:test")<CR>
-    nnoremap <Leader>btU :call MakeWithVimux("set TERM xterm-color; clear; sbt -Dsbt.log.noformat=true test")<CR>
-    nnoremap <Leader>btI :call MakeWithVimux("set TERM xterm-color; clear; sbt -Dsbt.log.noformat=true it:test")<CR>
-    nnoremap <Leader>btO :call MakeWithVimux("set TERM xterm-color; clear; " . CalculateSbtTestOnlyCommand())<CR>
+    nnoremap <Leader>bd  :call MakeWithVimux("set TERM xterm-color; sbt compile")<CR>
+    nnoremap <Leader>bs  :call MakeWithVimux("set TERM xterm-color; sbt run")<CR>
+    nnoremap <Leader>btt :call MakeWithVimux("set TERM xterm-color; sbt test it:test")<CR>
+    nnoremap <Leader>btu :call MakeWithVimux("set TERM xterm-color; sbt test")<CR>
+    nnoremap <Leader>bti :call MakeWithVimux("set TERM xterm-color; sbt it:test")<CR>
+    nnoremap <Leader>bto :call MakeWithVimux("set TERM xterm-color; " . CalculateSbtTestOnlyCommand())<CR>
+    nnoremap <Leader>br  :call MakeWithVimux("set TERM xterm-color; sbt console")<CR>
     nnoremap <Leader>bE  :call MakeWithVimuxOpenErrors('buffer')<CR>gg/\*\*\* FAILED \*\*\*<CR>
     nnoremap <Leader>fe  /\*\*\* FAILED \*\*\*<CR>
 endfunction
