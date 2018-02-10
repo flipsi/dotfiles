@@ -34,7 +34,7 @@ set $SHELLSCRIPT_PATH /home/sflip/shellscripts
 ###############################################################################
 
 # some setup logic I rather do with a shell script
-exec "/home/sflip/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"
+exec "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"
 
 # set keyboard layout
 exec "setxkbmap de_sflip"
