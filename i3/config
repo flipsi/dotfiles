@@ -332,7 +332,7 @@ mode "$mode_system" {
     bindsym h exec --no-startup-id "systemctl hibernate"; mode "default"
     bindsym r exec --no-startup-id "systemctl reboot"
     bindsym p exec --no-startup-id "systemctl poweroff
-    bindsym o exec --no-startup-id "/home/sflip/bin/i3-terminate.sh"; exec --no-startup-id "i3-nagbar -t warning -m 'About to Poweroff... ' -b Abort 'pkill -f i3-terminate.sh'"; mode "default"
+    bindsym o exec --no-startup-id "/home/sflip/.i3/bin/i3-terminate.sh"; exec --no-startup-id "i3-nagbar -t warning -m 'About to Poweroff... ' -b Abort 'pkill -f i3-terminate.sh'"; mode "default"
     # cancel
     bindsym $mod+Escape mode "default"
     bindsym Return mode "default"
