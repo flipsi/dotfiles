@@ -448,6 +448,7 @@ for_window [window_role="(?i)vlc-main"] resize set 750 450
 # for_window [window_role="(?i)vlc-main"] move position 800 150
 
 # windows always on specific workspace
+assign [class="(?i)chrom" instance="crx_acmikcjocccblbiibfdfjkghclpmmpip"]  Banking
 assign [class="(?i)chrom" instance="crx_kddchekfnnagpejaneebcigegenogifj"]  Banking
 assign [class="(?i)chrom"]                                                  Chrome
 assign [class="(?i)filezilla"]                                              Filezilla
