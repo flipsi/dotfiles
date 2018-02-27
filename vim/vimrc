@@ -270,10 +270,10 @@ Plugin 'benmills/vimux'
 let g:VimuxHeight = "50"
 let g:VimuxOrientation = "h"
 let VimuxUseNearest = 1
-nnoremap <Leader>bo         :VimuxRunCommand "clear; "<Left>
-nnoremap <Leader>bf         :VimuxRunCommand "clear;  " . expand('%')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+nnoremap <Leader>bo         :VimuxRunCommand ""<Left>
+nnoremap <Leader>bf         :VimuxRunCommand " " . expand('%')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 nnoremap <Leader>bb         :update<CR>:VimuxRunLastCommand<CR>
-nnoremap <Leader>bl         :update<CR>:VimuxRunLastCommand<CR>
+nnoremap <Leader>bl         :VimuxRunCommand "clear"<CR>
 nnoremap <Leader>bq         :VimuxCloseRunner<CR>
 nnoremap <Leader>bx         :VimuxCloseRunner<CR>
 nnoremap <Leader>bz         :call VimuxZoomRunner()<CR>
@@ -1532,11 +1532,11 @@ augroup javascript_on_read
     au FileType javascript call SetupJavascript()
 augroup END
 function! SetupJavascript()
-    nnoremap <Leader>bi  :call VimuxRunCommand("clear; npm install")<CR>
-    nnoremap <Leader>bs  :call VimuxRunCommand("clear; npm start")<CR>
-    nnoremap <Leader>btt :call VimuxRunCommand("clear; npm test")<CR>
-    nnoremap <Leader>btu :call VimuxRunCommand("clear; npm test-unit")<CR>
-    nnoremap <Leader>bti :call VimuxRunCommand("clear; npm test-int")<CR>
+    nnoremap <Leader>bi  :call VimuxRunCommand("npm install")<CR>
+    nnoremap <Leader>bs  :call VimuxRunCommand("npm start")<CR>
+    nnoremap <Leader>btt :call VimuxRunCommand("npm test")<CR>
+    nnoremap <Leader>btu :call VimuxRunCommand("npm test-unit")<CR>
+    nnoremap <Leader>bti :call VimuxRunCommand("npm test-int")<CR>
 endfunction
 
 
@@ -1572,9 +1572,9 @@ augroup python_on_read
     au FileType python call SetupPython()
 augroup END
 function! SetupPython()
-    nnoremap <Leader>bs  :call VimuxRunCommand("clear; python " . expand('%'))<CR>
-    nnoremap <Leader>b2  :call VimuxRunCommand("clear; python2 " . expand('%'))<CR>
-    nnoremap <Leader>b3  :call VimuxRunCommand("clear; python3 " . expand('%'))<CR>
+    nnoremap <Leader>bs  :call VimuxRunCommand("python " . expand('%'))<CR>
+    nnoremap <Leader>b2  :call VimuxRunCommand("python2 " . expand('%'))<CR>
+    nnoremap <Leader>b3  :call VimuxRunCommand("python3 " . expand('%'))<CR>
 endfunction
 
 
