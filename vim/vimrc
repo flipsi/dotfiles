@@ -1565,6 +1565,17 @@ augroup map_latex
 augroup END
 
 
+" Language: PHP
+
+augroup php_on_read
+    au!
+    au FileType php call SetupPHP()
+augroup END
+function! SetupPHP()
+    nnoremap <Leader>btt  :call VimuxRunCommand("composer test")<CR>
+endfunction
+
+
 " Language: python
 
 augroup python_on_read
