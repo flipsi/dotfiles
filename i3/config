@@ -462,6 +462,7 @@ for_window [class="(?i)chrom" instance="crx_hjpceadhnpnpdelkidbjdmoodafopfkp"] m
 assign [class="gnome-calendar"]                                                                     Kalender
 assign [class="(?i)thunderbird"]                                                                    Mail
 for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] move to workspace    Netflix
+for_window [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"] move to workspace    Notes
 assign [class="(?i)pokerstars"]                                                                     Poker
 assign [class="(?i)audacity"]                                                                       Recording
 assign [class="(?i)ardour"]                                                                         Recording
@@ -479,7 +480,6 @@ assign [class="(?i)gnome-terminal"]                                             
 assign [class="(?i)urxvt"]                                                                          Terminal
 assign [class="(?i)cool-retro-term"]                                                                Terminal
 for_window [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"] move to workspace    Trello
-for_window [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"] move to workspace    Trello
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] move to workspace    Trello
 assign [class="(?i)pale moon"]                                                                      Web
 
