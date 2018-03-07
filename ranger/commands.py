@@ -1,3 +1,4 @@
+from os import path
 from subprocess import PIPE
 from ranger.api.commands import *
 
@@ -28,10 +29,10 @@ class fzf(Command):
             return 1
         else:
             file = stdout.decode('utf-8').rstrip('\n')
-            if (os.path.isdir(file)):
+            if (path.isdir(file)):
                 self.fm.cd(file)
             else:
-                file = os.path.abspath(file) # somehow, otherwise wrong file selected
+                file = path.abspath(file) # somehow, otherwise wrong file selected
                 self.fm.select_file(file)
 
 
