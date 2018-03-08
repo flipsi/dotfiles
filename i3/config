@@ -310,6 +310,29 @@ mode "$mode_clipboard" {
     bindsym Escape mode "default"
 }
 
+# type something or press keys or click
+bindsym $mod+x mode "$mode_x"
+set $mode_x (x) type with xdotool
+mode "$mode_x" {
+    bindsym  $mod+x mode "$mode_xdootool"
+    bindsym       x mode "$mode_xdootool"
+    # cancel
+    bindsym $mod+Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+set $mode_xdootool (b) bash with my bashrc
+mode "$mode_xdootool" {
+    bindsym b exec --no-startup-id "xdotool type 'bbash --rcfile <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/bash/bashrc_sflip)'; xdotool key Return"; mode "default";
+    # cancel
+    bindsym $mod+Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+
+
 
 
 

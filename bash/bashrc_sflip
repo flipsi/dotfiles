@@ -5,6 +5,12 @@
 # These is just some basic stuff that I miss
 # when I use bash instead of fish occasionally.
 
+
+# If you want to start a bash instance with this config from any machine (with internet access), just run:
+#
+#       bash --rcfile <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/bash/bashrc_sflip)
+
+
 alias ..='cd ..'
 alias cde='cd /etc'
 alias cdl='cd /var/log'
