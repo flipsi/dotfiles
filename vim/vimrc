@@ -1312,6 +1312,7 @@ let g:toggle_words_dict = {
             \     ['up', 'down'],
             \     ['wide', 'narrow'],
             \     ['width', 'height'],
+            \     ['write', 'read'],
             \     ['yes', 'no'],
             \ ],
             \ }
