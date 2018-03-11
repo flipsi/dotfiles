@@ -1269,6 +1269,7 @@ let g:toggle_words_dict = {
             \     ['enabled', 'disabled'],
             \     ['fast', 'slow'],
             \     ['fat', 'thin'],
+            \     ['first', 'last'],
             \     ['forward', 'backward'],
             \     ['get', 'set'],
             \     ['good', 'bad'],
