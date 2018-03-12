@@ -1422,7 +1422,7 @@ vnoremap -af :Autoformat<CR>
 nmap <Leader>af -af
 vmap <Leader>af -af
 
-let g:formatdef_scalafmt = "'scalafmt --stdin'"
+let g:formatdef_scalafmt = "'scalafmt --stdin 2>/dev/null'"
 let g:formatters_scala = ['scalafmt']
 
 
