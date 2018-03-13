@@ -1417,8 +1417,8 @@ Plugin 'Chiel92/vim-autoformat'
 " - js-beautify (for HTML, CSS, JavaScript, JSON)
 " - scalafmt (for scala)
 
-nnoremap -af :Autoformat<CR>
-vnoremap -af :Autoformat<CR>
+nnoremap -af :Autoformat<CR>:GitGutterEnable<CR>
+vnoremap -af :Autoformat<CR>:GitGutterEnable<CR>
 nmap <Leader>af -af
 vmap <Leader>af -af
 
