@@ -2634,8 +2634,8 @@ nnoremap <Leader>ev :execute 'edit ' . resolve(expand($MYVIMRC))<CR>
 nnoremap <Leader>e3 :edit ~/.i3/config<CR>
 
 " reload config file
-nnoremap <Leader>sv :source $MYVIMRC<CR>
-nnoremap <F5>       :source $MYVIMRC<CR>
+nnoremap <Leader>sv :source $MYVIMRC<CR>:syntax enable<CR>
+nmap <F5> <Leader>sv
 
 
 " to follow links in help and jump to definition (ctags)
