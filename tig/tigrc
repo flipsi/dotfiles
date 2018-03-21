@@ -5,14 +5,23 @@
 # Author: Philipp Moers <soziflip@gmail.com>
 
 
+# window settings
+set main-view = line-number:no,interval=5 id:yes author:full date:default commit-title:yes,graph,refs,overflow=no
+
 
 # look
-color cursor            white       color236
-color header			red	        default
-color title-blur		black	    color23
-color title-focus		black	    color23       bold
-color section			black	    color23
-color status			color23	    default
+color cursor                white       color237
+color header                color167    default
+color title-blur            color106    color236
+color title-focus           color106    color236    bold
+color section               color172    color236
+color status                color167    default
+color search-result         black       color106
+color diff-stat             color66     default
+color diff-add-highlight    color142    default     standout
+color diff-del-highlight    color167    default     standout
+color graph-commit		    color124	default
+
 
 # beautiful diff view
 #set diff-options TODO
@@ -66,7 +75,8 @@ bind generic wp view-pager
 bind generic wh view-help
 bind generic ws view-status
 bind generic wc view-stage
-bind generic wa view-stash
+bind generic wA view-stash # see git/misc/git-branch-is-the-new-stash.md
+bind generic wa view-refs
 bind generic wg view-grep
 
 # view manipulation
@@ -85,10 +95,12 @@ bind generic Ö search-back
 #bind stage <Enter> :/^@@
 
 # add/stage/unstage and commit
-bind status a status-update
-bind stage  a status-update
+bind status a none
+bind stage  a none
 bind status s status-update
 bind stage  s status-update
+bind status S @bash -c 'git diff-files --quiet && git reset HEAD || git add --all'
+bind stage  S @bash -c 'git diff-files --quiet && git reset HEAD || git add --all'
 bind status c !git commit
 bind stage  c !git commit
 
@@ -106,12 +118,16 @@ bind main A ?git amend-old %(commit)
 bind diff A ?git amend-old %(commit)
 
 # stash
-bind status S ?git stash save --include-untracked
-bind stage  S ?git stash save --include-untracked
-bind stash  p ?git stash pop %(stash)
+bind status aS ?git stash save --include-untracked
+bind stage  aS ?git stash save --include-untracked
+bind stash  aP ?git stash pop %(stash)
+bind diff   aP ?git stash pop %(stash)
+bind status as ?git save %(prompt)
+bind stage  as ?git save %(prompt)
+bind refs   ap ?git pop-prefix %(branch)
 
 # checkout/merge refs
-bind refs c	?git checkout %(branch)
+bind refs c ?git checkout %(branch)
 bind refs m ?git merge %(branch)
 bind refs b !git checkout -b %(prompt)
 bind refs d ?git branch -d %(branch)

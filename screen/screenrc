@@ -1,0 +1,36 @@
+# GNU screen (a worse tmux) config file
+
+defscrollback 5000
+
+startup_message off
+
+hardstatus off
+hardstatus alwayslastline
+hardstatus string '%{= kc}[%{w}%H%{c}][%= %{= kw}%?%-Lw%?%{c}(%{W}%n*%f%t%?(%u)%?%{c})%{w}%?%+Lw%?%?%= %{c}][%{w}%c%{c}]'
+
+term screen-256color
+
+altscreen on
+
+# bind prefix key
+escape ^Bb
+
+# splits (not like tmux panes but like vim windows!)
+bind o split
+bind O split -v
+bind j focus down
+bind k focus up
+bind h focus left
+bind l focus right
+bind ! remove
+
+bind x kill
+
+bind ^u copy
+
+# start window numbers at 1 instead of 0
+bind i  screen 1
+bind ^i screen 1
+bind 0 select 10
+screen 1
+

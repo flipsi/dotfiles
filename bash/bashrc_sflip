@@ -5,9 +5,34 @@
 # These is just some basic stuff that I miss
 # when I use bash instead of fish occasionally.
 
+
+# If you want to start a bash instance with this config from any machine (with internet access), just run:
+#
+#       bash --rcfile <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/bash/bashrc_sflip)
+
+
 alias ..='cd ..'
+alias cde='cd /etc'
+alias cdl='cd /var/log'
+alias cdo='cd /opt'
+alias cdw='cd /var/www'
 
 alias g='grep --with-filename --line-number --recursive --ignore-case --extended-regexp'
+
+alias   gs='git status'
+alias   gd='git diff'
+alias  gdc='git diff --cached'
+alias   ge='git checkout'
+alias  sge='sudo git checkout'
+alias   gl='git log'
+alias   gf='git fetch'
+alias  sgf='sudo git fetch'
+alias   gp='git pull'
+alias  sgp='sudo git pull'
+alias  gup='git submodule update'
+alias sgup='sudo git submodule update'
+
+alias h='htop'
 
 # (also note lesskey configuration)
 alias l='less'
@@ -17,10 +42,49 @@ alias ll='ls $LS_OPTIONS -l'
 alias lll='ls $LS_OPTIONS -la'
 
 alias o='open'
+alias v='vim -u <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/vim/vimrc)'
+alias v=v
+function v() {
+    vimrc=/tmp/sflip.vimrc.vim
+    if [[ ! -f $vimrc ]]; then
+        curl https://raw.githubusercontent.com/sflip/dotfiles/master/vim/vimrc > $vimrc
+    fi
+    vim -u $vimrc $1
+}
+alias se=se
+function se() {
+    vimrc=/tmp/sflip.vimrc.vim
+    if [[ ! -f $vimrc ]]; then
+        curl https://raw.githubusercontent.com/sflip/dotfiles/master/vim/vimrc > $vimrc
+    fi
+    EDITOR="vim -u $vimrc"
+    sudoedit $1
+}
 
 if [ -t 1 ]; then
     bind '"\ei":"ranger\n"'
     bind '"\es":"ll; echo; git status --short 2>/dev/null\n"'
 fi
 
+# allow aliases with sudo
+alias sudo='sudo '
 
+
+# custom prompt
+PS1=\
+'\n'\
+'\[\033[01;33m\]\u@\h '\
+'\[\033[01;30m\]\w'\
+'\[\033[01;31m\] $(if [ -d .git ]; then echo -n "( "; git rev-parse --sq --abbrev-ref HEAD; echo -n ")"; fi)'\
+'\[\033[00m\]\n> '
+
+
+# attach to screen session if shell is interactive and there a screen session
+# TODO: start screen (optionally) when not local and not in tmux
+if [ -t 1 ]; then
+    if command -v screen >/dev/null 2>&1; then
+        if [ -z $STY ]; then
+            screen -x
+        fi
+    fi
+fi

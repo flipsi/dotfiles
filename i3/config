@@ -13,6 +13,7 @@
 # apart from i3, install...
 
 
+# dex
 # i3lock
 # dmenu
 # quickswitch [https://github.com/OliverUv/quickswitch-for-i3]
@@ -34,7 +35,7 @@ set $SHELLSCRIPT_PATH /home/sflip/shellscripts
 ###############################################################################
 
 # some setup logic I rather do with a shell script
-exec "/home/sflip/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"
+exec "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"
 
 # set keyboard layout
 exec "setxkbmap de_sflip"
@@ -54,18 +55,26 @@ exec "xset dpms 0 0 0 && xset s noblank && xset s off"
 ###########  AUTOSTART  #######################################################
 ###############################################################################
 
+
+# ALSO SEE 'autostart' TARGET IN DOTFILES AND LOOK INTO 'dex'
+# THIS MAKES A LOT OF THE FOLLOWING STUFF OBSOLETE
+
+# autostart .desktop files the convenient way
+# https://faq.i3wm.org/question/2155/how-can-i-use-autostart-desktop-files-in-i3.1.html
+exec --no-startup-id "dex -ae i3"
+
 # composite manager for window overlays, smooth workspace changes, etc.
 exec --no-startup-id "compton -b"
+# exec --no-startup-id "compton -b --active-opacity 0.9 -i 0.9"
 
 # clipboard can have multiple entries
 # exec --no-startup-id "clipmenud"
 
-
 # power manager takes care of lid closing, standby, display brightness etc.
-exec --no-startup-id "xfce4-power-manager"
+# exec --no-startup-id "xfce4-power-manager"
 
 # daemon for theme settings and shit
-#exec --no-startup-id "cinnamon-settings-daemon"
+# exec --no-startup-id "cinnamon-settings-daemon"
 exec --no-startup-id "xfsettingsd --sm-client-disable"
 
 # start the gnome network manager, because it automatically connects to eduroam etc.
@@ -93,14 +102,8 @@ exec --no-startup-id "xfsettingsd --sm-client-disable"
 ###############################################################################
 
 # launcher options
-set $DMENU_OPTIONS   -l 5 -fn 'Terminus-10' -i -nb '#1E1E1E' -sb '#00AFAF' -sf '#1E1E1E'
-set $DMENU_OPTIONS_2 -l 5 -fn 'Terminus-10' -i -nb \#1E1E1E -sb \#00AFAF -sf \#1E1E1E
-set $ROFI_OPTIONS -lines 5 -font 'Terminus 10' -width 100 -location 1 \
-    -color-normal '#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E' \
-    -color-urgent '#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E' \
-    -color-active '#1E1E1E,#FFFFFF,#1E1E1E,#00AFAF,#1E1E1E' \
-    -color-window '#1E1E1E,#1E1E1E' \
-    -kb-remove-word-back 'Alt+BackSpace'
+set $DMENU_OPTIONS   -l 5 -fn 'PragmataPro Mono-10' -i -nb '#282828' -sb '#FABD2F' -sf '#282828'
+set $DMENU_OPTIONS_2 -l 5 -fn 'PragmataPro Mono-10' -i -nb \#282828 -sb \#FABD2F -sf \#282828
 
 
 # modifier key: windows/super
@@ -126,11 +129,13 @@ bindsym XF86TouchpadToggle  exec --no-startup-id "$SHELLSCRIPT_PATH/xinput-toggl
 # reload the configuration file
 # or restart i3 [preserves session]
 bindsym $mod+F5 mode "$refresh"
-set $refresh Want it fresh? (l) reload config, (s) restart i3, (k) set keyboard layout
+set $refresh Want it fresh? (l) reload config, (s) restart i3, (i) initialize-script, (k) set keyboard layout, (a) add chrome app to i3
 mode "$refresh" {
     bindsym l reload; mode "default"
     bindsym s restart
+    bindsym i exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"; mode "default"
     bindsym k exec --no-startup-id "setxkbmap de_sflip"; mode "default"
+    bindsym a exec --no-startup-id "/home/sflip/.i3/bin/i3-config-mod-assign-chrome-app.sh > /tmp/i3-config-mod-assign-chrome-app.log 2>&1"; mode "default"
     # cancel
     bindsym $mod+F5 mode "default"
     bindsym Return mode "default"
@@ -176,9 +181,10 @@ bindsym $mod+Shift+F7   exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
+font pango:PragmataPro Mono 10
 # font pango:Monospace 9
 # font pango:Inconsolata 10
-font pango:Terminus 10, Awesome 10
+# font pango:Terminus 10
 # font pango:DejaVu Sans Mono 8
 # font pango:NotoSans 10
 
@@ -213,15 +219,30 @@ new_float  normal
 # Colors
 
 # accent colors:
-#       sfluen    #AFFF58         sfluen_dark #83B45C
-#       sflea     #00AFAF         sflea_dark  #005F5F
+# sfluen          #AFFF58         sfluen_dark #83B45C
+# sflea           #00AFAF         sflea_dark  #005F5F
+# gruvbox_light_3        "#BDAE93";
+# gruvbox_bright_red     "#FB4934"
+# gruvbox_bright_green   "#B8BB26"
+# gruvbox_bright_yellow  "#FABD2F"
+# gruvbox_bright_blue    "#83A598"
+# gruvbox_bright_purple  "#D3869B"
+# gruvbox_bright_aqua    "#8EC07C"
+# gruvbox_bright_orange  "#FE8019"
+# gruvbox_neutral_red    "#CC241D"
+# gruvbox_neutral_green  "#98971A"
+# gruvbox_neutral_yellow "#D79921"
+# gruvbox_neutral_blue   "#458588"
+# gruvbox_neutral_purple "#B16286"
+# gruvbox_neutral_aqua   "#689D6A"
+# gruvbox_neutral_orange "#D65D0E"
 
 #                       border   backgr   text     indicator
-client.focused          #005F5F  #005F5F  #1E1E1E  #FF0000
-client.focused_inactive #1E1E1E  #1E1E1E  #005F5F  #1E1E1E
+client.focused          #FB4934  #FB4934  #1E1E1E  #FF0000
+client.focused_inactive #1E1E1E  #1E1E1E  #FB4934  #1E1E1E
 client.unfocused        #1E1E1E  #1E1E1E  #DDDDDD  #1E1E1E
-client.urgent           #00AFAF  #00AFAF  #000000  #1E1E1E
-client.background       #1A1A1A  #1E1E1E  #005F5F  #1E1E1E
+client.urgent           #B8BB26  #B8BB26  #000000  #1E1E1E
+client.background       #1A1A1A  #1E1E1E  #FB4934  #1E1E1E
 
 
 
@@ -247,21 +268,25 @@ bar {
     # separator_symbol    " ⣿ "
     # separator_symbol    " Ꙭ "
     # tray_output         none
+    # tray_output         HDMI2
+    tray_padding        3
     colors {
         background  #000000
         statusline  #DDDDDD
         separator   #005F5F
         #                   border   backgr   text
-        focused_workspace   #005F5F  #005F5F  #1E1E1E
-        active_workspace    #1E1E1E  #1E1E1E  #005F5F
-        inactive_workspace  #1E1E1E  #1E1E1E  #DDDDDD
-        urgent_workspace    #00AFAF  #00AFAF  #000000
+        focused_workspace   #FB4934  #FB4934  #1E1E1E
+        active_workspace    #1E1E1E  #1E1E1E  #FB4934
+        inactive_workspace  #1E1E1E  #1E1E1E  #BDAE93
+        urgent_workspace    #B8BB26  #B8BB26  #000000
     }
 }
 
 
 # hide/show bar
 bindsym $mod+Shift+b bar mode toggle
+
+# TODO: toggle tray?
 
 set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
 
@@ -276,15 +301,39 @@ set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
 bindsym $mod+c mode "$mode_clipboard"
 set $mode_clipboard Clipboard: (c) choose (p) get password
 mode "$mode_clipboard" {
-    bindsym $mod+c exec --no-startup-id "clipmenu $DMENU_OPTIONS"; mode "default";
-    bindsym      c exec --no-startup-id "clipmenu $DMENU_OPTIONS"; mode "default";
+    bindsym  $mod+c exec --no-startup-id "CM_LAUNCHER=rofi clipmenu"; mode "default";
+    bindsym       c exec --no-startup-id "CM_LAUNCHER=rofi clipmenu"; mode "default";
+    bindsym Shift+c exec --no-startup-id "CM_LAUNCHER=dmenu clipmenu $DMENU_OPTIONS"; mode "default";
+    bindsym       p exec --no-startup-id "rofi-pass"; mode "default";
     bindsym Shift+p exec --no-startup-id "passmenu $DMENU_OPTIONS"; mode "default";
-    bindsym       p exec --no-startup-id "rofi-pass $ROFI_OPTIONS"; mode "default";
     # cancel
     bindsym $mod+Escape mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+
+# type something or press keys or click
+bindsym $mod+x mode "$mode_x"
+set $mode_x (x) type with xdotool
+mode "$mode_x" {
+    bindsym  $mod+x mode "$mode_xdootool"
+    bindsym       x mode "$mode_xdootool"
+    # cancel
+    bindsym $mod+Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+set $mode_xdootool (b) bash with my bashrc
+mode "$mode_xdootool" {
+    bindsym b exec --no-startup-id "xdotool type 'bbash --rcfile <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/bash/bashrc_sflip)'; xdotool key Return"; mode "default";
+    # cancel
+    bindsym $mod+Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+
 
 
 
@@ -308,7 +357,7 @@ mode "$mode_system" {
     bindsym h exec --no-startup-id "systemctl hibernate"; mode "default"
     bindsym r exec --no-startup-id "systemctl reboot"
     bindsym p exec --no-startup-id "systemctl poweroff
-    bindsym o exec --no-startup-id "/home/sflip/bin/i3-terminate.sh"; exec --no-startup-id "i3-nagbar -t warning -m 'About to Poweroff... ' -b Abort 'pkill -f i3-terminate.sh'"; mode "default"
+    bindsym o exec --no-startup-id "/home/sflip/.i3/bin/i3-terminate.sh"; exec --no-startup-id "i3-nagbar -t warning -m 'About to Poweroff... ' -b Abort 'pkill -f i3-terminate.sh'"; mode "default"
     # cancel
     bindsym $mod+Escape mode "default"
     bindsym Return mode "default"
@@ -372,14 +421,15 @@ mode "$mpd_control" {
 
 # play a sound
 bindsym $mod+Shift+0 mode "$play_sound"
-set $play_sound Play sound: (j) Jeopardy, (s) Scream, (t) Tusch
+set $play_sound Play sound: (j) Jeopardy, (s) Scream, (t) Tusch, (i) Chimpanzee, (l) Careless (c) Cantina
 mode "$play_sound" {
-    bindsym i                exec --no-startup-id "play /home/sflip/snd/Chimpanzee_Riding_on_a_Segway.mp3"; mode "default"
-    bindsym j                exec --no-startup-id "play /home/sflip/snd/jeopardy.mp3"; mode "default"
-    bindsym l                exec --no-startup-id "play /home/sflip/snd/carelesswhisper.mp3"; mode "default"
-    bindsym s                exec --no-startup-id "play /home/sflip/snd/WilhelmScream.mp3"; mode "default"
-    bindsym t                exec --no-startup-id "play /home/sflip/snd/tusch.mp3"; mode "default"
-    bindsym BackSpace        exec --no-startup-id "pkill -f 'play /home/sflip/snd/'"; mode "default"
+    bindsym c                exec --no-startup-id "cvlc /home/sflip/snd/star-wars-cantina-band.mp3"; mode "default"
+    bindsym i                exec --no-startup-id "cvlc /home/sflip/snd/Chimpanzee_Riding_on_a_Segway.mp3"; mode "default"
+    bindsym j                exec --no-startup-id "cvlc /home/sflip/snd/jeopardy.mp3"; mode "default"
+    bindsym l                exec --no-startup-id "cvlc /home/sflip/snd/carelesswhisper.mp3"; mode "default"
+    bindsym s                exec --no-startup-id "cvlc /home/sflip/snd/WilhelmScream.mp3"; mode "default"
+    bindsym t                exec --no-startup-id "cvlc /home/sflip/snd/tusch.mp3"; mode "default"
+    bindsym BackSpace        exec --no-startup-id "pkill -f 'vlc .* /home/sflip/snd/'"; mode "default"
     # cancel
     bindsym $mod+Shift+0 mode "default"
     bindsym Return mode "default"
@@ -387,10 +437,10 @@ mode "$play_sound" {
 }
 
 # take a screenshot
-bindsym $mod+Print       exec --no-startup-id "xfce4-screenshooter --fullscreen --save ~/img-screenshots"
-bindsym      Print       exec --no-startup-id "xfce4-screenshooter --fullscreen --save ~/img-screenshots"
-bindsym $mod+Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen --open krita"
-bindsym      Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen --open krita"
+bindsym $mod+Print       exec --no-startup-id "xfce4-screenshooter --window --save ~/img-screenshots"
+bindsym      Print       exec --no-startup-id "xfce4-screenshooter --window --save ~/img-screenshots"
+bindsym $mod+Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen --save ~/img-screenshots""
+bindsym      Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen --save ~/img-screenshots""
 
 
 
@@ -406,6 +456,9 @@ for_window [class="(?i)galculator"]     floating enable
 for_window [class="(?i)galculator"]     move position 750 450
 for_window [class="(?i)galculator"]     resize set 320 400
 for_window [class="(?i)nemo"]           floating enable
+for_window [class="(?i)nautilus"]       floating enable
+for_window [class="(?i)nautilus"]       resize set 920 600
+for_window [class="(?i)nautilus"]       move position 550 250
 for_window [class="(?i)file-roller"]    floating enable
 for_window [class="(?i)qjackctl"]       floating enable
 for_window [class="(?i)avd"]            floating enable
@@ -442,6 +495,58 @@ assign [class="(?i)pavucontrol"]        
 assign [class="(?i)audacity"]           
 assign [class="(?i)ardour"]             
 
+# for_window [class="(?i)chrom" instance="crx_acmikcjocccblbiibfdfjkghclpmmpip"] move to workspace    Banking
+# for_window [class="(?i)chrom" instance="crx_kddchekfnnagpejaneebcigegenogifj"] move to workspace    Banking
+# assign [class="(?i)chrom"]                                                                          Chrome
+# assign [class="(?i)filezilla"]                                                                      Filezilla
+# assign [class="(?i)firefox"]                                                                        Fuchs
+# for_window [class="(?i)chrom" instance="crx_afbjehlnjihfcebhifoapfibhcgakelg"] move to workspace    Github
+# for_window [class="(?i)chrom" instance="crx_lgeboohgcoglieeoikhidodnmdfcalmh"] move to workspace    Handy
+# for_window [class="(?i)chrom" instance="crx_elofdcljcpfajijdjlcbjclkdggnklhg"] move to workspace    Inbox
+# assign [class="(?i)jetbrains-idea"]                                                                 IntelliJ
+# for_window [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"] move to workspace    Kalender
+# for_window [class="(?i)chrom" instance="crx_hjpceadhnpnpdelkidbjdmoodafopfkp"] move to workspace    Kalender
+# assign [class="gnome-calendar"]                                                                     Kalender
+# assign [class="(?i)thunderbird"]                                                                    Mail
+# for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] move to workspace    Netflix
+# for_window [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"] move to workspace    Notes
+# assign [class="(?i)pokerstars"]                                                                     Poker
+# assign [class="(?i)audacity"]                                                                       Recording
+# assign [class="(?i)ardour"]                                                                         Recording
+# for_window [class="(?i)chrom" instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"] move to workspace    Signal
+# assign [class="(?i)skype"]                                                                          Skype
+# assign [class="(?i)slack"]                                                                          Slack
+# assign [class="(?i)qjackctl"]                                                                       Sound
+# assign [class="(?i)spotify"]                                                                        Spotify
+# assign [class="(?i)kaffeine"]                                                                       TV
+# assign [class="(?i)mediathek"]                                                                      TV
+# for_window [class="(?i)chrom" instance="crx_mldpchjnjlkioecpffkohnhjlgbkcfkf"] move to workspace    TV
+# for_window [class="Spotify"] move to workspace                                                      Spotify
+# assign [class="Telegram"]                                                                           Telegram
+# assign [class="(?i)gnome-terminal"]                                                                 Terminal
+# assign [class="(?i)urxvt"]                                                                          Terminal
+# assign [class="(?i)cool-retro-term"]                                                                Terminal
+# for_window [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"] move to workspace    Trello
+# for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] move to workspace    Trello
+# assign [class="(?i)pale moon"]                                                                      Web
+
+
+# kill specific apps (e.g. when memory really full again and the system hangs)
+bindsym $mod+Shift+BackSpace mode "$kill"
+set $kill Kill: (f) firefox (g) chrome (j) java
+mode "$kill" {
+    bindsym g       exec --no-startup-id "pkill    chrome"; mode "default"
+    bindsym G       exec --no-startup-id "pkill -9 chrome"; mode "default"
+    bindsym f       exec --no-startup-id "pkill    firefox"; mode "default"
+    bindsym F       exec --no-startup-id "pkill -9 firefox"; mode "default"
+    bindsym j       exec --no-startup-id "pkill    java"; mode "default"
+    bindsym J       exec --no-startup-id "pkill -9 java"; mode "default"
+    # cancel
+    #bindsym $mod+o mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
 
 
 ###############################################################################
@@ -457,7 +562,7 @@ workspace_layout stacked
 
 # start a terminal
 bindsym $mod+o mode "$terminal"
-set $terminal Open a terminal: (o) default (u) urxvt (k) konsole (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
+set $terminal Open a terminal: (o) default (u) urxvt (k) konsole (i) kitty (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
 mode "$terminal" {
     bindsym o       exec --no-startup-id "gnome-terminal --hide-menubar -- tmux -2 new-session -A -s main"; mode "default"
     bindsym $mod+o  exec --no-startup-id "gnome-terminal --hide-menubar -- tmux -2 new-session -A -s main"; mode "default"
@@ -465,6 +570,8 @@ mode "$terminal" {
     bindsym Shift+u exec --no-startup-id "urxvt"; mode "default"
     bindsym k       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower -e 'tmux -2 new-session -A -s main'"; mode "default"
     bindsym Shift+k exec --no-startup-id "konsole --fallback-profile"; mode "default"
+    bindsym i       exec --no-startup-id "kitty tmux -2 new-session -A -s main"; mode "default"
+    bindsym Shift+i exec --no-startup-id "kitty"; mode "default"
     bindsym x       exec --no-startup-id "xfce4-terminal --command='tmux -2 new-session -A -s main'"; mode "default"
     bindsym Shift+x exec --no-startup-id "xfce4-terminal"; mode "default"
     bindsym g       exec --no-startup-id "gnome-terminal --hide-menubar -- tmux -2 new-session -A -s main"; mode "default"
@@ -482,11 +589,11 @@ mode "$terminal" {
 # launch an application (that has a .desktop-file)
 # bindsym $mod+Return exec --no-startup-id "i3-dmenu-desktop -dmenu='dmenu $DMENU_OPTIONS'"
 # bindsym $mod+Return exec --no-startup-id "rofi -show drun $ROFI_OPTIONS"
-bindsym $mod+Return exec --no-startup-id "rofi -show combi -combi-modi window,drun $ROFI_OPTIONS"
+bindsym $mod+Return exec --no-startup-id "rofi -modi window,run,combi -show combi -combi-modi window,drun"
 
 # launch any application
 # bindsym $mod+Shift+Return exec --no-startup-id "dmenu_run $DMENU_OPTIONS"
-bindsym $mod+Shift+Return exec --no-startup-id "rofi -show run $ROFI_OPTIONS"
+bindsym $mod+Shift+Return exec --no-startup-id "rofi -show run"
 
 # kill focused container
 bindsym $mod+BackSpace kill

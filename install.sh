@@ -33,6 +33,7 @@ SUPPORTED_TARGETS=(\
     ghci \
     git \
     i3 \
+    kitty \
     konsole \
     lesskey \
     luakit \
@@ -43,7 +44,9 @@ SUPPORTED_TARGETS=(\
     muttator \
     ncmpcpp \
     pentadactyl \
+    psql \
     ranger \
+    screen \
     sbt \
     sublime-text-3 \
     taskwarrior \
@@ -69,6 +72,7 @@ SUPPORTED_TARGETS=(\
 ADDITIONAL_PACKAGE_TARGETS=(\
     atool \
     fzf \
+    fd \
     pydf \
     rar \
     ripgrep \
@@ -151,6 +155,10 @@ function create_link_for_target() {
             create_link "$PWD/cmus/sflea.theme" "$HOME/.cmus/sflea.theme"
             ;;
 
+        dircolors )
+            create_link "$PWD/dircolors/dircolors" "$HOME/.dircolors"
+            ;;
+
         elinks )
             mkdir -p "$HOME/.elinks"
             create_link "$PWD/elinks/elinks.conf" "$HOME/.elinks/elinks.conf"
@@ -175,13 +183,15 @@ function create_link_for_target() {
 
         i3 )
             mkdir -p "$HOME/.i3"
+            create_link "$PWD/i3/bin" "$HOME/.i3/bin"
             create_link "$PWD/i3/config" "$HOME/.i3/config"
             # create_link "$PWD/i3/i3status" "$HOME/.i3/i3status"
             create_link "$PWD/i3/i3pystatus" "$HOME/.i3/i3pystatus"
-            create_link "$PWD/i3/i3pystatus-mpd-notification.sh" "$HOME/.i3/i3pystatus-mpd-notification.sh"
-            mkdir -p "$HOME/bin"
-            create_link "$PWD/i3/i3-initialize.sh" "$HOME/bin/i3-initialize.sh"
-            create_link "$PWD/i3/i3-terminate.sh" "$HOME/bin/i3-terminate.sh"
+            ;;
+
+        kitty )
+            mkdir -p "$HOME/.config/kitty"
+            create_link "$PWD/kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf"
             ;;
 
         konsole )
@@ -257,6 +267,10 @@ function create_link_for_target() {
             create_link "$PWD/pentadactyl/pentadactylrc" "$HOME/.pentadactylrc"
             ;;
 
+        psql )
+            create_link "$PWD/psql/psqlrc" "$HOME/.psqlrc"
+            ;;
+
         ranger )
             mkdir -p "$HOME/.config/ranger"
             create_link "$PWD/ranger/commands.py" "$HOME/.config/ranger/commands.py"
@@ -267,10 +281,20 @@ function create_link_for_target() {
             create_link "$PWD/ranger/colorschemes" "$HOME/.config/ranger/colorschemes"
             ;;
 
+        rofi )
+            mkdir -p "$HOME/.config/rofi"
+            create_link "$PWD/rofi/config" "$HOME/.config/rofi/config"
+            create_link "$PWD/rofi/themes" "$HOME/.config/rofi/themes"
+            ;;
+
         sbt )
             create_link "$PWD/sbt/sbtconfig" "$HOME/.sbtconfig"
-            mkdir -p "$HOME/.sbt/plugins"
-            create_link "$PWD/sbt/plugins.sbt" "$HOME/.sbt/0.13/plugins/plugins.sbt"
+            mkdir -p "$HOME/.sbt/1.0/plugins"
+            create_link "$PWD/sbt/plugins.sbt" "$HOME/.sbt/1.0/plugins/plugins.sbt"
+            ;;
+
+        screen )
+            create_link "$PWD/screen/screenrc" "$HOME/.screenrc"
             ;;
 
         sublime-text-3 )
@@ -350,11 +374,18 @@ function create_link_for_target() {
             create_link "$PWD/vimfx/frame.js" "$HOME/.config/vimfx/frame.js"
             local sourcestring="@import url("\""$PWD/vimfx/userChrome.css"\"");"
             local userChromeCssFilepath=$(find ~/.mozilla/firefox -name userChrome.css)
+            # TODO: create profile chrome/userChrome.css if not exists
             if [[ $UNINSTALL != true ]]; then
                 grep "${sourcestring}" "${userChromeCssFilepath}" > /dev/null || echo "$sourcestring" >> "${userChromeCssFilepath}"
             else
                 sed -i -- "/^${sourcestring//\//\\/}$/d" "${userChromeCssFilepath}"
             fi
+            ;;
+
+        vimium )
+            echo "PLEASE OPEN THE VIMIUM EXTENSION'S OPTIONS IN THE BROWSER AND PASTE THE FOLLOWING:"
+            echo
+            cat "$PWD/vimium/custom-key-bindings.vim"
             ;;
 
         vimpc )
@@ -430,6 +461,10 @@ function package_install_target() {
             LIST_OF_SYSTEM_PACKAGES="i3-wm i3exit i3status i3lock dmenu quickswitch-i3 rofi compton unclutter syndaemon numlockx"
             ;;
 
+        fd )
+            LIST_OF_SYSTEM_PACKAGES="fd-find"
+            ;;
+
         mutt )
             LIST_OF_SYSTEM_PACKAGES="mutt msmtp offlineimap notmuch notmuch-mutt goobook elinks"
             ;;
@@ -468,23 +503,45 @@ function package_install_target() {
     if [[ "$UNINSTALL" != true ]]; then
         echo "Installing ${TARGET}......"
 
-        if [[ "$PLATFORM" = arch ]]; then
-            if [[ "$FORCE" != true ]]; then
-                sudo pacman --needed --confirm -S $LIST_OF_SYSTEM_PACKAGES
-            else
-                sudo pacman --noconfirm -S $LIST_OF_SYSTEM_PACKAGES
-            fi
-        elif [[ "$PLATFORM" = ubuntu ]]; then
-            if [[ "$FORCE" != true ]]; then
-                sudo apt install $LIST_OF_SYSTEM_PACKAGES
-            else
-                sudo apt --assume-yes install $LIST_OF_SYSTEM_PACKAGES
-            fi
-        elif [[ "$PLATFORM" = osx ]]; then
-            brew install $LIST_OF_SYSTEM_PACKAGES
-        fi
-
         case "$TARGET" in
+
+            fd )
+                cargo install $LIST_OF_SYSTEM_PACKAGES
+                ;;
+
+            * )
+
+                if [[ "$PLATFORM" = arch ]]; then
+                    if [[ "$FORCE" != true ]]; then
+                        sudo pacman --needed --confirm -S $LIST_OF_SYSTEM_PACKAGES
+                    else
+                        sudo pacman --noconfirm -S $LIST_OF_SYSTEM_PACKAGES
+                    fi
+                elif [[ "$PLATFORM" = ubuntu ]]; then
+                    if [[ "$FORCE" != true ]]; then
+                        sudo apt install $LIST_OF_SYSTEM_PACKAGES
+                    else
+                        sudo apt --assume-yes install $LIST_OF_SYSTEM_PACKAGES
+                    fi
+                elif [[ "$PLATFORM" = osx ]]; then
+                    brew install $LIST_OF_SYSTEM_PACKAGES
+                fi
+                ;;
+
+        esac
+
+        # ADDITIONAL STUFF
+        case "$TARGET" in
+
+            fish )
+                if test ! -d "$HOME/opt/fish-command-timer"; then
+                    echo "Installing fish-command-timer"
+                    mkdir -p "$HOME/opt/fish-command-timer/"
+                    curl https://raw.githubusercontent.com/jichu4n/fish-command-timer/master/conf.d/fish_command_timer.fish > "$HOME/opt/fish-command-timer/fish-command-timer.fish"
+                    mkdir -p "$HOME/.config/fish/conf.d/"
+                    create_link "$HOME/opt/fish-command-timer/fish-command-timer.fish" "$HOME/.config/fish/conf.d/"
+                fi
+                ;;
 
             git )
                 if test ! -d "$HOME/opt/git-amend-old"; then
@@ -492,6 +549,7 @@ function package_install_target() {
                     git clone https://github.com/colinodell/git-amend-old "$HOME/opt/git-amend-old"
                     create_link "$HOME/opt/git-amend-old/git-amend-old" "$HOME/bin/git-amend-old"
                 fi
+                gem install git-rc # git release
                 ;;
 
             mopidy )
@@ -519,6 +577,7 @@ function package_install_target() {
     else
         echo "Uninstalling ${TARGET}......"
 
+        # ADDITIONAL STUFF AND SPECIAL CASES
         case "$TARGET" in
 
             bash )
@@ -538,21 +597,31 @@ function package_install_target() {
 
         esac
 
-        if [[ "$PLATFORM" = arch ]]; then
-            if [[ "$FORCE" != true ]]; then
-                sudo pacman --confirm -R $LIST_OF_SYSTEM_PACKAGES
-            else
-                sudo pacman --noconfirm -R $LIST_OF_SYSTEM_PACKAGES
-            fi
-        elif [[ "$PLATFORM" = ubuntu ]]; then
-            if [[ "$FORCE" != true ]]; then
-                sudo apt remove $LIST_OF_SYSTEM_PACKAGES
-            else
-                sudo apt --assume-yes remove $LIST_OF_SYSTEM_PACKAGES
-            fi
-        elif [[ "$PLATFORM" = osx ]]; then
-            brew uninstall $LIST_OF_SYSTEM_PACKAGES
-        fi
+        # UNINSTALL PACKAGE
+        case "$TARGET" in
+
+            fd )
+                cargo uninstall $LIST_OF_SYSTEM_PACKAGES
+                ;;
+
+            * )
+                if [[ "$PLATFORM" = arch ]]; then
+                    if [[ "$FORCE" != true ]]; then
+                        sudo pacman --confirm -R $LIST_OF_SYSTEM_PACKAGES
+                    else
+                        sudo pacman --noconfirm -R $LIST_OF_SYSTEM_PACKAGES
+                    fi
+                elif [[ "$PLATFORM" = ubuntu ]]; then
+                    if [[ "$FORCE" != true ]]; then
+                        sudo apt remove $LIST_OF_SYSTEM_PACKAGES
+                    else
+                        sudo apt --assume-yes remove $LIST_OF_SYSTEM_PACKAGES
+                    fi
+                elif [[ "$PLATFORM" = osx ]]; then
+                    brew uninstall $LIST_OF_SYSTEM_PACKAGES
+                fi
+                ;;
+        esac
     fi
 }
 

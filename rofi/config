@@ -1,0 +1,10 @@
+rofi.theme: ~/.config/rofi/themes/gruvbox-dark-soft.mod.01.rasi
+rofi.font: PragmataPro Mono 11
+rofi.lines: 5
+rofi.location: 1
+rofi.width: 100
+rofi.display-combi: Open
+rofi.kb-remove-word-back: Alt+BackSpace
+
+
+

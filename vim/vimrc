@@ -216,10 +216,33 @@ Plugin 'gmarik/vundle'
 
 " package control mappings from vundle itself
 nnoremap <Leader>pl :PluginList<CR>
-nnoremap <Leader>pi :PluginInstall<CR>
+nnoremap <Leader>pi :PluginInstall<CR>:smile<CR>
 nnoremap <Leader>pc :PluginClean<CR>
 nnoremap <Leader>pu :PluginUpdate<CR>
 nnoremap <Leader>ps :PluginSearch<Space>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim sessions {{{
+
+" make sessions more convenient and automatically updated
+Plugin 'tpope/vim-obsession'
+
+let g:session_file_name = '.session.vim'
+
+" start session
+nnoremap <Leader>se :exe 'Obsession' . g:session_file_name<CR>
+
+" automatically load sessions if started without args
+autocmd VimEnter * nested
+            \ if !argc() && empty(v:this_session) |
+            \   if filereadable(g:session_file_name) |
+            \     exe 'source' . g:session_file_name |
+          " \   elseif |
+          " \     exe 'Obsession' . g:session_file_name |
+            \   endif |
+            \ endif
 
 
 " }}}
@@ -244,13 +267,13 @@ Plugin 'tmux-plugins/vim-tmux-focus-events'
 
 " run tmux commands from within vim
 Plugin 'benmills/vimux'
-let g:VimuxHeight = "24"
-let g:VimuxOrientation = "v"
+let g:VimuxHeight = "50"
+let g:VimuxOrientation = "h"
 let VimuxUseNearest = 1
-nnoremap <Leader>bo         :VimuxRunCommand "clear; "<Left>
-nnoremap <Leader>bf         :VimuxRunCommand "clear;  " . expand('%')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+nnoremap <Leader>bo         :VimuxRunCommand ""<Left>
+nnoremap <Leader>bf         :VimuxRunCommand " " . expand('%')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 nnoremap <Leader>bb         :update<CR>:VimuxRunLastCommand<CR>
-nnoremap <Leader>bl         :update<CR>:VimuxRunLastCommand<CR>
+nnoremap <Leader>bl         :VimuxRunCommand "clear"<CR>
 nnoremap <Leader>bq         :VimuxCloseRunner<CR>
 nnoremap <Leader>bx         :VimuxCloseRunner<CR>
 nnoremap <Leader>bz         :call VimuxZoomRunner()<CR>
@@ -264,11 +287,15 @@ nnoremap <Leader>bE         :call MakeWithVimuxOpenErrors('buffer')<CR>
 
 " build/debug with vimux
 " param command: the shell command to execute
-let g:makewithvimux_outfile = '/tmp/vim.make.out'
 function! MakeWithVimux(command)
-    call VimuxRunCommand(a:command . ' | tee ' . g:makewithvimux_outfile)
+    let g:makewithvimux_outfile = '/tmp/vim.'.v:servername.'.make.out'
+    let command = a:command . ' | tee ' . g:makewithvimux_outfile
+    call VimuxRunCommand(command)
 endfunction
 function! MakeWithVimuxOpenErrors(where)
+    " remove terminal color escape sequences that fuck with errorformat
+    exec  ':silent !sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" ' . g:makewithvimux_outfile
+    redraw!
     exec 'cfile ' . g:makewithvimux_outfile
     if a:where == 'quickfix'
         let g:jumplist = 'quickfixlist'
@@ -298,6 +325,10 @@ Plugin 'tpope/vim-repeat'
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " look and feel {{{
+
+" make gvim colorschemes work in terminal
+Plugin 'godlygeek/csapprox'
+
 
 " colorschemes
 Plugin 'flazz/vim-colorschemes'
@@ -355,7 +386,7 @@ Plugin 'vim-airline/vim-airline-themes'
 
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 
 "let g:airline_section_y = g:airline_section_a
 let g:airline_section_a = '%{fnamemodify(getcwd(), ":t")}'
@@ -388,6 +419,8 @@ nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gpp :Gpull<CR>
 nnoremap <Leader>gpu :Gpush<CR>
+nnoremap <Leader>gpU :exe ':Git push -u ' . system('git remote \| head -n1') . ' ' . system('git rev-parse --abbrev-ref HEAD')
+nnoremap <Leader>geb :exe ':Git checkout -b ' . input('Branch name: ')<CR>
 
 " in Gdiff view, navigate and stage/checkout easily
 augroup gitdiff
@@ -404,6 +437,12 @@ augroup END
 Plugin 'airblade/vim-gitgutter'
 
 let g:gitgutter_max_signs = 4000
+
+" GitGutter styling to use · instead of +/-
+let g:gitgutter_sign_added = '∙'
+let g:gitgutter_sign_modified = '∙'
+let g:gitgutter_sign_removed = '∙'
+let g:gitgutter_sign_modified_removed = '∙'
 
 " do not map ic/ac text objects etc because I decide how I use them
 let g:gitgutter_map_keys = 0
@@ -424,15 +463,6 @@ nnoremap <Leader>ga   :GitGutterStageHunk<CR>
 nnoremap <Leader>gu   :GitGutterUndoHunk<CR>
 nnoremap <Leader>gi   :GitGutterPreviewHunk<CR>
 
-
-" commit messages are special
-augroup gitcommit
-    autocmd!
-    autocmd filetype gitcommit setlocal nonumber norelativenumber
-    autocmd filetype gitcommit setlocal colorcolumn=50
-    autocmd filetype gitcommit setlocal textwidth=50
-    autocmd filetype gitcommit normal gg
-augroup END
 
 
 " }}}
@@ -460,8 +490,9 @@ map ä <Plug>(easymotion-prefix)
 let g:EasyMotion_keys = 'asdfgh,.qwertuiocvbnmjkl'
 
 
+
 " make f and t clever (i.e. repeatable. ',' and ';' will not be needed anymore.)
-Plugin 'rhysd/clever-f.vim'
+" Plugin 'rhysd/clever-f.vim'
 
 let g:clever_f_across_no_line = 0
 " let g:clever_f_ignore_case = 1
@@ -472,22 +503,82 @@ let g:clever_f_repeat_last_char_inputs = ["\<CR>", "\<Tab>"]
 let g:clever_f_chars_match_any_signs = 'ö'
 
 
+
+" like f but with two characters
+Plugin 'justinmk/vim-sneak'
+
+" interactive mode like easymotion
+" let g:sneak#label = 1
+
+" movement repeatable with same keystroke like clever-f
+" (i don't really like this, as it makes movements unpredictable)
+" let g:sneak#s_next = 1
+
+" , always forwards ; always backwards
+" let g:sneak#absolute_dir = 1
+
+" use smartcase;
+let g:sneak#use_ic_scs = 1
+
+nmap f <Plug>Sneak_s
+xmap z <Plug>Sneak_s
+omap z <Plug>Sneak_s
+
+nmap s <Plug>Sneak_S
+nmap F <Plug>Sneak_S
+xmap Z <Plug>Sneak_S
+omap Z <Plug>Sneak_S
+
+nmap , <Plug>Sneak_;
+nmap ; <Plug>Sneak_,
+
+
+autocmd ColorScheme * hi Sneak      ctermfg=72 ctermbg=236
+autocmd ColorScheme * hi SneakScope ctermfg=72 ctermbg=236
+
+
+
+" make f only match interesting characters
+" Plugin 'svermeulen/vim-NotableFt'
+
+" nmap , <Plug>NotableFtRepeatSearchForward
+" nmap ; <Plug>NotableFtRepeatSearchBackward
+" nmap f <Plug>NotableFtSearchFForward
+" nmap s <Plug>NotableFtSearchFBackward
+" nmap F <Plug>NotableFtSearchFBackward
+" nmap t <Plug>NotableFtSearchTForward
+" nmap T <Plug>NotableFtSearchTBackward
+
+
+
+" highlight characters for f
+" Plugin 'unblevable/quick-scope'
+
+
+
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " movements and text objects for parts of words {{{
 
 " move with ,w in wordsLikeThisWord or words_like_this_word
-Plugin 'bkad/CamelCaseMotion'
+" Plugin 'bkad/CamelCaseMotion'
 
 " call camelcasemotion#CreateMotionMappings(',') " DOES NOT WORK HERE
 
 " also handle dashes with this plugin (hence w should move over them)
-set iskeyword+=-
+" (this breaks toggle_words for many cases)
+" set iskeyword+=-
 
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" custom text objects {{{
+" better and custom text objects {{{
+
+Plugin 'wellle/targets.vim'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 Plugin 'kana/vim-textobj-user'
 
@@ -568,25 +659,18 @@ nnoremap Ö :call incsearch#call({'command': '?'})<CR>
 
 " searching in multiple files
 " install 'the_silver_searcher' package on the system
-Plugin 'rking/ag.vim'
+Plugin 'mileszs/ack.vim'
 
 " command to execute
-let g:ag_prg="ag --vimgrep --smart-case"
-" always start in project root instead of cwd
-let g:ag_working_path_mode="r"
+let g:ackprg="ag --vimgrep --smart-case"
 
 " type a search pattern
 nnoremap <Leader>Ö :let g:jumplist = 'quickfixlist'<CR>
-                 \ :Ag<Space>""<Left>
-" search for word under cursor
-" nnoremap <Leader>+ :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
-" nmap     <Leader>* <Leader>+
+                 \ :Ack!<Space>""<Left>
+
 " search for visual selection
 xnoremap <Leader>Ö y:let g:jumplist = 'quickfixlist'<CR>
-                 \ :<c-u>Ag <C-R>=shellescape(expand(@"),1)<CR><CR>
-" xmap     <Leader>* <Leader>ö
-" xmap     <Leader>+ <Leader>ö
-"nnoremap  K :<c-u>Ag <c-r>=shellescape(expand("<cword>"),1)<cr>:copen<cr>
+                 \ :<c-u>Ack! "-Q" "<C-R>""<CR>
 
 
 " % also matches HTML-tags/words etc
@@ -735,6 +819,23 @@ nnoremap <Leader>h<Leader>  :FzfHelptags<CR>
 imap <C-x><C-l> <plug>(fzf-complete-line)
 
 
+" adjust colors to colorscheme: gruvbox
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+
+
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " file searching and much more {{{
@@ -781,9 +882,15 @@ noremap <silent> <Leader>tt :TagbarToggle<CR>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" file browser {{{
+" file management {{{
 
-Plugin 'scrooloose/nerdtree'
+" sugar for unix shell commands like move/rename/delete/find files etc.
+Plugin 'tpope/vim-eunuch'
+
+nnoremap <Leader>rn :Rename <C-R>=expand("%:t")<CR>
+
+
+" Plugin 'scrooloose/nerdtree'
 
 let NERDTreeWinSize = 50
 let NERDTreeQuitOnOpen = 1
@@ -796,6 +903,10 @@ noremap <silent> <Leader>tN :NERDTreeToggle<CR>
 
 " show/hide hidden files
 let NERDTreeMapToggleHidden='.'
+
+
+" pimp netrw
+" Plugin 'tpope/vim-vinegar'
 
 
 
@@ -813,7 +924,7 @@ nmap <Leader>qo :BufOnly<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " static code analysis {{{
 
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -855,6 +966,11 @@ let g:syntastic_quiet_messages = { "regex": [
             \ '\mLine indented incorrectly;.*',
             \ '\mMulti-line IF statement not indented correctly;.*',
             \ '\mEach line in a multi-line IF statement must begin with a boolean operator.*',
+            \ '\mSpace after opening parenthesis of function call prohibited.*',
+            \ '\mExpected 0 spaces before closing bracket; .* found.*',
+            \ '\mExpected \\"foreach (...) {\\n\\"; found \\"foreach(...) {\\n\\".*',
+            \ '\mExpected \\"if (...) {\\n\\"; found \\"if(...) {\\n\\".*',
+            \ '\mExpected \\"} elseif (...) {\\n\\"; found \\"} elseif(...) {\\n\\".*',
             \ '\mOpening brace should be on a new line.*',
             \ '\mBad line breaking before .+..',
             \ '\mInline control structures are discouraged',
@@ -870,6 +986,33 @@ let g:syntastic_quiet_messages = { "regex": [
             \ '\mFunction name .* is prefixed with a package name but does not begin with a capital letter',
             \ '\m.$. was used before it was defined.'
             \ ] }
+
+
+
+" asynchronous alternative to syntastic
+Plugin 'w0rp/ale'
+
+let g:ale_list_window_size = 5
+let g:ale_lint_on_enter = 0
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\}
+
+nnoremap <silent> <Leader>sc :ALELint<CR>
+nnoremap <silent> <Leader>sn :ALENext<CR>
+nnoremap <silent> <Leader>sN :ALEPrevious<CR>
+nnoremap <silent> <Leader>sp :ALEPrevious<CR>
+nnoremap <silent> <Leader>sr :ALEDisable<CR>
+nnoremap <silent> <Leader>st :ALEToggle<CR>
+nnoremap <silent> <Leader>si :ALEInfo<CR>
+
+highlight ALEErrorSign      ctermfg=203
+highlight ALEWarningSign    ctermfg=227
+highlight ALEInfoSign       ctermfg=227
+
+
+" evaluate expression live, which is awesome
+" Plugin 'metakirby5/codi.vim'
 
 
 
@@ -919,7 +1062,8 @@ let g:NERDDefaultNesting = 1
 let g:NERDAltDelims_javascript = 0
 " align multiline comments
 let g:NERDDefaultAlign = 'left'
-nmap -c <Leader>c
+" nmap -c <Leader>c
+" xmap -c <Leader>c
 " comment text objects and movements
 for mov in ['j', 'k', 'gg', 'G', '(', ')', '{', '}', 'as', 'is', 'ap', 'ip']
     exe "nmap \<Leader\>c" . mov . " V" . mov . "\<Plug\>NERDCommenterInvert"
@@ -1001,6 +1145,12 @@ nmap <Leader>xx <Leader>xiw
 " nnoremap <Leader>SD :Fardo<CR>
 
 
+" " add "printf" statements with shortcut
+" Plugin 'bergercookie/vim-debugstring'
+
+" nmap <Leader>ad <Plug>DumpDebugString
+
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1047,10 +1197,10 @@ Plugin 'Olical/vim-enmasse'
 
 
 " automatically resize quickfix window
-" Plugin 'blueyed/vim-qf_resize'
+Plugin 'blueyed/vim-qf_resize'
 
-" let g:qf_resize_min_height = 1
-let g:qf_resize_max_height = 5
+let g:qf_resize_min_height = 1
+let g:qf_resize_max_height = 8
 
 
 " }}}
@@ -1104,6 +1254,9 @@ let g:toggle_words_dict = {
             \ '*': [
             \     ['0', '1'],
             \     ['add', 'remove'],
+            \     ['and', 'or'],
+            \     ['ascending', 'descending'],
+            \     ['ASC', 'DESC'],
             \     ['begin', 'end'],
             \     ['big', 'little'],
             \     ['black', 'white'],
@@ -1112,8 +1265,11 @@ let g:toggle_words_dict = {
             \     ['dark', 'light'],
             \     ['deep', 'shallow'],
             \     ['dynamic', 'static'],
+            \     ['enable', 'disable'],
+            \     ['enabled', 'disabled'],
             \     ['fast', 'slow'],
             \     ['fat', 'thin'],
+            \     ['first', 'last'],
             \     ['forward', 'backward'],
             \     ['get', 'set'],
             \     ['good', 'bad'],
@@ -1133,24 +1289,31 @@ let g:toggle_words_dict = {
             \     ['long', 'short'],
             \     ['love', 'hate'],
             \     ['many', 'few'],
+            \     ['master', 'slave', 'develop'],
             \     ['min', 'max'],
             \     ['more', 'less'],
             \     ['new', 'old'],
             \     ['next', 'previous'],
             \     ['on', 'off'],
+            \     ['online', 'offline'],
             \     ['open', 'close'],
             \     ['present', 'absent'],
             \     ['question', 'answer'],
             \     ['red','orange','yellow','green','blue','purple'],
             \     ['setup', 'teardown'],
             \     ['single', 'double', 'multi'],
+            \     ['start', 'stop'],
+            \     ['started', 'stopped'],
+            \     ['starting', 'stopping'],
             \     ['strong', 'weak'],
+            \     ['testing', 'production'],
             \     ['this', 'that'],
             \     ['top', 'bottom'],
             \     ['true', 'false'],
             \     ['up', 'down'],
             \     ['wide', 'narrow'],
             \     ['width', 'height'],
+            \     ['write', 'read'],
             \     ['yes', 'no'],
             \ ],
             \ }
@@ -1252,18 +1415,31 @@ Plugin 'Chiel92/vim-autoformat'
 
 " install formatters on the system:
 " - js-beautify (for HTML, CSS, JavaScript, JSON)
+" - scalafmt (for scala)
 
-nnoremap -af :Autoformat<CR>
-vnoremap -af :Autoformat<CR>
+nnoremap -af :Autoformat<CR>:GitGutterEnable<CR>
+vnoremap -af :Autoformat<CR>:GitGutterEnable<CR>
 nmap <Leader>af -af
 vmap <Leader>af -af
 
-" the shit above does not work for json. do this instead:
+let g:formatdef_scalafmt = "'scalafmt --stdin 2>/dev/null'"
+let g:formatters_scala = ['scalafmt']
+
+
+" autoformat for json does not work out with the plugin above. do this instead:
 augroup json_map_autoformat
     au!
     au FileType json nnoremap -af :%!python -m json.tool<CR>
     au FileType json nmap <Leader>af -af
 augroup END
+
+
+
+" change wrapping of function arguments
+Plugin 'FooSoft/vim-argwrap'
+
+nnoremap <silent> -tf :ArgWrap<CR>
+
 
 
 " coercion:
@@ -1296,7 +1472,8 @@ command! -bar ShowTrailingWhitespaceOff call ShowTrailingWhitespace#Set(0,1)
 command! -bar ShowTrailingWhitespaceToggle call ShowTrailingWhitespace#Toggle(0)
         \ <Bar>echo (ShowTrailingWhitespace#IsSet() ?
         \ 'Show trailing whitespace' : 'Not showing trailing whitespace')
-nnoremap <silent> <C-G>A :ShowTrailingWhitespaceToggle<CR>
+nnoremap <silent> <C-G>A  :ShowTrailingWhitespaceToggle<CR>
+nnoremap <silent> <C-G>st :ShowTrailingWhitespaceToggle<CR>
 
 " (has a bug)
 "Plugin 'vim-scripts/JumpToTrailingWhiteSpace'
@@ -1357,11 +1534,11 @@ augroup javascript_on_read
     au FileType javascript call SetupJavascript()
 augroup END
 function! SetupJavascript()
-    nnoremap <Leader>bi  :call VimuxRunCommand("clear; npm install")<CR>
-    nnoremap <Leader>bs  :call VimuxRunCommand("clear; npm start")<CR>
-    nnoremap <Leader>btt :call VimuxRunCommand("clear; npm test")<CR>
-    nnoremap <Leader>btu :call VimuxRunCommand("clear; npm test-unit")<CR>
-    nnoremap <Leader>bti :call VimuxRunCommand("clear; npm test-int")<CR>
+    nnoremap <Leader>bi  :call VimuxRunCommand("npm install")<CR>
+    nnoremap <Leader>bs  :call VimuxRunCommand("npm start")<CR>
+    nnoremap <Leader>btt :call VimuxRunCommand("npm test")<CR>
+    nnoremap <Leader>btu :call VimuxRunCommand("npm test-unit")<CR>
+    nnoremap <Leader>bti :call VimuxRunCommand("npm test-int")<CR>
 endfunction
 
 
@@ -1390,6 +1567,29 @@ augroup map_latex
 augroup END
 
 
+" Language: PHP
+
+augroup php_on_read
+    au!
+    au FileType php call SetupPHP()
+augroup END
+function! SetupPHP()
+    nnoremap <Leader>btt  :call VimuxRunCommand("composer test")<CR>
+endfunction
+
+
+" Language: python
+
+augroup python_on_read
+    au!
+    au FileType python call SetupPython()
+augroup END
+function! SetupPython()
+    nnoremap <Leader>bs  :call VimuxRunCommand("python " . expand('%'))<CR>
+    nnoremap <Leader>b2  :call VimuxRunCommand("python2 " . expand('%'))<CR>
+    nnoremap <Leader>b3  :call VimuxRunCommand("python3 " . expand('%'))<CR>
+endfunction
+
 
 " Language: R
 
@@ -1415,11 +1615,12 @@ if v:version > 704 || v:version == 704 && has("patch1829")
 endif
 
 
-
 " Language: Scala
 
 Plugin 'derekwyatt/vim-scala'
 Plugin 'derekwyatt/vim-sbt'
+Plugin 'mdreves/vim-scaladoc'
+nnoremap <leader>sd :call scaladoc#Search(expand("<cword>"))<CR>
 
 " Plugin 'ensime/ensime-sbt', { 'branch': '2.0', 'for': 'scala' }
 " Plugin 'ensime/ensime-server', { 'branch': '2.0', 'for': 'scala' }
@@ -1459,8 +1660,8 @@ augroup scala_on_read
 augroup END
 function! SetupScala()
     set errorformat=
-                \%E\ %#[error]\ %f:%l:\ %m,%C\ %#[error]\ %p^,%-C%.%#,%Z,
-                \%W\ %#[warn]\ %f:%l:\ %m,%C\ %#[warn]\ %p^,%-C%.%#,%Z,
+                \%E\ %#[error]\ %f:%l:%c:\ %m,%C\ %#[error]\ %p^,%-C%.%#,%Z,
+                \%W\ %#[warn]\ %f:%l:%c:\ %m,%C\ %#[warn]\ %p^,%-C%.%#,%Z,
                 \%-G%.%#
     " the lines above work for compiler errors
     " the lines below are for testing errors but do not work yet
@@ -1470,16 +1671,28 @@ function! SetupScala()
                 " \%E\ \%#[info]\ %.%#\ was\ not\ equal\ to\ %.%#\ (%f:%l),%Z,
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
-    nnoremap <Leader>bd  :call MakeWithVimux("clear; sbt -Dsbt.log.noformat=true compile")<CR>
-    nnoremap <Leader>btt :call MakeWithVimux("clear; sbt -Dsbt.log.noformat=true test it:test")<CR>
-    nnoremap <Leader>btu :call MakeWithVimux("clear; sbt -Dsbt.log.noformat=true test")<CR>
-    nnoremap <Leader>bti :call MakeWithVimux("clear; sbt -Dsbt.log.noformat=true it:test")<CR>
-    nnoremap <Leader>btT :call VimuxRunCommand("clear; sbt test it:test")<CR>
-    nnoremap <Leader>btU :call VimuxRunCommand("clear; sbt test")<CR>
-    nnoremap <Leader>btI :call VimuxRunCommand("clear; sbt it:test")<CR>
-    nnoremap <Leader>bc  :call VimuxRunCommand("clear; sbt console")<CR>
+    nnoremap <Leader>bd  :call MakeWithVimux("set TERM xterm-color; sbt compile")<CR>
+    nnoremap <Leader>bs  :call MakeWithVimux("set TERM xterm-color; sbt run")<CR>
+    nnoremap <Leader>btt :call MakeWithVimux("set TERM xterm-color; sbt test it:test")<CR>
+    nnoremap <Leader>btu :call MakeWithVimux("set TERM xterm-color; sbt test")<CR>
+    nnoremap <Leader>bti :call MakeWithVimux("set TERM xterm-color; sbt it:test")<CR>
+    nnoremap <Leader>bto :call MakeWithVimux("set TERM xterm-color; " . CalculateSbtTestOnlyCommand())<CR>
+    nnoremap <Leader>br  :call MakeWithVimux("set TERM xterm-color; sbt console")<CR>
     nnoremap <Leader>bE  :call MakeWithVimuxOpenErrors('buffer')<CR>gg/\*\*\* FAILED \*\*\*<CR>
     nnoremap <Leader>fe  /\*\*\* FAILED \*\*\*<CR>
+endfunction
+
+function! CalculateSbtTestOnlyCommand()
+    let lines_that_match_package = GetMatches('^package.*', 1, line('$'))
+    let lines_that_match_class   = GetMatches('^class.*', 1, line('$'))
+    if len(lines_that_match_package) == 0 || len(lines_that_match_class) == 0
+        echoerr "Could not find class name."
+        return  1
+    endif
+    let package  = substitute(lines_that_match_package[0], '^package\s\+\(\w\+\)', '\1', '')
+    let class    = substitute(lines_that_match_class[0], '^class\s\+\(\w\+\).*', '\1', '')
+    let itPrefix = match(@%, '.*/it/.*') == -1 ? '' : 'it:'
+    return "sbt '" . itPrefix . "testOnly " . package . "." . class . "'"
 endfunction
 
 " augroup scala_on_write
@@ -1487,6 +1700,22 @@ endfunction
     " au BufWritePost *.scala Dispatch! sbt -Dsbt.log.noformat=true parse
 " augroup END
 
+
+" TODO: find fzf scala docs
+
+
+" Language: SQL
+augroup sql_on_read
+    au!
+    au FileType sql call SetupSQL()
+augroup END
+function! SetupSQL()
+    nnoremap <Leader>bm  :call VimuxRunCommand("\\. " . expand('%:p'))<CR>
+    nnoremap <Leader>bp  :call VimuxRunCommand("\\i " . expand('%:p'))<CR>
+endfunction
+
+
+Plugin 'tpope/vim-db'
 
 
 
@@ -1513,11 +1742,15 @@ nnoremap <Leader>ut :GundoToggle<CR>
 
     " THE FOLLOWING MUST BE EXECUTED AFTER VUNDLE FINISHED:
 
-    call camelcasemotion#CreateMotionMappings(',')
+    " call camelcasemotion#CreateMotionMappings(',')
 
     " fix compatibility issues with D mapping
     " (must be executed before the D custom mapping)
     call yankstack#setup()
+
+    " fix s mapping
+    " (must be executed after yankstack#setup())
+    nmap s <Plug>Sneak_S
 
 
 endif
@@ -1557,7 +1790,9 @@ set ttyfast
 set lazyredraw
 
 " allow mouse usage for bad days
-set mouse=a
+if has('mouse')
+    set mouse=a
+endif
 
 " disable all bells
 set noerrorbells
@@ -1582,7 +1817,9 @@ else
 endif
 augroup autosave
     au!
-    au BufLeave,FocusLost * if g:autosave
+    au BufLeave,FocusLost * if (g:autosave && !exists("b:local_autosave"))
+                          \ || (g:autosave && exists("b:local_autosave") && b:local_autosave)
+                          \ || (!g:autosave && exists("b:local_autosave") && b:local_autosave)
     au BufLeave,FocusLost *     silent! update
     au BufLeave,FocusLost * endif
 augroup END
@@ -1614,7 +1851,8 @@ set spellfile=~/.vim/spellfile.utf-8.add,~/.vim/spellfile.local.utf-8.add
 
 " syntax highlighting
 syntax enable
-set synmaxcol=300
+let g:synmaxcol=300
+exe 'set synmaxcol=' . g:synmaxcol
 
 " highlight matching bracket when typing
 " set showmatch
@@ -1632,7 +1870,7 @@ set relativenumber
 set numberwidth=6
 
 " highlight current cursor position
-let g:cursorposition = 1
+let g:cursorposition = 0
 if g:cursorposition
     set cursorline cursorcolumn
 endif
@@ -1698,8 +1936,8 @@ endif
 set showbreak=↪
 
 " how other stuff looks like
-set fillchars+=vert:│
-" set fillchars+=fold:─
+set fillchars+=vert:\ "
+set fillchars+=fold:─
 
 " use 4 spaces instead of tabs
 " (otherwise handled by sleuth)
@@ -1742,15 +1980,17 @@ if s:MyMode == 'mastery'
 
     " colorscheme apprentice
     " colorscheme badwolf
-    colorscheme blackboard
+    " colorscheme blackboard
     " colorscheme blacklight
     " colorscheme candycode
     " colorscheme dante
     " colorscheme desertEx
+    colorscheme gruvbox
     " colorscheme iceberg
     " colorscheme jellybeans
     " colorscheme luna-term
     " colorscheme meta5
+    " colorscheme materialbox
     " colorscheme molokai
     " colorscheme onedark
     " colorscheme pride
@@ -1759,14 +1999,16 @@ if s:MyMode == 'mastery'
     " colorscheme up
     " colorscheme woju
 
+    let g:airline_theme='base16'
     " let g:airline_theme='base16_summerfruit'
+    " let g:airline_theme='base16_grayscale'
     " let g:airline_theme='behelit'
     " let g:airline_theme='distinguished'
     " let g:airline_theme='kalisi'
     " let g:airline_theme='laederon'
     " let g:airline_theme='lucius'
     " let g:airline_theme='minimalist'
-    let g:airline_theme='raven'
+    " let g:airline_theme='raven'
     " let g:airline_theme='serene'
     " let g:airline_theme='tomorrow'
     " let g:airline_theme='ubaryd'
@@ -1778,18 +2020,27 @@ if s:MyMode == 'mastery'
 
     highlight CursorLine              ctermbg=236 cterm=NONE
     highlight CursorColumn            ctermbg=236
-    highlight ColorColumn             ctermbg=235
+    highlight ColorColumn             ctermbg=237
+    highlight DiffAdd                 ctermbg=234
+    highlight DiffDelete              ctermbg=234
+    highlight DiffChange              ctermbg=234
+    highlight DiffText                ctermbg=233
     highlight ShowTrailingWhitespace  ctermbg=235
-    highlight Folded                  ctermbg=235
-    highlight LineNr                  ctermfg=237
-    highlight CursorLineNr            ctermfg=23
+    highlight VertSplit               ctermfg=238
+    highlight Folded                  ctermfg=238 ctermfg=248
+    highlight LineNr                  ctermbg=237 ctermfg=243
+    " highlight SignColumn              ctermbg=237
+    " highlight GitGutterAdd            ctermbg=235
+    " highlight GitGutterChange         ctermbg=235
+    " highlight GitGutterDelete         ctermbg=235
+    " highlight GitGutterChangeDelete   ctermbg=235
     highlight Conceal                 ctermbg=237
-  " highlight Search                  ctermbg=237 ctermfg=white
-    highlight Error                   ctermbg=234
-    highlight Todo                    ctermbg=197
-    highlight EasyMotionTarget        ctermfg=38
-    highlight EasyMotionTarget2First  ctermfg=38
-    highlight EasyMotionTarget2Second ctermfg=23
+    " highlight Search                  ctermbg=237 ctermfg=white
+    highlight Error                   ctermbg=162
+    highlight Todo                    ctermfg=132
+    highlight EasyMotionTarget        ctermfg=72
+    highlight EasyMotionTarget2First  ctermfg=72
+    highlight EasyMotionTarget2Second ctermfg=108
 
 
     " LIGHT THEMES
@@ -1892,7 +2143,7 @@ endfunction
 
 " get a list of buffers {{{
 function! GetBufferList()
-  redir =>buflist
+  silent! redir =>buflist
   silent! ls!
   redir END
   return buflist
@@ -1903,7 +2154,9 @@ endfunction
 
 " redraw the screen in case some git things don't keep up with shit {{{
 function! GitRedraw()
-    GitGutterAll
+    if exists(':GitGutterAll') == 2
+        GitGutterAll
+    endif
 endfunction
 " }}}
 
@@ -1980,6 +2233,36 @@ if v:version > 704 || v:version == 704 && has("patch786") " if has ('patch-7.4.7
     augroup END
 endif
 
+
+" Return list of matches for given pattern in given range.
+" This only works for matches within a single line.
+" Empty hits are skipped so search for '\d*\ze,' is not stuck in '123,456'.
+" If omit match() 'count' argument, pattern '^.' matches every character.
+" Using count=1 causes text before the 'start' argument to be considered.
+function! GetMatches(pattern, line1, line2)
+  let hits = []
+  for line in range(a:line1, a:line2)
+    let text = getline(line)
+    let from = 0
+    while 1
+      let next = match(text, a:pattern, from, 1)
+      if next < 0
+        break
+      endif
+      let from = matchend(text, a:pattern, from, 1)
+      if from > next
+        call add(hits, strpart(text, next, from - next))
+      else
+        let char = matchstr(text, '.', next)
+        if empty(char)
+          break
+        endif
+        let from = next + strlen(char)
+      endif
+    endwhile
+  endfor
+  return hits
+endfunction
 
 
 " Search across newlines {{{
@@ -2147,154 +2430,29 @@ endfunction
 
 
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
-" I copied this great piece of code from Steve Losh (sjl):
-
-
-
-
-" Next and Last {{{
-"
-" Motion for "next/last object".  "Last" here means "previous", not "final".
-" Unfortunately the "p" motion was already taken for paragraphs.
-"
-" Next acts on the next object of the given type, last acts on the previous
-" object of the given type.  These don't necessarily have to be in the current
-" line.
-"
-" Currently works for (, [, {, and their shortcuts b, r, B.
-"
-" Next kind of works for ' and " as long as there are no escaped versions of
-" them in the string (TODO: fix that).  Last is currently broken for quotes
-" (TODO: fix that).
-"
-" Some examples (C marks cursor positions, V means visually selected):
-"
-" din'  -> delete in next single quotes                foo = bar('spam')
-"                                                      C
-"                                                      foo = bar('')
-"                                                                C
-"
-" canb  -> change around next parens                   foo = bar('spam')
-"                                                      C
-"                                                      foo = bar
-"                                                               C
-"
-" vin"  -> select inside next double quotes            print "hello ", name
-"                                                       C
-"                                                      print "hello ", name
-"                                                             VVVVVV
-
-onoremap an :<c-u>call <SID>NextTextObject('a', '/')<cr>
-xnoremap an :<c-u>call <SID>NextTextObject('a', '/')<cr>
-onoremap in :<c-u>call <SID>NextTextObject('i', '/')<cr>
-xnoremap in :<c-u>call <SID>NextTextObject('i', '/')<cr>
-
-onoremap al :<c-u>call <SID>NextTextObject('a', '?')<cr>
-xnoremap al :<c-u>call <SID>NextTextObject('a', '?')<cr>
-onoremap il :<c-u>call <SID>NextTextObject('i', '?')<cr>
-xnoremap il :<c-u>call <SID>NextTextObject('i', '?')<cr>
-
-
-function! s:NextTextObject(motion, dir)
-    let c = nr2char(getchar())
-    let d = ''
-
-    if c ==# "b" || c ==# "(" || c ==# ")"
-        let c = "("
-    elseif c ==# "B" || c ==# "{" || c ==# "}"
-        let c = "{"
-    elseif c ==# "r" || c ==# "[" || c ==# "]"
-        let c = "["
-    elseif c ==# "'"
-        let c = "'"
-    elseif c ==# '"'
-        let c = '"'
-    else
-        return
-    endif
-
-    " Find the next opening-whatever.
-    execute "normal! " . a:dir . c . "\<cr>"
-
-    if a:motion ==# 'a'
-        " If we're doing an 'around' method, we just need to select around it
-        " and we can bail out to Vim.
-        execute "normal! va" . c
-    else
-        " Otherwise we're looking at an 'inside' motion.  Unfortunately these
-        " get tricky when you're dealing with an empty set of delimiters because
-        " Vim does the wrong thing when you say vi(.
-
-        let open = ''
-        let close = ''
-
-        if c ==# "("
-            let open = "("
-            let close = ")"
-        elseif c ==# "{"
-            let open = "{"
-            let close = "}"
-        elseif c ==# "["
-            let open = "\\["
-            let close = "\\]"
-        elseif c ==# "'"
-            let open = "'"
-            let close = "'"
-        elseif c ==# '"'
-            let open = '"'
-            let close = '"'
-        endif
-
-        " We'll start at the current delimiter.
-        let start_pos = getpos('.')
-        let start_l = start_pos[1]
-        let start_c = start_pos[2]
-
-        " Then we'll find it's matching end delimiter.
-        if c ==# "'" || c ==# '"'
-            " searchpairpos() doesn't work for quotes, because fuck me.
-            let end_pos = searchpos(open)
-        else
-            let end_pos = searchpairpos(open, '', close)
-        endif
-
-        let end_l = end_pos[0]
-        let end_c = end_pos[1]
-
-        call setpos('.', start_pos)
-
-        if start_l == end_l && start_c == (end_c - 1)
-            " We're in an empty set of delimiters.  We'll append an "x"
-            " character and select that so most Vim commands will do something
-            " sane.  v is gonna be weird, and so is y.  Oh well.
-            execute "normal! ax\<esc>\<left>"
-            execute "normal! vi" . c
-        elseif start_l == end_l && start_c == (end_c - 2)
-            " We're on a set of delimiters that contain a single, non-newline
-            " character.  We can just select that and we're done.
-            execute "normal! vi" . c
-        else
-            " Otherwise these delimiters contain something.  But we're still not
-            " sure Vim's gonna work, because if they contain nothing but
-            " newlines Vim still does the wrong thing.  So we'll manually select
-            " the guts ourselves.
-            let whichwrap = &whichwrap
-            set whichwrap+=h,l
-
-            execute "normal! va" . c . "hol"
-
-            let &whichwrap = whichwrap
-        endif
-    endif
+" send buffer via slack {{{
+function! SendBufferViaSlack(channel)
+    let content = getline(1, '$')
+    exec "write !slackcat --channel " . a:channel . " --filename " . expand("%:t")
 endfunction
-
 " }}}
 
 
+" send buffer via slack after choosing channel interactively {{{
+function! SendBufferViaSlackChooseChannel()
+    " let content = system("slackcat --list")
+    " echo content
+    let choice = input("Which channel: ")
+    call SendBufferViaSlack(choice)
+endfunction
+nnoremap <Leader>iS :call SendBufferViaSlackChooseChannel()<CR>
+" }}}
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Highlight Word {{{
 "
@@ -2362,6 +2520,43 @@ hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
 " }}}
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" handle binary documents {{{
+
+augroup read_special_files
+    au!
+    au BufWinEnter  *.{doc,docx,epub,odp,odt,pdf,rtf}
+                \ call s:filter_special_files()
+augroup END
+
+fu! s:filter_special_files() abort
+    if get(b:, 'did_filter_special_file', 0)
+        return
+    endif
+    let fname = shellescape(expand('%:p'), 1)
+    let ext = expand('%:e')
+    let ext2cmd = {
+    \               'doc' : '%!antiword '.fname,
+    \               'docx': '%!pandoc -f docx -t markdown '.fname,
+    \               'epub': '%!pandoc -f epub -t markdown '.fname,
+    \               'odp' : '%!odt2txt '.fname,
+    \               'odt' : '%!odt2txt '.fname,
+    \               'pdf' : '%!pdftotext -nopgbrk -layout -q -eol unix '.fname.' -',
+    \               'rtf' : '%!unrtf --text',
+    \             }
+    if has_key(ext2cmd, ext)
+        setl ma noro
+        sil exe ext2cmd[ext]
+        let b:did_filter_special_file = 1
+        setl noma ro nomod
+    endif
+endfu
+
+" }}}
+
+
+
 " }}}
 
 
@@ -2385,6 +2580,7 @@ let mapleader=' '
 " FIX MY TYPING {{{
 
 iabbrev todo TODO
+iabbrev autotype autotype: email :tab pass :enter
 
 
 " }}}
@@ -2438,8 +2634,8 @@ nnoremap <Leader>ev :execute 'edit ' . resolve(expand($MYVIMRC))<CR>
 nnoremap <Leader>e3 :edit ~/.i3/config<CR>
 
 " reload config file
-nnoremap <Leader>sv :source $MYVIMRC<CR>
-nnoremap <F5>       :source $MYVIMRC<CR>
+nnoremap <Leader>sv :source $MYVIMRC<CR>:syntax enable<CR>
+nmap <F5> <Leader>sv
 
 
 " to follow links in help and jump to definition (ctags)
@@ -2585,7 +2781,14 @@ nnoremap <Leader>ot8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
 nnoremap <Leader>op :set paste! <bar> :set paste?<CR>
 
 " toggle autosave ('autowrite')
-nnoremap <silent> <Leader>oW :let g:autosave = 1 - g:autosave <CR>
+nnoremap <silent> <Leader>oWW
+            \ :if !exists("b:local_autosave") <bar> let b:local_autosave = 0 <bar> endif <CR>
+            \ :let b:local_autosave = 1 - b:local_autosave <CR>
+            \ :echo b:local_autosave == 1 ?
+            \ 'autosave enabled for local buffer' :
+            \ 'autosave disabled for local buffer'<CR>
+nnoremap <silent> <Leader>oWA
+            \ :let g:autosave = 1 - g:autosave <CR>
             \ :echo g:autosave == 1 ?
             \ 'autosave enabled' :
             \ 'autosave disabled'<CR>
@@ -2606,6 +2809,8 @@ nnoremap <Leader>o <NOP>
 
 " toggle syntax highlighting
 nmap <silent> <C-G>y :call ToggleSyntax()<CR>
+" toggle syntax highlighting after g:synmaxcol characters
+nmap <silent> <C-G>Y :let &synmaxcol = g:synmaxcol - &synmaxcol <CR>
 
 " toggle line numbers
 noremap <silent> <C-G>l :set number! <bar> :set relativenumber! <CR>
@@ -2691,11 +2896,14 @@ cnoremap <C-A> <Home>
 " move to EOL with l instead of $
 onoremap l $
 
+" ... but current character movement is useful sometimes
+nnoremap ch cl
+nnoremap yh yl
 
 " swap , and ;
 " (makes more sense on german keyboard)
-nnoremap , ;
-nnoremap ; ,
+" nnoremap , ;
+" nnoremap ; ,
 nnoremap g, g;
 nnoremap g; g,
 
@@ -2873,6 +3081,9 @@ nnoremap <silent> -j :set fdm=manual<CR>:m .+1<CR>:set fdm=marker<CR>
 vnoremap <silent> -j <Esc>:set fdm=manual<CR>gv:m '>+1<CR>gv=gv:set fdm=marker<CR>
 vnoremap <silent> -k <Esc>:set fdm=manual<CR>gv:m '<-2<CR>gv=gv:set fdm=marker<CR>
 
+
+" join line above (instead of below)
+nnoremap <Leader>J kddpkJ
 
 " split line (opposite of 'J'oin lines)
 " (regular 'S' can be done with 'cc' instead)
@@ -3060,8 +3271,8 @@ endfunction
 " jump to (syntastic) errors
 nnoremap <Leader>sg :lfirst<CR>
 nnoremap <Leader>sG :llast<CR>
-nnoremap <Leader>sn :lnext<CR>
-nnoremap <Leader>sN :lprevious<CR>
+" nnoremap <Leader>sn :lnext<CR>
+" nnoremap <Leader>sN :lprevious<CR>
 
 " perform a :cnext or :lnext
 " so we jump through both quickfix and location list with one keystroke
@@ -3149,6 +3360,50 @@ nnoremap <silent> <Leader>tq :call ToggleList("Quickfix List", 'c')<CR>
 nnoremap <silent> <Leader>tl :call ToggleList("Location List", 'l')<CR>
 
 
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" builtin file explorer (netrw) {{{
+" (who needs NERDTree anyway)
+
+" let g:netrw_liststyle = 1
+" let g:netrw_winsize = 31
+let g:netrw_liststyle = 0
+let g:netrw_winsize = 16
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+
+let g:netrw_is_toggled = 0
+
+
+" toggle netrw and start from current file
+nnoremap <silent> <Leader>te :exe ':Lexplore! ' . expand('%:p:h')<CR>
+" toggle netrw and start from working (project) dir
+nnoremap <silent> <Leader>tE :Lexplore!<CR>
+
+
+augroup netrw_autocmds
+    autocmd!
+    autocmd filetype netrw call NetrwMappings()
+augroup END
+
+function! NetrwMappings()
+    silent! nunmap <buffer> qL
+    silent! nunmap <buffer> qF
+    silent! nunmap <buffer> qf
+    silent! nunmap <buffer> qb
+    silent! nunmap <buffer> q
+    nnoremap <buffer> q   :bd<CR>
+    nnoremap <buffer> h   :help netrw-quickmap<CR>
+    nmap     <buffer> .   gh
+    nmap     <buffer> u   -
+    " TODO: nnoremap u or locally unmap all - bindings to prevent odd bugs
+    nmap     <buffer> af  %
+    nmap     <buffer> ad  d
+endfunction
+
+
+
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EXTERNAL TOOLS {{{
@@ -3203,8 +3458,9 @@ nnoremap <Leader>w  :update<CR>
 nnoremap <Leader>WW :update!<CR>
 
 " quit current buffer
-nnoremap <Leader>qq :bdelete<CR>
-nnoremap <Leader>QQ :bdelete!<CR>
+nnoremap <Leader><BS> :bdelete<CR>
+nnoremap <Leader>qq   :bdelete<CR>
+nnoremap <Leader>QQ   :bdelete!<CR>
 augroup map_q_in_read_only_buffers
     au!
     au BufReadPost * if &readonly
@@ -3218,9 +3474,9 @@ augroup END
 nnoremap <Leader>qa :bufdo bdelete<CR>
 
 " quit current window
-nnoremap <Leader>qw :quit<CR>:buffer #<CR>
+nnoremap <Leader>qW :quit<CR>:buffer #<CR>
 " quit all windows but current
-nnoremap <Leader>qW :only<CR>
+nnoremap <Leader>qw :only<CR>
 
 " quit vim (multiple windows)
 " (this is how i exit most terminal applications)
@@ -3235,7 +3491,31 @@ nnoremap <Leader>Q <NOP>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FILETYPE SPECIFIC SETTINGS {{{
 
+augroup FILETYPE_SPECIFIC_SETTINGS_QUICKFIX
+    autocmd!
+    autocmd filetype qf setlocal norelativenumber
+    autocmd filetype qf setlocal colorcolumn=
+augroup END
+
+augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
+    autocmd!
+    autocmd filetype gitcommit setlocal nonumber norelativenumber
+    autocmd filetype gitcommit setlocal colorcolumn=50
+    autocmd filetype gitcommit setlocal textwidth=50
+    autocmd filetype gitcommit let b:local_autosave = 0
+    autocmd filetype gitcommit normal gg
+augroup END
+
+augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
+    autocmd!
+    autocmd! FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
+augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 " }}}

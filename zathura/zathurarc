@@ -2,11 +2,11 @@ set pages-per-row 1
 set incremental-search
 set window-title-basename true
 
+set selection-clipboard 'clipboard'
 
 #set font terminus 8
 
-# set default-bg "#2D2C2B"
-set default-bg "#1E1E1E"
+set default-bg "#2D2C2B"
 set default-fg "#DDDDDD"
 set statusbar-bg "#1E1E1E"
 set statusbar-fg "#DDDDDD"

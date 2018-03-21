@@ -13,20 +13,20 @@ status = Status(standalone=True)
 
 
 # Colors
-COLOR_DEFAULT = "#DDDDDD";
-#  COLOR_GREEN   = "#AABF9B";
-COLOR_GREEN   = "#009C9C";
-COLOR_RED     = "#F2935C";
+COLOR_DEFAULT = "#BDAE93";
+COLOR_GREEN   = "#B8BB26";
+COLOR_RED     = "#FB4934";
 
 
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
 #                          ^-- calendar week
 status.register("clock",
-    format = " %a %d.%m.%Y  %H:%M:%S  ",
-    on_leftclick = "xfce4-display-settings",
-    on_rightclick = "xfce4-settings-manager",
-    on_middleclick = "sudo poweroff",
+   format = " %a %d.%m.%Y  %H:%M:%S  ",
+   on_leftclick = "xfce4-display-settings",
+   on_rightclick = "xfce4-settings-manager",
+   on_middleclick = "sudo poweroff",
+   color = COLOR_DEFAULT,
 )
 
 # Shows the average load of the last minute and the last 5 minutes
@@ -35,34 +35,72 @@ status.register("clock",
 
 
 
+# The battery monitor has many formatting options, see README for details
+
+# This would look like this, when discharging (or charging)
+# ↓14.22W 56.15% [77.81%] 2h:41m
+
+# And like this if full:
+# =14.22W 100.0% [91.21%]
+#
+# This would also display a desktop notification (via D-Bus) if the percentage
+# goes below 5 percent while discharging. The block will also color RED.
+# If you don't have a desktop notification demon yet, take a look at dunst:
+#   http://www.knopwob.org/dunst/
+status.register("battery",
+    format = "{status} {consumption:.1f}W {percentage:.2f}% [{percentage_design:.2f}%] {remaining:%E%hh:%Mm}",
+    # format = " {bar} ",
+    alert = False,
+    alert_format_title = "Der liebe Akku meldet:",
+    alert_format_body = "Der Saft wird langsam knapp!",
+    alert_percentage = 15,
+    status = {
+        "DIS": "DISCHARGING",
+        "CHR": "CHARGING",
+        "FULL": "FULL",
+    },
+    on_leftclick = "xfce4-power-manager-settings",
+    color = COLOR_DEFAULT,
+    full_color = COLOR_DEFAULT,
+    charging_color = COLOR_GREEN,
+    critical_color = COLOR_RED,
+    interval = 4,
+)
+
+
 # Displays whether a DHCP client is running
 # status.register("runwatch",
 #     name = "DHCP",
 #     path = "/var/run/dhclient*.pid",)
 
-# Shows the address and up/down state of eth0. If it is up the address is shown in
+# Shows the address and up/down state of ethernet connection. If it is up the address is shown in
 # green (the default value of color_up) and the CIDR-address is shown
 # (i.e. 10.10.10.42/24).
-# If it's down just the interface name (eth0) will be displayed in red
+# If it's down just the interface name will be displayed in red
 # (defaults of format_down and color_down)
 #
+
+
 # Note: the network module requires PyPI package netifaces
-# status.register("network",
-#     interface = "eth0",
-#     format_up = "{v4cidr}",)
 
-
-# find out wlan interface name
+# find out interface names
+wifi_interface = ""
+cable_interface = ""
+# Note: requires both netifaces and basiciw (for essid and quality)
 from netifaces import interfaces
 ifaces = interfaces()
 for iface in ifaces:
-    if (iface.startswith('wlp') or iface.startswith('wlan')):
-        wlan_interface = iface
+    if (iface.startswith('wlp')
+    or iface.startswith('wlan')):
+        wifi_interface = iface
+    elif (iface.startswith('enp')):
+        cable_interface = iface
 
-# Note: requires both netifaces and basiciw (for essid and quality)
 status.register("network",
-    interface = wlan_interface,
-    # hints = { "markup" : "pango" },
+    interface = wifi_interface,
+    #  format_up = " <span color=\"#199C25\">{essid}</span> {quality:03.0f}% ",
+    format_up = "{v4cidr} ({essid}) {quality:02.0f}%",
+    format_down = "WiFi down",
     dynamic_color = False,
     # format_up = " <span color=\"#199C25\">{essid}</span> {quality:03.0f}% ",
     format_up = " {essid} {v4} {quality:02.0f}%",
@@ -74,6 +112,30 @@ status.register("network",
     interval = 4,
 )
 
+status.register("network",
+    interface = cable_interface,
+    format_up = "{v4cidr}",
+    format_down = "",
+    dynamic_color = False,
+    color_up = COLOR_DEFAULT,
+    color_down = COLOR_RED,
+    interval = 4,
+ )
+
+# online status
+#  status.register("shell",
+#      command = "fping -q -c1 -t900 8.8.8.8 && echo 'ONLINE ' || (echo 'OFFLINE ' && false)",
+#      interval = 9,
+status.register("online",
+    format_online = "ONLINE",
+    format_offline = "OFFLINE",
+    on_leftclick = "nm-applet",
+    on_rightclick = "nm-connection-editor",
+    on_middleclick = "pkill nm-applet",
+    color = COLOR_DEFAULT,
+    color_offline = COLOR_RED,
+)
+
 # Shows disk usage of /
 status.register("disk",
    path = "/home/",
@@ -81,6 +143,7 @@ status.register("disk",
    on_leftclick = "thunar",
    format = " {avail}G",
    interval = 9,
+   color = COLOR_DEFAULT,
 )
 status.register("disk",
    path = "/",
@@ -88,6 +151,7 @@ status.register("disk",
    on_leftclick = "thunar",
    interval = 9,
    hints = { "separator" : False, "separator_block_width": 0} ,
+   color = COLOR_DEFAULT,
 )
 
 # Show memory usage
@@ -95,12 +159,12 @@ status.register("mem",
     format = "MEM: {percent_used_mem}%",
     warn_percentage = 60,
     alert_percentage = 80,
-    color = COLOR_DEFAULT,
-    warn_color = COLOR_RED,
-    alert_color = "#FF0000",
     on_leftclick = "xfce4-terminal --execute htop",
     interval = 9,
     hints = { "separator" : False, "separator_block_width": 0} ,
+    color = COLOR_DEFAULT,
+    warn_color = COLOR_RED,
+    alert_color = "#FF0000",
 )
 
 
@@ -109,6 +173,7 @@ status.register("temp",
     format = "{temp:.0f}°C ",
     on_leftclick = "xfce4-terminal --execute htop",
     hints = { "separator" : False, "separator_block_width": 0} ,
+    color = COLOR_DEFAULT,
 )
 
 # Shows CPU usage
@@ -116,6 +181,7 @@ status.register("cpu_usage",
     format = " CPU: {usage}% ",
     on_leftclick = "xfce4-terminal --execute htop",
     hints = { "separator" : False, "separator_block_width": 0} ,
+    color = COLOR_DEFAULT,
 )
 
 
@@ -141,6 +207,8 @@ status.register("pulseaudio",
     on_leftclick     = "pavucontrol",
     on_upscroll     = "amixer sset Master 1%+; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
     on_downscroll   = "amixer sset Master 1%-; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
+    color_unmuted = COLOR_DEFAULT,
+    color_muted = COLOR_RED,
 )
 
 # Shows mpd status
@@ -179,6 +247,7 @@ status.register("shell",
     on_rightclick   = "mpc prev; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
     on_upscroll     = "mpc volume +1; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
     on_downscroll   = "mpc volume -1; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
+    color = COLOR_DEFAULT,
 )
 
 

@@ -12,9 +12,17 @@
 [push]
     default = simple
 
+[alias]
+    l          = log --pretty=format:"%C(blue)%ad\\ %C(yellow)%h\\ %C(green)%cn%C(red)%d\\ %C(reset)%s" --decorate --date=short
+    ll         = log --pretty=format:"%C(blue)%ad\\ %C(yellow)%h\\ %C(green)%cn%C(red)%d\\ %C(reset)%s" --decorate --date=short --numstat
+    save       = !sh -c 'git checkout -b "stash/$1" && git commit -m "$1" && git checkout -' - ; a better stash save
+    pop        = !sh -c 'git rebase $(git rev-parse --abbrev-ref HEAD) "stash/$1"' - ; a better stash pop
+    pop-prefix = !sh -c 'git rebase $(git rev-parse --abbrev-ref HEAD) "$1"' - ; (for tig)
+
 [diff]
     tool = vimdiff
     guitool = sublimerge
+    ; wsErrorHighlight = context
 
 [difftool "vimdiff"]
     prompt = false
@@ -28,3 +36,9 @@
 [mergetool "sublimerge"]
     prompt = false
     cmd = subl -n -w \"$REMOTE\" \"$BASE\" \"$LOCAL\" \"$MERGED\" --command \"sublimerge_diff_view\"
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true

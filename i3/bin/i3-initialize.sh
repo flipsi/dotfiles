@@ -80,7 +80,7 @@ function setup_musicserver
     set try_again_after 0 1 3 5 15
     for t in $try_again_after
         if start_musicserver_if_music_is_accessible
-            nohup $HOME/.i3/i3pystatus-mpd-notification.sh >/dev/null &
+            nohup $HOME/.i3/bin/i3pystatus-mpd-notification.sh >/dev/null &
             return 0
         else
             sleep $t
@@ -110,14 +110,25 @@ end
 
 
 function autostart
-    # if not pgrep -x urxvt; nohup urxvt -e tmux -2 new-session -A -s main &; end
-    if not pgrep -x firefox; nohup firefox &; end
+    if not pgrep -x firefox
+        nohup firefox &
+    end
+    if not pgrep gnome-terminal
+        nohup gnome-terminal --hide-menubar -- tmux -2 new-session -A -s main &
+    end
+    if not pgrep telegram-desktop
+        nohup telegram-desktop &
+    end
 end
 
 
 
-# setup_screen_resolution
-setup_screen_layout
+if test -f $HOME/bin/i3-initialize-arandr.local.sh
+    eval $HOME/bin/i3-initialize-arandr.local.sh
+else
+    setup_screen_resolution
+    setup_screen_layout
+end
 desktop_session
 setup_musicserver
 # tmux-system-sessions

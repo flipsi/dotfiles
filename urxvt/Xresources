@@ -15,12 +15,15 @@ URxvt.externalBorder: 0
 URxvt.iconFile: /usr/share/icons/Faenza/apps/16/terminal.png
 
 ! Fonts
-! URxvt.letterSpace: -1
+URxvt.letterSpace:  -1
+URxvt.font: xft:PragmataPro Mono:size=13
 ! URxvt.font: xft:Monospace:size=11
 ! URxvt.font: xft:Inconsolata:size=12
 ! URxvt.font: xft:Terminus:size=13
-URxvt.font: xft:xos4 Terminus:size=14
+! URxvt.font: xft:xos4 Terminus:size=14
 ! URxvt.font: xft:-xos4-terminus-bold-r-normal--16-160-72-72-c-80-iso8859-1:size=13
+! URxvt.font: xft:Fura Mono Regular Powerline:size=14
+! URxvt.font: xft:Fantasque Sans Mono:size=14
 ! URxvt.font: xft:Cantarell Regular:size=13
 ! URxvt.font: xft:DejaVu Sans Mono:size=11
 ! URxvt.font: xft:Roboto Regular:size=11
