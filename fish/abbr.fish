@@ -66,7 +66,10 @@ abbr v      vim
 abbr x      xrandr
 abbr xo     xrandr --output
 abbr y      yaourt
+abbr yi     yaourt -Qi
 abbr yr     yaourt -R
 abbr ys     yaourt -S
-abbr yu     yaourt -Syu --noconfirm
-abbr yua    yaourt -Syua --noconfirm
+abbr yu     yaourt -Syu
+abbr yun    yaourt -Syu --noconfirm
+abbr yua    yaourt -Syua
+abbr yuan   yaourt -Syua --noconfirm
