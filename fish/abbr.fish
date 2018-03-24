@@ -69,6 +69,7 @@ abbr y      yaourt
 abbr yi     yaourt -Qi
 abbr yr     yaourt -R
 abbr ys     yaourt -S
+abbr ysi    yaourt -Si
 abbr yu     yaourt -Syu
 abbr yun    yaourt -Syu --noconfirm
 abbr yua    yaourt -Syua
