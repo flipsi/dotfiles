@@ -1618,6 +1618,24 @@ endif
 
 " Language: Scala
 
+" Plugin 'ervandew/eclim'
+
+" start eclipse
+noremap <Leader>aea :Start! /usr/lib/eclipse/eclimd<CR>
+" test connection to eclipse
+noremap <Leader>aep :PingEclim<CR>
+noremap <Leader>aev :EclimValidate<CR>
+" shutdown eclipse
+noremap <Leader>aeo :ShutdownEclim<CR>
+
+" automated imports
+noremap <Leader>aei :ScalaImport<CR>
+
+" goto definition
+noremap <Leader>ae<Return> :ScalaSearch<CR>
+
+
+
 Plugin 'derekwyatt/vim-scala'
 Plugin 'derekwyatt/vim-sbt'
 Plugin 'mdreves/vim-scaladoc'
