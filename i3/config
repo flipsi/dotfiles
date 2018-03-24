@@ -564,8 +564,8 @@ workspace_layout stacked
 bindsym $mod+o mode "$terminal"
 set $terminal Open a terminal: (o) default (u) urxvt (k) konsole (i) kitty (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
 mode "$terminal" {
-    bindsym o       exec --no-startup-id "gnome-terminal --hide-menubar -- tmux -2 new-session -A -s main"; mode "default"
-    bindsym $mod+o  exec --no-startup-id "gnome-terminal --hide-menubar -- tmux -2 new-session -A -s main"; mode "default"
+    bindsym o       exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
+    bindsym $mod+o  exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
     bindsym u       exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
     bindsym Shift+u exec --no-startup-id "urxvt"; mode "default"
     bindsym k       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower -e 'tmux -2 new-session -A -s main'"; mode "default"

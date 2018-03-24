@@ -114,7 +114,7 @@ function autostart
         nohup firefox &
     end
     if not pgrep gnome-terminal
-        nohup gnome-terminal --hide-menubar -- tmux -2 new-session -A -s main &
+        nohup urxvt -e tmux -2 new-session -A -s main &
     end
     if not pgrep telegram-desktop
         nohup telegram-desktop &
