@@ -888,6 +888,7 @@ noremap <silent> <Leader>tt :TagbarToggle<CR>
 Plugin 'tpope/vim-eunuch'
 
 nnoremap <Leader>rn :Rename <C-R>=expand("%:t")<CR>
+nnoremap <Leader>rm :Remove<CR>
 
 
 " Plugin 'scrooloose/nerdtree'
