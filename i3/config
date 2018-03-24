@@ -271,9 +271,9 @@ bar {
     # tray_output         HDMI2
     tray_padding        3
     colors {
-        background  #000000
-        statusline  #DDDDDD
-        separator   #005F5F
+        background  #1E1E1E
+        statusline  #BDAE93
+        separator   #B8BB26
         #                   border   backgr   text
         focused_workspace   #FB4934  #FB4934  #1E1E1E
         active_workspace    #1E1E1E  #1E1E1E  #FB4934
