@@ -28,6 +28,7 @@ SUPPORTED_TARGETS=(\
     autostart \
     bash \
     cmus \
+    dircolors \
     elinks \
     fish \
     ghci \
