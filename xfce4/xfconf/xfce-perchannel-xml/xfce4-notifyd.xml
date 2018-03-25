@@ -8,6 +8,7 @@
       <value type="string" value="Electron"/>
       <value type="string" value="FileZilla"/>
       <value type="string" value="Firefox"/>
+      <value type="string" value="google-chrome"/>
       <value type="string" value="Konsole"/>
       <value type="string" value="nm-applet"/>
       <value type="string" value="notify-send"/>
