@@ -144,7 +144,7 @@ function create_link_for_target() {
         bash )
             local sourcestring="source $PWD/bash/bashrc_sflip"
             if [[ $UNINSTALL != true ]]; then
-                grep "$sourcestring" "$HOME/.bashrc" > /dev/null || echo "$sourcestring" >> "$HOME/.bashrc"
+                grep -q -F "$sourcestring" "$HOME/.bashrc" || echo "$sourcestring" >> "$HOME/.bashrc"
             else
                 sed -i -- "/^${sourcestring//\//\\/}$/d" "$HOME/.bashrc"
             fi
@@ -345,7 +345,7 @@ function create_link_for_target() {
         urxvt )
             local sourcestring="#include "\""$PWD/urxvt/Xresources"\"
             if [[ $UNINSTALL != true ]]; then
-                grep "$sourcestring" "$HOME/.Xresources" > /dev/null || echo "$sourcestring" >> "$HOME/.Xresources"
+                grep -q -F "$sourcestring" "$HOME/.Xresources"  || echo "$sourcestring" >> "$HOME/.Xresources"
                 xrdb -all "$HOME/.Xresources"
             else
                 touch "$HOME/.Xresources"
@@ -377,7 +377,7 @@ function create_link_for_target() {
             local userChromeCssFilepath=$(find ~/.mozilla/firefox -name userChrome.css)
             # TODO: create profile chrome/userChrome.css if not exists
             if [[ $UNINSTALL != true ]]; then
-                grep "${sourcestring}" "${userChromeCssFilepath}" > /dev/null || echo "$sourcestring" >> "${userChromeCssFilepath}"
+                grep -q -F "${sourcestring}" "${userChromeCssFilepath}"  || echo "$sourcestring" >> "${userChromeCssFilepath}"
             else
                 sed -i -- "/^${sourcestring//\//\\/}$/d" "${userChromeCssFilepath}"
             fi
