@@ -1,4 +1,4 @@
-colorscheme sflea
+colorscheme gruvbox
 
 bind -f common Q quit
 bind -f common ^D quit
