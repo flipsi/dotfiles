@@ -58,9 +58,9 @@ abbr s      systemctl status
 abbr sa     systemctl start
 abbr so     systemctl stop
 abbr sr     systemctl restart
-abbr t      translate-shell :de
-abbr te     translate-shell de:en
-abbr tf     translate-shell de:fr
+abbr t      trans :de
+abbr te     trans de:en
+abbr tf     trans de:fr
 abbr u      unison
 abbr v      vim
 abbr x      xrandr
