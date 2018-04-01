@@ -385,17 +385,38 @@ bindsym $mod+Down            exec --no-startup-id "amixer sset Master 1%-"; exec
 bindsym $mod+Up              exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
 bindsym $mod+minus           exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
 bindsym $mod+plus            exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
-
-# control music player daemon (mpd)
-bindsym $mod+Shift+minus     exec --no-startup-id "mpc volume -1"; exec "$UPDATE_STATUSBAR"
-bindsym $mod+Shift+plus      exec --no-startup-id "mpc volume +1"; exec "$UPDATE_STATUSBAR"
 bindsym XF86AudioLowerVolume exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
 bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
-bindsym XF86AudioPlay        exec --no-startup-id "mpc toggle"; exec "$UPDATE_STATUSBAR"
-bindsym XF86AudioNext        exec --no-startup-id "mpc next"; exec "$UPDATE_STATUSBAR"
-bindsym XF86AudioPrev        exec --no-startup-id "mpc prev"; exec "$UPDATE_STATUSBAR"
-bindsym $mod+0 mode "$mpd_control"
-#set $mpd_control MPD: (space) play/pause, (n) next, (p) prev, (s) stop, (c) last, (+/-) volume
+
+# control music
+bindsym $mod+Shift+minus     exec --no-startup-id "pgrep spotify && spotifycli --volumedown || mpc volume -1";  exec "$UPDATE_STATUSBAR"
+bindsym $mod+Shift+plus      exec --no-startup-id "pgrep spotify && spotifycli --volumeup   || mpc volume +1";  exec "$UPDATE_STATUSBAR"
+bindsym XF86AudioPlay        exec --no-startup-id "pgrep spotify && spotifycli --playpause  || mpc toggle";     exec "$UPDATE_STATUSBAR"
+bindsym XF86AudioNext        exec --no-startup-id "pgrep spotify && spotifycli --next       || mpc next";       exec "$UPDATE_STATUSBAR"
+bindsym XF86AudioPrev        exec --no-startup-id "pgrep spotify && spotifycli --prev       || mpc prev";       exec "$UPDATE_STATUSBAR"
+
+# bindsym $mod+0 mode "$spotify_control"
+# bindsym $mod+0 mode "$mpd_control"
+bindsym $mod+0 exec "pgrep spotify && i3-msg mode $spotify_control || i3-msg mode $mpd_control"
+
+## control music via spotify
+set $spotify_control Spotify Control
+mode "$spotify_control" {
+    bindsym space            exec --no-startup-id "spotifycli --playpause"
+    bindsym n                exec --no-startup-id "spotifycli --next"; exec "$UPDATE_STATUSBAR"
+    bindsym o                exec --no-startup-id "spotifycli --next"; exec "$UPDATE_STATUSBAR"
+    bindsym p                exec --no-startup-id "spotifycli --prev"; exec "$UPDATE_STATUSBAR"
+    bindsym O                exec --no-startup-id "spotifycli --prev"; exec "$UPDATE_STATUSBAR"
+    bindsym minus            exec --no-startup-id "spotifycli --volumeup"
+    bindsym plus             exec --no-startup-id "spotifycli --volumedown"
+    # cancel
+    bindsym $mod+0 mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+## control music via mpd (music player daemon)
+# set $mpd_control MPD: (space) play/pause, (n) next, (p) prev, (s) stop, (c) last, (+/-) volume
 set $mpd_control MPD Control
 mode "$mpd_control" {
     bindsym space            exec --no-startup-id "mpc toggle"; exec "$UPDATE_STATUSBAR"
