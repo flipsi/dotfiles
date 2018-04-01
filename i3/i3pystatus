@@ -247,5 +247,18 @@ status.register("shell",
     color = COLOR_DEFAULT,
 )
 
+# show spotify status
+status.register("shell",
+    command = """pgrep spotify > /dev/null && command -v spotifycli > /dev/null && 
+                    spotifycli --status | 
+                    sed '/spotify is off/d' || true""",
+    interval = 8,
+    on_leftclick    = "spotifycli --next; sleep 2; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
+    on_rightclick   = "spotifycli --prev; sleep 2; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
+    on_upscroll     = "spotifycli --volumeup",
+    on_downscroll   = "spotifycli --volumedown",
+    color = COLOR_DEFAULT,
+)
+
 
 status.run()
