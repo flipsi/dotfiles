@@ -167,10 +167,13 @@ status.register("mem",
 
 # Shows your CPU temperature, if you have a Intel CPU
 status.register("temp",
+    #  lm_sensors_enabled = True,
     format = "{temp:.0f}°C ",
     on_leftclick = "xfce4-terminal --execute htop",
     hints = { "separator" : False, "separator_block_width": 0} ,
     color = COLOR_DEFAULT,
+    alert_temp = 80,
+    #  dynamic_color = True,
 )
 
 # Shows CPU usage
