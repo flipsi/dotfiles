@@ -403,6 +403,7 @@ bindsym $mod+0 exec "pgrep spotify && i3-msg mode $spotify_control || i3-msg mod
 set $spotify_control Spotify Control
 mode "$spotify_control" {
     bindsym space            exec --no-startup-id "spotifycli --playpause"
+    bindsym BackSpace        exec --no-startup-id "spotifycli --playpause"
     bindsym n                exec --no-startup-id "spotifycli --next"; exec "$UPDATE_STATUSBAR"
     bindsym o                exec --no-startup-id "spotifycli --next"; exec "$UPDATE_STATUSBAR"
     bindsym p                exec --no-startup-id "spotifycli --prev"; exec "$UPDATE_STATUSBAR"
