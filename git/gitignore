@@ -11,3 +11,6 @@
 .ensime
 .ensime_cache
 sftp-config.json
+
+# compiled source
+*.class
