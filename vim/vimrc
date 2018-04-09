@@ -271,6 +271,7 @@ let g:VimuxHeight = "50"
 let g:VimuxOrientation = "h"
 let VimuxUseNearest = 1
 nnoremap <Leader>bo         :VimuxRunCommand ""<Left>
+nnoremap <Leader>bv         :call MakeWithVimux("")<Left><Left>
 nnoremap <Leader>bf         :VimuxRunCommand " " . expand('%')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 nnoremap <Leader>bb         :update<CR>:VimuxRunLastCommand<CR>
 nnoremap <Leader>bl         :VimuxRunCommand "clear"<CR>
