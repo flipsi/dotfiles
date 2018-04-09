@@ -1976,6 +1976,9 @@ set nojoinspaces
 " allow <BS> to delete everything
 set backspace=indent,eol,start
 
+" when incrementing numbers with leading zeros, don't interpret them as octal
+set nrformats-=octal
+
 " allow to :edit multiple files in buffers without writing changes
 set hidden
 
