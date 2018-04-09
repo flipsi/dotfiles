@@ -3528,10 +3528,10 @@ augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
     autocmd filetype gitcommit normal gg
 augroup END
 
-augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
+augroup FILETYPE_SPECIFIC_SETTINGS_JSON
     autocmd!
     autocmd! FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
-augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
+augroup END
 
 
 " default textwidth
