@@ -453,7 +453,8 @@ omap ah <Plug>GitGutterTextObjectOuterPending
 xmap ih <Plug>GitGutterTextObjectInnerVisual
 xmap ah <Plug>GitGutterTextObjectOuterVisual
 
-nnoremap <C-G>g       :GitGutterToggle<CR>
+nnoremap <C-G>G       :GitGutterToggle<CR>
+nnoremap <C-G>g       :GitGutter<CR> " redraw
 nnoremap <Leader>gg gg:GitGutterNextHunk<CR>ztzv
 nnoremap <Leader>gG  G:GitGutterPrevHunk<CR>ztzv
 nnoremap <Leader>gn   :GitGutterNextHunk<CR>ztzv
