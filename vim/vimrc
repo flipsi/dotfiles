@@ -1419,8 +1419,8 @@ Plugin 'Chiel92/vim-autoformat'
 " - js-beautify (for HTML, CSS, JavaScript, JSON)
 " - scalafmt (for scala)
 
-nnoremap -af :Autoformat<CR>:GitGutterEnable<CR>
-vnoremap -af :Autoformat<CR>:GitGutterEnable<CR>
+nnoremap -af :Autoformat<CR>:GitGutter<CR>
+vnoremap -af :Autoformat<CR>:GitGutter<CR>
 nmap <Leader>af -af
 vmap <Leader>af -af
 
@@ -2172,17 +2172,6 @@ function! GetBufferList()
   return buflist
 endfunction
 " }}}
-
-
-
-" redraw the screen in case some git things don't keep up with shit {{{
-function! GitRedraw()
-    if exists(':GitGutterAll') == 2
-        GitGutterAll
-    endif
-endfunction
-" }}}
-
 
 
 " toggle quickfix or location list {{{
@@ -3454,9 +3443,8 @@ nnoremap <Leader>ir :call RangerChooser(expand('%:p:h'))<CR>
 nnoremap <Leader>iR :RangerChooser<CR>
 
 " git interface in working dir or dir of current file
-nnoremap <Leader>it :!tig status <CR> :call GitRedraw()<CR>
-nnoremap <Leader>iT :execute '!cd ' . expand('%:p:h') . '; tig status'<CR>
-                                    \ :call GitRedraw()<CR>
+nnoremap <Leader>it :!tig status <CR><CR>
+nnoremap <Leader>iT :execute '!cd ' . expand('%:p:h') . '; tig status'<CR><CR>
 
 " insert google contacts with name and mail addresses (with goobook)
 nnoremap <Leader>igm         :r!goobook-query-mail.sh<space>
