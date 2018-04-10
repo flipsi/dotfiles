@@ -490,7 +490,7 @@ for_window [class="(?i)chrom" instance="crx_lgeboohgcoglieeoikhidodnmdfcalmh"] m
 for_window [class="(?i)chrom" instance="crx_elofdcljcpfajijdjlcbjclkdggnklhg"] move to workspace    Inbox
 assign [class="(?i)jetbrains-idea"]                                                                 IntelliJ
 for_window [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"] move to workspace    Kalender
-for_window [class="(?i)chrom" instance="crx_hjpceadhnpnpdelkidbjdmoodafopfkp"] move to workspace    Kalender
+for_window [class="(?i)chrom" instance="crx_nkciffeafpjoepmgjbjnckchbgfjnjhp"] move to workspace    Kalender
 assign [class="gnome-calendar"]                                                                     Kalender
 assign [class="(?i)thunderbird"]                                                                    Mail
 for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] move to workspace    Netflix
