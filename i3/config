@@ -408,8 +408,8 @@ mode "$spotify_control" {
     bindsym o                exec --no-startup-id "spotifycli --next"; exec "$UPDATE_STATUSBAR"
     bindsym p                exec --no-startup-id "spotifycli --prev"; exec "$UPDATE_STATUSBAR"
     bindsym O                exec --no-startup-id "spotifycli --prev"; exec "$UPDATE_STATUSBAR"
-    bindsym minus            exec --no-startup-id "spotifycli --volumeup"
-    bindsym plus             exec --no-startup-id "spotifycli --volumedown"
+    bindsym plus             exec --no-startup-id "spotifycli --volumeup"
+    bindsym minus            exec --no-startup-id "spotifycli --volumedown"
     # cancel
     bindsym $mod+0 mode "default"
     bindsym Return mode "default"
