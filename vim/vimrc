@@ -1577,7 +1577,10 @@ augroup php_on_read
     au FileType php call SetupPHP()
 augroup END
 function! SetupPHP()
-    nnoremap <Leader>btt  :call VimuxRunCommand("composer test")<CR>
+    nnoremap <Leader>bi  :call VimuxRunCommand("composer install")<CR>
+    nnoremap <Leader>bu  :call VimuxRunCommand("composer update")<CR>
+    nnoremap <Leader>btt :call VimuxRunCommand("composer test")<CR>
+    nnoremap <Leader>btu :call VimuxRunCommand("composer test")<CR>
 endfunction
 
 
