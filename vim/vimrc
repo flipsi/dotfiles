@@ -1001,6 +1001,8 @@ let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \}
 
+let g:ale_python_pylint_options = '--rcfile $HOME/.vim/config/pylint.rc'
+
 nnoremap <silent> <Leader>sc :ALELint<CR>
 nnoremap <silent> <Leader>sn :ALENext<CR>
 nnoremap <silent> <Leader>sN :ALEPrevious<CR>
