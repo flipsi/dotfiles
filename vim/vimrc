@@ -3533,10 +3533,12 @@ augroup END
 augroup auto_textwidth
     autocmd!
     autocmd FileType dockerfile      set textwidth=100 | call SetColorColumn('on')
+    autocmd FileType gitcommit       set textwidth=50  | call SetColorColumn('on')
     autocmd FileType markdown        set textwidth=100 | call SetColorColumn('on')
     autocmd FileType php             set textwidth=120 | call SetColorColumn('on')
     autocmd FileType scala           set textwidth=120 | call SetColorColumn('on')
-    autocmd FileType gitcommit       set textwidth=50  | call SetColorColumn('on')
+    autocmd FileType sh              set textwidth=100 | call SetColorColumn('on')
+    autocmd FileType sql             set textwidth=80  | call SetColorColumn('on')
 augroup END
 
 
