@@ -1,0 +1,146 @@
+" ideavimrc - a vimrc for IntelliJ IDEA
+
+set vim-surround
+
+set incsearch
+set ignorecase
+set smartcase
+
+set number
+set relativenumber
+
+set scrolloff=5
+set sidescrolloff=5
+set sidescroll=1
+
+
+let mapleader = " "
+
+nnoremap <F5> :source ~/.ideavimrc<cr>
+
+nnoremap <bs> :action HideActiveWindow<cr>
+
+inoremap jk <c-c>
+
+nnoremap <silent> <c-g>l :set relativenumber! <cr>
+
+nnoremap <a-j> 15<c-e>
+nnoremap <a-k> 15<c-y>
+
+noremap gj 10j
+noremap gk 10k
+
+nnoremap ö /
+nnoremap / :action Find<cr>
+
+nnoremap vv V
+vnoremap v <c-c>
+
+nnoremap <C-c><C-c>     :action EditorCopy<cr>
+nnoremap <leader><c-v>  :action EditorPaste<cr>
+nnoremap <c-v><c-v>     :action EditorPasteFromX11<cr>
+
+nnoremap <c-a> ^
+vnoremap <c-a> ^
+onoremap <c-a> ^
+nnoremap <c-e> $
+vnoremap <c-e> $
+onoremap <c-e> $
+inoremap <c-e> <End>
+cnoremap <c-a> <Home>
+
+nnoremap dl d$
+nnoremap cl c$
+nnoremap yl y$
+nnoremap ch cl
+nnoremap yh yl
+
+" yank/delete line without line break (in difference to yy/dd)
+nnoremap Y ^y$
+nnoremap D 0d$j
+
+vnoremap < <gv
+vnoremap > >gv
+
+" select last pasted/edited text
+nnoremap gV `[v`]
+
+" change case of word under cursor
+nnoremap cC viw~
+" split line (opposite of 'J'oin lines)
+" (regular 'S' can be done with 'cc' instead)
+nnoremap S i<CR><esc>
+            \ ^mq
+            \ :let searchregister=@/<CR>
+            \ :silent! .-1s/\v +$//<CR>:nohlsearch<CR>
+            \ :let @/=searchregister<CR>
+            \ `q
+
+" duplicate code
+nnoremap -uu yyp
+nnoremap -ul yyp
+nnoremap -up yap<S-}>p
+vnoremap -u yP
+
+nnoremap -as mno<Esc>o<Esc>o<Esc>o<Esc>`n
+
+nnoremap <c-g>+             :action EditorIncreaseFontSize<cr>
+nnoremap <c-g>-             :action EditorDecreaseFontSize<cr>
+
+nnoremap <leader>.          :action JumpToLastChange<cr>
+nnoremap <down>             :action VcsShowNextChangeMarker<cr>
+nnoremap <up>               :action VcsShowPrevChangeMarker<cr>
+nnoremap <right>            :action GotoNextError<cr>
+nnoremap <left>             :action GotoPreviousError<cr>
+
+nnoremap <leader>w          :action SaveDocument<cr>
+nnoremap <leader>qq         :action CloseContent<cr>
+nnoremap <leader>qa         :action CloseAllEditors<cr>
+nnoremap <leader><bs>       :action CloseContent<cr>
+
+nnoremap <a-u>              :action VimUndo<cr>
+nnoremap <a-s-u>            :action VimRedo<cr>
+
+nnoremap <leader>te         :action ActivateProjectToolWindow<cr>
+nnoremap <leader>tr         :action ActivateRunToolWindow<cr>
+nnoremap <leader>tt         :action ActivateTerminalToolWindow<cr>
+nnoremap <leader>if         :action ActivateTerminalToolWindow<cr>
+nnoremap <leader>tb         :action Activatesbt-shell-toolwindowToolWindow<cr>
+nnoremap <leader>ts         :action ShowSettings<cr>
+
+nnoremap #                  :action SearchEverywhere<cr>
+nnoremap <leader>#          :action SearchEverywhere<cr>
+nnoremap <leader>ec         :action GotoClass<cr>
+nnoremap <leader>es         :action GotoSymbol<cr>
+nnoremap <leader>ef         :action GotoFile<cr>
+nnoremap <leader>ea         :action GotoAction<cr>
+
+nnoremap <leader>ji         :action GotoImplementation<cr>
+nnoremap <leader>js         :action GotoSuperMethod<cr>
+nnoremap <leader>jd         :action GotoDeclaration<cr>
+nnoremap <leader>jt         :action GotoTest<cr>
+nnoremap <leader>jr         :action GotoRelated<cr>
+
+nnoremap <leader>*          :action ShowUsages<cr>
+nnoremap <leader>su         :action ShowUsages<cr>
+nnoremap <leader>fu         :action FindUsages<cr>
+nnoremap <leader>ö          :action FindInPath<cr>
+
+nnoremap <leader>gb         :action Annotate<cr>
+
+nnoremap <leader>c<leader>  :action CommentByLineComment<cr>
+
+nnoremap <leader>af         :action ReformatCode<cr>
+nnoremap <leader>ai         :action OptimizeImports<cr>
+
+nnoremap <leader>rf         :action RenameElement<cr>
+nnoremap <leader>rn         :action RenameFile<cr>
+
+nnoremap <leader>bp         :action ToggleLineBreakpoint<cr>
+nnoremap <leader>br         :action Run<cr>
+nnoremap <leader>bR         :action ChooseRunConfiguration<cr>
+nnoremap <leader>bc         :action RunClass<cr>
+nnoremap <leader>bd         :action Debug<cr>
+nnoremap <leader>bD         :action ChooseDebugConfiguration<cr>
+nnoremap <leader>bb         :action Rerun<cr>
+

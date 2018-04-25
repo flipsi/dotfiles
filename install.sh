@@ -35,6 +35,7 @@ SUPPORTED_TARGETS=(\
     ghci \
     git \
     i3 \
+    intellij\
     kitty \
     konsole \
     lesskey \
@@ -195,6 +196,10 @@ function create_link_for_target() {
             create_link "$PWD/i3/config" "$HOME/.i3/config"
             # create_link "$PWD/i3/i3status" "$HOME/.i3/i3status"
             create_link "$PWD/i3/i3pystatus" "$HOME/.i3/i3pystatus"
+            ;;
+
+        intellij )
+            create_link "$PWD/intellij/ideavimrc" "$HOME/.ideavimrc"
             ;;
 
         kitty )
