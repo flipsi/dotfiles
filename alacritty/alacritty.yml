@@ -119,14 +119,14 @@ colors:
 
   # Normal colors
   normal:
-    black:   '0x000000'
+    black:   '0x1D2021'
     red:     '0xCC241D'
     green:   '0x98971A'
     yellow:  '0xD79921'
     blue:    '0x458588'
-    magenta: '0xc397d8'
-    cyan:    '0x70c0ba'
-    white:   '0xffffff'
+    magenta: '0xB16286'
+    cyan:    '0x458588'
+    white:   '0xFBF1C7'
 
   # Bright colors
   bright:
@@ -135,8 +135,8 @@ colors:
     green:   '0xB8BB26'
     yellow:  '0xFABD2F'
     blue:    '0x83A598'
-    magenta: '0xb77ee0'
-    cyan:    '0x54ced6'
+    magenta: '0xD3869B'
+    cyan:    '0x83A598'
     white:   '0xffffff'
 
   # Dim colors (Optional)
