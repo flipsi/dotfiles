@@ -105,11 +105,11 @@ render_timer: false
 # and cursor.background colors, otherwise invert the colors of the cursor.
 custom_cursor_colors: false
 
-# Colors (Tomorrow Night Bright)
+# Colors
 colors:
   # Default colors
   primary:
-    background: '0x000000'
+    background: '0x242424'
     foreground: '0xeaeaea'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
@@ -120,10 +120,10 @@ colors:
   # Normal colors
   normal:
     black:   '0x000000'
-    red:     '0xd54e53'
-    green:   '0xb9ca4a'
-    yellow:  '0xe6c547'
-    blue:    '0x7aa6da'
+    red:     '0xCC241D'
+    green:   '0x98971A'
+    yellow:  '0xD79921'
+    blue:    '0x458588'
     magenta: '0xc397d8'
     cyan:    '0x70c0ba'
     white:   '0xffffff'
@@ -131,10 +131,10 @@ colors:
   # Bright colors
   bright:
     black:   '0x666666'
-    red:     '0xff3334'
-    green:   '0x9ec400'
-    yellow:  '0xe7c547'
-    blue:    '0x7aa6da'
+    red:     '0xFB4934'
+    green:   '0xB8BB26'
+    yellow:  '0xFABD2F'
+    blue:    '0x83A598'
     magenta: '0xb77ee0'
     cyan:    '0x54ced6'
     white:   '0xffffff'
