@@ -25,6 +25,7 @@ EOF
 
 
 SUPPORTED_TARGETS=(\
+    alacritty \
     autostart \
     bash \
     cmus \
@@ -125,6 +126,11 @@ function create_link() {
 function create_link_for_target() {
     local TARGET="$1"
     case "$TARGET" in
+
+        alacritty )
+            mkdir -p "$HOME/.config/alacritty"
+            create_link "$PWD/alacritty/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
+            ;;
 
         autostart )
             mkdir -p "$HOME/bin"

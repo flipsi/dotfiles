@@ -508,9 +508,10 @@ assign [class="(?i)mediathek"]                                                  
 for_window [class="(?i)chrom" instance="crx_mldpchjnjlkioecpffkohnhjlgbkcfkf"] move to workspace    TV
 for_window [class="Spotify"] move to workspace                                                      Spotify
 assign [class="Telegram"]                                                                           Telegram
+assign [class="(?i)alacritty"]                                                                      Terminal
+assign [class="(?i)cool-retro-term"]                                                                Terminal
 assign [class="(?i)gnome-terminal"]                                                                 Terminal
 assign [class="(?i)urxvt"]                                                                          Terminal
-assign [class="(?i)cool-retro-term"]                                                                Terminal
 for_window [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"] move to workspace    Trello
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] move to workspace    Trello
 assign [class="(?i)pale moon"]                                                                      Web
@@ -547,10 +548,12 @@ workspace_layout stacked
 
 # start a terminal
 bindsym $mod+o mode "$terminal"
-set $terminal Open a terminal: (o) default (u) urxvt (k) konsole (i) kitty (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
+set $terminal Open a terminal: (o) default (a) alacritty (u) urxvt (k) konsole (i) kitty (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
 mode "$terminal" {
     bindsym o       exec --no-startup-id "gnome-terminal --hide-menubar -- tmux -2 new-session -A -s main"; mode "default"
     bindsym $mod+o  exec --no-startup-id "gnome-terminal --hide-menubar -- tmux -2 new-session -A -s main"; mode "default"
+    bindsym a       exec --no-startup-id "alacritty --command tmux -2 new-session -A -s main"; mode "default"
+    bindsym Shift+a exec --no-startup-id "alacritty"; mode "default"
     bindsym u       exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
     bindsym Shift+u exec --no-startup-id "urxvt"; mode "default"
     bindsym k       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower -e 'tmux -2 new-session -A -s main'"; mode "default"
