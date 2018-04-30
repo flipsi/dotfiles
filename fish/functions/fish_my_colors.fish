@@ -17,7 +17,7 @@ function fish_my_colors
         set gray_245       "#928374"
         set gray_244       "#928374"
 
-        set light0_hard    "#FB4934"
+        set light0_hard    "#F9F5D7"
         set light0         "#FBF1C7"
         set light0_soft    "#F2E5BC"
         set light1         "#EBDBB2"
