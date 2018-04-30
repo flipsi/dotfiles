@@ -37,8 +37,9 @@ nnoremap vv V
 vnoremap v <c-c>
 
 nnoremap <C-c><C-c>     :action EditorCopy<cr>
-nnoremap <leader><c-v>  :action EditorPaste<cr>
-nnoremap <c-v><c-v>     :action EditorPasteFromX11<cr>
+nnoremap <leader><c-v>  :action EditorPasteFromX11<cr>
+nnoremap <c-v><c-v>     :action EditorPaste<cr>
+inoremap <c-v><c-v>     :action EditorPaste<cr>
 
 nnoremap <c-a> ^
 vnoremap <c-a> ^
@@ -62,6 +63,13 @@ nnoremap D 0d$j
 vnoremap < <gv
 vnoremap > >gv
 
+" move line up or down
+" (:m closes folds https://groups.google.com/forum/#!topic/vim_dev/QGgbjv4uyZc)
+nnoremap <silent> -k :set fdm=manual<CR>:m .-2<CR>:set fdm=marker<CR>
+nnoremap <silent> -j :set fdm=manual<CR>:m .+1<CR>:set fdm=marker<CR>
+vnoremap <silent> -j <Esc>:set fdm=manual<CR>gv:m '>+1<CR>gv=gv:set fdm=marker<CR>
+vnoremap <silent> -k <Esc>:set fdm=manual<CR>gv:m '<-2<CR>gv=gv:set fdm=marker<CR>
+
 " select last pasted/edited text
 nnoremap gV `[v`]
 
@@ -82,6 +90,7 @@ nnoremap -ul yyp
 nnoremap -up yap<S-}>p
 vnoremap -u yP
 
+nnoremap K o<c-c>k
 nnoremap -as mno<Esc>o<Esc>o<Esc>o<Esc>`n
 
 nnoremap <c-g>+             :action EditorIncreaseFontSize<cr>
@@ -108,6 +117,8 @@ nnoremap <leader>if         :action ActivateTerminalToolWindow<cr>
 nnoremap <leader>tb         :action Activatesbt-shell-toolwindowToolWindow<cr>
 nnoremap <leader>ts         :action ShowSettings<cr>
 
+nnoremap <leader><leader>   :action Switcher<cr>
+
 nnoremap #                  :action SearchEverywhere<cr>
 nnoremap <leader>#          :action SearchEverywhere<cr>
 nnoremap <leader>ec         :action GotoClass<cr>
@@ -130,7 +141,8 @@ nnoremap <leader>gb         :action Annotate<cr>
 
 nnoremap <leader>c<leader>  :action CommentByLineComment<cr>
 
-nnoremap <leader>af         :action ReformatCode<cr>
+" nnoremap <leader>af         :action ReformatCode<cr>
+nnoremap <leader>af         :action ScalaFmtFormat<cr>
 nnoremap <leader>ai         :action OptimizeImports<cr>
 
 nnoremap <leader>rf         :action RenameElement<cr>
