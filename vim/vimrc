@@ -1697,20 +1697,20 @@ function! SetupScala()
                 " \%E\ \%#[info]\ %.%#\ was\ not\ equal\ to\ %.%#\ (%f:%l),%Z,
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
-    nnoremap <Leader>bd  :call MakeWithVimux("set TERM xterm-color; sbt compile")<CR>
-    nnoremap <Leader>bs  :call MakeWithVimux("set TERM xterm-color; sbt run")<CR>
-    nnoremap <Leader>btt :call MakeWithVimux("set TERM xterm-color; sbt test it:test")<CR>
-    nnoremap <Leader>btu :call MakeWithVimux("set TERM xterm-color; sbt test")<CR>
-    nnoremap <Leader>bti :call MakeWithVimux("set TERM xterm-color; sbt it:test")<CR>
-    nnoremap <Leader>bto :call MakeWithVimux("set TERM xterm-color; sbt '". CalculateSbtTestOnlyCommand() . "'")<CR>
-    nnoremap <Leader>bx  :call MakeWithVimux("set TERM xterm-color; sbt clean")<CR>
-    nnoremap <Leader>br  :call MakeWithVimux("set TERM xterm-color; sbt console")<CR>
+    nnoremap <Leader>bd  :call MakeWithVimux("sbt compile")<CR>
+    nnoremap <Leader>bs  :call MakeWithVimux("sbt run")<CR>
+    nnoremap <Leader>btt :call MakeWithVimux("sbt test it:test")<CR>
+    nnoremap <Leader>btu :call MakeWithVimux("sbt test")<CR>
+    nnoremap <Leader>bti :call MakeWithVimux("sbt it:test")<CR>
+    nnoremap <Leader>bto :call MakeWithVimux("sbt '". CalculateSbtTestOnlyCommand() . "'")<CR>
+    nnoremap <Leader>bx  :call MakeWithVimux("sbt clean")<CR>
+    nnoremap <Leader>br  :call MakeWithVimux("sbt console")<CR>
     nnoremap <Leader>bD  :call VimuxRunCommand("sbt compile")<CR>
     nnoremap <Leader>bS  :call VimuxRunCommand("sbt run")<CR>
     nnoremap <Leader>btT :call VimuxRunCommand("sbt test it:test")<CR>
     nnoremap <Leader>btU :call VimuxRunCommand("sbt test")<CR>
     nnoremap <Leader>btI :call VimuxRunCommand("sbt it:test")<CR>
-    nnoremap <Leader>btO :call VimuxRunCommand("set TERM xterm-color; sbt '". CalculateSbtTestOnlyCommand() . "'")<CR>
+    nnoremap <Leader>btO :call VimuxRunCommand("sbt '". CalculateSbtTestOnlyCommand() . "'")<CR>
     nnoremap <Leader>bE  :call MakeWithVimuxOpenErrors('buffer')<CR>gg/\*\*\* FAILED \*\*\*<CR>
     nnoremap <Leader>fe  /\*\*\* FAILED \*\*\*<CR>
 endfunction
