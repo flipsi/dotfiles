@@ -1714,6 +1714,7 @@ function! SetupScala()
     nnoremap <Leader>bE  :call MakeWithVimuxOpenErrors('buffer')<CR>gg/\*\*\* FAILED \*\*\*<CR>
     nnoremap <Leader>fe  /\*\*\* FAILED \*\*\*<CR>
 endfunction
+command! -bang SetupScala :call SetupScala()
 
 function! CalculateSbtTestOnlyCommand()
     let lines_that_match_package = GetMatches('^package.*', 1, line('$'))
