@@ -276,7 +276,7 @@ nnoremap <Leader>bf         :VimuxRunCommand " " . expand('%')<Left><Left><Left>
 nnoremap <Leader>bb         :update<CR>:VimuxRunLastCommand<CR>
 nnoremap <Leader>bl         :VimuxRunCommand "clear"<CR>
 nnoremap <Leader>bq         :VimuxCloseRunner<CR>
-nnoremap <Leader>bx         :VimuxCloseRunner<CR>
+nnoremap <Leader>b<BS>      :VimuxCloseRunner<CR>
 nnoremap <Leader>bz         :call VimuxZoomRunner()<CR>
 nnoremap <Leader>bc         :VimuxInterruptRunner<CR>
 nnoremap <Leader>b<C-c>     :VimuxInterruptRunner<CR>
