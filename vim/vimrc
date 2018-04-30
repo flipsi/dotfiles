@@ -1702,8 +1702,15 @@ function! SetupScala()
     nnoremap <Leader>btt :call MakeWithVimux("set TERM xterm-color; sbt test it:test")<CR>
     nnoremap <Leader>btu :call MakeWithVimux("set TERM xterm-color; sbt test")<CR>
     nnoremap <Leader>bti :call MakeWithVimux("set TERM xterm-color; sbt it:test")<CR>
-    nnoremap <Leader>bto :call MakeWithVimux("set TERM xterm-color; " . CalculateSbtTestOnlyCommand())<CR>
+    nnoremap <Leader>bto :call MakeWithVimux("set TERM xterm-color; sbt '". CalculateSbtTestOnlyCommand() . "'")<CR>
+    nnoremap <Leader>bx  :call MakeWithVimux("set TERM xterm-color; sbt clean")<CR>
     nnoremap <Leader>br  :call MakeWithVimux("set TERM xterm-color; sbt console")<CR>
+    nnoremap <Leader>bD  :call VimuxRunCommand("sbt compile")<CR>
+    nnoremap <Leader>bS  :call VimuxRunCommand("sbt run")<CR>
+    nnoremap <Leader>btT :call VimuxRunCommand("sbt test it:test")<CR>
+    nnoremap <Leader>btU :call VimuxRunCommand("sbt test")<CR>
+    nnoremap <Leader>btI :call VimuxRunCommand("sbt it:test")<CR>
+    nnoremap <Leader>btO :call VimuxRunCommand("set TERM xterm-color; sbt '". CalculateSbtTestOnlyCommand() . "'")<CR>
     nnoremap <Leader>bE  :call MakeWithVimuxOpenErrors('buffer')<CR>gg/\*\*\* FAILED \*\*\*<CR>
     nnoremap <Leader>fe  /\*\*\* FAILED \*\*\*<CR>
 endfunction
@@ -1718,7 +1725,7 @@ function! CalculateSbtTestOnlyCommand()
     let package  = substitute(lines_that_match_package[0], '^package\s\+\(\w\+\)', '\1', '')
     let class    = substitute(lines_that_match_class[0], '^class\s\+\(\w\+\).*', '\1', '')
     let itPrefix = match(@%, '.*/it/.*') == -1 ? '' : 'it:'
-    return "sbt '" . itPrefix . "testOnly " . package . "." . class . "'"
+    return itPrefix . "testOnly " . package . "." . class
 endfunction
 
 " augroup scala_on_write
