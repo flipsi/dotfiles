@@ -31,6 +31,7 @@ abbr glh    git --no-pager log -n 1
 abbr gli    git --no-pager log -n 1 \| head -n 1 \| cut -d\" \" -f2 \| xsel --clipboard
 abbr gpp    git pull
 abbr gpu    git push
+abbr gpuf   git push --force-with-lease
 abbr gpuu   git push -u \(git remote \| head -n1\) \(git rev-parse --abbrev-ref HEAD\)
 abbr gr     grep --with-filename --line-number --recursive --ignore-case --extended-regexp
 abbr gs     tig status
