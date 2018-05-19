@@ -10,11 +10,11 @@ set main-view = line-number:no,interval=5 id:yes author:full date:default commit
 
 
 # look
-color cursor                white       color237
+color cursor                white       color243
 color header                color167    default
 color title-blur            color106    color236
 color title-focus           color106    color236    bold
-color section               color172    color236
+color section               color172    default
 color status                color167    default
 color search-result         black       color106
 color diff-stat             color66     default
