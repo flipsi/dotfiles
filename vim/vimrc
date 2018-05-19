@@ -2013,7 +2013,7 @@ if s:MyMode == 'mastery'
 
     " DARK THEMES
 
-    set background=dark
+    " set background=dark
 
     " colorscheme apprentice
     " colorscheme badwolf
@@ -2022,7 +2022,7 @@ if s:MyMode == 'mastery'
     " colorscheme candycode
     " colorscheme dante
     " colorscheme desertEx
-    colorscheme gruvbox
+    " colorscheme gruvbox
     " colorscheme iceberg
     " colorscheme jellybeans
     " colorscheme luna-term
@@ -2036,11 +2036,12 @@ if s:MyMode == 'mastery'
     " colorscheme up
     " colorscheme woju
 
-    let g:airline_theme='base16'
+    " let g:airline_theme='base16'
     " let g:airline_theme='base16_summerfruit'
     " let g:airline_theme='base16_grayscale'
     " let g:airline_theme='behelit'
     " let g:airline_theme='distinguished'
+    " let g:airline_theme='gruvbox'
     " let g:airline_theme='kalisi'
     " let g:airline_theme='laederon'
     " let g:airline_theme='lucius'
@@ -2055,9 +2056,26 @@ if s:MyMode == 'mastery'
     let g:indentLine_setColors = 1
     let g:indentLine_color_term = 236
 
-    highlight CursorLine              ctermbg=236 cterm=NONE
-    highlight CursorColumn            ctermbg=236
-    highlight ColorColumn             ctermbg=237
+    " LIGHT THEMES
+
+    set background=light
+
+    colorscheme gruvbox
+    " colorscheme lucius
+    " colorscheme peaksea
+    " colorscheme seoul256-light
+    " colorscheme Tomorrow-Night
+
+    let g:airline_theme='base16'
+    " let g:airline_theme='bubblegum'
+    " let g:airline_theme='lucius'
+    " let g:airline_theme='sol'
+
+    " FIXES
+
+    " highlight CursorLine              ctermbg=236 cterm=NONE
+    " highlight CursorColumn            ctermbg=236
+    " highlight ColorColumn             ctermbg=237
     highlight DiffAdd                 ctermbg=234
     highlight DiffDelete              ctermbg=234
     highlight DiffChange              ctermbg=234
@@ -2065,38 +2083,20 @@ if s:MyMode == 'mastery'
     highlight ShowTrailingWhitespace  ctermbg=235
     highlight VertSplit               ctermfg=238
     highlight Folded                  ctermfg=238 ctermfg=248
-    highlight LineNr                  ctermbg=237 ctermfg=243
+    " highlight LineNr                  ctermbg=237 ctermfg=243
     " highlight SignColumn              ctermbg=237
     " highlight GitGutterAdd            ctermbg=235
     " highlight GitGutterChange         ctermbg=235
     " highlight GitGutterDelete         ctermbg=235
     " highlight GitGutterChangeDelete   ctermbg=235
     highlight Conceal                 ctermbg=237
-    " highlight Search                  ctermbg=237 ctermfg=white
+    highlight Search                  ctermbg=237 ctermfg=white
     highlight Error                   ctermbg=162
     highlight Todo                    ctermfg=132
     highlight EasyMotionTarget        ctermfg=72
     highlight EasyMotionTarget2First  ctermfg=72
     highlight EasyMotionTarget2Second ctermfg=108
 
-
-    " LIGHT THEMES
-
-    " set background=light
-
-    " colorscheme lucius
-    " colorscheme peaksea
-    " colorscheme seoul256-light
-    " colorscheme Tomorrow-Night
-
-    " let g:airline_theme='bubblegum'
-    " let g:airline_theme='lucius'
-    " let g:airline_theme='sol'
-
-    " highlight CursorLine   ctermbg=252
-    " highlight CursorColumn ctermbg=252
-    " highlight ColorColumn  ctermbg=250
-    " highlight ShowTrailingWhitespace ctermbg=250
 
 else
 
@@ -2847,7 +2847,7 @@ nnoremap <silent> <C-G>w :setlocal wrap! <bar> :set wrap? <CR>
 
 " toggle vertical ruler
 nnoremap <silent> <C-G>r :call SetColorColumn('toggle')<CR>
-nnoremap <silent> <C-G>R :highlight ColorColumn ctermbg=235
+nnoremap <silent> <C-G>R :highlight ColorColumn ctermbg=248
                   \ <Bar> highlight clear BGdd8844
                   \ <Bar> highlight clear BG000000
                   \ <Bar> highlight clear BGffa724
