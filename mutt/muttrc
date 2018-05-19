@@ -134,12 +134,10 @@ set sidebar_visible = yes
 # set sidebar_sort = no
 # set sidebar_format = "%B [%N/%S]"
 # set sidebar_delim   = '  │'
-color sidebar_new   color241        color233
 
 
-# source $my_muttdir/colors/old_yellowish
-source $my_muttdir/colors/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc
-# source $my_muttdir/colors/badwolf.muttrc
+source $my_muttdir/colors/mutt-colors-solarized/mutt-colors-solarized-light-256-chbrauner.muttrc
+
 
 
 
