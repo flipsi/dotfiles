@@ -78,7 +78,7 @@ class Default(ColorScheme):
                 fg = self.GRUVBOX_BRIGHT_RED
             if context.directory:
                 attr |= bold
-                fg = self.GRAY_MIDDLE
+                fg = self.GRUVBOX_DARK2
             elif context.executable and not \
                     any((context.media, context.container,
                         context.fifo, context.socket)):
@@ -92,7 +92,7 @@ class Default(ColorScheme):
                 if context.device:
                     attr |= bold
             if context.link:
-                fg = context.good and self.GRUVBOX_LIGHT1 or self.GRUVBOX_NEUTRAL_PURPLE
+                fg = context.good and self.GRUVBOX_LIGHT4 or self.GRUVBOX_NEUTRAL_PURPLE
             if context.tag_marker and not context.selected:
                 attr |= bold
                 if fg in (self.GRUVBOX_BRIGHT_RED, self.GRUVBOX_BRIGHT_PURPLE):
