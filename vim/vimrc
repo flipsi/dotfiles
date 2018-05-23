@@ -792,7 +792,9 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 nnoremap <Leader>fi :FzfFiles<CR>
 nnoremap <Leader>fl :FzfLocate<Space>
 nnoremap #          :FzfBuffers<CR>
+xnoremap #          <Esc>:FzfBuffers<CR>
 nnoremap <Leader>#  :FzfFiles<CR>
+xnoremap <Leader>#  <Esc>:FzfFiles<CR>
 nnoremap <Leader>eo :FzfGFiles<CR>
 nnoremap <Leader>eg :FzfGFiles?<CR>
 nnoremap <Leader>er :FzfHistory<CR>
