@@ -1263,6 +1263,7 @@ let g:toggle_words_dict = {
             \     ['add', 'remove'],
             \     ['and', 'or'],
             \     ['ascending', 'descending'],
+            \     ['authentication', 'authorization'],
             \     ['ASC', 'DESC'],
             \     ['begin', 'end'],
             \     ['big', 'little'],
