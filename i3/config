@@ -474,7 +474,6 @@ for_window [class="(?i)pokerstars"]     floating enable
 for_window [class="(?i)qjackctl"]       floating enable
 for_window [class="(?i)sxiv"]           fullscreen
 for_window [class="(?i)thunar"]         floating enable
-for_window [class="Telegram"]           fullscreen
 for_window [class="ssh-askpass"]        floating enable
 for_window [title="Print"]              floating enable
 for_window [window_role="(?i)vlc-main"] floating enable
