@@ -48,6 +48,11 @@ abbr l      less
 abbr ll     ls -lhF
 abbr lll    ls -lhFa
 abbr m      man
+abbr ma     make apply
+abbr mi     make init
+abbr mip    make init plan
+abbr mp     make plan
+abbr mpa    make plan apply
 abbr o      open
 abbr p      pass
 abbr pe     pass edit
