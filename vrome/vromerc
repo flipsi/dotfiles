@@ -33,6 +33,7 @@ set follow_new_tab=1
 set disable_autofocus
 
 " Disable Vrome in those sites
+set disablesites+=inbox.google.com
 set disablesites+=mail.google.com
 set disablesites+=reader.google.com
 
