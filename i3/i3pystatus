@@ -22,8 +22,7 @@ COLOR_RED     = "#FB4934";
 # Tue 30 Jul 11:59:46 PM KW31
 #                          ^-- calendar week
 status.register("clock",
-   # format = " %a %-d %b %X KW%V",)
-   format = "%a %d.%m.%Y %H:%M:%S ",
+   format = " %a %d.%m.%Y  %H:%M:%S ",
    on_leftclick = "xfce4-display-settings",
    on_rightclick = "xfce4-settings-manager",
    on_middleclick = "sudo poweroff",
@@ -56,9 +55,9 @@ status.register("battery",
     alert_format_body = "Der Saft wird langsam knapp!",
     alert_percentage = 15,
     status = {
-        "DIS": "DISCHARGING",
-        "CHR": "CHARGING",
-        "FULL": "FULL",
+        "DIS": "", # DISCHARGING
+        "CHR": "", # CHARGING
+        "FULL": "", # FULL
     },
     on_leftclick = "xfce4-power-manager-settings",
     color = COLOR_DEFAULT,
@@ -100,8 +99,8 @@ for iface in ifaces:
 status.register("network",
     interface = wifi_interface,
     #  format_up = " <span color=\"#199C25\">{essid}</span> {quality:03.0f}% ",
-    format_up = "{v4cidr} ({essid}) {quality:02.0f}%",
-    format_down = "WiFi down",
+    format_up = " {v4cidr} ({essid}) {quality:02.0f}%",
+    format_down = " down",
     dynamic_color = False,
     color_up = COLOR_DEFAULT,
     color_down = COLOR_RED,
@@ -111,7 +110,7 @@ status.register("network",
 
 status.register("network",
     interface = cable_interface,
-    format_up = "{v4cidr}",
+    format_up = " {v4cidr}",
     format_down = "",
     dynamic_color = False,
     color_up = COLOR_DEFAULT,
@@ -124,8 +123,8 @@ status.register("network",
 #      command = "fping -q -c1 -t900 8.8.8.8 && echo 'ONLINE ' || (echo 'OFFLINE ' && false)",
 #      interval = 9,
 status.register("online",
-    format_online = "ONLINE",
-    format_offline = "OFFLINE",
+    format_online = "",
+    format_offline = "",
     on_leftclick = "nm-applet",
     on_rightclick = "nm-connection-editor",
     on_middleclick = "pkill nm-applet",
@@ -144,7 +143,7 @@ status.register("disk",
 )
 status.register("disk",
    path = "/",
-   format = " DISK: {avail}G",
+   format = "  {avail}G",
    on_leftclick = "thunar",
    interval = 9,
    hints = { "separator" : False, "separator_block_width": 0} ,
@@ -153,7 +152,7 @@ status.register("disk",
 
 # Show memory usage
 status.register("mem",
-    format = "MEM: {percent_used_mem}%",
+    format = " {percent_used_mem}%",
     warn_percentage = 60,
     alert_percentage = 80,
     on_leftclick = "xfce4-terminal --execute htop",
@@ -178,7 +177,7 @@ status.register("temp",
 
 # Shows CPU usage
 status.register("cpu_usage",
-    format = "CPU: {usage}% ",
+    format = " {usage}% ",
     on_leftclick = "xfce4-terminal --execute htop",
     hints = { "separator" : False, "separator_block_width": 0} ,
     color = COLOR_DEFAULT,
@@ -203,7 +202,7 @@ status.register("cpu_usage",
 #
 # Note: requires libpulseaudio from PyPI
 status.register("pulseaudio",
-    format = " {volume}",
+    format = " {volume}",
     on_leftclick     = "pavucontrol",
     on_upscroll     = "amixer sset Master 1%+; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
     on_downscroll   = "amixer sset Master 1%-; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
@@ -254,6 +253,7 @@ status.register("shell",
 status.register("shell",
     command = """pgrep spotify > /dev/null && command -v spotifycli > /dev/null && 
                     spotifycli --status | 
+                    sed 's/^/  /' | 
                     sed '/spotify is off/d' || true""",
     interval = 8,
     on_leftclick    = "spotifycli --next; sleep 2; pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'",
