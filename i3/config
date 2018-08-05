@@ -480,41 +480,41 @@ for_window [window_role="(?i)vlc-main"] floating enable
 for_window [window_role="(?i)vlc-main"] resize set 750 450
 
 # windows always on specific workspace
-for_window [class="(?i)chrom" instance="crx_acmikcjocccblbiibfdfjkghclpmmpip"] move to workspace    Banking
-for_window [class="(?i)chrom" instance="crx_kddchekfnnagpejaneebcigegenogifj"] move to workspace    Banking
-assign [class="(?i)chrom"]                                                                          Chrome
-assign [class="(?i)filezilla"]                                                                      Filezilla
-assign [class="(?i)firefox"]                                                                        Fuchs
-for_window [class="(?i)chrom" instance="crx_afbjehlnjihfcebhifoapfibhcgakelg"] move to workspace    Github
-for_window [class="(?i)chrom" instance="crx_lgeboohgcoglieeoikhidodnmdfcalmh"] move to workspace    Handy
-for_window [class="(?i)chrom" instance="crx_elofdcljcpfajijdjlcbjclkdggnklhg"] move to workspace    Inbox
-assign [class="(?i)jetbrains-idea"]                                                                 IntelliJ
-for_window [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"] move to workspace    Kalender
-for_window [class="(?i)chrom" instance="crx_nkciffeafpjoepmgjbjnckchbgfjnjhp"] move to workspace    Kalender
-assign [class="gnome-calendar"]                                                                     Kalender
-assign [class="(?i)thunderbird"]                                                                    Mail
-for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] move to workspace    Netflix
-for_window [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"] move to workspace    Notes
-assign [class="(?i)pokerstars"]                                                                     Poker
-assign [class="(?i)audacity"]                                                                       Recording
-assign [class="(?i)ardour"]                                                                         Recording
-for_window [class="(?i)chrom" instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"] move to workspace    Signal
-assign [class="(?i)skype"]                                                                          Skype
-assign [class="(?i)slack"]                                                                          Slack
-assign [class="(?i)qjackctl"]                                                                       Sound
-assign [class="(?i)spotify"]                                                                        Spotify
-assign [class="(?i)kaffeine"]                                                                       TV
-assign [class="(?i)mediathek"]                                                                      TV
-for_window [class="(?i)chrom" instance="crx_mldpchjnjlkioecpffkohnhjlgbkcfkf"] move to workspace    TV
-for_window [class="Spotify"] move to workspace                                                      Spotify
-assign [class="Telegram"]                                                                           Telegram
-assign [class="(?i)alacritty"]                                                                      Terminal
-assign [class="(?i)cool-retro-term"]                                                                Terminal
-assign [class="(?i)gnome-terminal"]                                                                 Terminal
-assign [class="(?i)urxvt"]                                                                          Terminal
-for_window [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"] move to workspace    Trello
-for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] move to workspace    Trello
-assign [class="(?i)pale moon"]                                                                      Web
+for_window [class="(?i)chrom" instance="crx_acmikcjocccblbiibfdfjkghclpmmpip"] move to workspace    
+for_window [class="(?i)chrom" instance="crx_kddchekfnnagpejaneebcigegenogifj"] move to workspace    
+assign [class="(?i)chrom"]                                                                          
+assign [class="(?i)filezilla"]                                                                      
+assign [class="(?i)firefox"]                                                                        
+for_window [class="(?i)chrom" instance="crx_afbjehlnjihfcebhifoapfibhcgakelg"] move to workspace    
+for_window [class="(?i)chrom" instance="crx_lgeboohgcoglieeoikhidodnmdfcalmh"] move to workspace    
+for_window [class="(?i)chrom" instance="crx_elofdcljcpfajijdjlcbjclkdggnklhg"] move to workspace    
+assign [class="(?i)jetbrains-idea"]                                                                 
+for_window [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"] move to workspace    
+for_window [class="(?i)chrom" instance="crx_nkciffeafpjoepmgjbjnckchbgfjnjhp"] move to workspace    
+assign [class="gnome-calendar"]                                                                     
+assign [class="(?i)thunderbird"]                                                                    
+for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] move to workspace    
+for_window [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"] move to workspace    
+assign [class="(?i)pokerstars"]                                                                     
+assign [class="(?i)audacity"]                                                                       
+assign [class="(?i)ardour"]                                                                         
+for_window [class="(?i)chrom" instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"] move to workspace    
+assign [class="(?i)skype"]                                                                          
+assign [class="(?i)slack"]                                                                          
+assign [class="(?i)qjackctl"]                                                                       
+assign [class="(?i)spotify"]                                                                        
+assign [class="(?i)kaffeine"]                                                                       
+assign [class="(?i)mediathek"]                                                                      
+for_window [class="(?i)chrom" instance="crx_mldpchjnjlkioecpffkohnhjlgbkcfkf"] move to workspace    
+for_window [class="Spotify"] move to workspace                                                      
+assign [class="Telegram"]                                                                           
+assign [class="(?i)alacritty"]                                                                      
+assign [class="(?i)cool-retro-term"]                                                                
+assign [class="(?i)gnome-terminal"]                                                                 
+assign [class="(?i)urxvt"]                                                                          
+for_window [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"] move to workspace    
+for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] move to workspace    
+assign [class="(?i)pale moon"]                                                                      
 
 
 # kill specific apps (e.g. when memory really full again and the system hangs)
