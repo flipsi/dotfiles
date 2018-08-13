@@ -41,6 +41,9 @@ nnoremap <leader><c-v>  :action EditorPasteFromX11<cr>
 nnoremap <c-v><c-v>     :action EditorPaste<cr>
 inoremap <c-v><c-v>     <Esc>:action EditorPaste<cr>
 
+nnoremap Q @
+nnoremap QQ @@
+
 nnoremap <c-a> ^
 vnoremap <c-a> ^
 onoremap <c-a> ^
