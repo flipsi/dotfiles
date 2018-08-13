@@ -150,6 +150,8 @@ nnoremap <leader>ai         :action OptimizeImports<cr>
 
 nnoremap <leader>rf         :action RenameElement<cr>
 nnoremap <leader>rn         :action RenameFile<cr>
+nnoremap <leader>rp         :action Replace<cr>
+vnoremap <leader>rp         "+y:action Replace<cr> " still got to <c-v>
 
 nnoremap <leader>bp         :action ToggleLineBreakpoint<cr>
 nnoremap <leader>br         :action Run<cr>
