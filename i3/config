@@ -491,6 +491,7 @@ for_window [class="(?i)chrom" instance="crx_afbjehlnjihfcebhifoapfibhcgakelg"] m
 for_window [class="(?i)chrom" instance="crx_lgeboohgcoglieeoikhidodnmdfcalmh"] move to workspace    
 for_window [class="(?i)chrom" instance="crx_elofdcljcpfajijdjlcbjclkdggnklhg"] move to workspace    
 assign [class="(?i)jetbrains-idea"]                                                                 
+assign [class="(?i)jetbrains-phpstorm"]                                                             
 for_window [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"] move to workspace    
 for_window [class="(?i)chrom" instance="crx_nkciffeafpjoepmgjbjnckchbgfjnjhp"] move to workspace    
 assign [class="gnome-calendar"]                                                                     
