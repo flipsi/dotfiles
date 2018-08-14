@@ -884,6 +884,14 @@ noremap <silent> <Leader>tt :TagbarToggle<CR>
 
 
 
+" jump to definitions without relying on tags
+" Plugin 'misterbuckley/vim-definitive'
+Plugin 'sflip/vim-definitive'
+
+nnoremap <Leader>fd :FindDefinition<CR>
+
+
+
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " file management {{{
