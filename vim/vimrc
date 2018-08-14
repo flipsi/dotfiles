@@ -771,7 +771,7 @@ Plugin 'junegunn/fzf.vim'
 let g:fzf_command_prefix = 'Fzf'
 
 " layout [ down / up / left / right ]
-let g:fzf_layout = { 'down': '~20%' }
+let g:fzf_layout = { 'down': '~30%' }
 
 " extra interactive key bindings
 " (scroll with <C-k> and <C-j>
@@ -787,6 +787,12 @@ let g:fzf_action = {
 " (scroll through history with <C-p> and <C-n>)
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
+" override command to only match content (not filenames)
+command! -bang -nargs=* FzfAg
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+  \                         : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+  \                 <bang>0)
 
 " open files by name
 nnoremap <Leader>fi :FzfFiles<CR>
@@ -807,10 +813,10 @@ xnoremap <Leader>et y:FzfTags <C-R>"<CR>
 " type a search pattern
 nnoremap <Leader>ö :FzfAg<CR>
 " search for word under cursor
-nnoremap <Leader>+ :FzfAg <C-R><C-W><CR>
+nnoremap <Leader>+ :FzfAg! <C-R><C-W><CR>
 nmap     <Leader>* <Leader>+
 " search for visual selection
-xnoremap <Leader>ö y:<c-u>FzfAg <C-R>"<CR>
+xnoremap <Leader>ö y:<c-u>FzfAg! <C-R>"<CR>
 xmap     <Leader>* <Leader>ö
 xmap     <Leader>+ <Leader>ö
 
