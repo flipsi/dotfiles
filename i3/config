@@ -323,9 +323,10 @@ mode "$mode_x" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-set $mode_xdootool (b) bash with my bashrc
+set $mode_xdootool (b) bash with my bashrc (s) shrug
 mode "$mode_xdootool" {
     bindsym b exec --no-startup-id "xdotool type 'bbash --rcfile <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/bash/bashrc_sflip)'; xdotool key Return"; mode "default";
+    bindsym s exec --no-startup-id "xdotool type --delay 50 '     ¯\_(ツ)_/¯'"; mode "default";
     # cancel
     bindsym $mod+Escape mode "default"
     bindsym Return mode "default"
