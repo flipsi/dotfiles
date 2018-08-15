@@ -80,6 +80,20 @@ if status --is-interactive; and status --is-login
     set -x fish_command_timer_color        $fish_my_color_gray_middle
     set -x fish_command_timer_time_format  '%b %d %I:%M%p'
 
+    # show error exit status after each command
+    function postcmd --on-event fish_postexec
+        switch $status
+            case 0
+                true
+            case '*'
+                set last_status $status
+                echo
+                set_color --bold $fish_my_color_red
+                printf "%"$COLUMNS"s" "[ Exit status: $last_status ] "
+                set_color normal
+        end
+    end
+
     # correct typos the fun way
     # https://github.com/nvbn/thefuck
     # (the following does not work, so i added the function manually)
