@@ -13,7 +13,8 @@ abbr gaa    git add --all
 abbr gas    git save
 # abbr gap    git pop  # because of autocompletion, the following is better:
 abbr gap    git rebase \(git rev-parse --abbrev-ref HEAD\) stash/
-abbr gb     git branch --verbose --all
+abbr gb     git branch
+abbr gB     git branch --verbose --all
 abbr gbd    git branch -d
 abbr gbD    git branch -D
 abbr gbm    git branch -m
