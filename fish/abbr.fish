@@ -38,8 +38,8 @@ abbr gr     grep --with-filename --line-number --recursive --ignore-case --exten
 abbr grh    git reset --hard
 abbr grH    git reset HEAD~1
 abbr gs     tig status
-abbr gsa    git stash save
-abbr gsi    git stash save --include-untracked
+abbr gsa    git stash push
+abbr gsi    git stash push --include-untracked
 abbr gsp    git stash pop
 abbr gu     git submodule
 abbr gup    git submodule update
