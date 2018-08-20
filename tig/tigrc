@@ -135,8 +135,9 @@ bind refs d ?git branch -d %(branch)
 # rename branch
 bind refs R ?git branch -m %(branch) %(prompt)
 
-# copy commit id to clipboard
+# copy commit details to clipboard
 bind generic y !bash -c "printf %(commit) | xsel -b"
+bind generic Y !bash -c "printf %(commit) | git log --format=%B -n 1 --stdin | xsel -b"
 
 # remote commands
 bind generic f !git fetch
