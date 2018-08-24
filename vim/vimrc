@@ -290,7 +290,7 @@ nnoremap <Leader>bE         :call MakeWithVimuxOpenErrors('buffer')<CR>
 " param command: the shell command to execute
 function! MakeWithVimux(command)
     let l:git_branch_name = system('git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d "\n" || echo -n ""')
-    let l:git_branch_name_escaped = UrlEncode(l:git_branch_name)
+    let l:git_branch_name_escaped = substitute(UrlEncode(l:git_branch_name), '%..', '-', 'g')
     if !empty(v:servername)
         let l:project_name = tolower(v:servername)
     else
