@@ -291,7 +291,12 @@ nnoremap <Leader>bE         :call MakeWithVimuxOpenErrors('buffer')<CR>
 function! MakeWithVimux(command)
     let l:git_branch_name = system('git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d "\n" || echo -n ""')
     let l:git_branch_name_escaped = UrlEncode(l:git_branch_name)
-    let g:makewithvimux_outfile = '/tmp/vim.'.v:servername.'.'.l:git_branch_name_escaped.'.make.out'
+    if !empty(v:servername)
+        let l:project_name = tolower(v:servername)
+    else
+        let l:project_name = tolower(system('basename $(pwd) | tr -d "\n"'))
+    endif
+    let g:makewithvimux_outfile = '/tmp/vim.'.l:project_name.'.'.l:git_branch_name_escaped.'.make.out'
     let command = a:command . ' | tee ' . g:makewithvimux_outfile
     call VimuxRunCommand(command)
 endfunction
