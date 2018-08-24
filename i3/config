@@ -349,12 +349,12 @@ mode "$mode_xdootool" {
 # lock/exit/suspend etc.
 bindsym XF86PowerOff mode "$mode_system"
 bindsym $mod+Escape mode "$mode_system"
-set $mode_system Want to leave?  (e) logout, (u) switch user, (l) lock, (s) suspend, (h) hibernate, (r) reboot, (p) poweroff (o) poweroff smoothly
+set $mode_system Want to leave?  (e) logout, (u) switch user, (l) lock, (k) lock and turn off screen (s) suspend, (h) hibernate, (r) reboot, (p) poweroff (o) poweroff smoothly
 mode "$mode_system" {
     bindsym e exit
     bindsym u exec --no-startup-id "i3exit switch_user"; mode "default"
-    bindsym l exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper.png && xset dpms force off"; mode "default"
-    bindsym L exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper.png # has to be png"; mode "default"
+    bindsym l exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper.png # has to be png"; mode "default"
+    bindsym k exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper.png && xset dpms force off"; mode "default"
     bindsym s exec --no-startup-id "systemctl suspend"; mode "default"
     bindsym h exec --no-startup-id "systemctl hibernate"; mode "default"
     bindsym r exec --no-startup-id "systemctl reboot"
