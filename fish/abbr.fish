@@ -36,12 +36,16 @@ abbr gpu    git push
 abbr gpuf   git push --force-with-lease
 abbr gpuu   git push -u \(git remote \| head -n1\) \(git rev-parse --abbrev-ref HEAD\)
 abbr gr     grep --with-filename --line-number --recursive --ignore-case --extended-regexp
+abbr gra    git reset --abort
+abbr grc    git reset --continue
 abbr grh    git reset --hard
 abbr grH    git reset HEAD~1
+abbr grm    git rebase master
 abbr gs     tig status
 abbr gsa    git stash push
 abbr gsi    git stash push --include-untracked
 abbr gsp    git stash pop
+abbr gst    git status
 abbr gu     git submodule
 abbr gup    git submodule update
 abbr gus    git submodule status
