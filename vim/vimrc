@@ -1709,10 +1709,19 @@ augroup scala_on_read
     au FileType scala call SetupScala()
 augroup END
 function! SetupScala()
-    set errorformat=
-                \%E\ %#[error]\ %f:%l:%c:\ %m,%C\ %#[error]\ %p^,%-C%.%#,%Z,
-                \%W\ %#[warn]\ %f:%l:%c:\ %m,%C\ %#[warn]\ %p^,%-C%.%#,%Z,
-                \%-G%.%#
+    let l:sbt_version = system('grep -E "sbt\.version" project/build.properties | sed -E "s/.*=(.*)/\1/"')
+    " sbt shows column in compiler errors since version 1.0.0 so there are two " cases for errorformat:
+    if l:sbt_version
+        set errorformat=
+                    \%E\ %#[error]\ %f:%l:%c:\ %m,%C\ %#[error]\ %p^,%-C%.%#,%Z,
+                    \%W\ %#[warn]\ %f:%l:%c:\ %m,%C\ %#[warn]\ %p^,%-C%.%#,%Z,
+                    \%-G%.%#
+    else
+        set errorformat=
+                    \%E\ %#[error]\ %f:%l:\ %m,%C\ %#[error]\ %p^,%-C%.%#,%Z,
+                    \%W\ %#[warn]\ %f:%l:\ %m,%C\ %#[warn]\ %p^,%-C%.%#,%Z,
+                    \%-G%.%#
+    endif
     " the lines above work for compiler errors
     " the lines below are for testing errors but do not work yet
     " (for example because the file path is not absolute)
