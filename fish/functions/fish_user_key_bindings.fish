@@ -1,4 +1,5 @@
 function fish_user_key_bindings
+    bind \cs 'fzf_command_chooser'
     bind \cr '__fzf_reverse_isearch'
     bind \e. history-token-search-backward
     bind \e: history-token-search-forward

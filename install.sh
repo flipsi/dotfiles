@@ -179,6 +179,7 @@ function create_link_for_target() {
             create_link "$PWD/fish/completions" "$HOME/.config/fish/completions"
             create_link "$PWD/fish/config.fish" "$HOME/.config/fish/config.fish"
             create_link "$PWD/fish/abbr.fish" "$HOME/.config/fish/abbr.fish"
+            create_link "$PWD/fish/commands.fish" "$HOME/.config/fish/commands.fish"
             ;;
 
         ghci )
