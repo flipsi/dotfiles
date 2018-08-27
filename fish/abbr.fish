@@ -33,6 +33,7 @@ abbr glh    git --no-pager log -n 1
 abbr gli    git --no-pager log -n 1 \| head -n 1 \| cut -d\" \" -f2 \| xsel --clipboard
 abbr gm     git merge
 abbr gmm    git merge master
+abbr gp     git pull
 abbr gpp    git pull
 abbr gpu    git push
 abbr gpuf   git push --force-with-lease
