@@ -31,6 +31,8 @@ abbr gfm    git checkout --quiet --detach\; git fetch \(git remote \| head -n1\)
 abbr gl     tig log
 abbr glh    git --no-pager log -n 1
 abbr gli    git --no-pager log -n 1 \| head -n 1 \| cut -d\" \" -f2 \| xsel --clipboard
+abbr gm     git merge
+abbr gmm    git merge master
 abbr gpp    git pull
 abbr gpu    git push
 abbr gpuf   git push --force-with-lease
