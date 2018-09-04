@@ -551,7 +551,7 @@ workspace_layout stacked
 
 
 # start a terminal
-bindsym $mod+o mode "$terminal"
+bindsym $mod+Shift+o mode "$terminal"
 set $terminal Open a terminal: (a) alacritty (u) urxvt (k) konsole (i) kitty (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
 mode "$terminal" {
     bindsym $mod+o  exec --no-startup-id "alacritty --command tmux -2 new-session -A -s main"; mode "default"
@@ -572,7 +572,6 @@ mode "$terminal" {
     bindsym t       exec --no-startup-id "terminology --exec 'tmux -2 new-session -A -s main'"; mode "default"
     bindsym Shift+t exec --no-startup-id "terminology"; mode "default"
     # cancel
-    #bindsym $mod+o mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -589,7 +588,6 @@ bindsym $mod+Shift+Return exec --no-startup-id "rofi -show run"
 # kill focused container
 bindsym $mod+BackSpace kill
 bindsym $mod+Shift+q kill
-
 
 # change focus
 bindsym $mod+h focus left
@@ -663,16 +661,29 @@ bindsym $mod+t       exec --no-startup-id i3-input -F 'mark %s' -P 'Mark name: '
 bindsym $mod+Shift+t exec --no-startup-id i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
 
 # switch to a specific window or workspace
-#bindsym $mod+t mode "goto"
-#mode "goto" {
-#   bindsym f [class="(?i)firefox"]  focus; mode "default"
-#   bindsym s [class="(?i)sublime"]  focus; mode "default"
-#   bindsym m workspace music; mode "default"
-#    # cancel
-#    bindsym $mod+t mode "default"
-#    bindsym Return mode "default"
-#    bindsym Escape mode "default"
-#}
+bindsym $mod+o mode "$goto"
+set $goto Focus app: (o) terminal (f) firefox (g) chrome
+mode "$goto" {
+  bindsym o         [class="(?i)alacritty"]             focus; mode "default"
+  bindsym $mod+o    [class="(?i)alacritty"]             focus; mode "default"
+  bindsym f         [class="(?i)firefox"]               focus; mode "default"
+  bindsym $mod+f    [class="(?i)firefox"]               focus; mode "default"
+  bindsym g         [class="(?i)google-chrome"]         focus; mode "default"
+  bindsym $mod+g    [class="(?i)google-chrome"]         focus; mode "default"
+  bindsym m         [class="(?i)spotify"]               focus; mode "default"
+  bindsym $mod+m    [class="(?i)spotify"]               focus; mode "default"
+  bindsym i         [class="(?i)jetbrains-idea"]        focus; mode "default"
+  bindsym $mod+s    [class="(?i)jetbrains-idea"]        focus; mode "default"
+  bindsym s         [class="(?i)slack"]                 focus; mode "default"
+  bindsym $mod+s    [class="(?i)slack"]                 focus; mode "default"
+  bindsym t         [class="(?i)Telegram"]              focus; mode "default"
+  bindsym $mod+t    [class="(?i)Telegram"]              focus; mode "default"
+  bindsym b         [class="(?i)chrom" instance="(crx_flcchhclanjfdanlfphjfnhbjdbejong|crx_goifhkhiimheobgjhfbnkkibebioelpk)"] focus; mode "default" # Trello
+  bindsym $mod+b    [class="(?i)chrom" instance="(crx_flcchhclanjfdanlfphjfnhbjdbejong|crx_goifhkhiimheobgjhfbnkkibebioelpk)"] focus; mode "default" # Trello
+  # cancel
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
 
 # switch to another workspace
 bindsym $mod+e [urgent=latest] focus
