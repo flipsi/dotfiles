@@ -1557,7 +1557,7 @@ Plugin 'ap/vim-css-color'
 
 " launch colorpicker and insert color code
 Plugin 'blindFS/vim-colorpicker'
-nnoremap <Leader>cp :ColorPicker<CR>
+nnoremap <Leader>icp :ColorPicker<CR>
 
 " alternative colorpicker
 " (readme is looking good, but throws errors)
