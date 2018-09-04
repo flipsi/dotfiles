@@ -96,7 +96,7 @@
 "                           Leader key convention:
 "                           - general leader is space (' ')
 "                           - text edit leader is minus ('-')
-"                           - interface leader is control+g ('<C-G>')
+"                           - interface leader is control+g ('<c-g>')
 "                           The leader key may set several times in this file
 "                           since the execution time of the mapping matters.
 "       a LOCAL SECTION
@@ -215,11 +215,11 @@ if s:MyMode == 'mastery'
 Plugin 'gmarik/vundle'
 
 " package control mappings from vundle itself
-nnoremap <Leader>pl :PluginList<CR>
-nnoremap <Leader>pi :PluginInstall<CR>:smile<CR>
-nnoremap <Leader>pc :PluginClean<CR>
-nnoremap <Leader>pu :PluginUpdate<CR>
-nnoremap <Leader>ps :PluginSearch<Space>
+nnoremap <leader>pl :PluginList<cr>
+nnoremap <leader>pi :PluginInstall<cr>:smile<cr>
+nnoremap <leader>pc :PluginClean<cr>
+nnoremap <leader>pu :PluginUpdate<cr>
+nnoremap <leader>ps :PluginSearch<space>
 
 
 " }}}
@@ -232,7 +232,7 @@ Plugin 'tpope/vim-obsession'
 let g:session_file_name = '.session.vim'
 
 " start session
-nnoremap <Leader>se :exe 'Obsession' . g:session_file_name<CR>
+nnoremap <leader>se :exe 'Obsession' . g:session_file_name<cr>
 
 " automatically load sessions if started without args
 autocmd VimEnter * nested
@@ -270,20 +270,20 @@ Plugin 'benmills/vimux'
 let g:VimuxHeight = "50"
 let g:VimuxOrientation = "h"
 let VimuxUseNearest = 1
-nnoremap <Leader>bo         :VimuxRunCommand ""<Left>
-nnoremap <Leader>bv         :call MakeWithVimux("")<Left><Left>
-nnoremap <Leader>bf         :VimuxRunCommand " " . expand('%')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
-nnoremap <Leader>bb         :update<CR>:VimuxRunLastCommand<CR>
-nnoremap <Leader>bl         :VimuxRunCommand "clear"<CR>
-nnoremap <Leader>bq         :VimuxCloseRunner<CR>
-nnoremap <Leader>b<BS>      :VimuxCloseRunner<CR>
-nnoremap <Leader>bz         :call VimuxZoomRunner()<CR>
-nnoremap <Leader>bc         :VimuxInterruptRunner<CR>
-nnoremap <Leader>b<C-c>     :VimuxInterruptRunner<CR>
-nnoremap <Leader>b<C-b>     :VimuxInspectRunner<CR>
-nnoremap <Leader><C-b><C-b> :VimuxInspectRunner<CR>
-nnoremap <Leader>be         :call MakeWithVimuxOpenErrors('quickfix')<CR>
-nnoremap <Leader>bE         :call MakeWithVimuxOpenErrors('buffer')<CR>
+nnoremap <leader>bo         :VimuxRunCommand ""<left>
+nnoremap <leader>bv         :call MakeWithVimux("")<left><left>
+nnoremap <leader>bf         :VimuxRunCommand " " . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
+nnoremap <leader>bb         :update<cr>:VimuxRunLastCommand<cr>
+nnoremap <leader>bl         :VimuxRunCommand "clear"<cr>
+nnoremap <leader>bq         :VimuxCloseRunner<cr>
+nnoremap <leader>b<bs>      :VimuxCloseRunner<cr>
+nnoremap <leader>bz         :call VimuxZoomRunner()<cr>
+nnoremap <leader>bc         :VimuxInterruptRunner<cr>
+nnoremap <leader>b<c-c>     :VimuxInterruptRunner<cr>
+nnoremap <leader>b<c-b>     :VimuxInspectRunner<cr>
+nnoremap <leader><c-b><c-b> :VimuxInspectRunner<cr>
+nnoremap <leader>be         :call MakeWithVimuxOpenErrors('quickfix')<cr>
+nnoremap <leader>bE         :call MakeWithVimuxOpenErrors('buffer')<cr>
 " MORE SPECIFIC MAPPING IN OTHER VIMRC SECTIONS (which makes more sense)
 
 " build/debug with vimux
@@ -319,7 +319,7 @@ endfunction
 
 " autocompletion from words visible in tmux panes
 Plugin 'wellle/tmux-complete.vim'
-" <C-x><C-u> and then <C-u> or <C-n> a few times
+" <c-x><c-u> and then <c-u> or <c-n> a few times
 
 
 
@@ -347,13 +347,13 @@ Plugin 'sjl/badwolf'
 
 " cycle through colorschemes
 Plugin 'vim-scripts/ScrollColors'
-nnoremap <C-G>o :COLORSCROLL<CR>
+nnoremap <c-g>o :COLORSCROLL<cr>
 
 
 " " highlight different bracket pairs with different colors
 " " DOES NOT WORK
 " Plugin 'kien/rainbow_parentheses.vim'
-" nnoremap <C-G>b :RainbowParenthesesToggle<CR>
+" nnoremap <c-g>b :RainbowParenthesesToggle<cr>
 
 
 " }}}
@@ -365,7 +365,7 @@ Plugin 'junegunn/goyo.vim'
 let g:goyo_width="120"
 let g:goyo_height="100%"
 
-nnoremap <C-G>f :Goyo<CR>
+nnoremap <c-g>f :Goyo<cr>
 
 
 " }}}
@@ -418,25 +418,25 @@ let g:airline_symbols.maxlinenr = ''
 
 Plugin 'tpope/vim-fugitive'
 
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gd :Gdiff<CR>
-nnoremap <Leader>gU :Gread<CR>
-nnoremap <Leader>gw :Gwrite<CR>
-nnoremap <Leader>gA :Gwrite<CR>
-nnoremap <Leader>gc :Gcommit<CR>
-nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gpp :Gpull<CR>
-nnoremap <Leader>gpu :Gpush<CR>
-nnoremap <Leader>gpU :exe ':Git push -u ' . system('git remote \| head -n1') . ' ' . system('git rev-parse --abbrev-ref HEAD')
-nnoremap <Leader>geb :exe ':Git checkout -b ' . input('Branch name: ')<CR>
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gU :Gread<cr>
+nnoremap <leader>gw :Gwrite<cr>
+nnoremap <leader>gA :Gwrite<cr>
+nnoremap <leader>gc :Gcommit<cr>
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gpp :Gpull<cr>
+nnoremap <leader>gpu :Gpush<cr>
+nnoremap <leader>gpU :exe ':Git push -u ' . system('git remote \| head -n1') . ' ' . system('git rev-parse --abbrev-ref HEAD')
+nnoremap <leader>geb :exe ':Git checkout -b ' . input('Branch name: ')<cr>
 
 " in Gdiff view, navigate and stage/checkout easily
 augroup gitdiff
     au!
-    au BufRead fugitive://* nnoremap <buffer> <Down>  ]c
-    au BufRead fugitive://* nnoremap <buffer> <Up>    [c
-    au BufRead fugitive://* nnoremap <buffer> <Left>  do
-    au BufRead fugitive://* nnoremap <buffer> <Right> dp
+    au BufRead fugitive://* nnoremap <buffer> <down>  ]c
+    au BufRead fugitive://* nnoremap <buffer> <up>    [c
+    au BufRead fugitive://* nnoremap <buffer> <left>  do
+    au BufRead fugitive://* nnoremap <buffer> <right> dp
 augroup END
 
 
@@ -455,22 +455,22 @@ let g:gitgutter_sign_modified_removed = '∙'
 " do not map ic/ac text objects etc because I decide how I use them
 let g:gitgutter_map_keys = 0
 
-omap ih <Plug>GitGutterTextObjectInnerPending
-omap ah <Plug>GitGutterTextObjectOuterPending
-xmap ih <Plug>GitGutterTextObjectInnerVisual
-xmap ah <Plug>GitGutterTextObjectOuterVisual
+omap ih <plug>GitGutterTextObjectInnerPending
+omap ah <plug>GitGutterTextObjectOuterPending
+xmap ih <plug>GitGutterTextObjectInnerVisual
+xmap ah <plug>GitGutterTextObjectOuterVisual
 
-nnoremap <C-G>G       :GitGutterToggle<CR>
-nnoremap <C-G>g       :GitGutter<CR> " redraw
-nnoremap <Leader>gg gg:GitGutterNextHunk<CR>ztzv
-nnoremap <Leader>gG  G:GitGutterPrevHunk<CR>ztzv
-nnoremap <Leader>gn   :GitGutterNextHunk<CR>ztzv
-nnoremap <Leader>gN   :GitGutterPrevHunk<CR>ztzv
-nnoremap <Down>       :GitGutterNextHunk<CR>ztzv
-nnoremap <Up>         :GitGutterPrevHunk<CR>ztzv
-nnoremap <Leader>ga   :GitGutterStageHunk<CR>
-nnoremap <Leader>gu   :GitGutterUndoHunk<CR>
-nnoremap <Leader>gi   :GitGutterPreviewHunk<CR>
+nnoremap <c-g>G       :GitGutterToggle<cr>
+nnoremap <c-g>g       :GitGutter<cr> " redraw
+nnoremap <leader>gg gg:GitGutterNextHunk<cr>ztzv
+nnoremap <leader>gG  G:GitGutterPrevHunk<cr>ztzv
+nnoremap <leader>gn   :GitGutterNextHunk<cr>ztzv
+nnoremap <leader>gN   :GitGutterPrevHunk<cr>ztzv
+nnoremap <down>       :GitGutterNextHunk<cr>ztzv
+nnoremap <up>         :GitGutterPrevHunk<cr>ztzv
+nnoremap <leader>ga   :GitGutterStageHunk<cr>
+nnoremap <leader>gu   :GitGutterUndoHunk<cr>
+nnoremap <leader>gi   :GitGutterPreviewHunk<cr>
 
 
 
@@ -481,10 +481,10 @@ nnoremap <Leader>gi   :GitGutterPreviewHunk<CR>
 Plugin 'chrisbra/unicode.vim'
 
 " inspect character under cursor
-nnoremap ga :UnicodeName<CR>
+nnoremap ga :UnicodeName<cr>
 
-" complete unicode with <C-X><C-Z>
-" complete digraph with <C-X><C-G>
+" complete unicode with <c-x><c-z>
+" complete digraph with <c-x><c-g>
 
 
 " }}}
@@ -494,7 +494,7 @@ nnoremap ga :UnicodeName<CR>
 Plugin 'easymotion/vim-easymotion'
 
 " prefix
-map ä <Plug>(easymotion-prefix)
+map ä <plug>(easymotion-prefix)
 " keys to move to target
 let g:EasyMotion_keys = 'asdfgh,.qwertuiocvbnmjkl'
 
@@ -508,7 +508,7 @@ let g:clever_f_across_no_line = 0
 let g:clever_f_smart_case = 1
 " let g:clever_f_timeout_ms = 2000
 let g:clever_f_fix_key_direction = 0
-let g:clever_f_repeat_last_char_inputs = ["\<CR>", "\<Tab>"]
+let g:clever_f_repeat_last_char_inputs = ["\<cr>", "\<tab>"]
 let g:clever_f_chars_match_any_signs = 'ö'
 
 
@@ -529,17 +529,17 @@ Plugin 'justinmk/vim-sneak'
 " use smartcase;
 let g:sneak#use_ic_scs = 1
 
-nmap f <Plug>Sneak_s
-xmap z <Plug>Sneak_s
-omap z <Plug>Sneak_s
+nmap f <plug>Sneak_s
+xmap z <plug>Sneak_s
+omap z <plug>Sneak_s
 
-nmap s <Plug>Sneak_S
-nmap F <Plug>Sneak_S
-xmap Z <Plug>Sneak_S
-omap Z <Plug>Sneak_S
+nmap s <plug>Sneak_S
+nmap F <plug>Sneak_S
+xmap Z <plug>Sneak_S
+omap Z <plug>Sneak_S
 
-nmap , <Plug>Sneak_;
-nmap ; <Plug>Sneak_,
+nmap , <plug>Sneak_;
+nmap ; <plug>Sneak_,
 
 
 autocmd ColorScheme * hi Sneak      ctermfg=72 ctermbg=236
@@ -550,13 +550,13 @@ autocmd ColorScheme * hi SneakScope ctermfg=72 ctermbg=236
 " make f only match interesting characters
 " Plugin 'svermeulen/vim-NotableFt'
 
-" nmap , <Plug>NotableFtRepeatSearchForward
-" nmap ; <Plug>NotableFtRepeatSearchBackward
-" nmap f <Plug>NotableFtSearchFForward
-" nmap s <Plug>NotableFtSearchFBackward
-" nmap F <Plug>NotableFtSearchFBackward
-" nmap t <Plug>NotableFtSearchTForward
-" nmap T <Plug>NotableFtSearchTBackward
+" nmap , <plug>NotableFtRepeatSearchForward
+" nmap ; <plug>NotableFtRepeatSearchBackward
+" nmap f <plug>NotableFtSearchFForward
+" nmap s <plug>NotableFtSearchFBackward
+" nmap F <plug>NotableFtSearchFBackward
+" nmap t <plug>NotableFtSearchTForward
+" nmap T <plug>NotableFtSearchTBackward
 
 
 
@@ -623,16 +623,16 @@ Plugin 'kana/vim-textobj-fold'
 
 " git hunks (ih) (now managed by gitgutter plugin)
 " Plugin 'gilligan/textobj-gitgutter'
-" omap ah <Plug>(textobj-gitgutter-i)
-" vmap ah <Plug>(textobj-gitgutter-i)
+" omap ah <plug>(textobj-gitgutter-i)
+" vmap ah <plug>(textobj-gitgutter-i)
 
 " entire buffer / 'all' (aa/ia)
 Plugin 'kana/vim-textobj-entire'
 let g:textobj_entire_no_default_key_mappings = 1
-omap aE <Plug>(textobj-entire-a)
-vmap aE <Plug>(textobj-entire-a)
-omap iE <Plug>(textobj-entire-i)
-vmap iE <Plug>(textobj-entire-i)
+omap aE <plug>(textobj-entire-a)
+vmap aE <plug>(textobj-entire-a)
+omap iE <plug>(textobj-entire-i)
+vmap iE <plug>(textobj-entire-i)
 " load dynamically with :TextobjEntireDefaultKeyMappings
 
 " note that vimtex also defines mappings ic/id/ie/i$
@@ -649,21 +649,21 @@ vmap iE <Plug>(textobj-entire-i)
 Plugin 'haya14busa/incsearch.vim'
 let g:incsearch#emacs_like_keymap = 1
 let g:incsearch_cli_key_mappings = {
-\   "\<C-n>": {
-\     'key': '<Over>(buffer-complete)',
+\   "\<c-n>": {
+\     'key': '<over>(buffer-complete)',
 \     'noremap': 1
 \   },
-\   "\<C-p>": {
-\     'key': '<Over>(buffer-complete-prev)',
+\   "\<c-p>": {
+\     'key': '<over>(buffer-complete-prev)',
 \     'noremap': 1
 \   },
 \ }
-" TODO: <C-k> and <C-j> to scroll through old searches. use arrows until fix.
+" TODO: <c-k> and <c-j> to scroll through old searches. use arrows until fix.
 
-" nnoremap ö  <Plug>(incsearch-forward)
-" nnoremap Ö  <Plug>(incsearch-backward)
-nnoremap ö :call incsearch#call()<CR>
-nnoremap Ö :call incsearch#call({'command': '?'})<CR>
+" nnoremap ö  <plug>(incsearch-forward)
+" nnoremap Ö  <plug>(incsearch-backward)
+nnoremap ö :call incsearch#call()<cr>
+nnoremap Ö :call incsearch#call({'command': '?'})<cr>
 
 
 " searching in multiple files
@@ -674,12 +674,12 @@ Plugin 'mileszs/ack.vim'
 let g:ackprg="ag --vimgrep --smart-case"
 
 " type a search pattern
-nnoremap <Leader>Ö :let g:jumplist = 'quickfixlist'<CR>
-                 \ :Ack!<Space>""<Left>
+nnoremap <leader>Ö :let g:jumplist = 'quickfixlist'<cr>
+                 \ :Ack!<space>""<left>
 
 " search for visual selection
-xnoremap <Leader>Ö y:let g:jumplist = 'quickfixlist'<CR>
-                 \ :<c-u>Ack! "-Q" "<C-R>""<CR>
+xnoremap <leader>Ö y:let g:jumplist = 'quickfixlist'<cr>
+                 \ :<c-u>Ack! "-Q" "<c-r>""<cr>
 
 
 " % also matches HTML-tags/words etc
@@ -693,27 +693,27 @@ let g:foldsearch_highlight = 0
 let g:foldsearch_disable_mappings = 1
 
 " show last search
-nnoremap <Leader>zs :Fs<CR>
-nnoremap <Leader>z/ :Fs<CR>
-nnoremap <Leader>zö :Fs<CR>
-nnoremap <Leader>zz :Fs<CR>
+nnoremap <leader>zs :Fs<cr>
+nnoremap <leader>z/ :Fs<cr>
+nnoremap <leader>zö :Fs<cr>
+nnoremap <leader>zz :Fs<cr>
 
 " show word under cursor
-nnoremap <Leader>z* :Fw<CR>
-nnoremap <Leader>zw :Fw<CR>
+nnoremap <leader>z* :Fw<cr>
+nnoremap <leader>zw :Fw<cr>
 
 " show visual selection
-vnoremap <Leader>z y:Fp<Space>\V<C-R>"<CR>
+vnoremap <leader>z y:Fp<space>\V<c-r>"<cr>
 
 " change context size (number of lines around matches)
-nnoremap <Leader>z+ :Fi<CR>
-nnoremap <Leader>zi :Fi<CR>
-nnoremap <Leader>z- :Fd<CR>
-nnoremap <Leader>zd :Fd<CR>
+nnoremap <leader>z+ :Fi<cr>
+nnoremap <leader>zi :Fi<cr>
+nnoremap <leader>z- :Fd<cr>
+nnoremap <leader>zd :Fd<cr>
 
 " restore folds
-nnoremap <Leader>ze :Fe<CR>
-nnoremap <Leader>Z  :Fe<CR>
+nnoremap <leader>ze :Fe<cr>
+nnoremap <leader>Z  :Fe<cr>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -724,12 +724,12 @@ nnoremap <Leader>Z  :Fe<CR>
 
 " let g:ctrlp_map = '#'
 " let g:ctrlp_cmd = 'CtrlPBuffer'
-nnoremap #          :CtrlPBuffer<CR>
-nnoremap <Leader>#  :CtrlPRoot<CR>
-nnoremap <Leader>er :CtrlPMRUFiles<CR>
-nnoremap <Leader>em :CtrlPMixed<CR>
-nnoremap <Leader>eo :CtrlPRoot<CR>
-nnoremap <Leader>eb :CtrlPBuffer<CR>
+nnoremap #          :CtrlPBuffer<cr>
+nnoremap <leader>#  :CtrlPRoot<cr>
+nnoremap <leader>er :CtrlPMRUFiles<cr>
+nnoremap <leader>em :CtrlPMixed<cr>
+nnoremap <leader>eo :CtrlPRoot<cr>
+nnoremap <leader>eb :CtrlPBuffer<cr>
 
 " ignore some stuff (in addition to 'wildignore')
 let g:ctrlp_custom_ignore = {
@@ -746,7 +746,7 @@ let g:ctrlp_prompt_mappings = {
             \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<tab>'],
             \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<s-tab>'],
             \ 'PrtExpandDir()':       [],
-            \ 'AcceptSelection("v")': ['<Esc><Enter>', '<c-l>', '<c-v>', '<RightMouse>'],
+            \ 'AcceptSelection("v")': ['<esc><enter>', '<c-l>', '<c-v>', '<rightmouse>'],
             \ 'ToggleFocus()':        [],
             \ 'ToggleRegex()':        ['<c-r>', '<esc>r'],
             \ 'ToggleType(1)':        ['<right>', '<c-up>'],
@@ -781,7 +781,7 @@ let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout = { 'down': '~30%' }
 
 " extra interactive key bindings
-" (scroll with <C-k> and <C-j>
+" (scroll with <c-k> and <c-j>
 let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-l': 'vsplit',
@@ -791,7 +791,7 @@ let g:fzf_action = {
 " \ 'ctrl-j': 'next-history',
 
 " enable per-command history
-" (scroll through history with <C-p> and <C-n>)
+" (scroll through history with <c-p> and <c-n>)
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " override command to only match content (not filenames)
@@ -802,38 +802,38 @@ command! -bang -nargs=* FzfAg
   \                 <bang>0)
 
 " open files by name
-nnoremap <Leader>fi :FzfFiles<CR>
-nnoremap <Leader>fl :FzfLocate<Space>
-nnoremap #          :FzfBuffers<CR>
-xnoremap #          <Esc>:FzfBuffers<CR>
-nnoremap <Leader>#  :FzfFiles<CR>
-xnoremap <Leader>#  <Esc>:FzfFiles<CR>
-nnoremap <Leader>eo :FzfGFiles<CR>
-nnoremap <Leader>eg :FzfGFiles?<CR>
-nnoremap <Leader>er :FzfHistory<CR>
-nnoremap <Leader>eb :FzfBuffers<CR>
+nnoremap <leader>fi :FzfFiles<cr>
+nnoremap <leader>fl :FzfLocate<space>
+nnoremap #          :FzfBuffers<cr>
+xnoremap #          <esc>:FzfBuffers<cr>
+nnoremap <leader>#  :FzfFiles<cr>
+xnoremap <leader>#  <esc>:FzfFiles<cr>
+nnoremap <leader>eo :FzfGFiles<cr>
+nnoremap <leader>eg :FzfGFiles?<cr>
+nnoremap <leader>er :FzfHistory<cr>
+nnoremap <leader>eb :FzfBuffers<cr>
 
 let g:fzf_tags_command = 'ctags -R -f .tags'
-nnoremap <Leader>et  :FzfTags<CR>
-xnoremap <Leader>et y:FzfTags <C-R>"<CR>
+nnoremap <leader>et  :FzfTags<cr>
+xnoremap <leader>et y:FzfTags <c-r>"<cr>
 
 " type a search pattern
-nnoremap <Leader>ö :FzfAg<CR>
+nnoremap <leader>ö :FzfAg<cr>
 " search for word under cursor
-nnoremap <Leader>+ :FzfAg! <C-R><C-W><CR>
-nmap     <Leader>* <Leader>+
+nnoremap <leader>+ :FzfAg! <c-r><c-w><cr>
+nmap     <leader>* <leader>+
 " search for visual selection
-xnoremap <Leader>ö y:<c-u>FzfAg! <C-R>"<CR>
-xmap     <Leader>* <Leader>ö
-xmap     <Leader>+ <Leader>ö
+xnoremap <leader>ö y:<c-u>FzfAg! <c-r>"<cr>
+xmap     <leader>* <leader>ö
+xmap     <leader>+ <leader>ö
 
 " fuzzy search for built-in vim stuff (command history, searches, helptags)
-nnoremap <Leader>:          :FzfHistory:<CR>
-nnoremap <Leader>/          :FzfHistory/<CR>
-nnoremap <Leader>h<Leader>  :FzfHelptags<CR>
+nnoremap <leader>:          :FzfHistory:<cr>
+nnoremap <leader>/          :FzfHistory/<cr>
+nnoremap <leader>h<leader>  :FzfHelptags<cr>
 
 " autocomplete lines like a boss, even across multiple files
-imap <C-x><C-l> <plug>(fzf-complete-line)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 
 " adjust colors to colorscheme: gruvbox
@@ -871,7 +871,7 @@ let g:fzf_colors =
 
 " generate tag file manually
 " (fails with '–exclude=@.gitignore' when the file does not exist!)
-nnoremap <Leader>eT :!ctags -R -f .tags .<CR>
+nnoremap <leader>eT :!ctags -R -f .tags .<cr>
 
 
 " generate tag file automagically
@@ -891,9 +891,9 @@ let g:tagbar_autoclose = 1
 
 "let g:tagbar_map_close = 'Q'
 
-noremap <silent> <Leader>tt :TagbarToggle<CR>
+noremap <silent> <leader>tt :TagbarToggle<cr>
 
-"autocmd FileType vim nested :TagbarOpen()<CR>
+"autocmd FileType vim nested :TagbarOpen()<cr>
 
 
 
@@ -901,7 +901,7 @@ noremap <silent> <Leader>tt :TagbarToggle<CR>
 " Plugin 'misterbuckley/vim-definitive'
 Plugin 'sflip/vim-definitive'
 
-nnoremap <Leader>fd :FindDefinition<CR>
+nnoremap <leader>fd :FindDefinition<cr>
 
 
 
@@ -912,8 +912,8 @@ nnoremap <Leader>fd :FindDefinition<CR>
 " sugar for unix shell commands like move/rename/delete/find files etc.
 Plugin 'tpope/vim-eunuch'
 
-nnoremap <Leader>rn :Rename <C-R>=expand("%:t")<CR>
-nnoremap <Leader>rm :Remove<CR>
+nnoremap <leader>rn :Rename <c-r>=expand("%:t")<cr>
+nnoremap <leader>rm :Remove<cr>
 
 
 " Plugin 'scrooloose/nerdtree'
@@ -923,9 +923,9 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeWinPos = 'right'
 
 " show nerdtree from current file
-noremap <silent> <Leader>tn :NERDTreeFind<CR>
+noremap <silent> <leader>tn :NERDTreeFind<cr>
 " show/hide nerdtree
-noremap <silent> <Leader>tN :NERDTreeToggle<CR>
+noremap <silent> <leader>tN :NERDTreeToggle<cr>
 
 " show/hide hidden files
 let NERDTreeMapToggleHidden='.'
@@ -942,7 +942,7 @@ let NERDTreeMapToggleHidden='.'
 
 Plugin 'vim-scripts/BufOnly.vim'
 
-nmap <Leader>qo :BufOnly<CR>
+nmap <leader>qo :BufOnly<cr>
 
 
 
@@ -965,10 +965,10 @@ let g:syntastic_mode_map = {
 " let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 let g:syntastic_c_cppcheck_args = ' -std=c++11 -stdlib=libc++'
 
-nnoremap <silent> <Leader>sc :SyntasticCheck<CR>
-nnoremap <silent> <Leader>sr :SyntasticReset<CR>
-nnoremap <silent> <Leader>st :SyntasticToggleMode<CR>
-nnoremap <silent> <Leader>si :SyntasticInfo<CR>
+nnoremap <silent> <leader>sc :SyntasticCheck<cr>
+nnoremap <silent> <leader>sr :SyntasticReset<cr>
+nnoremap <silent> <leader>st :SyntasticToggleMode<cr>
+nnoremap <silent> <leader>si :SyntasticInfo<cr>
 
 
 " install linters on the system:
@@ -1027,13 +1027,13 @@ let g:ale_fixers = {
 
 let g:ale_python_pylint_options = '--rcfile $HOME/.vim/config/pylint.rc'
 
-nnoremap <silent> <Leader>sc :ALELint<CR>
-nnoremap <silent> <Leader>sn :ALENext<CR>
-nnoremap <silent> <Leader>sN :ALEPrevious<CR>
-nnoremap <silent> <Leader>sp :ALEPrevious<CR>
-nnoremap <silent> <Leader>sr :ALEDisable<CR>
-nnoremap <silent> <Leader>st :ALEToggle<CR>
-nnoremap <silent> <Leader>si :ALEInfo<CR>
+nnoremap <silent> <leader>sc :ALELint<cr>
+nnoremap <silent> <leader>sn :ALENext<cr>
+nnoremap <silent> <leader>sN :ALEPrevious<cr>
+nnoremap <silent> <leader>sp :ALEPrevious<cr>
+nnoremap <silent> <leader>sr :ALEDisable<cr>
+nnoremap <silent> <leader>st :ALEToggle<cr>
+nnoremap <silent> <leader>si :ALEInfo<cr>
 
 highlight ALEErrorSign      ctermfg=203
 highlight ALEWarningSign    ctermfg=227
@@ -1054,16 +1054,16 @@ let g:CheatSheetDoNotMap=1
 
 " use line as query and paste result after line
 nnoremap <script> <silent> <leader>kp
-            \ :call cheat#cheat("", getcurpos()[1], getcurpos()[1], 0, 3, '!')<CR>
+            \ :call cheat#cheat("", getcurpos()[1], getcurpos()[1], 0, 3, '!')<cr>
 vnoremap <script> <silent> <leader>kp
-            \ :call cheat#cheat("", -1, -1, 3, 1, '!')<CR>
+            \ :call cheat#cheat("", -1, -1, 3, 1, '!')<cr>
 
 
 "result in buffer
 nnoremap <script> <silent> <leader>kb
-            \ :call cheat#cheat("", getcurpos()[1], getcurpos()[1], 0, 0, '!')<CR>
+            \ :call cheat#cheat("", getcurpos()[1], getcurpos()[1], 0, 0, '!')<cr>
 vnoremap <script> <silent> <leader>kb
-            \ :call cheat#cheat("", -1, -1, 2, 0, '!')<CR>
+            \ :call cheat#cheat("", -1, -1, 2, 0, '!')<cr>
 
 
 
@@ -1084,9 +1084,9 @@ Plugin 'thinca/vim-ref'
 
 " replace some motion or text object or selection with current yank
 " Plugin 'ReplaceWithRegister'
-" nmap -rr <Plug>ReplaceWithRegisterOperator
-" nmap -re <Plug>ReplaceWithRegisterLine
-" xmap -r  <Plug>ReplaceWithRegisterVisual
+" nmap -rr <plug>ReplaceWithRegisterOperator
+" nmap -re <plug>ReplaceWithRegisterLine
+" xmap -r  <plug>ReplaceWithRegisterVisual
 " I DON'T REALLY USE THIS BUT v3wp or -rw OCCASIONALLY
 
 
@@ -1098,12 +1098,12 @@ Plugin 'junegunn/vim-peekaboo'
 " lightweight alternative to yankring
 Plugin 'maxbrunsfeld/vim-yankstack'
 let g:yankstack_map_keys = 0
-nmap <Leader>pp <Plug>yankstack_substitute_older_paste
-nmap <Leader>nn <Plug>yankstack_substitute_newer_paste
+nmap <leader>pp <plug>yankstack_substitute_older_paste
+nmap <leader>nn <plug>yankstack_substitute_newer_paste
 "call yankstack#setup() " DOES NOT WORK HERE
 
 
-" add and toggle comments with <Leader>c<space> etc
+" add and toggle comments with <leader>c<space> etc
 Plugin 'scrooloose/nerdcommenter'
 " use leading space, but delete trailing space
 let g:NERDSpaceDelims = 1
@@ -1113,24 +1113,24 @@ let g:NERDDefaultNesting = 1
 let g:NERDAltDelims_javascript = 0
 " align multiline comments
 let g:NERDDefaultAlign = 'left'
-" nmap -c <Leader>c
-" xmap -c <Leader>c
+" nmap -c <leader>c
+" xmap -c <leader>c
 " comment text objects and movements
 for mov in ['j', 'k', 'gg', 'G', '(', ')', '{', '}', 'as', 'is', 'ap', 'ip']
-    exe "nmap \<Leader\>c" . mov . " V" . mov . "\<Plug\>NERDCommenterInvert"
-    exe "nmap -c"          . mov . " V" . mov . "\<Plug\>NERDCommenterComment"
+    exe "nmap \<leader\>c" . mov . " V" . mov . "\<plug\>NERDCommenterInvert"
+    exe "nmap -c"          . mov . " V" . mov . "\<plug\>NERDCommenterComment"
 endfor
 for i in range(1, 50)
-    exe "nmap \<Leader\>c" . i . "j V" . i . "j\<Plug\>NERDCommenterInvert"
-    exe "nmap \<Leader\>c" . i . "k V" . i . "k\<Plug\>NERDCommenterInvert"
-    exe "nmap -c"          . i . "j V" . i . "j\<Plug\>NERDCommenterComment"
-    exe "nmap -c"          . i . "k V" . i . "k\<Plug\>NERDCommenterComment"
+    exe "nmap \<leader\>c" . i . "j V" . i . "j\<plug\>NERDCommenterInvert"
+    exe "nmap \<leader\>c" . i . "k V" . i . "k\<plug\>NERDCommenterInvert"
+    exe "nmap -c"          . i . "j V" . i . "j\<plug\>NERDCommenterComment"
+    exe "nmap -c"          . i . "k V" . i . "k\<plug\>NERDCommenterComment"
 endfor
 " duplicate a line and comment out the first one
-nmap <Leader>cd <Leader>cyp
+nmap <leader>cd <leader>cyp
 " do not comment on new lines (except when already in insert mode)
-nnoremap o o<Esc>S
-nnoremap O O<Esc>S
+nnoremap o o<esc>S
+nnoremap O O<esc>S
 
 
 " automagically add closing braces etc
@@ -1139,8 +1139,8 @@ Plugin 'Raimondi/delimitMate'
 
 " add a ; at the end of a line
 "Plugin 'lfilho/cosco.vim'
-"inoremap <silent> <Esc><Enter> <Esc>:call cosco#commaOrSemiColon()<CR>A<Enter>
-inoremap <silent> <Esc><Enter> <Esc>A;<Esc>^
+"inoremap <silent> <esc><enter> <esc>:call cosco#commaOrSemiColon()<cr>A<enter>
+inoremap <silent> <esc><enter> <esc>A;<esc>^
 
 
 " add/change/delete quotes/braces/... and more
@@ -1175,31 +1175,31 @@ function! ToggleQuotesWithVimSurround()
     endif
 endfunction
 " }}}
-nnoremap <silent> -tq :call ToggleQuotesWithVimSurround()<CR>
+nnoremap <silent> -tq :call ToggleQuotesWithVimSurround()<cr>
 
 
 " swap ('transpose') two words or arbitrary things
 Plugin 'tommcdo/vim-exchange'
 " swap this word and the word before
-nmap <Leader>x <Plug>(Exchange)
-xmap <Leader>x <Plug>(Exchange)
-nmap <Leader>xc <Plug>(ExchangeClear)
-nmap <Leader>xl <Plug>(ExchangeLine)
-nmap <Leader>xx <Leader>xiw
+nmap <leader>x <plug>(Exchange)
+xmap <leader>x <plug>(Exchange)
+nmap <leader>xc <plug>(ExchangeClear)
+nmap <leader>xl <plug>(ExchangeLine)
+nmap <leader>xx <leader>xiw
 
 
 " " find and replace tool for multiple files (IDE like)
 " " (helptags are buggy according to vundle)
 " Plugin 'brooth/far.vim'
-" nnoremap <Leader>SS :Far  **<Left><Left><Left>
-" vnoremap <Leader>SS :Far *  **<Left><Left><Left>
-" nnoremap <Leader>SD :Fardo<CR>
+" nnoremap <leader>SS :Far  **<left><left><left>
+" vnoremap <leader>SS :Far *  **<left><left><left>
+" nnoremap <leader>SD :Fardo<cr>
 
 
 " " add "printf" statements with shortcut
 " Plugin 'bergercookie/vim-debugstring'
 
-" nmap <Leader>ad <Plug>DumpDebugString
+" nmap <leader>ad <plug>DumpDebugString
 
 
 
@@ -1214,11 +1214,11 @@ nmap <Leader>xx <Leader>xiw
 " let g:multi_cursor_use_default_mapping=0
 
 " " (only single keystrokes are possible at the moment)
-" let g:multi_cursor_next_key='<C-n>'
-" let g:multi_cursor_prev_key='<C-p>'
-" let g:multi_cursor_skip_key='<C-x>'
-" let g:multi_cursor_quit_key='<Esc>'
-" nnoremap -<C-c> :call multiple_cursors#quit()<CR>
+" let g:multi_cursor_next_key='<c-n>'
+" let g:multi_cursor_prev_key='<c-p>'
+" let g:multi_cursor_skip_key='<c-x>'
+" let g:multi_cursor_quit_key='<esc>'
+" nnoremap -<c-c> :call multiple_cursors#quit()<cr>
 
 " let g:multi_cursor_exit_from_visual_mode=1
 " let g:multi_cursor_exit_from_insert_mode=0
@@ -1259,23 +1259,23 @@ let g:qf_resize_max_height = 8
 " move visual selections around (even blocks) {{{
 
 "Plugin 'shinokada/dragvisuals.vim'
-"vmap <expr> <C-H>  DVB_Drag('left')
-"vmap <expr> <C-L>  DVB_Drag('right')
-"vmap <expr> <C-J>  DVB_Drag('down')
-"vmap <expr> <C-K>  DVB_Drag('up')
+"vmap <expr> <c-h>  DVB_Drag('left')
+"vmap <expr> <c-l>  DVB_Drag('right')
+"vmap <expr> <c-j>  DVB_Drag('down')
+"vmap <expr> <c-k>  DVB_Drag('up')
 
 
 " this is an improved version of dragvisuals
 Plugin 'zirrostig/vim-schlepp'
 
-vmap <up>    <Plug>SchleppUp
-vmap <down>  <Plug>SchleppDown
-vmap <left>  <Plug>SchleppLeft
-vmap <right> <Plug>SchleppRight
+vmap <up>    <plug>SchleppUp
+vmap <down>  <plug>SchleppDown
+vmap <left>  <plug>SchleppLeft
+vmap <right> <plug>SchleppRight
 
 " duplicate
 " (delete selection with x. by default, x and d do the same)
-vmap -u <Plug>SchleppDup
+vmap -u <plug>SchleppDup
 
 
 " }}}
@@ -1284,7 +1284,7 @@ vmap -u <Plug>SchleppDup
 
 Plugin 'vim-scripts/toggle_words.vim'
 
-noremap <silent> -tw :ToggleWord<CR>
+noremap <silent> -tw :ToggleWord<cr>
 
 let g:toggle_words_dict = {
             \ 'css': [
@@ -1377,10 +1377,10 @@ let g:toggle_words_dict = {
 
 " snippet engine
 Plugin 'SirVer/ultisnips'
-let g:UltiSnipsExpandTrigger='<C-k>'
-"let g:UltiSnipsListSnippets='<Esc>.'
-let g:UltiSnipsJumpForwardTrigger='<C-i>'
-let g:UltiSnipsJumpBackwardTrigger='<C-o>'
+let g:UltiSnipsExpandTrigger='<c-k>'
+"let g:UltiSnipsListSnippets='<esc>.'
+let g:UltiSnipsJumpForwardTrigger='<c-i>'
+let g:UltiSnipsJumpBackwardTrigger='<c-o>'
 let g:UltiSnipsSnippetDirectories=['UltiSnips', 'sflipsnippets']
 
 
@@ -1406,16 +1406,16 @@ autocmd filetype php set filetype=php.html
 " Plugin 'Valloric/YouCompleteMe'
 " let g:ycm_server_python_interpreter = '/usr/bin/python3'
 " let g:ycm_path_to_python_interpreter = '/usr/bin/python3'
-let g:ycm_key_invoke_completion = '<Esc>.'
-let g:ycm_key_list_select_completion   = ['<C-N>', '<Down>', '<Tab>', '<Enter>']
-let g:ycm_key_list_previous_completion = ['<C-P>', '<Up>']
+let g:ycm_key_invoke_completion = '<esc>.'
+let g:ycm_key_list_select_completion   = ['<c-n>', '<down>', '<tab>', '<enter>']
+let g:ycm_key_list_previous_completion = ['<c-p>', '<up>']
 " let g:ycm_show_diagnostics_ui = 0
 
 
 " autocompletion in command mode
 Plugin 'vim-scripts/CmdlineComplete'
-cmap <C-p> <Plug>CmdlineCompleteBackward
-cmap <C-n> <Plug>CmdlineCompleteForward
+cmap <c-p> <plug>CmdlineCompleteBackward
+cmap <c-n> <plug>CmdlineCompleteForward
 
 
 " }}}
@@ -1424,8 +1424,8 @@ cmap <C-n> <Plug>CmdlineCompleteForward
 
 " generate javascript docs
 Plugin 'heavenshell/vim-jsdoc'
-" nnoremap <silent> -adj ?function<cr>:noh<cr><Plug>(jsdoc)
-nnoremap <silent> -adj :JsDoc<CR>
+" nnoremap <silent> -adj ?function<cr>:noh<cr><plug>(jsdoc)
+nnoremap <silent> -adj :JsDoc<cr>
 
 
 " }}}
@@ -1436,7 +1436,7 @@ nnoremap <silent> -adj :JsDoc<CR>
 Plugin 'Yggdroot/indentLine'
 let g:indentLine_enabled = 1
 let g:indentLine_char = '┊'
-nnoremap <C-G>I :IndentLinesToggle<CR>
+nnoremap <c-g>I :IndentLinesToggle<cr>
 
 " Does not work. TODO: Fix it!
 augroup indentline_enabled
@@ -1451,10 +1451,10 @@ augroup END
 Plugin 'junegunn/vim-easy-align'
 
 " Start interactive EasyAlign in visual mode (e.g. vip-L=)
-xmap -L <Plug>(EasyAlign)
+xmap -L <plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. -LG=)
-nmap -L <Plug>(EasyAlign)
+nmap -L <plug>(EasyAlign)
 
 
 " }}}
@@ -1469,10 +1469,10 @@ Plugin 'Chiel92/vim-autoformat'
 " - js-beautify (for HTML, CSS, JavaScript, JSON)
 " - scalafmt (for scala)
 
-nnoremap -af :Autoformat<CR>:GitGutter<CR>
-vnoremap -af :Autoformat<CR>:GitGutter<CR>
-nmap <Leader>af -af
-vmap <Leader>af -af
+nnoremap -af :Autoformat<cr>:GitGutter<cr>
+vnoremap -af :Autoformat<cr>:GitGutter<cr>
+nmap <leader>af -af
+vmap <leader>af -af
 
 let g:formatdef_scalafmt = "'scalafmt --stdin 2>/dev/null'"
 let g:formatters_scala = ['scalafmt']
@@ -1481,8 +1481,8 @@ let g:formatters_scala = ['scalafmt']
 " autoformat for json does not work out with the plugin above. do this instead:
 augroup json_map_autoformat
     au!
-    au FileType json nnoremap -af :%!python -m json.tool<CR>
-    au FileType json nmap <Leader>af -af
+    au FileType json nnoremap -af :%!python -m json.tool<cr>
+    au FileType json nmap <leader>af -af
 augroup END
 
 
@@ -1490,7 +1490,7 @@ augroup END
 " change wrapping of function arguments
 Plugin 'FooSoft/vim-argwrap'
 
-nnoremap <silent> -tf :ArgWrap<CR>
+nnoremap <silent> -tf :ArgWrap<cr>
 
 
 
@@ -1522,10 +1522,10 @@ let g:ShowTrailingWhitespace = 1
 command! -bar ShowTrailingWhitespaceOn  call ShowTrailingWhitespace#Set(1,1)
 command! -bar ShowTrailingWhitespaceOff call ShowTrailingWhitespace#Set(0,1)
 command! -bar ShowTrailingWhitespaceToggle call ShowTrailingWhitespace#Toggle(0)
-        \ <Bar>echo (ShowTrailingWhitespace#IsSet() ?
+        \ <bar>echo (ShowTrailingWhitespace#IsSet() ?
         \ 'Show trailing whitespace' : 'Not showing trailing whitespace')
-nnoremap <silent> <C-G>A  :ShowTrailingWhitespaceToggle<CR>
-nnoremap <silent> <C-G>st :ShowTrailingWhitespaceToggle<CR>
+nnoremap <silent> <c-g>A  :ShowTrailingWhitespaceToggle<cr>
+nnoremap <silent> <c-g>st :ShowTrailingWhitespaceToggle<cr>
 
 " (has a bug)
 "Plugin 'vim-scripts/JumpToTrailingWhiteSpace'
@@ -1538,14 +1538,14 @@ let g:DeleteTrailingWhitespace = 1
 let g:DeleteTrailingWhitespace_Action = 'ask'
 
 " enable/disable plugin
-nnoremap <Leader>dst :let g:DeleteTrailingWhitespace = 1 - g:DeleteTrailingWhitespace<CR>
+nnoremap <leader>dst :let g:DeleteTrailingWhitespace = 1 - g:DeleteTrailingWhitespace<cr>
             \ :echo g:DeleteTrailingWhitespace == 1 ?
             \ 'DeleteTrailingWhitespace enabled' :
-            \ 'DeleteTrailingWhitespace disabled'<CR>
+            \ 'DeleteTrailingWhitespace disabled'<cr>
 " delete trailing whitespace for selected line
-vnoremap <silent> -dst :DeleteTrailingWhitespace<CR>
+vnoremap <silent> -dst :DeleteTrailingWhitespace<cr>
 " delete trailing whitespace for whole buffer
-nnoremap <silent> -dst :%DeleteTrailingWhitespace<CR>
+nnoremap <silent> -dst :%DeleteTrailingWhitespace<cr>
 
 
 " }}}
@@ -1557,12 +1557,12 @@ Plugin 'ap/vim-css-color'
 
 " launch colorpicker and insert color code
 Plugin 'blindFS/vim-colorpicker'
-nnoremap <Leader>icp :ColorPicker<CR>
+nnoremap <leader>icp :ColorPicker<cr>
 
 " alternative colorpicker
 " (readme is looking good, but throws errors)
 "Plugin 'KabbAmine/vCoolor.vim'
-"nnoremap <Leader>cp :VCoolor<CR>
+"nnoremap <leader>cp :VCoolor<cr>
 
 
 " }}}
@@ -1586,11 +1586,11 @@ augroup javascript_on_read
     au FileType javascript call SetupJavascript()
 augroup END
 function! SetupJavascript()
-    nnoremap <Leader>bi  :call VimuxRunCommand("npm install")<CR>
-    nnoremap <Leader>bs  :call VimuxRunCommand("npm start")<CR>
-    nnoremap <Leader>btt :call VimuxRunCommand("npm test")<CR>
-    nnoremap <Leader>btu :call VimuxRunCommand("npm test-unit")<CR>
-    nnoremap <Leader>bti :call VimuxRunCommand("npm test-int")<CR>
+    nnoremap <leader>bi  :call VimuxRunCommand("npm install")<cr>
+    nnoremap <leader>bs  :call VimuxRunCommand("npm start")<cr>
+    nnoremap <leader>btt :call VimuxRunCommand("npm test")<cr>
+    nnoremap <leader>btu :call VimuxRunCommand("npm test-unit")<cr>
+    nnoremap <leader>bti :call VimuxRunCommand("npm test-int")<cr>
 endfunction
 
 
@@ -1615,7 +1615,7 @@ let g:ycm_semantic_triggers.tex = [
 
 augroup map_latex
     au!
-    au FileType latex nnoremap <Leader>bl :VimtexCompileToggle<CR>
+    au FileType latex nnoremap <leader>bl :VimtexCompileToggle<cr>
 augroup END
 
 
@@ -1626,10 +1626,10 @@ augroup php_on_read
     au FileType php call SetupPHP()
 augroup END
 function! SetupPHP()
-    nnoremap <Leader>bi  :call VimuxRunCommand("composer install")<CR>
-    nnoremap <Leader>bu  :call VimuxRunCommand("composer update")<CR>
-    nnoremap <Leader>btt :call VimuxRunCommand("composer test")<CR>
-    nnoremap <Leader>btu :call VimuxRunCommand("composer test")<CR>
+    nnoremap <leader>bi  :call VimuxRunCommand("composer install")<cr>
+    nnoremap <leader>bu  :call VimuxRunCommand("composer update")<cr>
+    nnoremap <leader>btt :call VimuxRunCommand("composer test")<cr>
+    nnoremap <leader>btu :call VimuxRunCommand("composer test")<cr>
 endfunction
 
 
@@ -1640,9 +1640,9 @@ augroup python_on_read
     au FileType python call SetupPython()
 augroup END
 function! SetupPython()
-    nnoremap <Leader>bs  :call VimuxRunCommand("python " . expand('%'))<CR>
-    nnoremap <Leader>b2  :call VimuxRunCommand("python2 " . expand('%'))<CR>
-    nnoremap <Leader>b3  :call VimuxRunCommand("python3 " . expand('%'))<CR>
+    nnoremap <leader>bs  :call VimuxRunCommand("python " . expand('%'))<cr>
+    nnoremap <leader>b2  :call VimuxRunCommand("python2 " . expand('%'))<cr>
+    nnoremap <leader>b3  :call VimuxRunCommand("python3 " . expand('%'))<cr>
 endfunction
 
 
@@ -1660,12 +1660,12 @@ if v:version > 704 || v:version == 704 && has("patch1829")
     let R_user_maps_only = 1
     augroup NvimR
         au!
-        au FileType r nmap <C-r>s           <Plug>RStart
-        au FileType r nmap <C-r>q           <Plug>RClose
-        au FileType r nmap <C-r><C-l>       <Plug>RClearConsole
-        au FileType r nmap <Leader><Enter>  <Plug>RSendFile
-        au FileType r nmap <Enter>          <Plug>RSendLine
-        au FileType r xmap <Enter>          <Plug>RSendSelection
+        au FileType r nmap <c-r>s           <plug>RStart
+        au FileType r nmap <c-r>q           <plug>RClose
+        au FileType r nmap <c-r><c-l>       <plug>RClearConsole
+        au FileType r nmap <leader><enter>  <plug>RSendFile
+        au FileType r nmap <enter>          <plug>RSendLine
+        au FileType r xmap <enter>          <plug>RSendSelection
     augroup END
 endif
 
@@ -1675,25 +1675,25 @@ endif
 " Plugin 'ervandew/eclim'
 
 " start eclipse
-noremap <Leader>aea :Start! /usr/lib/eclipse/eclimd<CR>
+noremap <leader>aea :Start! /usr/lib/eclipse/eclimd<cr>
 " test connection to eclipse
-noremap <Leader>aep :PingEclim<CR>
-noremap <Leader>aev :EclimValidate<CR>
+noremap <leader>aep :PingEclim<cr>
+noremap <leader>aev :EclimValidate<cr>
 " shutdown eclipse
-noremap <Leader>aeo :ShutdownEclim<CR>
+noremap <leader>aeo :ShutdownEclim<cr>
 
 " automated imports
-noremap <Leader>aei :ScalaImport<CR>
+noremap <leader>aei :ScalaImport<cr>
 
 " goto definition
-noremap <Leader>ae<Return> :ScalaSearch<CR>
+noremap <leader>ae<return> :ScalaSearch<cr>
 
 
 
 Plugin 'derekwyatt/vim-scala'
 Plugin 'derekwyatt/vim-sbt'
 Plugin 'mdreves/vim-scaladoc'
-nnoremap <leader>sd :call scaladoc#Search(expand("<cword>"))<CR>
+nnoremap <leader>sd :call scaladoc#Search(expand("<cword>"))<cr>
 
 " Plugin 'ensime/ensime-sbt', { 'branch': '2.0', 'for': 'scala' }
 " Plugin 'ensime/ensime-server', { 'branch': '2.0', 'for': 'scala' }
@@ -1701,17 +1701,17 @@ nnoremap <leader>sd :call scaladoc#Search(expand("<cword>"))<CR>
 " augroup map_scala
     " au!
     " au FileType scala
-                " \ nnoremap <Leader>9d :EnDeclaration<CR> |
-                " \ nnoremap <Leader>9D :EnDeclarationSplit v<CR> |
-                " \ nnoremap <Leader>9x :EnDocBrowse<CR> |
-                " \ nnoremap <Leader>9t :EnType<CR> |
-                " \ " nnoremap <Leader>9t :EnInspectType<CR> |
-                " \ nnoremap <Leader>9T :EnTypeCheck<CR> |
-                " \ nnoremap <Leader>9ö :EnSearch<Space> |
-                " \ nnoremap <Leader>9r :EnRename<CR> |
-                " \ nnoremap <Leader>9i :EnOrganizeImports<CR> |
-                " \ nnoremap <Leader>9I :EnSugestImport<CR> |
-                " \ nnoremap <Leader>9 <NOP>
+                " \ nnoremap <leader>9d :EnDeclaration<cr> |
+                " \ nnoremap <leader>9D :EnDeclarationSplit v<cr> |
+                " \ nnoremap <leader>9x :EnDocBrowse<cr> |
+                " \ nnoremap <leader>9t :EnType<cr> |
+                " \ " nnoremap <leader>9t :EnInspectType<cr> |
+                " \ nnoremap <leader>9T :EnTypeCheck<cr> |
+                " \ nnoremap <leader>9ö :EnSearch<space> |
+                " \ nnoremap <leader>9r :EnRename<cr> |
+                " \ nnoremap <leader>9i :EnOrganizeImports<cr> |
+                " \ nnoremap <leader>9I :EnSugestImport<cr> |
+                " \ nnoremap <leader>9 <nop>
 " augroup END
 
 " scala and ctags:
@@ -1753,22 +1753,22 @@ function! SetupScala()
                 " \%E\ \%#[info]\ %.%#\ was\ not\ equal\ to\ %.%#\ (%f:%l),%Z,
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
-    nnoremap <Leader>bd  :call MakeWithVimux("sbt compile")<CR>
-    nnoremap <Leader>bs  :call MakeWithVimux("sbt run")<CR>
-    nnoremap <Leader>btt :call MakeWithVimux("sbt test it:test")<CR>
-    nnoremap <Leader>btu :call MakeWithVimux("sbt test")<CR>
-    nnoremap <Leader>bti :call MakeWithVimux("sbt it:test")<CR>
-    nnoremap <Leader>bto :call MakeWithVimux("sbt '". CalculateSbtTestOnlyCommand() . "'")<CR>
-    nnoremap <Leader>bx  :call MakeWithVimux("sbt clean")<CR>
-    nnoremap <Leader>br  :call MakeWithVimux("sbt console")<CR>
-    nnoremap <Leader>bD  :call VimuxRunCommand("sbt compile")<CR>
-    nnoremap <Leader>bS  :call VimuxRunCommand("sbt run")<CR>
-    nnoremap <Leader>btT :call VimuxRunCommand("sbt test it:test")<CR>
-    nnoremap <Leader>btU :call VimuxRunCommand("sbt test")<CR>
-    nnoremap <Leader>btI :call VimuxRunCommand("sbt it:test")<CR>
-    nnoremap <Leader>btO :call VimuxRunCommand("sbt '". CalculateSbtTestOnlyCommand() . "'")<CR>
-    nnoremap <Leader>bE  :call MakeWithVimuxOpenErrors('buffer')<CR>gg/\*\*\* FAILED \*\*\*<CR>
-    nnoremap <Leader>fe  /\*\*\* FAILED \*\*\*<CR>
+    nnoremap <leader>bd  :call MakeWithVimux("sbt compile")<cr>
+    nnoremap <leader>bs  :call MakeWithVimux("sbt run")<cr>
+    nnoremap <leader>btt :call MakeWithVimux("sbt test it:test")<cr>
+    nnoremap <leader>btu :call MakeWithVimux("sbt test")<cr>
+    nnoremap <leader>bti :call MakeWithVimux("sbt it:test")<cr>
+    nnoremap <leader>bto :call MakeWithVimux("sbt '". CalculateSbtTestOnlyCommand() . "'")<cr>
+    nnoremap <leader>bx  :call MakeWithVimux("sbt clean")<cr>
+    nnoremap <leader>br  :call MakeWithVimux("sbt console")<cr>
+    nnoremap <leader>bD  :call VimuxRunCommand("sbt compile")<cr>
+    nnoremap <leader>bS  :call VimuxRunCommand("sbt run")<cr>
+    nnoremap <leader>btT :call VimuxRunCommand("sbt test it:test")<cr>
+    nnoremap <leader>btU :call VimuxRunCommand("sbt test")<cr>
+    nnoremap <leader>btI :call VimuxRunCommand("sbt it:test")<cr>
+    nnoremap <leader>btO :call VimuxRunCommand("sbt '". CalculateSbtTestOnlyCommand() . "'")<cr>
+    nnoremap <leader>bE  :call MakeWithVimuxOpenErrors('buffer')<cr>gg/\*\*\* FAILED \*\*\*<cr>
+    nnoremap <leader>fe  /\*\*\* FAILED \*\*\*<cr>
 endfunction
 command! -bang SetupScala :call SetupScala()
 
@@ -1800,8 +1800,8 @@ augroup sql_on_read
     au FileType sql call SetupSQL()
 augroup END
 function! SetupSQL()
-    nnoremap <Leader>bm  :call VimuxRunCommand("\\. " . expand('%:p'))<CR>
-    nnoremap <Leader>bp  :call VimuxRunCommand("\\i " . expand('%:p'))<CR>
+    nnoremap <leader>bm  :call VimuxRunCommand("\\. " . expand('%:p'))<cr>
+    nnoremap <leader>bp  :call VimuxRunCommand("\\i " . expand('%:p'))<cr>
 endfunction
 
 
@@ -1820,7 +1820,7 @@ let g:gundo_right = 1
 let g:gundo_preview_bottom = 1
 let g:gundo_return_on_revert = 0
 
-nnoremap <Leader>ut :GundoToggle<CR>
+nnoremap <leader>ut :GundoToggle<cr>
 
 
 " }}}
@@ -1840,7 +1840,7 @@ nnoremap <Leader>ut :GundoToggle<CR>
 
     " fix s mapping
     " (must be executed after yankstack#setup())
-    nmap s <Plug>Sneak_S
+    nmap s <plug>Sneak_S
 
 
 endif
@@ -1892,7 +1892,7 @@ set t_vb=
 " encoding should be utf-8 on every OS
 set     encoding=utf-8
 set fileencoding=utf-8
-" <EOL> line ending philosophies to try
+" <eol> line ending philosophies to try
 " set fileformats=unix,dos,mac
 
 " reload files changed outside vim
@@ -2044,7 +2044,7 @@ set smarttab
 " 1 space, not 2, when joining sentences
 set nojoinspaces
 
-" allow <BS> to delete everything
+" allow <bs> to delete everything
 set backspace=indent,eol,start
 
 " when incrementing numbers with leading zeros, don't interpret them as octal
@@ -2184,11 +2184,11 @@ let terminal='urxvt'
 if terminal == 'konsole'
     " (this also resets the terminal font size, which is annoying)
     if exists('$TMUX')
-        let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-        let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+        let &t_SI = "\<esc>Ptmux;\<esc>\<esc>]50;CursorShape=1\x7\<esc>\\"
+        let &t_EI = "\<esc>Ptmux;\<esc>\<esc>]50;CursorShape=0\x7\<esc>\\"
     else
-        let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-        let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+        let &t_SI = "\<esc>]50;CursorShape=1\x7"
+        let &t_EI = "\<esc>]50;CursorShape=0\x7"
     endif
 elseif terminal == 'urxvt'
     let &t_SI = "\e[6 q"
@@ -2405,7 +2405,7 @@ function! SearchMultiLine(bang, ...)
     let @/ = join(a:000, sep)
   endif
 endfunction
-command! -bang -nargs=* -complete=tag SearchMultiLine call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
+command! -bang -nargs=* -complete=tag SearchMultiLine call SearchMultiLine(<bang>0, <f-args>)|normal! /<c-r>/<cr>
 
 " }}}
 
@@ -2454,9 +2454,9 @@ function! ToggleHTMLComment(mode)
         execute range . "substitute:\\v^(\\s*)(.*)$:\\1<!-- \\2 -->:"
     else
         " uncomment
-        " .substitute:\v\<!--\s*(.*\S)\s*--\>:\1:
-        " execute range . escape("substitute:\v\<!--\s*(.*\S)\s*--\>:\1:", '\')
-        execute range . "substitute:\\v\\<!--\\s*(.*\\S)\\s*--\\>:\\1:"
+        " .substitute:\v\<!--\s*(.*\s)\s*--\>:\1:
+        " execute range . escape("substitute:\v\<!--\s*(.*\s)\s*--\>:\1:", '\')
+        execute range . "substitute:\\v\\<!--\\s*(.*\\s)\\s*--\\>:\\1:"
     endif
 
 endfunction
@@ -2530,8 +2530,8 @@ command! -bar RangerChooser call RangerChooser(getcwd())
 function! s:SearchMode()
   if !exists('s:searchmode') || s:searchmode == 0
     echo 'Search next: scroll as few times as possible (smart)'
-    nnoremap <silent> n n:call <SID>MaybeScroll()<CR>zv
-    nnoremap <silent> N N:call <SID>MaybeScroll()<CR>zv
+    nnoremap <silent> n n:call <sid>MaybeScroll()<cr>zv
+    nnoremap <silent> N N:call <sid>MaybeScroll()<cr>zv
     let s:searchmode = 1
   elseif s:searchmode == 1
     echo 'Search next: scroll hit to middle'
@@ -2577,7 +2577,7 @@ function! SendBufferViaSlackChooseChannel()
     let choice = input("Which channel: ")
     call SendBufferViaSlack(choice)
 endfunction
-nnoremap <Leader>iS :call SendBufferViaSlackChooseChannel()<CR>
+nnoremap <leader>iS :call SendBufferViaSlackChooseChannel()<cr>
 " }}}
 
 
@@ -2719,7 +2719,7 @@ iabbrev autotype autotype: email :tab pass :enter
 
 
 " (for compatibility)
-nnoremap <C-G><C-G> <C-G>
+nnoremap <c-g><c-g> <c-g>
 
 " refresh screen the phat way
 " TODO make it work
@@ -2727,22 +2727,22 @@ nnoremap <C-G><C-G> <C-G>
      "command! MyRefresh :nohlsearch<bar>
                     "\   :diffupdate<bar>
                     "\   :syntax sync fromstart <bar>
-                    "\   :redraw!<CR>
+                    "\   :redraw!<cr>
 "else
      "command! MyRefresh :nohlsearch<bar>
                     "\   :diffupdate<bar>
                     "\   :syntax sync fromstart <bar>
                     "\   :redraw!<bar>
-                    "\   :AirlineRefresh<CR>
+                    "\   :AirlineRefresh<cr>
 "endif
-"nnoremap <Leader><F5> :MyRefresh<CR>
+"nnoremap <leader><f5> :MyRefresh<cr>
 
 
 " show absolute path of current file (':help filename-modifiers')
-nnoremap <Leader><C-G> :echo expand("%:~")<CR>
+nnoremap <leader><c-g> :echo expand("%:~")<cr>
 
 " if in a git directory and there are dirty files, open them
-" nnoremap <Leader>eG :silent! args `git diff --name-only`<CR>:bd#<CR>
+" nnoremap <leader>eG :silent! args `git diff --name-only`<cr>:bd#<cr>
 function! EditGitDirtyFiles()
     let numberOfGitDirtyFiles = system("git status --porcelain 2>/dev/null \| egrep '^(M\| M)' \| wc -l")
     if numberOfGitDirtyFiles != 0
@@ -2756,46 +2756,46 @@ function! EditGitDirtyFiles()
         echo 'Working directory clean'
     endif
 endfunction
-nnoremap <Leader>eG :call EditGitDirtyFiles()<CR>
+nnoremap <leader>eG :call EditGitDirtyFiles()<cr>
 
 " open config file
-"nnoremap <Leader>ev :edit ~/dotfiles/vim/vimrc<CR>
-nnoremap <Leader>ev :execute 'edit ' . resolve(expand($MYVIMRC))<CR>
-nnoremap <Leader>e3 :edit ~/.i3/config<CR>
+"nnoremap <leader>ev :edit ~/dotfiles/vim/vimrc<cr>
+nnoremap <leader>ev :execute 'edit ' . resolve(expand($MYVIMRC))<cr>
+nnoremap <leader>e3 :edit ~/.i3/config<cr>
 
 " reload config file
-nnoremap <Leader>sv :source $MYVIMRC<CR>:syntax enable<CR>
-nmap <F5> <Leader>sv
+nnoremap <leader>sv :source $MYVIMRC<cr>:syntax enable<cr>
+nmap <f5> <leader>sv
 
 
 " to follow links in help and jump to definition (ctags)
-nnoremap <M-Enter>    <C-]>
-nnoremap <Esc><Enter> <C-]>
+nnoremap <m-enter>    <c-]>
+nnoremap <esc><enter> <c-]>
 augroup map_enter_help
     au!
     au BufReadPost */vim/*/doc/*,*/\.vim/bundle/*doc/*
-                \ nnoremap <buffer> <Enter> <C-]>
+                \ nnoremap <buffer> <enter> <c-]>
 augroup END
-nnoremap <Leader><Down> :tn<CR>
-nnoremap <Leader><Up>   :tp<CR>
+nnoremap <leader><down> :tn<cr>
+nnoremap <leader><up>   :tp<cr>
 
 
 " visual block mode is more useful than visual mode
-nnoremap v <C-v>
-nnoremap <C-v> v
+nnoremap v <c-v>
+nnoremap <c-v> v
 
 " alternative for visual line mode
 nnoremap vv V
 
 " leave visual mode quickly
-vnoremap v <C-c>
+vnoremap v <c-c>
 
 
 " copy to clipboard / primary selection
-nnoremap         <C-c>     "+y
-nnoremap    <C-c><C-c>    V"*ygv"+y
-nnoremap <Leader><C-c> ggVG"*ygv"+y<C-o><C-o>
-vnoremap         <C-c>     "*ygv"+y
+nnoremap         <c-c>     "+y
+nnoremap    <c-c><c-c>    V"*ygv"+y
+nnoremap <leader><c-c> ggVG"*ygv"+y<c-o><c-o>
+vnoremap         <c-c>     "*ygv"+y
 
 " paste from clipboard / primary selection {{{
 function! PasteFromGUI()
@@ -2823,20 +2823,20 @@ function! PasteFromGUI()
     endif
 endfunction
 " }}}
-noremap <silent> <C-v><C-v> :call PasteFromGUI()<CR>
-imap <C-v><C-v> <C-o><C-v><C-v>
-noremap <silent> <C-v>j o<Esc>:call PasteFromGUI()<CR>
-noremap <silent> <C-v>k O<Esc>:call PasteFromGUI()<CR>
+noremap <silent> <c-v><c-v> :call PasteFromGUI()<cr>
+imap <c-v><c-v> <c-o><c-v><c-v>
+noremap <silent> <c-v>j o<esc>:call PasteFromGUI()<cr>
+noremap <silent> <c-v>k O<esc>:call PasteFromGUI()<cr>
 
 
 
 " macro ('complex repeat') without worrying about registers
-" record macro (start and stop) with <Leader>Q
-" replay macro with <Leader>q
-" nnoremap @{ :nmap <Leader<Left><Right>>Q @}<CR>qq
-" nnoremap @} q:nmap <Leader<Left><Right>>Q @{<CR>:echo ''<CR>
-" nmap     <Leader>Q @{
-" nnoremap <Leader>q @q
+" record macro (start and stop) with <leader>Q
+" replay macro with <leader>q
+" nnoremap @{ :nmap <leader<left><right>>Q @}<cr>qq
+" nnoremap @} q:nmap <leader<left><right>>Q @{<cr>:echo ''<cr>
+" nmap     <leader>Q @{
+" nnoremap <leader>q @q
 
 " macro ('complex repeat') with registers
 " (remapping q is bad, because it is used to close stuff like plugin windows)
@@ -2846,24 +2846,24 @@ nnoremap QQ @@
 
 
 " alternative way to go back to normal mode
-inoremap jk <Esc>
-cnoremap jk <C-c>
-cnoremap <C-g> <C-c>
+inoremap jk <esc>
+cnoremap jk <c-c>
+cnoremap <c-g> <c-c>
 
 " change to insert mode from visual mode
 " (this disables text objects)
 "vnoremap i vi
 
 " scroll with arrow keys if i lay back
-"nnoremap <Down> <C-E>
-"nnoremap <Up>   <C-Y>
+"nnoremap <down> <c-e>
+"nnoremap <up>   <c-y>
 
 " scroll a little smoother (but still without plugin)
 " (this actually is suggested in :help scroll-smooth)
-noremap <M-j>  <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
-noremap <Esc>j <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
-noremap <M-k>  <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
-noremap <Esc>k <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
+noremap <m-j>  <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
+noremap <esc>j <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
+noremap <m-k>  <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
+noremap <esc>k <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 
 
 " }}}
@@ -2882,8 +2882,8 @@ cnoremap w!! w !sudo tee % >/dev/null
 "cnoreabbrev w!! w !sudo tee % >/dev/null
 
 " have the up/down search functionality without reaching to the arrow keys
-cnoremap <C-j> <down>
-cnoremap <C-k> <up>
+cnoremap <c-j> <down>
+cnoremap <c-k> <up>
 
 
 
@@ -2895,40 +2895,40 @@ cnoremap <C-k> <up>
 
 
 " change text width
-nnoremap <Leader>ow0 :set textwidth=0<CR>
-nnoremap <Leader>ow5 :set textwidth=50<CR>
-nnoremap <Leader>ow7 :set textwidth=78<CR>
-nnoremap <Leader>ow8 :set textwidth=80<CR>
-nnoremap <Leader>ow1 :set textwidth=100<CR>
-nnoremap <Leader>ow2 :set textwidth=120<CR>
+nnoremap <leader>ow0 :set textwidth=0<cr>
+nnoremap <leader>ow5 :set textwidth=50<cr>
+nnoremap <leader>ow7 :set textwidth=78<cr>
+nnoremap <leader>ow8 :set textwidth=80<cr>
+nnoremap <leader>ow1 :set textwidth=100<cr>
+nnoremap <leader>ow2 :set textwidth=120<cr>
 
 " change tab width (soft)
-nnoremap <Leader>ot2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
-nnoremap <Leader>ot4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
-nnoremap <Leader>ot8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<CR>
+nnoremap <leader>ot2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<cr>
+nnoremap <leader>ot4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<cr>
+nnoremap <leader>ot8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<cr>
 
 " toggle paste mode
-nnoremap <Leader>op :set paste! <bar> :set paste?<CR>
+nnoremap <leader>op :set paste! <bar> :set paste?<cr>
 
 " toggle autosave ('autowrite')
-nnoremap <silent> <Leader>oWW
-            \ :if !exists("b:local_autosave") <bar> let b:local_autosave = 0 <bar> endif <CR>
-            \ :let b:local_autosave = 1 - b:local_autosave <CR>
+nnoremap <silent> <leader>oWW
+            \ :if !exists("b:local_autosave") <bar> let b:local_autosave = 0 <bar> endif <cr>
+            \ :let b:local_autosave = 1 - b:local_autosave <cr>
             \ :echo b:local_autosave == 1 ?
             \ 'autosave enabled for local buffer' :
-            \ 'autosave disabled for local buffer'<CR>
-nnoremap <silent> <Leader>oWA
-            \ :let g:autosave = 1 - g:autosave <CR>
+            \ 'autosave disabled for local buffer'<cr>
+nnoremap <silent> <leader>oWA
+            \ :let g:autosave = 1 - g:autosave <cr>
             \ :echo g:autosave == 1 ?
             \ 'autosave enabled' :
-            \ 'autosave disabled'<CR>
+            \ 'autosave disabled'<cr>
 
 " toggle search preferences
-nnoremap <Leader>os :set hlsearch! <bar> :set hlsearch?<CR>
-nnoremap <Leader>oS :set wrapscan! <bar> :set wrapscan?<CR>
+nnoremap <leader>os :set hlsearch! <bar> :set hlsearch?<cr>
+nnoremap <leader>oS :set wrapscan! <bar> :set wrapscan?<cr>
 
 " ... but ignore typos
-nnoremap <Leader>o <NOP>
+nnoremap <leader>o <nop>
 
 
 
@@ -2938,46 +2938,46 @@ nnoremap <Leader>o <NOP>
 
 
 " toggle syntax highlighting
-nmap <silent> <C-G>y :call ToggleSyntax()<CR>
+nmap <silent> <c-g>y :call ToggleSyntax()<cr>
 " toggle syntax highlighting after g:synmaxcol characters
-nmap <silent> <C-G>Y :let &synmaxcol = g:synmaxcol - &synmaxcol <CR>
+nmap <silent> <c-g>Y :let &synmaxcol = g:synmaxcol - &synmaxcol <cr>
 
 " toggle line numbers
-noremap <silent> <C-G>l :set number! <bar> :set relativenumber! <CR>
-noremap <silent> <C-G>L :set relativenumber! <CR>
+noremap <silent> <c-g>l :set number! <bar> :set relativenumber! <cr>
+noremap <silent> <c-g>L :set relativenumber! <cr>
 
 " toggle word wrap
-nnoremap <silent> <C-G>w :setlocal wrap! <bar> :set wrap? <CR>
+nnoremap <silent> <c-g>w :setlocal wrap! <bar> :set wrap? <cr>
 
 " toggle vertical ruler
-nnoremap <silent> <C-G>r :call SetColorColumn('toggle')<CR>
-nnoremap <silent> <C-G>R :highlight ColorColumn ctermbg=235
-                  \ <Bar> highlight clear BGdd8844
-                  \ <Bar> highlight clear BG000000
-                  \ <Bar> highlight clear BGffa724
-                  \ <Bar> highlight clear BGaeee00
-                  \ <Bar> highlight clear BG8cffba
-                  \ <Bar> highlight clear BGb88853
-                  \ <Bar> highlight clear BGff9eb8
-                  \ <Bar> highlight clear BGff2c4b
-                  \ <CR>
+nnoremap <silent> <c-g>r :call SetColorColumn('toggle')<cr>
+nnoremap <silent> <c-g>R :highlight ColorColumn ctermbg=235
+                  \ <bar> highlight clear BGdd8844
+                  \ <bar> highlight clear BG000000
+                  \ <bar> highlight clear BGffa724
+                  \ <bar> highlight clear BGaeee00
+                  \ <bar> highlight clear BG8cffba
+                  \ <bar> highlight clear BGb88853
+                  \ <bar> highlight clear BGff9eb8
+                  \ <bar> highlight clear BGff2c4b
+                  \ <cr>
 
 
 " toggle highlight current cursor position
-nnoremap <silent> <C-G>c :let g:cursorposition = 1 - g:cursorposition <CR>i<Esc>
+nnoremap <silent> <c-g>c :let g:cursorposition = 1 - g:cursorposition <cr>i<esc>
 
 " toggle show listchars (like whitespace)
-nnoremap <silent> <C-G>a :set list!<CR>
+nnoremap <silent> <c-g>a :set list!<cr>
 
 
 " spell checking
-nnoremap <C-G>ss :setlocal spell! <bar> :set spell? <CR>
-nnoremap <C-G>se :setlocal spelllang=en<CR>
-nnoremap <C-G>sd :setlocal spelllang=de<CR>
-nmap <C-G>sg <C-G>sd
+nnoremap <c-g>ss :setlocal spell! <bar> :set spell? <cr>
+nnoremap <c-g>se :setlocal spelllang=en<cr>
+nnoremap <c-g>sd :setlocal spelllang=de<cr>
+nmap <c-g>sg <c-g>sd
 
 " ... but ignore typos
-nnoremap <C-G> <NOP>
+nnoremap <c-g> <nop>
 
 
 
@@ -3000,29 +3000,29 @@ vnoremap gk 8k
 " move with emacs-keys like in most shells
 " (noremap! with the '!' is for insert and ex mode)
 " ... by characters
-noremap! <C-b>  <Left>
-noremap! <C-f>  <Right>
-noremap! <C-d>  <Delete>
+noremap! <c-b>  <left>
+noremap! <c-f>  <right>
+noremap! <c-d>  <delete>
 " ... by words
-noremap! <M-b>  <S-Left>
-noremap! <M-f>  <S-Right>
-cnoremap <Esc>b <S-Left>
-cnoremap <Esc>f <S-Right>
+noremap! <m-b>  <s-left>
+noremap! <m-f>  <s-right>
+cnoremap <esc>b <s-left>
+cnoremap <esc>f <s-right>
 
 
 " move to BOL
 " smart BOL: the cursor moves to the first nonblank character on the line,
 "            or, if already at that position, to the start of the line.
 "            (http://vim.wikia.com/wiki/Smart_home)
-noremap <expr> <silent> <C-A> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
-imap <silent> <C-A> <C-O><C-A>
+noremap <expr> <silent> <c-a> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
+imap <silent> <c-a> <c-o><c-a>
 
 " move to EOL
-nnoremap <C-E> $
-vnoremap <C-E> $
-onoremap <C-E> $
-inoremap <C-E> <End>
-cnoremap <C-A> <Home>
+nnoremap <c-e> $
+vnoremap <c-e> $
+onoremap <c-e> $
+inoremap <c-e> <end>
+cnoremap <c-a> <home>
 " move to EOL with l instead of $
 onoremap l $
 
@@ -3047,7 +3047,7 @@ nnoremap ` '
 nnoremap Ä `
 
 " goto last edit
-nnoremap <Leader>. `.zzzv
+nnoremap <leader>. `.zzzv
 
 
 " center line when jumping around
@@ -3072,24 +3072,24 @@ endif
 " (is useful when 'nowrapscan' is set)
 " nmap gö 1Gn
 nmap gÖ G$N
-" nmap gö :keepjumps normal 1G<CR>n " does not work
-" nmap gÖ :keepjumps normal G$<CR>N " does not work
-nmap <silent> gö :ijump! 1    /<C-R>/<CR>zv
-" nmap gÖ :ijump! 9999 /<C-R>/<CR> " does not work
+" nmap gö :keepjumps normal 1G<cr>n " does not work
+" nmap gÖ :keepjumps normal G$<cr>N " does not work
+nmap <silent> gö :ijump! 1    /<c-r>/<cr>zv
+" nmap gÖ :ijump! 9999 /<c-r>/<cr> " does not work
 
 
 " number of occurrences
-nnoremap <Leader>n* *<C-O>:%s///ngg<CR>
-nnoremap <Leader>nö  :%s:<C-R>/::ngg<CR>
-xnoremap <Leader>nö y:%s:\V<C-R>"::ngg<CR>
+nnoremap <leader>n* *<c-o>:%s///ngg<cr>
+nnoremap <leader>nö  :%s:<c-r>/::ngg<cr>
+xnoremap <leader>nö y:%s:\V<c-r>"::ngg<cr>
 
 
 
 " search in multiple files
 if s:MyMode == 'stripped'
-    nnoremap <Leader>ö
-            \ :call ToggleList("Quickfix List", 'c')<CR>
-            \ :vimgrep // **/*<Left><Left><Left><Left><Left><Left>
+    nnoremap <leader>ö
+            \ :call ToggleList("Quickfix List", 'c')<cr>
+            \ :vimgrep // **/*<left><left><left><left><left><left>
 endif
 
 
@@ -3101,8 +3101,8 @@ endif
 " keep search matches in the middle of the window and open folds
 " nnoremap n nzzzv
 " nnoremap N Nzzzv
-silent call <SID>SearchMode()
-nnoremap <silent> <Leader>on :call <SID>SearchMode()<CR>
+silent call <sid>SearchMode()
+nnoremap <silent> <leader>on :call <sid>SearchMode()<cr>
 
 
 " 'goto definition' with viewport adjustments
@@ -3111,41 +3111,41 @@ nmap gD gDztzv
 
 
 " search across newlines
-nnoremap <Leader>fn :SearchMultiLine<Space>
+nnoremap <leader>fn :SearchMultiLine<space>
 
 
 " find word under cursor
 nnoremap *  *zv
 nnoremap +  #zv
-nnoremap g+ #gg/<C-P><CR>zv
+nnoremap g+ #gg/<c-p><cr>zv
 
 " find visual selection
 " (i use this instead of g* and g# anyway)
-xnoremap *  y/\V<C-R>"<CR>zv
-xnoremap +  y?\V<C-R>"<CR>zv
-xnoremap g+ ygg/\V<C-R>"<CR>zv
+xnoremap *  y/\V<c-r>"<cr>zv
+xnoremap +  y?\V<c-r>"<cr>zv
+xnoremap g+ ygg/\V<c-r>"<cr>zv
 
 
 " find lines that are too long
-nnoremap <Leader>fw :exec '/\v^.{' . &textwidth . '}.'<CR>
+nnoremap <leader>fw :exec '/\v^.{' . &textwidth . '}.'<cr>
 
 " find trailing whitespace
-nnoremap <Leader>fst /\v\s+$<CR>
+nnoremap <leader>fst /\v\s+$<cr>
 
 " find matching element (brackets/braces/parentheses)
-nnoremap <Leader>fb %
+nnoremap <leader>fb %
 " extended find matching element (e.g. HTML-tags with matchit plugin)
-nmap <Leader>f<Leader> %
+nmap <leader>f<leader> %
 
 " find all lines with keyword under cursor and ask which one to jump to
-nmap <Leader>fj [I:let nr = input("Which one: ")
-            \   <Bar> exe "normal " . nr ."[\t"<CR>
+nmap <leader>fj [I:let nr = input("Which one: ")
+            \   <bar> exe "normal " . nr ."[\t"<cr>
 
 " find git merge conflict markers
-nnoremap <Leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
+nnoremap <leader>fc /\v^[<\|=>]{7}( .*\|$)<cr>
 
 " find errors and stuff
-nnoremap <Leader>fe /\v(error\|fail)<CR>
+nnoremap <leader>fe /\v(error\|fail)<cr>
 
 
 
@@ -3168,14 +3168,14 @@ nnoremap gV `[v`]
 nnoremap cC viw~
 
 " autocompletion
-inoremap <M-.>  <C-N>
-inoremap <Esc>. <C-N>
-inoremap <M-:>  <C-P>
-inoremap <Esc>: <C-P>
+inoremap <m-.>  <c-n>
+inoremap <esc>. <c-n>
+inoremap <m-:>  <c-p>
+inoremap <esc>: <c-p>
 
 " increment/decrement number
-nnoremap -i <C-A>
-nnoremap -- <C-X>
+nnoremap -i <c-a>
+nnoremap -- <c-x>
 
 
 " indent lines
@@ -3184,32 +3184,32 @@ vnoremap > >gv
 
 " change tab width (hard)
 nnoremap -rt2 :set noexpandtab <bar> :retab! <bar>
-            \ :set expandtab tabstop=2 <bar> :retab <CR>
+            \ :set expandtab tabstop=2 <bar> :retab <cr>
 nnoremap -rt4 :set noexpandtab <bar> :retab! <bar>
-            \ :set expandtab tabstop=4 <bar> :retab <CR>
+            \ :set expandtab tabstop=4 <bar> :retab <cr>
 nnoremap -rt8 :set noexpandtab <bar> :retab! <bar>
-            \ :set expandtab tabstop=8 <bar> :retab <CR>
+            \ :set expandtab tabstop=8 <bar> :retab <cr>
 
 " yank line with Enter (i do that so often)
 " CANNOT MAP THIS BECAUSE OF SPECIAL PLUGIN BUFFERS AND STUFF
-" nnoremap <Enter> yy
+" nnoremap <enter> yy
 
 " " autoformat with enter in normal buffers
 " augroup map_enter_autoformat
 "     au!
 "     au BufReadPost *
 "                 \ if ! strchars(&buftype) |
-"                 \   nnoremap <buffer> <Enter> gqap |
-"                 \   vnoremap <buffer> <Enter> gq |
+"                 \   nnoremap <buffer> <enter> gqap |
+"                 \   vnoremap <buffer> <enter> gq |
 "                 \ endif
 " augroup END
 
 " move line up or down
 " (:m closes folds https://groups.google.com/forum/#!topic/vim_dev/QGgbjv4uyZc)
-nnoremap <silent> -k :set fdm=manual<CR>:m .-2<CR>:set fdm=marker<CR>
-nnoremap <silent> -j :set fdm=manual<CR>:m .+1<CR>:set fdm=marker<CR>
-vnoremap <silent> -j <Esc>:set fdm=manual<CR>gv:m '>+1<CR>gv=gv:set fdm=marker<CR>
-vnoremap <silent> -k <Esc>:set fdm=manual<CR>gv:m '<-2<CR>gv=gv:set fdm=marker<CR>
+nnoremap <silent> -k :set fdm=manual<cr>:m .-2<cr>:set fdm=marker<cr>
+nnoremap <silent> -j :set fdm=manual<cr>:m .+1<cr>:set fdm=marker<cr>
+vnoremap <silent> -j <esc>:set fdm=manual<cr>gv:m '>+1<cr>gv=gv:set fdm=marker<cr>
+vnoremap <silent> -k <esc>:set fdm=manual<cr>gv:m '<-2<cr>gv=gv:set fdm=marker<cr>
 
 " join line
 nnoremap -lj J
@@ -3219,25 +3219,25 @@ nnoremap -lk kddpkJ
 
 " split line (opposite of join line)
 " (regular 'S' can be done with 'cc' instead)
-nnoremap -ls i<CR><esc>
+nnoremap -ls i<cr><esc>
             \ ^mq
-            \ :let searchregister=@/<CR>
-            \ :silent! .-1s/\v +$//<CR>:nohlsearch<CR>
-            \ :let @/=searchregister<CR>
+            \ :let searchregister=@/<cr>
+            \ :silent! .-1s/\v +$//<cr>:nohlsearch<cr>
+            \ :let @/=searchregister<cr>
             \ `q
 
 " duplicate code
 nnoremap -uu yyp
 nnoremap -ul yyp
-nnoremap -up yap<S-}>p
+nnoremap -up yap<s-}>p
 vnoremap -u yP
 
 " add new lines above or below
 "(this works without mappings, except that we arein insert mode afterwards)
-"noremap <M-o>  <Esc>o<Esc>k
-"noremap <Esc>o <Esc>o<Esc>k
-"noremap <M-O>  <Esc>O<Esc>j
-"noremap <Esc>O <Esc>O<Esc>j
+"noremap <m-o>  <esc>o<esc>k
+"noremap <esc>o <esc>o<esc>k
+"noremap <m-o>  <esc>O<esc>j
+"noremap <esc>O <esc>O<esc>j
 " nnoremap <somekey> :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[j
 nnoremap K :<c-u>put =repeat(nr2char(10), v:count1)<cr>k
 
@@ -3246,67 +3246,67 @@ nnoremap K :<c-u>put =repeat(nr2char(10), v:count1)<cr>k
 nnoremap -li kWjdwgE
 
 " add space (a few newlines) below
-"nnoremap <Enter> :.+1insert \n\n\n<CR>
-nnoremap -as mno<Esc>o<Esc>o<Esc>o<Esc>`n
+"nnoremap <enter> :.+1insert \n\n\n<cr>
+nnoremap -as mno<esc>o<esc>o<esc>o<esc>`n
 
 " add a line of characters
-nnoremap -al :call InsertCharLine(input("Insert character: "), 80)<CR>
+nnoremap -al :call InsertCharLine(input("Insert character: "), 80)<cr>
 " add a box of characters ('comment box')
-nnoremap -ab :call InsertCharBox(input("Insert character: "))<CR>
+nnoremap -ab :call InsertCharBox(input("Insert character: "))<cr>
 " add a line of characters below, just as long as the current line
 nnoremap -au- yyp^v$r-
 nnoremap -au= yyp^v$r=
 nnoremap -au# yyp^v$r#
 
 " enter substitution mode quickly
-nnoremap <C-S><C-S> :%s::<Left>
+nnoremap <c-s><c-s> :%s::<left>
 
 
 " in visual mode, use 's' for substitution
 " (to change only a single occurence, use 'c'. by default they are the same)
 
 " substitute occurrences of selection in this buffer
-vnoremap <C-S>         yms:%s:\V\C<C-R>":<C-R>":c<Bar>norm!`s
-    \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+vnoremap <c-s>         yms:%s:\V\C<c-r>":<c-r>":c<bar>norm!`s
+    \ <left><left><left><left><left><left><left><left><left><left><left>
 " the same, but with keyword matching
-vnoremap <Leader><C-S> yms:%s:\V\C\<<C-R>"\>:<C-R>":c<Bar>norm!`s
-    \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+vnoremap <leader><c-s> yms:%s:\V\C\<<c-r>"\>:<c-r>":c<bar>norm!`s
+    \ <left><left><left><left><left><left><left><left><left><left><left>
 
 " substitute occurrences of selection in this buffer from current line and below
-vnoremap s             yms:,$s:\V\C<C-R>":<C-R>":c<Bar>norm!`s
-    \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+vnoremap s             yms:,$s:\V\C<c-r>":<c-r>":c<bar>norm!`s
+    \ <left><left><left><left><left><left><left><left><left><left><left>
 " the same, but with keyword matching
-vnoremap <Leader>s     yms:,$s:\V\C\<<C-R>"\>:<C-R>":c<Bar>norm!`s
-    \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+vnoremap <leader>s     yms:,$s:\V\C\<<c-r>"\>:<c-r>":c<bar>norm!`s
+    \ <left><left><left><left><left><left><left><left><left><left><left>
 
 " " (these are actually two substitutions, so that we start at the current line
 " " but continue from the first. source: http://stackoverflow.com/a/7608016)
-" vnoremap s             yms:,$s:\V\C<C-R>":<C-R>":c<Bar>1,''-&&<Bar>norm!`s
-    " \ <Left><Left><Left><Left><Left><Left><Left><Left><Left>
-    " \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+" vnoremap s             yms:,$s:\V\C<c-r>":<c-r>":c<bar>1,''-&&<bar>norm!`s
+    " \ <left><left><left><left><left><left><left><left><left>
+    " \ <left><left><left><left><left><left><left><left><left><left><left>
 " " the same, but with keyword matching
-" vnoremap <Leader>s     yms:,$s:\V\C\<<C-R>"\>:<C-R>":c<Bar>1,''-&&<Bar>norm!`s
-    " \ <Left><Left><Left><Left><Left><Left><Left><Left><Left>
-    " \ <Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+" vnoremap <leader>s     yms:,$s:\V\C\<<c-r>"\>:<c-r>":c<bar>1,''-&&<bar>norm!`s
+    " \ <left><left><left><left><left><left><left><left><left>
+    " \ <left><left><left><left><left><left><left><left><left><left><left>
 
 " substitute motions
 for mov in ['e', 'E', 'b', 'B']
-    exe "nmap \<C-S>" . mov . " v" . mov . "\<C-S>"
+    exe "nmap \<c-s>" . mov . " v" . mov . "\<c-s>"
 endfor
 " substitute text objects
-nmap <C-S>iw viw<Leader><C-S>
-nmap <C-S>iW viW<C-S>
+nmap <c-s>iw viw<leader><c-s>
+nmap <c-s>iW viW<c-s>
 "substitute word under cursor
-nmap <C-S>w viw<Leader><C-S>
-nmap <C-S>W viW<C-S>
+nmap <c-s>w viw<leader><c-s>
+nmap <c-s>W viW<c-s>
 
 " substitute word under cursor in multiple files (add them with ':arg **' before)
 " (instead of using the far plugin)
-nnoremap <C-S>a :call Replace(0, input('Replace '.expand('<cword>').' with: '))<CR>
+nnoremap <c-s>a :call Replace(0, input('Replace '.expand('<cword>').' with: '))<cr>
 " ... and then ':wa'
 
 " substitute last search
-nmap <C-S>ö gggn<C-S>
+nmap <c-s>ö gggn<c-s>
 
 
 " replace something with yank
@@ -3316,53 +3316,53 @@ nnoremap -rl v$hp
 
 
 " sort lines
-nnoremap -o vip:sort<CR>
-vnoremap -o :sort<CR>
+nnoremap -o vip:sort<cr>
+vnoremap -o :sort<cr>
 
 
 " correct typos like 'DAmnitypefast' to titlecase ('Damnitypefast')
 nnoremap -tu blguee
-inoremap -tu <Esc>blgueea
+inoremap -tu <esc>blgueea
 
 
 if s:MyMode == 'stripped'
     " delete trailing whitespace for selected line
-    vnoremap <silent> -dst <Esc>:.s:\v\s+$::<CR>
+    vnoremap <silent> -dst <esc>:.s:\v\s+$::<cr>
     " delete trailing whitespace for whole buffer
-    nnoremap <silent> -dst :%s:\v\s+$::<CR>
+    nnoremap <silent> -dst :%s:\v\s+$::<cr>
 endif
 
 " delete leading whitespace (can be prefixed with a count)
-nnoremap <silent> -dsl :s:^\s\+::<CR>
+nnoremap <silent> -dsl :s:^\s\+::<cr>
 " replace double/multiple spaces with one space
-nnoremap <silent> -dsd :.s:\v(\S) {2}(\S):\1 \2:<CR>
-nnoremap <silent> -dsD :%s:\v(\S) {2}(\S):\1 \2:<CR>
-nnoremap <silent> -dsm :.s:\v(\S) {2,}(\S):\1 \2:<CR>
-nnoremap <silent> -dsM :.s:\v(\S) {2,}(\S):\1 \2:<CR>
+nnoremap <silent> -dsd :.s:\v(\S) {2}(\S):\1 \2:<cr>
+nnoremap <silent> -dsD :%s:\v(\S) {2}(\S):\1 \2:<cr>
+nnoremap <silent> -dsm :.s:\v(\S) {2,}(\S):\1 \2:<cr>
+nnoremap <silent> -dsM :.s:\v(\S) {2,}(\S):\1 \2:<cr>
 
 
 " convert a vim plugin github url into appropriate format for vundle
-nnoremap -pi :.s:\m.*http.*github\.com/\([^/]*/[^/]*\).*:Plugin '\1':<CR>
+nnoremap -pi :.s:\m.*http.*github\.com/\([^/]*/[^/]*\).*:Plugin '\1':<cr>
 
 
 " add/remove an html comment
 " (this is useful when syntax is set to php and nerdcommenter fucks up)
-nnoremap <silent> <Leader>ch :call ToggleHTMLComment("n")<CR>
-vnoremap <silent> <Leader>ch :call ToggleHTMLComment("v")<CR>
+nnoremap <silent> <leader>ch :call ToggleHTMLComment("n")<cr>
+vnoremap <silent> <leader>ch :call ToggleHTMLComment("v")<cr>
 
 " duplicate a line and comment out the first one
 if s:MyMode == 'stripped'
-    nnoremap <Leader>cd yyI#<Esc>p
+    nnoremap <leader>cd yyI#<esc>p
 endif
 
 
 " undo and redo
 " (in difference to :undo and :redo, :earlier and :later also make changes
 " reachable if we branch, i.e. go back in history and make other changes)
-noremap <M-u>  :earlier<CR>
-noremap <Esc>u :earlier<CR>
-noremap <M-U>  :later<CR>
-noremap <Esc>U :later<CR>
+noremap <m-u>  :earlier<cr>
+noremap <esc>u :earlier<cr>
+noremap <m-u>  :later<cr>
+noremap <esc>U :later<cr>
 
 
 " }}}
@@ -3383,7 +3383,7 @@ nnoremap dN [c
 
 
 " make
-nnoremap <Leader>bm :make<CR>
+nnoremap <leader>bm :make<cr>
 
 " execute shell script
 augroup shellscript_on_read
@@ -3393,18 +3393,18 @@ augroup shellscript_on_read
 augroup END
 function! SetupShellscript()
     if s:MyMode == 'mastery'
-        nnoremap <Leader>bs :call VimuxRunCommand("bash -c 'chmod u+x " . expand("%:~") . " && " . expand("%:~") . "'")<CR>
+        nnoremap <leader>bs :call VimuxRunCommand("bash -c 'chmod u+x " . expand("%:~") . " && " . expand("%:~") . "'")<cr>
     else
-        nnoremap <Leader>bs :!chmod u+x % && ./%<CR>
+        nnoremap <leader>bs :!chmod u+x % && ./%<cr>
     endif
 endfunction
 
 
 " jump to (syntastic) errors
-nnoremap <Leader>sg :lfirst<CR>
-nnoremap <Leader>sG :llast<CR>
-" nnoremap <Leader>sn :lnext<CR>
-" nnoremap <Leader>sN :lprevious<CR>
+nnoremap <leader>sg :lfirst<cr>
+nnoremap <leader>sG :llast<cr>
+" nnoremap <leader>sn :lnext<cr>
+" nnoremap <leader>sN :lprevious<cr>
 
 " perform a :cnext or :lnext
 " so we jump through both quickfix and location list with one keystroke
@@ -3433,16 +3433,16 @@ function! JumpThroughList(direction, switch)
         endif
     endif
 endfunction
-nnoremap <silent> <Left>          :call JumpThroughList(1, 0)<CR>
-nnoremap <silent> <Right>         :call JumpThroughList(0, 0)<CR>
-nnoremap <silent> <Leader><Left>  :call JumpThroughList(1, 1)<CR>
-nnoremap <silent> <Leader><Right> :call JumpThroughList(0, 1)<CR>
+nnoremap <silent> <left>          :call JumpThroughList(1, 0)<cr>
+nnoremap <silent> <right>         :call JumpThroughList(0, 0)<cr>
+nnoremap <silent> <leader><left>  :call JumpThroughList(1, 1)<cr>
+nnoremap <silent> <leader><right> :call JumpThroughList(0, 1)<cr>
 
 
 " close location list (which contains syntastic errors) and quickfix window
-nnoremap <silent> <Leader>sl :lclose<bar>:cclose<CR>
+nnoremap <silent> <leader>sl :lclose<bar>:cclose<cr>
 " reopen location list (which contains syntastic errors)
-nnoremap <silent> <Leader>sL :lopen<CR>
+nnoremap <silent> <leader>sL :lopen<cr>
 
 
 " }}}
@@ -3452,44 +3452,44 @@ nnoremap <silent> <Leader>sL :lopen<CR>
 
 " change or open new buffer by searching for file name
 if s:MyMode == 'stripped'
-    nnoremap # :buffers<CR>:buffer<Space>
-    nnoremap <Leader># :find<Space>
+    nnoremap # :buffers<cr>:buffer<space>
+    nnoremap <leader># :find<space>
 endif
 
 " change to LRU buffer
-nnoremap <Space><Space> :buffer #<CR>
-nnoremap <Space><Tab>   :buffer #<CR>
+nnoremap <space><space> :buffer #<cr>
+nnoremap <space><tab>   :buffer #<cr>
 
 " circle through buffers
-nnoremap <M-n>  :bnext<CR>
-nnoremap <Esc>n :bnext<CR>
-nnoremap <M-p>  :bprevious<CR>
-nnoremap <Esc>p :bprevious<CR>
+nnoremap <m-n>  :bnext<cr>
+nnoremap <esc>n :bnext<cr>
+nnoremap <m-p>  :bprevious<cr>
+nnoremap <esc>p :bprevious<cr>
 
 " change window
-nnoremap <silent> <C-j> :wincmd j<CR>
-nnoremap <silent> <C-k> :wincmd k<CR>
-nnoremap <silent> <C-h> :wincmd h<CR>
-nnoremap <silent> <C-l> :wincmd l<CR>
+nnoremap <silent> <c-j> :wincmd j<cr>
+nnoremap <silent> <c-k> :wincmd k<cr>
+nnoremap <silent> <c-h> :wincmd h<cr>
+nnoremap <silent> <c-l> :wincmd l<cr>
 
 " move buffer to a new window
-nnoremap <silent> <Leader><C-l> :vsplit<CR><C-W>w:bprevious<CR><C-W>w<CR>
-nnoremap <silent> <Leader><C-j>  :split<CR><C-W>w:bprevious<CR><C-W>w<CR>
+nnoremap <silent> <leader><c-l> :vsplit<cr><c-w>w:bprevious<cr><c-w>w<cr>
+nnoremap <silent> <leader><c-j>  :split<cr><c-w>w:bprevious<cr><c-w>w<cr>
 
 " resize window faster
-nnoremap <silent> <C-w>+ :resize +3<CR>
-nnoremap <silent> <C-w>- :resize -3<CR>
-nnoremap <silent> <C-w>> 5<C-W>>
-nnoremap <silent> <C-w>< 5<C-W><
+nnoremap <silent> <c-w>+ :resize +3<cr>
+nnoremap <silent> <c-w>- :resize -3<cr>
+nnoremap <silent> <c-w>> 5<c-w>>
+nnoremap <silent> <c-w>< 5<c-w><
 
 
 " clear windows (close quickfix and location list) and refresh screen
-nnoremap <silent> <BS> :nohlsearch \| :lclose \| :cclose \| :redraw! <CR>
-xmap <silent> <BS> <BS>gv
+nnoremap <silent> <bs> :nohlsearch \| :lclose \| :cclose \| :redraw! <cr>
+xmap <silent> <bs> <bs>gv
 
 " toggle quickfix or location list
-nnoremap <silent> <Leader>tq :call ToggleList("Quickfix List", 'c')<CR>
-nnoremap <silent> <Leader>tl :call ToggleList("Location List", 'l')<CR>
+nnoremap <silent> <leader>tq :call ToggleList("Quickfix List", 'c')<cr>
+nnoremap <silent> <leader>tl :call ToggleList("Location List", 'l')<cr>
 
 
 
@@ -3509,9 +3509,9 @@ let g:netrw_is_toggled = 0
 
 
 " toggle netrw and start from current file
-nnoremap <silent> <Leader>te :exe ':Lexplore! ' . expand('%:p:h')<CR>
+nnoremap <silent> <leader>te :exe ':Lexplore! ' . expand('%:p:h')<cr>
 " toggle netrw and start from working (project) dir
-nnoremap <silent> <Leader>tE :Lexplore!<CR>
+nnoremap <silent> <leader>tE :Lexplore!<cr>
 
 
 augroup netrw_autocmds
@@ -3525,8 +3525,8 @@ function! NetrwMappings()
     silent! nunmap <buffer> qf
     silent! nunmap <buffer> qb
     silent! nunmap <buffer> q
-    nnoremap <buffer> q   :bd<CR>
-    nnoremap <buffer> h   :help netrw-quickmap<CR>
+    nnoremap <buffer> q   :bd<cr>
+    nnoremap <buffer> h   :help netrw-quickmap<cr>
     nmap     <buffer> .   gh
     nmap     <buffer> u   -
     " TODO: nnoremap u or locally unmap all - bindings to prevent odd bugs
@@ -3541,34 +3541,34 @@ endfunction
 " EXTERNAL TOOLS {{{
 
 " copy current filepath (to clipboard and fucking everywhere)
-nnoremap <Leader>iP :let @" = expand("%:~")<CR>
-            \       :let @+ = expand("%:~")<CR>
-            \       :let @* = expand("%:~")<CR>
+nnoremap <leader>iP :let @" = expand("%:~")<cr>
+            \       :let @+ = expand("%:~")<cr>
+            \       :let @* = expand("%:~")<cr>
 
 " search the web with selection
-vnoremap <Leader>isl :<C-w>!$BROWSER 'https://dict.leo.org/ende/?lang=en&search=<C-R>*'<CR><CR>
-vnoremap <Leader>isd :<C-w>!$BROWSER 'https://duckduckgo.com/?q=<C-R>*'<CR><CR>
-vnoremap <Leader>isg :<C-w>!$BROWSER 'https://google.com/?q=<C-R>*'<CR><CR>
+vnoremap <leader>isl :<c-w>!$BROWSER 'https://dict.leo.org/ende/?lang=en&search=<c-r>*'<cr><cr>
+vnoremap <leader>isd :<c-w>!$BROWSER 'https://duckduckgo.com/?q=<c-r>*'<cr><cr>
+vnoremap <leader>isg :<c-w>!$BROWSER 'https://google.com/?q=<c-r>*'<cr><cr>
 
 " shell in working dir or dir of current file
-nnoremap <Leader>if :!fish<CR><CR>
-nnoremap <Leader>iF :execute '!cd ' . expand('%:p:h') . '; fish'<CR><CR>
-nnoremap <Leader>ib :!bash<CR><CR>
-nnoremap <Leader>iB :execute '!cd ' . expand('%:p:h') . '; bash'<CR><CR>
+nnoremap <leader>if :!fish<cr><cr>
+nnoremap <leader>iF :execute '!cd ' . expand('%:p:h') . '; fish'<cr><cr>
+nnoremap <leader>ib :!bash<cr><cr>
+nnoremap <leader>iB :execute '!cd ' . expand('%:p:h') . '; bash'<cr><cr>
 
 " file manager in working dir or dir of current file
-" nnoremap <Leader>ir :call VimuxRunCommand("ranger")<CR>
-" nnoremap <Leader>ir :exe "!ranger " . shellescape(expand("%p:h"))
-nnoremap <Leader>ir :call RangerChooser(expand('%:p:h'))<CR>
-nnoremap <Leader>iR :RangerChooser<CR>
+" nnoremap <leader>ir :call VimuxRunCommand("ranger")<cr>
+" nnoremap <leader>ir :exe "!ranger " . shellescape(expand("%p:h"))
+nnoremap <leader>ir :call RangerChooser(expand('%:p:h'))<cr>
+nnoremap <leader>iR :RangerChooser<cr>
 
 " git interface in working dir or dir of current file
-nnoremap <Leader>it :!tig status <CR><CR>
-nnoremap <Leader>iT :execute '!cd ' . expand('%:p:h') . '; tig status'<CR><CR>
+nnoremap <leader>it :!tig status <cr><cr>
+nnoremap <leader>iT :execute '!cd ' . expand('%:p:h') . '; tig status'<cr><cr>
 
 " insert google contacts with name and mail addresses (with goobook)
-nnoremap <Leader>igm         :r!goobook-query-mail.sh<space>
-" inoremap <Leader>igm <Esc>diw:r!goobook-query-mail.sh<space><C-R>"<CR><CR>
+nnoremap <leader>igm         :r!goobook-query-mail.sh<space>
+" inoremap <leader>igm <esc>diw:r!goobook-query-mail.sh<space><c-r>"<cr><cr>
 
 
 
@@ -3578,45 +3578,45 @@ nnoremap <Leader>igm         :r!goobook-query-mail.sh<space>
 
 
 " check for file changes (and 'reload' them or get asked with autoread)
-nnoremap <Leader>rl :checktime<CR>
+nnoremap <leader>rl :checktime<cr>
 
 " discard changes ('reset')
-nnoremap <Leader>rs :e!<CR>
+nnoremap <leader>rs :e!<cr>
 
 
 " write changes
-nnoremap <Leader>w  :update<CR>
-nnoremap <Leader>WW :update!<CR>
+nnoremap <leader>w  :update<cr>
+nnoremap <leader>WW :update!<cr>
 
 " quit current buffer
-nnoremap <Leader><BS> :bdelete<CR>
-nnoremap <Leader>qq   :bdelete<CR>
-nnoremap <Leader>QQ   :bdelete!<CR>
+nnoremap <leader><bs> :bdelete<cr>
+nnoremap <leader>qq   :bdelete<cr>
+nnoremap <leader>QQ   :bdelete!<cr>
 augroup map_q_in_read_only_buffers
     au!
     au BufReadPost * if &readonly
-    au BufReadPost *   nnoremap <buffer> q :bd<CR>
+    au BufReadPost *   nnoremap <buffer> q :bd<cr>
     au BufReadPost * endif
-    au BufReadPost fugitive://* nnoremap <buffer> q :bd<CR>
+    au BufReadPost fugitive://* nnoremap <buffer> q :bd<cr>
 augroup END
 
 
 " quit all buffers (not vim)
-nnoremap <Leader>qa :bufdo bdelete<CR>
+nnoremap <leader>qa :bufdo bdelete<cr>
 
 " quit current window
-nnoremap <Leader>qW :quit<CR>:buffer #<CR>
+nnoremap <leader>qW :quit<cr>:buffer #<cr>
 " quit all windows but current
-nnoremap <Leader>qw :only<CR>
+nnoremap <leader>qw :only<cr>
 
 " quit vim (multiple windows)
 " (this is how i exit most terminal applications)
-nnoremap <C-D>              :quitall<CR>
-nnoremap <Leader><C-D><C-D> :quitall!<CR>
+nnoremap <c-d>              :quitall<cr>
+nnoremap <leader><c-d><c-d> :quitall!<cr>
 
 " ... but ignore typos
-nnoremap <Leader>q <NOP>
-nnoremap <Leader>Q <NOP>
+nnoremap <leader>q <nop>
+nnoremap <leader>Q <nop>
 
 
 
