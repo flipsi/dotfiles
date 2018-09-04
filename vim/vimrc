@@ -365,7 +365,7 @@ Plugin 'junegunn/goyo.vim'
 let g:goyo_width="120"
 let g:goyo_height="100%"
 
-nnoremap <leader>yf :Goyo<cr>
+nnoremap <leader>yy :Goyo<cr>
 
 
 " }}}
@@ -2935,9 +2935,9 @@ nnoremap <leader>o <nop>
 
 
 " toggle syntax highlighting
-nmap <silent> <leader>yy :call ToggleSyntax()<cr>
+nmap <silent> <leader>ysy :call ToggleSyntax()<cr>
 " toggle syntax highlighting after g:synmaxcol characters
-nmap <silent> <leader>yY :let &synmaxcol = g:synmaxcol - &synmaxcol <cr>
+nmap <silent> <leader>ysmc :let &synmaxcol = g:synmaxcol - &synmaxcol <cr>
 
 " toggle line numbers
 noremap <silent> <leader>yl :set number! <bar> :set relativenumber! <cr>
@@ -2967,14 +2967,33 @@ nnoremap <silent> <leader>yc :let g:cursorposition = 1 - g:cursorposition <cr>i<
 nnoremap <silent> <leader>ya :set list!<cr>
 
 
-" spell checking
-nnoremap <leader>yss :setlocal spell! <bar> :set spell? <cr>
-nnoremap <leader>yse :setlocal spelllang=en<cr>
-nnoremap <leader>ysd :setlocal spelllang=de<cr>
-nmap <leader>ysg <leader>ysd
+" spell checking {{{
+function! ChangeSpellChecking()
+    ec "<space>  Toggle spell checking"
+    ec "<e>      Set language to 'en'"
+    ec "<d>      Set language to 'de'"
+    ec ""
+    let c = getchar()
+    if nr2char(c) == 'q' || c == 27 || c == 3 || c == 7
+        redraw
+    elseif nr2char(c) == ' ' || nr2char(c) == 'p'
+        redraw
+        set spell!
+        redraw
+    elseif nr2char(c) == 'e'
+        set spell=en
+        redraw
+    elseif nr2char(c) == 'e'
+        set spell=de
+        redraw
+    endif
+endfunction
+" }}}
+nnoremap <leader>ysp :call ChangeSpellChecking() <bar> :set spell? <cr>
 
 " ... but ignore typos
 nnoremap <leader>y <nop>
+nnoremap <leader>ys <nop>
 
 
 
