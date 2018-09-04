@@ -2738,6 +2738,25 @@ iabbrev autotype autotype: email :tab pass :enter
 " show absolute path of current file (':help filename-modifiers')
 nnoremap <leader><c-g> :echo expand("%:~")<cr>
 
+" copy current filename/path/dir (unnamed register/clipboard/fucking everywhere)
+nnoremap <leader>yf :let @" = expand("%:t") <cr>
+            \       :let @+ = expand("%:t") <cr>
+            \       :let @* = expand("%:t") <cr>
+            \       :echo @" <cr>
+nnoremap <leader>yp :let @" = expand("%:p") <cr>
+            \       :let @+ = expand("%:p") <cr>
+            \       :let @* = expand("%:p") <cr>
+            \       :echo @" <cr>
+nnoremap <leader>yP :let @" = expand("%") <cr>
+            \       :let @+ = expand("%") <cr>
+            \       :let @* = expand("%") <cr>
+            \       :echo @" <cr>
+nnoremap <leader>yd :let @" = expand("%:p:h") <cr>
+            \       :let @+ = expand("%:p:h") <cr>
+            \       :let @* = expand("%:p:h") <cr>
+            \       :echo @" <cr>
+
+
 " if in a git directory and there are dirty files, open them
 " nnoremap <leader>eG :silent! args `git diff --name-only`<cr>:bd#<cr>
 function! EditGitDirtyFiles()
@@ -3555,11 +3574,6 @@ endfunction
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EXTERNAL TOOLS {{{
-
-" copy current filepath (to clipboard and fucking everywhere)
-nnoremap <leader>iP :let @" = expand("%:~")<cr>
-            \       :let @+ = expand("%:~")<cr>
-            \       :let @* = expand("%:~")<cr>
 
 " search the web with selection
 vnoremap <leader>isl :<c-w>!$BROWSER 'https://dict.leo.org/ende/?lang=en&search=<c-r>*'<cr><cr>
