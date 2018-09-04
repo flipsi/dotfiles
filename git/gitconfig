@@ -36,6 +36,9 @@
 [difftool "sublimerge"]
     cmd = subl -n -w \"$REMOTE\" \"$LOCAL\" --command \"sublimerge_diff_views {\\\"left_read_only\\\": true, \\\"right_read_only\\\": true}\"
 
+[difftool "idiff"]
+    cmd = diff -i $LOCAL $REMOTE
+
 [merge]
     tool = vimdiff
 
