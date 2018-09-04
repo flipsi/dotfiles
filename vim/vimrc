@@ -96,7 +96,7 @@
 "                           Leader key convention:
 "                           - general leader is space (' ')
 "                           - text edit leader is minus ('-')
-"                           - interface leader is control+g ('<c-g>')
+"                           - interface leader is space followed by y (' y')
 "                           The leader key may set several times in this file
 "                           since the execution time of the mapping matters.
 "       a LOCAL SECTION
@@ -347,13 +347,13 @@ Plugin 'sjl/badwolf'
 
 " cycle through colorschemes
 Plugin 'vim-scripts/ScrollColors'
-nnoremap <c-g>o :COLORSCROLL<cr>
+nnoremap <leader>yo :COLORSCROLL<cr>
 
 
 " " highlight different bracket pairs with different colors
 " " DOES NOT WORK
 " Plugin 'kien/rainbow_parentheses.vim'
-" nnoremap <c-g>b :RainbowParenthesesToggle<cr>
+" nnoremap <leader>yb :RainbowParenthesesToggle<cr>
 
 
 " }}}
@@ -365,7 +365,7 @@ Plugin 'junegunn/goyo.vim'
 let g:goyo_width="120"
 let g:goyo_height="100%"
 
-nnoremap <c-g>f :Goyo<cr>
+nnoremap <leader>yf :Goyo<cr>
 
 
 " }}}
@@ -460,8 +460,8 @@ omap ah <plug>GitGutterTextObjectOuterPending
 xmap ih <plug>GitGutterTextObjectInnerVisual
 xmap ah <plug>GitGutterTextObjectOuterVisual
 
-nnoremap <c-g>G       :GitGutterToggle<cr>
-nnoremap <c-g>g       :GitGutter<cr> " redraw
+nnoremap <leader>yG   :GitGutterToggle<cr>
+nnoremap <leader>yg   :GitGutter<cr> " redraw
 nnoremap <leader>gg gg:GitGutterNextHunk<cr>ztzv
 nnoremap <leader>gG  G:GitGutterPrevHunk<cr>ztzv
 nnoremap <leader>gn   :GitGutterNextHunk<cr>ztzv
@@ -1436,7 +1436,7 @@ nnoremap <silent> -adj :JsDoc<cr>
 Plugin 'Yggdroot/indentLine'
 let g:indentLine_enabled = 1
 let g:indentLine_char = '┊'
-nnoremap <c-g>I :IndentLinesToggle<cr>
+nnoremap <leader>yI :IndentLinesToggle<cr>
 
 " Does not work. TODO: Fix it!
 augroup indentline_enabled
@@ -1524,8 +1524,8 @@ command! -bar ShowTrailingWhitespaceOff call ShowTrailingWhitespace#Set(0,1)
 command! -bar ShowTrailingWhitespaceToggle call ShowTrailingWhitespace#Toggle(0)
         \ <bar>echo (ShowTrailingWhitespace#IsSet() ?
         \ 'Show trailing whitespace' : 'Not showing trailing whitespace')
-nnoremap <silent> <c-g>A  :ShowTrailingWhitespaceToggle<cr>
-nnoremap <silent> <c-g>st :ShowTrailingWhitespaceToggle<cr>
+nnoremap <silent> <leader>yA  :ShowTrailingWhitespaceToggle<cr>
+nnoremap <silent> <leader>yst :ShowTrailingWhitespaceToggle<cr>
 
 " (has a bug)
 "Plugin 'vim-scripts/JumpToTrailingWhiteSpace'
@@ -2718,9 +2718,6 @@ iabbrev autotype autotype: email :tab pass :enter
 " GENERAL {{{
 
 
-" (for compatibility)
-nnoremap <c-g><c-g> <c-g>
-
 " refresh screen the phat way
 " TODO make it work
 "if s:MyMode == 'stripped'
@@ -2938,20 +2935,20 @@ nnoremap <leader>o <nop>
 
 
 " toggle syntax highlighting
-nmap <silent> <c-g>y :call ToggleSyntax()<cr>
+nmap <silent> <leader>yy :call ToggleSyntax()<cr>
 " toggle syntax highlighting after g:synmaxcol characters
-nmap <silent> <c-g>Y :let &synmaxcol = g:synmaxcol - &synmaxcol <cr>
+nmap <silent> <leader>yY :let &synmaxcol = g:synmaxcol - &synmaxcol <cr>
 
 " toggle line numbers
-noremap <silent> <c-g>l :set number! <bar> :set relativenumber! <cr>
-noremap <silent> <c-g>L :set relativenumber! <cr>
+noremap <silent> <leader>yl :set number! <bar> :set relativenumber! <cr>
+noremap <silent> <leader>yL :set relativenumber! <cr>
 
 " toggle word wrap
-nnoremap <silent> <c-g>w :setlocal wrap! <bar> :set wrap? <cr>
+nnoremap <silent> <leader>yw :setlocal wrap! <bar> :set wrap? <cr>
 
 " toggle vertical ruler
-nnoremap <silent> <c-g>r :call SetColorColumn('toggle')<cr>
-nnoremap <silent> <c-g>R :highlight ColorColumn ctermbg=235
+nnoremap <silent> <leader>yr :call SetColorColumn('toggle')<cr>
+nnoremap <silent> <leader>yR :highlight ColorColumn ctermbg=235
                   \ <bar> highlight clear BGdd8844
                   \ <bar> highlight clear BG000000
                   \ <bar> highlight clear BGffa724
@@ -2964,20 +2961,20 @@ nnoremap <silent> <c-g>R :highlight ColorColumn ctermbg=235
 
 
 " toggle highlight current cursor position
-nnoremap <silent> <c-g>c :let g:cursorposition = 1 - g:cursorposition <cr>i<esc>
+nnoremap <silent> <leader>yc :let g:cursorposition = 1 - g:cursorposition <cr>i<esc>
 
 " toggle show listchars (like whitespace)
-nnoremap <silent> <c-g>a :set list!<cr>
+nnoremap <silent> <leader>ya :set list!<cr>
 
 
 " spell checking
-nnoremap <c-g>ss :setlocal spell! <bar> :set spell? <cr>
-nnoremap <c-g>se :setlocal spelllang=en<cr>
-nnoremap <c-g>sd :setlocal spelllang=de<cr>
-nmap <c-g>sg <c-g>sd
+nnoremap <leader>yss :setlocal spell! <bar> :set spell? <cr>
+nnoremap <leader>yse :setlocal spelllang=en<cr>
+nnoremap <leader>ysd :setlocal spelllang=de<cr>
+nmap <leader>ysg <leader>ysd
 
 " ... but ignore typos
-nnoremap <c-g> <nop>
+nnoremap <leader>y <nop>
 
 
 
