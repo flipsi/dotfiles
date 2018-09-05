@@ -2743,6 +2743,10 @@ nnoremap <leader>yf :let @" = expand("%:t") <cr>
             \       :let @+ = expand("%:t") <cr>
             \       :let @* = expand("%:t") <cr>
             \       :echo @" <cr>
+nnoremap <leader>ye :let @" = expand("%:t:r") <cr>
+            \       :let @+ = expand("%:t:r") <cr>
+            \       :let @* = expand("%:t:r") <cr>
+            \       :echo @" <cr>
 nnoremap <leader>yp :let @" = expand("%:p") <cr>
             \       :let @+ = expand("%:p") <cr>
             \       :let @* = expand("%:p") <cr>
