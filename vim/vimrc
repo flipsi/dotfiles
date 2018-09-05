@@ -3615,7 +3615,7 @@ nnoremap <leader>rs :e!<cr>
 
 
 " write changes
-nnoremap <leader>w  :update<cr>
+nnoremap <leader>w  :update<cr>:GitGutter<cr>
 nnoremap <leader>WW :update!<cr>
 
 " quit current buffer
