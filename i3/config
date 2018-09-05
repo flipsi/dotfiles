@@ -663,7 +663,7 @@ bindsym $mod+Shift+t exec --no-startup-id i3-input -F '[con_mark=%s] focus' -P '
 
 # switch to a specific window or workspace
 bindsym $mod+o mode "$goto"
-set $goto Focus app: (o) terminal (f) firefox (g) chrome
+set $goto Focus app: (o) Terminal (f) Firefox (g) Chrome (m) Music (i) IntelliJ (s) Slack (t) Telegram (b) Trello
 mode "$goto" {
   bindsym o         [class="(?i)alacritty"]             focus; mode "default"
   bindsym $mod+o    [class="(?i)alacritty"]             focus; mode "default"
@@ -674,7 +674,7 @@ mode "$goto" {
   bindsym m         [class="(?i)spotify"]               focus; mode "default"
   bindsym $mod+m    [class="(?i)spotify"]               focus; mode "default"
   bindsym i         [class="(?i)jetbrains-idea"]        focus; mode "default"
-  bindsym $mod+s    [class="(?i)jetbrains-idea"]        focus; mode "default"
+  bindsym $mod+i    [class="(?i)jetbrains-idea"]        focus; mode "default"
   bindsym s         [class="(?i)slack"]                 focus; mode "default"
   bindsym $mod+s    [class="(?i)slack"]                 focus; mode "default"
   bindsym t         [class="(?i)Telegram"]              focus; mode "default"
