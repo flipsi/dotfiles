@@ -669,8 +669,6 @@ mode "$goto" {
   bindsym $mod+o    [class="(?i)alacritty"]             focus; mode "default"
   bindsym f         [class="(?i)firefox"]               focus; mode "default"
   bindsym $mod+f    [class="(?i)firefox"]               focus; mode "default"
-  bindsym g         [class="(?i)google-chrome"]         focus; mode "default"
-  bindsym $mod+g    [class="(?i)google-chrome"]         focus; mode "default"
   bindsym m         [class="(?i)spotify"]               focus; mode "default"
   bindsym $mod+m    [class="(?i)spotify"]               focus; mode "default"
   bindsym i         [class="(?i)jetbrains-idea"]        focus; mode "default"
@@ -679,8 +677,10 @@ mode "$goto" {
   bindsym $mod+s    [class="(?i)slack"]                 focus; mode "default"
   bindsym t         [class="(?i)Telegram"]              focus; mode "default"
   bindsym $mod+t    [class="(?i)Telegram"]              focus; mode "default"
-  bindsym b         [class="(?i)chrom" instance="(crx_flcchhclanjfdanlfphjfnhbjdbejong|crx_goifhkhiimheobgjhfbnkkibebioelpk)"] focus; mode "default" # Trello
-  bindsym $mod+b    [class="(?i)chrom" instance="(crx_flcchhclanjfdanlfphjfnhbjdbejong|crx_goifhkhiimheobgjhfbnkkibebioelpk)"] focus; mode "default" # Trello
+  bindsym g         [class="(?i)google-chrome" instance="google-chrome"] focus; mode "default"
+  bindsym $mod+g    [class="(?i)google-chrome" instance="google-chrome"] focus; mode "default"
+  bindsym b         [class="(?i)chrom" instance="(crx_flcchhclanjfdanlfphjfnhbjdbejong|crx_goifhkhiimheobgjhfbnkkibebioelpk)"] focus; mode "default"
+  bindsym $mod+b    [class="(?i)chrom" instance="(crx_flcchhclanjfdanlfphjfnhbjdbejong|crx_goifhkhiimheobgjhfbnkkibebioelpk)"] focus; mode "default"
   # cancel
   bindsym Return mode "default"
   bindsym Escape mode "default"
