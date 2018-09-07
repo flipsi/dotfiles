@@ -1,10 +1,10 @@
 abbr d      docker
-abbr da     docker-compose start
+abbr da     docker-compose up -d
 abbr do     docker-compose stop
 abbr dce    docker-compose exec
 abbr dcl    docker-compose logs
+abbr dclf   docker-compose logs -f
 abbr dcp    docker-compose pull
-abbr dcu    docker-compose up
 abbr fi     fzf_wrapper --find --ranger
 abbr fl     fzf_wrapper --locate --ranger
 abbr g      git
