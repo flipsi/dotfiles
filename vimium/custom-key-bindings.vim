@@ -14,5 +14,6 @@ map qq    removeTab
 map u     restoreTab
 
 map l     LinkHints.activateModeToOpenInNewTab
+map gl    LinkHints.activateModeToDownloadLink
 
 map ö     enterFindMode
