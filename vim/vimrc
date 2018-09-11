@@ -273,6 +273,7 @@ let VimuxUseNearest = 1
 nnoremap <leader>bo         :VimuxRunCommand ""<left>
 nnoremap <leader>bv         :call MakeWithVimux("")<left><left>
 nnoremap <leader>bf         :VimuxRunCommand " " . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
+nnoremap <leader>bF         :VimuxRunCommand "./" . expand('%') . " "<left>
 nnoremap <leader>bb         :update<cr>:VimuxRunLastCommand<cr>
 nnoremap <leader>bl         :VimuxRunCommand "clear"<cr>
 nnoremap <leader>bq         :VimuxCloseRunner<cr>
@@ -3432,7 +3433,7 @@ augroup shellscript_on_read
 augroup END
 function! SetupShellscript()
     if s:MyMode == 'mastery'
-        nnoremap <leader>bs :call VimuxRunCommand("bash -c 'chmod u+x " . expand("%:~") . " && " . expand("%:~") . "'")<cr>
+        nnoremap <leader>bs :call VimuxRunCommand("bash -c 'chmod u+x " . expand("%") . " && " . expand("%") . "'")<cr>
     else
         nnoremap <leader>bs :!chmod u+x % && ./%<cr>
     endif
