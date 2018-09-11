@@ -1,4 +1,3 @@
-i3/bin/i3-initialize-arandr.local.*
 pentadactyl/pentadactyl/info
 ranger/**/*.pyo
 ranger/colorschemes/__init__.py

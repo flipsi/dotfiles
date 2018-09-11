@@ -135,7 +135,7 @@ mode "$refresh" {
     bindsym i exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"; mode "default"
     bindsym k exec --no-startup-id "setxkbmap de_sflip"; mode "default"
     bindsym a exec --no-startup-id "/home/sflip/.i3/bin/i3-config-mod-assign-chrome-app.sh > /tmp/i3-config-mod-assign-chrome-app.log 2>&1"; mode "default"
-    bindsym x exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-arandr.local.sh"; mode "default"
+    bindsym x exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh"; mode "default"
     # cancel
     bindsym $mod+F5 mode "default"
     bindsym Return mode "default"
