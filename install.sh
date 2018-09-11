@@ -333,6 +333,11 @@ function create_link_for_target() {
             create_link "$PWD/telegram-cli/config" "$HOME/.telegram-cli/config"
             ;;
 
+        termite )
+            mkdir -p "$HOME/.config/termite"
+            create_link "$PWD/termite/config" "$HOME/.config/termite/config"
+            ;;
+
         tig )
             create_link "$PWD/tig/tigrc" "$HOME/.tigrc"
             ;;

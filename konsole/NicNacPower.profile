@@ -1,6 +1,6 @@
 [Appearance]
 ColorScheme=Tango-like
-Font=monospace,11,-1,2,50,0,0,0,0,0
+Font=PragmataPro Mono,10,-1,2,50,0,0,0,0,0
 
 [General]
 LocalTabTitleFormat=%w

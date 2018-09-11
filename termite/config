@@ -1,0 +1,42 @@
+# termite config
+
+
+[options]
+
+# TODO: somehow looks totally different. fix!
+font = PragmataPro Mono 10
+
+scrollback_lines = 10000
+
+geometry = 980x500
+
+cursor_shape = ibeam
+mous_autohide = on
+
+
+[colors]
+
+# cursor = #EAEAEA
+
+background = rgba(36, 36, 36, 0.8)
+# background = #242424
+foreground = #EAEAEA
+foreground_bold = #FFFFFF
+
+color0 = #1D2021
+color1 = #CC241D
+color2 = #98971A
+color3 = #D79921
+color4 = #458588
+color5 = #B16286
+color6 = #458588
+color7 = #FBF1C7
+color8 = #666666
+color9 = #FB4934
+color10 = #B8BB26
+color11 = #FABD2F
+color12 = #83A598
+color13 = #D3869B
+color14 = #83A598
+color15 = #ffffff
+
