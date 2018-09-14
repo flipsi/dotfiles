@@ -2708,10 +2708,11 @@ let mapleader=' '
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" FIX MY TYPING {{{
+" FIX AND SPEEDUP MY TYPING {{{
 
-iabbrev todo TODO
-iabbrev autotype autotype: email :tab pass :enter
+iabbrev todo        TODO:
+iabbrev todod       TODO: delete this debugging statement
+iabbrev autotype    autotype: email :tab pass :enter
 
 
 " }}}
