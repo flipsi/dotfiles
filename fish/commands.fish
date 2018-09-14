@@ -2,4 +2,5 @@
 
 curl wttr.in # weather report
 date +%s # unix timestamp
+git branch --merged | egrep "(feature|hotfix)" | xargs git branch -d # delete merged branches
 git checkout --quiet --detach; git fetch (git remote | head -n1) master:master; git checkout --quiet -
