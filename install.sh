@@ -386,6 +386,7 @@ function create_link_for_target() {
             create_link "$PWD/vim/vim/filetype.vim" "$HOME/.vim/filetype.vim"
             mkdir -p "$HOME/bin"
             create_link "$PWD/vim/bin/goobook-query-mail.sh" "$HOME/bin/goobook-query-mail.sh"
+            create_link "$PWD/vim/agignore" "$HOME/.agignore"
             ;;
 
         vimfx )
