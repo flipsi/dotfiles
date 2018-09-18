@@ -6,6 +6,7 @@
 # We have more power here than in the i3 config file (functions, loops, etc).
 
 
+# TODO: port to bash in ./i3/bin/i3-initialize-outputs.sh
 function new_screen_resolution
     set screen $argv[1]
     set h_resolution $argv[2]
@@ -20,31 +21,11 @@ function new_screen_resolution
 end
 
 
+# TODO: port to bash in ./i3/bin/i3-initialize-outputs.sh
 function setup_screen_resolution
     if test (hostname) = 'asterix'
         if not xrandr | grep "eDP1 connected 1920x1080" >/dev/null
             new_screen_resolution eDP1 1920 1080
-        end
-    end
-end
-
-
-function setup_screen_layout
-    set primary_screens LVDS0 LVDS1 LVDS-0 LVDS-1 eDP1
-    set secondary_screens VGA0 VGA1 VGA-0 VGA-1 HDMI1 HDMI2 HDMI-1 HDMI-2
-    for secondary_screen in $secondary_screens
-        if xrandr | grep "$secondary_screen connected" >/dev/null
-            for primary_screen in $primary_screens
-                if xrandr | grep "$primary_screen connected" >/dev/null
-                    xrandr --output $secondary_screen --auto --below $primary_screen --auto
-                    i3-msg restart
-                    if test -f $HOME/.i3/wallpaper
-                        feh --bg-scale $HOME/.i3/wallpaper
-                    end
-                    break
-                end
-            end
-            break
         end
     end
 end
@@ -123,12 +104,6 @@ function autostart
 end
 
 
-if test -f $HOME/.i3/bin/i3-initialize-arandr.local.sh
-    eval $HOME/.i3/bin/i3-initialize-arandr.local.sh
-else
-    setup_screen_resolution
-    setup_screen_layout
-end
 desktop_session
 setup_musicserver
 # tmux-system-sessions
