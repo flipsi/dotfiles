@@ -487,7 +487,8 @@ for_window [window_role="(?i)vlc-main"] resize set 750 450
 # windows always on specific workspace
 for_window [class="(?i)chrom" instance="crx_acmikcjocccblbiibfdfjkghclpmmpip"] move to workspace    
 for_window [class="(?i)chrom" instance="crx_kddchekfnnagpejaneebcigegenogifj"] move to workspace    
-assign [class="(?i)chrom"]                                                                          
+assign [class="(?i)chromium"]                                                                       
+assign [class="(?i)google-chrome"]                                                                  
 assign [class="(?i)filezilla"]                                                                      
 assign [class="(?i)firefox"]                                                                        
 for_window [class="(?i)chrom" instance="crx_afbjehlnjihfcebhifoapfibhcgakelg"] move to workspace    
@@ -521,6 +522,7 @@ assign [class="(?i)urxvt"]                                                      
 for_window [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"] move to workspace    
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] move to workspace    
 assign [class="(?i)pale moon"]                                                                      
+assign [class="(?i)qutebrowser"]                                                                    
 
 
 # kill specific apps (e.g. when memory really full again and the system hangs)
@@ -665,12 +667,14 @@ bindsym $mod+Shift+t exec --no-startup-id i3-input -F '[con_mark=%s] focus' -P '
 
 # switch to a specific window or workspace
 bindsym $mod+o mode "$goto"
-set $goto Focus app: (o) Terminal (f) Firefox (g) Chrome (m) Music (i) IntelliJ (s) Slack (t) Telegram (b) Trello
+set $goto Focus app: (o) Terminal (f) Firefox (c) Chromium (g) Chrome (m) Music (i) IntelliJ (s) Slack (t) Telegram (b) Trello (q) qutebrowser
 mode "$goto" {
   bindsym o         [class="(?i)alacritty"]             focus; mode "default"
   bindsym $mod+o    [class="(?i)alacritty"]             focus; mode "default"
   bindsym f         [class="(?i)firefox"]               focus; mode "default"
   bindsym $mod+f    [class="(?i)firefox"]               focus; mode "default"
+  bindsym q         [class="(?i)qutebrowser"]           focus; mode "default"
+  bindsym $mod+q    [class="(?i)qutebrowser"]           focus; mode "default"
   bindsym m         [class="(?i)spotify"]               focus; mode "default"
   bindsym $mod+m    [class="(?i)spotify"]               focus; mode "default"
   bindsym i         [class="(?i)jetbrains-idea"]        focus; mode "default"
@@ -679,6 +683,8 @@ mode "$goto" {
   bindsym $mod+s    [class="(?i)slack"]                 focus; mode "default"
   bindsym t         [class="(?i)Telegram"]              focus; mode "default"
   bindsym $mod+t    [class="(?i)Telegram"]              focus; mode "default"
+  bindsym c         [class="(?i)chromium" instance="chromium"] focus; mode "default"
+  bindsym $mod+c    [class="(?i)chromium" instance="chromium"] focus; mode "default"
   bindsym g         [class="(?i)google-chrome" instance="google-chrome"] focus; mode "default"
   bindsym $mod+g    [class="(?i)google-chrome" instance="google-chrome"] focus; mode "default"
   bindsym b         [class="(?i)chrom" instance="(crx_flcchhclanjfdanlfphjfnhbjdbejong|crx_goifhkhiimheobgjhfbnkkibebioelpk)"] focus; mode "default"
