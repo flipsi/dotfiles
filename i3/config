@@ -50,7 +50,10 @@ exec "xset -b"
 exec "xset s noblank && xset s off"
 
 # display power management (seconds until standby/suspend/off)
-exec "xset dpms 123 0 0"
+exec "xset dpms 127 0 0"
+
+# lock before turning of screen
+exec "xautolock -time 2 -locker i3lock"
 
 
 
