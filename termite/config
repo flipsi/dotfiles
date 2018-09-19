@@ -11,7 +11,7 @@ scrollback_lines = 10000
 geometry = 980x500
 
 cursor_shape = ibeam
-mous_autohide = on
+mouse_autohide = on
 
 
 [colors]
