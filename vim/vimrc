@@ -2507,7 +2507,7 @@ function! RangerChooser(starting_dir)
     else
         let command = 'silent !ranger'
     endif
-    exec command . ' --choosefiles=' . shellescape(temp) . ' --cmd="set viewmode\!" ' . a:starting_dir
+    exec command . ' --choosefiles=' . shellescape(temp) . ' --cmd="set viewmode multipane" ' . a:starting_dir
     if !filereadable(temp)
         redraw!
         " Nothing to read.
