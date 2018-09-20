@@ -53,7 +53,7 @@ exec "xset s noblank && xset s off"
 exec "xset dpms 595 0 0"
 
 # lock when turning of screen
-exec "xautolock -time 10 -locker i3lock"
+exec "nohup xautolock -time 10 -locker i3lock &"
 
 
 
