@@ -1350,6 +1350,7 @@ let g:toggle_words_dict = {
             \     ['on', 'off'],
             \     ['online', 'offline'],
             \     ['open', 'close'],
+            \     ['public', 'private'],
             \     ['present', 'absent'],
             \     ['question', 'answer'],
             \     ['red','orange','yellow','green','blue','purple'],
