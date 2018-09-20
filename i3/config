@@ -1,31 +1,14 @@
-# Author: Philipp Moers <soziflip@gmail.com>
-
-# i3 config file
-#
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
-
-
-
-###############################################################################
-###########  DEPENDENCIES  ####################################################
-###############################################################################
-
-# apart from i3, install...
+## Author: Philipp Moers <soziflip@gmail.com>
+##
+## config file for i3 window manager
+##
+## Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 
-# dex
-# i3lock
-# dmenu
-# quickswitch [https://github.com/OliverUv/quickswitch-for-i3]
-# rofi [https://davedavenport.github.io/rofi/]
-# compton
-# unclutter
-# numlockx
+## CAUTION:
+## This config has a dependency to [https://github.com/sflip/shellscripts]
 
-# my shellscripts [https://github.com/sflip/shellscripts]
-# path to my shellscripts
 set $SHELLSCRIPT_PATH /home/sflip/shellscripts
-
 
 
 
@@ -33,18 +16,23 @@ set $SHELLSCRIPT_PATH /home/sflip/shellscripts
 ###########  INITIAL SETUP  ###################################################
 ###############################################################################
 
-# some setup logic I rather do with a shell script
+## some setup logic I rather do with a shell script
 exec "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"
 exec "/home/sflip/.i3/bin/i3-initialize-outputs.sh > /tmp/i3-initialize-outputs.log 2>&1"
 
-# set keyboard layout
+## set keyboard layout
 exec "setxkbmap de_sflip"
 
-# turn on num block
+## turn on num block
 exec --no-startup-id "numlockx"
 
-# turn off pc speaker with annoying beep
+## turn off pc speaker with annoying beep
 exec "xset -b"
+
+## disable touchpad
+# exec --no-startup-id "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
+# exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'Device Enabled' 0"
+# exec --no-startup-id "xinput --set-prop 'FocalTechPS/2 FocalTech FocalTech Touchpad' 'Device Enabled' 0"
 
 
 
@@ -53,44 +41,32 @@ exec "xset -b"
 ###############################################################################
 
 
-# ALSO SEE 'autostart' TARGET IN DOTFILES AND LOOK INTO 'dex'
-# THIS MAKES A LOT OF THE FOLLOWING STUFF OBSOLETE
+## ALSO SEE 'autostart' TARGET IN DOTFILES AND LOOK INTO 'dex'
+## THIS MAKES A LOT OF THE FOLLOWING STUFF OBSOLETE
 
-# autostart .desktop files the convenient way
-# https://faq.i3wm.org/question/2155/how-can-i-use-autostart-desktop-files-in-i3.1.html
+## autostart .desktop files the convenient way
+## https://faq.i3wm.org/question/2155/how-can-i-use-autostart-desktop-files-in-i3.1.html
 exec --no-startup-id "dex -ae i3"
 
-# composite manager for window overlays, smooth workspace changes, etc.
+## composite manager for window overlays, smooth workspace changes, etc.
 exec --no-startup-id "compton -b"
 # exec --no-startup-id "compton -b --active-opacity 0.9 -i 0.9"
 
-# clipboard can have multiple entries
+## clipboard can have multiple entries
 # exec --no-startup-id "clipmenud"
 
-# power manager takes care of lid closing, standby, display brightness etc.
+## power manager takes care of lid closing, standby, display brightness etc.
 # exec --no-startup-id "xfce4-power-manager"
 
-# daemon for theme settings and shit
+## daemon for theme settings and shit
 # exec --no-startup-id "cinnamon-settings-daemon"
-exec --no-startup-id "xfsettingsd --sm-client-disable"
+# exec --no-startup-id "xfsettingsd --sm-client-disable"
 
-# start the gnome network manager, because it automatically connects to eduroam etc.
-# and kill it after a few seconds when it is not needed anymore
-# exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
+## hide mouse cursor
+# exec --no-startup-id "nohup unclutter -idle 4 -jitter 30 &"
 
-# hide mouse cursor
-# exec --no-startup-id unclutter -idle 4 -jitter 30
-
-# disable touchpad at start
-# exec --no-startup-id "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
-# exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'Device Enabled' 0"
-# exec --no-startup-id "xinput --set-prop 'FocalTechPS/2 FocalTech FocalTech Touchpad' 'Device Enabled' 0"
-
-# disable touchpad when typing
+## disable touchpad when typing
 # exec --no-startup-id "syndaemon -d -k -i 1.2"
-
-
-# (ALSO SEE 'autostart' TARGET IN DOTFILES!)
 
 
 
@@ -98,33 +74,31 @@ exec --no-startup-id "xfsettingsd --sm-client-disable"
 ###########  GENERAL  #########################################################
 ###############################################################################
 
-# launcher options
+## launcher options
 set $DMENU_OPTIONS   -l 5 -fn 'PragmataPro Mono-10' -i -nb '#282828' -sb '#FABD2F' -sf '#282828'
 set $DMENU_OPTIONS_2 -l 5 -fn 'PragmataPro Mono-10' -i -nb \#282828 -sb \#FABD2F -sf \#282828
 
-
-# modifier key: windows/super
+## modifier key: windows/super
 set $mod Mod4
 
-# Use Mouse+$mod to drag floating windows to their wanted position
+## Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# focus when mouse moves
+## focus when mouse moves
 focus_follows_mouse no
 
-# don't move mouse cursor when changing output
+## don't move mouse cursor when changing output
 mouse_warping none
 
-# close container with middle click on title bar
-# (mod2 numlock, so this should work in both cases https://github.com/i3/i3/issues/2523)
+## close container with middle click on title bar
+## (mod2 numlock, so this should work in both cases https://github.com/i3/i3/issues/2523)
 bindsym --release      button2 kill
 bindsym --release Mod2+button2 kill
 
-# enable/disable touchpad
+## enable/disable touchpad
 bindsym XF86TouchpadToggle  exec --no-startup-id "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
 
-# reload the configuration file
-# or restart i3 [preserves session]
+## reload the configuration file or restart i3 [preserves session] etc.
 bindsym $mod+F5 mode "$refresh"
 set $refresh Want it fresh? (l) reload config, (s) restart i3, (i) initialize-script, (x) setup outputs, (Z/z) save/restore layout (k) set keyboard layout, (a) add chrome app to i3
 mode "$refresh" {
@@ -142,7 +116,7 @@ mode "$refresh" {
     bindsym Escape mode "default"
 }
 
-# change keyboard layout
+## change keyboard layout
 bindsym $mod+Shift+F6 mode "$change_keyboard_layout"
 set $change_keyboard_layout Keyboard layout: (F1) de (F2) de_sflip (F3) us (F4) neo (F5) dvorak (F6) programmer dvorak
 mode "$change_keyboard_layout" {
@@ -157,7 +131,8 @@ mode "$change_keyboard_layout" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-# show keyboard layout
+
+## show keyboard layout
 set $keyboard_layout_image_source http://programmer-dvorak.appspot.com/img/KB_Programmer_Dvorak.png
 set $keyboard_layout_image /home/sflip/img/KB_Programmer_Dvorak.png
 exec "test -f $keyboard_layout_image || $( sleep 20 && curl $keyboard_layout_image_source > $keyboard_layout_image )"
@@ -169,18 +144,14 @@ bindsym $mod+F6 exec --no-startup-id "pkill -fx 'sxiv $keyboard_layout_image' ||
 ###########  LOOK  ############################################################
 ###############################################################################
 
-# set wallpaper
-# NOTE:
-# i3 is a window manager and hence has nothing to do with wallpapers
-# since desktops set their own, we still set a wallpaper here
+## set wallpaper
 exec --no-startup-id "feh --bg-scale ~/.i3/wallpaper"
 exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
 bindsym $mod+F7         exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
 bindsym $mod+Shift+F7   exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh --backwards"
 
-
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
+## Font for window titles.
+## Will also be used by the bar unless a different font # is used in the BAR block below.
 font pango:PragmataPro Mono 10
 # font pango:Monospace 9
 # font pango:Inconsolata 10
@@ -188,54 +159,39 @@ font pango:PragmataPro Mono 10
 # font pango:DejaVu Sans Mono 8
 # font pango:NotoSans 10
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-
-
-# Before i3 v4.8, we used to recommend this one as the default:
-
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
-
-
-
-# borders
+## borders
 #for_window [class="^.*"] border pixel 1
 new_window pixel 0
 new_float  normal
 # hide_edge_borders both
 
-
-# gaps (require the i3gaps fork)
+## gaps (require the i3gaps fork)
 # gaps inner 10
 # gaps outer 2
 # smart_gaps on
 
 
-# Colors
+## Colors
 
-# accent colors:
-# sfluen          #AFFF58         sfluen_dark #83B45C
-# sflea           #00AFAF         sflea_dark  #005F5F
-# gruvbox_light_3        "#BDAE93";
-# gruvbox_bright_red     "#FB4934"
-# gruvbox_bright_green   "#B8BB26"
-# gruvbox_bright_yellow  "#FABD2F"
-# gruvbox_bright_blue    "#83A598"
-# gruvbox_bright_purple  "#D3869B"
-# gruvbox_bright_aqua    "#8EC07C"
-# gruvbox_bright_orange  "#FE8019"
-# gruvbox_neutral_red    "#CC241D"
-# gruvbox_neutral_green  "#98971A"
-# gruvbox_neutral_yellow "#D79921"
-# gruvbox_neutral_blue   "#458588"
-# gruvbox_neutral_purple "#B16286"
-# gruvbox_neutral_aqua   "#689D6A"
-# gruvbox_neutral_orange "#D65D0E"
+# sfluen                            #AFFF58
+# sfluen_dark                       #83B45C
+# sflea                             #00AFAF
+# sflea_dark                        #005F5F
+# gruvbox_light_3                   #BDAE93
+# gruvbox_bright_red                #FB4934
+# gruvbox_bright_green              #B8BB26
+# gruvbox_bright_yellow             #FABD2F
+# gruvbox_bright_blue               #83A598
+# gruvbox_bright_purple             #D3869B
+# gruvbox_bright_aqua               #8EC07C
+# gruvbox_bright_orange             #FE8019
+# gruvbox_neutral_red               #CC241D
+# gruvbox_neutral_green             #98971A
+# gruvbox_neutral_yellow            #D79921
+# gruvbox_neutral_blue              #458588
+# gruvbox_neutral_purple            #B16286
+# gruvbox_neutral_aqua              #689D6A
+# gruvbox_neutral_orange            #D65D0E
 
 #                       border   backgr   text     indicator
 client.focused          #CC241D  #CC241D  #1E1E1E  #FF0000
@@ -250,17 +206,22 @@ client.background       #1A1A1A  #1E1E1E  #CC241D  #1E1E1E
 ###########  BAR  #############################################################
 ###############################################################################
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
+
     mode hide
+
     # status_command      i3status --config ~/.i3/i3status
     # status_command      i3blocks -c ~/.i3/i3blocks
     status_command      python3 ~/.i3/i3pystatus
+
     # output              HDMI2
+
     position            top
+
     workspace_buttons   yes
+
     strip_workspace_numbers yes
+
     separator_symbol    " | "
     # separator_symbol    " X "
     # separator_symbol    " ǁ "
@@ -268,9 +229,12 @@ bar {
     # separator_symbol    " ⣶ "
     # separator_symbol    " ⣿ "
     # separator_symbol    " Ꙭ "
+
     # tray_output         none
     # tray_output         HDMI2
+
     tray_padding        3
+
     colors {
         background  #1E1E1E
         statusline  #BDAE93
@@ -281,16 +245,16 @@ bar {
         inactive_workspace  #1E1E1E  #1E1E1E  #BDAE93
         urgent_workspace    #B8BB26  #B8BB26  #000000
     }
+
 }
 
 
-# hide/show bar
+## hide/show bar
 bindsym $mod+Shift+b bar mode toggle
 
-# TODO: toggle tray?
+# TODO: how to toggle tray_output dynamically?
 
 set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
-
 
 
 
@@ -298,7 +262,7 @@ set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
 ###########  HELPER  ##########################################################
 ###############################################################################
 
-# do something with the clipboard
+## do something with the clipboard
 bindsym $mod+c mode "$mode_clipboard"
 set $mode_clipboard Clipboard: (c) choose (p) get password
 mode "$mode_clipboard" {
@@ -313,7 +277,7 @@ mode "$mode_clipboard" {
     bindsym Escape mode "default"
 }
 
-# type something or press keys or click
+## type something or press keys or click
 bindsym $mod+x mode "$mode_x"
 set $mode_x (x) type with xdotool
 mode "$mode_x" {
@@ -336,18 +300,11 @@ mode "$mode_xdootool" {
 
 
 
-
-
-
-
 ###############################################################################
 ###########  SYSTEM  ##########################################################
 ###############################################################################
 
-# exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
-# lock/exit/suspend etc.
+## lock/exit/suspend etc.
 bindsym XF86PowerOff mode "$mode_system"
 bindsym $mod+Escape mode "$mode_system"
 set $mode_system Want to leave?  (e) logout, (u) switch user, (l) lock, (s) suspend, (h) hibernate, (r) reboot, (p) poweroff (o) poweroff smoothly
@@ -366,25 +323,22 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-
-# set keyboard brightness
+## set keyboard brightness
 bindsym XF86KbdBrightnessDown exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness down"
 bindsym XF86KbdBrightnessUp   exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness up"
 
-
-# set display brightness
+## set display brightness
 bindsym $mod+Left   exec --no-startup-id "xbacklight -dec 3"
 bindsym $mod+Right  exec --no-startup-id "xbacklight -inc 3"
 
-# set xfce4-terminal font size (not possible by default)
+## set xfce4-terminal font size (not possible by default)
 bindsym $mod+Control+plus   exec --no-startup-id "$SHELLSCRIPT_PATH/xfce4-terminal-fontsize increase"
 bindsym $mod+Control+minus  exec --no-startup-id "$SHELLSCRIPT_PATH/xfce4-terminal-fontsize decrease"
 
-
-# change audio output device
+## change audio output device
 bindsym $mod+v exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output"
 
-# set volume
+## set volume
 bindsym $mod+Down            exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
 bindsym $mod+Up              exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
 bindsym $mod+minus           exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
@@ -392,7 +346,7 @@ bindsym $mod+plus            exec --no-startup-id "amixer sset Master 1%+"; exec
 bindsym XF86AudioLowerVolume exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
 bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
 
-# control music
+## control music
 bindsym $mod+Shift+minus     exec --no-startup-id "pgrep spotify && spotifycli --volumedown || mpc volume -1";  exec "$UPDATE_STATUSBAR"
 bindsym $mod+Shift+plus      exec --no-startup-id "pgrep spotify && spotifycli --volumeup   || mpc volume +1";  exec "$UPDATE_STATUSBAR"
 bindsym XF86AudioPlay        exec --no-startup-id "pgrep spotify && spotifycli --playpause  || mpc toggle";     exec "$UPDATE_STATUSBAR"
@@ -443,10 +397,10 @@ mode "$mpd_control" {
     bindsym Escape mode "default"
 }
 
-# play a sound
+## play a sound
 bindsym $mod+Shift+0 exec --no-startup-id "~/.i3/bin/soundboard.sh"
 
-# take a screenshot
+## take a screenshot
 bindsym $mod+Print       exec --no-startup-id "xfce4-screenshooter --window --save ~/img-screenshots"
 bindsym      Print       exec --no-startup-id "xfce4-screenshooter --window --save ~/img-screenshots"
 bindsym $mod+Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen --save ~/img-screenshots""
@@ -455,10 +409,247 @@ bindsym      Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen 
 
 
 ###############################################################################
-###########  RULES FOR SPECIFIC APPS  #########################################
+###########  INTRA WORKSPACE  #################################################
 ###############################################################################
 
-# windows always floating/fullscreen
+## split vertically by default
+default_orientation vertical
+
+## new workspaces have this layout
+workspace_layout stacked
+
+
+## start a terminal
+bindsym $mod+Shift+o mode "$terminal"
+set $terminal Open a terminal: (a) alacritty (m) termite (u) urxvt (k) konsole (i) kitty (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
+mode "$terminal" {
+    bindsym a       exec --no-startup-id "alacritty --command tmux -2 new-session -A -s main"; mode "default"
+    bindsym Shift+a exec --no-startup-id "alacritty"; mode "default"
+    bindsym m       exec --no-startup-id "termite -e 'tmux -2 new-session -A -s main'"; mode "default"
+    bindsym Shift+m exec --no-startup-id "termite"; mode "default"
+    bindsym u       exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
+    bindsym Shift+u exec --no-startup-id "urxvt"; mode "default"
+    bindsym k       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower -e 'tmux -2 new-session -A -s main'"; mode "default"
+    bindsym Shift+k exec --no-startup-id "konsole --fallback-profile"; mode "default"
+    bindsym i       exec --no-startup-id "kitty tmux -2 new-session -A -s main"; mode "default"
+    bindsym Shift+i exec --no-startup-id "kitty"; mode "default"
+    bindsym x       exec --no-startup-id "xfce4-terminal --command='tmux -2 new-session -A -s main'"; mode "default"
+    bindsym Shift+x exec --no-startup-id "xfce4-terminal"; mode "default"
+    bindsym g       exec --no-startup-id "gnome-terminal --hide-menubar -- tmux -2 new-session -A -s main"; mode "default"
+    bindsym Shift+g exec --no-startup-id "gnome-terminal --hide-menubar"; mode "default"
+    bindsym r       exec --no-startup-id "cool-retro-term -e tmux -2 new-session -A -s main"; mode "default"
+    bindsym Shift+r exec --no-startup-id "cool-retro-term"; mode "default"
+    bindsym t       exec --no-startup-id "terminology --exec 'tmux -2 new-session -A -s main'"; mode "default"
+    bindsym Shift+t exec --no-startup-id "terminology"; mode "default"
+    # cancel
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+## launch an application (that has a .desktop-file)
+# bindsym $mod+Return exec --no-startup-id "i3-dmenu-desktop -dmenu='dmenu $DMENU_OPTIONS'"
+# bindsym $mod+Return exec --no-startup-id "rofi -show drun $ROFI_OPTIONS"
+bindsym $mod+Return exec --no-startup-id "rofi -modi window,run,combi -show combi -combi-modi window,drun"
+
+## launch any application
+# bindsym $mod+Shift+Return exec --no-startup-id "dmenu_run $DMENU_OPTIONS"
+bindsym $mod+Shift+Return exec --no-startup-id "rofi -show run"
+
+## kill focused container
+bindsym $mod+BackSpace kill
+bindsym $mod+Shift+q kill
+
+## change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+## move focused container
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+# bindsym $mod+Shift+j move down; resize shrink height 15 px or 15 ppt
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+## focus the parent/child container
+bindsym $mod+y focus parent
+bindsym $mod+Shift+y focus child
+
+## enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+## change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout toggle
+# bindsym $mod+s layout stacked
+
+## toggle tiling/floating
+bindsym $mod+m floating toggle
+# change focus between tiling/floating windows
+bindsym $mod+Tab focus mode_toggle
+
+## send container to background (and catapult in in the foreground again)
+bindsym $mod+Shift+z move scratchpad
+bindsym $mod+z scratchpad show
+
+## resize container
+bindsym $mod+r mode "resize"
+mode "resize" {
+    set $steps 5
+    bindsym h resize shrink width  $steps px or $steps ppt
+    bindsym k resize grow   height $steps px or $steps ppt
+    bindsym j resize shrink height $steps px or $steps ppt
+    bindsym l resize grow   width  $steps px or $steps ppt
+    # cancel
+    bindsym $mod+r mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+## change border
+bindsym $mod+b border toggle
+
+
+
+###############################################################################
+###########  INTER WORKSPACE  #################################################
+###############################################################################
+
+## toggle workspaces switches on repeated keypress
+workspace_auto_back_and_forth yes
+
+
+## open new workspace
+bindsym $mod+i exec --no-startup-id "quickswitch -E"
+
+## rename workspace
+bindsym $mod+comma exec --no-startup-id i3-input -F 'rename workspace to "%s"' -P 'rename workspace to: '
+
+## mark/goto windows like in vim
+bindsym $mod+t       exec --no-startup-id i3-input -F 'mark %s' -P 'Mark name: '
+bindsym $mod+Shift+t exec --no-startup-id i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
+
+## switch to another workspace
+bindsym $mod+e [urgent=latest] focus
+bindsym $mod+space workspace back_and_forth
+# bindsym $mod+numbersign workspace back_and_forth
+bindsym $mod+numbersign exec --no-startup-id "rofi -show window $ROFI_OPTIONS"
+bindsym $mod+w exec --no-startup-id "quickswitch --workspaces --dmenu 'dmenu $DMENU_OPTIONS_2'"
+bindsym $mod+n workspace next_on_output
+bindsym $mod+p workspace prev_on_output
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+#bindsym $mod+0 workspace 10
+
+## move container to specific workspace
+bindsym $mod+Shift+n move container to workspace next_on_output
+bindsym $mod+Shift+p move container to workspace prev_on_output
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+#bindsym $mod+Shift+0 move container to workspace 10
+
+## move container to new workspace (tmux 'break')
+bindsym $mod+Shift+i exec --no-startup-id "quickswitch --journey -E"
+# move container to specific workspace
+bindsym $mod+Shift+numbersign exec --no-startup-id "quickswitch --journey --dmenu 'dmenu $DMENU_OPTIONS_2'"
+bindsym $mod+Shift+w          exec --no-startup-id "quickswitch --journey --dmenu 'dmenu $DMENU_OPTIONS_2'"
+bindsym $mod+Shift+space move container to workspace back_and_forth
+
+
+## move container to other output
+bindsym $mod+u mode "$move_container_to_output"
+set $move_container_to_output Move container to output (h) left, (l) right, (j) down, (k) up
+mode "$move_container_to_output" {
+    bindsym h move container to output left; workspace back_and_forth; mode "default"
+    bindsym l move container to output right; workspace back_and_forth; mode "default"
+    bindsym j move container to output down; workspace back_and_forth; mode "default"
+    bindsym k move container to output up; workspace back_and_forth; mode "default"
+    # cancel
+    bindsym $mod+u mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+## move workspace to other output
+bindsym $mod+Shift+u mode "$move_workspace_to_output"
+set $move_workspace_to_output Move workspace to output (h) left, (l) right, (j) down, (k) up
+mode "$move_workspace_to_output" {
+    bindsym h move workspace to output left; mode "default"
+    bindsym l move workspace to output right; mode "default"
+    bindsym j move workspace to output down; mode "default"
+    bindsym k move workspace to output up; mode "default"
+    # cancel
+    bindsym $mod+Shift+u mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+
+###############################################################################
+###########  SPECIFIC APPS  ###################################################
+###############################################################################
+
+## switch to a specific window or workspace
+bindsym $mod+o mode "$goto"
+set $goto Focus app: (o) Terminal (f) Firefox (c) Chromium (g) Chrome (m) Music (i) IntelliJ (s) Slack (t) Telegram (b) Trello (q) qutebrowser
+mode "$goto" {
+  bindsym o         [class="(?i)alacritty"]             focus; mode "default"
+  bindsym $mod+o    [class="(?i)alacritty"]             focus; mode "default"
+  bindsym f         [class="(?i)firefox"]               focus; mode "default"
+  bindsym $mod+f    [class="(?i)firefox"]               focus; mode "default"
+  bindsym q         [class="(?i)qutebrowser"]           focus; mode "default"
+  bindsym $mod+q    [class="(?i)qutebrowser"]           focus; mode "default"
+  bindsym m         [class="(?i)spotify"]               focus; mode "default"
+  bindsym $mod+m    [class="(?i)spotify"]               focus; mode "default"
+  bindsym i         [class="(?i)jetbrains-idea"]        focus; mode "default"
+  bindsym $mod+i    [class="(?i)jetbrains-idea"]        focus; mode "default"
+  bindsym s         [class="(?i)slack"]                 focus; mode "default"
+  bindsym $mod+s    [class="(?i)slack"]                 focus; mode "default"
+  bindsym t         [class="(?i)Telegram"]              focus; mode "default"
+  bindsym $mod+t    [class="(?i)Telegram"]              focus; mode "default"
+  bindsym c         [class="(?i)chromium" instance="chromium"] focus; mode "default"
+  bindsym $mod+c    [class="(?i)chromium" instance="chromium"] focus; mode "default"
+  bindsym g         [class="(?i)google-chrome" instance="google-chrome"] focus; mode "default"
+  bindsym $mod+g    [class="(?i)google-chrome" instance="google-chrome"] focus; mode "default"
+  bindsym b         [class="(?i)chrom" instance="(crx_flcchhclanjfdanlfphjfnhbjdbejong|crx_goifhkhiimheobgjhfbnkkibebioelpk)"] focus; mode "default"
+  bindsym $mod+b    [class="(?i)chrom" instance="(crx_flcchhclanjfdanlfphjfnhbjdbejong|crx_goifhkhiimheobgjhfbnkkibebioelpk)"] focus; mode "default"
+  # cancel
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+## kill specific apps (e.g. when memory really full again and the system hangs)
+bindsym $mod+Shift+BackSpace mode "$kill"
+set $kill Kill: (f) firefox (g) chrome (j) java
+mode "$kill" {
+    bindsym g       exec --no-startup-id "pkill    chrome"; mode "default"
+    bindsym G       exec --no-startup-id "pkill -9 chrome"; mode "default"
+    bindsym f       exec --no-startup-id "pkill    firefox"; mode "default"
+    bindsym F       exec --no-startup-id "pkill -9 firefox"; mode "default"
+    bindsym j       exec --no-startup-id "pkill    java"; mode "default"
+    bindsym J       exec --no-startup-id "pkill -9 java"; mode "default"
+    # cancel
+    #bindsym $mod+o mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+## windows always floating/fullscreen
 for_window [class="(?i)avd"]            floating enable
 for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] fullscreen
 for_window [class="(?i)file-roller"]    floating enable
@@ -482,7 +673,7 @@ for_window [title="Print"]              floating enable
 for_window [window_role="(?i)vlc-main"] floating enable
 for_window [window_role="(?i)vlc-main"] resize set 750 450
 
-# windows always on specific workspace
+## windows always on specific workspace
 for_window [class="(?i)chrom" instance="crx_acmikcjocccblbiibfdfjkghclpmmpip"] move to workspace    
 for_window [class="(?i)chrom" instance="crx_kddchekfnnagpejaneebcigegenogifj"] move to workspace    
 assign [class="(?i)chromium"]                                                                       
@@ -522,7 +713,7 @@ for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] m
 assign [class="(?i)pale moon"]                                                                      
 assign [class="(?i)qutebrowser"]                                                                    
 
-# workspaces with window always on specific output
+## workspaces with window always on specific output
 for_window [class="(?i)chromium"]                               move workspace to output DP3-1
 for_window [class="(?i)google-chrome"]                          move workspace to output DP3-1
 for_window [class="(?i)firefox"]                                move workspace to output DP3-1
@@ -535,242 +726,3 @@ for_window [class="(?i)jetbrains-idea"]                         move workspace t
 for_window [class="(?i)jetbrains-phpstorm"]                     move workspace to output DP3-2
 for_window [class="(?i)slack"]                                  move workspace to output eDP1
 for_window [class="(?i)telegram"]                               move workspace to output eDP1
-
-
-# kill specific apps (e.g. when memory really full again and the system hangs)
-bindsym $mod+Shift+BackSpace mode "$kill"
-set $kill Kill: (f) firefox (g) chrome (j) java
-mode "$kill" {
-    bindsym g       exec --no-startup-id "pkill    chrome"; mode "default"
-    bindsym G       exec --no-startup-id "pkill -9 chrome"; mode "default"
-    bindsym f       exec --no-startup-id "pkill    firefox"; mode "default"
-    bindsym F       exec --no-startup-id "pkill -9 firefox"; mode "default"
-    bindsym j       exec --no-startup-id "pkill    java"; mode "default"
-    bindsym J       exec --no-startup-id "pkill -9 java"; mode "default"
-    # cancel
-    #bindsym $mod+o mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-
-
-###############################################################################
-###########  INTRA WORKSPACE  #################################################
-###############################################################################
-
-# split vertically by default
-default_orientation vertical
-
-# new workspaces have this layout
-workspace_layout stacked
-
-
-# start a terminal
-bindsym $mod+Shift+o mode "$terminal"
-set $terminal Open a terminal: (a) alacritty (m) termite (u) urxvt (k) konsole (i) kitty (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
-mode "$terminal" {
-    bindsym a       exec --no-startup-id "alacritty --command tmux -2 new-session -A -s main"; mode "default"
-    bindsym Shift+a exec --no-startup-id "alacritty"; mode "default"
-    bindsym m       exec --no-startup-id "termite -e 'tmux -2 new-session -A -s main'"; mode "default"
-    bindsym Shift+m exec --no-startup-id "termite"; mode "default"
-    bindsym u       exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
-    bindsym Shift+u exec --no-startup-id "urxvt"; mode "default"
-    bindsym k       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower -e 'tmux -2 new-session -A -s main'"; mode "default"
-    bindsym Shift+k exec --no-startup-id "konsole --fallback-profile"; mode "default"
-    bindsym i       exec --no-startup-id "kitty tmux -2 new-session -A -s main"; mode "default"
-    bindsym Shift+i exec --no-startup-id "kitty"; mode "default"
-    bindsym x       exec --no-startup-id "xfce4-terminal --command='tmux -2 new-session -A -s main'"; mode "default"
-    bindsym Shift+x exec --no-startup-id "xfce4-terminal"; mode "default"
-    bindsym g       exec --no-startup-id "gnome-terminal --hide-menubar -- tmux -2 new-session -A -s main"; mode "default"
-    bindsym Shift+g exec --no-startup-id "gnome-terminal --hide-menubar"; mode "default"
-    bindsym r       exec --no-startup-id "cool-retro-term -e tmux -2 new-session -A -s main"; mode "default"
-    bindsym Shift+r exec --no-startup-id "cool-retro-term"; mode "default"
-    bindsym t       exec --no-startup-id "terminology --exec 'tmux -2 new-session -A -s main'"; mode "default"
-    bindsym Shift+t exec --no-startup-id "terminology"; mode "default"
-    # cancel
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-# launch an application (that has a .desktop-file)
-# bindsym $mod+Return exec --no-startup-id "i3-dmenu-desktop -dmenu='dmenu $DMENU_OPTIONS'"
-# bindsym $mod+Return exec --no-startup-id "rofi -show drun $ROFI_OPTIONS"
-bindsym $mod+Return exec --no-startup-id "rofi -modi window,run,combi -show combi -combi-modi window,drun"
-
-# launch any application
-# bindsym $mod+Shift+Return exec --no-startup-id "dmenu_run $DMENU_OPTIONS"
-bindsym $mod+Shift+Return exec --no-startup-id "rofi -show run"
-
-# kill focused container
-bindsym $mod+BackSpace kill
-bindsym $mod+Shift+q kill
-
-# change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-
-# move focused container
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-# bindsym $mod+Shift+j move down; resize shrink height 15 px or 15 ppt
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-
-# focus the parent/child container
-bindsym $mod+y focus parent
-bindsym $mod+Shift+y focus child
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout toggle
-# bindsym $mod+s layout stacked
-
-# toggle tiling/floating
-bindsym $mod+m floating toggle
-# change focus between tiling/floating windows
-bindsym $mod+Tab focus mode_toggle
-
-# send container to background
-bindsym $mod+Shift+z move scratchpad
-# and show it again
-bindsym $mod+z scratchpad show
-
-# resize container
-bindsym $mod+r mode "resize"
-mode "resize" {
-    set $steps 5
-    bindsym h resize shrink width  $steps px or $steps ppt
-    bindsym k resize grow   height $steps px or $steps ppt
-    bindsym j resize shrink height $steps px or $steps ppt
-    bindsym l resize grow   width  $steps px or $steps ppt
-    # cancel
-    bindsym $mod+r mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-# change border
-bindsym $mod+b border toggle
-
-
-
-###############################################################################
-###########  INTER WORKSPACE  #################################################
-###############################################################################
-
-# $mod+4 two times to get back to last recently used
-workspace_auto_back_and_forth yes
-
-
-# open new workspace
-bindsym $mod+i exec --no-startup-id "quickswitch -E"
-
-# rename workspace
-bindsym $mod+comma exec --no-startup-id i3-input -F 'rename workspace to "%s"' -P 'rename workspace to: '
-
-# mark/goto windows like in vim
-bindsym $mod+t       exec --no-startup-id i3-input -F 'mark %s' -P 'Mark name: '
-bindsym $mod+Shift+t exec --no-startup-id i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
-
-# switch to a specific window or workspace
-bindsym $mod+o mode "$goto"
-set $goto Focus app: (o) Terminal (f) Firefox (c) Chromium (g) Chrome (m) Music (i) IntelliJ (s) Slack (t) Telegram (b) Trello (q) qutebrowser
-mode "$goto" {
-  bindsym o         [class="(?i)alacritty"]             focus; mode "default"
-  bindsym $mod+o    [class="(?i)alacritty"]             focus; mode "default"
-  bindsym f         [class="(?i)firefox"]               focus; mode "default"
-  bindsym $mod+f    [class="(?i)firefox"]               focus; mode "default"
-  bindsym q         [class="(?i)qutebrowser"]           focus; mode "default"
-  bindsym $mod+q    [class="(?i)qutebrowser"]           focus; mode "default"
-  bindsym m         [class="(?i)spotify"]               focus; mode "default"
-  bindsym $mod+m    [class="(?i)spotify"]               focus; mode "default"
-  bindsym i         [class="(?i)jetbrains-idea"]        focus; mode "default"
-  bindsym $mod+i    [class="(?i)jetbrains-idea"]        focus; mode "default"
-  bindsym s         [class="(?i)slack"]                 focus; mode "default"
-  bindsym $mod+s    [class="(?i)slack"]                 focus; mode "default"
-  bindsym t         [class="(?i)Telegram"]              focus; mode "default"
-  bindsym $mod+t    [class="(?i)Telegram"]              focus; mode "default"
-  bindsym c         [class="(?i)chromium" instance="chromium"] focus; mode "default"
-  bindsym $mod+c    [class="(?i)chromium" instance="chromium"] focus; mode "default"
-  bindsym g         [class="(?i)google-chrome" instance="google-chrome"] focus; mode "default"
-  bindsym $mod+g    [class="(?i)google-chrome" instance="google-chrome"] focus; mode "default"
-  bindsym b         [class="(?i)chrom" instance="(crx_flcchhclanjfdanlfphjfnhbjdbejong|crx_goifhkhiimheobgjhfbnkkibebioelpk)"] focus; mode "default"
-  bindsym $mod+b    [class="(?i)chrom" instance="(crx_flcchhclanjfdanlfphjfnhbjdbejong|crx_goifhkhiimheobgjhfbnkkibebioelpk)"] focus; mode "default"
-  # cancel
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-}
-
-# switch to another workspace
-bindsym $mod+e [urgent=latest] focus
-bindsym $mod+space workspace back_and_forth
-# bindsym $mod+numbersign workspace back_and_forth
-bindsym $mod+numbersign exec --no-startup-id "rofi -show window $ROFI_OPTIONS"
-bindsym $mod+w exec --no-startup-id "quickswitch --workspaces --dmenu 'dmenu $DMENU_OPTIONS_2'"
-bindsym $mod+n workspace next_on_output
-bindsym $mod+p workspace prev_on_output
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-#bindsym $mod+0 workspace 10
-
-# move container to specific workspace
-bindsym $mod+Shift+n move container to workspace next_on_output
-bindsym $mod+Shift+p move container to workspace prev_on_output
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-#bindsym $mod+Shift+0 move container to workspace 10
-
-# move container to new workspace (tmux 'break')
-bindsym $mod+Shift+i exec --no-startup-id "quickswitch --journey -E"
-# move container to specific workspace
-bindsym $mod+Shift+numbersign exec --no-startup-id "quickswitch --journey --dmenu 'dmenu $DMENU_OPTIONS_2'"
-bindsym $mod+Shift+w          exec --no-startup-id "quickswitch --journey --dmenu 'dmenu $DMENU_OPTIONS_2'"
-bindsym $mod+Shift+space move container to workspace back_and_forth
-
-
-# move container to other output
-bindsym $mod+u mode "$move_container_to_output"
-set $move_container_to_output Move container to output (h) left, (l) right, (j) down, (k) up
-mode "$move_container_to_output" {
-    bindsym h move container to output left; workspace back_and_forth; mode "default"
-    bindsym l move container to output right; workspace back_and_forth; mode "default"
-    bindsym j move container to output down; workspace back_and_forth; mode "default"
-    bindsym k move container to output up; workspace back_and_forth; mode "default"
-    # cancel
-    bindsym $mod+u mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-# move workspace to other output
-bindsym $mod+Shift+u mode "$move_workspace_to_output"
-set $move_workspace_to_output Move workspace to output (h) left, (l) right, (j) down, (k) up
-mode "$move_workspace_to_output" {
-    bindsym h move workspace to output left; mode "default"
-    bindsym l move workspace to output right; mode "default"
-    bindsym j move workspace to output down; mode "default"
-    bindsym k move workspace to output up; mode "default"
-    # cancel
-    bindsym $mod+Shift+u mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
