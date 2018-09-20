@@ -6,6 +6,19 @@
 # We have more power here than in the i3 config file (functions, loops, etc).
 
 
+function setup_power_management
+    switch (hostname)
+        case 'dwarf'
+            xset dpms 595 0 0 # seconds until standby/suspend/off
+            xset s noblank # screensaver should not turn off screen
+            xset s off # screensaver should be disabled
+            nohup xautolock -time 10 -locker i3lock & # lock after a few minutes
+        case '*'
+            xset dpms 14400 0 0 # seconds until standby/suspend/off
+    end
+end
+
+
 # TODO: port to bash in ./i3/bin/i3-initialize-outputs.sh
 function new_screen_resolution
     set screen $argv[1]
@@ -104,6 +117,7 @@ function autostart
 end
 
 
+setup_power_management
 desktop_session
 setup_musicserver
 # tmux-system-sessions
