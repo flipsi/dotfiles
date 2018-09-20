@@ -335,27 +335,38 @@ bindsym $mod+Right  exec --no-startup-id "xbacklight -inc 3"
 bindsym $mod+Control+plus   exec --no-startup-id "$SHELLSCRIPT_PATH/xfce4-terminal-fontsize increase"
 bindsym $mod+Control+minus  exec --no-startup-id "$SHELLSCRIPT_PATH/xfce4-terminal-fontsize decrease"
 
-## change audio output device
-bindsym $mod+v exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output"
-
 ## set volume
-bindsym $mod+Down            exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
-bindsym $mod+Up              exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
-bindsym $mod+minus           exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
-bindsym $mod+plus            exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
 bindsym XF86AudioLowerVolume exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
 bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
 
-## control music
-bindsym $mod+Shift+minus     exec --no-startup-id "pgrep spotify && spotifycli --volumedown || mpc volume -1";  exec "$UPDATE_STATUSBAR"
-bindsym $mod+Shift+plus      exec --no-startup-id "pgrep spotify && spotifycli --volumeup   || mpc volume +1";  exec "$UPDATE_STATUSBAR"
+## audio control
+bindsym $mod+0 mode "$audio"
+set $audio Audio (+/-) Volume (s) Switch output (p) Play sound
+mode "$audio" {
+    bindsym plus            exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
+    bindsym minus           exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
+    bindsym Up              exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
+    bindsym Down            exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
+    bindsym a               exec --no-startup-id "amixer sset Master 5%+"; exec "$UPDATE_STATUSBAR"
+    bindsym z               exec --no-startup-id "amixer sset Master 5%-"; exec "$UPDATE_STATUSBAR"
+    bindsym s               exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output"
+    bindsym p               exec --no-startup-id "~/.i3/bin/soundboard.sh"; mode "default"
+    # cancel
+    bindsym $mod+0 mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+## music control
+# bindsym $mod+Shift+minus     exec --no-startup-id "pgrep spotify && spotifycli --volumedown || mpc volume -1";  exec "$UPDATE_STATUSBAR"
+# bindsym $mod+Shift+plus      exec --no-startup-id "pgrep spotify && spotifycli --volumeup   || mpc volume +1";  exec "$UPDATE_STATUSBAR"
 bindsym XF86AudioPlay        exec --no-startup-id "pgrep spotify && spotifycli --playpause  || mpc toggle";     exec "$UPDATE_STATUSBAR"
 bindsym XF86AudioNext        exec --no-startup-id "pgrep spotify && spotifycli --next       || mpc next";       exec "$UPDATE_STATUSBAR"
 bindsym XF86AudioPrev        exec --no-startup-id "pgrep spotify && spotifycli --prev       || mpc prev";       exec "$UPDATE_STATUSBAR"
 
-# bindsym $mod+0 mode "$spotify_control"
-# bindsym $mod+0 mode "$mpd_control"
-bindsym $mod+0 exec "pgrep spotify && i3-msg mode $spotify_control || i3-msg mode $mpd_control"
+# bindsym $mod+Shift+0 mode "$spotify_control"
+# bindsym $mod+Shift+0 mode "$mpd_control"
+bindsym $mod+Shift+0 exec "pgrep spotify && i3-msg mode $spotify_control || i3-msg mode $mpd_control"
 
 ## control music via spotify
 set $spotify_control Spotify Control
@@ -369,7 +380,7 @@ mode "$spotify_control" {
     bindsym plus             exec --no-startup-id "spotifycli --volumeup"
     bindsym minus            exec --no-startup-id "spotifycli --volumedown"
     # cancel
-    bindsym $mod+0 mode "default"
+    bindsym $mod+Shift+0 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -392,13 +403,10 @@ mode "$mpd_control" {
     bindsym R                exec --no-startup-id "mpc random"
     bindsym Shift+S          exec --no-startup-id "mpc single"; mode "default"
     # cancel
-    bindsym $mod+0 mode "default"
+    bindsym $mod+Shift+0 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-
-## play a sound
-bindsym $mod+Shift+0 exec --no-startup-id "~/.i3/bin/soundboard.sh"
 
 ## take a screenshot
 bindsym $mod+Print       exec --no-startup-id "xfce4-screenshooter --window --save ~/img-screenshots"
