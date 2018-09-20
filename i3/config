@@ -418,34 +418,6 @@ default_orientation vertical
 ## new workspaces have this layout
 workspace_layout stacked
 
-
-## start a terminal
-bindsym $mod+Shift+o mode "$terminal"
-set $terminal Open a terminal: (a) alacritty (m) termite (u) urxvt (k) konsole (i) kitty (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
-mode "$terminal" {
-    bindsym a       exec --no-startup-id "alacritty --command tmux -2 new-session -A -s main"; mode "default"
-    bindsym Shift+a exec --no-startup-id "alacritty"; mode "default"
-    bindsym m       exec --no-startup-id "termite -e 'tmux -2 new-session -A -s main'"; mode "default"
-    bindsym Shift+m exec --no-startup-id "termite"; mode "default"
-    bindsym u       exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
-    bindsym Shift+u exec --no-startup-id "urxvt"; mode "default"
-    bindsym k       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower -e 'tmux -2 new-session -A -s main'"; mode "default"
-    bindsym Shift+k exec --no-startup-id "konsole --fallback-profile"; mode "default"
-    bindsym i       exec --no-startup-id "kitty tmux -2 new-session -A -s main"; mode "default"
-    bindsym Shift+i exec --no-startup-id "kitty"; mode "default"
-    bindsym x       exec --no-startup-id "xfce4-terminal --command='tmux -2 new-session -A -s main'"; mode "default"
-    bindsym Shift+x exec --no-startup-id "xfce4-terminal"; mode "default"
-    bindsym g       exec --no-startup-id "gnome-terminal --hide-menubar -- tmux -2 new-session -A -s main"; mode "default"
-    bindsym Shift+g exec --no-startup-id "gnome-terminal --hide-menubar"; mode "default"
-    bindsym r       exec --no-startup-id "cool-retro-term -e tmux -2 new-session -A -s main"; mode "default"
-    bindsym Shift+r exec --no-startup-id "cool-retro-term"; mode "default"
-    bindsym t       exec --no-startup-id "terminology --exec 'tmux -2 new-session -A -s main'"; mode "default"
-    bindsym Shift+t exec --no-startup-id "terminology"; mode "default"
-    # cancel
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
 ## launch an application (that has a .desktop-file)
 # bindsym $mod+Return exec --no-startup-id "i3-dmenu-desktop -dmenu='dmenu $DMENU_OPTIONS'"
 # bindsym $mod+Return exec --no-startup-id "rofi -show drun $ROFI_OPTIONS"
@@ -604,9 +576,56 @@ mode "$move_workspace_to_output" {
 ###########  SPECIFIC APPS  ###################################################
 ###############################################################################
 
+## start an application
+bindsym $mod+Shift+o mode "$launch"
+set $launch Launch: (o) Terminal (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (i) IntelliJ (s) Slack (t) Telegram
+mode "$launch" {
+    bindsym o               mode "$terminal"
+    bindsym Shift+o         mode "$terminal"
+    bindsym $mod+o          mode "$terminal"
+    bindsym $mod+Shift+o    mode "$terminal"
+    bindsym f       exec --no-startup-id "firefox"; mode "default"
+    bindsym c       exec --no-startup-id "chromium"; mode "default"
+    bindsym g       exec --no-startup-id "google-chrome"; mode "default"
+    bindsym q       exec --no-startup-id "qutebrowser"; mode "default"
+    bindsym m       exec --no-startup-id "spotify"; mode "default"
+    bindsym i       exec --no-startup-id "idea"; mode "default"
+    bindsym s       exec --no-startup-id "slack"; mode "default"
+    bindsym t       exec --no-startup-id "telegram-desktop"; mode "default"
+    # cancel
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+## start a terminal
+set $terminal Open a terminal: (a) alacritty (m) termite (u) urxvt (k) konsole (i) kitty (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
+mode "$terminal" {
+    bindsym a       exec --no-startup-id "alacritty --command tmux -2 new-session -A -s main"; mode "default"
+    bindsym Shift+a exec --no-startup-id "alacritty"; mode "default"
+    bindsym m       exec --no-startup-id "termite -e 'tmux -2 new-session -A -s main'"; mode "default"
+    bindsym Shift+m exec --no-startup-id "termite"; mode "default"
+    bindsym u       exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
+    bindsym Shift+u exec --no-startup-id "urxvt"; mode "default"
+    bindsym k       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower -e 'tmux -2 new-session -A -s main'"; mode "default"
+    bindsym Shift+k exec --no-startup-id "konsole --fallback-profile"; mode "default"
+    bindsym i       exec --no-startup-id "kitty tmux -2 new-session -A -s main"; mode "default"
+    bindsym Shift+i exec --no-startup-id "kitty"; mode "default"
+    bindsym x       exec --no-startup-id "xfce4-terminal --command='tmux -2 new-session -A -s main'"; mode "default"
+    bindsym Shift+x exec --no-startup-id "xfce4-terminal"; mode "default"
+    bindsym g       exec --no-startup-id "gnome-terminal --hide-menubar -- tmux -2 new-session -A -s main"; mode "default"
+    bindsym Shift+g exec --no-startup-id "gnome-terminal --hide-menubar"; mode "default"
+    bindsym r       exec --no-startup-id "cool-retro-term -e tmux -2 new-session -A -s main"; mode "default"
+    bindsym Shift+r exec --no-startup-id "cool-retro-term"; mode "default"
+    bindsym t       exec --no-startup-id "terminology --exec 'tmux -2 new-session -A -s main'"; mode "default"
+    bindsym Shift+t exec --no-startup-id "terminology"; mode "default"
+    # cancel
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
 ## switch to a specific window or workspace
 bindsym $mod+o mode "$goto"
-set $goto Focus app: (o) Terminal (f) Firefox (c) Chromium (g) Chrome (m) Music (i) IntelliJ (s) Slack (t) Telegram (b) Trello (q) qutebrowser
+set $goto Goto: (o) Terminal (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (i) IntelliJ (s) Slack (t) Telegram (b) Trello
 mode "$goto" {
   bindsym o         [class="(?i)alacritty"]             focus; mode "default"
   bindsym $mod+o    [class="(?i)alacritty"]             focus; mode "default"
