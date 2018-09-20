@@ -279,10 +279,12 @@ mode "$mode_clipboard" {
 
 ## type something or press keys or click
 bindsym $mod+x mode "$mode_x"
-set $mode_x (x) type with xdotool
+set $mode_x (x) type with xdotool (n) click away notification
 mode "$mode_x" {
     bindsym  $mod+x mode "$mode_xdootool"
     bindsym       x mode "$mode_xdootool"
+    bindsym  $mod+n exec --no-startup-id "xdotool mousemove 1880 35 click 1 mousemove restore"; mode "default"
+    bindsym       n exec --no-startup-id "xdotool mousemove 1880 35 click 1 mousemove restore"; mode "default"
     # cancel
     bindsym $mod+Escape mode "default"
     bindsym Return mode "default"
