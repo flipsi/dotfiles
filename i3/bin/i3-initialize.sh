@@ -12,7 +12,7 @@ function setup_power_management
             xset dpms 595 0 0 # seconds until standby/suspend/off
             xset s noblank # screensaver should not turn off screen
             xset s off # screensaver should be disabled
-            nohup xautolock -time 10 -locker i3lock & # lock after a few minutes
+            nohup xautolock -time 10 -locker 'i3lock -e -t -i ~/.i3/wallpaper.png' -notify 15 -notifier 'notify-send -u critical -t 10000 -- \'Turning off screen in 10 seconds...\'' &
         case '*'
             xset dpms 14400 0 0 # seconds until standby/suspend/off
     end
