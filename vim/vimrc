@@ -822,6 +822,7 @@ xnoremap <leader>et y:FzfTags <c-r>"<cr>
 nnoremap <leader>ö :FzfAg<cr>
 " search for word under cursor
 nnoremap <leader>+ :FzfAg! <c-r><c-w><cr>
+" TODO: search for word under cursor only in current buffer (like fj)
 nmap     <leader>* <leader>+
 " search for visual selection
 xnoremap <leader>ö y:<c-u>FzfAg! <c-r>"<cr>
@@ -2272,6 +2273,17 @@ endfunction
 " }}}
 
 
+" improved path expansion (prepend './' if necessary)  {{{
+function! ExpandPrependThisDir(expr)
+    if expand(a:expr . ':h') == '.'
+        return './' . expand(a:expr)
+    else
+        return expand(a:expr)
+    endif
+endfunction
+" }}}
+
+
 " set cwd to filepath {{{
 function! SetCwdToFilePath()
     execute "cd " . expand('%:p:h')
@@ -3434,17 +3446,24 @@ nnoremap dN [c
 nnoremap <leader>bm :make<cr>
 
 " execute shell script
+function! ExecuteShellscript()
+    call system('test -x ' . expand('%'))
+    if v:shell_error
+        call system('chmod +x ' . expand('%'))
+    endif
+    if s:MyMode == 'mastery'
+        call VimuxRunCommand(ExpandPrependThisDir("%"))
+    else
+        exec '!' . ExpandPrependThisDir('%')
+    endif
+endfunction
 augroup shellscript_on_read
     au!
     au FileType sh      call SetupShellscript()
     au FileType fish    call SetupShellscript()
 augroup END
 function! SetupShellscript()
-    if s:MyMode == 'mastery'
-        nnoremap <leader>bs :call VimuxRunCommand("bash -c 'chmod u+x " . expand("%") . " && " . expand("%:p") . "'")<cr>
-    else
-        nnoremap <leader>bs :!chmod u+x % && ./%<cr>
-    endif
+    nnoremap <leader>bs :call ExecuteShellscript()<cr>
 endfunction
 
 
