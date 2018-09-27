@@ -3441,7 +3441,7 @@ augroup shellscript_on_read
 augroup END
 function! SetupShellscript()
     if s:MyMode == 'mastery'
-        nnoremap <leader>bs :call VimuxRunCommand("bash -c 'chmod u+x " . expand("%") . " && " . expand("%") . "'")<cr>
+        nnoremap <leader>bs :call VimuxRunCommand("bash -c 'chmod u+x " . expand("%") . " && " . expand("%:p") . "'")<cr>
     else
         nnoremap <leader>bs :!chmod u+x % && ./%<cr>
     endif
