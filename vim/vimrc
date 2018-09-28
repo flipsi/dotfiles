@@ -1488,6 +1488,12 @@ augroup json_map_autoformat
     au FileType json nmap <leader>af -af
 augroup END
 
+" autoformat for sql
+augroup sql_map_autoformat
+    au!
+    au FileType sql nnoremap -af :%!sql-formatter-cli -<cr>
+    au FileType sql nmap <leader>af -af
+augroup END
 
 
 " change wrapping of function arguments
