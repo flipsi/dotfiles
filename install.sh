@@ -49,6 +49,7 @@ SUPPORTED_TARGETS=(\
     ncmpcpp \
     pentadactyl \
     psql \
+    qutebrowser \
     ranger \
     screen \
     sbt \
@@ -288,6 +289,10 @@ function create_link_for_target() {
 
         psql )
             create_link "$PWD/psql/psqlrc" "$HOME/.psqlrc"
+            ;;
+
+        qutebrowser )
+            create_link "$PWD/qutebrowser/config.py" "$HOME/.config/qutebrowser/config.py"
             ;;
 
         ranger )
