@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=redshift
+GenericName=redshift
+Comment=Adjust screen temperature and brightness
+Exec=/home/sflip/bin/autostart-redshift.sh
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true

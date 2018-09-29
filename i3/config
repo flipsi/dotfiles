@@ -51,10 +51,6 @@ exec --no-startup-id "dex -ae i3"
 ## composite manager for window overlays, smooth workspace changes, etc.
 exec --no-startup-id "compton -b"
 
-## adjust screen brightness and temparature to daytime automatically
-# exec --no-startup-id "redshift"
-exec --no-startup-id "redshift-gtk"
-
 ## clipboard can have multiple entries
 # exec --no-startup-id "clipmenud"
 

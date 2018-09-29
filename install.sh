@@ -143,6 +143,8 @@ function create_link_for_target() {
             create_link "$PWD/autostart/clipmenud.desktop" "$HOME/.config/autostart/clipmenud.desktop"
             create_link "$PWD/autostart/numlockx.sh" "$HOME/bin/autostart-numlockx.sh"
             create_link "$PWD/autostart/numlockx.desktop" "$HOME/.config/autostart/numlockx.desktop"
+            create_link "$PWD/autostart/redshift.sh" "$HOME/bin/autostart-redshift.sh"
+            create_link "$PWD/autostart/redshift.desktop" "$HOME/.config/autostart/redshift.desktop"
             create_link "$PWD/autostart/setxkbmap.sh" "$HOME/bin/autostart-setxkbmap.sh"
             create_link "$PWD/autostart/setxkbmap.desktop" "$HOME/.config/autostart/setxkbmap.desktop"
             create_link "$PWD/autostart/syndaemon.sh" "$HOME/bin/autostart-syndaemon.sh"
