@@ -29,6 +29,7 @@ SUPPORTED_TARGETS=(\
     autostart \
     bash \
     cmus \
+    compton \
     dircolors \
     elinks \
     fish \
@@ -162,6 +163,10 @@ function create_link_for_target() {
             create_link "$PWD/cmus/rc" "$HOME/.cmus/rc"
             create_link "$PWD/cmus/sflea.theme" "$HOME/.cmus/sflea.theme"
             create_link "$PWD/cmus/gruvbox.theme" "$HOME/.cmus/gruvbox.theme"
+            ;;
+
+        compton )
+            create_link "$PWD/compton/compton.conf" "$HOME/.config/compton.conf"
             ;;
 
         dircolors )
