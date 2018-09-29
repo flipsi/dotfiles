@@ -2,7 +2,7 @@
 Name=unclutter
 GenericName=unclutter
 Comment=Daemon to hide mouse cursor
-Exec=/home/sflip/bin/autostart-unclutter.sh
+Exec=unclutter -idle 4 -jitter 30
 Terminal=false
 Type=Application
 X-GNOME-Autostart-enabled=true

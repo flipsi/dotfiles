@@ -2,7 +2,7 @@
 Name=numlockx
 GenericName=numlockx
 Comment=Enable Num Block
-Exec=/home/sflip/bin/autostart-numlockx.sh
+Exec=numlockx
 Terminal=false
 Type=Application
 X-GNOME-Autostart-enabled=true

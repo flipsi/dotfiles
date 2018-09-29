@@ -139,17 +139,9 @@ function create_link_for_target() {
         autostart )
             mkdir -p "$HOME/bin"
             mkdir -p "$HOME/.config/autostart"
-            create_link "$PWD/autostart/clipmenud.sh" "$HOME/bin/autostart-clipmenud.sh"
             create_link "$PWD/autostart/clipmenud.desktop" "$HOME/.config/autostart/clipmenud.desktop"
-            create_link "$PWD/autostart/numlockx.sh" "$HOME/bin/autostart-numlockx.sh"
             create_link "$PWD/autostart/numlockx.desktop" "$HOME/.config/autostart/numlockx.desktop"
-            create_link "$PWD/autostart/redshift.sh" "$HOME/bin/autostart-redshift.sh"
-            create_link "$PWD/autostart/redshift.desktop" "$HOME/.config/autostart/redshift.desktop"
-            create_link "$PWD/autostart/setxkbmap.sh" "$HOME/bin/autostart-setxkbmap.sh"
-            create_link "$PWD/autostart/setxkbmap.desktop" "$HOME/.config/autostart/setxkbmap.desktop"
-            create_link "$PWD/autostart/syndaemon.sh" "$HOME/bin/autostart-syndaemon.sh"
             create_link "$PWD/autostart/syndaemon.desktop" "$HOME/.config/autostart/syndaemon.desktop"
-            create_link "$PWD/autostart/unclutter.sh" "$HOME/bin/autostart-unclutter.sh"
             create_link "$PWD/autostart/unclutter.desktop" "$HOME/.config/autostart/unclutter.desktop"
             ;;
 
@@ -316,6 +308,8 @@ function create_link_for_target() {
 
         redshift )
             create_link "$PWD/redshift/redshift.conf" "$HOME/.config/redshift.conf"
+            mkdir -p "$HOME/.config/autostart"
+            create_link "$PWD/redshift/redshift.desktop" "$HOME/.config/autostart/redshift.desktop"
             ;;
 
         sbt )
@@ -456,6 +450,8 @@ function create_link_for_target() {
                 create_link "$PWD/xkb/symbols/de_sflip" "/usr/share/X11/xkb/symbols/de_sflip"
             fi
             setxkbmap de_sflip
+            mkdir -p "$HOME/.config/autostart"
+            create_link "$PWD/xkb/setxkbmap.desktop" "$HOME/.config/autostart/setxkbmap.desktop"
             ;;
 
         xmonad )
@@ -496,7 +492,7 @@ function package_install_target() {
     case "$TARGET" in
 
         i3 )
-            LIST_OF_SYSTEM_PACKAGES="i3-wm i3exit i3status i3lock dmenu quickswitch-i3 rofi compton unclutter syndaemon numlockx"
+            LIST_OF_SYSTEM_PACKAGES="i3-wm i3exit i3status i3lock dmenu clipmenud quickswitch-i3 rofi compton redshift unclutter syndaemon numlockx"
             ;;
 
         fd )

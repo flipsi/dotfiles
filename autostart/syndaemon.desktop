@@ -2,7 +2,7 @@
 Name=syndaemon
 GenericName=syndaemon
 Comment=Disable touchpad when typing
-Exec=/home/sflip/bin/autostart-syndaemon.sh
+Exec=syndaemon -d -k -i 1.2
 Terminal=false
 Type=Application
 X-GNOME-Autostart-enabled=true
