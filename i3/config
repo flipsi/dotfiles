@@ -50,7 +50,6 @@ exec --no-startup-id "dex -ae i3"
 
 ## composite manager for window overlays, smooth workspace changes, etc.
 exec --no-startup-id "compton -b"
-# exec --no-startup-id "compton -b --active-opacity 0.9 -i 0.9"
 
 ## clipboard can have multiple entries
 # exec --no-startup-id "clipmenud"
