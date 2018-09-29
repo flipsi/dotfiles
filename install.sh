@@ -51,6 +51,7 @@ SUPPORTED_TARGETS=(\
     psql \
     qutebrowser \
     ranger \
+    redshift \
     screen \
     sbt \
     sublime-text-3 \
@@ -309,6 +310,10 @@ function create_link_for_target() {
             mkdir -p "$HOME/.config/rofi"
             create_link "$PWD/rofi/config" "$HOME/.config/rofi/config"
             create_link "$PWD/rofi/themes" "$HOME/.config/rofi/themes"
+            ;;
+
+        redshift )
+            create_link "$PWD/redshift/redshift.conf" "$HOME/.config/redshift.conf"
             ;;
 
         sbt )
