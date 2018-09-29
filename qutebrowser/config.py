@@ -1092,7 +1092,7 @@ c.colors.webpage.bg = '#FBF1C7'
 ## Enable smooth scrolling for web pages. Note smooth scrolling does not
 ## work with the `:scroll-px` command.
 ## Type: Bool
-# c.scrolling.smooth = False
+c.scrolling.smooth = True
 
 ## When to find text on a page case-insensitively.
 ## Type: String
@@ -1436,11 +1436,13 @@ c.colors.webpage.bg = '#FBF1C7'
 # c.zoom.text_only = False
 
 ## Bindings for normal mode
+config.bind('<F5>', 'config-source')
 # config.bind("'", 'enter-mode jump_mark')
 # config.bind('+', 'zoom-in')
 # config.bind('-', 'zoom-out')
 # config.bind('.', 'repeat-command')
 # config.bind('/', 'set-cmd-text /')
+config.bind('ö', 'set-cmd-text /')
 # config.bind(':', 'set-cmd-text :')
 # config.bind(';I', 'hint images tab')
 # config.bind(';O', 'hint links fill :open -t -r {hint-url}')
@@ -1498,21 +1500,27 @@ c.colors.webpage.bg = '#FBF1C7'
 # config.bind('<forward>', 'forward')
 # config.bind('=', 'zoom')
 # config.bind('?', 'set-cmd-text ?')
+config.bind('Ö', 'set-cmd-text ?')
 # config.bind('@', 'run-macro')
 # config.bind('B', 'set-cmd-text -s :quickmark-load -t')
 # config.bind('D', 'tab-close -o')
 # config.bind('F', 'hint all tab')
+config.bind('l', 'hint all tab')
 # config.bind('G', 'scroll-to-perc')
 # config.bind('H', 'back')
 # config.bind('J', 'tab-next')
 # config.bind('K', 'tab-prev')
+config.bind('<alt-n>', 'tab-next')
+config.bind('<alt-p>', 'tab-prev')
 # config.bind('L', 'forward')
 # config.bind('M', 'bookmark-add')
 # config.bind('N', 'search-prev')
 # config.bind('O', 'set-cmd-text -s :open -t')
+config.bind('t', 'set-cmd-text -s :open -t')
 # config.bind('PP', 'open -t -- {primary}')
 # config.bind('Pp', 'open -t -- {clipboard}')
-# config.bind('R', 'reload -f')
+config.bind('r', 'reload')
+config.bind('R', 'reload -f')
 # config.bind('Sb', 'open qute://bookmarks#bookmarks')
 # config.bind('Sh', 'open qute://history')
 # config.bind('Sq', 'open qute://bookmarks')
@@ -1544,6 +1552,8 @@ c.colors.webpage.bg = '#FBF1C7'
 # config.bind('gi', 'hint inputs --first')
 # config.bind('gl', 'tab-move -')
 # config.bind('gm', 'tab-move')
+config.bind('<alt-shift-n>', 'tab-move +')
+config.bind('<alt-shift-p>', 'tab-move -')
 # config.bind('go', 'set-cmd-text :open {url:pretty}')
 # config.bind('gr', 'tab-move +')
 # config.bind('gt', 'set-cmd-text -s :buffer')
@@ -1552,6 +1562,8 @@ c.colors.webpage.bg = '#FBF1C7'
 # config.bind('i', 'enter-mode insert')
 # config.bind('j', 'scroll down')
 # config.bind('k', 'scroll up')
+config.bind('<alt-j>', 'run-with-count 8 scroll down')
+config.bind('<alt-k>', 'run-with-count 8 scroll up')
 # config.bind('l', 'scroll right')
 # config.bind('m', 'quickmark-save')
 # config.bind('n', 'search-next')
