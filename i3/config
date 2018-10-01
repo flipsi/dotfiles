@@ -146,8 +146,19 @@ bindsym $mod+F6 exec --no-startup-id "pkill -fx 'sxiv $keyboard_layout_image' ||
 ## set wallpaper
 exec --no-startup-id "feh --bg-scale ~/.i3/wallpaper"
 exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
-bindsym $mod+F7         exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
-bindsym $mod+Shift+F7   exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh --backwards"
+
+## change wallpaper
+bindsym $mod+F7 mode "$change_wallpaper"
+set $change_wallpaper Wallpaper: (r) random (m) random per output (l) restore
+mode "$change_wallpaper" {
+    bindsym r exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
+    bindsym m exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh --multi"
+    bindsym b exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh --backwards"
+    # cancel
+    bindsym $mod+F7 mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
 ## Font for window titles.
 ## Will also be used by the bar unless a different font # is used in the BAR block below.
