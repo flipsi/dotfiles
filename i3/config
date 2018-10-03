@@ -9,6 +9,7 @@
 ## This config has a dependency to [https://github.com/sflip/shellscripts]
 
 set $SHELLSCRIPT_PATH /home/sflip/shellscripts
+set $WALLPAPER_PATH /home/sflip/img-wallpaper
 
 
 
@@ -148,8 +149,9 @@ exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
 
 ## change wallpaper
 bindsym $mod+F7 mode "$change_wallpaper"
-set $change_wallpaper Wallpaper: (r) random (m) random per output (l) restore (0-9) shades of gray
+set $change_wallpaper Wallpaper: (i) choose interactively (r) random (m) random per output (l) restore (0-9) shades of gray
 mode "$change_wallpaper" {
+    bindsym i exec --no-startup-id "feh --bg-scale $(fd '.*\.(jpg|jpeg|png)$' $WALLPAPER_PATH | rofi -dmenu)"; mode "default
     bindsym r exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
     bindsym m exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh --multi"
     bindsym b exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh --backwards"
