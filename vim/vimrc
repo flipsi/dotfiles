@@ -3031,10 +3031,10 @@ function! ChangeSpellChecking()
         set spell!
         redraw
     elseif nr2char(c) == 'e'
-        set spell=en
+        set spelllang=en
         redraw
-    elseif nr2char(c) == 'e'
-        set spell=de
+    elseif nr2char(c) == 'd'
+        set spelllang=de
         redraw
     endif
 endfunction
