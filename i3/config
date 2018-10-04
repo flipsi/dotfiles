@@ -404,27 +404,30 @@ mode "$audio" {
 }
 
 ## music control
-# bindsym $mod+Shift+minus     exec --no-startup-id "pgrep spotify && spotifycli --volumedown || mpc volume -1";  exec "$UPDATE_STATUSBAR"
-# bindsym $mod+Shift+plus      exec --no-startup-id "pgrep spotify && spotifycli --volumeup   || mpc volume +1";  exec "$UPDATE_STATUSBAR"
-bindsym XF86AudioPlay        exec --no-startup-id "pgrep spotify && spotifycli --playpause  || mpc toggle";     exec "$UPDATE_STATUSBAR"
-bindsym XF86AudioNext        exec --no-startup-id "pgrep spotify && spotifycli --next       || mpc next";       exec "$UPDATE_STATUSBAR"
-bindsym XF86AudioPrev        exec --no-startup-id "pgrep spotify && spotifycli --prev       || mpc prev";       exec "$UPDATE_STATUSBAR"
+bindsym XF86AudioPlay        exec --no-startup-id "playerctl play-pause"; exec "$UPDATE_STATUSBAR"
+bindsym XF86AudioNext        exec --no-startup-id "playerctl next"; exec "$UPDATE_STATUSBAR"
+bindsym XF86AudioPrev        exec --no-startup-id "playerctl previous"; exec "$UPDATE_STATUSBAR"
 
-# bindsym $mod+Shift+0 mode "$spotify_control"
+# bindsym $mod+Shift+0 mode "$player_control"
 # bindsym $mod+Shift+0 mode "$mpd_control"
-bindsym $mod+Shift+0 exec "pgrep spotify && i3-msg mode $spotify_control || i3-msg mode $mpd_control"
+# bindsym $mod+Shift+0 mode "$spotify_control"
+bindsym $mod+Shift+0 exec "pgrep mpd && i3-msg mode $mpd_control || i3-msg mode $music_control"
 
-## control music via spotify
-set $spotify_control Spotify Control
-mode "$spotify_control" {
-    bindsym space            exec --no-startup-id "spotifycli --playpause"
-    bindsym BackSpace        exec --no-startup-id "spotifycli --playpause"
-    bindsym n                exec --no-startup-id "spotifycli --next"; exec "$UPDATE_STATUSBAR"
-    bindsym o                exec --no-startup-id "spotifycli --next"; exec "$UPDATE_STATUSBAR"
-    bindsym p                exec --no-startup-id "spotifycli --prev"; exec "$UPDATE_STATUSBAR"
-    bindsym O                exec --no-startup-id "spotifycli --prev"; exec "$UPDATE_STATUSBAR"
-    bindsym plus             exec --no-startup-id "spotifycli --volumeup"
-    bindsym minus            exec --no-startup-id "spotifycli --volumedown"
+## control music (including spotify)
+set $music_control Music Control
+mode "$music_control" {
+    bindsym space            exec --no-startup-id "playerctl play-pause"
+    bindsym BackSpace        exec --no-startup-id "playerctl stop"
+    bindsym n                exec --no-startup-id "playerctl next"; exec "$UPDATE_STATUSBAR"
+    bindsym o                exec --no-startup-id "playerctl next"; exec "$UPDATE_STATUSBAR"
+    bindsym Right            exec --no-startup-id "playerctl next"; exec "$UPDATE_STATUSBAR"
+    bindsym p                exec --no-startup-id "playerctl previous"; exec "$UPDATE_STATUSBAR"
+    bindsym O                exec --no-startup-id "playerctl previous"; exec "$UPDATE_STATUSBAR"
+    bindsym Left             exec --no-startup-id "playerctl previous"; exec "$UPDATE_STATUSBAR"
+    # bindsym plus             exec --no-startup-id "playerctl volume 0.9+"
+    # bindsym minus            exec --no-startup-id "playerctl volume 0.9-"
+    bindsym plus            exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
+    bindsym minus           exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
     # cancel
     bindsym $mod+Shift+0 mode "default"
     bindsym Return mode "default"
@@ -448,6 +451,25 @@ mode "$mpd_control" {
     bindsym r                exec --no-startup-id "mpc random"
     bindsym R                exec --no-startup-id "mpc random"
     bindsym Shift+S          exec --no-startup-id "mpc single"; mode "default"
+    # cancel
+    bindsym $mod+Shift+0 mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+## control music via spotify
+set $spotify_control Spotify Control
+mode "$spotify_control" {
+    bindsym space            exec --no-startup-id "spotifycli --playpause"
+    bindsym BackSpace        exec --no-startup-id "spotifycli --playpause"
+    bindsym n                exec --no-startup-id "spotifycli --next"; exec "$UPDATE_STATUSBAR"
+    bindsym o                exec --no-startup-id "spotifycli --next"; exec "$UPDATE_STATUSBAR"
+    bindsym Right            exec --no-startup-id "spotifycli --next"; exec "$UPDATE_STATUSBAR"
+    bindsym p                exec --no-startup-id "spotifycli --prev"; exec "$UPDATE_STATUSBAR"
+    bindsym O                exec --no-startup-id "spotifycli --prev"; exec "$UPDATE_STATUSBAR"
+    bindsym Left             exec --no-startup-id "spotifycli --prev"; exec "$UPDATE_STATUSBAR"
+    bindsym plus             exec --no-startup-id "spotifycli --volumeup"
+    bindsym minus            exec --no-startup-id "spotifycli --volumedown"
     # cancel
     bindsym $mod+Shift+0 mode "default"
     bindsym Return mode "default"
