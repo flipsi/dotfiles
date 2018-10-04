@@ -100,7 +100,7 @@ bindsym XF86TouchpadToggle  exec --no-startup-id "$SHELLSCRIPT_PATH/xinput-toggl
 
 ## reload the configuration file or restart i3 [preserves session] etc.
 bindsym $mod+F5 mode "$refresh"
-set $refresh Want it fresh? (l) reload config, (s) restart i3, (i) initialize-script, (x) setup outputs, (Z/z) save/restore layout (k) set keyboard layout, (a) add chrome app to i3
+set $refresh Want it fresh? (l) reload config, (s) restart i3, (i) initialize-script, (x) setup outputs, (Z/z) save/restore layout (a) add chrome app to i3
 mode "$refresh" {
     bindsym l reload; mode "default"
     bindsym s restart
@@ -108,7 +108,6 @@ mode "$refresh" {
     bindsym x           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh"; mode "default"
     bindsym Shift+z     exec --no-startup-id "/home/sflip/.i3/bin/i3-workspaces-save-and-restore.py save"; mode "default"
     bindsym z           exec --no-startup-id "/home/sflip/.i3/bin/i3-workspaces-save-and-restore.py restore"; mode "default"
-    bindsym k           exec --no-startup-id "setxkbmap de_sflip"; mode "default"
     bindsym a           exec --no-startup-id "/home/sflip/.i3/bin/i3-config-mod-assign-chrome-app.sh > /tmp/i3-config-mod-assign-chrome-app.log 2>&1"; mode "default"
     # cancel
     bindsym $mod+F5 mode "default"
