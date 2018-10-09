@@ -12,10 +12,16 @@ case $(hostname) in
 
     asterix )
 
-        if xrandr | grep 'HDMI2 connected' >/dev/null; then
+        if xrandr | grep -q 'HDMI2 connected'; then
 
-            xrandr --output HDMI2 --mode 1920x1080 --pos 0x540 --rotate normal --output HDMI1 --off --output DP1 --off --output eDP1 --mode 960x540 --pos 0x0 --rotate normal --output VIRTUAL1 --off
-            setup_wallpaper
+            # on big tv, turn off laptop screen
+            if xrandr | grep -q '4096x2160'; then
+                xrandr --output HDMI2 --mode 4096x2160 --output eDP1 --off
+                setup_wallpaper
+            else
+                xrandr --output HDMI2 --mode 1920x1080 --pos 0x540 --rotate normal --output HDMI1 --off --output DP1 --off --output eDP1 --mode 960x540 --pos 0x0 --rotate normal --output VIRTUAL1 --off
+                setup_wallpaper
+            fi
 
         elif xrandr | grep 'eDP1 connected 960x540' >/dev/null; then
 
