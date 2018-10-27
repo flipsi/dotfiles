@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TEMP=$(getopt -o hlaifup --long only -n 'test.sh' -- "$@")
+TEMP=$(getopt -o o --long only -n 'test.sh' -- "$@")
 eval set -- "$TEMP"
 while true ; do
     case "$1" in
