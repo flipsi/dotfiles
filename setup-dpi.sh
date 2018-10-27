@@ -97,7 +97,6 @@ function switch_chromium_scale_factor() {
 
 function switch_to_hidpi() {
   echo "Switching to HiDPI..."
-  git checkout HiDPI
   change_x_server_dpi "${X_SERVER_DPI_HIGH}"
   switch_firefox_dpi "${FIREFOX_DPI_HIGH}"
   switch_google_chrome_scale_factor "${GOOGLE_CHROME_SCALE_FACTOR_HIGH}"
@@ -107,7 +106,6 @@ function switch_to_hidpi() {
 
 function switch_to_regular_dpi() {
   echo "Switching to regular DPI..."
-  git checkout master
   change_x_server_dpi "${X_SERVER_DPI_REGULAR}"
   switch_firefox_dpi "${FIREFOX_DPI_REGULAR}"
   switch_chromium_scale_factor "${GOOGLE_CHROME_SCALE_FACTOR_REGULAR}"
@@ -115,12 +113,13 @@ function switch_to_regular_dpi() {
 }
 
 
-# dpi specific dotfiles branch
-CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+HIDPI_ENABLED="/tmp/.HiDPI"
 
-if [[ ("${CURRENT_BRANCH}" != "HiDPI" || -n "${FORCE}") && "${MODE}" = high ]]; then
+if [[ ( ! -f "${HIDPI_ENABLED}" || -n "${FORCE}" ) && "${MODE}" = high ]]; then
   switch_to_hidpi
-elif [[ ("${CURRENT_BRANCH}" = "HiDPI" || -n "${FORCE}") && "${MODE}" = regular ]]; then
+  touch "${HIDPI_ENABLED}"
+elif [[ ( -f "${HIDPI_ENABLED}" || -n "${FORCE}" ) && "${MODE}" = regular ]]; then
   switch_to_regular_dpi
+  rm -f "${HIDPI_ENABLED}"
 fi
 
