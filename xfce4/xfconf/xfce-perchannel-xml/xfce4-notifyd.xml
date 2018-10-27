@@ -14,6 +14,7 @@
       <value type="string" value="notify-send"/>
       <value type="string" value="org.kde.konsole"/>
       <value type="string" value="Package Manager"/>
+      <value type="string" value="Slack"/>
       <value type="string" value="Spotify"/>
       <value type="string" value="System Config Printer Notification"/>
       <value type="string" value="Thunderbird"/>
