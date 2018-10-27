@@ -101,7 +101,7 @@ function switch_to_hidpi() {
   switch_firefox_dpi "${FIREFOX_DPI_HIGH}"
   switch_google_chrome_scale_factor "${GOOGLE_CHROME_SCALE_FACTOR_HIGH}"
   switch_chromium_scale_factor "${GOOGLE_CHROME_SCALE_FACTOR_HIGH}"
-  i3-msg restart
+  i3-msg restart | exit 0
 }
 
 function switch_to_regular_dpi() {
@@ -109,7 +109,7 @@ function switch_to_regular_dpi() {
   change_x_server_dpi "${X_SERVER_DPI_REGULAR}"
   switch_firefox_dpi "${FIREFOX_DPI_REGULAR}"
   switch_chromium_scale_factor "${GOOGLE_CHROME_SCALE_FACTOR_REGULAR}"
-  i3-msg restart
+  i3-msg restart | exit 0
 }
 
 
@@ -121,5 +121,7 @@ if [[ ( ! -f "${HIDPI_ENABLED}" || -n "${FORCE}" ) && "${MODE}" = high ]]; then
 elif [[ ( -f "${HIDPI_ENABLED}" || -n "${FORCE}" ) && "${MODE}" = regular ]]; then
   switch_to_regular_dpi
   rm -f "${HIDPI_ENABLED}"
+else
+  echo "Nothing to do..."
 fi
 
