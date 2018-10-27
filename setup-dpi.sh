@@ -29,7 +29,6 @@ FIREFOX_DPI_HIGH=2.5
 set -e
 
 # cd into directory of this very script
-# (otherwise the creating of links won't work!)
 # http://stackoverflow.com/a/246128/4568748
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$DIR" || exit 1
