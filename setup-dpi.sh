@@ -63,7 +63,7 @@ function switch_firefox_dpi() {
   local PROFILE_DIR=$(find ~/.mozilla/firefox/ -type d -name '*.default')
   local FILE="${PROFILE_DIR}/user.js"
   touch "${FILE}"
-  if grep -q 'layout.css.devPixelsPerPx' "${FILE}"; then
+  if grep -q -- 'layout.css.devPixelsPerPx' "${FILE}"; then
     sed -E -i -- "s/^(user_pref\\(\"layout.css.devPixelsPerPx\", \")(.+)(\"\\);)/\\1${DPI}\3/" "${FILE}"
   else
     echo "user_pref(\"layout.css.devPixelsPerPx\", \"${DPI}\");" >> "${FILE}"
@@ -75,7 +75,7 @@ function switch_google_chrome_scale_factor() {
   local FACTOR="$1"
   local FILE="$HOME/.config/chrome-flags.conf"
   touch "${FILE}"
-  if grep -q '--force-device-scale-factor' "${FILE}"; then
+  if grep -q -- '--force-device-scale-factor' "${FILE}"; then
     sed -E -i -- "s/^(--force-device-scale-factor=)(.+)/\\1${FACTOR}/" "${FILE}"
   else
     echo "--force-device-scale-factor=${FACTOR}" >> "${FILE}"
@@ -87,7 +87,7 @@ function switch_chromium_scale_factor() {
   local FACTOR="$1"
   local FILE="$HOME/.config/chromium-flags.conf"
   touch "${FILE}"
-  if grep -q '--force-device-scale-factor' "${FILE}"; then
+  if grep -q -- '--force-device-scale-factor' "${FILE}"; then
     sed -E -i -- "s/^(--force-device-scale-factor=)(.+)/\\1${FACTOR}/" "${FILE}"
   else
     echo "--force-device-scale-factor=${FACTOR}" >> "${FILE}"
