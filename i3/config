@@ -106,6 +106,7 @@ mode "$refresh" {
     bindsym s restart
     bindsym i           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"; mode "default"
     bindsym x           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh"; mode "default"
+    bindsym o           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh --only"; mode "default"
     bindsym Shift+z     exec --no-startup-id "/home/sflip/.i3/bin/i3-workspaces-save-and-restore.py save"; mode "default"
     bindsym z           exec --no-startup-id "/home/sflip/.i3/bin/i3-workspaces-save-and-restore.py restore"; mode "default"
     bindsym a           exec --no-startup-id "/home/sflip/.i3/bin/i3-config-mod-assign-chrome-app.sh > /tmp/i3-config-mod-assign-chrome-app.log 2>&1"; mode "default"

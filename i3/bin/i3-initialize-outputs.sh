@@ -1,5 +1,14 @@
 #!/bin/bash
 
+TEMP=$(getopt -o hlaifup --long only -n 'test.sh' -- "$@")
+eval set -- "$TEMP"
+while true ; do
+    case "$1" in
+        -o|--only) ONLY=true ; shift ;;
+        --) shift ; break ;;
+        *) echo 'Internal error!' ; exit 1 ;;
+    esac
+done
 
 setup_wallpaper() {
     if [[ -f "$HOME/.i3/wallpaper" ]]; then
@@ -12,7 +21,12 @@ case $(hostname) in
 
     asterix )
 
-        if xrandr | grep -q 'HDMI2 connected'; then
+        if test -n "$ONLY"; then
+
+            xrandr --output HDMI2 --off
+            xrandr --output eDP1 --mode '1920x1080_60.00' --auto
+
+        elif xrandr | grep -q 'HDMI2 connected'; then
 
             # on big tv, turn off laptop screen
             if xrandr | grep -q '4096x2160'; then
