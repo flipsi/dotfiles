@@ -100,7 +100,7 @@ bindsym XF86TouchpadToggle  exec --no-startup-id "$SHELLSCRIPT_PATH/xinput-toggl
 
 ## reload the configuration file or restart i3 [preserves session] etc.
 bindsym $mod+F5 mode "$refresh"
-set $refresh Want it fresh? (l) reload config, (s) restart i3, (i) initialize-script, (x/o) setup outputs, (d/D) setup DPI, (Z/z) save/restore layout (a) add chrome app to i3
+set $refresh (l) reload config, (s) restart i3, (i) initialize, (x/o) setup outputs, (d/D) setup DPI, (Z/z) save/restore layout
 mode "$refresh" {
     bindsym l reload; mode "default"
     bindsym s restart
