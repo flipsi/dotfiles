@@ -20,10 +20,12 @@ EOF
 # CONFIG
 X_SERVER_DPI_REGULAR=128
 X_SERVER_DPI_HIGH=320
+FONT_SIZE_REGULAR=11
+FONT_SIZE_HIGH=28
 GOOGLE_CHROME_SCALE_FACTOR_REGULAR=1
 GOOGLE_CHROME_SCALE_FACTOR_HIGH=2.5
-FIREFOX_DPI_REGULAR=1
-FIREFOX_DPI_HIGH=2.5
+FIREFOX_SCALE_FACTOR_REGULAR=1
+FIREFOX_SCALE_FACTOR_HIGH=2.5
 
 
 set -e
@@ -54,7 +56,14 @@ fi
 function change_x_server_dpi() {
   local DPI="$1"
   local FILE="$HOME/.Xresources"
-  sed -E -i -- "s/^(Xft\\.dpi:) (.+)/\\1 ${DPI}/" "${FILE}"
+  sed -E -i --follow-symlinks -- "s/^(Xft\\.dpi:) (.+)/\\1 ${DPI}/" "${FILE}"
+  xrdb -merge "${FILE}"
+}
+
+function change_rofi_font_size() {
+  local FONT_SIZE="$1"
+  local FILE="$HOME/.config/rofi/config"
+  sed -E -i --follow-symlinks -- "s/^(rofi.font: .+) (.+)/\\1 ${FONT_SIZE}/" "${FILE}"
   xrdb -merge "${FILE}"
 }
 
@@ -64,7 +73,7 @@ function switch_firefox_dpi() {
   local FILE="${PROFILE_DIR}/user.js"
   touch "${FILE}"
   if grep -q -- 'layout.css.devPixelsPerPx' "${FILE}"; then
-    sed -E -i -- "s/^(user_pref\\(\"layout.css.devPixelsPerPx\", \")(.+)(\"\\);)/\\1${DPI}\3/" "${FILE}"
+    sed -E -i --follow-symlinks -- "s/^(user_pref\\(\"layout.css.devPixelsPerPx\", \")(.+)(\"\\);)/\\1${DPI}\3/" "${FILE}"
   else
     echo "user_pref(\"layout.css.devPixelsPerPx\", \"${DPI}\");" >> "${FILE}"
   fi
@@ -76,7 +85,7 @@ function switch_google_chrome_scale_factor() {
   local FILE="$HOME/.config/chrome-flags.conf"
   touch "${FILE}"
   if grep -q -- '--force-device-scale-factor' "${FILE}"; then
-    sed -E -i -- "s/^(--force-device-scale-factor=)(.+)/\\1${FACTOR}/" "${FILE}"
+    sed -E -i --follow-symlinks -- "s/^(--force-device-scale-factor=)(.+)/\\1${FACTOR}/" "${FILE}"
   else
     echo "--force-device-scale-factor=${FACTOR}" >> "${FILE}"
   fi
@@ -88,7 +97,7 @@ function switch_chromium_scale_factor() {
   local FILE="$HOME/.config/chromium-flags.conf"
   touch "${FILE}"
   if grep -q -- '--force-device-scale-factor' "${FILE}"; then
-    sed -E -i -- "s/^(--force-device-scale-factor=)(.+)/\\1${FACTOR}/" "${FILE}"
+    sed -E -i --follow-symlinks -- "s/^(--force-device-scale-factor=)(.+)/\\1${FACTOR}/" "${FILE}"
   else
     echo "--force-device-scale-factor=${FACTOR}" >> "${FILE}"
   fi
@@ -98,7 +107,8 @@ function switch_chromium_scale_factor() {
 function switch_to_hidpi() {
   echo "Switching to HiDPI..."
   change_x_server_dpi "${X_SERVER_DPI_HIGH}"
-  switch_firefox_dpi "${FIREFOX_DPI_HIGH}"
+  change_rofi_font_size "${FONT_SIZE_HIGH}"
+  switch_firefox_dpi "${FIREFOX_SCALE_FACTOR_HIGH}"
   switch_google_chrome_scale_factor "${GOOGLE_CHROME_SCALE_FACTOR_HIGH}"
   switch_chromium_scale_factor "${GOOGLE_CHROME_SCALE_FACTOR_HIGH}"
   i3-msg restart | exit 0
@@ -107,7 +117,9 @@ function switch_to_hidpi() {
 function switch_to_regular_dpi() {
   echo "Switching to regular DPI..."
   change_x_server_dpi "${X_SERVER_DPI_REGULAR}"
-  switch_firefox_dpi "${FIREFOX_DPI_REGULAR}"
+  change_rofi_font_size "${FONT_SIZE_REGULAR}"
+  switch_firefox_dpi "${FIREFOX_SCALE_FACTOR_REGULAR}"
+  switch_google_chrome_scale_factor "${GOOGLE_CHROME_SCALE_FACTOR_REGULAR}"
   switch_chromium_scale_factor "${GOOGLE_CHROME_SCALE_FACTOR_REGULAR}"
   i3-msg restart | exit 0
 }
