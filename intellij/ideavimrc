@@ -120,7 +120,8 @@ nnoremap <leader>if         :action ActivateTerminalToolWindow<cr>
 nnoremap <leader>tb         :action Activatesbt-shell-toolwindowToolWindow<cr>
 nnoremap <leader>ts         :action ShowSettings<cr>
 
-nnoremap <leader><leader>   :action Switcher<cr>
+" nnoremap <leader><leader>   :action Switcher<cr> " Unusable in i3
+nnoremap <leader><leader>   :action SearchEverywhere<cr>
 
 nnoremap #                  :action SearchEverywhere<cr>
 nnoremap <leader>#          :action SearchEverywhere<cr>
