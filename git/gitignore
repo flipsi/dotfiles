@@ -14,3 +14,7 @@ sftp-config.json
 
 # compiled source
 *.class
+
+# misc
+nohup.out
+
