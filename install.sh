@@ -434,8 +434,8 @@ function create_link_for_target() {
             ;;
 
         vlc )
-            mkdir -p "$HOME/.config"
-            create_link "$PWD/vlc" "$HOME/.config/vlc"
+            mkdir -p "$HOME/.config/vlc"
+            create_link "$PWD/vlc/vlcrc" "$HOME/.config/vlc/vlcrc"
             ;;
 
         xfce4 )
