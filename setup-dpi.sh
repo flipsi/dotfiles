@@ -125,7 +125,7 @@ function switch_to_regular_dpi() {
 }
 
 
-HIDPI_ENABLED="/tmp/.HiDPI"
+HIDPI_ENABLED="./.HiDPI"
 
 if [[ ( ! -f "${HIDPI_ENABLED}" || -n "${FORCE}" ) && "${MODE}" = high ]]; then
   switch_to_hidpi
