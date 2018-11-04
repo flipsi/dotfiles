@@ -151,7 +151,7 @@ exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
 
 ## change wallpaper
 bindsym $mod+F7 mode "$change_wallpaper"
-set $change_wallpaper Wallpaper: (i) choose interactively (r) random (m) random per output (l) restore (0-9) shades of gray
+set $change_wallpaper Wallpaper: (i) choose interactively (r) random (m) random per output (b) restore (0-9) shades of gray
 mode "$change_wallpaper" {
     bindsym i exec --no-startup-id "feh --bg-scale $(fd '.*\.(jpg|jpeg|png)$' $WALLPAPER_PATH | rofi -dmenu)"; mode "default
     bindsym r exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
