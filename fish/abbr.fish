@@ -80,7 +80,7 @@ abbr te     trans de:en
 abbr tf     trans de:fr
 abbr u      unison
 abbr v      vim
-abbr vs     vim --servername
+abbr vs     vim --servername \(basename \(pwd\)\)
 abbr x      xrandr
 abbr xo     xrandr --output
 abbr y      yaourt
