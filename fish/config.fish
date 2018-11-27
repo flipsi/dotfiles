@@ -14,8 +14,8 @@ set -x LANG de_DE.UTF-8
 set -x PATH ~/.cargo/bin $PATH
 set -x PATH ~/.gem/ruby/2.4.0/bin $PATH
 set -x PATH ~/.i3/bin $PATH
-set -x PATH ~/bin $PATH
 set -x PATH ~/shellscripts $PATH
+set -x PATH ~/bin $PATH
 
 # edit files with vim
 set -x EDITOR vim
