@@ -708,12 +708,14 @@ mode "$terminal" {
 
 ## switch to a specific window or workspace
 bindsym $mod+o mode "$goto"
-set $goto Goto: (o) Terminal (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (i) IntelliJ (s) Slack (t) Telegram (b) Trello
+set $goto Goto: (o) Terminal (v) Vivaldi (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (i) IntelliJ (s) Slack (t) Telegram (b) Trello
 mode "$goto" {
   bindsym o         [class="(?i)alacritty"]             focus; mode "default"
   bindsym $mod+o    [class="(?i)alacritty"]             focus; mode "default"
   bindsym f         [class="(?i)firefox"]               focus; mode "default"
   bindsym $mod+f    [class="(?i)firefox"]               focus; mode "default"
+  bindsym v         [class="(?i)vivaldi-stable"]        focus; mode "default"
+  bindsym $mod+v    [class="(?i)vivaldi-stable"]        focus; mode "default"
   bindsym q         [class="(?i)qutebrowser"]           focus; mode "default"
   bindsym $mod+q    [class="(?i)qutebrowser"]           focus; mode "default"
   bindsym m         [class="(?i)spotify"]               focus; mode "default"
@@ -814,17 +816,20 @@ for_window [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"] m
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] move to workspace    
 assign [class="(?i)pale moon"]                                                                      
 assign [class="(?i)qutebrowser"]                                                                    
+assign [class="(?i)vivaldi-stable"]                                                                 
 
 ## workspaces with window always on specific output
-for_window [class="(?i)chromium"]                               move workspace to output DP3-1
-for_window [class="(?i)google-chrome"]                          move workspace to output DP3-1
-for_window [class="(?i)firefox"]                                move workspace to output DP3-1
-for_window [class="(?i)qutebrowser"]                            move workspace to output DP3-1
-for_window [class="(?i)alacritty"]                              move workspace to output DP3-2
-for_window [class="(?i)cool-retro-term"]                        move workspace to output DP3-2
-for_window [class="(?i)gnome-terminal"]                         move workspace to output DP3-2
-for_window [class="(?i)urxvt"]                                  move workspace to output DP3-2
-for_window [class="(?i)jetbrains-idea"]                         move workspace to output DP3-2
-for_window [class="(?i)jetbrains-phpstorm"]                     move workspace to output DP3-2
-for_window [class="(?i)slack"]                                  move workspace to output eDP1
-for_window [class="(?i)telegram"]                               move workspace to output eDP1
+for_window [class="(?i)vivaldi-stable"]                                         move workspace to output DP3-1
+for_window [class="(?i)chromium"]                                               move workspace to output DP3-1
+for_window [class="(?i)google-chrome"]                                          move workspace to output DP3-1
+for_window [class="(?i)firefox"]                                                move workspace to output DP3-1
+for_window [class="(?i)qutebrowser"]                                            move workspace to output DP3-1
+for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DP3-2
+for_window [class="(?i)alacritty"]                                              move workspace to output DP3-2
+for_window [class="(?i)cool-retro-term"]                                        move workspace to output DP3-2
+for_window [class="(?i)gnome-terminal"]                                         move workspace to output DP3-2
+for_window [class="(?i)urxvt"]                                                  move workspace to output DP3-2
+for_window [class="(?i)jetbrains-idea"]                                         move workspace to output DP3-2
+for_window [class="(?i)jetbrains-phpstorm"]                                     move workspace to output DP3-2
+for_window [class="(?i)slack"]                                                  move workspace to output eDP1
+for_window [class="(?i)telegram"]                                               move workspace to output eDP1

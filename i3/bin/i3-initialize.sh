@@ -104,6 +104,9 @@ end
 
 
 function autostart
+    if not pgrep -x vivaldi-stable
+        nohup vivaldi-stable &
+    end
     if not pgrep -x firefox
         nohup firefox &
     end
