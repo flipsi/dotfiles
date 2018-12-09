@@ -1,0 +1,14 @@
+let defaultengine = "duckduckgo"
+
+let qmark g = "https://github.com/notifications"
+let qmark i = "http://i3wm.org/docs/userguide.html"
+
+
+map l createActiveTabbedHint
+map d closeTab
+
+map ö openSearchBar
+map Ö openSearchBarReverse
+
+" map <M-n> nextTab
+" map <M-p> previousTab
