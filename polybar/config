@@ -78,6 +78,8 @@ height = 50
 radius = 6.0
 fixed-center = false
 
+enable-ipc = true
+
 ;wm-restack = i3
 ;override-redirect = true
 
