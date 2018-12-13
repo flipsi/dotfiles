@@ -67,9 +67,8 @@ alert                       = ${colors.gruvbox_bright_red}
 
 [bar/main]
 
-; Use either of the following command to list available outputs:
-; If unspecified, the application will pick the first one it finds.
-monitor =
+monitor = eDP1
+dpi = 170
 
 width = 100%
 height = 50
@@ -80,6 +79,7 @@ fixed-center = false
 
 enable-ipc = true
 
+; Make the bar appear below windows
 ;wm-restack = i3
 ;override-redirect = true
 
@@ -98,7 +98,7 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = "PragmataPro Mono:size=24"
+font-0 = "PragmataPro Mono:size=8"
 font-1 = "fixed:pixelsize=10;1"
 font-2 = "unifont:fontformat=truetype:size=8:antialias=false;0"
 ; font-3 = "siji:pixelsize=10;1"
