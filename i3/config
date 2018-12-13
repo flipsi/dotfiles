@@ -233,47 +233,36 @@ client.background       #1A1A1A  #1E1E1E  #CC241D  #1E1E1E
 exec_always --no-startup-id "/home/sflip/.i3/bin/i3-polybar.sh start"
 
 
-bar {
-
-    mode invisible
-
-    # status_command      i3status --config ~/.i3/i3status
-    # status_command      i3blocks -c ~/.i3/i3blocks
-    status_command      python3 ~/.i3/i3pystatus
-
-    # output              HDMI2
-
-    position            top
-
-    workspace_buttons   yes
-
-    strip_workspace_numbers yes
-
-    separator_symbol    " | "
-    # separator_symbol    " X "
-    # separator_symbol    " ǁ "
-    # separator_symbol    " ⠶ "
-    # separator_symbol    " ⣶ "
-    # separator_symbol    " ⣿ "
-    # separator_symbol    " Ꙭ "
-
-    # tray_output         none
-    # tray_output         HDMI2
-
-    tray_padding        3
-
-    colors {
-        background  #1E1E1E
-        statusline  #BDAE93
-        separator   #B8BB26
-        #                   border   backgr   text
-        focused_workspace   #CC241D  #CC241D  #1E1E1E
-        active_workspace    #1E1E1E  #1E1E1E  #CC241D
-        inactive_workspace  #1E1E1E  #1E1E1E  #BDAE93
-        urgent_workspace    #B8BB26  #B8BB26  #000000
-    }
-
-}
+# bar {
+#     mode show
+#     # status_command      i3status --config ~/.i3/i3status
+#     # status_command      i3blocks -c ~/.i3/i3blocks
+#     status_command      python3 ~/.i3/i3pystatus
+#     # output              HDMI2
+#     position            top
+#     workspace_buttons   yes
+#     strip_workspace_numbers yes
+#     separator_symbol    " | "
+#     # separator_symbol    " X "
+#     # separator_symbol    " ǁ "
+#     # separator_symbol    " ⠶ "
+#     # separator_symbol    " ⣶ "
+#     # separator_symbol    " ⣿ "
+#     # separator_symbol    " Ꙭ "
+#     # tray_output         none
+#     # tray_output         HDMI2
+#     tray_padding        3
+#     colors {
+#         background  #1E1E1E
+#         statusline  #BDAE93
+#         separator   #B8BB26
+#         #                   border   backgr   text
+#         focused_workspace   #CC241D  #CC241D  #1E1E1E
+#         active_workspace    #1E1E1E  #1E1E1E  #CC241D
+#         inactive_workspace  #1E1E1E  #1E1E1E  #BDAE93
+#         urgent_workspace    #B8BB26  #B8BB26  #000000
+#     }
+# }
 
 
 ## hide/show bar
