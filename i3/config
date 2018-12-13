@@ -270,7 +270,7 @@ exec_always --no-startup-id "/home/sflip/.i3/bin/i3-polybar.sh start > /tmp/i3-p
 bindsym $mod+Shift+b exec "polybar-msg cmd toggle"
 
 # set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
-set $UPDATE_STATUSBAR ""
+set $UPDATE_STATUSBAR true
 
 
 
