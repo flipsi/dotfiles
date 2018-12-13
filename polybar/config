@@ -105,7 +105,7 @@ font-2 = "unifont:fontformat=truetype:size=8:antialias=false;0"
 font-3 = "Wuncon Siji:pixelsize=10;1"
 
 modules-left = i3
-modules-center =
+modules-center = spotify
 modules-right = pulseaudio wlan eth battery date powermenu
 
 tray-position = right
@@ -233,6 +233,18 @@ icon-next = 
 
 label-song-maxlen = 25
 label-song-ellipsis = true
+
+
+[module/spotify]
+
+; https://github.com/Jvanrhijn/polybar-spotify
+
+type = custom/script
+interval = 1
+format-prefix =
+format = <label>
+exec = python $HOME/.config/polybar/scripts/spotify_status.py -f '{artist}: {song}'
+format-underline = ${colors.gruvbox_neutral_purple}
 
 
 [module/xbacklight]
