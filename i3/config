@@ -229,9 +229,13 @@ client.background       #1A1A1A  #1E1E1E  #CC241D  #1E1E1E
 ###########  BAR  #############################################################
 ###############################################################################
 
+
+exec_always --no-startup-id "/home/sflip/.i3/bin/i3-polybar.sh start"
+
+
 bar {
 
-    mode hide
+    mode invisible
 
     # status_command      i3status --config ~/.i3/i3status
     # status_command      i3blocks -c ~/.i3/i3blocks
@@ -273,11 +277,11 @@ bar {
 
 
 ## hide/show bar
-bindsym $mod+Shift+b bar mode toggle
+# bindsym $mod+Shift+b bar mode toggle
+bindsym $mod+Shift+b exec "/home/sflip/.i3/bin/i3-polybar.sh toggle"
 
-# TODO: how to toggle tray_output dynamically?
-
-set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
+# set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
+set $UPDATE_STATUSBAR ""
 
 
 
