@@ -778,45 +778,45 @@ for_window [window_role="(?i)vlc-main"] floating enable
 for_window [window_role="(?i)vlc-main"] resize set 750 450
 
 ## windows always on specific workspace
-for_window [class="(?i)chrom" instance="crx_acmikcjocccblbiibfdfjkghclpmmpip"] move to workspace    9
-for_window [class="(?i)chrom" instance="crx_kddchekfnnagpejaneebcigegenogifj"] move to workspace    9
-assign [class="(?i)chromium"]                                                                       3
-assign [class="(?i)google-chrome"]                                                                  3
-assign [class="(?i)filezilla"]                                                                      9
-assign [class="(?i)firefox"]                                                                        2
-for_window [class="(?i)chrom" instance="crx_afbjehlnjihfcebhifoapfibhcgakelg"] move to workspace    9
-for_window [class="(?i)chrom" instance="crx_lgeboohgcoglieeoikhidodnmdfcalmh"] move to workspace    9
-for_window [class="(?i)chrom" instance="crx_elofdcljcpfajijdjlcbjclkdggnklhg"] move to workspace    9
-assign [class="(?i)jetbrains-idea"]                                                                 5
-assign [class="(?i)jetbrains-phpstorm"]                                                             5
-for_window [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"] move to workspace    9
-for_window [class="(?i)chrom" instance="crx_nkciffeafpjoepmgjbjnckchbgfjnjhp"] move to workspace    9
-assign [class="gnome-calendar"]                                                                     9
-assign [class="(?i)thunderbird"]                                                                    4
-for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] move to workspace    4
-for_window [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"] move to workspace    9
-assign [class="(?i)pokerstars"]                                                                     5
-assign [class="(?i)audacity"]                                                                       5
-assign [class="(?i)ardour"]                                                                         5
-for_window [class="(?i)chrom" instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"] move to workspace    8
-assign [class="(?i)skype"]                                                                          8
-assign [class="(?i)slack"]                                                                          7
-assign [class="(?i)qjackctl"]                                                                       6
-assign [class="(?i)spotify"]                                                                        4
-for_window [class="Spotify"] move to workspace                                                      4
-assign [class="(?i)kaffeine"]                                                                       5
-assign [class="(?i)mediathek"]                                                                      5
-for_window [class="(?i)chrom" instance="crx_mldpchjnjlkioecpffkohnhjlgbkcfkf"] move to workspace    5
-assign [class="Telegram"]                                                                           8
-assign [class="(?i)alacritty"]                                                                      0
-assign [class="(?i)cool-retro-term"]                                                                0
-assign [class="(?i)gnome-terminal"]                                                                 0
-assign [class="(?i)urxvt"]                                                                          0
-for_window [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"] move to workspace    4
-for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] move to workspace    4
-assign [class="(?i)pale moon"]                                                                      1
-assign [class="(?i)qutebrowser"]                                                                    1
-assign [class="(?i)vivaldi-stable"]                                                                 1
+for_window [class="(?i)chrom" instance="crx_acmikcjocccblbiibfdfjkghclpmmpip"] move to workspace    
+for_window [class="(?i)chrom" instance="crx_kddchekfnnagpejaneebcigegenogifj"] move to workspace    
+assign [class="(?i)chromium"]                                                                       
+assign [class="(?i)google-chrome"]                                                                  
+assign [class="(?i)filezilla"]                                                                      
+assign [class="(?i)firefox"]                                                                        
+for_window [class="(?i)chrom" instance="crx_afbjehlnjihfcebhifoapfibhcgakelg"] move to workspace    
+for_window [class="(?i)chrom" instance="crx_lgeboohgcoglieeoikhidodnmdfcalmh"] move to workspace    
+for_window [class="(?i)chrom" instance="crx_elofdcljcpfajijdjlcbjclkdggnklhg"] move to workspace    
+assign [class="(?i)jetbrains-idea"]                                                                 
+assign [class="(?i)jetbrains-phpstorm"]                                                             
+for_window [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"] move to workspace    
+for_window [class="(?i)chrom" instance="crx_nkciffeafpjoepmgjbjnckchbgfjnjhp"] move to workspace    
+assign [class="gnome-calendar"]                                                                     
+assign [class="(?i)thunderbird"]                                                                    
+for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] move to workspace    
+for_window [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"] move to workspace    
+assign [class="(?i)pokerstars"]                                                                     
+assign [class="(?i)audacity"]                                                                       
+assign [class="(?i)ardour"]                                                                         
+for_window [class="(?i)chrom" instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"] move to workspace    
+assign [class="(?i)skype"]                                                                          
+assign [class="(?i)slack"]                                                                          
+assign [class="(?i)qjackctl"]                                                                       
+assign [class="(?i)spotify"]                                                                        
+assign [class="(?i)kaffeine"]                                                                       
+assign [class="(?i)mediathek"]                                                                      
+for_window [class="(?i)chrom" instance="crx_mldpchjnjlkioecpffkohnhjlgbkcfkf"] move to workspace    
+for_window [class="Spotify"] move to workspace                                                      
+assign [class="Telegram"]                                                                           
+assign [class="(?i)alacritty"]                                                                      
+assign [class="(?i)cool-retro-term"]                                                                
+assign [class="(?i)gnome-terminal"]                                                                 
+assign [class="(?i)urxvt"]                                                                          
+for_window [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"] move to workspace    
+for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] move to workspace    
+assign [class="(?i)pale moon"]                                                                      
+assign [class="(?i)qutebrowser"]                                                                    
+assign [class="(?i)vivaldi-stable"]                                                                 
 
 ## workspaces with window always on specific output
 for_window [class="(?i)vivaldi-stable"]                                         move workspace to output DP3-1
