@@ -20,12 +20,14 @@ EOF
 # CONFIG
 X_SERVER_DPI_REGULAR=128
 X_SERVER_DPI_HIGH=320
+POLYBAR_DPI_REGULAR=170
+POLYBAR_DPI_HIGH=300
 FONT_SIZE_REGULAR=11
 FONT_SIZE_HIGH=28
 GOOGLE_CHROME_SCALE_FACTOR_REGULAR=1
-GOOGLE_CHROME_SCALE_FACTOR_HIGH=2.5
+GOOGLE_CHROME_SCALE_FACTOR_HIGH=3.0
 FIREFOX_SCALE_FACTOR_REGULAR=1
-FIREFOX_SCALE_FACTOR_HIGH=2.5
+FIREFOX_SCALE_FACTOR_HIGH=3.0
 
 
 set -e
@@ -104,6 +106,13 @@ function switch_chromium_scale_factor() {
   pkill -x chromium && nohup chromium & # restart
 }
 
+function switch_polybar_dpi() {
+  local DPI="$1"
+  local FILE="$HOME/.config/polybar/config"
+  sed -E -i --follow-symlinks -- "s/^dpi = .*/dpi = ${DPI}/" "${FILE}"
+  "$HOME/.i3/bin/i3-polybar.sh" restart || true
+}
+
 function switch_to_hidpi() {
   echo "Switching to HiDPI..."
   change_x_server_dpi "${X_SERVER_DPI_HIGH}"
@@ -111,6 +120,7 @@ function switch_to_hidpi() {
   switch_firefox_dpi "${FIREFOX_SCALE_FACTOR_HIGH}"
   switch_google_chrome_scale_factor "${GOOGLE_CHROME_SCALE_FACTOR_HIGH}"
   switch_chromium_scale_factor "${GOOGLE_CHROME_SCALE_FACTOR_HIGH}"
+  switch_polybar_dpi "${POLYBAR_DPI_HIGH}"
   i3-msg restart | exit 0
 }
 
@@ -121,6 +131,7 @@ function switch_to_regular_dpi() {
   switch_firefox_dpi "${FIREFOX_SCALE_FACTOR_REGULAR}"
   switch_google_chrome_scale_factor "${GOOGLE_CHROME_SCALE_FACTOR_REGULAR}"
   switch_chromium_scale_factor "${GOOGLE_CHROME_SCALE_FACTOR_REGULAR}"
+  switch_polybar_dpi "${POLYBAR_DPI_REGULAR}"
   i3-msg restart | exit 0
 }
 
