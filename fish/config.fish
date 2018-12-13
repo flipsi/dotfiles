@@ -21,7 +21,7 @@ set -x PATH ~/bin $PATH
 set -x EDITOR vim
 
 # web browser
-set -x BROWSER firefox
+set -x BROWSER vivaldi-stable
 
 # setup fzf to use ag instead of find
 set -x FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git -f -g ""'
