@@ -60,8 +60,8 @@ background                  = ${colors.gruvbox_dark0_hard}
 background-alt              = ${colors.gruvbox_dark1}
 foreground                  = ${colors.gruvbox_light2}
 foreground-alt              = ${colors.gruvbox_light2}
-primary                     = ${colors.gruvbox_neutral_aqua}
-secondary                   = ${colors.gruvbox_bright_yellow}
+primary                     = ${colors.gruvbox_neutral_yellow}
+secondary                   = ${colors.gruvbox_neutral_aqua}
 alert                       = ${colors.gruvbox_bright_red}
 
 
@@ -152,7 +152,7 @@ wrapping-scroll = false
 reverse-scroll = false
 
 label-mode-padding = 2
-label-mode-foreground = ${colors.gruvbox_light2}
+label-mode-foreground = ${colors.gruvbox_dark0_hard}
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
@@ -265,7 +265,7 @@ type = internal/cpu
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.primary}
+format-underline = ${colors.secondary}
 label = %percentage:2%%
 
 
@@ -339,13 +339,13 @@ label-muted = 🔇 muted
 label-muted-foreground = ${colors.alert}
 
 bar-volume-width = 8
-bar-volume-foreground-0 = ${colors.primary}
-bar-volume-foreground-1 = ${colors.primary}
-bar-volume-foreground-2 = ${colors.primary}
-bar-volume-foreground-3 = ${colors.primary}
-bar-volume-foreground-4 = ${colors.primary}
-bar-volume-foreground-5 = ${colors.primary}
-bar-volume-foreground-6 = ${colors.primary}
+bar-volume-foreground-0 = ${colors.secondary}
+bar-volume-foreground-1 = ${colors.secondary}
+bar-volume-foreground-2 = ${colors.secondary}
+bar-volume-foreground-3 = ${colors.secondary}
+bar-volume-foreground-4 = ${colors.secondary}
+bar-volume-foreground-5 = ${colors.secondary}
+bar-volume-foreground-6 = ${colors.secondary}
 bar-volume-gradient = false
 bar-volume-indicator = |
 bar-volume-indicator-font = 2
@@ -369,13 +369,13 @@ format-muted-foreground = ${colors.foreground-alt}
 label-muted = sound muted
 
 bar-volume-width = 10
-bar-volume-foreground-0 = ${colors.primary}
-bar-volume-foreground-1 = ${colors.primary}
-bar-volume-foreground-2 = ${colors.primary}
-bar-volume-foreground-3 = ${colors.primary}
-bar-volume-foreground-4 = ${colors.primary}
-bar-volume-foreground-5 = ${colors.primary}
-bar-volume-foreground-6 = ${colors.primary}
+bar-volume-foreground-0 = ${colors.secondary}
+bar-volume-foreground-1 = ${colors.secondary}
+bar-volume-foreground-2 = ${colors.secondary}
+bar-volume-foreground-3 = ${colors.secondary}
+bar-volume-foreground-4 = ${colors.secondary}
+bar-volume-foreground-5 = ${colors.secondary}
+bar-volume-foreground-6 = ${colors.secondary}
 bar-volume-gradient = false
 bar-volume-indicator = |
 bar-volume-indicator-font = 2
@@ -444,7 +444,7 @@ thermal-zone = 0
 warn-temperature = 60
 
 format = <ramp> <label>
-format-underline = ${colors.primary}
+format-underline = ${colors.secondary}
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
@@ -467,7 +467,7 @@ expand-right = true
 format-spacing = 1
 
 label-open                 = X
-label-open-foreground      = ${colors.primary}
+label-open-foreground      = ${colors.secondary}
 label-close                = cancel
 label-close-foreground     = ${colors.alert}
 label-separator            = |
