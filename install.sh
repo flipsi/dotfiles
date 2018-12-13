@@ -48,6 +48,7 @@ SUPPORTED_TARGETS=(\
     muttator \
     ncmpcpp \
     pentadactyl \
+    polybar \
     psql \
     qutebrowser \
     ranger \
@@ -285,6 +286,11 @@ function create_link_for_target() {
 
         psql )
             create_link "$PWD/psql/psqlrc" "$HOME/.psqlrc"
+            ;;
+
+        polybar )
+            mkdir -p "$HOME/.config/polybar"
+            create_link "$PWD/polybar/config" "$HOME/.config/polybar/config"
             ;;
 
         qutebrowser )

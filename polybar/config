@@ -1,0 +1,508 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;==========================================================
+
+[colors]
+
+gruvbox_dark0_hard          = #1d2021
+gruvbox_dark0               = #282828
+gruvbox_dark0_soft          = #32302f
+gruvbox_dark1               = #3c3836
+gruvbox_dark2               = #504945
+gruvbox_dark3               = #665c54
+gruvbox_dark4               = #7c6f64
+gruvbox_gray_245            = #928374
+gruvbox_gray_244            = #928374
+gruvbox_light0_hard         = #f9f5d7
+gruvbox_light0              = #fbf1c7
+gruvbox_light0_soft         = #f2e5bc
+gruvbox_light1              = #ebdbb2
+gruvbox_light2              = #d5c4a1
+gruvbox_light3              = #bdae93
+gruvbox_light4              = #a89984
+gruvbox_bright_red          = #fb4934
+gruvbox_bright_green        = #b8bb26
+gruvbox_bright_yellow       = #fabd2f
+gruvbox_bright_blue         = #83a598
+gruvbox_bright_purple       = #d3869b
+gruvbox_bright_aqua         = #8ec07c
+gruvbox_bright_orange       = #fe8019
+gruvbox_neutral_red         = #cc241d
+gruvbox_neutral_green       = #98971a
+gruvbox_neutral_yellow      = #d79921
+gruvbox_neutral_blue        = #458588
+gruvbox_neutral_purple      = #b16286
+gruvbox_neutral_aqua        = #689d6a
+gruvbox_neutral_orange      = #d65d0e
+gruvbox_faded_red           = #9d0006
+gruvbox_faded_green         = #79740e
+gruvbox_faded_yellow        = #b57614
+gruvbox_faded_blue          = #076678
+gruvbox_faded_purple        = #8f3f71
+gruvbox_faded_aqua          = #427b58
+gruvbox_faded_orange        = #af3a03
+
+background                  = ${colors.gruvbox_dark0_hard}
+background-alt              = ${colors.gruvbox_dark1}
+foreground                  = ${colors.gruvbox_light2}
+foreground-alt              = ${colors.gruvbox_light2}
+primary                     = ${colors.gruvbox_neutral_aqua}
+secondary                   = ${colors.gruvbox_bright_yellow}
+alert                       = ${colors.gruvbox_bright_red}
+
+
+[bar/main]
+
+; Use either of the following command to list available outputs:
+; If unspecified, the application will pick the first one it finds.
+monitor =
+
+width = 100%
+height = 50
+;offset-x = 1%
+;offset-y = 1%
+radius = 6.0
+fixed-center = false
+
+;wm-restack = i3
+;override-redirect = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = ${colors.primary}
+
+border-size = 0
+border-color = ${colors.gruvbox_light2}
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = "PragmataPro Mono:size=24"
+font-1 = "fixed:pixelsize=10;1"
+font-2 = "unifont:fontformat=truetype:size=8:antialias=false;0"
+; font-3 = "siji:pixelsize=10;1"
+font-3 = "Wuncon Siji:pixelsize=10;1"
+
+modules-left = i3
+modules-center =
+modules-right = pulseaudio wlan eth battery date powermenu
+
+tray-position = right
+tray-padding = 2
+;tray-transparent = true
+;tray-background = ${colors.background}
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+
+[module/i3]
+
+type = internal/i3
+format = <label-state> <label-mode>
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+; This will split the workspace name on ':'
+; Default: false
+strip-wsnumbers = true
+
+; Sort the workspaces by index instead of the default
+; sorting that groups the workspaces by output
+; Default: false
+index-sort = false
+
+; Create click handler used to focus workspace
+; Default: true
+enable-click = true
+
+; Create scroll handlers used to cycle workspaces
+; Default: true
+enable-scroll = false
+
+; Wrap around when reaching the first/last workspace
+; Default: true
+wrapping-scroll = false
+
+; Set the scroll cycle direction
+; Default: true
+reverse-scroll = false
+
+label-mode-padding = 2
+label-mode-foreground = ${colors.gruvbox_light2}
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %name%
+label-focused-background = ${colors.gruvbox_dark0_hard}
+label-focused-underline = ${colors.gruvbox_neutral_red}
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %name%
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %name%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${colors.gruvbox_light2}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %name%
+label-urgent-foreground = ${colors.alert}
+label-urgent-background = ${self.label-focused-background}
+label-urgent-padding = ${self.label-focused-padding}
+
+; Separator in between workspaces
+; label-separator = |
+
+
+[module/xwindow]
+
+type = internal/xwindow
+label = %title:0:30:...%
+
+
+[module/xkeyboard]
+
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-underline = ${colors.secondary}
+
+label-layout = %layout%
+label-layout-underline = ${colors.secondary}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.secondary}
+label-indicator-underline = ${colors.secondary}
+
+
+[module/filesystem]
+
+type = internal/fs
+interval = 25
+
+mount-0 = /
+mount-1 = /home
+
+label-mounted = %mountpoint%: %free%
+label-unmounted = %mountpoint% N/A
+label-unmounted-foreground = ${colors.foreground-alt}
+
+
+[module/mpd]
+
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+
+[module/xbacklight]
+
+type = internal/xbacklight
+
+format = <label> <bar>
+label = BL
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = ${colors.gruvbox_neutral_aqua}
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = ${colors.gruvbox_neutral_yellow}
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+
+[module/backlight-acpi]
+
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+
+
+[module/cpu]
+
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = ${colors.primary}
+label = %percentage:2%%
+
+
+[module/memory]
+
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = ${colors.gruvbox_neutral_red}
+label = %percentage_used%%
+
+
+[module/wlan]
+
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+
+format-connected = <label-connected>
+; format-connected-underline = ${colors.gruvbox_bright_green}
+label-connected = %essid%
+
+format-disconnected = <label-disconnected>
+format-disconnected-underline = ${colors.gruvbox_bright_orange}
+label-disconnected = %ifname% N/A
+label-disconnected-foreground = ${colors.foreground-alt}
+
+
+[module/eth]
+
+type = internal/network
+interface = enp0s20u1u3
+interval = 3.0
+
+; format-connected-underline = ${colors.gruvbox_bright_green}
+format-connected-prefix =
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected = <label-disconnected>
+format-disconnected-underline = ${colors.gruvbox_bright_orange}
+label-disconnected = %ifname% N/A
+label-disconnected-foreground = ${colors.foreground-alt}
+
+
+[module/date]
+
+type = internal/date
+interval = 5
+
+format-prefix =
+format-prefix-foreground = ${colors.foreground-alt}
+; format-underline = ${colors.gruvbox_bright_blue}
+
+date = " %Y-%m-%d"
+time = %H:%M
+
+label = %date% %time%
+
+
+[module/pulseaudio]
+
+type = internal/pulseaudio
+
+format-volume = <label-volume> <bar-volume>
+label-volume = VOL %percentage%%
+label-volume-foreground = ${root.foreground}
+
+label-muted = 🔇 muted
+label-muted-foreground = ${colors.alert}
+
+bar-volume-width = 8
+bar-volume-foreground-0 = ${colors.primary}
+bar-volume-foreground-1 = ${colors.primary}
+bar-volume-foreground-2 = ${colors.primary}
+bar-volume-foreground-3 = ${colors.primary}
+bar-volume-foreground-4 = ${colors.primary}
+bar-volume-foreground-5 = ${colors.primary}
+bar-volume-foreground-6 = ${colors.primary}
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+
+[module/alsa]
+
+type = internal/alsa
+
+format-volume = <label-volume> <bar-volume>
+label-volume = VOL
+label-volume-foreground = ${root.foreground}
+
+format-muted-prefix = " "
+format-muted-foreground = ${colors.foreground-alt}
+label-muted = sound muted
+
+bar-volume-width = 10
+bar-volume-foreground-0 = ${colors.primary}
+bar-volume-foreground-1 = ${colors.primary}
+bar-volume-foreground-2 = ${colors.primary}
+bar-volume-foreground-3 = ${colors.primary}
+bar-volume-foreground-4 = ${colors.primary}
+bar-volume-foreground-5 = ${colors.primary}
+bar-volume-foreground-6 = ${colors.primary}
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+
+[module/battery]
+
+type = internal/battery
+battery = BAT0
+adapter = AC0
+full-at = 90
+
+; If an inotify event haven't been reported in this many
+; seconds, manually poll for new values.
+; Needed as a fallback for systems that don't report events
+; on sysfs/procfs.
+; Disable polling by setting the interval to 0.
+; Default: 5
+poll-interval = 5
+
+; format-charging = <animation-charging> <label-charging>
+format-charging = <label-charging>
+format-charging-underline = ${colors.gruvbox_bright_green}
+label-charging = Charging %percentage%%
+
+; format-discharging = <animation-discharging> <label-discharging>
+format-discharging = <label-discharging>
+format-discharging-underline =  ${colors.gruvbox_faded_orange}
+label-discharging = Discharging %percentage%%
+
+; format-full-prefix = ${self.ramp-charged}
+format-full-prefix =
+format-full-prefix-foreground = ${colors.foreground-alt}
+; format-full-underline = ${colors.gruvbox_faded_green}
+label-full = Charged
+
+ramp-charged = " "
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-foreground = ${colors.foreground-alt}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-framerate = 750
+
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-foreground = ${colors.foreground-alt}
+animation-discharging-framerate = 750
+
+
+[module/temperature]
+
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+format-underline = ${colors.primary}
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.foreground-alt}
+
+
+[module/powermenu]
+
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open                 = X
+label-open-foreground      = ${colors.primary}
+label-close                = cancel
+label-close-foreground     = ${colors.alert}
+label-separator            = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0        = reboot
+menu-0-0-exec   = menu-open-1
+menu-0-1        = power off
+menu-0-1-exec   = menu-open-2
+
+menu-1-0        = cancel
+menu-1-0-exec   = menu-open-0
+menu-1-1        = reboot
+menu-1-1-exec   = sudo reboot
+
+menu-2-0        = power off
+menu-2-0-exec   = sudo poweroff
+menu-2-1        = cancel
+menu-2-1-exec   = menu-open-0
+
+
+[settings]
+
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+
+
+[global/wm]
+
+margin-top = 5
+margin-bottom = 8
+
+
+
+; vim:ft=dosini
