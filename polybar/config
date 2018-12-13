@@ -67,7 +67,7 @@ alert                       = ${colors.gruvbox_bright_red}
 
 [bar/main]
 
-monitor = eDP1
+monitor = HDMI2
 dpi = 170
 
 width = 100%
