@@ -65,13 +65,14 @@ secondary                   = ${colors.gruvbox_neutral_aqua}
 alert                       = ${colors.gruvbox_bright_red}
 
 
+; TODO: one bar per output per host
 [bar/main]
 
-monitor = HDMI2
-dpi = 170
+monitor = eDP1
+dpi = 128
 
 width = 100%
-height = 50
+height = 30
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0.0
@@ -112,6 +113,7 @@ tray-position = right
 tray-padding = 2
 ;tray-transparent = true
 ;tray-background = ${colors.background}
+tray-maxsize = 20
 
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
