@@ -3287,7 +3287,7 @@ nnoremap -lk kddpkJ
 
 " split line (opposite of join line)
 " (regular 'S' can be done with 'cc' instead)
-nnoremap -ls i<cr><esc>
+nnoremap <leader><cr> i<cr><esc>
             \ ^mq
             \ :let searchregister=@/<cr>
             \ :silent! .-1s/\v +$//<cr>:nohlsearch<cr>
