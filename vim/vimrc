@@ -2109,9 +2109,9 @@ if s:MyMode == 'mastery'
     " colorscheme up
     " colorscheme woju
 
-    let g:airline_theme='base16'
+    " let g:airline_theme='base16'
     " let g:airline_theme='base16_summerfruit'
-    " let g:airline_theme='base16_grayscale'
+    let g:airline_theme='base16_grayscale'
     " let g:airline_theme='behelit'
     " let g:airline_theme='distinguished'
     " let g:airline_theme='kalisi'
