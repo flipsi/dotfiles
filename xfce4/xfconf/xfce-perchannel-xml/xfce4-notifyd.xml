@@ -20,6 +20,7 @@
       <value type="string" value="Thunderbird"/>
       <value type="string" value="Update Manager"/>
       <value type="string" value="Update-Manager"/>
+      <value type="string" value="vivaldi-stable"/>
       <value type="string" value="xfce4-power-manager"/>
     </property>
   </property>
