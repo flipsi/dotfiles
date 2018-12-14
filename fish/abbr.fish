@@ -1,3 +1,6 @@
+abbr cdi    cd_interactively
+abbr cdi.   cd_interactively .
+abbr cdir   cd_interactively /
 abbr d      docker
 abbr da     docker-compose up -d
 abbr do     docker-compose stop
