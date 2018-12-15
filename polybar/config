@@ -68,7 +68,7 @@ alert                       = ${colors.gruvbox_bright_red}
 ; TODO: one bar per output per host
 [bar/main]
 
-monitor = eDP1
+monitor = ${env:MAIN_MONITOR:eDP1}
 dpi = 128
 
 width = 100%
@@ -298,7 +298,7 @@ label = %percentage_used%%
 [module/wlan]
 
 type = internal/network
-interface = wlp2s0
+interface = ${env:WLAN_INTERFACE:wlp2s0}
 interval = 3.0
 
 format-connected = <label-connected>
@@ -314,7 +314,7 @@ label-disconnected-foreground = ${colors.foreground-alt}
 [module/eth]
 
 type = internal/network
-interface = enp0s20u1u3
+interface = ${env:ETH_INTERFACE:enp0s20u1u3}
 interval = 3.0
 
 ; format-connected-underline = ${colors.gruvbox_bright_green}
