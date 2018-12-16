@@ -65,17 +65,19 @@ secondary                   = ${colors.gruvbox_neutral_aqua}
 alert                       = ${colors.gruvbox_bright_red}
 
 
-; TODO: one bar per output per host
 [bar/main]
 
-monitor = ${env:MAIN_MONITOR:eDP1}
-dpi = 128
+monitor = ${env:BAR_MAIN_MONITOR:eDP1}
+dpi = ${env:BAR_MAIN_DPI:128}
 
 width = 100%
-height = 30
-;offset-x = 1%
-;offset-y = 1%
+height = ${env:BAR_MAIN_HEIGHT:30}
+
+offset-x = 0%
+offset-y = 0%
+
 radius = 0.0
+
 fixed-center = false
 
 enable-ipc = true
@@ -111,9 +113,9 @@ modules-right = pulseaudio wlan eth battery date powermenu
 
 tray-position = right
 tray-padding = 2
-;tray-transparent = true
-;tray-background = ${colors.background}
-tray-maxsize = 20
+tray-transparent = false
+tray-background = ${colors.background}
+tray-maxsize = ${env:BAR_TRAY_MAXSIZE:20}
 
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev

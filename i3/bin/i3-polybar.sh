@@ -4,7 +4,10 @@ function set_env_vars() {
     export HOSTNAME
     export  ETH_INTERFACE
     export WLAN_INTERFACE
-    export MAIN_MONITOR
+    export BAR_MAIN_MONITOR
+    export BAR_MAIN_DPI
+    export BAR_MAIN_HEIGHT
+    export BAR_TRAY_MAXSIZE
 
     ETH_INTERFACE=$( ip link show | grep enp | sed 's/.*: \(.*\):.*/\1/')
     WLAN_INTERFACE=$(ip link show | grep wlp | sed 's/.*: \(.*\):.*/\1/')
@@ -12,13 +15,18 @@ function set_env_vars() {
     HOSTNAME=$(hostname)
     case $HOSTNAME in
         asterix )
-            MAIN_MONITOR=eDP1
+            if xrandr | grep -q 'HDMI2 connected 4096x2160'; then
+                BAR_MAIN_MONITOR=HDMI2
+                BAR_MAIN_DPI=300
+                BAR_MAIN_HEIGHT=60
+                BAR_TRAY_MAXSIZE=28
+            fi
             ;;
         dwarf )
-            MAIN_MONITOR=HDMI-2
+            BAR_MAIN_MONITOR=HDMI-2
             ;;
         * )
-            MAIN_MONITOR=$(xrandr | grep ' connected' | grep DP | cut -d' ' -f1)
+            BAR_MAIN_MONITOR=$(xrandr | grep ' connected' | cut -d' ' -f1 | head -n1)
             ;;
     esac
 }
