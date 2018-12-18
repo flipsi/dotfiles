@@ -10,5 +10,6 @@ function fish_user_key_bindings
     bind \el forward-char
     bind \es 'commandline ""; ll; echo; git status --short ^/dev/null; fish_prompt'
     bind \et 'commandline -i (echo -n (date +"%F-%H%M"))'
+    bind \eu 'commandline ""; cd ..; clear; fish_prompt'
     bind \ew 'watch -c (history | head -n 1)'
 end
