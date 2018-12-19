@@ -655,18 +655,19 @@ mode "$move_workspace_to_output" {
 
 ## start an application
 bindsym $mod+Shift+o mode "$launch"
-set $launch Launch: (o) Terminal (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (i) IntelliJ (s) Slack (t) Telegram
+set $launch Launch: (o) Terminal (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram
 mode "$launch" {
     bindsym o               mode "$terminal"
     bindsym Shift+o         mode "$terminal"
     bindsym $mod+o          mode "$terminal"
     bindsym $mod+Shift+o    mode "$terminal"
-    bindsym f       exec --no-startup-id "firefox"; mode "default"
     bindsym c       exec --no-startup-id "chromium"; mode "default"
+    bindsym f       exec --no-startup-id "firefox"; mode "default"
     bindsym g       exec --no-startup-id "google-chrome"; mode "default"
-    bindsym q       exec --no-startup-id "qutebrowser"; mode "default"
+    bindsym i       exec --no-startup-id "vivaldi-stable"; mode "default"
+    bindsym j       exec --no-startup-id "idea"; mode "default"
     bindsym m       exec --no-startup-id "spotify"; mode "default"
-    bindsym i       exec --no-startup-id "idea"; mode "default"
+    bindsym q       exec --no-startup-id "qutebrowser"; mode "default"
     bindsym s       exec --no-startup-id "slack"; mode "default"
     bindsym t       exec --no-startup-id "telegram-desktop"; mode "default"
     # cancel
@@ -702,20 +703,20 @@ mode "$terminal" {
 
 ## switch to a specific window or workspace
 bindsym $mod+o mode "$goto"
-set $goto Goto: (o) Terminal (v) Vivaldi (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (i) IntelliJ (s) Slack (t) Telegram (b) Trello
+set $goto Goto: (o) Terminal (i) Vivaldi (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram (b) Trello
 mode "$goto" {
   bindsym o         [class="(?i)alacritty"]             focus; mode "default"
   bindsym $mod+o    [class="(?i)alacritty"]             focus; mode "default"
   bindsym f         [class="(?i)firefox"]               focus; mode "default"
   bindsym $mod+f    [class="(?i)firefox"]               focus; mode "default"
-  bindsym v         [class="(?i)vivaldi-stable"]        focus; mode "default"
-  bindsym $mod+v    [class="(?i)vivaldi-stable"]        focus; mode "default"
+  bindsym i         [class="(?i)vivaldi-stable"]        focus; mode "default"
+  bindsym $mod+i    [class="(?i)vivaldi-stable"]        focus; mode "default"
   bindsym q         [class="(?i)qutebrowser"]           focus; mode "default"
   bindsym $mod+q    [class="(?i)qutebrowser"]           focus; mode "default"
   bindsym m         [class="(?i)spotify"]               focus; mode "default"
   bindsym $mod+m    [class="(?i)spotify"]               focus; mode "default"
-  bindsym i         [class="(?i)jetbrains-idea"]        focus; mode "default"
-  bindsym $mod+i    [class="(?i)jetbrains-idea"]        focus; mode "default"
+  bindsym j         [class="(?i)jetbrains-idea"]        focus; mode "default"
+  bindsym $mod+j    [class="(?i)jetbrains-idea"]        focus; mode "default"
   bindsym s         [class="(?i)slack"]                 focus; mode "default"
   bindsym $mod+s    [class="(?i)slack"]                 focus; mode "default"
   bindsym t         [class="(?i)Telegram"]              focus; mode "default"
