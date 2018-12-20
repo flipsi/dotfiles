@@ -389,7 +389,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 1%+"; exec
 
 ## audio control
 bindsym $mod+0 mode "$audio"
-set $audio Audio (+/-) Volume (s) Switch output (p) Play sound (g) GUI
+set $audio Audio (+/-) Volume (m/M) Mute/Unmute (s) Switch output (p) Play sound (g) GUI
 mode "$audio" {
     bindsym plus            exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
     bindsym minus           exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
@@ -399,6 +399,8 @@ mode "$audio" {
     bindsym z               exec --no-startup-id "amixer sset Master 5%-"; exec "$UPDATE_STATUSBAR"
     bindsym Right           exec --no-startup-id "amixer sset Master 5%+"; exec "$UPDATE_STATUSBAR"
     bindsym Left            exec --no-startup-id "amixer sset Master 5%-"; exec "$UPDATE_STATUSBAR"
+    bindsym m               exec --no-startup-id "amixer set Master mute"; exec "$UPDATE_STATUSBAR"
+    bindsym Shift+m         exec --no-startup-id "amixer set Master unmute"; exec "$UPDATE_STATUSBAR"
     bindsym s               exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output"
     bindsym p               exec --no-startup-id "~/.i3/bin/soundboard.sh"; mode "default"
     bindsym g               exec --no-startup-id "pavucontrol"; mode "default"
