@@ -323,6 +323,10 @@ mode "$mode_xdootool" {
 ###########  SYSTEM  ##########################################################
 ###############################################################################
 
+# command to lock screen.
+# for i3lock, image has to be png
+set $LOCK_CMD i3lock -e -t -i ~/.i3/wallpaper.png
+
 ## lock/exit/suspend etc.
 bindsym XF86PowerOff mode "$mode_system"
 bindsym $mod+Escape mode "$mode_system"
@@ -330,7 +334,7 @@ set $mode_system Want to leave?  (e) logout, (u) switch user, (l) lock, (s) susp
 mode "$mode_system" {
     bindsym e exit
     bindsym u exec --no-startup-id "i3exit switch_user"; mode "default"
-    bindsym l exec --no-startup-id "i3lock -e -t -i ~/.i3/wallpaper.png # has to be png"; mode "default"
+    bindsym l exec --no-startup-id "$LOCK_CMD"; mode "default"
     bindsym s exec --no-startup-id "systemctl suspend"; mode "default"
     bindsym h exec --no-startup-id "systemctl hibernate"; mode "default"
     bindsym r exec --no-startup-id "systemctl reboot"
@@ -343,7 +347,7 @@ mode "$mode_system" {
 }
 
 # also lock with Ctrl+Alt+Space
-bindsym Control+Mod1+space exec --no-startup-id "i3lock -e -t -i ~/.i3/wallpaper.png # has to be png"
+bindsym Control+Mod1+space exec --no-startup-id "$LOCK_CMD"
 
 ## screen and light settings
 ## TODO screen brightness for separate outputs
