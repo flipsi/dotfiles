@@ -1822,7 +1822,7 @@ function! SetupSQL()
 endfunction
 
 
-Plugin 'tpope/vim-db'
+" Plugin 'tpope/vim-db'
 
 
 
