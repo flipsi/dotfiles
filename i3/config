@@ -794,7 +794,7 @@ for_window [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"] m
 for_window [class="(?i)chrom" instance="crx_nkciffeafpjoepmgjbjnckchbgfjnjhp"] move to workspace    Calendar
 assign [class="gnome-calendar"]                                                                     Calendar
 assign [class="(?i)thunderbird"]                                                                    Mail
-for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] move to workspace    Movie
+for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] move to workspace    Netflix
 for_window [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"] move to workspace    Notes
 assign [class="(?i)pokerstars"]                                                                     Poker
 assign [class="(?i)audacity"]                                                                       Recording
