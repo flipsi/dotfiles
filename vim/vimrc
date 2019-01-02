@@ -1812,6 +1812,7 @@ endfunction
 
 
 " Language: SQL
+
 augroup sql_on_read
     au!
     au FileType sql call SetupSQL()
@@ -1822,7 +1823,48 @@ function! SetupSQL()
 endfunction
 
 
-" Plugin 'tpope/vim-db'
+Plugin 'tpope/vim-dadbod'
+
+" For database connection, see ':help dadbod-variables'
+
+augroup sql_on_read_dadbod
+    au!
+    au FileType sql call SetupSQLDadBod()
+augroup END
+
+function! SetupSQLDadBod()
+
+    " sql query text object (aq)
+    vnoremap <buffer> aq <esc>:call search(";", "cWz")<cr>:call search(";\\<bar>\\%^", "bsWz")<cr>:call search("\\v\\c^(select<bar>with<bar>insert<bar>update<bar>delete<bar>create)\>", "Wz")<cr>vg`'
+    omap     <buffer> aq :normal vaq<cr>
+
+    nnoremap    <leader>bdo :DB<space>
+    nnoremap    <leader>bda :%DB<cr>
+    xmap <expr> <leader>bd db#op_exec()
+    nmap        <leader>bdq vaq<leader>bd
+
+endfunction
+
+
+" Plugin 'cosminadrianpopescu/vim-sql-workbench'
+" (This plugin sound promising, but is shit)
+
+" let g:sw_config_dir = '/home/sflip/.sqlworkbench'
+" let g:sw_exe = '/opt/SQLWorkbench/sqlwbconsole.sh'
+" " let g:sw_cache = ''
+
+" augroup sql_on_read_workbench
+"     au!
+"     au FileType sql call SetupSQLWorkbench()
+" augroup END
+" function! SetupSQLWorkbench()
+"     nnoremap <leader>bs   <nop>
+"     nnoremap <leader>bsc  :SWSqlBufferConnect<cr>
+"     nnoremap <leader>bse  :SWDbExplorer<space>
+"     nnoremap <leader>bsr  :SWSqlExecuteCurrent<cr>
+"     vnoremap <leader>bsr  :SWSqlExecuteSelected<cr>
+"     nnoremap <leader>bsa  :SWSqlExecuteAll<cr>
+" endfunction
 
 
 
