@@ -1,14 +1,18 @@
 let defaultengine = "duckduckgo"
 
+let blacklists = ["https://mail.google.com/*", "*://mail.google.com/*", "@https://mail.google.com/mail/*"]
+
 let qmark g = "https://github.com/notifications"
 let qmark i = "http://i3wm.org/docs/userguide.html"
-
 
 map l createActiveTabbedHint
 map d closeTab
 
 map ö openSearchBar
 map Ö openSearchBarReverse
+
+map + zoomPageIn
+map - zoomPageOut
 
 " map <M-n> nextTab
 " map <M-p> previousTab
