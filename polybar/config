@@ -221,6 +221,7 @@ mount-1 = /home
 
 label-mounted = %mountpoint%: %free%
 label-unmounted = %mountpoint% N/A
+label-mounted-foreground = ${colors.gruvbox_gray_245}
 label-unmounted-foreground = ${colors.foreground-alt}
 
 
@@ -306,6 +307,7 @@ interval = 3.0
 format-connected = <label-connected>
 ; format-connected-underline = ${colors.gruvbox_bright_green}
 label-connected = %essid%
+label-connected-foreground = ${colors.gruvbox_bright_green}
 
 format-disconnected = <label-disconnected>
 format-disconnected-underline = ${colors.gruvbox_bright_orange}
@@ -323,6 +325,7 @@ interval = 3.0
 format-connected-prefix =
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
+label-connected-foreground = ${colors.gruvbox_bright_green}
 
 format-disconnected = <label-disconnected>
 format-disconnected-underline = ${colors.gruvbox_bright_orange}
@@ -426,8 +429,9 @@ label-charging = Charging %percentage%%
 
 ; format-discharging = <animation-discharging> <label-discharging>
 format-discharging = <label-discharging>
-format-discharging-underline =  ${colors.gruvbox_faded_orange}
+; format-discharging-underline =  ${colors.gruvbox_faded_orange}
 label-discharging = Discharging %percentage%%
+label-discharging-foreground =  ${colors.gruvbox_bright_orange}
 
 ; format-full-prefix = ${self.ramp-charged}
 format-full-prefix =
