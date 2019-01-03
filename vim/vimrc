@@ -2117,6 +2117,9 @@ set splitbelow
 " puts new vsplit windows to the right of the current
 set splitright
 
+" preview-window (e.g. used by vim-dadbod)
+set previewheight=40
+
 
 
 " }}}
