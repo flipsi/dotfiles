@@ -109,7 +109,7 @@ font-3 = "Wuncon Siji:pixelsize=10;1"
 
 modules-left = i3
 modules-center = spotify
-modules-right = pulseaudio wlan eth battery date powermenu
+modules-right = pulseaudio wlan eth filesystem battery date powermenu
 
 tray-position = right
 tray-padding = 2
