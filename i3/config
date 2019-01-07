@@ -669,7 +669,7 @@ mode "$launch" {
     bindsym $mod+Shift+o    mode "$terminal"
     bindsym c       exec --no-startup-id "chromium"; mode "default"
     bindsym f       exec --no-startup-id "firefox"; mode "default"
-    bindsym g       exec --no-startup-id "google-chrome"; mode "default"
+    bindsym g       exec --no-startup-id "google-chrome-stable"; mode "default"
     bindsym i       exec --no-startup-id "vivaldi-stable"; mode "default"
     bindsym j       exec --no-startup-id "idea"; mode "default"
     bindsym m       exec --no-startup-id "spotify"; mode "default"
