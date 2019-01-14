@@ -59,7 +59,9 @@ if status --is-interactive; and status --is-login
     set -x LS_COLORS (bash -c 'eval `dircolors ~/.dircolors`; echo $LS_COLORS')
 
     # find out host once (useful for multiple things, but saves cycles)
-    set hostname (hostname)
+    if test -z $hostname
+        set hostname (hostname)
+    end
 
     # keychain takes care of ssh-agent and can also do gpg
     if command -v keychain >/dev/null
