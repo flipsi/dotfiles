@@ -1636,6 +1636,23 @@ augroup map_latex
 augroup END
 
 
+" Language: Markdown
+
+Plugin 'shime/vim-livedown'
+" requires `npm install -g livedown`
+
+let g:livedown_browser = 'surf'
+
+augroup markdown_on_read
+    au!
+    au FileType markdown call SetupMarkdown()
+augroup END
+function! SetupMarkdown()
+    nnoremap <buffer> <leader>bs :LivedownPreview<cr>
+    nnoremap <buffer> <leader>bx :LivedownKill<cr>
+endfunction
+
+
 " Language: PHP
 
 augroup php_on_read
