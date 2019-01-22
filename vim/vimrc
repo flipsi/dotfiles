@@ -351,10 +351,11 @@ Plugin 'vim-scripts/ScrollColors'
 nnoremap <leader>yo :COLORSCROLL<cr>
 
 
-" " highlight different bracket pairs with different colors
-" " DOES NOT WORK
-" Plugin 'kien/rainbow_parentheses.vim'
-" nnoremap <leader>yb :RainbowParenthesesToggle<cr>
+" highlight different parentheses pairs with different colors
+Plugin 'luochen1990/rainbow'
+let g:rainbow_active = 1
+nnoremap <leader>yb :RainbowToggle<cr>
+
 
 
 " }}}
