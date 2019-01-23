@@ -30,6 +30,10 @@ nnoremap <a-k> 15<c-y>
 noremap gj 10j
 noremap gk 10k
 
+nnoremap s F
+nnoremap , ;
+nnoremap ; ,
+
 nnoremap ö /
 nnoremap / :action Find<cr>
 
