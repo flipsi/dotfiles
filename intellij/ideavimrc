@@ -37,7 +37,8 @@ nnoremap ; ,
 nnoremap ö /
 nnoremap / :action Find<cr>
 
-nnoremap vv V
+nnoremap v <c-v>
+nnoremap <c-v> v
 vnoremap v <c-c>
 
 nnoremap <C-c><C-c>     :action EditorCopy<cr>
