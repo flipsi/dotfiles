@@ -8,6 +8,8 @@ let qmark g = "https://github.com/notifications"
 let qmark i = "http://i3wm.org/docs/userguide.html"
 let qmark m = "https://inbox.google.com/u/0/"
 
+map <C-b> scrollFullPageUp
+
 map l createActiveTabbedHint
 map ! :tabdetach<cr>
 map d closeTab
