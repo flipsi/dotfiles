@@ -2,6 +2,11 @@
 
 " the command ':actionlist' helps
 
+" Other useful plugins in addition to IdeaVIM:
+" - AceJump
+" - TabMover
+" - Rainbow Brackets
+
 set vim-surround
 
 set incsearch
