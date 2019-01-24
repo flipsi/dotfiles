@@ -1,5 +1,7 @@
 " ideavimrc - a vimrc for IntelliJ IDEA
 
+" the command ':actionlist' helps
+
 set vim-surround
 
 set incsearch
