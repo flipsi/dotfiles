@@ -1665,6 +1665,7 @@ function! SetupPHP()
     nnoremap <leader>bu  :call VimuxRunCommand("composer update")<cr>
     nnoremap <leader>btt :call VimuxRunCommand("composer test")<cr>
     nnoremap <leader>btu :call VimuxRunCommand("composer test")<cr>
+    nnoremap <leader>bto :call VimuxRunCommand("composer test " . expand('%p'))<cr>
 endfunction
 
 
