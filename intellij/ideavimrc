@@ -130,7 +130,7 @@ nnoremap <leader>ts         :action ShowSettings<cr>
 " nnoremap <leader><leader>   :action Switcher<cr> " Unusable in i3
 nnoremap <leader><leader>   :action SearchEverywhere<cr>
 
-nnoremap #                  :action SearchEverywhere<cr>
+nnoremap #                  :action GotoFile<cr>
 nnoremap <leader>#          :action SearchEverywhere<cr>
 nnoremap <leader>ec         :action GotoClass<cr>
 nnoremap <leader>es         :action GotoSymbol<cr>
