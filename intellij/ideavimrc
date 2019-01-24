@@ -148,7 +148,16 @@ nnoremap <leader>su         :action ShowUsages<cr>
 nnoremap <leader>fu         :action FindUsages<cr>
 nnoremap <leader>ö          :action FindInPath<cr>
 
+nnoremap <leader>iq         :action QuickJavaDoc<cr>
+
+" nnoremap <leader>gd         :action Compare.LastVersion<cr>
+nnoremap <leader>gd         :action Compare.SameVersion<cr>
+nnoremap <leader>gD         :action Git.CompareWithBranch<cr>
 nnoremap <leader>gb         :action Annotate<cr>
+nnoremap <leader>gA         :action Git.Add<cr>
+nnoremap <leader>gU         :action ChangesView.Revert<cr>
+nnoremap <leader>ga         :echo "Sorry, seems like there is no command to add a single hunk."<cr>
+nnoremap <leader>gu         :action Vcs.RollbackChangedLines<cr>
 
 nnoremap <leader>c<leader>  :action CommentByLineComment<cr>
 
@@ -159,7 +168,7 @@ nnoremap <leader>ai         :action OptimizeImports<cr>
 nnoremap <leader>rf         :action RenameElement<cr>
 nnoremap <leader>rn         :action RenameFile<cr>
 nnoremap <leader>rp         :action Replace<cr>
-vnoremap <leader>rp         "+y:action Replace<cr> " still got to <c-v>
+vnoremap <leader>rp         "+y:action Replace<cr>
 
 nnoremap <leader>bp         :action ToggleLineBreakpoint<cr>
 nnoremap <leader>br         :action Run<cr>
