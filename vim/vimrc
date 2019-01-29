@@ -3773,12 +3773,15 @@ augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
     autocmd filetype gitcommit call InsertTicketNumberFromBranchIfAny()<cr>
 augroup END
 
+" TODO: fix that this doesn't work with fugitive :Gcommit
 function! InsertTicketNumberFromBranchIfAny()
-    let l:branch_name = system('git rev-parse --abbrev-ref HEAD')
-    let l:ticket_number_pattern = '.*/\zs...-\d\+\ze/.*'
-    let l:ticket_number = matchstr(l:branch_name, l:ticket_number_pattern)
-    call setline(1, l:ticket_number)
-    normal $l
+    if strpart(getline('.'), 0, 5) != 'Merge'
+        let l:branch_name = system('git rev-parse --abbrev-ref HEAD')
+        let l:ticket_number_pattern = '.*/\zs...-\d\+\ze/.*'
+        let l:ticket_number = matchstr(l:branch_name, l:ticket_number_pattern)
+        call setline(1, l:ticket_number)
+        normal $l
+    endif
 endfunction
 
 
