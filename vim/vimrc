@@ -3770,10 +3770,9 @@ augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
     autocmd filetype gitcommit setlocal nonumber norelativenumber
     autocmd filetype gitcommit let b:local_autosave = 0
     autocmd filetype gitcommit normal gg
-    autocmd filetype gitcommit call InsertTicketNumberFromBranchIfAny()<cr>
+    autocmd filetype gitcommit call InsertTicketNumberFromBranchIfAny()
 augroup END
 
-" TODO: fix that this doesn't work with fugitive :Gcommit
 function! InsertTicketNumberFromBranchIfAny()
     if strpart(getline('.'), 0, 5) != 'Merge'
         let l:branch_name = system('git rev-parse --abbrev-ref HEAD')
