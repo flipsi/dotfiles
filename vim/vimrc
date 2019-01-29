@@ -3056,8 +3056,8 @@ nmap <silent> <leader>syn :call ToggleSyntax()<cr>
 nmap <silent> <leader>sym :let &synmaxcol = g:synmaxcol - &synmaxcol <cr>
 
 " toggle line numbers
-noremap <silent> <leader>yl :set number! <bar> :set relativenumber! <cr>
-noremap <silent> <leader>yL :set relativenumber! <cr>
+nnoremap <silent> <leader>yL :set number! <bar> :set relativenumber! <cr>
+nnoremap <silent> <leader>yl :set relativenumber! <cr>
 
 " toggle word wrap
 nnoremap <silent> <leader>yw :setlocal wrap! <bar> :set wrap? <cr>
