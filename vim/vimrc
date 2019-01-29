@@ -3736,7 +3736,7 @@ augroup END
 
 
 " quit all buffers (not vim)
-nnoremap <leader>qa :bufdo bdelete<cr>
+nnoremap <leader>qa :silent bufdo bdelete<cr>
 
 " quit current window
 nnoremap <leader>qW :quit<cr>:buffer #<cr>
