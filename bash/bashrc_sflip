@@ -61,6 +61,14 @@ function se() {
     EDITOR="vim -u $vimrc"
     sudoedit $1
 }
+alias tm=tm
+function tm() {
+    tmux_conf=/tmp/sflip.tmux.conf
+    if [[ ! -f $tmux_conf ]]; then
+        curl https://raw.githubusercontent.com/sflip/dotfiles/master/tmux/tmux.conf > $tmux_conf
+    fi
+    tmux -f $tmux_conf
+}
 
 if [ -t 1 ]; then
     bind '"\ei":"ranger\n"'
