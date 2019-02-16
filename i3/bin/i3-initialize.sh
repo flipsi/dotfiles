@@ -107,9 +107,6 @@ function autostart
     if not pgrep -x vivaldi-stable
         nohup vivaldi-stable &
     end
-    if not pgrep -x firefox
-        nohup firefox &
-    end
     if not pgrep alacritty; and not pgrep gnome-terminal
         nohup alacritty --command tmux -2 new-session -A -s main; or \
         nohup gnome-terminal --hide-menubar -- tmux -2 new-session -A -s main &
