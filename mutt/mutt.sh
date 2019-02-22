@@ -27,12 +27,22 @@ LAST_TIME_ACTION=ask
 
 MUTT_COMMAND="/usr/bin/mutt"
 
+
 ## FOR DEBUGGING:
-# OFFLINEIMAP_COMMAND_FULL="sleep 3; echo normal >> /tmp/offlineimap.log 2>&1"
-# OFFLINEIMAP_COMMAND_QUICK="sleep 1; echo quick >> /tmp/offlineimap.log 2>&1"
+# SYNC_COMMAND_FULL="sleep 3; echo normal >> /tmp/offlineimap.log 2>&1"
+# SYNC_COMMAND_QUICK="sleep 1; echo quick >> /tmp/offlineimap.log 2>&1"
+
+# ## FOR PRODUCTION:
+# SYNC_COMMAND_FULL="offlineimap -o >> /tmp/offlineimap.log 2>&1"
+# SYNC_COMMAND_QUICK="offlineimap -o -q >> /tmp/offlineimap.log 2>&1"
+
 ## FOR PRODUCTION:
-OFFLINEIMAP_COMMAND_FULL="offlineimap -o >> /tmp/offlineimap.log 2>&1"
-OFFLINEIMAP_COMMAND_QUICK="offlineimap -o -q >> /tmp/offlineimap.log 2>&1"
+SYNC_COMMAND_FULL="mbsync -V -a >> /tmp/mbsync.log 2>&1"
+SYNC_COMMAND_QUICK="mbsync -V -a >> /tmp/mbsync.log 2>&1"
+
+
+
+
 
 
 
@@ -98,10 +108,10 @@ esac
 while true                  # run forever
 do
     if [[ $FIRST_TIME_FULL = true ]]; then
-        eval $OFFLINEIMAP_COMMAND_FULL
+        eval $SYNC_COMMAND_FULL
         FIRST_TIME_FULL=false
     else
-        eval $OFFLINEIMAP_COMMAND_QUICK
+        eval $SYNC_COMMAND_QUICK
     fi
     sleep $LOOP_SLEEPTIME   # sleep a while before doing that again
 done &                      # run loop in background
@@ -126,17 +136,17 @@ done
 # sync one last time?
 case $LAST_TIME_ACTION in
     sync_full )
-        eval $OFFLINEIMAP_COMMAND_FULL
+        eval $SYNC_COMMAND_FULL
         ;;
     sync_quick )
-        eval $OFFLINEIMAP_COMMAND_QUICK
+        eval $SYNC_COMMAND_QUICK
         ;;
     ask )
         while true; do
             read -n 1 -p "Sync? " user_input; echo
             case $user_input in
                 [Nn]* ) exit 0;;
-                * )     eval $OFFLINEIMAP_COMMAND_FULL; break;;
+                * )     eval $SYNC_COMMAND_FULL; break;;
             esac
         done
         ;;

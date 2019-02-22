@@ -1,0 +1,191 @@
+#########################
+# philipp.moers@mail.de #
+#########################
+
+IMAPAccount mail.de
+Host imap.mail.de
+User philipp.moers@mail.de
+PassCmd "gpg --use-agent --quiet -d ~/.mutt/credentials/mail.de.gpg"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore mail.de-remote
+Account mail.de
+
+MaildirStore mail.de-local
+Subfolders Verbatim
+Flatten .
+Path ~/.mail/mail.de/
+Inbox ~/.mail/mail.de/INBOX
+
+Channel sync-mail.de-default
+Master :mail.de-remote:
+Slave :mail.de-local:
+Patterns "INBOX*"
+Create Slave
+
+Channel sync-mail.de-drafts
+Master :mail.de-remote:"Drafts"
+Slave :mail.de-local:drafts
+Create Slave
+
+Channel sync-mail.de-sent
+Master :mail.de-remote:"Sent"
+Slave :mail.de-local:sent
+Create Slave
+
+Channel sync-mail.de-trash
+Master :mail.de-remote:"Trash"
+Slave :mail.de-local:trash
+Create Slave
+
+Group mail.de
+Channel sync-mail.de-default
+Channel sync-mail.de-drafts
+Channel sync-mail.de-sent
+Channel sync-mail.de-trash
+
+
+######################
+# soziflip@gmail.com #
+######################
+
+IMAPAccount gmail.com
+Host imap.gmail.com
+User soziflip@gmail.com
+PassCmd "gpg --use-agent --quiet -d ~/.mutt/credentials/gmail.com.gpg"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore gmail-remote
+Account gmail.com
+
+MaildirStore gmail-local
+Subfolders Verbatim
+Flatten .
+Path ~/.mail/gmail.com/
+Inbox ~/.mail/gmail.com/INBOX
+
+Channel sync-gmail-default
+Master :gmail-remote:
+Slave :gmail-local:
+Patterns "INBOX*"
+Create Slave
+
+Channel sync-gmail-drafts
+Master :gmail-remote:"[Gmail]/Drafts"
+Slave :gmail-local:drafts
+Create Slave
+
+Channel sync-gmail-sent
+Master :gmail-remote:"[Gmail]/Sent Mail"
+Slave :gmail-local:sent
+Create Slave
+
+Channel sync-gmail-trash
+Master :gmail-remote:"[Gmail]/Trash"
+Slave :gmail-local:trash
+Create Slave
+
+Group gmail.com
+Channel sync-gmail-default
+Channel sync-gmail-drafts
+Channel sync-gmail-sent
+Channel sync-gmail-trash
+
+
+# ####################
+# # p.moers@ryte.com #
+# ####################
+
+# IMAPAccount ryte.com
+# Host imap.gmail.com
+# User p.moers@ryte.com
+# PassCmd "gpg --use-agent --quiet -d ~/.mutt/credentials/ryte.com.gpg"
+# SSLType IMAPS
+# CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# IMAPStore ryte-remote
+# Account ryte.com
+
+# MaildirStore ryte-local
+# Subfolders Verbatim
+# Flatten .
+# Path ~/.mail/ryte.com/
+# Inbox ~/.mail/ryte.com/INBOX
+
+# Channel sync-ryte-default
+# Master :ryte-remote:
+# Slave :ryte-local:
+# Patterns "INBOX*"
+# Create Slave
+
+# Channel sync-ryte-drafts
+# Master :ryte-remote:"[Gmail]/Drafts"
+# Slave :ryte-local:drafts
+# Create Slave
+
+# Channel sync-ryte-sent
+# Master :ryte-remote:"[Gmail]/Sent Mail"
+# Slave :ryte-local:sent
+# Create Slave
+
+# Channel sync-ryte-trash
+# Master :ryte-remote:"[Gmail]/Bin"
+# Slave :ryte-local:trash
+# Create Slave
+
+# Group ryte.com
+# Channel sync-ryte-default
+# Channel sync-ryte-drafts
+# Channel sync-ryte-sent
+# Channel sync-ryte-trash
+
+
+# ###########################
+# # keinschweinehund@web.de #
+# ###########################
+
+# IMAPAccount web.de-keinschweinehund
+# Host imap.web.de
+# User keinschweinehund
+# PassCmd "gpg --use-agent --quiet -d ~/.mutt/credentials/web.de-keinschweinehund.gpg"
+# SSLType IMAPS
+# CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# IMAPStore web.de-keinschweinehund-remote
+# Account web.de-keinschweinehund
+
+# MaildirStore web.de-keinschweinehund-local
+# Subfolders Verbatim
+# Flatten .
+# Path ~/.mail/web.de-keinschweinehund/
+# Inbox ~/.mail/web.de-keinschweinehund/INBOX
+
+# Channel sync-web.de-keinschweinehund-default
+# Master :web.de-keinschweinehund-remote:
+# Slave :web.de-keinschweinehund-local:
+# Patterns "INBOX*"
+# Create Slave
+
+# Channel sync-web.de-keinschweinehund-drafts
+# Master :web.de-keinschweinehund-remote:"Drafts"
+# Slave :web.de-keinschweinehund-local:drafts
+# Create Slave
+
+# Channel sync-web.de-keinschweinehund-sent
+# Master :web.de-keinschweinehund-remote:"Sent"
+# Slave :web.de-keinschweinehund-local:sent
+# Create Slave
+
+# Channel sync-web.de-keinschweinehund-trash
+# Master :web.de-keinschweinehund-remote:"Trash"
+# Slave :web.de-keinschweinehund-local:trash
+# Create Slave
+
+# Group web.de-keinschweinehund
+# Channel sync-web.de-keinschweinehund-default
+# Channel sync-web.de-keinschweinehund-drafts
+# Channel sync-web.de-keinschweinehund-sent
+# Channel sync-web.de-keinschweinehund-trash
+

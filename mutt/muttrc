@@ -1,8 +1,9 @@
 # Mutt configuration file
+
 # Author: Philipp Moers <soziflip@gmail.com>
 
 
-# mutt is configured to use offlineimap, i.e. a local copy of the account's imap folders.
+# mutt is configured to use mbsync/offlineimap, i.e. a local copy of the account's imap folders.
 
 # USE THE mutt.sh SCRIPT INSTEAD OF THE mutt BINARY!
 
@@ -87,7 +88,7 @@ set edit_hdrs                                             # edit headers of outg
 set edit_headers                                          # edit headers of outgoing messages in vim
 
 set signature = "$my_muttdir/signature"                   # append this to every mail
-set attribution = "\n%f wrote on %d:"                       # include quotations like this
+set attribution = "\n%f wrote on %d:"                     # include quotations like this
 
 
 # write mails in vim
@@ -165,10 +166,11 @@ set header_cache     = "$my_muttdir/cache/headers"
 set message_cachedir = "$my_muttdir/cache/headers"
 
 
-# NOTE: these settings are overwritten in accounts/XXX!
+# NOTE: these settings are overwritten in accounts/*!
 # set realname         = "Philipp Moers"
 set mbox_type        = Maildir                                      # maildir format (in addition to repositories in offlineimaprc?)
-set folder           = "$my_muttdir/mail"                           # use local folder (offlineimap)
+set folder           = "$HOME/.mail"                                # use local folder
+
 # set sendmail         = "$my_muttdir/proofread.zsh /usr/bin/msmtp"   # proofread before send
 set sendmail_wait    = 0                                            # don't send mails in background to catch errors
 
@@ -182,7 +184,7 @@ set reverse_realname = no                                           # still use 
 folder-hook mail.de/*        source $my_muttdir/accounts/mail.de.muttrc
 folder-hook gmail.com/*      source $my_muttdir/accounts/gmail.com.muttrc
 
-# use default account now
+# use default account on startup
 source $my_muttdir/accounts/$my_default_account.muttrc
 
 
@@ -193,18 +195,11 @@ source $my_muttdir/accounts/$my_default_account.muttrc
 # source $my_muttdir/mailboxes
 ## ...instead of the the above, add them manually (i don't want every synced folder)
 mailboxes \
-    =ryte.com/INBOX \
     =mail.de/INBOX \
+    =mail.de/drafts \
+    =mail.de/sent \
+    =mail.de/trash \
     =gmail.com/INBOX \
-    =web.de-pmoers/INBOX \
-    =web.de-keinschweinehund/INBOX \
-    =mail.de/Sent \
-    =gmail.com/Sent \
-    =mail.de/Drafts \
-    =gmail.com/Drafts \
-
-
-
-
-
-
+    =gmail.com/drafts \
+    =gmail.com/sent \
+    =gmail.com/trash \
