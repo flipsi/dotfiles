@@ -41,6 +41,7 @@ SYNC_COMMAND_FULL="mbsync -V -a >> /tmp/mbsync.log 2>&1"
 SYNC_COMMAND_QUICK="mbsync -V -a >> /tmp/mbsync.log 2>&1"
 
 
+NOTMUCH_COMMAND="notmuch new >> /tmp/notmuch.log 2>&1"
 
 
 
