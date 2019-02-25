@@ -53,12 +53,9 @@ NOTMUCH_COMMAND="notmuch new >> /tmp/notmuch.log 2>&1"
 # set window title #
 ####################
 
-# http://stackoverflow.com/a/1687708/4568748
-
 TITLE="mutt"
 
-echo -e '\033k'$TITLE'\033\\'
-# echo -e '\033]2;'$TITLE'\007'
+tmux rename-window $TITLE
 
 
 
