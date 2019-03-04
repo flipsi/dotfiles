@@ -3777,7 +3777,7 @@ augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
 augroup END
 
 function! InsertTicketNumberFromBranchIfAny()
-    if strpart(getline('.'), 0, 5) != 'Merge'
+    if empty(getline('.'))
         let l:branch_name = system('git rev-parse --abbrev-ref HEAD')
         let l:ticket_number_pattern = '.*/\zs...-\d\+\ze/.*'
         let l:ticket_number = matchstr(l:branch_name, l:ticket_number_pattern)
