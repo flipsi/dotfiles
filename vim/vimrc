@@ -1570,8 +1570,11 @@ nnoremap <silent> -dst :%DeleteTrailingWhitespace<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " colors (hex codes and such) {{{
 
-" make #DD8844 appear orange etc
+" make colors visible (e.g. '#DD8844' will have orange background)
 Plugin 'ap/vim-css-color'
+
+" convert between color formats
+Plugin 'amadeus/vim-convert-color-to'
 
 " launch colorpicker and insert color code
 Plugin 'blindFS/vim-colorpicker'
