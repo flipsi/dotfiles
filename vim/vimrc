@@ -1026,8 +1026,17 @@ Plugin 'w0rp/ale'
 
 let g:ale_list_window_size = 5
 let g:ale_lint_on_enter = 0
-let g:ale_fixers = {
+let g:ale_linters = {
 \   'javascript': ['eslint'],
+\   'typescript': ['tsserver', 'tslint'],
+\   'vue': ['eslint']
+\}
+let g:ale_fixers = {
+\    'javascript': ['eslint'],
+\    'typescript': ['prettier'],
+\    'vue': ['eslint'],
+\    'scss': ['prettier'],
+\    'html': ['prettier']
 \}
 
 let g:ale_python_pylint_options = '--rcfile $HOME/.vim/config/pylint.rc'
@@ -1473,6 +1482,7 @@ Plugin 'Chiel92/vim-autoformat'
 
 " install formatters on the system:
 " - js-beautify (for HTML, CSS, JavaScript, JSON)
+" - prettier (for JavaScript, TypeScript)
 " - scalafmt (for scala)
 
 nnoremap -af :Autoformat<cr>:GitGutter<cr>
@@ -1480,8 +1490,11 @@ vnoremap -af :Autoformat<cr>:GitGutter<cr>
 nmap <leader>af -af
 vmap <leader>af -af
 
-let g:formatdef_scalafmt = "'scalafmt --stdin 2>/dev/null'"
+let g:formatdef_scalafmt = '"scalafmt --stdin 2>/dev/null"'
 let g:formatters_scala = ['scalafmt']
+
+let g:formatdef_prettier_typescript = '"prettier --parser typescript"'
+let g:formatters_typescript = ['prettier_typescript']
 
 
 " autoformat for json does not work out with the plugin above. do this instead:
@@ -1602,6 +1615,10 @@ Plugin 'dag/vim-fish'
 
 " Language: javascript
 
+Plugin 'ianks/vim-tsx'
+
+Plugin 'Quramy/tsuquyomi'
+
 augroup javascript_on_read
     au!
     au FileType javascript call SetupJavascript()
@@ -1613,6 +1630,23 @@ function! SetupJavascript()
     nnoremap <leader>btu :call VimuxRunCommand("npm test-unit")<cr>
     nnoremap <leader>bti :call VimuxRunCommand("npm test-int")<cr>
 endfunction
+
+augroup typescript_on_read
+    au!
+    au FileType typescript call SetupTypescript()
+augroup END
+function! SetupTypescript()
+    nnoremap <leader>bi  :call VimuxRunCommand("yarn install")<cr>
+    nnoremap <leader>bd  :call VimuxRunCommand("yarn build")<cr>
+    nnoremap <leader>bs  :call VimuxRunCommand("yarn start")<cr>
+    nnoremap <leader>btt :call VimuxRunCommand("yarn test")<cr>
+    nnoremap <leader>btu :call VimuxRunCommand("yarn test-unit")<cr>
+    nnoremap <leader>bti :call VimuxRunCommand("yarn test-int")<cr>
+    nmap <leader>rf <Plug>(TsuquyomiRenameSymbolC)
+    nmap <leader>rF <Plug>(TsuquyomiRenameSymbol)
+    nmap <Leader>iq : <C-u>echo tsuquyomi#hint()<CR>
+endfunction
+
 
 
 " Language: LaTeX
