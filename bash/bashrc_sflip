@@ -20,6 +20,7 @@ alias cdw='cd /var/www'
 alias g='grep --with-filename --line-number --recursive --ignore-case --extended-regexp'
 
 alias   gs='git status'
+alias   gb='git branch'
 alias   gd='git diff'
 alias  gdc='git diff --cached'
 alias   ge='git checkout'
