@@ -28,6 +28,7 @@ alias   gl='git log'
 alias  glh='git --no-pager log -n 1'
 alias   gf='git fetch'
 alias   gp='git pull'
+alias  grh='git reset --hard'
 alias  gup='git submodule update'
 
 alias h='htop'
