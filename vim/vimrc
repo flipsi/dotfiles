@@ -2845,6 +2845,7 @@ let mapleader=' '
 
 iabbrev todo        TODO:
 iabbrev todod       TODO: delete this debugging statement
+iabbrev todof       TODO: FIX
 iabbrev autotype    autotype: email :tab pass :enter
 
 
