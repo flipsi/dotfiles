@@ -92,7 +92,7 @@ nnoremap gV `[v`]
 nnoremap cC viw~
 " split line (opposite of 'J'oin lines)
 " (regular 'S' can be done with 'cc' instead)
-nnoremap S i<CR><esc>
+nnoremap <leader><cr> i<CR><esc>
             \ ^mq
             \ :let searchregister=@/<CR>
             \ :silent! .-1s/\v +$//<CR>:nohlsearch<CR>
