@@ -1,0 +1,40 @@
+// Author: Philipp Moers <soziflip@gmail.com>
+
+// This is a symbols file for X KeyBoard extension (XKB).
+// It contains a custom keyboard layout.
+
+
+partial default alphanumeric_keys
+
+xkb_symbols "basic" {
+
+    include "us"
+
+    // change capslock/control/escape
+
+    // original capslock:
+    //replace key <AC00> { [ Escape ] };
+    replace key <AC00> { [ Control_L ] };
+
+    // original control:
+    //replace key <AA00> { [ Caps_Lock ] };
+    replace key <AA00> { [ Escape ] };
+
+
+
+    // vim movements with AltGr
+    key <AC06>  { [ h, H, Left,   Home       ] };
+    key <AC07>  { [ j, J, Down,   VoidSymbol ] };
+    key <AC08>  { [ k, K, Up,     VoidSymbol ] };
+    key <AC09>  { [ l, L, Right,  End        ] };
+
+
+
+    // TODO: FIX
+    // umlauts (ä, ö, ü) and ß
+    key <AC01> { [ a, A, adiaeresis, Adiaeresis ] };
+    key <AD09> { [ o, O, odiaeresis, Odiaeresis ] };
+    key <AD07> { [ u, U, udiaeresis, Udiaeresis ] };
+
+
+};
