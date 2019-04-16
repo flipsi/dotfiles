@@ -105,6 +105,15 @@ nnoremap -ul yyp
 nnoremap -up yap<S-}>p
 vnoremap -u yP
 
+" delete leading whitespace (can be prefixed with a count)
+nnoremap <silent> -dsl :s:^\s\+::<cr>
+" replace double/multiple spaces with one space
+nnoremap <silent> -dsd :.s:\v(\S) {2}(\S):\1 \2:<cr>
+nnoremap <silent> -dsD :%s:\v(\S) {2}(\S):\1 \2:<cr>
+nnoremap <silent> -dsm :.s:\v(\S) {2,}(\S):\1 \2:<cr>
+nnoremap <silent> -dsM :.s:\v(\S) {2,}(\S):\1 \2:<cr>
+
+
 nnoremap K o<c-c>k
 nnoremap -as mno<Esc>o<Esc>o<Esc>o<Esc>`n
 
