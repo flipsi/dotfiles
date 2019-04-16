@@ -2693,8 +2693,9 @@ endfunction
 
 " send buffer via slack {{{
 function! SendBufferViaSlack(channel)
+    let l:channel = substitute(a:channel, '\[.*\] \[.*\]\s\+', '', '')
     let content = getline(1, '$')
-    exec "write !slackcat --channel " . a:channel . " --filename " . expand("%:t")
+    exec "write !slackcat --channel '" . l:channel . "' --filename " . expand("%:t")
 endfunction
 " }}}
 
@@ -2703,8 +2704,12 @@ endfunction
 function! SendBufferViaSlackChooseChannel()
     " let content = system("slackcat --list")
     " echo content
-    let choice = input("Which channel: ")
-    call SendBufferViaSlack(choice)
+    " let choice = input("Which channel: ")
+    " call SendBufferViaSlack(choice)
+    call fzf#run({
+                \ 'source': 'slackcat --list',
+                \ 'sink': function('SendBufferViaSlack')
+                \ })
 endfunction
 nnoremap <leader>iS :call SendBufferViaSlackChooseChannel()<cr>
 " }}}
