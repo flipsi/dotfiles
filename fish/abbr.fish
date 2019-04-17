@@ -74,6 +74,7 @@ abbr pgpu   pass git push
 abbr pk     pkill
 abbr rrm    rm -rf
 abbr se     sudoedit
+abbr r      ranger
 abbr s      systemctl status
 abbr sa     systemctl start
 abbr so     systemctl stop
