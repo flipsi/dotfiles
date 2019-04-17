@@ -139,7 +139,7 @@ mode "$change_keyboard_layout" {
 set $keyboard_layout_image_source https://www.nayuki.io/res/i-type-in-dvorak/qwerty-layout.png
 set $keyboard_layout_image /home/sflip/.i3/keyboard_layout.png
 exec "test -f $keyboard_layout_image || $( sleep 20 && curl $keyboard_layout_image_source > $keyboard_layout_image )"
-bindsym $mod+F6 exec --no-startup-id "pkill -fx 'sxiv -z 400 $keyboard_layout_image' || sxiv -z 400 $keyboard_layout_image"
+bindsym $mod+F6 exec --no-startup-id "pkill -fx 'sxiv -z 200 $keyboard_layout_image' || sxiv -z 200 $keyboard_layout_image"
 
 
 
