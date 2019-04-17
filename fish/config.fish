@@ -12,7 +12,7 @@ set -x LANG de_DE.UTF-8
 
 # some more stuff in PATH
 set -x PATH ~/.cargo/bin $PATH
-set -x PATH ~/.gem/ruby/2.5.0/bin $PATH
+set -x PATH ~/.gem/ruby/2.6.0/bin $PATH
 set -x PATH ~/.i3/bin $PATH
 set -x PATH ~/shellscripts $PATH
 set -x PATH ~/bin $PATH
