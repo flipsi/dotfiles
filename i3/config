@@ -22,7 +22,7 @@ exec "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"
 exec "/home/sflip/.i3/bin/i3-initialize-outputs.sh > /tmp/i3-initialize-outputs.log 2>&1"
 
 ## set keyboard layout
-exec "setxkbmap de_sflip"
+exec "setxkbmap us_sflip"
 
 ## turn on num block
 exec --no-startup-id "numlockx"
@@ -122,7 +122,6 @@ mode "$refresh" {
 bindsym $mod+Shift+F6 mode "$change_keyboard_layout"
 set $change_keyboard_layout Keyboard layout: (F1) de (F2) de_sflip (F3) us (F4) us_sflip (F5) neo (F6) dvorak (F7) programmer dvorak
 mode "$change_keyboard_layout" {
-    bindsym $mod+Shift+F6 exec "setxkbmap de_sflip"; mode "default"
     bindsym F1 exec "setxkbmap de"; mode "default"
     bindsym F2 exec "setxkbmap de_sflip"; mode "default"
     bindsym F3 exec "setxkbmap us"; mode "default"
@@ -131,6 +130,7 @@ mode "$change_keyboard_layout" {
     bindsym F6 exec "setxkbmap dvorak"; mode "default"
     bindsym F7 exec "setxkbmap -layout us -variant dvp"; mode "default"
     # cancel
+    bindsym $mod+Shift+F6 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
