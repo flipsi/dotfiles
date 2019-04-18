@@ -41,9 +41,6 @@ nnoremap s F
 nnoremap , ;
 nnoremap ; ,
 
-nnoremap ö /
-nnoremap / :action Find<cr>
-
 nnoremap v <c-v>
 nnoremap <c-v> v
 vnoremap v <c-c>
@@ -144,8 +141,6 @@ nnoremap <leader>ts         :action ShowSettings<cr>
 " nnoremap <leader><leader>   :action Switcher<cr> " Unusable in i3
 nnoremap <leader><leader>   :action SearchEverywhere<cr>
 
-nnoremap #                  :action GotoClass<cr>
-nnoremap <leader>#          :action GotoFile<cr>
 nnoremap <leader>ec         :action GotoClass<cr>
 nnoremap <leader>es         :action GotoSymbol<cr>
 nnoremap <leader>ef         :action GotoFile<cr>
@@ -160,7 +155,8 @@ nnoremap <leader>jr         :action GotoRelated<cr>
 nnoremap <leader>*          :action ShowUsages<cr>
 nnoremap <leader>su         :action ShowUsages<cr>
 nnoremap <leader>fu         :action FindUsages<cr>
-nnoremap <leader>ö          :action FindInPath<cr>
+nnoremap <leader>ff         :action Find<cr>
+nnoremap <leader>/          :action FindInPath<cr>
 
 nnoremap <leader>ie         :action ShowErrorDescription<cr>
 nnoremap <leader>in         :action ShowNavBar<cr>

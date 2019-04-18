@@ -512,7 +512,7 @@ let g:clever_f_smart_case = 1
 " let g:clever_f_timeout_ms = 2000
 let g:clever_f_fix_key_direction = 0
 let g:clever_f_repeat_last_char_inputs = ["\<cr>", "\<tab>"]
-let g:clever_f_chars_match_any_signs = 'ö'
+let g:clever_f_chars_match_any_signs = '/'
 
 
 
@@ -663,10 +663,10 @@ let g:incsearch_cli_key_mappings = {
 \ }
 " TODO: <c-k> and <c-j> to scroll through old searches. use arrows until fix.
 
-" nnoremap ö  <plug>(incsearch-forward)
-" nnoremap Ö  <plug>(incsearch-backward)
-nnoremap ö :call incsearch#call()<cr>
-nnoremap Ö :call incsearch#call({'command': '?'})<cr>
+" nnoremap /  <plug>(incsearch-forward)
+" nnoremap ?  <plug>(incsearch-backward)
+nnoremap / :call incsearch#call()<cr>
+nnoremap ? :call incsearch#call({'command': '?'})<cr>
 
 
 " searching in multiple files
@@ -677,11 +677,11 @@ Plugin 'mileszs/ack.vim'
 let g:ackprg="ag --vimgrep --smart-case"
 
 " type a search pattern
-nnoremap <leader>Ö :let g:jumplist = 'quickfixlist'<cr>
+nnoremap <leader>ag :let g:jumplist = 'quickfixlist'<cr>
                  \ :Ack!<space>""<left>
 
 " search for visual selection
-xnoremap <leader>Ö y:let g:jumplist = 'quickfixlist'<cr>
+xnoremap <leader>ag y:let g:jumplist = 'quickfixlist'<cr>
                  \ :<c-u>Ack! "-Q" "<c-r>""<cr>
 
 
@@ -698,7 +698,6 @@ let g:foldsearch_disable_mappings = 1
 " show last search
 nnoremap <leader>zs :Fs<cr>
 nnoremap <leader>z/ :Fs<cr>
-nnoremap <leader>zö :Fs<cr>
 nnoremap <leader>zz :Fs<cr>
 
 " show word under cursor
@@ -727,8 +726,7 @@ nnoremap <leader>Z  :Fe<cr>
 
 " let g:ctrlp_map = '#'
 " let g:ctrlp_cmd = 'CtrlPBuffer'
-nnoremap #          :CtrlPBuffer<cr>
-nnoremap <leader>#  :CtrlPRoot<cr>
+nnoremap <leader>ef :CtrlPRoot<cr>
 nnoremap <leader>er :CtrlPMRUFiles<cr>
 nnoremap <leader>em :CtrlPMixed<cr>
 nnoremap <leader>eo :CtrlPRoot<cr>
@@ -805,35 +803,34 @@ command! -bang -nargs=* FzfAg
   \                 <bang>0)
 
 " open files by name
-nnoremap <leader>fi :FzfFiles<cr>
 nnoremap <leader>fl :FzfLocate<space>
-nnoremap #          :FzfBuffers<cr>
-xnoremap #          <esc>:FzfBuffers<cr>
-nnoremap <leader>#  :FzfFiles<cr>
-xnoremap <leader>#  <esc>:FzfFiles<cr>
+nnoremap <leader>fi :FzfFiles<cr>
+nnoremap <leader>ef :FzfFiles<cr>
 nnoremap <leader>eo :FzfGFiles<cr>
 nnoremap <leader>eg :FzfGFiles?<cr>
 nnoremap <leader>er :FzfHistory<cr>
 nnoremap <leader>eb :FzfBuffers<cr>
+nnoremap <leader>ec :FzfBuffers<cr>
+nnoremap <leader><leader> :FzfBuffers<cr>
 
 let g:fzf_tags_command = 'ctags -R -f .tags'
 nnoremap <leader>et  :FzfTags<cr>
 xnoremap <leader>et y:FzfTags <c-r>"<cr>
 
 " type a search pattern
-nnoremap <leader>ö :FzfAg<cr>
+nnoremap <leader>/ :FzfAg<cr>
 " search for word under cursor
 nnoremap <leader>+ :FzfAg! <c-r><c-w><cr>
 " TODO: search for word under cursor only in current buffer (like fj)
 nmap     <leader>* <leader>+
 " search for visual selection
-xnoremap <leader>ö y:<c-u>FzfAg! <c-r>"<cr>
-xmap     <leader>* <leader>ö
-xmap     <leader>+ <leader>ö
+xnoremap <leader>/ y:<c-u>FzfAg! <c-r>"<cr>
+xmap     <leader>* <leader>/
+xmap     <leader>+ <leader>/
 
 " fuzzy search for built-in vim stuff (command history, searches, helptags)
 nnoremap <leader>:          :FzfHistory:<cr>
-nnoremap <leader>/          :FzfHistory/<cr>
+nnoremap <leader>?          :FzfHistory/<cr>
 nnoremap <leader>h<leader>  :FzfHelptags<cr>
 
 " autocomplete lines like a boss, even across multiple files
@@ -1781,7 +1778,7 @@ nnoremap <leader>sd :call scaladoc#Search(expand("<cword>"))<cr>
                 " \ nnoremap <leader>9t :EnType<cr> |
                 " \ " nnoremap <leader>9t :EnInspectType<cr> |
                 " \ nnoremap <leader>9T :EnTypeCheck<cr> |
-                " \ nnoremap <leader>9ö :EnSearch<space> |
+                " \ nnoremap <leader>9/ :EnSearch<space> |
                 " \ nnoremap <leader>9r :EnRename<cr> |
                 " \ nnoremap <leader>9i :EnOrganizeImports<cr> |
                 " \ nnoremap <leader>9I :EnSugestImport<cr> |
@@ -3023,11 +3020,14 @@ noremap <m-k>  <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 noremap <esc>k <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 
 
+
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MAKE THE COMMAND MODE A LITTLE NICER {{{
 " (there may be other command mode things elsewhere that are more general)
 
+" nnoremap ; : " don't know what to do with sneak then
+" nnoremap : ;
 
 " open help in vertical window
 cnoreabbrev <expr> h ((getcmdtype() is# ':' && getcmdline() is# 'h')
@@ -3041,8 +3041,6 @@ cnoremap w!! w !sudo tee % >/dev/null
 " have the up/down search functionality without reaching to the arrow keys
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
-
-
 
 
 
@@ -3186,12 +3184,14 @@ cnoremap <esc>b <s-left>
 cnoremap <esc>f <s-right>
 
 
-" move to BOL
+" TODO: FIX
+" move to BOL (beginning of line)
 " smart BOL: the cursor moves to the first nonblank character on the line,
-"            or, if already at that position, to the start of the line.
+"            or, if already at that position, to the very start of the line.
 "            (http://vim.wikia.com/wiki/Smart_home)
-noremap <expr> <silent> <c-a> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
-imap <silent> <c-a> <c-o><c-a>
+noremap <expr> <silent> <home>
+            \ col('.') == match(getline('.'),'\S')+0 ? '0' : '^'
+imap <silent> <home> <c-o><home>
 
 " move to EOL
 nnoremap <c-e> $
@@ -3207,25 +3207,17 @@ nnoremap ch cl
 nnoremap yh yl
 nnoremap <c-c>h v"*ygv"+y
 
-" swap , and ;
-" (makes more sense on german keyboard)
-" nnoremap , ;
-" nnoremap ; ,
+" swap g, and g; (jump through changelist)
 nnoremap g, g;
 nnoremap g; g,
-
 
 " swap ` and ' (jump to markers)
 " (by default, ' marked line, ` marked line and column)
 nnoremap ' `
 nnoremap ` '
 
-" goto mark
-nnoremap Ä `
-
 " goto last edit
 nnoremap <leader>. `.zzzv
-
 
 " center line when jumping around
 nnoremap <c-o> <c-o>zz
@@ -3238,33 +3230,26 @@ nnoremap <c-i> <c-i>zz
 " SEARCHING AND FINDING {{{
 
 
-" search in this buffer
-if s:MyMode == 'stripped'
-    nnoremap ö /
-    nnoremap Ö ?
-endif
-
-
 " restart search from BOF/EOF
 " (is useful when 'nowrapscan' is set)
-" nmap gö 1Gn
-nmap gÖ G$N
-" nmap gö :keepjumps normal 1G<cr>n " does not work
-" nmap gÖ :keepjumps normal G$<cr>N " does not work
-nmap <silent> gö :ijump! 1    /<c-r>/<cr>zv
-" nmap gÖ :ijump! 9999 /<c-r>/<cr> " does not work
+" nmap g/ 1Gn
+nmap g? G$N
+" nmap g/ :keepjumps normal 1G<cr>n " does not work
+" nmap g? :keepjumps normal G$<cr>N " does not work
+nmap <silent> g/ :ijump! 1    /<c-r>/<cr>zv
+" nmap g? :ijump! 9999 /<c-r>/<cr> " does not work
 
 
 " number of occurrences
 nnoremap <leader>n* *<c-o>:%s///ngg<cr>
-nnoremap <leader>nö  :%s:<c-r>/::ngg<cr>
-xnoremap <leader>nö y:%s:\V<c-r>"::ngg<cr>
+nnoremap <leader>n/  :%s:<c-r>/::ngg<cr>
+xnoremap <leader>n/ y:%s:\V<c-r>"::ngg<cr>
 
 
 
 " search in multiple files
 if s:MyMode == 'stripped'
-    nnoremap <leader>ö
+    nnoremap <leader>/
             \ :call ToggleList("Quickfix List", 'c')<cr>
             \ :vimgrep // **/*<left><left><left><left><left><left>
 endif
@@ -3483,7 +3468,7 @@ nnoremap <c-s>a :call Replace(0, input('Replace '.expand('<cword>').' with: '))<
 " ... and then ':wa'
 
 " substitute last search
-nmap <c-s>ö gggn<c-s>
+nmap <c-s>/ gggn<c-s>
 
 
 " replace something with yank
@@ -3636,13 +3621,13 @@ nnoremap <silent> <leader>sL :lopen<cr>
 
 " change or open new buffer by searching for file name
 if s:MyMode == 'stripped'
-    nnoremap # :buffers<cr>:buffer<space>
-    nnoremap <leader># :find<space>
+    nnoremap <space><space> :buffers<cr>:buffer<space>
+    nnoremap <leader>fi :find<space>
 endif
 
 " change to LRU buffer
-nnoremap <space><space> :buffer #<cr>
-nnoremap <space><tab>   :buffer #<cr>
+nnoremap <leader>e<leader> :buffer #<cr>
+nnoremap <leader><tab>     :buffer #<cr>
 
 " circle through buffers
 nnoremap <m-n>  :bnext<cr>
