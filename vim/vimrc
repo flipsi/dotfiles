@@ -3205,6 +3205,7 @@ onoremap l $
 " ... but current character movement is useful sometimes
 nnoremap ch cl
 nnoremap yh yl
+nnoremap <c-c>h v"*ygv"+y
 
 " swap , and ;
 " (makes more sense on german keyboard)
