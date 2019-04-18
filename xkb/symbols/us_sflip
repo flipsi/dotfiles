@@ -21,22 +21,33 @@ xkb_symbols "basic" {
     replace key <AA00> { [ Escape ] };
 
 
-    // vim movements with AltGr
-    key <AC06>  { [ h, H, Left,   VoidSymbol ] };
-    key <AC07>  { [ j, J, Down,   VoidSymbol ] };
-    key <AC08>  { [ k, K, Up,     VoidSymbol ] };
-    key <AC09>  { [ l, L, Right,  VoidSymbol ] };
-
-
     // umlauts (ä, ö, ü) and ß
     key <AC01> { [ a, A, adiaeresis, Adiaeresis ] };
     key <AD09> { [ o, O, odiaeresis, Odiaeresis ] };
     key <AD07> { [ u, U, udiaeresis, Udiaeresis ] };
 
 
+    // vim movements with AltGr
+    key <AC06>  { [ h, H, Left,   VoidSymbol ] };
+    key <AC07>  { [ j, J, Down,   VoidSymbol ] };
+    key <AC08>  { [ k, K, Up,     VoidSymbol ] };
+    key <AC09>  { [ l, L, Right,  VoidSymbol ] };
+
     // Home and End with AltGr
     key <AB08> { [ comma, less, Home, VoidSymbol ] };
     key <AB09> { [ period, greater, End, VoidSymbol ] };
+
+    // left hand number block with AltGr
+    key <AD02> { [ w, W, 7, ampersand ] };
+    key <AD03> { [ e, E, 8, asterisk ] };
+    key <AD04> { [ r, R, 9, EuroSign ] };
+    key <AC02> { [ s, S, 4, dollar ] };
+    key <AC03> { [ d, D, 5, percent ] };
+    key <AC04> { [ f, F, 6, dead_circumflex ] };
+    key <AB01> { [ z, Z, 0, VoidSymbol ] };
+    key <AB02> { [ x, X, 1, exclam ] };
+    key <AB03> { [ c, C, 2, at ] };
+    key <AB04> { [ v, V, 3, numbersign ] };
 
 
     include "level3(ralt_switch)"
