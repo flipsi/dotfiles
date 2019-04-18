@@ -21,20 +21,24 @@ xkb_symbols "basic" {
     replace key <AA00> { [ Escape ] };
 
 
-
     // vim movements with AltGr
-    key <AC06>  { [ h, H, Left,   Home       ] };
+    key <AC06>  { [ h, H, Left,   VoidSymbol ] };
     key <AC07>  { [ j, J, Down,   VoidSymbol ] };
     key <AC08>  { [ k, K, Up,     VoidSymbol ] };
-    key <AC09>  { [ l, L, Right,  End        ] };
+    key <AC09>  { [ l, L, Right,  VoidSymbol ] };
 
 
-
-    // TODO: FIX
     // umlauts (ä, ö, ü) and ß
     key <AC01> { [ a, A, adiaeresis, Adiaeresis ] };
     key <AD09> { [ o, O, odiaeresis, Odiaeresis ] };
     key <AD07> { [ u, U, udiaeresis, Udiaeresis ] };
 
+
+    // Home and End with AltGr
+    key <AB08> { [ comma, less, Home, VoidSymbol ] };
+    key <AB09> { [ period, greater, End, VoidSymbol ] };
+
+
+    include "level3(ralt_switch)"
 
 };
