@@ -2868,6 +2868,8 @@ iabbrev autotype    autotype: email :tab pass :enter
 "endif
 "nnoremap <leader><f5> :MyRefresh<cr>
 
+" ignore typos with text edit leader
+nnoremap - <nop>
 
 " show absolute path of current file (':help filename-modifiers')
 nnoremap <leader><c-g> :echo expand("%:~")<cr>
