@@ -56,6 +56,7 @@ SUPPORTED_TARGETS=(\
     screen \
     sbt \
     sublime-text-3 \
+    sxiv \
     taskwarrior \
     telegram-cli \
     telegram-desktop \
@@ -93,6 +94,16 @@ function print_supported_targets() {
     done
 }
 
+function install_xresources_inclusion() {
+    local sourcestring="#include "\""$1"\"
+    if [[ $UNINSTALL != true ]]; then
+        grep -q -F "$sourcestring" "$HOME/.Xresources"  || echo "$sourcestring" >> "$HOME/.Xresources"
+        xrdb -all "$HOME/.Xresources"
+    else
+        touch "$HOME/.Xresources"
+        sed -i -- "/^${sourcestring//\//\\/}$/d" "$HOME/.Xresources"
+    fi
+}
 
 function create_link() {
     local DESTPATH="$1"
@@ -340,6 +351,10 @@ function create_link_for_target() {
             create_link "$PWD/sublime/jsbeautifyrc" "$HOME/.jsbeautifyrc"
             ;;
 
+        sxiv )
+            install_xresources_inclusion  "$PWD/sxiv/Xresources"
+            ;;
+
         taskwarrior )
             create_link "$PWD/taskwarrior/taskrc" "$HOME/.taskrc"
             ;;
@@ -384,14 +399,7 @@ function create_link_for_target() {
             ;;
 
         urxvt )
-            local sourcestring="#include "\""$PWD/urxvt/Xresources"\"
-            if [[ $UNINSTALL != true ]]; then
-                grep -q -F "$sourcestring" "$HOME/.Xresources"  || echo "$sourcestring" >> "$HOME/.Xresources"
-                xrdb -all "$HOME/.Xresources"
-            else
-                touch "$HOME/.Xresources"
-                sed -i -- "/^${sourcestring//\//\\/}$/d" "$HOME/.Xresources"
-            fi
+            install_xresources_inclusion "$PWD/urxvt/Xresources"
             ;;
 
         vim )
