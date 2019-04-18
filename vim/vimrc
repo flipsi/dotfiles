@@ -3747,14 +3747,15 @@ nnoremap <leader>rl :checktime<cr>
 " discard changes ('reset')
 nnoremap <leader>rs :e!<cr>
 
-
 " write changes
 nnoremap <leader>w  :update<cr>:GitGutter<cr>
 nnoremap <leader>WW :update!<cr>
 
+" save and close
+nnoremap <leader>qq :wq<cr>
+
 " quit current buffer
 nnoremap <leader><bs> :bdelete<cr>
-nnoremap <leader>qq   :bdelete<cr>
 nnoremap <leader>QQ   :bdelete!<cr>
 augroup map_q_in_read_only_buffers
     au!
@@ -3763,7 +3764,6 @@ augroup map_q_in_read_only_buffers
     au BufReadPost * endif
     au BufReadPost fugitive://* nnoremap <buffer> q :bd<cr>
 augroup END
-
 
 " quit all buffers (not vim)
 nnoremap <leader>qa :silent bufdo bdelete<cr>
