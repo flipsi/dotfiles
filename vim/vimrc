@@ -496,7 +496,8 @@ nnoremap ga :UnicodeName<cr>
 Plugin 'easymotion/vim-easymotion'
 
 " prefix
-map ä <plug>(easymotion-prefix)
+map <M-l>  <plug>(easymotion-prefix)
+map <esc>l <plug>(easymotion-prefix)
 " keys to move to target
 let g:EasyMotion_keys = 'asdfgh,.qwertuiocvbnmjkl'
 
