@@ -7,8 +7,8 @@ set fish_greeting ""
 #########################
 
 # QUICKFIX FOR LOCALE ISSUE
-set -x LANG de_DE.UTF-8
-# set -x LANG en_US.UTF-8
+# set -x LANG de_DE.UTF-8
+set -x LANG en_US.UTF-8
 
 # some more stuff in PATH
 set -x PATH ~/.cargo/bin $PATH
