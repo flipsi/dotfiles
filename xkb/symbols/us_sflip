@@ -21,7 +21,7 @@ xkb_symbols "basic" {
     replace key <AA00> { [ Escape ] };
 
 
-    // umlauts (ä, ö, ü) and ß
+    // umlauts (ä, ö, ü)
     key <AC01> { [ a, A, adiaeresis, Adiaeresis ] };
     key <AD09> { [ o, O, odiaeresis, Odiaeresis ] };
     key <AD07> { [ u, U, udiaeresis, Udiaeresis ] };
@@ -37,11 +37,11 @@ xkb_symbols "basic" {
     key <AB08> { [ comma, less, Home, VoidSymbol ] };
     key <AB09> { [ period, greater, End, VoidSymbol ] };
 
-    // left hand number block with AltGr
+    // left hand number block with AltGr (and ß on s)
     key <AD02> { [ w, W, 7, ampersand ] };
     key <AD03> { [ e, E, 8, asterisk ] };
     key <AD04> { [ r, R, 9, EuroSign ] };
-    key <AC02> { [ s, S, 4, dollar ] };
+    key <AC02> { [ s, S, 4, ssharp ] };
     key <AC03> { [ d, D, 5, percent ] };
     key <AC04> { [ f, F, 6, dead_circumflex ] };
     key <AB01> { [ z, Z, 0, VoidSymbol ] };
