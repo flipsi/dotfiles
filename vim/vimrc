@@ -1895,7 +1895,8 @@ function! SetupSQLDadBod()
     nnoremap    <leader>bdo :DB<space>
     nnoremap    <leader>bda :%DB<cr>
     xmap <expr> <leader>bd db#op_exec()
-    nmap        <leader>bdq vaq<leader>bd
+    "nmap        <leader>bdq vaq<leader>bd
+    nmap        <leader>bdq vap<leader>bd
 
 endfunction
 
