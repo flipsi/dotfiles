@@ -892,7 +892,7 @@ let g:tagbar_autoclose = 1
 
 "let g:tagbar_map_close = 'Q'
 
-noremap <silent> <leader>tt :TagbarToggle<cr>
+noremap <silent> <leader>tb :TagbarToggle<cr>
 
 "autocmd FileType vim nested :TagbarOpen()<cr>
 
@@ -3024,6 +3024,17 @@ noremap <esc>j <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
 noremap <m-k>  <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 noremap <esc>k <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TERMINAL {{{
+
+nnoremap <leader>tt :terminal ++close ++curwin fish<cr>
+
+" TODO: replace vimux?
+
+" TODO: checkout debugging feature (see :help terminal-debug)
 
 
 " }}}
