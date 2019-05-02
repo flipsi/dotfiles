@@ -823,7 +823,7 @@ assign [class="(?i)vivaldi-stable"]                                             
 ## workspaces with window always on specific output
 for_window [class="(?i)vivaldi-stable"]                                         move workspace to output DP3-1
 for_window [class="(?i)chromium"]                                               move workspace to output DP3-1
-for_window [class="(?i)google-chrome"]                                          move workspace to output DP3-1
+for_window [class="(?i)google-chrome"]                                          move workspace to output DP3-2
 for_window [class="(?i)firefox"]                                                move workspace to output DP3-1
 for_window [class="(?i)qutebrowser"]                                            move workspace to output DP3-1
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DP3-2
