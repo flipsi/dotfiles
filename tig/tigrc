@@ -104,12 +104,14 @@ bind stage  S @bash -c 'git diff-files --quiet && git reset HEAD || git add --al
 bind status c !git commit
 bind stage  c !git commit
 
-# checkout, reset and delete
-bind status C  ?git checkout -- %(file)
-bind stage  C  ?git checkout -- %(file)
-bind status R  ?git reset --hard
-bind stage  R  ?git reset --hard
-bind status xr ?rm -r %(file)
+# checkout files, reset and delete
+bind generic grh ?git reset --hard
+bind status C    ?git checkout -- %(file)
+bind stage  C    ?git checkout -- %(file)
+bind status R    ?git reset --hard
+bind stage  R    ?git reset --hard
+bind status xr   ?rm -r %(file)
+bind status xt   !trash-put %(file)
 
 # amend to last commit
 bind status A ?git commit --amend
@@ -127,10 +129,11 @@ bind stage  as ?git save %(prompt)
 bind refs   ap ?git pop-prefix %(branch)
 
 # checkout/merge refs
-bind refs c ?git checkout %(branch)
-bind refs m ?git merge %(branch)
-bind refs b !git checkout -b %(prompt)
-bind refs d ?git branch -d %(branch)
+bind generic geb ?git checkout -b %(prompt)
+bind refs c      ?git checkout %(branch)
+bind refs m      ?git merge %(branch)
+bind refs b      !git checkout -b %(prompt)
+bind refs d      ?git branch -d %(branch)
 
 # rename branch
 bind refs R ?git branch -m %(branch) %(prompt)
@@ -143,7 +146,8 @@ bind generic Y !bash -c "printf %(commit) | git log --format=%B -n 1 --stdin | x
 bind generic f !git fetch
 bind generic pp !git pull
 bind generic pu !git push
-bind generic pU !git push -u %(remote) %(branch)
+bind generic gpuf !git push --force-with-lease
+bind generic gpuu !bash -c "git push -u $(git remote | head -n1) $(git rev-parse --abbrev-ref HEAD)"
 
 
 # more/less context
