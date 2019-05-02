@@ -3262,6 +3262,7 @@ endif
 
 
 " find next and previous occurence like usual when we searched backwards
+" TODO: make this work with SearchMode()
 " nnoremap <expr> n  'Nn'[v:searchforward]
 " nnoremap <expr> N  'nN'[v:searchforward]
 
