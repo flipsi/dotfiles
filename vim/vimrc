@@ -1869,22 +1869,22 @@ endfunction
 
 augroup sql_on_read
     au!
-    au FileType sql call SetupSQL()
+    au FileType sql call SetupSQLVimux()
+    au FileType sql call SetupSQLDadBod()
 augroup END
-function! SetupSQL()
+
+command! -bang SetupSQL :call SetupSQLDadBod()<bar> call SetupSQLVimux()
+
+function! SetupSQLVimux()
     nnoremap <leader>bm  :call VimuxRunCommand("\\. " . expand('%:p'))<cr>
     nnoremap <leader>bp  :call VimuxRunCommand("\\i " . expand('%:p'))<cr>
 endfunction
+command! -bang SetupSQLVimux :call SetupSQLVimux()
 
 
 Plugin 'tpope/vim-dadbod'
 
 " For database connection, see ':help dadbod-variables'
-
-augroup sql_on_read_dadbod
-    au!
-    au FileType sql call SetupSQLDadBod()
-augroup END
 
 function! SetupSQLDadBod()
 
@@ -1899,6 +1899,8 @@ function! SetupSQLDadBod()
     nmap        <leader>bdq vap<leader>bd
 
 endfunction
+command! -bang SetupSQLDadBod :call SetupSQLDadBod()
+
 
 
 " Plugin 'cosminadrianpopescu/vim-sql-workbench'
