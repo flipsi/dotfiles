@@ -2843,10 +2843,11 @@ let mapleader=' '
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FIX AND SPEEDUP MY TYPING {{{
 
+iabbrev autotype    autotype: email :tab pass :enter
+iabbrev dpr         deprecated
 iabbrev todo        TODO:
 iabbrev todod       TODO: delete this debugging statement
 iabbrev todof       TODO: FIX
-iabbrev autotype    autotype: email :tab pass :enter
 
 
 " }}}
