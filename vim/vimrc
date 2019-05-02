@@ -2695,7 +2695,6 @@ endfunction
 " send buffer via slack {{{
 function! SendBufferViaSlack(channel)
     let l:channel = substitute(a:channel, '\[.*\] \[.*\]\s\+', '', '')
-    let content = getline(1, '$')
     exec "write !slackcat --channel '" . l:channel . "' --filename " . expand("%:t")
 endfunction
 " }}}
