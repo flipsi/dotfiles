@@ -47,6 +47,7 @@ SUPPORTED_TARGETS=(\
     mutt \
     muttator \
     ncmpcpp \
+    ncspot \
     pentadactyl \
     polybar \
     psql \
@@ -292,6 +293,11 @@ function create_link_for_target() {
             mkdir -p "$HOME/.ncmpcpp"
             create_link "$PWD/ncmpcpp/config" "$HOME/.ncmpcpp/config"
             create_link "$PWD/ncmpcpp/bindings" "$HOME/.ncmpcpp/bindings"
+            ;;
+
+        ncspot )
+            mkdir -p "$HOME/.config/ncspot/"
+            create_link "$PWD/ncspot/config.toml" "$HOME/.config/ncspot/config.toml"
             ;;
 
         pentadactyl )
