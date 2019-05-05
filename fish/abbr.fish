@@ -63,6 +63,7 @@ abbr m      man
 abbr ma     make apply
 abbr mi     make init
 abbr mip    make init plan
+abbr mkd    mkdir
 abbr mp     make plan
 abbr mpa    make plan apply
 abbr o      open
