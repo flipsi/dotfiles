@@ -1820,10 +1820,12 @@ function! SetupScala()
     " the lines below are for testing errors but do not work yet
     " (for example because the file path is not absolute)
     " (also, I'm a noob with the efm matching syntax)
+    " TODO: fix
                 " \%E\ \%#[info]%.%#was\ not\ equal\ to%.%#(%f:%l),%Z,
                 " \%E\ \%#[info]\ %.%#\ was\ not\ equal\ to\ %.%#\ (%f:%l),%Z,
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
+    nnoremap <leader>AF  :call VimuxRunCommand("scalafmt")<cr>
     nnoremap <leader>bd  :call MakeWithVimux("sbt compile")<cr>
     nnoremap <leader>bs  :call MakeWithVimux("sbt run")<cr>
     nnoremap <leader>btt :call MakeWithVimux("sbt test it:test")<cr>
