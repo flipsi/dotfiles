@@ -121,13 +121,15 @@ bind main A ?git amend-old %(commit)
 bind diff A ?git amend-old %(commit)
 
 # stash
-bind status aS ?git stash push --include-untracked
-bind stage  aS ?git stash push --include-untracked
-bind stash  aP ?git stash pop %(stash)
-bind diff   aP ?git stash pop %(stash)
-bind status as ?git save %(prompt)
-bind stage  as ?git save %(prompt)
-bind refs   ap ?git pop-prefix %(branch)
+bind generic gsa ?git stash push --include-untracked
+bind generic gsp ?git stash pop
+bind status  aS  ?git stash push --include-untracked
+bind stage   aS  ?git stash push --include-untracked
+bind stash   aP  ?git stash pop %(stash)
+bind diff    aP  ?git stash pop %(stash)
+bind status  as  ?git save %(prompt)
+bind stage   as  ?git save %(prompt)
+bind refs    ap  ?git pop-prefix %(branch)
 
 # checkout/merge refs
 bind generic geb ?git checkout -b %(prompt)
