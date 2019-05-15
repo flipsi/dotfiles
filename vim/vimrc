@@ -2886,11 +2886,11 @@ nnoremap <leader>ye :let @" = expand("%:t:r") <cr>
             \       :let @+ = expand("%:t:r") <cr>
             \       :let @* = expand("%:t:r") <cr>
             \       :echo @" <cr>
-nnoremap <leader>yp :let @" = expand("%:p") <cr>
+nnoremap <leader>yP :let @" = expand("%:p") <cr>
             \       :let @+ = expand("%:p") <cr>
             \       :let @* = expand("%:p") <cr>
             \       :echo @" <cr>
-nnoremap <leader>yP :let @" = expand("%") <cr>
+nnoremap <leader>yp :let @" = expand("%") <cr>
             \       :let @+ = expand("%") <cr>
             \       :let @* = expand("%") <cr>
             \       :echo @" <cr>
