@@ -393,8 +393,19 @@ let g:airline_symbols.linenr = ''
 let g:airline_symbols.maxlinenr = ''
 
 
+" " airline extension
+" " show list of buffers (like tabs)
+" Plugin 'bling/vim-bufferline'
+" let g:airline#extensions#bufferline#enabled = 0
 
-" simple statusline
+" airline extension
+" show columns of csv files
+Plugin 'chrisbra/csv.vim'
+let g:airline#extensions#csv#enabled = 1
+
+
+
+" simple status bar alternative?
 " http://www.blaenkdenum.com/posts/a-simpler-vim-statusline/
 
 
