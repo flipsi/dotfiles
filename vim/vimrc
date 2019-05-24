@@ -1404,7 +1404,7 @@ autocmd filetype php set filetype=php.html
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" advanced autocompletion engine {{{
+" advanced autocompletion {{{
 "
 " Remember: YCM is a plugin with a compiled component. If you update YCM using
 " Vundle and the ycm_support_libs library APIs have changed (happens rarely),
@@ -1590,6 +1590,31 @@ nnoremap <leader>icp :ColorPicker<cr>
 " (readme is looking good, but throws errors)
 "Plugin 'KabbAmine/vCoolor.vim'
 "nnoremap <leader>cp :VCoolor<cr>
+
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Completion and other smart IDE features via LSP {{{
+
+" stable
+" Plugin 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+
+" nightly
+Plugin 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+
+nmap <leader>ie <Plug>(coc-diagnostic-info)
+nmap <leader>i<bs> <Plug>(coc-float-hide)
+
+nmap <leader>in <Plug>(coc-diagnostic-next)
+nmap <leader>iN <Plug>(coc-diagnostic-prev)
+nmap <leader>jd <Plug>(coc-definition)
+nmap <leader>jD <Plug>(coc-declaration)
+nmap <leader>ji <Plug>(coc-implementation)
+
+nmap <leader>rf <Plug>(coc-rename)
+nmap <leader>i<return> <Plug>(coc-fix-current)
+
 
 
 " }}}
