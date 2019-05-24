@@ -372,31 +372,14 @@ nnoremap <leader>yy :Goyo<cr>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" statusline {{{
-
-" https://powerline.readthedocs.org/en/latest/usage/other.html#vim-statusline
-"
-" instead of this deprecated vimscript plugin...:
-" Plugin 'Lokaltog/vim-powerline
-" ... we use this rewritten one in python:
-" Plugin 'powerline/powerline'
-
-" disable powerline if it is installed
-let g:powerline_loaded = 1
-
-" on arch linux, installed python-powerline
-" and fix import error with
-"let $PYTHONPATH="/usr/lib/python3.5/site-packages"
-
-
-" lightweight alternative to powerline
+" status bar {{{
 
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
-let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
 
 "let g:airline_section_y = g:airline_section_a
 let g:airline_section_a = '%{fnamemodify(getcwd(), ":t")}'
