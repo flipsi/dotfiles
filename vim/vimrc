@@ -694,14 +694,18 @@ let g:grepper.prompt_mapping_side = '<c-l>'
 let g:grepper.searchreg = 1
 
 nnoremap <leader>/      :Grepper<cr>
-nnoremap g/             :Grepper -side<cr>
-nnoremap g*             :Grepper -cword -noprompt -tool ag -side<cr>
-" xnoremap <c-l>          :Grepper -tool ag -side<cr>
+
+nnoremap g/             :Grepper-side<cr>
+nnoremap g*             :Grepper-side -cword -noprompt -tool ag<cr>
+xnoremap g/             y:Grepper-side -noprompt -tool ag -query "<c-r>""<cr>
+xmap     g*             g/
+
+nnoremap <leader>*      <nop>
 nnoremap <leader>**     :Grepper -cword -noprompt -tool ag <cr>
 nnoremap <leader>*b     :Grepper -cword -noprompt -tool ag -buffer<cr>
 nnoremap <leader>*o     :Grepper -cword -noprompt -tool ag -buffers<cr>
-nmap <leader>*B         <leader>*b
-nmap <leader>*O         <leader>*o
+nmap     <leader>*B     <leader>*b
+nmap     <leader>*O     <leader>*o
 
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
@@ -846,6 +850,7 @@ xnoremap <leader>et y:FzfTags <c-r>"<cr>
 nnoremap <leader>j/         :FzfAg!<cr>
 " search for word under cursor
 nnoremap <leader>j*         :FzfAg! <c-r><c-w><cr>
+nmap     <leader>jj         <leader>j*
 " search for visual selection
 xnoremap <leader>j*         y:<c-u>FzfAg! <c-r>"<cr>
 
