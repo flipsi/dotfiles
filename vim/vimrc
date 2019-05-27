@@ -665,19 +665,45 @@ nnoremap ? :call incsearch#call({'command': '?'})<cr>
 
 
 " searching in multiple files
-" install 'the_silver_searcher' package on the system
 Plugin 'mileszs/ack.vim'
 
 " command to execute
 let g:ackprg="ag --vimgrep --smart-case"
 
-" type a search pattern
-nnoremap <leader>ag :let g:jumplist = 'quickfixlist'<cr>
-                 \ :Ack!<space>""<left>
+" " type a search pattern
+" nnoremap <leader>ag :let g:jumplist = 'quickfixlist'<cr>
+"                  \ :Ack!<space>""<left>
 
-" search for visual selection
-xnoremap <leader>ag y:let g:jumplist = 'quickfixlist'<cr>
-                 \ :<c-u>Ack! "-Q" "<c-r>""<cr>
+" " search for visual selection
+" xnoremap <leader>ag y:let g:jumplist = 'quickfixlist'<cr>
+"                  \ :<c-u>Ack! "-Q" "<c-r>""<cr>
+
+
+" grep in vim like a pro
+Plugin 'mhinz/vim-grepper'
+
+let g:grepper = {}
+" let g:grepper.tools = ['git', 'ag', 'grep', 'rg']
+let g:grepper.quickfix = 1
+let g:grepper.switch = 0
+let g:grepper.prompt_mapping_side = '<c-l>'
+let g:grepper.searchreg = 1
+
+nnoremap <leader>/      :Grepper<cr>
+nnoremap g/             :Grepper -side<cr>
+nnoremap g*             :Grepper -cword -noprompt -tool ag -side<cr>
+" xnoremap <c-l>          :Grepper -tool ag -side<cr>
+nnoremap <leader>**     :Grepper -cword -noprompt -tool ag <cr>
+nnoremap <leader>*b     :Grepper -cword -noprompt -tool ag -buffer<cr>
+nnoremap <leader>*o     :Grepper -cword -noprompt -tool ag -buffers<cr>
+nmap <leader>*B         <leader>*b
+nmap <leader>*O         <leader>*o
+
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
+
+command! TODO Grepper -noprompt -tool git -query -E '(TODO|FIXME|XXX|\?\?\?)'
+
 
 
 " % also matches HTML-tags/words etc
@@ -813,19 +839,15 @@ nnoremap <leader>et  :FzfTags<cr>
 xnoremap <leader>et y:FzfTags <c-r>"<cr>
 
 " type a search pattern
-nnoremap <leader>/ :FzfAg<cr>
+nnoremap <leader>j/         :FzfAg!<cr>
 " search for word under cursor
-nnoremap <leader>+ :FzfAg! <c-r><c-w><cr>
-" TODO: search for word under cursor only in current buffer (like fj)
-nmap     <leader>* <leader>+
+nnoremap <leader>j*         :FzfAg! <c-r><c-w><cr>
 " search for visual selection
-xnoremap <leader>/ y:<c-u>FzfAg! <c-r>"<cr>
-xmap     <leader>* <leader>/
-xmap     <leader>+ <leader>/
+xnoremap <leader>j*         y:<c-u>FzfAg! <c-r>"<cr>
 
 " fuzzy search for built-in vim stuff (command history, searches, helptags)
 nnoremap <leader>:          :FzfHistory:<cr>
-nnoremap <leader>?          :FzfHistory/<cr>
+nnoremap <leader>hs         :FzfHistory/<cr>
 nnoremap <leader>h<leader>  :FzfHelptags<cr>
 
 " autocomplete lines like a boss, even across multiple files
@@ -3270,11 +3292,11 @@ nnoremap <c-i> <c-i>zz
 
 " restart search from BOF/EOF
 " (is useful when 'nowrapscan' is set)
-" nmap g/ 1Gn
+" nmap gt 1Gn
 nmap g? G$N
-" nmap g/ :keepjumps normal 1G<cr>n " does not work
+" nmap gt :keepjumps normal 1G<cr>n " does not work
 " nmap g? :keepjumps normal G$<cr>N " does not work
-nmap <silent> g/ :ijump! 1    /<c-r>/<cr>zv
+nmap <silent> gt :ijump! 1    /<c-r>/<cr>zv
 " nmap g? :ijump! 9999 /<c-r>/<cr> " does not work
 
 
