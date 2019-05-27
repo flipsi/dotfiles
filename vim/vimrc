@@ -1579,7 +1579,7 @@ Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
 
 " check for trailing whitespace when writing file
 let g:DeleteTrailingWhitespace = 1
-let g:DeleteTrailingWhitespace_Action = 'ask'
+let g:DeleteTrailingWhitespace_Action = 'ask' " TODO: 'delete' if in a git repository, 'ask' otherwise
 
 " disable for specific files automatically
 augroup delete_trailing_whitespace_disable
@@ -3724,6 +3724,12 @@ xmap <silent> <bs> <bs>gv
 " toggle quickfix or location list
 nnoremap <silent> <leader>tq :call ToggleList("Quickfix List", 'c')<cr>
 nnoremap <silent> <leader>tl :call ToggleList("Location List", 'l')<cr>
+
+" TODO:
+" Normally the quickfix window is at the bottom of the screen.  If there are
+" vertical splits, it's at the bottom of the rightmost column of windows.  To
+" make it always occupy the full width: >
+	" :botright cwindow
 
 
 
