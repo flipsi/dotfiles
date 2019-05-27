@@ -379,6 +379,7 @@ Plugin 'vim-airline/vim-airline-themes'
 
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
@@ -393,16 +394,19 @@ let g:airline_symbols.linenr = ''
 let g:airline_symbols.maxlinenr = ''
 
 
-" " airline extension
-" " show list of buffers (like tabs)
+" " airline extension: show list of buffers (like tabs)
 " Plugin 'bling/vim-bufferline'
 " let g:airline#extensions#bufferline#enabled = 0
 
-" airline extension
-" show columns of csv files
+" airline extension: show columns of csv files
 Plugin 'chrisbra/csv.vim'
 let g:airline#extensions#csv#enabled = 1
 
+" airline extension: hide fugitive stuff
+let g:airline#extensions#fugitiveline#enabled = 1
+
+" airline extension: vim-grepper integration
+let g:airline#extensions#grepper#enabled = 1
 
 
 " simple status bar alternative?
