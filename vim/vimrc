@@ -1883,6 +1883,7 @@ function! SetupScala()
     nnoremap <leader>btu :call MakeWithVimux("sbt test")<cr>
     nnoremap <leader>bti :call MakeWithVimux("sbt it:test")<cr>
     nnoremap <leader>bto :call MakeWithVimux("sbt '". CalculateSbtTestOnlyCommand() . "'")<cr>
+    nnoremap <leader>ba  :call MakeWithVimux("sbt scapegoat")<cr>
     nnoremap <leader>bx  :call MakeWithVimux("sbt clean")<cr>
     nnoremap <leader>br  :call MakeWithVimux("sbt console")<cr>
     nnoremap <leader>bD  :call VimuxRunCommand("sbt compile")<cr>
