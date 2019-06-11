@@ -3837,7 +3837,7 @@ nnoremap <leader>ir :call RangerChooser(expand('%:p:h'))<cr>
 nnoremap <leader>iR :RangerChooser<cr>
 
 " git interface in working dir or dir of current file
-nnoremap <leader>it :!tig status <cr><cr>
+nnoremap <leader>it :!tig status<cr><cr>:GitGutter<cr>
 nnoremap <leader>iT :execute '!cd ' . expand('%:p:h') . '; tig status'<cr><cr>
 
 " insert google contacts with name and mail addresses (with goobook)
