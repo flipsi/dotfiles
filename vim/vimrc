@@ -474,6 +474,15 @@ nnoremap <leader>gu   :GitGutterUndoHunk<cr>
 nnoremap <leader>gi   :GitGutterPreviewHunk<cr>
 
 
+" show commit messages in a preview window
+
+Plugin 'rhysd/git-messenger.vim'
+
+let g:git_messenger_no_default_mappings = v:true
+
+nmap <Leader>gm <Plug>(git-messenger)
+
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
