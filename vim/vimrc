@@ -474,6 +474,14 @@ nnoremap <leader>gu   :GitGutterUndoHunk<cr>
 nnoremap <leader>gi   :GitGutterPreviewHunk<cr>
 
 
+" mergetool with regular diffs (easier than 3-way merge)
+
+Plugin 'whiteinge/diffconflicts'
+
+nmap <Leader>gMM :DiffConflicts<cr>
+nmap <Leader>gML :DiffConflictsShowHistory<cr>
+
+
 " show commit messages in a preview window
 
 Plugin 'rhysd/git-messenger.vim'

@@ -40,11 +40,18 @@
     cmd = diff -i $LOCAL $REMOTE
 
 [merge]
-    tool = vimdiff
+    tool = diffconflicts
+
+[mergetool]
+    keepBackup = false
 
 [mergetool "sublimerge"]
     prompt = false
     cmd = subl -n -w \"$REMOTE\" \"$BASE\" \"$LOCAL\" \"$MERGED\" --command \"sublimerge_diff_view\"
+
+[mergetool "diffconflicts"]
+    cmd = vim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
+    trustExitCode = true
 
 [filter "lfs"]
     clean = git-lfs clean -- %f
