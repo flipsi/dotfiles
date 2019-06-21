@@ -3706,7 +3706,7 @@ nnoremap <leader>sG :llast<cr>
 " so we jump through both quickfix and location list with one keystroke
 " @param direction: 0 for next, 1 for previous
 " @param switch: 0 for the same list as before, 1 for the other
-let g:jumplist = 'locationlist'
+let g:jumplist = 'quickfixlist'
 function! JumpThroughList(direction, switch)
     if (a:switch == 1)
         if (g:jumplist == 'quickfixlist')
