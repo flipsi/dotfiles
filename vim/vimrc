@@ -718,6 +718,7 @@ nmap     <leader>*O     <leader>*o
 
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
+xmap <leader>* y:Grepper -noprompt -tool ag -query "<c-r>""<cr>
 
 command! TODO Grepper -noprompt -tool git -query -E '(TODO|FIXME|XXX|\?\?\?)'
 
