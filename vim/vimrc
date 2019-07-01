@@ -3791,7 +3791,7 @@ nnoremap <silent> <leader>tl :call ToggleList("Location List", 'l')<cr>
 " Normally the quickfix window is at the bottom of the screen.  If there are
 " vertical splits, it's at the bottom of the rightmost column of windows.  To
 " make it always occupy the full width: >
-	" :botright cwindow
+" :botright cwindow
 
 
 
