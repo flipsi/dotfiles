@@ -59,25 +59,19 @@ draw_bold_text_with_bright_colors: true
 # * https://wiki.archlinux.org/index.php/font_configuration#Fontconfig_configuration
 # * file:///usr/share/doc/fontconfig/fontconfig-user.html
 font:
-  # The normal (roman) font face to use.
   normal:
-    family: PragmataPro Mono # should be "Menlo" or something on macOS.
-    # Style can be specified to pick a specific face.
-    # style: Regular
-
-  # The bold font face
+    # family: Fantasque Sans Mono
+    family: PragmataPro Mono
+    style: Regular
   bold:
-    family: PragmataPro Mono # should be "Menlo" or something on macOS.
-    # Style can be specified to pick a specific face.
+    # family: Fantasque Sans Mono
+    family: PragmataPro Mono
     style: Bold
-
-  # The italic font face
   italic:
-    family: PragmataPro Mono # should be "Menlo" or something on macOS.
-    # Style can be specified to pick a specific face.
+    # family: Fantasque Sans Mono
+    family: PragmataPro Mono
     style: Italic
 
-  # Point size of the font
   size: 10.0
 
   # Offset is the extra space around each character. offset.y can be thought of
