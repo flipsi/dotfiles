@@ -3,8 +3,8 @@
 
 [options]
 
-# TODO: somehow looks totally different. fix!
-font = PragmataPro Mono 10
+# font = PragmataPro Mono 10
+font = Fantasque Sans Mono 10
 
 scrollback_lines = 10000
 
