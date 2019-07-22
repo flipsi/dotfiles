@@ -160,14 +160,14 @@ mode "$change_wallpaper" {
     bindsym b exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh --backwards"
     bindsym 0 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/black_1920x1080.png"
     bindsym 1 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_0C0C0C_1920x1080.png"
-    bindsym 2 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_1E1E1E_1920x1080.png
-    bindsym 3 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_2F2F2F_1920x1080.png
-    bindsym 4 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_3A3A3A_1920x1080.png
-    bindsym 5 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_575757_1920x1080.png
-    bindsym 6 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_6E6E6E_1920x1080.png
-    bindsym 7 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_919191_1920x1080.png
-    bindsym 8 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_DDDDDD_1920x1080.png
-    bindsym 9 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/white_1920x1080.png
+    bindsym 2 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_1E1E1E_1920x1080.png"
+    bindsym 3 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_2F2F2F_1920x1080.png"
+    bindsym 4 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_3A3A3A_1920x1080.png"
+    bindsym 5 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_575757_1920x1080.png"
+    bindsym 6 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_6E6E6E_1920x1080.png"
+    bindsym 7 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_919191_1920x1080.png"
+    bindsym 8 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_DDDDDD_1920x1080.png"
+    bindsym 9 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/white_1920x1080.png"
     # cancel
     bindsym $mod+F7 mode "default"
     bindsym Return mode "default"
