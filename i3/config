@@ -487,8 +487,8 @@ mode "$spotify_control" {
 ## take a screenshot
 bindsym $mod+Print       exec --no-startup-id "xfce4-screenshooter --window --save ~/img-screenshots"
 bindsym      Print       exec --no-startup-id "xfce4-screenshooter --window --save ~/img-screenshots"
-bindsym $mod+Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen --save ~/img-screenshots"
-bindsym      Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen --save ~/img-screenshots"
+bindsym $mod+Shift+Print exec --no-startup-id "xfce4-screenshooter --region --save ~/img-screenshots"
+bindsym      Shift+Print exec --no-startup-id "xfce4-screenshooter --region --save ~/img-screenshots"
 
 
 
