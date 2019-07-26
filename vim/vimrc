@@ -1688,7 +1688,9 @@ augroup END
 augroup typescript_on_read
     au!
     au FileType typescript call SetupYarn()
-    au FileType javascript call SetupTsuquyomi()
+    au FileType typescript call SetupTsuquyomi()
+    au FileType typescript.tsx call SetupYarn()
+    au FileType typescript.tsx call SetupTsuquyomi()
 augroup END
 
 function! SetupNpm()
