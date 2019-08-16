@@ -201,7 +201,22 @@ new_float  normal
 # sfluen_dark                       #83B45C
 # sflea                             #00AFAF
 # sflea_dark                        #005F5F
-# gruvbox_light_3                   #BDAE93
+# gruvbox_dark0_hard                #1D2021
+# gruvbox_dark0                     #282828
+# gruvbox_dark0_soft                #32302F
+# gruvbox_dark1                     #3C3836
+# gruvbox_dark2                     #504945
+# gruvbox_dark3                     #665C54
+# gruvbox_dark4                     #7C6F64
+# gruvbox_gray_245                  #928374
+# gruvbox_gray_244                  #928374
+# gruvbox_light0_hard               #F9F5D7
+# gruvbox_light0                    #FBF1C7
+# gruvbox_light0_soft               #F2E5BC
+# gruvbox_light1                    #EBDBB2
+# gruvbox_light2                    #D5C4A1
+# gruvbox_light3                    #BDAE93
+# gruvbox_light4                    #A89984
 # gruvbox_bright_red                #FB4934
 # gruvbox_bright_green              #B8BB26
 # gruvbox_bright_yellow             #FABD2F
@@ -218,11 +233,11 @@ new_float  normal
 # gruvbox_neutral_orange            #D65D0E
 
 #                       border   backgr   text     indicator
-client.focused          #CC241D  #1E1E1E  #CC241D  #FF0000
-client.focused_inactive #1E1E1E  #1E1E1E  #CC241D  #1E1E1E
-client.unfocused        #1E1E1E  #1E1E1E  #DDDDDD  #1E1E1E
-client.urgent           #B8BB26  #B8BB26  #000000  #1E1E1E
-client.background       #1A1A1A  #1E1E1E  #CC241D  #1E1E1E
+client.focused          #282828  #282828  #BDAE93  #FB4934
+client.focused_inactive #282828  #282828  #928374  #282828
+client.unfocused        #282828  #282828  #504945  #282828
+client.urgent           #B8BB26  #B8BB26  #282828  #282828
+client.background       #282828  #282828  #CC241D  #282828
 
 
 
