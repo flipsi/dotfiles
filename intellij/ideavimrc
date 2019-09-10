@@ -48,7 +48,7 @@ vnoremap v <c-c>
 nnoremap <C-c><C-c>     :action EditorCopy<cr>
 nnoremap <leader><c-v>  :action EditorPasteFromX11<cr>
 nnoremap <c-v><c-v>     :action EditorPaste<cr>
-inoremap <c-v><c-v>     <Esc>:action EditorPaste<cr>
+inoremap <c-v><c-v>     <Esc>l:action EditorPaste<cr>i
 
 nnoremap Q @
 nnoremap QQ @@
