@@ -31,7 +31,7 @@ abbr ge     git checkout
 abbr geb    git checkout -b
 abbr gf     git fetch --prune
 abbr gfm    git checkout --quiet --detach\; git fetch \(git remote \| head -n1\) master:master\; git checkout --quiet -
-abbr gl     tig log
+abbr gl     tig
 abbr glh    git --no-pager log -n 1
 abbr gli    git --no-pager log -n 1 \| head -n 1 \| cut -d\" \" -f2 \| xsel --clipboard
 abbr gm     git merge
