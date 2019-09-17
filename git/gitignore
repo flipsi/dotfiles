@@ -7,7 +7,9 @@
 # IDE and editor files etc.
 .session.vim
 .tags
-.idea
+.idea/
+.bloop/
+.metals/
 .ensime
 .ensime_cache
 sftp-config.json
