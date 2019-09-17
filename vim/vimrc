@@ -554,11 +554,6 @@ nmap , <plug>Sneak_;
 nmap ; <plug>Sneak_,
 
 
-autocmd ColorScheme * hi Sneak      ctermfg=72 ctermbg=236
-autocmd ColorScheme * hi SneakScope ctermfg=72 ctermbg=236
-
-
-
 " make f only match interesting characters
 " Plugin 'svermeulen/vim-NotableFt'
 
@@ -2354,6 +2349,7 @@ if s:MyMode == 'mastery'
     " highlight Search                  ctermbg=237 ctermfg=white
     highlight Error                   ctermbg=162
     highlight Todo                    ctermfg=132
+    highlight Sneak                   ctermfg=72 ctermbg=234
     highlight EasyMotionTarget        ctermfg=72
     highlight EasyMotionTarget2First  ctermfg=72
     highlight EasyMotionTarget2Second ctermfg=108
