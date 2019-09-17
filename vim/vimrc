@@ -542,16 +542,20 @@ Plugin 'justinmk/vim-sneak'
 let g:sneak#use_ic_scs = 1
 
 nmap f <plug>Sneak_s
-xmap z <plug>Sneak_s
-omap z <plug>Sneak_s
-
-nmap s <plug>Sneak_S
 nmap F <plug>Sneak_S
-xmap Z <plug>Sneak_S
-omap Z <plug>Sneak_S
 
 nmap , <plug>Sneak_;
 nmap ; <plug>Sneak_,
+
+xmap f :<C-U>call sneak#wrap(visualmode(), 2, 0, 1, 0)<CR>
+xmap F :<C-U>call sneak#wrap(visualmode(), 2, 1, 1, 0)<CR>
+xmap t :<C-U>call sneak#wrap(visualmode(), 2, 0, 0, 0)<CR>
+xmap T :<C-U>call sneak#wrap(visualmode(), 2, 1, 0, 0)<CR>
+
+omap f :<C-U>call sneak#wrap(v:operator,   2, 0, 1, 0)<CR>
+omap F :<C-U>call sneak#wrap(v:operator,   2, 1, 1, 0)<CR>
+omap t :<C-U>call sneak#wrap(v:operator,   2, 0, 0, 0)<CR>
+omap T :<C-U>call sneak#wrap(v:operator,   2, 1, 0, 0)<CR>
 
 
 " make f only match interesting characters
