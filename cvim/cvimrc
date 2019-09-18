@@ -6,6 +6,7 @@ let qmark a = "https://docs.google.com/spreadsheets/d/17QbADpr9nn7VAdhotSqMic64N
 let qmark c = "https://calendar.google.com/calendar/r?pli=1#main_7"
 let qmark g = "https://github.com/notifications"
 let qmark i = "http://i3wm.org/docs/userguide.html"
+let qmark j = "https://onpage.atlassian.net/secure/RapidBoard.jspa?rapidView=28"
 let qmark m = "https://mail.google.com/mail/u/0/#inbox"
 
 map <C-b> scrollFullPageUp
