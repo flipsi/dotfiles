@@ -1,0 +1,18 @@
+snippet app "simple standalone script"
+import scala.concurrent.{Future, ExecutionContext}
+import scala.util.{Failure, Success}
+
+object Main extends App {
+
+  implicit val ec = ExecutionContext.global
+
+  $0
+
+}
+endsnippet
+
+snippet for "multiline for comprehension"
+for {
+	$2 <- $1
+} yield $0
+endsnippet
