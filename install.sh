@@ -33,6 +33,7 @@ SUPPORTED_TARGETS=(\
     dircolors \
     elinks \
     fish \
+    gcalcli \
     ghci \
     git \
     i3 \
@@ -194,6 +195,10 @@ function create_link_for_target() {
             create_link "$PWD/fish/config.fish" "$HOME/.config/fish/config.fish"
             create_link "$PWD/fish/abbr.fish" "$HOME/.config/fish/abbr.fish"
             create_link "$PWD/fish/commands.fish" "$HOME/.config/fish/commands.fish"
+            ;;
+
+        gcalcli )
+            create_link "$PWD/gcalcli/gcalclirc" "$HOME/.gcalclirc"
             ;;
 
         ghci )
