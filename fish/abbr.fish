@@ -1,3 +1,4 @@
+abbr ca     gcalcli
 abbr cdi    cd_interactively
 abbr cdi.   cd_interactively .
 abbr cdir   cd_interactively /
