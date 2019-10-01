@@ -46,6 +46,9 @@ set -x CM_LAUNCHER "rofi"
 
 if status --is-interactive; and status --is-login
 
+    # aliases (also see abbr file)
+    alias git hub
+
     # change colors
     fish_my_colors gruvbox
 
