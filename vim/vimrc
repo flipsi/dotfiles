@@ -2232,10 +2232,14 @@ set virtualedit=block,insert,onemore
 
 
 " characters to show in list mode
+set listchars=nbsp:⦸
+" set listchars+=eol:$
+set listchars+=extends:❯
+set listchars+=precedes:❮
+set listchars+=tab:--
 if v:version > 704 || v:version == 704 && has("patch711")
-    set listchars=space:·,tab:--,extends:❯,precedes:❮
-else
-    set listchars=tab:--,extends:❯,precedes:❮
+    set listchars+=space:·
+    " set listchars+=trail:•
 endif
 
 " how it looks like if we wrap lines
