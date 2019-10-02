@@ -3705,12 +3705,12 @@ nnoremap <leader>sG :llast<cr>
 " nnoremap <leader>sn :lnext<cr>
 " nnoremap <leader>sN :lprevious<cr>
 
-" perform a :cnext or :lnext
-" so we jump through both quickfix and location list with one keystroke
+" jump through both, quickfix and location list, with the same keys
 " @param direction: 0 for next, 1 for previous
+" @param perFile: 0 for jumping per occurence, 1 for jumping per file
 " @param switch: 0 for the same list as before, 1 for the other
 let g:jumplist = 'quickfixlist'
-function! JumpThroughList(direction, switch)
+function! JumpThroughList(direction, perFile, switch)
     if (a:switch == 1)
         if (g:jumplist == 'quickfixlist')
             let g:jumplist = 'locationlist'
@@ -3718,24 +3718,43 @@ function! JumpThroughList(direction, switch)
             let g:jumplist = 'quickfixlist'
         endif
     endif
-    if (a:direction == 1)
-        if (g:jumplist == 'quickfixlist')
-            silent! cprevious
+    if (g:jumplist == 'locationlist')
+        if (a:perFile == 0)
+            if (a:direction == 0)
+                silent! lnext
+            else
+                silent! lprevious
+            endif
         else
-            silent! lprevious
+            if (a:direction == 0)
+                silent! lnfile
+            else
+                silent! lpfile
+            endif
         endif
     else
-        if (g:jumplist == 'quickfixlist')
-            silent! cnext
+        if (a:perFile == 0)
+            if (a:direction == 0)
+                silent! cnext
+            else
+                silent! cprevious
+            endif
         else
-            silent! lnext
+            if (a:direction == 0)
+                silent! cnfile
+            else
+                silent! cpfile
+            endif
         endif
     endif
 endfunction
-nnoremap <silent> <left>          :call JumpThroughList(1, 0)<cr>
-nnoremap <silent> <right>         :call JumpThroughList(0, 0)<cr>
-nnoremap <silent> <leader><left>  :call JumpThroughList(1, 1)<cr>
-nnoremap <silent> <leader><right> :call JumpThroughList(0, 1)<cr>
+
+nnoremap <silent> <left>          :call JumpThroughList(1, 0, 0)<cr>
+nnoremap <silent> <right>         :call JumpThroughList(0, 0, 0)<cr>
+nnoremap <silent> g<left>         :call JumpThroughList(1, 1, 0)<cr>
+nnoremap <silent> g<right>        :call JumpThroughList(0, 1, 0)<cr>
+nnoremap <silent> <leader><left>  :call JumpThroughList(1, 0, 1)<cr>
+nnoremap <silent> <leader><right> :call JumpThroughList(0, 0, 1)<cr>
 
 
 " close location list (which contains syntastic errors) and quickfix window
