@@ -3907,8 +3907,8 @@ nnoremap <leader>rl :checktime<cr>
 nnoremap <leader>rs :e!<cr>
 
 " write changes
-nnoremap <leader>w  :update<cr>:GitGutter<cr>
-nnoremap <leader>WW :update!<cr>
+nnoremap <leader>w  :update<cr>:GitGutter<cr>:echo '"' . expand("%") . '" ✔'<cr>
+nnoremap <leader>WW :update!<cr>             :echo '"' . expand("%") . '" ✔'<cr>
 
 " save and close
 nnoremap <leader>qq :wq<cr>
