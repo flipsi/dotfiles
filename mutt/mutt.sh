@@ -49,6 +49,10 @@ TITLE="mutt"
 echo -e '\033k'$TITLE'\033\\'
 # echo -e '\033]2;'$TITLE'\007'
 
+if [[ -n $TMUX ]]; then
+    tmux rename-window $TITLE
+fi
+
 
 
 #########################
