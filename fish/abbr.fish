@@ -89,12 +89,12 @@ abbr --add --global v      vim
 abbr --add --global vs     vim --servername \(basename \(pwd\)\)
 abbr --add --global x      xrandr
 abbr --add --global xo     xrandr --output
-abbr --add --global y      yaourt
-abbr --add --global yi     yaourt -Qi
-abbr --add --global yr     yaourt -R
-abbr --add --global ys     yaourt -S
-abbr --add --global ysi    yaourt -Si
-abbr --add --global yu     yaourt -Syu
-abbr --add --global yun    yaourt -Syu --noconfirm
-abbr --add --global yua    yaourt -Syua
-abbr --add --global yuan   yaourt -Syua --noconfirm
+abbr --add --global y      yay
+abbr --add --global yi     yay -Qi
+abbr --add --global yr     yay -R
+abbr --add --global ys     yay -S
+abbr --add --global ysi    yay -Si
+abbr --add --global yu     yay -Syu
+abbr --add --global yun    yay -Syu --noconfirm
+abbr --add --global yua    yay -Syua
+abbr --add --global yuan   yay -Syua --noconfirm
