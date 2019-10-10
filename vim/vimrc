@@ -1700,6 +1700,7 @@ function! SetupNpm()
     nnoremap <leader>btu :call VimuxRunCommand("npm test-unit")<cr>
     nnoremap <leader>bti :call VimuxRunCommand("npm test-int")<cr>
 endfunction
+command! -bang SetupNpm :call SetupNpm()
 
 function! SetupYarn()
     nnoremap <leader>bi  :call VimuxRunCommand("yarn install")<cr>
@@ -1709,12 +1710,14 @@ function! SetupYarn()
     nnoremap <leader>btu :call VimuxRunCommand("yarn test-unit")<cr>
     nnoremap <leader>bti :call VimuxRunCommand("yarn test-int")<cr>
 endfunction
+command! -bang SetupYarn :call SetupYarn()
 
 function SetupTsuquyomi()
     nmap <leader>rf <Plug>(TsuquyomiRenameSymbolC)
     nmap <leader>rF <Plug>(TsuquyomiRenameSymbol)
     nmap <Leader>iq : <C-u>echo tsuquyomi#hint()<CR>
 endfunction
+command! -bang SetupTsuquyomi :call SetupTsuquyomi()
 
 
 
