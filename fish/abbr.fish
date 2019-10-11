@@ -16,7 +16,7 @@ abbr --add --global ga     git add
 abbr --add --global gaa    git add --all
 abbr --add --global gas    git save
 # abbr --add --global gap    git pop  # because of autocompletion, the following is better:
-abbr --add --global gap    git rebase \(git rev-parse --abbr --add --globalev-ref HEAD\) stash/
+abbr --add --global gap    git rebase \(git rev-parse --abbrev-ref HEAD\) stash/
 abbr --add --global gb     git branch
 abbr --add --global gB     git branch --verbose --all
 abbr --add --global gbd    git branch -d
@@ -41,7 +41,7 @@ abbr --add --global gp     git pull
 abbr --add --global gpp    git pull
 abbr --add --global gpu    git push
 abbr --add --global gpuf   git push --force-with-lease
-abbr --add --global gpuu   git push -u \(git remote \| head -n1\) \(git rev-parse --abbr --add --globalev-ref HEAD\)
+abbr --add --global gpuu   git push -u \(git remote \| head -n1\) \(git rev-parse --abbrev-ref HEAD\)
 abbr --add --global gr     grep --with-filename --line-number --recursive --ignore-case --extended-regexp
 abbr --add --global gra    git reset --abort
 abbr --add --global grc    git reset --continue
