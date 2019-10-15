@@ -131,6 +131,13 @@ nnoremap <leader><bs>       :action CloseContent<cr>
 nnoremap <a-u>              :action VimUndo<cr>
 nnoremap <a-s-u>            :action VimRedo<cr>
 
+nnoremap <leader><c-l>      :action SplitVertically<cr>
+nnoremap <leader><c-x>      :action SplitHorizontally<cr>
+nnoremap <leader>qw         :action Unsplit<cr>
+
+nnoremap <c-l>              :action com.mnw.tabmover.actions.MoveFocusToNextWindow<cr>
+nnoremap <c-h>              :action com.mnw.tabmover.actions.MoveFocusToNextWindow<cr>
+
 nnoremap <leader>te         :action ActivateProjectToolWindow<cr>
 nnoremap <leader>tr         :action ActivateRunToolWindow<cr>
 nnoremap <leader>tt         :action ActivateTerminalToolWindow<cr>
