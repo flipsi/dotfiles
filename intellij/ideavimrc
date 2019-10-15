@@ -167,6 +167,7 @@ nnoremap <leader>/          :action FindInPath<cr>
 
 nnoremap <leader>ie         :action ShowErrorDescription<cr>
 nnoremap <leader>in         :action ShowNavBar<cr>
+nnoremap <leader>it         :action Scala.TypeInfo<cr>
 nnoremap <leader>iq         :action QuickJavaDoc<cr>
 
 " nnoremap <leader>gd         :action Compare.LastVersion<cr>
