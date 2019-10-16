@@ -43,20 +43,16 @@
 " {{{
 "
 "
-" Vim becomes especially powerful with plugins.
-" I use   VUNDLE    to manage my plugins.
-" It seems to be best package manager for me. For a discussion see here:
-"       http://quyennguyen.com/code/Sync-Vim-With-Github-and-Vundle/
-"       http://lepture.com/en/2012/vundle-vs-pathogen
+" Vim becomes especially powerful with plugins. I use vim-plug to manage them.
 
-" I install vundle like this:
+" I install vim-plug like this:
 "
-"       git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+"       curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"           https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 "
 " and don't have ~/.vim/bundle under version control, because this is a bad
 " idea. Instead, I use the install.sh script provided in this repository to
-" install some of the vim configuration files and from inside vim I call
-" :PluginInstall on each host to let vundle handle the plugins.
+" install vim configuration files let vim-plug handle the plugins.
 "
 "
 " I want my vimrc to be sourced without errors out of the box.
@@ -137,9 +133,8 @@ set runtimepath+=~/.vim/syntax
 " my mode {{{
 
 " compute if we should use mastery of the world or stripped mode
-" (TODO: current implementation is very simple and should be improved)
 function! ComputeMyMode()
-    if isdirectory(expand("~/.vim/bundle/vundle"))
+    if filereadable(expand("~/.vim/autoload/plug.vim"))
         return 'mastery'
     else
         return 'stripped'
@@ -195,39 +190,25 @@ augroup END
 "                                                                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" {{{
+
+nnoremap <leader>pi :PlugInstall<cr>:smile<cr>
+nnoremap <leader>pc :PlugClean<cr>
+nnoremap <leader>pu :PlugUpdate<cr>
+nnoremap <leader>ps :PlugStatus<space>
+nnoremap <leader>pd :PlugDiff<space>
+
 
 
 if s:MyMode == 'mastery'
 
-
-    " start vundle
-    filetype off
-    set rtp+=~/.vim/bundle/vundle/
-    "call vundle#rc()
-    call vundle#begin()
+    call plug#begin()
 
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let Vundle manage Vundle (required!) {{{
-
-Plugin 'gmarik/vundle'
-
-" package control mappings from vundle itself
-nnoremap <leader>pl :PluginList<cr>
-nnoremap <leader>pi :PluginInstall<cr>:smile<cr>
-nnoremap <leader>pc :PluginClean<cr>
-nnoremap <leader>pu :PluginUpdate<cr>
-nnoremap <leader>ps :PluginSearch<space>
-
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim sessions {{{
 
 " make sessions more convenient and automatically updated
-Plugin 'tpope/vim-obsession'
+Plug 'tpope/vim-obsession'
 
 let g:session_file_name = '.session.vim'
 
@@ -251,7 +232,7 @@ autocmd VimEnter * nested
 
 
 " fix FocusLost and FocusGained events in tmux
-Plugin 'tmux-plugins/vim-tmux-focus-events'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 
 " " don't worry about tmux panes and vim splits
@@ -266,7 +247,7 @@ Plugin 'tmux-plugins/vim-tmux-focus-events'
 
 
 " run tmux commands from within vim
-Plugin 'benmills/vimux'
+Plug 'benmills/vimux'
 let g:VimuxHeight = "50"
 let g:VimuxOrientation = "h"
 let VimuxUseNearest = 1
@@ -320,7 +301,7 @@ endfunction
 
 
 " autocompletion from words visible in tmux panes
-Plugin 'wellle/tmux-complete.vim'
+Plug 'wellle/tmux-complete.vim'
 " <c-x><c-u> and then <c-u> or <c-n> a few times
 
 
@@ -329,7 +310,7 @@ Plugin 'wellle/tmux-complete.vim'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " allow plugins to utilize . command {{{
 
-Plugin 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 
 
 " }}}
@@ -337,23 +318,23 @@ Plugin 'tpope/vim-repeat'
 " look and feel {{{
 
 " make gvim colorschemes work in terminal
-Plugin 'godlygeek/csapprox'
+Plug 'godlygeek/csapprox'
 
 
 " colorschemes
-Plugin 'flazz/vim-colorschemes'
-Plugin 'christophermca/meta5'
-Plugin 'joshdick/onedark.vim'
-Plugin 'sjl/badwolf'
+Plug 'flazz/vim-colorschemes'
+Plug 'christophermca/meta5'
+Plug 'joshdick/onedark.vim'
+Plug 'sjl/badwolf'
 
 
 " cycle through colorschemes
-Plugin 'vim-scripts/ScrollColors'
+Plug 'vim-scripts/ScrollColors'
 nnoremap <leader>yo :COLORSCROLL<cr>
 
 
 " highlight different parentheses pairs with different colors
-Plugin 'luochen1990/rainbow'
+Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
 nnoremap <leader>yb :RainbowToggle<cr>
 
@@ -363,7 +344,7 @@ nnoremap <leader>yb :RainbowToggle<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " distraction free mode {{{
 
-Plugin 'junegunn/goyo.vim'
+Plug 'junegunn/goyo.vim'
 
 let g:goyo_width="120"
 let g:goyo_height="100%"
@@ -375,8 +356,8 @@ nnoremap <leader>yy :Goyo<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " status bar {{{
 
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
@@ -396,11 +377,11 @@ let g:airline_symbols.maxlinenr = ''
 
 
 " " airline extension: show list of buffers (like tabs)
-" Plugin 'bling/vim-bufferline'
+" Plug 'bling/vim-bufferline'
 " let g:airline#extensions#bufferline#enabled = 0
 
 " airline extension: show columns of csv files
-Plugin 'chrisbra/csv.vim'
+Plug 'chrisbra/csv.vim'
 let g:airline#extensions#csv#enabled = 1
 
 " airline extension: hide fugitive stuff
@@ -418,7 +399,7 @@ let g:airline#extensions#grepper#enabled = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " do some git from within vim {{{
 
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gd :Gdiff<cr>
@@ -444,7 +425,7 @@ augroup END
 
 " show git status of lines on the left
 
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 
 let g:gitgutter_max_signs = 4000
 
@@ -477,7 +458,7 @@ nnoremap <leader>gi   :GitGutterPreviewHunk<cr>
 
 " show commit messages in a preview window
 
-Plugin 'rhysd/git-messenger.vim'
+Plug 'rhysd/git-messenger.vim'
 
 let g:git_messenger_no_default_mappings = v:true
 
@@ -489,7 +470,7 @@ nmap <Leader>gm <Plug>(git-messenger)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " handle unicode and digraphs easily {{{
 
-Plugin 'chrisbra/unicode.vim'
+Plug 'chrisbra/unicode.vim'
 
 " inspect character under cursor
 nnoremap ga :UnicodeName<cr>
@@ -502,7 +483,7 @@ nnoremap ga :UnicodeName<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " amazingly move everywhere {{{
 
-Plugin 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 
 " prefix
 map <M-l>  <plug>(easymotion-prefix)
@@ -513,7 +494,7 @@ let g:EasyMotion_keys = 'asdfgh,.qwertuiocvbnmjkl'
 
 
 " make f and t clever (i.e. repeatable. ',' and ';' will not be needed anymore.)
-" Plugin 'rhysd/clever-f.vim'
+" Plug 'rhysd/clever-f.vim'
 
 let g:clever_f_across_no_line = 0
 " let g:clever_f_ignore_case = 1
@@ -526,7 +507,7 @@ let g:clever_f_chars_match_any_signs = '/'
 
 
 " like f but with two characters
-Plugin 'justinmk/vim-sneak'
+Plug 'justinmk/vim-sneak'
 
 " interactive mode like easymotion
 " let g:sneak#label = 1
@@ -559,7 +540,7 @@ omap T :<C-U>call sneak#wrap(v:operator,   2, 1, 0, 0)<CR>
 
 
 " make f only match interesting characters
-" Plugin 'svermeulen/vim-NotableFt'
+" Plug 'svermeulen/vim-NotableFt'
 
 " nmap , <plug>NotableFtRepeatSearchForward
 " nmap ; <plug>NotableFtRepeatSearchBackward
@@ -572,7 +553,7 @@ omap T :<C-U>call sneak#wrap(v:operator,   2, 1, 0, 0)<CR>
 
 
 " highlight characters for f
-" Plugin 'unblevable/quick-scope'
+" Plug 'unblevable/quick-scope'
 
 
 
@@ -581,7 +562,7 @@ omap T :<C-U>call sneak#wrap(v:operator,   2, 1, 0, 0)<CR>
 " movements and text objects for parts of words {{{
 
 " move with ,w in wordsLikeThisWord or words_like_this_word
-" Plugin 'bkad/CamelCaseMotion'
+" Plug 'bkad/CamelCaseMotion'
 
 " call camelcasemotion#CreateMotionMappings(',') " DOES NOT WORK HERE
 
@@ -594,51 +575,51 @@ omap T :<C-U>call sneak#wrap(v:operator,   2, 1, 0, 0)<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " better and custom text objects {{{
 
-Plugin 'wellle/targets.vim'
+Plug 'wellle/targets.vim'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-Plugin 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-user'
 
 " lines with the same indent level (ai/ii)
-Plugin 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-indent'
 
 " quotes (aq/iq)
-Plugin 'beloglazov/vim-textobj-quotes'
+Plug 'beloglazov/vim-textobj-quotes'
 
 " functions (af/if)
-Plugin 'kana/vim-textobj-function'
-Plugin 'thinca/vim-textobj-function-javascript'
+Plug 'kana/vim-textobj-function'
+Plug 'thinca/vim-textobj-function-javascript'
 
 " function arguments (aa/ia)
 " (somehow required one more keystroke)
-Plugin 'gaving/vim-textobj-argument'
+Plug 'gaving/vim-textobj-argument'
 
 " lines with ( [ { pairs (ac/ic)
-" Plugin 'Chun-Yang/vim-textobj-chunk'
+" Plug 'Chun-Yang/vim-textobj-chunk'
 
 " css rules (ac/ic)
-Plugin 'jasonlong/vim-textobj-css'
-" Plugin 'stephenway/vim-textobj-css'
+Plug 'jasonlong/vim-textobj-css'
+" Plug 'stephenway/vim-textobj-css'
 
 " HTML/XML attributes (ax/ix)
-Plugin 'whatyouhide/vim-textobj-xmlattr'
+Plug 'whatyouhide/vim-textobj-xmlattr'
 
 " PHP Tags (aP/iP)
-Plugin 'akiyan/vim-textobj-php'
+Plug 'akiyan/vim-textobj-php'
 
 " folds (az/iz)
-Plugin 'kana/vim-textobj-fold'
+Plug 'kana/vim-textobj-fold'
 
 " git hunks (ih) (now managed by gitgutter plugin)
-" Plugin 'gilligan/textobj-gitgutter'
+" Plug 'gilligan/textobj-gitgutter'
 " omap ah <plug>(textobj-gitgutter-i)
 " vmap ah <plug>(textobj-gitgutter-i)
 
 " entire buffer / 'all' (aa/ia)
-Plugin 'kana/vim-textobj-entire'
+Plug 'kana/vim-textobj-entire'
 let g:textobj_entire_no_default_key_mappings = 1
 omap aE <plug>(textobj-entire-a)
 vmap aE <plug>(textobj-entire-a)
@@ -653,11 +634,11 @@ vmap iE <plug>(textobj-entire-i)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " advanced searching {{{
 
-" Plugin 'google/vim-searchindex'
-" Plugin 'osyo-manga/vim-anzu'
+" Plug 'google/vim-searchindex'
+" Plug 'osyo-manga/vim-anzu'
 
 
-Plugin 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch.vim'
 let g:incsearch#emacs_like_keymap = 1
 let g:incsearch_cli_key_mappings = {
 \   "\<c-n>": {
@@ -678,7 +659,7 @@ nnoremap ? :call incsearch#call({'command': '?'})<cr>
 
 
 " searching in multiple files
-Plugin 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim'
 
 " command to execute
 let g:ackprg="ag --vimgrep --smart-case"
@@ -693,7 +674,7 @@ let g:ackprg="ag --vimgrep --smart-case"
 
 
 " grep in vim like a pro
-Plugin 'mhinz/vim-grepper'
+Plug 'mhinz/vim-grepper'
 
 let g:grepper = {}
 " let g:grepper.tools = ['git', 'ag', 'grep', 'rg']
@@ -725,11 +706,11 @@ command! TODO Grepper -noprompt -tool git -query -E '(TODO|FIXME|XXX|\?\?\?)'
 
 
 " % also matches HTML-tags/words etc
-Plugin 'matchit.zip'
+Plug 'vim-scripts/matchit.zip'
 
 
 " hide (fold) everything except search string etc
-Plugin 'embear/vim-foldsearch'
+Plug 'embear/vim-foldsearch'
 
 let g:foldsearch_highlight = 0
 let g:foldsearch_disable_mappings = 1
@@ -761,7 +742,7 @@ nnoremap <leader>Z  :Fe<cr>
 " fuzzy find files etc (like Sublimes 'Goto Anything') {{{
 
 " (i use fzf instead)
-" Plugin 'kien/ctrlp.vim'
+" Plug 'kien/ctrlp.vim'
 
 " let g:ctrlp_map = '#'
 " let g:ctrlp_cmd = 'CtrlPBuffer'
@@ -809,9 +790,9 @@ let g:ctrlp_use_caching = 2000
 " (prefixing a word with ' makes it non-fuzzy)
 
 " install 'fzf' package on the system. or:
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim'
 
 
 " prefix all the command names
@@ -896,8 +877,8 @@ let g:fzf_colors =
 " http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
 " TODO CONFIGURE AND TEST
 
-"Plugin 'Shougo/vimproc.vim'
-"Plugin 'Shougo/unite.vim'
+"Plug 'Shougo/vimproc.vim'
+"Plug 'Shougo/unite.vim'
 
 
 " }}}
@@ -912,13 +893,13 @@ nnoremap <leader>eT :!ctags -R -f .tags .<cr>
 
 
 " generate tag file automagically
-Plugin 'craigemery/vim-autotag'
+Plug 'craigemery/vim-autotag'
 
 let g:autotagTagsFile=".tags"
 
 
 
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 
 " if I leave tagbar open but unfocused, q closes vim. that not what i want...
 " so i autoclose and autofocus tagbar, which is cooler anyway
@@ -935,8 +916,8 @@ noremap <silent> <leader>tb :TagbarToggle<cr>
 
 
 " jump to definitions without relying on tags
-" Plugin 'misterbuckley/vim-definitive'
-Plugin 'sflip/vim-definitive'
+" Plug 'misterbuckley/vim-definitive'
+Plug 'sflip/vim-definitive'
 
 nnoremap <leader>fd :FindDefinition<cr>
 
@@ -947,7 +928,7 @@ nnoremap <leader>fd :FindDefinition<cr>
 " file management {{{
 
 " sugar for unix shell commands like move/rename/delete/find files etc.
-Plugin 'tpope/vim-eunuch'
+Plug 'tpope/vim-eunuch'
 
 nnoremap <leader>rn :Rename <c-r>=expand("%:t")<cr>
 nnoremap <leader>rm
@@ -955,7 +936,7 @@ nnoremap <leader>rm
             \ <bar> Delete
             \ <bar> endif <cr>
 
-" Plugin 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 
 let NERDTreeWinSize = 50
 let NERDTreeQuitOnOpen = 1
@@ -971,7 +952,7 @@ let NERDTreeMapToggleHidden='.'
 
 
 " pimp netrw
-" Plugin 'tpope/vim-vinegar'
+" Plug 'tpope/vim-vinegar'
 
 
 
@@ -979,7 +960,7 @@ let NERDTreeMapToggleHidden='.'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " close all other buffers {{{
 
-Plugin 'vim-scripts/BufOnly.vim'
+Plug 'vim-scripts/BufOnly.vim'
 
 nmap <leader>qo :BufOnly<cr>
 
@@ -989,7 +970,7 @@ nmap <leader>qo :BufOnly<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " static code analysis {{{
 
-" Plugin 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -1056,7 +1037,7 @@ let g:syntastic_quiet_messages = { "regex": [
 
 
 " asynchronous alternative to syntastic
-Plugin 'w0rp/ale'
+Plug 'w0rp/ale'
 
 let g:ale_list_window_size = 5
 let g:ale_lint_on_enter = 0
@@ -1089,12 +1070,12 @@ highlight ALEInfoSign       ctermfg=227
 
 
 " evaluate expression live, which is awesome
-" Plugin 'metakirby5/codi.vim'
+" Plug 'metakirby5/codi.vim'
 
 
 
 " lookup stuff
-Plugin 'dbeniamine/cheat.sh-vim'
+Plug 'dbeniamine/cheat.sh-vim'
 
 let g:CheatSheetDefaultMode=0
 
@@ -1119,7 +1100,7 @@ vnoremap <script> <silent> <leader>kb
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " read the docs {{{
 
-Plugin 'thinca/vim-ref'
+Plug 'thinca/vim-ref'
 
 ":Ref STUFF
 
@@ -1131,7 +1112,7 @@ Plugin 'thinca/vim-ref'
 
 
 " replace some motion or text object or selection with current yank
-" Plugin 'ReplaceWithRegister'
+" Plug 'ReplaceWithRegister'
 " nmap -rr <plug>ReplaceWithRegisterOperator
 " nmap -re <plug>ReplaceWithRegisterLine
 " xmap -r  <plug>ReplaceWithRegisterVisual
@@ -1139,12 +1120,12 @@ Plugin 'thinca/vim-ref'
 
 
 " preview register contents
-Plugin 'junegunn/vim-peekaboo'
+Plug 'junegunn/vim-peekaboo'
 
 
 " make the 0 register a stack (yank/delete multiple things without worrying)
 " lightweight alternative to yankring
-Plugin 'maxbrunsfeld/vim-yankstack'
+Plug 'maxbrunsfeld/vim-yankstack'
 let g:yankstack_map_keys = 0
 nmap <leader>pp <plug>yankstack_substitute_older_paste
 nmap <leader>nn <plug>yankstack_substitute_newer_paste
@@ -1152,7 +1133,7 @@ nmap <leader>nn <plug>yankstack_substitute_newer_paste
 
 
 " add and toggle comments with <leader>c<space> etc
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 " use leading space, but delete trailing space
 let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 1
@@ -1182,17 +1163,17 @@ nnoremap O O<esc>S
 
 
 " automagically add closing braces etc
-Plugin 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 
 
 " add a ; at the end of a line
-"Plugin 'lfilho/cosco.vim'
+"Plug 'lfilho/cosco.vim'
 "inoremap <silent> <esc><enter> <esc>:call cosco#commaOrSemiColon()<cr>A<enter>
 inoremap <silent> <esc><enter> <esc>A;<esc>^
 
 
 " add/change/delete quotes/braces/... and more
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " surround consistently in both modes and more comfortably on german keyboard
 nmap -s ys
@@ -1227,7 +1208,7 @@ nnoremap <silent> -tq :call ToggleQuotesWithVimSurround()<cr>
 
 
 " swap ('transpose') two words or arbitrary things
-Plugin 'tommcdo/vim-exchange'
+Plug 'tommcdo/vim-exchange'
 " swap this word and the word before
 nmap <leader>x <plug>(Exchange)
 xmap <leader>x <plug>(Exchange)
@@ -1237,15 +1218,14 @@ nmap <leader>xx <leader>xiw
 
 
 " " find and replace tool for multiple files (IDE like)
-" " (helptags are buggy according to vundle)
-" Plugin 'brooth/far.vim'
+" Plug 'brooth/far.vim'
 " nnoremap <leader>SS :Far  **<left><left><left>
 " vnoremap <leader>SS :Far *  **<left><left><left>
 " nnoremap <leader>SD :Fardo<cr>
 
 
 " " add "printf" statements with shortcut
-" Plugin 'bergercookie/vim-debugstring'
+" Plug 'bergercookie/vim-debugstring'
 
 " nmap <leader>ad <plug>DumpDebugString
 
@@ -1257,7 +1237,7 @@ nmap <leader>xx <leader>xiw
 
 " SEEMS NOT TO WORK PROPERLY FOR ME
 
-" Plugin 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
 
 " let g:multi_cursor_use_default_mapping=0
 
@@ -1276,14 +1256,14 @@ nmap <leader>xx <leader>xiw
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " better diff {{{
 
-Plugin 'AndrewRadev/linediff.vim'
+Plug 'AndrewRadev/linediff.vim'
 
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " run make or jobs asynchronously {{{
 
-Plugin 'tpope/vim-dispatch'
+Plug 'tpope/vim-dispatch'
 
 
 
@@ -1292,11 +1272,11 @@ Plugin 'tpope/vim-dispatch'
 " better quickfix window {{{
 
 " edit quickfix list (make changes directly after global search or linting)
-Plugin 'Olical/vim-enmasse'
+Plug 'Olical/vim-enmasse'
 
 
 " automatically resize quickfix window
-Plugin 'blueyed/vim-qf_resize'
+Plug 'blueyed/vim-qf_resize'
 
 let g:qf_resize_min_height = 1
 let g:qf_resize_max_height = 8
@@ -1306,7 +1286,7 @@ let g:qf_resize_max_height = 8
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " move visual selections around (even blocks) {{{
 
-"Plugin 'shinokada/dragvisuals.vim'
+"Plug 'shinokada/dragvisuals.vim'
 "vmap <expr> <c-h>  DVB_Drag('left')
 "vmap <expr> <c-l>  DVB_Drag('right')
 "vmap <expr> <c-j>  DVB_Drag('down')
@@ -1314,7 +1294,7 @@ let g:qf_resize_max_height = 8
 
 
 " this is an improved version of dragvisuals
-Plugin 'zirrostig/vim-schlepp'
+Plug 'zirrostig/vim-schlepp'
 
 vmap <up>    <plug>SchleppUp
 vmap <down>  <plug>SchleppDown
@@ -1330,7 +1310,7 @@ vmap -u <plug>SchleppDup
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " change 'true' to 'false' etc. in the blink of an eye {{{
 
-Plugin 'vim-scripts/toggle_words.vim'
+Plug 'vim-scripts/toggle_words.vim'
 
 noremap <silent> -tw :ToggleWord<cr>
 
@@ -1425,7 +1405,7 @@ let g:toggle_words_dict = {
 " Snippets {{{
 
 " snippet engine
-Plugin 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger='<c-k>'
 "let g:UltiSnipsListSnippets='<esc>.'
 let g:UltiSnipsJumpForwardTrigger='<c-i>'
@@ -1434,7 +1414,7 @@ let g:UltiSnipsSnippetDirectories=['UltiSnips', 'sflipsnippets']
 
 
 " snippet packs
-Plugin 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 
 
 " make html snippets work in php
@@ -1447,12 +1427,7 @@ autocmd filetype php set filetype=php.html
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " advanced autocompletion {{{
 "
-" Remember: YCM is a plugin with a compiled component. If you update YCM using
-" Vundle and the ycm_support_libs library APIs have changed (happens rarely),
-" YCM will notify you to recompile it. You should then rerun the install
-" process.
-
-" Plugin 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 " let g:ycm_server_python_interpreter = '/usr/bin/python3'
 " let g:ycm_path_to_python_interpreter = '/usr/bin/python3'
 let g:ycm_key_invoke_completion = '<esc>.'
@@ -1462,7 +1437,7 @@ let g:ycm_key_list_previous_completion = ['<c-p>', '<up>']
 
 
 " autocompletion in command mode
-Plugin 'vim-scripts/CmdlineComplete'
+Plug 'vim-scripts/CmdlineComplete'
 cmap <c-p> <plug>CmdlineCompleteBackward
 cmap <c-n> <plug>CmdlineCompleteForward
 
@@ -1472,7 +1447,7 @@ cmap <c-n> <plug>CmdlineCompleteForward
 " generate docs {{{
 
 " generate javascript docs
-Plugin 'heavenshell/vim-jsdoc'
+Plug 'heavenshell/vim-jsdoc'
 " nnoremap <silent> -adj ?function<cr>:noh<cr><plug>(jsdoc)
 nnoremap <silent> -adj :JsDoc<cr>
 
@@ -1482,7 +1457,7 @@ nnoremap <silent> -adj :JsDoc<cr>
 " align stuff {{{
 
 " show indentation level
-Plugin 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
 let g:indentLine_enabled = 1
 let g:indentLine_char = '┊'
 nnoremap <leader>yI :IndentLinesToggle<cr>
@@ -1497,7 +1472,7 @@ augroup END
 
 
 " align plugin
-Plugin 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 
 " Start interactive EasyAlign in visual mode (e.g. vip-L=)
 xmap -L <plug>(EasyAlign)
@@ -1512,7 +1487,7 @@ nmap -L <plug>(EasyAlign)
 
 " (also remember ==)
 
-Plugin 'Chiel92/vim-autoformat'
+Plug 'Chiel92/vim-autoformat'
 
 " install formatters on the system:
 " - js-beautify (for HTML, CSS, JavaScript, JSON)
@@ -1547,7 +1522,7 @@ augroup END
 
 
 " change wrapping of function arguments
-Plugin 'FooSoft/vim-argwrap'
+Plug 'FooSoft/vim-argwrap'
 
 nnoremap <silent> -tf :ArgWrap<cr>
 
@@ -1562,21 +1537,21 @@ nnoremap <silent> -tf :ArgWrap<cr>
 " - dot.case (cr.),
 " - space case (cr<space>),
 " - Title Case (crt)
-Plugin 'tpope/vim-abolish'
+Plug 'tpope/vim-abolish'
 
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " don't worry about 'shiftwidth' and 'expandtab' etc. {{{
 
-Plugin 'tpope/vim-sleuth'
+Plug 'tpope/vim-sleuth'
 
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " handle trailing whitespace {{{
 
-Plugin 'vim-scripts/ShowTrailingWhiteSpace'
+Plug 'vim-scripts/ShowTrailingWhiteSpace'
 let g:ShowTrailingWhitespace = 1
 command! -bar ShowTrailingWhitespaceOn  call ShowTrailingWhitespace#Set(1,1)
 command! -bar ShowTrailingWhitespaceOff call ShowTrailingWhitespace#Set(0,1)
@@ -1587,10 +1562,10 @@ nnoremap <silent> <leader>yA  :ShowTrailingWhitespaceToggle<cr>
 nnoremap <silent> <leader>yst :ShowTrailingWhitespaceToggle<cr>
 
 " (has a bug)
-"Plugin 'vim-scripts/JumpToTrailingWhiteSpace'
+"Plug 'vim-scripts/JumpToTrailingWhiteSpace'
 
 
-Plugin 'vim-scripts/DeleteTrailingWhiteSpace'
+Plug 'vim-scripts/DeleteTrailingWhiteSpace'
 
 " check for trailing whitespace when writing file
 let g:DeleteTrailingWhitespace = 1
@@ -1618,18 +1593,18 @@ nnoremap <silent> -dst :%DeleteTrailingWhitespace<cr>
 " colors (hex codes and such) {{{
 
 " make colors visible (e.g. '#DD8844' will have orange background)
-Plugin 'ap/vim-css-color'
+Plug 'ap/vim-css-color'
 
 " convert between color formats
-Plugin 'amadeus/vim-convert-color-to'
+Plug 'amadeus/vim-convert-color-to'
 
 " launch colorpicker and insert color code
-Plugin 'blindFS/vim-colorpicker'
+Plug 'blindFS/vim-colorpicker'
 nnoremap <leader>icp :ColorPicker<cr>
 
 " alternative colorpicker
 " (readme is looking good, but throws errors)
-"Plugin 'KabbAmine/vCoolor.vim'
+"Plug 'KabbAmine/vCoolor.vim'
 "nnoremap <leader>cp :VCoolor<cr>
 
 
@@ -1639,10 +1614,10 @@ nnoremap <leader>icp :ColorPicker<cr>
 " Completion and other smart IDE features via LSP {{{
 
 " stable
-" Plugin 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 
 " nightly
-Plugin 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 
 nmap <leader>ie <Plug>(coc-diagnostic-info)
 nmap <leader>i<bs> <Plug>(coc-float-hide)
@@ -1663,21 +1638,21 @@ nmap <leader>i<return> <Plug>(coc-fix-current)
 " Language specific stuff {{{
 
 
-Plugin 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 
 
 
 " Language: fish {{{
 
-Plugin 'dag/vim-fish'
+Plug 'dag/vim-fish'
 
 
 " }}}
 " Language: javascript {{{
 
-Plugin 'ianks/vim-tsx'
+Plug 'ianks/vim-tsx'
 
-Plugin 'Quramy/tsuquyomi'
+Plug 'Quramy/tsuquyomi'
 
 augroup javascript_on_read
     au!
@@ -1724,7 +1699,7 @@ command! -bang SetupTsuquyomi :call SetupTsuquyomi()
 " }}}
 " Language: LaTeX {{{
 
-Plugin 'lervag/vimtex'
+Plug 'lervag/vimtex'
 
 let g:vimtex_view_method='zathura'
 "let g:vimtex_viewer_general='zathura'
@@ -1750,7 +1725,7 @@ augroup END
 " }}}
 " Language: Markdown {{{
 
-Plugin 'shime/vim-livedown'
+Plug 'shime/vim-livedown'
 " requires `npm install -g livedown`
 
 let g:livedown_browser = 'surf'
@@ -1799,7 +1774,7 @@ endfunction
 " Language: R {{{
 
 if v:version > 704 || v:version == 704 && has("patch1829")
-    Plugin 'jalvesaq/Nvim-R'
+    Plug 'jalvesaq/Nvim-R'
     " use with tmux
     let R_in_buffer = 0
     let R_applescript = 0
@@ -1839,7 +1814,7 @@ command! -bang SetupRust :call SetupRust()
 " }}}
 " Language: Scala {{{
 
-" Plugin 'ervandew/eclim'
+" Plug 'ervandew/eclim'
 
 " start eclipse
 noremap <leader>aea :Start! /usr/lib/eclipse/eclimd<cr>
@@ -1857,14 +1832,14 @@ noremap <leader>ae<return> :ScalaSearch<cr>
 
 
 
-Plugin 'derekwyatt/vim-scala'
-Plugin 'derekwyatt/vim-sbt'
-Plugin 'mdreves/vim-scaladoc'
+Plug 'derekwyatt/vim-scala'
+Plug 'derekwyatt/vim-sbt'
+Plug 'mdreves/vim-scaladoc'
 nnoremap <leader>sd :call scaladoc#Search(expand("<cword>"))<cr>
 
-" Plugin 'ensime/ensime-sbt', { 'branch': '2.0', 'for': 'scala' }
-" Plugin 'ensime/ensime-server', { 'branch': '2.0', 'for': 'scala' }
-" Plugin 'ensime/ensime-vim', { 'for': 'scala' }
+" Plug 'ensime/ensime-sbt', { 'branch': '2.0', 'for': 'scala' }
+" Plug 'ensime/ensime-server', { 'branch': '2.0', 'for': 'scala' }
+" Plug 'ensime/ensime-vim', { 'for': 'scala' }
 " augroup map_scala
     " au!
     " au FileType scala
@@ -1884,10 +1859,10 @@ nnoremap <leader>sd :call scaladoc#Search(expand("<cword>"))<cr>
 " scala and ctags:
 " https://advancedweb.hu/2017/01/10/vim-scala-ag-ctags/
 " plugin that also creates ctags for libaries (can be slow and huge files):
-" Plugin 'ceedubs/sbt-ctags'
+" Plug 'ceedubs/sbt-ctags'
 
 " show sbt errors in the quickfix window
-" Plugin 'dscleaver/sbt-quickfix'
+" Plug 'dscleaver/sbt-quickfix'
 " (does not work and is not necessary: https://gist.github.com/nkpart/5945278)
 
 " :!sbt -Dsbt.log.noformat=true compile 2>&1 >/tmp/sbt.out
@@ -1988,7 +1963,7 @@ endfunction
 command! -bang SetupSQLVimux :call SetupSQLVimux()
 
 
-Plugin 'tpope/vim-dadbod'
+Plug 'tpope/vim-dadbod'
 
 " For database connection, see ':help dadbod-variables'
 
@@ -2009,7 +1984,7 @@ command! -bang SetupSQLDadBod :call SetupSQLDadBod()
 
 
 
-" Plugin 'cosminadrianpopescu/vim-sql-workbench'
+" Plug 'cosminadrianpopescu/vim-sql-workbench'
 " (This plugin sound promising, but is shit)
 
 " let g:sw_config_dir = '/home/sflip/.sqlworkbench'
@@ -2035,7 +2010,7 @@ command! -bang SetupSQLDadBod :call SetupSQLDadBod()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Graphical undo tree {{{
 
-Plugin 'sjl/gundo.vim'
+Plug 'sjl/gundo.vim'
 
 let g:gundo_preview_height = 25
 let g:gundo_right = 1
@@ -2048,11 +2023,9 @@ nnoremap <leader>ut :GundoToggle<cr>
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    " finish vundle
-    call vundle#end()
-    filetype plugin indent on
+    call plug#end()
 
-    " THE FOLLOWING MUST BE EXECUTED AFTER VUNDLE FINISHED:
+    " THE FOLLOWING MUST BE EXECUTED AFTER vim-plugin FINISHED:
 
     " call camelcasemotion#CreateMotionMappings(',')
 
@@ -3640,8 +3613,8 @@ nnoremap <silent> -dsm :.s:\v(\S) {2,}(\S):\1 \2:<cr>
 nnoremap <silent> -dsM :.s:\v(\S) {2,}(\S):\1 \2:<cr>
 
 
-" convert a vim plugin github url into appropriate format for vundle
-nnoremap -pi :.s:\m.*http.*github\.com/\([^/]*/[^/]*\).*:Plugin '\1':<cr>
+" convert a vim plugin github url into appropriate format for vim-plug
+nnoremap -pi :.s:\m.*http.*github\.com/\([^/]*/[^/]*\).*:Plug '\1':<cr>
 
 
 " add/remove an html comment
