@@ -6,6 +6,9 @@
     editor = vim
     excludesfile = "~/.gitignore"
 
+[commit]
+    verbose = true
+
 [fetch]
     prune = true
 
