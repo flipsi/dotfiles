@@ -3934,6 +3934,7 @@ augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
     autocmd!
     autocmd filetype gitcommit setlocal nonumber norelativenumber
     autocmd filetype gitcommit let b:local_autosave = 0
+    autocmd filetype gitcommit let b:DeleteTrailingWhitespace_Action = 'delete'
     autocmd filetype gitcommit normal gg
     autocmd filetype gitcommit call InsertTicketNumberFromBranchIfAny()
 augroup END
