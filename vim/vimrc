@@ -191,7 +191,7 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-nnoremap <leader>pi :PlugInstall<cr>:smile<cr>
+nnoremap <leader>pi :PlugInstall<cr>
 nnoremap <leader>pc :PlugClean<cr>
 nnoremap <leader>pu :PlugUpdate<cr>
 nnoremap <leader>ps :PlugStatus<space>
