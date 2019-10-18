@@ -3445,6 +3445,10 @@ inoremap <esc>. <c-n>
 inoremap <m-:>  <c-p>
 inoremap <esc>: <c-p>
 
+" disable (or enable) tag completions (sometimes they are too slow)
+" TODO: also disable 'i' with the same keystroke?
+nnoremap <leader>oc :if &complete =~ 't' <bar> set complete-=t <bar> else <bar> set complete+=t <bar> endif <bar> set complete? <cr>
+
 " increment/decrement number
 nnoremap -i <c-a>
 nnoremap -- <c-x>
