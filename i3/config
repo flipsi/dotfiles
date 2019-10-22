@@ -323,10 +323,14 @@ mode "$mode_x" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-set $mode_xdootool (b) bash with my bashrc (s) shrug
+set $mode_xdootool (b) bash with my bashrc (p) testing password (s) shrug (t) timestamp (T) unix timestamp
 mode "$mode_xdootool" {
-    bindsym b exec --no-startup-id "xdotool type 'bbash --rcfile <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/bash/bashrc_sflip)'; xdotool key Return"; mode "default";
-    bindsym s exec --no-startup-id "xdotool type --delay 50 '     ¯\_(ツ)_/¯'"; mode "default";
+    bindsym b       exec --no-startup-id "xdotool type 'bbash --rcfile <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/bash/bashrc_sflip)'; xdotool key Return"; mode "default";
+    bindsym p       exec --no-startup-id "xdotool type 'iopineiBie5fiong7yae6aeng0ooF6'"; mode "default";
+    bindsym s       exec --no-startup-id "sleep 0.1; xdotool type --delay 30 '¯\_(ツ)_/¯'"; mode "default";
+    bindsym Shift+s exec --no-startup-id "sleep 0.1; xdotool type --delay 30 '¯\\\_(ツ)\_/¯'"; mode "default";
+    bindsym t       exec --no-startup-id "sleep 0.1; xdotool type \\"$(date +%Y%m%d%H%M)\\""; mode "default";
+    bindsym Shift+t exec --no-startup-id "sleep 0.1; xdotool type \\"$(date +%s)\\""; mode "default";
     # cancel
     bindsym $mod+Escape mode "default"
     bindsym Return mode "default"
