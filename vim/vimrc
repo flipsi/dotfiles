@@ -1619,6 +1619,11 @@ nnoremap <leader>icp :ColorPicker<cr>
 " nightly
 Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 
+let g:coc_start_at_startup = 0
+
+nmap <leader>jt :CocDisable<cr>
+nmap <leader>jT :CocEnable<cr>
+
 nmap <leader>ie <Plug>(coc-diagnostic-info)
 nmap <leader>i<bs> <Plug>(coc-float-hide)
 
