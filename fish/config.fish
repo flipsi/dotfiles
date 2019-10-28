@@ -126,6 +126,11 @@ if status --is-interactive; and status --is-login
       end
     end
 
+    # asdf version manager
+    if test -f /opt/asdf-vm/asdf.fish
+        source /opt/asdf-vm/asdf.fish
+    end
+
     # configuration for fish-command-timer
     set -x fish_command_timer_enabled      1
     set -x fish_command_timer_color        $fish_my_color_gray_middle
