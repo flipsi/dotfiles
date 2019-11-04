@@ -1884,6 +1884,10 @@ augroup sbt_on_read
     au FileType sbt.scala call SetupScala()
 augroup END
 
+function! IsScalaProject()
+    return filereadable("build.sbt")
+endfunction
+
 function! SetupScala()
     let l:sbt_version = system('grep -E "sbt\.version" project/build.properties | sed -E "s/.*=(.*)/\1/"')
     " sbt shows column in compiler errors since version 1.0.0 so there are two " cases for errorformat:
@@ -1955,8 +1959,8 @@ endfunction
 
 augroup sql_on_read
     au!
-    au FileType sql call SetupSQLVimux()
-    au FileType sql call SetupSQLDadBod()
+    au FileType sql if !IsScalaProject() | call SetupSQLVimux() | endif
+    au FileType sql if !IsScalaProject() | call SetupSQLDadBod() | endif
 augroup END
 
 command! -bang SetupSQL :call SetupSQLDadBod()<bar> call SetupSQLVimux()
