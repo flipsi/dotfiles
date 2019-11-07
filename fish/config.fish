@@ -127,8 +127,8 @@ if status --is-interactive; and status --is-login
     end
 
     # asdf version manager
-    if test -f /opt/asdf-vm/asdf.fish
-        source /opt/asdf-vm/asdf.fish
+    if test -f ~/.asdf/asdf.fish
+        source ~/.asdf/asdf.fish
     end
 
     # configuration for fish-command-timer
