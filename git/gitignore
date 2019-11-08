@@ -4,6 +4,9 @@
 *.bak
 *.swp
 
+# version managers
+.tool-versions
+
 # IDE and editor files etc.
 .session.vim
 .tags
