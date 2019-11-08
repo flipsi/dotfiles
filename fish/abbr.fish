@@ -77,6 +77,7 @@ abbr $args o      open
 abbr $args p      pass
 abbr $args pe     pass edit
 abbr $args pg     pgrep
+abbr $args pn     pass generate --no-symbols --clip
 abbr $args pgp    pass git pull
 abbr $args pgpu   pass git push
 abbr $args pk     pkill
