@@ -280,7 +280,9 @@ function! MakeWithVimux(command)
         let l:project_name = tolower(system('basename $(pwd) | tr -d "\n"'))
     endif
     let g:makewithvimux_outfile = '/tmp/vim.'.l:project_name.'.'.l:git_branch_name_escaped.'.make.out'
-    let command = a:command . ' | tee ' . g:makewithvimux_outfile
+    " let command = a:command . ' | tee ' . g:makewithvimux_outfile
+    " let command = a:command . " | tee (tty) | sed 's/\\x1b\\[[0-9;]*m//g' > " . g:makewithvimux_outfile
+    let command = a:command . " | tee (tty) | sed 's/\\x1b\\[[0-9;]*[a-zA-Z]//g' > " . g:makewithvimux_outfile
     call VimuxRunCommand(command)
 endfunction
 function! MakeWithVimuxOpenErrors(where)
