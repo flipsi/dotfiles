@@ -855,4 +855,5 @@ for_window [class="(?i)urxvt"]                                                  
 for_window [class="(?i)jetbrains-idea"]                                         move workspace to output DP3-1
 for_window [class="(?i)jetbrains-phpstorm"]                                     move workspace to output DP3-1
 for_window [class="(?i)slack"]                                                  move workspace to output eDP1
+for_window [class="Spotify"]                                                    move workspace to output eDP1
 for_window [class="(?i)telegram"]                                               move workspace to output eDP1
