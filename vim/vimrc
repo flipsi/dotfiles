@@ -1744,6 +1744,7 @@ function! SetupMarkdown()
     nnoremap <buffer> <leader>bs :LivedownPreview<cr>
     nnoremap <buffer> <leader>bx :LivedownKill<cr>
 endfunction
+command! -bang SetupMarkdown :call SetupMarkdown()
 
 
 " }}}
