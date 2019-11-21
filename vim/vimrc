@@ -1646,6 +1646,10 @@ nmap <leader>i<return> <Plug>(coc-fix-current)
 
 Plug 'sheerun/vim-polyglot'
 
+" helm is disabled so *.tpl files are considered smarty files
+let g:polyglot_disabled = ['helm']
+
+
 
 
 " Language: fish {{{
@@ -1955,6 +1959,16 @@ endfunction
 
 
 " TODO: find fzf scala docs
+
+" }}}
+" Language: Smarty {{{
+
+Plug 'vim-scripts/smarty-syntax'
+
+augroup smarty_on_read
+    au!
+    au BufNewFile,BufReadPost *.tpl set syntax=smarty
+augroup END
 
 
 " }}}
