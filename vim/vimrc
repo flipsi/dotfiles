@@ -3319,8 +3319,11 @@ cnoremap <esc>b <s-left>
 cnoremap <esc>f <s-right>
 
 
-" TODO: FIX
 " move to BOL (beginning of line)
+nnoremap <c-a> ^
+cnoremap <c-a> ^
+
+" TODO: FIX
 " smart BOL: the cursor moves to the first nonblank character on the line,
 "            or, if already at that position, to the very start of the line.
 "            (http://vim.wikia.com/wiki/Smart_home)
@@ -3333,7 +3336,6 @@ nnoremap <c-e> $
 vnoremap <c-e> $
 onoremap <c-e> $
 inoremap <c-e> <end>
-cnoremap <c-a> <home>
 " move to EOL with l instead of $
 onoremap l $
 
