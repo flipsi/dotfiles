@@ -4,6 +4,7 @@ else
     set args --add
 end
 
+abbr $args agl    ag -l
 abbr $args ca     gcalcli
 abbr $args cdi    cd_interactively
 abbr $args cdi.   cd_interactively .
