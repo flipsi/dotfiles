@@ -117,6 +117,14 @@ nnoremap -as mno<Esc>o<Esc>o<Esc>o<Esc>`n
 nnoremap <c-g>+             :action EditorIncreaseFontSize<cr>
 nnoremap <c-g>-             :action EditorDecreaseFontSize<cr>
 
+nnoremap <leader>ym         :action ViewMainMenu<cr>
+nnoremap <leader>yy         :action TogglePresentationMode<cr>
+nnoremap <leader>yY         :action ToggleDistractionFreeMode<cr>
+nnoremap <leader>yG         :action EditorToggleShowGutterIcons<cr>
+nnoremap <leader>yI         :action EditorToggleShowIndentLines<cr>
+nnoremap <leader>yL         :action EditorToggleShowLineNumbers<cr>
+nnoremap <leader>ya         :action EditorToggleShowWhitespaces<cr>
+
 nnoremap <leader>.          :action JumpToLastChange<cr>
 nnoremap <down>             :action VcsShowNextChangeMarker<cr>
 nnoremap <up>               :action VcsShowPrevChangeMarker<cr>
@@ -136,7 +144,7 @@ nnoremap <leader><c-x>      :action SplitHorizontally<cr>
 nnoremap <leader>qw         :action Unsplit<cr>
 
 nnoremap <c-l>              :action com.mnw.tabmover.actions.MoveFocusToNextWindow<cr>
-nnoremap <c-h>              :action com.mnw.tabmover.actions.MoveFocusToNextWindow<cr>
+nnoremap <c-h>              :action com.mnw.tabmover.actions.MoveFocusToPreviousWindow<cr>
 
 nnoremap <leader>te         :action ActivateProjectToolWindow<cr>
 nnoremap <leader>tr         :action ActivateRunToolWindow<cr>
