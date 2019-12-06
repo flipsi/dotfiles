@@ -143,8 +143,9 @@ nnoremap <leader><c-l>      :action SplitVertically<cr>
 nnoremap <leader><c-x>      :action SplitHorizontally<cr>
 nnoremap <leader>qw         :action Unsplit<cr>
 
-nnoremap <c-l>              :action com.mnw.tabmover.actions.MoveFocusToNextWindow<cr>
-nnoremap <c-h>              :action com.mnw.tabmover.actions.MoveFocusToPreviousWindow<cr>
+nnoremap <c-l>              <c-w>l
+nnoremap <c-h>              <c-w>h
+nnoremap <c-w><c-w>         :action com.mnw.tabmover.actions.ShowTabMoveActions<cr>
 
 nnoremap <leader>te         :action ActivateProjectToolWindow<cr>
 nnoremap <leader>tr         :action ActivateRunToolWindow<cr>
