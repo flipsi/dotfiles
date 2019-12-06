@@ -71,7 +71,7 @@ abbr $args m      man
 abbr $args ma     make apply
 abbr $args mi     make init
 abbr $args mip    make init plan
-abbr $args mkd    mkdir
+abbr $args mkd    mkdir_cd
 abbr $args mp     make plan
 abbr $args mpa    make plan apply
 abbr $args o      open
