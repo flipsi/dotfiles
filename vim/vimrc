@@ -121,6 +121,11 @@ set nocompatible
 "set shell=/usr/bin/bash
 let &shell=system('which bash | tr -d "\n"')
 
+" force usage of python3
+" https://robertbasic.com/blog/force-python-version-in-vim/
+if has('python3')
+endif
+
 " always search recursively (e.g. when using :find)
 set path+=**
 
@@ -1845,7 +1850,8 @@ noremap <leader>ae<return> :ScalaSearch<cr>
 
 Plug 'derekwyatt/vim-scala'
 Plug 'derekwyatt/vim-sbt'
-Plug 'mdreves/vim-scaladoc'
+
+" Plug 'mdreves/vim-scaladoc' " uses python 2 which is ridiculous
 nnoremap <leader>sd :call scaladoc#Search(expand("<cword>"))<cr>
 
 " Plug 'ensime/ensime-sbt', { 'branch': '2.0', 'for': 'scala' }
