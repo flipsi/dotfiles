@@ -773,7 +773,6 @@ mode "$kill" {
     bindsym s       exec --no-startup-id "pkill    -f 'sbt-launch.jar'"; mode "default"
     bindsym S       exec --no-startup-id "pkill -9 -f 'sbt-launch.jar'"; mode "default"
     # cancel
-    #bindsym $mod+o mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
