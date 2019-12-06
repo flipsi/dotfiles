@@ -770,6 +770,8 @@ mode "$kill" {
     bindsym I       exec --no-startup-id "pkill -9 vivaldi-stable"; mode "default"
     bindsym j       exec --no-startup-id "pkill    java"; mode "default"
     bindsym J       exec --no-startup-id "pkill -9 java"; mode "default"
+    bindsym s       exec --no-startup-id "pkill    -f 'sbt-launch.jar'"; mode "default"
+    bindsym S       exec --no-startup-id "pkill -9 -f 'sbt-launch.jar'"; mode "default"
     # cancel
     #bindsym $mod+o mode "default"
     bindsym Return mode "default"
