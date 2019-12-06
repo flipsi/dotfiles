@@ -37,9 +37,9 @@ set ignore-case = true
 set editor-line-number = true
 
 # when to refresh the views
-set refresh-mode = auto
-#set refresh-mode = periodic
-#set refresh-interval = 2
+# set refresh-mode = auto
+set refresh-mode = periodic
+set refresh-interval = 2
 
 
 
