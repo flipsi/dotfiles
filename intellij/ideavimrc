@@ -136,8 +136,8 @@ nnoremap <leader>qq         :action CloseContent<cr>
 nnoremap <leader>qa         :action CloseAllEditors<cr>
 nnoremap <leader><bs>       :action CloseContent<cr>
 
-nnoremap <a-u>              :action VimUndo<cr>
-nnoremap <a-s-u>            :action VimRedo<cr>
+nnoremap <a-u>              :undo<cr>
+nnoremap <a-s-u>            :redo<cr>
 
 nnoremap <leader><c-l>      :action SplitVertically<cr>
 nnoremap <leader><c-x>      :action SplitHorizontally<cr>
