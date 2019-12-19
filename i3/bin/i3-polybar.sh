@@ -27,7 +27,7 @@ function set_env_vars() {
                 BAR_MAIN_MONITOR=DP3-1
             fi
             BAR_MAIN_DPI=108
-            BAR_MAIN_HEIGHT=28
+            BAR_MAIN_HEIGHT=24
             BAR_TRAY_MAXSIZE=16
             ;;
         * )
