@@ -1853,7 +1853,7 @@ Plug 'derekwyatt/vim-scala'
 Plug 'derekwyatt/vim-sbt'
 
 " Plug 'mdreves/vim-scaladoc' " uses python 2 which is ridiculous
-nnoremap <leader>sd :call scaladoc#Search(expand("<cword>"))<cr>
+" nnoremap <leader>sd :call scaladoc#Search(expand("<cword>"))<cr>
 
 " Plug 'ensime/ensime-sbt', { 'branch': '2.0', 'for': 'scala' }
 " Plug 'ensime/ensime-server', { 'branch': '2.0', 'for': 'scala' }
@@ -1873,6 +1873,9 @@ nnoremap <leader>sd :call scaladoc#Search(expand("<cword>"))<cr>
                 " \ nnoremap <leader>9I :EnSugestImport<cr> |
                 " \ nnoremap <leader>9 <nop>
 " augroup END
+
+Plug 'ckipp01/coc-metals'
+
 
 " scala and ctags:
 " https://advancedweb.hu/2017/01/10/vim-scala-ag-ctags/
