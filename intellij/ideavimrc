@@ -29,8 +29,6 @@ nnoremap <bs> :action HideActiveWindow<cr>
 
 inoremap jk <c-c>
 
-nnoremap <silent> <c-g>l :set relativenumber! <cr>
-
 nnoremap <a-j> 15<c-e>
 nnoremap <a-k> 15<c-y>
 
@@ -122,6 +120,7 @@ nnoremap <leader>yy         :action TogglePresentationMode<cr>
 nnoremap <leader>yY         :action ToggleDistractionFreeMode<cr>
 nnoremap <leader>yG         :action EditorToggleShowGutterIcons<cr>
 nnoremap <leader>yI         :action EditorToggleShowIndentLines<cr>
+nnoremap <leader>yl         :set relativenumber!<cr>
 nnoremap <leader>yL         :action EditorToggleShowLineNumbers<cr>
 nnoremap <leader>ya         :action EditorToggleShowWhitespaces<cr>
 
