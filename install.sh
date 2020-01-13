@@ -418,6 +418,7 @@ function create_link_for_target() {
             create_link "$PWD/vim/gvimrc" "$HOME/.gvimrc"
             create_link "$PWD/vim/ctags" "$HOME/.ctags"
             create_link "$PWD/vim/config/" "$HOME/.vim/config"
+            create_link "$PWD/vim/plugin/" "$HOME/.vim/plugin"
             create_link "$PWD/vim/config/eslintrc.json" "$HOME/.eslintrc.json"
             mkdir -p "$HOME/.vim"
             mkdir -p "$HOME/.vim/undodir"
