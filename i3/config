@@ -608,8 +608,8 @@ bindsym $mod+Shift+t exec --no-startup-id i3-input -F '[con_mark=%s] focus' -P '
 bindsym $mod+e [urgent=latest] focus
 bindsym $mod+space workspace back_and_forth
 # bindsym $mod+numbersign workspace back_and_forth
-bindsym $mod+numbersign exec --no-startup-id "rofi -show window $ROFI_OPTIONS"
-bindsym $mod+w exec --no-startup-id "quickswitch --workspaces --dmenu 'dmenu $DMENU_OPTIONS_2'"
+bindsym $mod+w exec --no-startup-id "rofi -show window $ROFI_OPTIONS"
+# bindsym $mod+w exec --no-startup-id "quickswitch --workspaces --dmenu 'dmenu $DMENU_OPTIONS_2'"
 bindsym $mod+n workspace next_on_output
 bindsym $mod+p workspace prev_on_output
 bindsym $mod+1 workspace 1
