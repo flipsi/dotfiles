@@ -170,6 +170,7 @@ nnoremap <leader>jr         :action GotoRelated<cr>
 
 nnoremap <leader>*          :action ShowUsages<cr>
 nnoremap <leader>su         :action ShowUsages<cr>
+nnoremap <leader>fc         /\v^[<\|=>]{7}( .*\|$)<cr>
 nnoremap <leader>fu         :action FindUsages<cr>
 nnoremap <leader>ff         :action Find<cr>
 nnoremap <leader>/          :action FindInPath<cr>
