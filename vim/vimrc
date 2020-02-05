@@ -1703,7 +1703,7 @@ function! SetupYarn()
 endfunction
 command! -bang SetupYarn :call SetupYarn()
 
-function SetupTsuquyomi()
+function! SetupTsuquyomi()
     nmap <leader>rf <Plug>(TsuquyomiRenameSymbolC)
     nmap <leader>rF <Plug>(TsuquyomiRenameSymbol)
     nmap <leader>iq : <C-u>echo tsuquyomi#hint()<CR>
