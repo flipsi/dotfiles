@@ -43,7 +43,9 @@ abbr $args gl     tig
 abbr $args glh    git --no-pager log -n 1
 abbr $args gli    git --no-pager log -n 1 \| head -n 1 \| cut -d\" \" -f2 \| xsel --clipboard
 abbr $args gm     git merge
+abbr $args gma    git merge --abort
 abbr $args gmm    git merge master
+abbr $args gmt    git mergetool
 abbr $args gp     git pull
 abbr $args gpp    git pull
 abbr $args gpu    git push
