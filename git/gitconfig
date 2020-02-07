@@ -43,7 +43,11 @@
     cmd = diff -i $LOCAL $REMOTE
 
 [merge]
-    tool = vimdiff
+    tool = conflicted
+
+[mergetool "conflicted"]
+    prompt = false
+    cmd = vim +Conflicted
 
 [mergetool "sublimerge"]
     prompt = false

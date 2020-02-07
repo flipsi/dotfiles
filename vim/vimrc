@@ -462,13 +462,26 @@ nnoremap <leader>gu   :GitGutterUndoHunk<cr>
 nnoremap <leader>gi   :GitGutterPreviewHunk<cr>
 
 
+" Resolve merge conflicts the easy way
+
+Plug 'christoomey/vim-conflicted'
+
+nnoremap <leader>gmt :Conflicted<cr>
+nnoremap <leader>gmn :GitNextConflict<cr>
+
+" navigate through hunks with ]c and [c
+
+let g:diffget_local_map = '<left>'
+let g:diffget_upstream_map = '<right>'
+
+
 " show commit messages in a preview window
 
 Plug 'rhysd/git-messenger.vim'
 
 let g:git_messenger_no_default_mappings = v:true
 
-nmap <leader>gm <Plug>(git-messenger)
+nmap <leader>gB <Plug>(git-messenger)
 
 
 
