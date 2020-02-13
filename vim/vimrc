@@ -261,6 +261,7 @@ nnoremap <leader>bv         :call MakeWithVimux("")<left><left>
 nnoremap <leader>bf         :VimuxRunCommand " " . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
 nnoremap <leader>bF         :VimuxRunCommand ExpandPrependThisDir('%') . " "<left>
 nnoremap <leader>bC         :call VimuxRunCommand(getline('.'))<cr>
+vnoremap <leader>bC         y:call VimuxRunCommand(@*)<cr>
 nnoremap <leader>bb         :update<cr>:VimuxRunLastCommand<cr>
 nnoremap <leader>bl         :VimuxRunCommand "clear"<cr>
 nnoremap <leader>bq         :VimuxCloseRunner<cr>
