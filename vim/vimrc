@@ -2799,6 +2799,7 @@ command! -bar RangerChooser call RangerChooser(getcwd())
 
 " change search mode (what happens when hitting n) {{{
 " http://vim.wikia.com/wiki/Make_search_results_appear_in_the_middle_of_the_screen
+" TODO: make it easy to change default
 function! s:SearchMode()
   if !exists('s:searchmode') || s:searchmode == 0
     echo 'Search next: scroll as few times as possible (smart)'
