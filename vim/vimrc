@@ -1702,7 +1702,8 @@ augroup typescript_on_read
     au FileType typescript call SetupTsuquyomi()
     au FileType typescript.tsx call SetupYarn()
     au FileType typescript.tsx call SetupTsuquyomi()
-    nnoremap <leader>AF  :call VimuxRunCommand("prettier --parser typescript --write **.tsx")<cr>
+    " nnoremap <leader>AF  :call VimuxRunCommand("prettier --parser typescript --write **.tsx")<cr>
+    nnoremap <leader>AF  :call VimuxRunCommand("yarn format")<cr>
 augroup END
 
 function! SetupNpm()
