@@ -2874,32 +2874,27 @@ nnoremap <leader>iS :call SendBufferViaSlackChooseChannel()<cr>
 let g:match_id_base = 86750
 
 function! ToggleHighlightInterestingWord(n)
+    normal! mZ
     let match_id = g:match_id_base + a:n
-    silent! let new_match = matchdelete(match_id)
+    silent! windo let new_match = matchdelete(match_id)
     if new_match
-        " Save our location.
-        normal! mz
-        " Yank the current word into the z register.
         normal! "zyiw
-        " Construct a literal pattern that has to match at boundaries.
         let pattern = '\V\<' . escape(@z, '\') . '\>'
-        " Actually match the words.
-        call matchadd("InterestingWord" . a:n, pattern, 1, match_id)
-        " Move back to our original location.
-        normal! `z
+        windo call matchadd("InterestingWord" . a:n, pattern, 1, match_id)
     endif
+    normal! `Z
 endfunction
 
 function! RemoveAllInterestingWordHighlights()
-    silent! call matchdelete(g:match_id_base + 1)<bar>
-    silent! call matchdelete(g:match_id_base + 2)<bar>
-    silent! call matchdelete(g:match_id_base + 3)<bar>
-    silent! call matchdelete(g:match_id_base + 4)<bar>
-    silent! call matchdelete(g:match_id_base + 5)<bar>
-    silent! call matchdelete(g:match_id_base + 6)<cr>
-    silent! call matchdelete(g:match_id_base + 7)<cr>
-    silent! call matchdelete(g:match_id_base + 8)<cr>
-    silent! call matchdelete(g:match_id_base + 9)<cr>
+    silent! windo call matchdelete(g:match_id_base + 1)<bar>
+    silent! windo call matchdelete(g:match_id_base + 2)<bar>
+    silent! windo call matchdelete(g:match_id_base + 3)<bar>
+    silent! windo call matchdelete(g:match_id_base + 4)<bar>
+    silent! windo call matchdelete(g:match_id_base + 5)<bar>
+    silent! windo call matchdelete(g:match_id_base + 6)<cr>
+    silent! windo call matchdelete(g:match_id_base + 7)<cr>
+    silent! windo call matchdelete(g:match_id_base + 8)<cr>
+    silent! windo call matchdelete(g:match_id_base + 9)<cr>
 endfunction
 
 " Mappings
