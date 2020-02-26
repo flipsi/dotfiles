@@ -2865,60 +2865,54 @@ nnoremap <leader>iS :call SendBufferViaSlackChooseChannel()<cr>
 "
 " Sometimes you're looking at a hairy piece of code and would like a certain
 " word or two to stand out temporarily.  You can search for it, but that only
-" gives you one color of highlighting.  Now you can use <leader>N where N is
-" a number from 1-9 to highlight the current word in a specific color.
+" gives you one color of highlighting.
+" Now you can use ToggleHighlightInterestingWord(n) where n is a number from 1-9
+" to highlight the current word in a specific color.
 
-function! HiInterestingWord(n) " {{{
-    " Save our location.
-    normal! mz
+let g:match_id_base = 86750
 
-    " Yank the current word into the z register.
-    normal! "zyiw
+function! ToggleHighlightInterestingWord(n)
+    let match_id = g:match_id_base + a:n
+    silent! let new_match = matchdelete(match_id)
+    if new_match
+        " Save our location.
+        normal! mz
+        " Yank the current word into the z register.
+        normal! "zyiw
+        " Construct a literal pattern that has to match at boundaries.
+        let pattern = '\V\<' . escape(@z, '\') . '\>'
+        " Actually match the words.
+        call matchadd("InterestingWord" . a:n, pattern, 1, match_id)
+        " Move back to our original location.
+        normal! `z
+    endif
+endfunction
 
-    " Calculate an arbitrary match ID.  Hopefully nothing else is using it.
-    let mid = 86750 + a:n
+function! RemoveAllInterestingWordHighlights()
+    silent! call matchdelete(g:match_id_base + 1)<bar>
+    silent! call matchdelete(g:match_id_base + 2)<bar>
+    silent! call matchdelete(g:match_id_base + 3)<bar>
+    silent! call matchdelete(g:match_id_base + 4)<bar>
+    silent! call matchdelete(g:match_id_base + 5)<bar>
+    silent! call matchdelete(g:match_id_base + 6)<cr>
+    silent! call matchdelete(g:match_id_base + 7)<cr>
+    silent! call matchdelete(g:match_id_base + 8)<cr>
+    silent! call matchdelete(g:match_id_base + 9)<cr>
+endfunction
 
-    " Clear existing matches, but don't worry if they don't exist.
-    silent! call matchdelete(mid)
+" Mappings
+nnoremap <silent> <leader>1 :call ToggleHighlightInterestingWord(1)<cr>
+nnoremap <silent> <leader>2 :call ToggleHighlightInterestingWord(2)<cr>
+nnoremap <silent> <leader>3 :call ToggleHighlightInterestingWord(3)<cr>
+nnoremap <silent> <leader>4 :call ToggleHighlightInterestingWord(4)<cr>
+nnoremap <silent> <leader>5 :call ToggleHighlightInterestingWord(5)<cr>
+nnoremap <silent> <leader>6 :call ToggleHighlightInterestingWord(6)<cr>
+nnoremap <silent> <leader>7 :call ToggleHighlightInterestingWord(7)<cr>
+nnoremap <silent> <leader>8 :call ToggleHighlightInterestingWord(8)<cr>
+nnoremap <silent> <leader>9 :call ToggleHighlightInterestingWord(9)<cr>
+nnoremap <silent> <leader>0 :call RemoveAllInterestingWordHighlights()<cr>
 
-    " Construct a literal pattern that has to match at boundaries.
-    let pat = '\V\<' . escape(@z, '\') . '\>'
-
-    " Actually match the words.
-    call matchadd("InterestingWord" . a:n, pat, 1, mid)
-
-    " Move back to our original location.
-    normal! `z
-endfunction " }}}
-
-" Mappings {{{
-
-" add highlighted word
-nnoremap <silent> <leader>1 :call HiInterestingWord(1)<cr>
-nnoremap <silent> <leader>2 :call HiInterestingWord(2)<cr>
-nnoremap <silent> <leader>3 :call HiInterestingWord(3)<cr>
-nnoremap <silent> <leader>4 :call HiInterestingWord(4)<cr>
-nnoremap <silent> <leader>5 :call HiInterestingWord(5)<cr>
-nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
-nnoremap <silent> <leader>7 :call HiInterestingWord(7)<cr>
-nnoremap <silent> <leader>8 :call HiInterestingWord(8)<cr>
-nnoremap <silent> <leader>9 :call HiInterestingWord(9)<cr>
-
-" remove highlighted words
-nnoremap <silent> <leader>0
-    \ :silent! call matchdelete(86751)<bar>
-    \ :silent! call matchdelete(86752)<bar>
-    \ :silent! call matchdelete(86753)<bar>
-    \ :silent! call matchdelete(86754)<bar>
-    \ :silent! call matchdelete(86755)<bar>
-    \ :silent! call matchdelete(86756)<cr>
-    \ :silent! call matchdelete(86757)<cr>
-    \ :silent! call matchdelete(86758)<cr>
-    \ :silent! call matchdelete(86759)<cr>
-
-" }}}
-" Default Highlights {{{
-
+" Highlights (color definitions)
 hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#086A7E ctermbg=33
 hi def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#08471D ctermbg=28
 hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
@@ -2929,7 +2923,6 @@ hi def InterestingWord7 guifg=#000000 ctermfg=16 guibg=#5B0F74 ctermbg=57
 hi def InterestingWord8 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=137
 hi def InterestingWord9 guifg=#000000 ctermfg=16 guibg=#553E26 ctermbg=220
 
-" }}}
 
 " }}}
 
