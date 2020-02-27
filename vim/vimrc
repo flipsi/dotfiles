@@ -1393,6 +1393,7 @@ let g:toggle_words_dict = {
             \     ['left', 'right'],
             \     ['light', 'dark'],
             \     ['local', 'global'],
+            \     ['login', 'logout'],
             \     ['long', 'short'],
             \     ['love', 'hate'],
             \     ['many', 'few'],
