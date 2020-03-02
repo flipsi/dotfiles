@@ -2064,6 +2064,11 @@ command! -bang SetupSQLDadBod :call SetupSQLDadBod()
 " endfunction
 
 
+" }}}
+" Language: (Salesforce) Force/Apex {{{
+
+Plug 'neowit/vim-force.com'
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
