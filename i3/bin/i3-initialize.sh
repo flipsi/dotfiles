@@ -56,7 +56,7 @@ function start_musicserver_if_music_is_accessible
                     nohup mopidy \
                         --option spotify/password=(pass spotify/soziflip+spotify@gmail.com  | head -n1) \
                         --option spotify/client_secret=(pass spotify/mopidy | head -n1) \
-                        >/tmp/mopidy.log ^&1 &
+                        >/tmp/mopidy.log 2>&1 &
                 else
                     mpd
                 end
