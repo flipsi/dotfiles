@@ -89,7 +89,7 @@ echo 'Choose action: [c]opy filepath
     set -l file
     if test $mode = "find"
         # fzf -q $pattern
-        if command -v ag >/dev/null ^&1
+        if command -v ag >/dev/null 2>&1
             ag -l --silent -g "$pattern" | fzf | read file
             # ag -l --silent -g "$pattern" | sed -e 's:/[^/]*$::' | uniq | fzf --cycle | read file
         else

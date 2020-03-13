@@ -6,7 +6,7 @@ if [ "$unfucked_command" != !! ]
 eval $unfucked_command
 if test $exit_code -ne 0
 history --delete $fucked_up_command
-history --merge ^/dev/null
+history --merge 2>/dev/null
 return 0
 end
 end
