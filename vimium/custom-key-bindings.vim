@@ -16,4 +16,8 @@ map u     restoreTab
 map l     LinkHints.activateModeToOpenInNewTab
 map gl    LinkHints.activateModeToDownloadLink
 
+" global marks with lowercase letters, local marks with uppercase letters
+map m     Marks.activateCreateMode swap
+map '     Marks.activateGotoMode swap
+
 map ö     enterFindMode
