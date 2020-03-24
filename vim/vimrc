@@ -3107,11 +3107,11 @@ function! PasteFromGUI()
     let clipbrd = @+
     let primary = @*
     if len(primary) == 0
-        normal "+P
+        normal "+Pl
     elseif len(clipbrd) == 0
-        normal "*P
+        normal "*Pl
     elseif primary == clipbrd
-        normal "*P
+        normal "*Pl
     else
         ec "Paste (c)lipboard (default)    " . strtrans(strpart(clipbrd, 0, 50))
         ec "or    (p)rimary selection?     " . strtrans(strpart(primary, 0, 50))
@@ -3119,10 +3119,10 @@ function! PasteFromGUI()
         if nr2char(c) == 'q' || c == 27 || c == 3 || c == 7
             redraw
         elseif nr2char(c) == 'c' || nr2char(c) == '+' || c == 13 || c == 22
-            normal "+P
+            normal "+Pl
             redraw
         elseif nr2char(c) == 'p' || nr2char(c) == 's' || nr2char(c) == '*'
-            normal "*P
+            normal "*Pl
             redraw
         endif
     endif
