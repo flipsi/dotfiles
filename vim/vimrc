@@ -3861,25 +3861,22 @@ nnoremap <silent> <leader>tl :call ToggleList("Location List", 'l')<cr>
 " builtin file explorer (netrw) {{{
 " (who needs NERDTree anyway)
 
-" let g:netrw_liststyle = 1
-" let g:netrw_winsize = 31
-let g:netrw_liststyle = 0
-let g:netrw_winsize = 16
+let g:netrw_liststyle = 3
+let g:netrw_winsize = 12
 let g:netrw_banner = 0
 let g:netrw_browse_split = 4
 
-let g:netrw_is_toggled = 0
-
 
 " toggle netrw and start from current file
-nnoremap <silent> <leader>te :exe ':Lexplore! ' . expand('%:p:h')<cr>
+nnoremap <silent> <leader>te :exe ':Lexplore ' . expand('%:p:h')<cr>
 " toggle netrw and start from working (project) dir
-nnoremap <silent> <leader>tE :Lexplore!<cr>
+nnoremap <silent> <leader>tE :Lexplore<cr>
 
 
 augroup netrw_autocmds
     autocmd!
     autocmd filetype netrw call NetrwMappings()
+    autocmd filetype netrw setlocal bufhidden=wipe
 augroup END
 
 function! NetrwMappings()
@@ -3888,6 +3885,7 @@ function! NetrwMappings()
     silent! nunmap <buffer> qf
     silent! nunmap <buffer> qb
     silent! nunmap <buffer> q
+    silent! nunmap <buffer> <c-l>
     nnoremap <buffer> q   :bd<cr>
     nnoremap <buffer> h   :help netrw-quickmap<cr>
     nmap     <buffer> .   gh
