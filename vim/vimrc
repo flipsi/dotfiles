@@ -707,6 +707,7 @@ let g:grepper = {}
 " let g:grepper.tools = ['git', 'ag', 'grep', 'rg']
 let g:grepper.quickfix = 1
 let g:grepper.switch = 0
+let g:grepper.jump = 1
 let g:grepper.prompt_mapping_side = '<c-l>'
 let g:grepper.searchreg = 1
 
