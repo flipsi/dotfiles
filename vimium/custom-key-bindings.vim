@@ -30,3 +30,10 @@ map '       Marks.activateGotoMode swap
 
 map ö       enterFindMode
 
+
+
+"""""""""""""""""""""""
+" REMOVE MAPPINGS
+
+
+unmap <c-e>
