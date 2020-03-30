@@ -333,6 +333,10 @@ Plug 'flazz/vim-colorschemes'
 Plug 'christophermca/meta5'
 Plug 'joshdick/onedark.vim'
 Plug 'sjl/badwolf'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'ayu-theme/ayu-vim'
+Plug 'NLKNguyen/papercolor-theme'
+
 
 
 " cycle through colorschemes
