@@ -2349,7 +2349,7 @@ if s:MyMode == 'mastery'
     " colorscheme candycode
     " colorscheme dante
     " colorscheme desertEx
-    colorscheme gruvbox
+    " colorscheme gruvbox
     " colorscheme iceberg
     " colorscheme jellybeans
     " colorscheme luna-term
@@ -2367,7 +2367,7 @@ if s:MyMode == 'mastery'
     " let g:airline_theme='base16_summerfruit'
     " let g:airline_theme='base16_grayscale'
     " let g:airline_theme='behelit'
-    let g:airline_theme='distinguished'
+    " let g:airline_theme='distinguished'
     " let g:airline_theme='kalisi'
     " let g:airline_theme='laederon'
     " let g:airline_theme='lucius'
@@ -2379,20 +2379,20 @@ if s:MyMode == 'mastery'
     " let g:airline_theme='wombat'
     " let g:airline_theme='zenburn'
 
-    let g:indentLine_setColors = 1
-    let g:indentLine_color_term = 236
+    " let g:indentLine_setColors = 1
+    " let g:indentLine_color_term = 236
 
-    highlight CursorLine              ctermbg=236 cterm=NONE
-    highlight CursorColumn            ctermbg=236
-    highlight ColorColumn             ctermbg=237
+    highlight CursorLine              ctermbg=255 cterm=NONE
+    highlight CursorColumn            ctermbg=255
+    highlight ColorColumn             ctermbg=254
     highlight DiffAdd                 ctermbg=234
     highlight DiffDelete              ctermbg=234
     highlight DiffChange              ctermbg=234
     highlight DiffText                ctermbg=233
     highlight ShowTrailingWhitespace  ctermbg=235
-    highlight VertSplit               ctermfg=238
-    highlight Folded                  ctermfg=238 ctermfg=248
-    highlight LineNr                  ctermbg=237 ctermfg=243
+    " highlight VertSplit               ctermfg=238
+    " highlight Folded                  ctermfg=238 ctermfg=248
+    " highlight LineNr                  ctermbg=237 ctermfg=243
     " highlight SignColumn              ctermbg=237
     " highlight GitGutterAdd            ctermbg=235
     " highlight GitGutterChange         ctermbg=235
@@ -2410,20 +2410,28 @@ if s:MyMode == 'mastery'
 
     " LIGHT THEMES
 
-    " set background=light
+    set background=light
 
     " colorscheme lucius
     " colorscheme peaksea
     " colorscheme seoul256-light
-    " colorscheme Tomorrow-Night
+    " colorscheme Tomorrow
+    " colorscheme google
+    " colorscheme impactjs
+    " colorscheme last256
+    colorscheme onehalflight
+    " colorscheme pyte
+    " let ayucolor="light" | colorscheme ayu
 
     " let g:airline_theme='bubblegum'
     " let g:airline_theme='lucius'
     " let g:airline_theme='sol'
+    " let g:airline_theme='base16'
+    let g:airline_theme='seagull'
 
-    " highlight CursorLine   ctermbg=252
-    " highlight CursorColumn ctermbg=252
-    " highlight ColorColumn  ctermbg=250
+    highlight CursorLine   ctermbg=255
+    highlight CursorColumn ctermbg=255
+    highlight ColorColumn  ctermbg=255
     " highlight ShowTrailingWhitespace ctermbg=250
 
 else
@@ -3273,7 +3281,7 @@ nnoremap <silent> <leader>yw :setlocal wrap! <bar> :set wrap? <cr>
 
 " toggle vertical ruler
 nnoremap <silent> <leader>yr :call SetColorColumn('toggle')<cr>
-nnoremap <silent> <leader>yR :highlight ColorColumn ctermbg=235
+nnoremap <silent> <leader>yR :highlight ColorColumn ctermbg=255
                   \ <bar> highlight clear BGdd8844
                   \ <bar> highlight clear BG000000
                   \ <bar> highlight clear BGffa724

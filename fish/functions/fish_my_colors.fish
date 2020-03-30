@@ -63,13 +63,13 @@ function fish_my_colors
     set -g fish_my_color_accent_dark     $neutral_yellow
 
     # SET COLORS OF FISH
-    set -g fish_color_normal $light1 # the default color
-    set -g fish_color_command $light3 # the color for commands
-    set -g fish_color_quote $bright_green # the color for quoted blocks of text
-    set -g fish_color_redirection $bright_orange # the color for IO redirections
-    set -g fish_color_end $bright_orange # the color for process separators like ';' and '&'
-    set -g fish_color_error $bright_red # the color used to highlight potential errors
-    set -g fish_color_param $light2 # the color for regular command parameters
+    set -g fish_color_normal $dark1 # the default color
+    set -g fish_color_command $dark2 # the color for commands
+    set -g fish_color_quote $neutral_green # the color for quoted blocks of text
+    set -g fish_color_redirection $neutral_orange # the color for IO redirections
+    set -g fish_color_end $neutral_orange # the color for process separators like ';' and '&'
+    set -g fish_color_error $neutral_red # the color used to highlight potential errors
+    set -g fish_color_param $dark3 # the color for regular command parameters
     set -g fish_color_comment $dark4 # the color used for code comments
     set -g fish_color_match $neutral_orange # the color used to highlight matching parenthesis
     # set -g fish_color_search_match $light2 --background $neutral_aqua # the color used to highlight history search matches
