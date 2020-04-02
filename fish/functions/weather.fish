@@ -1,3 +1,12 @@
-function weather
-	wego -forecast-api-key (pass darksky.net/soziflip+darksky@gmail.com | grep api-key | cut -d' ' -f2) -l "48.1442327,11.5748727"
+function weather --description 'show weather forecast'
+
+	set	default_location 'munich'
+
+	set location $argv[1]
+	if test -z $location
+		set location $default_location
+	end
+
+	curl wttr.in/$location
+
 end

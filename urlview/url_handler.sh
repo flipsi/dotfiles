@@ -9,10 +9,11 @@
 
 
 # set BROWSER (e.g. in /etc/environment) to overwrite
-BROWSER=firefox
+BROWSER=vivaldi-stable
 
 # checked browsers if BROWSER is not set
 BROWSERS=`cat <<END
+    vivaldi-stable\
     chromium\
     chromium-browser\
     google-chrome-stable\

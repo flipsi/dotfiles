@@ -16,7 +16,7 @@ URxvt.iconFile: /usr/share/icons/Faenza/apps/16/terminal.png
 
 ! Fonts
 URxvt.letterSpace:  -1
-URxvt.font: xft:PragmataPro Mono:size=13
+URxvt.font: xft:PragmataPro Mono:size=10
 ! URxvt.font: xft:Monospace:size=11
 ! URxvt.font: xft:Inconsolata:size=12
 ! URxvt.font: xft:Terminus:size=13

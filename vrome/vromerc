@@ -33,6 +33,7 @@ set follow_new_tab=1
 set disable_autofocus
 
 " Disable Vrome in those sites
+set disablesites+=inbox.google.com
 set disablesites+=mail.google.com
 set disablesites+=reader.google.com
 
@@ -107,6 +108,9 @@ imap <M-Space> <Esc><C-^>
 " move tab
 map <M-S-p> :tabmove -1<CR>
 map <M-S-n> :tabmove +1<CR>
+
+" detach tab to a new window
+map ! gD
 
 " close tab
 " map dd :quit<CR>

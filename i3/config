@@ -1,31 +1,15 @@
-# Author: Philipp Moers <soziflip@gmail.com>
-
-# i3 config file
-#
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
-
-
-
-###############################################################################
-###########  DEPENDENCIES  ####################################################
-###############################################################################
-
-# apart from i3, install...
+## Author: Philipp Moers <soziflip@gmail.com>
+##
+## config file for i3 window manager
+##
+## Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 
-# dex
-# i3lock
-# dmenu
-# quickswitch [https://github.com/OliverUv/quickswitch-for-i3]
-# rofi [https://davedavenport.github.io/rofi/]
-# compton
-# unclutter
-# numlockx
+## CAUTION:
+## This config has a dependency to [https://github.com/sflip/shellscripts]
 
-# my shellscripts [https://github.com/sflip/shellscripts]
-# path to my shellscripts
 set $SHELLSCRIPT_PATH /home/sflip/shellscripts
-
+set $WALLPAPER_PATH /home/sflip/img-wallpaper
 
 
 
@@ -33,20 +17,23 @@ set $SHELLSCRIPT_PATH /home/sflip/shellscripts
 ###########  INITIAL SETUP  ###################################################
 ###############################################################################
 
-# some setup logic I rather do with a shell script
+## some setup logic I rather do with a shell script
 exec "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"
+exec "/home/sflip/.i3/bin/i3-initialize-outputs.sh > /tmp/i3-initialize-outputs.log 2>&1"
 
-# set keyboard layout
-exec "setxkbmap de_sflip"
+## set keyboard layout
+exec "setxkbmap us_sflip"
 
-# turn on num block
+## turn on num block
 exec --no-startup-id "numlockx"
 
-# turn off pc speaker with annoying beep
+## turn off pc speaker with annoying beep
 exec "xset -b"
 
-# turn off screensaver and display power management
-exec "xset dpms 0 0 0 && xset s noblank && xset s off"
+## disable touchpad
+# exec --no-startup-id "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
+# exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'Device Enabled' 0"
+# exec --no-startup-id "xinput --set-prop 'FocalTechPS/2 FocalTech FocalTech Touchpad' 'Device Enabled' 0"
 
 
 
@@ -55,44 +42,31 @@ exec "xset dpms 0 0 0 && xset s noblank && xset s off"
 ###############################################################################
 
 
-# ALSO SEE 'autostart' TARGET IN DOTFILES AND LOOK INTO 'dex'
-# THIS MAKES A LOT OF THE FOLLOWING STUFF OBSOLETE
+## ALSO SEE 'autostart' TARGET IN DOTFILES AND LOOK INTO 'dex'
+## THIS MAKES A LOT OF THE FOLLOWING STUFF OBSOLETE
 
-# autostart .desktop files the convenient way
-# https://faq.i3wm.org/question/2155/how-can-i-use-autostart-desktop-files-in-i3.1.html
+## autostart .desktop files the convenient way
+## https://faq.i3wm.org/question/2155/how-can-i-use-autostart-desktop-files-in-i3.1.html
 exec --no-startup-id "dex -ae i3"
 
-# composite manager for window overlays, smooth workspace changes, etc.
+## composite manager for window overlays, smooth workspace changes, etc.
 exec --no-startup-id "compton -b"
-# exec --no-startup-id "compton -b --active-opacity 0.9 -i 0.9"
 
-# clipboard can have multiple entries
+## clipboard can have multiple entries
 # exec --no-startup-id "clipmenud"
 
-# power manager takes care of lid closing, standby, display brightness etc.
+## power manager takes care of lid closing, standby, display brightness etc.
 # exec --no-startup-id "xfce4-power-manager"
 
-# daemon for theme settings and shit
+## daemon for theme settings and shit
 # exec --no-startup-id "cinnamon-settings-daemon"
-exec --no-startup-id "xfsettingsd --sm-client-disable"
+# exec --no-startup-id "xfsettingsd --sm-client-disable"
 
-# start the gnome network manager, because it automatically connects to eduroam etc.
-# and kill it after a few seconds when it is not needed anymore
-# exec --no-startup-id "timelimit -t 30 -T 35 nm-applet"
+## hide mouse cursor
+# exec --no-startup-id "nohup unclutter -idle 4 -jitter 30 &"
 
-# hide mouse cursor
-# exec --no-startup-id unclutter -idle 4 -jitter 30
-
-# disable touchpad at start
-# exec --no-startup-id "xinput --set-prop 'PS/2 Logitech Wheel Mouse' 'Device Enabled' 0"
-# exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'Device Enabled' 0"
-# exec --no-startup-id "xinput --set-prop 'FocalTechPS/2 FocalTech FocalTech Touchpad' 'Device Enabled' 0"
-
-# disable touchpad when typing
+## disable touchpad when typing
 # exec --no-startup-id "syndaemon -d -k -i 1.2"
-
-
-# (ALSO SEE 'autostart' TARGET IN DOTFILES!)
 
 
 
@@ -100,68 +74,72 @@ exec --no-startup-id "xfsettingsd --sm-client-disable"
 ###########  GENERAL  #########################################################
 ###############################################################################
 
-# launcher options
+## launcher options
 set $DMENU_OPTIONS   -l 5 -fn 'PragmataPro Mono-10' -i -nb '#282828' -sb '#FABD2F' -sf '#282828'
 set $DMENU_OPTIONS_2 -l 5 -fn 'PragmataPro Mono-10' -i -nb \#282828 -sb \#FABD2F -sf \#282828
 
-
-# modifier key: windows/super
+## modifier key: windows/super
 set $mod Mod4
 
-# Use Mouse+$mod to drag floating windows to their wanted position
+## Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# focus when mouse moves
+## focus when mouse moves
 focus_follows_mouse no
 
-# don't move mouse cursor when changing output
+## don't move mouse cursor when changing output
 mouse_warping none
 
-# close container with middle click on title bar
-# (mod2 numlock, so this should work in both cases https://github.com/i3/i3/issues/2523)
+## close container with middle click on title bar
+## (mod2 numlock, so this should work in both cases https://github.com/i3/i3/issues/2523)
 bindsym --release      button2 kill
 bindsym --release Mod2+button2 kill
 
-# enable/disable touchpad
+## enable/disable touchpad
 bindsym XF86TouchpadToggle  exec --no-startup-id "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
 
-# reload the configuration file
-# or restart i3 [preserves session]
+## reload the configuration file or restart i3 [preserves session] etc.
 bindsym $mod+F5 mode "$refresh"
-set $refresh Want it fresh? (l) reload config, (s) restart i3, (i) initialize-script, (k) set keyboard layout, (a) add chrome app to i3, (x) setup outputs
+set $refresh (l) reload config, (s) restart i3, (i) initialize, (x/o) setup outputs, (d/D) setup DPI, (Z/z) save/restore layout
 mode "$refresh" {
     bindsym l reload; mode "default"
     bindsym s restart
-    bindsym i exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"; mode "default"
-    bindsym k exec --no-startup-id "setxkbmap de_sflip"; mode "default"
-    bindsym a exec --no-startup-id "/home/sflip/.i3/bin/i3-config-mod-assign-chrome-app.sh > /tmp/i3-config-mod-assign-chrome-app.log 2>&1"; mode "default"
-    bindsym x exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-arandr.local.sh"; mode "default"
+    bindsym i           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"; mode "default"
+    bindsym x           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh > /tmp/i3-initialize-outputs.sh.log 2>&1"; mode "default"
+    bindsym o           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh --only > /tmp/i3-initialize-outputs.sh.log 2>&1"; mode "default"
+    bindsym d           exec --no-startup-id "/home/sflip/dotfiles/setup-dpi.sh --regular > /tmp/setup-dpi.log 2>&1"; mode "default"
+    bindsym Shift+d     exec --no-startup-id "/home/sflip/dotfiles/setup-dpi.sh --high > /tmp/setup-dpi.log 2>&1"; mode "default"
+    bindsym Shift+z     exec --no-startup-id "/home/sflip/.i3/bin/i3-workspaces-save-and-restore.py save"; mode "default"
+    bindsym z           exec --no-startup-id "/home/sflip/.i3/bin/i3-workspaces-save-and-restore.py restore"; mode "default"
+    bindsym a           exec --no-startup-id "/home/sflip/.i3/bin/i3-config-mod-assign-chrome-app.sh > /tmp/i3-config-mod-assign-chrome-app.log 2>&1"; mode "default"
     # cancel
     bindsym $mod+F5 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
-# change keyboard layout
+## change keyboard layout
 bindsym $mod+Shift+F6 mode "$change_keyboard_layout"
-set $change_keyboard_layout Keyboard layout: (F1) de (F2) de_sflip (F3) us (F4) neo (F5) dvorak (F6) programmer dvorak
+set $change_keyboard_layout Keyboard layout: (F1) de (F2) de_sflip (F3) us (F4) us_sflip (F5) neo (F6) dvorak (F7) programmer dvorak
 mode "$change_keyboard_layout" {
-    bindsym $mod+Shift+F6 exec "setxkbmap de_sflip"; mode "default"
     bindsym F1 exec "setxkbmap de"; mode "default"
     bindsym F2 exec "setxkbmap de_sflip"; mode "default"
     bindsym F3 exec "setxkbmap us"; mode "default"
-    bindsym F4 exec "setxkbmap neo"; mode "default"
-    bindsym F5 exec "setxkbmap dvorak"; mode "default"
-    bindsym F6 exec "setxkbmap -layout us -variant dvp"; mode "default"
+    bindsym F4 exec "setxkbmap us_sflip"; mode "default"
+    bindsym F5 exec "setxkbmap neo"; mode "default"
+    bindsym F6 exec "setxkbmap dvorak"; mode "default"
+    bindsym F7 exec "setxkbmap -layout us -variant dvp"; mode "default"
     # cancel
+    bindsym $mod+Shift+F6 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-# show keyboard layout
-set $keyboard_layout_image_source http://programmer-dvorak.appspot.com/img/KB_Programmer_Dvorak.png
-set $keyboard_layout_image /home/sflip/img/KB_Programmer_Dvorak.png
+
+## show keyboard layout
+set $keyboard_layout_image_source https://www.nayuki.io/res/i-type-in-dvorak/qwerty-layout.png
+set $keyboard_layout_image /home/sflip/.i3/keyboard_layout.png
 exec "test -f $keyboard_layout_image || $( sleep 20 && curl $keyboard_layout_image_source > $keyboard_layout_image )"
-bindsym $mod+F6 exec --no-startup-id "pkill -fx 'sxiv $keyboard_layout_image' || sxiv $keyboard_layout_image"
+bindsym $mod+F6 exec --no-startup-id "pkill -fx 'sxiv -z 200 $keyboard_layout_image' || sxiv -z 200 $keyboard_layout_image"
 
 
 
@@ -169,18 +147,35 @@ bindsym $mod+F6 exec --no-startup-id "pkill -fx 'sxiv $keyboard_layout_image' ||
 ###########  LOOK  ############################################################
 ###############################################################################
 
-# set wallpaper
-# NOTE:
-# i3 is a window manager and hence has nothing to do with wallpapers
-# since desktops set their own, we still set a wallpaper here
-exec --no-startup-id "feh --bg-scale ~/.i3/wallpaper"
+## set wallpaper
 exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
-bindsym $mod+F7         exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
-bindsym $mod+Shift+F7   exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh --backwards"
 
+## change wallpaper
+bindsym $mod+F7 mode "$change_wallpaper"
+set $change_wallpaper Wallpaper: (i) choose interactively (r) random (m) random per output (b) restore (0-9) shades of gray
+mode "$change_wallpaper" {
+    bindsym i exec --no-startup-id "feh --bg-scale $(fd '.*\.(jpg|jpeg|png)$' $WALLPAPER_PATH | rofi -dmenu)"; mode "default
+    bindsym r exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
+    bindsym m exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh --multi"
+    bindsym b exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh --backwards"
+    bindsym 0 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/black_1920x1080.png"
+    bindsym 1 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_0C0C0C_1920x1080.png"
+    bindsym 2 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_1E1E1E_1920x1080.png"
+    bindsym 3 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_2F2F2F_1920x1080.png"
+    bindsym 4 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_3A3A3A_1920x1080.png"
+    bindsym 5 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_575757_1920x1080.png"
+    bindsym 6 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_6E6E6E_1920x1080.png"
+    bindsym 7 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_919191_1920x1080.png"
+    bindsym 8 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_DDDDDD_1920x1080.png"
+    bindsym 9 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/white_1920x1080.png"
+    # cancel
+    bindsym $mod+F7 mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
+## Font for window titles.
+## Will also be used by the bar unless a different font # is used in the BAR block below.
 font pango:PragmataPro Mono 10
 # font pango:Monospace 9
 # font pango:Inconsolata 10
@@ -188,61 +183,61 @@ font pango:PragmataPro Mono 10
 # font pango:DejaVu Sans Mono 8
 # font pango:NotoSans 10
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-
-
-# Before i3 v4.8, we used to recommend this one as the default:
-
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
-
-
-
-# borders
+## borders
 #for_window [class="^.*"] border pixel 1
 new_window pixel 0
 new_float  normal
 # hide_edge_borders both
 
-
-# gaps (require the i3gaps fork)
+## gaps (require the i3gaps fork)
 # gaps inner 10
 # gaps outer 2
 # smart_gaps on
 
 
-# Colors
+## Colors
 
-# accent colors:
-# sfluen          #AFFF58         sfluen_dark #83B45C
-# sflea           #00AFAF         sflea_dark  #005F5F
-# gruvbox_light_3        "#BDAE93";
-# gruvbox_bright_red     "#FB4934"
-# gruvbox_bright_green   "#B8BB26"
-# gruvbox_bright_yellow  "#FABD2F"
-# gruvbox_bright_blue    "#83A598"
-# gruvbox_bright_purple  "#D3869B"
-# gruvbox_bright_aqua    "#8EC07C"
-# gruvbox_bright_orange  "#FE8019"
-# gruvbox_neutral_red    "#CC241D"
-# gruvbox_neutral_green  "#98971A"
-# gruvbox_neutral_yellow "#D79921"
-# gruvbox_neutral_blue   "#458588"
-# gruvbox_neutral_purple "#B16286"
-# gruvbox_neutral_aqua   "#689D6A"
-# gruvbox_neutral_orange "#D65D0E"
+# sfluen                            #AFFF58
+# sfluen_dark                       #83B45C
+# sflea                             #00AFAF
+# sflea_dark                        #005F5F
+# gruvbox_dark0_hard                #1D2021
+# gruvbox_dark0                     #282828
+# gruvbox_dark0_soft                #32302F
+# gruvbox_dark1                     #3C3836
+# gruvbox_dark2                     #504945
+# gruvbox_dark3                     #665C54
+# gruvbox_dark4                     #7C6F64
+# gruvbox_gray_245                  #928374
+# gruvbox_gray_244                  #928374
+# gruvbox_light0_hard               #F9F5D7
+# gruvbox_light0                    #FBF1C7
+# gruvbox_light0_soft               #F2E5BC
+# gruvbox_light1                    #EBDBB2
+# gruvbox_light2                    #D5C4A1
+# gruvbox_light3                    #BDAE93
+# gruvbox_light4                    #A89984
+# gruvbox_bright_red                #FB4934
+# gruvbox_bright_green              #B8BB26
+# gruvbox_bright_yellow             #FABD2F
+# gruvbox_bright_blue               #83A598
+# gruvbox_bright_purple             #D3869B
+# gruvbox_bright_aqua               #8EC07C
+# gruvbox_bright_orange             #FE8019
+# gruvbox_neutral_red               #CC241D
+# gruvbox_neutral_green             #98971A
+# gruvbox_neutral_yellow            #D79921
+# gruvbox_neutral_blue              #458588
+# gruvbox_neutral_purple            #B16286
+# gruvbox_neutral_aqua              #689D6A
+# gruvbox_neutral_orange            #D65D0E
 
 #                       border   backgr   text     indicator
-client.focused          #CC241D  #CC241D  #1E1E1E  #FF0000
-client.focused_inactive #1E1E1E  #1E1E1E  #CC241D  #1E1E1E
-client.unfocused        #1E1E1E  #1E1E1E  #DDDDDD  #1E1E1E
-client.urgent           #B8BB26  #B8BB26  #000000  #1E1E1E
-client.background       #1A1A1A  #1E1E1E  #CC241D  #1E1E1E
+client.focused          #282828  #282828  #BDAE93  #FB4934
+client.focused_inactive #282828  #282828  #928374  #282828
+client.unfocused        #282828  #282828  #504945  #282828
+client.urgent           #B8BB26  #B8BB26  #282828  #282828
+client.background       #282828  #282828  #CC241D  #282828
 
 
 
@@ -250,45 +245,49 @@ client.background       #1A1A1A  #1E1E1E  #CC241D  #1E1E1E
 ###########  BAR  #############################################################
 ###############################################################################
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-    # status_command      i3status --config ~/.i3/i3status
-    # status_command      i3blocks -c ~/.i3/i3blocks
-    status_command      python3 ~/.i3/i3pystatus
-    # output              HDMI2
-    position            top
-    workspace_buttons   yes
-    separator_symbol    " | "
-    # separator_symbol    " X "
-    # separator_symbol    " ǁ "
-    # separator_symbol    " ⠶ "
-    # separator_symbol    " ⣶ "
-    # separator_symbol    " ⣿ "
-    # separator_symbol    " Ꙭ "
-    # tray_output         none
-    # tray_output         HDMI2
-    tray_padding        3
-    colors {
-        background  #1E1E1E
-        statusline  #BDAE93
-        separator   #B8BB26
-        #                   border   backgr   text
-        focused_workspace   #CC241D  #CC241D  #1E1E1E
-        active_workspace    #1E1E1E  #1E1E1E  #CC241D
-        inactive_workspace  #1E1E1E  #1E1E1E  #BDAE93
-        urgent_workspace    #B8BB26  #B8BB26  #000000
-    }
-}
+
+exec_always --no-startup-id "/home/sflip/.i3/bin/i3-polybar.sh start > /tmp/i3-polybar.log 2>&1"
 
 
-# hide/show bar
-bindsym $mod+Shift+b bar mode toggle
+# bar {
+#     mode show
+#     # status_command      i3status --config ~/.i3/i3status
+#     # status_command      i3blocks -c ~/.i3/i3blocks
+#     status_command      python3 ~/.i3/i3pystatus
+#     # output              HDMI2
+#     position            top
+#     workspace_buttons   yes
+#     strip_workspace_numbers yes
+#     separator_symbol    " | "
+#     # separator_symbol    " X "
+#     # separator_symbol    " ǁ "
+#     # separator_symbol    " ⠶ "
+#     # separator_symbol    " ⣶ "
+#     # separator_symbol    " ⣿ "
+#     # separator_symbol    " Ꙭ "
+#     # tray_output         none
+#     # tray_output         HDMI2
+#     tray_padding        3
+#     colors {
+#         background  #1E1E1E
+#         statusline  #BDAE93
+#         separator   #B8BB26
+#         #                   border   backgr   text
+#         focused_workspace   #CC241D  #CC241D  #1E1E1E
+#         active_workspace    #1E1E1E  #1E1E1E  #CC241D
+#         inactive_workspace  #1E1E1E  #1E1E1E  #BDAE93
+#         urgent_workspace    #B8BB26  #B8BB26  #000000
+#     }
+# }
 
-# TODO: toggle tray?
 
-set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
+## hide/show bar
+# bindsym $mod+Shift+b bar mode toggle
+# bindsym $mod+Shift+b exec "polybar-msg cmd toggle" # (would be nice, but polybar shows on wrong monitor after hide: https://github.com/jaagr/polybar/issues/1484)
+bindsym $mod+Shift+b exec "/home/sflip/.i3/bin/i3-polybar.sh toggle > /tmp/i3-polybar.log 2>&1"
 
+# set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
+set $UPDATE_STATUSBAR true
 
 
 
@@ -296,7 +295,7 @@ set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
 ###########  HELPER  ##########################################################
 ###############################################################################
 
-# do something with the clipboard
+## do something with the clipboard
 bindsym $mod+c mode "$mode_clipboard"
 set $mode_clipboard Clipboard: (c) choose (p) get password
 mode "$mode_clipboard" {
@@ -311,29 +310,32 @@ mode "$mode_clipboard" {
     bindsym Escape mode "default"
 }
 
-# type something or press keys or click
+## type something or press keys or click
 bindsym $mod+x mode "$mode_x"
-set $mode_x (x) type with xdotool
+set $mode_x (x) type with xdotool (n) click away notification
 mode "$mode_x" {
     bindsym  $mod+x mode "$mode_xdootool"
     bindsym       x mode "$mode_xdootool"
+    bindsym  $mod+n exec --no-startup-id "xdotool mousemove 1880 35 click 1 mousemove restore"; mode "default"
+    bindsym       n exec --no-startup-id "xdotool mousemove 1880 35 click 1 mousemove restore"; mode "default"
     # cancel
     bindsym $mod+Escape mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-set $mode_xdootool (b) bash with my bashrc
+set $mode_xdootool (b) bash with my bashrc (p) testing password (s) shrug (t) timestamp (T) unix timestamp
 mode "$mode_xdootool" {
-    bindsym b exec --no-startup-id "xdotool type 'bbash --rcfile <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/bash/bashrc_sflip)'; xdotool key Return"; mode "default";
+    bindsym b       exec --no-startup-id "xdotool type 'bbash --rcfile <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/bash/bashrc_sflip)'; xdotool key Return"; mode "default";
+    bindsym p       exec --no-startup-id "xdotool type 'iopineiBie5fiong7yae6aeng0ooF6'"; mode "default";
+    bindsym s       exec --no-startup-id "sleep 0.1; xdotool type --delay 30 '¯\_(ツ)_/¯'"; mode "default";
+    bindsym Shift+s exec --no-startup-id "sleep 0.1; xdotool type --delay 30 '¯\\\_(ツ)\_/¯'"; mode "default";
+    bindsym t       exec --no-startup-id "sleep 0.1; xdotool type \\"$(date +%Y%m%d%H%M)\\""; mode "default";
+    bindsym Shift+t exec --no-startup-id "sleep 0.1; xdotool type \\"$(date +%s)\\""; mode "default";
     # cancel
     bindsym $mod+Escape mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-
-
-
-
 
 
 
@@ -341,21 +343,22 @@ mode "$mode_xdootool" {
 ###########  SYSTEM  ##########################################################
 ###############################################################################
 
-# exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# command to lock screen.
+# for i3lock, image has to be png
+set $LOCK_CMD i3lock -e -t -i ~/.i3/wallpaper.png
 
-# lock/exit/suspend etc.
+## lock/exit/suspend etc.
 bindsym XF86PowerOff mode "$mode_system"
 bindsym $mod+Escape mode "$mode_system"
 set $mode_system Want to leave?  (e) logout, (u) switch user, (l) lock, (s) suspend, (h) hibernate, (r) reboot, (p) poweroff (o) poweroff smoothly
 mode "$mode_system" {
     bindsym e exit
     bindsym u exec --no-startup-id "i3exit switch_user"; mode "default"
-    bindsym l exec --no-startup-id "i3lock -t -i ~/.i3/wallpaper.png # has to be png"; mode "default"
+    bindsym l exec --no-startup-id "$LOCK_CMD"; mode "default"
     bindsym s exec --no-startup-id "systemctl suspend"; mode "default"
     bindsym h exec --no-startup-id "systemctl hibernate"; mode "default"
     bindsym r exec --no-startup-id "systemctl reboot"
-    bindsym p exec --no-startup-id "systemctl poweroff
+    bindsym p exec --no-startup-id "systemctl poweroff"
     bindsym o exec --no-startup-id "/home/sflip/.i3/bin/i3-terminate.sh"; exec --no-startup-id "i3-nagbar -t warning -m 'About to Poweroff... ' -b Abort 'pkill -f i3-terminate.sh'"; mode "default"
     # cancel
     bindsym $mod+Escape mode "default"
@@ -363,56 +366,100 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
+# also lock with Ctrl+Alt+Space
+bindsym Control+Mod1+space exec --no-startup-id "$LOCK_CMD"
 
-# set keyboard brightness
+## screen and light settings
+## TODO screen brightness for separate outputs
+bindsym $mod+F10 mode "$mode_light"
+set $mode_light Screen and light settings: (+/-) screen brightness (n) toggle night adjustment (k/b) keyboard brighness
+mode "$mode_light" {
+    bindsym plus            exec --no-startup-id "xbacklight -inc 2"
+    bindsym minus           exec --no-startup-id "xbacklight -dec 2"
+    bindsym Up              exec --no-startup-id "xbacklight -inc 2"
+    bindsym Down            exec --no-startup-id "xbacklight -dec 2"
+    bindsym a               exec --no-startup-id "xbacklight -inc 5"
+    bindsym z               exec --no-startup-id "xbacklight -inc 5"
+    bindsym Right           exec --no-startup-id "xbacklight -inc 5"
+    bindsym Left            exec --no-startup-id "xbacklight -inc 5"
+    bindsym n               exec --no-startup-id "pkill -USR1 '^redshift$'"; mode "default"
+    bindsym k               exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness up"
+    bindsym b               exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness down"
+    # cancel
+    bindsym $mod+F10 mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# open a clock
+bindsym $mod+minus  exec --no-startup-id "gnome-clocks"
+
+## set keyboard brightness
 bindsym XF86KbdBrightnessDown exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness down"
 bindsym XF86KbdBrightnessUp   exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness up"
 
-
 # set display brightness
-bindsym $mod+Left   exec --no-startup-id "xbacklight -dec 3"
-bindsym $mod+Right  exec --no-startup-id "xbacklight -inc 3"
+# bindsym $mod+Left   exec --no-startup-id "xbacklight -dec 3"
+# bindsym $mod+Right  exec --no-startup-id "xbacklight -inc 3"
 
-# set xfce4-terminal font size (not possible by default)
+## set xfce4-terminal font size (not possible by default)
 bindsym $mod+Control+plus   exec --no-startup-id "$SHELLSCRIPT_PATH/xfce4-terminal-fontsize increase"
 bindsym $mod+Control+minus  exec --no-startup-id "$SHELLSCRIPT_PATH/xfce4-terminal-fontsize decrease"
 
-
-# change audio output device
-bindsym $mod+v exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output"
-
-# set volume
-bindsym $mod+Down            exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
-bindsym $mod+Up              exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
-bindsym $mod+minus           exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
-bindsym $mod+plus            exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
+## set volume
 bindsym XF86AudioLowerVolume exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
 bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
 
-# control music
-bindsym $mod+Shift+minus     exec --no-startup-id "pgrep spotify && spotifycli --volumedown || mpc volume -1";  exec "$UPDATE_STATUSBAR"
-bindsym $mod+Shift+plus      exec --no-startup-id "pgrep spotify && spotifycli --volumeup   || mpc volume +1";  exec "$UPDATE_STATUSBAR"
-bindsym XF86AudioPlay        exec --no-startup-id "pgrep spotify && spotifycli --playpause  || mpc toggle";     exec "$UPDATE_STATUSBAR"
-bindsym XF86AudioNext        exec --no-startup-id "pgrep spotify && spotifycli --next       || mpc next";       exec "$UPDATE_STATUSBAR"
-bindsym XF86AudioPrev        exec --no-startup-id "pgrep spotify && spotifycli --prev       || mpc prev";       exec "$UPDATE_STATUSBAR"
-
-# bindsym $mod+0 mode "$spotify_control"
-# bindsym $mod+0 mode "$mpd_control"
-bindsym $mod+0 exec "pgrep spotify && i3-msg mode $spotify_control || i3-msg mode $mpd_control"
-
-## control music via spotify
-set $spotify_control Spotify Control
-mode "$spotify_control" {
-    bindsym space            exec --no-startup-id "spotifycli --playpause"
-    bindsym BackSpace        exec --no-startup-id "spotifycli --playpause"
-    bindsym n                exec --no-startup-id "spotifycli --next"; exec "$UPDATE_STATUSBAR"
-    bindsym o                exec --no-startup-id "spotifycli --next"; exec "$UPDATE_STATUSBAR"
-    bindsym p                exec --no-startup-id "spotifycli --prev"; exec "$UPDATE_STATUSBAR"
-    bindsym O                exec --no-startup-id "spotifycli --prev"; exec "$UPDATE_STATUSBAR"
-    bindsym plus             exec --no-startup-id "spotifycli --volumeup"
-    bindsym minus            exec --no-startup-id "spotifycli --volumedown"
+## audio control
+bindsym $mod+0 mode "$audio"
+set $audio Audio (+/-) Volume (m/M) Mute/Unmute (s) Switch output (p) Play sound (g) GUI
+mode "$audio" {
+    bindsym plus            exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
+    bindsym minus           exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
+    bindsym Up              exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
+    bindsym Down            exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
+    bindsym a               exec --no-startup-id "amixer sset Master 5%+"; exec "$UPDATE_STATUSBAR"
+    bindsym z               exec --no-startup-id "amixer sset Master 5%-"; exec "$UPDATE_STATUSBAR"
+    bindsym Right           exec --no-startup-id "amixer sset Master 5%+"; exec "$UPDATE_STATUSBAR"
+    bindsym Left            exec --no-startup-id "amixer sset Master 5%-"; exec "$UPDATE_STATUSBAR"
+    bindsym m               exec --no-startup-id "amixer set Master mute"; exec "$UPDATE_STATUSBAR"
+    bindsym Shift+m         exec --no-startup-id "amixer set Master unmute"; exec "$UPDATE_STATUSBAR"
+    bindsym s               exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output"
+    bindsym p               exec --no-startup-id "~/.i3/bin/soundboard.sh"; mode "default"
+    bindsym g               exec --no-startup-id "pavucontrol"; mode "default"
     # cancel
     bindsym $mod+0 mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+## music control
+bindsym XF86AudioPlay        exec --no-startup-id "playerctl play-pause"; exec "$UPDATE_STATUSBAR"
+bindsym XF86AudioNext        exec --no-startup-id "playerctl next"; exec "$UPDATE_STATUSBAR"
+bindsym XF86AudioPrev        exec --no-startup-id "playerctl previous"; exec "$UPDATE_STATUSBAR"
+
+# bindsym $mod+Shift+0 mode "$player_control"
+# bindsym $mod+Shift+0 mode "$mpd_control"
+# bindsym $mod+Shift+0 mode "$spotify_control"
+bindsym $mod+Shift+0 exec "pgrep mpd && i3-msg mode $mpd_control || i3-msg mode $music_control"
+
+## control music (including spotify)
+set $music_control Music Control
+mode "$music_control" {
+    bindsym space            exec --no-startup-id "playerctl play-pause"
+    bindsym BackSpace        exec --no-startup-id "playerctl stop"
+    bindsym n                exec --no-startup-id "playerctl next"; exec "$UPDATE_STATUSBAR"
+    bindsym o                exec --no-startup-id "playerctl next"; exec "$UPDATE_STATUSBAR"
+    bindsym Right            exec --no-startup-id "playerctl next"; exec "$UPDATE_STATUSBAR"
+    bindsym p                exec --no-startup-id "playerctl previous"; exec "$UPDATE_STATUSBAR"
+    bindsym O                exec --no-startup-id "playerctl previous"; exec "$UPDATE_STATUSBAR"
+    bindsym Left             exec --no-startup-id "playerctl previous"; exec "$UPDATE_STATUSBAR"
+    # bindsym plus             exec --no-startup-id "playerctl volume 0.9+"
+    # bindsym minus            exec --no-startup-id "playerctl volume 0.9-"
+    bindsym plus            exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
+    bindsym minus           exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
+    # cancel
+    bindsym $mod+Shift+0 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -435,103 +482,35 @@ mode "$mpd_control" {
     bindsym R                exec --no-startup-id "mpc random"
     bindsym Shift+S          exec --no-startup-id "mpc single"; mode "default"
     # cancel
-    bindsym $mod+0 mode "default"
+    bindsym $mod+Shift+0 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
-# play a sound
-bindsym $mod+Shift+0 exec --no-startup-id "~/.i3/bin/soundboard.sh"
+## control music via spotify
+set $spotify_control Spotify Control
+mode "$spotify_control" {
+    bindsym space            exec --no-startup-id "spotifycli --playpause"
+    bindsym BackSpace        exec --no-startup-id "spotifycli --playpause"
+    bindsym n                exec --no-startup-id "spotifycli --next"; exec "$UPDATE_STATUSBAR"
+    bindsym o                exec --no-startup-id "spotifycli --next"; exec "$UPDATE_STATUSBAR"
+    bindsym Right            exec --no-startup-id "spotifycli --next"; exec "$UPDATE_STATUSBAR"
+    bindsym p                exec --no-startup-id "spotifycli --prev"; exec "$UPDATE_STATUSBAR"
+    bindsym O                exec --no-startup-id "spotifycli --prev"; exec "$UPDATE_STATUSBAR"
+    bindsym Left             exec --no-startup-id "spotifycli --prev"; exec "$UPDATE_STATUSBAR"
+    bindsym plus             exec --no-startup-id "spotifycli --volumeup"
+    bindsym minus            exec --no-startup-id "spotifycli --volumedown"
+    # cancel
+    bindsym $mod+Shift+0 mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
-# take a screenshot
+## take a screenshot
 bindsym $mod+Print       exec --no-startup-id "xfce4-screenshooter --window --save ~/img-screenshots"
 bindsym      Print       exec --no-startup-id "xfce4-screenshooter --window --save ~/img-screenshots"
-bindsym $mod+Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen --save ~/img-screenshots""
-bindsym      Shift+Print exec --no-startup-id "xfce4-screenshooter --fullscreen --save ~/img-screenshots""
-
-
-
-###############################################################################
-###########  RULES FOR SPECIFIC APPS  #########################################
-###############################################################################
-
-# windows always floating/fullscreen
-for_window [class="(?i)avd"]            floating enable
-for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] fullscreen
-for_window [class="(?i)file-roller"]    floating enable
-for_window [class="(?i)galculator"]     floating enable
-for_window [class="(?i)galculator"]     move position 750 450
-for_window [class="(?i)galculator"]     resize set 320 400
-for_window [class="(?i)gcolor2"]        floating enable
-for_window [class="(?i)gcolor2"]        move position 750 150
-for_window [class="(?i)mplayer"]        fullscreen
-for_window [class="(?i)nautilus"]       floating enable
-for_window [class="(?i)nautilus"]       move position 550 250
-for_window [class="(?i)nautilus"]       resize set 920 600
-for_window [class="(?i)nemo"]           floating enable
-for_window [class="(?i)pavucontrol"]    floating enable
-for_window [class="(?i)pokerstars"]     floating enable
-for_window [class="(?i)qjackctl"]       floating enable
-for_window [class="(?i)sxiv"]           fullscreen
-for_window [class="(?i)thunar"]         floating enable
-for_window [class="ssh-askpass"]        floating enable
-for_window [title="Print"]              floating enable
-for_window [window_role="(?i)vlc-main"] floating enable
-for_window [window_role="(?i)vlc-main"] resize set 750 450
-
-# windows always on specific workspace
-for_window [class="(?i)chrom" instance="crx_acmikcjocccblbiibfdfjkghclpmmpip"] move to workspace    Banking
-for_window [class="(?i)chrom" instance="crx_kddchekfnnagpejaneebcigegenogifj"] move to workspace    Banking
-assign [class="(?i)chrom"]                                                                          Chrome
-assign [class="(?i)filezilla"]                                                                      Filezilla
-assign [class="(?i)firefox"]                                                                        Fuchs
-for_window [class="(?i)chrom" instance="crx_afbjehlnjihfcebhifoapfibhcgakelg"] move to workspace    Github
-for_window [class="(?i)chrom" instance="crx_lgeboohgcoglieeoikhidodnmdfcalmh"] move to workspace    Handy
-for_window [class="(?i)chrom" instance="crx_elofdcljcpfajijdjlcbjclkdggnklhg"] move to workspace    Inbox
-assign [class="(?i)jetbrains-idea"]                                                                 IntelliJ
-for_window [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"] move to workspace    Kalender
-for_window [class="(?i)chrom" instance="crx_nkciffeafpjoepmgjbjnckchbgfjnjhp"] move to workspace    Kalender
-assign [class="gnome-calendar"]                                                                     Kalender
-assign [class="(?i)thunderbird"]                                                                    Mail
-for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] move to workspace    Netflix
-for_window [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"] move to workspace    Notes
-assign [class="(?i)pokerstars"]                                                                     Poker
-assign [class="(?i)audacity"]                                                                       Recording
-assign [class="(?i)ardour"]                                                                         Recording
-for_window [class="(?i)chrom" instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"] move to workspace    Signal
-assign [class="(?i)skype"]                                                                          Skype
-assign [class="(?i)slack"]                                                                          Slack
-assign [class="(?i)qjackctl"]                                                                       Sound
-assign [class="(?i)spotify"]                                                                        Spotify
-assign [class="(?i)kaffeine"]                                                                       TV
-assign [class="(?i)mediathek"]                                                                      TV
-for_window [class="(?i)chrom" instance="crx_mldpchjnjlkioecpffkohnhjlgbkcfkf"] move to workspace    TV
-for_window [class="Spotify"] move to workspace                                                      Spotify
-assign [class="Telegram"]                                                                           Telegram
-assign [class="(?i)alacritty"]                                                                      Terminal
-assign [class="(?i)cool-retro-term"]                                                                Terminal
-assign [class="(?i)gnome-terminal"]                                                                 Terminal
-assign [class="(?i)urxvt"]                                                                          Terminal
-for_window [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"] move to workspace    Trello
-for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] move to workspace    Trello
-assign [class="(?i)pale moon"]                                                                      Web
-
-
-# kill specific apps (e.g. when memory really full again and the system hangs)
-bindsym $mod+Shift+BackSpace mode "$kill"
-set $kill Kill: (f) firefox (g) chrome (j) java
-mode "$kill" {
-    bindsym g       exec --no-startup-id "pkill    chrome"; mode "default"
-    bindsym G       exec --no-startup-id "pkill -9 chrome"; mode "default"
-    bindsym f       exec --no-startup-id "pkill    firefox"; mode "default"
-    bindsym F       exec --no-startup-id "pkill -9 firefox"; mode "default"
-    bindsym j       exec --no-startup-id "pkill    java"; mode "default"
-    bindsym J       exec --no-startup-id "pkill -9 java"; mode "default"
-    # cancel
-    #bindsym $mod+o mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+bindsym $mod+Shift+Print exec --no-startup-id "xfce4-screenshooter --region --save ~/img-screenshots"
+bindsym      Shift+Print exec --no-startup-id "xfce4-screenshooter --region --save ~/img-screenshots"
 
 
 
@@ -539,20 +518,199 @@ mode "$kill" {
 ###########  INTRA WORKSPACE  #################################################
 ###############################################################################
 
-# split vertically by default
+## split vertically by default
 default_orientation vertical
 
-# new workspaces have this layout
+## new workspaces have this layout
 workspace_layout stacked
 
+## launch an application (that has a .desktop-file)
+# bindsym $mod+Return exec --no-startup-id "i3-dmenu-desktop -dmenu='dmenu $DMENU_OPTIONS'"
+# bindsym $mod+Return exec --no-startup-id "rofi -show drun $ROFI_OPTIONS"
+bindsym $mod+Return exec --no-startup-id "rofi -modi window,run,combi -show combi -combi-modi window,drun"
 
-# start a terminal
-bindsym $mod+o mode "$terminal"
-set $terminal Open a terminal: (a) alacritty (u) urxvt (k) konsole (i) kitty (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
+## launch any application
+# bindsym $mod+Shift+Return exec --no-startup-id "dmenu_run $DMENU_OPTIONS"
+bindsym $mod+Shift+Return exec --no-startup-id "rofi -show run"
+
+## kill focused container
+bindsym $mod+BackSpace kill
+bindsym $mod+Shift+q kill
+
+## change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+## move focused container
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+# bindsym $mod+Shift+j move down; resize shrink height 15 px or 15 ppt
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+## focus the parent/child container
+bindsym $mod+y focus parent
+bindsym $mod+Shift+y focus child
+
+## enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+## change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout toggle
+# bindsym $mod+s layout stacked
+
+## toggle tiling/floating
+bindsym $mod+m floating toggle
+# change focus between tiling/floating windows
+bindsym $mod+Tab focus mode_toggle
+
+## send container to background (and catapult in in the foreground again)
+bindsym $mod+Shift+z move scratchpad
+bindsym $mod+z scratchpad show
+
+## resize container
+bindsym $mod+r mode "resize"
+mode "resize" {
+    set $steps 5
+    bindsym h resize shrink width  $steps px or $steps ppt
+    bindsym k resize grow   height $steps px or $steps ppt
+    bindsym j resize shrink height $steps px or $steps ppt
+    bindsym l resize grow   width  $steps px or $steps ppt
+    # cancel
+    bindsym $mod+r mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+## change border
+bindsym $mod+b border toggle
+
+
+
+###############################################################################
+###########  INTER WORKSPACE  #################################################
+###############################################################################
+
+## toggle workspaces switches on repeated keypress
+workspace_auto_back_and_forth yes
+
+
+## open new workspace
+bindsym $mod+i exec --no-startup-id "quickswitch -E"
+
+## rename workspace
+bindsym $mod+comma exec --no-startup-id i3-input -F 'rename workspace to "%s"' -P 'rename workspace to: '
+
+## mark/goto windows like in vim
+bindsym $mod+t       exec --no-startup-id i3-input -F 'mark %s' -P 'Mark name: '
+bindsym $mod+Shift+t exec --no-startup-id i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
+
+## switch to another workspace
+bindsym $mod+e [urgent=latest] focus
+bindsym $mod+space workspace back_and_forth
+# bindsym $mod+numbersign workspace back_and_forth
+bindsym $mod+w exec --no-startup-id "rofi -show window $ROFI_OPTIONS"
+# bindsym $mod+w exec --no-startup-id "quickswitch --workspaces --dmenu 'dmenu $DMENU_OPTIONS_2'"
+bindsym $mod+n workspace next_on_output
+bindsym $mod+p workspace prev_on_output
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+#bindsym $mod+0 workspace 10
+
+## move container to specific workspace
+bindsym $mod+Shift+n move container to workspace next_on_output
+bindsym $mod+Shift+p move container to workspace prev_on_output
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+#bindsym $mod+Shift+0 move container to workspace 10
+
+## move container to new workspace (tmux 'break')
+bindsym $mod+Shift+i exec --no-startup-id "quickswitch --journey -E"
+# move container to specific workspace
+bindsym $mod+Shift+numbersign exec --no-startup-id "quickswitch --journey --dmenu 'dmenu $DMENU_OPTIONS_2'"
+bindsym $mod+Shift+w          exec --no-startup-id "quickswitch --journey --dmenu 'dmenu $DMENU_OPTIONS_2'"
+bindsym $mod+Shift+space move container to workspace back_and_forth
+
+
+## move container to other output
+bindsym $mod+u mode "$move_container_to_output"
+set $move_container_to_output Move container to output (h) left, (l) right, (j) down, (k) up
+mode "$move_container_to_output" {
+    bindsym h move container to output left; workspace back_and_forth; mode "default"
+    bindsym l move container to output right; workspace back_and_forth; mode "default"
+    bindsym j move container to output down; workspace back_and_forth; mode "default"
+    bindsym k move container to output up; workspace back_and_forth; mode "default"
+    # cancel
+    bindsym $mod+u mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+## move workspace to other output
+bindsym $mod+Shift+u mode "$move_workspace_to_output"
+set $move_workspace_to_output Move workspace to output (h) left, (l) right, (j) down, (k) up
+mode "$move_workspace_to_output" {
+    bindsym h move workspace to output left; mode "default"
+    bindsym l move workspace to output right; mode "default"
+    bindsym j move workspace to output down; mode "default"
+    bindsym k move workspace to output up; mode "default"
+    # cancel
+    bindsym $mod+Shift+u mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+
+###############################################################################
+###########  SPECIFIC APPS  ###################################################
+###############################################################################
+
+## start an application
+bindsym $mod+Shift+o mode "$launch"
+set $launch Launch: (o) Terminal (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram
+mode "$launch" {
+    bindsym o               mode "$terminal"
+    bindsym Shift+o         mode "$terminal"
+    bindsym $mod+o          mode "$terminal"
+    bindsym $mod+Shift+o    mode "$terminal"
+    bindsym c       exec --no-startup-id "chromium"; mode "default"
+    bindsym f       exec --no-startup-id "firefox"; mode "default"
+    bindsym g       exec --no-startup-id "google-chrome-stable"; mode "default"
+    bindsym i       exec --no-startup-id "vivaldi-stable"; mode "default"
+    bindsym j       exec --no-startup-id "/home/sflip/opt/idea-IU-183.5153.38/bin/idea.sh nosplash || idea"; mode "default"
+    bindsym m       exec --no-startup-id "spotify"; mode "default"
+    bindsym q       exec --no-startup-id "qutebrowser"; mode "default"
+    bindsym s       exec --no-startup-id "slack"; mode "default"
+    bindsym t       exec --no-startup-id "telegram-desktop"; mode "default"
+    # cancel
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+## start a terminal
+set $terminal Open a terminal: (a) alacritty (m) termite (u) urxvt (k) konsole (i) kitty (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
 mode "$terminal" {
-    bindsym $mod+o  exec --no-startup-id "alacritty --command tmux -2 new-session -A -s main"; mode "default"
     bindsym a       exec --no-startup-id "alacritty --command tmux -2 new-session -A -s main"; mode "default"
     bindsym Shift+a exec --no-startup-id "alacritty"; mode "default"
+    bindsym m       exec --no-startup-id "termite -e 'tmux -2 new-session -A -s main'"; mode "default"
+    bindsym Shift+m exec --no-startup-id "termite"; mode "default"
     bindsym u       exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
     bindsym Shift+u exec --no-startup-id "urxvt"; mode "default"
     bindsym k       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower -e 'tmux -2 new-session -A -s main'"; mode "default"
@@ -568,173 +726,142 @@ mode "$terminal" {
     bindsym t       exec --no-startup-id "terminology --exec 'tmux -2 new-session -A -s main'"; mode "default"
     bindsym Shift+t exec --no-startup-id "terminology"; mode "default"
     # cancel
-    #bindsym $mod+o mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
-# launch an application (that has a .desktop-file)
-# bindsym $mod+Return exec --no-startup-id "i3-dmenu-desktop -dmenu='dmenu $DMENU_OPTIONS'"
-# bindsym $mod+Return exec --no-startup-id "rofi -show drun $ROFI_OPTIONS"
-bindsym $mod+Return exec --no-startup-id "rofi -modi window,run,combi -show combi -combi-modi window,drun"
+## switch to a specific window or workspace
+bindsym $mod+o mode "$goto"
+set $goto Goto: (o) Terminal (i) Vivaldi (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram
+mode "$goto" {
+  bindsym o         [class="(?i)alacritty"]             focus; mode "default"
+  bindsym $mod+o    [class="(?i)alacritty"]             focus; mode "default"
+  bindsym f         [class="(?i)firefox"]               focus; mode "default"
+  bindsym $mod+f    [class="(?i)firefox"]               focus; mode "default"
+  bindsym i         [class="(?i)vivaldi-stable"]        focus; mode "default"
+  bindsym $mod+i    [class="(?i)vivaldi-stable"]        focus; mode "default"
+  bindsym q         [class="(?i)qutebrowser"]           focus; mode "default"
+  bindsym $mod+q    [class="(?i)qutebrowser"]           focus; mode "default"
+  bindsym m         [class="(?i)spotify"]               focus; mode "default"
+  bindsym $mod+m    [class="(?i)spotify"]               focus; mode "default"
+  bindsym j         [class="(?i)jetbrains-idea"]        focus; mode "default"
+  bindsym $mod+j    [class="(?i)jetbrains-idea"]        focus; mode "default"
+  bindsym s         [class="(?i)slack"]                 focus; mode "default"
+  bindsym $mod+s    [class="(?i)slack"]                 focus; mode "default"
+  bindsym t         [class="(?i)Telegram"]              focus; mode "default"
+  bindsym $mod+t    [class="(?i)Telegram"]              focus; mode "default"
+  bindsym c         [class="(?i)chromium" instance="chromium"] focus; mode "default"
+  bindsym $mod+c    [class="(?i)chromium" instance="chromium"] focus; mode "default"
+  bindsym g         [class="(?i)google-chrome" instance="google-chrome"] focus; mode "default"
+  bindsym $mod+g    [class="(?i)google-chrome" instance="google-chrome"] focus; mode "default"
+  bindsym b         [class="(?i)chrom" instance="(crx_flcchhclanjfdanlfphjfnhbjdbejong|crx_goifhkhiimheobgjhfbnkkibebioelpk)"] focus; mode "default"
+  bindsym $mod+b    [class="(?i)chrom" instance="(crx_flcchhclanjfdanlfphjfnhbjdbejong|crx_goifhkhiimheobgjhfbnkkibebioelpk)"] focus; mode "default"
+  # cancel
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
 
-# launch any application
-# bindsym $mod+Shift+Return exec --no-startup-id "dmenu_run $DMENU_OPTIONS"
-bindsym $mod+Shift+Return exec --no-startup-id "rofi -show run"
-
-# kill focused container
-bindsym $mod+BackSpace kill
-bindsym $mod+Shift+q kill
-
-
-# change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-
-# move focused container
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-# bindsym $mod+Shift+j move down; resize shrink height 15 px or 15 ppt
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-
-# focus the parent/child container
-bindsym $mod+y focus parent
-bindsym $mod+Shift+y focus child
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout toggle
-# bindsym $mod+s layout stacked
-
-# toggle tiling/floating
-bindsym $mod+m floating toggle
-# change focus between tiling/floating windows
-bindsym $mod+Tab focus mode_toggle
-
-# send container to background
-bindsym $mod+Shift+z move scratchpad
-# and show it again
-bindsym $mod+z scratchpad show
-
-# resize container
-bindsym $mod+r mode "resize"
-mode "resize" {
-    set $steps 5
-    bindsym h resize shrink width  $steps px or $steps ppt
-    bindsym k resize grow   height $steps px or $steps ppt
-    bindsym j resize shrink height $steps px or $steps ppt
-    bindsym l resize grow   width  $steps px or $steps ppt
+## kill specific apps (e.g. when memory really full again and the system hangs)
+bindsym $mod+Shift+BackSpace mode "$kill"
+set $kill Kill: (f) Firefox (g) Chrome (i) Vivaldi (j) Java (s) Sbt
+mode "$kill" {
+    bindsym g       exec --no-startup-id "pkill    chrome"; mode "default"
+    bindsym G       exec --no-startup-id "pkill -9 chrome"; mode "default"
+    bindsym f       exec --no-startup-id "pkill    firefox"; mode "default"
+    bindsym F       exec --no-startup-id "pkill -9 firefox"; mode "default"
+    bindsym i       exec --no-startup-id "pkill    vivaldi-stable"; mode "default"
+    bindsym I       exec --no-startup-id "pkill -9 vivaldi-stable"; mode "default"
+    bindsym j       exec --no-startup-id "pkill    java"; mode "default"
+    bindsym J       exec --no-startup-id "pkill -9 java"; mode "default"
+    bindsym s       exec --no-startup-id "pkill    -f 'sbt-launch.jar'"; mode "default"
+    bindsym S       exec --no-startup-id "pkill -9 -f 'sbt-launch.jar'"; mode "default"
     # cancel
-    bindsym $mod+r mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
-# change border
-bindsym $mod+b border toggle
+## windows always floating/fullscreen
+for_window [class="(?i)avd"]                                                        floating enable
+for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"]      fullscreen
+for_window [class="(?i)file-roller"]                                                floating enable
+for_window [class="(?i)galculator"]                                                 floating enable
+for_window [class="(?i)galculator"]                                                 move position 750 450
+for_window [class="(?i)galculator"]                                                 resize set 320 400
+for_window [class="(?i)gcolor2"]                                                    floating enable
+for_window [class="(?i)gcolor2"]                                                    move position 750 150
+for_window [class="(?i)mplayer"]                                                    fullscreen
+for_window [class="(?i)nm-connection-editor"]                                       floating enable
+for_window [class="(?i)nautilus"]                                                   floating enable
+for_window [class="(?i)nautilus"]                                                   move position 550 250
+for_window [class="(?i)nautilus"]                                                   resize set 920 600
+for_window [class="(?i)nemo"]                                                       floating enable
+for_window [class="(?i)pavucontrol"]                                                floating enable
+for_window [class="(?i)pokerstars"]                                                 floating enable
+for_window [class="(?i)qjackctl"]                                                   floating enable
+for_window [class="(?i)sxiv"]                                                       fullscreen
+for_window [class="(?i)thunar"]                                                     floating enable
+for_window [class="ssh-askpass"]                                                    floating enable
+for_window [title="Print"]                                                          floating enable
+for_window [class="(?i)org.gnome.clocks"]                                           floating enable
+for_window [window_role="(?i)vlc-main"]                                             floating enable
+for_window [window_role="(?i)vlc-main"]                                             resize set 750 450
 
+## windows always on specific workspace
+for_window [class="(?i)chrom" instance="crx_acmikcjocccblbiibfdfjkghclpmmpip"] move to workspace    Banking
+for_window [class="(?i)chrom" instance="crx_kddchekfnnagpejaneebcigegenogifj"] move to workspace    Banking
+for_window [class="(?i)chrom" instance="crx_afbjehlnjihfcebhifoapfibhcgakelg"] move to workspace    Github
+for_window [class="(?i)chrom" instance="crx_lgeboohgcoglieeoikhidodnmdfcalmh"] move to workspace    Phone
+for_window [class="(?i)chrom" instance="crx_elofdcljcpfajijdjlcbjclkdggnklhg"] move to workspace    Mail
+for_window [class="(?i)chrom" instance="crx_coohboghlolbhgjfnghkkddfmichcgmp"] move to workspace    Calendar
+for_window [class="(?i)chrom" instance="crx_nkciffeafpjoepmgjbjnckchbgfjnjhp"] move to workspace    Calendar
+for_window [class="(?i)chrom" instance="crx_bikioccmkafdpakkkcpdbppfkghcmihk"] move to workspace    Chat
+for_window [class="(?i)chrom" instance="crx_mldpchjnjlkioecpffkohnhjlgbkcfkf"] move to workspace    Mediathek
+for_window [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"] move to workspace    Trello
+for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] move to workspace    Trello
+for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] move to workspace    Netflix
+for_window [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"] move to workspace    Notes
+assign [class="(?i)chromium"]                                                                       Chromium
+assign [class="(?i)google-chrome"]                                                                  Chrome
+assign [class="(?i)filezilla"]                                                                      Filezilla
+assign [class="(?i)firefox"]                                                                        Firefox
+assign [class="(?i)jetbrains-idea"]                                                                 IntelliJ
+assign [class="(?i)jetbrains-phpstorm"]                                                             PhpStorm
+assign [class="gnome-calendar"]                                                                     Calendar
+assign [class="(?i)thunderbird"]                                                                    Mail
+assign [class="(?i)pokerstars"]                                                                     Poker
+assign [class="(?i)audacity"]                                                                       Recording
+assign [class="(?i)ardour"]                                                                         Recording
+assign [class="(?i)skype"]                                                                          Skype
+assign [class="(?i)slack"]                                                                          Slack
+assign [class="(?i)qjackctl"]                                                                       Audiosettings
+assign [class="(?i)kaffeine"]                                                                       Kaffeine
+assign [class="(?i)mediathek"]                                                                      Mediathek
+assign [class="(?i)spotify"]                                                                        Spotify
+for_window [class="Spotify"] move to workspace                                                      Spotify
+assign [class="Telegram"]                                                                           Telegram
+assign [class="(?i)alacritty"]                                                                      Terminal
+assign [class="(?i)cool-retro-term"]                                                                Terminal
+assign [class="(?i)gnome-terminal"]                                                                 Terminal
+assign [class="(?i)urxvt"]                                                                          Terminal
+assign [class="(?i)pale moon"]                                                                      Web
+assign [class="(?i)qutebrowser"]                                                                    Web
+assign [class="(?i)vivaldi-stable"]                                                                 Vivaldi
+assign [class="code-oss"]                                                                           VS Code
+assign [class="(?i)gnome-session-failed"]                                                           GnomeSessionFailed
 
-
-###############################################################################
-###########  INTER WORKSPACE  #################################################
-###############################################################################
-
-# $mod+4 two times to get back to last recently used
-workspace_auto_back_and_forth yes
-
-
-# open new workspace
-bindsym $mod+i exec --no-startup-id "quickswitch -E"
-
-# rename workspace
-bindsym $mod+comma exec --no-startup-id i3-input -F 'rename workspace to "%s"' -P 'rename workspace to: '
-
-# mark/goto windows like in vim
-bindsym $mod+t       exec --no-startup-id i3-input -F 'mark %s' -P 'Mark name: '
-bindsym $mod+Shift+t exec --no-startup-id i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
-
-# switch to a specific window or workspace
-#bindsym $mod+t mode "goto"
-#mode "goto" {
-#   bindsym f [class="(?i)firefox"]  focus; mode "default"
-#   bindsym s [class="(?i)sublime"]  focus; mode "default"
-#   bindsym m workspace music; mode "default"
-#    # cancel
-#    bindsym $mod+t mode "default"
-#    bindsym Return mode "default"
-#    bindsym Escape mode "default"
-#}
-
-# switch to another workspace
-bindsym $mod+e [urgent=latest] focus
-bindsym $mod+space workspace back_and_forth
-# bindsym $mod+numbersign workspace back_and_forth
-bindsym $mod+numbersign exec --no-startup-id "rofi -show window $ROFI_OPTIONS"
-bindsym $mod+w exec --no-startup-id "quickswitch --workspaces --dmenu 'dmenu $DMENU_OPTIONS_2'"
-bindsym $mod+n workspace next_on_output
-bindsym $mod+p workspace prev_on_output
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-#bindsym $mod+0 workspace 10
-
-# move container to specific workspace
-bindsym $mod+Shift+n move container to workspace next_on_output
-bindsym $mod+Shift+p move container to workspace prev_on_output
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-#bindsym $mod+Shift+0 move container to workspace 10
-
-# move container to new workspace (tmux 'break')
-bindsym $mod+Shift+i exec --no-startup-id "quickswitch --journey -E"
-# move container to specific workspace
-bindsym $mod+Shift+numbersign exec --no-startup-id "quickswitch --journey --dmenu 'dmenu $DMENU_OPTIONS_2'"
-bindsym $mod+Shift+w          exec --no-startup-id "quickswitch --journey --dmenu 'dmenu $DMENU_OPTIONS_2'"
-bindsym $mod+Shift+space move container to workspace back_and_forth
-
-
-# move container to other output
-bindsym $mod+u mode "$move_container_to_output"
-set $move_container_to_output Move container to output (h) left, (l) right, (j) down, (k) up
-mode "$move_container_to_output" {
-    bindsym h move container to output left; workspace back_and_forth; mode "default"
-    bindsym l move container to output right; workspace back_and_forth; mode "default"
-    bindsym j move container to output down; workspace back_and_forth; mode "default"
-    bindsym k move container to output up; workspace back_and_forth; mode "default"
-    # cancel
-    bindsym $mod+u mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-# move workspace to other output
-bindsym $mod+Shift+u mode "$move_workspace_to_output"
-set $move_workspace_to_output Move workspace to output (h) left, (l) right, (j) down, (k) up
-mode "$move_workspace_to_output" {
-    bindsym h move workspace to output left; mode "default"
-    bindsym l move workspace to output right; mode "default"
-    bindsym j move workspace to output down; mode "default"
-    bindsym k move workspace to output up; mode "default"
-    # cancel
-    bindsym $mod+Shift+u mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+## workspaces with window always on specific output
+for_window [class="(?i)vivaldi-stable"]                                         move workspace to output DP3-2
+for_window [class="(?i)chromium"]                                               move workspace to output DP3-2
+for_window [class="(?i)google-chrome"]                                          move workspace to output DP3-1
+for_window [class="(?i)firefox"]                                                move workspace to output DP3-2
+for_window [class="(?i)qutebrowser"]                                            move workspace to output DP3-2
+for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DP3-1
+for_window [class="(?i)alacritty"]                                              move workspace to output DP3-1
+for_window [class="(?i)cool-retro-term"]                                        move workspace to output DP3-1
+for_window [class="(?i)gnome-terminal"]                                         move workspace to output DP3-1
+for_window [class="(?i)urxvt"]                                                  move workspace to output DP3-1
+for_window [class="(?i)jetbrains-idea"]                                         move workspace to output DP3-1
+for_window [class="(?i)jetbrains-phpstorm"]                                     move workspace to output DP3-1
+for_window [class="(?i)slack"]                                                  move workspace to output eDP1
+for_window [class="Spotify"]                                                    move workspace to output eDP1
+for_window [class="(?i)telegram"]                                               move workspace to output eDP1

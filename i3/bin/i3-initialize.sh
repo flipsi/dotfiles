@@ -6,6 +6,20 @@
 # We have more power here than in the i3 config file (functions, loops, etc).
 
 
+function setup_power_management
+    switch (hostname)
+        case 'dwarf'
+            xset dpms 595 0 0 # seconds until standby/suspend/off
+            xset s noblank # screensaver should not turn off screen
+            xset s off # screensaver should be disabled
+            nohup xautolock -time 10 -locker 'i3lock -e -t -i ~/.i3/wallpaper.png' -notify 15 -notifier 'notify-send -u critical -t 10000 -- \'Turning off screen in 10 seconds...\'' &
+        case '*'
+            xset dpms 14400 0 0 # seconds until standby/suspend/off
+    end
+end
+
+
+# TODO: port to bash in ./i3/bin/i3-initialize-outputs.sh
 function new_screen_resolution
     set screen $argv[1]
     set h_resolution $argv[2]
@@ -20,31 +34,11 @@ function new_screen_resolution
 end
 
 
+# TODO: port to bash in ./i3/bin/i3-initialize-outputs.sh
 function setup_screen_resolution
     if test (hostname) = 'asterix'
         if not xrandr | grep "eDP1 connected 1920x1080" >/dev/null
             new_screen_resolution eDP1 1920 1080
-        end
-    end
-end
-
-
-function setup_screen_layout
-    set primary_screens LVDS0 LVDS1 LVDS-0 LVDS-1 eDP1
-    set secondary_screens VGA0 VGA1 VGA-0 VGA-1 HDMI1 HDMI2 HDMI-1 HDMI-2
-    for secondary_screen in $secondary_screens
-        if xrandr | grep "$secondary_screen connected" >/dev/null
-            for primary_screen in $primary_screens
-                if xrandr | grep "$primary_screen connected" >/dev/null
-                    xrandr --output $secondary_screen --auto --below $primary_screen --auto
-                    i3-msg restart
-                    if test -f $HOME/.i3/wallpaper
-                        feh --bg-scale $HOME/.i3/wallpaper
-                    end
-                    break
-                end
-            end
-            break
         end
     end
 end
@@ -62,7 +56,7 @@ function start_musicserver_if_music_is_accessible
                     nohup mopidy \
                         --option spotify/password=(pass spotify/soziflip+spotify@gmail.com  | head -n1) \
                         --option spotify/client_secret=(pass spotify/mopidy | head -n1) \
-                        >/tmp/mopidy.log ^&1 &
+                        >/tmp/mopidy.log 2>&1 &
                 else
                     mpd
                 end
@@ -110,11 +104,12 @@ end
 
 
 function autostart
-    if not pgrep -x firefox
-        nohup firefox &
+    if not pgrep -x vivaldi-stable
+        nohup vivaldi-stable &
     end
-    if not pgrep alacritty
-        nohup alacritty --command tmux -2 new-session -A -s main &
+    if not pgrep alacritty; and not pgrep gnome-terminal
+        nohup alacritty --command tmux -2 new-session -A -s main; or \
+        nohup gnome-terminal --hide-menubar -- tmux -2 new-session -A -s main &
     end
     if not pgrep telegram-desktop
         nohup telegram-desktop &
@@ -122,12 +117,7 @@ function autostart
 end
 
 
-if test -f $HOME/.i3/bin/i3-initialize-arandr.local.sh
-    eval $HOME/.i3/bin/i3-initialize-arandr.local.sh
-else
-    setup_screen_resolution
-    setup_screen_layout
-end
+setup_power_management
 desktop_session
 setup_musicserver
 # tmux-system-sessions

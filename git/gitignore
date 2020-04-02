@@ -4,13 +4,23 @@
 *.bak
 *.swp
 
+# version managers
+.tool-versions
+
 # IDE and editor files etc.
 .session.vim
 .tags
-.idea
+.idea/
+.bloop/
+.metals/
+/project/metals.sbt
 .ensime
 .ensime_cache
 sftp-config.json
 
 # compiled source
 *.class
+
+# misc
+nohup.out
+

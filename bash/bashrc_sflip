@@ -20,18 +20,16 @@ alias cdw='cd /var/www'
 alias g='grep --with-filename --line-number --recursive --ignore-case --extended-regexp'
 
 alias   gs='git status'
+alias   gb='git branch'
 alias   gd='git diff'
 alias  gdc='git diff --cached'
 alias   ge='git checkout'
-alias  sge='sudo git checkout'
 alias   gl='git log'
 alias  glh='git --no-pager log -n 1'
 alias   gf='git fetch'
-alias  sgf='sudo git fetch'
 alias   gp='git pull'
-alias  sgp='sudo git pull'
+alias  grh='git reset --hard'
 alias  gup='git submodule update'
-alias sgup='sudo git submodule update'
 
 alias h='htop'
 
@@ -60,6 +58,14 @@ function se() {
     fi
     EDITOR="vim -u $vimrc"
     sudoedit $1
+}
+alias tm=tm
+function tm() {
+    tmux_conf=/tmp/sflip.tmux.conf
+    if [[ ! -f $tmux_conf ]]; then
+        curl https://raw.githubusercontent.com/sflip/dotfiles/master/tmux/tmux.conf > $tmux_conf
+    fi
+    tmux -f $tmux_conf
 }
 
 if [ -t 1 ]; then

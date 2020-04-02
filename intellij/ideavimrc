@@ -1,5 +1,12 @@
 " ideavimrc - a vimrc for IntelliJ IDEA
 
+" the command ':actionlist' helps
+
+" Other useful plugins in addition to IdeaVIM:
+" - AceJump
+" - TabMover
+" - Rainbow Brackets
+
 set vim-surround
 
 set incsearch
@@ -22,24 +29,27 @@ nnoremap <bs> :action HideActiveWindow<cr>
 
 inoremap jk <c-c>
 
-nnoremap <silent> <c-g>l :set relativenumber! <cr>
-
 nnoremap <a-j> 15<c-e>
 nnoremap <a-k> 15<c-y>
 
 noremap gj 10j
 noremap gk 10k
 
-nnoremap ö /
-nnoremap / :action Find<cr>
+nnoremap s F
+nnoremap , ;
+nnoremap ; ,
 
-nnoremap vv V
+nnoremap v <c-v>
+nnoremap <c-v> v
 vnoremap v <c-c>
 
 nnoremap <C-c><C-c>     :action EditorCopy<cr>
 nnoremap <leader><c-v>  :action EditorPasteFromX11<cr>
 nnoremap <c-v><c-v>     :action EditorPaste<cr>
-inoremap <c-v><c-v>     :action EditorPaste<cr>
+inoremap <c-v><c-v>     <Esc>l:action EditorPaste<cr>i
+
+nnoremap Q @
+nnoremap QQ @@
 
 nnoremap <c-a> ^
 vnoremap <c-a> ^
@@ -77,7 +87,7 @@ nnoremap gV `[v`]
 nnoremap cC viw~
 " split line (opposite of 'J'oin lines)
 " (regular 'S' can be done with 'cc' instead)
-nnoremap S i<CR><esc>
+nnoremap <leader><cr> i<CR><esc>
             \ ^mq
             \ :let searchregister=@/<CR>
             \ :silent! .-1s/\v +$//<CR>:nohlsearch<CR>
@@ -90,11 +100,29 @@ nnoremap -ul yyp
 nnoremap -up yap<S-}>p
 vnoremap -u yP
 
+" delete leading whitespace (can be prefixed with a count)
+nnoremap <silent> -dsl :s:^\s\+::<cr>
+" replace double/multiple spaces with one space
+nnoremap <silent> -dsd :.s:\v(\S) {2}(\S):\1 \2:<cr>
+nnoremap <silent> -dsD :%s:\v(\S) {2}(\S):\1 \2:<cr>
+nnoremap <silent> -dsm :.s:\v(\S) {2,}(\S):\1 \2:<cr>
+nnoremap <silent> -dsM :.s:\v(\S) {2,}(\S):\1 \2:<cr>
+
+
 nnoremap K o<c-c>k
 nnoremap -as mno<Esc>o<Esc>o<Esc>o<Esc>`n
 
 nnoremap <c-g>+             :action EditorIncreaseFontSize<cr>
 nnoremap <c-g>-             :action EditorDecreaseFontSize<cr>
+
+nnoremap <leader>ym         :action ViewMainMenu<cr>
+nnoremap <leader>yy         :action TogglePresentationMode<cr>
+nnoremap <leader>yY         :action ToggleDistractionFreeMode<cr>
+nnoremap <leader>yG         :action EditorToggleShowGutterIcons<cr>
+nnoremap <leader>yI         :action EditorToggleShowIndentLines<cr>
+nnoremap <leader>yl         :set relativenumber!<cr>
+nnoremap <leader>yL         :action EditorToggleShowLineNumbers<cr>
+nnoremap <leader>ya         :action EditorToggleShowWhitespaces<cr>
 
 nnoremap <leader>.          :action JumpToLastChange<cr>
 nnoremap <down>             :action VcsShowNextChangeMarker<cr>
@@ -107,8 +135,17 @@ nnoremap <leader>qq         :action CloseContent<cr>
 nnoremap <leader>qa         :action CloseAllEditors<cr>
 nnoremap <leader><bs>       :action CloseContent<cr>
 
-nnoremap <a-u>              :action VimUndo<cr>
-nnoremap <a-s-u>            :action VimRedo<cr>
+nnoremap <a-u>              :undo<cr>
+nnoremap <a-s-u>            :redo<cr>
+
+nnoremap <c-l>              <c-w>l
+nnoremap <c-h>              <c-w>h
+nnoremap <leader><c-l>      :action SplitVertically<cr>
+nnoremap <leader><c-x>      :action SplitHorizontally<cr>
+nnoremap <leader>qw         :action Unsplit<cr>
+nnoremap <c-w>L             :action com.mnw.tabmover.actions.MoveTabToNextSplitter<cr>
+nnoremap <c-w>H             :action com.mnw.tabmover.actions.MoveTabToPreviousSplitter<cr>
+nnoremap <c-w><c-w>         :action com.mnw.tabmover.actions.ShowTabMoveActions<cr>
 
 nnoremap <leader>te         :action ActivateProjectToolWindow<cr>
 nnoremap <leader>tr         :action ActivateRunToolWindow<cr>
@@ -117,10 +154,9 @@ nnoremap <leader>if         :action ActivateTerminalToolWindow<cr>
 nnoremap <leader>tb         :action Activatesbt-shell-toolwindowToolWindow<cr>
 nnoremap <leader>ts         :action ShowSettings<cr>
 
-nnoremap <leader><leader>   :action Switcher<cr>
+" nnoremap <leader><leader>   :action Switcher<cr> " Unusable in i3
+nnoremap <leader><leader>   :action SearchEverywhere<cr>
 
-nnoremap #                  :action SearchEverywhere<cr>
-nnoremap <leader>#          :action SearchEverywhere<cr>
 nnoremap <leader>ec         :action GotoClass<cr>
 nnoremap <leader>es         :action GotoSymbol<cr>
 nnoremap <leader>ef         :action GotoFile<cr>
@@ -134,10 +170,24 @@ nnoremap <leader>jr         :action GotoRelated<cr>
 
 nnoremap <leader>*          :action ShowUsages<cr>
 nnoremap <leader>su         :action ShowUsages<cr>
+nnoremap <leader>fc         /\v^[<\|=>]{7}( .*\|$)<cr>
 nnoremap <leader>fu         :action FindUsages<cr>
-nnoremap <leader>ö          :action FindInPath<cr>
+nnoremap <leader>ff         :action Find<cr>
+nnoremap <leader>/          :action FindInPath<cr>
 
+nnoremap <leader>ie         :action ShowErrorDescription<cr>
+nnoremap <leader>in         :action ShowNavBar<cr>
+nnoremap <leader>it         :action Scala.TypeInfo<cr>
+nnoremap <leader>iq         :action QuickJavaDoc<cr>
+
+" nnoremap <leader>gd         :action Compare.LastVersion<cr>
+nnoremap <leader>gd         :action Compare.SameVersion<cr>
+nnoremap <leader>gD         :action Git.CompareWithBranch<cr>
 nnoremap <leader>gb         :action Annotate<cr>
+nnoremap <leader>gA         :action Git.Add<cr>
+nnoremap <leader>gU         :action ChangesView.Revert<cr>
+nnoremap <leader>ga         :echo "Sorry, seems like there is no command to add a single hunk."<cr>
+nnoremap <leader>gu         :action Vcs.RollbackChangedLines<cr>
 
 nnoremap <leader>c<leader>  :action CommentByLineComment<cr>
 
@@ -147,6 +197,8 @@ nnoremap <leader>ai         :action OptimizeImports<cr>
 
 nnoremap <leader>rf         :action RenameElement<cr>
 nnoremap <leader>rn         :action RenameFile<cr>
+nnoremap <leader>rp         :action Replace<cr>
+vnoremap <leader>rp         "+y:action Replace<cr>
 
 nnoremap <leader>bp         :action ToggleLineBreakpoint<cr>
 nnoremap <leader>br         :action Run<cr>

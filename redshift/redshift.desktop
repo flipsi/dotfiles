@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=redshift
+GenericName=redshift
+Comment=Adjust screen temperature and brightness
+# Exec=redshift
+Exec=redshift-gtk
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true

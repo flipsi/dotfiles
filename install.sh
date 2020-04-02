@@ -29,9 +29,11 @@ SUPPORTED_TARGETS=(\
     autostart \
     bash \
     cmus \
+    compton \
     dircolors \
     elinks \
     fish \
+    gcalcli \
     ghci \
     git \
     i3 \
@@ -46,12 +48,17 @@ SUPPORTED_TARGETS=(\
     mutt \
     muttator \
     ncmpcpp \
+    ncspot \
     pentadactyl \
+    polybar \
     psql \
+    qutebrowser \
     ranger \
+    redshift \
     screen \
     sbt \
     sublime-text-3 \
+    sxiv \
     taskwarrior \
     telegram-cli \
     telegram-desktop \
@@ -89,6 +96,16 @@ function print_supported_targets() {
     done
 }
 
+function install_xresources_inclusion() {
+    local sourcestring="#include "\""$1"\"
+    if [[ $UNINSTALL != true ]]; then
+        grep -q -F "$sourcestring" "$HOME/.Xresources"  || echo "$sourcestring" >> "$HOME/.Xresources"
+        xrdb -all "$HOME/.Xresources"
+    else
+        touch "$HOME/.Xresources"
+        sed -i -- "/^${sourcestring//\//\\/}$/d" "$HOME/.Xresources"
+    fi
+}
 
 function create_link() {
     local DESTPATH="$1"
@@ -136,15 +153,9 @@ function create_link_for_target() {
         autostart )
             mkdir -p "$HOME/bin"
             mkdir -p "$HOME/.config/autostart"
-            create_link "$PWD/autostart/clipmenud.sh" "$HOME/bin/autostart-clipmenud.sh"
             create_link "$PWD/autostart/clipmenud.desktop" "$HOME/.config/autostart/clipmenud.desktop"
-            create_link "$PWD/autostart/numlockx.sh" "$HOME/bin/autostart-numlockx.sh"
             create_link "$PWD/autostart/numlockx.desktop" "$HOME/.config/autostart/numlockx.desktop"
-            create_link "$PWD/autostart/setxkbmap.sh" "$HOME/bin/autostart-setxkbmap.sh"
-            create_link "$PWD/autostart/setxkbmap.desktop" "$HOME/.config/autostart/setxkbmap.desktop"
-            create_link "$PWD/autostart/syndaemon.sh" "$HOME/bin/autostart-syndaemon.sh"
             create_link "$PWD/autostart/syndaemon.desktop" "$HOME/.config/autostart/syndaemon.desktop"
-            create_link "$PWD/autostart/unclutter.sh" "$HOME/bin/autostart-unclutter.sh"
             create_link "$PWD/autostart/unclutter.desktop" "$HOME/.config/autostart/unclutter.desktop"
             ;;
 
@@ -164,6 +175,10 @@ function create_link_for_target() {
             create_link "$PWD/cmus/gruvbox.theme" "$HOME/.cmus/gruvbox.theme"
             ;;
 
+        compton )
+            create_link "$PWD/compton/compton.conf" "$HOME/.config/compton.conf"
+            ;;
+
         dircolors )
             create_link "$PWD/dircolors/dircolors" "$HOME/.dircolors"
             ;;
@@ -179,6 +194,11 @@ function create_link_for_target() {
             create_link "$PWD/fish/completions" "$HOME/.config/fish/completions"
             create_link "$PWD/fish/config.fish" "$HOME/.config/fish/config.fish"
             create_link "$PWD/fish/abbr.fish" "$HOME/.config/fish/abbr.fish"
+            create_link "$PWD/fish/commands.fish" "$HOME/.config/fish/commands.fish"
+            ;;
+
+        gcalcli )
+            create_link "$PWD/gcalcli/gcalclirc" "$HOME/.gcalclirc"
             ;;
 
         ghci )
@@ -192,14 +212,19 @@ function create_link_for_target() {
 
         i3 )
             mkdir -p "$HOME/.i3"
-            create_link "$PWD/i3/bin" "$HOME/.i3/bin"
             create_link "$PWD/i3/config" "$HOME/.i3/config"
             # create_link "$PWD/i3/i3status" "$HOME/.i3/i3status"
             create_link "$PWD/i3/i3pystatus" "$HOME/.i3/i3pystatus"
+            create_link "$PWD/i3/bin" "$HOME/.i3/bin"
+            create_link "$PWD/i3/wallpaper" "$HOME/.i3/wallpaper"
             ;;
 
         intellij )
             create_link "$PWD/intellij/ideavimrc" "$HOME/.ideavimrc"
+            INTELLIJ_DIRS=$(find $HOME -maxdepth 1 -type d -name '.IntelliJIdea*')
+            for DIR in $INTELLIJ_DIRS; do
+                create_link "$PWD/intellij/idea.properties" "$DIR/config/idea.properties"
+            done
             ;;
 
         kitty )
@@ -275,6 +300,11 @@ function create_link_for_target() {
             create_link "$PWD/ncmpcpp/bindings" "$HOME/.ncmpcpp/bindings"
             ;;
 
+        ncspot )
+            mkdir -p "$HOME/.config/ncspot/"
+            create_link "$PWD/ncspot/config.toml" "$HOME/.config/ncspot/config.toml"
+            ;;
+
         pentadactyl )
             create_link "$PWD/pentadactyl/pentadactyl" "$HOME/.pentadactyl"
             create_link "$PWD/pentadactyl/pentadactylrc" "$HOME/.pentadactylrc"
@@ -282,6 +312,16 @@ function create_link_for_target() {
 
         psql )
             create_link "$PWD/psql/psqlrc" "$HOME/.psqlrc"
+            ;;
+
+        polybar )
+            mkdir -p "$HOME/.config/polybar"
+            create_link "$PWD/polybar/config" "$HOME/.config/polybar/config"
+            create_link "$PWD/polybar/scripts" "$HOME/.config/polybar/scripts"
+            ;;
+
+        qutebrowser )
+            create_link "$PWD/qutebrowser/config.py" "$HOME/.config/qutebrowser/config.py"
             ;;
 
         ranger )
@@ -300,6 +340,12 @@ function create_link_for_target() {
             create_link "$PWD/rofi/themes" "$HOME/.config/rofi/themes"
             ;;
 
+        redshift )
+            create_link "$PWD/redshift/redshift.conf" "$HOME/.config/redshift.conf"
+            mkdir -p "$HOME/.config/autostart"
+            create_link "$PWD/redshift/redshift.desktop" "$HOME/.config/autostart/redshift.desktop"
+            ;;
+
         sbt )
             create_link "$PWD/sbt/sbtconfig" "$HOME/.sbtconfig"
             mkdir -p "$HOME/.sbt/1.0/plugins"
@@ -316,6 +362,10 @@ function create_link_for_target() {
             create_link "$PWD/sublime/jsbeautifyrc" "$HOME/.jsbeautifyrc"
             ;;
 
+        sxiv )
+            install_xresources_inclusion  "$PWD/sxiv/Xresources"
+            ;;
+
         taskwarrior )
             create_link "$PWD/taskwarrior/taskrc" "$HOME/.taskrc"
             ;;
@@ -330,6 +380,11 @@ function create_link_for_target() {
         telegram-cli )
             mkdir -p "$HOME/.telegram-cli"
             create_link "$PWD/telegram-cli/config" "$HOME/.telegram-cli/config"
+            ;;
+
+        termite )
+            mkdir -p "$HOME/.config/termite"
+            create_link "$PWD/termite/config" "$HOME/.config/termite/config"
             ;;
 
         tig )
@@ -355,14 +410,7 @@ function create_link_for_target() {
             ;;
 
         urxvt )
-            local sourcestring="#include "\""$PWD/urxvt/Xresources"\"
-            if [[ $UNINSTALL != true ]]; then
-                grep -q -F "$sourcestring" "$HOME/.Xresources"  || echo "$sourcestring" >> "$HOME/.Xresources"
-                xrdb -all "$HOME/.Xresources"
-            else
-                touch "$HOME/.Xresources"
-                sed -i -- "/^${sourcestring//\//\\/}$/d" "$HOME/.Xresources"
-            fi
+            install_xresources_inclusion "$PWD/urxvt/Xresources"
             ;;
 
         vim )
@@ -373,13 +421,15 @@ function create_link_for_target() {
             create_link "$PWD/vim/config/eslintrc.json" "$HOME/.eslintrc.json"
             mkdir -p "$HOME/.vim"
             mkdir -p "$HOME/.vim/undodir"
+            create_link "$PWD/vim/vim/coc-settings.json" "$HOME/.vim/coc-settings.json"
+            create_link "$PWD/vim/vim/filetype.vim" "$HOME/.vim/filetype.vim"
             create_link "$PWD/vim/vim/sflipsnippets" "$HOME/.vim/sflipsnippets"
             create_link "$PWD/vim/vim/spell" "$HOME/.vim/spell"
             create_link "$PWD/vim/vim/spellfile.utf-8.add" "$HOME/.vim/spellfile.utf-8.add"
             create_link "$PWD/vim/vim/syntax" "$HOME/.vim/syntax"
-            create_link "$PWD/vim/vim/filetype.vim" "$HOME/.vim/filetype.vim"
             mkdir -p "$HOME/bin"
             create_link "$PWD/vim/bin/goobook-query-mail.sh" "$HOME/bin/goobook-query-mail.sh"
+            create_link "$PWD/vim/agignore" "$HOME/.agignore"
             ;;
 
         vimfx )
@@ -415,8 +465,8 @@ function create_link_for_target() {
             ;;
 
         vlc )
-            mkdir -p "$HOME/.config"
-            create_link "$PWD/vlc" "$HOME/.config/vlc"
+            mkdir -p "$HOME/.config/vlc"
+            create_link "$PWD/vlc/vlcrc" "$HOME/.config/vlc/vlcrc"
             ;;
 
         xfce4 )
@@ -430,8 +480,11 @@ function create_link_for_target() {
         xkb )
             if [[ $(whoami) = 'root' ]]; then
                 create_link "$PWD/xkb/symbols/de_sflip" "/usr/share/X11/xkb/symbols/de_sflip"
+                create_link "$PWD/xkb/symbols/us_sflip" "/usr/share/X11/xkb/symbols/us_sflip"
             fi
-            setxkbmap de_sflip
+            setxkbmap us_sflip
+            mkdir -p "$HOME/.config/autostart"
+            create_link "$PWD/xkb/setxkbmap.desktop" "$HOME/.config/autostart/setxkbmap.desktop"
             ;;
 
         xmonad )
@@ -472,7 +525,7 @@ function package_install_target() {
     case "$TARGET" in
 
         i3 )
-            LIST_OF_SYSTEM_PACKAGES="i3-wm i3exit i3status i3lock dmenu quickswitch-i3 rofi compton unclutter syndaemon numlockx"
+            LIST_OF_SYSTEM_PACKAGES="i3-wm i3exit i3status i3lock dmenu clipmenud quickswitch-i3 rofi compton redshift unclutter syndaemon numlockx"
             ;;
 
         fd )

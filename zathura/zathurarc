@@ -4,7 +4,7 @@ set window-title-basename true
 
 set selection-clipboard 'clipboard'
 
-#set font terminus 8
+set font "PragmataPro Mono 10"
 
 set default-bg "#2D2C2B"
 set default-fg "#DDDDDD"
