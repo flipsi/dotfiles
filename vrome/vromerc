@@ -109,6 +109,9 @@ imap <M-Space> <Esc><C-^>
 map <M-S-p> :tabmove -1<CR>
 map <M-S-n> :tabmove +1<CR>
 
+" detach tab to a new window
+map ! gD
+
 " close tab
 " map dd :quit<CR>
 map dd dc

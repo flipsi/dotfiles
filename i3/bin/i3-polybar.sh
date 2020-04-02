@@ -24,7 +24,11 @@ function set_env_vars() {
             ;;
         dwarf )
             if xrandr | grep -q 'DP3-1 connected'; then
-                BAR_MAIN_MONITOR=DP3-1
+                BAR_MAIN_MONITOR='DP3-1'
+            elif xrandr | grep -q 'DP3-2 connected'; then
+                BAR_MAIN_MONITOR='DP3-2'
+            elif xrandr | grep -q 'HDMI1 connected'; then
+                BAR_MAIN_MONITOR='HDMI1'
             fi
             BAR_MAIN_DPI=108
             BAR_MAIN_HEIGHT=24

@@ -3,8 +3,8 @@
 
 [options]
 
-# font = PragmataPro Mono 10
-font = Fantasque Sans Mono 10
+font = PragmataPro Mono 9
+# font = Fantasque Sans Mono 10
 
 scrollback_lines = 10000
 
