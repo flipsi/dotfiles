@@ -147,3 +147,5 @@ case $LAST_TIME_ACTION in
     * )
         ;;
 esac
+
+# TODO: reset window rename
