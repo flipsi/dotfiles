@@ -346,7 +346,7 @@ nnoremap <leader>yo :COLORSCROLL<cr>
 
 " highlight different parentheses pairs with different colors
 Plug 'luochen1990/rainbow'
-let g:rainbow_active = 1
+let g:rainbow_active = 0
 nnoremap <leader>yb :RainbowToggle<cr>
 
 
@@ -1491,7 +1491,7 @@ nnoremap <silent> -adj :JsDoc<cr>
 
 " show indentation level
 Plug 'Yggdroot/indentLine'
-let g:indentLine_enabled = 1
+let g:indentLine_enabled = 0
 let g:indentLine_char = '┊'
 nnoremap <leader>yI :IndentLinesToggle<cr>
 
