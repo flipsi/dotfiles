@@ -104,7 +104,7 @@ bind stage  S @bash -c 'git diff-files --quiet && git reset HEAD || git add --al
 bind status c !git commit
 bind stage  c !git commit
 
-# checkout files, reset and delete
+# checkout files / reset / delete / format / etc.
 bind generic grh ?git reset --hard
 bind generic gup ?git submodule update
 bind status C    ?git checkout -- %(file)
@@ -113,6 +113,7 @@ bind status R    ?git reset --hard
 bind stage  R    ?git reset --hard
 bind status xr   ?rm -r %(file)
 bind status xt   !trash-put %(file)
+bind status afs  ?scalafmt %(file)
 
 # amend to last commit
 bind status A ?git commit --amend
