@@ -463,12 +463,12 @@ xmap ah <plug>GitGutterTextObjectOuterVisual
 
 nnoremap <leader>yG   :GitGutterToggle<cr>
 nnoremap <leader>yg   :GitGutter<cr> " redraw
-nnoremap <leader>gg gg:GitGutterNextHunk<cr>ztzv
-nnoremap <leader>gG  G:GitGutterPrevHunk<cr>ztzv
-nnoremap <leader>gn   :GitGutterNextHunk<cr>ztzv
-nnoremap <leader>gN   :GitGutterPrevHunk<cr>ztzv
-nnoremap <down>       :GitGutterNextHunk<cr>ztzv
-nnoremap <up>         :GitGutterPrevHunk<cr>ztzv
+nnoremap <leader>gg gg:GitGutterNextHunk<cr>zz9<c-e>zv
+nnoremap <leader>gG  G:GitGutterPrevHunk<cr>zz9<c-e>zv
+nnoremap <leader>gn   :GitGutterNextHunk<cr>zz9<c-e>zv
+nnoremap <leader>gN   :GitGutterPrevHunk<cr>zz9<c-e>zv
+nnoremap <down>       :GitGutterNextHunk<cr>zz9<c-e>zv
+nnoremap <up>         :GitGutterPrevHunk<cr>zz9<c-e>zv
 nnoremap <leader>ga   :GitGutterStageHunk<cr>
 nnoremap <leader>gu   :GitGutterUndoHunk<cr>
 nnoremap <leader>gi   :GitGutterPreviewHunk<cr>
