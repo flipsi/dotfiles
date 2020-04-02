@@ -784,6 +784,7 @@ mode "$kill" {
 for_window [class="Wine"]                                                           floating enable
 for_window [class="(?i)avd"]                                                        floating enable
 for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"]      fullscreen
+for_window [class="com-intellij-updater-Runner"]                                    floating enable
 for_window [class="(?i)file-roller"]                                                floating enable
 for_window [class="(?i)galculator"]                                                 floating enable
 for_window [class="(?i)galculator"]                                                 move position 750 450
@@ -826,6 +827,7 @@ assign [class="(?i)google-chrome"]                                              
 assign [class="(?i)filezilla"]                                                                      Filezilla
 assign [class="(?i)firefox"]                                                                        Firefox
 assign [class="(?i)jetbrains-idea"]                                                                 IntelliJ
+assign [class="com-intellij-updater-Runner"]                                                        IntelliJ
 assign [class="(?i)jetbrains-phpstorm"]                                                             PhpStorm
 assign [class="gnome-calendar"]                                                                     Calendar
 assign [class="(?i)thunderbird"]                                                                    Mail
