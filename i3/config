@@ -391,6 +391,9 @@ mode "$mode_light" {
     bindsym Escape mode "default"
 }
 
+# open a clock
+bindsym $mod+minus  exec --no-startup-id "gnome-clocks"
+
 ## set keyboard brightness
 bindsym XF86KbdBrightnessDown exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness down"
 bindsym XF86KbdBrightnessUp   exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness up"
@@ -729,7 +732,7 @@ mode "$terminal" {
 
 ## switch to a specific window or workspace
 bindsym $mod+o mode "$goto"
-set $goto Goto: (o) Terminal (i) Vivaldi (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram (b) Trello
+set $goto Goto: (o) Terminal (i) Vivaldi (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram
 mode "$goto" {
   bindsym o         [class="(?i)alacritty"]             focus; mode "default"
   bindsym $mod+o    [class="(?i)alacritty"]             focus; mode "default"
@@ -778,28 +781,30 @@ mode "$kill" {
 }
 
 ## windows always floating/fullscreen
-for_window [class="(?i)avd"]            floating enable
-for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] fullscreen
-for_window [class="(?i)file-roller"]    floating enable
-for_window [class="(?i)galculator"]     floating enable
-for_window [class="(?i)galculator"]     move position 750 450
-for_window [class="(?i)galculator"]     resize set 320 400
-for_window [class="(?i)gcolor2"]        floating enable
-for_window [class="(?i)gcolor2"]        move position 750 150
-for_window [class="(?i)mplayer"]        fullscreen
-for_window [class="(?i)nautilus"]       floating enable
-for_window [class="(?i)nautilus"]       move position 550 250
-for_window [class="(?i)nautilus"]       resize set 920 600
-for_window [class="(?i)nemo"]           floating enable
-for_window [class="(?i)pavucontrol"]    floating enable
-for_window [class="(?i)pokerstars"]     floating enable
-for_window [class="(?i)qjackctl"]       floating enable
-for_window [class="(?i)sxiv"]           fullscreen
-for_window [class="(?i)thunar"]         floating enable
-for_window [class="ssh-askpass"]        floating enable
-for_window [title="Print"]              floating enable
-for_window [window_role="(?i)vlc-main"] floating enable
-for_window [window_role="(?i)vlc-main"] resize set 750 450
+for_window [class="(?i)avd"]                                                        floating enable
+for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"]      fullscreen
+for_window [class="(?i)file-roller"]                                                floating enable
+for_window [class="(?i)galculator"]                                                 floating enable
+for_window [class="(?i)galculator"]                                                 move position 750 450
+for_window [class="(?i)galculator"]                                                 resize set 320 400
+for_window [class="(?i)gcolor2"]                                                    floating enable
+for_window [class="(?i)gcolor2"]                                                    move position 750 150
+for_window [class="(?i)mplayer"]                                                    fullscreen
+for_window [class="(?i)nm-connection-editor"]                                       floating enable
+for_window [class="(?i)nautilus"]                                                   floating enable
+for_window [class="(?i)nautilus"]                                                   move position 550 250
+for_window [class="(?i)nautilus"]                                                   resize set 920 600
+for_window [class="(?i)nemo"]                                                       floating enable
+for_window [class="(?i)pavucontrol"]                                                floating enable
+for_window [class="(?i)pokerstars"]                                                 floating enable
+for_window [class="(?i)qjackctl"]                                                   floating enable
+for_window [class="(?i)sxiv"]                                                       fullscreen
+for_window [class="(?i)thunar"]                                                     floating enable
+for_window [class="ssh-askpass"]                                                    floating enable
+for_window [title="Print"]                                                          floating enable
+for_window [class="(?i)org.gnome.clocks"]                                           floating enable
+for_window [window_role="(?i)vlc-main"]                                             floating enable
+for_window [window_role="(?i)vlc-main"]                                             resize set 750 450
 
 ## windows always on specific workspace
 for_window [class="(?i)chrom" instance="crx_acmikcjocccblbiibfdfjkghclpmmpip"] move to workspace    Banking
@@ -841,11 +846,13 @@ assign [class="(?i)urxvt"]                                                      
 assign [class="(?i)pale moon"]                                                                      Web
 assign [class="(?i)qutebrowser"]                                                                    Web
 assign [class="(?i)vivaldi-stable"]                                                                 Vivaldi
+assign [class="code-oss"]                                                                           VS Code
+assign [class="(?i)gnome-session-failed"]                                                           GnomeSessionFailed
 
 ## workspaces with window always on specific output
 for_window [class="(?i)vivaldi-stable"]                                         move workspace to output DP3-2
 for_window [class="(?i)chromium"]                                               move workspace to output DP3-2
-for_window [class="(?i)google-chrome"]                                          move workspace to output DP3-2
+for_window [class="(?i)google-chrome"]                                          move workspace to output DP3-1
 for_window [class="(?i)firefox"]                                                move workspace to output DP3-2
 for_window [class="(?i)qutebrowser"]                                            move workspace to output DP3-2
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DP3-1
