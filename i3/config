@@ -781,6 +781,7 @@ mode "$kill" {
 }
 
 ## windows always floating/fullscreen
+for_window [class="Wine"]                                                           floating enable
 for_window [class="(?i)avd"]                                                        floating enable
 for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"]      fullscreen
 for_window [class="(?i)file-roller"]                                                floating enable
@@ -796,7 +797,6 @@ for_window [class="(?i)nautilus"]                                               
 for_window [class="(?i)nautilus"]                                                   resize set 920 600
 for_window [class="(?i)nemo"]                                                       floating enable
 for_window [class="(?i)pavucontrol"]                                                floating enable
-for_window [class="(?i)pokerstars"]                                                 floating enable
 for_window [class="(?i)qjackctl"]                                                   floating enable
 for_window [class="(?i)sxiv"]                                                       fullscreen
 for_window [class="(?i)thunar"]                                                     floating enable
@@ -820,6 +820,7 @@ for_window [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"] m
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] move to workspace    Trello
 for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] move to workspace    Netflix
 for_window [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"] move to workspace    Notes
+assign [class="Wine"]                                                                               Poker
 assign [class="(?i)chromium"]                                                                       Chromium
 assign [class="(?i)google-chrome"]                                                                  Chrome
 assign [class="(?i)filezilla"]                                                                      Filezilla
@@ -828,7 +829,6 @@ assign [class="(?i)jetbrains-idea"]                                             
 assign [class="(?i)jetbrains-phpstorm"]                                                             PhpStorm
 assign [class="gnome-calendar"]                                                                     Calendar
 assign [class="(?i)thunderbird"]                                                                    Mail
-assign [class="(?i)pokerstars"]                                                                     Poker
 assign [class="(?i)audacity"]                                                                       Recording
 assign [class="(?i)ardour"]                                                                         Recording
 assign [class="(?i)skype"]                                                                          Skype
