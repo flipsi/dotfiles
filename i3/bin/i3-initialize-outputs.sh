@@ -57,11 +57,7 @@ case $(hostname) in
             xrandr --output 'DP3-2' --off
             xrandr --output 'eDP1' --mode '1920x1080' --auto
 
-        elif xrandr | grep 'HDMI1 connected' >/dev/null; then
-
-            xrandr --output 'HDMI1' --left-of 'eDP1'  --auto
-
-        elif xrandr | grep 'DP3-1 connected' >/dev/null; then
+        elif xrandr | grep 'DP3-2 connected' >/dev/null; then
 
             xrandr --output 'eDP1' --primary --mode 1920x1080 --pos 3840x0 --rotate normal --output 'DP1' --off --output 'DP2' --off --output 'DP3' --off --output 'DP3-1' --mode 1920x1080 --pos 1920x0 --rotate normal --output 'DP3-2' --mode 1920x1080 --pos 0x0 --rotate normal --output 'DP3-3' --off --output 'HDMI1' --off --output 'HDMI2' --off --output 'HDMI3' --off --output VIRTUAL1 --off \
                 || ( \
@@ -73,9 +69,13 @@ case $(hostname) in
 
             setup_wallpaper
 
-        elif xrandr | grep 'DP3-2 connected' >/dev/null; then
+        elif xrandr | grep 'DP3-1 connected' >/dev/null; then
 
-            sleep 0.1 && xrandr --output 'DP3-2' --auto --left-of 'eDP1'
+            sleep 0.1 && xrandr --output 'DP3-1' --auto --left-of 'eDP1'
+
+        elif xrandr | grep 'HDMI1 connected' >/dev/null; then
+
+            sleep 0.1 && xrandr --output 'HDMI1' --left-of 'eDP1'  --auto
 
         fi
         ;;
