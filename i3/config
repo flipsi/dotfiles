@@ -732,7 +732,7 @@ mode "$terminal" {
 
 ## switch to a specific window or workspace
 bindsym $mod+o mode "$goto"
-set $goto Goto: (o) Terminal (i) Vivaldi (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram
+set $goto Goto: (o) Terminal (i) Vivaldi (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram (w) Wine
 mode "$goto" {
   bindsym o         [class="(?i)alacritty"]             focus; mode "default"
   bindsym $mod+o    [class="(?i)alacritty"]             focus; mode "default"
@@ -746,6 +746,8 @@ mode "$goto" {
   bindsym $mod+m    [class="(?i)spotify"]               focus; mode "default"
   bindsym j         [class="(?i)jetbrains-idea"]        focus; mode "default"
   bindsym $mod+j    [class="(?i)jetbrains-idea"]        focus; mode "default"
+  bindsym w         [class="Wine"]                      focus; mode "default"
+  bindsym $mod+w    [class="Wine"]                      focus; mode "default"
   bindsym s         [class="(?i)slack"]                 focus; mode "default"
   bindsym $mod+s    [class="(?i)slack"]                 focus; mode "default"
   bindsym t         [class="(?i)Telegram"]              focus; mode "default"
