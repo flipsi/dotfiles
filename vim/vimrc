@@ -2994,11 +2994,16 @@ let mapleader=' '
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FIX AND SPEEDUP MY TYPING {{{
 
-iabbrev autotype    autotype: email :tab pass :enter
 iabbrev dpr         deprecated
 iabbrev todo        TODO:
 iabbrev todod       TODO: delete this debugging statement
 iabbrev todof       TODO: FIX
+
+" password store
+augroup abbreviations_password_store
+    autocmd!
+    autocmd BufRead /dev/shm/pass.* iabbrev auto autotype: email :tab pass :enter
+augroup END
 
 
 " }}}
