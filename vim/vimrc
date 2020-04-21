@@ -3989,6 +3989,13 @@ nnoremap <leader>Q <nop>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FILETYPE SPECIFIC SETTINGS {{{
 
+
+augroup SET_FILETYPE
+    au!
+    au BufNewFile,BufReadPost *.conf set ft=conf
+augroup END
+
+
 augroup FILETYPE_SPECIFIC_SETTINGS_QUICKFIX
     autocmd!
     autocmd filetype qf setlocal norelativenumber
