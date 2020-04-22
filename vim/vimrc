@@ -3878,10 +3878,20 @@ let g:netrw_banner = 0
 let g:netrw_browse_split = 4
 
 
-" toggle netrw and start from current file
-nnoremap <silent> <leader>te :exe ':Lexplore ' . expand('%:p:h')<cr>
-" toggle netrw and start from working (project) dir
-nnoremap <silent> <leader>tE :Lexplore<cr>
+function! ToggleNetRW(from_current_file)
+    if exists("g:netrw_buffer") && bufexists(g:netrw_buffer)
+        exe "bd".g:netrw_buffer | unlet g:netrw_buffer
+    else
+        if (a:from_current_file == 1)
+            exe 'Lexplore ' . expand('%:p:h') | let g:netrw_buffer=bufnr("%")
+        else
+            Lexplore | let g:netrw_buffer=bufnr("%")
+        endif
+    endif
+endfunction
+
+nnoremap <silent> <leader>tE :call ToggleNetRW(0)<cr>
+nnoremap <silent> <leader>te :call ToggleNetRW(1)<cr>
 
 
 augroup netrw_autocmds
