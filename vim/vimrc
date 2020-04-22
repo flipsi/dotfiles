@@ -3220,6 +3220,8 @@ cnoremap <c-k> <up>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CHANGE SETTINGS/OPTIONS {{{
 
+" toggle whether to use undofile or not
+nnoremap <leader>ou :setlocal undofile! <bar> :setlocal undofile?<cr>
 
 " change text width
 nnoremap <leader>ow0 :set textwidth=0<cr>
