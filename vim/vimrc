@@ -1214,8 +1214,8 @@ vmap -s S
 " surround with quotes/parentheses/brackets quickly
 vmap -q S'
 vmap -Q S"
-nmap -q ysiW'
-nmap -Q ysiW"
+nmap -q ysiw'
+nmap -Q ysiW'
 vmap -b S)
 vmap -B S}
 nmap -b ysiw)
