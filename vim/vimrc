@@ -3144,6 +3144,28 @@ noremap <silent> <c-v>j o<esc>:call PasteFromGUI()<cr>
 noremap <silent> <c-v>k O<esc>:call PasteFromGUI()<cr>
 
 
+" Convert Unix timestamp to datetime
+function! UnixTimestampAsDateTime(timestamp)
+    return system('date --iso-8601=seconds -d @' . a:timestamp . ' | tr -d "\n"')
+endfunction
+
+" Replace Unix timestamp with datetimes
+function! ReplaceUnixTimestampWithDateTime(rangeString)
+    "" in current line:
+    " .substitute:\v(\d{5,15}):\='"' . UnixTimestampAsDateTime(submatch(1)) . '"':
+    "" with range:
+    exe a:rangeString . 'substitute:\v(\d{5,15}):\= ''"''. UnixTimestampAsDateTime(submatch(1)) . ''"'':'
+endfunction
+
+" Replace Unix timestamp with datetime in current line
+nnoremap -iu :call ReplaceUnixTimestampWithDateTime('.')<cr>
+
+" Replace Unix timestamps with datetimes in buffer
+nnoremap -iU :call ReplaceUnixTimestampWithDateTime('%')<cr>
+
+" Show Unix timestamp under cursor as datetime
+nnoremap <leader>iu :echo UnixTimestampAsDateTime(expand("<cword>"))<cr>
+
 
 " macro ('complex repeat') without worrying about registers
 " record macro (start and stop) with <leader>Q
