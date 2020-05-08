@@ -50,7 +50,7 @@ exec "xset -b"
 exec --no-startup-id "dex -ae i3"
 
 ## composite manager for window overlays, smooth workspace changes, etc.
-exec --no-startup-id "compton -b"
+exec --no-startup-id "picom -b"
 
 ## clipboard can have multiple entries
 # exec --no-startup-id "clipmenud"

@@ -29,7 +29,6 @@ SUPPORTED_TARGETS=(\
     autostart \
     bash \
     cmus \
-    compton \
     dircolors \
     elinks \
     fish \
@@ -49,6 +48,7 @@ SUPPORTED_TARGETS=(\
     muttator \
     ncmpcpp \
     ncspot \
+    picom \
     pentadactyl \
     polybar \
     psql \
@@ -175,8 +175,8 @@ function create_link_for_target() {
             create_link "$PWD/cmus/gruvbox.theme" "$HOME/.cmus/gruvbox.theme"
             ;;
 
-        compton )
-            create_link "$PWD/compton/compton.conf" "$HOME/.config/compton.conf"
+        picom )
+            create_link "$PWD/picom/picom.conf" "$HOME/.config/picom.conf"
             ;;
 
         dircolors )
@@ -526,7 +526,7 @@ function package_install_target() {
     case "$TARGET" in
 
         i3 )
-            LIST_OF_SYSTEM_PACKAGES="i3-wm i3exit i3status i3lock dmenu clipmenud quickswitch-i3 rofi compton redshift unclutter syndaemon numlockx"
+            LIST_OF_SYSTEM_PACKAGES="i3-wm i3exit i3status i3lock dmenu clipmenud quickswitch-i3 rofi picom redshift unclutter syndaemon numlockx"
             ;;
 
         fd )
