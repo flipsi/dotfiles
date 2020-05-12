@@ -1374,7 +1374,7 @@ let g:toggle_words_dict = {
             \     ['black', 'white'],
             \     ['clean', 'dirty'],
             \     ['create', 'delete'],
-            \     ['dark', 'light'],
+            \     ['dark', 'bright'],
             \     ['deep', 'shallow'],
             \     ['dynamic', 'static'],
             \     ['enable', 'disable'],
