@@ -2771,6 +2771,26 @@ endfunction
 " }}}
 
 
+" poor-man's (fake IDE) auto-import {{{
+" searches for import statement for word under cursor and adds it to buffer
+function! AutoImportFake()
+    let word = expand("<cword>")
+    call fzf#run(fzf#wrap({
+                \ 'source': 'git grep -h "import.*' . word . '" | sort | uniq',
+                \ 'sink': function('AddImportStatement')
+                \ }))
+endfunction
+function! AddImportStatement(statement)
+    normal gg
+    let linenumber = search('import')
+    put =a:statement
+endfunction
+command! -bar AutoImportFake call AutoImportFake()
+nnoremap <leader>io :call AutoImportFake()<cr>
+" }}}
+
+
+
 
 " ranger as a file chooser {{{
 function! RangerChooser(starting_dir)
