@@ -877,10 +877,14 @@ nmap     <leader>jj         <leader>j*
 " search for visual selection
 xnoremap <leader>j*         y:<c-u>FzfAg! <c-r>"<cr>
 
-" fuzzy search for built-in vim stuff (command history, searches, helptags)
-nnoremap <leader>:          :FzfHistory:<cr>
+" fuzzy search commands
+nnoremap <leader>:          :FzfCommands<cr>
+" fuzzy search command history
+nnoremap <leader>h:         :FzfHistory:<cr>
+" fuzzy search search history
 nnoremap <leader>hs         :FzfHistory/<cr>
-nnoremap <leader>h<leader>  :FzfHelptags<cr>
+" fuzzy search helptags
+nnoremap <leader>hh         :FzfHelptags<cr>
 
 " autocomplete lines like a boss, even across multiple files
 imap <c-x><c-l> <plug>(fzf-complete-line)
