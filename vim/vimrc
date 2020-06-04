@@ -3176,9 +3176,9 @@ endfunction
 " Replace Unix timestamp with datetimes
 function! ReplaceUnixTimestampWithDateTime(rangeString)
     "" in current line:
-    " .substitute:\v(\d{5,15}):\='"' . UnixTimestampAsDateTime(submatch(1)) . '"':
+    " .substitute:\v(\d{9,15}):\='"' . UnixTimestampAsDateTime(submatch(1)) . '"':
     "" with range:
-    exe a:rangeString . 'substitute:\v(\d{5,15}):\= ''"''. UnixTimestampAsDateTime(submatch(1)) . ''"'':'
+    exe a:rangeString . 'substitute:\v(\d{9,15}):\= ''"''. UnixTimestampAsDateTime(submatch(1)) . ''"'':'
 endfunction
 
 " Replace Unix timestamp with datetime in current line
