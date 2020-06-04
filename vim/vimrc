@@ -1533,6 +1533,9 @@ vnoremap -af :Autoformat<cr>:GitGutter<cr>
 nmap <leader>af -af
 vmap <leader>af -af
 
+let g:formatdef_php = '" php-cs-fixer.phar fix"'
+let g:formatters_php = ['php']
+
 let g:formatdef_scalafmt = '"scalafmt --stdin 2>/dev/null"'
 let g:formatters_scala = ['scalafmt']
 
