@@ -263,7 +263,7 @@ nnoremap <leader>bF         :VimuxRunCommand ExpandPrependThisDir('%') . " "<lef
 nnoremap <leader>bC         :call VimuxRunCommand(getline('.'))<cr>
 vnoremap <leader>bC         y:call VimuxRunCommand(@*)<cr>
 nnoremap <leader>bb         :update<cr>:VimuxRunLastCommand<cr>
-nnoremap <leader>bl         :VimuxRunCommand "clear"<cr>
+nnoremap <silent> <leader>bl :VimuxClearTerminalScreen<cr>
 nnoremap <leader>bq         :VimuxCloseRunner<cr>
 nnoremap <leader>b<bs>      :VimuxCloseRunner<cr>
 nnoremap <leader>bz         :call VimuxZoomRunner()<cr>
