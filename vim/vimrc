@@ -80,8 +80,11 @@
 "                           This often is stuff too big for one mapping or the
 "                           like and probably I shamelessly copied it.
 "                           It is executed in both modes.
-"       a KEYMAP SECTION
-"                           where characters are bound.
+"       a COMMAND AND KEYMAP SECTION
+"                           where commands are defined and characters are bound.
+"                           Command definitions makes it easier to find a
+"                           functionality via :FzfCommands when I can't remember
+"                           the corresponding mapping.
 "                           It is executed in both modes.
 "                           Also, it may contain fallback keymaps for plugin
 "                           specific things if we are in stripped mode.
@@ -1727,7 +1730,7 @@ function! SetupNpm()
     nnoremap <leader>btu :call VimuxRunCommand("npm test-unit")<cr>
     nnoremap <leader>bti :call VimuxRunCommand("npm test-int")<cr>
 endfunction
-command! -bang SetupNpm :call SetupNpm()
+command! -bang SetupNpm :call SetupNpm() <cr> " add mappings for development with NodeJS
 
 function! SetupYarn()
     nnoremap <leader>bi  :call VimuxRunCommand("yarn install")<cr>
@@ -1737,14 +1740,14 @@ function! SetupYarn()
     nnoremap <leader>btu :call VimuxRunCommand("yarn test-unit")<cr>
     nnoremap <leader>bti :call VimuxRunCommand("yarn test-int")<cr>
 endfunction
-command! -bang SetupYarn :call SetupYarn()
+command! -bang SetupYarn :call SetupYarn() " add mappings for development with yarn
 
 function! SetupTsuquyomi()
     nmap <leader>rf <Plug>(TsuquyomiRenameSymbolC)
     nmap <leader>rF <Plug>(TsuquyomiRenameSymbol)
     nmap <leader>iq : <C-u>echo tsuquyomi#hint()<CR>
 endfunction
-command! -bang SetupTsuquyomi :call SetupTsuquyomi()
+command! -bang SetupTsuquyomi :call SetupTsuquyomi() " add mappings for development with Tsuquyomi
 
 
 
@@ -1790,7 +1793,7 @@ function! SetupMarkdown()
     nnoremap <buffer> <leader>bs :LivedownPreview<cr>
     nnoremap <buffer> <leader>bx :LivedownKill<cr>
 endfunction
-command! -bang SetupMarkdown :call SetupMarkdown()
+command! -bang SetupMarkdown :call SetupMarkdown() " add mappings for development with Markdown
 
 
 " }}}
@@ -1861,7 +1864,7 @@ function! SetupRust()
     nnoremap <leader>bs  :call MakeWithVimux("cargo run")<cr>
     nnoremap <leader>btc :call MakeWithVimux("cargo check")<cr>
 endfunction
-command! -bang SetupRust :call SetupRust()
+command! -bang SetupRust :call SetupRust() " add mappings for development with Rust
 
 
 " }}}
@@ -1983,7 +1986,7 @@ function! SetupScala()
     nnoremap <leader>bE  :call MakeWithVimuxOpenErrors('buffer')<cr>gg/\*\*\* FAILED \*\*\*<cr>
     nnoremap <leader>fe  /\*\*\* FAILED \*\*\*<cr>
 endfunction
-command! -bang SetupScala :call SetupScala()
+command! -bang SetupScala :call SetupScala() " add mappings for development with Scala
 
 function! CalculateSbtTestOnlyCommand()
     let lines_that_match_package = GetMatches('^package.*', 1, line('$'))
@@ -2026,13 +2029,13 @@ augroup sql_on_read
     au FileType sql if !IsScalaProject() | call SetupSQLDadBod() | endif
 augroup END
 
-command! -bang SetupSQL :call SetupSQLDadBod()<bar> call SetupSQLVimux()
+command! -bang SetupSQL :call SetupSQLDadBod()<bar> call SetupSQLVimux() " add mappings for development with SQL
 
 function! SetupSQLVimux()
     nnoremap <leader>bm  :call VimuxRunCommand("\\. " . expand('%:p'))<cr>
     nnoremap <leader>bp  :call VimuxRunCommand("\\i " . expand('%:p'))<cr>
 endfunction
-command! -bang SetupSQLVimux :call SetupSQLVimux()
+command! -bang SetupSQLVimux :call SetupSQLVimux() " add mappings for development with SQL (Vimux)
 
 
 Plug 'tpope/vim-dadbod'
@@ -2052,7 +2055,7 @@ function! SetupSQLDadBod()
     nmap        <leader>bdq vap<leader>bd
 
 endfunction
-command! -bang SetupSQLDadBod :call SetupSQLDadBod()
+command! -bang SetupSQLDadBod :call SetupSQLDadBod() " add mappings for development with SQL (DadBod)
 
 
 
@@ -2562,14 +2565,42 @@ endfunction
 " }}}
 
 
+" copy current filename/path/dir (unnamed register/clipboard/fucking everywhere) {{{
+function! CopyFileNameOrPathOrDir(modifiers)
+    let @" = expand(a:modifiers)
+    let @+ = expand(a:modifiers)
+    let @* = expand(a:modifiers)
+    echo @"
+endfunction
+" }}}
+
+
 " toggle syntax highlighting {{{
+
+command! DisableSyntax :syntax off          " Disable syntax highlighting (globally)
+command! EnableSyntax  :syntax enable       " Enable syntax highlighting (globally)
+
+command! ToggleSyntax :call ToggleSyntax() " Disable or enable syntax highlighting (globally)
 function! ToggleSyntax()
    if exists("g:syntax_on")
-      syntax off
+       DisableSyntax
    else
-      syntax enable
+       EnableSyntax
    endif
 endfunction
+
+command! DisableSyntaxCurrentBuffer :setlocal syntax=OFF " Disable syntax highlighting (current buffer)
+command! EnableSyntaxCurrentBuffer  :setlocal syntax=ON  " Enable syntax highlighting (current buffer)
+
+command! ToggleSyntaxCurrentBuffer :call ToggleSyntaxCurrentBuffer() " Disable or enable syntax highlighting (current buffer)
+function! ToggleSyntaxCurrentBuffer()
+   if &syntax == "OFF"
+       EnableSyntaxCurrentBuffer
+   else
+       DisableSyntaxCurrentBuffer
+   endif
+endfunction
+
 " }}}
 
 
@@ -2606,8 +2637,7 @@ endfunction
 " }}}
 
 
-" return 1 iff the active window contains a quickfix buffer and there are no
-" other windows with normal buffers.
+" return 1 iff the active window contains a quickfix buffer and there are no other windows with normal buffers. {{{
 function! IsOrphanQuickfixList()
     let winnr = winnr("$")
     while winnr >= 1
@@ -2626,7 +2656,7 @@ augroup quickfix
     au BufEnter *     bdelete
     au BufEnter * endif
 augroup END
-
+" }}}
 
 
 
@@ -2832,6 +2862,7 @@ function! RangerChooser(starting_dir)
     redraw!
 endfunction
 command! -bar RangerChooser call RangerChooser(getcwd())
+command! -bar RangerChooserFromCurrentFile :call RangerChooser(expand('%:p:h'))
 " }}}
 
 
@@ -3006,14 +3037,13 @@ endfu
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                              "
-"  KEYMAP SECTION                                                              "
+"  COMMAND AND KEYMAP SECTION                                                  "
 "  (not plugin specific)                                                       "
 "                                                                              "
 "                                                                              "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " {{{
-
 
 
 let mapleader=' '
@@ -3061,31 +3091,22 @@ nnoremap - <nop>
 " show absolute path of current file (':help filename-modifiers')
 nnoremap <leader><c-g> :echo expand("%:~")<cr>
 
-" copy current filename/path/dir (unnamed register/clipboard/fucking everywhere)
-nnoremap <leader>yf :let @" = expand("%:t") <cr>
-            \       :let @+ = expand("%:t") <cr>
-            \       :let @* = expand("%:t") <cr>
-            \       :echo @" <cr>
-nnoremap <leader>ye :let @" = expand("%:t:r") <cr>
-            \       :let @+ = expand("%:t:r") <cr>
-            \       :let @* = expand("%:t:r") <cr>
-            \       :echo @" <cr>
-nnoremap <leader>yP :let @" = expand("%:p") <cr>
-            \       :let @+ = expand("%:p") <cr>
-            \       :let @* = expand("%:p") <cr>
-            \       :echo @" <cr>
-nnoremap <leader>yp :let @" = expand("%") <cr>
-            \       :let @+ = expand("%") <cr>
-            \       :let @* = expand("%") <cr>
-            \       :echo @" <cr>
-nnoremap <leader>yd :let @" = expand("%:p:h") <cr>
-            \       :let @+ = expand("%:p:h") <cr>
-            \       :let @* = expand("%:p:h") <cr>
-            \       :echo @" <cr>
 
+" copy current filename/path/dir (unnamed register/clipboard/fucking everywhere) {{{
+command! CopyFileName                   :call CopyFileNameOrPathOrDir("%:t")    " Copy name of current file
+command! CopyFileNameWithoutExtension   :call CopyFileNameOrPathOrDir("%:t:r")  " Copy name of current file (without extension)
+command! CopyFilePath                   :call CopyFileNameOrPathOrDir("%")      " Copy relative path to current file
+command! CopyFilePathAbsolute           :call CopyFileNameOrPathOrDir("%:p")    " Copy absolute path to current file
+command! CopyFileDirectory              :call CopyFileNameOrPathOrDir("%:p:h")  " Copy directory of current file
+nnoremap <leader>yf :CopyFileName<cr>
+nnoremap <leader>ye :CopyFileNameExpand<cr>
+nnoremap <leader>yp :CopyFilePath<cr>
+nnoremap <leader>yP :CopyFilePathAbsolute<cr>
+nnoremap <leader>yd :CopyFileDirectory<cr>
+" }}}
 
-" if in a git directory and there are dirty files, open them
-" nnoremap <leader>eG :silent! args `git diff --name-only`<cr>:bd#<cr>
+" open all files that are dirty according to git
+command! EditGitDirtyFiles :call EditGitDirtyFiles() " open all files that are dirty according to git
 function! EditGitDirtyFiles()
     let numberOfGitDirtyFiles = system("git status --porcelain 2>/dev/null \| egrep '^(M\| M)' \| wc -l")
     if numberOfGitDirtyFiles != 0
@@ -3099,6 +3120,7 @@ function! EditGitDirtyFiles()
         echo 'Working directory clean'
     endif
 endfunction
+" nnoremap <leader>eG :silent! args `git diff --name-only`<cr>:bd#<cr>
 nnoremap <leader>eG :call EditGitDirtyFiles()<cr>
 
 " open config file
@@ -3186,12 +3208,15 @@ function! ReplaceUnixTimestampWithDateTime(rangeString)
 endfunction
 
 " Replace Unix timestamp with datetime in current line
+command! ReplaceUnixTimestampWithDateTimeInCurrentLine :call ReplaceUnixTimestampWithDateTime('.') " Replace Unix timestamps with datetimes in current line
 nnoremap -iu :call ReplaceUnixTimestampWithDateTime('.')<cr>
 
 " Replace Unix timestamps with datetimes in buffer
+command! ReplaceUnixTimestampWithDateTimeInBuffer :call ReplaceUnixTimestampWithDateTime('%') " Replace Unix timestamps with datetimes in buffer
 nnoremap -iU :call ReplaceUnixTimestampWithDateTime('%')<cr>
 
 " Show Unix timestamp under cursor as datetime
+command! UnixTimestampAsDateTime :echo UnixTimestampAsDateTime(expand("<cword>"))
 nnoremap <leader>iu :echo UnixTimestampAsDateTime(expand("<cword>"))<cr>
 
 
@@ -3236,6 +3261,7 @@ noremap <esc>k <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TERMINAL {{{
 
+command! Terminal   :vertical terminal ++close fish
 nnoremap <leader>tt :vertical terminal ++close fish<cr>
 
 " TODO: replace vimux?
@@ -3270,18 +3296,30 @@ cnoremap <c-k> <up>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CHANGE SETTINGS/OPTIONS {{{
 
-" toggle whether to use undofile or not
+" change undofile settings
+command! DisableUndoFile :setlocal noundofile " don't persist undo history
+command! EnableUndoFile  :setlocal undofile   " persist undo history
 nnoremap <leader>ou :setlocal undofile! <bar> :setlocal undofile?<cr>
 
 " change text width
-nnoremap <leader>ow0 :set textwidth=0<cr>
-nnoremap <leader>ow5 :set textwidth=50<cr>
-nnoremap <leader>ow7 :set textwidth=78<cr>
-nnoremap <leader>ow8 :set textwidth=80<cr>
-nnoremap <leader>ow1 :set textwidth=100<cr>
-nnoremap <leader>ow2 :set textwidth=120<cr>
+command! -nargs=1 SetTextWidth  :set textwidth=<args> " Maximum width of text that is being inserted. A longer line will be broken after white space to get this width.
+command! SetTextWidthDisable    :set textwidth=0      " Maximum width of text that is being inserted. A longer line will be broken after white space to get this width.
+command! SetTextWidthTo50       :set textwidth=50     " Maximum width of text that is being inserted. A longer line will be broken after white space to get this width.
+command! SetTextWidthTo78       :set textwidth=78     " Maximum width of text that is being inserted. A longer line will be broken after white space to get this width.
+command! SetTextWidthTo80       :set textwidth=80     " Maximum width of text that is being inserted. A longer line will be broken after white space to get this width.
+command! SetTextWidthTo100      :set textwidth=100    " Maximum width of text that is being inserted. A longer line will be broken after white space to get this width.
+command! SetTextWidthTo120      :set textwidth=120    " Maximum width of text that is being inserted. A longer line will be broken after white space to get this width.
+nnoremap <leader>ow0            :set textwidth=0<cr>
+nnoremap <leader>ow5            :set textwidth=50<cr>
+nnoremap <leader>ow7            :set textwidth=78<cr>
+nnoremap <leader>ow8            :set textwidth=80<cr>
+nnoremap <leader>ow1            :set textwidth=100<cr>
+nnoremap <leader>ow2            :set textwidth=120<cr>
 
 " change tab width (soft)
+command! SetTabWidthTo2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2 " How many spaces a tab should be considered
+command! SetTabWidthTo4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4 " How many spaces a tab should be considered
+command! SetTabWidthTo8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4 " How many spaces a tab should be considered
 nnoremap <leader>ot2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<cr>
 nnoremap <leader>ot4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<cr>
 nnoremap <leader>ot8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<cr>
@@ -3289,7 +3327,13 @@ nnoremap <leader>ot8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<cr>
 " toggle paste mode
 nnoremap <leader>op :set paste! <bar> :set paste?<cr>
 
-" toggle autosave ('autowrite')
+" autosave (aka 'autowrite')
+command! DisableAutoSave        :let g:autosave = 0         " Don't save file autosave on focus lost (globally)
+command! EnableAutoSave         :let g:autosave = 1         " Save file autosave on focus lost (globally)
+command! DisableAutoSaveForFile :let b:local_autosave = 0   " Don't save file autosave on focus lost (only current file)
+command! EnableAutoSaveForFile  :let b:local_autosave = 1   " Save file autosave on focus lost (only current file)
+
+" toggle autosave
 nnoremap <silent> <leader>oWW
             \ :if !exists("b:local_autosave") <bar> let b:local_autosave = 0 <bar> endif <cr>
             \ :let b:local_autosave = 1 - b:local_autosave <cr>
@@ -3303,6 +3347,10 @@ nnoremap <silent> <leader>oWA
             \ 'autosave disabled'<cr>
 
 " toggle search preferences
+command! EnableHighlightSearch  :set hlsearch       " When there is a previous search pattern, highlight all its matches.
+command! DisableHighlightSearch :set nohlsearch     " When there is a previous search pattern, don't highlight all its matches.
+command! EnableWrapSearch       :set wrapscan       " Searches wrap around the end of the file.
+command! DisableWrapSearch      :set nowrapscan     " Searches don't wrap around the end of the file.
 nnoremap <leader>os :set hlsearch! <bar> :set hlsearch?<cr>
 nnoremap <leader>oS :set wrapscan! <bar> :set wrapscan?<cr>
 
@@ -3317,61 +3365,72 @@ nnoremap <leader>o <nop>
 
 
 " toggle syntax highlighting
-nmap <silent> <leader>syn :call ToggleSyntax()<cr>
+nmap <silent> <leader>syn :ToggleSyntaxCurrentBuffer<cr>
+
 " toggle syntax highlighting after g:synmaxcol characters
-nmap <silent> <leader>sym :let &synmaxcol = g:synmaxcol - &synmaxcol <cr>
+command! ToggleSyntaxLongLines :let &synmaxcol = g:synmaxcol - &synmaxcol " Disable or enable syntax highlighting (long lines)
+nmap <silent> <leader>sym :ToggleSyntaxLongLines
 
 " toggle line numbers
-nnoremap <silent> <leader>yL :set number! <bar> :set relativenumber! <cr>
-nnoremap <silent> <leader>yl :set relativenumber! <cr>
+command! ToggleLineNumbers          :set number! <bar> :set relativenumber! " Disable or enable line numbers
+command! ToggleRelativeLineNumbers  :set relativenumber!                    " Disable or enable relative line numbers
+nnoremap <silent> <leader>yL :ToggleLineNumbers <cr>
+nnoremap <silent> <leader>yl :ToggleRelativeLineNumbers <cr>
 
 " toggle word wrap
-nnoremap <silent> <leader>yw :setlocal wrap! <bar> :set wrap? <cr>
+command! ToggleWordWrap :setlocal wrap! <bar> :set wrap? " This option changes how text is displayed. It doesn't change the text in the buffer, see 'textwidth' for that.
+nnoremap <silent> <leader>yw :ToggleWordWrap <cr>
 
 " toggle vertical ruler
-nnoremap <silent> <leader>yr :call SetColorColumn('toggle')<cr>
+command! ToggleRuler :call SetColorColumn('toggle') " toggle vertical ruler
+nnoremap <silent> <leader>yr :ToggleRuler <cr>
+" (quickfix ruler highlighting)
 nnoremap <silent> <leader>yR :highlight ColorColumn ctermbg=235
-                  \ <bar> highlight clear BGdd8844
-                  \ <bar> highlight clear BG000000
-                  \ <bar> highlight clear BGffa724
-                  \ <bar> highlight clear BGaeee00
-                  \ <bar> highlight clear BG8cffba
-                  \ <bar> highlight clear BGb88853
-                  \ <bar> highlight clear BGff9eb8
-                  \ <bar> highlight clear BGff2c4b
-                  \ <cr>
+              \ <bar> highlight clear BGdd8844
+              \ <bar> highlight clear BG000000
+              \ <bar> highlight clear BGffa724
+              \ <bar> highlight clear BGaeee00
+              \ <bar> highlight clear BG8cffba
+              \ <bar> highlight clear BGb88853
+              \ <bar> highlight clear BGff9eb8
+              \ <bar> highlight clear BGff2c4b
+              \ <cr>
 
 
 " toggle highlight current cursor position
-nnoremap <silent> <leader>yc :let g:cursorposition = 1 - g:cursorposition <cr>i<esc>
+command! ToggleCursor :let g:cursorposition = 1 - g:cursorposition | normal i<esc> " toggle highlight current cursor position
+nnoremap <silent> <leader>yc :ToggleCursor <cr>
 
 " toggle show listchars (like whitespace)
-nnoremap <silent> <leader>ya :set list!<cr>
+command! ToggleListChars :set list! " toggle show listchars (like whitespace)
+nnoremap <silent> <leader>ya :ToggleListChars <cr>
 
 
 " spell checking {{{
+command! ChangeSpellChecking :call ChangeSpellChecking() " Disable, enable or change spell checking
 function! ChangeSpellChecking()
-    ec "<space>  Toggle spell checking"
-    ec "<e>      Set language to 'en'"
-    ec "<d>      Set language to 'de'"
-    ec ""
-    let c = getchar()
-    if nr2char(c) == 'q' || c == 27 || c == 3 || c == 7
-        redraw
-    elseif nr2char(c) == ' ' || nr2char(c) == 'p'
-        redraw
-        set spell!
-        redraw
-    elseif nr2char(c) == 'e'
-        set spelllang=en
-        redraw
-    elseif nr2char(c) == 'd'
-        set spelllang=de
-        redraw
-    endif
+ec "<space>  Toggle spell checking"
+ec "<e>      Set language to 'en'"
+ec "<d>      Set language to 'de'"
+ec ""
+let c = getchar()
+if nr2char(c) == 'q' || c == 27 || c == 3 || c == 7
+    redraw
+elseif nr2char(c) == ' ' || nr2char(c) == 'p'
+    redraw
+    set spell!
+    redraw
+elseif nr2char(c) == 'e'
+    set spelllang=en
+    redraw
+elseif nr2char(c) == 'd'
+    set spelllang=de
+    redraw
+endif
+set spell?
 endfunction
 " }}}
-nnoremap <leader>ysp :call ChangeSpellChecking() <bar> :set spell? <cr>
+nnoremap <leader>ysp :ChangeSpellChecking <cr>
 
 " ... but ignore typos
 nnoremap <leader>y <nop>
@@ -3778,6 +3837,7 @@ nnoremap dN [c
 nnoremap <leader>bm :make<cr>
 
 " execute shell script
+command! ExecuteShellscript :call ExecuteShellscript() " Execute shellscript (current file) in a new tmux pane
 function! ExecuteShellscript()
     call system('test -x ' . expand('%'))
     if v:shell_error
@@ -3800,6 +3860,8 @@ endfunction
 
 
 " jump to (syntastic) errors
+command! JumpToFirstSyntaxError :lfirst
+command! JumpToLastSyntaxError  :llast
 nnoremap <leader>sg :lfirst<cr>
 nnoremap <leader>sG :llast<cr>
 " nnoremap <leader>sn :lnext<cr>
@@ -3940,8 +4002,10 @@ function! ToggleNetRW(from_current_file)
     endif
 endfunction
 
-nnoremap <silent> <leader>tE :call ToggleNetRW(0)<cr>
-nnoremap <silent> <leader>te :call ToggleNetRW(1)<cr>
+command! ToggleFileBrowserFromCurrentFile :call ToggleNetRW(1) " Open (or close) netrw in side bar (current file)
+command! ToggleFileBrowserFromProjectDir  :call ToggleNetRW(0) " Open (or close) netrw in side bar (project root)
+nnoremap <silent> <leader>te :ToggleFileBrowserFromCurrentFile<cr>
+nnoremap <silent> <leader>tE :ToggleFileBrowserFromProjectDir<cr>
 
 
 augroup netrw_autocmds
@@ -3986,14 +4050,27 @@ nnoremap <leader>iB :execute '!cd ' . expand('%:p:h') . '; bash'<cr><cr>
 " file manager in working dir or dir of current file
 " nnoremap <leader>ir :call VimuxRunCommand("ranger")<cr>
 " nnoremap <leader>ir :exe "!ranger " . shellescape(expand("%p:h"))
-nnoremap <leader>ir :call RangerChooser(expand('%:p:h'))<cr>
+nnoremap <leader>ir :RangerChooserFromCurrentFile<cr>
 nnoremap <leader>iR :RangerChooser<cr>
 
-" git interface in working dir or dir of current file
-nnoremap <leader>it :!tig status<cr><cr>:GitGutter<cr>
-nnoremap <leader>iT :execute '!cd ' . expand('%:p:h') . '; tig status'<cr><cr>
+" tig - an ncurses git interface
+function! Tig(from_current_file)
+    if (a:from_current_file)
+        execute 'silent !cd ' . expand('%:p:h') . '; tig status'
+    else
+        silent !tig status
+    endif
+    redraw!
+endfunction
+command! TigFromWorkingDir  :call Tig(0) " Interactive Git interface (from working directory)
+command! TigFromCurrentFile :call Tig(1) " Interactive Git interface (from current file)
+nnoremap <leader>it :TigFromWorkingDir<cr>
+nnoremap <leader>iT :TigFromCurrentFile<cr>
 
 " insert google contacts with name and mail addresses (with goobook)
+" TODO: fix
+command! -nargs=1 InsertGoogleContact :r!goobook-query-mail.sh <args> " Interactively search for Google contacts and insert name and email
+" nnoremap <leader>igm :InsertGoogleContact
 nnoremap <leader>igm         :r!goobook-query-mail.sh<space>
 " inoremap <leader>igm <esc>diw:r!goobook-query-mail.sh<space><c-r>"<cr><cr>
 
@@ -4003,23 +4080,42 @@ nnoremap <leader>igm         :r!goobook-query-mail.sh<space>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SAVING AND CLOSING {{{
 
+silent! function! Save(force)
+    if (a:force)
+        silent update!
+    else
+        silent update
+    endif
+    GitGutter
+    echo '"' . expand("%") . '" ✔'
+endfunction
 
-" check for file changes (and 'reload' them or get asked with autoread)
-nnoremap <leader>rl :checktime<cr>
+command! ReloadBuffer       :checktime              " Check for file changes (and 'reload' them or get asked with autoread)
+command! Reset              :e!                     " Discard changes in buffer
+command! Save               :call Save(0)           " Write buffer changes to file
+command! SaveForce          :call Save(1)           " Write buffer changes to file igoring 'readonly' etc.
+command! SaveAndClose       :wq                     " Write buffer changes to file and close window
+command! CloseBuffer        :bdelete                " Close current buffer
+command! CloseBufferForce   :bdelete!               " Close current buffer discarding changes
+command! CloseAllBuffers    :silent bufdo bdelete   " Close all buffers (not vim)
+command! CloseWindow        :quit                   " Close current window (not buffer)
+command! CloseOtherWindows  :only                   " Close all but current window (not buffers)
+command! QuitVim            :quitall                " Quit Vim (closing all windows)
+command! QuitVimForce       :quitall!               " Quit Vim (closing all windows) discarding changes
 
-" discard changes ('reset')
-nnoremap <leader>rs :e!<cr>
+nnoremap <leader>rl         :ReloadBuffer<cr>
+nnoremap <leader>rs         :Reset<cr>
+nnoremap <leader>w          :Save<cr>
+nnoremap <leader>WW         :SaveForce<cr>
+nnoremap <leader>qq         :SaveAndClose<cr>
+nnoremap <leader>qa         :CloseAllBuffers<cr>
+nnoremap <leader><bs>       :CloseBuffer<cr>
+nnoremap <leader>QQ         :CloseBufferForce<cr>
+nnoremap <leader>qW         :CloseWindow<cr>
+nnoremap <leader>qw         :CloseOtherWindows<cr>
+nnoremap <c-d>              :QuitVim<cr> " this is how i exit most terminal applications
+nnoremap <leader><c-d><c-d> :QuitVimForce<cr>
 
-" write changes
-nnoremap <leader>w  :update<cr>:GitGutter<cr>:echo '"' . expand("%") . '" ✔'<cr>
-nnoremap <leader>WW :update!<cr>             :echo '"' . expand("%") . '" ✔'<cr>
-
-" save and close
-nnoremap <leader>qq :wq<cr>
-
-" quit current buffer
-nnoremap <leader><bs> :bdelete<cr>
-nnoremap <leader>QQ   :bdelete!<cr>
 augroup map_q_in_read_only_buffers
     au!
     au BufReadPost * if &readonly
@@ -4028,23 +4124,9 @@ augroup map_q_in_read_only_buffers
     au BufReadPost fugitive://* nnoremap <buffer> q :bd<cr>
 augroup END
 
-" quit all buffers (not vim)
-nnoremap <leader>qa :silent bufdo bdelete<cr>
-
-" quit current window
-nnoremap <leader>qW :quit<cr>:buffer #<cr>
-" quit all windows but current
-nnoremap <leader>qw :only<cr>
-
-" quit vim (multiple windows)
-" (this is how i exit most terminal applications)
-nnoremap <c-d>              :quitall<cr>
-nnoremap <leader><c-d><c-d> :quitall!<cr>
-
 " ... but ignore typos
 nnoremap <leader>q <nop>
 nnoremap <leader>Q <nop>
-
 
 
 " }}}
@@ -4074,6 +4156,7 @@ augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
     autocmd filetype gitcommit call InsertTicketNumberFromBranchIfAny()
 augroup END
 
+command! InsertTicketNumberFromBranchIfAny :call InsertTicketNumberFromBranchIfAny()
 function! InsertTicketNumberFromBranchIfAny()
     if empty(getline('.'))
         let l:branch_name = system('git rev-parse --abbrev-ref HEAD')
@@ -4147,5 +4230,5 @@ endfor
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim:tw=80:sw=4:fdm=marker:
+" vim:tw=0:sw=4:fdm=marker:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
