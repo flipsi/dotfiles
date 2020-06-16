@@ -1693,6 +1693,29 @@ Plug 'sheerun/vim-polyglot'
 let g:polyglot_disabled = ['helm']
 
 
+" Language: CSV {{{
+
+Plug 'chrisbra/csv.vim'
+
+
+augroup csv_on_read
+    au!
+    au FileType csv call SetupCSV()
+augroup END
+
+function! SetupCSV()
+    nnoremap <silent> <leader>yy :CSVHiColumn <cr>              " highlight current column
+    nnoremap <silent> <leader>yY :CSVHiColumn! <cr>             " undo highlight current column
+    nnoremap <silent> <leader>yh :CSVHeader <cr>                " add window with header row
+    nnoremap <silent> <leader>yH :CSVHeader! <cr>               " close window with header row
+    nnoremap <silent> <leader>af :%CSVArrangeColumn <cr>        " align columns by adding spaces
+    nnoremap <silent> <leader>AF :%CSVArrangeColumn! <cr>       " align columns by adding spaces recalculating widths
+    nnoremap <silent> <leader>au :%CSVUnArrangeColumn <cr>      " undo aligning columns by removing spaces
+endfunction
+command! SetupCSV :call SetupCSV() <cr> " add mappings for CSV handling
+
+
+" }}}
 
 
 " Language: fish {{{
