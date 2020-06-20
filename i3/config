@@ -427,8 +427,8 @@ mode "$audio" {
     bindsym s               exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output"
     bindsym p               exec --no-startup-id "~/.i3/bin/soundboard.sh"; mode "default"
     bindsym g               exec --no-startup-id "pavucontrol"; mode "default"
+    bindsym $mod+0          exec --no-startup-id "pavucontrol"; mode "default"
     # cancel
-    bindsym $mod+0 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
