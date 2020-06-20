@@ -119,7 +119,7 @@ mode "$refresh" {
 }
 
 ## change keyboard layout
-bindsym $mod+Shift+F6 mode "$change_keyboard_layout"
+bindsym $mod+Shift+F4 mode "$change_keyboard_layout"
 set $change_keyboard_layout Keyboard layout: (F1) de (F2) de_sflip (F3) us (F4) us_sflip (F5) neo (F6) dvorak (F7) programmer dvorak
 mode "$change_keyboard_layout" {
     bindsym F1 exec "setxkbmap de"; mode "default"
@@ -130,7 +130,6 @@ mode "$change_keyboard_layout" {
     bindsym F6 exec "setxkbmap dvorak"; mode "default"
     bindsym F7 exec "setxkbmap -layout us -variant dvp"; mode "default"
     # cancel
-    bindsym $mod+Shift+F6 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -139,7 +138,7 @@ mode "$change_keyboard_layout" {
 set $keyboard_layout_image_source https://www.nayuki.io/res/i-type-in-dvorak/qwerty-layout.png
 set $keyboard_layout_image /home/sflip/.i3/keyboard_layout.png
 exec "test -f $keyboard_layout_image || $( sleep 20 && curl $keyboard_layout_image_source > $keyboard_layout_image )"
-bindsym $mod+F6 exec --no-startup-id "pkill -fx 'sxiv -z 200 $keyboard_layout_image' || sxiv -z 200 $keyboard_layout_image"
+bindsym $mod+F4 exec --no-startup-id "pkill -fx 'sxiv -z 200 $keyboard_layout_image' || sxiv -z 200 $keyboard_layout_image"
 
 
 
