@@ -784,6 +784,7 @@ mode "$kill" {
 
 ## windows always floating/fullscreen
 for_window [class="Wine"]                                                           floating enable
+for_window [class="pokerstars.exe"]                                                 floating enable
 for_window [class="(?i)avd"]                                                        floating enable
 for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"]      fullscreen
 for_window [class="com-intellij-updater-Runner"]                                    floating enable
@@ -798,6 +799,7 @@ for_window [class="(?i)nm-connection-editor"]                                   
 for_window [class="(?i)nautilus"]                                                   floating enable
 for_window [class="(?i)nautilus"]                                                   move position 550 250
 for_window [class="(?i)nautilus"]                                                   resize set 920 600
+for_window [class="(?i)blueman-manager"]                                            floating enable
 for_window [class="(?i)nemo"]                                                       floating enable
 for_window [class="(?i)pavucontrol"]                                                floating enable
 for_window [class="(?i)qjackctl"]                                                   floating enable
@@ -824,6 +826,7 @@ for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] m
 for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] move to workspace    Netflix
 for_window [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"] move to workspace    Notes
 assign [class="Wine"]                                                                               Poker
+assign [class="pokerstars.exe"]                                                                     Poker
 assign [class="(?i)chromium"]                                                                       Chromium
 assign [class="(?i)google-chrome"]                                                                  Chrome
 assign [class="(?i)filezilla"]                                                                      Filezilla
@@ -854,9 +857,9 @@ assign [class="code-oss"]                                                       
 assign [class="(?i)gnome-session-failed"]                                                           GnomeSessionFailed
 
 ## workspaces with window always on specific output
-for_window [class="(?i)vivaldi-stable"]                                         move workspace to output DP3-2
-for_window [class="(?i)chromium"]                                               move workspace to output DP3-2
-for_window [class="(?i)google-chrome"]                                          move workspace to output DP3-1
+for_window [class="(?i)vivaldi-stable"]                                         move workspace to output DP3-1
+for_window [class="(?i)chromium"]                                               move workspace to output DP3-1
+for_window [class="(?i)google-chrome"]                                          move workspace to output eDP1
 for_window [class="(?i)firefox"]                                                move workspace to output DP3-2
 for_window [class="(?i)qutebrowser"]                                            move workspace to output DP3-2
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DP3-1
@@ -867,5 +870,5 @@ for_window [class="(?i)urxvt"]                                                  
 for_window [class="(?i)jetbrains-idea"]                                         move workspace to output DP3-1
 for_window [class="(?i)jetbrains-phpstorm"]                                     move workspace to output DP3-1
 for_window [class="(?i)slack"]                                                  move workspace to output eDP1
-for_window [class="Spotify"]                                                    move workspace to output eDP1
+for_window [class="Spotify"]                                                    move workspace to output DP3-1
 for_window [class="(?i)telegram"]                                               move workspace to output eDP1
