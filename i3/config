@@ -282,9 +282,9 @@ exec_always --no-startup-id "/home/sflip/.i3/bin/i3-polybar.sh start > /tmp/i3-p
 
 
 ## hide/show bar
-# bindsym $mod+Shift+b bar mode toggle
-# bindsym $mod+Shift+b exec "polybar-msg cmd toggle" # (would be nice, but polybar shows on wrong monitor after hide: https://github.com/jaagr/polybar/issues/1484)
-bindsym $mod+Shift+b exec "/home/sflip/.i3/bin/i3-polybar.sh toggle > /tmp/i3-polybar.log 2>&1"
+# bindsym $mod+b bar mode toggle
+# bindsym $mod+b exec "polybar-msg cmd toggle" # (would be nice, but polybar shows on wrong monitor after hide: https://github.com/jaagr/polybar/issues/1484)
+bindsym $mod+b exec "/home/sflip/.i3/bin/i3-polybar.sh toggle > /tmp/i3-polybar.log 2>&1"
 
 # set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
 set $UPDATE_STATUSBAR true
@@ -585,7 +585,7 @@ mode "resize" {
 }
 
 ## change border
-bindsym $mod+b border toggle
+bindsym $mod+Shift+b border toggle
 
 
 
