@@ -71,7 +71,7 @@ case $(hostname) in
 
         elif xrandr | grep 'DP3-1 connected' >/dev/null; then
 
-            sleep 0.1 && xrandr --output 'DP3-1' --auto --left-of 'eDP1'
+            sleep 0.1 && xrandr --output 'DP3-1' --auto --right-of 'eDP1'
 
         elif xrandr | grep 'HDMI1 connected' >/dev/null; then
 
