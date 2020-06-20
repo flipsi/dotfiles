@@ -693,7 +693,7 @@ mode "$launch" {
     bindsym f       exec --no-startup-id "firefox"; mode "default"
     bindsym g       exec --no-startup-id "google-chrome-stable"; mode "default"
     bindsym i       exec --no-startup-id "vivaldi-stable"; mode "default"
-    bindsym j       exec --no-startup-id "/home/sflip/opt/idea-IU-183.5153.38/bin/idea.sh nosplash || idea"; mode "default"
+    bindsym j       exec --no-startup-id "/home/sflip/opt/idea-IU-201.7223.91/bin/idea.sh nosplash || idea"; mode "default"
     bindsym m       exec --no-startup-id "spotify"; mode "default"
     bindsym q       exec --no-startup-id "qutebrowser"; mode "default"
     bindsym s       exec --no-startup-id "slack"; mode "default"
