@@ -696,6 +696,7 @@ mode "$launch" {
     bindsym j       exec --no-startup-id "/home/sflip/opt/idea-IU-201.7223.91/bin/idea.sh nosplash || idea"; mode "default"
     bindsym m       exec --no-startup-id "spotify"; mode "default"
     bindsym q       exec --no-startup-id "qutebrowser"; mode "default"
+    bindsym r       exec --no-startup-id "nautilus"; mode "default"
     bindsym s       exec --no-startup-id "slack"; mode "default"
     bindsym t       exec --no-startup-id "telegram-desktop"; mode "default"
     # cancel
