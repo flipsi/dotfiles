@@ -107,4 +107,4 @@ abbr $args yr     yay -R
 abbr $args ys     yay -S
 abbr $args ysi    yay -Si
 abbr $args yu     yay -Syu
-abbr $args yuy    yay -Syu --noconfirm
+abbr $args yy     yay -Syu --noconfirm
