@@ -88,12 +88,9 @@ if status --is-interactive; and status --is-login
     end
 
     # load abbreviations
-    if not set -q __abbr_init
-      set -gx __abbr_init
-      source $HOME/.config/fish/abbr.fish
-      if test -f $HOME/.config/fish/abbr.local.fish
-          source $HOME/.config/fish/abbr.local.fish
-      end
+    source $HOME/.config/fish/abbr.fish
+    if test -f $HOME/.config/fish/abbr.local.fish
+        source $HOME/.config/fish/abbr.local.fish
     end
 
     # asdf version manager
