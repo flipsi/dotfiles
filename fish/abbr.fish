@@ -99,6 +99,7 @@ abbr $args u      unison
 abbr $args v      vim
 abbr $args vs     vim --servername \(basename \(pwd\)\)
 abbr $args x      xrandr
+abbr $args xi     startx ~/.xinitrc
 abbr $args xo     xrandr --output
 abbr $args y      yay
 abbr $args yc     yay -Yc
