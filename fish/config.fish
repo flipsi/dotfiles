@@ -17,27 +17,30 @@ set BROWSER_APP "vivaldi-stable.desktop"
 set PDF_VIEWER_APP "org.pwmt.zathura.desktop"
 set IMAGE_VIEWER_APP "sxiv.desktop"
 
-if test (xdg-mime query default 'x-scheme-handler/https') != $BROWSER_APP
-    echo "Setting default browser to $BROWSER_APP"
-    xdg-mime default $BROWSER_APP 'x-scheme-handler/https'
-    xdg-mime default $BROWSER_APP 'x-scheme-handler/http'
-end
+if command -v xdg-mime >/dev/null
 
-if test (xdg-mime query default 'application/pdf') != $PDF_VIEWER_APP
-    echo "Setting default application for 'application/pdf' to $PDF_VIEWER_APP"
-    xdg-mime default $PDF_VIEWER_APP 'application/pdf'
-end
+    if test (xdg-mime query default 'x-scheme-handler/https') != $BROWSER_APP
+        # echo "Setting default browser to $BROWSER_APP"
+        xdg-mime default $BROWSER_APP 'x-scheme-handler/https'
+        xdg-mime default $BROWSER_APP 'x-scheme-handler/http'
+    end
 
-if test (xdg-mime query default 'image/png') != $IMAGE_VIEWER_APP
-    echo "Setting default application for 'image/png' to $IMAGE_VIEWER_APP..."
-    xdg-mime default $IMAGE_VIEWER_APP 'image/png'
-end
+    if test (xdg-mime query default 'application/pdf') != $PDF_VIEWER_APP
+        # echo "Setting default application for 'application/pdf' to $PDF_VIEWER_APP"
+        xdg-mime default $PDF_VIEWER_APP 'application/pdf'
+    end
 
-if test (xdg-mime query default 'image/jpeg') != $IMAGE_VIEWER_APP
-    echo "Setting default application for 'image/jpeg' to $IMAGE_VIEWER_APP..."
-    xdg-mime default $IMAGE_VIEWER_APP 'image/jpeg'
-end
+    if test (xdg-mime query default 'image/png') != $IMAGE_VIEWER_APP
+        # echo "Setting default application for 'image/png' to $IMAGE_VIEWER_APP..."
+        xdg-mime default $IMAGE_VIEWER_APP 'image/png'
+    end
 
+    if test (xdg-mime query default 'image/jpeg') != $IMAGE_VIEWER_APP
+        # echo "Setting default application for 'image/jpeg' to $IMAGE_VIEWER_APP..."
+        xdg-mime default $IMAGE_VIEWER_APP 'image/jpeg'
+    end
+
+end
 
 
 #############################################################
