@@ -2001,12 +2001,12 @@ function! SetupScala()
     nnoremap <leader>ba  :call MakeWithVimux("sbt " . g:sbt_args . "scapegoat")<cr>
     nnoremap <leader>bx  :call MakeWithVimux("sbt " . g:sbt_args . "clean")<cr>
     nnoremap <leader>br  :call MakeWithVimux("sbt " . g:sbt_args . "console")<cr>
-    nnoremap <leader>bD  :call VimuxRunCommand("sbt compile")<cr>
-    nnoremap <leader>bS  :call VimuxRunCommand("sbt run")<cr>
-    nnoremap <leader>btT :call VimuxRunCommand("sbt test it:test")<cr>
-    nnoremap <leader>btU :call VimuxRunCommand("sbt test")<cr>
-    nnoremap <leader>btI :call VimuxRunCommand("sbt it:test")<cr>
-    nnoremap <leader>btO :call VimuxRunCommand("sbt '". CalculateSbtTestOnlyCommand() . "'")<cr>
+    nnoremap <leader>bD  :call VimuxRunCommand("compile")<cr>
+    nnoremap <leader>bS  :call VimuxRunCommand("run")<cr>
+    nnoremap <leader>btT :call VimuxRunCommand("test it:test")<cr>
+    nnoremap <leader>btU :call VimuxRunCommand("test")<cr>
+    nnoremap <leader>btI :call VimuxRunCommand("it:test")<cr>
+    nnoremap <leader>btO :call VimuxRunCommand(CalculateSbtTestOnlyCommand())<cr>
     nnoremap <leader>bE  :call MakeWithVimuxOpenErrors('buffer')<cr>gg/\*\*\* FAILED \*\*\*<cr>
     nnoremap <leader>fe  /\*\*\* FAILED \*\*\*<cr>
 endfunction
