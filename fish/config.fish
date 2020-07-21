@@ -13,33 +13,21 @@ source $HOME/.config/fish/environment.fish
 # default applications  #
 #########################
 
-set BROWSER_APP "vivaldi-stable.desktop"
-set PDF_VIEWER_APP "org.pwmt.zathura.desktop"
-set IMAGE_VIEWER_APP "sxiv.desktop"
+function set_xdg_default_app
+    set -l MIME_TYPE $argv[1]
+    set -l APP $argv[2]
+    set -l CURRENT_APP (xdg-mime query default "$MIME_TYPE")
+    if test -z "$CURRENT_APP" -o "$CURRENT_APP" != "$APP"
+        xdg-mime default "$APP" "$MIME_TYPE"
+    end
+end
 
 if command -v xdg-mime >/dev/null
-
-    if test (xdg-mime query default 'x-scheme-handler/https') != $BROWSER_APP
-        # echo "Setting default browser to $BROWSER_APP"
-        xdg-mime default $BROWSER_APP 'x-scheme-handler/https'
-        xdg-mime default $BROWSER_APP 'x-scheme-handler/http'
-    end
-
-    if test (xdg-mime query default 'application/pdf') != $PDF_VIEWER_APP
-        # echo "Setting default application for 'application/pdf' to $PDF_VIEWER_APP"
-        xdg-mime default $PDF_VIEWER_APP 'application/pdf'
-    end
-
-    if test (xdg-mime query default 'image/png') != $IMAGE_VIEWER_APP
-        # echo "Setting default application for 'image/png' to $IMAGE_VIEWER_APP..."
-        xdg-mime default $IMAGE_VIEWER_APP 'image/png'
-    end
-
-    if test (xdg-mime query default 'image/jpeg') != $IMAGE_VIEWER_APP
-        # echo "Setting default application for 'image/jpeg' to $IMAGE_VIEWER_APP..."
-        xdg-mime default $IMAGE_VIEWER_APP 'image/jpeg'
-    end
-
+    set_xdg_default_app 'application/pdf'           'org.pwmt.zathura.desktop'
+    set_xdg_default_app 'image/jpeg'                'sxiv.desktop'
+    set_xdg_default_app 'image/png'                 'sxiv.desktop'
+    set_xdg_default_app 'x-scheme-handler/http'     'vivaldi-stable.desktop'
+    set_xdg_default_app 'x-scheme-handler/https'    'vivaldi-stable.desktop'
 end
 
 
