@@ -395,7 +395,6 @@ let g:airline_symbols.maxlinenr = ''
 " let g:airline#extensions#bufferline#enabled = 0
 
 " airline extension: show columns of csv files
-Plug 'chrisbra/csv.vim'
 let g:airline#extensions#csv#enabled = 1
 
 " airline extension: hide fugitive stuff
@@ -1696,7 +1695,6 @@ let g:polyglot_disabled = ['helm']
 " Language: CSV {{{
 
 Plug 'chrisbra/csv.vim'
-
 
 augroup csv_on_read
     au!
