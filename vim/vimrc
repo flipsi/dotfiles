@@ -1615,7 +1615,18 @@ Plug 'vim-scripts/DeleteTrailingWhiteSpace'
 
 " check for trailing whitespace when writing file
 let g:DeleteTrailingWhitespace = 1
-let g:DeleteTrailingWhitespace_Action = 'ask' " TODO: 'delete' if in a git repository, 'ask' otherwise
+let g:DeleteTrailingWhitespace_Action = 'ask'
+
+function! DeleteTrailingWhitespaceInGitRepo()
+    if IsGitRepository(expand("%:p:h"))
+        let b:DeleteTrailingWhitespace_Action = 'delete'
+    end
+endfunction
+
+augroup delete_trailing_whitespace_in_git_repo
+    autocmd!
+    autocmd BufRead * call DeleteTrailingWhitespaceInGitRepo()
+augroup END
 
 " disable for specific files automatically
 augroup delete_trailing_whitespace_disable
@@ -2585,6 +2596,14 @@ endfunction
 " set cwd to filepath {{{
 function! SetCwdToFilePath()
     execute "cd " . expand('%:p:h')
+endfunction
+" }}}
+
+
+" determine whether directory (or some parent) is a git repository or not {{{
+function! IsGitRepository(dir)
+    call system('cd "'.expand(a:dir).'" && git rev-parse --is-inside-work-tree >/dev/null 2>&1')
+    return !v:shell_error
 endfunction
 " }}}
 
@@ -4106,12 +4125,22 @@ nnoremap <leader>igm         :r!goobook-query-mail.sh<space>
 
 silent! function! Save(force)
     if (a:force)
-        silent update!
+        if !exists('b:DeleteTrailingWhitespace_Action') || b:DeleteTrailingWhitespace_Action == 'ask'
+            update!
+        else
+            silent update!
+            GitGutter
+            echo '"' . expand("%") . '" ✔'
+        end
     else
-        silent update
+        if !exists('b:DeleteTrailingWhitespace_Action') || b:DeleteTrailingWhitespace_Action == 'ask'
+            update
+        else
+            silent update
+            GitGutter
+            echo '"' . expand("%") . '" ✔'
+        end
     endif
-    GitGutter
-    echo '"' . expand("%") . '" ✔'
 endfunction
 
 command! ReloadBuffer       :checktime              " Check for file changes (and 'reload' them or get asked with autoread)
