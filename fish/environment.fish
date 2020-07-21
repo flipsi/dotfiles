@@ -2,13 +2,22 @@
 # set -x LANG de_DE.UTF-8
 set -x LANG en_US.UTF-8
 
-# some more stuff in PATH
-set -x PATH ~/.local/bin $PATH
-set -x PATH ~/.cargo/bin $PATH
-set -x PATH ~/.gem/ruby/2.6.0/bin $PATH
-set -x PATH ~/.i3/bin $PATH
-set -x PATH ~/shellscripts $PATH
-set -x PATH ~/bin $PATH
+
+function prepend_to_path
+    set -l DIR $argv[1]
+    if test -n "$DIR" -a -d "$DIR"
+        set -x PATH "$DIR" $PATH
+    end
+end
+
+prepend_to_path ~/.local/bin
+prepend_to_path ~/.cargo/bin
+prepend_to_path ~/.gem/ruby/2.4.0/bin
+prepend_to_path ~/.gem/ruby/2.6.0/bin
+prepend_to_path ~/.i3/bin
+prepend_to_path ~/shellscripts
+prepend_to_path ~/bin
+
 
 # edit files with vim
 set -x EDITOR vim
@@ -34,6 +43,6 @@ set -x CM_LAUNCHER "rofi"
 
 # load local environment if present
 if test -f $HOME/.config/fish/environment.local.fish
-  source $HOME/.config/fish/environment.local.fish
+    source $HOME/.config/fish/environment.local.fish
 end
 
