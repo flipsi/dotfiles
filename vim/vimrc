@@ -828,7 +828,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 
 Plug 'junegunn/fzf.vim'
 
-
 " prefix all the command names
 let g:fzf_command_prefix = 'Fzf'
 
@@ -907,6 +906,10 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+
+" Plug 'laher/fuzzymenu.vim'
+nmap <leader>; <Plug>Fzm
+vmap <leader>; <Plug>FzmVisual
 
 
 " }}}
