@@ -4,7 +4,8 @@
 
 [general]
 
-accounts = ryte.com, mail.de, gmail.com, web.de-pmoers
+#accounts = ryte.com, mail.de, gmail.com, web.de-pmoers
+accounts = mail.de, web.de-pmoers
 
 ui = ttyui
 fsync = False
