@@ -66,7 +66,9 @@ if status --is-interactive; and status --is-login
 
     # change colors of ls
     # eval (dircolors -c LS_COLORS)
-    set -x LS_COLORS (bash -c 'eval `dircolors ~/.dircolors`; echo $LS_COLORS')
+    if test -f ~/.dircolors
+        set -x LS_COLORS (bash -c 'eval `dircolors ~/.dircolors`; echo $LS_COLORS')
+    end
 
     # find out host once (useful for multiple things, but saves cycles)
     if test -z $hostname
