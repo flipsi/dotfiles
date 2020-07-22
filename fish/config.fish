@@ -58,6 +58,9 @@ if status --is-interactive; and status --is-login
     # change colors
     fish_my_colors gruvbox
 
+    # change colors for virtual console
+    set_tty_colors gruvbox
+
     # modify the terminal's 256 color palette to use the gruvbox theme
     set -l GRUVBOX_SCRIPT ~/.vim/bundle/gruvbox/gruvbox_256palette.sh
     if test -f $GRUVBOX_SCRIPT
