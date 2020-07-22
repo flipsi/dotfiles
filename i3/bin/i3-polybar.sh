@@ -14,12 +14,19 @@ function set_env_vars() {
 
     HOSTNAME=$(hostname)
     case $HOSTNAME in
-        asterix )
-            if xrandr | grep -q 'HDMI2 connected 4096x2160'; then
+        falbala )
+            if xrandr | grep -q 'DP2-1 connected 4096x2160'; then
                 BAR_MAIN_MONITOR=HDMI2
                 BAR_MAIN_DPI=300
                 BAR_MAIN_HEIGHT=60
                 BAR_TRAY_MAXSIZE=28
+            elif xrandr | grep -q 'DP2-1 connected'; then
+                BAR_MAIN_MONITOR=DP2-1
+                BAR_MAIN_DPI=108
+                BAR_MAIN_HEIGHT=24
+                BAR_TRAY_MAXSIZE=16
+            else
+                BAR_MAIN_DPI=100
             fi
             ;;
         dwarf )
