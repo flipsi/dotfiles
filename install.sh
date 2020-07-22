@@ -38,6 +38,7 @@ SUPPORTED_TARGETS=(\
     i3 \
     intellij\
     kitty \
+    kbd \
     konsole \
     lesskey \
     luakit \
@@ -226,6 +227,14 @@ function create_link_for_target() {
             for DIR in $INTELLIJ_DIRS; do
                 create_link "$PWD/intellij/idea.properties" "$DIR/config/idea.properties"
             done
+            ;;
+
+        kbd )
+            if [[ $(whoami) = 'root' ]]; then
+                mkdir -p "/usr/local/share/kbd/keymaps/"
+                create_link "$PWD/kbd/us_sflip.map" "/usr/local/share/kbd/keymaps/us_sflip.map"
+            fi
+            loadkeys us_sflip
             ;;
 
         kitty )
