@@ -1670,11 +1670,8 @@ nnoremap <leader>icp :ColorPicker<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Completion and other smart IDE features via LSP {{{
 
-" stable
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
-
-" nightly
-Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 
 let g:coc_start_at_startup = 0
 
