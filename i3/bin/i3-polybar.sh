@@ -25,8 +25,6 @@ function set_env_vars() {
                 BAR_MAIN_DPI=108
                 BAR_MAIN_HEIGHT=24
                 BAR_TRAY_MAXSIZE=16
-            else
-                BAR_MAIN_DPI=100
             fi
             ;;
         dwarf )
