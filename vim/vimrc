@@ -2004,7 +2004,7 @@ function! SetupScala()
     nnoremap <leader>bS  :call VimuxRunCommand("sbt")<cr>
     nnoremap <leader>bd  :call ExecuteSbtCommand("compile")<cr>
     nnoremap <leader>bs  :call ExecuteSbtCommand("run")<cr>
-    nnoremap <leader>btt :call ExecuteSbtCommand("test it:test")<cr>
+    nnoremap <leader>btt :call ExecuteSbtCommand("test; it:test")<cr>
     nnoremap <leader>btu :call ExecuteSbtCommand("test")<cr>
     nnoremap <leader>bti :call ExecuteSbtCommand("it:test")<cr>
     nnoremap <leader>bto :call ExecuteSbtCommand(CalculateSbtTestOnlyCommand())<cr>
