@@ -1788,6 +1788,7 @@ command! -bang SetupTsuquyomi :call SetupTsuquyomi() " add mappings for developm
 
 Plug 'lervag/vimtex'
 
+let g:tex_flavor = 'latex'
 let g:vimtex_view_method='zathura'
 "let g:vimtex_viewer_general='zathura'
 let g:vimtex_quickfix_ignore_all_warnings=1
