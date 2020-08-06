@@ -272,6 +272,7 @@ nnoremap <leader>b<bs>      :VimuxCloseRunner<cr>
 nnoremap <leader>bz         :call VimuxZoomRunner()<cr>
 nnoremap <leader>bc         :VimuxInterruptRunner<cr>
 nnoremap <leader>b<c-c>     :VimuxInterruptRunner<cr>
+nnoremap <leader>b<c-d>     :call VimuxSendKeys("C-d")<cr>
 nnoremap <leader>b<c-b>     :VimuxInspectRunner<cr>
 nnoremap <leader><c-b><c-b> :VimuxInspectRunner<cr>
 nnoremap <leader>be         :call MakeWithVimuxOpenErrors('quickfix')<cr>
