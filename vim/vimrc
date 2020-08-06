@@ -2000,27 +2000,30 @@ function! SetupScala()
                 " \%E\ \%#[info]\ %.%#\ was\ not\ equal\ to\ %.%#\ (%f:%l),%Z,
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
-    let g:sbt_args = "--color=true "
     nnoremap <leader>AF  :call VimuxRunCommand("scalafmt")<cr>
-    nnoremap <leader>bd  :call MakeWithVimux("sbt " . g:sbt_args . "compile")<cr>
-    nnoremap <leader>bs  :call MakeWithVimux("sbt " . g:sbt_args . "run")<cr>
-    nnoremap <leader>btt :call MakeWithVimux("sbt " . g:sbt_args . "test it:test")<cr>
-    nnoremap <leader>btu :call MakeWithVimux("sbt " . g:sbt_args . "test")<cr>
-    nnoremap <leader>bti :call MakeWithVimux("sbt " . g:sbt_args . "it:test")<cr>
-    nnoremap <leader>bto :call MakeWithVimux("sbt " . g:sbt_args . "'". CalculateSbtTestOnlyCommand() . "'")<cr>
-    nnoremap <leader>ba  :call MakeWithVimux("sbt " . g:sbt_args . "scapegoat")<cr>
-    nnoremap <leader>bx  :call MakeWithVimux("sbt " . g:sbt_args . "clean")<cr>
-    nnoremap <leader>br  :call MakeWithVimux("sbt " . g:sbt_args . "console")<cr>
-    nnoremap <leader>bD  :call VimuxRunCommand("compile")<cr>
-    nnoremap <leader>bS  :call VimuxRunCommand("run")<cr>
-    nnoremap <leader>btT :call VimuxRunCommand("test it:test")<cr>
-    nnoremap <leader>btU :call VimuxRunCommand("test")<cr>
-    nnoremap <leader>btI :call VimuxRunCommand("it:test")<cr>
-    nnoremap <leader>btO :call VimuxRunCommand(CalculateSbtTestOnlyCommand())<cr>
+    nnoremap <leader>bS  :call VimuxRunCommand("sbt")<cr>
+    nnoremap <leader>bd  :call ExecuteSbtCommand("compile")<cr>
+    nnoremap <leader>bs  :call ExecuteSbtCommand("run")<cr>
+    nnoremap <leader>btt :call ExecuteSbtCommand("test it:test")<cr>
+    nnoremap <leader>btu :call ExecuteSbtCommand("test")<cr>
+    nnoremap <leader>bti :call ExecuteSbtCommand("it:test")<cr>
+    nnoremap <leader>bto :call ExecuteSbtCommand(CalculateSbtTestOnlyCommand())<cr>
+    nnoremap <leader>ba  :call ExecuteSbtCommand("scapegoat")<cr>
+    nnoremap <leader>bx  :call ExecuteSbtCommand("clean")<cr>
+    nnoremap <leader>br  :call ExecuteSbtCommand("console")<cr>
     nnoremap <leader>bE  :call MakeWithVimuxOpenErrors('buffer')<cr>gg/\*\*\* FAILED \*\*\*<cr>
     nnoremap <leader>fe  /\*\*\* FAILED \*\*\*<cr>
 endfunction
 command! -bang SetupScala :call SetupScala() " add mappings for development with Scala
+
+function! ExecuteSbtCommand(command)
+    if IsSbtRunning()
+        call VimuxRunCommand(a:command)
+    else
+        let g:sbt_args = "--color=true "
+        call MakeWithVimux("sbt " . g:sbt_args . "'" . a:command . "'")
+    endif
+endfunction
 
 function! CalculateSbtTestOnlyCommand()
     let lines_that_match_package = GetMatches('^package.*', 1, line('$'))
@@ -2033,6 +2036,12 @@ function! CalculateSbtTestOnlyCommand()
     let class    = substitute(lines_that_match_class[0], '^class\s\+\(\w\+\).*', '\1', '')
     let itPrefix = match(@%, '.*/it/.*') == -1 ? '' : 'it:'
     return itPrefix . "testOnly " . package . "." . class
+endfunction
+
+function! IsSbtRunning()
+    " This only checks if SBT is running globally, not in the adjacent tmux pane # TODO: improve
+    call system('ps -ef | grep -v grep | grep sbt-launch.jar')
+    return !v:shell_error
 endfunction
 
 " augroup scala_on_write
