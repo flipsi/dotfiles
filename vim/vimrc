@@ -2493,6 +2493,11 @@ else
 
 endif
 
+
+highlight PokemonPikachu ctermfg=233 ctermbg=184
+match PokemonPikachu /pikachu/
+
+
 " }}}
 
 
