@@ -110,7 +110,7 @@ font-4 = "PragmataPro Mono:size=12"
 
 modules-left = i3
 ; modules-center = spotify
-modules-right = pulseaudio xkeyboard wlan eth filesystem battery date powermenu
+modules-right = pulseaudio xkeyboard wlan eth filesystem memory battery date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -282,11 +282,11 @@ label = %percentage:2%%
 [module/memory]
 
 type = internal/memory
-interval = 2
+interval = 3
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.gruvbox_neutral_red}
-label = %percentage_used%%
+; format-underline = ${colors.gruvbox_neutral_red}
+label = MEM %percentage_used%%
 
 
 [module/wlan]
