@@ -2040,7 +2040,9 @@ endfunction
 
 function! IsSbtRunning()
     " This only checks if SBT is running globally, not in the adjacent tmux pane # TODO: improve
-    call system('ps -ef | grep -v grep | grep sbt-launch.jar')
+    " the space before 'java' is important (to match pure sbt but ignore IntelliJ's sbt)
+    call system('ps -ef | grep -v grep | grep " java.*sbt-launch.jar"')
+    " call system('ps -ef | grep -v grep | grep sbt-launch.jar')
     return !v:shell_error
 endfunction
 
