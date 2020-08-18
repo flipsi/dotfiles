@@ -1807,7 +1807,7 @@ let g:ycm_semantic_triggers.tex = [
 
 augroup map_latex
     au!
-    au FileType latex nnoremap <leader>bl :VimtexCompileToggle<cr>
+    au FileType latex nnoremap <leader>bl :VimtexCompile<cr>
 augroup END
 
 
