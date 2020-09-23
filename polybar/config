@@ -110,7 +110,7 @@ font-4 = "PragmataPro Mono:size=12"
 
 modules-left = i3
 ; modules-center = spotify
-modules-right = pulseaudio xkeyboard wlan eth filesystem memory battery date powermenu
+modules-right = pulseaudio xkeyboard wlan eth filesystem cpu memory battery date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -272,10 +272,10 @@ card = intel_backlight
 [module/cpu]
 
 type = internal/cpu
-interval = 2
-format-prefix = " "
+interval = 3
+format-prefix = "CPU"
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.secondary}
+; format-underline = ${colors.secondary}
 label = %percentage:2%%
 
 
@@ -283,10 +283,10 @@ label = %percentage:2%%
 
 type = internal/memory
 interval = 3
-format-prefix = " "
+format-prefix = "MEM "
 format-prefix-foreground = ${colors.foreground-alt}
 ; format-underline = ${colors.gruvbox_neutral_red}
-label = MEM %percentage_used%%
+label = %percentage_used%%
 
 
 [module/wlan]
