@@ -4012,7 +4012,7 @@ nnoremap <silent> <c-l> :wincmd l<cr>
 
 " move buffer to a new window
 nnoremap <silent> <leader><c-l> :vsplit<cr><c-w>w:bprevious<cr><c-w>w<cr>
-nnoremap <silent> <leader><c-j>  :split<cr><c-w>w:bprevious<cr><c-w>w<cr>
+nnoremap <silent> <leader><c-j> :vertical split<cr>
 
 " resize window faster
 nnoremap <silent> <c-w>+ :resize +3<cr>
