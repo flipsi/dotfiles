@@ -371,7 +371,7 @@ card = intel_backlight
 
 type = internal/cpu
 interval = 3
-format-prefix = "CPU"
+format-prefix = "CPU "
 format-prefix-foreground = ${colors.foreground-alt}
 ; format-underline = ${colors.secondary}
 label = %percentage:2%%
