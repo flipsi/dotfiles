@@ -76,8 +76,8 @@ exec --no-startup-id "picom -b"
 ###############################################################################
 
 ## launcher options
-set $DMENU_OPTIONS   -l 5 -fn 'PragmataPro Mono-10' -i -nb '#282828' -sb '#FABD2F' -sf '#282828'
-set $DMENU_OPTIONS_2 -l 5 -fn 'PragmataPro Mono-10' -i -nb \#282828 -sb \#FABD2F -sf \#282828
+set $DMENU_OPTIONS   -l 15 -fn 'PragmataPro Mono-10' -i -nb '#282828' -sb '#FABD2F' -sf '#282828'
+set $DMENU_OPTIONS_2 -l 15 -fn 'PragmataPro Mono-10' -i -nb \#282828 -sb \#FABD2F -sf \#282828
 
 ## modifier key: windows/super
 set $mod Mod4

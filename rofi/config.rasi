@@ -1,8 +1,8 @@
 configuration {
-	width: 100;
-	lines: 5;
+	width: 50;
+	lines: 15;
 	font: "PragmataPro Mono 11";
-	location: 1;
+	location: 0;
 	show-icons: false;
 	window-format: "{c}    {t}";
 	theme: "~/.config/rofi/themes/gruvbox-dark-soft.mod.01.rasi";
