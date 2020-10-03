@@ -346,7 +346,7 @@ function create_link_for_target() {
 
         rofi )
             mkdir -p "$HOME/.config/rofi"
-            create_link "$PWD/rofi/config" "$HOME/.config/rofi/config"
+            create_link "$PWD/rofi/config.rasi" "$HOME/.config/rofi/config.rasi"
             create_link "$PWD/rofi/themes" "$HOME/.config/rofi/themes"
             ;;
 
