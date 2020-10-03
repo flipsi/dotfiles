@@ -80,7 +80,6 @@ modules-right = pulseaudio xkeyboard filesystem date powermenu
 
 tray-position = right
 tray-padding = 2
-tray-transparent = false
 tray-background = ${colors.background}
 tray-maxsize = ${env:BAR_TRAY_MAXSIZE:20}
 
