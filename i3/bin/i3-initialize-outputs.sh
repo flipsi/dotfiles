@@ -48,7 +48,7 @@ case $(hostname) in
         fi
         ;;
 
-    dwarf )
+    dwarf | falbala )
 
         if test -n "$ONLY"; then
 
@@ -57,23 +57,23 @@ case $(hostname) in
             xrandr --output 'DP3-2' --off
             xrandr --output 'eDP1' --mode '1920x1080' --auto
 
-        elif xrandr | grep 'DP3-2 connected' >/dev/null; then
+        elif xrandr | grep 'DP.-. connected' >/dev/null; then
+            BAR_MAIN_MONITOR=$(xrandr | grep 'DP.-2 connected' | cut -d' ' -f1 | head -n1)
+            BAR_SECOND_MONITOR=$(xrandr | grep 'DP.-1 connected' | cut -d' ' -f1 | head -n1)
+            BAR_THIRD_MONITOR='eDP1'
 
-            xrandr --output 'eDP1' --primary \
-                --output 'DP3-2' --auto --right-of 'eDP1' \
-                --output 'DP3-1' --auto --right-of 'DP3-2'\
+            xrandr --output "$BAR_MAIN_MONITOR" --primary \
+                --output "$BAR_SECOND_MONITOR" --auto --left-of "$BAR_MAIN_MONITOR" \
+                --output "$BAR_THIRD_MONITOR" --auto --left-of "$BAR_SECOND_MONITOR" \
                 || ( \
-                sleep 0.1 && xrandr --output 'DP3-1' --off && \
-                sleep 0.1 && xrandr --output 'DP3-2' --auto && \
-                sleep 0.1 && xrandr --output 'DP3-1' --auto --right-of 'DP3-2' && \
-                sleep 0.1 && xrandr --output 'eDP1' --auto --left-of 'DP3-2' \
+                sleep 0.1 && xrandr --output "$BAR_THIRD_MONITOR" --off && \
+                sleep 0.1 && xrandr --output "$BAR_MAIN_MONITOR" --primary --auto && \
+                sleep 0.1 && xrandr --output "$BAR_SECOND_MONITOR" --auto --right-of "$BAR_MAIN_MONITOR" && \
+                sleep 0.1 && xrandr --output "$BAR_THIRD_MONITOR" --auto --left-of "$BAR_SECOND_MONITOR" \
                 )
 
             setup_wallpaper
 
-        elif xrandr | grep 'DP3-1 connected' >/dev/null; then
-
-            sleep 0.1 && xrandr --output 'DP3-1' --auto --right-of 'eDP1'
 
         elif xrandr | grep 'HDMI1 connected' >/dev/null; then
 
