@@ -66,6 +66,7 @@ exec --no-startup-id "picom -b"
 # exec --no-startup-id "nohup unclutter -idle 4 -jitter 30 &"
 
 ## disable touchpad when typing
+## (package is called xf86-input-synaptics)
 # exec --no-startup-id "syndaemon -d -k -i 1.2"
 
 
