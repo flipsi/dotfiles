@@ -5,6 +5,8 @@ function set_env_vars() {
     export  ETH_INTERFACE
     export WLAN_INTERFACE
     export BAR_MAIN_MONITOR
+    export BAR_SECOND_MONITOR
+    export BAR_THIRD_MONITOR
     export BAR_DPI
     export BAR_HEIGHT
     export BAR_TRAY_MAXSIZE
@@ -14,36 +16,26 @@ function set_env_vars() {
 
     HOSTNAME=$(hostname)
     case $HOSTNAME in
-        falbala )
-            if xrandr | grep -q 'DP2-1 connected 4096x2160'; then
-                BAR_MAIN_MONITOR=HDMI2
+        * )
+            if xrandr | grep -q 'HDMI2 connected 4096x2160'; then
+                BAR_MAIN_MONITOR='HDMI2'
+                BAR_SECOND_MONITOR='eDP1'
                 BAR_DPI=300
                 BAR_HEIGHT=60
                 BAR_TRAY_MAXSIZE=28
-            elif xrandr | grep -q 'DP2-1 connected'; then
-                BAR_MAIN_MONITOR=DP2-1
-                BAR_DPI=108
-                BAR_HEIGHT=24
-                BAR_TRAY_MAXSIZE=16
-            fi
-            ;;
-        dwarf )
-            if xrandr | grep -q 'DP3-2 connected'; then
-                BAR_MAIN_MONITOR='DP3-1'
-                BAR_SECOND_MONITOR='DP3-2'
+            elif xrandr | grep -q 'DP.-2 connected'; then
+                BAR_MAIN_MONITOR=$(xrandr | grep 'DP.-2 connected' | cut -d' ' -f1 | head -n1)
+                BAR_SECOND_MONITOR=$(xrandr | grep 'DP.-1 connected' | cut -d' ' -f1 | head -n1)
                 BAR_THIRD_MONITOR='eDP1'
-            elif xrandr | grep -q 'DP3-1 connected'; then
-                BAR_MAIN_MONITOR='DP3-1'
+            elif xrandr | grep -q 'HDMI. connected'; then
+                BAR_MAIN_MONITOR=$(xrandr | grep 'HDMI. connected' | cut -d' ' -f1 | head -n1)
                 BAR_SECOND_MONITOR='eDP1'
-            elif xrandr | grep -q 'HDMI1 connected'; then
-                BAR_MAIN_MONITOR='HDMI1'
+            else
+                BAR_MAIN_MONITOR=$(xrandr | grep ' connected' | cut -d' ' -f1 | head -n1)
             fi
             BAR_DPI=108
             BAR_HEIGHT=24
             BAR_TRAY_MAXSIZE=16
-            ;;
-        * )
-            BAR_MAIN_MONITOR=$(xrandr | grep ' connected' | cut -d' ' -f1 | head -n1)
             ;;
     esac
 }

@@ -125,7 +125,7 @@ cursor-scroll = ns-resize
 
 [bar/second]
 
-monitor = ${env:BAR_SECOND_MONITOR:DP3-2}
+monitor = ${env:BAR_SECOND_MONITOR:HDMI1}
 
 modules-left = spotify
 modules-center = i3
