@@ -3998,7 +3998,7 @@ endif
 nnoremap <leader>e<leader> :buffer #<cr>
 nnoremap <leader><tab>     :buffer #<cr>
 
-" circle through buffers
+" navigate through buffers
 nnoremap <m-n>  :bnext<cr>
 nnoremap <esc>n :bnext<cr>
 nnoremap <m-p>  :bprevious<cr>
@@ -4019,6 +4019,12 @@ nnoremap <silent> <c-w>+ :resize +3<cr>
 nnoremap <silent> <c-w>- :resize -3<cr>
 nnoremap <silent> <c-w>> 5<c-w>>
 nnoremap <silent> <c-w>< 5<c-w><
+
+" navigate through tabs
+nnoremap <leader><m-n>  :tabnext<cr>
+nnoremap <leader><esc>n :tabnext<cr>
+nnoremap <leader><m-p>  :tabprevious<cr>
+nnoremap <leader><esc>p :tabprevious<cr>
 
 
 " clear windows (close quickfix and location list) and refresh screen
@@ -4158,6 +4164,7 @@ silent! function! Save(force)
     endif
 endfunction
 
+command! NewTab             :tabnew                 " Create a new tab
 command! ReloadBuffer       :checktime              " Check for file changes (and 'reload' them or get asked with autoread)
 command! Reset              :e!                     " Discard changes in buffer
 command! Save               :call Save(0)           " Write buffer changes to file
@@ -4168,6 +4175,7 @@ command! CloseBufferForce   :bdelete!               " Close current buffer disca
 command! CloseAllBuffers    :silent bufdo bdelete   " Close all buffers (not vim)
 command! CloseWindow        :quit                   " Close current window (not buffer)
 command! CloseOtherWindows  :only                   " Close all but current window (not buffers)
+command! CloseTab           :tabclose               " Close current tab (not buffer)
 command! QuitVim            :quitall                " Quit Vim (closing all windows)
 command! QuitVimForce       :quitall!               " Quit Vim (closing all windows) discarding changes
 
@@ -4181,6 +4189,8 @@ nnoremap <leader><bs>       :CloseBuffer<cr>
 nnoremap <leader>QQ         :CloseBufferForce<cr>
 nnoremap <leader>qW         :CloseWindow<cr>
 nnoremap <leader>qw         :CloseOtherWindows<cr>
+nnoremap <leader><c-n>      :NewTab<cr>
+nnoremap <leader><c-w>      :CloseTab<cr>
 nnoremap <c-d>              :QuitVim<cr> " this is how i exit most terminal applications
 nnoremap <leader><c-d><c-d> :QuitVimForce<cr>
 
