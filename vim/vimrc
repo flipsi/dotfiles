@@ -170,10 +170,19 @@ let maplocalleader=' '
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " automatically source vimrc on save {{{
 
+if !exists("*SourceMYVIMRC")
+    function SourceMYVIMRC()
+        source $MYVIMRC
+        syntax enable
+        AirlineRefresh
+        FixHighlighting
+    endfunction
+endif
+command! -bang SourceMYVIMRC :call SourceMYVIMRC() " Reload configuration
+
 augroup reload_vimrc
     autocmd!
-    autocmd BufWritePost vimrc source $MYVIMRC
-    autocmd BufWritePost vimrc AirlineRefresh
+    autocmd BufWritePost vimrc SourceMYVIMRC
 augroup END
 
 " }}}
@@ -2392,95 +2401,96 @@ set previewheight=40
 
 " colorscheme {{{
 
+let g:light_or_dark_theme = 'dark'
+
+
+function! FixHighlighting()
+
+    if g:light_or_dark_theme == 'dark'
+        let g:indentLine_setColors = 1
+        let g:indentLine_color_term = 237
+        highlight CursorLine              ctermbg=236 cterm=NONE
+        highlight CursorColumn            ctermbg=236
+        highlight ColorColumn             ctermbg=237
+        highlight DiffAdd                 ctermbg=234
+        highlight DiffDelete              ctermbg=234
+        highlight DiffChange              ctermbg=234
+        highlight DiffText                ctermbg=233
+        highlight ShowTrailingWhitespace  ctermbg=235
+        highlight VertSplit               ctermfg=238
+        highlight Folded                  ctermfg=238 ctermfg=248
+        highlight LineNr                  ctermbg=237 ctermfg=243
+        " highlight SignColumn              ctermbg=237
+        " highlight GitGutterAdd            ctermbg=235
+        " highlight GitGutterChange         ctermbg=235
+        " highlight GitGutterDelete         ctermbg=235
+        " highlight GitGutterChangeDelete   ctermbg=235
+        " highlight Conceal                 ctermbg=236
+        " highlight Search                  ctermbg=237 ctermfg=white
+        highlight Error                   ctermbg=162
+        highlight Todo                    ctermfg=132
+        highlight Sneak                   ctermfg=72 ctermbg=234
+        highlight EasyMotionTarget        ctermfg=72
+        highlight EasyMotionTarget2First  ctermfg=72
+        highlight EasyMotionTarget2Second ctermfg=108
+
+    elseif g:light_or_dark_theme == 'light'
+        let g:indentLine_setColors = 1
+        let g:indentLine_color_term = 250
+        highlight CursorLine   ctermbg=252
+        highlight CursorColumn ctermbg=252
+        highlight ColorColumn  ctermbg=250
+        highlight ShowTrailingWhitespace ctermbg=250
+    else
+        echoerr "Unknown value for g:light_or_dark_theme (" . g:light_or_dark_theme . ")"
+    endif
+endfunction
+command! -bang FixHighlighting :call FixHighlighting() " Overwrite some highlight group definitions
+
+
 if s:MyMode == 'mastery'
 
-    " DARK THEMES
+    if g:light_or_dark_theme == 'dark'
 
-    set background=dark
+        set background=dark
 
-    " colorscheme apprentice
-    " colorscheme badwolf
-    " colorscheme blackboard
-    " colorscheme blacklight
-    " colorscheme candycode
-    " colorscheme dante
-    " colorscheme desertEx
-    colorscheme gruvbox
-    " colorscheme iceberg
-    " colorscheme jellybeans
-    " colorscheme luna-term
-    " colorscheme meta5
-    " colorscheme materialbox
-    " colorscheme molokai
-    " colorscheme onedark
-    " colorscheme pride
-    " colorscheme seoul256
-    " colorscheme Tomorrow-Night
-    " colorscheme up
-    " colorscheme woju
+        " dark colorschemes that I like or once liked:
+        " ----------------------------------------------
+        " apprentice badwolf blackboard blacklight candycode dante desertEx
+        " gruvbox iceberg jellybeans luna-term meta5 materialbox molokai
+        " onedark pride seoul256 Tomorrow-Night up woju
 
-    " let g:airline_theme='base16'
-    " let g:airline_theme='base16_summerfruit'
-    " let g:airline_theme='base16_grayscale'
-    " let g:airline_theme='behelit'
-    let g:airline_theme='distinguished'
-    " let g:airline_theme='kalisi'
-    " let g:airline_theme='laederon'
-    " let g:airline_theme='lucius'
-    " let g:airline_theme='minimalist'
-    " let g:airline_theme='raven'
-    " let g:airline_theme='serene'
-    " let g:airline_theme='tomorrow'
-    " let g:airline_theme='ubaryd'
-    " let g:airline_theme='wombat'
-    " let g:airline_theme='zenburn'
+        colorscheme gruvbox
 
-    let g:indentLine_setColors = 1
-    let g:indentLine_color_term = 236
+        " dark airlinethemes that I like or once liked:
+        " ----------------------------------------------
+        " base16 base16_summerfruit base16_grayscale behelit distinguished
+        " kalisi laederon lucius minimalist raven serene tomorrow ubaryd wombat
+        " zenburn
 
-    highlight CursorLine              ctermbg=236 cterm=NONE
-    highlight CursorColumn            ctermbg=236
-    highlight ColorColumn             ctermbg=237
-    highlight DiffAdd                 ctermbg=234
-    highlight DiffDelete              ctermbg=234
-    highlight DiffChange              ctermbg=234
-    highlight DiffText                ctermbg=233
-    highlight ShowTrailingWhitespace  ctermbg=235
-    highlight VertSplit               ctermfg=238
-    highlight Folded                  ctermfg=238 ctermfg=248
-    highlight LineNr                  ctermbg=237 ctermfg=243
-    " highlight SignColumn              ctermbg=237
-    " highlight GitGutterAdd            ctermbg=235
-    " highlight GitGutterChange         ctermbg=235
-    " highlight GitGutterDelete         ctermbg=235
-    " highlight GitGutterChangeDelete   ctermbg=235
-    highlight Conceal                 ctermbg=237
-    " highlight Search                  ctermbg=237 ctermfg=white
-    highlight Error                   ctermbg=162
-    highlight Todo                    ctermfg=132
-    highlight Sneak                   ctermfg=72 ctermbg=234
-    highlight EasyMotionTarget        ctermfg=72
-    highlight EasyMotionTarget2First  ctermfg=72
-    highlight EasyMotionTarget2Second ctermfg=108
+        let g:airline_theme='distinguished'
 
+    elseif g:light_or_dark_theme == 'light'
 
-    " LIGHT THEMES
+        set background=light
 
-    " set background=light
+        " light colorschemes that I like or once liked:
+        " ----------------------------------------------
+        " lucius peaksea seoul256-light Tomorrow-Night
 
-    " colorscheme lucius
-    " colorscheme peaksea
-    " colorscheme seoul256-light
-    " colorscheme Tomorrow-Night
+        colorscheme seoul256-light
 
-    " let g:airline_theme='bubblegum'
-    " let g:airline_theme='lucius'
-    " let g:airline_theme='sol'
+        " light airlinethemes that I like or once liked:
+        " ----------------------------------------------
+        " bubblegum lucius sol
 
-    " highlight CursorLine   ctermbg=252
-    " highlight CursorColumn ctermbg=252
-    " highlight ColorColumn  ctermbg=250
-    " highlight ShowTrailingWhitespace ctermbg=250
+        let g:airline_theme='lucius'
+
+    else
+        echoerr "Unknown value for g:light_or_dark_theme (" . g:light_or_dark_theme . ")"
+    endif
+
+    FixHighlighting
 
 else
 
@@ -3187,7 +3197,7 @@ nnoremap <leader>ev :execute 'edit ' . resolve(expand($MYVIMRC))<cr>
 nnoremap <leader>e3 :execute 'edit ' . resolve(expand('~/.i3/config'))<cr>
 
 " reload config file
-nnoremap <leader>sv :source $MYVIMRC<cr>:syntax enable<cr>
+nnoremap <leader>sv :SourceMYVIMRC<cr>
 nmap <f5> <leader>sv
 
 
