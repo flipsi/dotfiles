@@ -4155,7 +4155,14 @@ nnoremap <leader>igm         :r!goobook-query-mail.sh<space>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SAVING AND CLOSING {{{
 
+function! MkdirIfNotExists(dir)
+    if !isdirectory(a:dir)
+        silent! call system('mkdir -p "' . a:dir . '"')
+    endif
+endfunction
+
 silent! function! Save(force)
+    call MkdirIfNotExists(expand("%:h"))
     if (a:force)
         if !exists('b:DeleteTrailingWhitespace_Action') || b:DeleteTrailingWhitespace_Action == 'ask'
             update!
@@ -4179,7 +4186,7 @@ command! NewTab             :tabnew                 " Create a new tab
 command! ReloadBuffer       :checktime              " Check for file changes (and 'reload' them or get asked with autoread)
 command! Reset              :e!                     " Discard changes in buffer
 command! Save               :call Save(0)           " Write buffer changes to file
-command! SaveForce          :call Save(1)           " Write buffer changes to file igoring 'readonly' etc.
+command! SaveForce          :call Save(1)           " Write buffer changes to file ignoring 'readonly' etc.
 command! SaveAndClose       :wq                     " Write buffer changes to file and close window
 command! CloseBuffer        :bdelete                " Close current buffer
 command! CloseBufferForce   :bdelete!               " Close current buffer discarding changes
