@@ -855,7 +855,7 @@ assign [class="(?i)pale moon"]                                                  
 assign [class="(?i)qutebrowser"]                                                                    Web
 assign [class="(?i)vivaldi-stable"]                                                                 Vivaldi
 assign [class="code-oss"]                                                                           VS Code
-assign [class="(?i)gnome-session-failed"]                                                           GnomeSessionFailed
+for_window [class="(?i)gnome-session-failed"] move to workspace                                     GnomeSessionFailed
 
 ## workspaces with window always on specific output
 for_window [class="(?i)vivaldi-stable"]                                         move workspace to output DP3-1
@@ -873,3 +873,4 @@ for_window [class="(?i)jetbrains-phpstorm"]                                     
 for_window [class="(?i)slack"]                                                  move workspace to output eDP1
 for_window [class="Spotify"]                                                    move workspace to output DP3-1
 for_window [class="(?i)telegram"]                                               move workspace to output eDP1
+for_window [class="(?i)gnome-session-failed"]                                   move workspace to output eDP1
