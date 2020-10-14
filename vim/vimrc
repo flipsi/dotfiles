@@ -1512,7 +1512,8 @@ nnoremap <silent> -adj :JsDoc<cr>
 " show indentation level
 Plug 'Yggdroot/indentLine'
 let g:indentLine_enabled = 1
-let g:indentLine_char = '┊'
+" let g:indentLine_char = '┊'
+let g:indentLine_char = '|'
 nnoremap <leader>yI :IndentLinesToggle<cr>
 
 " Does not work. TODO: Fix it!
