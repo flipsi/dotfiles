@@ -2442,73 +2442,91 @@ function! FixHighlighting()
         highlight CursorColumn ctermbg=252
         highlight ColorColumn  ctermbg=250
         highlight ShowTrailingWhitespace ctermbg=250
+
     else
         echoerr "Unknown value for g:light_or_dark_theme (" . g:light_or_dark_theme . ")"
     endif
+
 endfunction
 command! -bang FixHighlighting :call FixHighlighting() " Overwrite some highlight group definitions
 
 
-if s:MyMode == 'mastery'
-
-    if g:light_or_dark_theme == 'dark'
-
-        set background=dark
-
-        " dark colorschemes that I like or once liked:
-        " ----------------------------------------------
-        " apprentice badwolf blackboard blacklight candycode dante desertEx
-        " gruvbox iceberg jellybeans luna-term meta5 materialbox molokai
-        " onedark pride seoul256 Tomorrow-Night up woju
-
-        colorscheme gruvbox
-
-        " dark airlinethemes that I like or once liked:
-        " ----------------------------------------------
-        " base16 base16_summerfruit base16_grayscale behelit distinguished
-        " kalisi laederon lucius minimalist raven serene tomorrow ubaryd wombat
-        " zenburn
-
-        let g:airline_theme='distinguished'
-
-    elseif g:light_or_dark_theme == 'light'
-
-        set background=light
-
-        " light colorschemes that I like or once liked:
-        " ----------------------------------------------
-        " lucius peaksea seoul256-light Tomorrow-Night
-
-        colorscheme seoul256-light
-
-        " light airlinethemes that I like or once liked:
-        " ----------------------------------------------
-        " bubblegum lucius sol
-
-        let g:airline_theme='lucius'
-
-    else
-        echoerr "Unknown value for g:light_or_dark_theme (" . g:light_or_dark_theme . ")"
-    endif
-
-    FixHighlighting
-
-else
-
-    " fallback colorscheme
-    colorscheme desert
-
-    let g:cursorposition = 0
-    set nocursorcolumn nocursorline
-    highlight CursorLine   ctermbg=233
-    highlight CursorColumn ctermbg=233
-    highlight ColorColumn  ctermbg=233
-
-endif
-
-
 highlight PokemonPikachu ctermfg=233 ctermbg=184
 match PokemonPikachu /pikachu/
+
+
+function! SetColorscheme()
+
+    if s:MyMode == 'mastery'
+
+        if g:light_or_dark_theme == 'dark'
+            set background=dark
+
+            " dark colorschemes that I like or once liked:
+            " ----------------------------------------------
+            " apprentice badwolf blackboard blacklight candycode dante desertEx
+            " gruvbox iceberg jellybeans luna-term meta5 materialbox molokai
+            " onedark pride seoul256 Tomorrow-Night up woju
+
+            colorscheme gruvbox
+
+            " dark airlinethemes that I like or once liked:
+            " ----------------------------------------------
+            " base16 base16_summerfruit base16_grayscale behelit distinguished
+            " kalisi laederon lucius minimalist raven serene tomorrow ubaryd wombat
+            " zenburn
+
+            let g:airline_theme='distinguished'
+
+        elseif g:light_or_dark_theme == 'light'
+            set background=light
+
+            " light colorschemes that I like or once liked:
+            " ----------------------------------------------
+            " lucius peaksea seoul256-light Tomorrow-Night
+
+            colorscheme seoul256-light
+
+            " light airlinethemes that I like or once liked:
+            " ----------------------------------------------
+            " bubblegum lucius sol
+
+            let g:airline_theme='lucius'
+
+        else
+            echoerr "Unknown value for g:light_or_dark_theme (" . g:light_or_dark_theme . ")"
+        endif
+
+        FixHighlighting
+
+    else
+
+        colorscheme desert " fallback colorscheme
+
+        let g:cursorposition = 0
+        set nocursorcolumn nocursorline
+        highlight CursorLine   ctermbg=233
+        highlight CursorColumn ctermbg=233
+        highlight ColorColumn  ctermbg=233
+
+    endif
+
+endfunction
+
+call SetColorscheme()
+
+
+command! -bang ToggleColorschemeDarkOrLight :call ToggleColorschemeDarkOrLight() " Set colorscheme etc. to dark or light
+function! ToggleColorschemeDarkOrLight()
+    if g:light_or_dark_theme == 'dark'
+        let g:light_or_dark_theme = 'light'
+    else
+        let g:light_or_dark_theme = 'dark'
+    endif
+    call SetColorscheme()
+endfunction
+
+nnoremap <leader>oC :ToggleColorschemeDarkOrLight<cr>
 
 
 " }}}
