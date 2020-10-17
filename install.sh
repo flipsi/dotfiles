@@ -535,7 +535,7 @@ function package_install_target() {
     case "$TARGET" in
 
         i3 )
-            LIST_OF_SYSTEM_PACKAGES="i3-wm i3exit i3status i3lock dmenu clipmenud quickswitch-i3 rofi picom redshift unclutter syndaemon numlockx"
+            LIST_OF_SYSTEM_PACKAGES="i3-wm i3exit i3status i3lock dmenu clipmenud rofi picom redshift unclutter syndaemon numlockx"
             ;;
 
         fd )
