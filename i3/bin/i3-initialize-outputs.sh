@@ -62,7 +62,7 @@ case $(hostname) in
             BAR_SECOND_MONITOR=$(xrandr | grep 'DP.-1 connected' | cut -d' ' -f1 | head -n1)
             BAR_THIRD_MONITOR='eDP1'
 
-            xrandr --output "$BAR_MAIN_MONITOR" --primary \
+            xrandr --output "$BAR_MAIN_MONITOR" --auto --primary \
                 --output "$BAR_SECOND_MONITOR" --auto --left-of "$BAR_MAIN_MONITOR" \
                 --output "$BAR_THIRD_MONITOR" --auto --left-of "$BAR_SECOND_MONITOR" \
                 || ( \
