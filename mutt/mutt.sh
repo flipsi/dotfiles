@@ -17,22 +17,19 @@ LOOP_SLEEPTIME=900
 # whether to do a full or quick sync the first time (afterwards, only quick syncs)
 FIRST_TIME_FULL=true
 
-# what to do when quitting: ['sync_full', 'sync_quick', 'nothing', 'ask']
+# what to do when quitting: ['sync', 'nothing', 'ask']
 LAST_TIME_ACTION=ask
 
+# whether to open sync logs in new tmux pane or not
+TAIL_SYNC_LOGS=true
 
 
 
-# commands
+MUTT_COMMAND="/usr/bin/neomutt"
 
-MUTT_COMMAND="/usr/bin/mutt"
-
-## FOR DEBUGGING:
-# OFFLINEIMAP_COMMAND_FULL="sleep 3; echo normal >> /tmp/offlineimap.log 2>&1"
-# OFFLINEIMAP_COMMAND_QUICK="sleep 1; echo quick >> /tmp/offlineimap.log 2>&1"
-## FOR PRODUCTION:
-OFFLINEIMAP_COMMAND_FULL="offlineimap -o >> /tmp/offlineimap.log 2>&1"
-OFFLINEIMAP_COMMAND_QUICK="offlineimap -o -q >> /tmp/offlineimap.log 2>&1"
+SYNC_APP="mbsync"
+SYNC_LOGFILE="/tmp/mbsync.log"
+SYNC_COMMAND="mbsync -a --verbose >> $SYNC_LOGFILE 2>&1"
 
 
 
@@ -51,6 +48,9 @@ echo -e '\033k'$TITLE'\033\\'
 
 if [[ -n $TMUX ]]; then
     tmux rename-window $TITLE
+    if [[ $TAIL_SYNC_LOGS = "true" ]]; then
+        tmux split-window -v -l 20 -d "tail -F $SYNC_LOGFILE"
+    fi
 fi
 
 
@@ -94,19 +94,14 @@ esac
 
 
 
-################################################
-# run offlineimap in a loop while running mutt #
-################################################
+#####################################
+# sync in a loop while running mutt #
+#####################################
 
 
 while true                  # run forever
 do
-    if [[ $FIRST_TIME_FULL = true ]]; then
-        eval $OFFLINEIMAP_COMMAND_FULL
-        FIRST_TIME_FULL=false
-    else
-        eval $OFFLINEIMAP_COMMAND_QUICK
-    fi
+    eval $SYNC_COMMAND
     sleep $LOOP_SLEEPTIME   # sleep a while before doing that again
 done &                      # run loop in background
 LOOP_PID=$!                 # copy PID of loop
@@ -118,29 +113,26 @@ wait $LOOP_PID 2>/dev/null  # infinite loop and hide the error that it generates
 
 
 
-##############################
-# run offlineimap at the end #
-##############################
+###################
+# sync at the end #
+###################
 
 # wait for last loop to finish
-while pkill --signal 0 offlineimap; do
+while pkill --signal 0 "$SYNC_APP"; do
     sleep 2
 done
 
 # sync one last time?
 case $LAST_TIME_ACTION in
-    sync_full )
-        eval $OFFLINEIMAP_COMMAND_FULL
-        ;;
-    sync_quick )
-        eval $OFFLINEIMAP_COMMAND_QUICK
+    sync )
+        eval $SYNC_COMMAND
         ;;
     ask )
         while true; do
             read -n 1 -p "Sync? " user_input; echo
             case $user_input in
                 [Nn]* ) exit 0;;
-                * )     eval $OFFLINEIMAP_COMMAND_FULL; break;;
+                * )     eval $SYNC_COMMAND; break;;
             esac
         done
         ;;

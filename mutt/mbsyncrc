@@ -1,0 +1,52 @@
+IMAPStore philipp.moers@mail.de-remote
+Host imap.mail.de
+Port 993
+User philipp.moers@mail.de
+PassCmd "pass mw-philipp.moers@mail.de"
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore philipp.moers@mail.de-local
+Subfolders Verbatim
+Path /home/sflip/.local/share/mail/philipp.moers@mail.de/
+Inbox /home/sflip/.local/share/mail/philipp.moers@mail.de/INBOX
+Flatten .
+
+Channel philipp.moers@mail.de
+Expunge Both
+Master :philipp.moers@mail.de-remote:
+Slave :philipp.moers@mail.de-local:
+Patterns * !"[Gmail]/All Mail"
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
+
+
+IMAPStore soziflip@gmail.com-remote
+Host imap.gmail.com
+Port 993
+User soziflip@gmail.com
+PassCmd "pass mw-soziflip@gmail.com"
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore soziflip@gmail.com-local
+Subfolders Verbatim
+Path /home/sflip/.local/share/mail/soziflip@gmail.com/
+Inbox /home/sflip/.local/share/mail/soziflip@gmail.com/INBOX
+
+Channel soziflip@gmail.com
+Expunge Both
+Master :soziflip@gmail.com-remote:
+Slave :soziflip@gmail.com-local:
+Patterns * !"[Gmail]/All Mail"
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
+

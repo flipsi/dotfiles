@@ -281,21 +281,8 @@ function create_link_for_target() {
             ;;
 
         mutt )
-            mkdir -p "$HOME/.mutt"
-            mkdir -p "$HOME/.mutt/mail"
-            mkdir -p "$HOME/.mutt/cache"
-            mkdir -p "$HOME/.mutt/credentials"
-            create_link "$PWD/mutt/muttrc" "$HOME/.mutt/muttrc"
-            create_link "$PWD/mutt/accounts" "$HOME/.mutt/accounts"
-            create_link "$PWD/mutt/keybindings.muttrc" "$HOME/.mutt/keybindings.muttrc"
-            create_link "$PWD/mutt/colors" "$HOME/.mutt/colors"
-            create_link "$PWD/mutt/mailcap" "$HOME/.mutt/mailcap"
-            create_link "$PWD/mutt/signature" "$HOME/.mutt/signature"
-            create_link "$PWD/mutt/offlineimaprc" "$HOME/.offlineimaprc"
-            create_link "$PWD/mutt/offlineimapcredentials.py" "$HOME/.mutt/offlineimapcredentials.py"
-            create_link "$PWD/mutt/msmtprc" "$HOME/.msmtprc"
-            create_link "$PWD/mutt/notmuch-config" "$HOME/.notmuch-config"
-            create_link "$PWD/mutt/proofread.zsh" "$HOME/.mutt/proofread.zsh"
+            create_link "$PWD/mutt/mutt" "$HOME/.config/mutt"
+            create_link "$PWD/mutt/mbsyncrc" "$HOME/.mbsyncrc"
             mkdir -p "$HOME/bin"
             create_link "$PWD/mutt/mutt.sh" "$HOME/bin/mutt"
             ;;
