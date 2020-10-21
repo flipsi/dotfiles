@@ -52,10 +52,21 @@ case $(hostname) in
 
         if test -n "$ONLY"; then
 
-            xrandr --output 'HDMI1' --off
-            xrandr --output 'DP3-1' --off
-            xrandr --output 'DP3-2' --off
-            xrandr --output 'eDP1' --mode '1920x1080' --auto
+            OUTPUT_TO_KEEP='eDP1'
+
+            if ! xrandr | grep -q "$OUTPUT_TO_KEEP connected"; then
+                echo "Only output $OUTPUT_TO_KEEP seems unavailable. Aborting."
+                exit 1
+            fi
+
+            mapfile -t MONITOR_LIST < <(xrandr | grep ' connected' | cut -d' ' -f1)
+            for MONITOR in "${MONITOR_LIST[@]}"; do
+                if [[ "$MONITOR" != "$OUTPUT_TO_KEEP" ]]; then
+                    xrandr --output "$MONITOR" --off
+                fi
+            done
+
+            xrandr --output "$OUTPUT_TO_KEEP" --mode '1920x1080' --auto
 
         elif xrandr | grep 'DP.-. connected' >/dev/null; then
             BAR_MAIN_MONITOR=$(xrandr | grep 'DP.-2 connected' | cut -d' ' -f1 | head -n1)
