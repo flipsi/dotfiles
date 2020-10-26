@@ -11,6 +11,7 @@
 .session.vim
 .tags
 .idea/
+.bsp/
 .bloop/
 .metals/
 /project/metals.sbt
