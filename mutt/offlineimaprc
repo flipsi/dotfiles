@@ -9,7 +9,7 @@ accounts = mail.de, web.de-pmoers
 
 ui = ttyui
 fsync = False
-pythonfile = ~/.mutt/offlineimapcredentials.py
+pythonfile = ~/.mutt/secrets.py
 
 # prevent race conditions! (according to man page)
 maxsyncaccounts = 1

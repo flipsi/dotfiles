@@ -1,27 +1,3 @@
-# Mutt configuration file
-# Author: Philipp Moers <soziflip@gmail.com>
-
-
-# mutt is configured to use offlineimap, i.e. a local copy of the account's imap folders.
-
-# USE THE mutt.sh SCRIPT INSTEAD OF THE mutt BINARY!
-
-
-
-# some urls i used to write this mess:
-
-# http://stevelosh.com/blog/2012/10/the-homely-mutt/
-# https://hynek.me/articles/my-mutt-gmail-setup/
-# https://pbrisbin.com/posts/two_accounts_in_mutt/
-# https://pbrisbin.com/posts/mutt_gmail_offlineimap/
-# http://bkanuka.com/articles/offlineimap-mutt/
-# http://marcorucci.tumblr.com/post/34416884082/backup-gmail-with-offlineimap-folders-and-labels
-# http://blog.mafr.de/2012/09/09/mutt-too-many-errors/
-# https://baptiste-wicht.com/posts/2014/07/a-mutt-journey-download-mails-with-offlineimap.html
-# https://atechnologyjobisnoexcuse.com/2010/04/google-contacts-in-mutt-and-vim/
-
-
-
 
 ####################
 # general settings #
