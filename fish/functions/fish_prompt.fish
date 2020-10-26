@@ -57,6 +57,8 @@ function fish_prompt --description 'Prompt anzeigen'
         set wd (pwd)
         if set -q RANGER_LEVEL
             set_color --bold $fish_my_color_gray_bright
+        else if set -q VIMRUNTIME
+            set_color --bold $fish_my_color_gray_bright
         else
             set_color --italics $fish_my_color_gray_dark
         end
