@@ -60,8 +60,8 @@ macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 # abort command (instead of ESC) with \Cg
 bind index \Cd quit
 
-# search mails
-macro generic,index Ö \
+# search mails with notmuch (TODO: setup again)
+macro generic,index \C/ \
      "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt -r --prompt search<enter>\
      <change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>" \
      "notmuch: search mail"
