@@ -16,16 +16,16 @@ secrets_file = os.path.expanduser("~") + "/.config/mutt/secrets.gpg"
 """
 # This file contains credentials for my email accounts and is meant to be encrypted with GnuPG
 
-set my_email_00           = "philipp.moers@mail.com"
-set my_name_00            = "Philipp Moers"
-set my_username           = "philipp.moers@mail.com"
-set my_password           = "top secret"
+set my_00_email         = "philipp.moers@mail.com"
+set my_00_name          = "Philipp Moers"
+set my_00_username      = "philipp.moers@mail.com"
+set my_00_password      = "top secret"
 
-set my_email_01           = "soziflip@gmail.com"
-set my_name_01            = "Philipp Moers"
-set my_client_id_01       = "top secret"
-set my_client_secret_01   = "top secret"
-set my_refresh_token_01   = "top secret"
+set my_01_email         = "soziflip@gmail.com"
+set my_01_name          = "Philipp Moers"
+set my_01_client_id     = "top secret"
+set my_01_client_secret = "top secret"
+set my_01_refresh_token = "top secret"
 
 # [...]
 
@@ -56,18 +56,16 @@ def get_secrets_from_gpg_encrypted_muttrc(accountname=False):
   account_indexes = {
     '00': 'philipp.moers@mail.de',
     '01': 'soziflip@gmail.com',
-    '03': 'keinschweinehund@web.de',
-    '04': 'pmoers@web.de',
     '09': 'p.moers@ryte.com',
   }
   def parse_muttrc(muttrc):
-    pattern = re.compile('^set my_(\w*)_(\d\d)\s*=\s*"(.*)"')
+    pattern = re.compile('^set my_(\d\d)_(\w*)\s*=\s*"(.*)"')
     dictionary = {}
     for line in muttrc:
       match = pattern.search(line)
       if match:
-        index = match.group(2)
-        key = match.group(1)
+        index = match.group(1)
+        key = match.group(2)
         value = match.group(3)
         acc_name = account_indexes.get(index)
         if acc_name is None:
