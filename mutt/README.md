@@ -23,7 +23,7 @@ Mutt-wizard uses a re-implementation of mutt called [neomutt](https://neomutt.or
 Also, it uses isync (mbsync) to sync local copies of mailboxes which apparently has some advantages
 over offlineimap.
 
-I wrote a script called [mutt.sh](./mutt.sh) to wrap mutt with a mail sync mechanism with isync.
+I wrote a script called [mail.sh](./mail.sh) to wrap mutt with a mail sync mechanism with isync.
 
 
 ## Setup

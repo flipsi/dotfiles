@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-# mutt wrapper
-# this script runs offlineimap in the background and starts mutt in the foreground
+# mutt/neomutt wrapper
+
+# this script runs mbsync in the background and starts mutt in the foreground
 
 
 ##########
