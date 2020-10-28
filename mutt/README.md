@@ -32,17 +32,33 @@ Install required dependencies:
 ```
 yay -S neomutt isync msmtp pass python2 cyrus-sasl-xoauth2
 ```
+Create mail store:
+```
+MAILDIR=~/.local/share/mail
+mkdir $MAILDIR/$EMAIL_ADDRESS
+```
 
 ### Setup Gmail Account
 
 In Gmail, I do not want to have to enable LSA (Less Secure Apps) so that one can authenticate with
 my plain text Google password from any application. Instead, I configure isync and msmtp to use
 OAuth.
+
 For this to work, I have to create a project with the [Google API Console](https://console.developers.google.com/)
-(my own "mutt" Google App) for every Google account I want to access. The Client ID, Client Secret
-are then used by the oauth2.py script to generate a Refresh Token. Those three are stored in a GPG
-encrypted file. On every sync or send mail, they are used to generate an access token with the
-oauth2.py script.
+(my own "mutt" Google App) for every Google account I want to access:
+1. Open the ‘Select a project’ drop down menu at the top left of the page, this will open a pop-up window.
+1. In the top right of the window select ‘NEW PROJECT’. This will take you to the project creation page.
+1. You can leave the default name if you choose but I recommend giving it a descriptive name, then select ‘CREATE’. It might take a few seconds but you should get a notification telling you the project has been created.
+1. Now, on the left menu bar, select ‘OAuth consent screen’. This will take you to another page with a ‘User Type’ option. Choose ‘External’ and then ‘CREATE’.
+1. You will now be on a new page with a few more options. You only need to fill in the application name and then click the save button at the bottom of the page.
+1. Next, go back the menu on the left and select ‘Credentials’. This will take you to the credentials page where you can select ‘CREATE CREDENTIALS’ at the top. Choose ‘OAuth client ID’.
+1. On the next page choose ‘Desktop app’ and give it a name. Once you select ‘CREATE’ you will be presented with your Client_id and Client_secret.
+
+The Client ID, Client Secret are then used by the oauth2.py script to generate a Refresh Token:
+`python2 ./oauth2.py --user=$EMAIL --client_id=$CLIENT_ID --client_secret=$CLIENT_SECRET --generate_oauth2_token`
+
+Those three are stored in a GPG encrypted file. Use `mutt-secrets.py --mode edit_secrets_file`.
+On every sync or send mail, they are used to generate an access token with the oauth2.py script.
 
 ### Setup mutt on another host
 
