@@ -37,7 +37,6 @@ IMAPStore soziflip@gmail.com-remote
 Host imap.gmail.com
 Port 993
 User soziflip@gmail.com
-PassCmd "pass mw-soziflip@gmail.com"
 AuthMechs XOAUTH2
 PassCmd "mutt-secrets.py --mode get_secret --oauth --account soziflip@gmail.com"
 SSLType IMAPS
@@ -52,6 +51,36 @@ Channel soziflip@gmail.com
 Expunge Both
 Master :soziflip@gmail.com-remote:
 Slave :soziflip@gmail.com-local:
+Patterns * !"[Gmail]/All Mail"
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
+
+
+###############################
+# account: soziflip@gmail.com #
+###############################
+
+IMAPStore p.moers@ryte.com-remote
+Host imap.gmail.com
+Port 993
+User p.moers@ryte.com
+AuthMechs XOAUTH2
+PassCmd "mutt-secrets.py --mode get_secret --oauth --account p.moers@ryte.com"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore p.moers@ryte.com-local
+Subfolders Verbatim
+Path /home/sflip/.local/share/mail/p.moers@ryte.com/
+Inbox /home/sflip/.local/share/mail/p.moers@ryte.com/INBOX
+
+Channel p.moers@ryte.com
+Expunge Both
+Master :p.moers@ryte.com-remote:
+Slave :p.moers@ryte.com-local:
 Patterns * !"[Gmail]/All Mail"
 Create Both
 SyncState *
