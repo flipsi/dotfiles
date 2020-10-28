@@ -137,6 +137,7 @@ def edit_secrets_file(secrets_file):
   check_call(['touch', secrets_file])
   temporary_file = check_output(['mktemp', '--dry-run']).decode(encoding).splitlines()[0]
   check_call(['gpg', '--output', temporary_file, '--decrypt', secrets_file])
+  check_call(['chmod', '600', temporary_file])
   editor = os.environ.get('EDITOR') or 'nano'
   check_call([editor, temporary_file])
   check_call(['gpg', '--yes', '--output', secrets_file, '--recipient', gpg_recipient, '--encrypt', temporary_file])
