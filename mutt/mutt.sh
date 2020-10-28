@@ -48,9 +48,6 @@ echo -e '\033k'$TITLE'\033\\'
 
 if [[ -n $TMUX ]]; then
     tmux rename-window $TITLE
-    if [[ $TAIL_SYNC_LOGS = "true" ]]; then
-        tmux split-window -v -l 20 -d "tail -F $SYNC_LOGFILE"
-    fi
 fi
 
 
@@ -81,23 +78,17 @@ esac
 
 
 
-###############################################################
-# unlock gpg encrypted passwords and let the agent do its job #
-###############################################################
-
-# THIS IS HANDLED ON DEMAND
-
-# for gpg_file in $HOME/.mutt/credentials/*.gpg; do
-    # gpg --quiet --use-agent --for-your-eyes-only --decrypt $gpg_file > /dev/null
-    # echo status is $?
-# done
-
-
-
 #####################################
 # sync in a loop while running mutt #
 #####################################
 
+
+# open logs
+if [[ -n $TMUX ]]; then
+    if [[ $TAIL_SYNC_LOGS = "true" ]]; then
+        tmux split-window -v -l 20 -d "tail -F $SYNC_LOGFILE"
+    fi
+fi
 
 while true                  # run forever
 do
