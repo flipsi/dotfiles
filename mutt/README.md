@@ -30,7 +30,7 @@ I wrote a script called [mail.sh](./mail.sh) to wrap mutt with a mail sync mecha
 
 Install required dependencies:
 ```
-yay -S neomutt isync msmtp pass python2 cyrus-sasl-xoauth2
+yay -S mutt-wizard neomutt isync msmtp pass python2 cyrus-sasl-xoauth2
 ```
 Create mail store:
 ```
