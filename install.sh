@@ -49,6 +49,7 @@ SUPPORTED_TARGETS=(\
     muttator \
     ncmpcpp \
     ncspot \
+    nvim \
     picom \
     pentadactyl \
     polybar \
@@ -302,6 +303,11 @@ function create_link_for_target() {
         ncspot )
             mkdir -p "$HOME/.config/ncspot/"
             create_link "$PWD/ncspot/config.toml" "$HOME/.config/ncspot/config.toml"
+            ;;
+
+        nvim )
+            mkdir -p "$HOME/.config/nvim/"
+            create_link "$PWD/nvim/init.vim" "$HOME/.config/nvim/init.vim"
             ;;
 
         pentadactyl )
