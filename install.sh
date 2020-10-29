@@ -284,7 +284,7 @@ function create_link_for_target() {
         mutt )
             create_link "$PWD/mutt/mutt" "$HOME/.config/mutt"
             create_link "$PWD/mutt/mbsyncrc" "$HOME/.mbsyncrc"
-            create_link "$PWD/mutt/msmtprc" "$HOME/.config/msmtp/config"
+            create_link "$PWD/mutt/msmtprc" "$HOME/.msmtprc"
             mkdir -p "$HOME/bin"
             create_link "$PWD/mutt/mail.sh" "$HOME/bin/mail"
             create_link "$PWD/mutt/secrets.py" "$HOME/bin/mutt-secrets.py"
