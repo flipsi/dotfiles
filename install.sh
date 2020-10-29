@@ -538,7 +538,7 @@ function package_install_target() {
             ;;
 
         mutt )
-            LIST_OF_SYSTEM_PACKAGES="mutt msmtp offlineimap notmuch notmuch-mutt goobook elinks"
+            LIST_OF_SYSTEM_PACKAGES="neomutt msmtp isync notmuch notmuch-mutt goobook elinks"
             ;;
 
         taskwarrior )
