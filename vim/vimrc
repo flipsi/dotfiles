@@ -430,7 +430,8 @@ nnoremap <leader>gmd :Gdiffsplit!<cr>
 nnoremap <leader>gU  :Gread<cr>
 nnoremap <leader>gw  :Gwrite<cr>
 nnoremap <leader>gA  :Gwrite<cr>
-nnoremap <leader>gc  :Git commit<cr>
+nnoremap <leader>gcc :Git commit<cr>
+nnoremap <leader>gca :Git commit --amend<cr>
 nnoremap <leader>gb  :Git blame<cr>
 nnoremap <leader>gpp :Git pull<cr>
 nnoremap <leader>gpu :Git push<cr>
