@@ -4056,11 +4056,32 @@ nnoremap <silent> <c-l> :wincmd l<cr>
 nnoremap <silent> <leader><c-l> :vsplit<cr><c-w>w:bprevious<cr><c-w>w<cr>
 nnoremap <silent> <leader><c-j> :vertical split<cr>
 
-" resize window faster
-nnoremap <silent> <c-w>+ :resize +3<cr>
-nnoremap <silent> <c-w>- :resize -3<cr>
-nnoremap <silent> <c-w>> 5<c-w>>
-nnoremap <silent> <c-w>< 5<c-w><
+" swap/rotate windows
+nnoremap <silent> <c-w>> <c-w>r
+nnoremap <silent> <c-w>< <c-w>R
+
+" resize window mode
+nnoremap <silent> <c-w>r     :ResizeWindows<cr>
+nnoremap <silent> <c-w><c-r> :ResizeWindows<cr>
+command! ResizeWindows  :call ResizeWindows('enter') " Open a mode to resize windows with h,j,k,l
+function! ResizeWindows(enter_or_leave)
+    " TODO: save and restore existing mappings (j,k)
+    if a:enter_or_leave == "enter"
+        nnoremap <return> :call ResizeWindows('leave')<cr>
+        nnoremap <silent> j :resize -2<cr>
+        nnoremap <silent> k :resize +2<cr>
+        nnoremap <silent> h 2<c-w>>
+        nnoremap <silent> l 2<c-w><
+        echo "[RESIZE MODE] (press h,j,k,l to resize and <enter> to leave move)"
+    else
+        nnoremap j gj
+        nnoremap k gk
+        nunmap   h
+        nunmap   l
+        nunmap   <return>
+        echo "Windows resized."
+    endif
+endfunction
 
 " navigate through tabs
 nnoremap <leader><m-n>  :tabnext<cr>
