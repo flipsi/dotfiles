@@ -16,10 +16,6 @@ bind index \Cb previous-page
 bind generic,pager,index <Esc>j half-down
 bind generic,pager,index <Esc>k half-up
 
-# bind generic,pager / search
-# bind generic,pager ? search-reverse
-bind generic,pager ö search
-# bind generic,pager Ö search-reverse
 bind generic,pager,index n search-next
 bind generic,pager,index N search-opposite
 
@@ -35,7 +31,6 @@ bind pager k previous-line
 # remember <tab> to jump to next unread message!
 
 
-
 ################
 # Mail actions #
 ################
@@ -43,6 +38,7 @@ bind pager k previous-line
 bind pager r reply
 bind pager R group-reply
 bind index d delete-message
+bind pager d delete-message
 bind index u undelete-message
 bind index D delete-pattern
 bind index U undelete-pattern
@@ -57,6 +53,8 @@ macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 # Misc #
 ########
 
+# remember $ to sync mailbox (e.g. delete message marked as delete)
+
 # abort command (instead of ESC) with \Cg
 bind index \Cd quit
 
@@ -65,11 +63,6 @@ macro generic,index \C/ \
      "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt -r --prompt search<enter>\
      <change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>" \
      "notmuch: search mail"
-
-# sync local mails with remotes
-macro generic,index \Cs \
-    "<enter-command>unset wait_key<enter><shell-escape>echo 'syncing maildir...'; offlineimap -o -u quiet -q<enter>" \
-    "run offlineimap to sync all mail"
 
 # goobook
 macro index,pager A "<pipe-message>goobook add<return>" "add sender to google contacts"
