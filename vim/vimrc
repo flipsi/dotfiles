@@ -3368,7 +3368,9 @@ else
 endif
 
 " leave terminal insert mode
-tnoremap <expr> <esc> &filetype == 'fzf' ? "\<esc>" : "\<c-\>\<c-n>"
+" (this is a bad idea if terminal applications use <esc> as well)
+" tnoremap <esc> <c-\><c-n>
+" tnoremap <expr> <esc> &filetype == 'fzf' ? "\<esc>" : "\<c-\>\<c-n>"
 
 " leave terminal insert mode and move to window on the left
 tnoremap <c-h> <c-\><c-n><c-w>h
