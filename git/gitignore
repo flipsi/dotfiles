@@ -23,5 +23,5 @@ sftp-config.json
 *.class
 
 # misc
+.ignore
 nohup.out
-
