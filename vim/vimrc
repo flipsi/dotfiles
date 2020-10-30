@@ -425,15 +425,15 @@ let g:airline#extensions#grepper#enabled = 1
 Plug 'tpope/vim-fugitive'
 
 nnoremap <leader>gs  :Gstatus<cr>
-nnoremap <leader>gd  :Gdiff<cr>
+nnoremap <leader>gd  :Gdiffsplit<cr>
 nnoremap <leader>gmd :Gdiffsplit!<cr>
 nnoremap <leader>gU  :Gread<cr>
 nnoremap <leader>gw  :Gwrite<cr>
 nnoremap <leader>gA  :Gwrite<cr>
-nnoremap <leader>gc  :Gcommit<cr>
-nnoremap <leader>gb  :Gblame<cr>
-nnoremap <leader>gpp :Gpull<cr>
-nnoremap <leader>gpu :Gpush<cr>
+nnoremap <leader>gc  :Git commit<cr>
+nnoremap <leader>gb  :Git blame<cr>
+nnoremap <leader>gpp :Git pull<cr>
+nnoremap <leader>gpu :Git push<cr>
 nnoremap <leader>gpU :exe ':Git push -u ' . system('git remote \| head -n1 \| tr -d "\\n"') . ' ' . system('git rev-parse --abbrev-ref HEAD \| tr -d "\\n"')<cr>
 nnoremap <leader>geb :exe ':Git checkout -b ' . input('Branch name: ')<cr>
 
