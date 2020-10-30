@@ -3360,15 +3360,19 @@ if has('nvim')
       autocmd BufEnter term://* startinsert
   augroup END
 
-  " leave terminal insert mode and move to window on the left
-  tnoremap <c-h> <c-\><c-n><c-w>h
-
 else
 
   command! Terminal   :vertical terminal ++close fish           " Open a new terminal in a vertial split
   nnoremap <leader>tt :vertical terminal ++close fish<cr>
 
 endif
+
+" leave terminal insert mode
+tnoremap <expr> <esc> &filetype == 'fzf' ? "\<esc>" : "\<c-\>\<c-n>"
+
+" leave terminal insert mode and move to window on the left
+tnoremap <c-h> <c-\><c-n><c-w>h
+
 
 " TODO: replace vimux?
 
