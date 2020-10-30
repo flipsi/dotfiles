@@ -3370,6 +3370,9 @@ if has('nvim')
       autocmd TermOpen * startinsert
       " enter insert mode when switching to terminal
       autocmd BufEnter term://* startinsert
+      " don't show line numbers
+      autocmd TermOpen * setlocal nonumber
+      autocmd TermOpen * setlocal norelativenumber
       " Close terminal buffer automatically (https://www.reddit.com/r/neovim/comments/7xonzm/how_to_close_a_terminal_buffer_automatically_if/)
       autocmd TermClose * silent call s:OnTermClose()
   augroup END
