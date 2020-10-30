@@ -2036,16 +2036,15 @@ function! ExecuteSbtCommand(command)
 endfunction
 
 function! CalculateSbtTestOnlyCommand()
-    let lines_that_match_package = GetMatches('^package.*', 1, line('$'))
-    let lines_that_match_class   = GetMatches('^class.*', 1, line('$'))
-    if len(lines_that_match_package) == 0 || len(lines_that_match_class) == 0
-        echoerr "Could not find class name."
-        return  1
+    let l:lines_that_match_package = GetMatches('^package.*', 1, line('$'))
+    let l:lines_that_match_class   = GetMatches('^\(class\|object\).*', 1, line('$'))
+    if len(l:lines_that_match_package) == 0 || len(l:lines_that_match_class) == 0
+        throw "Could not find test class name."
     endif
-    let package  = substitute(lines_that_match_package[0], '^package\s\+\(\w\+\)', '\1', '')
-    let class    = substitute(lines_that_match_class[0], '^class\s\+\(\w\+\).*', '\1', '')
-    let itPrefix = match(@%, '.*/it/.*') == -1 ? '' : 'it:'
-    return itPrefix . "testOnly " . package . "." . class
+    let l:package  = substitute(l:lines_that_match_package[0], '^package\s\+\(\w\+\)', '\1', '')
+    let l:class    = substitute(l:lines_that_match_class[0], '^\(class\|object\)\s\+\(\w\+\).*', '\2', '')
+    let l:itPrefix = match(@%, '.*/it/.*') == -1 ? '' : 'it:'
+    return l:itPrefix . "testOnly " . l:package . "." . l:class
 endfunction
 
 function! IsSbtRunning()
