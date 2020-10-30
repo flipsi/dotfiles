@@ -2704,12 +2704,37 @@ endfunction
 
 " get a list of buffers {{{
 function! GetBufferList()
-  silent! redir =>buflist
-  silent! ls!
-  redir END
-  return buflist
+    silent! redir =>buflist
+    silent! ls!
+    redir END
+    return buflist
 endfunction
 " }}}
+
+" find buffers with a running terminal (returns list of bufnum) {{{
+function! GetTerminalBuffers()
+    if !has('nvim')
+        " TODO: make this work in regular vim
+        echoerr "Sorry, this is only implemented in neovim (right now)."
+        return
+    endif
+    " terminals have b:terminal_job_id defined
+    let l:terminals = filter(range(1, bufnr('$')), 'bufexists(v:val) && getbufvar(v:val, "terminal_job_id", 0)')
+    return l:terminals
+endfunction
+" }}}
+
+" find bufnum of the first buffer with a running terminal (or 0) {{{
+function! GetTerminalBuffer()
+    let l:terminals = GetTerminalBuffers()
+    if len(l:terminals) == 0
+        return 0
+    else
+        return l:terminals[0]
+    endif
+endfunction
+" }}}
+
 
 
 " toggle quickfix or location list {{{
