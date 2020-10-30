@@ -2577,6 +2577,18 @@ endif
 " {{{
 
 
+" Execute a interactive shell command in full screen {{{
+command! -nargs=1 -bang Shell :call Shell(<q-args>)
+function! Shell(command)
+    if has('nvim')
+        execute 'terminal ' . a:command
+    else
+        execute '!' . a:command
+    endif
+endfunction
+" }}}
+
+
 " URL encode a string. ie. Percent-encode characters as necessary. {{{
 function! UrlEncode(string)
 
@@ -2919,32 +2931,32 @@ nnoremap <leader>io :call AutoImportFake()<cr>
 " ranger as a file chooser {{{
 function! RangerChooser(starting_dir)
     let temp = tempname()
-    " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
-    " with ranger 1.4.2 through 1.5.0 instead.
-    "exec 'silent !ranger --choosefile=' . shellescape(temp)
-    if has("gui_running")
-        let command = 'silent !xterm -e ranger'
+
+    " in vim, this is blocking, in neovim it's not
+    call Shell('ranger --choosefiles=' . shellescape(temp) . ' --cmd="set viewmode multipane" ' . a:starting_dir)
+
+    if has('nvim')
+        " TODO: make this work, because in neovim Shell/:terminal is non-blocking, but we need a blocking ranger instance
+        " https://vi.stackexchange.com/questions/10292/how-to-close-and-and-delete-terminal-buffer-if-programs-exited
+        echoerr "Sorry, file choosing via Ranger is (yet) working in Neovim."
     else
-        let command = 'silent !ranger'
+        if !filereadable(temp)
+            redraw!
+            return
+        endif
+        let names = readfile(temp)
+        if empty(names)
+            redraw!
+            return
+        endif
+        " Edit the first item.
+        exec 'edit ' . fnameescape(names[0])
+        " Add any remaning items to the arg list/buffer list.
+        for name in names[1:]
+            exec 'argadd ' . fnameescape(name)
+        endfor
     endif
-    exec command . ' --choosefiles=' . shellescape(temp) . ' --cmd="set viewmode multipane" ' . a:starting_dir
-    if !filereadable(temp)
-        redraw!
-        " Nothing to read.
-        return
-    endif
-    let names = readfile(temp)
-    if empty(names)
-        redraw!
-        " Nothing to open.
-        return
-    endif
-    " Edit the first item.
-    exec 'edit ' . fnameescape(names[0])
-    " Add any remaning items to the arg list/buffer list.
-    for name in names[1:]
-        exec 'argadd ' . fnameescape(name)
-    endfor
+
     redraw!
 endfunction
 command! -bar RangerChooser call RangerChooser(getcwd())
@@ -4181,23 +4193,24 @@ vnoremap <leader>isd :<c-w>!$BROWSER 'https://duckduckgo.com/?q=<c-r>*'<cr><cr>
 vnoremap <leader>isg :<c-w>!$BROWSER 'https://google.com/?q=<c-r>*'<cr><cr>
 
 " shell in working dir or dir of current file
-nnoremap <leader>if :!fish<cr><cr>
-nnoremap <leader>iF :execute '!cd ' . expand('%:p:h') . '; fish'<cr><cr>
-nnoremap <leader>ib :!bash<cr><cr>
-nnoremap <leader>iB :execute '!cd ' . expand('%:p:h') . '; bash'<cr><cr>
+nnoremap <leader>if :Shell fish<cr>
+nnoremap <leader>iF :call Shell('cd ' . expand('%:p:h') . '; fish')<cr>
+nnoremap <leader>ib :Shell bash<cr>
+nnoremap <leader>iB :call Shell('cd ' . expand('%:p:h') . '; bash')<cr>
 
 " file manager in working dir or dir of current file
 " nnoremap <leader>ir :call VimuxRunCommand("ranger")<cr>
 " nnoremap <leader>ir :exe "!ranger " . shellescape(expand("%p:h"))
-nnoremap <leader>ir :RangerChooserFromCurrentFile<cr>
-nnoremap <leader>iR :RangerChooser<cr>
+nnoremap <leader>ir :RangerChooserFromCurrentFile<cr><cr>
+nnoremap <leader>iR :RangerChooser<cr><cr>
 
 " tig - an ncurses git interface
 function! Tig(from_current_file)
     if (a:from_current_file)
-        execute 'silent !cd ' . expand('%:p:h') . '; tig status'
+        let l:command = 'cd "' . expand('%:p:h') . '"; tig status'
+        execute 'Shell fish -c ''' . l:command . ''''
     else
-        silent !tig status
+        Shell tig status
     endif
     redraw!
 endfunction
