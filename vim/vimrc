@@ -3347,8 +3347,22 @@ noremap <esc>k <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TERMINAL {{{
 
-command! Terminal   :vertical terminal ++close fish
-nnoremap <leader>tt :vertical terminal ++close fish<cr>
+if has('nvim')
+
+  command! Terminal   :vsplit <bar> terminal fish               " Open a new terminal in a vertial split
+  nnoremap <leader>tt :vsplit <bar> terminal fish<cr>
+
+  " start terminal in insert mode, not normal mode
+  autocmd TermOpen * startinsert
+  " leave terminal insert mode and move to window on the left
+  tnoremap <c-h> <c-\><c-n><c-w>h
+
+else
+
+  command! Terminal   :vertical terminal ++close fish           " Open a new terminal in a vertial split
+  nnoremap <leader>tt :vertical terminal ++close fish<cr>
+
+endif
 
 " TODO: replace vimux?
 
