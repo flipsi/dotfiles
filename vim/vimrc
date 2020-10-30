@@ -3370,7 +3370,23 @@ if has('nvim')
       autocmd TermOpen * startinsert
       " enter insert mode when switching to terminal
       autocmd BufEnter term://* startinsert
+      " Close terminal buffer automatically (https://www.reddit.com/r/neovim/comments/7xonzm/how_to_close_a_terminal_buffer_automatically_if/)
+      autocmd TermClose * silent call s:OnTermClose()
   augroup END
+
+  function! s:OnTermClose()
+      " Try to move the cursor to the last line containing text
+      try
+          $;?.
+      catch
+          " The buffer is empty here. This shouldn't ever happen
+          return
+      endtry
+      " Is the last line an error message?
+      if match(getline('.'), 'make: \*\*\* \[[^\]]\+] Error ') == -1
+          call feedkeys('<cr>')
+      endif
+  endfunction
 
 else
 
