@@ -3352,8 +3352,14 @@ if has('nvim')
   command! Terminal   :vsplit <bar> terminal fish               " Open a new terminal in a vertial split
   nnoremap <leader>tt :vsplit <bar> terminal fish<cr>
 
-  " start terminal in insert mode, not normal mode
-  autocmd TermOpen * startinsert
+  augroup terminal_autocommands
+      au!
+      " start terminal in insert mode, not normal mode
+      autocmd TermOpen * startinsert
+      " enter insert mode when switching to terminal
+      autocmd BufEnter term://* startinsert
+  augroup END
+
   " leave terminal insert mode and move to window on the left
   tnoremap <c-h> <c-\><c-n><c-w>h
 
