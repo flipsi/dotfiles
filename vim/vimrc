@@ -272,6 +272,12 @@ function! RunLastCommandInTerminal()
     endif
 endfunction
 
+" Remove stupid default mappings
+augroup neoterm_remove_mappings
+    au!
+    au VimEnter * nunmap ,tt
+augroup END
+
 nnoremap <leader>tt     :Topen<cr>
 nnoremap <leader>tn     :Tnew<cr>
 nnoremap <leader>to     :RunCommandInTerminal<space>
