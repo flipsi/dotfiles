@@ -404,12 +404,14 @@ Plug 'vim-airline/vim-airline-themes'
 
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
+let g:airline_inactive_collapse=0
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
-"let g:airline_section_y = g:airline_section_a
-let g:airline_section_a = '%{fnamemodify(getcwd(), ":t")}'
+let g:airline_section_b = '%{expand("%:h")}'
+let g:airline_section_a = '%{expand("%:t")}'
+let g:airline_section_c = '%{airline#util#wrap(airline#extensions#hunks#get_hunks(),100)}%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'
 
 let g:airline_powerline_fonts=0
 if !exists('g:airline_symbols')
