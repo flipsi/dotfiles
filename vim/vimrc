@@ -4462,7 +4462,8 @@ augroup map_q_in_read_only_buffers
     au BufReadPost * if &readonly
     au BufReadPost *   nnoremap <buffer> q :bd<cr>
     au BufReadPost * endif
-    au BufReadPost fugitive://* nnoremap <buffer> q :bd<cr>
+    au BufReadPost fugitive://*     nnoremap <buffer> q :bd<cr>
+    au BufReadPost output://*       nnoremap <buffer> q :bd<cr>
 augroup END
 
 " ... but ignore typos
