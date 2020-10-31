@@ -4011,6 +4011,7 @@ endif
 " delete leading whitespace (can be prefixed with a count)
 nnoremap <silent> -dsl :s:^\s\+::<cr>
 " replace double/multiple spaces with one space
+" TODO: make this repeatable with .
 nnoremap <silent> -dsd :.s:\v(\S) {2}(\S):\1 \2:<cr>
 nnoremap <silent> -dsD :%s:\v(\S) {2}(\S):\1 \2:<cr>
 nnoremap <silent> -dsm :.s:\v(\S) {2,}(\S):\1 \2:<cr>
