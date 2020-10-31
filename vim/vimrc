@@ -245,6 +245,43 @@ autocmd VimEnter * nested
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" terminal extensions {{{
+
+Plug 'kassio/neoterm'
+
+let g:neoterm_shell = 'fish'
+let g:neoterm_default_mod = ':vertical'
+let g:neoterm_autoinsert = 1
+let g:neoterm_autoscroll = 1
+
+" TODO: add autocompletion from :T
+command! -nargs=1 RunCommandInTerminal :call RunCommandInTerminal(<q-args>)
+function! RunCommandInTerminal(commandline)
+    let g:last_terminal_command = a:commandline
+    let g:suppress_terminal_autoinsert = 1
+    execute 'T ' . a:commandline
+    sleep 50m
+    unlet g:suppress_terminal_autoinsert
+endfunction
+
+function! RunLastCommandInTerminal()
+    if exists('g:last_terminal_command')
+        execute 'RunCommandInTerminal ' . g:last_terminal_command
+    else
+        echoerr "No last command found!"
+    endif
+endfunction
+
+nnoremap <leader>tt     :Topen<cr>
+nnoremap <leader>tn     :Tnew<cr>
+nnoremap <leader>to     :RunCommandInTerminal<space>
+nnoremap <leader>t<bs>  :Tclose<cr>         " only hides buffer, we can still sent commands to it
+
+" nnoremap <leader>tl :Tclear<cr>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tmux integration {{{
 
 
@@ -268,25 +305,6 @@ Plug 'benmills/vimux'
 let g:VimuxHeight = "50"
 let g:VimuxOrientation = "h"
 let VimuxUseNearest = 1
-nnoremap <leader>bo         :VimuxRunCommand ""<left>
-nnoremap <leader>bv         :call MakeWithVimux("")<left><left>
-nnoremap <leader>bf         :VimuxRunCommand " " . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
-nnoremap <leader>bF         :VimuxRunCommand ExpandPrependThisDir('%') . " "<left>
-nnoremap <leader>bC         :call VimuxRunCommand(getline('.'))<cr>
-vnoremap <leader>bC         y:call VimuxRunCommand(@*)<cr>
-nnoremap <leader>bb         :update<cr>:VimuxRunLastCommand<cr>
-nnoremap <silent> <leader>bl :VimuxClearTerminalScreen<cr>
-nnoremap <leader>bq         :VimuxCloseRunner<cr>
-nnoremap <leader>b<bs>      :VimuxCloseRunner<cr>
-nnoremap <leader>bz         :call VimuxZoomRunner()<cr>
-nnoremap <leader>bc         :VimuxInterruptRunner<cr>
-nnoremap <leader>b<c-c>     :VimuxInterruptRunner<cr>
-nnoremap <leader>b<c-d>     :call VimuxSendKeys("C-d")<cr>
-nnoremap <leader>b<c-b>     :VimuxInspectRunner<cr>
-nnoremap <leader><c-b><c-b> :VimuxInspectRunner<cr>
-nnoremap <leader>be         :call MakeWithVimuxOpenErrors('quickfix')<cr>
-nnoremap <leader>bE         :call MakeWithVimuxOpenErrors('buffer')<cr>
-" MORE SPECIFIC MAPPING IN OTHER VIMRC SECTIONS (which makes more sense)
 
 " build/debug with vimux
 " param command: the shell command to execute
@@ -303,6 +321,7 @@ function! MakeWithVimux(command)
     let command = a:command . " | tee (tty) | sed 's/\\x1b\\[[0-9;]*[a-zA-Z]//g' > " . g:makewithvimux_outfile
     call VimuxRunCommand(command)
 endfunction
+
 function! MakeWithVimuxOpenErrors(where)
     " remove terminal color escape sequences that fuck with errorformat
     exec  ':silent !sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" ' . g:makewithvimux_outfile
@@ -995,9 +1014,9 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeWinPos = 'right'
 
 " show nerdtree from current file
-noremap <silent> <leader>tn :NERDTreeFind<cr>
+" noremap <silent> <leader>tn :NERDTreeFind<cr>
 " show/hide nerdtree
-noremap <silent> <leader>tN :NERDTreeToggle<cr>
+" noremap <silent> <leader>tN :NERDTreeToggle<cr>
 
 " show/hide hidden files
 let NERDTreeMapToggleHidden='.'
@@ -1763,26 +1782,26 @@ augroup typescript_on_read
     au FileType typescript call SetupTsuquyomi()
     au FileType typescript.tsx call SetupYarn()
     au FileType typescript.tsx call SetupTsuquyomi()
-    " nnoremap <leader>AF  :call VimuxRunCommand("prettier --parser typescript --write **.tsx")<cr>
-    nnoremap <leader>AF  :call VimuxRunCommand("yarn format")<cr>
+    " nnoremap <leader>AF  :call RunCommand("prettier --parser typescript --write **.tsx")<cr>
+    nnoremap <leader>AF  :call RunCommand("yarn format")<cr>
 augroup END
 
 function! SetupNpm()
-    nnoremap <leader>bi  :call VimuxRunCommand("npm install")<cr>
-    nnoremap <leader>bs  :call VimuxRunCommand("npm start")<cr>
-    nnoremap <leader>btt :call VimuxRunCommand("npm test")<cr>
-    nnoremap <leader>btu :call VimuxRunCommand("npm test-unit")<cr>
-    nnoremap <leader>bti :call VimuxRunCommand("npm test-int")<cr>
+    nnoremap <leader>bi  :call RunCommand("npm install")<cr>
+    nnoremap <leader>bs  :call RunCommand("npm start")<cr>
+    nnoremap <leader>btt :call RunCommand("npm test")<cr>
+    nnoremap <leader>btu :call RunCommand("npm test-unit")<cr>
+    nnoremap <leader>bti :call RunCommand("npm test-int")<cr>
 endfunction
 command! -bang SetupNpm :call SetupNpm() <cr> " add mappings for development with NodeJS
 
 function! SetupYarn()
-    nnoremap <leader>bi  :call VimuxRunCommand("yarn install")<cr>
-    nnoremap <leader>bd  :call VimuxRunCommand("yarn build")<cr>
-    nnoremap <leader>bs  :call VimuxRunCommand("yarn start")<cr>
-    nnoremap <leader>btt :call VimuxRunCommand("yarn test")<cr>
-    nnoremap <leader>btu :call VimuxRunCommand("yarn test-unit")<cr>
-    nnoremap <leader>bti :call VimuxRunCommand("yarn test-int")<cr>
+    nnoremap <leader>bi  :call RunCommand("yarn install")<cr>
+    nnoremap <leader>bd  :call RunCommand("yarn build")<cr>
+    nnoremap <leader>bs  :call RunCommand("yarn start")<cr>
+    nnoremap <leader>btt :call RunCommand("yarn test")<cr>
+    nnoremap <leader>btu :call RunCommand("yarn test-unit")<cr>
+    nnoremap <leader>bti :call RunCommand("yarn test-int")<cr>
 endfunction
 command! -bang SetupYarn :call SetupYarn() " add mappings for development with yarn
 
@@ -1818,7 +1837,7 @@ let g:ycm_semantic_triggers.tex = [
 
 augroup map_latex
     au!
-    au FileType latex nnoremap <leader>bl :VimtexCompile<cr>
+    au FileType latex nnoremap <leader>bb :VimtexCompileToggle<cr>
 augroup END
 
 
@@ -1849,11 +1868,11 @@ augroup php_on_read
     au FileType php call SetupPHP()
 augroup END
 function! SetupPHP()
-    nnoremap <leader>bi  :call VimuxRunCommand("composer install")<cr>
-    nnoremap <leader>bu  :call VimuxRunCommand("composer update")<cr>
-    nnoremap <leader>btt :call VimuxRunCommand("composer test")<cr>
-    nnoremap <leader>btu :call VimuxRunCommand("composer test")<cr>
-    nnoremap <leader>bto :call VimuxRunCommand("composer test " . expand('%p'))<cr>
+    nnoremap <leader>bi  :call RunCommand("composer install")<cr>
+    nnoremap <leader>bu  :call RunCommand("composer update")<cr>
+    nnoremap <leader>btt :call RunCommand("composer test")<cr>
+    nnoremap <leader>btu :call RunCommand("composer test")<cr>
+    nnoremap <leader>bto :call RunCommand("composer test " . expand('%p'))<cr>
 endfunction
 
 
@@ -1865,9 +1884,9 @@ augroup python_on_read
     au FileType python call SetupPython()
 augroup END
 function! SetupPython()
-    nnoremap <leader>bs  :call VimuxRunCommand("python " . expand('%'))<cr>
-    nnoremap <leader>b2  :call VimuxRunCommand("python2 " . expand('%'))<cr>
-    nnoremap <leader>b3  :call VimuxRunCommand("python3 " . expand('%'))<cr>
+    nnoremap <leader>bs  :call RunCommand("python " . expand('%'))<cr>
+    nnoremap <leader>b2  :call RunCommand("python2 " . expand('%'))<cr>
+    nnoremap <leader>b3  :call RunCommand("python3 " . expand('%'))<cr>
 endfunction
 
 
@@ -1988,6 +2007,7 @@ function! IsScalaProject()
     return filereadable("build.sbt")
 endfunction
 
+command! -bang SetupScala :call SetupScala() " add settings and mappings for development with Scala
 function! SetupScala()
     let l:sbt_version = system('grep -E "sbt\.version" project/build.properties | sed -E "s/.*=(.*)/\1/"')
     " sbt shows column in compiler errors since version 1.0.0 so there are two " cases for errorformat:
@@ -2011,28 +2031,35 @@ function! SetupScala()
                 " \%E\ \%#[info]\ %.%#\ was\ not\ equal\ to\ %.%#\ (%f:%l),%Z,
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
-    nnoremap <leader>AF  :call VimuxRunCommand("scalafmt")<cr>
-    nnoremap <leader>bS  :call VimuxRunCommand("sbt")<cr>
-    nnoremap <leader>bd  :call ExecuteSbtCommand("compile")<cr>
-    nnoremap <leader>bs  :call ExecuteSbtCommand("run")<cr>
-    nnoremap <leader>btt :call ExecuteSbtCommand("test; it:test")<cr>
-    nnoremap <leader>btu :call ExecuteSbtCommand("test")<cr>
-    nnoremap <leader>bti :call ExecuteSbtCommand("it:test")<cr>
-    nnoremap <leader>bto :call ExecuteSbtCommand(CalculateSbtTestOnlyCommand())<cr>
-    nnoremap <leader>ba  :call ExecuteSbtCommand("scapegoat")<cr>
-    nnoremap <leader>bx  :call ExecuteSbtCommand("clean")<cr>
-    nnoremap <leader>br  :call ExecuteSbtCommand("console")<cr>
-    nnoremap <leader>bE  :call MakeWithVimuxOpenErrors('buffer')<cr>gg/\*\*\* FAILED \*\*\*<cr>
-    nnoremap <leader>fe  /\*\*\* FAILED \*\*\*<cr>
-endfunction
-command! -bang SetupScala :call SetupScala() " add mappings for development with Scala
 
-function! ExecuteSbtCommand(command)
-    if IsSbtRunning()
-        call VimuxRunCommand(a:command)
-    else
-        let g:sbt_args = "--color=true "
-        call MakeWithVimux("sbt " . g:sbt_args . "'" . a:command . "'")
+    nnoremap <leader>AF     :Terminal scalafmt<cr>
+
+    nnoremap <leader>bd     :call ExecuteSbtCommand("compile")<cr>
+    nnoremap <leader>bs     :call ExecuteSbtCommand("run")<cr>
+    nnoremap <leader>btt    :call ExecuteSbtCommand("test; it:test")<cr>
+    nnoremap <leader>btu    :call ExecuteSbtCommand("test")<cr>
+    nnoremap <leader>bti    :call ExecuteSbtCommand("it:test")<cr>
+    nnoremap <leader>bto    :call ExecuteSbtCommand(CalculateSbtTestOnlyCommand())<cr>
+    nnoremap <leader>ba     :call ExecuteSbtCommand("scapegoat")<cr>
+    nnoremap <leader>bx     :call ExecuteSbtCommand("clean")<cr>
+    nnoremap <leader>br     :call ExecuteSbtCommand("console")<cr>
+    nnoremap <leader>b<f5>  :call ExecuteSbtCommand("reload")<cr>
+
+    nnoremap <leader>bE     :call MakeWithVimuxOpenErrors('buffer')<cr>gg/\*\*\* FAILED \*\*\*<cr>
+    nnoremap <leader>fe     /\*\*\* FAILED \*\*\*<cr>
+
+endfunction
+
+function! ExecuteSbtCommand(commandline)
+    let g:build_shell = 'sbt --color=true'
+    if g:run_command_method == "terminal"
+        call RunCommandInBuildShell(a:commandline)
+    elseif g:run_command_method == "vimux"
+        if IsSbtRunning()
+            call VimuxRunCommand(a:command)
+        else
+            call MakeWithVimux(g:build_shell . " '" . a:command . "'")
+        endif
     endif
 endfunction
 
@@ -2087,8 +2114,8 @@ augroup END
 command! -bang SetupSQL :call SetupSQLDadBod()<bar> call SetupSQLVimux() " add mappings for development with SQL
 
 function! SetupSQLVimux()
-    nnoremap <leader>bm  :call VimuxRunCommand("\\. " . expand('%:p'))<cr>
-    nnoremap <leader>bp  :call VimuxRunCommand("\\i " . expand('%:p'))<cr>
+    nnoremap <leader>bm  :call RunCommand("\\. " . expand('%:p'))<cr>
+    nnoremap <leader>bp  :call RunCommand("\\i " . expand('%:p'))<cr>
 endfunction
 command! -bang SetupSQLVimux :call SetupSQLVimux() " add mappings for development with SQL (Vimux)
 
@@ -2580,11 +2607,11 @@ endif
 
 " Execute a interactive shell command in full screen {{{
 command! -nargs=1 -bang Shell :call Shell(<q-args>)
-function! Shell(command)
+function! Shell(commandline)
     if has('nvim')
-        execute 'terminal ' . a:command
+        execute 'terminal ' . a:commandline
     else
-        execute '!' . a:command
+        execute '!' . a:commandline
     endif
 endfunction
 " }}}
@@ -3380,58 +3407,51 @@ noremap <m-k>  <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 noremap <esc>k <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 
 
-
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TERMINAL {{{
 
-if !has('nvim')
+" nnoremap <leader>tt :Terminal! fish<cr>
+" nnoremap <leader>to :Terminal<space>
+" nnoremap <leader>tO :Terminal!<space>
 
-  command! Terminal   :vertical terminal ++close fish           " Open a new terminal in a vertial split
-  nnoremap <leader>tt :vertical terminal ++close fish<cr>
-
-" run a given (interactive) command in the builtin terminal in a vertical split (also see :Shell)
-" (with bang, close after exit, without keep open)
-function! Terminal(bang, command)
+" run a given (interactive) commandline in the builtin terminal in a vertical split (also see :Shell)
+command! -nargs=1 -bang Terminal :call Terminal(<bang>0, <q-args>)
+" with bang == 0: keep terminal open after exit
+" with bang == 1: close terminal automatically after exit
+" TODO: argument for keeping focus on current window
+function! Terminal(bang, commandline)
     if !has('nvim')
         let l:open_or_close = a:bang ? "++close " : "++open "
-        execute 'vertical terminal ' . l:open_or_close . a:command
+        execute 'vertical terminal ' . l:open_or_close . a:commandline
     else
         let g:terminal_close_after_exit = a:bang
-        execute 'vsplit | terminal ' . a:command
+        execute 'vsplit | terminal ' . a:commandline
     endif
 endfunction
 
-command! -nargs=1 -bang Terminal :call Terminal(<bang>0, <q-args>) " Open a new terminal in a vertial split
-
-" TODO: make commented mappings work
-nnoremap <leader>tt :Terminal fish<cr>
-nnoremap <leader>to :Terminal<space>
-nnoremap <leader>tO :Terminal!<space>
-" nnoremap <leader>tf :Terminal " " . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
-" nnoremap <leader>tF :Terminal ExpandPrependThisDir('%') . " "<left>
-nnoremap <leader>tC :call Terminal(0, getline('.'))<cr>
-" nnoremap <leader>be :call OpenErrorsFromTerminal('quickfix')<cr>
-" nnoremap <leader>bb :update<cr>:TerminalRunLastCommand<cr>
-" nnoremap <leader>bl :TerminalClear<cr>
-" nnoremap <leader>bq :TerminalClose<cr>
-
-
 if has('nvim')
 
-    let g:terminal_close_after_exit = 1
+    let g:terminal_close_after_exit = 0
 
     augroup terminal_autocommands
         au!
+
         " start terminal in insert mode, not normal mode
-        autocmd TermOpen * startinsert
+        " (in neoterm we have g:neoterm_autoinsert)
+        " autocmd TermOpen * startinsert
+
         " enter insert mode when switching to terminal
-        autocmd BufEnter term://* startinsert
+        " autocmd BufEnter term://* startinsert
+        autocmd BufEnter term://* if !exists('g:suppress_terminal_autoinsert') | startinsert | endif
+
         " don't show line numbers
         autocmd TermOpen * setlocal nonumber
         autocmd TermOpen * setlocal norelativenumber
-        " Close terminal buffer automatically (https://www.reddit.com/r/neovim/comments/7xonzm/how_to_close_a_terminal_buffer_automatically_if/)
+
+        " close terminal buffer automatically (https://www.reddit.com/r/neovim/comments/7xonzm/how_to_close_a_terminal_buffer_automatically_if/)
         autocmd TermClose * silent call s:OnTermClose()
+
     augroup END
 
     function! s:OnTermClose()
@@ -4028,11 +4048,78 @@ nnoremap dN [c
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" BUILDING AND DEBUGGING {{{
+" BUILDING, MAKING AND DEBUGGING {{{
 
-
-" make
 nnoremap <leader>bm :make<cr>
+
+if has('nvim')
+    let g:run_command_method = "terminal"
+else
+    let g:run_command_method = "vimux"
+endif
+
+" open up build shell if not already opened before executing commandline
+command! -nargs=1 RunCommandInBuildShell :call RunCommandInBuildShell(<q-args>)
+function! RunCommandInBuildShell(commandline)
+    let l:terminal_bufnum = GetTerminalBuffer()
+    " if l:terminal_bufnum == 0
+    "     let l:build_shell = exists('g:build_shell') ? g:build_shell : 'fish'
+    "     " call Terminal(1, l:build_shell)
+    "     execute 'T ' . l:build_shell
+    "     " TODO fix: open neoterm without focus / autoinsert
+    "     let l:terminal_bufnum = GetTerminalBuffer()
+    " endif
+    call RunCommandInTerminal(a:commandline)
+endfunction
+
+command! -nargs=1 RunCommand :call RunCommand(<q-args>)
+function! RunCommand(command)
+    if g:run_command_method == "terminal"
+        call RunCommandInTerminal(a:command)
+    elseif g:run_command_method == "vimux"
+        call VimuxRunCommand(a:command)
+    else
+      echoerr "Unknown g:run_command_method (" . g:run_command_method . ")"
+    endif
+endfunction
+
+" TODO: make those work
+nnoremap <leader>bC :call RunCommand(getline('.'))<cr>
+vnoremap <leader>bC y:call RunCommand(@*)<cr>
+
+if g:run_command_method == "terminal"
+    " TODO: make <nop>s work
+    " TODO: let and unlet g:suppress_terminal_autoinsert for :T / :Tclear / :Tkill
+    nnoremap <leader>bo         :RunCommandInTerminal<space>
+    nnoremap <leader>bf         <nop>
+    nnoremap <leader>bF         <nop>
+    nnoremap <leader>bb         :update<cr> :call RunLastCommandInTerminal()<cr>
+    nnoremap <leader>bl         :Tclear<cr>
+    nnoremap <leader>bc         :Tkill<cr>
+    nnoremap <leader>b<c-c>     :Tkill<cr>
+    nnoremap <leader>b<bs>      :Tclose<cr>         " only hides buffer, we can still sent commands to it
+    nnoremap <leader>be         <nop>
+    " nnoremap <leader>bq :T
+elseif g:run_command_method == "vimux"
+    nnoremap <leader>bo         :VimuxRunCommand ""<left>
+    nnoremap <leader>bf         :VimuxRunCommand " " . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
+    nnoremap <leader>bF         :VimuxRunCommand ExpandPrependThisDir('%') . " "<left>
+    nnoremap <leader>bb         :update<cr>:VimuxRunLastCommand<cr>
+    nnoremap <silent> <leader>bl :VimuxClearTerminalScreen<cr>
+    nnoremap <leader>bq         :VimuxCloseRunner<cr>
+    nnoremap <leader>b<bs>      :VimuxCloseRunner<cr>
+    nnoremap <leader>bz         :call VimuxZoomRunner()<cr>
+    nnoremap <leader>bc         :VimuxInterruptRunner<cr>
+    nnoremap <leader>b<c-c>     :VimuxInterruptRunner<cr>
+    nnoremap <leader>b<c-d>     :call VimuxSendKeys("C-d")<cr>
+    nnoremap <leader>b<c-b>     :VimuxInspectRunner<cr>
+    nnoremap <leader><c-b><c-b> :VimuxInspectRunner<cr>
+    nnoremap <leader>be         :call MakeWithVimuxOpenErrors('quickfix')<cr>
+    nnoremap <leader>bE         :call MakeWithVimuxOpenErrors('buffer')<cr>
+else
+    echoerr "Unknown g:run_command_method (" . g:run_command_method . ")"
+endif
+
 
 " execute shell script
 command! ExecuteShellscript :call ExecuteShellscript() " Execute shellscript (current file) in a new tmux pane
@@ -4042,7 +4129,7 @@ function! ExecuteShellscript()
         call system('chmod +x ' . expand('%'))
     endif
     if s:MyMode == 'mastery'
-        call VimuxRunCommand(ExpandPrependThisDir("%"))
+        call RunCommand(ExpandPrependThisDir("%"))
     else
         exec '!' . ExpandPrependThisDir('%')
     endif
@@ -4273,7 +4360,7 @@ nnoremap <leader>ib :Shell bash<cr>
 nnoremap <leader>iB :call Shell('cd ' . expand('%:p:h') . '; bash')<cr>
 
 " file manager in working dir or dir of current file
-" nnoremap <leader>ir :call VimuxRunCommand("ranger")<cr>
+" nnoremap <leader>ir :call RunCommand("ranger")<cr>
 " nnoremap <leader>ir :exe "!ranger " . shellescape(expand("%p:h"))
 nnoremap <leader>ir :RangerChooserFromCurrentFile<cr><cr>
 nnoremap <leader>iR :RangerChooser<cr><cr>
