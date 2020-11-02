@@ -2647,7 +2647,9 @@ endif
 command! -nargs=1 -bang Shell :call Shell(<q-args>)
 function! Shell(commandline)
     if has('nvim')
+        tabnew
         execute 'terminal ' . a:commandline
+        startinsert
     else
         execute '!' . a:commandline
     endif
