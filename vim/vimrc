@@ -2034,7 +2034,8 @@ function! SetupScala()
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
 
-    let g:build_shell = 'sbt --color=true'
+    " TODO delete supershell escape sequences instead of supressing them
+    let g:build_shell = 'sbt --color=true --supershell=false'
     let g:prompt_regex = '^sbt:.*>'
 
     highlight link SbtPrompt LineNr
