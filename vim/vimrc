@@ -321,16 +321,9 @@ let VimuxUseNearest = 1
 " build/debug with vimux
 " param command: the shell command to execute
 function! MakeWithVimux(command)
-    let l:git_branch_name = system('git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d "\n" || echo -n ""')
-    let l:git_branch_name_escaped = substitute(UrlEncode(l:git_branch_name), '%..', '-', 'g')
-    if !empty(v:servername)
-        let l:project_name = tolower(v:servername)
-    else
-        let l:project_name = tolower(system('basename $(pwd) | tr -d "\n"'))
-    endif
-    let g:makewithvimux_outfile = '/tmp/vim.'.l:project_name.'.'.l:git_branch_name_escaped.'.make.out'
+    let l:build_output_file = GetBuildOutputFilename()
     " let command = a:command . ' | tee ' . g:makewithvimux_outfile
-    let command = a:command . " | tee (tty) | sed 's/\\x1b\\[[0-9;]*[a-zA-Z]//g' > " . g:makewithvimux_outfile
+    let command = a:command . " | tee (tty) | sed 's/\\x1b\\[[0-9;]*[a-zA-Z]//g' > " . l:build_output_file
     call VimuxRunCommand(command)
 endfunction
 
@@ -341,7 +334,7 @@ function! MakeWithVimuxOpenErrors(where)
     exec 'cfile ' . g:makewithvimux_outfile
     if a:where == 'quickfix'
         let g:jumplist = 'quickfixlist'
-        call ToggleList("Quickfix List", 'c')
+        cfirst
     elseif a:where == 'buffer'
         execute "edit " . g:makewithvimux_outfile
     endif
@@ -4104,15 +4097,31 @@ else
     let g:run_command_method = "vimux"
 endif
 
+function! GetBuildOutputFilename()
+    if !empty(v:servername)
+        let l:project_name = tolower(v:servername)
+    else
+        let l:project_name = system('basename "$(pwd)" | tr -d "\n"')
+    endif
+    let l:project_name = tolower(substitute(l:project_name, "[ /]", "_", "g"))
+    " let l:git_branch_name = system('git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d "\n" || echo -n ""')
+    " let l:git_branch_name_escaped = substitute(UrlEncode(l:git_branch_name), '%..', '-', 'g')
+    let l:build_output_file = '/tmp/vim.' . l:project_name . '.make.out'
+    return l:build_output_file
+endfunction
+
 " open up build shell if not already opened before executing commandline
 command! -nargs=1 RunCommandInBuildShell :call RunCommandInBuildShell(<q-args>)
 function! RunCommandInBuildShell(commandline)
     if g:run_command_method == "terminal"
         let l:terminal_bufnum = GetTerminalBuffer()
         if l:terminal_bufnum == 0 && exists('g:build_shell')
+            let l:build_output_file = GetBuildOutputFilename()
+            let l:escape_sequence_subst = " | tee (tty) | sed 's/\\x1b\\[[0-9;]*[a-zA-Z]//g'"
             let l:neoterm_autoinsert = g:neoterm_autoinsert
             let g:neoterm_autoinsert = 0
-            call RunCommandInTerminal(g:build_shell)
+            let l:shell_cmd = g:build_shell .  l:escape_sequence_subst . " > " . l:build_output_file
+            call RunCommandInTerminal(l:shell_cmd)
             let g:neoterm_autoinsert = l:neoterm_autoinsert
         endif
     endif
@@ -4166,27 +4175,34 @@ endif
 " open quickfix list with build errors from the terminal
 command! OpenQuickfixListWithBuildErrors :call OpenQuickfixListWithBuildErrors()
 function! OpenQuickfixListWithBuildErrors()
-    let l:terminal_bufnum = GetTerminalBuffer()
-    if l:terminal_bufnum == 0
-        echoerr "No terminal buffer found."
-    else
-        let l:lines = getbufline(l:terminal_bufnum, 1, "$")
-        let l:last_prompt_line = l:lines[1]
-        if exists('g:prompt_regex')
-            for i in range (len(l:lines) - 2 , 1, -1)
-                if match(l:lines[i], g:prompt_regex) == 0
-                    let l:last_prompt_line = i
-                    break
-                endif
-            endfor
-        endif
-        let l:errorfile = '/tmp/vim.errorfile.txt'
-        call writefile(l:lines[l:last_prompt_line:], l:errorfile)
-        exe 'cfile' . l:errorfile
-        let g:jumplist = 'quickfixlist'
-        copen
-        cfirst
+    " let l:terminal_bufnum = GetTerminalBuffer()
+    " if l:terminal_bufnum == 0
+    "     echoerr 'No terminal buffer found.'
+    "     return
+    " let l:lines = getbufline(l:terminal_bufnum, 1, '$')
+    "
+    " " Unfortunately, the terminal (or more specifically libvterm) inserts hard
+    " " linebreaks when the width of the terminal window is reached, so it's
+    " " hardly usable for parsing build output.
+    " " See https://github.com/neovim/neovim/issues/2514
+    "
+    let l:build_output_file = GetBuildOutputFilename()
+    let l:lines = readfile(l:build_output_file)
+    let l:last_prompt_line = l:lines[1]
+    if exists('g:prompt_regex')
+        for i in range (len(l:lines) - 2 , 1, -1)
+            if match(l:lines[i], g:prompt_regex) == 0
+                let l:last_prompt_line = i
+                break
+            endif
+        endfor
     endif
+    let l:errorfile = '/tmp/vim.errorfile.txt'
+    call writefile(l:lines[l:last_prompt_line:], l:errorfile)
+    exe 'cfile' . l:errorfile
+    let g:jumplist = 'quickfixlist'
+    copen
+    cfirst
 endfunction
 
 
