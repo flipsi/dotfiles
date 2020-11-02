@@ -2064,10 +2064,13 @@ function! SetupScala()
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
 
+    let g:build_shell = 'sbt --color=true'
+    let g:prompt_regex = '^sbt:.*>'
+
     highlight link SbtPrompt LineNr
     augroup sbt_prompt_highlighting
         au!
-        au VimEnter,WinEnter * match SbtPrompt /^sbt:.*>/
+        au VimEnter,WinEnter * execute 'match SbtPrompt /' . g:prompt_regex . '/'
     augroup END
 
     nnoremap <leader>AF     :Terminal scalafmt<cr>
@@ -2089,7 +2092,6 @@ function! SetupScala()
 endfunction
 
 function! ExecuteSbtCommand(commandline)
-    let g:build_shell = 'sbt --color=true'
     if g:run_command_method == "terminal"
         call RunCommandInBuildShell(a:commandline)
     elseif g:run_command_method == "vimux"
@@ -4132,7 +4134,6 @@ nnoremap <leader>bC :call RunCommand(getline('.'))<cr>
 vnoremap <leader>bC y:call RunCommand(@*)<cr>
 
 if g:run_command_method == "terminal"
-    " TODO: make <nop>s work
     nnoremap <leader>bo         :RunCommandInBuildShell<space>
     nnoremap <leader>bf         <nop>
     nnoremap <leader>bF         <nop>
@@ -4141,7 +4142,7 @@ if g:run_command_method == "terminal"
     nnoremap <leader>bc         :ExecuteInNeoTerminal Tkill<cr>
     nnoremap <leader>b<c-c>     :ExecuteInNeoTerminal Tkill<cr>
     nnoremap <leader>b<bs>      :Tclose<cr>         " only hides buffer, we can still sent commands to it
-    nnoremap <leader>be         <nop>
+    nnoremap <leader>be         :OpenQuickfixListWithBuildErrors<cr>
 elseif g:run_command_method == "vimux"
     nnoremap <leader>bo         :VimuxRunCommand ""<left>
     nnoremap <leader>bf         :VimuxRunCommand " " . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
@@ -4161,6 +4162,32 @@ elseif g:run_command_method == "vimux"
 else
     echoerr "Unknown g:run_command_method (" . g:run_command_method . ")"
 endif
+
+" open quickfix list with build errors from the terminal
+command! OpenQuickfixListWithBuildErrors :call OpenQuickfixListWithBuildErrors()
+function! OpenQuickfixListWithBuildErrors()
+    let l:terminal_bufnum = GetTerminalBuffer()
+    if l:terminal_bufnum == 0
+        echoerr "No terminal buffer found."
+    else
+        let l:lines = getbufline(l:terminal_bufnum, 1, "$")
+        let l:last_prompt_line = l:lines[1]
+        if exists('g:prompt_regex')
+            for i in range (len(l:lines) - 2 , 1, -1)
+                if match(l:lines[i], g:prompt_regex) == 0
+                    let l:last_prompt_line = i
+                    break
+                endif
+            endfor
+        endif
+        let l:errorfile = '/tmp/vim.errorfile.txt'
+        call writefile(l:lines[l:last_prompt_line:], l:errorfile)
+        exe 'cfile' . l:errorfile
+        let g:jumplist = 'quickfixlist'
+        copen
+        cfirst
+    endif
+endfunction
 
 
 " execute shell script
