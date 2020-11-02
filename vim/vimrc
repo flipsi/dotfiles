@@ -2065,7 +2065,10 @@ function! SetupScala()
     match ErrorMsg '\*\*\* FAILED \*\*\*'
 
     highlight link SbtPrompt LineNr
-    match SbtPrompt /^sbt:.*>/
+    augroup sbt_prompt_highlighting
+        au!
+        au VimEnter,WinEnter * match SbtPrompt /^sbt:.*>/
+    augroup END
 
     nnoremap <leader>AF     :Terminal scalafmt<cr>
 
