@@ -254,14 +254,10 @@ let g:neoterm_default_mod = ':vertical'
 let g:neoterm_autoinsert = 1
 let g:neoterm_autoscroll = 1
 
-" TODO: add autocompletion from :T
-command! -nargs=1 RunCommandInTerminal :call RunCommandInTerminal(<q-args>)
+command! -nargs=1 -complete=file RunCommandInTerminal :call RunCommandInTerminal(<q-args>)
 function! RunCommandInTerminal(commandline)
     let g:last_terminal_command = a:commandline
-    let g:suppress_terminal_autoinsert = 1
-    execute 'T ' . a:commandline
-    sleep 50m
-    unlet g:suppress_terminal_autoinsert
+    call ExecuteInNeoTerminal('T ' . a:commandline)
 endfunction
 
 function! RunLastCommandInTerminal()
@@ -270,6 +266,16 @@ function! RunLastCommandInTerminal()
     else
         echoerr "No last command found!"
     endif
+endfunction
+
+" Execute some neoterm terminal command without ending up in insert mode
+" (this is necessary due to the 'startinsert' autocmd that I want)
+command! -nargs=1 ExecuteInNeoTerminal :call ExecuteInNeoTerminal(<q-args>)
+function! ExecuteInNeoTerminal(vimcommand)
+    let g:suppress_terminal_autoinsert = 1
+    execute a:vimcommand
+    sleep 50m
+    unlet g:suppress_terminal_autoinsert
 endfunction
 
 " Remove stupid default mappings
@@ -2058,6 +2064,9 @@ function! SetupScala()
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
 
+    highlight link SbtPrompt LineNr
+    match SbtPrompt /^sbt:.*>/
+
     nnoremap <leader>AF     :Terminal scalafmt<cr>
 
     nnoremap <leader>bd     :call ExecuteSbtCommand("compile")<cr>
@@ -3507,6 +3516,9 @@ endif
 " tnoremap <esc> <c-\><c-n>
 " tnoremap <expr> <esc> &filetype == 'fzf' ? "\<esc>" : "\<c-\>\<c-n>"
 
+" leave terminal insert mode and scroll up
+tnoremap <c-b> <c-\><c-n><c-b>
+
 " leave terminal insert mode and move to window on the left
 tnoremap <c-h> <c-\><c-n><c-w>h
 
@@ -4110,23 +4122,20 @@ function! RunCommand(command)
     endif
 endfunction
 
-" TODO: make those work
 nnoremap <leader>bC :call RunCommand(getline('.'))<cr>
 vnoremap <leader>bC y:call RunCommand(@*)<cr>
 
 if g:run_command_method == "terminal"
     " TODO: make <nop>s work
-    " TODO: let and unlet g:suppress_terminal_autoinsert for :T / :Tclear / :Tkill
     nnoremap <leader>bo         :RunCommandInTerminal<space>
     nnoremap <leader>bf         <nop>
     nnoremap <leader>bF         <nop>
     nnoremap <leader>bb         :update<cr> :call RunLastCommandInTerminal()<cr>
-    nnoremap <leader>bl         :Tclear<cr>
-    nnoremap <leader>bc         :Tkill<cr>
-    nnoremap <leader>b<c-c>     :Tkill<cr>
+    nnoremap <leader>bl         :ExecuteInNeoTerminal Tclear<cr>
+    nnoremap <leader>bc         :ExecuteInNeoTerminal Tkill<cr>
+    nnoremap <leader>b<c-c>     :ExecuteInNeoTerminal Tkill<cr>
     nnoremap <leader>b<bs>      :Tclose<cr>         " only hides buffer, we can still sent commands to it
     nnoremap <leader>be         <nop>
-    " nnoremap <leader>bq :T
 elseif g:run_command_method == "vimux"
     nnoremap <leader>bo         :VimuxRunCommand ""<left>
     nnoremap <leader>bf         :VimuxRunCommand " " . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
