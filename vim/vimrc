@@ -4100,15 +4100,16 @@ endif
 " open up build shell if not already opened before executing commandline
 command! -nargs=1 RunCommandInBuildShell :call RunCommandInBuildShell(<q-args>)
 function! RunCommandInBuildShell(commandline)
-    let l:terminal_bufnum = GetTerminalBuffer()
-    " if l:terminal_bufnum == 0
-    "     let l:build_shell = exists('g:build_shell') ? g:build_shell : 'fish'
-    "     " call Terminal(1, l:build_shell)
-    "     execute 'T ' . l:build_shell
-    "     " TODO fix: open neoterm without focus / autoinsert
-    "     let l:terminal_bufnum = GetTerminalBuffer()
-    " endif
-    call RunCommandInTerminal(a:commandline)
+    if g:run_command_method == "terminal"
+        let l:terminal_bufnum = GetTerminalBuffer()
+        if l:terminal_bufnum == 0 && exists('g:build_shell')
+            let l:neoterm_autoinsert = g:neoterm_autoinsert
+            let g:neoterm_autoinsert = 0
+            call RunCommandInTerminal(g:build_shell)
+            let g:neoterm_autoinsert = l:neoterm_autoinsert
+        endif
+    endif
+    call RunCommand(a:commandline)
 endfunction
 
 command! -nargs=1 RunCommand :call RunCommand(<q-args>)
@@ -4127,7 +4128,7 @@ vnoremap <leader>bC y:call RunCommand(@*)<cr>
 
 if g:run_command_method == "terminal"
     " TODO: make <nop>s work
-    nnoremap <leader>bo         :RunCommandInTerminal<space>
+    nnoremap <leader>bo         :RunCommandInBuildShell<space>
     nnoremap <leader>bf         <nop>
     nnoremap <leader>bF         <nop>
     nnoremap <leader>bb         :update<cr> :call RunLastCommandInTerminal()<cr>
