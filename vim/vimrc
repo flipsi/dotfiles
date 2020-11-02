@@ -4114,8 +4114,8 @@ endfunction
 
 nnoremap <leader>bC :call RunCommand(getline('.'))<cr>
 vnoremap <leader>bC y:call RunCommand(@*)<cr>
-nnoremap <leader>be :OpenBuildErrorsInQuickfixList<cr>
-nnoremap <leader>bE :OpenBuildErrorsInBuffer<cr>
+nnoremap <leader>be :OpenBuildErrorsInQuickfixList<cr><esc>hj
+nnoremap <leader>bE :OpenBuildErrorsInBuffer<cr><esc>hj
 
 if g:run_command_method == "terminal"
     nnoremap <leader>bo         :RunCommandInBuildShell<space>
