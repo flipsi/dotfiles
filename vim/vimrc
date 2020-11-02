@@ -318,30 +318,6 @@ let g:VimuxHeight = "50"
 let g:VimuxOrientation = "h"
 let VimuxUseNearest = 1
 
-" build/debug with vimux
-" param command: the shell command to execute
-function! MakeWithVimux(command)
-    let l:build_output_file = GetBuildOutputFilename()
-    " let command = a:command . ' | tee ' . g:makewithvimux_outfile
-    let command = a:command . " | tee (tty) | sed 's/\\x1b\\[[0-9;]*[a-zA-Z]//g' > " . l:build_output_file
-    call VimuxRunCommand(command)
-endfunction
-
-function! MakeWithVimuxOpenErrors(where)
-    " remove terminal color escape sequences that fuck with errorformat
-    exec  ':silent !sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" ' . g:makewithvimux_outfile
-    redraw!
-    exec 'cfile ' . g:makewithvimux_outfile
-    if a:where == 'quickfix'
-        let g:jumplist = 'quickfixlist'
-        cfirst
-    elseif a:where == 'buffer'
-        execute "edit " . g:makewithvimux_outfile
-    endif
-endfunction
-
-
-
 
 
 " autocompletion from words visible in tmux panes
@@ -1948,10 +1924,11 @@ augroup rust_on_read
     au FileType rust call SetupRust()
 augroup END
 function! SetupRust()
-    nnoremap <leader>bd  :call MakeWithVimux("cargo build")<cr>
-    nnoremap <leader>bD  :call MakeWithVimux("cargo build --release")<cr>
-    nnoremap <leader>bs  :call MakeWithVimux("cargo run")<cr>
-    nnoremap <leader>btc :call MakeWithVimux("cargo check")<cr>
+    let g:build_shell = 'bash'
+    nnoremap <leader>bd  :call RunCommandInBuildShell("cargo build")<cr>
+    nnoremap <leader>bD  :call RunCommandInBuildShell("cargo build --release")<cr>
+    nnoremap <leader>bs  :call RunCommandInBuildShell("cargo run")<cr>
+    nnoremap <leader>btc :call RunCommandInBuildShell("cargo check")<cr>
 endfunction
 command! -bang SetupRust :call SetupRust() " add mappings for development with Rust
 
@@ -2068,32 +2045,17 @@ function! SetupScala()
 
     nnoremap <leader>AF     :Terminal scalafmt<cr>
 
-    nnoremap <leader>bd     :call ExecuteSbtCommand("compile")<cr>
-    nnoremap <leader>bs     :call ExecuteSbtCommand("run")<cr>
-    nnoremap <leader>btt    :call ExecuteSbtCommand("test; it:test")<cr>
-    nnoremap <leader>btu    :call ExecuteSbtCommand("test")<cr>
-    nnoremap <leader>bti    :call ExecuteSbtCommand("it:test")<cr>
-    nnoremap <leader>bto    :call ExecuteSbtCommand(CalculateSbtTestOnlyCommand())<cr>
-    nnoremap <leader>ba     :call ExecuteSbtCommand("scapegoat")<cr>
-    nnoremap <leader>bx     :call ExecuteSbtCommand("clean")<cr>
-    nnoremap <leader>br     :call ExecuteSbtCommand("console")<cr>
-    nnoremap <leader>b<f5>  :call ExecuteSbtCommand("reload")<cr>
+    nnoremap <leader>bd     :call RunCommandInBuildShell("compile")<cr>
+    nnoremap <leader>bs     :call RunCommandInBuildShell("run")<cr>
+    nnoremap <leader>btt    :call RunCommandInBuildShell("test; it:test")<cr>
+    nnoremap <leader>btu    :call RunCommandInBuildShell("test")<cr>
+    nnoremap <leader>bti    :call RunCommandInBuildShell("it:test")<cr>
+    nnoremap <leader>bto    :call RunCommandInBuildShell(CalculateSbtTestOnlyCommand())<cr>
+    nnoremap <leader>ba     :call RunCommandInBuildShell("scapegoat")<cr>
+    nnoremap <leader>bx     :call RunCommandInBuildShell("clean")<cr>
+    nnoremap <leader>br     :call RunCommandInBuildShell("console")<cr>
+    nnoremap <leader>b<f5>  :call RunCommandInBuildShell("reload")<cr>
 
-    nnoremap <leader>bE     :call MakeWithVimuxOpenErrors('buffer')<cr>gg/\*\*\* FAILED \*\*\*<cr>
-    nnoremap <leader>fe     /\*\*\* FAILED \*\*\*<cr>
-
-endfunction
-
-function! ExecuteSbtCommand(commandline)
-    if g:run_command_method == "terminal"
-        call RunCommandInBuildShell(a:commandline)
-    elseif g:run_command_method == "vimux"
-        if IsSbtRunning()
-            call VimuxRunCommand(a:command)
-        else
-            call MakeWithVimux(g:build_shell . " '" . a:command . "'")
-        endif
-    endif
 endfunction
 
 function! CalculateSbtTestOnlyCommand()
@@ -4110,20 +4072,31 @@ function! GetBuildOutputFilename()
     return l:build_output_file
 endfunction
 
+function! IsBuildShellRunning()
+    if g:run_command_method == "terminal"
+        let l:terminal_bufnum = GetTerminalBuffer()
+        return l:terminal_bufnum > 0
+    elseif g:run_command_method == "vimux"
+        " TODO: make this work for other shells
+        return exists('g:build_shell') && match(g:build_shell, 'sbt') == 0
+                    \ && IsSbtRunning()
+    else
+        return 0
+    endif
+endfunction
+
 " open up build shell if not already opened before executing commandline
 command! -nargs=1 RunCommandInBuildShell :call RunCommandInBuildShell(<q-args>)
 function! RunCommandInBuildShell(commandline)
-    if g:run_command_method == "terminal"
-        let l:terminal_bufnum = GetTerminalBuffer()
-        if l:terminal_bufnum == 0 && exists('g:build_shell')
-            let l:build_output_file = GetBuildOutputFilename()
-            let l:escape_sequence_subst = " | tee (tty) | sed 's/\\x1b\\[[0-9;]*[a-zA-Z]//g'"
-            let l:neoterm_autoinsert = g:neoterm_autoinsert
-            let g:neoterm_autoinsert = 0
-            let l:shell_cmd = g:build_shell .  l:escape_sequence_subst . " > " . l:build_output_file
-            call RunCommandInTerminal(l:shell_cmd)
-            let g:neoterm_autoinsert = l:neoterm_autoinsert
-        endif
+    if !IsBuildShellRunning() && exists('g:build_shell')
+        echo "Starting build shell..."
+        let l:build_output_file = GetBuildOutputFilename()
+        let l:escape_sequence_subst = " | tee (tty) | sed 's/\\x1b\\[[0-9;]*[a-zA-Z]//g'"
+        let l:neoterm_autoinsert = g:neoterm_autoinsert
+        let g:neoterm_autoinsert = 0
+        let l:shell_cmd = g:build_shell .  l:escape_sequence_subst . " > " . l:build_output_file
+        call RunCommand(l:shell_cmd)
+        let g:neoterm_autoinsert = l:neoterm_autoinsert
     endif
     call RunCommand(a:commandline)
 endfunction
@@ -4141,6 +4114,8 @@ endfunction
 
 nnoremap <leader>bC :call RunCommand(getline('.'))<cr>
 vnoremap <leader>bC y:call RunCommand(@*)<cr>
+nnoremap <leader>be :OpenBuildErrorsInQuickfixList<cr>
+nnoremap <leader>bE :OpenBuildErrorsInBuffer<cr>
 
 if g:run_command_method == "terminal"
     nnoremap <leader>bo         :RunCommandInBuildShell<space>
@@ -4151,7 +4126,6 @@ if g:run_command_method == "terminal"
     nnoremap <leader>bc         :ExecuteInNeoTerminal Tkill<cr>
     nnoremap <leader>b<c-c>     :ExecuteInNeoTerminal Tkill<cr>
     nnoremap <leader>b<bs>      :Tclose<cr>         " only hides buffer, we can still sent commands to it
-    nnoremap <leader>be         :OpenQuickfixListWithBuildErrors<cr>
 elseif g:run_command_method == "vimux"
     nnoremap <leader>bo         :VimuxRunCommand ""<left>
     nnoremap <leader>bf         :VimuxRunCommand " " . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
@@ -4166,15 +4140,13 @@ elseif g:run_command_method == "vimux"
     nnoremap <leader>b<c-d>     :call VimuxSendKeys("C-d")<cr>
     nnoremap <leader>b<c-b>     :VimuxInspectRunner<cr>
     nnoremap <leader><c-b><c-b> :VimuxInspectRunner<cr>
-    nnoremap <leader>be         :call MakeWithVimuxOpenErrors('quickfix')<cr>
-    nnoremap <leader>bE         :call MakeWithVimuxOpenErrors('buffer')<cr>
 else
     echoerr "Unknown g:run_command_method (" . g:run_command_method . ")"
 endif
 
 " open quickfix list with build errors from the terminal
-command! OpenQuickfixListWithBuildErrors :call OpenQuickfixListWithBuildErrors()
-function! OpenQuickfixListWithBuildErrors()
+command! OpenBuildErrorsInQuickfixList :call OpenBuildErrorsInQuickfixList()
+function! OpenBuildErrorsInQuickfixList()
     " let l:terminal_bufnum = GetTerminalBuffer()
     " if l:terminal_bufnum == 0
     "     echoerr 'No terminal buffer found.'
@@ -4204,6 +4176,16 @@ function! OpenQuickfixListWithBuildErrors()
     copen
     cfirst
 endfunction
+
+command! OpenBuildErrorsInBuffer :call OpenBuildErrorsInBuffer()
+function! OpenBuildErrorsInBuffer()
+    let l:build_output_file = GetBuildOutputFilename()
+    " remove terminal color escape sequences that fuck with errorformat
+    exec ':silent !sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" ' . l:build_output_file
+    redraw!
+    execute "edit " . l:build_output_file
+endfunction
+
 
 
 " execute shell script
