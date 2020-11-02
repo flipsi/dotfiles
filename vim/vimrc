@@ -4067,10 +4067,10 @@ endif
 " undo and redo
 " (in difference to :undo and :redo, :earlier and :later also make changes
 " reachable if we branch, i.e. go back in history and make other changes)
-noremap <m-u>  :earlier<cr>
-noremap <esc>u :earlier<cr>
-noremap <m-u>  :later<cr>
-noremap <esc>U :later<cr>
+noremap <m-u>   :earlier<cr>
+noremap <esc>u  :earlier<cr>
+noremap <m-s-u> :later<cr>
+noremap <esc>U  :later<cr>
 
 
 " }}}
