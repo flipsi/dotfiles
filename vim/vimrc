@@ -1717,10 +1717,23 @@ nnoremap <leader>icp :ColorPicker<cr>
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 
-let g:coc_start_at_startup = 0
+let g:coc_start_at_startup = 1
 
-nmap <leader>jt :CocDisable<cr>
-nmap <leader>jT :CocEnable<cr>
+" TODO: FIX (This fails with 'E488 Trailing characters')
+command! CocToggle :call CocToggle() <cr> " Enable or Disable COC
+function! CocToggle()
+    if g:coc_enabled == 1
+        CocDisable
+    else
+        CocEnable
+    endif
+endfunction
+" nmap <leader>jot :if g:coc_enabled == 1 <bar> CocDisable <bar> else <bar> CocEnable <bar> endif <cr>
+" nmap <leader>jot :if g:coc_enabled == 1 <bar> echo 'jaj' <bar> else <bar> echo 'no' <bar> endif
+" nmap <leader>jot :if g:coc_enabled == 1 <bar> echo 'jaj' <bar> endif <cr>
+nmap <leader>jot :CocToggle<cr>
+
+nmap <leader>joi :CocInfo<cr>
 
 nmap <leader>ie <Plug>(coc-diagnostic-info)
 nmap <leader>i<bs> <Plug>(coc-float-hide)
