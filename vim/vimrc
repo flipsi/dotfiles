@@ -4494,7 +4494,7 @@ command! Reset              :e!                     " Discard changes in buffer
 command! Save               :call Save(0)           " Write buffer changes to file
 command! SaveForce          :call Save(1)           " Write buffer changes to file ignoring 'readonly' etc.
 command! SaveAndClose       :wq                     " Write buffer changes to file and close window
-command! CloseBuffer        :bdelete                " Close current buffer
+command! CloseBuffer        :bn | :bd#              " Close current buffer (without closing window)
 command! CloseBufferForce   :bdelete!               " Close current buffer discarding changes
 command! CloseAllBuffers    :silent bufdo bdelete   " Close all buffers (not vim)
 command! CloseWindow        :quit                   " Close current window (not buffer)
