@@ -685,6 +685,7 @@ vmap iE <plug>(textobj-entire-i)
 
 
 Plug 'haya14busa/incsearch.vim'
+let g:incsearch#auto_nohlsearch = 1
 let g:incsearch#emacs_like_keymap = 1
 let g:incsearch_cli_key_mappings = {
 \   "\<c-n>": {
@@ -705,7 +706,7 @@ nnoremap ? :call incsearch#call({'command': '?'})<cr>
 
 
 " searching in multiple files
-Plug 'mileszs/ack.vim'
+" Plug 'mileszs/ack.vim'
 
 " command to execute
 let g:ackprg="ag --vimgrep --smart-case"
@@ -1159,7 +1160,7 @@ vnoremap <script> <silent> <leader>kb
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " read the docs {{{
 
-Plug 'thinca/vim-ref'
+" Plug 'thinca/vim-ref'
 
 ":Ref STUFF
 
@@ -1315,7 +1316,9 @@ nmap <leader>xx <leader>xiw
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " better diff {{{
 
+" diff two visually selected blocks of code (in new tab)
 Plug 'AndrewRadev/linediff.vim'
+vnoremap <leader>dv :Linediff<cr>
 
 
 " }}}
@@ -1508,7 +1511,7 @@ cmap <c-n> <plug>CmdlineCompleteForward
 " generate docs {{{
 
 " generate javascript docs
-Plug 'heavenshell/vim-jsdoc'
+" Plug 'heavenshell/vim-jsdoc'
 " nnoremap <silent> -adj ?function<cr>:noh<cr><plug>(jsdoc)
 nnoremap <silent> -adj :JsDoc<cr>
 
@@ -1671,8 +1674,11 @@ nnoremap <silent> -dst :%DeleteTrailingWhitespace<cr>
 " make colors visible (e.g. '#DD8844' will have orange background)
 Plug 'ap/vim-css-color'
 
-" convert between color formats
+" convert between color formats (color under cursor or visually selected)
 Plug 'amadeus/vim-convert-color-to'
+nnoremap -cch :ConvertColorTo hex<cr>
+nnoremap -ccr :ConvertColorTo rgb<cr>
+nnoremap -cca :ConvertColorTo rgba<cr>
 
 " launch colorpicker and insert color code
 Plug 'blindFS/vim-colorpicker'
