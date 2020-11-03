@@ -31,6 +31,7 @@ abbr $args gbD    git branch -D
 abbr $args gbm    git branch -m
 abbr $args gc     git commit
 abbr $args gca    git commit --amend
+abbr $args gcm    git commit -m
 abbr $args gcl    git clone --recursive
 abbr $args gcf    git clean -f -d
 abbr $args gd     git diff
