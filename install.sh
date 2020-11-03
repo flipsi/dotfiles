@@ -170,6 +170,11 @@ function create_link_for_target() {
             fi
             ;;
 
+        bpytop )
+            mkdir -p "$HOME/.config/bpytop"
+            create_link "$PWD/bpytop/bpytop.conf" "$HOME/.config/bpytop/bpytop.conf"
+            ;;
+
         cmus )
             mkdir -p "$HOME/.cmus"
             create_link "$PWD/cmus/rc" "$HOME/.cmus/rc"

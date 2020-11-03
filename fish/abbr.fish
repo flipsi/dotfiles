@@ -68,7 +68,7 @@ abbr $args gst    git status
 abbr $args gu     git submodule
 abbr $args gup    git submodule update
 abbr $args gus    git submodule status
-abbr $args h      htop
+abbr $args h      bpytop \|\| htop
 abbr $args l      less
 abbr $args ll     ls -lhF
 abbr $args lll    ls -lhFa
