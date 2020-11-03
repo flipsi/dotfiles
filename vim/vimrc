@@ -2781,6 +2781,21 @@ function! GetTerminalBuffer()
 endfunction
 " }}}
 
+" Close all buffers with a running terminal {{{
+" With bang it also kills the running shell
+command! -bang CloseTerminalBuffers :call CloseTerminalBuffers(<bang>0) " Close all buffers with a running terminal
+function! CloseTerminalBuffers(bang)
+    let l:terminals = GetTerminalBuffers()
+    if a:bang
+        let l:bang_string = '!'
+    else
+        let l:bang_string = ''
+    endif
+    for n in l:terminals
+        exe n . 'bd' . l:bang_string
+    endfor
+endfunction
+" }}}
 
 
 " toggle quickfix or location list {{{
@@ -3467,8 +3482,14 @@ if has('nvim')
         autocmd TermOpen * setlocal nonumber
         autocmd TermOpen * setlocal norelativenumber
 
-        " close terminal buffer automatically (https://www.reddit.com/r/neovim/comments/7xonzm/how_to_close_a_terminal_buffer_automatically_if/)
+        " close terminal buffer automatically after shell exits
+        " (https://www.reddit.com/r/neovim/comments/7xonzm/how_to_close_a_terminal_buffer_automatically_if/)
         autocmd TermClose * silent call s:OnTermClose()
+
+        " close terminal buffers if vim is closed (don't persist them in sessions)
+        " autocmd VimLeavePre * silent CloseTerminalBuffers! " Doesn't work, so do it at start instead:
+        " TODO: fix that this start insert mode
+        autocmd VimEnter * silent CloseTerminalBuffers!
 
     augroup END
 
