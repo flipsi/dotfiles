@@ -4090,12 +4090,10 @@ endfunction
 command! -nargs=1 RunCommandInBuildShell :call RunCommandInBuildShell(<q-args>)
 function! RunCommandInBuildShell(commandline)
     if !IsBuildShellRunning() && exists('g:build_shell')
-        echo "Starting build shell..."
         let l:build_output_file = GetBuildOutputFilename()
-        let l:escape_sequence_subst = " | tee (tty) | sed 's/\\x1b\\[[0-9;]*[a-zA-Z]//g'"
         let l:neoterm_autoinsert = g:neoterm_autoinsert
         let g:neoterm_autoinsert = 0
-        let l:shell_cmd = g:build_shell .  l:escape_sequence_subst . " > " . l:build_output_file
+        let l:shell_cmd = g:build_shell . " | tee (tty) > " . l:build_output_file
         call RunCommand(l:shell_cmd)
         let g:neoterm_autoinsert = l:neoterm_autoinsert
     endif
@@ -4115,8 +4113,8 @@ endfunction
 
 nnoremap <leader>bC :call RunCommand(getline('.'))<cr>
 vnoremap <leader>bC y:call RunCommand(@*)<cr>
-nnoremap <leader>be :OpenBuildErrorsInQuickfixList<cr><esc>hj
-nnoremap <leader>bE :OpenBuildErrorsInBuffer<cr><esc>hj
+nnoremap <silent> <leader>be :OpenBuildErrorsInQuickfixList<cr><esc>hj
+nnoremap <silent> <leader>bE :OpenBuildErrorsInBuffer<cr><esc>hj
 
 if g:run_command_method == "terminal"
     nnoremap <leader>bo         :RunCommandInBuildShell<space>
@@ -4145,6 +4143,17 @@ else
     echoerr "Unknown g:run_command_method (" . g:run_command_method . ")"
 endif
 
+function! RemoveEscapeSequencesFromFile(filename)
+    " color escape sequences
+    exec ':silent !sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" ' . a:filename
+    exec ':silent !sed -i -r "s/\\x1b\\[[0-9;]*[a-zA-Z]//g" ' . a:filename
+    " magic control sequences
+    exec ':silent !sed -i -r "s/[\\x01-\\x1F\\x7F]//g" ' . a:filename
+    exec ':silent !sed -i -r "s/[\\x?1-\\x1F\\x7F]//g" ' . a:filename
+    " weird sbt shell sequences
+    exec ':silent !sed -i -r "s/\[\?1h=\[\?2004h//g" ' . a:filename
+endfunction
+
 " open quickfix list with build errors from the terminal
 command! OpenBuildErrorsInQuickfixList :call OpenBuildErrorsInQuickfixList()
 function! OpenBuildErrorsInQuickfixList()
@@ -4158,10 +4167,17 @@ function! OpenBuildErrorsInQuickfixList()
     " " linebreaks when the width of the terminal window is reached, so it's
     " " hardly usable for parsing build output.
     " " See https://github.com/neovim/neovim/issues/2514
+    " " So I use the tee to build output file solution instead:
     "
     let l:build_output_file = GetBuildOutputFilename()
     let l:lines = readfile(l:build_output_file)
-    let l:last_prompt_line = l:lines[1]
+
+    let l:errorfile = '/tmp/vim.errorfile.txt'
+    call writefile(l:lines, l:errorfile)
+    call RemoveEscapeSequencesFromFile(l:errorfile)
+    let l:lines = readfile(l:errorfile)
+
+    let l:last_prompt_line = 1
     if exists('g:prompt_regex')
         for i in range (len(l:lines) - 2 , 1, -1)
             if match(l:lines[i], g:prompt_regex) == 0
@@ -4170,20 +4186,25 @@ function! OpenBuildErrorsInQuickfixList()
             endif
         endfor
     endif
-    let l:errorfile = '/tmp/vim.errorfile.txt'
-    call writefile(l:lines[l:last_prompt_line:], l:errorfile)
+    if l:last_prompt_line != 1
+        call writefile(l:lines[l:last_prompt_line:], l:errorfile)
+    endif
+
+    cclose
     exe 'cfile' . l:errorfile
-    let g:jumplist = 'quickfixlist'
-    copen
-    cfirst
+    if len(getqflist()) > 0
+        let g:jumplist = 'quickfixlist'
+        copen
+        cfirst
+    else
+        echomsg "No build errors."
+    endif
 endfunction
 
 command! OpenBuildErrorsInBuffer :call OpenBuildErrorsInBuffer()
 function! OpenBuildErrorsInBuffer()
     let l:build_output_file = GetBuildOutputFilename()
-    " remove terminal color escape sequences that fuck with errorformat
-    exec ':silent !sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" ' . l:build_output_file
-    redraw!
+    call RemoveEscapeSequencesFromFile(l:build_output_file)
     execute "edit " . l:build_output_file
 endfunction
 
