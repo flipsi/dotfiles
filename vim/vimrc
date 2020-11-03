@@ -178,7 +178,7 @@ if !exists("*SourceMYVIMRC")
         FixHighlighting
     endfunction
 endif
-command! -bang SourceMYVIMRC :call SourceMYVIMRC() " Reload configuration
+command! SourceMYVIMRC :call SourceMYVIMRC() " Reload configuration
 
 augroup reload_vimrc
     autocmd!
@@ -1814,7 +1814,7 @@ function! SetupNpm()
     nnoremap <leader>btu :call RunCommand("npm test-unit")<cr>
     nnoremap <leader>bti :call RunCommand("npm test-int")<cr>
 endfunction
-command! -bang SetupNpm :call SetupNpm() <cr> " add mappings for development with NodeJS
+command! SetupNpm :call SetupNpm() <cr> " add mappings for development with NodeJS
 
 function! SetupYarn()
     nnoremap <leader>bi  :call RunCommand("yarn install")<cr>
@@ -1824,14 +1824,14 @@ function! SetupYarn()
     nnoremap <leader>btu :call RunCommand("yarn test-unit")<cr>
     nnoremap <leader>bti :call RunCommand("yarn test-int")<cr>
 endfunction
-command! -bang SetupYarn :call SetupYarn() " add mappings for development with yarn
+command! SetupYarn :call SetupYarn() " add mappings for development with yarn
 
 function! SetupTsuquyomi()
     nmap <leader>rf <Plug>(TsuquyomiRenameSymbolC)
     nmap <leader>rF <Plug>(TsuquyomiRenameSymbol)
     nmap <leader>iq : <C-u>echo tsuquyomi#hint()<CR>
 endfunction
-command! -bang SetupTsuquyomi :call SetupTsuquyomi() " add mappings for development with Tsuquyomi
+command! SetupTsuquyomi :call SetupTsuquyomi() " add mappings for development with Tsuquyomi
 
 
 
@@ -1878,7 +1878,7 @@ function! SetupMarkdown()
     nnoremap <buffer> <leader>bs :LivedownPreview<cr>
     nnoremap <buffer> <leader>bx :LivedownKill<cr>
 endfunction
-command! -bang SetupMarkdown :call SetupMarkdown() " add mappings for development with Markdown
+command! SetupMarkdown :call SetupMarkdown() " add mappings for development with Markdown
 
 
 " }}}
@@ -1950,7 +1950,7 @@ function! SetupRust()
     nnoremap <leader>bs  :call RunCommandInBuildShell("cargo run")<cr>
     nnoremap <leader>btc :call RunCommandInBuildShell("cargo check")<cr>
 endfunction
-command! -bang SetupRust :call SetupRust() " add mappings for development with Rust
+command! SetupRust :call SetupRust() " add mappings for development with Rust
 
 
 " }}}
@@ -2029,7 +2029,7 @@ function! IsScalaProject()
     return filereadable("build.sbt")
 endfunction
 
-command! -bang SetupScala :call SetupScala() " add settings and mappings for development with Scala
+command! SetupScala :call SetupScala() " add settings and mappings for development with Scala
 function! SetupScala()
     let l:sbt_version = system('grep -E "sbt\.version" project/build.properties | sed -E "s/.*=(.*)/\1/"')
     " sbt shows column in compiler errors since version 1.0.0 so there are two " cases for errorformat:
@@ -2127,13 +2127,13 @@ augroup sql_on_read
     au FileType sql if !IsScalaProject() | call SetupSQLDadBod() | endif
 augroup END
 
-command! -bang SetupSQL :call SetupSQLDadBod()<bar> call SetupSQLVimux() " add mappings for development with SQL
+command! SetupSQL :call SetupSQLDadBod()<bar> call SetupSQLVimux() " add mappings for development with SQL
 
 function! SetupSQLVimux()
     nnoremap <leader>bm  :call RunCommand("\\. " . expand('%:p'))<cr>
     nnoremap <leader>bp  :call RunCommand("\\i " . expand('%:p'))<cr>
 endfunction
-command! -bang SetupSQLVimux :call SetupSQLVimux() " add mappings for development with SQL (Vimux)
+command! SetupSQLVimux :call SetupSQLVimux() " add mappings for development with SQL (Vimux)
 
 
 Plug 'tpope/vim-dadbod'
@@ -2153,7 +2153,7 @@ function! SetupSQLDadBod()
     nmap        <leader>bdq vap<leader>bd
 
 endfunction
-command! -bang SetupSQLDadBod :call SetupSQLDadBod() " add mappings for development with SQL (DadBod)
+command! SetupSQLDadBod :call SetupSQLDadBod() " add mappings for development with SQL (DadBod)
 
 
 
@@ -2491,7 +2491,7 @@ function! FixHighlighting()
     endif
 
 endfunction
-command! -bang FixHighlighting :call FixHighlighting() " Overwrite some highlight group definitions
+command! FixHighlighting :call FixHighlighting() " Overwrite some highlight group definitions
 
 
 highlight PokemonPikachu ctermfg=233 ctermbg=184
@@ -2559,7 +2559,7 @@ endfunction
 call SetColorscheme()
 
 
-command! -bang ToggleColorschemeDarkOrLight :call ToggleColorschemeDarkOrLight() " Set colorscheme etc. to dark or light
+command! ToggleColorschemeDarkOrLight :call ToggleColorschemeDarkOrLight() " Set colorscheme etc. to dark or light
 function! ToggleColorschemeDarkOrLight()
     if g:light_or_dark_theme == 'dark'
         let g:light_or_dark_theme = 'light'
@@ -2622,7 +2622,7 @@ endif
 
 
 " Execute a interactive shell command in full screen {{{
-command! -nargs=1 -bang Shell :call Shell(<q-args>)
+command! -nargs=1 Shell :call Shell(<q-args>)
 function! Shell(commandline)
     if has('nvim')
         tabnew
@@ -4220,7 +4220,7 @@ function! OpenBuildErrorsInQuickfixList()
 
     let l:last_prompt_line = 1
     if exists('g:prompt_regex')
-        for i in range (len(l:lines) - 2 , 1, -1)
+        for i in range(len(l:lines) - 2 , 1, -1)
             if match(l:lines[i], g:prompt_regex) == 0
                 let l:last_prompt_line = i
                 break
