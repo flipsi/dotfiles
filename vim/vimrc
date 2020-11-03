@@ -4344,7 +4344,7 @@ nnoremap <leader><esc>p :tabprevious<cr>
 
 
 " clear windows (close quickfix and location list) and refresh screen
-nnoremap <silent> <bs> :nohlsearch \| :lclose \| :cclose \| :redraw! <cr>
+nnoremap <silent> <bs> :nohlsearch \| :lclose \| :cclose \| :redraw! <cr> :<c-c>
 xmap <silent> <bs> <bs>gv
 
 " toggle quickfix or location list
