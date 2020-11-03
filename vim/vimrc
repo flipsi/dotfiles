@@ -439,6 +439,21 @@ nnoremap <leader>gpp :Git pull<cr>
 nnoremap <leader>gpu :Git push<cr>
 nnoremap <leader>gpU :exe ':Git push -u ' . system('git remote \| head -n1 \| tr -d "\\n"') . ' ' . system('git rev-parse --abbrev-ref HEAD \| tr -d "\\n"')<cr>
 nnoremap <leader>geb :exe ':Git checkout -b ' . input('Branch name: ')<cr>
+nnoremap <leader>geo :GitCheckoutInteractively<cr>
+
+
+command! GitCheckoutInteractively :call GitCheckoutInteractively() <cr> " checkout git branch chosen with fzf
+function! GitCheckoutInteractively()
+    let word = expand("<cword>")
+    call fzf#run(fzf#wrap({
+                \ 'source': 'git branch',
+                \ 'sink': function('GitCheckout')
+                \ }))
+endfunction
+function! GitCheckout(ref)
+    exe 'Git checkout ' . a:ref
+endfunction
+
 
 " resolve 3-way merge conflicts (diff view)
 nnoremap <leader>g<down>    ]c
@@ -789,7 +804,6 @@ nnoremap <leader>Z  :Fe<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fuzzy find files etc (like Sublimes 'Goto Anything') {{{
 
-" (i use fzf instead)
 " Plug 'kien/ctrlp.vim'
 
 " let g:ctrlp_map = '#'
@@ -2966,6 +2980,8 @@ endfunction
 
 " poor-man's (fake IDE) auto-import {{{
 " searches for import statement for word under cursor and adds it to buffer
+nnoremap <leader>io :call AutoImportFake()<cr>
+command! -bar AutoImportFake call AutoImportFake()
 function! AutoImportFake()
     let word = expand("<cword>")
     call fzf#run(fzf#wrap({
@@ -2978,8 +2994,6 @@ function! AddImportStatement(statement)
     let linenumber = search('import')
     put =a:statement
 endfunction
-command! -bar AutoImportFake call AutoImportFake()
-nnoremap <leader>io :call AutoImportFake()<cr>
 " }}}
 
 
