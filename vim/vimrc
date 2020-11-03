@@ -4120,8 +4120,8 @@ nnoremap <leader>bE :OpenBuildErrorsInBuffer<cr><esc>hj
 
 if g:run_command_method == "terminal"
     nnoremap <leader>bo         :RunCommandInBuildShell<space>
-    nnoremap <leader>bf         <nop>
-    nnoremap <leader>bF         <nop>
+    nnoremap <leader>bf         :execute 'RunCommandInBuildShell  ' . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
+    nnoremap <leader>bF         :execute 'RunCommandInBuildShell ' . ExpandPrependThisDir('%') . ' '<left>
     nnoremap <leader>bb         :update<cr> :call RunLastCommandInTerminal()<cr>
     nnoremap <leader>bl         :ExecuteInNeoTerminal Tclear<cr>
     nnoremap <leader>bc         :ExecuteInNeoTerminal Tkill<cr>
