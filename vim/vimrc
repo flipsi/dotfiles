@@ -262,7 +262,7 @@ endfunction
 
 function! RunLastCommandInTerminal()
     if exists('g:last_terminal_command')
-        execute 'RunCommandInTerminal ' . g:last_terminal_command
+        execute 'RunCommandInTerminal ' . escape(g:last_terminal_command, '\\')
     else
         echoerr "No last command found!"
     endif
