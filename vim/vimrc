@@ -178,7 +178,7 @@ if !exists("*SourceMYVIMRC")
         FixHighlighting
     endfunction
 endif
-command! -bang SourceMYVIMRC :call SourceMYVIMRC() " Reload configuration
+command! SourceMYVIMRC :call SourceMYVIMRC() " Reload configuration
 
 augroup reload_vimrc
     autocmd!
@@ -245,6 +245,55 @@ autocmd VimEnter * nested
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" terminal extensions {{{
+
+Plug 'kassio/neoterm'
+
+let g:neoterm_shell = 'fish'
+let g:neoterm_default_mod = ':vertical'
+let g:neoterm_autoinsert = 1
+let g:neoterm_autoscroll = 1
+
+command! -nargs=1 -complete=file RunCommandInTerminal :call RunCommandInTerminal(<q-args>)
+function! RunCommandInTerminal(commandline)
+    let g:last_terminal_command = a:commandline
+    call ExecuteInNeoTerminal('T ' . a:commandline)
+endfunction
+
+function! RunLastCommandInTerminal()
+    if exists('g:last_terminal_command')
+        execute 'RunCommandInTerminal ' . escape(g:last_terminal_command, '\\')
+    else
+        echoerr "No last command found!"
+    endif
+endfunction
+
+" Execute some neoterm terminal command without ending up in insert mode
+" (this is necessary due to the 'startinsert' autocmd that I want)
+command! -nargs=1 ExecuteInNeoTerminal :call ExecuteInNeoTerminal(<q-args>)
+function! ExecuteInNeoTerminal(vimcommand)
+    let g:suppress_terminal_autoinsert = 1
+    execute a:vimcommand
+    sleep 50m
+    unlet g:suppress_terminal_autoinsert
+endfunction
+
+" Remove stupid default mappings
+augroup neoterm_remove_mappings
+    au!
+    au VimEnter * nunmap ,tt
+augroup END
+
+nnoremap <leader>tt     :Topen<cr>
+nnoremap <leader>tn     :Tnew<cr>
+nnoremap <leader>to     :RunCommandInTerminal<space>
+nnoremap <leader>t<bs>  :Tclose<cr>         " only hides buffer, we can still sent commands to it
+
+" nnoremap <leader>tl :Tclear<cr>
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tmux integration {{{
 
 
@@ -268,55 +317,6 @@ Plug 'benmills/vimux'
 let g:VimuxHeight = "50"
 let g:VimuxOrientation = "h"
 let VimuxUseNearest = 1
-nnoremap <leader>bo         :VimuxRunCommand ""<left>
-nnoremap <leader>bv         :call MakeWithVimux("")<left><left>
-nnoremap <leader>bf         :VimuxRunCommand " " . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
-nnoremap <leader>bF         :VimuxRunCommand ExpandPrependThisDir('%') . " "<left>
-nnoremap <leader>bC         :call VimuxRunCommand(getline('.'))<cr>
-vnoremap <leader>bC         y:call VimuxRunCommand(@*)<cr>
-nnoremap <leader>bb         :update<cr>:VimuxRunLastCommand<cr>
-nnoremap <silent> <leader>bl :VimuxClearTerminalScreen<cr>
-nnoremap <leader>bq         :VimuxCloseRunner<cr>
-nnoremap <leader>b<bs>      :VimuxCloseRunner<cr>
-nnoremap <leader>bz         :call VimuxZoomRunner()<cr>
-nnoremap <leader>bc         :VimuxInterruptRunner<cr>
-nnoremap <leader>b<c-c>     :VimuxInterruptRunner<cr>
-nnoremap <leader>b<c-d>     :call VimuxSendKeys("C-d")<cr>
-nnoremap <leader>b<c-b>     :VimuxInspectRunner<cr>
-nnoremap <leader><c-b><c-b> :VimuxInspectRunner<cr>
-nnoremap <leader>be         :call MakeWithVimuxOpenErrors('quickfix')<cr>
-nnoremap <leader>bE         :call MakeWithVimuxOpenErrors('buffer')<cr>
-" MORE SPECIFIC MAPPING IN OTHER VIMRC SECTIONS (which makes more sense)
-
-" build/debug with vimux
-" param command: the shell command to execute
-function! MakeWithVimux(command)
-    let l:git_branch_name = system('git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d "\n" || echo -n ""')
-    let l:git_branch_name_escaped = substitute(UrlEncode(l:git_branch_name), '%..', '-', 'g')
-    if !empty(v:servername)
-        let l:project_name = tolower(v:servername)
-    else
-        let l:project_name = tolower(system('basename $(pwd) | tr -d "\n"'))
-    endif
-    let g:makewithvimux_outfile = '/tmp/vim.'.l:project_name.'.'.l:git_branch_name_escaped.'.make.out'
-    " let command = a:command . ' | tee ' . g:makewithvimux_outfile
-    let command = a:command . " | tee (tty) | sed 's/\\x1b\\[[0-9;]*[a-zA-Z]//g' > " . g:makewithvimux_outfile
-    call VimuxRunCommand(command)
-endfunction
-function! MakeWithVimuxOpenErrors(where)
-    " remove terminal color escape sequences that fuck with errorformat
-    exec  ':silent !sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" ' . g:makewithvimux_outfile
-    redraw!
-    exec 'cfile ' . g:makewithvimux_outfile
-    if a:where == 'quickfix'
-        let g:jumplist = 'quickfixlist'
-        call ToggleList("Quickfix List", 'c')
-    elseif a:where == 'buffer'
-        execute "edit " . g:makewithvimux_outfile
-    endif
-endfunction
-
-
 
 
 
@@ -385,12 +385,14 @@ Plug 'vim-airline/vim-airline-themes'
 
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
+let g:airline_inactive_collapse=0
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
-"let g:airline_section_y = g:airline_section_a
-let g:airline_section_a = '%{fnamemodify(getcwd(), ":t")}'
+let g:airline_section_b = '%{expand("%:h")}'
+let g:airline_section_a = '%{expand("%:t")}'
+let g:airline_section_c = '%{airline#util#wrap(airline#extensions#hunks#get_hunks(),100)}%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'
 
 let g:airline_powerline_fonts=0
 if !exists('g:airline_symbols')
@@ -425,17 +427,33 @@ let g:airline#extensions#grepper#enabled = 1
 Plug 'tpope/vim-fugitive'
 
 nnoremap <leader>gs  :Gstatus<cr>
-nnoremap <leader>gd  :Gdiff<cr>
+nnoremap <leader>gd  :Gdiffsplit<cr>
 nnoremap <leader>gmd :Gdiffsplit!<cr>
 nnoremap <leader>gU  :Gread<cr>
 nnoremap <leader>gw  :Gwrite<cr>
 nnoremap <leader>gA  :Gwrite<cr>
-nnoremap <leader>gc  :Gcommit<cr>
-nnoremap <leader>gb  :Gblame<cr>
-nnoremap <leader>gpp :Gpull<cr>
-nnoremap <leader>gpu :Gpush<cr>
+nnoremap <leader>gcc :Git commit<cr>
+nnoremap <leader>gca :Git commit --amend<cr>
+nnoremap <leader>gb  :Git blame<cr>
+nnoremap <leader>gpp :Git pull<cr>
+nnoremap <leader>gpu :Git push<cr>
 nnoremap <leader>gpU :exe ':Git push -u ' . system('git remote \| head -n1 \| tr -d "\\n"') . ' ' . system('git rev-parse --abbrev-ref HEAD \| tr -d "\\n"')<cr>
 nnoremap <leader>geb :exe ':Git checkout -b ' . input('Branch name: ')<cr>
+nnoremap <leader>geo :GitCheckoutInteractively<cr>
+
+
+command! GitCheckoutInteractively :call GitCheckoutInteractively() <cr> " checkout git branch chosen with fzf
+function! GitCheckoutInteractively()
+    let word = expand("<cword>")
+    call fzf#run(fzf#wrap({
+                \ 'source': 'git branch',
+                \ 'sink': function('GitCheckout')
+                \ }))
+endfunction
+function! GitCheckout(ref)
+    exe 'Git checkout ' . a:ref
+endfunction
+
 
 " resolve 3-way merge conflicts (diff view)
 nnoremap <leader>g<down>    ]c
@@ -682,6 +700,7 @@ vmap iE <plug>(textobj-entire-i)
 
 
 Plug 'haya14busa/incsearch.vim'
+let g:incsearch#auto_nohlsearch = 1
 let g:incsearch#emacs_like_keymap = 1
 let g:incsearch_cli_key_mappings = {
 \   "\<c-n>": {
@@ -702,7 +721,7 @@ nnoremap ? :call incsearch#call({'command': '?'})<cr>
 
 
 " searching in multiple files
-Plug 'mileszs/ack.vim'
+" Plug 'mileszs/ack.vim'
 
 " command to execute
 let g:ackprg="ag --vimgrep --smart-case"
@@ -785,7 +804,6 @@ nnoremap <leader>Z  :Fe<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fuzzy find files etc (like Sublimes 'Goto Anything') {{{
 
-" (i use fzf instead)
 " Plug 'kien/ctrlp.vim'
 
 " let g:ctrlp_map = '#'
@@ -862,8 +880,13 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 command! -bang -nargs=* FzfAg
   \ call fzf#vim#ag(<q-args>,
   \                 <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-  \                         : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+  \                         : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:20%:hidden', '?'),
   \                 <bang>0)
+
+" Empty value to disable preview window altogether
+let g:fzf_preview_window = ''
+" Always enable preview window on the right with 60% width
+" let g:fzf_preview_window = 'right:60%'
 
 " open files by name
 nnoremap <leader>fl :FzfLocate<space>
@@ -994,9 +1017,9 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeWinPos = 'right'
 
 " show nerdtree from current file
-noremap <silent> <leader>tn :NERDTreeFind<cr>
+" noremap <silent> <leader>tn :NERDTreeFind<cr>
 " show/hide nerdtree
-noremap <silent> <leader>tN :NERDTreeToggle<cr>
+" noremap <silent> <leader>tN :NERDTreeToggle<cr>
 
 " show/hide hidden files
 let NERDTreeMapToggleHidden='.'
@@ -1151,7 +1174,7 @@ vnoremap <script> <silent> <leader>kb
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " read the docs {{{
 
-Plug 'thinca/vim-ref'
+" Plug 'thinca/vim-ref'
 
 ":Ref STUFF
 
@@ -1307,7 +1330,9 @@ nmap <leader>xx <leader>xiw
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " better diff {{{
 
+" diff two visually selected blocks of code (in new tab)
 Plug 'AndrewRadev/linediff.vim'
+vnoremap <leader>dv :Linediff<cr>
 
 
 " }}}
@@ -1500,7 +1525,7 @@ cmap <c-n> <plug>CmdlineCompleteForward
 " generate docs {{{
 
 " generate javascript docs
-Plug 'heavenshell/vim-jsdoc'
+" Plug 'heavenshell/vim-jsdoc'
 " nnoremap <silent> -adj ?function<cr>:noh<cr><plug>(jsdoc)
 nnoremap <silent> -adj :JsDoc<cr>
 
@@ -1663,8 +1688,11 @@ nnoremap <silent> -dst :%DeleteTrailingWhitespace<cr>
 " make colors visible (e.g. '#DD8844' will have orange background)
 Plug 'ap/vim-css-color'
 
-" convert between color formats
+" convert between color formats (color under cursor or visually selected)
 Plug 'amadeus/vim-convert-color-to'
+nnoremap -cch :ConvertColorTo hex<cr>
+nnoremap -ccr :ConvertColorTo rgb<cr>
+nnoremap -cca :ConvertColorTo rgba<cr>
 
 " launch colorpicker and insert color code
 Plug 'blindFS/vim-colorpicker'
@@ -1684,10 +1712,23 @@ nnoremap <leader>icp :ColorPicker<cr>
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 
-let g:coc_start_at_startup = 0
+let g:coc_start_at_startup = 1
 
-nmap <leader>jt :CocDisable<cr>
-nmap <leader>jT :CocEnable<cr>
+" TODO: FIX (This fails with 'E488 Trailing characters')
+command! CocToggle :call CocToggle() <cr> " Enable or Disable COC
+function! CocToggle()
+    if g:coc_enabled == 1
+        CocDisable
+    else
+        CocEnable
+    endif
+endfunction
+" nmap <leader>jot :if g:coc_enabled == 1 <bar> CocDisable <bar> else <bar> CocEnable <bar> endif <cr>
+" nmap <leader>jot :if g:coc_enabled == 1 <bar> echo 'jaj' <bar> else <bar> echo 'no' <bar> endif
+" nmap <leader>jot :if g:coc_enabled == 1 <bar> echo 'jaj' <bar> endif <cr>
+nmap <leader>jot :CocToggle<cr>
+
+nmap <leader>joi :CocInfo<cr>
 
 nmap <leader>ie <Plug>(coc-diagnostic-info)
 nmap <leader>i<bs> <Plug>(coc-float-hide)
@@ -1762,35 +1803,35 @@ augroup typescript_on_read
     au FileType typescript call SetupTsuquyomi()
     au FileType typescript.tsx call SetupYarn()
     au FileType typescript.tsx call SetupTsuquyomi()
-    " nnoremap <leader>AF  :call VimuxRunCommand("prettier --parser typescript --write **.tsx")<cr>
-    nnoremap <leader>AF  :call VimuxRunCommand("yarn format")<cr>
+    " nnoremap <leader>AF  :call RunCommand("prettier --parser typescript --write **.tsx")<cr>
+    nnoremap <leader>AF  :call RunCommand("yarn format")<cr>
 augroup END
 
 function! SetupNpm()
-    nnoremap <leader>bi  :call VimuxRunCommand("npm install")<cr>
-    nnoremap <leader>bs  :call VimuxRunCommand("npm start")<cr>
-    nnoremap <leader>btt :call VimuxRunCommand("npm test")<cr>
-    nnoremap <leader>btu :call VimuxRunCommand("npm test-unit")<cr>
-    nnoremap <leader>bti :call VimuxRunCommand("npm test-int")<cr>
+    nnoremap <leader>bi  :call RunCommand("npm install")<cr>
+    nnoremap <leader>bs  :call RunCommand("npm start")<cr>
+    nnoremap <leader>btt :call RunCommand("npm test")<cr>
+    nnoremap <leader>btu :call RunCommand("npm test-unit")<cr>
+    nnoremap <leader>bti :call RunCommand("npm test-int")<cr>
 endfunction
-command! -bang SetupNpm :call SetupNpm() <cr> " add mappings for development with NodeJS
+command! SetupNpm :call SetupNpm() <cr> " add mappings for development with NodeJS
 
 function! SetupYarn()
-    nnoremap <leader>bi  :call VimuxRunCommand("yarn install")<cr>
-    nnoremap <leader>bd  :call VimuxRunCommand("yarn build")<cr>
-    nnoremap <leader>bs  :call VimuxRunCommand("yarn start")<cr>
-    nnoremap <leader>btt :call VimuxRunCommand("yarn test")<cr>
-    nnoremap <leader>btu :call VimuxRunCommand("yarn test-unit")<cr>
-    nnoremap <leader>bti :call VimuxRunCommand("yarn test-int")<cr>
+    nnoremap <leader>bi  :call RunCommand("yarn install")<cr>
+    nnoremap <leader>bd  :call RunCommand("yarn build")<cr>
+    nnoremap <leader>bs  :call RunCommand("yarn start")<cr>
+    nnoremap <leader>btt :call RunCommand("yarn test")<cr>
+    nnoremap <leader>btu :call RunCommand("yarn test-unit")<cr>
+    nnoremap <leader>bti :call RunCommand("yarn test-int")<cr>
 endfunction
-command! -bang SetupYarn :call SetupYarn() " add mappings for development with yarn
+command! SetupYarn :call SetupYarn() " add mappings for development with yarn
 
 function! SetupTsuquyomi()
     nmap <leader>rf <Plug>(TsuquyomiRenameSymbolC)
     nmap <leader>rF <Plug>(TsuquyomiRenameSymbol)
     nmap <leader>iq : <C-u>echo tsuquyomi#hint()<CR>
 endfunction
-command! -bang SetupTsuquyomi :call SetupTsuquyomi() " add mappings for development with Tsuquyomi
+command! SetupTsuquyomi :call SetupTsuquyomi() " add mappings for development with Tsuquyomi
 
 
 
@@ -1817,7 +1858,7 @@ let g:ycm_semantic_triggers.tex = [
 
 augroup map_latex
     au!
-    au FileType latex nnoremap <leader>bl :VimtexCompile<cr>
+    au FileType latex nnoremap <leader>bb :VimtexCompileToggle<cr>
 augroup END
 
 
@@ -1837,7 +1878,7 @@ function! SetupMarkdown()
     nnoremap <buffer> <leader>bs :LivedownPreview<cr>
     nnoremap <buffer> <leader>bx :LivedownKill<cr>
 endfunction
-command! -bang SetupMarkdown :call SetupMarkdown() " add mappings for development with Markdown
+command! SetupMarkdown :call SetupMarkdown() " add mappings for development with Markdown
 
 
 " }}}
@@ -1848,11 +1889,11 @@ augroup php_on_read
     au FileType php call SetupPHP()
 augroup END
 function! SetupPHP()
-    nnoremap <leader>bi  :call VimuxRunCommand("composer install")<cr>
-    nnoremap <leader>bu  :call VimuxRunCommand("composer update")<cr>
-    nnoremap <leader>btt :call VimuxRunCommand("composer test")<cr>
-    nnoremap <leader>btu :call VimuxRunCommand("composer test")<cr>
-    nnoremap <leader>bto :call VimuxRunCommand("composer test " . expand('%p'))<cr>
+    nnoremap <leader>bi  :call RunCommand("composer install")<cr>
+    nnoremap <leader>bu  :call RunCommand("composer update")<cr>
+    nnoremap <leader>btt :call RunCommand("composer test")<cr>
+    nnoremap <leader>btu :call RunCommand("composer test")<cr>
+    nnoremap <leader>bto :call RunCommand("composer test " . expand('%p'))<cr>
 endfunction
 
 
@@ -1864,9 +1905,9 @@ augroup python_on_read
     au FileType python call SetupPython()
 augroup END
 function! SetupPython()
-    nnoremap <leader>bs  :call VimuxRunCommand("python " . expand('%'))<cr>
-    nnoremap <leader>b2  :call VimuxRunCommand("python2 " . expand('%'))<cr>
-    nnoremap <leader>b3  :call VimuxRunCommand("python3 " . expand('%'))<cr>
+    nnoremap <leader>bs  :call RunCommand("python " . expand('%'))<cr>
+    nnoremap <leader>b2  :call RunCommand("python2 " . expand('%'))<cr>
+    nnoremap <leader>b3  :call RunCommand("python3 " . expand('%'))<cr>
 endfunction
 
 
@@ -1903,12 +1944,13 @@ augroup rust_on_read
     au FileType rust call SetupRust()
 augroup END
 function! SetupRust()
-    nnoremap <leader>bd  :call MakeWithVimux("cargo build")<cr>
-    nnoremap <leader>bD  :call MakeWithVimux("cargo build --release")<cr>
-    nnoremap <leader>bs  :call MakeWithVimux("cargo run")<cr>
-    nnoremap <leader>btc :call MakeWithVimux("cargo check")<cr>
+    let g:build_shell = 'bash'
+    nnoremap <leader>bd  :call RunCommandInBuildShell("cargo build")<cr>
+    nnoremap <leader>bD  :call RunCommandInBuildShell("cargo build --release")<cr>
+    nnoremap <leader>bs  :call RunCommandInBuildShell("cargo run")<cr>
+    nnoremap <leader>btc :call RunCommandInBuildShell("cargo check")<cr>
 endfunction
-command! -bang SetupRust :call SetupRust() " add mappings for development with Rust
+command! SetupRust :call SetupRust() " add mappings for development with Rust
 
 
 " }}}
@@ -1987,6 +2029,7 @@ function! IsScalaProject()
     return filereadable("build.sbt")
 endfunction
 
+command! SetupScala :call SetupScala() " add settings and mappings for development with Scala
 function! SetupScala()
     let l:sbt_version = system('grep -E "sbt\.version" project/build.properties | sed -E "s/.*=(.*)/\1/"')
     " sbt shows column in compiler errors since version 1.0.0 so there are two " cases for errorformat:
@@ -2010,42 +2053,42 @@ function! SetupScala()
                 " \%E\ \%#[info]\ %.%#\ was\ not\ equal\ to\ %.%#\ (%f:%l),%Z,
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
-    nnoremap <leader>AF  :call VimuxRunCommand("scalafmt")<cr>
-    nnoremap <leader>bS  :call VimuxRunCommand("sbt")<cr>
-    nnoremap <leader>bd  :call ExecuteSbtCommand("compile")<cr>
-    nnoremap <leader>bs  :call ExecuteSbtCommand("run")<cr>
-    nnoremap <leader>btt :call ExecuteSbtCommand("test; it:test")<cr>
-    nnoremap <leader>btu :call ExecuteSbtCommand("test")<cr>
-    nnoremap <leader>bti :call ExecuteSbtCommand("it:test")<cr>
-    nnoremap <leader>bto :call ExecuteSbtCommand(CalculateSbtTestOnlyCommand())<cr>
-    nnoremap <leader>ba  :call ExecuteSbtCommand("scapegoat")<cr>
-    nnoremap <leader>bx  :call ExecuteSbtCommand("clean")<cr>
-    nnoremap <leader>br  :call ExecuteSbtCommand("console")<cr>
-    nnoremap <leader>bE  :call MakeWithVimuxOpenErrors('buffer')<cr>gg/\*\*\* FAILED \*\*\*<cr>
-    nnoremap <leader>fe  /\*\*\* FAILED \*\*\*<cr>
-endfunction
-command! -bang SetupScala :call SetupScala() " add mappings for development with Scala
 
-function! ExecuteSbtCommand(command)
-    if IsSbtRunning()
-        call VimuxRunCommand(a:command)
-    else
-        let g:sbt_args = "--color=true "
-        call MakeWithVimux("sbt " . g:sbt_args . "'" . a:command . "'")
-    endif
+    " TODO delete supershell escape sequences instead of supressing them
+    let g:build_shell = 'sbt --color=true --supershell=false'
+    let g:prompt_regex = '^sbt:.*>'
+
+    highlight link SbtPrompt LineNr
+    augroup sbt_prompt_highlighting
+        au!
+        au VimEnter,WinEnter * execute 'match SbtPrompt /' . g:prompt_regex . '/'
+    augroup END
+
+    nnoremap <leader>AF     :Terminal scalafmt<cr>
+
+    nnoremap <leader>bd     :call RunCommandInBuildShell("compile")<cr>
+    nnoremap <leader>bs     :call RunCommandInBuildShell("run")<cr>
+    nnoremap <leader>btt    :call RunCommandInBuildShell("test; it:test")<cr>
+    nnoremap <leader>btu    :call RunCommandInBuildShell("test")<cr>
+    nnoremap <leader>bti    :call RunCommandInBuildShell("it:test")<cr>
+    nnoremap <leader>bto    :call RunCommandInBuildShell(CalculateSbtTestOnlyCommand())<cr>
+    nnoremap <leader>ba     :call RunCommandInBuildShell("scapegoat")<cr>
+    nnoremap <leader>bx     :call RunCommandInBuildShell("clean")<cr>
+    nnoremap <leader>br     :call RunCommandInBuildShell("console")<cr>
+    nnoremap <leader>b<f5>  :call RunCommandInBuildShell("reload")<cr>
+
 endfunction
 
 function! CalculateSbtTestOnlyCommand()
-    let lines_that_match_package = GetMatches('^package.*', 1, line('$'))
-    let lines_that_match_class   = GetMatches('^class.*', 1, line('$'))
-    if len(lines_that_match_package) == 0 || len(lines_that_match_class) == 0
-        echoerr "Could not find class name."
-        return  1
+    let l:lines_that_match_package = GetMatches('^package.*', 1, line('$'))
+    let l:lines_that_match_class   = GetMatches('^\(class\|object\).*', 1, line('$'))
+    if len(l:lines_that_match_package) == 0 || len(l:lines_that_match_class) == 0
+        throw "Could not find test class name."
     endif
-    let package  = substitute(lines_that_match_package[0], '^package\s\+\(\w\+\)', '\1', '')
-    let class    = substitute(lines_that_match_class[0], '^class\s\+\(\w\+\).*', '\1', '')
-    let itPrefix = match(@%, '.*/it/.*') == -1 ? '' : 'it:'
-    return itPrefix . "testOnly " . package . "." . class
+    let l:package  = substitute(l:lines_that_match_package[0], '^package\s\+\(\w\+\)', '\1', '')
+    let l:class    = substitute(l:lines_that_match_class[0], '^\(class\|object\)\s\+\(\w\+\).*', '\2', '')
+    let l:itPrefix = match(@%, '.*/it/.*') == -1 ? '' : 'it:'
+    return l:itPrefix . "testOnly " . l:package . "." . l:class
 endfunction
 
 function! IsSbtRunning()
@@ -2084,13 +2127,13 @@ augroup sql_on_read
     au FileType sql if !IsScalaProject() | call SetupSQLDadBod() | endif
 augroup END
 
-command! -bang SetupSQL :call SetupSQLDadBod()<bar> call SetupSQLVimux() " add mappings for development with SQL
+command! SetupSQL :call SetupSQLDadBod()<bar> call SetupSQLVimux() " add mappings for development with SQL
 
 function! SetupSQLVimux()
-    nnoremap <leader>bm  :call VimuxRunCommand("\\. " . expand('%:p'))<cr>
-    nnoremap <leader>bp  :call VimuxRunCommand("\\i " . expand('%:p'))<cr>
+    nnoremap <leader>bm  :call RunCommand("\\. " . expand('%:p'))<cr>
+    nnoremap <leader>bp  :call RunCommand("\\i " . expand('%:p'))<cr>
 endfunction
-command! -bang SetupSQLVimux :call SetupSQLVimux() " add mappings for development with SQL (Vimux)
+command! SetupSQLVimux :call SetupSQLVimux() " add mappings for development with SQL (Vimux)
 
 
 Plug 'tpope/vim-dadbod'
@@ -2110,7 +2153,7 @@ function! SetupSQLDadBod()
     nmap        <leader>bdq vap<leader>bd
 
 endfunction
-command! -bang SetupSQLDadBod :call SetupSQLDadBod() " add mappings for development with SQL (DadBod)
+command! SetupSQLDadBod :call SetupSQLDadBod() " add mappings for development with SQL (DadBod)
 
 
 
@@ -2448,7 +2491,7 @@ function! FixHighlighting()
     endif
 
 endfunction
-command! -bang FixHighlighting :call FixHighlighting() " Overwrite some highlight group definitions
+command! FixHighlighting :call FixHighlighting() " Overwrite some highlight group definitions
 
 
 highlight PokemonPikachu ctermfg=233 ctermbg=184
@@ -2516,7 +2559,7 @@ endfunction
 call SetColorscheme()
 
 
-command! -bang ToggleColorschemeDarkOrLight :call ToggleColorschemeDarkOrLight() " Set colorscheme etc. to dark or light
+command! ToggleColorschemeDarkOrLight :call ToggleColorschemeDarkOrLight() " Set colorscheme etc. to dark or light
 function! ToggleColorschemeDarkOrLight()
     if g:light_or_dark_theme == 'dark'
         let g:light_or_dark_theme = 'light'
@@ -2576,6 +2619,20 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " {{{
+
+
+" Execute a interactive shell command in full screen {{{
+command! -nargs=1 Shell :call Shell(<q-args>)
+function! Shell(commandline)
+    if has('nvim')
+        tabnew
+        execute 'terminal ' . a:commandline
+        startinsert
+    else
+        execute '!' . a:commandline
+    endif
+endfunction
+" }}}
 
 
 " URL encode a string. ie. Percent-encode characters as necessary. {{{
@@ -2693,10 +2750,50 @@ endfunction
 
 " get a list of buffers {{{
 function! GetBufferList()
-  silent! redir =>buflist
-  silent! ls!
-  redir END
-  return buflist
+    silent! redir =>buflist
+    silent! ls!
+    redir END
+    return buflist
+endfunction
+" }}}
+
+" find buffers with a running terminal (returns list of bufnum) {{{
+function! GetTerminalBuffers()
+    if !has('nvim')
+        " TODO: make this work in regular vim
+        echoerr "Sorry, this is only implemented in neovim (right now)."
+        return
+    endif
+    " terminals have b:terminal_job_id defined
+    let l:terminals = filter(range(1, bufnr('$')), 'bufexists(v:val) && getbufvar(v:val, "terminal_job_id", 0)')
+    return l:terminals
+endfunction
+" }}}
+
+" find bufnum of the first buffer with a running terminal (or 0) {{{
+function! GetTerminalBuffer()
+    let l:terminals = GetTerminalBuffers()
+    if len(l:terminals) == 0
+        return 0
+    else
+        return l:terminals[0]
+    endif
+endfunction
+" }}}
+
+" Close all buffers with a running terminal {{{
+" With bang it also kills the running shell
+command! -bang CloseTerminalBuffers :call CloseTerminalBuffers(<bang>0) " Close all buffers with a running terminal
+function! CloseTerminalBuffers(bang)
+    let l:terminals = GetTerminalBuffers()
+    if a:bang
+        let l:bang_string = '!'
+    else
+        let l:bang_string = ''
+    endif
+    for n in l:terminals
+        exe n . 'bd' . l:bang_string
+    endfor
 endfunction
 " }}}
 
@@ -2898,6 +2995,8 @@ endfunction
 
 " poor-man's (fake IDE) auto-import {{{
 " searches for import statement for word under cursor and adds it to buffer
+nnoremap <leader>io :call AutoImportFake()<cr>
+command! -bar AutoImportFake call AutoImportFake()
 function! AutoImportFake()
     let word = expand("<cword>")
     call fzf#run(fzf#wrap({
@@ -2910,8 +3009,6 @@ function! AddImportStatement(statement)
     let linenumber = search('import')
     put =a:statement
 endfunction
-command! -bar AutoImportFake call AutoImportFake()
-nnoremap <leader>io :call AutoImportFake()<cr>
 " }}}
 
 
@@ -2920,32 +3017,32 @@ nnoremap <leader>io :call AutoImportFake()<cr>
 " ranger as a file chooser {{{
 function! RangerChooser(starting_dir)
     let temp = tempname()
-    " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
-    " with ranger 1.4.2 through 1.5.0 instead.
-    "exec 'silent !ranger --choosefile=' . shellescape(temp)
-    if has("gui_running")
-        let command = 'silent !xterm -e ranger'
+
+    " in vim, this is blocking, in neovim it's not
+    call Shell('ranger --choosefiles=' . shellescape(temp) . ' --cmd="set viewmode multipane" ' . a:starting_dir)
+
+    if has('nvim')
+        " TODO: make this work, because in neovim Shell/:terminal is non-blocking, but we need a blocking ranger instance
+        " https://vi.stackexchange.com/questions/10292/how-to-close-and-and-delete-terminal-buffer-if-programs-exited
+        echoerr "Sorry, file choosing via Ranger is (yet) working in Neovim."
     else
-        let command = 'silent !ranger'
+        if !filereadable(temp)
+            redraw!
+            return
+        endif
+        let names = readfile(temp)
+        if empty(names)
+            redraw!
+            return
+        endif
+        " Edit the first item.
+        exec 'edit ' . fnameescape(names[0])
+        " Add any remaning items to the arg list/buffer list.
+        for name in names[1:]
+            exec 'argadd ' . fnameescape(name)
+        endfor
     endif
-    exec command . ' --choosefiles=' . shellescape(temp) . ' --cmd="set viewmode multipane" ' . a:starting_dir
-    if !filereadable(temp)
-        redraw!
-        " Nothing to read.
-        return
-    endif
-    let names = readfile(temp)
-    if empty(names)
-        redraw!
-        " Nothing to open.
-        return
-    endif
-    " Edit the first item.
-    exec 'edit ' . fnameescape(names[0])
-    " Add any remaning items to the arg list/buffer list.
-    for name in names[1:]
-        exec 'argadd ' . fnameescape(name)
-    endfor
+
     redraw!
 endfunction
 command! -bar RangerChooser call RangerChooser(getcwd())
@@ -3343,15 +3440,91 @@ noremap <m-k>  <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 noremap <esc>k <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 
 
-
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TERMINAL {{{
 
-command! Terminal   :vertical terminal ++close fish
-nnoremap <leader>tt :vertical terminal ++close fish<cr>
+" nnoremap <leader>tt :Terminal! fish<cr>
+" nnoremap <leader>to :Terminal<space>
+" nnoremap <leader>tO :Terminal!<space>
 
-" TODO: replace vimux?
+" run a given (interactive) commandline in the builtin terminal in a vertical split (also see :Shell)
+command! -nargs=1 -bang Terminal :call Terminal(<bang>0, <q-args>)
+" with bang == 0: keep terminal open after exit
+" with bang == 1: close terminal automatically after exit
+" TODO: argument for keeping focus on current window
+function! Terminal(bang, commandline)
+    if !has('nvim')
+        let l:open_or_close = a:bang ? "++close " : "++open "
+        execute 'vertical terminal ' . l:open_or_close . a:commandline
+    else
+        let g:terminal_close_after_exit = a:bang
+        execute 'vsplit | terminal ' . a:commandline
+    endif
+endfunction
+
+if has('nvim')
+
+    let g:terminal_close_after_exit = 0
+
+    augroup terminal_autocommands
+        au!
+
+        " start terminal in insert mode, not normal mode
+        " (in neoterm we have g:neoterm_autoinsert)
+        " autocmd TermOpen * startinsert
+
+        " enter insert mode when switching to terminal
+        " autocmd BufEnter term://* startinsert
+        autocmd BufEnter term://* if !exists('g:suppress_terminal_autoinsert') | startinsert | endif
+
+        " don't show line numbers
+        autocmd TermOpen * setlocal nonumber
+        autocmd TermOpen * setlocal norelativenumber
+
+        " close terminal buffer automatically after shell exits
+        " (https://www.reddit.com/r/neovim/comments/7xonzm/how_to_close_a_terminal_buffer_automatically_if/)
+        autocmd TermClose * silent call s:OnTermClose()
+
+        " close terminal buffers if vim is closed (don't persist them in sessions)
+        " autocmd VimLeavePre * silent CloseTerminalBuffers! " Doesn't work, so do it at start instead:
+        " TODO: fix that this start insert mode
+        autocmd VimEnter * silent CloseTerminalBuffers!
+
+    augroup END
+
+    function! s:OnTermClose()
+        if g:terminal_close_after_exit
+            call s:PressKeyToCloseTerminal()
+        endif
+    endfunction
+
+    function! s:PressKeyToCloseTerminal()
+        " Try to move the cursor to the last line containing text
+        try
+            $;?.
+        catch
+            " The buffer is empty here. This shouldn't ever happen
+            return
+        endtry
+        " Is the last line an error message?
+        if match(getline('.'), 'make: \*\*\* \[[^\]]\+] Error ') == -1
+            call feedkeys('<cr>')
+        endif
+    endfunction
+
+endif
+
+" leave terminal insert mode
+" (this is a bad idea if terminal applications use <esc> as well)
+" tnoremap <esc> <c-\><c-n>
+" tnoremap <expr> <esc> &filetype == 'fzf' ? "\<esc>" : "\<c-\>\<c-n>"
+
+" leave terminal insert mode and scroll up
+tnoremap <c-b> <c-\><c-n><c-b>
+
+" leave terminal insert mode and move to window on the left
+tnoremap <c-h> <c-\><c-n><c-w>h
 
 " TODO: checkout debugging feature (see :help terminal-debug)
 
@@ -3873,6 +4046,7 @@ endif
 " delete leading whitespace (can be prefixed with a count)
 nnoremap <silent> -dsl :s:^\s\+::<cr>
 " replace double/multiple spaces with one space
+" TODO: make this repeatable with .
 nnoremap <silent> -dsd :.s:\v(\S) {2}(\S):\1 \2:<cr>
 nnoremap <silent> -dsD :%s:\v(\S) {2}(\S):\1 \2:<cr>
 nnoremap <silent> -dsm :.s:\v(\S) {2,}(\S):\1 \2:<cr>
@@ -3897,10 +4071,10 @@ endif
 " undo and redo
 " (in difference to :undo and :redo, :earlier and :later also make changes
 " reachable if we branch, i.e. go back in history and make other changes)
-noremap <m-u>  :earlier<cr>
-noremap <esc>u :earlier<cr>
-noremap <m-u>  :later<cr>
-noremap <esc>U :later<cr>
+noremap <m-u>   :earlier<cr>
+noremap <esc>u  :earlier<cr>
+noremap <m-s-u> :later<cr>
+noremap <esc>U  :later<cr>
 
 
 " }}}
@@ -3917,11 +4091,165 @@ nnoremap dN [c
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" BUILDING AND DEBUGGING {{{
+" BUILDING, MAKING AND DEBUGGING {{{
 
-
-" make
 nnoremap <leader>bm :make<cr>
+
+if has('nvim')
+    let g:run_command_method = "terminal"
+else
+    let g:run_command_method = "vimux"
+endif
+
+function! GetBuildOutputFilename()
+    if !empty(v:servername)
+        let l:project_name = tolower(v:servername)
+    else
+        let l:project_name = system('basename "$(pwd)" | tr -d "\n"')
+    endif
+    let l:project_name = tolower(substitute(l:project_name, "[ /]", "_", "g"))
+    " let l:git_branch_name = system('git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d "\n" || echo -n ""')
+    " let l:git_branch_name_escaped = substitute(UrlEncode(l:git_branch_name), '%..', '-', 'g')
+    let l:build_output_file = '/tmp/vim.' . l:project_name . '.make.out'
+    return l:build_output_file
+endfunction
+
+function! IsBuildShellRunning()
+    if g:run_command_method == "terminal"
+        let l:terminal_bufnum = GetTerminalBuffer()
+        return l:terminal_bufnum > 0
+    elseif g:run_command_method == "vimux"
+        " TODO: make this work for other shells
+        return exists('g:build_shell') && match(g:build_shell, 'sbt') == 0
+                    \ && IsSbtRunning()
+    else
+        return 0
+    endif
+endfunction
+
+" open up build shell if not already opened before executing commandline
+command! -nargs=1 RunCommandInBuildShell :call RunCommandInBuildShell(<q-args>)
+function! RunCommandInBuildShell(commandline)
+    if !IsBuildShellRunning() && exists('g:build_shell')
+        let l:build_output_file = GetBuildOutputFilename()
+        let l:neoterm_autoinsert = g:neoterm_autoinsert
+        let g:neoterm_autoinsert = 0
+        let l:shell_cmd = g:build_shell . " | tee (tty) > " . l:build_output_file
+        call RunCommand(l:shell_cmd)
+        let g:neoterm_autoinsert = l:neoterm_autoinsert
+    endif
+    call RunCommand(a:commandline)
+endfunction
+
+command! -nargs=1 RunCommand :call RunCommand(<q-args>)
+function! RunCommand(command)
+    if g:run_command_method == "terminal"
+        call RunCommandInTerminal(a:command)
+    elseif g:run_command_method == "vimux"
+        call VimuxRunCommand(a:command)
+    else
+      echoerr "Unknown g:run_command_method (" . g:run_command_method . ")"
+    endif
+endfunction
+
+nnoremap <leader>bC :call RunCommand(getline('.'))<cr>
+vnoremap <leader>bC y:call RunCommand(@*)<cr>
+nnoremap <silent> <leader>be :OpenBuildErrorsInQuickfixList<cr><esc>hj
+nnoremap <silent> <leader>bE :OpenBuildErrorsInBuffer<cr><esc>hj
+
+if g:run_command_method == "terminal"
+    nnoremap <leader>bo         :RunCommandInBuildShell<space>
+    nnoremap <leader>bf         :execute 'RunCommandInBuildShell  ' . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
+    nnoremap <leader>bF         :execute 'RunCommandInBuildShell ' . ExpandPrependThisDir('%') . ' '<left>
+    nnoremap <leader>bb         :update<cr> :call RunLastCommandInTerminal()<cr>
+    nnoremap <leader>bl         :ExecuteInNeoTerminal Tclear<cr>
+    nnoremap <leader>bc         :ExecuteInNeoTerminal Tkill<cr>
+    nnoremap <leader>b<c-c>     :ExecuteInNeoTerminal Tkill<cr>
+    nnoremap <leader>b<bs>      :Tclose<cr>         " only hides buffer, we can still sent commands to it
+elseif g:run_command_method == "vimux"
+    nnoremap <leader>bo         :VimuxRunCommand ""<left>
+    nnoremap <leader>bf         :VimuxRunCommand " " . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
+    nnoremap <leader>bF         :VimuxRunCommand ExpandPrependThisDir('%') . " "<left>
+    nnoremap <leader>bb         :update<cr>:VimuxRunLastCommand<cr>
+    nnoremap <silent> <leader>bl :VimuxClearTerminalScreen<cr>
+    nnoremap <leader>bq         :VimuxCloseRunner<cr>
+    nnoremap <leader>b<bs>      :VimuxCloseRunner<cr>
+    nnoremap <leader>bz         :call VimuxZoomRunner()<cr>
+    nnoremap <leader>bc         :VimuxInterruptRunner<cr>
+    nnoremap <leader>b<c-c>     :VimuxInterruptRunner<cr>
+    nnoremap <leader>b<c-d>     :call VimuxSendKeys("C-d")<cr>
+    nnoremap <leader>b<c-b>     :VimuxInspectRunner<cr>
+    nnoremap <leader><c-b><c-b> :VimuxInspectRunner<cr>
+else
+    echoerr "Unknown g:run_command_method (" . g:run_command_method . ")"
+endif
+
+function! RemoveEscapeSequencesFromFile(filename)
+    " color escape sequences
+    exec ':silent !sed -i -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" ' . a:filename
+    exec ':silent !sed -i -r "s/\\x1b\\[[0-9;]*[a-zA-Z]//g" ' . a:filename
+    " magic control sequences
+    exec ':silent !sed -i -r "s/[\\x01-\\x1F\\x7F]//g" ' . a:filename
+    exec ':silent !sed -i -r "s/[\\x?1-\\x1F\\x7F]//g" ' . a:filename
+    " weird sbt shell sequences
+    exec ':silent !sed -i -r "s/\[\?1h=\[\?2004h//g" ' . a:filename
+endfunction
+
+" open quickfix list with build errors from the terminal
+command! OpenBuildErrorsInQuickfixList :call OpenBuildErrorsInQuickfixList()
+function! OpenBuildErrorsInQuickfixList()
+    " let l:terminal_bufnum = GetTerminalBuffer()
+    " if l:terminal_bufnum == 0
+    "     echoerr 'No terminal buffer found.'
+    "     return
+    " let l:lines = getbufline(l:terminal_bufnum, 1, '$')
+    "
+    " " Unfortunately, the terminal (or more specifically libvterm) inserts hard
+    " " linebreaks when the width of the terminal window is reached, so it's
+    " " hardly usable for parsing build output.
+    " " See https://github.com/neovim/neovim/issues/2514
+    " " So I use the tee to build output file solution instead:
+    "
+    let l:build_output_file = GetBuildOutputFilename()
+    let l:lines = readfile(l:build_output_file)
+
+    let l:errorfile = '/tmp/vim.errorfile.txt'
+    call writefile(l:lines, l:errorfile)
+    call RemoveEscapeSequencesFromFile(l:errorfile)
+    let l:lines = readfile(l:errorfile)
+
+    let l:last_prompt_line = 1
+    if exists('g:prompt_regex')
+        for i in range(len(l:lines) - 2 , 1, -1)
+            if match(l:lines[i], g:prompt_regex) == 0
+                let l:last_prompt_line = i
+                break
+            endif
+        endfor
+    endif
+    if l:last_prompt_line != 1
+        call writefile(l:lines[l:last_prompt_line:], l:errorfile)
+    endif
+
+    cclose
+    exe 'cfile' . l:errorfile
+    if len(getqflist()) > 0
+        let g:jumplist = 'quickfixlist'
+        copen
+        cfirst
+    else
+        echomsg "No build errors."
+    endif
+endfunction
+
+command! OpenBuildErrorsInBuffer :call OpenBuildErrorsInBuffer()
+function! OpenBuildErrorsInBuffer()
+    let l:build_output_file = GetBuildOutputFilename()
+    call RemoveEscapeSequencesFromFile(l:build_output_file)
+    execute "edit " . l:build_output_file
+endfunction
+
+
 
 " execute shell script
 command! ExecuteShellscript :call ExecuteShellscript() " Execute shellscript (current file) in a new tmux pane
@@ -3931,7 +4259,7 @@ function! ExecuteShellscript()
         call system('chmod +x ' . expand('%'))
     endif
     if s:MyMode == 'mastery'
-        call VimuxRunCommand(ExpandPrependThisDir("%"))
+        call RunCommand(ExpandPrependThisDir("%"))
     else
         exec '!' . ExpandPrependThisDir('%')
     endif
@@ -4043,11 +4371,32 @@ nnoremap <silent> <c-l> :wincmd l<cr>
 nnoremap <silent> <leader><c-l> :vsplit<cr><c-w>w:bprevious<cr><c-w>w<cr>
 nnoremap <silent> <leader><c-j> :vertical split<cr>
 
-" resize window faster
-nnoremap <silent> <c-w>+ :resize +3<cr>
-nnoremap <silent> <c-w>- :resize -3<cr>
-nnoremap <silent> <c-w>> 5<c-w>>
-nnoremap <silent> <c-w>< 5<c-w><
+" swap/rotate windows
+nnoremap <silent> <c-w>> <c-w>r
+nnoremap <silent> <c-w>< <c-w>R
+
+" resize window mode
+nnoremap <silent> <c-w>r     :ResizeWindows<cr>
+nnoremap <silent> <c-w><c-r> :ResizeWindows<cr>
+command! ResizeWindows  :call ResizeWindows('enter') " Open a mode to resize windows with h,j,k,l
+function! ResizeWindows(enter_or_leave)
+    " TODO: save and restore existing mappings (j,k)
+    if a:enter_or_leave == "enter"
+        nnoremap <return> :call ResizeWindows('leave')<cr>
+        nnoremap <silent> j :resize -2<cr>
+        nnoremap <silent> k :resize +2<cr>
+        nnoremap <silent> h 2<c-w><
+        nnoremap <silent> l 2<c-w>>
+        echo "[RESIZE MODE] (press h,j,k,l to resize and <enter> to leave move)"
+    else
+        nnoremap j gj
+        nnoremap k gk
+        nunmap   h
+        nunmap   l
+        nunmap   <return>
+        echo "Windows resized."
+    endif
+endfunction
 
 " navigate through tabs
 nnoremap <leader><m-n>  :tabnext<cr>
@@ -4057,7 +4406,7 @@ nnoremap <leader><esc>p :tabprevious<cr>
 
 
 " clear windows (close quickfix and location list) and refresh screen
-nnoremap <silent> <bs> :nohlsearch \| :lclose \| :cclose \| :redraw! <cr>
+nnoremap <silent> <bs> :nohlsearch \| :lclose \| :cclose \| :redraw! <cr> :<c-c>
 xmap <silent> <bs> <bs>gv
 
 " toggle quickfix or location list
@@ -4135,23 +4484,24 @@ vnoremap <leader>isd :<c-w>!$BROWSER 'https://duckduckgo.com/?q=<c-r>*'<cr><cr>
 vnoremap <leader>isg :<c-w>!$BROWSER 'https://google.com/?q=<c-r>*'<cr><cr>
 
 " shell in working dir or dir of current file
-nnoremap <leader>if :!fish<cr><cr>
-nnoremap <leader>iF :execute '!cd ' . expand('%:p:h') . '; fish'<cr><cr>
-nnoremap <leader>ib :!bash<cr><cr>
-nnoremap <leader>iB :execute '!cd ' . expand('%:p:h') . '; bash'<cr><cr>
+nnoremap <leader>if :Shell fish<cr>
+nnoremap <leader>iF :call Shell('cd ' . expand('%:p:h') . '; fish')<cr>
+nnoremap <leader>ib :Shell bash<cr>
+nnoremap <leader>iB :call Shell('cd ' . expand('%:p:h') . '; bash')<cr>
 
 " file manager in working dir or dir of current file
-" nnoremap <leader>ir :call VimuxRunCommand("ranger")<cr>
+" nnoremap <leader>ir :call RunCommand("ranger")<cr>
 " nnoremap <leader>ir :exe "!ranger " . shellescape(expand("%p:h"))
-nnoremap <leader>ir :RangerChooserFromCurrentFile<cr>
-nnoremap <leader>iR :RangerChooser<cr>
+nnoremap <leader>ir :RangerChooserFromCurrentFile<cr><cr>
+nnoremap <leader>iR :RangerChooser<cr><cr>
 
 " tig - an ncurses git interface
 function! Tig(from_current_file)
     if (a:from_current_file)
-        execute 'silent !cd ' . expand('%:p:h') . '; tig status'
+        let l:command = 'cd "' . expand('%:p:h') . '"; tig status'
+        execute 'Shell fish -c ''' . l:command . ''''
     else
-        silent !tig status
+        Shell tig status
     endif
     redraw!
 endfunction
@@ -4206,7 +4556,7 @@ command! Reset              :e!                     " Discard changes in buffer
 command! Save               :call Save(0)           " Write buffer changes to file
 command! SaveForce          :call Save(1)           " Write buffer changes to file ignoring 'readonly' etc.
 command! SaveAndClose       :wq                     " Write buffer changes to file and close window
-command! CloseBuffer        :bdelete                " Close current buffer
+command! CloseBuffer        :bn | :bd#              " Close current buffer (without closing window)
 command! CloseBufferForce   :bdelete!               " Close current buffer discarding changes
 command! CloseAllBuffers    :silent bufdo bdelete   " Close all buffers (not vim)
 command! CloseWindow        :quit                   " Close current window (not buffer)
@@ -4235,7 +4585,8 @@ augroup map_q_in_read_only_buffers
     au BufReadPost * if &readonly
     au BufReadPost *   nnoremap <buffer> q :bd<cr>
     au BufReadPost * endif
-    au BufReadPost fugitive://* nnoremap <buffer> q :bd<cr>
+    au BufReadPost fugitive://*     nnoremap <buffer> q :bd<cr>
+    au BufReadPost output://*       nnoremap <buffer> q :bd<cr>
 augroup END
 
 " ... but ignore typos
@@ -4344,5 +4695,5 @@ endfor
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim:tw=0:sw=4:fdm=marker:
+" vim:tw=0:ts=4:sts=4:sw=4:fdm=marker:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -31,6 +31,7 @@ abbr $args gbD    git branch -D
 abbr $args gbm    git branch -m
 abbr $args gc     git commit
 abbr $args gca    git commit --amend
+abbr $args gcm    git commit -m
 abbr $args gcl    git clone --recursive
 abbr $args gcf    git clean -f -d
 abbr $args gd     git diff
@@ -67,7 +68,7 @@ abbr $args gst    git status
 abbr $args gu     git submodule
 abbr $args gup    git submodule update
 abbr $args gus    git submodule status
-abbr $args h      htop
+abbr $args h      bpytop \|\| htop
 abbr $args l      less
 abbr $args ll     ls -lhF
 abbr $args lll    ls -lhFa
@@ -78,6 +79,8 @@ abbr $args mip    make init plan
 abbr $args mkd    mkdir_cd
 abbr $args mp     make plan
 abbr $args mpa    make plan apply
+abbr $args nv     nvim
+abbr $args ns     nvim --listen \(basename \(pwd\)\)
 abbr $args o      open
 abbr $args p      pass
 abbr $args pe     pass edit
