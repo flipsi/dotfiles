@@ -376,6 +376,13 @@ let g:goyo_height="100%"
 nnoremap <leader>yy :Goyo<cr>
 
 
+" maximize (tmux 'zoom') current window temporarily
+Plug 'szw/vim-maximizer'
+let g:maximizer_set_default_mapping = 0
+nnoremap <silent><leader>ym :MaximizerToggle!<CR>
+vnoremap <silent><leader>ym :MaximizerToggle!<CR>gv
+
+
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " status bar {{{
