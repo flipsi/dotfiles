@@ -632,11 +632,6 @@ function package_install_target() {
                 ;;
 
             git )
-                if test ! -d "$HOME/opt/git-amend-old"; then
-                    echo "Installing git-amend-old"
-                    git clone https://github.com/colinodell/git-amend-old "$HOME/opt/git-amend-old"
-                    create_link "$HOME/opt/git-amend-old/git-amend-old" "$HOME/bin/git-amend-old"
-                fi
                 gem install git-rc # git release
                 ;;
 
@@ -671,16 +666,6 @@ function package_install_target() {
             bash )
                 echo 'You really should not uninstall bash.'
                 return 1
-                ;;
-
-            git )
-                echo 'Uninstalling git-amend-old...'
-                if [[ "$FORCE" != true ]]; then
-                    rm -rI "$HOME/opt/git-amend-old"
-                else
-                    rm -rf "$HOME/opt/git-amend-old"
-                fi
-                create_link "$HOME/opt/git-amend-old/git-amend-old" "$HOME/bin/git-amend-old" # delete the link
                 ;;
 
         esac

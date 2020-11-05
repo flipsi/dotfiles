@@ -118,8 +118,8 @@ bind status afs  ?scalafmt %(file)
 # amend to last commit
 bind status A ?git commit --amend
 # amend to older commit
-bind main A ?git amend-old %(commit)
-bind diff A ?git amend-old %(commit)
+bind main A ?git fixup %(commit)
+bind diff A ?git fixup %(commit)
 
 # stash
 bind generic gsa ?git stash push --include-untracked
