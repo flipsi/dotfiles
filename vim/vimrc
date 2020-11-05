@@ -1750,6 +1750,21 @@ nmap <leader>rf <Plug>(coc-rename)
 nmap <leader>i<return> <Plug>(coc-fix-current)
 
 
+" Debugger
+Plug 'puremourning/vimspector'
+nnoremap <leader>da     :call vimspector#Launch()<CR>
+nnoremap <leader>dq     :call vimspector#Reset()<CR>
+nmap     <leader>dj     <Plug>VimspectorStepInto
+nmap     <leader>dl     <Plug>VimspectorStepOver
+nmap     <leader>dk     <Plug>VimspectorStepOut
+nmap     <leader>d_     <Plug>VimspectorRestart
+nnoremap <leader>d<cr>  :call vimspector#Continue()<CR>
+nmap     <leader>drc    <Plug>VimspectorRunToCursor
+nmap     <leader>dbp    <Plug>VimspectorToggleBreakpoint
+nmap     <leader>dcbp   <Plug>VimspectorToggleConditionalBreakpoint
+nnoremap <leader>ddbp   :call vimspector#CleanLineBreakpoint()<CR>
+
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
