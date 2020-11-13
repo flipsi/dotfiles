@@ -1878,10 +1878,17 @@ let g:ycm_semantic_triggers.tex = [
             \ 're!\\(include|input){[^}]*'
             \ ]
 
-augroup map_latex
+augroup latex_on_read
     au!
-    au FileType latex nnoremap <leader>bb :VimtexCompileToggle<cr>
+    au FileType latex SetupLatex
+    au FileType tex   SetupLatex
 augroup END
+
+command! SetupLatex :call SetupLatex() " add mappings for LaTeX
+function! SetupLatex()
+    nnoremap <leader>bb :VimtexCompile<cr>
+    nnoremap <leader>bs :VimtexCompileSS<cr>
+endfunction
 
 
 " }}}
