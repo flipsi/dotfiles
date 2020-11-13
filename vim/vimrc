@@ -1886,6 +1886,7 @@ augroup END
 
 command! SetupLatex :call SetupLatex() " add mappings for LaTeX
 function! SetupLatex()
+    setlocal wrap
     nnoremap <leader>bb :VimtexCompile<cr>
     nnoremap <leader>bs :VimtexCompileSS<cr>
 endfunction
