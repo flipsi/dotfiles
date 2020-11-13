@@ -20,8 +20,12 @@ prepend_to_path ~/shellscripts
 prepend_to_path ~/bin
 
 
-# edit files with vim
-set -x EDITOR vim
+# edit files with neovim or vim
+if command -v nvim >/dev/null 2>&1
+    set -x EDITOR nvim
+else
+    set -x EDITOR vim
+end
 
 # web browser
 set -x BROWSER vivaldi-stable
