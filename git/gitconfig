@@ -22,6 +22,7 @@
     default = simple
 
 [alias]
+    fixup      = !sh -c 'REV=$(git rev-parse $1) && git commit --fixup $@ && git rebase -i --autostash --autosquash $REV^' -
     l          = log --pretty=format:"%C(blue)%ad\\ %C(yellow)%h\\ %C(green)%cn%C(red)%d\\ %C(reset)%s" --decorate --date=short
     ll         = log --pretty=format:"%C(blue)%ad\\ %C(yellow)%h\\ %C(green)%cn%C(red)%d\\ %C(reset)%s" --decorate --date=short --numstat
     save       = !sh -c 'git checkout -b "stash/$1" && git commit -m "$1" && git checkout -' - ; a better stash save

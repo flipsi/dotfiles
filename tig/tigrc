@@ -113,13 +113,13 @@ bind status R    ?git reset --hard
 bind stage  R    ?git reset --hard
 bind status xr   ?rm -r %(file)
 bind status xt   !trash-put %(file)
-bind status afs  ?scalafmt %(file)
+bind status af   ?autoformat.sh %(file)
 
 # amend to last commit
 bind status A ?git commit --amend
 # amend to older commit
-bind main A ?git amend-old %(commit)
-bind diff A ?git amend-old %(commit)
+bind main A ?git fixup %(commit)
+bind diff A ?git fixup %(commit)
 
 # stash
 bind generic gsa ?git stash push --include-untracked

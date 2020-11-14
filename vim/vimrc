@@ -376,6 +376,13 @@ let g:goyo_height="100%"
 nnoremap <leader>yy :Goyo<cr>
 
 
+" maximize (tmux 'zoom') current window temporarily
+Plug 'szw/vim-maximizer'
+let g:maximizer_set_default_mapping = 0
+nnoremap <silent><leader>ym :MaximizerToggle!<CR>
+vnoremap <silent><leader>ym :MaximizerToggle!<CR>gv
+
+
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " status bar {{{
@@ -1743,6 +1750,21 @@ nmap <leader>rf <Plug>(coc-rename)
 nmap <leader>i<return> <Plug>(coc-fix-current)
 
 
+" Debugger
+Plug 'puremourning/vimspector'
+nnoremap <leader>da     :call vimspector#Launch()<CR>
+nnoremap <leader>dq     :call vimspector#Reset()<CR>
+nmap     <leader>dj     <Plug>VimspectorStepInto
+nmap     <leader>dl     <Plug>VimspectorStepOver
+nmap     <leader>dk     <Plug>VimspectorStepOut
+nmap     <leader>d_     <Plug>VimspectorRestart
+nnoremap <leader>d<cr>  :call vimspector#Continue()<CR>
+nmap     <leader>drc    <Plug>VimspectorRunToCursor
+nmap     <leader>dbp    <Plug>VimspectorToggleBreakpoint
+nmap     <leader>dcbp   <Plug>VimspectorToggleConditionalBreakpoint
+nnoremap <leader>ddbp   :call vimspector#CleanLineBreakpoint()<CR>
+
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1856,10 +1878,18 @@ let g:ycm_semantic_triggers.tex = [
             \ 're!\\(include|input){[^}]*'
             \ ]
 
-augroup map_latex
+augroup latex_on_read
     au!
-    au FileType latex nnoremap <leader>bb :VimtexCompileToggle<cr>
+    au FileType latex SetupLatex
+    au FileType tex   SetupLatex
 augroup END
+
+command! SetupLatex :call SetupLatex() " add mappings for LaTeX
+function! SetupLatex()
+    setlocal wrap
+    nnoremap <leader>bb :VimtexCompile<cr>
+    nnoremap <leader>bs :VimtexCompileSS<cr>
+endfunction
 
 
 " }}}

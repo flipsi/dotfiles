@@ -89,12 +89,6 @@ if status --is-interactive; and status --is-login
         end
     end
 
-    # load abbreviations
-    source $HOME/.config/fish/abbr.fish
-    if test -f $HOME/.config/fish/abbr.local.fish
-        source $HOME/.config/fish/abbr.local.fish
-    end
-
     # asdf version manager
     if test -f ~/.asdf/asdf.fish
         source ~/.asdf/asdf.fish
@@ -139,6 +133,16 @@ if status --is-interactive; and status --is-login
         else
             tmux-ryte-sessions.sh
         end
+    end
+
+end
+
+if status --is-interactive
+
+    # load abbreviations
+    source $HOME/.config/fish/abbr.fish
+    if test -f $HOME/.config/fish/abbr.local.fish
+        source $HOME/.config/fish/abbr.local.fish
     end
 
 end
