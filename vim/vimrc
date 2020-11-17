@@ -435,20 +435,20 @@ let g:airline#extensions#grepper#enabled = 1
 
 Plug 'tpope/vim-fugitive'
 
-nnoremap <leader>gs  :Gstatus<cr>
-nnoremap <leader>gd  :Gdiffsplit<cr>
-nnoremap <leader>gmd :Gdiffsplit!<cr>
-nnoremap <leader>gU  :Gread<cr>
-nnoremap <leader>gw  :Gwrite<cr>
-nnoremap <leader>gA  :Gwrite<cr>
-nnoremap <leader>gcc :Git commit<cr>
-nnoremap <leader>gca :Git commit --amend<cr>
-nnoremap <leader>gb  :Git blame<cr>
-nnoremap <leader>gpp :Git pull<cr>
-nnoremap <leader>gpu :Git push<cr>
-nnoremap <leader>gpU :exe ':Git push -u ' . system('git remote \| head -n1 \| tr -d "\\n"') . ' ' . system('git rev-parse --abbrev-ref HEAD \| tr -d "\\n"')<cr>
-nnoremap <leader>geb :exe ':Git checkout -b ' . input('Branch name: ')<cr>
-nnoremap <leader>geo :GitCheckoutInteractively<cr>
+nnoremap <leader>gs   :Git<cr>
+nnoremap <leader>gd   :Gdiffsplit<cr>
+nnoremap <leader>gmd  :Gdiffsplit!<cr>
+nnoremap <leader>gU   :Gread<cr>
+nnoremap <leader>gw   :Gwrite<cr>
+nnoremap <leader>gA   :Gwrite<cr>
+nnoremap <leader>gcc  :Git commit<cr>
+nnoremap <leader>gca  :Git commit --amend<cr>
+nnoremap <leader>gb   :Git blame<cr>
+nnoremap <leader>gpp  :Git pull<cr>
+nnoremap <leader>gpu  :GitPush<cr>
+nnoremap <leader>geb  :exe ':Git checkout -b ' . input('Branch name: ')<cr>
+nnoremap <leader>geo  :GitCheckoutInteractively<cr>
+nnoremap <leader>ghpr :OpenOrCreatePullRequest<cr>
 
 
 command! GitCheckoutInteractively :call GitCheckoutInteractively() <cr> " checkout git branch chosen with fzf
@@ -2739,6 +2739,40 @@ function! IsGitRepository(dir)
     return !v:shell_error
 endfunction
 " }}}
+
+" determine whether current branch has a tracking remote or not {{{
+function! HasRemoteBranch()
+    call system('git rev-parse --abbrev-ref --symbolic-full-name @{u} >/dev/null 2>&1')
+    return !v:shell_error
+endfunction
+" }}}
+
+command! GitPush :call GitPush() " Git push or GitPushNewBranch if necessary
+function! GitPush()
+    if HasRemoteBranch()
+        Git push
+    else
+        GitPushNewBranch
+    endif
+endfunction
+
+
+command! GitPushNewBranch :call GitPushNewBranch() " push a new branch to remote and set tracking upstream
+function! GitPushNewBranch()
+    let l:remote = system('git remote | head -n1 | tr -d "\n"')
+    let l:branch_name = system('git rev-parse --abbrev-ref HEAD | tr -d "\n"')
+    exe ':Git push -u ' . l:remote . ' ' . l:branch_name
+endfunction
+
+" Github CLI (gh)
+
+command! OpenOrCreatePullRequest :call OpenOrCreatePullRequest() <cr> " Open (and create if not exists) Pull Request on Github
+function! OpenOrCreatePullRequest()
+    if !HasRemoteBranch()
+        GitPushNewBranch
+    endif
+    call system('gh pr view --web || gh pr create --web')
+endfunction
 
 
 " copy current filename/path/dir (unnamed register/clipboard/fucking everywhere) {{{
