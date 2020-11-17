@@ -394,6 +394,8 @@ let g:airline_detect_modified=1
 let g:airline_detect_paste=1
 let g:airline_inactive_collapse=0
 
+let g:airline#extensions#tabline#show_tabs = 1
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
@@ -3556,6 +3558,11 @@ tnoremap <c-b> <c-\><c-n><c-b>
 " leave terminal insert mode and move to window on the left
 tnoremap <c-h> <c-\><c-n><c-w>h
 
+" leave terminal insert mode and go to previous/next/new tab
+tnoremap <space><c-p> <c-\><c-n>:tabprevious<cr>
+tnoremap <space><c-n> <c-\><c-n>:tabnext<cr>
+tnoremap <space><c-t> <c-\><c-n>:tabnew<cr>
+
 " TODO: checkout debugging feature (see :help terminal-debug)
 
 
@@ -4429,10 +4436,8 @@ function! ResizeWindows(enter_or_leave)
 endfunction
 
 " navigate through tabs
-nnoremap <leader><m-n>  :tabnext<cr>
-nnoremap <leader><esc>n :tabnext<cr>
-nnoremap <leader><m-p>  :tabprevious<cr>
-nnoremap <leader><esc>p :tabprevious<cr>
+nnoremap <leader><c-n>  :tabnext<cr>
+nnoremap <leader><c-p>  :tabprevious<cr>
 
 
 " clear windows (close quickfix and location list) and refresh screen
@@ -4605,7 +4610,7 @@ nnoremap <leader><bs>       :CloseBuffer<cr>
 nnoremap <leader>QQ         :CloseBufferForce<cr>
 nnoremap <leader>qW         :CloseWindow<cr>
 nnoremap <leader>qw         :CloseOtherWindows<cr>
-nnoremap <leader><c-n>      :NewTab<cr>
+nnoremap <leader><c-t>      :tab split<cr> " open current buffer in a new tab
 nnoremap <leader><c-w>      :CloseTab<cr>
 nnoremap <c-d>              :QuitVim<cr> " this is how i exit most terminal applications
 nnoremap <leader><c-d><c-d> :QuitVimForce<cr>
