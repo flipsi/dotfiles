@@ -394,6 +394,8 @@ let g:airline_detect_modified=1
 let g:airline_detect_paste=1
 let g:airline_inactive_collapse=0
 
+let g:airline#extensions#tabline#show_tabs = 1
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
@@ -433,20 +435,20 @@ let g:airline#extensions#grepper#enabled = 1
 
 Plug 'tpope/vim-fugitive'
 
-nnoremap <leader>gs  :Gstatus<cr>
-nnoremap <leader>gd  :Gdiffsplit<cr>
-nnoremap <leader>gmd :Gdiffsplit!<cr>
-nnoremap <leader>gU  :Gread<cr>
-nnoremap <leader>gw  :Gwrite<cr>
-nnoremap <leader>gA  :Gwrite<cr>
-nnoremap <leader>gcc :Git commit<cr>
-nnoremap <leader>gca :Git commit --amend<cr>
-nnoremap <leader>gb  :Git blame<cr>
-nnoremap <leader>gpp :Git pull<cr>
-nnoremap <leader>gpu :Git push<cr>
-nnoremap <leader>gpU :exe ':Git push -u ' . system('git remote \| head -n1 \| tr -d "\\n"') . ' ' . system('git rev-parse --abbrev-ref HEAD \| tr -d "\\n"')<cr>
-nnoremap <leader>geb :exe ':Git checkout -b ' . input('Branch name: ')<cr>
-nnoremap <leader>geo :GitCheckoutInteractively<cr>
+nnoremap <leader>gs   :Git<cr>
+nnoremap <leader>gd   :Gdiffsplit<cr>
+nnoremap <leader>gmd  :Gdiffsplit!<cr>
+nnoremap <leader>gU   :Gread<cr>
+nnoremap <leader>gw   :Gwrite<cr>
+nnoremap <leader>gA   :Gwrite<cr>
+nnoremap <leader>gcc  :Git commit<cr>
+nnoremap <leader>gca  :Git commit --amend<cr>
+nnoremap <leader>gb   :Git blame<cr>
+nnoremap <leader>gpp  :Git pull<cr>
+nnoremap <leader>gpu  :GitPush<cr>
+nnoremap <leader>geb  :exe ':Git checkout -b ' . input('Branch name: ')<cr>
+nnoremap <leader>geo  :GitCheckoutInteractively<cr>
+nnoremap <leader>ghpr :OpenOrCreatePullRequest<cr>
 
 
 command! GitCheckoutInteractively :call GitCheckoutInteractively() <cr> " checkout git branch chosen with fzf
@@ -2738,6 +2740,40 @@ function! IsGitRepository(dir)
 endfunction
 " }}}
 
+" determine whether current branch has a tracking remote or not {{{
+function! HasRemoteBranch()
+    call system('git rev-parse --abbrev-ref --symbolic-full-name @{u} >/dev/null 2>&1')
+    return !v:shell_error
+endfunction
+" }}}
+
+command! GitPush :call GitPush() " Git push or GitPushNewBranch if necessary
+function! GitPush()
+    if HasRemoteBranch()
+        Git push
+    else
+        GitPushNewBranch
+    endif
+endfunction
+
+
+command! GitPushNewBranch :call GitPushNewBranch() " push a new branch to remote and set tracking upstream
+function! GitPushNewBranch()
+    let l:remote = system('git remote | head -n1 | tr -d "\n"')
+    let l:branch_name = system('git rev-parse --abbrev-ref HEAD | tr -d "\n"')
+    exe ':Git push -u ' . l:remote . ' ' . l:branch_name
+endfunction
+
+" Github CLI (gh)
+
+command! OpenOrCreatePullRequest :call OpenOrCreatePullRequest() <cr> " Open (and create if not exists) Pull Request on Github
+function! OpenOrCreatePullRequest()
+    if !HasRemoteBranch()
+        GitPushNewBranch
+    endif
+    call system('gh pr view --web || gh pr create --web')
+endfunction
+
 
 " copy current filename/path/dir (unnamed register/clipboard/fucking everywhere) {{{
 function! CopyFileNameOrPathOrDir(modifiers)
@@ -3555,6 +3591,11 @@ tnoremap <c-b> <c-\><c-n><c-b>
 
 " leave terminal insert mode and move to window on the left
 tnoremap <c-h> <c-\><c-n><c-w>h
+
+" leave terminal insert mode and go to previous/next/new tab
+tnoremap <space><c-p> <c-\><c-n>:tabprevious<cr>
+tnoremap <space><c-n> <c-\><c-n>:tabnext<cr>
+tnoremap <space><c-t> <c-\><c-n>:tabnew<cr>
 
 " TODO: checkout debugging feature (see :help terminal-debug)
 
@@ -4429,10 +4470,8 @@ function! ResizeWindows(enter_or_leave)
 endfunction
 
 " navigate through tabs
-nnoremap <leader><m-n>  :tabnext<cr>
-nnoremap <leader><esc>n :tabnext<cr>
-nnoremap <leader><m-p>  :tabprevious<cr>
-nnoremap <leader><esc>p :tabprevious<cr>
+nnoremap <leader><c-n>  :tabnext<cr>
+nnoremap <leader><c-p>  :tabprevious<cr>
 
 
 " clear windows (close quickfix and location list) and refresh screen
@@ -4605,7 +4644,7 @@ nnoremap <leader><bs>       :CloseBuffer<cr>
 nnoremap <leader>QQ         :CloseBufferForce<cr>
 nnoremap <leader>qW         :CloseWindow<cr>
 nnoremap <leader>qw         :CloseOtherWindows<cr>
-nnoremap <leader><c-n>      :NewTab<cr>
+nnoremap <leader><c-t>      :tab split<cr> " open current buffer in a new tab
 nnoremap <leader><c-w>      :CloseTab<cr>
 nnoremap <c-d>              :QuitVim<cr> " this is how i exit most terminal applications
 nnoremap <leader><c-d><c-d> :QuitVimForce<cr>
