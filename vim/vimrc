@@ -2216,6 +2216,13 @@ command! SetupSQLDadBod :call SetupSQLDadBod() " add mappings for development wi
 
 Plug 'neowit/vim-force.com'
 
+let g:apex_backup_folder = '/tmp/force.com/backup' " project backup folder
+let g:apex_temp_folder = '/tmp/force.com/temp' " temporary folder
+let g:apex_properties_folder = '/tmp/force.com/properties' " login/pass/token credentials
+
+" Download from https://github.com/neowit/tooling-force.com/releases
+let g:apex_tooling_force_dot_com_path = expand('~/.local/share/force.com/tooling-force.com-0.4.7.0.jar') " full path to tooling.jar
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
