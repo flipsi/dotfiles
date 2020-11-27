@@ -436,6 +436,7 @@ let g:airline#extensions#grepper#enabled = 1
 Plug 'tpope/vim-fugitive'
 
 nnoremap <leader>gs   :Git<cr>
+nnoremap <leader>gel  :Git difftool<cr> " open quickfixlist with unstaged changes
 nnoremap <leader>gd   :Gdiffsplit<cr>
 nnoremap <leader>gmd  :Gdiffsplit!<cr>
 nnoremap <leader>gU   :Gread<cr>
