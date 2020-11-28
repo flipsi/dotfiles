@@ -19,31 +19,6 @@ function setup_power_management
 end
 
 
-# TODO: port to bash in ./i3/bin/i3-initialize-outputs.sh
-function new_screen_resolution
-    set screen $argv[1]
-    set h_resolution $argv[2]
-    set v_resolution $argv[3]
-    set modeline (cvt $h_resolution $v_resolution | grep Modeline)
-    set modeline (echo $modeline | sed 's/Modeline //' | sed 's/\s\+/ /g')
-    set modeline (string split ' ' $modeline)
-    set modename $modeline[1]
-    xrandr --newmode $modeline
-    and xrandr --addmode $screen $modename
-    xrandr --output $screen --mode $modename
-end
-
-
-# TODO: port to bash in ./i3/bin/i3-initialize-outputs.sh
-function setup_screen_resolution
-    if test (hostname) = 'asterix'
-        if not xrandr | grep "eDP1 connected 1920x1080" >/dev/null
-            new_screen_resolution eDP1 1920 1080
-        end
-    end
-end
-
-
 function start_musicserver_if_music_is_accessible
     set mountpoints /mnt/extern /media/sflip/extern /media/sflip/Extern
     if not nc -z localhost 6600
