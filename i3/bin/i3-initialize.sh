@@ -111,8 +111,11 @@ end
 setup_power_management
 desktop_session
 setup_musicserver
-# tmux-system-sessions
 autostart
 toggle_redshift
 
+
+if command -v tmux-initialize-sessions.sh >/dev/null
+    tmux-initialize-sessions.sh
+end
 
