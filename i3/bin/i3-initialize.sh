@@ -59,7 +59,20 @@ function setup_musicserver
 end
 
 
+# redshift makes it dark after startup at day (major use case), so toggle once
+function toggle_redshift
+    for t in (seq 60)
+        if pgrep -x redshift >/dev/null
+           pkill -USR1 '^redshift$'
+        else
+            sleep 1
+        end
+    end
+end
+
+
 function desktop_session
+
     # daemon for theme settings and shit
     if command -v gnome-session >/dev/null
         if not pgrep -x gnome-session; nohup gnome-session &; end
@@ -68,13 +81,16 @@ function desktop_session
     else if command -v cinnamon-settings-daemon >/dev/null
         if not pgrep -x cinnamon-settings-daemon; nohup cinnamon-settings-daemon &; end
     end
+
     # power manager takes care of lid closing, standby, display brightness etc.
     if command -v xfce4-power-manager >/dev/null
         if not pgrep -x xfce4-power-manager; nohup xfce4-power-manager &; end
     end
+
     # start the gnome network manager, because it automatically connects to eduroam etc.
     # and kill it after a few seconds when it is not needed anymore
     #timelimit -t 30 -T 35 nm-applet
+
 end
 
 
@@ -97,5 +113,6 @@ desktop_session
 setup_musicserver
 # tmux-system-sessions
 autostart
+toggle_redshift
 
 
