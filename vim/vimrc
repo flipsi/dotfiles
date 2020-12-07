@@ -445,7 +445,9 @@ nnoremap <leader>gA   :Gwrite<cr>
 nnoremap <leader>gcc  :Git commit<cr>
 nnoremap <leader>gca  :Git commit --amend<cr>
 nnoremap <leader>grh  :Confirm Git reset --hard<cr>
-nnoremap <leader>gb   :Git blame<cr>
+nnoremap <leader>gta  :Confirm Git stash push --include-untracked<cr>
+nnoremap <leader>gtp  :Confirm Git stash pop<cr>
+nnoremap <leader>gbb  :Git blame<cr>
 nnoremap <leader>gpp  :Git pull<cr>
 nnoremap <leader>gpu  :GitPush<cr>
 nnoremap <leader>geb  :exe ':Git checkout -b ' . input('Branch name: ')<cr>

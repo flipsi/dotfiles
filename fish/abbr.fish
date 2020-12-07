@@ -62,9 +62,8 @@ abbr $args grh    git reset --hard
 abbr $args grH    git reset HEAD~1
 abbr $args grm    git rebase master
 abbr $args gs     tig status
-abbr $args gsa    git stash push
-abbr $args gsi    git stash push --include-untracked
-abbr $args gsp    git stash pop
+abbr $args gta    git stash push --include-untracked
+abbr $args gtp    git stash pop
 abbr $args gst    git status
 abbr $args gu     git submodule
 abbr $args gup    git submodule update
