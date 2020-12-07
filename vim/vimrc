@@ -1018,10 +1018,7 @@ nnoremap <leader>fd :FindDefinition<cr>
 Plug 'tpope/vim-eunuch'
 
 nnoremap <leader>rn :Rename <c-r>=expand("%:t")<cr>
-nnoremap <leader>rm
-            \ :if confirm("Remove file?", "&Yes\n&No", 2) == 1
-            \ <bar> Delete
-            \ <bar> endif <cr>
+nnoremap <leader>rm :Confirm Delete<cr>
 
 " Plug 'scrooloose/nerdtree'
 
