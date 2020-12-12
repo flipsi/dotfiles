@@ -444,7 +444,10 @@ nnoremap <leader>gw   :Gwrite<cr>
 nnoremap <leader>gA   :Gwrite<cr>
 nnoremap <leader>gcc  :Git commit<cr>
 nnoremap <leader>gca  :Git commit --amend<cr>
-nnoremap <leader>gb   :Git blame<cr>
+nnoremap <leader>grh  :Confirm Git reset --hard<cr>
+nnoremap <leader>gta  :Confirm Git stash push --include-untracked<cr>
+nnoremap <leader>gtp  :Confirm Git stash pop<cr>
+nnoremap <leader>gbb  :Git blame<cr>
 nnoremap <leader>gpp  :Git pull<cr>
 nnoremap <leader>gpu  :GitPush<cr>
 nnoremap <leader>geb  :exe ':Git checkout -b ' . input('Branch name: ')<cr>
@@ -1015,10 +1018,7 @@ nnoremap <leader>fd :FindDefinition<cr>
 Plug 'tpope/vim-eunuch'
 
 nnoremap <leader>rn :Rename <c-r>=expand("%:t")<cr>
-nnoremap <leader>rm
-            \ :if confirm("Remove file?", "&Yes\n&No", 2) == 1
-            \ <bar> Delete
-            \ <bar> endif <cr>
+nnoremap <leader>rm :Confirm Delete<cr>
 
 " Plug 'scrooloose/nerdtree'
 
@@ -2670,6 +2670,16 @@ function! Shell(commandline)
         startinsert
     else
         execute '!' . a:commandline
+    endif
+endfunction
+" }}}
+
+
+" Confirm before executing a command {{{
+command! -nargs=1 Confirm :call Confirm(<q-args>)
+function! Confirm(vimcommand)
+    if confirm("Execute '" . a:vimcommand . "'?", "&Yes\n&No", 2) == 1
+        execute a:vimcommand
     endif
 endfunction
 " }}}

@@ -122,8 +122,8 @@ bind main A ?git fixup %(commit)
 bind diff A ?git fixup %(commit)
 
 # stash
-bind generic gsa ?git stash push --include-untracked
-bind generic gsp ?git stash pop
+bind generic gta ?git stash push --include-untracked
+bind generic gtp ?git stash pop
 bind status  aS  ?git stash push --include-untracked
 bind stage   aS  ?git stash push --include-untracked
 bind stash   aP  ?git stash pop %(stash)

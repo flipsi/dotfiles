@@ -128,13 +128,6 @@ if status --is-interactive; and status --is-login
         end
     end
 
-    if test $hostname = "dwarf"
-        if tmux has-session -t src 2>/dev/null
-        else
-            tmux-ryte-sessions.sh
-        end
-    end
-
 end
 
 if status --is-interactive

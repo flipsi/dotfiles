@@ -62,9 +62,8 @@ abbr $args grh    git reset --hard
 abbr $args grH    git reset HEAD~1
 abbr $args grm    git rebase master
 abbr $args gs     tig status
-abbr $args gsa    git stash push
-abbr $args gsi    git stash push --include-untracked
-abbr $args gsp    git stash pop
+abbr $args gta    git stash push --include-untracked
+abbr $args gtp    git stash pop
 abbr $args gst    git status
 abbr $args gu     git submodule
 abbr $args gup    git submodule update
@@ -80,8 +79,6 @@ abbr $args mip    make init plan
 abbr $args mkd    mkdir_cd
 abbr $args mp     make plan
 abbr $args mpa    make plan apply
-abbr $args nv     nvim
-abbr $args ns     nvim --listen \(basename \(pwd\)\)
 abbr $args o      open
 abbr $args p      pass
 abbr $args pe     pass edit
@@ -101,8 +98,9 @@ abbr $args t      trans :de
 abbr $args te     trans de:en
 abbr $args tf     trans de:fr
 abbr $args u      unison
-abbr $args v      vim
-abbr $args vs     vim --servername \(basename \(pwd\)\)
+abbr $args v      nvim
+abbr $args vs     nvim --listen \(basename \(pwd\)\)
+# abbr $args vs     vim --servername \(basename \(pwd\)\)
 abbr $args x      xrandr
 abbr $args xi     startx ~/.xinitrc
 abbr $args xo     xrandr --output
