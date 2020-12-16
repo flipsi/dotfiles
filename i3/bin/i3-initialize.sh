@@ -115,7 +115,7 @@ autostart
 toggle_redshift
 
 
-if command -v tmux-initialize-sessions.sh >/dev/null
-    tmux-initialize-sessions.sh
+if test -x /home/sflip/dotfiles/tmux/tmux-initialize-sessions.sh
+    /home/sflip/dotfiles/tmux/tmux-initialize-sessions.sh >> /tmp/tmux-initialize-sessions.log 2>&1
 end
 

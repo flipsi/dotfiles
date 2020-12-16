@@ -9,7 +9,7 @@ SESSION_NAME_1="main"
 SESSION_NAME_2="src"
 
 PROJECTS_DIR="$HOME/work/ryte/src"
-NUMBER_OF_PROJECTS_TO_OPEN=8
+NUMBER_OF_PROJECTS_TO_OPEN=6
 
 
 function has_internet_connection() {
