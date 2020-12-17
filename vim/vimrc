@@ -3566,6 +3566,9 @@ if has('nvim')
         autocmd TermOpen * setlocal nonumber
         autocmd TermOpen * setlocal norelativenumber
 
+        " don't list terminal buffers in buffer list
+        autocmd TermOpen * setlocal nobuflisted
+
         " close terminal buffer automatically after shell exits
         " (https://www.reddit.com/r/neovim/comments/7xonzm/how_to_close_a_terminal_buffer_automatically_if/)
         autocmd TermClose * silent call s:OnTermClose()
