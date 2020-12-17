@@ -1039,6 +1039,21 @@ let NERDTreeMapToggleHidden='.'
 " Plug 'tpope/vim-vinegar'
 
 
+" use ranger file manager as file chooser etc.
+Plug 'francoiscabrol/ranger.vim'
+
+if has('nvim')
+    Plug 'rbgrouleff/bclose.vim'
+endif
+
+" open ranger when vim open a directory
+let g:ranger_replace_netrw = 1
+
+let g:ranger_map_keys = 0
+
+nnoremap <leader>ir :Ranger<cr>
+nnoremap <leader>iR :RangerWorkingDirectory<cr>
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -3097,44 +3112,6 @@ endfunction
 
 
 
-
-" ranger as a file chooser {{{
-function! RangerChooser(starting_dir)
-    let temp = tempname()
-
-    " in vim, this is blocking, in neovim it's not
-    call Shell('ranger --choosefiles=' . shellescape(temp) . ' --cmd="set viewmode multipane" ' . a:starting_dir)
-
-    if has('nvim')
-        " TODO: make this work, because in neovim Shell/:terminal is non-blocking, but we need a blocking ranger instance
-        " https://vi.stackexchange.com/questions/10292/how-to-close-and-and-delete-terminal-buffer-if-programs-exited
-        echoerr "Sorry, file choosing via Ranger is (yet) working in Neovim."
-    else
-        if !filereadable(temp)
-            redraw!
-            return
-        endif
-        let names = readfile(temp)
-        if empty(names)
-            redraw!
-            return
-        endif
-        " Edit the first item.
-        exec 'edit ' . fnameescape(names[0])
-        " Add any remaning items to the arg list/buffer list.
-        for name in names[1:]
-            exec 'argadd ' . fnameescape(name)
-        endfor
-    endif
-
-    redraw!
-endfunction
-command! -bar RangerChooser call RangerChooser(getcwd())
-command! -bar RangerChooserFromCurrentFile :call RangerChooser(expand('%:p:h'))
-" }}}
-
-
-
 " change search mode (what happens when hitting n) {{{
 " http://vim.wikia.com/wiki/Make_search_results_appear_in_the_middle_of_the_screen
 " TODO: make it easy to change default
@@ -4582,8 +4559,6 @@ nnoremap <leader>iB :call Shell('cd ' . expand('%:p:h') . '; bash')<cr>
 " file manager in working dir or dir of current file
 " nnoremap <leader>ir :call RunCommand("ranger")<cr>
 " nnoremap <leader>ir :exe "!ranger " . shellescape(expand("%p:h"))
-nnoremap <leader>ir :RangerChooserFromCurrentFile<cr><cr>
-nnoremap <leader>iR :RangerChooser<cr><cr>
 
 " tig - an ncurses git interface
 function! Tig(from_current_file)
