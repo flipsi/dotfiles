@@ -3,7 +3,7 @@
     email = soziflip@gmail.com
 
 [core]
-    editor = vim
+    editor = nvim
     excludesfile = "~/.gitignore"
 
 [commit]
