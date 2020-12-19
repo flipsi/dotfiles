@@ -3,7 +3,8 @@
     email = soziflip@gmail.com
 
 [core]
-    editor = vim
+    pager = delta ; https://github.com/dandavison/delta
+    editor = nvim
     excludesfile = "~/.gitignore"
 
 [commit]
@@ -29,9 +30,27 @@
     pop        = !sh -c 'git rebase $(git rev-parse --abbrev-ref HEAD) "stash/$1"' - ; a better stash pop
     pop-prefix = !sh -c 'git rebase $(git rev-parse --abbrev-ref HEAD) "$1"' - ; (for tig)
 
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = side-by-side line-numbers decorations
+    side-by-side = true
+    line-numbers = true
+    whitespace-error-style = 22 reverse
+    plus-color = "#98971A"
+    minus-color = "#CC241D"
+    syntax-theme = 1337
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+
 [diff]
     tool = vimdiff
     guitool = sublimerge
+    colorMoved = default
     ; wsErrorHighlight = context
 
 [difftool "vimdiff"]

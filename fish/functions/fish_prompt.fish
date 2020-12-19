@@ -40,8 +40,10 @@ function fish_prompt --description 'Prompt anzeigen'
 
     case '*'
 
-        set_color $fish_my_color_gray_dark
-        echo_horizontal_line
+        # set_color $fish_my_color_gray_dark
+        # echo_horizontal_line
+
+        echo # newline because whitespace is good
 
         # user
         set_color --bold $fish_my_color_accent_dark
