@@ -202,8 +202,8 @@ nnoremap <leader>c<leader>  :action CommentByLineComment<cr>
 vmap <leader>c              gc
 omap <leader>c              gc
 
-" nnoremap <leader>af         :action ReformatCode<cr>
-nnoremap <leader>af         :action ScalaFmtFormat<cr>
+nnoremap <leader>af         :action ReformatCode<cr>
+" nnoremap <leader>af         :action ScalaFmtFormat<cr> " seems deprecated
 nnoremap <leader>ai         :action OptimizeImports<cr>
 
 nnoremap <leader>rf         :action RenameElement<cr>
