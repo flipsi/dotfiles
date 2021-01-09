@@ -1051,8 +1051,13 @@ let g:ranger_replace_netrw = 1
 
 let g:ranger_map_keys = 0
 
-nnoremap <leader>ir :Ranger<cr>
-nnoremap <leader>iR :RangerWorkingDirectory<cr>
+nnoremap <silent> <leader>ir :vertical split <bar> wincmd H <bar> vertical resize 60 <bar> Ranger <cr>
+nnoremap <silent> <leader>iR :vertical split <bar> wincmd H <bar> vertical resize 60 <bar> RangerWorkingDirectory <cr>
+
+augroup ranger_autoclose
+    au!
+    au BufWipeout term://*ranger* quit
+augroup END
 
 
 " }}}
