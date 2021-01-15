@@ -1014,11 +1014,19 @@ nnoremap <leader>fd :FindDefinition<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " file management {{{
 
+" write buffer with sudo
+" (because the `:w !sudo tee % > /dev/null` does not work in neovim)
+Plug 'lambdalisue/suda.vim'
+
+cnoreabbrev w!! SudaWrite
+
+
 " sugar for unix shell commands like move/rename/delete/find files etc.
 Plug 'tpope/vim-eunuch'
 
 nnoremap <leader>rn :Rename <c-r>=expand("%:t")<cr>
 nnoremap <leader>rm :Confirm Delete<cr>
+
 
 " Plug 'scrooloose/nerdtree'
 
@@ -3617,8 +3625,10 @@ cnoreabbrev <expr> h ((getcmdtype() is# ':' && getcmdline() is# 'h')
 autocmd FileType help wincmd L
 
 " write changes with root permissions
-cnoremap w!! w !sudo tee % >/dev/null
-"cnoreabbrev w!! w !sudo tee % >/dev/null
+" (does not work in neovim, so I use the suda.vim plugin now)
+if s:MyMode == 'stripped'
+    cnoreabbrev w!! w !sudo tee % >/dev/null
+endif
 
 " have the up/down search functionality without reaching to the arrow keys
 cnoremap <c-j> <down>
@@ -4457,8 +4467,8 @@ function! ResizeWindows(enter_or_leave)
     " TODO: save and restore existing mappings (j,k)
     if a:enter_or_leave == "enter"
         nnoremap <return> :call ResizeWindows('leave')<cr>
-        nnoremap <silent> j :resize -2<cr>
-        nnoremap <silent> k :resize +2<cr>
+        nnoremap <silent> j :resize +2<cr>
+        nnoremap <silent> k :resize -2<cr>
         nnoremap <silent> h 2<c-w><
         nnoremap <silent> l 2<c-w>>
         echo "[RESIZE MODE] (press h,j,k,l to resize and <enter> to leave move)"
