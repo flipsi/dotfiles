@@ -95,5 +95,5 @@ case $(hostname) in
 esac
 
 
-setup_wallpaper
+# setup_wallpaper
 
