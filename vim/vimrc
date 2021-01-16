@@ -1762,31 +1762,53 @@ endfunction
 
 let g:coc_start_at_startup = 0
 
+" start/stop coc
 nmap <leader>ica :CocStart<cr>
 nmap <leader>ict :CocToggle<cr>
 nmap <leader>ici :CocInfo<cr>
+
+" choose coc command (fuzzy finder)
 nmap <leader>icc :CocList commands<cr>
 
-nmap <leader>ia         <Plug>(coc-codeaction)
-nmap <leader>ie         <Plug>(coc-diagnostic-info)
-nmap <leader>i<return>  <Plug>(coc-fix-current)
+" hide error/warning popup
 nmap <leader>i<bs>      <Plug>(coc-float-hide)
+
+" show error/warning in a popup
+nmap <leader>ie         <Plug>(coc-diagnostic-info)
+
+" show infos about function under cursor in popup
+nmap <silent> <leader>iq :call <SID>show_documentation()<CR>
+
+" navigate to first/next/last error/warning
 nmap <leader>ig       gg<Plug>(coc-diagnostic-next)
 nmap <leader>in         <Plug>(coc-diagnostic-next)
 nmap <leader>iN         <Plug>(coc-diagnostic-prev)
+
+" open errors in location list
 nmap <leader>iE         :CocDiagnostics<cr>
+
+" jump to specific error (fuzzy finder)
 nmap <leader>jE         :CocList diagnostics<cr>
+
+" jump to definition etc.
 nmap <leader>jd         <Plug>(coc-definition)
 nmap <leader>jD         <Plug>(coc-declaration)
 nmap <leader>ji         <Plug>(coc-implementation)
 
+" jump to symbol (class, object, etc.)
+nmap <leader>es :CocList outline<cr>
+
+" find usages and show in quickfix list
+nmap <leader>fu         <Plug>(coc-references)
+
+" actions
+nmap <leader>ia         <Plug>(coc-codeaction)
+nmap <leader>i<return>  <Plug>(coc-fix-current)
+nmap <leader>ai         :CocCommand editor.action.organizeImport<cr> " autoimport
+
+" refactor/rename identifier
 nmap <leader>rf <Plug>(coc-rename)
 
-" jump to symbol (class, object, etc.)
-nmap <leader>js :CocList outline<cr>
-
-
-nmap <silent> <leader>id :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)

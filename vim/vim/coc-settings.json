@@ -1,3 +1,4 @@
 {
-    "metals.javaHome": "/usr/lib/jvm/default"
+    "metals.javaHome": "/usr/lib/jvm/default",
+    "coc.preferences.useQuickfixForLocations": true
 }
