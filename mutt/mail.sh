@@ -15,9 +15,6 @@ MODE=ask
 # how long to wait between syncs (in seconds)
 LOOP_SLEEPTIME=900
 
-# whether to do a full or quick sync the first time (afterwards, only quick syncs)
-FIRST_TIME_FULL=true
-
 # what to do when quitting: ['sync', 'nothing', 'ask']
 LAST_TIME_ACTION=ask
 
@@ -44,11 +41,12 @@ SYNC_COMMAND="mbsync -a --verbose >> $SYNC_LOGFILE 2>&1"
 
 TITLE="mutt"
 
-echo -e '\033k'$TITLE'\033\\'
-# echo -e '\033]2;'$TITLE'\007'
-
 if [[ -n $TMUX ]]; then
-    tmux rename-window $TITLE
+    ORIGINAL_TITLE=$(tmux display-message -p '#W')
+    tmux rename-window "$TITLE"
+else
+    echo -e '\033k'$TITLE'\033\\'
+    # echo -e '\033]2;'$TITLE'\007'
 fi
 
 
@@ -64,7 +62,7 @@ case $MODE in
         exit $?
         ;;
     ask )
-        read -n 1 -p "Sync (default) or use [o]ffline mode? " user_input; echo
+        read -r -n 1 -p "Sync (default) or use [o]ffline mode? " user_input; echo
         case $user_input in
             q )
                 exit 0
@@ -87,13 +85,13 @@ esac
 # open logs
 if [[ -n $TMUX ]]; then
     if [[ $TAIL_SYNC_LOGS = "true" ]]; then
-        tmux split-window -v -l 20 -d "tail -F $SYNC_LOGFILE"
+        tmux split-window -v -l 10 -d "tail -F $SYNC_LOGFILE"
     fi
 fi
 
 while true                  # run forever
 do
-    eval $SYNC_COMMAND
+    eval "$SYNC_COMMAND"
     sleep $LOOP_SLEEPTIME   # sleep a while before doing that again
 done &                      # run loop in background
 LOOP_PID=$!                 # copy PID of loop
@@ -117,14 +115,14 @@ done
 # sync one last time?
 case $LAST_TIME_ACTION in
     sync )
-        eval $SYNC_COMMAND
+        eval "$SYNC_COMMAND"
         ;;
     ask )
         while true; do
-            read -n 1 -p "Sync? " user_input; echo
+            read -r -n 1 -p "Sync? " user_input; echo
             case $user_input in
                 [Nn]* ) exit 0;;
-                * )     eval $SYNC_COMMAND; break;;
+                * )     eval "$SYNC_COMMAND"; break;;
             esac
         done
         ;;
@@ -132,4 +130,12 @@ case $LAST_TIME_ACTION in
         ;;
 esac
 
-# TODO: reset window rename
+if [[ -n $TMUX ]]; then
+    # close logs
+    if [[ $TAIL_SYNC_LOGS = "true" ]]; then
+        tmux kill-pane -t 2
+    fi
+    # restore window title
+    tmux rename-window "$ORIGINAL_TITLE"
+fi
+
