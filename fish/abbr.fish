@@ -94,6 +94,9 @@ abbr $args s      systemctl status
 abbr $args sa     systemctl start
 abbr $args so     systemctl stop
 abbr $args sr     systemctl restart
+abbr $args ssa    sudo systemctl start
+abbr $args sso    sudo systemctl stop
+abbr $args ssr    sudo systemctl restart
 abbr $args t      trans :de
 abbr $args te     trans de:en
 abbr $args tf     trans de:fr

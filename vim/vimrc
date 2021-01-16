@@ -455,7 +455,7 @@ nnoremap <leader>geo  :GitCheckoutInteractively<cr>
 nnoremap <leader>ghpr :OpenOrCreatePullRequest<cr>
 
 
-command! GitCheckoutInteractively :call GitCheckoutInteractively() <cr> " checkout git branch chosen with fzf
+command! GitCheckoutInteractively :call GitCheckoutInteractively() " checkout git branch chosen with fzf
 function! GitCheckoutInteractively()
     let word = expand("<cword>")
     call fzf#run(fzf#wrap({
@@ -1748,37 +1748,55 @@ nnoremap <leader>icp :ColorPicker<cr>
 " Completion and other smart IDE features via LSP {{{
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 
-let g:coc_start_at_startup = 1
-
-" TODO: FIX (This fails with 'E488 Trailing characters')
-command! CocToggle :call CocToggle() <cr> " Enable or Disable COC
+command! CocToggle :call CocToggle() " Enable or Disable COC
 function! CocToggle()
-    if g:coc_enabled == 1
+    if g:coc_workspace_initialized == 0
+        CocStart
+    elseif g:coc_enabled == 1
         CocDisable
     else
         CocEnable
     endif
 endfunction
-" nmap <leader>jot :if g:coc_enabled == 1 <bar> CocDisable <bar> else <bar> CocEnable <bar> endif <cr>
-" nmap <leader>jot :if g:coc_enabled == 1 <bar> echo 'jaj' <bar> else <bar> echo 'no' <bar> endif
-" nmap <leader>jot :if g:coc_enabled == 1 <bar> echo 'jaj' <bar> endif <cr>
-nmap <leader>jot :CocToggle<cr>
 
-nmap <leader>joi :CocInfo<cr>
+let g:coc_start_at_startup = 0
 
-nmap <leader>ie <Plug>(coc-diagnostic-info)
-nmap <leader>i<bs> <Plug>(coc-float-hide)
+nmap <leader>ica :CocStart<cr>
+nmap <leader>ict :CocToggle<cr>
+nmap <leader>ici :CocInfo<cr>
+nmap <leader>icc :CocList commands<cr>
 
-nmap <leader>in <Plug>(coc-diagnostic-next)
-nmap <leader>iN <Plug>(coc-diagnostic-prev)
-nmap <leader>jd <Plug>(coc-definition)
-nmap <leader>jD <Plug>(coc-declaration)
-nmap <leader>ji <Plug>(coc-implementation)
+nmap <leader>ia         <Plug>(coc-codeaction)
+nmap <leader>ie         <Plug>(coc-diagnostic-info)
+nmap <leader>i<return>  <Plug>(coc-fix-current)
+nmap <leader>i<bs>      <Plug>(coc-float-hide)
+nmap <leader>ig       gg<Plug>(coc-diagnostic-next)
+nmap <leader>in         <Plug>(coc-diagnostic-next)
+nmap <leader>iN         <Plug>(coc-diagnostic-prev)
+nmap <leader>iE         :CocDiagnostics<cr>
+nmap <leader>jE         :CocList diagnostics<cr>
+nmap <leader>jd         <Plug>(coc-definition)
+nmap <leader>jD         <Plug>(coc-declaration)
+nmap <leader>ji         <Plug>(coc-implementation)
 
 nmap <leader>rf <Plug>(coc-rename)
-nmap <leader>i<return> <Plug>(coc-fix-current)
+
+" jump to symbol (class, object, etc.)
+nmap <leader>js :CocList outline<cr>
+
+
+nmap <silent> <leader>id :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
 
 " Debugger
@@ -1826,7 +1844,7 @@ function! SetupCSV()
     nnoremap <silent> <leader>AF :%CSVArrangeColumn! <cr>       " align columns by adding spaces recalculating widths
     nnoremap <silent> <leader>au :%CSVUnArrangeColumn <cr>      " undo aligning columns by removing spaces
 endfunction
-command! SetupCSV :call SetupCSV() <cr> " add mappings for CSV handling
+command! SetupCSV :call SetupCSV() " add mappings for CSV handling
 
 
 " }}}
@@ -1867,7 +1885,7 @@ function! SetupNpm()
     nnoremap <leader>btu :call RunCommand("npm test-unit")<cr>
     nnoremap <leader>bti :call RunCommand("npm test-int")<cr>
 endfunction
-command! SetupNpm :call SetupNpm() <cr> " add mappings for development with NodeJS
+command! SetupNpm :call SetupNpm() " add mappings for development with NodeJS
 
 function! SetupYarn()
     nnoremap <leader>bi  :call RunCommand("yarn install")<cr>
@@ -2060,7 +2078,19 @@ Plug 'derekwyatt/vim-sbt'
                 " \ nnoremap <leader>9 <nop>
 " augroup END
 
-Plug 'ckipp01/coc-metals'
+
+" Scala Metals {{{
+
+" Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'ckipp01/coc-metals'
+
+" The above lines (installing metals via vim plugin manager) do not work for me.
+" So instead I need to do `:CocInstall coc-metals`
+" (one should only use exactly one of those)
+
+
+
+" }}}
 
 
 " scala and ctags:
@@ -4594,7 +4624,7 @@ nnoremap <leader>iT :TigFromCurrentFile<cr>
 " TODO: fix
 command! -nargs=1 InsertGoogleContact :r!goobook-query-mail.sh <args> " Interactively search for Google contacts and insert name and email
 " nnoremap <leader>igm :InsertGoogleContact
-nnoremap <leader>igm         :r!goobook-query-mail.sh<space>
+" nnoremap <leader>igm         :r!goobook-query-mail.sh<space>
 " inoremap <leader>igm <esc>diw:r!goobook-query-mail.sh<space><c-r>"<cr><cr>
 
 
