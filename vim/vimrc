@@ -2591,7 +2591,7 @@ function! FixHighlighting()
         " highlight GitGutterChangeDelete   ctermbg=235
         " highlight Conceal                 ctermbg=236
         " highlight Search                  ctermbg=237 ctermfg=white
-        highlight Error                   ctermbg=162
+        " highlight Error                   ctermbg=162
         highlight Todo                    ctermfg=132
         highlight Sneak                   ctermfg=72 ctermbg=234
         highlight EasyMotionTarget        ctermfg=72
