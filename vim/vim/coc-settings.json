@@ -1,5 +1,6 @@
 {
     "coc.preferences.useQuickfixForLocations": true,
+    "coc.preferences.jumpCommand": "vsplit",
     "metals.javaHome": "/usr/lib/jvm/default",
     "metals.statusBarEnabled": true
 }
