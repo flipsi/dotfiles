@@ -313,6 +313,7 @@ function create_link_for_target() {
         nvim )
             mkdir -p "$HOME/.config/nvim/"
             create_link "$PWD/nvim/init.vim" "$HOME/.config/nvim/init.vim"
+            create_link "$PWD/vim/vim/coc-settings.json" "$HOME/.config/nvim/coc-settings.json"
             ;;
 
         pentadactyl )
@@ -432,7 +433,6 @@ function create_link_for_target() {
             mkdir -p "$HOME/.vim"
             mkdir -p "$HOME/.vim/undodir"
             create_link "$PWD/vim/vim/coc-settings.json" "$HOME/.vim/coc-settings.json"
-            create_link "$PWD/vim/vim/coc-settings.json" "$HOME/.config/nvim/coc-settings.json"
             create_link "$PWD/vim/vim/filetype.vim" "$HOME/.vim/filetype.vim"
             create_link "$PWD/vim/vim/sflipsnippets" "$HOME/.vim/sflipsnippets"
             create_link "$PWD/vim/vim/spell" "$HOME/.vim/spell"
