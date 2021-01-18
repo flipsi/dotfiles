@@ -1080,7 +1080,7 @@ augroup END
 
 Plug 'vim-scripts/BufOnly.vim'
 
-nmap <leader>qo :BufOnly<cr>
+nmap <leader>qO :BufOnly<cr>
 
 
 
@@ -4711,8 +4711,8 @@ nnoremap <leader>qq         :SaveAndClose<cr>
 nnoremap <leader>qa         :CloseAllBuffers<cr>
 nnoremap <leader><bs>       :CloseBuffer<cr>
 nnoremap <leader>QQ         :CloseBufferForce<cr>
-nnoremap <leader>qW         :CloseWindow<cr>
-nnoremap <leader>qw         :CloseOtherWindows<cr>
+nnoremap <leader>qw         :CloseWindow<cr>
+nnoremap <leader>qo         :CloseOtherWindows<cr>
 nnoremap <leader><c-t>      :tab split<cr> " open current buffer in a new tab
 nnoremap <leader><c-w>      :CloseTab<cr>
 nnoremap <c-d>              :QuitVim<cr> " this is how i exit most terminal applications
