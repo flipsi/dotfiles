@@ -1238,7 +1238,10 @@ vnoremap <script> <silent> <leader>kb
 
 
 " preview register contents
-Plug 'junegunn/vim-peekaboo'
+" (seems buggy in neovim)
+if !has('nvim')
+    Plug 'junegunn/vim-peekaboo'
+endif
 
 
 " make the 0 register a stack (yank/delete multiple things without worrying)
