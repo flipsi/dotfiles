@@ -172,10 +172,18 @@ let maplocalleader=' '
 
 if !exists("*SourceMYVIMRC")
     function SourceMYVIMRC()
+        echo 'Sourcing vimrc ...'
         source $MYVIMRC
         syntax enable
         AirlineRefresh
         FixHighlighting
+        let l:win_id = win_getid()
+        normal! mZ
+        windo RainbowToggleOn
+        call win_gotoid(l:win_id)
+        normal! `Z
+        redraw
+        echomsg 'vimrc sourced' . ' ✔'
     endfunction
 endif
 command! SourceMYVIMRC :call SourceMYVIMRC() " Reload configuration
