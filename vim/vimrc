@@ -3671,6 +3671,7 @@ endif
 " (this is a bad idea if terminal applications use <esc> as well)
 " tnoremap <esc> <c-\><c-n>
 " tnoremap <expr> <esc> &filetype == 'fzf' ? "\<esc>" : "\<c-\>\<c-n>"
+tnoremap <c-y><c-y> <c-\><c-n>
 
 " leave terminal insert mode and scroll up
 tnoremap <c-b> <c-\><c-n><c-b>
@@ -3678,10 +3679,6 @@ tnoremap <c-b> <c-\><c-n><c-b>
 " leave terminal insert mode and move to window on the left
 tnoremap <c-h> <c-\><c-n><c-w>h
 
-" leave terminal insert mode and go to previous/next/new tab
-tnoremap <space><c-p> <c-\><c-n>:tabprevious<cr>
-tnoremap <space><c-n> <c-\><c-n>:tabnext<cr>
-tnoremap <space><c-t> <c-\><c-n>:tabnew<cr>
 
 " TODO: checkout debugging feature (see :help terminal-debug)
 
@@ -4501,7 +4498,7 @@ nnoremap <silent> <leader>sL :lopen<cr>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" BUFFERS AND WINDOWS {{{
+" BUFFERS, WINDOWS AND TABS {{{
 
 
 " change or open new buffer by searching for file name
@@ -4527,8 +4524,8 @@ nnoremap <silent> <c-h> :wincmd h<cr>
 nnoremap <silent> <c-l> :wincmd l<cr>
 
 " move buffer to a new window
-nnoremap <silent> <leader><c-l> :vsplit<cr><c-w>w:bprevious<cr><c-w>w<cr>
-nnoremap <silent> <leader><c-j> :vertical split<cr>
+nnoremap <silent> <leader><c-l> :vsplit<cr><c-w>w:buffer #<cr><c-w>w<cr>
+nnoremap <silent> <leader><c-h> :vertical split<cr>
 
 " swap/rotate windows
 nnoremap <silent> <c-w>> <c-w>r
@@ -4557,11 +4554,6 @@ function! ResizeWindows(enter_or_leave)
     endif
 endfunction
 
-" navigate through tabs
-nnoremap <leader><c-n>  :tabnext<cr>
-nnoremap <leader><c-p>  :tabprevious<cr>
-
-
 " clear windows (close quickfix and location list) and refresh screen
 nnoremap <silent> <bs> :nohlsearch \| :lclose \| :cclose \| :redraw! <cr> :<c-c>
 xmap <silent> <bs> <bs>gv
@@ -4576,6 +4568,54 @@ nnoremap <silent> <leader>tl :call ToggleList("Location List", 'l')<cr>
 " make it always occupy the full width: >
 " :botright cwindow
 
+
+" I can use <c-y> as a mapping prefix for tab-related things, because I mostly
+" use tabs for terminal buffers and I don't really use <c-y> as terminal
+" suspend *or* as vim per-line scrolling, so it works everywhere.
+
+" create tab
+nnoremap <c-y><c-t>           :NewTab<cr>
+nnoremap <c-y>t               :NewTab<cr>
+tnoremap <c-y><c-t> <c-\><c-n>:NewTab<cr>
+tnoremap <c-y>t     <c-\><c-n>:NewTab<cr>
+
+" open current buffer in a new tab
+nnoremap <leader><c-t>        :tab split<cr>
+
+" close tab
+nnoremap <c-y>q               :CloseTab<cr>
+nnoremap <c-y><c-w>           :CloseTab<cr>
+
+" change tab
+nnoremap <c-y><c-n>           :tabnext<cr>
+nnoremap <c-y>n               :tabnext<cr>
+tnoremap <c-y><c-n> <c-\><c-n>:tabnext<cr>
+tnoremap <c-y>n     <c-\><c-n>:tabnext<cr>
+nnoremap <c-y><c-p>           :tabprevious<cr>
+nnoremap <c-y>p               :tabprevious<cr>
+tnoremap <c-y><c-p> <c-\><c-n>:tabprevious<cr>
+tnoremap <c-y>p     <c-\><c-n>:tabprevious<cr>
+nnoremap <c-y>1               :tabn 1<cr>
+tnoremap <c-y>1     <c-\><c-n>:tabn 1<cr>
+nnoremap <c-y>2               :tabn 2<cr>
+tnoremap <c-y>2     <c-\><c-n>:tabn 2<cr>
+nnoremap <c-y>3               :tabn 3<cr>
+tnoremap <c-y>3     <c-\><c-n>:tabn 3<cr>
+nnoremap <c-y>4               :tabn 4<cr>
+tnoremap <c-y>4     <c-\><c-n>:tabn 4<cr>
+nnoremap <c-y>5               :tabn 5<cr>
+tnoremap <c-y>5     <c-\><c-n>:tabn 5<cr>
+nnoremap <c-y>6               :tabn 6<cr>
+tnoremap <c-y>6     <c-\><c-n>:tabn 6<cr>
+nnoremap <c-y>7               :tabn 7<cr>
+tnoremap <c-y>7     <c-\><c-n>:tabn 7<cr>
+nnoremap <c-y>8               :tabn 8<cr>
+tnoremap <c-y>8     <c-\><c-n>:tabn 8<cr>
+nnoremap <c-y>9               :tabn $<cr>
+tnoremap <c-y>9     <c-\><c-n>:tabn $<cr>
+
+" ... but ignore typos
+tnoremap <c-y> <nop>
 
 
 " }}}
@@ -4705,7 +4745,6 @@ silent! function! Save(force)
     endif
 endfunction
 
-command! NewTab             :tabnew                 " Create a new tab
 command! ReloadBuffer       :checktime              " Check for file changes (and 'reload' them or get asked with autoread)
 command! Reset              :e!                     " Discard changes in buffer
 command! Save               :call Save(0)           " Write buffer changes to file
@@ -4716,6 +4755,7 @@ command! CloseBufferForce   :bdelete!               " Close current buffer disca
 command! CloseAllBuffers    :silent bufdo bdelete   " Close all buffers (not vim)
 command! CloseWindow        :quit                   " Close current window (not buffer)
 command! CloseOtherWindows  :only                   " Close all but current window (not buffers)
+command! NewTab             :tabnew                 " Create a new tab
 command! CloseTab           :tabclose               " Close current tab (not buffer)
 command! QuitVim            :quitall                " Quit Vim (closing all windows)
 command! QuitVimForce       :quitall!               " Quit Vim (closing all windows) discarding changes
@@ -4730,8 +4770,6 @@ nnoremap <leader><bs>       :CloseBuffer<cr>
 nnoremap <leader>QQ         :CloseBufferForce<cr>
 nnoremap <leader>qw         :CloseWindow<cr>
 nnoremap <leader>qo         :CloseOtherWindows<cr>
-nnoremap <leader><c-t>      :tab split<cr> " open current buffer in a new tab
-nnoremap <leader><c-w>      :CloseTab<cr>
 nnoremap <c-d>              :QuitVim<cr> " this is how i exit most terminal applications
 nnoremap <leader><c-d><c-d> :QuitVimForce<cr>
 
