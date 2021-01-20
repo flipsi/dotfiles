@@ -3263,18 +3263,23 @@ nnoremap <leader>iS :call SendBufferViaSlackChooseChannel()<cr>
 let g:match_id_base = 86750
 
 function! ToggleHighlightInterestingWord(n)
+    let l:win_id = win_getid()
     normal! mZ
     let match_id = g:match_id_base + a:n
     silent! windo let new_match = matchdelete(match_id)
     if new_match
+        call win_gotoid(l:win_id)
+        normal! `Z
         normal! "zyiw
         let pattern = '\V\<' . escape(@z, '\') . '\>'
         windo call matchadd("InterestingWord" . a:n, pattern, 1, match_id)
     endif
+    call win_gotoid(l:win_id)
     normal! `Z
 endfunction
 
 function! RemoveAllInterestingWordHighlights()
+    let l:win_id = win_getid()
     silent! windo call matchdelete(g:match_id_base + 1)<bar>
     silent! windo call matchdelete(g:match_id_base + 2)<bar>
     silent! windo call matchdelete(g:match_id_base + 3)<bar>
@@ -3284,6 +3289,7 @@ function! RemoveAllInterestingWordHighlights()
     silent! windo call matchdelete(g:match_id_base + 7)<cr>
     silent! windo call matchdelete(g:match_id_base + 8)<cr>
     silent! windo call matchdelete(g:match_id_base + 9)<cr>
+    call win_gotoid(l:win_id)
 endfunction
 
 " Mappings
