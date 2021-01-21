@@ -4524,7 +4524,7 @@ nnoremap <silent> <c-h> :wincmd h<cr>
 nnoremap <silent> <c-l> :wincmd l<cr>
 
 " move buffer to a new window
-nnoremap <silent> <leader><c-l> :vsplit<cr><c-w>w:buffer #<cr><c-w>w<cr>
+nnoremap <silent> <leader><c-l> :vsplit<cr><c-w>p:buffer #<cr><c-w>p<cr>
 nnoremap <silent> <leader><c-h> :vertical split<cr>
 
 " swap/rotate windows
