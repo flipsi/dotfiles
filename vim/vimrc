@@ -469,6 +469,7 @@ nnoremap <leader>gpp  :Git pull<cr>
 nnoremap <leader>gpu  :GitPush<cr>
 nnoremap <leader>geb  :exe ':Git checkout -b ' . input('Branch name: ')<cr>
 nnoremap <leader>geo  :GitCheckoutInteractively<cr>
+nnoremap <leader>gho  :OpenGithubRepoWeb<cr>
 nnoremap <leader>ghpr :OpenOrCreatePullRequest<cr>
 
 
@@ -2910,6 +2911,12 @@ function! GitPushNewBranch()
 endfunction
 
 " Github CLI (gh)
+
+command! OpenGithubRepoWeb :call OpenGithubRepoWeb() " Open Github repo in browser
+function! OpenGithubRepoWeb()
+    call system('gh repo view --web')
+endfunction
+
 
 command! OpenOrCreatePullRequest :call OpenOrCreatePullRequest() " Open (and create if not exists) Pull Request on Github
 function! OpenOrCreatePullRequest()
