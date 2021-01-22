@@ -461,8 +461,9 @@ nnoremap <leader>gca  :Git commit --amend<cr>
 nnoremap <leader>grh  :Confirm Git reset --hard<cr>
 nnoremap <leader>gta  :Confirm Git stash push --include-untracked<cr>
 nnoremap <leader>gtp  :Confirm Git stash pop<cr>
-nnoremap <leader>gll  :tab Git log<cr>
 nnoremap <leader>glh  :Git log<cr>
+nnoremap <leader>gll  :tab Git log<cr>
+nnoremap <leader>glf  :tab Git log %<cr>
 nnoremap <leader>gbb  :Git blame<cr>
 nnoremap <leader>gpp  :Git pull<cr>
 nnoremap <leader>gpu  :GitPush<cr>
@@ -489,6 +490,15 @@ nnoremap <leader>g<up>      [c
 nnoremap <leader>g<left>    :diffget //3<cr>    " get changes from the right
 nnoremap <leader>g<right>   :diffget //2<cr>    " get changes from the left
 
+" in Gstatus view, have custom mappings as well
+augroup custom_fugitive_mappings
+    au!
+    " https://github.com/tpope/vim-fugitive/issues/1451#issuecomment-765576235
+    " TODO: how to compare a certain file against HEAD
+    " TODO: how to get the filename under cursor?
+    au User FugitiveIndex nnoremap <buffer> dt :tab Gdiffsplit @
+augroup END
+
 " in Gdiff view, navigate and stage/checkout easily
 augroup gitdiff
     au!
@@ -497,6 +507,13 @@ augroup gitdiff
     au BufRead fugitive://* nnoremap <buffer> <left>  do
     au BufRead fugitive://* nnoremap <buffer> <right> dp
 augroup END
+
+" in Git commit view (opening from git log, not commit message), don't use folds
+augroup gitcommit_view
+    au!
+    au BufRead fugitive:///*/.git//?\\\{40\} normal zR
+augroup END
+
 
 
 " show git status of lines on the left
@@ -527,7 +544,7 @@ nnoremap <leader>gn   :GitGutterNextHunk<cr>zz9<c-e>zv
 nnoremap <leader>gN   :GitGutterPrevHunk<cr>zz9<c-e>zv
 nnoremap <down>       :GitGutterNextHunk<cr>zz9<c-e>zv
 nnoremap <up>         :GitGutterPrevHunk<cr>zz9<c-e>zv
-nnoremap <leader>ga   :GitGutterStageHunk<cr>
+nnoremap <leader>ga   :GitGutterStageHunk<cr>:GitGutterNextHunk<cr>
 nnoremap <leader>gu   :GitGutterUndoHunk<cr>
 nnoremap <leader>gi   :GitGutterPreviewHunk<cr>
 
