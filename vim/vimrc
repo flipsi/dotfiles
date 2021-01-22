@@ -461,6 +461,8 @@ nnoremap <leader>gca  :Git commit --amend<cr>
 nnoremap <leader>grh  :Confirm Git reset --hard<cr>
 nnoremap <leader>gta  :Confirm Git stash push --include-untracked<cr>
 nnoremap <leader>gtp  :Confirm Git stash pop<cr>
+nnoremap <leader>gll  :tab Git log<cr>
+nnoremap <leader>glh  :Git log<cr>
 nnoremap <leader>gbb  :Git blame<cr>
 nnoremap <leader>gpp  :Git pull<cr>
 nnoremap <leader>gpu  :GitPush<cr>
@@ -471,7 +473,6 @@ nnoremap <leader>ghpr :OpenOrCreatePullRequest<cr>
 
 command! GitCheckoutInteractively :call GitCheckoutInteractively() " checkout git branch chosen with fzf
 function! GitCheckoutInteractively()
-    let word = expand("<cword>")
     call fzf#run(fzf#wrap({
                 \ 'source': 'git branch',
                 \ 'sink': function('GitCheckout')
