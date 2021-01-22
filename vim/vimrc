@@ -484,19 +484,22 @@ function! GitCheckout(ref)
 endfunction
 
 
-" resolve 3-way merge conflicts (diff view)
-nnoremap <leader>g<down>    ]c
-nnoremap <leader>g<up>      [c
-nnoremap <leader>g<left>    :diffget //3<cr>    " get changes from the right
-nnoremap <leader>g<right>   :diffget //2<cr>    " get changes from the left
+function! GStatusGetFilenameUnderCursor()
+    return matchstr(getline('.'), '^[A-Z?] \zs.*')
+endfunction
+
+" open diff of file under cursor in new tab
+command! GStatusDiffsplitNewTab call GStatusDiffsplitNewTab()
+function! GStatusDiffsplitNewTab()
+    let l:filename = GStatusGetFilenameUnderCursor()
+    exe 'tabedit ' . l:filename
+    Gdiffsplit
+endfunction
 
 " in Gstatus view, have custom mappings as well
 augroup custom_fugitive_mappings
     au!
-    " https://github.com/tpope/vim-fugitive/issues/1451#issuecomment-765576235
-    " TODO: how to compare a certain file against HEAD
-    " TODO: how to get the filename under cursor?
-    au User FugitiveIndex nnoremap <buffer> dt :tab Gdiffsplit @
+    au User FugitiveIndex nnoremap <buffer> dt :GStatusDiffsplitNewTab<cr>
 augroup END
 
 " in Gdiff view, navigate and stage/checkout easily
@@ -513,6 +516,14 @@ augroup gitcommit_view
     au!
     au BufRead fugitive:///*/.git//?\\\{40\} normal zR
 augroup END
+
+
+" resolve 3-way merge conflicts (diff view)
+nnoremap <leader>g<down>    ]c
+nnoremap <leader>g<up>      [c
+nnoremap <leader>g<left>    :diffget //3<cr>    " get changes from the right
+nnoremap <leader>g<right>   :diffget //2<cr>    " get changes from the left
+
 
 
 
