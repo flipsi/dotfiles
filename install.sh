@@ -54,6 +54,7 @@ SUPPORTED_TARGETS=(\
     pentadactyl \
     polybar \
     psql \
+    qimgv \
     qutebrowser \
     ranger \
     redshift \
@@ -329,6 +330,10 @@ function create_link_for_target() {
             mkdir -p "$HOME/.config/polybar"
             create_link "$PWD/polybar/config" "$HOME/.config/polybar/config"
             create_link "$PWD/polybar/scripts" "$HOME/.config/polybar/scripts"
+            ;;
+
+        qimgv )
+            create_link "$PWD/qimgv/qimgv.conf" "$HOME/.config/qimgv/qimgv.conf"
             ;;
 
         qutebrowser )
