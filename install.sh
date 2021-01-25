@@ -333,6 +333,7 @@ function create_link_for_target() {
             ;;
 
         qimgv )
+            mkdir -p "$HOME/.config/qimgv"
             create_link "$PWD/qimgv/qimgv.conf" "$HOME/.config/qimgv/qimgv.conf"
             ;;
 
