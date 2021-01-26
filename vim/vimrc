@@ -1269,11 +1269,10 @@ vnoremap <script> <silent> <leader>kb
 
 
 " replace some motion or text object or selection with current yank
-" Plug 'ReplaceWithRegister'
-" nmap -rr <plug>ReplaceWithRegisterOperator
-" nmap -re <plug>ReplaceWithRegisterLine
-" xmap -r  <plug>ReplaceWithRegisterVisual
-" I DON'T REALLY USE THIS BUT v3wp or -rw OCCASIONALLY
+Plug 'vim-scripts/ReplaceWithRegister'
+nmap -r  <plug>ReplaceWithRegisterOperator
+nmap -rl <plug>ReplaceWithRegisterLine
+xmap -r  <plug>ReplaceWithRegisterVisual
 
 
 " preview register contents
@@ -4211,12 +4210,6 @@ nnoremap <c-s>a :call Replace(0, input('Replace '.expand('<cword>').' with: '))<
 
 " substitute last search
 nmap <c-s>/ gggn<c-s>
-
-
-" replace something with yank
-nnoremap -rw viwp
-nnoremap -rW viWp
-nnoremap -rl v$hp
 
 
 " sort lines
