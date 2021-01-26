@@ -1,3 +1,33 @@
+#################################
+# account: mail@philippmoers.de #
+#################################
+
+IMAPStore mail@philippmoers.de-remote
+Host imap.strato.de
+Port 993
+User mail@philippmoers.de
+PassCmd "mutt-secrets.py --mode get_secret --account mail@philippmoers.de"
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore mail@philippmoers.de-local
+Subfolders Verbatim
+Path /home/sflip/.local/share/mail/mail@philippmoers.de/
+Inbox /home/sflip/.local/share/mail/mail@philippmoers.de/INBOX
+Flatten .
+
+Channel mail@philippmoers.de
+Expunge Both
+Master :mail@philippmoers.de-remote:
+Slave :mail@philippmoers.de-local:
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
+
+
 ##################################
 # account: philipp.moers@mail.de #
 ##################################

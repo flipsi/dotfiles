@@ -56,6 +56,7 @@ def get_secrets_from_gpg_encrypted_muttrc(accountname=False):
   account_indexes = {
     '00': 'philipp.moers@mail.de',
     '01': 'soziflip@gmail.com',
+    '02': 'mail@philippmoers.de',
     '09': 'p.moers@ryte.com',
   }
   def parse_muttrc(muttrc):
