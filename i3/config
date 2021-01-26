@@ -106,8 +106,8 @@ mode "$refresh" {
     bindsym l reload; mode "default"
     bindsym s restart
     bindsym i           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"; mode "default"
-    bindsym x           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh > /tmp/i3-initialize-outputs.sh.log 2>&1"; mode "default"
-    bindsym o           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh --only > /tmp/i3-initialize-outputs.sh.log 2>&1"; mode "default"
+    bindsym x           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
+    bindsym o           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh --only > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
     bindsym d           exec --no-startup-id "/home/sflip/dotfiles/setup-dpi.sh --regular > /tmp/setup-dpi.log 2>&1"; mode "default"
     bindsym Shift+d     exec --no-startup-id "/home/sflip/dotfiles/setup-dpi.sh --high > /tmp/setup-dpi.log 2>&1"; mode "default"
     bindsym Shift+z     exec --no-startup-id "/home/sflip/.i3/bin/i3-workspaces-save-and-restore.py save"; mode "default"
