@@ -484,7 +484,7 @@ function! GitCheckout(ref)
     exe 'Git checkout ' . a:ref
 endfunction
 
-
+" can be replaced with `<Plug><cfile>` in some cases
 function! GStatusGetFilenameUnderCursor()
     return matchstr(getline('.'), '^[A-Z?] \zs.*')
 endfunction
