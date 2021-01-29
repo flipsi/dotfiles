@@ -502,6 +502,7 @@ augroup custom_fugitive_mappings
     au User FugitiveIndex nnoremap <buffer> dt :call GdiffsplitTab(GStatusGetFilenameUnderCursor())<cr>
     au User FugitiveIndex nmap     <buffer> pp :Git pull<cr>
     au User FugitiveIndex nmap     <buffer> pu :GitPush<cr>
+    au User FugitiveIndex nmap     <buffer> pr :OpenOrCreatePullRequest<cr>
 augroup END
 
 " in Gdiff view, navigate and stage/checkout easily
