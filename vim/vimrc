@@ -1348,6 +1348,8 @@ vmap -b S)
 vmap -B S}
 nmap -b ysiw)
 nmap -B ysiw}
+vmap -` S`
+nmap -` ysiw`
 nmap dq ds'
 nmap dQ ds"
 
