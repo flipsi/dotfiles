@@ -1323,7 +1323,15 @@ nnoremap O O<esc>S
 
 
 " automagically add closing braces etc
-Plug 'Raimondi/delimitMate'
+" Plug 'Raimondi/delimitMate'
+
+Plug 'jiangmiao/auto-pairs'
+let g:AutoPairsShortcutToggle = '<leader>oap'
+let g:AutoPairsShortcutJump = '<leader>]'
+
+" Plug 'rstacruz/vim-closer'
+Plug 'tpope/vim-endwise'
+
 
 
 " add a ; at the end of a line
