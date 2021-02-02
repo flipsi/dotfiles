@@ -1869,8 +1869,13 @@ nmap <leader>fu         <Plug>(coc-references)
 
 " actions
 nmap <leader>ia         <Plug>(coc-codeaction)
-nmap <leader>i<return>  <Plug>(coc-fix-current)
-nmap <leader>ai         :CocCommand editor.action.organizeImport<cr> " autoimport
+nmap <leader>io         :CocCommand editor.action.organizeImport<cr>
+" nmap <leader>i<return>  <Plug>(coc-fix-current)
+nmap <leader>i<return>  :if g:coc_enabled == 1
+            \ <bar> execute "normal \<Plug>(coc-fix-current)"
+            \ <bar> else
+            \ <bar> call AutoImportFake()
+            \ <bar> endif <cr>
 
 " refactor/rename identifier
 nmap <leader>rf <Plug>(coc-rename)
@@ -3231,7 +3236,6 @@ endfunction
 
 " poor-man's (fake IDE) auto-import {{{
 " searches for import statement for word under cursor and adds it to buffer
-nnoremap <leader>io :call AutoImportFake()<cr>
 command! -bar AutoImportFake call AutoImportFake()
 function! AutoImportFake()
     let word = expand("<cword>")
