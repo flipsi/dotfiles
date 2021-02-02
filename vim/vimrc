@@ -1808,6 +1808,9 @@ nnoremap <leader>icp :ColorPicker<cr>
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+nmap <leader>i <nop>
+nmap <leader>j <nop>
+
 command! CocToggle :call CocToggle() " Enable or Disable COC
 function! CocToggle()
     if g:coc_workspace_initialized == 0
@@ -1822,6 +1825,7 @@ endfunction
 let g:coc_start_at_startup = 0
 
 " start/stop coc
+nmap <leader>ic  <nop>
 nmap <leader>ica :CocStart<cr>
 nmap <leader>ict :CocToggle<cr>
 nmap <leader>ici :CocInfo<cr>
@@ -1836,7 +1840,7 @@ nmap <leader>i<bs>      <Plug>(coc-float-hide)
 nmap <leader>ie         <Plug>(coc-diagnostic-info)
 
 " show infos about function under cursor in popup
-nmap <silent> <leader>iq :call <SID>show_documentation()<CR>
+nmap <silent> <leader>iq :call <SID>show_documentation()<cr>
 
 " navigate to first/next/last error/warning
 nmap <leader>ig       gg<Plug>(coc-diagnostic-next)
@@ -1850,7 +1854,10 @@ nmap <leader>iE         :CocDiagnostics<cr>
 nmap <leader>jE         :CocList diagnostics<cr>
 
 " jump to definition etc.
-nmap <leader>jd         <Plug>(coc-definition)
+" nmap <leader>jd         <Plug>(coc-definition)
+nmap <leader>jd         <nop>
+nmap <leader>jdl        :call CocAction('jumpDefinition', 'vsplit')<cr>
+nmap <leader>jdd        :call CocAction('jumpDefinition', 'buffer')<cr>
 nmap <leader>jD         <Plug>(coc-declaration)
 nmap <leader>ji         <Plug>(coc-implementation)
 
