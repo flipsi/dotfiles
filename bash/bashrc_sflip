@@ -70,7 +70,7 @@ function tm() {
 
 if [ -t 1 ]; then
     bind '"\ei":"ranger\n"'
-    bind '"\es":"ll; echo; git status --short 2>/dev/null\n"'
+    bind '"\el":"echo; ls; echo; git status --short 2>/dev/null\n"'
 fi
 
 # allow aliases with sudo
