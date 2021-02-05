@@ -39,7 +39,7 @@ function get_last_recent_git_projects() {
     # get list of git projects and their last commit timestamp
     for CHILD in "$PROJECTS_DIR"/*; do
         if [[ -d "$CHILD/.git" ]]; then
-            PROJECTS=("$(git -C "$CHILD" log -1 --format=%ct) $CHILD" "${PROJECTS[@]}")
+            PROJECTS=("$(git -C "$CHILD" log -1 --format=%ct) $(basename "$CHILD")" "${PROJECTS[@]}")
         fi
     done
 
