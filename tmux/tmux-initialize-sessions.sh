@@ -59,6 +59,23 @@ function get_last_recent_git_projects() {
 
 function create_sessions() {
 
+    if ! (tmux has-session -t $SESSION_NAME_1 2>/dev/null); then
+
+        tmux new-session -d -s $SESSION_NAME_1 -c "$HOME"
+        tmux new-window -t $SESSION_NAME_1: -n "top" "bpytop || htop"
+
+        if has_internet_connection; then
+            tmux new-window -t $SESSION_NAME_1: -n mail "mail"
+            tmux new-window -t $SESSION_NAME_1: -n telegram "tg"
+        fi
+
+        tmux new-window -t $SESSION_NAME_1: -n "tmp" "ranger $HOME/tmp"
+
+        tmux select-window -t $SESSION_NAME_1:2 # (set 'last' window)
+        tmux select-window -t $SESSION_NAME_1:1 # (set active window)
+
+    fi
+
     if ! (tmux has-session -t $SESSION_NAME_2 2>/dev/null); then
 
         tmux new-session -d -s $SESSION_NAME_2 -n "dotfiles" -c "$HOME/dotfiles" "nvim --listen dotfiles"
@@ -70,23 +87,13 @@ function create_sessions() {
 
     fi
 
-    if ! (tmux has-session -t $SESSION_NAME_1 2>/dev/null); then
-
-        tmux new-session -d -s $SESSION_NAME_1 -c "$HOME"
-        tmux new-window -t $SESSION_NAME_1: -n "top" "bpytop || htop"
-        tmux new-window -t $SESSION_NAME_1: -n "tmp" "ranger $HOME/tmp"
-
-        # if has_internet_connection; then
-        #     tmux new-window -t $SESSION_NAME_1: -n mail "mail"
-        #     tmux new-window -t $SESSION_NAME_1: -n telegram "telegram-cli"
-        # fi
-
-        tmux select-window -t $SESSION_NAME_1:2 # (set 'last' window)
-        tmux select-window -t $SESSION_NAME_1:1 # (set active window)
-
-    fi
-
 }
 
+
 create_sessions
+
+if ! (tmux has-session -t $SESSION_NAME_1 2>/dev/null); then
+    tmux kill-session -t $SESSION_NAME_1
+fi
+
 tmux switch-client -t $SESSION_NAME_1
