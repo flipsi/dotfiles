@@ -4,12 +4,13 @@
 
 # Set up tmux sessions that i always use
 
+set -e
 
 SESSION_NAME_1="main"
 SESSION_NAME_2="src"
 
 PROJECTS_DIR="$HOME/work/ryte/src"
-NUMBER_OF_PROJECTS_TO_OPEN=6
+NUMBER_OF_PROJECTS=8
 
 
 function has_internet_connection() {
@@ -28,19 +29,44 @@ function has_internet_connection() {
     return $INTERNET_CONNECTION
 }
 
+
+# For a given directory, return a list of the most recently updated git projects within it
+function get_last_recent_git_projects() {
+    PROJECTS_DIR="$1"
+    NUMBER_OF_PROJECTS="$2"
+    PROJECTS_DIR=${PROJECTS_DIR%/} # remove trailing slash if any
+
+    # get list of git projects and their last commit timestamp
+    for CHILD in "$PROJECTS_DIR"/*; do
+        if [[ -d "$CHILD/.git" ]]; then
+            PROJECTS=("$(git -C "$CHILD" log -1 --format=%ct) $CHILD" "${PROJECTS[@]}")
+        fi
+    done
+
+    # sort by timestamp
+    # shellcheck disable=SC2207
+    IFS=$'\n' PROJECTS=($(sort --reverse <<<"${PROJECTS[*]}"))
+    unset IFS
+
+    # get the first $NUMBER_OF_PROJECTS entries and throw away timestamp
+    for PROJECT in "${PROJECTS[@]:0:$NUMBER_OF_PROJECTS}"; do
+        RESULT=("$(echo "$PROJECT" | cut -d' ' -f2) ${RESULT[@]}")
+    done
+
+    echo "${RESULT[@]}"
+}
+
+
 function create_sessions() {
 
     if ! (tmux has-session -t $SESSION_NAME_2 2>/dev/null); then
 
         tmux new-session -d -s $SESSION_NAME_2 -n "dotfiles" -c "$HOME/dotfiles" "nvim --listen dotfiles"
 
-        if [[ -d "$PROJECTS_DIR" ]]; then
-            # shellcheck disable=SC2012
-            for PROJECT in $(ls -t1 "$PROJECTS_DIR" | head "-n$NUMBER_OF_PROJECTS_TO_OPEN"); do
-                tmux new-window -t $SESSION_NAME_2: -n "$PROJECT" -c \
-                    "$PROJECTS_DIR/$PROJECT" "fish -i -C \"nvim --listen $PROJECT"\"
-            done
-        fi
+        for PROJECT in $(get_last_recent_git_projects "$PROJECTS_DIR" "$NUMBER_OF_PROJECTS"); do
+            tmux new-window -t $SESSION_NAME_2: -n "$PROJECT" -c \
+                "$PROJECTS_DIR/$PROJECT" "fish -i -C \"nvim --listen $PROJECT"\"
+        done
 
     fi
 
@@ -62,6 +88,5 @@ function create_sessions() {
 
 }
 
-
 create_sessions
-# tmux switch-client -t $SESSION_NAME_1
+tmux switch-client -t $SESSION_NAME_1
