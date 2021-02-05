@@ -824,7 +824,7 @@ for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] m
 for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] move to workspace    Netflix
 for_window [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"] move to workspace    Notes
 assign [class="Wine"]                                                                               Poker
-assign [class="pokerstars.exe"]                                                                     Poker
+assign [class="pokerstars"]                                                                         Poker
 assign [class="(?i)chromium"]                                                                       Chromium
 assign [class="(?i)google-chrome"]                                                                  Chrome
 assign [class="(?i)filezilla"]                                                                      Filezilla
@@ -834,6 +834,7 @@ assign [class="com-intellij-updater-Runner"]                                    
 assign [class="(?i)jetbrains-phpstorm"]                                                             PhpStorm
 assign [class="gnome-calendar"]                                                                     Calendar
 assign [class="(?i)thunderbird"]                                                                    Mail
+assign [class="(?i)jamulus"]                                                                        Jam
 assign [class="(?i)audacity"]                                                                       Recording
 assign [class="(?i)ardour"]                                                                         Recording
 assign [class="(?i)skype"]                                                                          Skype
