@@ -919,7 +919,7 @@ Plug 'junegunn/fzf.vim'
 let g:fzf_command_prefix = 'Fzf'
 
 " layout [ down / up / left / right ]
-let g:fzf_layout = { 'down': '~30%' }
+let g:fzf_layout = { 'up': '~50%' }
 
 " extra interactive key bindings
 " (scroll with <c-k> and <c-j>
@@ -935,17 +935,17 @@ let g:fzf_action = {
 " (scroll through history with <c-p> and <c-n>)
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
+" Preview window settings (disable preview window altogether with empty value)
+let g:fzf_preview_window = 'right:50%'
+
 " override command to only match content (not filenames)
 command! -bang -nargs=* FzfAg
   \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+  \                 <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'down:50%')
   \                         : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:20%:hidden', '?'),
   \                 <bang>0)
 
-" Empty value to disable preview window altogether
-let g:fzf_preview_window = ''
-" Always enable preview window on the right with 60% width
-" let g:fzf_preview_window = 'right:60%'
+
 
 " open files by name
 nnoremap <leader>fl :FzfLocate<space>
