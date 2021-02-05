@@ -1,3 +1,9 @@
+# vim: filetype=neomuttrc
+
+bind generic,index u noop
+bind generic,index f noop
+bind generic,index g noop
+
 
 ##############
 # Navigation #
@@ -18,6 +24,8 @@ bind generic,pager,index <Esc>k half-up
 
 bind generic,pager,index n search-next
 bind generic,pager,index N search-opposite
+bind  index ff  limit # filter mailbox by string (prefix `=` or regex (prefix `~`)
+macro index uf "<limit>all\n"
 
 bind index j next-entry
 bind index k previous-entry
@@ -25,6 +33,9 @@ macro index gj "<next-entry><next-entry><next-entry><next-entry><next-entry><nex
 macro index gk "<previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry>"
 bind index J next-thread
 bind index K previous-thread
+bind index z collapse-thread
+bind index Z collapse-all
+
 bind pager j next-line
 bind pager k previous-line
 
@@ -35,16 +46,16 @@ bind pager k previous-line
 # Mail actions #
 ################
 
-bind pager r reply
-bind pager R group-reply
-bind index d delete-message
-bind pager d delete-message
-bind index u undelete-message
-bind index D delete-pattern
-bind index U undelete-pattern
-bind index S save-message
-bind index b bounce-message
-bind index t toggle-new
+bind pager r  reply
+bind pager R  group-reply
+bind index F  forward-message
+bind index d  delete-message
+bind pager d  delete-message # mark for deletion
+bind index ud undelete-message
+bind index D  sync-mailbox # perform deletions in mailbox
+bind index S  save-message
+bind index b  bounce-message
+bind index t  toggle-new
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 
@@ -56,7 +67,15 @@ macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 # remember $ to sync mailbox (e.g. delete message marked as delete)
 
 # abort command (instead of ESC) with \Cg
+
 bind index \Cd quit
+
+# reload config
+macro index,pager,compose,browser,attach <F5> ":source ~/.config/mutt/muttrc\n" "reload config"
+
+# open urls easily (urlscan is an alternative to urlview)
+macro index,pager    \cu "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cu "<pipe-entry>   urlscan<Enter>" "call urlscan to extract URLs out of a message"
 
 # search mails with notmuch (TODO: setup again)
 macro generic,index \C/ \

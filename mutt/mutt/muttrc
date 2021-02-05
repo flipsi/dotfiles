@@ -24,8 +24,11 @@ set mail_check = 0                                        # never check mail aut
 
 
 set sort = threads                                        # sort mails by thread and date
-set sort_browser = reverse-date                           # sort mails by thread and date
 set sort_aux = reverse-last-date-received                 # date-sent | last-date-received | reverse-last-date-received
+set collapse_unread = no                                  # refuse to collapse threads if it contains unread mails
+set strict_threads = no                                   # use pseudo threads (subject, not only In-Reply-To)
+set sort_re = yes
+set sort_browser = alpha                                  # sorting in file browser
 
 set date_format = "%a, %d. %b %H:%M"                      # use nice date format
 set index_format = "%4C %Z %D %-22.22F (%?l?%4l&%4c?) %s" # how mail list is displayed
