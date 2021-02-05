@@ -4361,8 +4361,11 @@ function! RunCommand(command)
     endif
 endfunction
 
-nnoremap <leader>bC :call RunCommand(getline('.'))<cr>
-vnoremap <leader>bC y:call RunCommand(@*)<cr>
+" run current line or selection as shell command
+nnoremap <leader>bS :call RunCommand(getline('.'))<cr>
+vnoremap <leader>bS y:call RunCommand(@")<cr>gv
+nnoremap <leader>b` yi`:call RunCommand(@")<cr>
+
 nnoremap <silent> <leader>be :OpenBuildErrorsInQuickfixList<cr><esc>hj
 nnoremap <silent> <leader>bE :OpenBuildErrorsInBuffer<cr><esc>hj
 
