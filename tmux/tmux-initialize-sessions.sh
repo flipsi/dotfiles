@@ -65,7 +65,7 @@ function create_sessions() {
         tmux new-window -t $SESSION_NAME_1: -n "top" "bpytop || htop"
 
         if has_internet_connection; then
-            tmux new-window -t $SESSION_NAME_1: -n mail "mail"
+            tmux new-window -t $SESSION_NAME_1: -n mail "mail --mode sync --disable-tmux-rename --disable-tail-logs"
             tmux new-window -t $SESSION_NAME_1: -n telegram "tg"
         fi
 
