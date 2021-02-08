@@ -93,9 +93,9 @@
 "                           - with <Esc>* for terminal sequences, and
 "                           - with <M-*>  for gvim
 "                           Leader key convention:
-"                           - general leader is space (' ')
-"                           - text edit leader is minus ('-')
-"                           - interface leader is space followed by y (' y')
+"                           - general leader is space (` `)
+"                           - text edit leader is single quote (`'`)
+"                           - interface leader is space followed by y (` y`)
 "                           The leader key may set several times in this file
 "                           since the execution time of the mapping matters.
 "       a LOCAL SECTION
@@ -1276,9 +1276,9 @@ vnoremap <script> <silent> <leader>kb
 
 " replace some motion or text object or selection with current yank
 Plug 'vim-scripts/ReplaceWithRegister'
-nmap -r  <plug>ReplaceWithRegisterOperator
-nmap -rl <plug>ReplaceWithRegisterLine
-xmap -r  <plug>ReplaceWithRegisterVisual
+nmap 'r  <plug>ReplaceWithRegisterOperator
+nmap 'rl <plug>ReplaceWithRegisterLine
+xmap 'r  <plug>ReplaceWithRegisterVisual
 
 
 " preview register contents
@@ -1307,18 +1307,18 @@ let g:NERDDefaultNesting = 1
 let g:NERDAltDelims_javascript = 0
 " align multiline comments
 let g:NERDDefaultAlign = 'left'
-" nmap -c <leader>c
-" xmap -c <leader>c
+" nmap 'c <leader>c
+" xmap 'c <leader>c
 " comment text objects and movements
 for mov in ['j', 'k', 'gg', 'G', '(', ')', '{', '}', 'as', 'is', 'ap', 'ip']
     exe "nmap \<leader\>c" . mov . " V" . mov . "\<plug\>NERDCommenterInvert"
-    exe "nmap -c"          . mov . " V" . mov . "\<plug\>NERDCommenterComment"
+    exe "nmap 'c"          . mov . " V" . mov . "\<plug\>NERDCommenterComment"
 endfor
 for i in range(1, 50)
     exe "nmap \<leader\>c" . i . "j V" . i . "j\<plug\>NERDCommenterInvert"
     exe "nmap \<leader\>c" . i . "k V" . i . "k\<plug\>NERDCommenterInvert"
-    exe "nmap -c"          . i . "j V" . i . "j\<plug\>NERDCommenterComment"
-    exe "nmap -c"          . i . "k V" . i . "k\<plug\>NERDCommenterComment"
+    exe "nmap 'c"          . i . "j V" . i . "j\<plug\>NERDCommenterComment"
+    exe "nmap 'c"          . i . "k V" . i . "k\<plug\>NERDCommenterComment"
 endfor
 " duplicate a line and comment out the first one
 nmap <leader>cd <leader>cyp
@@ -1350,20 +1350,24 @@ inoremap <silent> <esc><enter> <esc>A;<esc>^
 Plug 'tpope/vim-surround'
 
 " surround consistently in both modes and more comfortably on german keyboard
-nmap -s ys
-vmap -s S
+nmap 's ys
+vmap 's S
 
 " surround with quotes/parentheses/brackets quickly
-vmap -q S'
-vmap -Q S"
-nmap -q ysiw'
-nmap -Q ysiW'
-vmap -b S)
-vmap -B S}
-nmap -b ysiw)
-nmap -B ysiw}
-vmap -` S`
-nmap -` ysiw`
+vmap '' S'
+vmap '" S"
+nmap '' ysiw'
+nmap '" ysiw"
+nmap 'q ysiW'
+nmap 'Q ysiW"
+vmap 'b S)
+vmap 'B S}
+nmap 'b ysiw)
+nmap 'B ysiw}
+vmap '` S`
+nmap '` ysiw`
+nmap d' ds'
+nmap d" ds"
 nmap dq ds'
 nmap dQ ds"
 
@@ -1380,7 +1384,7 @@ function! ToggleQuotesWithVimSurround()
     endif
 endfunction
 " }}}
-nnoremap <silent> -tq :call ToggleQuotesWithVimSurround()<cr>
+nnoremap <silent> 'tq :call ToggleQuotesWithVimSurround()<cr>
 
 
 " swap ('transpose') two words or arbitrary things
@@ -1422,7 +1426,7 @@ nmap <leader>xx <leader>xiw
 " let g:multi_cursor_prev_key='<c-p>'
 " let g:multi_cursor_skip_key='<c-x>'
 " let g:multi_cursor_quit_key='<esc>'
-" nnoremap -<c-c> :call multiple_cursors#quit()<cr>
+" nnoremap '<c-c> :call multiple_cursors#quit()<cr>
 
 " let g:multi_cursor_exit_from_visual_mode=1
 " let g:multi_cursor_exit_from_insert_mode=0
@@ -1481,7 +1485,7 @@ vmap <right> <plug>SchleppRight
 
 " duplicate
 " (delete selection with x. by default, x and d do the same)
-vmap -u <plug>SchleppDup
+vmap 'u <plug>SchleppDup
 
 
 " }}}
@@ -1490,7 +1494,7 @@ vmap -u <plug>SchleppDup
 
 Plug 'vim-scripts/toggle_words.vim'
 
-noremap <silent> -tw :ToggleWord<cr>
+noremap <silent> 'tw :ToggleWord<cr>
 
 let g:toggle_words_dict = {
             \ 'css': [
@@ -1628,8 +1632,8 @@ cmap <c-n> <plug>CmdlineCompleteForward
 
 " generate javascript docs
 " Plug 'heavenshell/vim-jsdoc'
-" nnoremap <silent> -adj ?function<cr>:noh<cr><plug>(jsdoc)
-nnoremap <silent> -adj :JsDoc<cr>
+" nnoremap <silent> 'adj ?function<cr>:noh<cr><plug>(jsdoc)
+nnoremap <silent> 'adj :JsDoc<cr>
 
 
 " }}}
@@ -1656,10 +1660,10 @@ augroup END
 Plug 'junegunn/vim-easy-align'
 
 " Start interactive EasyAlign in visual mode (e.g. vip-L=)
-xmap -L <plug>(EasyAlign)
+xmap 'L <plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. -LG=)
-nmap -L <plug>(EasyAlign)
+nmap 'L <plug>(EasyAlign)
 
 
 " }}}
@@ -1675,10 +1679,10 @@ Plug 'Chiel92/vim-autoformat'
 " - prettier (for JavaScript, TypeScript)
 " - scalafmt (for scala)
 
-nnoremap -af :Autoformat<cr>:GitGutter<cr>
-vnoremap -af :Autoformat<cr>:GitGutter<cr>
-nmap <leader>af -af
-vmap <leader>af -af
+nnoremap 'af :Autoformat<cr>:GitGutter<cr>
+vnoremap 'af :Autoformat<cr>:GitGutter<cr>
+nmap <leader>af 'af
+vmap <leader>af 'af
 
 let g:formatdef_php = '" php-cs-fixer.phar fix"'
 let g:formatters_php = ['php']
@@ -1693,22 +1697,22 @@ let g:formatters_typescript = ['prettier_typescript']
 " autoformat for json does not work out with the plugin above. do this instead:
 augroup json_map_autoformat
     au!
-    au FileType json nnoremap -af :%!python -m json.tool<cr>
-    au FileType json nmap <leader>af -af
+    au FileType json nnoremap 'af :%!python -m json.tool<cr>
+    au FileType json nmap <leader>af 'af
 augroup END
 
 " autoformat for sql
 augroup sql_map_autoformat
     au!
-    au FileType sql nnoremap -af :%!sql-formatter-cli -<cr>
-    au FileType sql nmap <leader>af -af
+    au FileType sql nnoremap 'af :%!sql-formatter-cli -<cr>
+    au FileType sql nmap <leader>af 'af
 augroup END
 
 
 " change wrapping of function arguments
 Plug 'FooSoft/vim-argwrap'
 
-nnoremap <silent> -tf :ArgWrap<cr>
+nnoremap <silent> 'tf :ArgWrap<cr>
 
 
 
@@ -1778,9 +1782,9 @@ nnoremap <leader>dst :let g:DeleteTrailingWhitespace = 1 - g:DeleteTrailingWhite
             \ 'DeleteTrailingWhitespace enabled' :
             \ 'DeleteTrailingWhitespace disabled'<cr>
 " delete trailing whitespace for selected line
-vnoremap <silent> -dst :DeleteTrailingWhitespace<cr>
+vnoremap <silent> 'dst :DeleteTrailingWhitespace<cr>
 " delete trailing whitespace for whole buffer
-nnoremap <silent> -dst :%DeleteTrailingWhitespace<cr>
+nnoremap <silent> 'dst :%DeleteTrailingWhitespace<cr>
 
 
 " }}}
@@ -1792,9 +1796,9 @@ Plug 'ap/vim-css-color'
 
 " convert between color formats (color under cursor or visually selected)
 Plug 'amadeus/vim-convert-color-to'
-nnoremap -cch :ConvertColorTo hex<cr>
-nnoremap -ccr :ConvertColorTo rgb<cr>
-nnoremap -cca :ConvertColorTo rgba<cr>
+nnoremap 'cch :ConvertColorTo hex<cr>
+nnoremap 'ccr :ConvertColorTo rgb<cr>
+nnoremap 'cca :ConvertColorTo rgba<cr>
 
 " launch colorpicker and insert color code
 Plug 'blindFS/vim-colorpicker'
@@ -2391,7 +2395,7 @@ let g:gundo_right = 1
 let g:gundo_preview_bottom = 1
 let g:gundo_return_on_revert = 0
 
-nnoremap <leader>ut :GundoToggle<cr>
+nnoremap <leader>uT :GundoToggle<cr>
 
 
 " }}}
@@ -3483,7 +3487,7 @@ augroup END
 "nnoremap <leader><f5> :MyRefresh<cr>
 
 " ignore typos with text edit leader
-nnoremap - <nop>
+nnoremap ' <nop>
 
 " show absolute path of current file (':help filename-modifiers')
 nnoremap <leader><c-g> :echo expand("%:~")<cr>
@@ -3606,15 +3610,15 @@ endfunction
 
 " Replace Unix timestamp with datetime in current line
 command! ReplaceUnixTimestampWithDateTimeInCurrentLine :call ReplaceUnixTimestampWithDateTime('.') " Replace Unix timestamps with datetimes in current line
-nnoremap -iu :call ReplaceUnixTimestampWithDateTime('.')<cr>
+nnoremap 'utl :call ReplaceUnixTimestampWithDateTime('.')<cr>
 
 " Replace Unix timestamps with datetimes in buffer
 command! ReplaceUnixTimestampWithDateTimeInBuffer :call ReplaceUnixTimestampWithDateTime('%') " Replace Unix timestamps with datetimes in buffer
-nnoremap -iU :call ReplaceUnixTimestampWithDateTime('%')<cr>
+nnoremap 'utb :call ReplaceUnixTimestampWithDateTime('%')<cr>
 
 " Show Unix timestamp under cursor as datetime
 command! UnixTimestampAsDateTime :echo UnixTimestampAsDateTime(expand("<cword>"))
-nnoremap <leader>iu :echo UnixTimestampAsDateTime(expand("<cword>"))<cr>
+nnoremap <leader>ut :echo UnixTimestampAsDateTime(expand("<cword>"))<cr>
 
 
 " macro ('complex repeat') without worrying about registers
@@ -3950,6 +3954,7 @@ cnoremap <esc>f <s-right>
 " move to BOL (beginning of line)
 nnoremap <c-a> ^
 cnoremap <c-a> ^
+xnoremap <c-a> ^
 
 " TODO: FIX
 " smart BOL: the cursor moves to the first nonblank character on the line,
@@ -3975,11 +3980,6 @@ nnoremap <c-c>h v"*ygv"+y
 " swap g, and g; (jump through changelist)
 nnoremap g, g;
 nnoremap g; g,
-
-" swap ` and ' (jump to markers)
-" (by default, ' marked line, ` marked line and column)
-nnoremap ' `
-nnoremap ` '
 
 " goto last edit
 nnoremap <leader>. `.zzzv
@@ -4105,8 +4105,8 @@ inoremap <esc>: <c-p>
 nnoremap <leader>oc :if &complete =~ 't' <bar> set complete-=t,i <bar> else <bar> set complete+=t,i <bar> endif <bar> set complete? <cr>
 
 " increment/decrement number
-nnoremap -i <c-a>
-nnoremap -- <c-x>
+nnoremap 'i <c-a>
+nnoremap 'I <c-x>
 
 
 " indent lines
@@ -4114,11 +4114,11 @@ vnoremap < <gv
 vnoremap > >gv
 
 " change tab width (hard)
-nnoremap -rt2 :set noexpandtab <bar> :retab! <bar>
+nnoremap 'rt2 :set noexpandtab <bar> :retab! <bar>
             \ :set expandtab tabstop=2 <bar> :retab <cr>
-nnoremap -rt4 :set noexpandtab <bar> :retab! <bar>
+nnoremap 'rt4 :set noexpandtab <bar> :retab! <bar>
             \ :set expandtab tabstop=4 <bar> :retab <cr>
-nnoremap -rt8 :set noexpandtab <bar> :retab! <bar>
+nnoremap 'rt8 :set noexpandtab <bar> :retab! <bar>
             \ :set expandtab tabstop=8 <bar> :retab <cr>
 
 " yank line with Enter (i do that so often)
@@ -4137,16 +4137,16 @@ nnoremap -rt8 :set noexpandtab <bar> :retab! <bar>
 
 " move line up or down
 " (:m closes folds https://groups.google.com/forum/#!topic/vim_dev/QGgbjv4uyZc)
-nnoremap <silent> -k :set fdm=manual<cr>:m .-2<cr>:set fdm=marker<cr>
-nnoremap <silent> -j :set fdm=manual<cr>:m .+1<cr>:set fdm=marker<cr>
-vnoremap <silent> -j <esc>:set fdm=manual<cr>gv:m '>+1<cr>gv=gv:set fdm=marker<cr>
-vnoremap <silent> -k <esc>:set fdm=manual<cr>gv:m '<-2<cr>gv=gv:set fdm=marker<cr>
+nnoremap <silent> 'k :set fdm=manual<cr>:m .-2<cr>:set fdm=marker<cr>
+nnoremap <silent> 'j :set fdm=manual<cr>:m .+1<cr>:set fdm=marker<cr>
+vnoremap <silent> 'j <esc>:set fdm=manual<cr>gv:m '>+1<cr>gv=gv:set fdm=marker<cr>
+vnoremap <silent> 'k <esc>:set fdm=manual<cr>gv:m '<-2<cr>gv=gv:set fdm=marker<cr>
 
 " join line
-nnoremap -lj J
+nnoremap 'lj J
 
 " join line above (instead of below)
-nnoremap -lk kddpkJ
+nnoremap 'lk kddpkJ
 
 " split line (opposite of join line)
 " (regular 'S' can be done with 'cc' instead)
@@ -4158,10 +4158,10 @@ nnoremap <leader><cr> i<cr><esc>
             \ `q
 
 " duplicate code
-nnoremap -uu yyp
-nnoremap -ul yyp
-nnoremap -up yap<s-}>p
-vnoremap -u yP
+nnoremap 'uu yyp
+nnoremap 'ul yyp
+nnoremap 'up yap<s-}>p
+vnoremap 'u yP
 
 " add new lines above or below
 "(this works without mappings, except that we arein insert mode afterwards)
@@ -4174,20 +4174,20 @@ nnoremap K :<c-u>put =repeat(nr2char(10), v:count1)<cr>k
 
 " align next column in duplicated line when i don't use replace mode
 " (very bad implementation)
-nnoremap -li kWjdwgE
+nnoremap 'li kWjdwgE
 
 " add space (a few newlines) below
 "nnoremap <enter> :.+1insert \n\n\n<cr>
-nnoremap -as mno<esc>o<esc>o<esc>o<esc>`n
+nnoremap 'as mno<esc>o<esc>o<esc>o<esc>`n
 
 " add a line of characters
-nnoremap -al :call InsertCharLine(input("Insert character: "), 80)<cr>
+nnoremap 'al :call InsertCharLine(input("Insert character: "), 80)<cr>
 " add a box of characters ('comment box')
-nnoremap -ab :call InsertCharBox(input("Insert character: "))<cr>
+nnoremap 'ab :call InsertCharBox(input("Insert character: "))<cr>
 " add a line of characters below, just as long as the current line
-nnoremap -au- yyp^v$r-
-nnoremap -au= yyp^v$r=
-nnoremap -au# yyp^v$r#
+nnoremap 'au- yyp^v$r-
+nnoremap 'au= yyp^v$r=
+nnoremap 'au# yyp^v$r#
 
 " enter substitution mode quickly
 nnoremap <c-s><c-s> :%s::<left>
@@ -4241,34 +4241,34 @@ nmap <c-s>/ gggn<c-s>
 
 
 " sort lines
-nnoremap -o vip:sort<cr>
-vnoremap -o :sort<cr>
+nnoremap 'o vip:sort<cr>
+vnoremap 'o :sort<cr>
 
 
 " correct typos like 'DAmnitypefast' to titlecase ('Damnitypefast')
-nnoremap -tu blguee
-inoremap -tu <esc>blgueea
+nnoremap 'tu blguee
+inoremap 'tu <esc>blgueea
 
 
 if s:MyMode == 'stripped'
     " delete trailing whitespace for selected line
-    vnoremap <silent> -dst <esc>:.s:\v\s+$::<cr>
+    vnoremap <silent> 'dst <esc>:.s:\v\s+$::<cr>
     " delete trailing whitespace for whole buffer
-    nnoremap <silent> -dst :%s:\v\s+$::<cr>
+    nnoremap <silent> 'dst :%s:\v\s+$::<cr>
 endif
 
 " delete leading whitespace (can be prefixed with a count)
-nnoremap <silent> -dsl :s:^\s\+::<cr>
+nnoremap <silent> 'dsl :s:^\s\+::<cr>
 " replace double/multiple spaces with one space
 " TODO: make this repeatable with .
-nnoremap <silent> -dsd :.s:\v(\S) {2}(\S):\1 \2:<cr>
-nnoremap <silent> -dsD :%s:\v(\S) {2}(\S):\1 \2:<cr>
-nnoremap <silent> -dsm :.s:\v(\S) {2,}(\S):\1 \2:<cr>
-nnoremap <silent> -dsM :.s:\v(\S) {2,}(\S):\1 \2:<cr>
+nnoremap <silent> 'dsd :.s:\v(\S) {2}(\S):\1 \2:<cr>
+nnoremap <silent> 'dsD :%s:\v(\S) {2}(\S):\1 \2:<cr>
+nnoremap <silent> 'dsm :.s:\v(\S) {2,}(\S):\1 \2:<cr>
+nnoremap <silent> 'dsM :.s:\v(\S) {2,}(\S):\1 \2:<cr>
 
 
 " convert a vim plugin github url into appropriate format for vim-plug
-nnoremap -pi :.s:\m.*http.*github\.com/\([^/]*/[^/]*\).*:Plug '\1':<cr>
+nnoremap 'pi :.s:\m.*http.*github\.com/\([^/]*/[^/]*\).*:Plug '\1':<cr>
 
 
 " add/remove an html comment
