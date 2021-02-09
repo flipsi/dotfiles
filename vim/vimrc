@@ -345,10 +345,10 @@ Plug 'tpope/vim-repeat'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " look and feel {{{
 
-" smooth scrolling
-Plug 'psliwka/vim-smoothie'
-nmap <unique> <M-j> <Plug>(SmoothieDownwards)
-nmap <unique> <M-k> <Plug>(SmoothieUpwards)
+" " smooth scrolling
+" Plug 'psliwka/vim-smoothie'
+" nmap <unique> <M-j> <Plug>(SmoothieDownwards)
+" nmap <unique> <M-k> <Plug>(SmoothieUpwards)
 
 
 " make gvim colorschemes work in terminal
@@ -3649,12 +3649,12 @@ cnoremap <c-g> <c-c>
 "nnoremap <down> <c-e>
 "nnoremap <up>   <c-y>
 
-" " scroll a little smoother
-" " (this actually is suggested in :help scroll-smooth)
-" noremap <m-j>  <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
-" noremap <esc>j <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
-" noremap <m-k>  <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
-" noremap <esc>k <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
+" scroll a little smoother
+" (this actually is suggested in :help scroll-smooth)
+noremap <m-j>  <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
+noremap <esc>j <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
+noremap <m-k>  <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
+noremap <esc>k <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 
 
 " }}}
