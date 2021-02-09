@@ -106,7 +106,7 @@ function start_mail_util_with_sync() {
     eval $MUTT_COMMAND
 
     # finalize after mutt exited
-    kill $LOOP_PID
+    kill $LOOP_PID || true
     wait $LOOP_PID 2>/dev/null || true
     final_sync
     close_logs
