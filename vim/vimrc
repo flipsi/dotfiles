@@ -4272,6 +4272,21 @@ nnoremap <silent> 'dsM :.s:\v(\S) {2,}(\S):\1 \2:<cr>
 " convert a vim plugin github url into appropriate format for vim-plug
 nnoremap 'pi :.s:\m.*http.*github\.com/\([^/]*/[^/]*\).*:Plug '\1':<cr>
 
+" open plugin under cursor on Github
+function! OpenVimPlugOnInGithub()
+    let l:line = getline(".")
+    let l:plugin_identifier = matchstr(l:line, "\\m.*Plug '\\zs.\\+/.\\+\\ze'.*")
+    if !empty(l:plugin_identifier)
+        call system('xdg-open https://github.com/' . l:plugin_identifier)
+    else
+        echo "Sorry, this does not look like a line with a plugin name."
+    endif
+endfunction
+augroup open_vim_plugins_on_github
+    autocmd!
+    autocmd BufRead vimrc nmap <buffer> <leader>px :call OpenVimPlugOnInGithub()<cr>
+augroup END
+
 
 " add/remove an html comment
 " (this is useful when syntax is set to php and nerdcommenter fucks up)
