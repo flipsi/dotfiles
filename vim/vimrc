@@ -258,7 +258,7 @@ autocmd VimEnter * nested
 Plug 'kassio/neoterm'
 
 let g:neoterm_shell = 'fish'
-let g:neoterm_default_mod = ':vertical'
+let g:neoterm_default_mod = ':botright'
 let g:neoterm_autoinsert = 1
 let g:neoterm_autoscroll = 1
 
@@ -286,12 +286,25 @@ function! ExecuteInNeoTerminal(vimcommand)
     unlet g:suppress_terminal_autoinsert
 endfunction
 
+" Switch how to split terminal window
+command! SwitchNeoTermMode :call SwitchNeoTermMode()
+function! SwitchNeoTermMode()
+    if g:neoterm_default_mod != ':botright'
+        let g:neoterm_default_mod = ':botright'
+        echo 'Splitting terminal at the bottom'
+    else
+        let g:neoterm_default_mod = ':vertical'
+        echo 'Splitting terminal vertically'
+    endif
+endfunction
+
 " Remove stupid default mappings
 augroup neoterm_remove_mappings
     au!
     au VimEnter * silent! nunmap ,tt
 augroup END
 
+nnoremap <leader>tm     :SwitchNeoTermMode<cr>
 nnoremap <leader>tt     :Topen<cr>
 nnoremap <leader>tn     :Tnew<cr>
 nnoremap <leader>to     :RunCommandInTerminal<space>
