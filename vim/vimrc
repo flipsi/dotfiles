@@ -4291,6 +4291,7 @@ nnoremap <silent> 'dsM :.s:\v(\S) {2,}(\S):\1 \2:<cr>
 nnoremap 'pi :.s:\m.*http.*github\.com/\([^/]*/[^/]*\).*:Plug '\1':<cr>
 
 " open plugin under cursor on Github
+command! OpenVimPlugOnInGithub :call OpenVimPlugOnInGithub()
 function! OpenVimPlugOnInGithub()
     let l:line = getline(".")
     let l:plugin_identifier = matchstr(l:line, "\\m.*Plug '\\zs.\\+/.\\+\\ze'.*")
