@@ -85,6 +85,9 @@ function start_mail_util() {
                     ;;
             esac
             ;;
+        sync )
+            start_mail_util_with_sync
+            ;;
         offline )
             eval $MUTT_COMMAND
             ;;
