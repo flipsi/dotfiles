@@ -261,6 +261,7 @@ let g:neoterm_shell = 'fish'
 let g:neoterm_default_mod = ':botright'
 let g:neoterm_autoinsert = 1
 let g:neoterm_autoscroll = 1
+let g:neoterm_automap_keys = '' " don't add default mapping (,tt)
 
 command! -nargs=1 -complete=file RunCommandInTerminal :call RunCommandInTerminal(<q-args>)
 function! RunCommandInTerminal(commandline)
@@ -298,11 +299,11 @@ function! SwitchNeoTermMode()
     endif
 endfunction
 
-" Remove stupid default mappings
-augroup neoterm_remove_mappings
-    au!
-    au VimEnter * silent! nunmap ,tt
-augroup END
+" " Remove stupid default mappings
+" augroup neoterm_remove_mappings
+"     au!
+"     au VimEnter * silent! nunmap ,tt
+" augroup END
 
 nnoremap <leader>tm     :SwitchNeoTermMode<cr>
 nnoremap <leader>tt     :Topen<cr>
