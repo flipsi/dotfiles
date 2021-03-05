@@ -502,10 +502,15 @@ nnoremap <leader>ghpr :OpenOrCreatePullRequest<cr>
 
 command! GitCheckoutInteractively :call GitCheckoutInteractively() " checkout git branch chosen with fzf
 function! GitCheckoutInteractively()
-    call fzf#run(fzf#wrap({
-                \ 'source': 'git branch',
-                \ 'sink': function('GitCheckout')
-                \ }))
+    let l:plugin_command_name = g:fzf_command_prefix . 'GBranches'
+    if exists(':' . l:plugin_command_name)
+        exe l:plugin_command_name
+    else
+        call fzf#run(fzf#wrap({
+                    \ 'source': 'git branch',
+                    \ 'sink': function('GitCheckout')
+                    \ }))
+    endif
 endfunction
 function! GitCheckout(ref)
     exe 'Git checkout ' . a:ref
@@ -941,6 +946,9 @@ let g:ctrlp_use_caching = 2000
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 
 Plug 'junegunn/fzf.vim'
+
+Plug 'stsewd/fzf-checkout.vim'
+
 
 " prefix all the command names
 let g:fzf_command_prefix = 'Fzf'
