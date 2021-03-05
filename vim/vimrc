@@ -495,6 +495,7 @@ nnoremap <leader>gee  :Git checkout<space>
 nnoremap <leader>geb  :exe ':Git checkout -b ' . input('Branch name: ')<cr>
 nnoremap <leader>geo  :GitCheckoutInteractively<cr>
 nnoremap <leader>ge-  :Git checkout -<cr>
+nnoremap <leader>gup  :Confirm Git submodule update<cr>
 nnoremap <leader>gho  :OpenGithubRepoWeb<cr>
 nnoremap <leader>ghpr :OpenOrCreatePullRequest<cr>
 
