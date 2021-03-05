@@ -4005,6 +4005,10 @@ nnoremap g; g,
 " goto last edit
 nnoremap <leader>. `.zzzv
 
+" marks
+nnoremap mm m
+nnoremap m  `
+
 " center line when jumping around
 nnoremap <c-o> <c-o>zz
 nnoremap <c-i> <c-i>zz
