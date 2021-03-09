@@ -3485,6 +3485,7 @@ let mapleader=' '
 
 iabbrev dpr         deprecated
 iabbrev todo        TODO:
+iabbrev todoi       TODO: implement
 iabbrev todod       TODO: delete this debugging statement
 iabbrev todof       TODO: FIX
 
