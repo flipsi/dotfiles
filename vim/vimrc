@@ -1897,7 +1897,8 @@ nmap <leader>jE         :CocList diagnostics<cr>
 " nmap <leader>jd         <Plug>(coc-definition)
 nmap <leader>jd         <nop>
 nmap <leader>jdl        :call CocAction('jumpDefinition', 'vsplit')<cr>
-nmap <leader>jdd        :call CocAction('jumpDefinition', 'buffer')<cr>
+nmap <leader>jdb        :call CocAction('jumpDefinition', 'buffer')<cr>
+nmap <leader>jdd        <Plug>(coc-definition)
 nmap <leader>jD         <Plug>(coc-declaration)
 nmap <leader>ji         <Plug>(coc-implementation)
 
