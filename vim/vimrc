@@ -2014,7 +2014,7 @@ augroup END
 
 function! SetupNpm()
     nnoremap <leader>bi  :call RunCommand("npm install")<cr>
-    nnoremap <leader>bs  :call RunCommand("npm start")<cr>
+    nnoremap <leader>br  :call RunCommand("npm start")<cr>
     nnoremap <leader>btt :call RunCommand("npm test")<cr>
     nnoremap <leader>btu :call RunCommand("npm test-unit")<cr>
     nnoremap <leader>bti :call RunCommand("npm test-int")<cr>
@@ -2024,7 +2024,7 @@ command! SetupNpm :call SetupNpm() " add mappings for development with NodeJS
 function! SetupYarn()
     nnoremap <leader>bi  :call RunCommand("yarn install")<cr>
     nnoremap <leader>bd  :call RunCommand("yarn build")<cr>
-    nnoremap <leader>bs  :call RunCommand("yarn start")<cr>
+    nnoremap <leader>br  :call RunCommand("yarn start")<cr>
     nnoremap <leader>btt :call RunCommand("yarn test")<cr>
     nnoremap <leader>btu :call RunCommand("yarn test-unit")<cr>
     nnoremap <leader>bti :call RunCommand("yarn test-int")<cr>
@@ -2071,7 +2071,7 @@ command! SetupLatex :call SetupLatex() " add mappings for LaTeX
 function! SetupLatex()
     setlocal wrap
     nnoremap <leader>bb :VimtexCompile<cr>
-    nnoremap <leader>bs :VimtexCompileSS<cr>
+    nnoremap <leader>br :VimtexCompileSS<cr>
 endfunction
 
 
@@ -2088,7 +2088,7 @@ augroup markdown_on_read
     au FileType markdown call SetupMarkdown()
 augroup END
 function! SetupMarkdown()
-    nnoremap <buffer> <leader>bs :LivedownPreview<cr>
+    nnoremap <buffer> <leader>br :LivedownPreview<cr>
     nnoremap <buffer> <leader>bx :LivedownKill<cr>
 endfunction
 command! SetupMarkdown :call SetupMarkdown() " add mappings for development with Markdown
@@ -2118,7 +2118,7 @@ augroup python_on_read
     au FileType python call SetupPython()
 augroup END
 function! SetupPython()
-    nnoremap <leader>bs  :call RunCommand("python " . expand('%'))<cr>
+    nnoremap <leader>br  :call RunCommand("python " . expand('%'))<cr>
     nnoremap <leader>b2  :call RunCommand("python2 " . expand('%'))<cr>
     nnoremap <leader>b3  :call RunCommand("python3 " . expand('%'))<cr>
 endfunction
@@ -2160,7 +2160,7 @@ function! SetupRust()
     let g:build_shell = 'bash'
     nnoremap <leader>bd  :call RunCommandInBuildShell("cargo build")<cr>
     nnoremap <leader>bD  :call RunCommandInBuildShell("cargo build --release")<cr>
-    nnoremap <leader>bs  :call RunCommandInBuildShell("cargo run")<cr>
+    nnoremap <leader>br  :call RunCommandInBuildShell("cargo run")<cr>
     nnoremap <leader>btc :call RunCommandInBuildShell("cargo check")<cr>
 endfunction
 command! SetupRust :call SetupRust() " add mappings for development with Rust
@@ -2292,14 +2292,14 @@ function! SetupScala()
     nnoremap <leader>AF     :Terminal scalafmt<cr>
 
     nnoremap <leader>bd     :call RunCommandInBuildShell("compile")<cr>
-    nnoremap <leader>bs     :call RunCommandInBuildShell("run")<cr>
+    nnoremap <leader>br     :call RunCommandInBuildShell("run")<cr>
     nnoremap <leader>btt    :call RunCommandInBuildShell("test; it:test")<cr>
     nnoremap <leader>btu    :call RunCommandInBuildShell("test")<cr>
     nnoremap <leader>bti    :call RunCommandInBuildShell("it:test")<cr>
     nnoremap <leader>bto    :call RunCommandInBuildShell(CalculateSbtTestOnlyCommand())<cr>
     nnoremap <leader>ba     :call RunCommandInBuildShell("scapegoat")<cr>
     nnoremap <leader>bx     :call RunCommandInBuildShell("clean")<cr>
-    nnoremap <leader>br     :call RunCommandInBuildShell("console")<cr>
+    nnoremap <leader>bR     :call RunCommandInBuildShell("console")<cr>
     nnoremap <leader>b<f5>  :call RunCommandInBuildShell("reload")<cr>
 
 endfunction
@@ -2394,12 +2394,12 @@ command! SetupSQLDadBod :call SetupSQLDadBod() " add mappings for development wi
 "     au FileType sql call SetupSQLWorkbench()
 " augroup END
 " function! SetupSQLWorkbench()
-"     nnoremap <leader>bs   <nop>
-"     nnoremap <leader>bsc  :SWSqlBufferConnect<cr>
-"     nnoremap <leader>bse  :SWDbExplorer<space>
-"     nnoremap <leader>bsr  :SWSqlExecuteCurrent<cr>
-"     vnoremap <leader>bsr  :SWSqlExecuteSelected<cr>
-"     nnoremap <leader>bsa  :SWSqlExecuteAll<cr>
+"     nnoremap <leader>br   <nop>
+"     nnoremap <leader>brc  :SWSqlBufferConnect<cr>
+"     nnoremap <leader>bre  :SWDbExplorer<space>
+"     nnoremap <leader>brr  :SWSqlExecuteCurrent<cr>
+"     vnoremap <leader>brr  :SWSqlExecuteSelected<cr>
+"     nnoremap <leader>bra  :SWSqlExecuteAll<cr>
 " endfunction
 
 
@@ -4549,7 +4549,7 @@ augroup shellscript_on_read
     au FileType fish    call SetupShellscript()
 augroup END
 function! SetupShellscript()
-    nnoremap <leader>bs :call ExecuteShellscript()<cr>
+    nnoremap <leader>br :call ExecuteShellscript()<cr>
 endfunction
 
 
