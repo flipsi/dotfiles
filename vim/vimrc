@@ -493,6 +493,7 @@ nnoremap <leader>gpp  :Git pull<cr>
 nnoremap <leader>gpu  :GitPush<cr>
 nnoremap <leader>gee  :Git checkout<space>
 nnoremap <leader>geb  :exe ':Git checkout -b ' . input('Branch name: ')<cr>
+nnoremap <leader>gbm  :exe ':Confirm Git branch -m ' . input('New branch name: ')<cr>
 nnoremap <leader>geo  :GitCheckoutInteractively<cr>
 nnoremap <leader>ge-  :Git checkout -<cr>
 nnoremap <leader>gup  :Confirm Git submodule update<cr>
