@@ -4433,8 +4433,9 @@ nnoremap <leader>bS :call RunCommand(getline('.'))<cr>
 vnoremap <leader>bS y:call RunCommand(@")<cr>gv
 nnoremap <leader>b` yi`:call RunCommand(@")<cr>
 
-nnoremap <silent> <leader>be :OpenBuildErrorsInQuickfixList<cr><esc>hj
-nnoremap <silent> <leader>bE :OpenBuildErrorsInBuffer<cr><esc>hj
+nnoremap <silent> <leader>bee :OpenBuildErrorsInQuickfixList<cr><esc>hj
+nnoremap <silent> <leader>beo :OpenBuildErrorsInBuffer<cr><esc>hj
+nnoremap <silent> <leader>bex :WebSearchForBuildError<cr>
 
 if g:run_command_method == "terminal"
     nnoremap <leader>bo         :RunCommandInBuildShell<space>
@@ -4474,9 +4475,8 @@ function! RemoveEscapeSequencesFromFile(filename)
     exec ':silent !sed -i -r "s/\[\?1h=\[\?2004h//g" ' . a:filename
 endfunction
 
-" open quickfix list with build errors from the terminal
-command! OpenBuildErrorsInQuickfixList :call OpenBuildErrorsInQuickfixList()
-function! OpenBuildErrorsInQuickfixList()
+" copy the build output file content to a new vim error file (of the last run)
+function! PrepareErrorFile(errorfile)
     " let l:terminal_bufnum = GetTerminalBuffer()
     " if l:terminal_bufnum == 0
     "     echoerr 'No terminal buffer found.'
@@ -4492,10 +4492,9 @@ function! OpenBuildErrorsInQuickfixList()
     let l:build_output_file = GetBuildOutputFilename()
     let l:lines = readfile(l:build_output_file)
 
-    let l:errorfile = '/tmp/vim.errorfile.txt'
-    call writefile(l:lines, l:errorfile)
-    call RemoveEscapeSequencesFromFile(l:errorfile)
-    let l:lines = readfile(l:errorfile)
+    call writefile(l:lines, a:errorfile)
+    call RemoveEscapeSequencesFromFile(a:errorfile)
+    let l:lines = readfile(a:errorfile)
 
     let l:last_prompt_line = 1
     if exists('g:prompt_regex')
@@ -4507,9 +4506,15 @@ function! OpenBuildErrorsInQuickfixList()
         endfor
     endif
     if l:last_prompt_line != 1
-        call writefile(l:lines[l:last_prompt_line:], l:errorfile)
+        call writefile(l:lines[l:last_prompt_line:], a:errorfile)
     endif
+endfunction
 
+" open quickfix list with build errors from the terminal
+command! OpenBuildErrorsInQuickfixList :call OpenBuildErrorsInQuickfixList()
+function! OpenBuildErrorsInQuickfixList()
+    let l:errorfile = '/tmp/vim.errorfile.txt'
+    call PrepareErrorFile(l:errorfile)
     cclose
     exe 'cfile' . l:errorfile
     if len(getqflist()) > 0
@@ -4523,9 +4528,37 @@ endfunction
 
 command! OpenBuildErrorsInBuffer :call OpenBuildErrorsInBuffer()
 function! OpenBuildErrorsInBuffer()
-    let l:build_output_file = GetBuildOutputFilename()
-    call RemoveEscapeSequencesFromFile(l:build_output_file)
-    execute "edit " . l:build_output_file
+    " let l:build_output_file = GetBuildOutputFilename()
+    " execute "edit " . l:build_output_file
+    let l:errorfile = '/tmp/vim.errorfile.txt'
+    call PrepareErrorFile(l:errorfile)
+    execute "edit " . l:errorfile
+endfunction
+
+command! WebSearchForBuildError :call WebSearchForBuildError()
+function! WebSearchForBuildError()
+    let l:errorfile = '/tmp/vim.errorfile.txt'
+    call PrepareErrorFile(l:errorfile)
+    let l:lines = readfile(l:errorfile)
+    let l:errorpattern = '\m^\[error\] .\+: \zs.*\ze' " only for Scala/sbt
+    for i in range(0, len(l:lines) - 1)
+        let l:error = matchstr(l:lines[i], l:errorpattern)
+        if len(l:error) > 0
+            break
+        endif
+    endfor
+    if len(l:error) > 0
+        echo "Searching the web for error: " . l:error
+        call WebSearch(l:error)
+    else
+        echomsg "No build errors."
+    endif
+endfunction
+
+
+command! -nargs=1 WebSearch :call WebSearch(<q-args>)
+function! WebSearch(query)
+    call system("$BROWSER 'https://google.com/search?q=" . UrlEncode(a:query) . "'")
 endfunction
 
 
