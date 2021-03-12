@@ -4863,6 +4863,7 @@ command! Save               :call Save(0)           " Write buffer changes to fi
 command! SaveForce          :call Save(1)           " Write buffer changes to file ignoring 'readonly' etc.
 command! SaveAndClose       :wq                     " Write buffer changes to file and close window
 command! CloseBuffer        :bn | :bd#              " Close current buffer (without closing window)
+command! CloseBufferWindow  :bd                     " Close current buffer (with closing window)
 command! CloseBufferForce   :bdelete!               " Close current buffer discarding changes
 command! CloseAllBuffers    :silent bufdo bdelete   " Close all buffers (not vim)
 command! CloseWindow        :quit                   " Close current window (not buffer)
@@ -4878,6 +4879,7 @@ nnoremap <leader>w          :Save<cr>
 nnoremap <leader>WW         :SaveForce<cr>
 nnoremap <leader>qq         :SaveAndClose<cr>
 nnoremap <leader>qa         :CloseAllBuffers<cr>
+nnoremap <leader>qb         :CloseBufferWindow<cr>
 nnoremap <leader><bs>       :CloseBuffer<cr>
 nnoremap <leader>QQ         :CloseBufferForce<cr>
 nnoremap <leader>qw         :CloseWindow<cr>
