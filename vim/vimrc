@@ -2570,12 +2570,21 @@ if g:cursorposition
     set cursorline cursorcolumn
 endif
 " ... but not in insert mode or inactive windows
+" TODO: fix this for focus lost in terminal
 augroup cursorposition
     au!
-    au WinLeave,InsertEnter,FocusLost   * set nocursorline nocursorcolumn
-    au WinEnter,InsertLeave,FocusGained * if g:cursorposition
-    au WinEnter,InsertLeave,FocusGained *     set cursorline cursorcolumn
-    au WinEnter,InsertLeave,FocusGained * endif
+    au WinLeave,InsertEnter *
+                \ set nocursorline nocursorcolumn
+    au WinEnter,InsertLeave *
+                \ if g:cursorposition
+                \ | set cursorline cursorcolumn
+                \ | endif
+    au FocusLost   *
+                \ set nocursorline nocursorcolumn
+    au FocusGained *
+                \ if g:cursorposition && mode() != 'i'
+                \ | set cursorline cursorcolumn
+                \ | endif
 augroup END
 
 " statusline
