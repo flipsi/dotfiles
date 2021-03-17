@@ -4864,11 +4864,13 @@ nnoremap <leader>iB :call Shell('cd ' . expand('%:p:h') . '; bash')<cr>
 function! Tig(from_current_file)
     if (a:from_current_file)
         let l:command = 'cd "' . expand('%:p:h') . '"; tig status'
-        execute 'Shell fish -c ''' . l:command . ''''
+        let l:command = 'fish -c ''' . l:command . ''''
+        " execute 'Shell fish -c ''' . l:command . ''''
     else
-        Shell tig status
+        let l:command = 'tig status'
     endif
-    redraw!
+    call VimuxRunCommand(l:command)
+    call VimuxZoomRunner()
 endfunction
 command! TigFromWorkingDir  :call Tig(0) " Interactive Git interface (from working directory)
 command! TigFromCurrentFile :call Tig(1) " Interactive Git interface (from current file)
