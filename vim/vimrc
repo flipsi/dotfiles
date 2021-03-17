@@ -1040,6 +1040,20 @@ nmap <leader>; <Plug>Fzm
 vmap <leader>; <Plug>FzmVisual
 
 
+" Telescope - another highly extendable fuzzy finder
+
+" Neovim Nightly (0.5) is required for telescope.nvim to work.
+
+" Plug 'nvim-lua/popup.nvim'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-telescope/telescope.nvim'
+
+" nnoremap <leader>ef <cmd>Telescope find_files<cr>
+" nnoremap <leader>j/ <cmd>Telescope live_grep<cr>
+" nnoremap <leader>eb <cmd>Telescope buffers<cr>
+" nnoremap <leader>hh <cmd>Telescope help_tags<cr>
+
+
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " file searching and much more {{{
