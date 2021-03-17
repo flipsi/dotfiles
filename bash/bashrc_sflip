@@ -79,13 +79,18 @@ fi
 alias sudo='sudo '
 
 
+YELLOW='\[\033[01;33m\]'
+GREY='\[\033[01;30m\]'
+RED='\[\033[01;31m\]'
+DEFAULT_COLOR='\[\033[00m\]'
+
 # custom prompt
 PS1=\
 '\n'\
-'\[\033[01;33m\]\u@\h '\
-'\[\033[01;30m\]\w'\
-'\[\033[01;31m\] $(if [ -d .git ]; then echo -n "( "; git rev-parse --sq --abbrev-ref HEAD; echo -n ")"; fi)'\
-'\[\033[00m\]\n> '
+"$YELLOW\u@\h "\
+"$GREY\w"\
+"$RED"'$(if [ -d .git ]; then echo -n " ( "; git rev-parse --sq --abbrev-ref HEAD; echo -n ")"; fi)'\
+"$DEFAULT_COLOR\n> "
 
 
 # attach to screen session if shell is interactive and there a screen session
