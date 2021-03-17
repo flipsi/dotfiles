@@ -844,7 +844,7 @@ assign [class="(?i)kaffeine"]                                                   
 assign [class="(?i)mediathek"]                                                                      Mediathek
 assign [class="(?i)spotify"]                                                                        Spotify
 for_window [class="Spotify"] move to workspace                                                      Spotify
-assign [class="Telegram"]                                                                           Telegram
+assign [class="(?i)telegram"]                                                                       Telegram
 assign [class="(?i)alacritty"]                                                                      Terminal
 assign [class="(?i)cool-retro-term"]                                                                Terminal
 assign [class="(?i)gnome-terminal"]                                                                 Terminal
@@ -857,8 +857,8 @@ for_window [class="(?i)gnome-session-failed"] move to workspace                 
 
 ## workspaces with window always on specific output
 for_window [class="(?i)vivaldi-stable"]                                         move workspace to output DP3-1
-for_window [class="(?i)chromium"]                                               move workspace to output DP3-2
-for_window [class="(?i)google-chrome"]                                          move workspace to output DP3-2
+for_window [class="(?i)chromium"]                                               move workspace to output DP3-1
+for_window [class="(?i)google-chrome"]                                          move workspace to output DP3-1
 for_window [class="(?i)firefox"]                                                move workspace to output DP3-1
 for_window [class="(?i)qutebrowser"]                                            move workspace to output DP3-1
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DP3-2
@@ -871,4 +871,5 @@ for_window [class="(?i)jetbrains-phpstorm"]                                     
 for_window [class="(?i)slack"]                                                  move workspace to output eDP1
 for_window [class="Spotify"]                                                    move workspace to output DP3-1
 for_window [class="(?i)telegram"]                                               move workspace to output eDP1
+for_window [class="(?i)telegram-desktop"]                                       move workspace to output eDP1
 for_window [class="(?i)gnome-session-failed"]                                   move workspace to output eDP1
