@@ -497,13 +497,14 @@ nnoremap <leader>gbm  :exe ':Confirm Git branch -m ' . input('New branch name: '
 nnoremap <leader>geo  :GitCheckoutInteractively<cr>
 nnoremap <leader>ge-  :Git checkout -<cr>
 nnoremap <leader>gup  :Confirm Git submodule update<cr>
-nnoremap <leader>gho  :OpenGithubRepoWeb<cr>
-nnoremap <leader>ghpr :OpenOrCreatePullRequest<cr>
-nnoremap <leader>ghfo :OpenGithubFileWeb<cr>
-nnoremap <leader>ghff :YankGithubFileToClipboard<cr>
-nnoremap <leader>ghf  <nop>
-nnoremap <leader>ghp  <nop>
 nnoremap <leader>gh   <nop>
+nnoremap <leader>ghp  <nop>
+nnoremap <leader>ghpr :OpenOrCreatePullRequest<cr>
+nnoremap <leader>ghO  :OpenGithubRepoWeb<cr>
+nnoremap <leader>gho  :call GithubWebUrl('line', 'open_in_web')<cr>
+nnoremap <leader>ghy  :call GithubWebUrl('line', 'yank_to_clipboard')<cr>
+vnoremap <leader>gho  :<c-u>call GithubWebUrl('range', 'open_in_web')<cr>
+vnoremap <leader>ghy  :<c-u>call GithubWebUrl('range', 'yank_to_clipboard')<cr>
 
 
 command! GitCheckoutInteractively :call GitCheckoutInteractively() " checkout git branch chosen with fzf
@@ -3005,42 +3006,35 @@ endfunction
 " Github
 
 " Get Github URL of file and position in current revision
-command! GithubWebUrl :call GithubWebUrl() " Get Github URL of file and position in current revision
-function! GithubWebUrl()
+function! GithubWebUrl(line_or_range, return_or_yank_to_clipboard_or_open_in_web)
     let l:remote_name = system('git remote | head -n1')
     let l:revision = system('git rev-parse HEAD | tr -d "\n"')
-    " let l:remote_url = system('git ls-remote --get-url ' . l:remote_name . ' | tr -d "\n"')
     let l:remote_url = system('git ls-remote --get-url ' . l:remote_name)
     let l:github_string_matches = matchlist(l:remote_url, 'github.com[:/]\(.\{-}\)\(.git\)\?\n')
     if v:shell_error || len(l:github_string_matches) == 0
-        return ""
+        echo "File not hosted on Github."
+        return
     endif
-    " TODO: if mode() == "v"
-    let l:filename = expand("%")
-    let l:web_url = 'https://github.com/' . l:github_string_matches[1] .
-                \ '/blob/' . l:revision . '/' . l:filename . "#L" . line('.')
-    return l:web_url
-endfunction
 
-command! YankGithubFileToClipboard :call YankGithubFileToClipboard() " Copy Github URL to clipboard
-function! YankGithubFileToClipboard()
-    let l:web_url = GithubWebUrl()
-    if len(l:web_url) > 0
+    let l:filename = expand("%")
+    if a:line_or_range == 'range'
+        let [l:startline, l:startcol, l:endline, l:endcol] = GetVisPos()
+        let l:line_param = "#L" . l:startline . '-L' . l:endline
+    else
+        let l:line_param = "#L". line('.')
+    endif
+
+    let l:web_url = 'https://github.com/' . l:github_string_matches[1] .
+                \ '/blob/' . l:revision . '/' . l:filename . l:line_param
+
+    if a:return_or_yank_to_clipboard_or_open_in_web == 'return'
+        return l:web_url
+    elseif a:return_or_yank_to_clipboard_or_open_in_web == 'yank_to_clipboard'
         echo "Yanking " . l:web_url
         let @+=l:web_url
-    else
-        echo "File not hosted on Github."
-    endif
-endfunction
-
-command! OpenGithubFileWeb :call OpenGithubFileWeb() " Open Github URL of file in browser
-function! OpenGithubFileWeb()
-    let l:web_url = GithubWebUrl()
-    if len(l:web_url) > 0
+    elseif a:return_or_yank_to_clipboard_or_open_in_web == 'open_in_web'
         echo "Opening " . l:web_url
         call system("$BROWSER " . l:web_url)
-    else
-        echo "File not hosted on Github."
     endif
 endfunction
 
@@ -3099,6 +3093,15 @@ endfunction
 
 " }}}
 
+" get list of position of current visual selection {{{
+function! GetVisPos()
+  let l:startline = line("'<")
+  let l:startcol = col("'<")
+  let l:endline = line("'>")
+  let l:endcol = col("'>")
+  return [l:startline, l:startcol, l:endline, l:endcol]
+endfunction
+" }}}
 
 " get a list of buffers {{{
 function! GetBufferList()
