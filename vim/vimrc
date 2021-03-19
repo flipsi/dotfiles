@@ -300,11 +300,10 @@ function! SwitchNeoTermMode()
 endfunction
 
 " " Remove stupid default mappings
-augroup neoterm_remove_mappings
-    au!
+" augroup neoterm_remove_mappings
+    " au!
     " au VimEnter * silent! nunmap ,tt
-    au VimEnter * silent! nunmap :call
-augroup END
+" augroup END
 
 nnoremap <leader>tm     :SwitchNeoTermMode<cr>
 nnoremap <leader>tt     :Topen<cr>
@@ -1916,12 +1915,12 @@ nmap <leader>jE         :CocList diagnostics<cr>
 
 " jump to definition etc.
 " nmap <leader>jd         <Plug>(coc-definition)
-nmap <leader>jd         <nop>
-nmap <leader>jdl        :call CocAction('jumpDefinition', 'vsplit')<cr>
-nmap <leader>jdb        :call CocAction('jumpDefinition', 'buffer')<cr>
-nmap <leader>jdd        <Plug>(coc-definition)
-nmap <leader>jD         <Plug>(coc-declaration)
-nmap <leader>ji         <Plug>(coc-implementation)
+nnoremap <leader>jd         <nop>
+nnoremap <leader>jdl        :call CocAction('jumpDefinition', 'vsplit')<cr>
+nnoremap <leader>jdb        :call CocAction('jumpDefinition', 'buffer')<cr>
+nmap     <leader>jdd        <Plug>(coc-definition)
+nmap     <leader>jD         <Plug>(coc-declaration)
+nmap     <leader>ji         <Plug>(coc-implementation)
 
 " jump to symbol (class, object, etc.)
 nmap <leader>es :CocList outline<cr>
