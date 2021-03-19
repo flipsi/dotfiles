@@ -300,10 +300,11 @@ function! SwitchNeoTermMode()
 endfunction
 
 " " Remove stupid default mappings
-" augroup neoterm_remove_mappings
-"     au!
-"     au VimEnter * silent! nunmap ,tt
-" augroup END
+augroup neoterm_remove_mappings
+    au!
+    " au VimEnter * silent! nunmap ,tt
+    au VimEnter * silent! nunmap :call
+augroup END
 
 nnoremap <leader>tm     :SwitchNeoTermMode<cr>
 nnoremap <leader>tt     :Topen<cr>
