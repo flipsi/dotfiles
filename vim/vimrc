@@ -274,7 +274,7 @@ let g:neoterm_automap_keys = '' " don't add default mapping (,tt)
 command! -nargs=1 -complete=file RunCommandInTerminal :call RunCommandInTerminal(<q-args>)
 function! RunCommandInTerminal(commandline)
     let g:last_terminal_command = a:commandline
-    call ExecuteInNeoTerminal('T ' . a:commandline)
+    call ExecuteInNeoTerminal(a:commandline)
 endfunction
 
 function! RunLastCommandInTerminal()
@@ -290,7 +290,11 @@ endfunction
 command! -nargs=1 ExecuteInNeoTerminal :call ExecuteInNeoTerminal(<q-args>)
 function! ExecuteInNeoTerminal(vimcommand)
     let g:suppress_terminal_autoinsert = 1
-    execute a:vimcommand
+    if index(['Tkill','Tclear'], a:vimcommand) >= 0
+        execute a:vimcommand
+    else
+        execute "T " . a:vimcommand
+    endif
     sleep 50m
     unlet g:suppress_terminal_autoinsert
 endfunction
