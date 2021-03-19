@@ -4815,6 +4815,8 @@ tnoremap <c-y>t     <c-\><c-n>:NewTab<cr>
 
 " open current buffer in a new tab
 nnoremap <leader><c-t>        :tab split<cr>
+nnoremap <c-y>!               :tab split<cr>
+tnoremap <c-y>!     <c-\><c-n>:tab split<cr>i
 
 " close tab
 nnoremap <c-y>q               :CloseTab<cr>
