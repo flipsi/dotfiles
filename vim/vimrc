@@ -207,6 +207,14 @@ augroup END
 
 " }}}
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" automatically resize windows when terminal (or font) is resized
+
+augroup autoresize_windows
+    autocmd!
+    autocmd VimResized * :wincmd =
+augroup END
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                              "
