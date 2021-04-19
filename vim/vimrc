@@ -2331,6 +2331,7 @@ function! SetupScala()
     nnoremap <leader>btu    :call RunCommandInBuildShell("test")<cr>
     nnoremap <leader>bti    :call RunCommandInBuildShell("it:test")<cr>
     nnoremap <leader>bto    :call RunCommandInBuildShell(CalculateSbtTestOnlyCommand())<cr>
+    nnoremap <leader>btq    :call RunCommandInBuildShell("testQuick")<cr>
     nnoremap <leader>ba     :call RunCommandInBuildShell("scapegoat")<cr>
     nnoremap <leader>bx     :call RunCommandInBuildShell("clean")<cr>
     nnoremap <leader>bR     :call RunCommandInBuildShell("console")<cr>
