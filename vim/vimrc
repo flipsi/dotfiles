@@ -3827,11 +3827,6 @@ if has('nvim')
         " (https://www.reddit.com/r/neovim/comments/7xonzm/how_to_close_a_terminal_buffer_automatically_if/)
         autocmd TermClose * silent call s:OnTermClose()
 
-        " close terminal buffers if vim is closed (don't persist them in sessions)
-        " autocmd VimLeavePre * silent CloseTerminalBuffers! " Doesn't work, so do it at start instead:
-        " TODO: fix that this start insert mode
-        autocmd VimEnter * silent CloseTerminalBuffers!
-
     augroup END
 
     function! s:OnTermClose()
@@ -5011,8 +5006,8 @@ nnoremap <leader><bs>       :CloseBuffer<cr>
 nnoremap <leader>QQ         :CloseBufferForce<cr>
 nnoremap <leader>qw         :CloseWindow<cr>
 nnoremap <leader>qo         :CloseOtherWindows<cr>
-nnoremap <c-d>              :QuitVim<cr> " this is how i exit most terminal applications
-nnoremap <leader><c-d><c-d> :QuitVimForce<cr>
+nnoremap <c-d>              :exe 'CloseTerminalBuffers!' <bar> :QuitVim<cr>
+nnoremap <leader><c-d><c-d> :exe 'CloseTerminalBuffers!' <bar> :QuitVimForce<cr>
 
 augroup map_q_in_read_only_buffers
     au!
