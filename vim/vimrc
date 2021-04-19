@@ -4518,8 +4518,8 @@ nnoremap <silent> <leader>bex :WebSearchForBuildError<cr>
 
 if g:run_command_method == "terminal"
     nnoremap <leader>bo         :RunCommandInBuildShell<space>
-    nnoremap <leader>bf         :execute 'RunCommandInBuildShell  ' . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
-    nnoremap <leader>bF         :execute 'RunCommandInBuildShell ' . ExpandPrependThisDir('%') . ' '<left>
+    nnoremap <leader>bf         :execute 'RunCommandInTerminal  ' . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
+    nnoremap <leader>bF         :execute 'RunCommandInTerminal ' . ExpandPrependThisDir('%') . ' '<left>
     nnoremap <leader>bb         :update<cr> :call RunLastCommandInTerminal()<cr>
     nnoremap <leader>bl         :ExecuteInNeoTerminal Tclear<cr>
     nnoremap <leader>bc         :ExecuteInNeoTerminal Tkill<cr>
