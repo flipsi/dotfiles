@@ -347,7 +347,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 
 
 " run tmux commands from within vim
-Plug 'benmills/vimux'
+Plug 'preservim/vimux'
 let g:VimuxHeight = "50"
 let g:VimuxOrientation = "h"
 let VimuxUseNearest = 1
