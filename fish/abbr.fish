@@ -60,6 +60,7 @@ abbr $args gra    git reset --abort
 abbr $args grc    git reset --continue
 abbr $args grh    git reset --hard
 abbr $args grH    git reset HEAD~1
+abbr $args grl    git revert HEAD
 abbr $args grm    git rebase master
 abbr $args gs     tig status
 abbr $args gta    git stash push --include-untracked
