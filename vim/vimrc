@@ -1839,6 +1839,7 @@ augroup END
 augroup delete_trailing_whitespace_disable
     au!
     au FileType mail let b:DeleteTrailingWhitespace = 0
+    au BufRead /dev/shm/pass.* let b:DeleteTrailingWhitespace = 0
 augroup END
 
 " enable/disable plugin
