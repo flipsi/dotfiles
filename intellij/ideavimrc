@@ -170,6 +170,7 @@ nnoremap <leader><leader>   :action SearchEverywhere<cr>
 nnoremap <leader>ec         :action GotoClass<cr>
 nnoremap <leader>es         :action GotoSymbol<cr>
 nnoremap <leader>ef         :action GotoFile<cr>
+nnoremap <leader>eo         :action GotoFile<cr>
 nnoremap <leader>ea         :action GotoAction<cr>
 
 nnoremap <leader>ji         :action GotoImplementation<cr>
