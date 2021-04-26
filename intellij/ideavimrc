@@ -125,6 +125,7 @@ nnoremap <c-g>+             :action EditorIncreaseFontSize<cr>
 nnoremap <c-g>-             :action EditorDecreaseFontSize<cr>
 
 nnoremap <leader>ym         :action ViewMainMenu<cr>
+nnoremap <leader>yt         :action ViewToolBar<cr>
 nnoremap <leader>yy         :action TogglePresentationMode<cr>
 nnoremap <leader>yY         :action ToggleDistractionFreeMode<cr>
 nnoremap <leader>yG         :action EditorToggleShowGutterIcons<cr>
