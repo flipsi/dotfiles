@@ -4070,7 +4070,7 @@ cnoremap <esc>f <s-right>
 
 " move to BOL (beginning of line)
 nnoremap <c-a> ^
-cnoremap <c-a> ^
+" cnoremap <c-a> ^ " This is useful to complete patterns e.g. :bd foobar/<c-a>
 xnoremap <c-a> ^
 
 " TODO: FIX
