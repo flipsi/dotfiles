@@ -983,6 +983,7 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-l': 'vsplit',
   \ 'ctrl-v': 'vsplit',
+  \ 'ctrl-t': 'tab split',
   \ }
 " \ 'ctrl-k': 'previous-history',
 " \ 'ctrl-j': 'next-history',
