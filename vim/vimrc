@@ -3864,6 +3864,11 @@ tnoremap <c-b> <c-\><c-n><c-b>
 " leave terminal insert mode and move to last used window
 tnoremap <c-h> <c-\><c-n><c-w>p
 
+" leave terminal insert mode and move window to the bottom/right
+tnoremap <c-y>J <c-\><c-n><c-w>Ji
+tnoremap <c-y>L <c-\><c-n><c-w>Li
+
+
 
 " TODO: checkout debugging feature (see :help terminal-debug)
 
