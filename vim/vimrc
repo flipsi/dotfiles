@@ -2925,9 +2925,9 @@ endfunction
 
 " Generate a random alphanumeric string of a certain length. {{{
 function! RandomString(length)
-    return system("tr -dc A-Za-z0-9 </dev/urandom | head -c " . a:length ." ; echo ''")
+    return system("tr -dc A-Za-z0-9 </dev/urandom | head -c " . a:length)
 endfunction
-nnoremap 'tr :put =RandomString(32)<cr>
+nnoremap 'tr i<c-r>=RandomString(32)<esc><esc>
 " }}}
 
 
