@@ -2923,6 +2923,14 @@ endfunction
 " }}}
 
 
+" Generate a random alphanumeric string of a certain length. {{{
+function! RandomString(length)
+    return system("tr -dc A-Za-z0-9 </dev/urandom | head -c " . a:length ." ; echo ''")
+endfunction
+nnoremap 'tr :put =RandomString(32)<cr>
+" }}}
+
+
 " URL encode a string. ie. Percent-encode characters as necessary. {{{
 function! UrlEncode(string)
 
