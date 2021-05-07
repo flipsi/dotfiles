@@ -31,7 +31,8 @@ set sort_re = yes
 set sort_browser = alpha                                  # sorting in file browser
 
 set date_format = "%a, %d. %b %H:%M"                      # use nice date format
-set index_format = "%4C %Z %D %-22.22F (%?l?%4l&%4c?) %s" # how mail list is displayed
+set index_format = \
+    "%4C %Z %D %-22.22F (%?l?%4l&%4c?) %?X?%X& ? %s"      # how mail list is displayed
 set folder_format = "%2C %8s %d %t %N %f"                 # how file browser is displayed
 set pager_index_lines = 10                                # number of mails in overview
 set pager_stop                                            # don't open next mail when scrolling
