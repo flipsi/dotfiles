@@ -6,6 +6,7 @@
 
 set -e
 
+HOSTNAME=$(hostname)
 SESSION_NAME_1="main"
 SESSION_NAME_2="src"
 
@@ -80,10 +81,12 @@ function create_sessions() {
 
         tmux new-session -d -s $SESSION_NAME_2 -n "dotfiles" -c "$HOME/dotfiles" "nvim --listen dotfiles"
 
-        for PROJECT in $(get_last_recent_git_projects "$PROJECTS_DIR" "$NUMBER_OF_PROJECTS"); do
-            tmux new-window -t $SESSION_NAME_2: -n "$PROJECT" -c \
-                "$PROJECTS_DIR/$PROJECT" "fish -i -C \"nvim --listen $PROJECT"\"
-        done
+        if [[ "$HOSTNAME" = "dwarf" ]]; then
+            for PROJECT in $(get_last_recent_git_projects "$PROJECTS_DIR" "$NUMBER_OF_PROJECTS"); do
+                tmux new-window -t $SESSION_NAME_2: -n "$PROJECT" -c \
+                    "$PROJECTS_DIR/$PROJECT" "fish -i -C \"nvim --listen $PROJECT"\"
+            done
+        fi
 
     fi
 
