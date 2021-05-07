@@ -1396,9 +1396,11 @@ nnoremap O O<esc>S
 " automagically add closing braces etc
 " Plug 'Raimondi/delimitMate'
 
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
+" Mappings are created even in insert mode, so with <space> as leader this sucks.
 let g:AutoPairsShortcutToggle = '<leader>oap'
 let g:AutoPairsShortcutJump = '<leader>]'
+let g:AutoPairsMapSpace = 0
 " remember <M-e> to move closing brace to end of word
 
 " Plug 'rstacruz/vim-closer'
