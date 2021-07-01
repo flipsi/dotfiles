@@ -2066,6 +2066,7 @@ function! SetupYarn()
     nnoremap <leader>btt :call RunCommand("yarn test")<cr>
     nnoremap <leader>btu :call RunCommand("yarn test-unit")<cr>
     nnoremap <leader>bti :call RunCommand("yarn test-int")<cr>
+    nnoremap <leader>bto :call RunCommand("yarn test:jest " . expand("%"))<cr>
 endfunction
 command! SetupYarn :call SetupYarn() " add mappings for development with yarn
 
