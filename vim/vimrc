@@ -396,7 +396,7 @@ nnoremap <leader>yo :COLORSCROLL<cr>
 
 
 " highlight word under cursor
-Plug 'RRethy/vim-illuminate'
+" Plug 'RRethy/vim-illuminate'
 let g:Illuminate_delay = 200
 let g:Illuminate_highlightUnderCursor = 0
 
