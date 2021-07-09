@@ -2320,7 +2320,7 @@ function! SetupScala()
 
     " TODO delete supershell escape sequences instead of supressing them
     let g:build_shell = 'sbt --color=true --supershell=false'
-    let g:prompt_regex = '^sbt:.*>'
+    let g:prompt_regex = '^sbt:.*>\|^>\.\.\.\.'
 
     highlight link SbtPrompt LineNr
     augroup sbt_prompt_highlighting
