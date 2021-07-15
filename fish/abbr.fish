@@ -71,6 +71,7 @@ abbr $args gup    git submodule update
 abbr $args gus    git submodule status
 abbr $args gw     git worktree
 abbr $args gwa    git worktree add
+abbr $args gwl    git worktree list
 abbr $args gwr    git worktree remove
 abbr $args h      bpytop \|\| htop
 abbr $args l      less
