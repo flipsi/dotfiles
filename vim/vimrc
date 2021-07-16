@@ -437,7 +437,9 @@ let g:airline_detect_modified=1
 let g:airline_detect_paste=1
 let g:airline_inactive_collapse=0
 
-let g:airline#extensions#tabline#show_tabs = 1
+let g:airline_statusline_ontop = 1
+let g:airline#extensions#tabline#show_tabs = 0
+let g:airline#extensions#tabline#show_tab_count = 1
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
@@ -463,6 +465,9 @@ let g:airline_symbols.maxlinenr = ''
 " " airline extension: show list of buffers (like tabs)
 " Plug 'bling/vim-bufferline'
 " let g:airline#extensions#bufferline#enabled = 0
+
+" airline extension: obsession (session plugin)
+let g:airline#extensions#obsession#enabled = 1
 
 " airline extension: show columns of csv files
 let g:airline#extensions#csv#enabled = 1
