@@ -107,6 +107,7 @@ bind stage  c !git commit
 # checkout files / reset / delete / format / etc.
 bind generic grh ?git reset --hard
 bind generic gup ?git submodule update
+bind main	e	 ?git checkout %(commit)
 bind status C    ?git checkout -- %(file)
 bind stage  C    ?git checkout -- %(file)
 bind status R    ?git reset --hard
