@@ -5,7 +5,8 @@ configuration {
 	location: 0;
 	show-icons: false;
 	window-format: "{c}    {t}";
-	theme: "~/.config/rofi/themes/gruvbox-dark-soft.mod.01.rasi";
 	display-combi: ">";
 	kb-remove-word-back: "Alt+BackSpace";
 }
+
+@theme "~/.config/rofi/themes/gruvbox-dark-purple.rasi"
