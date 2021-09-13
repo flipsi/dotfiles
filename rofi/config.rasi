@@ -1,6 +1,4 @@
 configuration {
-	width: 50;
-	lines: 15;
 	font: "PragmataPro Mono 11";
 	location: 0;
 	show-icons: false;

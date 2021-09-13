@@ -61,3 +61,7 @@
 }
 
 @import "gruvbox-common.rasi"
+
+#listview {
+    lines: 15;
+}
