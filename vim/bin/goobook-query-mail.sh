@@ -38,20 +38,18 @@ fi
 # Query Google contacts
 mapfile -t GOOBOOK_RESULTS < <(goobook query "$SEARCH")
 
-# Choose output format
-FORMAT_OPTION_ONLY_EMAIL="Only Email"
-FORMAT_OPTION_LONG_THING="Name with Email formatted professionally"
-FORMAT_CHOICE=$(echo -e "$FORMAT_OPTION_ONLY_EMAIL\n$FORMAT_OPTION_LONG_THING" | rofi -dmenu -l 2)
+# Build results strings to choose from
+RESULTS=()
+for CONTACT in "${GOOBOOK_RESULTS[@]}"; do
+    NAME_AND_EMAIL=$(echo "$CONTACT" \
+        | sed -E -e '/^$/d' -e 's/([[:alnum:]]*) (.*)\t.*/\1 \2/' -e 's/(^\<.*)\t(.*)/"\2" \<\1\>/'
+    )
+    ONLY_EMAIL=$(echo "$CONTACT" \
+        | sed -E -e '/^$/d' -e 's/([[:alnum:]]*)\t.*/\1/'
+    )
+    RESULTS+=("$NAME_AND_EMAIL" "$ONLY_EMAIL")
+done
 
 # Choose result and print it
 # shellcheck disable=SC2145
-if [[ "$FORMAT_CHOICE" = "$FORMAT_OPTION_LONG_THING" ]]; then
-    printf "%s\n${GOOBOOK_RESULTS[@]}" \
-        | sed -E -e '/^$/d' -e 's/(.*) (.*)\t.*/\1 \2/' -e 's/(^\<.*)\t(.*)/"\2" \<\1\>/' \
-        | rofi -dmenu
-else
-    printf "%s\n${GOOBOOK_RESULTS[@]}" \
-        | sed -E -e '/^$/d' -e 's/([[:alnum:]]*)\t.*/\1/' \
-        | rofi -dmenu
-fi
-
+printf "%s\n${RESULTS[@]}" | rofi -dmenu
