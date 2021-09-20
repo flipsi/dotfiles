@@ -120,6 +120,7 @@ macro index,pager im '<sync-mailbox><enter-command>source /home/sflip/.config/mu
 macro index,pager ip '<sync-mailbox><enter-command>source /home/sflip/.config/mutt/accounts/mail@philippmoers.de.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to mail@philippmoers.de"
 macro index,pager is '<sync-mailbox><enter-command>source /home/sflip/.config/mutt/accounts/soziflip@gmail.com.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to soziflip@gmail.com"
 macro index,pager ir '<sync-mailbox><enter-command>source /home/sflip/.config/mutt/accounts/p.moers@ryte.com.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to p.moers@ryte.com"
+macro index,pager iv '<sync-mailbox><enter-command>source /home/sflip/.config/mutt/accounts/valentina@philippmoers.de.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to valentina@philippmoers.de"
 
 
 ###################

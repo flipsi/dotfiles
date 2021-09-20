@@ -119,4 +119,33 @@ ExpireUnread no
 # End profile
 
 
+######################################
+# account: valentina@philippmoers.de #
+######################################
+
+IMAPStore valentina@philippmoers.de-remote
+Host imap.strato.de
+Port 993
+User valentina@philippmoers.de
+PassCmd "mutt-secrets.py --mode get_secret --account valentina@philippmoers.de"
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore valentina@philippmoers.de-local
+Subfolders Verbatim
+Path /home/sflip/.local/share/mail/valentina@philippmoers.de/
+Inbox /home/sflip/.local/share/mail/valentina@philippmoers.de/INBOX
+Flatten .
+
+Channel valentina@philippmoers.de
+Expunge Both
+Master :valentina@philippmoers.de-remote:
+Slave :valentina@philippmoers.de-local:
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
+
 # vim:ft=conf
