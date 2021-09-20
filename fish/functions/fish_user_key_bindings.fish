@@ -6,7 +6,7 @@ function fish_user_key_bindings
     bind \ec 'history | head -n 1 | tr -d "\n" | xsel -b'
     bind \ei 'ranger; and clear; and fish_prompt'
     bind \ej 'cd_interactively; and clear; and fish_prompt'
-    bind \el 'commandline ""; echo; ls; echo; git status --short 2>/dev/null; fish_prompt'
+    bind \el 'commandline ""; echo; exa --long --git --grid --git; fish_prompt'
     bind \et 'commandline -i (echo -n (date +"%F-%H%M%S"))'
     bind \eu 'commandline ""; cd ..; clear; fish_prompt'
     bind \ew 'watch -c (history | head -n 1)'
