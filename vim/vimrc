@@ -336,14 +336,14 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 
 
 " " don't worry about tmux panes and vim splits
-" Plugin 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 " let g:tmux_navigator_save_on_switch = 1
-" let g:tmux_navigator_no_mappings = 1
-" nnoremap <silent> {Left-Mapping}     :TmuxNavigateLeft<cr>
-" nnoremap <silent> {Down-Mapping}     :TmuxNavigateDown<cr>
-" nnoremap <silent> {Up-Mapping}       :TmuxNavigateUp<cr>
-" nnoremap <silent> {Right-Mapping}    :TmuxNavigateRight<cr>
-" nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+" nnoremap <silent> ??? :TmuxNavigatePrevious<cr>
 
 
 " run tmux commands from within vim
@@ -375,6 +375,10 @@ Plug 'tpope/vim-repeat'
 " Plug 'psliwka/vim-smoothie'
 " nmap <unique> <M-j> <Plug>(SmoothieDownwards)
 " nmap <unique> <M-k> <Plug>(SmoothieUpwards)
+
+" show mappings when typing them
+Plug 'liuchengxu/vim-which-key'
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 
 " make gvim colorschemes work in terminal
@@ -3878,14 +3882,27 @@ tnoremap <c-y><c-y> <c-\><c-n>
 " leave terminal insert mode and scroll up
 tnoremap <c-b> <c-\><c-n><c-b>
 
-" leave terminal insert mode and move to last used window
-tnoremap <c-h> <c-\><c-n><c-w>p
-
 " leave terminal insert mode and move window to the bottom/right
 tnoremap <c-y>J <c-\><c-n><c-w>Ji
 tnoremap <c-y>L <c-\><c-n><c-w>Li
 
+" leave terminal insert mode and move to last used window
+tnoremap <c-h> <c-\><c-n><c-w>p
 
+" leave terminal insert mode to focus other window
+" (stolen from https://github.com/christoomey/vim-tmux-navigator/pull/172#issuecomment-612219227)
+function s:AddTerminalNavigation()
+    if &filetype != 'fzf'
+        tnoremap <buffer> <silent> <c-h> <c-\><c-n>:TmuxNavigateLeft<cr>
+        tnoremap <buffer> <silent> <c-j> <c-\><c-n>:TmuxNavigateDown<cr>
+        tnoremap <buffer> <silent> <c-k> <c-\><c-n>:TmuxNavigateUp<cr>
+        tnoremap <buffer> <silent> <c-l> <c-\><c-n>:TmuxNavigateRight<cr>
+    endif
+endfunction
+augroup TerminalNavigation
+    autocmd!
+    " autocmd TermOpen * call s:AddTerminalNavigation()
+augroup END
 
 " TODO: checkout debugging feature (see :help terminal-debug)
 
@@ -4771,10 +4788,12 @@ nnoremap <m-p>  :bprevious<cr>
 nnoremap <esc>p :bprevious<cr>
 
 " change window
-nnoremap <silent> <c-j> :wincmd j<cr>
-nnoremap <silent> <c-k> :wincmd k<cr>
-nnoremap <silent> <c-h> :wincmd h<cr>
-nnoremap <silent> <c-l> :wincmd l<cr>
+if s:MyMode == 'stripped'
+    nnoremap <silent> <c-j> :wincmd j<cr>
+    nnoremap <silent> <c-k> :wincmd k<cr>
+    nnoremap <silent> <c-h> :wincmd h<cr>
+    nnoremap <silent> <c-l> :wincmd l<cr>
+endif
 
 " move buffer to a new window
 nnoremap <silent> <leader><c-l> :vsplit<cr><c-w>p:buffer #<cr><c-w>p<cr>
