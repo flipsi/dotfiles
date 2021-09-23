@@ -75,8 +75,8 @@ abbr $args gwl    git worktree list
 abbr $args gwr    git worktree remove
 abbr $args h      bpytop \|\| htop
 abbr $args l      less
-abbr $args ll     exa --long --git --grid --git    \|\| ls -lhF
-abbr $args lll    exa --long --git --grid --git -a \|\| ls -lhFa
+abbr $args ll     exa --long --git --grid --git
+abbr $args lll    exa --long --git --grid --git -a
 abbr $args m      man
 abbr $args ma     make apply
 abbr $args mi     make init
