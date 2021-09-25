@@ -77,6 +77,8 @@ abbr $args h      bpytop \|\| htop
 abbr $args l      less
 abbr $args ll     exa --long --git --grid --git
 abbr $args lll    exa --long --git --grid --git -a
+abbr $args lsl    ls -lhF
+abbr $args lsll   ls -lhFa
 abbr $args m      man
 abbr $args ma     make apply
 abbr $args mi     make init
