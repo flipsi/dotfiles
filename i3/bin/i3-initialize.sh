@@ -98,6 +98,9 @@ function autostart
     if not pgrep -x vivaldi-stable
         nohup vivaldi-stable &
     end
+    if not pgrep -x chromium
+        nohup chromium &
+    end
     if not pgrep alacritty
         nohup alacritty --command tmux -2 new-session -A -s init &
     end
