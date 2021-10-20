@@ -2338,9 +2338,9 @@ function! SetupScala()
 
     nnoremap <leader>bd     :call RunCommandInBuildShell("compile")<cr>
     nnoremap <leader>br     :call RunCommandInBuildShell("run")<cr>
-    nnoremap <leader>btt    :call RunCommandInBuildShell("test; it:test")<cr>
+    nnoremap <leader>btt    :call RunCommandInBuildShell("test; IntegrationTest / test")<cr>
     nnoremap <leader>btu    :call RunCommandInBuildShell("test")<cr>
-    nnoremap <leader>bti    :call RunCommandInBuildShell("it:test")<cr>
+    nnoremap <leader>bti    :call RunCommandInBuildShell("IntegrationTest / test")<cr>
     nnoremap <leader>bto    :call RunCommandInBuildShell(CalculateSbtTestOnlyCommand())<cr>
     nnoremap <leader>btq    :call RunCommandInBuildShell("testQuick")<cr>
     nnoremap <leader>ba     :call RunCommandInBuildShell("scapegoat")<cr>
@@ -2358,7 +2358,7 @@ function! CalculateSbtTestOnlyCommand()
     endif
     let l:package  = substitute(l:lines_that_match_package[0], '^package\s\+\(\w\+\)', '\1', '')
     let l:class    = substitute(l:lines_that_match_class[0], '^\(class\|object\)\s\+\(\w\+\).*', '\2', '')
-    let l:itPrefix = match(@%, '.*/it/.*') == -1 ? '' : 'it:'
+    let l:itPrefix = match(@%, '.*/it/.*') == -1 ? '' : 'IntegrationTest / '
     return l:itPrefix . "testOnly " . l:package . "." . l:class
 endfunction
 
