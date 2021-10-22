@@ -4802,20 +4802,24 @@ nnoremap <silent> <c-w>r     :ResizeWindows<cr>
 nnoremap <silent> <c-w><c-r> :ResizeWindows<cr>
 command! ResizeWindows  :call ResizeWindows('enter') " Open a mode to resize windows with h,j,k,l
 function! ResizeWindows(enter_or_leave)
-    " TODO: save and restore existing mappings (j,k)
+    " TODO: save and restore existing mappings (j,k) without redefining here
     if a:enter_or_leave == "enter"
         nnoremap <return> :call ResizeWindows('leave')<cr>
+        nnoremap <esc>    :call ResizeWindows('leave')<cr>
+        nnoremap <c-c>    :call ResizeWindows('leave')<cr>
         nnoremap <silent> j :resize +2<cr>
         nnoremap <silent> k :resize -2<cr>
         nnoremap <silent> h 2<c-w><
         nnoremap <silent> l 2<c-w>>
-        echo "[RESIZE MODE] (press h,j,k,l to resize and <enter> to leave move)"
+        echo "[RESIZE MODE] (press h,j,k,l to resize and <enter> or <esc> to leave move)"
     else
         nnoremap j gj
         nnoremap k gk
         nunmap   h
         nunmap   l
         nunmap   <return>
+        nunmap   <esc>
+        nunmap   <c-c>
         echo "Windows resized."
     endif
 endfunction
