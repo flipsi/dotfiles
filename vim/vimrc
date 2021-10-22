@@ -1930,6 +1930,9 @@ nmap <leader>i<bs>      <Plug>(coc-float-hide)
 " show error/warning in a popup
 nmap <leader>ie         <Plug>(coc-diagnostic-info)
 
+" highlight symbol under cursor
+nnoremap <leader>ih     :call CocAction('highlight')<cr>
+
 " show infos about function under cursor in popup
 nnoremap <silent> <leader>iq :call <SID>show_documentation()<cr>
 
@@ -1961,7 +1964,8 @@ nmap <leader>fu         <Plug>(coc-references)
 
 " actions
 nmap <leader>ia         <Plug>(coc-codeaction)
-nnoremap <leader>io         :CocCommand editor.action.organizeImport<cr>
+nnoremap <leader>iio    :CocCommand editor.action.organizeImport<cr>
+nnoremap <leader>iif    :call CocAction('fold', 'imports')<cr>
 " nmap <leader>i<return>  <Plug>(coc-fix-current)
 nnoremap <leader>i<return>  :if g:coc_enabled == 1
             \ <bar> execute "normal \<Plug>(coc-fix-current)"
@@ -2773,6 +2777,7 @@ function! FixHighlighting()
         highlight EasyMotionTarget        ctermfg=72
         highlight EasyMotionTarget2First  ctermfg=72
         highlight EasyMotionTarget2Second ctermfg=108
+        highlight CocHighlightText        ctermfg=71 ctermbg=237
 
     elseif g:light_or_dark_theme == 'light'
         let g:indentLine_setColors = 1
