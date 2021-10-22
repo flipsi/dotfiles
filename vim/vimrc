@@ -1899,8 +1899,8 @@ nnoremap <leader>icp :ColorPicker<cr>
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-nmap <leader>i <nop>
-nmap <leader>j <nop>
+nnoremap <leader>i <nop>
+nnoremap <leader>j <nop>
 
 command! CocToggle :call CocToggle() " Enable or Disable COC
 function! CocToggle()
@@ -1916,13 +1916,13 @@ endfunction
 let g:coc_start_at_startup = 0
 
 " start/stop coc
-nmap <leader>ic  <nop>
-nmap <leader>ica :CocStart<cr>
-nmap <leader>ict :CocToggle<cr>
-nmap <leader>ici :CocInfo<cr>
+nnoremap <leader>ic  <nop>
+nnoremap <leader>ica :CocStart<cr>
+nnoremap <leader>ict :CocToggle<cr>
+nnoremap <leader>ici :CocInfo<cr>
 
 " choose coc command (fuzzy finder)
-nmap <leader>icc :CocList commands<cr>
+nnoremap <leader>icc :CocList commands<cr>
 
 " hide error/warning popup
 nmap <leader>i<bs>      <Plug>(coc-float-hide)
@@ -1931,7 +1931,7 @@ nmap <leader>i<bs>      <Plug>(coc-float-hide)
 nmap <leader>ie         <Plug>(coc-diagnostic-info)
 
 " show infos about function under cursor in popup
-nmap <silent> <leader>iq :call <SID>show_documentation()<cr>
+nnoremap <silent> <leader>iq :call <SID>show_documentation()<cr>
 
 " navigate to first/next/last error/warning
 nmap <leader>ig       gg<Plug>(coc-diagnostic-next)
@@ -1939,10 +1939,10 @@ nmap <leader>in         <Plug>(coc-diagnostic-next)
 nmap <leader>iN         <Plug>(coc-diagnostic-prev)
 
 " open errors in location list
-nmap <leader>iE         :CocDiagnostics<cr>
+nnoremap <leader>iE         :CocDiagnostics<cr>
 
 " jump to specific error (fuzzy finder)
-nmap <leader>jE         :CocList diagnostics<cr>
+nnoremap <leader>jE         :CocList diagnostics<cr>
 
 " jump to definition etc.
 " nmap <leader>jd         <Plug>(coc-definition)
@@ -1954,16 +1954,16 @@ nmap     <leader>jD         <Plug>(coc-declaration)
 nmap     <leader>ji         <Plug>(coc-implementation)
 
 " jump to symbol (class, object, etc.)
-nmap <leader>es :CocList outline<cr>
+nnoremap <leader>es :CocList outline<cr>
 
 " find usages and show in quickfix list
 nmap <leader>fu         <Plug>(coc-references)
 
 " actions
 nmap <leader>ia         <Plug>(coc-codeaction)
-nmap <leader>io         :CocCommand editor.action.organizeImport<cr>
+nnoremap <leader>io         :CocCommand editor.action.organizeImport<cr>
 " nmap <leader>i<return>  <Plug>(coc-fix-current)
-nmap <leader>i<return>  :if g:coc_enabled == 1
+nnoremap <leader>i<return>  :if g:coc_enabled == 1
             \ <bar> execute "normal \<Plug>(coc-fix-current)"
             \ <bar> else
             \ <bar> call AutoImportFake()
