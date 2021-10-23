@@ -979,11 +979,8 @@ let g:ctrlp_use_caching = 2000
 
 " install 'fzf' package on the system. or:
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-
 Plug 'junegunn/fzf.vim'
-
 Plug 'stsewd/fzf-checkout.vim'
-
 
 " prefix all the command names
 let g:fzf_command_prefix = 'Fzf'
@@ -1074,19 +1071,85 @@ nmap <leader>; <Plug>Fzm
 vmap <leader>; <Plug>FzmVisual
 
 
+"""""""""""""""""""""""""
+
+" Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
+" TOO SLOW!
+
+" " open files by name
+" nnoremap <leader>fi :FzfPreviewProjectFilesRpc<cr>
+" nnoremap <leader>ef :FzfPreviewProjectFilesRpc<cr>
+" nnoremap <leader>eo :FzfPreviewGitFilesRpc<cr>
+" nnoremap <leader>eb :FzfPreviewBuffersRpc<cr>
+" nnoremap <leader><leader> :FzfPreviewBuffersRpc<cr>
+
+" " jump to line in current buffer
+" nnoremap <leader>el :FzfPreviewLinesRpc<cr>
+
+" " project grep
+" nnoremap <leader>/ :FzfPreviewProjectGrepRpc<space>
+" xnoremap <leader>/ "sy:FzfPreviewProjectGrepRpc<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+
+" " search command history
+" nnoremap <leader>h:         :FzfPreviewCommandPaletteRpc:<cr>
+
+" " search TODO etc.
+" nnoremap <leader>h:         :FzfPreviewTodoCommentsRpc:<cr>
+
+" " open Github PR that introduced line
+" " :FzfPreviewBlamePRRpc
+
+" " [coc] jump to definitions
+" nnoremap <leader>ed :CocCommand fzf-preview.CocTypeDefinitions<cr>
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Telescope - another highly extendable fuzzy finder
+" TOO SLOW!
 
 " Neovim Nightly (0.5) is required for telescope.nvim to work.
 
-" Plug 'nvim-lua/popup.nvim'
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-telescope/telescope.nvim'
+" if has('nvim')
 
-" nnoremap <leader>ef <cmd>Telescope find_files<cr>
-" nnoremap <leader>j/ <cmd>Telescope live_grep<cr>
-" nnoremap <leader>eb <cmd>Telescope buffers<cr>
-" nnoremap <leader>hh <cmd>Telescope help_tags<cr>
+"     Plug 'nvim-lua/popup.nvim'
+"     Plug 'nvim-lua/plenary.nvim'
+"     Plug 'nvim-telescope/telescope.nvim'
 
+lua << EOF
+--[[
+require('telescope').setup{
+  defaults = {
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case'
+    },
+    prompt_prefix = ">>> ",
+  }
+}
+--]]
+
+EOF
+
+    " fzf-writer!
+    " https://github.com/nvim-telescope/telescope-fzf-writer.nvim
+
+    " cooler typ config?
+    " https://github.com/smithbm2316/dotfiles/tree/main/nvim
+
+    " nnoremap <leader>hh <cmd>Telescope help_tags<cr>
+    " nnoremap <leader>ef <cmd>Telescope find_files<cr>
+    " nnoremap <leader>j/ <cmd>Telescope live_grep<cr>
+    " nnoremap <leader>eb <cmd>Telescope buffers<cr>
+    " nnoremap <leader><leader> <cmd>Telescope buffers<cr>
+
+
+" endif
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1106,7 +1169,7 @@ vmap <leader>; <Plug>FzmVisual
 
 " generate tag file manually
 " (fails with '–exclude=@.gitignore' when the file does not exist!)
-nnoremap <leader>eT :!ctags -R -f .tags .<cr>
+" nnoremap <leader>eT :!ctags -R -f .tags .<cr>
 
 
 " generate tag file automagically
@@ -1305,11 +1368,6 @@ nnoremap <silent> <leader>sp :ALEPrevious<cr>
 nnoremap <silent> <leader>sr :ALEDisable<cr>
 nnoremap <silent> <leader>st :ALEToggle<cr>
 nnoremap <silent> <leader>si :ALEInfo<cr>
-
-highlight ALEErrorSign      ctermfg=203
-highlight ALEWarningSign    ctermfg=227
-highlight ALEInfoSign       ctermfg=227
-
 
 " evaluate expression live, which is awesome
 " Plug 'metakirby5/codi.vim'
@@ -2772,12 +2830,16 @@ function! FixHighlighting()
         " highlight Conceal                 ctermbg=236
         " highlight Search                  ctermbg=237 ctermfg=white
         " highlight Error                   ctermbg=162
-        highlight Todo                    ctermfg=132
-        highlight Sneak                   ctermfg=72 ctermbg=234
-        highlight EasyMotionTarget        ctermfg=72
-        highlight EasyMotionTarget2First  ctermfg=72
-        highlight EasyMotionTarget2Second ctermfg=108
-        highlight CocHighlightText        ctermfg=71 ctermbg=237
+        highlight Todo                      ctermfg=132
+        highlight Sneak                     ctermfg=72 ctermbg=234
+        highlight EasyMotionTarget          ctermfg=72
+        highlight EasyMotionTarget2First    ctermfg=72
+        highlight EasyMotionTarget2Second   ctermfg=108
+        highlight TelescopeSelection        ctermfg=214
+        highlight ALEErrorSign              ctermfg=203
+        highlight ALEWarningSign            ctermfg=227
+        highlight ALEInfoSign               ctermfg=227
+        highlight CocHighlightText          ctermfg=71 ctermbg=237
 
     elseif g:light_or_dark_theme == 'light'
         let g:indentLine_setColors = 1
