@@ -858,20 +858,20 @@ assign [class="code-oss"]                                                       
 for_window [class="(?i)gnome-session-failed"] move to workspace                                     GnomeSessionFailed
 
 ## workspaces with window always on specific output
-for_window [class="(?i)vivaldi-stable"]                                         move workspace to output DP3-1
-for_window [class="(?i)chromium"]                                               move workspace to output DP3-1
-for_window [class="(?i)google-chrome"]                                          move workspace to output DP3-1
-for_window [class="(?i)firefox"]                                                move workspace to output DP3-1
-for_window [class="(?i)qutebrowser"]                                            move workspace to output DP3-1
-for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DP3-2
-for_window [class="(?i)alacritty"]                                              move workspace to output DP3-2
-for_window [class="(?i)cool-retro-term"]                                        move workspace to output DP3-2
-for_window [class="(?i)gnome-terminal"]                                         move workspace to output DP3-2
-for_window [class="(?i)urxvt"]                                                  move workspace to output DP3-2
-for_window [class="(?i)jetbrains-idea"]                                         move workspace to output DP3-2
-for_window [class="(?i)jetbrains-phpstorm"]                                     move workspace to output DP3-2
+for_window [class="(?i)vivaldi-stable"]                                         move workspace to output DP2-2
+for_window [class="(?i)chromium"]                                               move workspace to output DP2-2
+for_window [class="(?i)google-chrome"]                                          move workspace to output DP2-2
+for_window [class="(?i)firefox"]                                                move workspace to output DP2-2
+for_window [class="(?i)qutebrowser"]                                            move workspace to output DP2-2
+for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DP2-1
+for_window [class="(?i)alacritty"]                                              move workspace to output DP2-1
+for_window [class="(?i)cool-retro-term"]                                        move workspace to output DP2-1
+for_window [class="(?i)gnome-terminal"]                                         move workspace to output DP2-1
+for_window [class="(?i)urxvt"]                                                  move workspace to output DP2-1
+for_window [class="(?i)jetbrains-idea"]                                         move workspace to output DP2-1
+for_window [class="(?i)jetbrains-phpstorm"]                                     move workspace to output DP2-1
 for_window [class="(?i)slack"]                                                  move workspace to output eDP1
-for_window [class="Spotify"]                                                    move workspace to output DP3-1
+for_window [class="Spotify"]                                                    move workspace to output DP2-2
 for_window [class="(?i)signal"]                                                 move workspace to output eDP1
 for_window [class="(?i)telegram"]                                               move workspace to output eDP1
 for_window [class="(?i)telegram-desktop"]                                       move workspace to output eDP1
