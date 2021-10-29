@@ -392,16 +392,21 @@ mode "$mode_light" {
     bindsym Escape mode "default"
 }
 
+# # toggle display
+# bindsym XF86Display exec --no-startup-id "xset -q | grep -q 'Monitor is On' && xset dpms force off || xset dpms force on"
+# (display turns on automatically on keypress, so I only need to set it off:)
+bindsym XF86Display exec --no-startup-id "xset dpms force off"
+
+# set display brightness
+# bindsym $mod+Left   exec --no-startup-id "xbacklight -dec 3"
+# bindsym $mod+Right  exec --no-startup-id "xbacklight -inc 3"
+
 # open a clock
 bindsym $mod+minus  exec --no-startup-id "gnome-clocks"
 
 ## set keyboard brightness
 bindsym XF86KbdBrightnessDown exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness down"
 bindsym XF86KbdBrightnessUp   exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness up"
-
-# set display brightness
-# bindsym $mod+Left   exec --no-startup-id "xbacklight -dec 3"
-# bindsym $mod+Right  exec --no-startup-id "xbacklight -inc 3"
 
 ## set xfce4-terminal font size (not possible by default)
 bindsym $mod+Control+plus   exec --no-startup-id "$SHELLSCRIPT_PATH/xfce4-terminal-fontsize increase"
