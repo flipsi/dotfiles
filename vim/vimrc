@@ -2770,6 +2770,9 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 
+" only use multiples of 'shiftwidth' when indenting
+set shiftround
+
 " indent after open braces etc
 set autoindent
 set smartindent
