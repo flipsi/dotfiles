@@ -2407,6 +2407,7 @@ function! SetupScala()
 
     nnoremap <leader>bd     :call RunCommandInBuildShell("compile")<cr>
     nnoremap <leader>br     :call RunCommandInBuildShell("run")<cr>
+    nnoremap <leader>btd    :call RunCommandInBuildShell("Test / compile; IntegrationTest / compile")<cr>
     nnoremap <leader>btt    :call RunCommandInBuildShell("test; IntegrationTest / test")<cr>
     nnoremap <leader>btu    :call RunCommandInBuildShell("test")<cr>
     nnoremap <leader>bti    :call RunCommandInBuildShell("IntegrationTest / test")<cr>
