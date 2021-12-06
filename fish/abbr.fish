@@ -86,6 +86,7 @@ abbr $args mip    make init plan
 abbr $args mkd    mkdir_cd
 abbr $args mp     make plan
 abbr $args mpa    make plan apply
+abbr $args nv     nvlc
 abbr $args o      open
 abbr $args p      pass
 abbr $args pe     pass edit
