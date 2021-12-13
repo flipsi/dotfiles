@@ -75,8 +75,9 @@ abbr $args gwl    git worktree list
 abbr $args gwr    git worktree remove
 abbr $args h      bpytop \|\| htop
 abbr $args l      less
-abbr $args ll     exa --long --git --grid --git
-abbr $args lll    exa --long --git --grid --git -a
+abbr $args ll     exa_or_ls -l
+abbr $args lll    exa_or_ls -l -a
+abbr $args lt     exa_or_tree -l
 abbr $args lsl    ls -lhF
 abbr $args lsll   ls -lhFa
 abbr $args m      man
