@@ -78,8 +78,6 @@ abbr $args l      less
 abbr $args ll     exa_or_ls -l
 abbr $args lll    exa_or_ls -l -a
 abbr $args lt     exa_or_tree -l
-abbr $args lsl    ls -lhF
-abbr $args lsll   ls -lhFa
 abbr $args m      man
 abbr $args ma     make apply
 abbr $args mi     make init
