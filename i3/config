@@ -312,32 +312,49 @@ mode "$mode_clipboard" {
 
 ## type something or press keys or click
 bindsym $mod+x mode "$mode_x"
-set $mode_x (x) type with xdotool (n) click away notification
+set $mode_x (x) type with xdotool (t) type timestamp with xdotool (n) click away notification
 mode "$mode_x" {
     bindsym  $mod+x mode "$mode_xdootool"
     bindsym       x mode "$mode_xdootool"
+    bindsym  $mod+t mode "$mode_xdootool_timestamp"
+    bindsym       t mode "$mode_xdootool_timestamp"
     bindsym  $mod+n exec --no-startup-id "xdotool mousemove 1880 35 click 1 mousemove restore"; mode "default"
     bindsym       n exec --no-startup-id "xdotool mousemove 1880 35 click 1 mousemove restore"; mode "default"
     # cancel
     bindsym $mod+Escape mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Return      mode "default"
+    bindsym Escape      mode "default"
 }
-set $mode_xdootool (b) bash with my bashrc (g) Google contact email (p) testing password (s) shrug (t) timestamp (T) unix timestamp
+set $mode_xdootool (b) bash with my bashrc (g) Google contact email (p) testing password (s) shrug (t) timestamp
 mode "$mode_xdootool" {
     bindsym b       exec --no-startup-id "xdotool type 'bbash --rcfile <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/bash/bashrc_sflip)'; xdotool key Return"; mode "default";
     bindsym g       exec --no-startup-id "xdotool type $(goobook-query-mail.sh)"; mode "default";
     bindsym p       exec --no-startup-id "xdotool type 'iopineiBie5fiong7yae6aeng0ooF6'"; mode "default";
-    bindsym s       exec --no-startup-id "sleep 0.1; xdotool type --delay 30 '¯\_(ツ)_/¯'"; mode "default";
-    bindsym Shift+s exec --no-startup-id "sleep 0.1; xdotool type --delay 30 '¯\\\_(ツ)\_/¯'"; mode "default";
-    bindsym t       exec --no-startup-id "sleep 0.1; xdotool type \\"$(date +%Y%m%d%H%M)\\""; mode "default";
-    bindsym Shift+t exec --no-startup-id "sleep 0.1; xdotool type \\"$(date +%s)\\""; mode "default";
+    bindsym s       exec --no-startup-id "sleep 0.2; xdotool type --delay 30 '¯\_(ツ)_/¯'"; mode "default";
+    bindsym t       mode "$mode_xdootool_timestamp"
+    bindsym Shift+s exec --no-startup-id "sleep 0.2; xdotool type --delay 30 '¯\\\_(ツ)\_/¯'"; mode "default";
     # cancel
+    bindsym BackSpace   mode "$mode_x"
     bindsym $mod+Escape mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Return      mode "default"
+    bindsym Escape      mode "default"
 }
-
+set $mode_xdootool_timestamp Format: (d) YYYY-MM-DD  (D) YYYYMMDD (g) DD.MM.YYYY (t) HH:MM (T) HHMM (a) YYYY-MM-DD-HH-MM (A) YYYYMMDDHHMM (u) unix timestamp
+mode "$mode_xdootool_timestamp" {
+    bindsym d       exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%Y-%m-%d)\\""; mode "default";
+    bindsym Shift+d exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%Y%m%d)\\""; mode "default";
+    bindsym g       exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%d.%m.%Y)\\""; mode "default";
+    bindsym t       exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%H:%M)\\""; mode "default";
+    bindsym Shift+t exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%H%M)\\""; mode "default";
+    bindsym a       exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%Y-%m-%d-%H-%M)\\""; mode "default";
+    bindsym Shift+a exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%Y%m%d%H%M)\\""; mode "default";
+    bindsym u       exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%s)\\""; mode "default";
+    # cancel
+    bindsym BackSpace   mode "$mode_x"
+    bindsym $mod+Escape mode "default"
+    bindsym Return      mode "default"
+    bindsym Escape      mode "default"
+}
 
 
 ###############################################################################
