@@ -5189,6 +5189,7 @@ augroup auto_textwidth
     autocmd FileType scala           set textwidth=120 | call SetColorColumn('on')
     autocmd FileType sh              set textwidth=100 | call SetColorColumn('on')
     autocmd FileType sql             set textwidth=80  | call SetColorColumn('on')
+    autocmd FileType mail            set textwidth=0   | call SetColorColumn('off')
 augroup END
 
 
