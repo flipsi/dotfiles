@@ -150,6 +150,8 @@ def edit_secrets_file(secrets_file):
 
 def get_secret(accountname, oauth=False):
   secrets = get_secrets_from_gpg_encrypted_muttrc(accountname)
+  if secrets is None:
+    raise Exception(f"Secret for {accountname} not found!")
   if oauth:
     client_id = secrets['client_id']
     client_secret = secrets['client_secret']
