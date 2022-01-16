@@ -41,8 +41,8 @@
     side-by-side = true
     line-numbers = true
     whitespace-error-style = 22 reverse
-    plus-color = "#98971A"
-    minus-color = "#CC241D"
+    plus-style = "syntax #98971A"
+    minus-style = "syntax #CC241D"
     syntax-theme = 1337
 
 [delta "decorations"]
