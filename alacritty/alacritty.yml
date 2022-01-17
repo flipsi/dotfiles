@@ -59,6 +59,12 @@ font:
   normal:
     # family: Fantasque Sans Mono
     family: PragmataPro Mono
+    # family: Fira Mono
+    # family: Source Code Pro
+    # family: Sudo
+    # family: Monoid
+    # family: Hack
+    # family: Courier Prime Code
     style: Regular
   bold:
     # family: Fantasque Sans Mono
