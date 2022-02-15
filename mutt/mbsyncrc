@@ -51,7 +51,6 @@ Channel philipp.moers@mail.de
 Expunge Both
 Far :philipp.moers@mail.de-remote:
 Near :philipp.moers@mail.de-local:
-Patterns * !"[Gmail]/All Mail"
 Create Both
 SyncState *
 MaxMessages 0
