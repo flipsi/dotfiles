@@ -17,7 +17,7 @@ bind index gg first-entry
 
 # sync local mails with remotes
 macro generic,index \Cs \
-    "<enter-command>unset wait_key<enter><shell-escape>echo 'syncing...'; mbsync -a valentina@philippmoers.de<enter>" \
+    "<enter-command>unset wait_key<enter><shell-escape>echo 'syncing...'; mbsync valentina@philippmoers.de<enter>" \
     "run mbsync to sync mails for valentina@philippmoers.de"
 
 unmailboxes *
