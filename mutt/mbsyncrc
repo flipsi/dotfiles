@@ -25,7 +25,6 @@ Expunge Both
 SyncState *
 MaxMessages 0
 ExpireUnread no
-# End profile
 
 
 ##################################
@@ -55,7 +54,6 @@ Expunge Both
 SyncState *
 MaxMessages 0
 ExpireUnread no
-# End profile
 
 
 ###############################
@@ -85,7 +83,6 @@ Expunge Both
 SyncState *
 MaxMessages 0
 ExpireUnread no
-# End profile
 
 
 ###############################
@@ -115,7 +112,6 @@ Expunge Both
 SyncState *
 MaxMessages 0
 ExpireUnread no
-# End profile
 
 
 ######################################
@@ -145,6 +141,5 @@ Expunge Both
 SyncState *
 MaxMessages 0
 ExpireUnread no
-# End profile
 
 # vim:ft=conf
