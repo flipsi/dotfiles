@@ -18,10 +18,10 @@ Inbox /home/sflip/.local/share/mail/mail@philippmoers.de/INBOX
 Flatten .
 
 Channel mail@philippmoers.de
-Expunge Both
 Far :mail@philippmoers.de-remote:
 Near :mail@philippmoers.de-local:
 Create Both
+Expunge Both
 SyncState *
 MaxMessages 0
 ExpireUnread no
@@ -48,10 +48,10 @@ Inbox /home/sflip/.local/share/mail/philipp.moers@mail.de/INBOX
 Flatten .
 
 Channel philipp.moers@mail.de
-Expunge Both
 Far :philipp.moers@mail.de-remote:
 Near :philipp.moers@mail.de-local:
 Create Both
+Expunge Both
 SyncState *
 MaxMessages 0
 ExpireUnread no
@@ -77,11 +77,11 @@ Path /home/sflip/.local/share/mail/soziflip@gmail.com/
 Inbox /home/sflip/.local/share/mail/soziflip@gmail.com/INBOX
 
 Channel soziflip@gmail.com
-Expunge Both
 Far :soziflip@gmail.com-remote:
 Near :soziflip@gmail.com-local:
 Patterns * !"[Gmail]/All Mail"
 Create Both
+Expunge Both
 SyncState *
 MaxMessages 0
 ExpireUnread no
@@ -107,11 +107,11 @@ Path /home/sflip/.local/share/mail/p.moers@ryte.com/
 Inbox /home/sflip/.local/share/mail/p.moers@ryte.com/INBOX
 
 Channel p.moers@ryte.com
-Expunge Both
 Far :p.moers@ryte.com-remote:
 Near :p.moers@ryte.com-local:
 Patterns * !"[Gmail]/All Mail"
 Create Both
+Expunge Both
 SyncState *
 MaxMessages 0
 ExpireUnread no
@@ -138,10 +138,10 @@ Inbox /home/sflip/.local/share/mail/valentina@philippmoers.de/INBOX
 Flatten .
 
 Channel valentina@philippmoers.de
-Expunge Both
 Far :valentina@philippmoers.de-remote:
 Near :valentina@philippmoers.de-local:
 Create Both
+Expunge Both
 SyncState *
 MaxMessages 0
 ExpireUnread no
