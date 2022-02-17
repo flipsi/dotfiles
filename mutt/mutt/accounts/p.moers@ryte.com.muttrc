@@ -1,9 +1,11 @@
 # vim: filetype=neomuttrc
 # muttrc file for account p.moers@ryte.com
+
+alias me Philipp Moers <p.moers@ryte.com>
 set realname = "Philipp Moers"
 set from = "p.moers@ryte.com"
+
 set sendmail = "msmtp -a p.moers@ryte.com"
-alias me Philipp Moers <p.moers@ryte.com>
 set folder = "/home/sflip/.local/share/mail/p.moers@ryte.com"
 set header_cache = /home/sflip/.cache/mutt-wizard/p.moers@ryte.com/headers
 set message_cachedir = /home/sflip/.cache/mutt-wizard/p.moers@ryte.com/bodies

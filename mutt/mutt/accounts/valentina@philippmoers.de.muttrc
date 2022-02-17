@@ -1,9 +1,11 @@
 # vim: filetype=neomuttrc
 # muttrc file for account valentina@philippmoers.de
+
+alias me Valentina Greif <valentina@philippmoers.de>
 set realname = "Valentina Greif"
 set from = "valentina@philippmoers.de"
+
 set sendmail = "msmtp -a valentina@philippmoers.de"
-alias me Valentina Greif <valentina@philippmoers.de>
 set folder = "/home/sflip/.local/share/mail/valentina@philippmoers.de"
 set header_cache = /home/sflip/.cache/mutt-wizard/valentina@philippmoers.de/headers
 set message_cachedir = /home/sflip/.cache/mutt-wizard/valentina@philippmoers.de/bodies
@@ -23,22 +25,23 @@ macro generic,index \Cs \
 
 unmailboxes *
 mailboxes "=INBOX" "=Archive" "=Drafts" "=Sent" "=Trash" "=Junk"
+set spoolfile = "+INBOX"
+set postponed = "+Drafts"
+set record    = "+Sent"
+set trash     = "+Trash"
 
 macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
 macro index,pager Mi ";<save-message>=INBOX<enter>" "move mail to inbox"
 macro index,pager Ci ";<copy-message>=INBOX<enter>" "copy mail to inbox"
-set spoolfile = "+INBOX"
 
 macro index,pager ga "<change-folder>=Archive<enter>" "go to archive"
 macro index,pager Ma ";<save-message>=Archive<enter>" "move mail to archive"
 macro index,pager Ca ";<copy-message>=Archive<enter>" "copy mail to archive"
 
-set postponed = "+Drafts"
 macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
 macro index,pager Md ";<save-message>=Drafts<enter>" "move mail to drafts"
 macro index,pager Cd ";<copy-message>=Drafts<enter>" "copy mail to drafts"
 
-set record = "+Sent"
 macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
 macro index,pager Ms ";<save-message>=Sent<enter>" "move mail to sent"
 macro index,pager Cs ";<copy-message>=Sent<enter>" "copy mail to sent"
@@ -50,4 +53,3 @@ macro index,pager CS ";<copy-message>=Junk<enter>" "copy mail to junk/spam"
 macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
 macro index,pager Mt ";<save-message>=Trash<enter>" "move mail to trash"
 macro index,pager Ct ";<copy-message>=Trash<enter>" "copy mail to trash"
-set trash = "+Trash"
