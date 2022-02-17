@@ -18,9 +18,16 @@ bind index,pager C noop
 bind pager gg top
 bind index gg first-entry
 
+# # sync local mails with remotes
+# # TODO: add <sync-mailbox> command that works
+# macro generic,index \Cs \
+#     "<enter-command>unset wait_key<enter><shell-escape>echo 'syncing...'; mbsync soziflip@gmail.com<enter>" \
+#     "run mbsync to sync mails for soziflip@gmail.com"
+
 # sync local mails with remotes
+# TODO: use background alternative from above
 macro generic,index \Cs \
-    "<enter-command>unset wait_key<enter><shell-escape>echo 'syncing...'; mbsync soziflip@gmail.com<enter>" \
+    "<sync-mailbox><shell-escape>mbsync soziflip@gmail.com<enter>" \
     "run mbsync to sync mails for soziflip@gmail.com"
 
 unmailboxes *
