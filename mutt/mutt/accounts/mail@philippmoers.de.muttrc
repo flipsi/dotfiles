@@ -43,9 +43,9 @@ macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
 macro index,pager Ms ";<save-message>=Sent<enter>" "move mail to sent"
 macro index,pager Cs ";<copy-message>=Sent<enter>" "copy mail to sent"
 
-macro index,pager gj "<change-folder>=Junk<enter>" "go to junk/spam"
-macro index,pager Mj ";<save-message>=Junk<enter>" "move mail to junk/spam"
-macro index,pager Cj ";<copy-message>=Junk<enter>" "copy mail to junk/spam"
+macro index,pager gS "<change-folder>=Junk<enter>" "go to junk/spam"
+macro index,pager MS ";<save-message>=Junk<enter>" "move mail to junk/spam"
+macro index,pager CS ";<copy-message>=Junk<enter>" "copy mail to junk/spam"
 
 macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
 macro index,pager Mt ";<save-message>=Trash<enter>" "move mail to trash"
