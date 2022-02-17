@@ -1,3 +1,56 @@
+# RFC 6154 standard mailbox denominations (see https://apple.stackexchange.com/a/201346/450683) are:
+#
+#   \All
+#      This mailbox presents all messages in the user's message store.
+#      Implementations MAY omit some messages, such as, perhaps, those
+#      in \Trash and \Junk.  When this special use is supported, it is
+#      almost certain to represent a virtual mailbox.
+#
+#   \Archive
+#        This mailbox is used to archive messages.  The meaning of an
+#        "archival" mailbox is server-dependent; typically, it will be
+#        used to get messages out of the inbox, or otherwise keep them
+#        out of the user's way, while still making them accessible.
+#
+#   \Drafts
+#        This mailbox is used to hold draft messages -- typically,
+#        messages that are being composed but have not yet been sent.  In
+#        some server implementations, this might be a virtual mailbox,
+#        containing messages from other mailboxes that are marked with
+#        the "\Draft" message flag.  Alternatively, this might just be
+#        advice that a client put drafts here.
+#
+#   \Flagged
+#        This mailbox presents all messages marked in some way as
+#        "important".  When this special use is supported, it is likely
+#        to represent a virtual mailbox collecting messages (from other
+#        mailboxes) that are marked with the "\Flagged" message flag.
+#
+#   \Junk
+#        This mailbox is where messages deemed to be junk mail are held.
+#        Some server implementations might put messages here
+#        automatically.  Alternatively, this might just be advice to a
+#        client-side spam filter.
+#
+#   \Sent
+#        This mailbox is used to hold copies of messages that have been
+#        sent.  Some server implementations might put messages here
+#        automatically.  Alternatively, this might just be advice that a
+#        client save sent messages here.
+#
+#   \Trash
+#        This mailbox is used to hold messages that have been deleted or
+#        marked for deletion.  In some server implementations, this might
+#        be a virtual mailbox, containing messages from other mailboxes
+#        that are marked with the "\Deleted" message flag.
+#        Alternatively, this might just be advice that a client that
+#        chooses not to use the IMAP "\Deleted" model should use this as
+#        its trash location.  In server implementations that strictly
+#        expect the IMAP "\Deleted" model, this special use is likely not
+#        to be supported.
+
+
+
 #################################
 # account: mail@philippmoers.de #
 #################################
@@ -17,15 +70,62 @@ Path /home/sflip/.local/share/mail/mail@philippmoers.de/
 Inbox /home/sflip/.local/share/mail/mail@philippmoers.de/INBOX
 Flatten .
 
-Channel mail@philippmoers.de
-Far :mail@philippmoers.de-remote:
-Near :mail@philippmoers.de-local:
+#### one channel for all folders ####
+
+# Channel mail@philippmoers.de
+# Far  :mail@philippmoers.de-remote:
+# Near :mail@philippmoers.de-local:
+# Create Both
+# Expunge Both
+# SyncState *
+# MaxMessages 0
+# ExpireUnread no
+
+#### multiple channels (one for each folder) to rename folders ####
+
+Group   mail@philippmoers.de
+Channel mail@philippmoers.de-inbox
+Channel mail@philippmoers.de-archive
+Channel mail@philippmoers.de-drafts
+Channel mail@philippmoers.de-sent
+Channel mail@philippmoers.de-trash
+Channel mail@philippmoers.de-junk
+
+Channel mail@philippmoers.de-inbox
+Far  :mail@philippmoers.de-remote:"INBOX"
+Near :mail@philippmoers.de-local:INBOX
 Create Both
 Expunge Both
-SyncState *
-MaxMessages 0
-ExpireUnread no
 
+Channel mail@philippmoers.de-archive
+Far  :mail@philippmoers.de-remote:"Archive"
+Near :mail@philippmoers.de-local:Archive
+Create Both
+Expunge Both
+
+Channel mail@philippmoers.de-drafts
+Far  :mail@philippmoers.de-remote:"Drafts"
+Near :mail@philippmoers.de-local:Drafts
+Create Both
+Expunge Both
+
+Channel mail@philippmoers.de-sent
+Far  :mail@philippmoers.de-remote:"Sent Items"
+Near :mail@philippmoers.de-local:Sent
+Create Both
+Expunge Both
+
+Channel mail@philippmoers.de-trash
+Far  :mail@philippmoers.de-remote:"Trash"
+Near :mail@philippmoers.de-local:Trash
+Create Both
+Expunge Both
+
+Channel mail@philippmoers.de-junk
+Far  :mail@philippmoers.de-remote:"Spam"
+Near :mail@philippmoers.de-local:Junk
+Create Both
+Expunge Both
 
 ##################################
 # account: philipp.moers@mail.de #
@@ -47,7 +147,7 @@ Inbox /home/sflip/.local/share/mail/philipp.moers@mail.de/INBOX
 Flatten .
 
 Channel philipp.moers@mail.de
-Far :philipp.moers@mail.de-remote:
+Far  :philipp.moers@mail.de-remote:
 Near :philipp.moers@mail.de-local:
 Create Both
 Expunge Both
@@ -75,7 +175,7 @@ Path /home/sflip/.local/share/mail/soziflip@gmail.com/
 Inbox /home/sflip/.local/share/mail/soziflip@gmail.com/INBOX
 
 Channel soziflip@gmail.com
-Far :soziflip@gmail.com-remote:
+Far  :soziflip@gmail.com-remote:
 Near :soziflip@gmail.com-local:
 Patterns * !"[Gmail]/All Mail"
 Create Both
@@ -104,7 +204,7 @@ Path /home/sflip/.local/share/mail/p.moers@ryte.com/
 Inbox /home/sflip/.local/share/mail/p.moers@ryte.com/INBOX
 
 Channel p.moers@ryte.com
-Far :p.moers@ryte.com-remote:
+Far  :p.moers@ryte.com-remote:
 Near :p.moers@ryte.com-local:
 Patterns * !"[Gmail]/All Mail"
 Create Both
@@ -133,13 +233,49 @@ Path /home/sflip/.local/share/mail/valentina@philippmoers.de/
 Inbox /home/sflip/.local/share/mail/valentina@philippmoers.de/INBOX
 Flatten .
 
-Channel valentina@philippmoers.de
-Far :valentina@philippmoers.de-remote:
-Near :valentina@philippmoers.de-local:
+Group   valentina@philippmoers.de
+Channel valentina@philippmoers.de-inbox
+Channel valentina@philippmoers.de-archive
+Channel valentina@philippmoers.de-drafts
+Channel valentina@philippmoers.de-sent
+Channel valentina@philippmoers.de-trash
+Channel valentina@philippmoers.de-junk
+
+Channel valentina@philippmoers.de-inbox
+Far  :valentina@philippmoers.de-remote:"INBOX"
+Near :valentina@philippmoers.de-local:INBOX
 Create Both
 Expunge Both
-SyncState *
-MaxMessages 0
-ExpireUnread no
+
+Channel valentina@philippmoers.de-archive
+Far  :valentina@philippmoers.de-remote:"Archive"
+Near :valentina@philippmoers.de-local:Archive
+Create Both
+Expunge Both
+
+Channel valentina@philippmoers.de-drafts
+Far  :valentina@philippmoers.de-remote:"Drafts"
+Near :valentina@philippmoers.de-local:Drafts
+Create Both
+Expunge Both
+
+Channel valentina@philippmoers.de-sent
+Far  :valentina@philippmoers.de-remote:"Sent Items"
+Near :valentina@philippmoers.de-local:Sent
+Create Both
+Expunge Both
+
+Channel valentina@philippmoers.de-trash
+Far  :valentina@philippmoers.de-remote:"Trash"
+Near :valentina@philippmoers.de-local:Trash
+Create Both
+Expunge Both
+
+Channel valentina@philippmoers.de-junk
+Far  :valentina@philippmoers.de-remote:"Spam"
+Near :valentina@philippmoers.de-local:Junk
+Create Both
+Expunge Both
+
 
 # vim:ft=conf
