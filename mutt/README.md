@@ -68,6 +68,13 @@ On every sync or send mail, they are used to generate an access token with the o
 * Copy encrypted credentials file `mutt/mutt/secrets.gpg` to the host
 
 
+## Gmail peculiarities
+
+* Gmail stores/archives every email (even when deleted) in a special *All Mail* folder, which I probably don't want to sync.
+* If an email is deleted in mutt and deletion is synced back to Gmail, it will still be archived.
+  For this to work, the according option in [Gmail IMAP settings](https://mail.google.com/mail/u/0/?tab=cm#settings/fwdandpop) has to be set (found via [this answer](https://superuser.com/a/1542298/431697)).
+
+
 ## Resources
 
 https://nixvsevil.com/posts/mutt-gmail-oauth-gnupg/
