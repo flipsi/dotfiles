@@ -2,11 +2,11 @@
 # muttrc file to be sourced after folder change (e.g. because RHS depends on folder path)
 
 
-# TODO: can't this block be in regular keybindings file?
 bind index,pager gg noop
 bind index,pager g noop
 bind index,pager M noop
 bind index,pager C noop
+
 bind pager gg top
 bind index gg first-entry
 
