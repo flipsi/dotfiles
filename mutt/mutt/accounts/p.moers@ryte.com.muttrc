@@ -26,7 +26,7 @@ macro generic,index \Cs \
     "run mbsync to sync mails for p.moers@ryte.com"
 
 unmailboxes *
-mailboxes "=INBOX" "=Archive" "=Drafts" "=Sent" "=Sent-Mail-old" "=Trash" "=Junk"
+mailboxes "=INBOX" "=Archive" "=Drafts" "=Sent" "=Junk" "=Trash"
 set spoolfile = "+INBOX"
 set postponed = "+Drafts"
 # set record    = "+Sent" # because copy = no
