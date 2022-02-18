@@ -25,33 +25,36 @@ macro generic,index \Cs \
     "<sync-mailbox><shell-escape>mbsync p.moers@ryte.com<enter>" \
     "run mbsync to sync mails for p.moers@ryte.com"
 
+set spoolfile               = "+INBOX"
+set postponed               = "+Drafts"
+set record                  = "+Sent"
+set trash                   = "+Trash"
+set my_mailbox_archive      = "+Archive"
+set my_mailbox_junk         = "+Junk"
+
 unmailboxes *
-mailboxes "=INBOX" "=Archive" "=Drafts" "=Sent" "=Junk" "=Trash"
-set spoolfile = "+INBOX"
-set postponed = "+Drafts"
-# set record    = "+Sent" # because copy = no
-set trash     = "+Trash"
+mailboxes $spoolfile $my_mailbox_archive $postponed $record "=Sent-Mail-old" $my_mailbox_junk $trash
 
-macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
-macro index,pager Mi ";<save-message>=INBOX<enter>" "move mail to inbox"
-macro index,pager Ci ";<copy-message>=INBOX<enter>" "copy mail to inbox"
+macro index,pager gi "<change-folder>$spoolfile<enter>" "go to inbox"
+macro index,pager Mi ";<save-message>$spoolfile<enter>" "move mail to inbox"
+macro index,pager Ci ";<copy-message>$spoolfile<enter>" "copy mail to inbox"
 
-macro index,pager ga "<change-folder>=Archive<enter>" "go to archive"
-macro index,pager Ma ";<save-message>=Archive<enter>" "move mail to archive"
-macro index,pager Ca ";<copy-message>=Archive<enter>" "copy mail to archive"
+macro index,pager ga "<change-folder>$my_mailbox_archive<enter>" "go to archive"
+macro index,pager Ma ";<save-message>$my_mailbox_archive<enter>" "move mail to archive"
+macro index,pager Ca ";<copy-message>$my_mailbox_archive<enter>" "copy mail to archive"
 
-macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
-macro index,pager Md ";<save-message>=Drafts<enter>" "move mail to drafts"
-macro index,pager Cd ";<copy-message>=Drafts<enter>" "copy mail to drafts"
+macro index,pager gd "<change-folder>$postponed<enter>" "go to drafts"
+macro index,pager Md ";<save-message>$postponed<enter>" "move mail to drafts"
+macro index,pager Cd ";<copy-message>$postponed<enter>" "copy mail to drafts"
 
-macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
-macro index,pager Ms ";<save-message>=Sent<enter>" "move mail to sent"
-macro index,pager Cs ";<copy-message>=Sent<enter>" "copy mail to sent"
+macro index,pager gs "<change-folder>$record<enter>" "go to sent"
+macro index,pager Ms ";<save-message>$record<enter>" "move mail to sent"
+macro index,pager Cs ";<copy-message>$record<enter>" "copy mail to sent"
 
-macro index,pager gS "<change-folder>=Junk<enter>" "go to junk/spam"
-macro index,pager MS ";<save-message>=Junk<enter>" "move mail to junk/spam"
-macro index,pager CS ";<copy-message>=Junk<enter>" "copy mail to junk/spam"
+macro index,pager gS "<change-folder>=$my_mailbox_junk<enter>" "go to junk/spam"
+macro index,pager MS ";<save-message>=$my_mailbox_junk<enter>" "move mail to junk/spam"
+macro index,pager CS ";<copy-message>=$my_mailbox_junk<enter>" "copy mail to junk/spam"
 
-macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
-macro index,pager Mt ";<save-message>=Trash<enter>" "move mail to trash"
-macro index,pager Ct ";<copy-message>=Trash<enter>" "copy mail to trash"
+macro index,pager gt "<change-folder>$trash<enter>" "go to trash"
+macro index,pager Mt ";<save-message>$trash<enter>" "move mail to trash"
+macro index,pager Ct ";<copy-message>$trash<enter>" "copy mail to trash"
