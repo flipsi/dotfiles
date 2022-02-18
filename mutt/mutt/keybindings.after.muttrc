@@ -36,15 +36,7 @@ macro index,pager Mt ";<save-message>$trash<enter>" "move mail to trash"
 macro index,pager Ct ";<copy-message>$trash<enter>" "copy mail to trash"
 
 
-# # sync local mailbox with remote mailbox
-# # TODO: add <sync-mailbox> command that works
-# macro generic,index \Cs \
-#     "<enter-command>unset wait_key<enter><shell-escape>echo 'syncing...'; mbsync $from<enter>" \
-#     "run mbsync to sync mails for $from"
-
 # sync local mailbox with remote mailbox
-# TODO: use background alternative from above
 macro generic,index \Cs \
-    "<sync-mailbox><shell-escape>mbsync $from<enter>" \
-    "run mbsync to sync mails for $from"
-
+    "<sync-mailbox><shell-escape>tmux split-window -d -l 15 'mbsync -V $from | tee /tmp/mbsync.on_demand.log'<enter>" \
+     "Run mbsync to sync mails for $from"
