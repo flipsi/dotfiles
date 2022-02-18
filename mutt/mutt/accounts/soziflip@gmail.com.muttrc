@@ -13,60 +13,15 @@ set mbox_type = Maildir
 
 set copy = no
 
-bind index,pager gg noop
-bind index,pager g noop
-bind index,pager M noop
-bind index,pager C noop
-bind pager gg top
-bind index gg first-entry
-
-# # sync local mails with remotes
-# # TODO: add <sync-mailbox> command that works
-# macro generic,index \Cs \
-#     "<enter-command>unset wait_key<enter><shell-escape>echo 'syncing...'; mbsync soziflip@gmail.com<enter>" \
-#     "run mbsync to sync mails for soziflip@gmail.com"
-
-# sync local mails with remotes
-# TODO: use background alternative from above
-macro generic,index \Cs \
-    "<sync-mailbox><shell-escape>mbsync soziflip@gmail.com<enter>" \
-    "run mbsync to sync mails for soziflip@gmail.com"
-
-# TODO: centralize duplicate keybindings while not breaking '=' expansion
-# test command for '=' expansion (WIP):
-macro generic,index \Ct \
-    "<enter-command>echo 'sahne ='<enter>"
-
 set spoolfile               = "+INBOX"
 set postponed               = "+Drafts"
 set record                  = "+Sent"
 set trash                   = "+Trash"
-set my_mailbox_archive      = "+Archive"
-set my_mailbox_junk         = "+Junk"
+set my_mailbox_archive      = "$folder/Archive"
+set my_mailbox_junk         = "$folder/Junk"
 
 unmailboxes *
 mailboxes $spoolfile $my_mailbox_archive $postponed $record "=Sent-Mail-old" $my_mailbox_junk $trash
 
-macro index,pager gi "<change-folder>$spoolfile<enter>" "go to inbox"
-macro index,pager Mi ";<save-message>$spoolfile<enter>" "move mail to inbox"
-macro index,pager Ci ";<copy-message>$spoolfile<enter>" "copy mail to inbox"
 
-macro index,pager ga "<change-folder>$my_mailbox_archive<enter>" "go to archive"
-macro index,pager Ma ";<save-message>$my_mailbox_archive<enter>" "move mail to archive"
-macro index,pager Ca ";<copy-message>$my_mailbox_archive<enter>" "copy mail to archive"
-
-macro index,pager gd "<change-folder>$postponed<enter>" "go to drafts"
-macro index,pager Md ";<save-message>$postponed<enter>" "move mail to drafts"
-macro index,pager Cd ";<copy-message>$postponed<enter>" "copy mail to drafts"
-
-macro index,pager gs "<change-folder>$record<enter>" "go to sent"
-macro index,pager Ms ";<save-message>$record<enter>" "move mail to sent"
-macro index,pager Cs ";<copy-message>$record<enter>" "copy mail to sent"
-
-macro index,pager gS "<change-folder>=$my_mailbox_junk<enter>" "go to junk/spam"
-macro index,pager MS ";<save-message>=$my_mailbox_junk<enter>" "move mail to junk/spam"
-macro index,pager CS ";<copy-message>=$my_mailbox_junk<enter>" "copy mail to junk/spam"
-
-macro index,pager gt "<change-folder>$trash<enter>" "go to trash"
-macro index,pager Mt ";<save-message>$trash<enter>" "move mail to trash"
-macro index,pager Ct ";<copy-message>$trash<enter>" "copy mail to trash"
+source $my_muttdir/keybindings.after.muttrc

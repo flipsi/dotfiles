@@ -13,45 +13,15 @@ set mbox_type = Maildir
 
 set copy = yes
 
-bind index,pager gg noop
-bind index,pager g noop
-bind index,pager M noop
-bind index,pager C noop
-bind pager gg top
-bind index gg first-entry
-
-# sync local mails with remotes
-macro generic,index \Cs \
-    "<sync-mailbox><shell-escape>mbsync mail@philippmoers.de<enter>" \
-    "run mbsync to sync mails for mail@philippmoers.de"
+set spoolfile               = "+INBOX"
+set postponed               = "+Drafts"
+set record                  = "+Sent"
+set trash                   = "+Trash"
+set my_mailbox_archive      = "$folder/Archive"
+set my_mailbox_junk         = "$folder/Junk"
 
 unmailboxes *
-mailboxes "=INBOX" "=Archive" "=Drafts" "=Sent" "=Trash" "=Junk"
-set spoolfile = "+INBOX"
-set postponed = "+Drafts"
-set record    = "+Sent"
-set trash     = "+Trash"
+mailboxes $spoolfile $my_mailbox_archive $postponed $record $my_mailbox_junk $trash
 
-macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
-macro index,pager Mi ";<save-message>=INBOX<enter>" "move mail to inbox"
-macro index,pager Ci ";<copy-message>=INBOX<enter>" "copy mail to inbox"
 
-macro index,pager ga "<change-folder>=Archive<enter>" "go to archive"
-macro index,pager Ma ";<save-message>=Archive<enter>" "move mail to archive"
-macro index,pager Ca ";<copy-message>=Archive<enter>" "copy mail to archive"
-
-macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
-macro index,pager Md ";<save-message>=Drafts<enter>" "move mail to drafts"
-macro index,pager Cd ";<copy-message>=Drafts<enter>" "copy mail to drafts"
-
-macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
-macro index,pager Ms ";<save-message>=Sent<enter>" "move mail to sent"
-macro index,pager Cs ";<copy-message>=Sent<enter>" "copy mail to sent"
-
-macro index,pager gS "<change-folder>=Junk<enter>" "go to junk/spam"
-macro index,pager MS ";<save-message>=Junk<enter>" "move mail to junk/spam"
-macro index,pager CS ";<copy-message>=Junk<enter>" "copy mail to junk/spam"
-
-macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
-macro index,pager Mt ";<save-message>=Trash<enter>" "move mail to trash"
-macro index,pager Ct ";<copy-message>=Trash<enter>" "copy mail to trash"
+source $my_muttdir/keybindings.after.muttrc
