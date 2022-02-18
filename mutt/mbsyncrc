@@ -74,7 +74,6 @@ SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore mail@philippmoers.de-local
-Subfolders Verbatim
 Path /home/sflip/.local/share/mail/mail@philippmoers.de/
 Inbox /home/sflip/.local/share/mail/mail@philippmoers.de/INBOX
 Flatten .
@@ -150,7 +149,6 @@ SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore philipp.moers@mail.de-local
-Subfolders Verbatim
 Path /home/sflip/.local/share/mail/philipp.moers@mail.de/
 Inbox /home/sflip/.local/share/mail/philipp.moers@mail.de/INBOX
 Flatten .
@@ -282,7 +280,6 @@ SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore valentina@philippmoers.de-local
-Subfolders Verbatim
 Path /home/sflip/.local/share/mail/valentina@philippmoers.de/
 Inbox /home/sflip/.local/share/mail/valentina@philippmoers.de/INBOX
 Flatten .
