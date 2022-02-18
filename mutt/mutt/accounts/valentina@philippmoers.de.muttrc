@@ -11,6 +11,8 @@ set header_cache = /home/sflip/.cache/mutt-wizard/valentina@philippmoers.de/head
 set message_cachedir = /home/sflip/.cache/mutt-wizard/valentina@philippmoers.de/bodies
 set mbox_type = Maildir
 
+set copy = yes
+
 bind index,pager gg noop
 bind index,pager g noop
 bind index,pager M noop

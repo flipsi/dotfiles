@@ -70,9 +70,12 @@ On every sync or send mail, they are used to generate an access token with the o
 
 ## Gmail peculiarities
 
-* Gmail stores/archives every email (even when deleted) in a special *All Mail* folder, which I probably don't want to sync.
+* [Gmail doesn't use folders, but labels instead](https://blogs-on-gmail.blogspot.com/2019/02/howgmailstores.html).
+* Gmail implicitly archives every email (even when deleted) with the special *All Mail* label.
 * If an email is deleted in mutt and deletion is synced back to Gmail, it will still be archived.
   For this to work, the according option in [Gmail IMAP settings](https://mail.google.com/mail/u/0/?tab=cm#settings/fwdandpop) has to be set (found via [this answer](https://superuser.com/a/1542298/431697)).
+* [Gmail automatically saves sent emails](https://linuxconfig.org/how-to-install-configure-and-use-mutt-with-a-gmail-account-on-linux) - by adding the '[Gmail]Sent Mail' label.
+  So to avoid duplicates, mutt should be configured to not save a copy of sent mails.
 
 
 ## Resources

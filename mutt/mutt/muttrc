@@ -57,7 +57,7 @@ set mailcap_path = $my_muttdir/mailcap
 # composing mail settings #
 ###########################
 
-set copy                                                  # keep copy on send
+set copy                                                  # keep copy on send (don't use with Gmail! See README)
 
 unset reply_self                                          # always reply to others
 set fast_reply                                            # skip recipients and subject dialog when replying

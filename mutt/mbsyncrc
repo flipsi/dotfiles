@@ -50,6 +50,15 @@
 #        to be supported.
 
 
+# Gmail mailboxes:
+# "[Gmail]/All Mail"
+# "[Gmail]/Drafts"
+# "[Gmail]/Important"
+# "[Gmail]/Sent Mail"
+# "[Gmail]/Spam"
+# "[Gmail]/Starred"
+# "[Gmail]/Trash"
+
 
 #################################
 # account: mail@philippmoers.de #
@@ -174,15 +183,60 @@ Subfolders Verbatim
 Path /home/sflip/.local/share/mail/soziflip@gmail.com/
 Inbox /home/sflip/.local/share/mail/soziflip@gmail.com/INBOX
 
-Channel soziflip@gmail.com
-Far  :soziflip@gmail.com-remote:
-Near :soziflip@gmail.com-local:
-Patterns * !"[Gmail]/All Mail"
+Group soziflip@gmail.com
+Channel soziflip@gmail.com-inbox
+Channel soziflip@gmail.com-archive
+Channel soziflip@gmail.com-drafts
+Channel soziflip@gmail.com-sent
+Channel soziflip@gmail.com-trash
+Channel soziflip@gmail.com-junk
+
+Channel soziflip@gmail.com-inbox
+Far  :soziflip@gmail.com-remote:"INBOX"
+Near :soziflip@gmail.com-local:INBOX
+Sync All
 Create Both
 Expunge Both
-SyncState *
-MaxMessages 0
-ExpireUnread no
+
+Channel soziflip@gmail.com-archive
+# Far  :soziflip@gmail.com-remote:"[Gmail]/All Mail"
+Far  :soziflip@gmail.com-remote:"[Gmail]/Alle Nachrichten"
+Near :soziflip@gmail.com-local:Archive
+Sync Pull
+Create Both
+Expunge None
+
+Channel soziflip@gmail.com-drafts
+# Far  :soziflip@gmail.com-remote:"[Gmail]/Drafts"
+Far  :soziflip@gmail.com-remote:"[Gmail]/Entw&APw-rfe"
+Near :soziflip@gmail.com-local:Drafts
+Sync Pull
+Create Both
+Expunge None
+
+Channel soziflip@gmail.com-sent
+# Far  :soziflip@gmail.com-remote:"[Gmail]/Sent Mail"
+Far  :soziflip@gmail.com-remote:"[Gmail]/Gesendet"
+Near :soziflip@gmail.com-local:Sent
+Sync Pull
+Create Both
+Expunge None
+
+Channel soziflip@gmail.com-trash
+# Far  :soziflip@gmail.com-remote:"[Gmail]/Trash"
+Far  :soziflip@gmail.com-remote:"[Gmail]/Papierkorb"
+Near :soziflip@gmail.com-local:Trash
+Sync Pull
+Create Both
+Expunge None
+
+Channel soziflip@gmail.com-junk
+Far  :soziflip@gmail.com-remote:"[Gmail]/Spam"
+Near :soziflip@gmail.com-local:Junk
+Sync Pull
+Create Both
+Expunge None
+
 
 
 ###############################
