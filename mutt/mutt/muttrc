@@ -101,6 +101,9 @@ set menu_scroll                                           # don't do huge scroll
 
 unset help                                                # hide keybindings help bar on top
 
+# status_format is set freshly after each mailbox change
+
+
 # sidebar
 set sidebar_width = 32
 set sidebar_visible = yes
