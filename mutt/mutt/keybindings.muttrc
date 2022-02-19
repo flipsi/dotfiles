@@ -77,6 +77,11 @@ macro index,pager,compose,browser,attach <F5> ":source ~/.config/mutt/muttrc\n" 
 macro index,pager    \cu "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 macro attach,compose \cu "<pipe-entry>   urlscan<Enter>" "call urlscan to extract URLs out of a message"
 
+# open html email in browser
+macro attach      !                                      "<pipe-message>cat > /tmp/mutt.html; $BROWSER /tmp/mutt.html<enter>" "open html email in browser"
+macro index,pager ! "<view-attachments><search>html<enter><pipe-message>cat > /tmp/mutt.html; $BROWSER /tmp/mutt.html<enter>" "open html email in browser"
+# macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>"
+
 # search mails with notmuch (TODO: setup again)
 macro generic,index \C/ \
      "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt -r --prompt search<enter>\

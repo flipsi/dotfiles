@@ -50,6 +50,7 @@ set delete_untag                                          # untag msgs when dele
 
 # view special content and attachements
 auto_view text/html
+alternative_order text/enriched text/plain text/html text
 set mailcap_path = $my_muttdir/mailcap
 
 
