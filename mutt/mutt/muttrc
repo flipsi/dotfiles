@@ -99,6 +99,8 @@ unset wait_key                                            # don't annoy me
 
 set menu_scroll                                           # don't do huge scroll jumps, but scroll line by line
 
+unset help                                                # hide keybindings help bar on top
+
 # sidebar
 set sidebar_width = 32
 set sidebar_visible = yes
