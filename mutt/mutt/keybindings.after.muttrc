@@ -36,6 +36,8 @@ macro index,pager Mt ";<save-message>$trash<enter>" "move mail to trash"
 macro index,pager Ct ";<copy-message>$trash<enter>" "copy mail to trash"
 
 
+# remember $ to sync to local mailbox (e.g. delete message marked as delete)
+
 # sync local mailbox with remote mailbox
 macro generic,index \Cs \
     "<sync-mailbox><shell-escape>tmux split-window -d -l 15 'mbsync -V $from | tee /tmp/mbsync.on_demand.log'<enter>" \

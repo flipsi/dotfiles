@@ -64,8 +64,6 @@ macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 # Misc #
 ########
 
-# remember $ to sync mailbox (e.g. delete message marked as delete)
-
 # abort command (instead of ESC) with \Cg
 
 bind index \Cd quit
