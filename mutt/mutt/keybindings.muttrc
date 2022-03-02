@@ -59,6 +59,8 @@ bind index t  toggle-new
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 
+macro pager yae "<pipe-message>xclip -selection clipboard<enter>" "copy message text to clipboard"
+
 
 ########
 # Misc #
