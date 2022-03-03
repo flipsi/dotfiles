@@ -2784,6 +2784,9 @@ set nojoinspaces
 " allow <bs> to delete everything
 set backspace=indent,eol,start
 
+" when formatting / wrapping text, indent 'correctly' in numbered lists
+set formatoptions+=n
+
 " when incrementing numbers with leading zeros, don't interpret them as octal
 set nrformats-=octal
 
