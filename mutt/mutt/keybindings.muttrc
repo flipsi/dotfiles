@@ -3,6 +3,7 @@
 bind generic,index u noop
 bind generic,index f noop
 bind generic,index g noop
+bind pager         y noop
 
 
 ##############
