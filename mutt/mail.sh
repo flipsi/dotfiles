@@ -12,7 +12,7 @@ Usage: $(basename "$0") [OPTIONS]
     OPTIONS:
 
     -m|--mode <mode>
-        One of ['sync', 'offline', 'ask].
+        One of ['sync', 'offline', 'ask'].
         In 'sync' mode, mbsync is started in the background.
         In 'offline' mode, mbsync is not started, only mutt (using local mailbox).
         In 'ask' mode, one can choose between those two interactively.
