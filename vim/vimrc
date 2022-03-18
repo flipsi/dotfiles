@@ -1805,6 +1805,11 @@ xmap 'L <plug>(EasyAlign)
 nmap 'L <plug>(EasyAlign)
 
 
+Plug 'godlygeek/tabular'
+
+Plug 'tommcdo/vim-lion'
+
+
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " auto format {{{
