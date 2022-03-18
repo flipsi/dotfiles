@@ -35,6 +35,7 @@ SUPPORTED_TARGETS=(\
     gcalcli \
     ghci \
     git \
+    gtk \
     i3 \
     intellij\
     kitty \
@@ -217,6 +218,13 @@ function create_link_for_target() {
         git )
             create_link "$PWD/git/gitconfig" "$HOME/.gitconfig"
             create_link "$PWD/git/gitignore" "$HOME/.gitignore"
+            ;;
+
+        gtk )
+            mkdir -p "$HOME/.config/gtk-3.0"
+            mkdir -p "$HOME/.config/gtk-4.0"
+            create_link "$PWD/gtk/settings.ini" "$HOME/.config/gtk-3.0/settings.ini"
+            create_link "$PWD/gtk/settings.ini" "$HOME/.config/gtk-4.0/settings.ini"
             ;;
 
         i3 )
