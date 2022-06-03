@@ -4024,12 +4024,14 @@ command! SetTextWidthTo78       :set textwidth=78     " Maximum width of text th
 command! SetTextWidthTo80       :set textwidth=80     " Maximum width of text that is being inserted. A longer line will be broken after white space to get this width.
 command! SetTextWidthTo100      :set textwidth=100    " Maximum width of text that is being inserted. A longer line will be broken after white space to get this width.
 command! SetTextWidthTo120      :set textwidth=120    " Maximum width of text that is being inserted. A longer line will be broken after white space to get this width.
+command! SetTextWidthTo140      :set textwidth=140    " Maximum width of text that is being inserted. A longer line will be broken after white space to get this width.
 nnoremap <leader>ow0            :set textwidth=0<cr>
 nnoremap <leader>ow5            :set textwidth=50<cr>
 nnoremap <leader>ow7            :set textwidth=78<cr>
 nnoremap <leader>ow8            :set textwidth=80<cr>
 nnoremap <leader>ow1            :set textwidth=100<cr>
 nnoremap <leader>ow2            :set textwidth=120<cr>
+nnoremap <leader>ow4            :set textwidth=140<cr>
 
 " change tab width (soft)
 command! SetTabWidthTo2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2 " How many spaces a tab should be considered
