@@ -6,68 +6,29 @@ set fish_greeting ""
 # environment variables #
 #########################
 
-# QUICKFIX FOR LOCALE ISSUE
-# set -x LANG de_DE.UTF-8
-set -x LANG en_US.UTF-8
-
-# some more stuff in PATH
-set -x PATH ~/.local/bin $PATH
-set -x PATH ~/.cargo/bin $PATH
-set -x PATH ~/.gem/ruby/2.6.0/bin $PATH
-set -x PATH ~/.i3/bin $PATH
-set -x PATH ~/shellscripts $PATH
-set -x PATH ~/bin $PATH
-
-# edit files with vim
-set -x EDITOR vim
-
-# web browser
-set -x BROWSER vivaldi-stable
-
-# setup fzf to use ag instead of find
-set -x FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git -f -g ""'
-
-# use rofi instead of dmenu
-set -x CM_LAUNCHER "rofi"
-
-# # music player daemon
-# if test $hostname = "asterix"
-#     set -x MPD_HOST (ifconfig wlan0 | grep 'inet ' | sed 's/.*addr:\(.*\)  Bcast.*/\1/')
-# else
-    # set -x MPD_HOST $hostname
-    set -x MPD_HOST localhost
-# end
+source $HOME/.config/fish/environment.fish
 
 
 #########################
 # default applications  #
 #########################
 
-set BROWSER_APP "vivaldi-stable.desktop"
-set PDF_VIEWER_APP "org.pwmt.zathura.desktop"
-set IMAGE_VIEWER_APP "sxiv.desktop"
-
-if test (xdg-mime query default 'x-scheme-handler/https') != $BROWSER_APP
-    echo "Setting default browser to $BROWSER_APP"
-    xdg-mime default $BROWSER_APP 'x-scheme-handler/https'
-    xdg-mime default $BROWSER_APP 'x-scheme-handler/http'
+function set_xdg_default_app
+    set -l MIME_TYPE $argv[1]
+    set -l APP $argv[2]
+    set -l CURRENT_APP (xdg-mime query default "$MIME_TYPE")
+    if test -z "$CURRENT_APP" -o "$CURRENT_APP" != "$APP"
+        xdg-mime default "$APP" "$MIME_TYPE"
+    end
 end
 
-if test (xdg-mime query default 'application/pdf') != $PDF_VIEWER_APP
-    echo "Setting default application for 'application/pdf' to $PDF_VIEWER_APP"
-    xdg-mime default $PDF_VIEWER_APP 'application/pdf'
+if command -v xdg-mime >/dev/null
+    set_xdg_default_app 'application/pdf'           'org.pwmt.zathura.desktop'
+    set_xdg_default_app 'image/jpeg'                'sxiv.desktop'
+    set_xdg_default_app 'image/png'                 'sxiv.desktop'
+    set_xdg_default_app 'x-scheme-handler/http'     'vivaldi-stable.desktop'
+    set_xdg_default_app 'x-scheme-handler/https'    'vivaldi-stable.desktop'
 end
-
-if test (xdg-mime query default 'image/png') != $IMAGE_VIEWER_APP
-    echo "Setting default application for 'image/png' to $IMAGE_VIEWER_APP..."
-    xdg-mime default $IMAGE_VIEWER_APP 'image/png'
-end
-
-if test (xdg-mime query default 'image/jpeg') != $IMAGE_VIEWER_APP
-    echo "Setting default application for 'image/jpeg' to $IMAGE_VIEWER_APP..."
-    xdg-mime default $IMAGE_VIEWER_APP 'image/jpeg'
-end
-
 
 
 #############################################################
@@ -97,6 +58,9 @@ if status --is-interactive; and status --is-login
     # change colors
     fish_my_colors gruvbox
 
+    # change colors for virtual console
+    set_tty_colors gruvbox
+
     # modify the terminal's 256 color palette to use the gruvbox theme
     set -l GRUVBOX_SCRIPT ~/.vim/bundle/gruvbox/gruvbox_256palette.sh
     if test -f $GRUVBOX_SCRIPT
@@ -105,7 +69,9 @@ if status --is-interactive; and status --is-login
 
     # change colors of ls
     # eval (dircolors -c LS_COLORS)
-    set -x LS_COLORS (bash -c 'eval `dircolors ~/.dircolors`; echo $LS_COLORS')
+    if test -f ~/.dircolors
+        set -x LS_COLORS (bash -c 'eval `dircolors ~/.dircolors`; echo $LS_COLORS')
+    end
 
     # find out host once (useful for multiple things, but saves cycles)
     if test -z $hostname
@@ -113,17 +79,14 @@ if status --is-interactive; and status --is-login
     end
 
     # keychain takes care of ssh-agent and can also do gpg
-    if command -v keychain >/dev/null
+    function keychain_start
         eval (command keychain --eval --quiet ~/.ssh/id_rsa)
     end
-
-    # load abbreviations
-    if not set -q __abbr_init
-      set -gx __abbr_init
-      source $HOME/.config/fish/abbr.fish
-      if test -f $HOME/.config/fish/abbr.local.fish
-          source $HOME/.config/fish/abbr.local.fish
-      end
+    if command -v keychain >/dev/null
+        set -l host_where_to_start_keychain_automatically 'falbala' 'obelix' 'dwarf'
+        if contains $hostname $host_where_to_start_keychain_automatically
+            keychain_start
+        end
     end
 
     # asdf version manager
@@ -165,11 +128,14 @@ if status --is-interactive; and status --is-login
         end
     end
 
-    if test $hostname = "dwarf"
-        if tmux has-session -t src 2>/dev/null
-        else
-            tmux-ryte-sessions.sh
-        end
+end
+
+if status --is-interactive
+
+    # load abbreviations
+    source $HOME/.config/fish/abbr.fish
+    if test -f $HOME/.config/fish/abbr.local.fish
+        source $HOME/.config/fish/abbr.local.fish
     end
 
 end

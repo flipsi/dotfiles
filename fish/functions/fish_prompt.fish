@@ -40,6 +40,11 @@ function fish_prompt --description 'Prompt anzeigen'
 
     case '*'
 
+        # set_color $fish_my_color_gray_dark
+        # echo_horizontal_line
+
+        echo # newline because whitespace is good
+
         # user
         set_color --bold $fish_my_color_accent_dark
         echo -n $USER'@'
@@ -53,6 +58,8 @@ function fish_prompt --description 'Prompt anzeigen'
         # working directory
         set wd (pwd)
         if set -q RANGER_LEVEL
+            set_color --bold $fish_my_color_gray_bright
+        else if set -q VIMRUNTIME
             set_color --bold $fish_my_color_gray_bright
         else
             set_color --italics $fish_my_color_gray_dark

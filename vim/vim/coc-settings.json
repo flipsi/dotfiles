@@ -1,10 +1,6 @@
 {
-    "jumpCommand": "vsplit",
-    "languageserver": {
-        "metals": {
-            "command": "metals-vim",
-            "rootPatterns": ["build.sbt"],
-            "filetypes": ["scala", "sbt"]
-        }
-    }
+    "coc.preferences.useQuickfixForLocations": true,
+    "coc.preferences.jumpCommand": "vsplit",
+    "metals.javaHome": "/usr/lib/jvm/default",
+    "metals.statusBarEnabled": true
 }

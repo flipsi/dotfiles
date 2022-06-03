@@ -33,6 +33,11 @@ window:
   # Setting this to false will result in window without borders and title bar.
   decorations: "full"
 
+  opacity: 1.0
+
+  dynamic_title: true
+
+
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
 
@@ -59,6 +64,12 @@ font:
   normal:
     # family: Fantasque Sans Mono
     family: PragmataPro Mono
+    # family: Fira Mono
+    # family: Source Code Pro
+    # family: Sudo
+    # family: Monoid
+    # family: Hack
+    # family: Courier Prime Code
     style: Regular
   bold:
     # family: Fantasque Sans Mono
@@ -155,12 +166,9 @@ colors:
 #
 # To completely disable the visual bell, set its duration to 0.
 #
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
-
-# Background opacity
-background_opacity: 1.0
 
 # Mouse bindings
 #
@@ -204,8 +212,6 @@ mouse:
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
-
-dynamic_title: true
 
 cursor:
   style: Block # [Block, Underline, Beam]
@@ -270,8 +276,8 @@ key_bindings:
   - { key: Insert,   mods: Shift,   action: PasteSelection               }
   - { key: Key0,     mods: Control, action: ResetFontSize                }
   - { key: Equals,   mods: Control, action: IncreaseFontSize             }
-  - { key: Add,      mods: Control, action: IncreaseFontSize             }
-  - { key: Subtract, mods: Control, action: DecreaseFontSize             }
+  - { key: Plus,     mods: Control, action: IncreaseFontSize             }
+  - { key: Minus,    mods: Control, action: DecreaseFontSize             }
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
   - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
   - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }

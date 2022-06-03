@@ -20,6 +20,7 @@ alias cdw='cd /var/www'
 alias g='grep --with-filename --line-number --recursive --ignore-case --extended-regexp'
 
 alias   gs='git status'
+alias  gst='git status'
 alias   gb='git branch'
 alias   gd='git diff'
 alias  gdc='git diff --cached'
@@ -70,20 +71,41 @@ function tm() {
 
 if [ -t 1 ]; then
     bind '"\ei":"ranger\n"'
-    bind '"\es":"ll; echo; git status --short 2>/dev/null\n"'
+    bind '"\el":"echo; ls; echo; git status --short 2>/dev/null\n"'
+    bind '"\eu":"cd ..\n"'
 fi
 
 # allow aliases with sudo
 alias sudo='sudo '
 
 
+DEFAULT_COLOR='\[\033[01;39m\]'
+BLACK='\[\033[01;30m\]'
+RED='\[\033[01;31m\]'
+GREEN='\[\033[01;32m\]'
+YELLOW='\[\033[01;33m\]'
+BLUE='\[\033[01;34m\]'
+MAGENTA='\[\033[01;35m\]'
+CYAN='\[\033[01;36m\]'
+LIGHT_GRAY='\[\033[01;37m\]'
+DARK_GRAY='\[\033[01;90m\]'
+LIGHT_RED='\[\033[01;91m\]'
+LIGHT_GREEN='\[\033[01;92m\]'
+LIGHT_YELLOW='\[\033[01;93m\]'
+LIGHT_BLUE='\[\033[01;94m\]'
+LIGHT_MAGENTA='\[\033[01;95m\]'
+LIGHT_CYAN='\[\033[01;96m\]'
+WHITE='\[\033[01;97m\]'
+GREY='\[\033[01;30m\]'
+RESET_COLOR='\[\033[00m\]'
+
 # custom prompt
 PS1=\
 '\n'\
-'\[\033[01;33m\]\u@\h '\
-'\[\033[01;30m\]\w'\
-'\[\033[01;31m\] $(if [ -d .git ]; then echo -n "( "; git rev-parse --sq --abbrev-ref HEAD; echo -n ")"; fi)'\
-'\[\033[00m\]\n> '
+"$YELLOW\u@\h "\
+"$GREY\w"\
+"$RED"'$(if [ -d .git ]; then echo -n " ( "; git rev-parse --sq --abbrev-ref HEAD; echo -n ")"; fi)'\
+"$RESET_COLOR\n> "
 
 
 # attach to screen session if shell is interactive and there a screen session

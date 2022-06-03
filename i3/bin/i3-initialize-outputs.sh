@@ -31,10 +31,8 @@ case $(hostname) in
             # on big tv, turn off laptop screen
             if xrandr | grep -q '4096x2160'; then
                 xrandr --output 'HDMI2' --mode 4096x2160 --output 'eDP1' --off
-                setup_wallpaper
             else
                 xrandr --output 'HDMI2' --mode 1920x1080 --pos 0x540 --rotate normal --output 'HDMI1' --off --output 'DP1' --off --output 'eDP1' --mode 960x540 --pos 0x0 --rotate normal --output VIRTUAL1 --off
-                setup_wallpaper
             fi
 
         elif xrandr | grep 'eDP1 connected 960x540' >/dev/null; then
@@ -43,39 +41,48 @@ case $(hostname) in
             xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
             xrandr --addmode 'eDP1' "1920x1080_60.00"
             xrandr --output 'eDP1' --mode "1920x1080_60.00"
-            setup_wallpaper
 
         fi
         ;;
 
-    dwarf )
+    dwarf | falbala )
 
         if test -n "$ONLY"; then
 
-            xrandr --output 'HDMI1' --off
-            xrandr --output 'DP3-1' --off
-            xrandr --output 'DP3-2' --off
-            xrandr --output 'eDP1' --mode '1920x1080' --auto
+            OUTPUT_TO_KEEP='eDP1'
+
+            if ! xrandr | grep -q "$OUTPUT_TO_KEEP connected"; then
+                echo "Only output $OUTPUT_TO_KEEP seems unavailable. Aborting."
+                exit 1
+            fi
+
+            mapfile -t MONITOR_LIST < <(xrandr | grep ' connected' | cut -d' ' -f1)
+            for MONITOR in "${MONITOR_LIST[@]}"; do
+                if [[ "$MONITOR" != "$OUTPUT_TO_KEEP" ]]; then
+                    xrandr --output "$MONITOR" --off
+                fi
+            done
+
+            xrandr --output "$OUTPUT_TO_KEEP" --mode '1920x1080' --auto
+
+        elif xrandr | grep 'DP.-. connected' >/dev/null; then
+            BAR_MAIN_MONITOR=$(xrandr | grep 'DP.-2 connected' | cut -d' ' -f1 | head -n1)
+            BAR_SECOND_MONITOR=$(xrandr | grep 'DP.-1 connected' | cut -d' ' -f1 | head -n1)
+            BAR_THIRD_MONITOR='eDP1'
+
+            xrandr --output "$BAR_MAIN_MONITOR" --auto --primary \
+                --output "$BAR_SECOND_MONITOR" --auto --left-of "$BAR_MAIN_MONITOR" \
+                --output "$BAR_THIRD_MONITOR" --auto --left-of "$BAR_SECOND_MONITOR" \
+                || ( \
+                sleep 0.1 && xrandr --output "$BAR_THIRD_MONITOR" --off && \
+                sleep 0.1 && xrandr --output "$BAR_MAIN_MONITOR" --primary --auto && \
+                sleep 0.1 && xrandr --output "$BAR_SECOND_MONITOR" --auto --right-of "$BAR_MAIN_MONITOR" && \
+                sleep 0.1 && xrandr --output "$BAR_THIRD_MONITOR" --auto --left-of "$BAR_SECOND_MONITOR" \
+                )
 
         elif xrandr | grep 'HDMI1 connected' >/dev/null; then
 
-            xrandr --output 'HDMI1' --left-of 'eDP1'  --auto
-
-        elif xrandr | grep 'DP3-1 connected' >/dev/null; then
-
-            xrandr --output 'eDP1' --primary --mode 1920x1080 --pos 3840x0 --rotate normal --output 'DP1' --off --output 'DP2' --off --output 'DP3' --off --output 'DP3-1' --mode 1920x1080 --pos 1920x0 --rotate normal --output 'DP3-2' --mode 1920x1080 --pos 0x0 --rotate normal --output 'DP3-3' --off --output 'HDMI1' --off --output 'HDMI2' --off --output 'HDMI3' --off --output VIRTUAL1 --off \
-                || ( \
-                sleep 0.1 && xrandr --output 'DP3-2' --off && \
-                sleep 0.1 && xrandr --output 'DP3-1' --auto && \
-                sleep 0.1 && xrandr --output 'DP3-2' --auto --right-of 'DP3-1' && \
-                sleep 0.1 && xrandr --output 'eDP1' --right-of 'DP3-2' --auto \
-                )
-
-            setup_wallpaper
-
-        elif xrandr | grep 'DP3-2 connected' >/dev/null; then
-
-            sleep 0.1 && xrandr --output 'DP3-2' --auto --left-of 'eDP1'
+            sleep 0.1 && xrandr --output 'HDMI1' --left-of 'eDP1'  --auto
 
         fi
         ;;
@@ -86,4 +93,7 @@ case $(hostname) in
         exit 1
 
 esac
+
+
+# setup_wallpaper
 

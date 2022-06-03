@@ -1,0 +1,375 @@
+# RFC 6154 standard mailbox denominations (see https://apple.stackexchange.com/a/201346/450683) are:
+#
+#   \All
+#      This mailbox presents all messages in the user's message store.
+#      Implementations MAY omit some messages, such as, perhaps, those
+#      in \Trash and \Junk.  When this special use is supported, it is
+#      almost certain to represent a virtual mailbox.
+#
+#   \Archive
+#        This mailbox is used to archive messages.  The meaning of an
+#        "archival" mailbox is server-dependent; typically, it will be
+#        used to get messages out of the inbox, or otherwise keep them
+#        out of the user's way, while still making them accessible.
+#
+#   \Drafts
+#        This mailbox is used to hold draft messages -- typically,
+#        messages that are being composed but have not yet been sent.  In
+#        some server implementations, this might be a virtual mailbox,
+#        containing messages from other mailboxes that are marked with
+#        the "\Draft" message flag.  Alternatively, this might just be
+#        advice that a client put drafts here.
+#
+#   \Flagged
+#        This mailbox presents all messages marked in some way as
+#        "important".  When this special use is supported, it is likely
+#        to represent a virtual mailbox collecting messages (from other
+#        mailboxes) that are marked with the "\Flagged" message flag.
+#
+#   \Junk
+#        This mailbox is where messages deemed to be junk mail are held.
+#        Some server implementations might put messages here
+#        automatically.  Alternatively, this might just be advice to a
+#        client-side spam filter.
+#
+#   \Sent
+#        This mailbox is used to hold copies of messages that have been
+#        sent.  Some server implementations might put messages here
+#        automatically.  Alternatively, this might just be advice that a
+#        client save sent messages here.
+#
+#   \Trash
+#        This mailbox is used to hold messages that have been deleted or
+#        marked for deletion.  In some server implementations, this might
+#        be a virtual mailbox, containing messages from other mailboxes
+#        that are marked with the "\Deleted" message flag.
+#        Alternatively, this might just be advice that a client that
+#        chooses not to use the IMAP "\Deleted" model should use this as
+#        its trash location.  In server implementations that strictly
+#        expect the IMAP "\Deleted" model, this special use is likely not
+#        to be supported.
+
+
+# Gmail mailboxes:
+# "[Gmail]/All Mail"
+# "[Gmail]/Drafts"
+# "[Gmail]/Important"
+# "[Gmail]/Sent Mail"
+# "[Gmail]/Spam"
+# "[Gmail]/Starred"
+# "[Gmail]/Trash"
+
+
+#################################
+# account: mail@philippmoers.de #
+#################################
+
+IMAPStore mail@philippmoers.de-remote
+Host imap.strato.de
+Port 993
+User mail@philippmoers.de
+PassCmd "mutt-secrets.py --mode get_secret --account mail@philippmoers.de"
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore mail@philippmoers.de-local
+Path /home/sflip/.local/share/mail/mail@philippmoers.de/
+Inbox /home/sflip/.local/share/mail/mail@philippmoers.de/INBOX
+Flatten .
+
+#### one channel for all folders ####
+
+# Channel mail@philippmoers.de
+# Far  :mail@philippmoers.de-remote:
+# Near :mail@philippmoers.de-local:
+# Create Both
+# Expunge Both
+# SyncState *
+# MaxMessages 0
+# ExpireUnread no
+
+#### multiple channels (one for each folder) to rename folders ####
+
+Group   mail@philippmoers.de
+Channel mail@philippmoers.de-inbox
+Channel mail@philippmoers.de-archive
+Channel mail@philippmoers.de-drafts
+Channel mail@philippmoers.de-sent
+Channel mail@philippmoers.de-trash
+Channel mail@philippmoers.de-junk
+
+Channel mail@philippmoers.de-inbox
+Far  :mail@philippmoers.de-remote:"INBOX"
+Near :mail@philippmoers.de-local:INBOX
+Create Both
+Expunge Both
+
+Channel mail@philippmoers.de-archive
+Far  :mail@philippmoers.de-remote:"Archive"
+Near :mail@philippmoers.de-local:Archive
+Create Both
+Expunge Both
+
+Channel mail@philippmoers.de-drafts
+Far  :mail@philippmoers.de-remote:"Drafts"
+Near :mail@philippmoers.de-local:Drafts
+Create Both
+Expunge Both
+
+Channel mail@philippmoers.de-sent
+Far  :mail@philippmoers.de-remote:"Sent Items"
+Near :mail@philippmoers.de-local:Sent
+Create Both
+Expunge Both
+
+Channel mail@philippmoers.de-trash
+Far  :mail@philippmoers.de-remote:"Trash"
+Near :mail@philippmoers.de-local:Trash
+Create Both
+Expunge Both
+
+Channel mail@philippmoers.de-junk
+Far  :mail@philippmoers.de-remote:"Spam"
+Near :mail@philippmoers.de-local:Junk
+Create Both
+Expunge Both
+
+##################################
+# account: philipp.moers@mail.de #
+##################################
+
+IMAPStore philipp.moers@mail.de-remote
+Host imap.mail.de
+Port 993
+User philipp.moers@mail.de
+PassCmd "mutt-secrets.py --mode get_secret --account philipp.moers@mail.de"
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore philipp.moers@mail.de-local
+Path /home/sflip/.local/share/mail/philipp.moers@mail.de/
+Inbox /home/sflip/.local/share/mail/philipp.moers@mail.de/INBOX
+Flatten .
+
+Channel philipp.moers@mail.de
+Far  :philipp.moers@mail.de-remote:
+Near :philipp.moers@mail.de-local:
+Create Both
+Expunge Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+
+
+###############################
+# account: soziflip@gmail.com #
+###############################
+
+IMAPStore soziflip@gmail.com-remote
+Host imap.gmail.com
+Port 993
+User soziflip@gmail.com
+AuthMechs XOAUTH2
+PassCmd "mutt-secrets.py --mode get_secret --oauth --account soziflip@gmail.com"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore soziflip@gmail.com-local
+Subfolders Verbatim
+Path /home/sflip/.local/share/mail/soziflip@gmail.com/
+Inbox /home/sflip/.local/share/mail/soziflip@gmail.com/INBOX
+
+Group soziflip@gmail.com
+Channel soziflip@gmail.com-inbox
+Channel soziflip@gmail.com-archive
+Channel soziflip@gmail.com-drafts
+Channel soziflip@gmail.com-sent
+Channel soziflip@gmail.com-trash
+Channel soziflip@gmail.com-junk
+
+Channel soziflip@gmail.com-inbox
+Far  :soziflip@gmail.com-remote:"INBOX"
+Near :soziflip@gmail.com-local:INBOX
+Sync All
+Create Both
+Expunge Both
+
+Channel soziflip@gmail.com-archive
+# Far  :soziflip@gmail.com-remote:"[Gmail]/All Mail"
+Far  :soziflip@gmail.com-remote:"[Gmail]/Alle Nachrichten"
+Near :soziflip@gmail.com-local:Archive
+Sync Pull
+Create Both
+Expunge None
+
+Channel soziflip@gmail.com-drafts
+# Far  :soziflip@gmail.com-remote:"[Gmail]/Drafts"
+Far  :soziflip@gmail.com-remote:"[Gmail]/Entw&APw-rfe"
+Near :soziflip@gmail.com-local:Drafts
+Sync Pull
+Create Both
+Expunge None
+
+Channel soziflip@gmail.com-sent
+# Far  :soziflip@gmail.com-remote:"[Gmail]/Sent Mail"
+Far  :soziflip@gmail.com-remote:"[Gmail]/Gesendet"
+Near :soziflip@gmail.com-local:Sent
+Sync Pull
+Create Both
+Expunge None
+
+Channel soziflip@gmail.com-trash
+# Far  :soziflip@gmail.com-remote:"[Gmail]/Trash"
+Far  :soziflip@gmail.com-remote:"[Gmail]/Papierkorb"
+Near :soziflip@gmail.com-local:Trash
+Sync Pull
+Create Both
+Expunge None
+
+Channel soziflip@gmail.com-junk
+Far  :soziflip@gmail.com-remote:"[Gmail]/Spam"
+Near :soziflip@gmail.com-local:Junk
+Sync Pull
+Create Both
+Expunge None
+
+
+
+###############################
+# account:p.moers@ryte.com    #
+###############################
+
+IMAPStore p.moers@ryte.com-remote
+Host imap.gmail.com
+Port 993
+User p.moers@ryte.com
+AuthMechs XOAUTH2
+PassCmd "mutt-secrets.py --mode get_secret --oauth --account p.moers@ryte.com"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore p.moers@ryte.com-local
+Subfolders Verbatim
+Path /home/sflip/.local/share/mail/p.moers@ryte.com/
+Inbox /home/sflip/.local/share/mail/p.moers@ryte.com/INBOX
+
+Group p.moers@ryte.com
+Channel p.moers@ryte.com-inbox
+Channel p.moers@ryte.com-archive
+Channel p.moers@ryte.com-drafts
+Channel p.moers@ryte.com-sent
+Channel p.moers@ryte.com-trash
+Channel p.moers@ryte.com-junk
+
+Channel p.moers@ryte.com-inbox
+Far  :p.moers@ryte.com-remote:"INBOX"
+Near :p.moers@ryte.com-local:INBOX
+Sync All
+Create Both
+Expunge Both
+
+Channel p.moers@ryte.com-archive
+# Far  :p.moers@ryte.com-remote:"[Gmail]/All Mail"
+Far  :p.moers@ryte.com-remote:"[Gmail]/Alle Nachrichten"
+Near :p.moers@ryte.com-local:Archive
+Sync Pull
+Create Both
+Expunge None
+
+Channel p.moers@ryte.com-drafts
+# Far  :p.moers@ryte.com-remote:"[Gmail]/Drafts"
+Far  :p.moers@ryte.com-remote:"[Gmail]/Entw&APw-rfe"
+Near :p.moers@ryte.com-local:Drafts
+Sync Pull
+Create Both
+Expunge None
+
+Channel p.moers@ryte.com-sent
+# Far  :p.moers@ryte.com-remote:"[Gmail]/Sent Mail"
+Far  :p.moers@ryte.com-remote:"[Gmail]/Gesendet"
+Near :p.moers@ryte.com-local:Sent
+Sync Pull
+Create Both
+Expunge None
+
+Channel p.moers@ryte.com-trash
+# Far  :p.moers@ryte.com-remote:"[Gmail]/Trash"
+Far  :p.moers@ryte.com-remote:"[Gmail]/Papierkorb"
+Near :p.moers@ryte.com-local:Trash
+Sync Pull
+Create Both
+Expunge None
+
+Channel p.moers@ryte.com-junk
+Far  :p.moers@ryte.com-remote:"[Gmail]/Spam"
+Near :p.moers@ryte.com-local:Junk
+Sync Pull
+Create Both
+Expunge None
+
+######################################
+# account: valentina@philippmoers.de #
+######################################
+
+IMAPStore valentina@philippmoers.de-remote
+Host imap.strato.de
+Port 993
+User valentina@philippmoers.de
+PassCmd "mutt-secrets.py --mode get_secret --account valentina@philippmoers.de"
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore valentina@philippmoers.de-local
+Path /home/sflip/.local/share/mail/valentina@philippmoers.de/
+Inbox /home/sflip/.local/share/mail/valentina@philippmoers.de/INBOX
+Flatten .
+
+Group   valentina@philippmoers.de
+Channel valentina@philippmoers.de-inbox
+Channel valentina@philippmoers.de-archive
+Channel valentina@philippmoers.de-drafts
+Channel valentina@philippmoers.de-sent
+Channel valentina@philippmoers.de-trash
+Channel valentina@philippmoers.de-junk
+
+Channel valentina@philippmoers.de-inbox
+Far  :valentina@philippmoers.de-remote:"INBOX"
+Near :valentina@philippmoers.de-local:INBOX
+Create Both
+Expunge Both
+
+Channel valentina@philippmoers.de-archive
+Far  :valentina@philippmoers.de-remote:"Archive"
+Near :valentina@philippmoers.de-local:Archive
+Create Both
+Expunge Both
+
+Channel valentina@philippmoers.de-drafts
+Far  :valentina@philippmoers.de-remote:"Drafts"
+Near :valentina@philippmoers.de-local:Drafts
+Create Both
+Expunge Both
+
+Channel valentina@philippmoers.de-sent
+Far  :valentina@philippmoers.de-remote:"Sent Items"
+Near :valentina@philippmoers.de-local:Sent
+Create Both
+Expunge Both
+
+Channel valentina@philippmoers.de-trash
+Far  :valentina@philippmoers.de-remote:"Trash"
+Near :valentina@philippmoers.de-local:Trash
+Create Both
+Expunge Both
+
+Channel valentina@philippmoers.de-junk
+Far  :valentina@philippmoers.de-remote:"Spam"
+Near :valentina@philippmoers.de-local:Junk
+Create Both
+Expunge Both
+
+
+# vim:ft=conf

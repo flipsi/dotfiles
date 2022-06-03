@@ -1,0 +1,10 @@
+configuration {
+	font: "PragmataPro Mono 11";
+	location: 0;
+	show-icons: false;
+	window-format: "{c}    {t}";
+	display-combi: ">";
+	kb-remove-word-back: "Alt+BackSpace";
+}
+
+@theme "~/.config/rofi/themes/gruvbox-dark-purple.rasi"

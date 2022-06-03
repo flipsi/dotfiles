@@ -1,44 +1,21 @@
-# Mutt configuration file
-# Author: Philipp Moers <soziflip@gmail.com>
+###############
+# mutt-wizard #
+###############
 
-
-# mutt is configured to use offlineimap, i.e. a local copy of the account's imap folders.
-
-# USE THE mutt.sh SCRIPT INSTEAD OF THE mutt BINARY!
-
-
-
-# some urls i used to write this mess:
-
-# http://stevelosh.com/blog/2012/10/the-homely-mutt/
-# https://hynek.me/articles/my-mutt-gmail-setup/
-# https://pbrisbin.com/posts/two_accounts_in_mutt/
-# https://pbrisbin.com/posts/mutt_gmail_offlineimap/
-# http://bkanuka.com/articles/offlineimap-mutt/
-# http://marcorucci.tumblr.com/post/34416884082/backup-gmail-with-offlineimap-folders-and-labels
-# http://blog.mafr.de/2012/09/09/mutt-too-many-errors/
-# https://baptiste-wicht.com/posts/2014/07/a-mutt-journey-download-mails-with-offlineimap.html
-# https://atechnologyjobisnoexcuse.com/2010/04/google-contacts-in-mutt-and-vim/
-
-
+source /usr/share/mutt-wizard/mutt-wizard.muttrc
 
 
 ####################
 # general settings #
 ####################
 
-# path to mutt files
-set my_muttdir = "~/.mutt"
-
+set my_muttdir = "~/.config/mutt"                         # path to mutt files
 
 set      charset  = "utf-8"
 set send_charset  = "utf-8"
 unset allow_8bit
 
-
-# never check mail automatically
-set mail_check = 0
-
+set mail_check = 0                                        # never check mail automatically
 
 
 #########################
@@ -47,11 +24,15 @@ set mail_check = 0
 
 
 set sort = threads                                        # sort mails by thread and date
-set sort_browser = reverse-date                           # sort mails by thread and date
 set sort_aux = reverse-last-date-received                 # date-sent | last-date-received | reverse-last-date-received
+set collapse_unread = no                                  # refuse to collapse threads if it contains unread mails
+set strict_threads = no                                   # use pseudo threads (subject, not only In-Reply-To)
+set sort_re = yes
+set sort_browser = alpha                                  # sorting in file browser
 
 set date_format = "%a, %d. %b %H:%M"                      # use nice date format
-set index_format = "%4C %Z %D %-22.22F (%?l?%4l&%4c?) %s" # how mail list is displayed
+set index_format = \
+    "%4C %Z %D %-22.22F (%?l?%4l&%4c?) %?X?%X& ? %s"      # how mail list is displayed
 set folder_format = "%2C %8s %d %t %N %f"                 # how file browser is displayed
 set pager_index_lines = 10                                # number of mails in overview
 set pager_stop                                            # don't open next mail when scrolling
@@ -69,35 +50,29 @@ set delete_untag                                          # untag msgs when dele
 
 # view special content and attachements
 auto_view text/html
+alternative_order text/enriched text/plain text/html text
 set mailcap_path = $my_muttdir/mailcap
-
 
 
 ###########################
 # composing mail settings #
 ###########################
 
-set copy                                                  # keep copy on send
+set copy                                                  # keep copy on send (don't use with Gmail! See README)
 
 unset reply_self                                          # always reply to others
 set fast_reply                                            # skip recipients and subject dialog when replying
 
 set envelope_from                                         # übergibt msmtp automatisch den richtigen Absender
-set edit_hdrs                                             # edit headers of outgoing messages in vim
 set edit_headers                                          # edit headers of outgoing messages in vim
 
 set signature = "$my_muttdir/signature"                   # append this to every mail
 set attribution = "\n%f wrote on %d:"                       # include quotations like this
 
-
-# write mails in vim
-set editor="vim -c 'startinsert' -c 'set tw=80 et' -c 'set wrap' '+/^$'"
-
+set editor="vim -c 'startinsert' -c 'set wrap' '+/^$'"      # write mails in vim
 
 # gpg settings
 # set pgp_use_gpg_agent = yes
-
-
 
 
 # address book with abook
@@ -112,13 +87,9 @@ set editor="vim -c 'startinsert' -c 'set tw=80 et' -c 'set wrap' '+/^$'"
 set query_command="goobook query %s"
 
 
-
-
-
 #################
 # look and feel #
 #################
-
 
 unset beep                                                # don't be noisy
 unset beep_new                                            # don't be noisy
@@ -127,6 +98,11 @@ set quit                                                  # don't ask on quit
 unset wait_key                                            # don't annoy me
 
 set menu_scroll                                           # don't do huge scroll jumps, but scroll line by line
+
+unset help                                                # hide keybindings help bar on top
+
+# status_format is set freshly after each mailbox change
+
 
 # sidebar
 set sidebar_width = 32
@@ -137,10 +113,7 @@ set sidebar_visible = yes
 color sidebar_new   color241        color233
 
 
-# source $my_muttdir/colors/old_yellowish
 source $my_muttdir/colors/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc
-# source $my_muttdir/colors/badwolf.muttrc
-
 
 
 ###############
@@ -149,62 +122,18 @@ source $my_muttdir/colors/mutt-colors-solarized/mutt-colors-solarized-dark-256.m
 
 source $my_muttdir/keybindings.muttrc
 
+macro index,pager im '<sync-mailbox><enter-command>source /home/sflip/.config/mutt/accounts/philipp.moers@mail.de.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to philipp.moers@mail.de"
+macro index,pager ip '<sync-mailbox><enter-command>source /home/sflip/.config/mutt/accounts/mail@philippmoers.de.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to mail@philippmoers.de"
+macro index,pager is '<sync-mailbox><enter-command>source /home/sflip/.config/mutt/accounts/soziflip@gmail.com.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to soziflip@gmail.com"
+macro index,pager ir '<sync-mailbox><enter-command>source /home/sflip/.config/mutt/accounts/p.moers@ryte.com.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to p.moers@ryte.com"
+macro index,pager iv '<sync-mailbox><enter-command>source /home/sflip/.config/mutt/accounts/valentina@philippmoers.de.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to valentina@philippmoers.de"
 
 
+###################
+# default account #
+###################
+
+source /home/sflip/.config/mutt/accounts/philipp.moers@mail.de.muttrc
 
 
-####################
-# account settings #
-####################
-
-
-set my_default_account = "mail.de"
-
-
-set header_cache     = "$my_muttdir/cache/headers"
-set message_cachedir = "$my_muttdir/cache/headers"
-
-
-# NOTE: these settings are overwritten in accounts/XXX!
-# set realname         = "Philipp Moers"
-set mbox_type        = Maildir                                      # maildir format (in addition to repositories in offlineimaprc?)
-set folder           = "$my_muttdir/mail"                           # use local folder (offlineimap)
-# set sendmail         = "$my_muttdir/proofread.zsh /usr/bin/msmtp"   # proofread before send
-set sendmail_wait    = 0                                            # don't send mails in background to catch errors
-
-set use_from         = yes                                          # autodetect from
-set envelope_from    = yes                                          # reply with same account
-set reverse_name     = yes                                          # reply with same account
-set reverse_realname = no                                           # still use name from config
-
-
-# set account specific options on folder change
-folder-hook mail.de/*        source $my_muttdir/accounts/mail.de.muttrc
-folder-hook gmail.com/*      source $my_muttdir/accounts/gmail.com.muttrc
-
-# use default account now
-source $my_muttdir/accounts/$my_default_account.muttrc
-
-
-## mailboxes in sidebar (or change folder with c)
-## ...automatically get list of mailboxes
-# set imap_check_subscribed
-## ...instead of the the above, add them from offlineimap generated file
-# source $my_muttdir/mailboxes
-## ...instead of the the above, add them manually (i don't want every synced folder)
-mailboxes \
-    =ryte.com/INBOX \
-    =mail.de/INBOX \
-    =gmail.com/INBOX \
-    =web.de-pmoers/INBOX \
-    =web.de-keinschweinehund/INBOX \
-    =mail.de/Sent \
-    =gmail.com/Sent \
-    =mail.de/Drafts \
-    =gmail.com/Drafts \
-
-
-
-
-
-
+# vim: filetype=neomuttrc

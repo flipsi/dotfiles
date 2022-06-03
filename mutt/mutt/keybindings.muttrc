@@ -1,3 +1,10 @@
+# vim: filetype=neomuttrc
+
+bind generic,index u noop
+bind generic,index f noop
+bind generic,index g noop
+bind pager         y noop
+
 
 ##############
 # Navigation #
@@ -16,12 +23,10 @@ bind index \Cb previous-page
 bind generic,pager,index <Esc>j half-down
 bind generic,pager,index <Esc>k half-up
 
-# bind generic,pager / search
-# bind generic,pager ? search-reverse
-bind generic,pager ö search
-# bind generic,pager Ö search-reverse
 bind generic,pager,index n search-next
 bind generic,pager,index N search-opposite
+bind  index ff  limit # filter mailbox by string (prefix `=` or regex (prefix `~`)
+macro index uf "<limit>all\n"
 
 bind index j next-entry
 bind index k previous-entry
@@ -29,28 +34,33 @@ macro index gj "<next-entry><next-entry><next-entry><next-entry><next-entry><nex
 macro index gk "<previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry>"
 bind index J next-thread
 bind index K previous-thread
+bind index z collapse-thread
+bind index Z collapse-all
+
 bind pager j next-line
 bind pager k previous-line
 
 # remember <tab> to jump to next unread message!
 
 
-
 ################
 # Mail actions #
 ################
 
-bind pager r reply
-bind pager R group-reply
-bind index d delete-message
-bind index u undelete-message
-bind index D delete-pattern
-bind index U undelete-pattern
-bind index S save-message
-bind index b bounce-message
-bind index t toggle-new
+bind pager r  reply
+bind pager R  group-reply
+bind index F  forward-message
+bind index d  delete-message
+bind pager d  delete-message # mark for deletion
+bind index ud undelete-message
+bind index D  sync-mailbox # perform deletions in mailbox
+bind index S  save-message
+bind index b  bounce-message
+bind index t  toggle-new
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+
+macro pager yae "<pipe-message>xclip -selection clipboard<enter>" "copy message text to clipboard"
 
 
 ########
@@ -58,18 +68,26 @@ macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 ########
 
 # abort command (instead of ESC) with \Cg
+
 bind index \Cd quit
 
-# search mails
-macro generic,index Ö \
+# reload config
+macro index,pager,compose,browser,attach <F5> ":source ~/.config/mutt/muttrc\n" "reload config"
+
+# open urls easily (urlscan is an alternative to urlview)
+macro index,pager    \cu "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cu "<pipe-entry>   urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
+# open html email in browser
+macro attach      !                                      "<pipe-message>cat > /tmp/mutt.html; $BROWSER /tmp/mutt.html<enter>" "open html email in browser"
+macro index,pager ! "<view-attachments><search>html<enter><pipe-message>cat > /tmp/mutt.html; $BROWSER /tmp/mutt.html<enter>" "open html email in browser"
+# macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>"
+
+# search mails with notmuch (TODO: setup again)
+macro generic,index \C/ \
      "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt -r --prompt search<enter>\
      <change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>" \
      "notmuch: search mail"
-
-# sync local mails with remotes
-macro generic,index \Cs \
-    "<enter-command>unset wait_key<enter><shell-escape>echo 'syncing maildir...'; offlineimap -o -u quiet -q<enter>" \
-    "run offlineimap to sync all mail"
 
 # goobook
 macro index,pager A "<pipe-message>goobook add<return>" "add sender to google contacts"

@@ -19,31 +19,6 @@ function setup_power_management
 end
 
 
-# TODO: port to bash in ./i3/bin/i3-initialize-outputs.sh
-function new_screen_resolution
-    set screen $argv[1]
-    set h_resolution $argv[2]
-    set v_resolution $argv[3]
-    set modeline (cvt $h_resolution $v_resolution | grep Modeline)
-    set modeline (echo $modeline | sed 's/Modeline //' | sed 's/\s\+/ /g')
-    set modeline (string split ' ' $modeline)
-    set modename $modeline[1]
-    xrandr --newmode $modeline
-    and xrandr --addmode $screen $modename
-    xrandr --output $screen --mode $modename
-end
-
-
-# TODO: port to bash in ./i3/bin/i3-initialize-outputs.sh
-function setup_screen_resolution
-    if test (hostname) = 'asterix'
-        if not xrandr | grep "eDP1 connected 1920x1080" >/dev/null
-            new_screen_resolution eDP1 1920 1080
-        end
-    end
-end
-
-
 function start_musicserver_if_music_is_accessible
     set mountpoints /mnt/extern /media/sflip/extern /media/sflip/Extern
     if not nc -z localhost 6600
@@ -84,7 +59,20 @@ function setup_musicserver
 end
 
 
+# redshift makes it dark after startup at day (major use case), so toggle once
+function toggle_redshift
+    for t in (seq 60)
+        if pgrep -x redshift >/dev/null
+           pkill -USR1 '^redshift$'
+        else
+            sleep 1
+        end
+    end
+end
+
+
 function desktop_session
+
     # daemon for theme settings and shit
     if command -v gnome-session >/dev/null
         if not pgrep -x gnome-session; nohup gnome-session &; end
@@ -93,13 +81,16 @@ function desktop_session
     else if command -v cinnamon-settings-daemon >/dev/null
         if not pgrep -x cinnamon-settings-daemon; nohup cinnamon-settings-daemon &; end
     end
+
     # power manager takes care of lid closing, standby, display brightness etc.
     if command -v xfce4-power-manager >/dev/null
         if not pgrep -x xfce4-power-manager; nohup xfce4-power-manager &; end
     end
+
     # start the gnome network manager, because it automatically connects to eduroam etc.
     # and kill it after a few seconds when it is not needed anymore
     #timelimit -t 30 -T 35 nm-applet
+
 end
 
 
@@ -107,9 +98,11 @@ function autostart
     if not pgrep -x vivaldi-stable
         nohup vivaldi-stable &
     end
-    if not pgrep alacritty; and not pgrep gnome-terminal
-        nohup alacritty --command tmux -2 new-session -A -s main; or \
-        nohup gnome-terminal --hide-menubar -- tmux -2 new-session -A -s main &
+    if not pgrep -x chromium
+        nohup chromium &
+    end
+    if not pgrep alacritty
+        nohup alacritty --command tmux -2 new-session -A -s init &
     end
     if not pgrep telegram-desktop
         nohup telegram-desktop &
@@ -120,7 +113,11 @@ end
 setup_power_management
 desktop_session
 setup_musicserver
-# tmux-system-sessions
 autostart
+toggle_redshift
 
+
+if test -x /home/sflip/dotfiles/tmux/tmux-initialize-sessions.sh
+    /home/sflip/dotfiles/tmux/tmux-initialize-sessions.sh >> /tmp/tmux-initialize-sessions.log 2>&1
+end
 

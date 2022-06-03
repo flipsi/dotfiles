@@ -1,0 +1,27 @@
+# vim: filetype=neomuttrc
+# muttrc file for account soziflip@gmail.com
+
+alias me Philipp Moers <soziflip@gmail.com>
+set realname = "Philipp Moers"
+set from = "soziflip@gmail.com"
+
+set sendmail = "msmtp -a soziflip@gmail.com"
+set folder = "/home/sflip/.local/share/mail/soziflip@gmail.com"
+set header_cache = /home/sflip/.cache/mutt-wizard/soziflip@gmail.com/headers
+set message_cachedir = /home/sflip/.cache/mutt-wizard/soziflip@gmail.com/bodies
+set mbox_type = Maildir
+
+set copy = no
+
+set spoolfile               = "+INBOX"
+set postponed               = "+Drafts"
+set record                  = "+Sent"
+set trash                   = "+Trash"
+set my_mailbox_archive      = "$folder/Archive"
+set my_mailbox_junk         = "$folder/Junk"
+
+unmailboxes *
+mailboxes $spoolfile $my_mailbox_archive $postponed $record "=Sent-Mail-old" $my_mailbox_junk $trash
+
+
+source $my_muttdir/keybindings.after.muttrc

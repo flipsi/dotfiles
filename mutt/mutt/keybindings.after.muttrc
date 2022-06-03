@@ -1,0 +1,49 @@
+# vim: filetype=neomuttrc
+# muttrc file to be sourced after folder change (e.g. because RHS depends on folder path)
+
+
+bind index,pager gg noop
+bind index,pager g noop
+bind index,pager M noop
+bind index,pager C noop
+
+bind pager gg top
+bind index gg first-entry
+
+
+macro index,pager gi "<change-folder>$spoolfile<enter>" "go to inbox"
+macro index,pager Mi ";<save-message>$spoolfile<enter>" "move mail to inbox"
+macro index,pager Ci ";<copy-message>$spoolfile<enter>" "copy mail to inbox"
+
+macro index,pager ga "<change-folder>$my_mailbox_archive<enter>" "go to archive"
+macro index,pager Ma ";<save-message>$my_mailbox_archive<enter>" "move mail to archive"
+macro index,pager Ca ";<copy-message>$my_mailbox_archive<enter>" "copy mail to archive"
+
+macro index,pager gd "<change-folder>$postponed<enter>" "go to drafts"
+macro index,pager Md ";<save-message>$postponed<enter>" "move mail to drafts"
+macro index,pager Cd ";<copy-message>$postponed<enter>" "copy mail to drafts"
+
+macro index,pager gs "<change-folder>$record<enter>" "go to sent"
+macro index,pager Ms ";<save-message>$record<enter>" "move mail to sent"
+macro index,pager Cs ";<copy-message>$record<enter>" "copy mail to sent"
+
+macro index,pager gS "<change-folder>$my_mailbox_junk<enter>" "go to junk/spam"
+macro index,pager MS ";<save-message>$my_mailbox_junk<enter>" "move mail to junk/spam"
+macro index,pager CS ";<copy-message>$my_mailbox_junk<enter>" "copy mail to junk/spam"
+
+macro index,pager gt "<change-folder>$trash<enter>" "go to trash"
+macro index,pager Mt ";<save-message>$trash<enter>" "move mail to trash"
+macro index,pager Ct ";<copy-message>$trash<enter>" "copy mail to trash"
+
+
+# remember $ to sync to local mailbox (e.g. delete message marked as delete)
+
+# sync local mailbox with remote mailbox
+macro generic,index \Cs \
+    "<sync-mailbox><shell-escape>tmux split-window -d -l 15 'mbsync -V $from | tee /tmp/mbsync.on_demand.log'<enter>" \
+     "Run mbsync to sync mails for $from"
+
+
+# (not a keybinding, but) update status bar with $from value (show which mailbox I'm using)
+set status_format = "-%r-NeoMutt: $from %D [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%?T?%T/?%s/%S)-%>-(%P)---"
+

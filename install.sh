@@ -29,16 +29,17 @@ SUPPORTED_TARGETS=(\
     autostart \
     bash \
     cmus \
-    compton \
     dircolors \
     elinks \
     fish \
     gcalcli \
     ghci \
     git \
+    gtk \
     i3 \
     intellij\
     kitty \
+    kbd \
     konsole \
     lesskey \
     luakit \
@@ -49,9 +50,12 @@ SUPPORTED_TARGETS=(\
     muttator \
     ncmpcpp \
     ncspot \
+    nvim \
+    picom \
     pentadactyl \
     polybar \
     psql \
+    qimgv \
     qutebrowser \
     ranger \
     redshift \
@@ -168,6 +172,11 @@ function create_link_for_target() {
             fi
             ;;
 
+        bpytop )
+            mkdir -p "$HOME/.config/bpytop"
+            create_link "$PWD/bpytop/bpytop.conf" "$HOME/.config/bpytop/bpytop.conf"
+            ;;
+
         cmus )
             mkdir -p "$HOME/.cmus"
             create_link "$PWD/cmus/rc" "$HOME/.cmus/rc"
@@ -175,8 +184,8 @@ function create_link_for_target() {
             create_link "$PWD/cmus/gruvbox.theme" "$HOME/.cmus/gruvbox.theme"
             ;;
 
-        compton )
-            create_link "$PWD/compton/compton.conf" "$HOME/.config/compton.conf"
+        picom )
+            create_link "$PWD/picom/picom.conf" "$HOME/.config/picom.conf"
             ;;
 
         dircolors )
@@ -193,6 +202,7 @@ function create_link_for_target() {
             create_link "$PWD/fish/functions" "$HOME/.config/fish/functions"
             create_link "$PWD/fish/completions" "$HOME/.config/fish/completions"
             create_link "$PWD/fish/config.fish" "$HOME/.config/fish/config.fish"
+            create_link "$PWD/fish/environment.fish" "$HOME/.config/fish/environment.fish"
             create_link "$PWD/fish/abbr.fish" "$HOME/.config/fish/abbr.fish"
             create_link "$PWD/fish/commands.fish" "$HOME/.config/fish/commands.fish"
             ;;
@@ -210,6 +220,13 @@ function create_link_for_target() {
             create_link "$PWD/git/gitignore" "$HOME/.gitignore"
             ;;
 
+        gtk )
+            mkdir -p "$HOME/.config/gtk-3.0"
+            mkdir -p "$HOME/.config/gtk-4.0"
+            create_link "$PWD/gtk/settings.ini" "$HOME/.config/gtk-3.0/settings.ini"
+            create_link "$PWD/gtk/settings.ini" "$HOME/.config/gtk-4.0/settings.ini"
+            ;;
+
         i3 )
             mkdir -p "$HOME/.i3"
             create_link "$PWD/i3/config" "$HOME/.i3/config"
@@ -225,6 +242,14 @@ function create_link_for_target() {
             for DIR in $INTELLIJ_DIRS; do
                 create_link "$PWD/intellij/idea.properties" "$DIR/config/idea.properties"
             done
+            ;;
+
+        kbd )
+            if [[ $(whoami) = 'root' ]]; then
+                mkdir -p "/usr/local/share/kbd/keymaps/"
+                create_link "$PWD/kbd/us_sflip.map" "/usr/local/share/kbd/keymaps/us_sflip.map"
+            fi
+            loadkeys us_sflip
             ;;
 
         kitty )
@@ -271,23 +296,12 @@ function create_link_for_target() {
             ;;
 
         mutt )
-            mkdir -p "$HOME/.mutt"
-            mkdir -p "$HOME/.mutt/mail"
-            mkdir -p "$HOME/.mutt/cache"
-            mkdir -p "$HOME/.mutt/credentials"
-            create_link "$PWD/mutt/muttrc" "$HOME/.mutt/muttrc"
-            create_link "$PWD/mutt/accounts" "$HOME/.mutt/accounts"
-            create_link "$PWD/mutt/keybindings.muttrc" "$HOME/.mutt/keybindings.muttrc"
-            create_link "$PWD/mutt/colors" "$HOME/.mutt/colors"
-            create_link "$PWD/mutt/mailcap" "$HOME/.mutt/mailcap"
-            create_link "$PWD/mutt/signature" "$HOME/.mutt/signature"
-            create_link "$PWD/mutt/offlineimaprc" "$HOME/.offlineimaprc"
-            create_link "$PWD/mutt/offlineimapcredentials.py" "$HOME/.mutt/offlineimapcredentials.py"
+            create_link "$PWD/mutt/mutt" "$HOME/.config/mutt"
+            create_link "$PWD/mutt/mbsyncrc" "$HOME/.mbsyncrc"
             create_link "$PWD/mutt/msmtprc" "$HOME/.msmtprc"
-            create_link "$PWD/mutt/notmuch-config" "$HOME/.notmuch-config"
-            create_link "$PWD/mutt/proofread.zsh" "$HOME/.mutt/proofread.zsh"
             mkdir -p "$HOME/bin"
-            create_link "$PWD/mutt/mutt.sh" "$HOME/bin/mutt"
+            create_link "$PWD/mutt/mail.sh" "$HOME/bin/mail"
+            create_link "$PWD/mutt/secrets.py" "$HOME/bin/mutt-secrets.py"
             ;;
 
         muttator )
@@ -305,6 +319,12 @@ function create_link_for_target() {
             create_link "$PWD/ncspot/config.toml" "$HOME/.config/ncspot/config.toml"
             ;;
 
+        nvim )
+            mkdir -p "$HOME/.config/nvim/"
+            create_link "$PWD/nvim/init.vim" "$HOME/.config/nvim/init.vim"
+            create_link "$PWD/vim/vim/coc-settings.json" "$HOME/.config/nvim/coc-settings.json"
+            ;;
+
         pentadactyl )
             create_link "$PWD/pentadactyl/pentadactyl" "$HOME/.pentadactyl"
             create_link "$PWD/pentadactyl/pentadactylrc" "$HOME/.pentadactylrc"
@@ -318,6 +338,11 @@ function create_link_for_target() {
             mkdir -p "$HOME/.config/polybar"
             create_link "$PWD/polybar/config" "$HOME/.config/polybar/config"
             create_link "$PWD/polybar/scripts" "$HOME/.config/polybar/scripts"
+            ;;
+
+        qimgv )
+            mkdir -p "$HOME/.config/qimgv"
+            create_link "$PWD/qimgv/qimgv.conf" "$HOME/.config/qimgv/qimgv.conf"
             ;;
 
         qutebrowser )
@@ -336,7 +361,7 @@ function create_link_for_target() {
 
         rofi )
             mkdir -p "$HOME/.config/rofi"
-            create_link "$PWD/rofi/config" "$HOME/.config/rofi/config"
+            create_link "$PWD/rofi/config.rasi" "$HOME/.config/rofi/config.rasi"
             create_link "$PWD/rofi/themes" "$HOME/.config/rofi/themes"
             ;;
 
@@ -382,11 +407,6 @@ function create_link_for_target() {
             create_link "$PWD/telegram-cli/config" "$HOME/.telegram-cli/config"
             ;;
 
-        termite )
-            mkdir -p "$HOME/.config/termite"
-            create_link "$PWD/termite/config" "$HOME/.config/termite/config"
-            ;;
-
         tig )
             create_link "$PWD/tig/tigrc" "$HOME/.tigrc"
             ;;
@@ -394,8 +414,8 @@ function create_link_for_target() {
         tmux )
             create_link "$PWD/tmux/tmux.conf" "$HOME/.tmux.conf"
             mkdir -p "$HOME/bin"
-            create_link "$PWD/tmux/tmux-system-sessions.sh" "$HOME/bin/tmux-system-sessions"
-            create_link "$PWD/tmux/tmux-project-session.sh" "$HOME/bin/tmux-project-session"
+            create_link "$PWD/tmux/tmux-initialize-sessions.sh" "$HOME/bin/tmux-initialize-sessions.sh"
+            create_link "$PWD/tmux/tmux-project-session.sh" "$HOME/bin/tmux-project-session.sh"
             ;;
 
         turses )
@@ -525,7 +545,7 @@ function package_install_target() {
     case "$TARGET" in
 
         i3 )
-            LIST_OF_SYSTEM_PACKAGES="i3-wm i3exit i3status i3lock dmenu clipmenud quickswitch-i3 rofi compton redshift unclutter syndaemon numlockx"
+            LIST_OF_SYSTEM_PACKAGES="i3-wm i3exit i3status i3lock dmenu clipmenud rofi picom redshift unclutter syndaemon numlockx"
             ;;
 
         fd )
@@ -533,7 +553,7 @@ function package_install_target() {
             ;;
 
         mutt )
-            LIST_OF_SYSTEM_PACKAGES="mutt msmtp offlineimap notmuch notmuch-mutt goobook elinks"
+            LIST_OF_SYSTEM_PACKAGES="neomutt msmtp isync notmuch notmuch-mutt goobook elinks"
             ;;
 
         taskwarrior )
@@ -611,11 +631,6 @@ function package_install_target() {
                 ;;
 
             git )
-                if test ! -d "$HOME/opt/git-amend-old"; then
-                    echo "Installing git-amend-old"
-                    git clone https://github.com/colinodell/git-amend-old "$HOME/opt/git-amend-old"
-                    create_link "$HOME/opt/git-amend-old/git-amend-old" "$HOME/bin/git-amend-old"
-                fi
                 gem install git-rc # git release
                 ;;
 
@@ -650,16 +665,6 @@ function package_install_target() {
             bash )
                 echo 'You really should not uninstall bash.'
                 return 1
-                ;;
-
-            git )
-                echo 'Uninstalling git-amend-old...'
-                if [[ "$FORCE" != true ]]; then
-                    rm -rI "$HOME/opt/git-amend-old"
-                else
-                    rm -rf "$HOME/opt/git-amend-old"
-                fi
-                create_link "$HOME/opt/git-amend-old/git-amend-old" "$HOME/bin/git-amend-old" # delete the link
                 ;;
 
         esac

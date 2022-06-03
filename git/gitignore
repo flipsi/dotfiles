@@ -11,8 +11,10 @@
 .session.vim
 .tags
 .idea/
+.bsp/
 .bloop/
 .metals/
+metals.sbt
 /project/metals.sbt
 .ensime
 .ensime_cache
@@ -22,5 +24,5 @@ sftp-config.json
 *.class
 
 # misc
+.ignore
 nohup.out
-

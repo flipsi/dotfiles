@@ -31,6 +31,7 @@ abbr $args gbD    git branch -D
 abbr $args gbm    git branch -m
 abbr $args gc     git commit
 abbr $args gca    git commit --amend
+abbr $args gcm    git commit -m
 abbr $args gcl    git clone --recursive
 abbr $args gcf    git clean -f -d
 abbr $args gd     git diff
@@ -40,7 +41,9 @@ abbr $args ge     git checkout
 abbr $args geb    git checkout -b
 abbr $args gf     git fetch --prune
 abbr $args gfm    git checkout --quiet --detach\; git fetch \(git remote \| head -n1\) master:master\; git checkout --quiet -
-abbr $args gl     tig
+abbr $args ghpr   gh pr view --web \|\| gh pr create --web
+abbr $args gl     tig log
+abbr $args glm    tig
 abbr $args glh    git --no-pager log -n 1
 abbr $args gli    git --no-pager log -n 1 \| head -n 1 \| cut -d\" \" -f2 \| xsel --clipboard
 abbr $args gm     git merge
@@ -57,19 +60,24 @@ abbr $args gra    git reset --abort
 abbr $args grc    git reset --continue
 abbr $args grh    git reset --hard
 abbr $args grH    git reset HEAD~1
+abbr $args grl    git revert HEAD
 abbr $args grm    git rebase master
 abbr $args gs     tig status
-abbr $args gsa    git stash push
-abbr $args gsi    git stash push --include-untracked
-abbr $args gsp    git stash pop
+abbr $args gta    git stash push --include-untracked
+abbr $args gtp    git stash pop
 abbr $args gst    git status
 abbr $args gu     git submodule
 abbr $args gup    git submodule update
 abbr $args gus    git submodule status
-abbr $args h      htop
+abbr $args gw     git worktree
+abbr $args gwa    git worktree add
+abbr $args gwl    git worktree list
+abbr $args gwr    git worktree remove
+abbr $args h      bpytop \|\| htop
 abbr $args l      less
-abbr $args ll     ls -lhF
-abbr $args lll    ls -lhFa
+abbr $args ll     exa_or_ls -l
+abbr $args lll    exa_or_ls -l -a
+abbr $args lt     exa_or_tree -l
 abbr $args m      man
 abbr $args ma     make apply
 abbr $args mi     make init
@@ -77,6 +85,7 @@ abbr $args mip    make init plan
 abbr $args mkd    mkdir_cd
 abbr $args mp     make plan
 abbr $args mpa    make plan apply
+abbr $args nv     nvlc
 abbr $args o      open
 abbr $args p      pass
 abbr $args pe     pass edit
@@ -92,13 +101,18 @@ abbr $args s      systemctl status
 abbr $args sa     systemctl start
 abbr $args so     systemctl stop
 abbr $args sr     systemctl restart
+abbr $args ssa    sudo systemctl start
+abbr $args sso    sudo systemctl stop
+abbr $args ssr    sudo systemctl restart
 abbr $args t      trans :de
 abbr $args te     trans de:en
 abbr $args tf     trans de:fr
 abbr $args u      unison
-abbr $args v      vim
-abbr $args vs     vim --servername \(basename \(pwd\)\)
+abbr $args v      nvim
+abbr $args vs     nvim --listen \(basename \(pwd\)\)
+# abbr $args vs     vim --servername \(basename \(pwd\)\)
 abbr $args x      xrandr
+abbr $args xi     startx ~/.xinitrc
 abbr $args xo     xrandr --output
 abbr $args y      yay
 abbr $args yc     yay -Yc
@@ -107,4 +121,4 @@ abbr $args yr     yay -R
 abbr $args ys     yay -S
 abbr $args ysi    yay -Si
 abbr $args yu     yay -Syu
-abbr $args yuy    yay -Syu --noconfirm
+abbr $args yy     yay -Syu --noconfirm

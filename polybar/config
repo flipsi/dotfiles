@@ -65,21 +65,32 @@ secondary                   = ${colors.gruvbox_neutral_aqua}
 alert                       = ${colors.gruvbox_bright_red}
 
 
+
+;==========================================================
+; BAR CONFIGURATION
+;==========================================================
+
 [bar/main]
 
 monitor = ${env:BAR_MAIN_MONITOR:eDP1}
-dpi = ${env:BAR_MAIN_DPI:128}
 
+modules-left = battery wlan eth
+modules-center = i3
+modules-right = pulseaudio xkeyboard filesystem date powermenu
+
+tray-position = right
+tray-padding = 2
+tray-background = ${colors.background}
+tray-maxsize = ${env:BAR_TRAY_MAXSIZE:20}
+
+dpi = ${env:BAR_DPI:128}
 width = 100%
-height = ${env:BAR_MAIN_HEIGHT:30}
+height = ${env:BAR_HEIGHT:30}
 
 offset-x = 0%
 offset-y = 0%
-
 radius = 0.0
-
 fixed-center = false
-
 enable-ipc = true
 
 ; Make the bar appear below windows
@@ -91,13 +102,10 @@ foreground = ${colors.foreground}
 
 line-size = 3
 line-color = ${colors.primary}
-
 border-size = 0
 border-color = ${colors.gruvbox_light2}
-
-padding-left = 0
+padding-left = 1
 padding-right = 2
-
 module-margin-left = 1
 module-margin-right = 2
 
@@ -108,22 +116,111 @@ font-2 = "unifont:fontformat=truetype:size=8:antialias=false;0"
 font-3 = "Wuncon Siji:pixelsize=10;1"
 font-4 = "PragmataPro Mono:size=12"
 
-modules-left = i3
-modules-center = spotify
-modules-right = pulseaudio xkeyboard wlan eth filesystem battery date powermenu
-
-tray-position = right
-tray-padding = 2
-tray-transparent = false
-tray-background = ${colors.background}
-tray-maxsize = ${env:BAR_TRAY_MAXSIZE:20}
-
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
-
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+
+[bar/second]
+
+monitor = ${env:BAR_SECOND_MONITOR:HDMI1}
+
+modules-left = spotify
+modules-center = i3
+modules-right = weather cpu memory
+
+tray-output = none
+
+dpi = ${env:BAR_DPI:128}
+width = 100%
+height = ${env:BAR_HEIGHT:30}
+
+offset-x = ${bar/main.offset-x}
+offset-y = ${bar/main.offset-y}
+radius = ${bar/main.radius}
+fixed-center = ${bar/main.fixed-center}
+enable-ipc = ${bar/main.enable-ipc}
+
+; Make the bar appear below windows
+;wm-restack = ${bar/main.wm-restack}
+;override-redirect = ${bar/main.override-redirect}
+
+background = ${bar/main.background}
+foreground = ${bar/main.foreground}
+
+line-size = ${bar/main.line-size}
+line-color = ${bar/main.line-color}
+border-size = ${bar/main.border-size}
+border-color = ${bar/main.border-color}
+padding-left = ${bar/main.padding-left}
+padding-right = ${bar/main.padding-right}
+module-margin-left = ${bar/main.module-margin-left}
+module-margin-right = ${bar/main.module-margin-right}
+
+font-0 = ${bar/main.font-0}
+font-1 = ${bar/main.font-1}
+font-2 = ${bar/main.font-2}
+font-3 = ${bar/main.font-3}
+font-4 = ${bar/main.font-4}
+
+scroll-up = ${bar/main.scroll-up}
+scroll-down = ${bar/main.scroll-down}
+cursor-click = ${bar/main.cursor-click}
+cursor-scroll = ${bar/main.cursor-scroll}
+
+
+[bar/third]
+
+monitor = ${env:BAR_THIRD_MONITOR:eDP1}
+
+modules-left =
+modules-center = i3
+modules-right =
+
+tray-output = none
+
+dpi = ${env:BAR_DPI:128}
+width = 100%
+height = ${env:BAR_HEIGHT:30}
+
+offset-x = ${bar/main.offset-x}
+offset-y = ${bar/main.offset-y}
+radius = ${bar/main.radius}
+fixed-center = ${bar/main.fixed-center}
+enable-ipc = ${bar/main.enable-ipc}
+
+; Make the bar appear below windows
+;wm-restack = ${bar/main.wm-restack}
+;override-redirect = ${bar/main.override-redirect}
+
+background = ${bar/main.background}
+foreground = ${bar/main.foreground}
+
+line-size = ${bar/main.line-size}
+line-color = ${bar/main.line-color}
+border-size = ${bar/main.border-size}
+border-color = ${bar/main.border-color}
+padding-left = ${bar/main.padding-left}
+padding-right = ${bar/main.padding-right}
+module-margin-left = ${bar/main.module-margin-left}
+module-margin-right = ${bar/main.module-margin-right}
+
+font-0 = ${bar/main.font-0}
+font-1 = ${bar/main.font-1}
+font-2 = ${bar/main.font-2}
+font-3 = ${bar/main.font-3}
+font-4 = ${bar/main.font-4}
+
+scroll-up = ${bar/main.scroll-up}
+scroll-down = ${bar/main.scroll-down}
+cursor-click = ${bar/main.cursor-click}
+cursor-scroll = ${bar/main.cursor-scroll}
+
+
+;==========================================================
+; MODULE CONFIGURATION
+;==========================================================
 
 [module/i3]
 
@@ -272,20 +369,20 @@ card = intel_backlight
 [module/cpu]
 
 type = internal/cpu
-interval = 2
-format-prefix = " "
+interval = 3
+format-prefix = "CPU "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.secondary}
+; format-underline = ${colors.secondary}
 label = %percentage:2%%
 
 
 [module/memory]
 
 type = internal/memory
-interval = 2
-format-prefix = " "
+interval = 3
+format-prefix = "MEM "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.gruvbox_neutral_red}
+; format-underline = ${colors.gruvbox_neutral_red}
 label = %percentage_used%%
 
 
@@ -337,6 +434,13 @@ date = " %Y-%m-%d"
 time = %H:%M
 
 label = %date% %time%
+
+
+[module/weather]
+
+type = custom/script
+exec = curl -s wttr.in/?format="%l:+%t+%C+%c\n"
+interval = 30
 
 
 [module/pulseaudio]
@@ -501,6 +605,10 @@ menu-2-0-exec   = sudo poweroff
 menu-2-1        = cancel
 menu-2-1-exec   = menu-open-0
 
+
+;==========================================================
+; SETTINGS ETC.
+;==========================================================
 
 [settings]
 

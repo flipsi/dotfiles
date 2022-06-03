@@ -3,8 +3,12 @@
     email = soziflip@gmail.com
 
 [core]
-    editor = vim
+    pager = delta ; https://github.com/dandavison/delta
+    editor = nvim
     excludesfile = "~/.gitignore"
+
+[init]
+	defaultBranch = main
 
 [commit]
     verbose = true
@@ -22,15 +26,38 @@
     default = simple
 
 [alias]
+    fixup      = !sh -c 'REV=$(git rev-parse $1) && git commit --fixup $@ && git rebase -i --autostash --autosquash $REV^' -
     l          = log --pretty=format:"%C(blue)%ad\\ %C(yellow)%h\\ %C(green)%cn%C(red)%d\\ %C(reset)%s" --decorate --date=short
     ll         = log --pretty=format:"%C(blue)%ad\\ %C(yellow)%h\\ %C(green)%cn%C(red)%d\\ %C(reset)%s" --decorate --date=short --numstat
     save       = !sh -c 'git checkout -b "stash/$1" && git commit -m "$1" && git checkout -' - ; a better stash save
     pop        = !sh -c 'git rebase $(git rev-parse --abbrev-ref HEAD) "stash/$1"' - ; a better stash pop
     pop-prefix = !sh -c 'git rebase $(git rev-parse --abbrev-ref HEAD) "$1"' - ; (for tig)
 
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = side-by-side line-numbers decorations
+    side-by-side = true
+    line-numbers = true
+    whitespace-error-style = 22 reverse
+    plus-style =                "#FBF1C7 #98971A"
+    minus-style =               "#9D0006 #1D2021"
+    plus-emph-style =           "#1D2021 #83A598"
+    minus-emph-style =          "#282828 #CC241D"
+    line-numbers-minus-style =  "#CC241D"
+    line-numbers-plus-style =   "#98971A"
+    syntax-theme = 1337
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+
 [diff]
     tool = vimdiff
     guitool = sublimerge
+    colorMoved = default
     ; wsErrorHighlight = context
 
 [difftool "vimdiff"]

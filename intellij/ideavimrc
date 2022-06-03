@@ -1,13 +1,20 @@
 " ideavimrc - a vimrc for IntelliJ IDEA
 
-" the command ':actionlist' helps
+" The command ':actionlist' helps (and also takes a patternsparameter)
 
 " Other useful plugins in addition to IdeaVIM:
 " - AceJump
 " - TabMover
 " - Rainbow Brackets
 
-set vim-surround
+
+" Emulated vim plugins
+
+set surround
+set commentary
+
+
+" Settings
 
 set incsearch
 set ignorecase
@@ -20,6 +27,8 @@ set scrolloff=5
 set sidescrolloff=5
 set sidescroll=1
 
+
+" Mappings
 
 let mapleader = " "
 
@@ -116,6 +125,7 @@ nnoremap <c-g>+             :action EditorIncreaseFontSize<cr>
 nnoremap <c-g>-             :action EditorDecreaseFontSize<cr>
 
 nnoremap <leader>ym         :action ViewMainMenu<cr>
+nnoremap <leader>yt         :action ViewToolBar<cr>
 nnoremap <leader>yy         :action TogglePresentationMode<cr>
 nnoremap <leader>yY         :action ToggleDistractionFreeMode<cr>
 nnoremap <leader>yG         :action EditorToggleShowGutterIcons<cr>
@@ -160,6 +170,7 @@ nnoremap <leader><leader>   :action SearchEverywhere<cr>
 nnoremap <leader>ec         :action GotoClass<cr>
 nnoremap <leader>es         :action GotoSymbol<cr>
 nnoremap <leader>ef         :action GotoFile<cr>
+nnoremap <leader>eo         :action GotoFile<cr>
 nnoremap <leader>ea         :action GotoAction<cr>
 
 nnoremap <leader>ji         :action GotoImplementation<cr>
@@ -190,9 +201,11 @@ nnoremap <leader>ga         :echo "Sorry, seems like there is no command to add 
 nnoremap <leader>gu         :action Vcs.RollbackChangedLines<cr>
 
 nnoremap <leader>c<leader>  :action CommentByLineComment<cr>
+vmap <leader>c              gc
+omap <leader>c              gc
 
-" nnoremap <leader>af         :action ReformatCode<cr>
-nnoremap <leader>af         :action ScalaFmtFormat<cr>
+nnoremap <leader>af         :action ReformatCode<cr>
+" nnoremap <leader>af         :action ScalaFmtFormat<cr> " seems deprecated
 nnoremap <leader>ai         :action OptimizeImports<cr>
 
 nnoremap <leader>rf         :action RenameElement<cr>

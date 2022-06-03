@@ -47,10 +47,10 @@ exec "xset -b"
 
 ## autostart .desktop files the convenient way
 ## https://faq.i3wm.org/question/2155/how-can-i-use-autostart-desktop-files-in-i3.1.html
-exec --no-startup-id "dex -ae i3"
+# exec --no-startup-id "dex -ae i3"
 
 ## composite manager for window overlays, smooth workspace changes, etc.
-exec --no-startup-id "compton -b"
+exec --no-startup-id "picom -b"
 
 ## clipboard can have multiple entries
 # exec --no-startup-id "clipmenud"
@@ -66,6 +66,7 @@ exec --no-startup-id "compton -b"
 # exec --no-startup-id "nohup unclutter -idle 4 -jitter 30 &"
 
 ## disable touchpad when typing
+## (package is called xf86-input-synaptics)
 # exec --no-startup-id "syndaemon -d -k -i 1.2"
 
 
@@ -75,8 +76,8 @@ exec --no-startup-id "compton -b"
 ###############################################################################
 
 ## launcher options
-set $DMENU_OPTIONS   -l 5 -fn 'PragmataPro Mono-10' -i -nb '#282828' -sb '#FABD2F' -sf '#282828'
-set $DMENU_OPTIONS_2 -l 5 -fn 'PragmataPro Mono-10' -i -nb \#282828 -sb \#FABD2F -sf \#282828
+set $DMENU_OPTIONS   -l 15 -fn 'PragmataPro Mono-10' -i -nb '#282828' -sb '#FABD2F' -sf '#282828'
+set $DMENU_OPTIONS_2 -l 15 -fn 'PragmataPro Mono-10' -i -nb \#282828 -sb \#FABD2F -sf \#282828
 
 ## modifier key: windows/super
 set $mod Mod4
@@ -105,8 +106,8 @@ mode "$refresh" {
     bindsym l reload; mode "default"
     bindsym s restart
     bindsym i           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"; mode "default"
-    bindsym x           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh > /tmp/i3-initialize-outputs.sh.log 2>&1"; mode "default"
-    bindsym o           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh --only > /tmp/i3-initialize-outputs.sh.log 2>&1"; mode "default"
+    bindsym x           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
+    bindsym o           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh --only > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
     bindsym d           exec --no-startup-id "/home/sflip/dotfiles/setup-dpi.sh --regular > /tmp/setup-dpi.log 2>&1"; mode "default"
     bindsym Shift+d     exec --no-startup-id "/home/sflip/dotfiles/setup-dpi.sh --high > /tmp/setup-dpi.log 2>&1"; mode "default"
     bindsym Shift+z     exec --no-startup-id "/home/sflip/.i3/bin/i3-workspaces-save-and-restore.py save"; mode "default"
@@ -119,7 +120,7 @@ mode "$refresh" {
 }
 
 ## change keyboard layout
-bindsym $mod+Shift+F6 mode "$change_keyboard_layout"
+bindsym $mod+Shift+F4 mode "$change_keyboard_layout"
 set $change_keyboard_layout Keyboard layout: (F1) de (F2) de_sflip (F3) us (F4) us_sflip (F5) neo (F6) dvorak (F7) programmer dvorak
 mode "$change_keyboard_layout" {
     bindsym F1 exec "setxkbmap de"; mode "default"
@@ -130,7 +131,6 @@ mode "$change_keyboard_layout" {
     bindsym F6 exec "setxkbmap dvorak"; mode "default"
     bindsym F7 exec "setxkbmap -layout us -variant dvp"; mode "default"
     # cancel
-    bindsym $mod+Shift+F6 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -139,7 +139,7 @@ mode "$change_keyboard_layout" {
 set $keyboard_layout_image_source https://www.nayuki.io/res/i-type-in-dvorak/qwerty-layout.png
 set $keyboard_layout_image /home/sflip/.i3/keyboard_layout.png
 exec "test -f $keyboard_layout_image || $( sleep 20 && curl $keyboard_layout_image_source > $keyboard_layout_image )"
-bindsym $mod+F6 exec --no-startup-id "pkill -fx 'sxiv -z 200 $keyboard_layout_image' || sxiv -z 200 $keyboard_layout_image"
+bindsym $mod+F4 exec --no-startup-id "pkill -fx 'sxiv -z 200 $keyboard_layout_image' || sxiv -z 200 $keyboard_layout_image"
 
 
 
@@ -282,9 +282,9 @@ exec_always --no-startup-id "/home/sflip/.i3/bin/i3-polybar.sh start > /tmp/i3-p
 
 
 ## hide/show bar
-# bindsym $mod+Shift+b bar mode toggle
-# bindsym $mod+Shift+b exec "polybar-msg cmd toggle" # (would be nice, but polybar shows on wrong monitor after hide: https://github.com/jaagr/polybar/issues/1484)
-bindsym $mod+Shift+b exec "/home/sflip/.i3/bin/i3-polybar.sh toggle > /tmp/i3-polybar.log 2>&1"
+# bindsym $mod+b bar mode toggle
+# bindsym $mod+b exec "polybar-msg cmd toggle" # (would be nice, but polybar shows on wrong monitor after hide: https://github.com/jaagr/polybar/issues/1484)
+bindsym $mod+b exec "/home/sflip/.i3/bin/i3-polybar.sh toggle > /tmp/i3-polybar.log 2>&1"
 
 # set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
 set $UPDATE_STATUSBAR true
@@ -312,31 +312,49 @@ mode "$mode_clipboard" {
 
 ## type something or press keys or click
 bindsym $mod+x mode "$mode_x"
-set $mode_x (x) type with xdotool (n) click away notification
+set $mode_x (x) type with xdotool (t) type timestamp with xdotool (n) click away notification
 mode "$mode_x" {
     bindsym  $mod+x mode "$mode_xdootool"
     bindsym       x mode "$mode_xdootool"
+    bindsym  $mod+t mode "$mode_xdootool_timestamp"
+    bindsym       t mode "$mode_xdootool_timestamp"
     bindsym  $mod+n exec --no-startup-id "xdotool mousemove 1880 35 click 1 mousemove restore"; mode "default"
     bindsym       n exec --no-startup-id "xdotool mousemove 1880 35 click 1 mousemove restore"; mode "default"
     # cancel
     bindsym $mod+Escape mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Return      mode "default"
+    bindsym Escape      mode "default"
 }
-set $mode_xdootool (b) bash with my bashrc (p) testing password (s) shrug (t) timestamp (T) unix timestamp
+set $mode_xdootool (b) bash with my bashrc (g) Google contact email (p) testing password (s) shrug (t) timestamp
 mode "$mode_xdootool" {
     bindsym b       exec --no-startup-id "xdotool type 'bbash --rcfile <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/bash/bashrc_sflip)'; xdotool key Return"; mode "default";
+    bindsym g       exec --no-startup-id "xdotool type $(goobook-query-mail.sh)"; mode "default";
     bindsym p       exec --no-startup-id "xdotool type 'iopineiBie5fiong7yae6aeng0ooF6'"; mode "default";
-    bindsym s       exec --no-startup-id "sleep 0.1; xdotool type --delay 30 '¯\_(ツ)_/¯'"; mode "default";
-    bindsym Shift+s exec --no-startup-id "sleep 0.1; xdotool type --delay 30 '¯\\\_(ツ)\_/¯'"; mode "default";
-    bindsym t       exec --no-startup-id "sleep 0.1; xdotool type \\"$(date +%Y%m%d%H%M)\\""; mode "default";
-    bindsym Shift+t exec --no-startup-id "sleep 0.1; xdotool type \\"$(date +%s)\\""; mode "default";
+    bindsym s       exec --no-startup-id "sleep 0.2; xdotool type --delay 30 '¯\_(ツ)_/¯'"; mode "default";
+    bindsym t       mode "$mode_xdootool_timestamp"
+    bindsym Shift+s exec --no-startup-id "sleep 0.2; xdotool type --delay 30 '¯\\\_(ツ)\_/¯'"; mode "default";
     # cancel
+    bindsym BackSpace   mode "$mode_x"
     bindsym $mod+Escape mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+    bindsym Return      mode "default"
+    bindsym Escape      mode "default"
 }
-
+set $mode_xdootool_timestamp Format: (d) YYYY-MM-DD  (D) YYYYMMDD (g) DD.MM.YYYY (t) HH:MM (T) HHMM (a) YYYY-MM-DD-HH-MM (A) YYYYMMDDHHMM (u) unix timestamp
+mode "$mode_xdootool_timestamp" {
+    bindsym d       exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%Y-%m-%d)\\""; mode "default";
+    bindsym Shift+d exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%Y%m%d)\\""; mode "default";
+    bindsym g       exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%d.%m.%Y)\\""; mode "default";
+    bindsym t       exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%H:%M)\\""; mode "default";
+    bindsym Shift+t exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%H%M)\\""; mode "default";
+    bindsym a       exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%Y-%m-%d-%H-%M)\\""; mode "default";
+    bindsym Shift+a exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%Y%m%d%H%M)\\""; mode "default";
+    bindsym u       exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%s)\\""; mode "default";
+    # cancel
+    bindsym BackSpace   mode "$mode_x"
+    bindsym $mod+Escape mode "default"
+    bindsym Return      mode "default"
+    bindsym Escape      mode "default"
+}
 
 
 ###############################################################################
@@ -355,7 +373,7 @@ mode "$mode_system" {
     bindsym e exit
     bindsym u exec --no-startup-id "i3exit switch_user"; mode "default"
     bindsym l exec --no-startup-id "$LOCK_CMD"; mode "default"
-    bindsym s exec --no-startup-id "systemctl suspend"; mode "default"
+    bindsym s exec --no-startup-id "$LOCK_CMD; systemctl suspend -i"; mode "default"
     bindsym h exec --no-startup-id "systemctl hibernate"; mode "default"
     bindsym r exec --no-startup-id "systemctl reboot"
     bindsym p exec --no-startup-id "systemctl poweroff"
@@ -379,9 +397,9 @@ mode "$mode_light" {
     bindsym Up              exec --no-startup-id "xbacklight -inc 2"
     bindsym Down            exec --no-startup-id "xbacklight -dec 2"
     bindsym a               exec --no-startup-id "xbacklight -inc 5"
-    bindsym z               exec --no-startup-id "xbacklight -inc 5"
+    bindsym z               exec --no-startup-id "xbacklight -dec 5"
     bindsym Right           exec --no-startup-id "xbacklight -inc 5"
-    bindsym Left            exec --no-startup-id "xbacklight -inc 5"
+    bindsym Left            exec --no-startup-id "xbacklight -dec 5"
     bindsym n               exec --no-startup-id "pkill -USR1 '^redshift$'"; mode "default"
     bindsym k               exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness up"
     bindsym b               exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness down"
@@ -391,16 +409,21 @@ mode "$mode_light" {
     bindsym Escape mode "default"
 }
 
+# # toggle display
+# bindsym XF86Display exec --no-startup-id "xset -q | grep -q 'Monitor is On' && xset dpms force off || xset dpms force on"
+# (display turns on automatically on keypress, so I only need to set it off:)
+bindsym XF86Display exec --no-startup-id "xset dpms force off"
+
+# set display brightness
+# bindsym $mod+Left   exec --no-startup-id "xbacklight -dec 3"
+# bindsym $mod+Right  exec --no-startup-id "xbacklight -inc 3"
+
 # open a clock
 bindsym $mod+minus  exec --no-startup-id "gnome-clocks"
 
 ## set keyboard brightness
 bindsym XF86KbdBrightnessDown exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness down"
 bindsym XF86KbdBrightnessUp   exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness up"
-
-# set display brightness
-# bindsym $mod+Left   exec --no-startup-id "xbacklight -dec 3"
-# bindsym $mod+Right  exec --no-startup-id "xbacklight -inc 3"
 
 ## set xfce4-terminal font size (not possible by default)
 bindsym $mod+Control+plus   exec --no-startup-id "$SHELLSCRIPT_PATH/xfce4-terminal-fontsize increase"
@@ -427,8 +450,8 @@ mode "$audio" {
     bindsym s               exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output"
     bindsym p               exec --no-startup-id "~/.i3/bin/soundboard.sh"; mode "default"
     bindsym g               exec --no-startup-id "pavucontrol"; mode "default"
+    bindsym $mod+0          exec --no-startup-id "pavucontrol"; mode "default"
     # cancel
-    bindsym $mod+0 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -585,7 +608,7 @@ mode "resize" {
 }
 
 ## change border
-bindsym $mod+b border toggle
+bindsym $mod+Shift+b border toggle
 
 
 
@@ -594,11 +617,11 @@ bindsym $mod+b border toggle
 ###############################################################################
 
 ## toggle workspaces switches on repeated keypress
-workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth no
 
 
 ## open new workspace
-bindsym $mod+i exec --no-startup-id "quickswitch -E"
+bindsym $mod+i exec --no-startup-id "/home/sflip/.i3/bin/i3-new-workspace.sh"
 
 ## rename workspace
 bindsym $mod+comma exec --no-startup-id i3-input -F 'rename workspace to "%s"' -P 'rename workspace to: '
@@ -612,7 +635,6 @@ bindsym $mod+e [urgent=latest] focus
 bindsym $mod+space workspace back_and_forth
 # bindsym $mod+numbersign workspace back_and_forth
 bindsym $mod+w exec --no-startup-id "rofi -show window $ROFI_OPTIONS"
-# bindsym $mod+w exec --no-startup-id "quickswitch --workspaces --dmenu 'dmenu $DMENU_OPTIONS_2'"
 bindsym $mod+n workspace next_on_output
 bindsym $mod+p workspace prev_on_output
 bindsym $mod+1 workspace 1
@@ -625,6 +647,12 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 #bindsym $mod+0 workspace 10
+
+## move container to new workspace (tmux 'break')
+bindsym $mod+Shift+i exec --no-startup-id "/home/sflip/.i3/bin/i3-new-workspace.sh --move-container"
+
+## move container to LRU workspace
+bindsym $mod+Shift+space move container to workspace back_and_forth
 
 ## move container to specific workspace
 bindsym $mod+Shift+n move container to workspace next_on_output
@@ -639,14 +667,6 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 #bindsym $mod+Shift+0 move container to workspace 10
-
-## move container to new workspace (tmux 'break')
-bindsym $mod+Shift+i exec --no-startup-id "quickswitch --journey -E"
-# move container to specific workspace
-bindsym $mod+Shift+numbersign exec --no-startup-id "quickswitch --journey --dmenu 'dmenu $DMENU_OPTIONS_2'"
-bindsym $mod+Shift+w          exec --no-startup-id "quickswitch --journey --dmenu 'dmenu $DMENU_OPTIONS_2'"
-bindsym $mod+Shift+space move container to workspace back_and_forth
-
 
 ## move container to other output
 bindsym $mod+u mode "$move_container_to_output"
@@ -694,9 +714,10 @@ mode "$launch" {
     bindsym f       exec --no-startup-id "firefox"; mode "default"
     bindsym g       exec --no-startup-id "google-chrome-stable"; mode "default"
     bindsym i       exec --no-startup-id "vivaldi-stable"; mode "default"
-    bindsym j       exec --no-startup-id "/home/sflip/opt/idea-IU-183.5153.38/bin/idea.sh nosplash || idea"; mode "default"
+    bindsym j       exec --no-startup-id "/home/sflip/opt/idea-IU-201.7223.91/bin/idea.sh nosplash || idea"; mode "default"
     bindsym m       exec --no-startup-id "spotify"; mode "default"
     bindsym q       exec --no-startup-id "qutebrowser"; mode "default"
+    bindsym r       exec --no-startup-id "nautilus"; mode "default"
     bindsym s       exec --no-startup-id "slack"; mode "default"
     bindsym t       exec --no-startup-id "telegram-desktop"; mode "default"
     # cancel
@@ -705,12 +726,10 @@ mode "$launch" {
 }
 
 ## start a terminal
-set $terminal Open a terminal: (a) alacritty (m) termite (u) urxvt (k) konsole (i) kitty (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
+set $terminal Open a terminal: (a) alacritty (u) urxvt (k) konsole (i) kitty (x) xfce-terminal (g) gnome-terminal (r) cool-retro-term (t) terminology
 mode "$terminal" {
     bindsym a       exec --no-startup-id "alacritty --command tmux -2 new-session -A -s main"; mode "default"
     bindsym Shift+a exec --no-startup-id "alacritty"; mode "default"
-    bindsym m       exec --no-startup-id "termite -e 'tmux -2 new-session -A -s main'"; mode "default"
-    bindsym Shift+m exec --no-startup-id "termite"; mode "default"
     bindsym u       exec --no-startup-id "urxvt -e tmux -2 new-session -A -s main"; mode "default"
     bindsym Shift+u exec --no-startup-id "urxvt"; mode "default"
     bindsym k       exec --no-startup-id "konsole --hide-menubar --hide-tabbar --profile NicNacPower -e 'tmux -2 new-session -A -s main'"; mode "default"
@@ -732,8 +751,10 @@ mode "$terminal" {
 
 ## switch to a specific window or workspace
 bindsym $mod+o mode "$goto"
-set $goto Goto: (o) Terminal (i) Vivaldi (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram
+set $goto Goto: (o) Terminal (i) Vivaldi (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram (a) Audacity (w) Wine
 mode "$goto" {
+  bindsym a         [class="(?i)audacity"]              focus; mode "default"
+  bindsym $mod+a    [class="(?i)audacity"]              focus; mode "default"
   bindsym o         [class="(?i)alacritty"]             focus; mode "default"
   bindsym $mod+o    [class="(?i)alacritty"]             focus; mode "default"
   bindsym f         [class="(?i)firefox"]               focus; mode "default"
@@ -746,6 +767,8 @@ mode "$goto" {
   bindsym $mod+m    [class="(?i)spotify"]               focus; mode "default"
   bindsym j         [class="(?i)jetbrains-idea"]        focus; mode "default"
   bindsym $mod+j    [class="(?i)jetbrains-idea"]        focus; mode "default"
+  bindsym w         [class="Wine"]                      focus; mode "default"
+  bindsym $mod+w    [class="Wine"]                      focus; mode "default"
   bindsym s         [class="(?i)slack"]                 focus; mode "default"
   bindsym $mod+s    [class="(?i)slack"]                 focus; mode "default"
   bindsym t         [class="(?i)Telegram"]              focus; mode "default"
@@ -781,8 +804,11 @@ mode "$kill" {
 }
 
 ## windows always floating/fullscreen
+for_window [class="Wine"]                                                           floating enable
+for_window [class="pokerstars.exe"]                                                 floating enable
 for_window [class="(?i)avd"]                                                        floating enable
 for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"]      fullscreen
+for_window [class="com-intellij-updater-Runner"]                                    floating enable
 for_window [class="(?i)file-roller"]                                                floating enable
 for_window [class="(?i)galculator"]                                                 floating enable
 for_window [class="(?i)galculator"]                                                 move position 750 450
@@ -794,9 +820,9 @@ for_window [class="(?i)nm-connection-editor"]                                   
 for_window [class="(?i)nautilus"]                                                   floating enable
 for_window [class="(?i)nautilus"]                                                   move position 550 250
 for_window [class="(?i)nautilus"]                                                   resize set 920 600
+for_window [class="(?i)blueman-manager"]                                            floating enable
 for_window [class="(?i)nemo"]                                                       floating enable
 for_window [class="(?i)pavucontrol"]                                                floating enable
-for_window [class="(?i)pokerstars"]                                                 floating enable
 for_window [class="(?i)qjackctl"]                                                   floating enable
 for_window [class="(?i)sxiv"]                                                       fullscreen
 for_window [class="(?i)thunar"]                                                     floating enable
@@ -820,15 +846,18 @@ for_window [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"] m
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] move to workspace    Trello
 for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] move to workspace    Netflix
 for_window [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"] move to workspace    Notes
+assign [class="Wine"]                                                                               Poker
+assign [class="pokerstars"]                                                                         Poker
 assign [class="(?i)chromium"]                                                                       Chromium
 assign [class="(?i)google-chrome"]                                                                  Chrome
 assign [class="(?i)filezilla"]                                                                      Filezilla
 assign [class="(?i)firefox"]                                                                        Firefox
 assign [class="(?i)jetbrains-idea"]                                                                 IntelliJ
+assign [class="com-intellij-updater-Runner"]                                                        IntelliJ
 assign [class="(?i)jetbrains-phpstorm"]                                                             PhpStorm
 assign [class="gnome-calendar"]                                                                     Calendar
 assign [class="(?i)thunderbird"]                                                                    Mail
-assign [class="(?i)pokerstars"]                                                                     Poker
+assign [class="(?i)jamulus"]                                                                        Jam
 assign [class="(?i)audacity"]                                                                       Recording
 assign [class="(?i)ardour"]                                                                         Recording
 assign [class="(?i)skype"]                                                                          Skype
@@ -838,7 +867,8 @@ assign [class="(?i)kaffeine"]                                                   
 assign [class="(?i)mediathek"]                                                                      Mediathek
 assign [class="(?i)spotify"]                                                                        Spotify
 for_window [class="Spotify"] move to workspace                                                      Spotify
-assign [class="Telegram"]                                                                           Telegram
+assign [class="(?i)signal"]                                                                         Signal
+assign [class="(?i)telegram"]                                                                       Telegram
 assign [class="(?i)alacritty"]                                                                      Terminal
 assign [class="(?i)cool-retro-term"]                                                                Terminal
 assign [class="(?i)gnome-terminal"]                                                                 Terminal
@@ -847,12 +877,31 @@ assign [class="(?i)pale moon"]                                                  
 assign [class="(?i)qutebrowser"]                                                                    Web
 assign [class="(?i)vivaldi-stable"]                                                                 Vivaldi
 assign [class="code-oss"]                                                                           VS Code
-assign [class="(?i)gnome-session-failed"]                                                           GnomeSessionFailed
+for_window [class="(?i)gnome-session-failed"] move to workspace                                     GnomeSessionFailed
 
 ## workspaces with window always on specific output
-for_window [class="(?i)vivaldi-stable"]                                         move workspace to output DP3-2
+for_window [class="(?i)vivaldi-stable"]                                         move workspace to output DP2-1
+for_window [class="(?i)chromium"]                                               move workspace to output DP2-2
+for_window [class="(?i)google-chrome"]                                          move workspace to output DP2-2
+for_window [class="(?i)firefox"]                                                move workspace to output DP2-2
+for_window [class="(?i)qutebrowser"]                                            move workspace to output DP2-2
+for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DP2-1
+for_window [class="(?i)alacritty"]                                              move workspace to output DP2-1
+for_window [class="(?i)cool-retro-term"]                                        move workspace to output DP2-1
+for_window [class="(?i)gnome-terminal"]                                         move workspace to output DP2-1
+for_window [class="(?i)urxvt"]                                                  move workspace to output DP2-1
+for_window [class="(?i)jetbrains-idea"]                                         move workspace to output DP2-1
+for_window [class="(?i)jetbrains-phpstorm"]                                     move workspace to output DP2-1
+for_window [class="Spotify"]                                                    move workspace to output DP2-1
+for_window [class="(?i)slack"]                                                  move workspace to output eDP1
+for_window [class="(?i)signal"]                                                 move workspace to output eDP1
+for_window [class="(?i)telegram"]                                               move workspace to output eDP1
+for_window [class="(?i)telegram-desktop"]                                       move workspace to output eDP1
+for_window [class="(?i)gnome-session-failed"]                                   move workspace to output eDP1
+## repeat that for hosts with other output names
+for_window [class="(?i)vivaldi-stable"]                                         move workspace to output DP3-1
 for_window [class="(?i)chromium"]                                               move workspace to output DP3-2
-for_window [class="(?i)google-chrome"]                                          move workspace to output DP3-1
+for_window [class="(?i)google-chrome"]                                          move workspace to output DP3-2
 for_window [class="(?i)firefox"]                                                move workspace to output DP3-2
 for_window [class="(?i)qutebrowser"]                                            move workspace to output DP3-2
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DP3-1
@@ -862,6 +911,9 @@ for_window [class="(?i)gnome-terminal"]                                         
 for_window [class="(?i)urxvt"]                                                  move workspace to output DP3-1
 for_window [class="(?i)jetbrains-idea"]                                         move workspace to output DP3-1
 for_window [class="(?i)jetbrains-phpstorm"]                                     move workspace to output DP3-1
+for_window [class="Spotify"]                                                    move workspace to output DP3-1
 for_window [class="(?i)slack"]                                                  move workspace to output eDP1
-for_window [class="Spotify"]                                                    move workspace to output eDP1
+for_window [class="(?i)signal"]                                                 move workspace to output eDP1
 for_window [class="(?i)telegram"]                                               move workspace to output eDP1
+for_window [class="(?i)telegram-desktop"]                                       move workspace to output eDP1
+for_window [class="(?i)gnome-session-failed"]                                   move workspace to output eDP1
