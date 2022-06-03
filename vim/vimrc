@@ -1841,15 +1841,15 @@ let g:formatters_typescript = ['prettier_typescript']
 " autoformat for json does not work out with the plugin above. do this instead:
 augroup json_map_autoformat
     au!
-    au FileType json nnoremap 'af :%!python -m json.tool<cr>
-    au FileType json nmap <leader>af 'af
+    au FileType json nnoremap <buffer> 'af :%!python -m json.tool<cr>
+    au FileType json nmap <buffer> <leader>af 'af
 augroup END
 
 " autoformat for sql
 augroup sql_map_autoformat
     au!
-    au FileType sql nnoremap 'af :%!sql-formatter-cli -<cr>
-    au FileType sql nmap <leader>af 'af
+    au FileType sql nnoremap <buffer> 'af :%!sql-formatter-cli -<cr>
+    au FileType sql nmap <buffer> <leader>af 'af
 augroup END
 
 
@@ -4616,6 +4616,9 @@ function! RunCommand(command)
       echoerr "Unknown g:run_command_method (" . g:run_command_method . ")"
     endif
 endfunction
+
+" search the web for selection
+vnoremap <leader>ss y:call WebSearch(@")<cr>gv
 
 " run current line or selection as shell command
 nnoremap <leader>bS :call RunCommand(getline('.'))<cr>
