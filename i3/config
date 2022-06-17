@@ -578,7 +578,8 @@ bindsym $mod+y focus parent
 bindsym $mod+Shift+y focus child
 
 ## enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
+bindsym $mod+f          fullscreen toggle
+bindsym $mod+Shift+f    fullscreen toggle global
 
 ## change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout toggle
