@@ -3803,10 +3803,12 @@ vnoremap v <c-c>
 
 
 " copy to clipboard / primary selection
-nnoremap         <c-c>            "+y
+nnoremap    <c-c>                 "+y
+nnoremap    <c-c>w        viw"*ygv"+y
+nnoremap    <c-c>W        viW"*ygv"+y
 nnoremap    <c-c><c-c>      V"*ygv"+y
 nnoremap <leader><c-c>  mzggVG"*ygv"+y`z
-vnoremap         <c-c>        "*ygv"+y
+vnoremap    <c-c>             "*ygv"+y
 
 " paste from clipboard / primary selection {{{
 function! PasteFromGUI()
