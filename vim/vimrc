@@ -523,6 +523,7 @@ nnoremap <leader>gee  :Git checkout<space>
 nnoremap <leader>geb  :exe ':Git checkout -b ' . input('Branch name: ')<cr>
 nnoremap <leader>gbm  :exe ':Confirm Git branch -m ' . input('New branch name: ')<cr>
 nnoremap <leader>geo  :GitCheckoutInteractively<cr>
+nnoremap <leader>gmm  :GitMergeChooseBranchInteractively<cr>
 nnoremap <leader>ge-  :Git checkout -<cr>
 nnoremap <leader>gup  :Confirm Git submodule update<cr>
 nnoremap <leader>gh   <nop>
@@ -549,6 +550,22 @@ function! GitCheckoutInteractively()
 endfunction
 function! GitCheckout(ref)
     exe 'Git checkout ' . a:ref
+endfunction
+
+command! GitMergeChooseBranchInteractively :call GitMergeChooseBranchInteractively() " checkout git branch chosen with fzf
+function! GitMergeChooseBranchInteractively()
+    let l:plugin_command_name = g:fzf_command_prefix . 'GBranches'
+    if exists(':' . l:plugin_command_name)
+        exe l:plugin_command_name
+    else
+        call fzf#run(fzf#wrap({
+                    \ 'source': 'git branch',
+                    \ 'sink': function('GitMerge')
+                    \ }))
+    endif
+endfunction
+function! GitMerge(branch)
+    exe 'Git merge ' . a:branch
 endfunction
 
 " can be replaced with `<Plug><cfile>` in some cases
