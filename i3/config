@@ -897,7 +897,7 @@ for_window [class="Spotify"]                                                    
 for_window [class="(?i)slack"]                                                  move workspace to output eDP1
 for_window [class="(?i)signal"]                                                 move workspace to output eDP1
 for_window [class="(?i)telegram"]                                               move workspace to output eDP1
-for_window [class="(?i)telegram-desktop"]                                       move workspace to output eDP1
+for_window [class="(?i)telegram-desktop" title="^Telegram"]                     move workspace to output eDP1
 for_window [class="(?i)gnome-session-failed"]                                   move workspace to output eDP1
 ## repeat that for hosts with other output names
 for_window [class="(?i)vivaldi-stable"]                                         move workspace to output DP3-1
