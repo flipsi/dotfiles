@@ -5082,6 +5082,18 @@ command! TigFromCurrentFile :call Tig(1) " Interactive Git interface (from curre
 nnoremap <leader>it :TigFromWorkingDir<cr>
 nnoremap <leader>iT :TigFromCurrentFile<cr>
 
+
+" Translate word to German via Google Translate CLI
+function! Translate(word) abort
+    let target_language = 'de'
+    let result = system('trans :' . target_language . ' "' . a:word . '"')
+    let result = substitute(result, '\e\[[0-9]*m', '', 'g') " remove formatting escape sequences
+    echo result
+endfunction
+command! Translate :call Translate(expand("<cword>")) " Translate word under Cursor
+nnoremap <leader>tr :echo Translate(expand("<cword>"))<cr>
+
+
 " insert google contacts with name and mail addresses (with goobook)
 command! -nargs=1 InsertGoogleContact :r!goobook-query-mail.sh <args> " Interactively search for Google contacts and insert name and email
 " nnoremap <leader>igm :InsertGoogleContact
