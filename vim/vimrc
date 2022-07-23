@@ -3292,6 +3292,52 @@ endfunction
 " }}}
 
 
+" Show a temporary message in a floating window with a border {{{
+" From https://www.statox.fr/posts/2021/03/breaking_habits_floating_window/
+" TODO: debug
+function! ShowMessageInFloatingWindow(msg) abort
+    " Define the size of the floating window
+    let width = 50
+    let height = 10
+
+    " Create the scratch buffer displayed in the floating window
+    let buf = nvim_create_buf(v:false, v:true)
+
+    " Get the current UI
+    let ui = nvim_list_uis()[0]
+
+    " create the lines to draw a box
+    let horizontal_border = '+' . repeat('-', width - 2) . '+'
+    let empty_line = '|' . repeat(' ', width - 2) . '|'
+    let lines = flatten([horizontal_border, map(range(height-2), 'empty_line'), horizontal_border])
+
+    " Create the lines for the centered message and put them in the buffer
+    let offset = 0
+    for line in a:msg
+        let start_col = (width - len(line)) / 2
+        let end_col = start_col + len(line)
+        let current_row = height / 2 - len(a:msg) / 2 + offset
+        let offset = offset + 1
+        call nvim_buf_set_text(buf, current_row, start_col, current_row, end_col, [line])
+    endfor
+
+    " Create the floating window
+    let opts = {'relative': 'editor',
+                \ 'width': width,
+                \ 'height': height,
+                \ 'col': (ui.width/2) - (width/2),
+                \ 'row': (ui.height/2) - (height/2),
+                \ 'anchor': 'NW',
+                \ 'style': 'minimal',
+                \ }
+    let win = nvim_open_win(buf, 1, opts)
+
+    " Change highlighting
+    call nvim_win_set_option(win, 'winhl', 'Normal:ErrorFloat')
+endfunction
+
+" }}}
+
 " toggle quickfix or location list {{{
 function! ToggleList(bufname, pfx)
   let buflist = GetBufferList()
@@ -5088,7 +5134,11 @@ function! Translate(word) abort
     let target_language = 'de'
     let result = system('trans :' . target_language . ' "' . a:word . '"')
     let result = substitute(result, '\e\[[0-9]*m', '', 'g') " remove formatting escape sequences
-    echo result
+    " if has('nvim')
+    "     call ShowMessageInFloatingWindow(result)
+    " else
+        echo result
+    " endif
 endfunction
 command! Translate :call Translate(expand("<cword>")) " Translate word under Cursor
 nnoremap <leader>tr :echo Translate(expand("<cword>"))<cr>
