@@ -2974,9 +2974,7 @@ nnoremap <leader>oC :ToggleColorschemeDarkOrLight<cr>
 " http://stackoverflow.com/questions/6488683/how-do-i-change-the-vim-cursor-in-insert-normal-mode
 
 " escape sequence depends on the terminal ('konsole', 'urxvt')
-let terminal='urxvt'
-
-
+let terminal='alacritty'
 
 if terminal == 'konsole'
     " (this also resets the terminal font size, which is annoying)

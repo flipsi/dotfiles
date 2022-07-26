@@ -75,4 +75,8 @@ function fish_prompt --description 'Prompt anzeigen'
         echo -e -n -s '\n> '
 
     end
+
+    # Set cursor to beam after leaving neovim (because neovim doesn't restore from block cursor)
+    printf "\\033[6 q"
+
 end

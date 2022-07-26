@@ -214,7 +214,8 @@ selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
 cursor:
-  style: Block # [Block, Underline, Beam]
+  style: Beam # [Block, Underline, Beam]
+  vi_mode_style: Block
 
 # Live config reload (changes require restart)
 live_config_reload: true
