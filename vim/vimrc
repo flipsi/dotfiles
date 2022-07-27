@@ -2095,6 +2095,18 @@ Plug 'sheerun/vim-polyglot'
 let g:polyglot_disabled = ['helm']
 
 
+" Language: Clojure {{{
+
+Plug 'tpope/vim-fireplace'
+
+Plug 'tpope/vim-salve'
+
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+
+
+" }}}
+
 " Language: CSV {{{
 
 Plug 'chrisbra/csv.vim'
