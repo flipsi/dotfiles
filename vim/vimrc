@@ -3959,6 +3959,9 @@ noremap <esc>j <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
 noremap <m-k>  <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 noremap <esc>k <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 
+noremap <PageDown> <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
+noremap <PageUp>   <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
