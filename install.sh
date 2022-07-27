@@ -501,6 +501,7 @@ function create_link_for_target() {
             if [[ $(whoami) = 'root' ]]; then
                 create_link "$PWD/xkb/symbols/de_sflip" "/usr/share/X11/xkb/symbols/de_sflip"
                 create_link "$PWD/xkb/symbols/us_sflip" "/usr/share/X11/xkb/symbols/us_sflip"
+                create_link "$PWD/xkb/symbols/us_norman_sflip" "/usr/share/X11/xkb/symbols/us_norman_sflip"
             fi
             setxkbmap us_sflip
             mkdir -p "$HOME/.config/autostart"

@@ -1,0 +1,55 @@
+// Author: Philipp Moers <soziflip@gmail.com>
+
+// This is a symbols file for X KeyBoard extension (XKB).
+// It contains a custom keyboard layout.
+
+
+partial default alphanumeric_keys
+
+xkb_symbols "basic" {
+
+    include "us(norman)"
+
+    // change capslock/control/escape
+
+    // original capslock:
+    //replace key <AC00> { [ Escape ] };
+    replace key <AC00> { [ Control_L ] };
+
+    // original control:
+    //replace key <AA00> { [ Caps_Lock ] };
+    replace key <AA00> { [ Escape ] };
+
+
+    // umlauts (ä, ö, ü)
+    key <AC01> { [ a, A, adiaeresis, Adiaeresis ] };
+    key <AC09> { [ o, O, odiaeresis, Odiaeresis ] };
+    key <AD07> { [ u, U, udiaeresis, Udiaeresis ] };
+
+
+    // qwerty hjkl (vim movements) with AltGr
+    key <AC06>  { [ y, Y, h,   VoidSymbol ] };
+    key <AC07>  { [ n, N, j,   VoidSymbol ] };
+    key <AC08>  { [ i, I, k,   VoidSymbol ] };
+    key <AC09>  { [ o, O, l,   VoidSymbol ] };
+
+    // Home and End with AltGr
+    key <AB08> { [ comma, less, Home, VoidSymbol ] };
+    key <AB09> { [ period, greater, End, VoidSymbol ] };
+
+    // left hand number block with AltGr (and ß on s)
+    key <AD02> { [ w, W, 7, ampersand ] };
+    key <AD03> { [ d, D, 8, asterisk ] };
+    key <AD04> { [ f, F, 9, EuroSign ] };
+    key <AC02> { [ s, S, 4, ssharp ] };
+    key <AC03> { [ e, E, 5, percent ] };
+    key <AC04> { [ t, T, 6, dead_circumflex ] };
+    key <AB01> { [ z, Z, 0, VoidSymbol ] };
+    key <AB02> { [ x, X, 1, exclam ] };
+    key <AB03> { [ c, C, 2, at ] };
+    key <AB04> { [ v, V, 3, numbersign ] };
+
+
+    include "level3(ralt_switch)"
+
+};
