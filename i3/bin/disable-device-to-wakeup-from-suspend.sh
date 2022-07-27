@@ -9,6 +9,11 @@ function print_help_msg() {
     cat <<-EOF
 Disable USB device (like mouse) to wake up from suspend.
 
+You may want to run this at startup as root:
+Execute \`sudo crontab -e\`
+and add the following at the end of the file:
+@reboot $(realpath "$0")
+
 Source:
 https://askubuntu.com/a/1373808/1240029
 https://codetrips.com/2020/03/18/ubuntu-disable-mouse-wake-from-suspend/
