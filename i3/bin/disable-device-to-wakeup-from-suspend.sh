@@ -2,7 +2,7 @@
 
 set -e
 
-FALLBACK_DEVICE='1-2'
+FALLBACK_DEVICE='1-4'
 
 
 function print_help_msg() {
@@ -35,7 +35,7 @@ or:    $(basename "$0") [--enable] [DEVICE]
 
     DEVICE
         Optional.
-        Device to disable (or enable). Defaults to $FALLBACK_DEVICE
+        Device to disable (or enable). Defaults to "$FALLBACK_DEVICE"
 
 EOF
 }
