@@ -1214,7 +1214,7 @@ noremap <silent> <leader>tb :TagbarToggle<cr>
 
 " jump to definitions without relying on tags
 " Plug 'misterbuckley/vim-definitive'
-Plug 'sflip/vim-definitive'
+Plug 'flipsi/vim-definitive'
 
 nnoremap <leader>fd :FindDefinition<cr>
 
