@@ -2097,11 +2097,45 @@ let g:polyglot_disabled = ['helm']
 
 " Language: Clojure {{{
 
-Plug 'tpope/vim-fireplace'
+" https://thoughtbot.com/blog/writing-clojure-in-vim
+" https://tomekw.com/nvim-for-clojure-development/
+" https://smallsheds.garden/blog/clojure/2020/clj2-setting-up-vim/
 
-Plug 'tpope/vim-salve'
+" Fireplace is a 'Quasi-REPL' for Clojure
+" Plug 'tpope/vim-fireplace'
+" Plug 'ctford/vim-fireplace-easy'
 
-" Vim-sexp brings the Vim philosophy of precision editing to S-expressions.
+" static project support
+" Plug 'tpope/vim-salve'
+
+" Some handy keybindings for working with the Clojure REPL
+" Plug 'SevereOverfl0w/vim-replant'
+
+" Semantic autocompletion
+" Plug 'clojure-vim/async-clj-omni'
+" Plug 'prabirshrestha/asyncomplete.vim'
+
+" Alternative to Fireplace
+" Clojure Interactive Development Environment
+" Plug 'liquidz/vim-iced'
+
+" Yet another alternative to Fireplace
+" Multi-language Interactive evaluation
+" Quick start for Clojure: https://github.com/Olical/conjure/wiki/Quick-start:-Clojure
+Plug 'Olical/conjure'
+" Use :ConjureSchool to get started
+" See `:vertical help conjure-mappings` for (default) mappings
+
+" Provides a couple of helper commands for 'jacking' in to a Clojure REPL by auto-starting it.
+" (For Clojure CLI use :Clj)
+Plug 'clojure-vim/vim-jack-in'
+" Start an nREPL server with all of the appropriate middleware inside your Neovim instance
+nnoremap <leader>clj   :Clj<CR>
+
+
+
+" Vim-sexp brings the Vim philosophy of precision editing to S-expressions (as used in Lisps).
+" It is less intrusive than the paredit plugin.
 Plug 'guns/vim-sexp'
 
 " Tpopes remaps for vim-sexp
