@@ -2103,9 +2103,13 @@ Plug 'tpope/vim-salve'
 
 " Vim-sexp brings the Vim philosophy of precision editing to S-expressions.
 Plug 'guns/vim-sexp'
+
+" Tpopes remaps for vim-sexp
+" (I like some of them, but not all and do have the problem described below, so I steal some mapping manually)
 " Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
-" Disable mapping hooks (because unmapping by adding empty string to the s:sexp_mappings dict as described in the docs doesn't work)
+" Disable mapping hooks
+" (because unmapping by adding empty string to the s:sexp_mappings dict as described in the docs doesn't work)
 let g:sexp_filetypes = ''
 
 let s:sexp_mappings = {
@@ -2191,29 +2195,29 @@ function! s:vim_sexp_mappings()
     xmap <silent><buffer> <LocalLeader>e{ <Plug>(sexp_curly_head_wrap_element)
     nmap <silent><buffer> <LocalLeader>e} <Plug>(sexp_curly_tail_wrap_element)
     xmap <silent><buffer> <LocalLeader>e} <Plug>(sexp_curly_tail_wrap_element)
-    nmap <silent><buffer> <LocalLeader>h  <Plug>(sexp_insert_at_list_head)
-    nmap <silent><buffer> <LocalLeader>l  <Plug>(sexp_insert_at_list_tail)
+    nmap <silent><buffer> <I              <Plug>(sexp_insert_at_list_head)
+    nmap <silent><buffer> >I              <Plug>(sexp_insert_at_list_tail)
     nmap <silent><buffer> <LocalLeader>@  <Plug>(sexp_splice_list)
     nmap <silent><buffer> <LocalLeader>o  <Plug>(sexp_raise_list)
     xmap <silent><buffer> <LocalLeader>o  <Plug>(sexp_raise_list)
     nmap <silent><buffer> <LocalLeader>O  <Plug>(sexp_raise_element)
     xmap <silent><buffer> <LocalLeader>O  <Plug>(sexp_raise_element)
-    nmap <silent><buffer> sk              <Plug>(sexp_swap_list_backward)
-    xmap <silent><buffer> sk              <Plug>(sexp_swap_list_backward)
-    nmap <silent><buffer> sj              <Plug>(sexp_swap_list_forward)
-    xmap <silent><buffer> sj              <Plug>(sexp_swap_list_forward)
-    nmap <silent><buffer> sh              <Plug>(sexp_swap_element_backward)
-    xmap <silent><buffer> sh              <Plug>(sexp_swap_element_backward)
-    nmap <silent><buffer> sl              <Plug>(sexp_swap_element_forward)
-    xmap <silent><buffer> sl              <Plug>(sexp_swap_element_forward)
-    " nmap <silent><buffer> <M-S-j>         <Plug>(sexp_emit_head_element)
-    " xmap <silent><buffer> <M-S-j>         <Plug>(sexp_emit_head_element)
-    " nmap <silent><buffer> <M-S-k>         <Plug>(sexp_emit_tail_element)
-    " xmap <silent><buffer> <M-S-k>         <Plug>(sexp_emit_tail_element)
-    nmap <silent><buffer> <M-S-h>         <Plug>(sexp_capture_prev_element)
-    xmap <silent><buffer> <M-S-h>         <Plug>(sexp_capture_prev_element)
-    nmap <silent><buffer> <M-S-l>         <Plug>(sexp_capture_next_element)
-    xmap <silent><buffer> <M-S-l>         <Plug>(sexp_capture_next_element)
+    nmap <silent><buffer> <f              <Plug>(sexp_swap_list_backward)
+    xmap <silent><buffer> <f              <Plug>(sexp_swap_list_backward)
+    nmap <silent><buffer> >f              <Plug>(sexp_swap_list_forward)
+    xmap <silent><buffer> >f              <Plug>(sexp_swap_list_forward)
+    nmap <silent><buffer> <e              <Plug>(sexp_swap_element_backward)
+    xmap <silent><buffer> <e              <Plug>(sexp_swap_element_backward)
+    nmap <silent><buffer> >e              <Plug>(sexp_swap_element_forward)
+    xmap <silent><buffer> >e              <Plug>(sexp_swap_element_forward)
+    nmap <silent><buffer> >(              <Plug>(sexp_emit_head_element)
+    xmap <silent><buffer> >(              <Plug>(sexp_emit_head_element)
+    nmap <silent><buffer> <)              <Plug>(sexp_emit_tail_element)
+    xmap <silent><buffer> <)              <Plug>(sexp_emit_tail_element)
+    nmap <silent><buffer> <(              <Plug>(sexp_capture_prev_element)
+    xmap <silent><buffer> <(              <Plug>(sexp_capture_prev_element)
+    nmap <silent><buffer> >)              <Plug>(sexp_capture_next_element)
+    xmap <silent><buffer> >)              <Plug>(sexp_capture_next_element)
     imap <silent><buffer> <BS>            <Plug>(sexp_insert_backspace)
     imap <silent><buffer> "               <Plug>(sexp_insert_double_quote)
     imap <silent><buffer> (               <Plug>(sexp_insert_opening_round)
