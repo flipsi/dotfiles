@@ -4755,7 +4755,7 @@ function! OpenVimPlugOnInGithub()
 endfunction
 augroup open_vim_plugins_on_github
     autocmd!
-    autocmd BufRead vimrc nmap <buffer> <leader>px :call OpenVimPlugOnInGithub()<cr>
+    autocmd BufRead vimrc nnoremap <buffer> <leader>px :call OpenVimPlugOnInGithub()<cr>
 augroup END
 
 
