@@ -1602,7 +1602,7 @@ vnoremap <leader>dv :Linediff<cr>
 " run make or jobs asynchronously {{{
 
 Plug 'tpope/vim-dispatch'
-
+Plug 'radenling/vim-dispatch-neovim'
 
 
 " }}}
