@@ -2593,11 +2593,6 @@ nnoremap <leader>uT :GundoToggle<cr>
     " (must be executed before the D custom mapping)
     call yankstack#setup()
 
-    " fix s mapping
-    " (must be executed after yankstack#setup())
-    nmap s <plug>Sneak_S
-
-
 endif
 
 
