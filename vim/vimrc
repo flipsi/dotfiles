@@ -2105,7 +2105,7 @@ let g:polyglot_disabled = ['helm']
 " Plug 'tpope/vim-fireplace'
 " Plug 'ctford/vim-fireplace-easy'
 
-" static project support
+" static project support (integrate Fireplace with Leiningen / Clojure CLI)
 " Plug 'tpope/vim-salve'
 
 " Some handy keybindings for working with the Clojure REPL
