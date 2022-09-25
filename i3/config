@@ -120,16 +120,23 @@ mode "$refresh" {
 }
 
 ## change keyboard layout
-bindsym $mod+Shift+F4 mode "$change_keyboard_layout"
+bindsym $mod+F1 mode "$change_keyboard_layout"
 set $change_keyboard_layout Keyboard layout: (F1) de (F2) norman_sflip (F3) us (F4) us_sflip (F5) neo (F6) dvorak (F7) programmer dvorak
 mode "$change_keyboard_layout" {
     bindsym F1 exec "setxkbmap de"; mode "default"
+    bindsym  1 exec "setxkbmap de"; mode "default"
     bindsym F2 exec "setxkbmap us_norman_sflip"; mode "default"
+    bindsym  2 exec "setxkbmap us_norman_sflip"; mode "default"
     bindsym F3 exec "setxkbmap us"; mode "default"
+    bindsym  3 exec "setxkbmap us"; mode "default"
     bindsym F4 exec "setxkbmap us_sflip"; mode "default"
+    bindsym  4 exec "setxkbmap us_sflip"; mode "default"
     bindsym F5 exec "setxkbmap neo"; mode "default"
+    bindsym  5 exec "setxkbmap neo"; mode "default"
     bindsym F6 exec "setxkbmap dvorak"; mode "default"
+    bindsym  6 exec "setxkbmap dvorak"; mode "default"
     bindsym F7 exec "setxkbmap -layout us -variant dvp"; mode "default"
+    bindsym  7 exec "setxkbmap -layout us -variant dvp"; mode "default"
     # cancel
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -139,7 +146,7 @@ mode "$change_keyboard_layout" {
 set $keyboard_layout_image_source https://romanzolotarev.com/typing-norman.png
 set $keyboard_layout_image /home/sflip/.i3/keyboard_layout.png
 exec "test -f $keyboard_layout_image || $( sleep 20 && curl $keyboard_layout_image_source > $keyboard_layout_image )"
-bindsym $mod+F4 exec --no-startup-id "pkill -fx 'sxiv -z 100 $keyboard_layout_image' || sxiv -z 100 $keyboard_layout_image"
+bindsym $mod+Shift+F1 exec --no-startup-id "pkill -fx 'sxiv -z 100 $keyboard_layout_image' || sxiv -z 100 $keyboard_layout_image"
 
 
 
