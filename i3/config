@@ -568,17 +568,24 @@ bindsym $mod+BackSpace kill
 bindsym $mod+Shift+q kill
 
 ## change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+h      focus left
+bindsym $mod+Left   focus left
+bindsym $mod+j      focus down
+bindsym $mod+Down   focus down
+bindsym $mod+k      focus up
+bindsym $mod+Up     focus up
+bindsym $mod+l      focus right
+bindsym $mod+Right  focus right
 
 ## move focused container
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-# bindsym $mod+Shift+j move down; resize shrink height 15 px or 15 ppt
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h     move left
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+j     move down
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+k     move up
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+l     move right
+bindsym $mod+Shift+Right move right
 
 ## focus the parent/child container
 bindsym $mod+y focus parent
@@ -605,10 +612,14 @@ bindsym $mod+z scratchpad show
 bindsym $mod+r mode "resize"
 mode "resize" {
     set $steps 5
-    bindsym h resize shrink width  $steps px or $steps ppt
-    bindsym k resize grow   height $steps px or $steps ppt
-    bindsym j resize shrink height $steps px or $steps ppt
-    bindsym l resize grow   width  $steps px or $steps ppt
+    bindsym h       resize shrink width  $steps px or $steps ppt
+    bindsym Left    resize shrink width  $steps px or $steps ppt
+    bindsym j       resize shrink height $steps px or $steps ppt
+    bindsym Down    resize shrink height $steps px or $steps ppt
+    bindsym k       resize grow   height $steps px or $steps ppt
+    bindsym Up      resize grow   height $steps px or $steps ppt
+    bindsym l       resize grow   width  $steps px or $steps ppt
+    bindsym Right   resize grow   width  $steps px or $steps ppt
     # cancel
     bindsym $mod+r mode "default"
     bindsym Return mode "default"
@@ -680,10 +691,14 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+u mode "$move_container_to_output"
 set $move_container_to_output Move container to output (h) left, (l) right, (j) down, (k) up
 mode "$move_container_to_output" {
-    bindsym h move container to output left; workspace back_and_forth; mode "default"
-    bindsym l move container to output right; workspace back_and_forth; mode "default"
-    bindsym j move container to output down; workspace back_and_forth; mode "default"
-    bindsym k move container to output up; workspace back_and_forth; mode "default"
+    bindsym h       move container to output left;  workspace back_and_forth; mode "default"
+    bindsym Left    move container to output left;  workspace back_and_forth; mode "default"
+    bindsym j       move container to output down;  workspace back_and_forth; mode "default"
+    bindsym Down    move container to output down;  workspace back_and_forth; mode "default"
+    bindsym k       move container to output up;    workspace back_and_forth; mode "default"
+    bindsym Up      move container to output up;    workspace back_and_forth; mode "default"
+    bindsym l       move container to output right; workspace back_and_forth; mode "default"
+    bindsym Right   move container to output right; workspace back_and_forth; mode "default"
     # cancel
     bindsym $mod+u mode "default"
     bindsym Return mode "default"
@@ -694,10 +709,14 @@ mode "$move_container_to_output" {
 bindsym $mod+Shift+u mode "$move_workspace_to_output"
 set $move_workspace_to_output Move workspace to output (h) left, (l) right, (j) down, (k) up
 mode "$move_workspace_to_output" {
-    bindsym h move workspace to output left; mode "default"
-    bindsym l move workspace to output right; mode "default"
-    bindsym j move workspace to output down; mode "default"
-    bindsym k move workspace to output up; mode "default"
+    bindsym h       move workspace to output left;  mode "default"
+    bindsym Left    move workspace to output left;  mode "default"
+    bindsym j       move workspace to output down;  mode "default"
+    bindsym Down    move workspace to output down;  mode "default"
+    bindsym k       move workspace to output up;    mode "default"
+    bindsym Up      move workspace to output up;    mode "default"
+    bindsym l       move workspace to output right; mode "default"
+    bindsym Right   move workspace to output right; mode "default"
     # cancel
     bindsym $mod+Shift+u mode "default"
     bindsym Return mode "default"
