@@ -640,8 +640,8 @@ nnoremap <leader>gg gg:GitGutterNextHunk<cr>zz9<c-e>zv
 nnoremap <leader>gG  G:GitGutterPrevHunk<cr>zz9<c-e>zv
 nnoremap <leader>gn   :GitGutterNextHunk<cr>zz9<c-e>zv
 nnoremap <leader>gN   :GitGutterPrevHunk<cr>zz9<c-e>zv
-nnoremap <down>       :GitGutterNextHunk<cr>zz9<c-e>zv
-nnoremap <up>         :GitGutterPrevHunk<cr>zz9<c-e>zv
+nnoremap         gn   :GitGutterNextHunk<cr>zz9<c-e>zv
+nnoremap         gN   :GitGutterPrevHunk<cr>zz9<c-e>zv
 nnoremap <leader>ga   :GitGutterStageHunk<cr>:GitGutterNextHunk<cr>
 nnoremap <leader>gu   :GitGutterUndoHunk<cr>
 nnoremap <leader>gi   :GitGutterPreviewHunk<cr>
@@ -855,7 +855,6 @@ let g:incsearch_cli_key_mappings = {
 \     'noremap': 1
 \   },
 \ }
-" TODO: <c-k> and <c-j> to scroll through old searches. use arrows until fix.
 
 " nnoremap /  <plug>(incsearch-forward)
 " nnoremap ?  <plug>(incsearch-backward)
@@ -1464,6 +1463,10 @@ let g:NERDDefaultAlign = 'left'
 " nmap 'c <leader>c
 " xmap 'c <leader>c
 " comment text objects and movements
+nmap <leader>c<down> V<down><plug>NERDCommenterInvert
+nmap <leader>c<up>   V<up><plug>NERDCommenterInvert
+nmap        'c<down> V<down><plug>NERDCommenterComment
+nmap        'c<up>   V<up><plug>NERDCommenterComment
 for mov in ['j', 'k', 'gg', 'G', '(', ')', '{', '}', 'as', 'is', 'ap', 'ip']
     exe "nmap \<leader\>c" . mov . " V" . mov . "\<plug\>NERDCommenterInvert"
     exe "nmap 'c"          . mov . " V" . mov . "\<plug\>NERDCommenterComment"
@@ -1634,10 +1637,10 @@ let g:qf_resize_max_height = 8
 " this is an improved version of dragvisuals
 Plug 'zirrostig/vim-schlepp'
 
-vmap <up>    <plug>SchleppUp
-vmap <down>  <plug>SchleppDown
-vmap <left>  <plug>SchleppLeft
-vmap <right> <plug>SchleppRight
+" vmap <up>    <plug>SchleppUp
+" vmap <down>  <plug>SchleppDown
+" vmap <left>  <plug>SchleppLeft
+" vmap <right> <plug>SchleppRight
 
 " duplicate
 " (delete selection with x. by default, x and d do the same)
@@ -4000,8 +4003,8 @@ augroup map_enter_help
     au BufReadPost */vim/*/doc/*,*/\.vim/bundle/*doc/*
                 \ nnoremap <buffer> <enter> <c-]>
 augroup END
-nnoremap <leader><down> :tn<cr>
-nnoremap <leader><up>   :tp<cr>
+" nnoremap <leader><down> :tn<cr>
+" nnoremap <leader><up>   :tp<cr>
 
 
 " visual block mode is more useful than visual mode
@@ -4105,19 +4108,16 @@ cnoremap <c-g> <c-c>
 " (this disables text objects)
 "vnoremap i vi
 
-" scroll with arrow keys if i lay back
-"nnoremap <down> <c-e>
-"nnoremap <up>   <c-y>
-
 " scroll a little smoother
 " (this actually is suggested in :help scroll-smooth)
-noremap <m-j>  <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
-noremap <esc>j <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
-noremap <m-k>  <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
-noremap <esc>k <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
-
-noremap <PageDown> <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
-noremap <PageUp>   <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
+" noremap <m-j>       <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
+" noremap <esc>j      <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
+noremap <m-down>    <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
+noremap <esc><down> <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
+" noremap <m-k>       <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
+" noremap <esc>k      <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
+noremap <m-up>      <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
+noremap <esc><up>   <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 
 
 " }}}
@@ -4394,16 +4394,24 @@ nnoremap <leader>ys <nop>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MOVEMENT {{{
 
+" Now that I'm on a Moonlander where arrow keys are usable and I'm using the Norman keyboard layout, I don't want to use hjkl anymore.
+" So unmap those to get them out of muscle memory.
+nmap h <nop>
+nmap j <nop>
+nmap k <nop>
+nmap l <nop>
 
 " move intuitively when text is wrapped
-nnoremap j gj
-nnoremap k gk
+" nnoremap j gj
+" nnoremap k gk
+nnoremap <down> g<down>
+nnoremap <up>   g<up>
 
 " move faster
-nnoremap gj 8j
-nnoremap gk 8k
-vnoremap gj 8j
-vnoremap gk 8k
+nnoremap g<down> 8j
+vnoremap g<down> 8j
+nnoremap g<up>   8k
+vnoremap g<up>   8k
 
 
 " move with emacs-keys like in most shells
@@ -5067,12 +5075,12 @@ function! JumpThroughList(direction, perFile, switch)
     endif
 endfunction
 
-nnoremap <silent> <left>          :call JumpThroughList(1, 0, 0)<cr>
-nnoremap <silent> <right>         :call JumpThroughList(0, 0, 0)<cr>
-nnoremap <silent> g<left>         :call JumpThroughList(1, 1, 0)<cr>
-nnoremap <silent> g<right>        :call JumpThroughList(0, 1, 0)<cr>
-nnoremap <silent> <leader><left>  :call JumpThroughList(1, 0, 1)<cr>
-nnoremap <silent> <leader><right> :call JumpThroughList(0, 0, 1)<cr>
+nnoremap <silent> kn   :call JumpThroughList(0, 0, 0)<cr>
+nnoremap <silent> kN   :call JumpThroughList(1, 0, 0)<cr>
+nnoremap <silent> kgn  :call JumpThroughList(0, 1, 0)<cr>
+nnoremap <silent> kgN  :call JumpThroughList(1, 1, 0)<cr>
+nnoremap <silent> kkn  :call JumpThroughList(0, 0, 1)<cr>
+nnoremap <silent> kkN  :call JumpThroughList(1, 0, 1)<cr>
 
 
 " close location list (which contains syntastic errors) and quickfix window
@@ -5103,10 +5111,10 @@ nnoremap <m-p>  :bprevious<cr>
 nnoremap <esc>p :bprevious<cr>
 
 " change window
-nnoremap <silent> <c-j> :wincmd j<cr>
-nnoremap <silent> <c-k> :wincmd k<cr>
-nnoremap <silent> <c-h> :wincmd h<cr>
-nnoremap <silent> <c-l> :wincmd l<cr>
+nnoremap <silent> <leader><left>  :wincmd h<cr>
+nnoremap <silent> <leader><down>  :wincmd j<cr>
+nnoremap <silent> <leader><up>    :wincmd k<cr>
+nnoremap <silent> <leader><right> :wincmd l<cr>
 
 " move buffer to a new window
 nnoremap <silent> <leader><c-l> :vsplit<cr><c-w>p:buffer #<cr><c-w>p<cr>
@@ -5121,24 +5129,32 @@ nnoremap <silent> <c-w>r     :ResizeWindows<cr>
 nnoremap <silent> <c-w><c-r> :ResizeWindows<cr>
 command! ResizeWindows  :call ResizeWindows('enter') " Open a mode to resize windows with h,j,k,l
 function! ResizeWindows(enter_or_leave)
-    " TODO: save and restore existing mappings (j,k) without redefining here
+    " TODO: save and restore existing mappings without redefining / unmapping here
     if a:enter_or_leave == "enter"
         nnoremap <return> :call ResizeWindows('leave')<cr>
         nnoremap <esc>    :call ResizeWindows('leave')<cr>
         nnoremap <c-c>    :call ResizeWindows('leave')<cr>
-        nnoremap <silent> j :resize +2<cr>
-        nnoremap <silent> k :resize -2<cr>
-        nnoremap <silent> h 2<c-w><
-        nnoremap <silent> l 2<c-w>>
-        echo "[RESIZE MODE] (press h,j,k,l to resize and <enter> or <esc> to leave move)"
+        nnoremap <silent> j         :resize +2<cr>
+        nnoremap <silent> <down>    :resize +2<cr>
+        nnoremap <silent> k         :resize -2<cr>
+        nnoremap <silent> <up>      :resize -2<cr>
+        nnoremap <silent> h         2<c-w><
+        nnoremap <silent> <left>    2<c-w><
+        nnoremap <silent> l         2<c-w>>
+        nnoremap <silent> <right>   2<c-w>>
+        echo "[RESIZE MODE] (press h,j,k,l or arrow keys to resize and <enter> or <esc> to leave move)"
     else
-        nnoremap j gj
-        nnoremap k gk
-        nunmap   h
-        nunmap   l
-        nunmap   <return>
-        nunmap   <esc>
-        nunmap   <c-c>
+        nmap h <nop>
+        nmap j <nop>
+        nmap k <nop>
+        nmap l <nop>
+        nunmap <down>
+        nunmap <up>
+        nunmap <left>
+        nunmap <right>
+        nunmap <return>
+        nunmap <esc>
+        nunmap <c-c>
         echo "Windows resized."
     endif
 endfunction
