@@ -5075,12 +5075,61 @@ function! JumpThroughList(direction, perFile, switch)
     endif
 endfunction
 
-nnoremap <silent> kn   :call JumpThroughList(0, 0, 0)<cr>
-nnoremap <silent> kN   :call JumpThroughList(1, 0, 0)<cr>
-nnoremap <silent> kgn  :call JumpThroughList(0, 1, 0)<cr>
-nnoremap <silent> kgN  :call JumpThroughList(1, 1, 0)<cr>
-nnoremap <silent> kkn  :call JumpThroughList(0, 0, 1)<cr>
-nnoremap <silent> kkN  :call JumpThroughList(1, 0, 1)<cr>
+" jump to first result of quickfix and location list, with the same keys
+" @param switch: 0 for the same list as before, 1 for the other
+function! JumpToFirstInList(switch)
+    if (a:switch == 1)
+        if (g:jumplist == 'quickfixlist')
+            let g:jumplist = 'locationlist'
+        else
+            let g:jumplist = 'quickfixlist'
+        endif
+    endif
+    if (g:jumplist == 'locationlist')
+        lfirst
+    else
+        cfirst
+    endif
+endfunction
+
+" jump to last result of quickfix and location list, with the same keys
+" @param switch: 0 for the same list as before, 1 for the other
+function! JumpToLastInList(switch)
+    if (a:switch == 1)
+        if (g:jumplist == 'quickfixlist')
+            let g:jumplist = 'locationlist'
+        else
+            let g:jumplist = 'quickfixlist'
+        endif
+    endif
+    if (g:jumplist == 'locationlist')
+        llast
+    else
+        clast
+    endif
+endfunction
+
+" first/last result in list
+nnoremap <silent> kgg        :call JumpToFirstInList(0)<cr>
+nnoremap <silent> kG         :call JumpToLastInList(0)<cr>
+" first/last result in other list
+nnoremap <silent> kkgg       :call JumpToFirstInList(1)<cr>
+nnoremap <silent> kkG        :call JumpToLastInList(1)<cr>
+" next/previous result in list
+nnoremap <silent> kn         :call JumpThroughList(0, 0, 0)<cr>
+nnoremap <silent> k<down>    :call JumpThroughList(0, 0, 0)<cr>
+nnoremap <silent> kN         :call JumpThroughList(1, 0, 0)<cr>
+nnoremap <silent> k<up>      :call JumpThroughList(1, 0, 0)<cr>
+" next/previous result in next file in list
+nnoremap <silent> kgn        :call JumpThroughList(0, 1, 0)<cr>
+nnoremap <silent> kg<down>   :call JumpThroughList(0, 1, 0)<cr>
+nnoremap <silent> kgN        :call JumpThroughList(1, 1, 0)<cr>
+nnoremap <silent> kg<up>     :call JumpThroughList(1, 1, 0)<cr>
+" next/previous result in other list
+nnoremap <silent> kkn        :call JumpThroughList(0, 0, 1)<cr>
+nnoremap <silent> kk<down>   :call JumpThroughList(0, 0, 1)<cr>
+nnoremap <silent> kkN        :call JumpThroughList(1, 0, 1)<cr>
+nnoremap <silent> kk<up>     :call JumpThroughList(1, 0, 1)<cr>
 
 
 " close location list (which contains syntastic errors) and quickfix window
