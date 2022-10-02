@@ -167,6 +167,9 @@ endif
 let mapleader=' '
 let maplocalleader=' '
 
+" leader key should do nothing alone
+nnoremap <leader> <nop>
+
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " automatically source vimrc on save {{{
