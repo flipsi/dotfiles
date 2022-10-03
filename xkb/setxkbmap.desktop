@@ -2,7 +2,7 @@
 Name=setxkbmap
 GenericName=setxkbmap
 Comment=Set my keyboard layout
-Exec=setxkbmap us_sflip
+Exec=setxkbmap de
 Terminal=false
 Type=Application
 X-GNOME-Autostart-enabled=true

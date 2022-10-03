@@ -22,7 +22,9 @@ exec "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"
 exec "/home/sflip/.i3/bin/i3-initialize-outputs.sh > /tmp/i3-initialize-outputs.log 2>&1"
 
 ## set keyboard layout
-exec "setxkbmap us_sflip"
+# exec "setxkbmap us_sflip"
+# Use german software layout to enable german characters on Moonlander keyboard
+exec "setxkbmap de"
 
 ## turn on num block
 exec --no-startup-id "numlockx"
