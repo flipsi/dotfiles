@@ -1475,10 +1475,14 @@ for mov in ['j', 'k', 'gg', 'G', '(', ')', '{', '}', 'as', 'is', 'ap', 'ip']
     exe "nmap 'c"          . mov . " V" . mov . "\<plug\>NERDCommenterComment"
 endfor
 for i in range(1, 50)
-    exe "nmap \<leader\>c" . i . "j V" . i . "j\<plug\>NERDCommenterInvert"
-    exe "nmap \<leader\>c" . i . "k V" . i . "k\<plug\>NERDCommenterInvert"
-    exe "nmap 'c"          . i . "j V" . i . "j\<plug\>NERDCommenterComment"
-    exe "nmap 'c"          . i . "k V" . i . "k\<plug\>NERDCommenterComment"
+    exe "nmap \<leader\>c" . i . "j        V" . i . "j\<plug\>NERDCommenterInvert"
+    exe "nmap \<leader\>c" . i . "\<down\> V" . i . "j\<plug\>NERDCommenterInvert"
+    exe "nmap \<leader\>c" . i . "k        V" . i . "k\<plug\>NERDCommenterInvert"
+    exe "nmap \<leader\>c" . i . "\<up\>   V" . i . "k\<plug\>NERDCommenterInvert"
+    exe "nmap 'c"          . i . "j        V" . i . "j\<plug\>NERDCommenterComment"
+    exe "nmap 'c"          . i . "\<down\> V" . i . "j\<plug\>NERDCommenterComment"
+    exe "nmap 'c"          . i . "k        V" . i . "k\<plug\>NERDCommenterComment"
+    exe "nmap 'c"          . i . "\<up\>   V" . i . "k\<plug\>NERDCommenterComment"
 endfor
 " duplicate a line and comment out the first one
 nmap <leader>cd <leader>cyp
