@@ -1241,7 +1241,7 @@ cnoreabbrev w!! SudaWrite
 Plug 'tpope/vim-eunuch'
 
 nnoremap <leader>rn :Rename <c-r>=expand("%:t")<cr>
-nnoremap <leader>rm :Confirm Delete<cr>
+nnoremap <leader>rm :Confirm Delete!<cr>
 
 
 " Plug 'scrooloose/nerdtree'
