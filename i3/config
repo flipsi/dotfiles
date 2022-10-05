@@ -486,10 +486,9 @@ mode "$music_control" {
     bindsym p                exec --no-startup-id "playerctl previous"; exec "$UPDATE_STATUSBAR"
     bindsym O                exec --no-startup-id "playerctl previous"; exec "$UPDATE_STATUSBAR"
     bindsym Left             exec --no-startup-id "playerctl previous"; exec "$UPDATE_STATUSBAR"
-    # bindsym plus             exec --no-startup-id "playerctl volume 0.9+"
-    # bindsym minus            exec --no-startup-id "playerctl volume 0.9-"
-    bindsym plus            exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
-    bindsym minus           exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
+    # volume change seems to not work without the `-p` option
+    bindsym plus             exec --no-startup-id "playerctl -p spotify volume 0.9+"
+    bindsym minus            exec --no-startup-id "playerctl -p spotify volume 0.9-"
     # cancel
     bindsym $mod+Shift+0 mode "default"
     bindsym Return mode "default"
