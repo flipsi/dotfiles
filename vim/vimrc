@@ -4214,14 +4214,18 @@ tnoremap <c-y>z <c-\><c-n>:MaximizerToggle!<CR>i
 tnoremap <c-y><c-y> <c-\><c-n>
 
 " leave terminal insert mode and scroll up
-tnoremap <c-b> <c-\><c-n><c-b>
+tnoremap <c-b>      <c-\><c-n><c-b>
+tnoremap <PageUp>   <c-\><c-n><c-b>
+tnoremap <PageDown> <c-\><c-n><c-b>
 
-" leave terminal insert mode and move to last used window
-tnoremap <c-h> <c-\><c-n><c-w>p
+" leave terminal insert mode and move to last used or adjacent window
+tnoremap <c-h>          <c-\><c-n><c-w>p
+tnoremap <c-y><up>      <c-\><c-n><c-w>k
+tnoremap <c-y><left>    <c-\><c-n><c-w>h
 
 " leave terminal insert mode and move window to the bottom/right
-tnoremap <c-y>J <c-\><c-n><c-w>Ji
-tnoremap <c-y>L <c-\><c-n><c-w>Li
+tnoremap <c-y>J         <c-\><c-n><c-w>Ji
+tnoremap <c-y>L         <c-\><c-n><c-w>Li
 
 
 
