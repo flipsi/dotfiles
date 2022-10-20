@@ -199,6 +199,16 @@ augroup END
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" automatically create non-existing directories when writing files
+
+augroup Mkdir
+    autocmd!
+    autocmd BufWritePre * call mkdir(expand("<afile>:p:h"), "p")
+augroup END
+
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " cursor to the last line when reopening a file {{{
 
 augroup line_jump_on_open
