@@ -745,19 +745,24 @@ let g:sneak#use_ic_scs = 1
 
 nmap f <plug>Sneak_s
 nmap F <plug>Sneak_S
+nmap l <plug>Sneak_S
 
 nmap , <plug>Sneak_;
 nmap ; <plug>Sneak_,
 
 xmap f :<C-U>call sneak#wrap(visualmode(), 2, 0, 1, 0)<CR>
 xmap F :<C-U>call sneak#wrap(visualmode(), 2, 1, 1, 0)<CR>
+xmap l :<C-U>call sneak#wrap(visualmode(), 2, 1, 1, 0)<CR>
 xmap t :<C-U>call sneak#wrap(visualmode(), 2, 0, 0, 0)<CR>
 xmap T :<C-U>call sneak#wrap(visualmode(), 2, 1, 0, 0)<CR>
+xmap l :<C-U>call sneak#wrap(visualmode(), 2, 1, 0, 0)<CR>
 
 omap f :<C-U>call sneak#wrap(v:operator,   2, 0, 1, 0)<CR>
 omap F :<C-U>call sneak#wrap(v:operator,   2, 1, 1, 0)<CR>
+omap l :<C-U>call sneak#wrap(v:operator,   2, 1, 1, 0)<CR>
 omap t :<C-U>call sneak#wrap(v:operator,   2, 0, 0, 0)<CR>
 omap T :<C-U>call sneak#wrap(v:operator,   2, 1, 0, 0)<CR>
+omap l :<C-U>call sneak#wrap(v:operator,   2, 1, 0, 0)<CR>
 
 
 " make f only match interesting characters
@@ -4420,11 +4425,10 @@ nnoremap <leader>ys <nop>
 " MOVEMENT {{{
 
 " Now that I'm on a Moonlander where arrow keys are usable and I'm using the Norman keyboard layout, I don't want to use hjkl anymore.
-" So unmap those to get them out of muscle memory.
 nmap h <nop>
 nmap j <nop>
 nmap k <nop>
-nmap l <nop>
+" nmap l <nop>
 
 " move intuitively when text is wrapped
 " nnoremap j gj
