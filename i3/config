@@ -736,13 +736,13 @@ mode "$move_workspace_to_output" {
 
 ## start an application
 bindsym $mod+Shift+o mode "$launch"
-set $launch Launch: (o) Terminal (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram
+set $launch Launch: (o) Terminal (f) Firefox (g) Chrome (r) Chromium (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram
 mode "$launch" {
     bindsym o               mode "$terminal"
     bindsym Shift+o         mode "$terminal"
     bindsym $mod+o          mode "$terminal"
     bindsym $mod+Shift+o    mode "$terminal"
-    bindsym c       exec --no-startup-id "chromium"; mode "default"
+    bindsym r       exec --no-startup-id "chromium"; mode "default"
     bindsym f       exec --no-startup-id "firefox"; mode "default"
     bindsym g       exec --no-startup-id "google-chrome-stable"; mode "default"
     bindsym i       exec --no-startup-id "vivaldi-stable"; mode "default"
@@ -783,7 +783,7 @@ mode "$terminal" {
 
 ## switch to a specific window or workspace
 bindsym $mod+o mode "$goto"
-set $goto Goto: (o) Terminal (i) Vivaldi (f) Firefox (c) Chromium (g) Chrome (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram (a) Audacity (w) Wine
+set $goto Goto: (o) Terminal (i) Vivaldi (f) Firefox (g) Chrome (r) Chromium (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram (a) Audacity (w) Wine
 mode "$goto" {
   bindsym a         [class="(?i)audacity"]              focus; mode "default"
   bindsym $mod+a    [class="(?i)audacity"]              focus; mode "default"
@@ -805,8 +805,8 @@ mode "$goto" {
   bindsym $mod+s    [class="(?i)slack"]                 focus; mode "default"
   bindsym t         [class="(?i)Telegram"]              focus; mode "default"
   bindsym $mod+t    [class="(?i)Telegram"]              focus; mode "default"
-  bindsym c         [class="(?i)chromium" instance="chromium"] focus; mode "default"
-  bindsym $mod+c    [class="(?i)chromium" instance="chromium"] focus; mode "default"
+  bindsym r         [class="(?i)chromium" instance="chromium"] focus; mode "default"
+  bindsym $mod+r    [class="(?i)chromium" instance="chromium"] focus; mode "default"
   bindsym g         [class="(?i)google-chrome" instance="google-chrome"] focus; mode "default"
   bindsym $mod+g    [class="(?i)google-chrome" instance="google-chrome"] focus; mode "default"
   bindsym b         [class="(?i)chrom" instance="(crx_flcchhclanjfdanlfphjfnhbjdbejong|crx_goifhkhiimheobgjhfbnkkibebioelpk)"] focus; mode "default"
