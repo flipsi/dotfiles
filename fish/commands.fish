@@ -8,5 +8,6 @@ date +%s # unix timestamp
 git branch -vv --merged | grep "\[.*/.*: gone\]" | cut -d" " -f3 | xargs git branch -d # delete merged branches
 git checkout --quiet --detach; git fetch (git remote | head -n1) master:master; git checkout --quiet -
 picom-trans -s -o 90 # set transparency for window to be clicked on
+sudoedit /etc/X11/xorg.conf.d/00-keyboard.conf # configure Xorg keyboard layout
 yay -Sc # clear pacman cache (to free disk space)
 yay -Yc # remove unused dependencies
