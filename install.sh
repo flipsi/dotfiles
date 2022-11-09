@@ -336,7 +336,7 @@ function create_link_for_target() {
 
         polybar )
             mkdir -p "$HOME/.config/polybar"
-            create_link "$PWD/polybar/config" "$HOME/.config/polybar/config"
+            create_link "$PWD/polybar/config.ini" "$HOME/.config/polybar/config.ini"
             create_link "$PWD/polybar/scripts" "$HOME/.config/polybar/scripts"
             ;;
 
