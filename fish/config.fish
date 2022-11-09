@@ -80,10 +80,10 @@ if status --is-interactive; and status --is-login
 
     # keychain takes care of ssh-agent and can also do gpg
     function keychain_start
-        eval (command keychain --eval --quiet ~/.ssh/id_rsa)
+        eval (command keychain --eval --quiet ~/.ssh/id_*)
     end
     if command -v keychain >/dev/null
-        set -l host_where_to_start_keychain_automatically 'falbala' 'obelix' 'dwarf'
+        set -l host_where_to_start_keychain_automatically 'falbala' 'obelix' 'mimir'
         if contains $hostname $host_where_to_start_keychain_automatically
             keychain_start
         end
