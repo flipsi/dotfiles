@@ -10,8 +10,9 @@ HOSTNAME=$(hostname)
 SESSION_NAME_1="main"
 SESSION_NAME_2="src"
 
-PROJECTS_DIR="$HOME/work/ryte/src"
-NUMBER_OF_PROJECTS=8
+HOSTNAME_WORK="mimir"
+PROJECTS_DIR="$HOME/work/code-intelligence/src"
+NUMBER_OF_PROJECTS=3
 
 
 function has_internet_connection() {
@@ -66,8 +67,9 @@ function create_sessions() {
         tmux new-window -t $SESSION_NAME_1: -n "top" "bpytop || htop"
 
         if has_internet_connection; then
-            tmux new-window -t $SESSION_NAME_1: -n mail "mail --mode sync --disable-tmux-rename --disable-tail-logs"
-            tmux new-window -t $SESSION_NAME_1: -n telegram "tg"
+            if [[ "$HOSTNAME" = "falbala" ]]; then
+                tmux new-window -t $SESSION_NAME_1: -n mail "mail --mode sync --disable-tmux-rename --disable-tail-logs"
+            fi
         fi
 
         tmux new-window -t $SESSION_NAME_1: -n "tmp" "ranger $HOME/tmp"
@@ -81,7 +83,7 @@ function create_sessions() {
 
         tmux new-session -d -s $SESSION_NAME_2 -n "dotfiles" -c "$HOME/dotfiles" "nvim --listen dotfiles"
 
-        if [[ "$HOSTNAME" = "dwarf" ]]; then
+        if [[ "$HOSTNAME" = "$HOSTNAME_WORK" ]]; then
             for PROJECT in $(get_last_recent_git_projects "$PROJECTS_DIR" "$NUMBER_OF_PROJECTS"); do
                 tmux new-window -t $SESSION_NAME_2: -n "$PROJECT" -c \
                     "$PROJECTS_DIR/$PROJECT" "fish -i -C \"nvim --listen $PROJECT"\"
