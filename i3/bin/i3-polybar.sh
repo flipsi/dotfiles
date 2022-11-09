@@ -11,8 +11,8 @@ function set_env_vars() {
     export BAR_HEIGHT
     export BAR_TRAY_MAXSIZE
 
-    ETH_INTERFACE=$( ip link show | grep enp | sed 's/.*: \(.*\):.*/\1/')
-    WLAN_INTERFACE=$(ip link show | grep wlp | sed 's/.*: \(.*\):.*/\1/')
+    ETH_INTERFACE=$( ip link show | grep -E 'enp'            | sed 's/.*: \(.*\):.*/\1/')
+    WLAN_INTERFACE=$(ip link show | grep -E '(wlan|wlp)'     | sed 's/.*: \(.*\):.*/\1/')
 
     HOSTNAME=$(hostname)
     case $HOSTNAME in
