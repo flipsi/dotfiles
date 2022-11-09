@@ -745,7 +745,7 @@ let g:sneak#use_ic_scs = 1
 
 nmap f <plug>Sneak_s
 nmap F <plug>Sneak_S
-nmap l <plug>Sneak_S
+" nmap l <plug>Sneak_S " suitable for Moonlander, but not for other keyboards...
 
 nmap , <plug>Sneak_;
 nmap ; <plug>Sneak_,
@@ -4136,12 +4136,12 @@ cnoremap <c-g> <c-c>
 
 " scroll a little smoother
 " (this actually is suggested in :help scroll-smooth)
-" noremap <m-j>       <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
-" noremap <esc>j      <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
+noremap <m-j>       <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
+noremap <esc>j      <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
 noremap <m-down>    <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
 noremap <esc><down> <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
-" noremap <m-k>       <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
-" noremap <esc>k      <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
+noremap <m-k>       <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
+noremap <esc>k      <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 noremap <m-up>      <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 noremap <esc><up>   <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 
@@ -4425,18 +4425,22 @@ nnoremap <leader>ys <nop>
 " MOVEMENT {{{
 
 " Now that I'm on a Moonlander where arrow keys are usable and I'm using the Norman keyboard layout, I don't want to use hjkl anymore.
-nmap h <nop>
-nmap j <nop>
-nmap k <nop>
+" nmap h <nop>
+" nmap j <nop>
+" nmap k <nop>
 " nmap l <nop>
 
 " move intuitively when text is wrapped
-" nnoremap j gj
-" nnoremap k gk
+nnoremap j      gj
+nnoremap k      gk
 nnoremap <down> g<down>
 nnoremap <up>   g<up>
 
 " move faster
+nnoremap gj      8j
+vnoremap gj      8j
+nnoremap gk      8k
+vnoremap gk      8k
 nnoremap g<down> 8j
 vnoremap g<down> 8j
 nnoremap g<up>   8k
@@ -5139,26 +5143,26 @@ function! JumpToLastInList(switch)
 endfunction
 
 " first/last result in list
-nnoremap <silent> kgg        :call JumpToFirstInList(0)<cr>
-nnoremap <silent> kG         :call JumpToLastInList(0)<cr>
+nnoremap <silent> <leader>kgg        :call JumpToFirstInList(0)<cr>
+nnoremap <silent> <leader>kG         :call JumpToLastInList(0)<cr>
 " first/last result in other list
-nnoremap <silent> kkgg       :call JumpToFirstInList(1)<cr>
-nnoremap <silent> kkG        :call JumpToLastInList(1)<cr>
+nnoremap <silent> <leader>kkgg       :call JumpToFirstInList(1)<cr>
+nnoremap <silent> <leader>kkG        :call JumpToLastInList(1)<cr>
 " next/previous result in list
-nnoremap <silent> kn         :call JumpThroughList(0, 0, 0)<cr>
-nnoremap <silent> k<down>    :call JumpThroughList(0, 0, 0)<cr>
-nnoremap <silent> kN         :call JumpThroughList(1, 0, 0)<cr>
-nnoremap <silent> k<up>      :call JumpThroughList(1, 0, 0)<cr>
+nnoremap <silent> <leader>kn         :call JumpThroughList(0, 0, 0)<cr>
+nnoremap <silent> <leader>k<down>    :call JumpThroughList(0, 0, 0)<cr>
+nnoremap <silent> <leader>kN         :call JumpThroughList(1, 0, 0)<cr>
+nnoremap <silent> <leader>k<up>      :call JumpThroughList(1, 0, 0)<cr>
 " next/previous result in next file in list
-nnoremap <silent> kgn        :call JumpThroughList(0, 1, 0)<cr>
-nnoremap <silent> kg<down>   :call JumpThroughList(0, 1, 0)<cr>
-nnoremap <silent> kgN        :call JumpThroughList(1, 1, 0)<cr>
-nnoremap <silent> kg<up>     :call JumpThroughList(1, 1, 0)<cr>
+nnoremap <silent> <leader>kgn        :call JumpThroughList(0, 1, 0)<cr>
+nnoremap <silent> <leader>kg<down>   :call JumpThroughList(0, 1, 0)<cr>
+nnoremap <silent> <leader>kgN        :call JumpThroughList(1, 1, 0)<cr>
+nnoremap <silent> <leader>kg<up>     :call JumpThroughList(1, 1, 0)<cr>
 " next/previous result in other list
-nnoremap <silent> kkn        :call JumpThroughList(0, 0, 1)<cr>
-nnoremap <silent> kk<down>   :call JumpThroughList(0, 0, 1)<cr>
-nnoremap <silent> kkN        :call JumpThroughList(1, 0, 1)<cr>
-nnoremap <silent> kk<up>     :call JumpThroughList(1, 0, 1)<cr>
+nnoremap <silent> <leader>kkn        :call JumpThroughList(0, 0, 1)<cr>
+nnoremap <silent> <leader>kk<down>   :call JumpThroughList(0, 0, 1)<cr>
+nnoremap <silent> <leader>kkN        :call JumpThroughList(1, 0, 1)<cr>
+nnoremap <silent> <leader>kk<up>     :call JumpThroughList(1, 0, 1)<cr>
 
 
 " close location list (which contains syntastic errors) and quickfix window
@@ -5223,10 +5227,14 @@ function! ResizeWindows(enter_or_leave)
         nnoremap <silent> <right>   2<c-w>>
         echo "[RESIZE MODE] (press h,j,k,l or arrow keys to resize and <enter> or <esc> to leave move)"
     else
-        nmap h <nop>
-        nmap j <nop>
-        nmap k <nop>
-        nmap l <nop>
+        " nmap h <nop>
+        " nmap j <nop>
+        " nmap k <nop>
+        " nmap l <nop>
+        nunmap h
+        nunmap j
+        nunmap k
+        nunmap l
         nunmap <down>
         nunmap <up>
         nunmap <left>
