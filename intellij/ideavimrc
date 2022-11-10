@@ -148,6 +148,8 @@ nnoremap <leader><bs>       :action CloseContent<cr>
 nnoremap <a-u>              :undo<cr>
 nnoremap <a-s-u>            :redo<cr>
 
+nnoremap <a-n>              :action NextTab<cr>
+nnoremap <a-p>              :action PreviousTab<cr>
 nnoremap <c-l>              <c-w>l
 nnoremap <c-h>              <c-w>h
 nnoremap <leader><c-l>      :action SplitVertically<cr>
