@@ -13,6 +13,7 @@ end
 prepend_to_path ~/.local/share/coursier/bin
 prepend_to_path ~/.local/bin
 prepend_to_path ~/.cargo/bin
+prepend_to_path ~/cifuzz/bin
 prepend_to_path ~/.gem/ruby/2.4.0/bin
 prepend_to_path ~/.gem/ruby/2.6.0/bin
 prepend_to_path ~/.i3/bin

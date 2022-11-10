@@ -9,10 +9,12 @@ abbr $args ca     gcalcli
 abbr $args cdi    cd_interactively
 abbr $args cdi.   cd_interactively .
 abbr $args cdir   cd_interactively /
+abbr $args ci     cifuzz
 abbr $args d      docker
 abbr $args da     docker-compose up -d
 abbr $args do     docker-compose stop
 abbr $args dce    docker-compose exec
+abbr $args dc     docker-compose
 abbr $args dcl    docker-compose logs
 abbr $args dclf   docker-compose logs -f
 abbr $args dcp    docker-compose pull
