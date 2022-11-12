@@ -88,6 +88,9 @@ abbr $args mkd    mkdir_cd
 abbr $args mp     make plan
 abbr $args mpa    make plan apply
 abbr $args nv     nvlc
+abbr $args ns     netctl status
+abbr $args na     sudo netctl start
+abbr $args no     sudo netctl stop
 abbr $args o      open
 abbr $args p      pass
 abbr $args pe     pass edit
@@ -99,13 +102,10 @@ abbr $args pk     pkill
 abbr $args rrm    rm -rf
 abbr $args se     sudoedit
 abbr $args r      ranger
-abbr $args s      systemctl status
-abbr $args sa     systemctl start
-abbr $args so     systemctl stop
-abbr $args sr     systemctl restart
-abbr $args ssa    sudo systemctl start
-abbr $args sso    sudo systemctl stop
-abbr $args ssr    sudo systemctl restart
+abbr $args s      systemctl status --no-pager
+abbr $args sa     sudo systemctl start
+abbr $args so     sudo systemctl stop
+abbr $args sr     sudo systemctl restart
 abbr $args t      trans :de
 abbr $args te     trans de:en
 abbr $args tf     trans de:fr
