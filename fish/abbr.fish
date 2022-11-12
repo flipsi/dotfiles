@@ -103,6 +103,7 @@ abbr $args rrm    rm -rf
 abbr $args se     sudoedit
 abbr $args r      ranger
 abbr $args s      systemctl status --no-pager
+abbr $args sj     journalctl --no-pager -n15 -u
 abbr $args sa     sudo systemctl start
 abbr $args so     sudo systemctl stop
 abbr $args sr     sudo systemctl restart
