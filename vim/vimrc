@@ -5197,7 +5197,7 @@ nnoremap <silent> <leader><left>  :wincmd h<cr>
 nnoremap <silent> <leader><down>  :wincmd j<cr>
 nnoremap <silent> <leader><up>    :wincmd k<cr>
 nnoremap <silent> <leader><right> :wincmd l<cr>
-nnoremap <silent> <leader>l       :wincmd p<cr>
+nnoremap <silent> <C-h>           :wincmd p<cr>
 
 " move buffer to a new window
 nnoremap <silent> <leader><c-l> :vsplit<cr><c-w>p:buffer #<cr><c-w>p<cr>
