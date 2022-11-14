@@ -16,6 +16,15 @@ function set_env_vars() {
 
     HOSTNAME=$(hostname)
     case $HOSTNAME in
+        mimir )
+            if xrandr | grep -q 'DVI-I-1-1 connected'; then
+                BAR_MAIN_MONITOR='DP-1'
+                BAR_SECOND_MONITOR='DVI-I-2-2'
+                BAR_THIRD_MONITOR='DVI-I-1-1'
+            else
+                BAR_MAIN_MONITOR='eDP-1'
+            fi
+            ;;
         * )
             if xrandr | grep -q 'HDMI2 connected 4096x2160'; then
                 BAR_MAIN_MONITOR='HDMI2'
@@ -24,7 +33,8 @@ function set_env_vars() {
                 BAR_HEIGHT=60
                 BAR_TRAY_MAXSIZE=28
             elif xrandr | grep -q 'DVI-I-1-1 connected'; then
-                BAR_MAIN_MONITOR='DP1'
+                # BAR_MAIN_MONITOR=$(xrandr | grep -E '[^e]DP.-?. connected' | cut -d' ' -f-2 | head -n1) # ^ not working
+                BAR_MAIN_MONITOR=$(xrandr | grep -E 'DP.-?. connected' | cut -d' ' -f-2 | head -n1)
                 BAR_SECOND_MONITOR='DVI-I-2-2'
                 BAR_THIRD_MONITOR='DVI-I-1-1'
             elif xrandr | grep -q 'DP1 connected'; then
@@ -40,11 +50,11 @@ function set_env_vars() {
             else
                 BAR_MAIN_MONITOR=$(xrandr | grep ' connected' | cut -d' ' -f1 | head -n1)
             fi
-            BAR_DPI=108
-            BAR_HEIGHT=24
-            BAR_TRAY_MAXSIZE=16
             ;;
     esac
+    BAR_DPI=108
+    BAR_HEIGHT=24
+    BAR_TRAY_MAXSIZE=16
 }
 
 function stop() {
