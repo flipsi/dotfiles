@@ -45,7 +45,54 @@ case $(hostname) in
         fi
         ;;
 
-    dwarf | falbala )
+    mimir )
+
+        if test -n "$ONLY"; then
+
+            OUTPUT_TO_KEEP='eDP-1'
+
+            if ! xrandr | grep -q "$OUTPUT_TO_KEEP connected"; then
+                echo "Only output $OUTPUT_TO_KEEP seems unavailable. Aborting."
+                exit 1
+            fi
+
+            mapfile -t MONITOR_LIST < <(xrandr | grep ' connected' | cut -d' ' -f1)
+            for MONITOR in "${MONITOR_LIST[@]}"; do
+                if [[ "$MONITOR" != "$OUTPUT_TO_KEEP" ]]; then
+                    xrandr --output "$MONITOR" --off
+                fi
+            done
+
+            xrandr --output "$OUTPUT_TO_KEEP" --mode '1920x1080' --auto
+
+        elif xrandr | grep -q 'DVI-I-1-1 connected'; then
+
+            MAIN_MONITOR='DP-1'
+            SECOND_MONITOR='DVI-I-2-2'
+            THIRD_MONITOR='DVI-I-1-1'
+            LAPTOP_SCREEN='eDP-1'
+
+            xrandr \
+                --output "$LAPTOP_SCREEN" --off \
+                --output "$MAIN_MONITOR" --auto --primary \
+                --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR" \
+                --output "$THIRD_MONITOR" --auto --left-of "$MAIN_MONITOR" --rotate left \
+                || ( \
+                sleep 0.1 && xrandr --output "$LAPTOP_SCREEN" --off && \
+                sleep 0.1 && xrandr --output "$THIRD_MONITOR" --off && \
+                sleep 0.1 && xrandr --output "$MAIN_MONITOR" --primary --auto && \
+                sleep 0.1 && xrandr --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR" && \
+                sleep 0.1 && xrandr --output "$THIRD_MONITOR" --auto --left-of "$MAIN_MONITOR" --rotate left \
+                )
+
+        elif xrandr | grep 'HDMI-1 connected' >/dev/null; then
+
+            sleep 0.1 && xrandr --output 'HDMI-1' --left-of 'eDP-1'  --auto
+
+        fi
+        ;;
+
+    falbala )
 
         if test -n "$ONLY"; then
 
