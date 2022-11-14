@@ -23,6 +23,13 @@ function set_env_vars() {
                 BAR_DPI=300
                 BAR_HEIGHT=60
                 BAR_TRAY_MAXSIZE=28
+            elif xrandr | grep -q 'DVI-I-1-1 connected'; then
+                BAR_MAIN_MONITOR='DP1'
+                BAR_SECOND_MONITOR='DVI-I-2-2'
+                BAR_THIRD_MONITOR='DVI-I-1-1'
+            elif xrandr | grep -q 'DP1 connected'; then
+                BAR_MAIN_MONITOR='DP1'
+                BAR_SECOND_MONITOR='eDP1'
             elif xrandr | grep -q 'DP.-2 connected'; then
                 BAR_MAIN_MONITOR=$(xrandr | grep 'DP.-2 connected' | cut -d' ' -f1 | head -n1)
                 BAR_SECOND_MONITOR=$(xrandr | grep 'DP.-1 connected' | cut -d' ' -f1 | head -n1)

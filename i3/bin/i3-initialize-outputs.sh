@@ -65,19 +65,24 @@ case $(hostname) in
 
             xrandr --output "$OUTPUT_TO_KEEP" --mode '1920x1080' --auto
 
-        elif xrandr | grep 'DP.-. connected' >/dev/null; then
-            BAR_MAIN_MONITOR=$(xrandr | grep 'DP.-2 connected' | cut -d' ' -f1 | head -n1)
-            BAR_SECOND_MONITOR=$(xrandr | grep 'DP.-1 connected' | cut -d' ' -f1 | head -n1)
-            BAR_THIRD_MONITOR='eDP1'
+        elif xrandr | grep -q 'DVI-I-1-1 connected'; then
 
-            xrandr --output "$BAR_MAIN_MONITOR" --auto --primary \
-                --output "$BAR_SECOND_MONITOR" --auto --left-of "$BAR_MAIN_MONITOR" \
-                --output "$BAR_THIRD_MONITOR" --auto --left-of "$BAR_SECOND_MONITOR" \
+            MAIN_MONITOR='DP1'
+            SECOND_MONITOR='DVI-I-1-1'
+            THIRD_MONITOR='DVI-I-2-2'
+            LAPTOP_SCREEN='eDP1'
+
+            xrandr \
+                --output "$LAPTOP_SCREEN" --off \
+                --output "$MAIN_MONITOR" --auto --primary \
+                --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR" \
+                --output "$THIRD_MONITOR" --auto --left-of "$MAIN_MONITOR" --rotate left \
                 || ( \
-                sleep 0.1 && xrandr --output "$BAR_THIRD_MONITOR" --off && \
-                sleep 0.1 && xrandr --output "$BAR_MAIN_MONITOR" --primary --auto && \
-                sleep 0.1 && xrandr --output "$BAR_SECOND_MONITOR" --auto --right-of "$BAR_MAIN_MONITOR" && \
-                sleep 0.1 && xrandr --output "$BAR_THIRD_MONITOR" --auto --left-of "$BAR_SECOND_MONITOR" \
+                sleep 0.1 && xrandr --output "$LAPTOP_SCREEN" --off && \
+                sleep 0.1 && xrandr --output "$THIRD_MONITOR" --off && \
+                sleep 0.1 && xrandr --output "$MAIN_MONITOR" --primary --auto && \
+                sleep 0.1 && xrandr --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR" && \
+                sleep 0.1 && xrandr --output "$THIRD_MONITOR" --auto --left-of "$MAIN_MONITOR" --rotate left \
                 )
 
         elif xrandr | grep 'HDMI1 connected' >/dev/null; then
