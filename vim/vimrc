@@ -2152,14 +2152,16 @@ let g:polyglot_disabled = ['helm']
 " Multi-language Interactive evaluation
 " Quick start for Clojure: https://github.com/Olical/conjure/wiki/Quick-start:-Clojure
 Plug 'Olical/conjure'
+let g:conjure#mapping#prefix = "<leader>l"
 " Use :ConjureSchool to get started
 " See `:vertical help conjure-mappings` for (default) mappings
+nnoremap <leader>clc   :ConjureConnect<CR>
 
 " Provides a couple of helper commands for 'jacking' in to a Clojure REPL by auto-starting it.
 " (For Clojure CLI use :Clj)
 Plug 'clojure-vim/vim-jack-in'
 " Start an nREPL server with all of the appropriate middleware inside your Neovim instance
-nnoremap <leader>clj   :Clj<CR>
+nnoremap <leader>cla   :Clj -M:repl<CR>
 
 
 
