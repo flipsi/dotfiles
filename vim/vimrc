@@ -2298,6 +2298,22 @@ augroup VIM_SEXP_MAPPING
     autocmd FileType clojure,scheme,lisp,timl call s:vim_sexp_mappings()
 augroup END
 
+augroup clojure_on_read
+    au!
+    au FileType clojure call SetupClojureForCodeIntelligenceCore()
+augroup END
+
+function! SetupClojureForCodeIntelligenceCore()
+    nnoremap <leader>bg  :call RunCommand("scripts/clojure-codegen.sh")<cr>
+    nnoremap <leader>bd  :call RunCommand("bazel build //backend/...")<cr>
+    nnoremap <leader>btt :call RunCommand("bazel test //backend/...")<cr>
+    nnoremap <leader>af  :call RunCommand("./bazelisk.py run @cljfmt//:cljfmt -- --config backend/dev-resources/cljfmt.clj " . expand("%"))<cr>
+    nnoremap <leader>AF  :call RunCommand("find . -name '*.edn' -o -name '*.clj' -exec ./bazelisk.py run @cljfmt//:cljfmt -- --config backend/dev-resources/cljfmt.clj {} +")<cr>
+endfunction
+command! SetupClojureForCodeIntelligenceCore :call SetupClojureForCodeIntelligenceCore() " add mappings for Clojure
+
+
+
 " }}}
 
 " Language: CSV {{{
