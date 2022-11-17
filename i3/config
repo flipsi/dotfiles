@@ -471,10 +471,10 @@ bindsym XF86AudioPlay        exec --no-startup-id "playerctl play-pause"; exec "
 bindsym XF86AudioNext        exec --no-startup-id "playerctl next"; exec "$UPDATE_STATUSBAR"
 bindsym XF86AudioPrev        exec --no-startup-id "playerctl previous"; exec "$UPDATE_STATUSBAR"
 
-# bindsym $mod+Shift+0 mode "$player_control"
+bindsym $mod+Shift+0 mode "$music_control"
 # bindsym $mod+Shift+0 mode "$mpd_control"
 # bindsym $mod+Shift+0 mode "$spotify_control"
-bindsym $mod+Shift+0 exec "pgrep mpd && i3-msg mode $mpd_control || i3-msg mode $music_control"
+# bindsym $mod+Shift+0 exec "pgrep mpd && i3-msg mode $mpd_control || i3-msg mode $music_control"
 
 ## control music (including spotify)
 set $music_control Music Control
