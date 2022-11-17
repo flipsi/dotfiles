@@ -595,10 +595,10 @@ endfunction
 " custom mapping in fugitive window (:Git)
 augroup custom_fugitive_mappings
     au!
-    au User FugitiveIndex nnoremap <buffer> <up>     k
-    au User FugitiveIndex nnoremap <buffer> <down>   j
-    au User FugitiveIndex nnoremap <buffer> <left>   h
-    au User FugitiveIndex nnoremap <buffer> <right>  l
+    au User FugitiveIndex,FugitiveChanged nnoremap <buffer> <up>     k
+    au User FugitiveIndex,FugitiveChanged nnoremap <buffer> <down>   j
+    au User FugitiveIndex,FugitiveChanged nnoremap <buffer> <left>   h
+    au User FugitiveIndex,FugitiveChanged nnoremap <buffer> <right>  l
     au User FugitiveIndex nmap     <buffer> w  =
     au User FugitiveIndex nnoremap <buffer> dt :call GdiffsplitTab(GStatusGetFilenameUnderCursor())<cr>
     au User FugitiveIndex nmap     <buffer> pp :Git pull<cr>
