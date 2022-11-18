@@ -10,23 +10,56 @@ while true ; do
     esac
 done
 
-setup_wallpaper() {
+function setup_wallpaper() {
     if [[ -f "$HOME/.i3/wallpaper" ]]; then
         feh --bg-scale "$HOME/.i3/wallpaper"
     fi
 }
 
 
-case $(hostname) in
+function arrange_outputs_at_home() {
+    xrandr \
+        --output "$LAPTOP_SCREEN" --off \
+        --output "$MAIN_MONITOR" --auto --primary \
+        --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR" --rotate normal \
+        --output "$THIRD_MONITOR" --auto --left-of "$MAIN_MONITOR" --rotate left \
+        || ( \
+        sleep 0.1 && xrandr --output "$LAPTOP_SCREEN" --off && \
+        sleep 0.1 && xrandr --output "$THIRD_MONITOR" --off && \
+        sleep 0.1 && xrandr --output "$MAIN_MONITOR" --primary --auto && \
+        sleep 0.1 && xrandr --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR" && \
+        sleep 0.1 && xrandr --output "$THIRD_MONITOR" --auto --left-of "$MAIN_MONITOR" --rotate left \
+    )
+}
 
-    asterix )
+function disable_all_but_one_output() {
+    if ! xrandr | grep -q "$OUTPUT_TO_KEEP connected"; then
+        echo "Only output $OUTPUT_TO_KEEP seems unavailable. Aborting."
+        exit 1
+    fi
 
-        if test -n "$ONLY"; then
+    mapfile -t MONITOR_LIST < <(xrandr | grep ' connected' | cut -d' ' -f1)
+    for MONITOR in "${MONITOR_LIST[@]}"; do
+        if [[ "$MONITOR" != "$OUTPUT_TO_KEEP" ]]; then
+            xrandr --output "$MONITOR" --off
+        fi
+    done
 
-            xrandr --output 'HDMI2' --off
-            xrandr --output 'eDP1' --mode '1920x1080_60.00' --auto
+    xrandr --output "$OUTPUT_TO_KEEP" --auto
+}
 
-        elif xrandr | grep -q 'HDMI2 connected'; then
+function main() {
+
+    case $(hostname) in
+
+        asterix )
+
+            if test -n "$ONLY"; then
+
+                xrandr --output 'HDMI2' --off
+                xrandr --output 'eDP1' --mode '1920x1080_60.00' --auto
+
+            elif xrandr | grep -q 'HDMI2 connected'; then
 
             # on big tv, turn off laptop screen
             if xrandr | grep -q '4096x2160'; then
@@ -42,109 +75,65 @@ case $(hostname) in
             xrandr --addmode 'eDP1' "1920x1080_60.00"
             xrandr --output 'eDP1' --mode "1920x1080_60.00"
 
-        fi
-        ;;
-
-    mimir )
-
-        if test -n "$ONLY"; then
-
-            OUTPUT_TO_KEEP='eDP-1'
-
-            if ! xrandr | grep -q "$OUTPUT_TO_KEEP connected"; then
-                echo "Only output $OUTPUT_TO_KEEP seems unavailable. Aborting."
-                exit 1
             fi
+            ;;
 
-            mapfile -t MONITOR_LIST < <(xrandr | grep ' connected' | cut -d' ' -f1)
-            for MONITOR in "${MONITOR_LIST[@]}"; do
-                if [[ "$MONITOR" != "$OUTPUT_TO_KEEP" ]]; then
-                    xrandr --output "$MONITOR" --off
-                fi
-            done
+        mimir )
 
-            xrandr --output "$OUTPUT_TO_KEEP" --mode '1920x1080' --auto
+            if test -n "$ONLY"; then
 
-        elif xrandr | grep -q 'DVI-I-1-1 connected'; then
+                OUTPUT_TO_KEEP='eDP-1'
 
-            MAIN_MONITOR='DP-1'
-            SECOND_MONITOR='DVI-I-2-2'
-            THIRD_MONITOR='DVI-I-1-1'
-            LAPTOP_SCREEN='eDP-1'
+                disable_all_but_one_output
 
-            xrandr \
-                --output "$LAPTOP_SCREEN" --off \
-                --output "$MAIN_MONITOR" --auto --primary \
-                --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR" \
-                --output "$THIRD_MONITOR" --auto --left-of "$MAIN_MONITOR" --rotate left \
-                || ( \
-                sleep 0.1 && xrandr --output "$LAPTOP_SCREEN" --off && \
-                sleep 0.1 && xrandr --output "$THIRD_MONITOR" --off && \
-                sleep 0.1 && xrandr --output "$MAIN_MONITOR" --primary --auto && \
-                sleep 0.1 && xrandr --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR" && \
-                sleep 0.1 && xrandr --output "$THIRD_MONITOR" --auto --left-of "$MAIN_MONITOR" --rotate left \
-                )
+            elif xrandr | grep -q 'DVI-I-1-1 connected'; then
 
-        elif xrandr | grep 'HDMI-1 connected' >/dev/null; then
+                MAIN_MONITOR='DP-1'
+                SECOND_MONITOR='DVI-I-1-1'
+                THIRD_MONITOR='DVI-I-2-2'
+                LAPTOP_SCREEN='eDP-1'
 
-            sleep 0.1 && xrandr --output 'HDMI-1' --left-of 'eDP-1'  --auto
+                arrange_outputs_at_home
 
-        fi
-        ;;
+            elif xrandr | grep 'HDMI-1 connected' >/dev/null; then
 
-    falbala )
+                sleep 0.1 && xrandr --output 'HDMI-1' --above 'eDP-1'  --auto
 
-        if test -n "$ONLY"; then
-
-            OUTPUT_TO_KEEP='eDP1'
-
-            if ! xrandr | grep -q "$OUTPUT_TO_KEEP connected"; then
-                echo "Only output $OUTPUT_TO_KEEP seems unavailable. Aborting."
-                exit 1
             fi
+            ;;
 
-            mapfile -t MONITOR_LIST < <(xrandr | grep ' connected' | cut -d' ' -f1)
-            for MONITOR in "${MONITOR_LIST[@]}"; do
-                if [[ "$MONITOR" != "$OUTPUT_TO_KEEP" ]]; then
-                    xrandr --output "$MONITOR" --off
-                fi
-            done
+        falbala )
 
-            xrandr --output "$OUTPUT_TO_KEEP" --mode '1920x1080' --auto
+            if test -n "$ONLY"; then
 
-        elif xrandr | grep -q 'DVI-I-1-1 connected'; then
+                OUTPUT_TO_KEEP='eDP1'
 
-            MAIN_MONITOR='DP1'
-            SECOND_MONITOR='DVI-I-1-1'
-            THIRD_MONITOR='DVI-I-2-2'
-            LAPTOP_SCREEN='eDP1'
+                disable_all_but_one_output
 
-            xrandr \
-                --output "$LAPTOP_SCREEN" --off \
-                --output "$MAIN_MONITOR" --auto --primary \
-                --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR" \
-                --output "$THIRD_MONITOR" --auto --left-of "$MAIN_MONITOR" --rotate left \
-                || ( \
-                sleep 0.1 && xrandr --output "$LAPTOP_SCREEN" --off && \
-                sleep 0.1 && xrandr --output "$THIRD_MONITOR" --off && \
-                sleep 0.1 && xrandr --output "$MAIN_MONITOR" --primary --auto && \
-                sleep 0.1 && xrandr --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR" && \
-                sleep 0.1 && xrandr --output "$THIRD_MONITOR" --auto --left-of "$MAIN_MONITOR" --rotate left \
-                )
+            elif xrandr | grep -q 'DVI-I-1-1 connected'; then
 
-        elif xrandr | grep 'HDMI1 connected' >/dev/null; then
+                MAIN_MONITOR='DP1'
+                SECOND_MONITOR='DVI-I-1-1'
+                THIRD_MONITOR='DVI-I-2-2'
+                LAPTOP_SCREEN='eDP1'
 
-            sleep 0.1 && xrandr --output 'HDMI1' --left-of 'eDP1'  --auto
+                arrange_outputs_at_home
 
-        fi
-        ;;
+            elif xrandr | grep 'HDMI1 connected' >/dev/null; then
 
-    * )
+                sleep 0.1 && xrandr --output 'HDMI1' --above 'eDP1'  --auto
 
-        echo ERROR: Unknown host!
-        exit 1
+            fi
+            ;;
 
-esac
+        * )
+
+            echo ERROR: Unknown host!
+            exit 1
+
+        esac
+
+}
 
 
 # setup_wallpaper
