@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+set -e
+
+function find_network_interface_name_by_pattern() {
+    PATTERN="$1"
+    ip link show \
+        | grep -E "$PATTERN" \
+        | sed 's/.*: \(.*\):.*/\1/' \
+        | tail -n 1
+}
+
 function set_env_vars() {
     export HOSTNAME
     export  ETH_INTERFACE
@@ -11,8 +21,8 @@ function set_env_vars() {
     export BAR_HEIGHT
     export BAR_TRAY_MAXSIZE
 
-    ETH_INTERFACE=$( ip link show | grep -E 'enp'            | sed 's/.*: \(.*\):.*/\1/')
-    WLAN_INTERFACE=$(ip link show | grep -E '(wlan|wlp)'     | sed 's/.*: \(.*\):.*/\1/')
+    ETH_INTERFACE=$(find_network_interface_name_by_pattern 'enp')
+    WLAN_INTERFACE=$(find_network_interface_name_by_pattern '(wlan|wlp)')
 
     HOSTNAME=$(hostname)
     case $HOSTNAME in
