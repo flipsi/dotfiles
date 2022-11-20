@@ -135,6 +135,7 @@ function main() {
 
 }
 
+main
 
 # setup_wallpaper
 
