@@ -2159,6 +2159,7 @@ let g:conjure#mapping#prefix = "<leader>l"
 " Use :ConjureSchool to get started
 " See `:vertical help conjure-mappings` for (default) mappings
 nnoremap <leader>clc   :ConjureConnect<CR>
+nnoremap <leader>clo   :ConjureEval<space>
 
 " Provides a couple of helper commands for 'jacking' in to a Clojure REPL by auto-starting it.
 " (For Clojure CLI use :Clj)
@@ -2310,6 +2311,7 @@ function! SetupClojureForCodeIntelligenceCore()
     nnoremap <leader>bg  :call RunCommand("scripts/clojure-codegen.sh")<cr>
     nnoremap <leader>bd  :call RunCommand("bazel build //backend/...")<cr>
     nnoremap <leader>btt :call RunCommand("bazel test //backend/...")<cr>
+    nnoremap <leader>bto :ConjureCljRunCurrentTest<cr>
     nnoremap <leader>af  :call RunCommand("./bazelisk.py run @cljfmt//:cljfmt -- --config backend/dev-resources/cljfmt.clj " . expand("%"))<cr>
     nnoremap <leader>AF  :call RunCommand("find . -name '*.edn' -o -name '*.clj' -exec ./bazelisk.py run @cljfmt//:cljfmt -- --config backend/dev-resources/cljfmt.clj {} +")<cr>
 endfunction
