@@ -10,11 +10,17 @@ abbr $args cdi    cd_interactively
 abbr $args cdi.   cd_interactively .
 abbr $args cdir   cd_interactively /
 abbr $args ci     cifuzz
+abbr $args cid    cifuzz-dev
 abbr $args d      docker
-abbr $args da     docker-compose up -d
-abbr $args do     docker-compose stop
-abbr $args dce    docker-compose exec
+abbr $args dl     docker logs
+abbr $args dlf    docker logs -f
+abbr $args dps    docker ps
+abbr $args dr     docker run
+abbr $args do     docker stop
 abbr $args dc     docker-compose
+abbr $args dca    docker-compose up -d
+abbr $args dce    docker-compose exec
+abbr $args dco    docker-compose stop
 abbr $args dcl    docker-compose logs
 abbr $args dclf   docker-compose logs -f
 abbr $args dcp    docker-compose pull
