@@ -58,12 +58,12 @@ abbr $args gpu    git push
 abbr $args gpuf   git push --force-with-lease
 abbr $args gpuu   git push -u \(git remote \| head -n1\) \(git rev-parse --abbrev-ref HEAD\)
 abbr $args gr     grep --with-filename --line-number --recursive --ignore-case --extended-regexp
-abbr $args gra    git reset --abort
-abbr $args grc    git reset --continue
+abbr $args grm    git rebase master
+abbr $args gra    git rebase --abort
+abbr $args grc    git rebase --continue
 abbr $args grh    git reset --hard
 abbr $args grH    git reset HEAD~1
 abbr $args grl    git revert HEAD
-abbr $args grm    git rebase master
 abbr $args gs     tig status
 abbr $args gta    git stash push --include-untracked
 abbr $args gtp    git stash pop
