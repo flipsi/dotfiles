@@ -529,6 +529,9 @@ nnoremap <leader>gtp  :Confirm Git stash pop<cr>
 nnoremap <leader>glh  :Git log<cr>
 nnoremap <leader>gll  :tab Git log<cr>
 nnoremap <leader>glf  :tab Git log %<cr>
+nnoremap <leader>glmc :Shell glab mr create --web --fill<cr>
+nnoremap <leader>glmv :Shell glab mr view --web<cr>
+nnoremap <leader>glp  :Shell glab pipeline ci view<cr>
 nnoremap <leader>gbb  :Git blame<cr>
 nnoremap <leader>gpp  :Git pull<cr>
 nnoremap <leader>gpu  :GitPush<cr>

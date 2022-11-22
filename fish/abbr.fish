@@ -50,7 +50,12 @@ abbr $args geb    git checkout -b
 abbr $args gf     git fetch --prune
 abbr $args gfm    git checkout --quiet --detach\; git fetch \(git remote \| head -n1\) master:master\; git checkout --quiet -
 abbr $args ghpr   gh pr view --web \|\| gh pr create --web
-abbr $args gl     tig log
+abbr $args gl     glab
+abbr $args glp    glab pipeline ci view
+abbr $args glm    glab mr
+abbr $args glmv   glab mr view --web
+abbr $args glmc   glab mr create --web --fill
+abbr $args gll    tig log
 abbr $args glm    tig
 abbr $args glh    git --no-pager log -n 1
 abbr $args gli    git --no-pager log -n 1 \| head -n 1 \| cut -d\" \" -f2 \| xsel --clipboard
