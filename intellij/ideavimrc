@@ -135,10 +135,12 @@ nnoremap <leader>yL         :action EditorToggleShowLineNumbers<cr>
 nnoremap <leader>ya         :action EditorToggleShowWhitespaces<cr>
 
 nnoremap <leader>.          :action JumpToLastChange<cr>
-nnoremap <down>             :action VcsShowNextChangeMarker<cr>
-nnoremap <up>               :action VcsShowPrevChangeMarker<cr>
-nnoremap <right>            :action GotoNextError<cr>
-nnoremap <left>             :action GotoPreviousError<cr>
+nnoremap <leader>gn         :action VcsShowNextChangeMarker<cr>
+nnoremap <leader>gN         :action VcsShowPrevChangeMarker<cr>
+nnoremap <leader>kn         :action GotoNextError<cr>
+nnoremap <leader>k<down>    :action GotoNextError<cr>
+nnoremap <leader>kN         :action GotoPreviousError<cr>
+nnoremap <leader>k<up>      :action GotoPreviousError<cr>
 
 nnoremap <leader>w          :action SaveDocument<cr>
 nnoremap <leader>qq         :action CloseContent<cr>
