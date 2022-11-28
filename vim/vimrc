@@ -2326,7 +2326,7 @@ command! SetupClojure :call SetupClojure() " add mappings for Clojure
 function! SetupClojureForCodeIntelligenceCore()
     nnoremap <leader>bg  :call RunCommand("scripts/clojure-codegen.sh")<cr>
     nnoremap <leader>bd  :call RunCommand("bazel build //backend/...")<cr>
-    nnoremap <leader>bta :call RunCommand("bazel test //backend/...")<cr>
+    nnoremap <leader>bta :call RunCommand("bazel test //backend/... --test_output=streamed")<cr>
     nnoremap <leader>af  :call RunCommand("./bazelisk.py run @cljfmt//:cljfmt -- --config backend/dev-resources/cljfmt.clj " . expand("%"))<cr>
     nnoremap <leader>AF  :call RunCommand("find . -name '*.edn' -o -name '*.clj' -exec ./bazelisk.py run @cljfmt//:cljfmt -- --config backend/dev-resources/cljfmt.clj {} +")<cr>
 endfunction
