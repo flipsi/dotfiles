@@ -445,7 +445,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 1%+"; exec
 
 ## audio control
 bindsym $mod+Shift+0 mode "$audio"
-set $audio Audio (+/-) Volume (m/M) Mute/Unmute (e) Mute/Unmute Google Meet (s) Switch output (p) Play sound (g) GUI
+set $audio Audio (+/-) Volume (m/M) Mute/Unmute (e) Mute/Unmute Video Call (s) Switch output (p) Play sound (g) GUI
 mode "$audio" {
     bindsym plus            exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
     bindsym minus           exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
@@ -459,7 +459,7 @@ mode "$audio" {
     bindsym Shift+m         exec --no-startup-id "amixer set Master unmute"; exec "$UPDATE_STATUSBAR"
     bindsym s               exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output"
     bindsym p               exec --no-startup-id "~/.i3/bin/soundboard.sh"; mode "default"
-    bindsym e               exec --no-startup-id "~/.i3/bin/mute-google-meet.sh"; mode "default"
+    bindsym e               exec --no-startup-id "~/.i3/bin/mute-video-call.sh"; mode "default"
     bindsym g               exec --no-startup-id "pavucontrol"; mode "default"
     bindsym $mod+0          exec --no-startup-id "pavucontrol"; mode "default"
     # cancel
@@ -467,7 +467,7 @@ mode "$audio" {
     bindsym Escape mode "default"
 }
 
-bindsym $mod+Control+e       exec --no-startup-id "~/.i3/bin/mute-google-meet.sh"
+bindsym $mod+Control+e       exec --no-startup-id "~/.i3/bin/mute-video-call.sh"
 
 ## music control
 bindsym XF86AudioPlay        exec --no-startup-id "playerctl play-pause"; exec "$UPDATE_STATUSBAR"
