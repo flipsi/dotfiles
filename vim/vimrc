@@ -4862,6 +4862,9 @@ noremap <esc>U  :later<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DIFF AND MERGE {{{
 
+" compare open windows
+nnoremap <leader>dt :windo diffthis<cr>
+nnoremap <leader>do :windo diffoff<cr>
 
 " jump to next/previous change
 nnoremap dn ]c
