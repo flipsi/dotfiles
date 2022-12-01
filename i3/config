@@ -125,8 +125,8 @@ mode "$refresh" {
 bindsym $mod+F1 mode "$change_keyboard_layout"
 set $change_keyboard_layout Keyboard layout: (F1) de (F2) norman_sflip (F3) us (F4) us_sflip (F5) neo (F6) dvorak (F7) programmer dvorak
 mode "$change_keyboard_layout" {
-    bindsym F1 exec "setxkbmap de"; mode "default"
-    bindsym  1 exec "setxkbmap de"; mode "default"
+    bindsym F1 exec "setxkbmap de -variant nodeadkeys"; mode "default"
+    bindsym  1 exec "setxkbmap de -variant nodeadkeys"; mode "default"
     bindsym F2 exec "setxkbmap us_norman_sflip"; mode "default"
     bindsym  2 exec "setxkbmap us_norman_sflip"; mode "default"
     bindsym F3 exec "setxkbmap us"; mode "default"

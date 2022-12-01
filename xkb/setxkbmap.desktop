@@ -2,7 +2,7 @@
 Name=setxkbmap
 GenericName=setxkbmap
 Comment=Set my keyboard layout
-Exec=setxkbmap de
+Exec=setxkbmap de -variant nodeadkeys
 Terminal=false
 Type=Application
 X-GNOME-Autostart-enabled=true
