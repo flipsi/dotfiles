@@ -5250,6 +5250,10 @@ nnoremap <silent> <leader><c-h> :vertical split<cr>
 nnoremap <silent> <c-w>> <c-w>r
 nnoremap <silent> <c-w>< <c-w>R
 
+" resize windows to equal size, even when in termial
+nnoremap <silent> <c-y>=           <c-w>=
+tnoremap <silent> <c-y>= <c-\><c-n><c-w>=
+
 " resize window mode
 nnoremap <silent> <c-w>r     :ResizeWindows<cr>
 nnoremap <silent> <c-w><c-r> :ResizeWindows<cr>
