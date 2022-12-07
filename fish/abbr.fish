@@ -10,6 +10,7 @@ abbr $args cdi    cd_interactively
 abbr $args cdi.   cd_interactively .
 abbr $args cdir   cd_interactively /
 abbr $args ci     cifuzz
+abbr $args cic    cictl
 abbr $args cid    cifuzz-dev
 abbr $args d      docker
 abbr $args dl     docker logs
