@@ -654,17 +654,19 @@ omap ah <plug>GitGutterTextObjectOuterPending
 xmap ih <plug>GitGutterTextObjectInnerVisual
 xmap ah <plug>GitGutterTextObjectOuterVisual
 
-nnoremap <leader>yG   :GitGutterToggle<cr>
-nnoremap <leader>yg   :GitGutter<cr> " redraw
-nnoremap <leader>gg gg:GitGutterNextHunk<cr>zz9<c-e>zv
-nnoremap <leader>gG  G:GitGutterPrevHunk<cr>zz9<c-e>zv
-nnoremap <leader>gn   :GitGutterNextHunk<cr>zz9<c-e>zv
-nnoremap <leader>gN   :GitGutterPrevHunk<cr>zz9<c-e>zv
-nnoremap         gn   :GitGutterNextHunk<cr>zz9<c-e>zv
-nnoremap         gN   :GitGutterPrevHunk<cr>zz9<c-e>zv
-nnoremap <leader>ga   :GitGutterStageHunk<cr>:GitGutterNextHunk<cr>
-nnoremap <leader>gu   :GitGutterUndoHunk<cr>
-nnoremap <leader>gi   :GitGutterPreviewHunk<cr>
+nnoremap <leader>yG       :GitGutterToggle<cr>
+nnoremap <leader>yg       :GitGutter<cr> " redraw
+nnoremap <leader>gg     gg:GitGutterNextHunk<cr>zz9<c-e>zv
+nnoremap <leader>gG      G:GitGutterPrevHunk<cr>zz9<c-e>zv
+nnoremap <leader>gn       :GitGutterNextHunk<cr>zz9<c-e>zv
+nnoremap <leader>gN       :GitGutterPrevHunk<cr>zz9<c-e>zv
+nnoremap <leader>g<down>  :GitGutterNextHunk<cr>zz9<c-e>zv
+nnoremap <leader>g<up>    :GitGutterPrevHunk<cr>zz9<c-e>zv
+nnoremap         gn       :GitGutterNextHunk<cr>zz9<c-e>zv
+nnoremap         gN       :GitGutterPrevHunk<cr>zz9<c-e>zv
+nnoremap <leader>ga       :GitGutterStageHunk<cr>:GitGutterNextHunk<cr>
+nnoremap <leader>gu       :GitGutterUndoHunk<cr>
+nnoremap <leader>gi       :GitGutterPreviewHunk<cr>
 
 
 " Resolve merge conflicts the easy way
