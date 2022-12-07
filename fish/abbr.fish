@@ -69,8 +69,9 @@ abbr $args gpp    git pull
 abbr $args gpu    git push
 abbr $args gpuf   git push --force-with-lease
 abbr $args gpuu   git push -u \(git remote \| head -n1\) \(git rev-parse --abbrev-ref HEAD\)
-abbr $args gr     grep --with-filename --line-number --recursive --ignore-case --extended-regexp
-abbr $args grm    git rebase master
+abbr $args gre    grep --with-filename --line-number --recursive --ignore-case --extended-regexp
+abbr $args gr     git revise
+abbr $args grm    git revise --interactive master
 abbr $args gra    git rebase --abort
 abbr $args grc    git rebase --continue
 abbr $args grh    git reset --hard
