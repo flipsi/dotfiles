@@ -2852,7 +2852,7 @@ let g:powerline_loaded = 1
 " (so that leaving insert mode does not last that long)
 set timeout ttimeoutlen=50
 " but mapping delay can be more
-set timeoutlen=1200
+set timeoutlen=3000
 
 " always assume modern terminal
 set ttyfast
