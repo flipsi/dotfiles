@@ -546,10 +546,10 @@ nnoremap <leader>gh   <nop>
 nnoremap <leader>ghp  <nop>
 nnoremap <leader>ghpr :OpenOrCreatePullRequest<cr>
 nnoremap <leader>ghO  :OpenGithubRepoWeb<cr>
-nnoremap <leader>gho  :call GithubWebUrl('line', 'open_in_web')<cr>
-nnoremap <leader>ghy  :call GithubWebUrl('line', 'yank_to_clipboard')<cr>
-vnoremap <leader>gho  :<c-u>call GithubWebUrl('range', 'open_in_web')<cr>
-vnoremap <leader>ghy  :<c-u>call GithubWebUrl('range', 'yank_to_clipboard')<cr>
+nnoremap <leader>gho  :call GitWebUrl('line', 'open_in_web')<cr>
+nnoremap <leader>ghy  :call GitWebUrl('line', 'yank_to_clipboard')<cr>
+vnoremap <leader>gho  :<c-u>call GitWebUrl('range', 'open_in_web')<cr>
+vnoremap <leader>ghy  :<c-u>call GitWebUrl('range', 'yank_to_clipboard')<cr>
 
 
 command! GitCheckoutInteractively :call GitCheckoutInteractively() " checkout git branch chosen with fzf
@@ -3378,16 +3378,15 @@ function! GitPushNewBranch()
     exe ':Git push -u ' . l:remote . ' ' . l:branch_name
 endfunction
 
-" Github
-
-" Get Github URL of file and position in current revision
-function! GithubWebUrl(line_or_range, return_or_yank_to_clipboard_or_open_in_web)
+" Get Github or Gitlab URL of file and position in current revision.
+" Either return or yank_to_clipboard or open_in_web
+function! GitWebUrl(line_or_range, return_or_yank_to_clipboard_or_open_in_web)
     let l:remote_name = system('git remote | head -n1')
     let l:revision = system('git rev-parse HEAD | tr -d "\n"')
     let l:remote_url = system('git ls-remote --get-url ' . l:remote_name)
-    let l:github_string_matches = matchlist(l:remote_url, 'github.com[:/]\(.\{-}\)\(.git\)\?\n')
-    if v:shell_error || len(l:github_string_matches) == 0
-        echo "File not hosted on Github."
+    let l:url_matches = matchlist(l:remote_url, '\m\(github\.com\|gitlab.*\.com\)[:/]\(.\{-}\)\(\.git\)\?\n')
+    if v:shell_error || len(l:url_matches) == 0
+        echo "Could not extract web URL."
         return
     endif
 
@@ -3399,7 +3398,8 @@ function! GithubWebUrl(line_or_range, return_or_yank_to_clipboard_or_open_in_web
         let l:line_param = "#L". line('.')
     endif
 
-    let l:web_url = 'https://github.com/' . l:github_string_matches[1] .
+    let l:web_domain = l:url_matches[1]
+    let l:web_url = 'https://' . l:web_domain . '/' . l:url_matches[2] .
                 \ '/blob/' . l:revision . '/' . l:filename . l:line_param
 
     if a:return_or_yank_to_clipboard_or_open_in_web == 'return'
