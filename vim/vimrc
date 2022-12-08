@@ -2162,7 +2162,7 @@ let g:conjure#mapping#prefix = "<leader>l"
 " See `:vertical help conjure-mappings` for (default) mappings
 nnoremap <leader>cl         <nop>
 nnoremap <leader>clc        :ConjureConnect<CR>
-nnoremap <leader>clo        :ConjureEval<space>
+nnoremap <leader>cll        :ConjureEval<space>
 nnoremap <leader>cl<c-c>    :ConjureCljInterrupt<CR>
 nnoremap <leader>clr        :ConjureCljRefreshChanged<CR>
 nnoremap <leader>cl<f5>     :ConjureCljRefreshAll<CR>
