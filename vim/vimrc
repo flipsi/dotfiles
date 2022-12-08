@@ -3979,6 +3979,7 @@ let mapleader=' '
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FIX AND SPEEDUP MY TYPING {{{
 
+iabbrev af          autoformat
 iabbrev dpr         deprecated
 iabbrev todo        TODO:
 iabbrev todoi       TODO: implement
