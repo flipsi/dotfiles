@@ -22,12 +22,14 @@ function set_xdg_default_app
     end
 end
 
-if command -v xdg-mime >/dev/null
-    set_xdg_default_app 'application/pdf'           'org.pwmt.zathura.desktop'
-    set_xdg_default_app 'image/jpeg'                'sxiv.desktop'
-    set_xdg_default_app 'image/png'                 'sxiv.desktop'
-    set_xdg_default_app 'x-scheme-handler/http'     'vivaldi-stable.desktop'
-    set_xdg_default_app 'x-scheme-handler/https'    'vivaldi-stable.desktop'
+function set_xdg_default_apps
+    if command -v xdg-mime >/dev/null
+        set_xdg_default_app 'application/pdf'           'org.pwmt.zathura.desktop'
+        set_xdg_default_app 'image/jpeg'                'sxiv.desktop'
+        set_xdg_default_app 'image/png'                 'sxiv.desktop'
+        set_xdg_default_app 'x-scheme-handler/http'     'vivaldi-stable.desktop'
+        set_xdg_default_app 'x-scheme-handler/https'    'vivaldi-stable.desktop'
+    end
 end
 
 
@@ -44,16 +46,18 @@ end
 # end
 
 
-####################################
-# login and interactive shell only #
-####################################
 
-if status --is-interactive; and status --is-login
+#############################################################
 
-    # aliases (also see abbr file)
-    if command -v hub >/dev/null
-        alias git hub
+function set_hostname
+    # find out host once (useful for multiple things, but saves cycles)
+    if test -z $hostname
+        set hostname (hostname)
     end
+end
+
+
+function set_color_theme
 
     # change colors
     fish_my_colors gruvbox
@@ -73,33 +77,10 @@ if status --is-interactive; and status --is-login
         set -x LS_COLORS (bash -c 'eval `dircolors ~/.dircolors`; echo $LS_COLORS')
     end
 
-    # find out host once (useful for multiple things, but saves cycles)
-    if test -z $hostname
-        set hostname (hostname)
-    end
+end
 
-    # keychain takes care of ssh-agent and can also do gpg
-    function keychain_start
-        eval (command keychain --eval --quiet ~/.ssh/id_*)
-    end
-    if command -v keychain >/dev/null
-        set -l host_where_to_start_keychain_automatically 'falbala' 'obelix' 'mimir'
-        if contains $hostname $host_where_to_start_keychain_automatically
-            keychain_start
-        end
-    end
-
-    # asdf version manager
-    if test -f ~/.asdf/asdf.fish
-        source ~/.asdf/asdf.fish
-    end
-
-    # configuration for fish-command-timer
-    set -x fish_command_timer_enabled      1
-    set -x fish_command_timer_color        $fish_my_color_gray_middle
-    set -x fish_command_timer_time_format  '%b %d %I:%M%p'
-
-    # show error exit status after each command
+# show error exit status after each command
+function setup_exit_status_printing
     function postcmd --on-event fish_postexec
         switch $status
             case 0
@@ -112,23 +93,29 @@ if status --is-interactive; and status --is-login
                 set_color normal
         end
     end
+end
 
-    # correct typos the fun way
-    # https://github.com/nvbn/thefuck
-    # (the following does not work, so i added the function manually)
-    #eval (thefuck --alias)
-
-
-    # on some hosts, start desktop if not already running
-    if test $hostname = "obelix"
-        if not set -q DISPLAY
-            if not pgrep -x xinit >/dev/null
-                startx
-            end
+function autostart_keychain_on_some_hosts
+    # keychain takes care of ssh-agent and can also do gpg
+    function keychain_start
+        eval (command keychain --eval --quiet ~/.ssh/id_*)
+    end
+    if command -v keychain >/dev/null
+        set -l host_where_to_start_keychain_automatically 'falbala' 'mimir'
+        if contains $hostname $host_where_to_start_keychain_automatically
+            keychain_start
         end
     end
-
 end
+
+
+#############################################################
+
+if status --is-login
+    set_xdg_default_apps
+    set_hostname
+end
+
 
 if status --is-interactive
 
@@ -139,3 +126,35 @@ if status --is-interactive
     end
 
 end
+
+if status --is-interactive; and status --is-login
+
+    # aliases (also see abbr file)
+    if command -v hub >/dev/null
+        alias git hub
+    end
+
+    # asdf version manager
+    if test -f ~/.asdf/asdf.fish
+        source ~/.asdf/asdf.fish
+    end
+
+    set_color_theme
+
+    # configuration for fish-command-timer
+    set -x fish_command_timer_enabled      1
+    set -x fish_command_timer_color        $fish_my_color_gray_middle
+    set -x fish_command_timer_time_format  '%b %d %I:%M%p'
+
+    setup_exit_status_printing
+
+    # correct typos the fun way
+    # https://github.com/nvbn/thefuck
+    # if command -v thefuck >/dev/null
+        # eval (thefuck --alias) # (does not work, so i added the function manually)
+    # end
+
+    autostart_keychain_on_some_hosts
+
+end
+
