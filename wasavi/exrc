@@ -1,0 +1,19 @@
+" exrc for wasavi (Chrome plugin)
+
+set nolaunchbell
+set noerrorbells
+set jkdenotative
+set theme='charcoal'
+
+map <c-a> ^
+map <c-e> $
+
+" save and quit
+map ZQ :q!
+map <insert> ZZ
+map <space>qq ZZ
+map <space>yy :set fs!
+
+" map! targets the insert mode (like :imap)
+map! jk <esc>
+
