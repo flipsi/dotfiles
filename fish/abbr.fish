@@ -49,7 +49,7 @@ abbr $args gdc    git diff --cached
 abbr $args ge     git checkout
 abbr $args geb    git checkout -b
 abbr $args gf     git fetch --prune
-abbr $args gfm    git checkout --quiet --detach\; git fetch \(git remote \| head -n1\) master:master\; git checkout --quiet -
+abbr $args gfm    git checkout --quiet --detach\; git fetch \(git remote \| head -n1\) \(git-main-or-master\):\(git-main-or-master\)\; git checkout --quiet -
 abbr $args ghpr   gh pr view --web \|\| gh pr create --web
 abbr $args gl     glab
 abbr $args glp    glab pipeline ci view
@@ -62,16 +62,17 @@ abbr $args glh    git --no-pager log -n 1
 abbr $args gli    git --no-pager log -n 1 \| head -n 1 \| cut -d\" \" -f2 \| xsel --clipboard
 abbr $args gm     git merge
 abbr $args gma    git merge --abort
-abbr $args gmm    git merge master
+abbr $args gmb    git merge-base \(git-current-branch-name\) \(git-main-or-master\)
+abbr $args gmm    git merge \(git-main-or-master\)
 abbr $args gmt    git mergetool
 abbr $args gp     git pull
 abbr $args gpp    git pull
 abbr $args gpu    git push
 abbr $args gpuf   git push --force-with-lease
-abbr $args gpuu   git push -u \(git remote \| head -n1\) \(git rev-parse --abbrev-ref HEAD\)
+abbr $args gpuu   git push -u \(git remote \| head -n1\) \(git-current-branch-name\)
 abbr $args gre    grep --with-filename --line-number --recursive --ignore-case --extended-regexp
 abbr $args gr     git revise
-abbr $args grm    git revise --interactive master
+abbr $args grm    git revise --interactive \(git-main-or-master\)
 abbr $args gra    git rebase --abort
 abbr $args grc    git rebase --continue
 abbr $args grh    git reset --hard
