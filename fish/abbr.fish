@@ -47,6 +47,7 @@ abbr $args gd     git diff
 abbr $args gda    git diff --cached
 abbr $args gdc    git diff --cached
 abbr $args ge     git checkout
+abbr $args ge-    git checkout -
 abbr $args gem    git checkout \(git-main-or-master\)
 abbr $args geb    git checkout -b
 abbr $args gf     git fetch --prune
