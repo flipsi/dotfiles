@@ -2133,6 +2133,12 @@ let g:polyglot_disabled = ['helm']
 
 " Language: Clojure {{{
 
+augroup is_keyword_clojure
+    autocmd!
+    autocmd FileType clojure setlocal iskeyword-=/
+augroup END
+
+
 " https://thoughtbot.com/blog/writing-clojure-in-vim
 " https://tomekw.com/nvim-for-clojure-development/
 " https://smallsheds.garden/blog/clojure/2020/clj2-setting-up-vim/
