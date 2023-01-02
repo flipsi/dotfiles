@@ -534,7 +534,8 @@ nnoremap <leader>glmv :Shell glab mr view --web<cr>
 nnoremap <leader>glp  :Shell glab pipeline ci view<cr>
 nnoremap <leader>gbb  :Git blame<cr>
 nnoremap <leader>gpp  :Git pull<cr>
-nnoremap <leader>gpu  :GitPush<cr>
+nnoremap <leader>gpuu :Git push<cr>
+nnoremap <leader>gpuf :Git push --force-with-lease<cr>
 nnoremap <leader>gee  :Git checkout<space>
 nnoremap <leader>geb  :exe ':Git checkout -b ' . input('Branch name: ')<cr>
 nnoremap <leader>gbm  :exe ':Confirm Git branch -m ' . input('New branch name: ')<cr>
@@ -602,11 +603,12 @@ augroup custom_fugitive_mappings
     au User FugitiveIndex,FugitiveChanged nnoremap <buffer> <down>   j
     au User FugitiveIndex,FugitiveChanged nnoremap <buffer> <left>   h
     au User FugitiveIndex,FugitiveChanged nnoremap <buffer> <right>  l
-    au User FugitiveIndex nmap     <buffer> w  =
-    au User FugitiveIndex nnoremap <buffer> dt :call GdiffsplitTab(GStatusGetFilenameUnderCursor())<cr>
-    au User FugitiveIndex nmap     <buffer> pp :Git pull<cr>
-    au User FugitiveIndex nmap     <buffer> pu :GitPush<cr>
-    au User FugitiveIndex nmap     <buffer> pr :OpenOrCreatePullRequest<cr>
+    au User FugitiveIndex nmap     <buffer> w   =
+    au User FugitiveIndex nnoremap <buffer> dt  :call GdiffsplitTab(GStatusGetFilenameUnderCursor())<cr>
+    au User FugitiveIndex nmap     <buffer> pp  :Git pull<cr>
+    au User FugitiveIndex nmap     <buffer> puu :Git push<cr>
+    au User FugitiveIndex nmap     <buffer> puf :Git push --force-with-lease<cr>
+    au User FugitiveIndex nmap     <buffer> pr  :OpenOrCreatePullRequest<cr>
 augroup END
 
 " in Gdiff view, navigate and stage/checkout easily
