@@ -4753,17 +4753,17 @@ nnoremap <c-s><c-s> :%s::<left>
 " (to change only a single occurence, use 'c'. by default they are the same)
 
 " substitute occurrences of selection in this buffer
-vnoremap <c-s>         yms:%s:\V\C<c-r>":<c-r>":c<bar>norm!`s
+vnoremap <c-s>         yms:%s`\V\C<c-r>"`<c-r>"`c<bar>norm!`s
     \ <left><left><left><left><left><left><left><left><left><left><left>
 " the same, but with keyword matching
-vnoremap <leader><c-s> yms:%s:\V\C\<<c-r>"\>:<c-r>":c<bar>norm!`s
+vnoremap <leader><c-s> yms:%s`\V\C\<<c-r>"\>`<c-r>"`c<bar>norm!`s
     \ <left><left><left><left><left><left><left><left><left><left><left>
 
 " substitute occurrences of selection in this buffer from current line and below
-vnoremap s             yms:,$s:\V\C<c-r>":<c-r>":c<bar>norm!`s
+vnoremap s             yms:,$s`\V\C<c-r>"`<c-r>"`c<bar>norm!`s
     \ <left><left><left><left><left><left><left><left><left><left><left>
 " the same, but with keyword matching
-vnoremap <leader>s     yms:,$s:\V\C\<<c-r>"\>:<c-r>":c<bar>norm!`s
+vnoremap <leader>s     yms:,$s`\V\C\<<c-r>"\>`<c-r>"`c<bar>norm!`s
     \ <left><left><left><left><left><left><left><left><left><left><left>
 
 " " (these are actually two substitutions, so that we start at the current line
