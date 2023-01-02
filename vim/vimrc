@@ -4395,8 +4395,8 @@ command! ToggleSyntaxLongLines :let &synmaxcol = g:synmaxcol - &synmaxcol " Disa
 nmap <silent> <leader>sym :ToggleSyntaxLongLines
 
 " toggle line numbers
-command! ToggleLineNumbers          :set number! <bar> :set relativenumber! " Disable or enable line numbers
-command! ToggleRelativeLineNumbers  :set relativenumber!                    " Disable or enable relative line numbers
+command! ToggleLineNumbers          :windo set number! <bar> :set relativenumber! " Disable or enable line numbers
+command! ToggleRelativeLineNumbers  :windo set relativenumber!                    " Disable or enable relative line numbers
 nnoremap <silent> <leader>yL :ToggleLineNumbers <cr>
 nnoremap <silent> <leader>yl :ToggleRelativeLineNumbers <cr>
 
