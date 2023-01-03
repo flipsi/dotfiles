@@ -2324,21 +2324,21 @@ augroup END
 
 function! SetupClojure()
     " TODO: make those work (eval before run)
-    " nnoremap <leader>btt :ConjureCljRefreshAll <bar> ConjureCljRunAllTests<cr>
-    " nnoremap <leader>bto :ConjureEvalRootForm <bar> ConjureCljRunCurrentTest<cr>
-    " nnoremap <leader>btn :ConjureEvalBuf <bar> ConjureCljRunCurrentNsTests<cr>
-    nnoremap <leader>btt :ConjureCljRunAllTests<cr>
-    nnoremap <leader>bto :ConjureCljRunCurrentTest<cr>
-    nnoremap <leader>btn :ConjureCljRunCurrentNsTests<cr>
+    " nnoremap <buffer> <leader>btt :ConjureCljRefreshAll <bar> ConjureCljRunAllTests<cr>
+    " nnoremap <buffer> <leader>bto :ConjureEvalRootForm <bar> ConjureCljRunCurrentTest<cr>
+    " nnoremap <buffer> <leader>btn :ConjureEvalBuf <bar> ConjureCljRunCurrentNsTests<cr>
+    nnoremap <buffer> <leader>btt :ConjureCljRunAllTests<cr>
+    nnoremap <buffer> <leader>bto :ConjureCljRunCurrentTest<cr>
+    nnoremap <buffer> <leader>btn :ConjureCljRunCurrentNsTests<cr>
 endfunction
 command! SetupClojure :call SetupClojure() " add mappings for Clojure
 
 function! SetupClojureForCodeIntelligenceCore()
-    nnoremap <leader>bg  :call RunCommand("scripts/clojure-codegen.sh")<cr>
-    nnoremap <leader>bd  :call RunCommand("bazel build //backend/...")<cr>
-    nnoremap <leader>bta :call RunCommand("bazel test //backend/... --test_output=streamed")<cr>
-    nnoremap <leader>af  :call RunCommand("./bazelisk.py run @cljfmt//:cljfmt -- --config backend/dev-resources/cljfmt.clj " . expand("%"))<cr>
-    nnoremap <leader>AF  :call RunCommand("find . -name '*.edn' -o -name '*.clj' -exec ./bazelisk.py run @cljfmt//:cljfmt -- --config backend/dev-resources/cljfmt.clj {} +")<cr>
+    nnoremap <buffer> <leader>bg  :call RunCommand("scripts/clojure-codegen.sh")<cr>
+    nnoremap <buffer> <leader>bd  :call RunCommand("bazel build //backend/...")<cr>
+    nnoremap <buffer> <leader>bta :call RunCommand("bazel test //backend/... --test_output=streamed")<cr>
+    nnoremap <buffer> <leader>af  :call RunCommand("./bazelisk.py run @cljfmt//:cljfmt -- --config backend/dev-resources/cljfmt.clj " . expand("%"))<cr>
+    nnoremap <buffer> <leader>AF  :call RunCommand("find . -name '*.edn' -o -name '*.clj' -exec ./bazelisk.py run @cljfmt//:cljfmt -- --config backend/dev-resources/cljfmt.clj {} +")<cr>
 endfunction
 command! SetupClojureForCodeIntelligenceCore :call SetupClojureForCodeIntelligenceCore() " add mappings for Clojure
 
@@ -2356,13 +2356,13 @@ augroup csv_on_read
 augroup END
 
 function! SetupCSV()
-    nnoremap <silent> <leader>yy :CSVHiColumn <cr>              " highlight current column
-    nnoremap <silent> <leader>yY :CSVHiColumn! <cr>             " undo highlight current column
-    nnoremap <silent> <leader>yh :CSVHeader <cr>                " add window with header row
-    nnoremap <silent> <leader>yH :CSVHeader! <cr>               " close window with header row
-    nnoremap <silent> <leader>af :%CSVArrangeColumn <cr>        " align columns by adding spaces
-    nnoremap <silent> <leader>AF :%CSVArrangeColumn! <cr>       " align columns by adding spaces recalculating widths
-    nnoremap <silent> <leader>au :%CSVUnArrangeColumn <cr>      " undo aligning columns by removing spaces
+    nnoremap <buffer> <silent> <leader>yy :CSVHiColumn <cr>              " highlight current column
+    nnoremap <buffer> <silent> <leader>yY :CSVHiColumn! <cr>             " undo highlight current column
+    nnoremap <buffer> <silent> <leader>yh :CSVHeader <cr>                " add window with header row
+    nnoremap <buffer> <silent> <leader>yH :CSVHeader! <cr>               " close window with header row
+    nnoremap <buffer> <silent> <leader>af :%CSVArrangeColumn <cr>        " align columns by adding spaces
+    nnoremap <buffer> <silent> <leader>AF :%CSVArrangeColumn! <cr>       " align columns by adding spaces recalculating widths
+    nnoremap <buffer> <silent> <leader>au :%CSVUnArrangeColumn <cr>      " undo aligning columns by removing spaces
 endfunction
 command! SetupCSV :call SetupCSV() " add mappings for CSV handling
 
@@ -2394,27 +2394,27 @@ augroup typescript_on_read
     au FileType typescript call SetupTsuquyomi()
     au FileType typescript.tsx call SetupYarn()
     au FileType typescript.tsx call SetupTsuquyomi()
-    " nnoremap <leader>AF  :call RunCommand("prettier --parser typescript --write **.tsx")<cr>
-    nnoremap <leader>AF  :call RunCommand("yarn format")<cr>
+    " nnoremap <buffer> <leader>AF  :call RunCommand("prettier --parser typescript --write **.tsx")<cr>
+    nnoremap <buffer> <leader>AF  :call RunCommand("yarn format")<cr>
 augroup END
 
 function! SetupNpm()
-    nnoremap <leader>bi  :call RunCommand("npm install")<cr>
-    nnoremap <leader>br  :call RunCommand("npm start")<cr>
-    nnoremap <leader>btt :call RunCommand("npm test")<cr>
-    nnoremap <leader>btu :call RunCommand("npm test-unit")<cr>
-    nnoremap <leader>bti :call RunCommand("npm test-int")<cr>
+    nnoremap <buffer> <leader>bi  :call RunCommand("npm install")<cr>
+    nnoremap <buffer> <leader>br  :call RunCommand("npm start")<cr>
+    nnoremap <buffer> <leader>btt :call RunCommand("npm test")<cr>
+    nnoremap <buffer> <leader>btu :call RunCommand("npm test-unit")<cr>
+    nnoremap <buffer> <leader>bti :call RunCommand("npm test-int")<cr>
 endfunction
 command! SetupNpm :call SetupNpm() " add mappings for development with NodeJS
 
 function! SetupYarn()
-    nnoremap <leader>bi  :call RunCommand("yarn install")<cr>
-    nnoremap <leader>bd  :call RunCommand("yarn build")<cr>
-    nnoremap <leader>br  :call RunCommand("yarn start")<cr>
-    nnoremap <leader>btt :call RunCommand("yarn test")<cr>
-    nnoremap <leader>btu :call RunCommand("yarn test-unit")<cr>
-    nnoremap <leader>bti :call RunCommand("yarn test-int")<cr>
-    nnoremap <leader>bto :call RunCommand("yarn test:jest " . expand("%"))<cr>
+    nnoremap <buffer> <leader>bi  :call RunCommand("yarn install")<cr>
+    nnoremap <buffer> <leader>bd  :call RunCommand("yarn build")<cr>
+    nnoremap <buffer> <leader>br  :call RunCommand("yarn start")<cr>
+    nnoremap <buffer> <leader>btt :call RunCommand("yarn test")<cr>
+    nnoremap <buffer> <leader>btu :call RunCommand("yarn test-unit")<cr>
+    nnoremap <buffer> <leader>bti :call RunCommand("yarn test-int")<cr>
+    nnoremap <buffer> <leader>bto :call RunCommand("yarn test:jest " . expand("%"))<cr>
 endfunction
 command! SetupYarn :call SetupYarn() " add mappings for development with yarn
 
@@ -2457,8 +2457,8 @@ augroup END
 command! SetupLatex :call SetupLatex() " add mappings for LaTeX
 function! SetupLatex()
     setlocal wrap
-    nnoremap <leader>bb :VimtexCompile<cr>
-    nnoremap <leader>br :VimtexCompileSS<cr>
+    nnoremap <buffer> <leader>bb :VimtexCompile<cr>
+    nnoremap <buffer> <leader>br :VimtexCompileSS<cr>
 endfunction
 
 
@@ -2489,11 +2489,11 @@ augroup php_on_read
     au FileType php call SetupPHP()
 augroup END
 function! SetupPHP()
-    nnoremap <leader>bi  :call RunCommand("composer install")<cr>
-    nnoremap <leader>bu  :call RunCommand("composer update")<cr>
-    nnoremap <leader>btt :call RunCommand("composer test")<cr>
-    nnoremap <leader>btu :call RunCommand("composer test")<cr>
-    nnoremap <leader>bto :call RunCommand("composer test " . expand('%p'))<cr>
+    nnoremap <buffer> <leader>bi  :call RunCommand("composer install")<cr>
+    nnoremap <buffer> <leader>bu  :call RunCommand("composer update")<cr>
+    nnoremap <buffer> <leader>btt :call RunCommand("composer test")<cr>
+    nnoremap <buffer> <leader>btu :call RunCommand("composer test")<cr>
+    nnoremap <buffer> <leader>bto :call RunCommand("composer test " . expand('%p'))<cr>
 endfunction
 
 
@@ -2505,9 +2505,9 @@ augroup python_on_read
     au FileType python call SetupPython()
 augroup END
 function! SetupPython()
-    nnoremap <leader>br  :call RunCommand("python " . expand('%'))<cr>
-    nnoremap <leader>b2  :call RunCommand("python2 " . expand('%'))<cr>
-    nnoremap <leader>b3  :call RunCommand("python3 " . expand('%'))<cr>
+    nnoremap <buffer> <leader>br  :call RunCommand("python " . expand('%'))<cr>
+    nnoremap <buffer> <leader>b2  :call RunCommand("python2 " . expand('%'))<cr>
+    nnoremap <buffer> <leader>b3  :call RunCommand("python3 " . expand('%'))<cr>
 endfunction
 
 
@@ -2545,10 +2545,10 @@ augroup rust_on_read
 augroup END
 function! SetupRust()
     let g:build_shell = 'bash'
-    nnoremap <leader>bd  :call RunCommandInBuildShell("cargo build")<cr>
-    nnoremap <leader>bD  :call RunCommandInBuildShell("cargo build --release")<cr>
-    nnoremap <leader>br  :call RunCommandInBuildShell("cargo run")<cr>
-    nnoremap <leader>btc :call RunCommandInBuildShell("cargo check")<cr>
+    nnoremap <buffer> <leader>bd  :call RunCommandInBuildShell("cargo build")<cr>
+    nnoremap <buffer> <leader>bD  :call RunCommandInBuildShell("cargo build --release")<cr>
+    nnoremap <buffer> <leader>br  :call RunCommandInBuildShell("cargo run")<cr>
+    nnoremap <buffer> <leader>btc :call RunCommandInBuildShell("cargo check")<cr>
 endfunction
 command! SetupRust :call SetupRust() " add mappings for development with Rust
 
@@ -2676,20 +2676,20 @@ function! SetupScala()
         au VimEnter,WinEnter * execute 'match SbtPrompt /' . g:prompt_regex . '/'
     augroup END
 
-    nnoremap <leader>AF     :Terminal scalafmt<cr>
+    nnoremap <buffer> <leader>AF     :Terminal scalafmt<cr>
 
-    nnoremap <leader>bd     :call RunCommandInBuildShell("compile")<cr>
-    nnoremap <leader>br     :call RunCommandInBuildShell("run")<cr>
-    nnoremap <leader>btd    :call RunCommandInBuildShell("Test / compile; IntegrationTest / compile")<cr>
-    nnoremap <leader>btt    :call RunCommandInBuildShell("test; IntegrationTest / test")<cr>
-    nnoremap <leader>btu    :call RunCommandInBuildShell("test")<cr>
-    nnoremap <leader>bti    :call RunCommandInBuildShell("IntegrationTest / test")<cr>
-    nnoremap <leader>bto    :call RunCommandInBuildShell(CalculateSbtTestOnlyCommand())<cr>
-    nnoremap <leader>btq    :call RunCommandInBuildShell("testQuick")<cr>
-    nnoremap <leader>ba     :call RunCommandInBuildShell("scapegoat")<cr>
-    nnoremap <leader>bx     :call RunCommandInBuildShell("clean")<cr>
-    nnoremap <leader>bR     :call RunCommandInBuildShell("console")<cr>
-    nnoremap <leader>b<f5>  :call RunCommandInBuildShell("reload")<cr>
+    nnoremap <buffer> <leader>bd     :call RunCommandInBuildShell("compile")<cr>
+    nnoremap <buffer> <leader>br     :call RunCommandInBuildShell("run")<cr>
+    nnoremap <buffer> <leader>btd    :call RunCommandInBuildShell("Test / compile; IntegrationTest / compile")<cr>
+    nnoremap <buffer> <leader>btt    :call RunCommandInBuildShell("test; IntegrationTest / test")<cr>
+    nnoremap <buffer> <leader>btu    :call RunCommandInBuildShell("test")<cr>
+    nnoremap <buffer> <leader>bti    :call RunCommandInBuildShell("IntegrationTest / test")<cr>
+    nnoremap <buffer> <leader>bto    :call RunCommandInBuildShell(CalculateSbtTestOnlyCommand())<cr>
+    nnoremap <buffer> <leader>btq    :call RunCommandInBuildShell("testQuick")<cr>
+    nnoremap <buffer> <leader>ba     :call RunCommandInBuildShell("scapegoat")<cr>
+    nnoremap <buffer> <leader>bx     :call RunCommandInBuildShell("clean")<cr>
+    nnoremap <buffer> <leader>bR     :call RunCommandInBuildShell("console")<cr>
+    nnoremap <buffer> <leader>b<f5>  :call RunCommandInBuildShell("reload")<cr>
 
 endfunction
 
@@ -2744,8 +2744,8 @@ augroup END
 command! SetupSQL :call SetupSQLDadBod()<bar> call SetupSQLVimux() " add mappings for development with SQL
 
 function! SetupSQLVimux()
-    nnoremap <leader>bm  :call RunCommand("\\. " . expand('%:p'))<cr>
-    nnoremap <leader>bp  :call RunCommand("\\i " . expand('%:p'))<cr>
+    nnoremap <buffer> <leader>bm  :call RunCommand("\\. " . expand('%:p'))<cr>
+    nnoremap <buffer> <leader>bp  :call RunCommand("\\i " . expand('%:p'))<cr>
 endfunction
 command! SetupSQLVimux :call SetupSQLVimux() " add mappings for development with SQL (Vimux)
 
@@ -2760,8 +2760,8 @@ function! SetupSQLDadBod()
     vnoremap <buffer> aq <esc>:call search(";", "cWz")<cr>:call search(";\\<bar>\\%^", "bsWz")<cr>:call search("\\v\\c^(select<bar>with<bar>insert<bar>update<bar>delete<bar>create)\>", "Wz")<cr>vg`'
     omap     <buffer> aq :normal vaq<cr>
 
-    nnoremap    <leader>bdo :DB<space>
-    nnoremap    <leader>bda :%DB<cr>
+    nnoremap <buffer>    <leader>bdo :DB<space>
+    nnoremap <buffer>    <leader>bda :%DB<cr>
     xmap <expr> <leader>bd db#op_exec()
     "nmap        <leader>bdq vaq<leader>bd
     nmap        <leader>bdq vap<leader>bd
@@ -2783,12 +2783,12 @@ command! SetupSQLDadBod :call SetupSQLDadBod() " add mappings for development wi
 "     au FileType sql call SetupSQLWorkbench()
 " augroup END
 " function! SetupSQLWorkbench()
-"     nnoremap <leader>br   <nop>
-"     nnoremap <leader>brc  :SWSqlBufferConnect<cr>
-"     nnoremap <leader>bre  :SWDbExplorer<space>
-"     nnoremap <leader>brr  :SWSqlExecuteCurrent<cr>
-"     vnoremap <leader>brr  :SWSqlExecuteSelected<cr>
-"     nnoremap <leader>bra  :SWSqlExecuteAll<cr>
+"     nnoremap <buffer> <leader>br   <nop>
+"     nnoremap <buffer> <leader>brc  :SWSqlBufferConnect<cr>
+"     nnoremap <buffer> <leader>bre  :SWDbExplorer<space>
+"     nnoremap <buffer> <leader>brr  :SWSqlExecuteCurrent<cr>
+"     vnoremap <buffer> <leader>brr  :SWSqlExecuteSelected<cr>
+"     nnoremap <buffer> <leader>bra  :SWSqlExecuteAll<cr>
 " endfunction
 
 
