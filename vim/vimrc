@@ -286,20 +286,6 @@ let g:neoterm_autoinsert = 1
 let g:neoterm_autoscroll = 1
 let g:neoterm_automap_keys = '' " don't add default mapping (,tt)
 
-command! -nargs=1 -complete=file RunCommandInTerminal :call RunCommandInTerminal(<q-args>)
-function! RunCommandInTerminal(commandline)
-    let g:last_terminal_command = a:commandline
-    call ExecuteInNeoTerminal(a:commandline)
-endfunction
-
-function! RunLastCommandInTerminal()
-    if exists('g:last_terminal_command')
-        execute 'RunCommandInTerminal ' . escape(g:last_terminal_command, '\\')
-    else
-        echoerr "No last command found!"
-    endif
-endfunction
-
 " Execute some neoterm terminal command without ending up in insert mode
 " (this is necessary due to the 'startinsert' autocmd that I want)
 command! -nargs=1 ExecuteInNeoTerminal :call ExecuteInNeoTerminal(<q-args>)
@@ -338,7 +324,6 @@ endfunction
 nnoremap <leader>tm     :SwitchNeoTermMode<cr>
 nnoremap <leader>tt     :Topen<cr>
 nnoremap <leader>tn     :Tnew<cr>
-nnoremap <leader>to     :RunCommandInTerminal<space>
 nnoremap <leader>t<bs>  :Tclose<cr>         " only hides buffer, we can still sent commands to it
 
 " nnoremap <leader>tl :Tclear<cr>
@@ -4891,15 +4876,50 @@ nnoremap dN [c
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" BUILDING, MAKING AND DEBUGGING {{{
-
-nnoremap <leader>bm :make<cr>
+" RUNNING COMMANDS, SBUILDING, MAKING AND DEBUGGING {{{
 
 if has('nvim')
-    let g:run_command_method = "terminal"
+    let g:run_command_method = "terminal-window"
 else
     let g:run_command_method = "vimux"
 endif
+
+
+function! ToggleRunCommandMethod()
+    if !exists('g:run_command_method') || g:run_command_method == "terminal-window"
+        echo 'Set running method to `terminal-emulator`'
+        let g:run_command_method = "terminal-emulator"
+        RefreshRunCommandMappings
+    elseif g:run_command_method == "terminal-emulator"
+        echo 'Set running method to `vimux`'
+        let g:run_command_method = "vimux"
+        RefreshRunCommandMappings
+    else
+        echo 'Set running method to `terminal-window`'
+        let g:run_command_method = "terminal-window"
+        RefreshRunCommandMappings
+    endif
+endfunction
+
+command! -nargs=1 -complete=file RunCommandInTerminal :call RunCommandInTerminal(<q-args>)
+function! RunCommandInTerminal(commandline)
+    let g:last_terminal_command = a:commandline
+    if g:run_command_method == "terminal-emulator"
+        call ExecuteInNeoTerminal(a:commandline)
+    elseif g:run_command_method == "terminal-window"
+        call jobstart('alacritty --title "Output" --hold --command ' . a:commandline)
+    else
+      echoerr "Unknown g:run_command_method (" . g:run_command_method . ")"
+    endif
+endfunction
+
+function! RunLastCommandInTerminal()
+    if exists('g:last_terminal_command')
+        execute 'RunCommandInTerminal ' . escape(g:last_terminal_command, '\\')
+    else
+        echoerr "No last command found!"
+    endif
+endfunction
 
 function! GetBuildOutputFilename()
     if !empty(v:servername)
@@ -4915,13 +4935,16 @@ function! GetBuildOutputFilename()
 endfunction
 
 function! IsBuildShellRunning()
-    if g:run_command_method == "terminal"
+    if g:run_command_method == "terminal-emulator"
         let l:terminal_bufnum = GetTerminalBuffer()
         return l:terminal_bufnum > 0
     elseif g:run_command_method == "vimux"
         " TODO: make this work for other shells
         return exists('g:build_shell') && match(g:build_shell, 'sbt') == 0
                     \ && IsSbtRunning()
+    elseif g:run_command_method == "terminal-window"
+        call system("i3-msg -t get_workspaces | tr , '\\n' | grep -q '\"name\":\"Output\"'")
+        return !v:shell_error
     else
         return 0
     endif
@@ -4943,53 +4966,72 @@ endfunction
 
 command! -nargs=1 RunCommand :call RunCommand(<q-args>)
 function! RunCommand(command)
-    if g:run_command_method == "terminal"
-        call RunCommandInTerminal(a:command)
-    elseif g:run_command_method == "vimux"
+    if g:run_command_method == "vimux"
         call VimuxRunCommand(a:command)
     else
-      echoerr "Unknown g:run_command_method (" . g:run_command_method . ")"
+        call RunCommandInTerminal(a:command)
     endif
 endfunction
 
-" search the web for selection
-vnoremap <leader>ws y:call WebSearch(@")<cr>gv
+
+" old-school make
+nnoremap <leader>bm :make<cr>
+
+" change how commands are run
+nnoremap <leader>or :call ToggleRunCommandMethod()<cr>
+
+" type command to run
+nnoremap <leader>to :RunCommandInTerminal<space>
 
 " run current line or selection as shell command
 nnoremap <leader>bS :call RunCommand(getline('.'))<cr>
 vnoremap <leader>bS y:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>gv
 nnoremap <leader>b` yi`:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
 
+" inspect built errors somewhere
 nnoremap <silent> <leader>bee :OpenBuildErrorsInQuickfixList<cr><esc>hj
 nnoremap <silent> <leader>beo :OpenBuildErrorsInBuffer<cr><esc>hj
 nnoremap <silent> <leader>bex :WebSearchForBuildError<cr>
 
-if g:run_command_method == "terminal"
-    nnoremap <leader>bo         :RunCommandInBuildShell<space>
-    nnoremap <leader>bf         :execute 'RunCommandInTerminal  ' . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
-    nnoremap <leader>bF         :execute 'RunCommandInTerminal ' . ExpandPrependThisDir('%') . ' '<left>
-    nnoremap <leader>bb         :update<cr> :call RunLastCommandInTerminal()<cr>
-    nnoremap <leader>bl         :ExecuteInNeoTerminal Tclear<cr>
-    nnoremap <leader>bc         :ExecuteInNeoTerminal Tkill<cr>
-    nnoremap <leader>b<c-c>     :ExecuteInNeoTerminal Tkill<cr>
-    nnoremap <leader>b<bs>      :Tclose<cr>         " only hides buffer, we can still sent commands to it
-elseif g:run_command_method == "vimux"
-    nnoremap <leader>bo         :VimuxRunCommand ""<left>
-    nnoremap <leader>bf         :VimuxRunCommand " " . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
-    nnoremap <leader>bF         :VimuxRunCommand ExpandPrependThisDir('%') . " "<left>
-    nnoremap <leader>bb         :update<cr>:VimuxRunLastCommand<cr>
-    nnoremap <silent> <leader>bl :VimuxClearTerminalScreen<cr>
-    nnoremap <leader>bq         :VimuxCloseRunner<cr>
-    nnoremap <leader>b<bs>      :VimuxCloseRunner<cr>
-    nnoremap <leader>bz         :call VimuxZoomRunner()<cr>
-    nnoremap <leader>bc         :VimuxInterruptRunner<cr>
-    nnoremap <leader>b<c-c>     :VimuxInterruptRunner<cr>
-    nnoremap <leader>b<c-d>     :call VimuxSendKeys("C-d")<cr>
-    nnoremap <leader>b<c-b>     :VimuxInspectRunner<cr>
-    nnoremap <leader><c-b><c-b> :VimuxInspectRunner<cr>
-else
-    echoerr "Unknown g:run_command_method (" . g:run_command_method . ")"
-endif
+command! RefreshRunCommandMappings :call RefreshRunCommandMappings()
+function! RefreshRunCommandMappings()
+    if g:run_command_method == "terminal-emulator"
+        nnoremap <leader>bo         :RunCommandInBuildShell<space>
+        nnoremap <leader>bf         :execute 'RunCommandInTerminal  ' . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
+        nnoremap <leader>bF         :execute 'RunCommandInTerminal ' . ExpandPrependThisDir('%') . ' '<left>
+        nnoremap <leader>bb         :update<cr> :call RunLastCommandInTerminal()<cr>
+        nnoremap <leader>bl         :ExecuteInNeoTerminal Tclear<cr>
+        nnoremap <leader>bc         :ExecuteInNeoTerminal Tkill<cr>
+        nnoremap <leader>b<c-c>     :ExecuteInNeoTerminal Tkill<cr>
+        nnoremap <leader>b<bs>      :Tclose<cr>         " only hides buffer, we can still sent commands to it
+    elseif g:run_command_method == "terminal-window"
+        nnoremap <leader>bo         :RunCommandInBuildShell<space>
+        nnoremap <leader>bf         :execute 'RunCommandInTerminal  ' . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
+        nnoremap <leader>bF         :execute 'RunCommandInTerminal ' . ExpandPrependThisDir('%') . ' '<left>
+        nnoremap <leader>bb         :update<cr> :call RunLastCommandInTerminal()<cr>
+        nnoremap <leader>bl         :echoerr "Not implemented"<cr>
+        nnoremap <leader>bc         :echoerr "Not implemented"<cr>
+        nnoremap <leader>b<c-c>     :echoerr "Not implemented"<cr>
+        nnoremap <leader>b<bs>      :echoerr "Not implemented"<cr>
+    elseif g:run_command_method == "vimux"
+        nnoremap <leader>bo         :VimuxRunCommand ""<left>
+        nnoremap <leader>bf         :VimuxRunCommand " " . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
+        nnoremap <leader>bF         :VimuxRunCommand ExpandPrependThisDir('%') . " "<left>
+        nnoremap <leader>bb         :update<cr>:VimuxRunLastCommand<cr>
+        nnoremap <silent> <leader>bl :VimuxClearTerminalScreen<cr>
+        nnoremap <leader>bq         :VimuxCloseRunner<cr>
+        nnoremap <leader>b<bs>      :VimuxCloseRunner<cr>
+        nnoremap <leader>bz         :call VimuxZoomRunner()<cr>
+        nnoremap <leader>bc         :VimuxInterruptRunner<cr>
+        nnoremap <leader>b<c-c>     :VimuxInterruptRunner<cr>
+        nnoremap <leader>b<c-d>     :call VimuxSendKeys("C-d")<cr>
+        nnoremap <leader>b<c-b>     :VimuxInspectRunner<cr>
+        nnoremap <leader><c-b><c-b> :VimuxInspectRunner<cr>
+    else
+        echoerr "Unknown g:run_command_method (" . g:run_command_method . ")"
+    endif
+endfunction
+RefreshRunCommandMappings
 
 function! RemoveEscapeSequencesFromFile(filename)
     " color escape sequences

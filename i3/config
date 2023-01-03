@@ -908,6 +908,7 @@ for_window [class="Spotify"] move to workspace                                  
 assign [class="(?i)signal"]                                                                         Signal
 assign [class="(?i)telegram"]                                                                       Telegram
 assign [class="(?i)alacritty"]                                                                      Terminal
+for_window [class="(?i)alacritty" title="Output"] move to workspace                                 Output
 assign [class="(?i)cool-retro-term"]                                                                Terminal
 assign [class="(?i)gnome-terminal"]                                                                 Terminal
 assign [class="(?i)urxvt"]                                                                          Terminal
@@ -924,6 +925,7 @@ for_window [class="(?i)google-chrome"]                                          
 for_window [class="(?i)firefox"]                                                move workspace to output DP2-2
 for_window [class="(?i)qutebrowser"]                                            move workspace to output DP2-2
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DP2-1
+for_window [class="(?i)alacritty" title="Output"]                               move workspace to output DP-1
 for_window [class="(?i)alacritty"]                                              move workspace to output DP2-1
 for_window [class="(?i)cool-retro-term"]                                        move workspace to output DP2-1
 for_window [class="(?i)gnome-terminal"]                                         move workspace to output DP2-1
@@ -942,6 +944,7 @@ for_window [class="(?i)google-chrome"]                                          
 for_window [class="(?i)firefox"]                                                move workspace to output DP3-2
 for_window [class="(?i)qutebrowser"]                                            move workspace to output DP3-2
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DP3-1
+for_window [class="(?i)alacritty" title="Output"]                               move workspace to output DP-1
 for_window [class="(?i)alacritty"]                                              move workspace to output DP3-1
 for_window [class="(?i)cool-retro-term"]                                        move workspace to output DP3-1
 for_window [class="(?i)gnome-terminal"]                                         move workspace to output DP3-1
