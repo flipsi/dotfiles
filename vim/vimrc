@@ -2412,9 +2412,9 @@ function! SetupYarn()
     nnoremap <buffer> <leader>bd  :call RunCommand("yarn build")<cr>
     nnoremap <buffer> <leader>br  :call RunCommand("yarn start")<cr>
     nnoremap <buffer> <leader>btt :call RunCommand("yarn test")<cr>
-    nnoremap <buffer> <leader>btu :call RunCommand("yarn test-unit")<cr>
-    nnoremap <buffer> <leader>bti :call RunCommand("yarn test-int")<cr>
-    nnoremap <buffer> <leader>bto :call RunCommand("yarn test:jest " . expand("%"))<cr>
+    nnoremap <buffer> <leader>btu :call RunCommand("yarn test:unit")<cr>
+    nnoremap <buffer> <leader>bto :call RunCommand("yarn test:unit -- " . expand("%"))<cr>
+    nnoremap <buffer> <leader>bti :call RunCommand("yarn test:e2e")<cr>
 endfunction
 command! SetupYarn :call SetupYarn() " add mappings for development with yarn
 
