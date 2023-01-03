@@ -3989,10 +3989,12 @@ let mapleader=' '
 
 iabbrev af          autoformat
 iabbrev dpr         deprecated
+iabbrev sm          [SQUASHME]
 iabbrev todo        TODO:
 iabbrev todoi       TODO: implement
 iabbrev todod       TODO: delete this debugging statement
 iabbrev todof       TODO: FIX
+iabbrev wip         WIP:
 
 " password store
 augroup abbreviations_password_store
