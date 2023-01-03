@@ -4954,8 +4954,8 @@ vnoremap <leader>ss y:call WebSearch(@")<cr>gv
 
 " run current line or selection as shell command
 nnoremap <leader>bS :call RunCommand(getline('.'))<cr>
-vnoremap <leader>bS y:call RunCommand(@")<cr>gv
-nnoremap <leader>b` yi`:call RunCommand(@")<cr>
+vnoremap <leader>bS y:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>gv
+nnoremap <leader>b` yi`:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
 
 nnoremap <silent> <leader>bee :OpenBuildErrorsInQuickfixList<cr><esc>hj
 nnoremap <silent> <leader>beo :OpenBuildErrorsInBuffer<cr><esc>hj
