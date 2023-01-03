@@ -2168,12 +2168,15 @@ Plug 'Olical/conjure'
 let g:conjure#mapping#prefix = "<leader>l"
 " Use :ConjureSchool to get started
 " See `:vertical help conjure-mappings` for (default) mappings
-nnoremap <leader>cl         <nop>
 nnoremap <leader>clc        :ConjureConnect<CR>
 nnoremap <leader>cll        :ConjureEval<space>
 nnoremap <leader>cl<c-c>    :ConjureCljInterrupt<CR>
 nnoremap <leader>clr        :ConjureCljRefreshChanged<CR>
 nnoremap <leader>cl<f5>     :ConjureCljRefreshAll<CR>
+
+" ignore typos
+nnoremap <leader>l          <nop>
+nnoremap <leader>cl         <nop>
 
 " Provides a couple of helper commands for 'jacking' in to a Clojure REPL by auto-starting it.
 " (For Clojure CLI use :Clj)
