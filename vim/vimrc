@@ -5339,6 +5339,10 @@ nnoremap <c-y>q               :CloseTab<cr>
 nnoremap <c-y><c-w>           :CloseTab<cr>
 
 " change tab
+nnoremap <c-y><c-space>               g<tab>
+nnoremap <c-y><space>                 g<tab>
+tnoremap <c-y><c-space>     <c-\><c-n>g<tab>
+tnoremap <c-y><space>       <c-\><c-n>g<tab>
 nnoremap <c-y><c-n>           :tabnext<cr>
 nnoremap <c-y>n               :tabnext<cr>
 tnoremap <c-y><c-n> <c-\><c-n>:tabnext<cr>
