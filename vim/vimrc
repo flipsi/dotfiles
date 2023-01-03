@@ -4950,7 +4950,7 @@ function! RunCommand(command)
 endfunction
 
 " search the web for selection
-vnoremap <leader>ss y:call WebSearch(@")<cr>gv
+vnoremap <leader>ws y:call WebSearch(@")<cr>gv
 
 " run current line or selection as shell command
 nnoremap <leader>bS :call RunCommand(getline('.'))<cr>
@@ -5085,6 +5085,8 @@ function! WebSearch(query)
     call system("$BROWSER 'https://google.com/search?q=" . UrlEncode(a:query) . "'")
 endfunction
 
+" search the web for selection
+vnoremap <leader>ws y:call WebSearch(@")<cr>gv
 
 
 " execute shell script
@@ -5431,6 +5433,7 @@ endfunction
 " EXTERNAL TOOLS {{{
 
 " search the web with selection
+" TODO: escape and combine with WebSearch()
 vnoremap <leader>isl :<c-w>!$BROWSER 'https://dict.leo.org/ende/?lang=en&search=<c-r>*'<cr><cr>
 vnoremap <leader>isd :<c-w>!$BROWSER 'https://duckduckgo.com/?q=<c-r>*'<cr><cr>
 vnoremap <leader>isg :<c-w>!$BROWSER 'https://google.com/?q=<c-r>*'<cr><cr>
