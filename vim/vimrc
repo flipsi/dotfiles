@@ -2406,7 +2406,7 @@ function! SetupYarn()
     nnoremap <buffer> <leader>bLF :call RunCommand("yarn --cwd ./ui lint:fix")<cr>
     nnoremap <buffer> <leader>btt :call RunCommand("yarn --cwd ./ui test")<cr>
     nnoremap <buffer> <leader>btu :call RunCommand("yarn --cwd ./ui test:unit")<cr>
-    nnoremap <buffer> <leader>bto :call RunCommand("yarn --cwd ./ui test:unit -- " . expand("%"))<cr>
+    nnoremap <buffer> <leader>bto :call RunCommand("yarn --cwd ./ui test:unit " . expand("%"))<cr>
     nnoremap <buffer> <leader>bti :call RunCommand("yarn --cwd ./ui test:e2e")<cr>
 endfunction
 command! SetupYarn :call SetupYarn() " add mappings for development with yarn
