@@ -37,9 +37,9 @@ function set_env_vars() {
             ;;
         mimir )
             if xrandr | grep -q 'DVI-I-1-1 connected'; then
-                BAR_MAIN_MONITOR='DP-1'
-                BAR_SECOND_MONITOR='DVI-I-2-2'
-                BAR_THIRD_MONITOR='DVI-I-1-1'
+                BAR_MAIN_MONITOR='DVI-I-2-2'
+                BAR_SECOND_MONITOR='DVI-I-1-1'
+                BAR_THIRD_MONITOR='DP-1'
             else
                 BAR_MAIN_MONITOR='eDP-1'
             fi

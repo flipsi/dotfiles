@@ -88,9 +88,9 @@ function main() {
 
             elif xrandr | grep -q 'DVI-I-1-1 connected'; then
 
-                MAIN_MONITOR='DP-1'
+                MAIN_MONITOR='DVI-I-2-2'
                 SECOND_MONITOR='DVI-I-1-1'
-                THIRD_MONITOR='DVI-I-2-2'
+                THIRD_MONITOR='DP-1'
                 LAPTOP_SCREEN='eDP-1'
 
                 arrange_outputs_at_home
