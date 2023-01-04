@@ -152,6 +152,8 @@ nnoremap <a-s-u>            :redo<cr>
 
 nnoremap <a-n>              :action NextTab<cr>
 nnoremap <a-p>              :action PreviousTab<cr>
+nnoremap <leader><right>    <c-w>l
+nnoremap <leader><left>     <c-w>h
 nnoremap <c-l>              <c-w>l
 nnoremap <c-h>              <c-w>h
 nnoremap <leader><c-l>      :action SplitVertically<cr>
@@ -223,5 +225,15 @@ nnoremap <leader>bR         :action ChooseRunConfiguration<cr>
 nnoremap <leader>bc         :action RunClass<cr>
 nnoremap <leader>bd         :action Debug<cr>
 nnoremap <leader>bD         :action ChooseDebugConfiguration<cr>
-nnoremap <leader>bb         :action Rerun<cr>
+" nnoremap <leader>bb         :action Rerun<cr>
 
+nnoremap <leader>b<c-l>     :action :cursive.repl.actions.clear-repl<cr>
+nnoremap <leader>b<c-c>     :action :cursive.repl.actions.interrupt<cr>
+nnoremap <leader>leb        :action :cursive.repl.actions.load-file<cr>
+nnoremap <leader>leo        :action :cursive.repl.actions.jump-to-repl<cr>
+nnoremap <leader>lee        :action :cursive.repl.actions.run-top-sexp<cr>
+nnoremap <leader>let        :action :cursive.repl.actions.run-top-sexp<cr>
+nnoremap <leader>bto        :action :cursive.testing.actions.run-single-test<cr>
+nnoremap <leader>btn        :action :cursive.testing.actions.run-ns-tests<cr>
+nnoremap <leader>btl        :action :cursive.testing.actions.rerun-last-test<cr>
+nnoremap <leader>bb         :action :cursive.repl.actions.run-last-sexp<cr>
