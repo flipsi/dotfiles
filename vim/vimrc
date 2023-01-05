@@ -1269,25 +1269,28 @@ let NERDTreeMapToggleHidden='.'
 " pimp netrw
 " Plug 'tpope/vim-vinegar'
 
-
-" use ranger file manager as file chooser etc.
-Plug 'francoiscabrol/ranger.vim'
-
+" delete a buffer in Vim without closing the window
 if has('nvim')
     Plug 'rbgrouleff/bclose.vim'
 endif
 
-" open ranger when vim open a directory
+" use ranger file manager as file chooser etc.
+Plug 'francoiscabrol/ranger.vim'
+
+" open ranger when vim opens a directory
 let g:ranger_replace_netrw = 1
 
+" map keys explicitly
 let g:ranger_map_keys = 0
 
+" open ranger in a vertical split window at the left
 nnoremap <silent> <leader>ir :vertical split <bar> wincmd H <bar> vertical resize 60 <bar> Ranger <cr>
 nnoremap <silent> <leader>iR :vertical split <bar> wincmd H <bar> vertical resize 60 <bar> RangerWorkingDirectory <cr>
 
+" close window when exiting ranger (and fix window width afterwards)
 augroup ranger_autoclose
     au!
-    au BufWipeout term://*ranger* quit
+    au BufWipeout term://*ranger* quit | wincmd =
 augroup END
 
 
