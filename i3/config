@@ -753,7 +753,7 @@ mode "$launch" {
     bindsym j       exec --no-startup-id "/home/sflip/opt/idea-IU-201.7223.91/bin/idea.sh nosplash || idea"; mode "default"
     bindsym m       exec --no-startup-id "spotify"; mode "default"
     bindsym q       exec --no-startup-id "qutebrowser"; mode "default"
-    bindsym n       exec --no-startup-id "nautilus"; mode "default"
+    bindsym n       exec --no-startup-id "thunar || nautilus"; mode "default"
     bindsym s       exec --no-startup-id "slack"; mode "default"
     bindsym t       exec --no-startup-id "telegram-desktop"; mode "default"
     # cancel
@@ -801,8 +801,8 @@ mode "$goto" {
   bindsym $mod+q    [class="(?i)qutebrowser"]           focus; mode "default"
   bindsym m         [class="(?i)spotify"]               focus; mode "default"
   bindsym $mod+m    [class="(?i)spotify"]               focus; mode "default"
-  bindsym n         [class="(?i)nautilus"]              focus; mode "default"
-  bindsym $mod+n    [class="(?i)nautilus"]              focus; mode "default"
+  bindsym n         [class="((?i)nautilus|thunar)"]     focus; mode "default"
+  bindsym $mod+n    [class="((?i)nautilus|thunar)"]     focus; mode "default"
   bindsym j         [class="(?i)jetbrains-idea"]        focus; mode "default"
   bindsym $mod+j    [class="(?i)jetbrains-idea"]        focus; mode "default"
   bindsym w         [class="Wine"]                      focus; mode "default"
@@ -856,8 +856,6 @@ for_window [class="(?i)gcolor2"]                                                
 for_window [class="(?i)mplayer"]                                                    fullscreen
 for_window [class="(?i)nm-connection-editor"]                                       floating enable
 for_window [class="(?i)nautilus"]                                                   floating enable
-for_window [class="(?i)nautilus"]                                                   move position 550 250
-for_window [class="(?i)nautilus"]                                                   resize set 920 600
 for_window [class="(?i)blueman-manager"]                                            floating enable
 for_window [class="(?i)nemo"]                                                       floating enable
 for_window [class="(?i)pavucontrol"]                                                floating enable
