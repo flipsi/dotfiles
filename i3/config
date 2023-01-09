@@ -917,10 +917,10 @@ assign [class="code-oss"]                                                       
 for_window [class="(?i)gnome-session-failed"] move to workspace                                     GnomeSessionFailed
 
 ## workspaces with window always on specific output
-for_window [class="(?i)alacritty" title="Output"]                               move workspace to output DVI-I-2-2
 for_window [class="(?i)alacritty"]                                              move workspace to output DVI-I-2-2
-for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DVI-I-2-2
+for_window [class="(?i)alacritty" title="Output"]                               move workspace to output DP-1
 for_window [class="(?i)chrom"]                                                  move workspace to output DVI-I-2-2
+for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DVI-I-2-2
 for_window [class="(?i)chromium"]                                               move workspace to output DVI-I-2-2
 for_window [class="(?i)cool-retro-term"]                                        move workspace to output DVI-I-2-2
 for_window [class="(?i)firefox"]                                                move workspace to output DVI-I-2-2
