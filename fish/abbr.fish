@@ -9,12 +9,15 @@ abbr $args ca     gcalcli
 abbr $args cdi    cd_interactively
 abbr $args cdi.   cd_interactively .
 abbr $args cdir   cd_interactively /
-abbr $args ci     cifuzz
-abbr $args cic    cictl
-abbr $args cid    cifuzz-dev
+abbr $args cc     cictl
+abbr $args cif    cifuzz
+abbr $args ci     cifuzz-dev
+abbr $args cia    cifuzz-dev up -d --local
+abbr $args cio    cifuzz-dev stop
+abbr $args cip    cifuzz-dev ps
 abbr $args d      docker
-abbr $args dl     docker logs
-abbr $args dlf    docker logs -f
+abbr $args dl     docker logs -n 60
+abbr $args dlf    docker logs -n 60 -f
 abbr $args dps    docker ps
 abbr $args dr     docker run
 abbr $args do     docker stop
@@ -74,7 +77,7 @@ abbr $args gpuf   git push --force-with-lease
 abbr $args gpuc   git push -u \(git remote \| head -n1\) \(git-current-branch-name\)
 abbr $args gre    grep --with-filename --line-number --recursive --ignore-case --extended-regexp
 abbr $args gr     git revise
-abbr $args grm    git revise --interactive \(git-main-or-master\)
+abbr $args grm    git rebase \(git-main-or-master\)
 abbr $args gra    git rebase --abort
 abbr $args grc    git rebase --continue
 abbr $args grh    git reset --hard
