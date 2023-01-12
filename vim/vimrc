@@ -4889,10 +4889,12 @@ nnoremap dN [c
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING COMMANDS, SBUILDING, MAKING AND DEBUGGING {{{
 
-if has('nvim')
-    let g:run_command_method = "terminal-window"
-else
-    let g:run_command_method = "vimux"
+if !exists('g:run_command_method')
+    if has('nvim')
+        let g:run_command_method = "terminal-window"
+    else
+        let g:run_command_method = "vimux"
+    endif
 endif
 
 
