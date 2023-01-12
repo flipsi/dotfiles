@@ -5636,14 +5636,24 @@ nnoremap <leader>qo         :CloseOtherWindows<cr>
 nnoremap <c-d>              :exe 'CloseTerminalBuffers!' <bar> :QuitVim<cr>
 nnoremap <leader><c-d><c-d> :exe 'CloseTerminalBuffers!' <bar> :QuitVimForce<cr>
 
+" How to delete multiple buffers:
+" You can use <C-a> to complete all matches. So if you type :bd *.xml and then hit <C-a>, vim will complete the command to :bd file1.xml file2.xml file3.xml.
+" Source: https://stackoverflow.com/a/9499234/4568748
+
 augroup map_q_in_read_only_buffers
-    au!
-    au BufReadPost * if &readonly
-    au BufReadPost *   nnoremap <buffer> q :bd<cr>
-    au BufReadPost * endif
-    au BufReadPost fugitive://*     nnoremap <buffer> q :bd<cr>
-    au BufReadPost output://*       nnoremap <buffer> q :bd<cr>
+    autocmd!
+    autocmd BufReadPost * if &readonly
+    autocmd BufReadPost *   nnoremap <buffer> q :bd<cr>
+    autocmd BufReadPost * endif
 augroup END
+
+augroup map_q_in_certain_buffers
+    autocmd!
+    autocmd BufReadPost fugitive://*     nnoremap <buffer> q :bd<cr>
+    autocmd BufReadPost output://*       nnoremap <buffer> q :bd<cr>
+    autocmd filetype git                 nnoremap <buffer> q :bd<cr>
+augroup END
+
 
 " ... but ignore typos
 nnoremap <leader>q <nop>
