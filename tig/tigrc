@@ -155,7 +155,7 @@ bind generic f !git fetch
 bind generic pp !git pull
 bind generic pu !git push
 bind generic gpuf !git push --force-with-lease
-bind generic gpuu !bash -c "git push -u $(git remote | head -n1) $(git rev-parse --abbrev-ref HEAD)"
+bind generic gpuc !bash -c "git push -u $(git remote | head -n1) $(git rev-parse --abbrev-ref HEAD)"
 
 
 # more/less context
