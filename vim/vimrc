@@ -2005,12 +2005,18 @@ nnoremap <leader>icp :ColorPicker<cr>
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Install CoC plugins manually on each host:
+
+" Clojure:
+" system:                       yay -S clojure-lsp-bin
+" vim (in clojure project):     :CocInstall coc-clojure
+
 nnoremap <leader>i <nop>
 nnoremap <leader>j <nop>
 
 command! CocToggle :call CocToggle() " Enable or Disable COC
 function! CocToggle()
-    if g:coc_workspace_initialized == 0
+    if !exists('g:coc_workspace_initialized') || g:coc_workspace_initialized == 0
         CocStart
     elseif g:coc_enabled == 1
         CocDisable
@@ -2037,10 +2043,10 @@ nmap <leader>i<bs>      <Plug>(coc-float-hide)
 nmap <leader>ie         <Plug>(coc-diagnostic-info)
 
 " highlight symbol under cursor
-nnoremap <leader>ih     :call CocAction('highlight')<cr>
+nnoremap <leader>ih             :call CocActionAsync('highlight')<cr>
 
 " show infos about function under cursor in popup
-nnoremap <silent> <leader>iq :call <SID>show_documentation()<cr>
+nnoremap <silent> <leader>iq    :call <SID>show_documentation()<cr>
 
 " navigate to first/next/last error/warning
 nmap <leader>ig       gg<Plug>(coc-diagnostic-next)
@@ -2056,8 +2062,8 @@ nnoremap <leader>jE         :CocList diagnostics<cr>
 " jump to definition etc.
 " nmap <leader>jd         <Plug>(coc-definition)
 nnoremap <leader>jd         <nop>
-nnoremap <leader>jdl        :call CocAction('jumpDefinition', 'vsplit')<cr>
-nnoremap <leader>jdb        :call CocAction('jumpDefinition', 'buffer')<cr>
+nnoremap <leader>jdl        :call CocActionAsync('jumpDefinition', 'vsplit')<cr>
+nnoremap <leader>jdb        :call CocActionAsync('jumpDefinition', 'buffer')<cr>
 nmap     <leader>jdd        <Plug>(coc-definition)
 nmap     <leader>jD         <Plug>(coc-declaration)
 nmap     <leader>ji         <Plug>(coc-implementation)
@@ -2071,7 +2077,7 @@ nmap <leader>fu         <Plug>(coc-references)
 " actions
 nmap <leader>ia         <Plug>(coc-codeaction)
 nnoremap <leader>iio    :CocCommand editor.action.organizeImport<cr>
-nnoremap <leader>iif    :call CocAction('fold', 'imports')<cr>
+nnoremap <leader>iif    :call CocActionAsync('fold', 'imports')<cr>
 " nmap <leader>i<return>  <Plug>(coc-fix-current)
 nnoremap <leader>i<return>  :if g:coc_enabled == 1
             \ <bar> execute "normal \<Plug>(coc-fix-current)"
@@ -2323,6 +2329,19 @@ function! SetupClojure()
     nnoremap <buffer> <leader>btt :ConjureCljRunAllTests<cr>
     nnoremap <buffer> <leader>bto :ConjureCljRunCurrentTest<cr>
     nnoremap <buffer> <leader>btn :ConjureCljRunCurrentNsTests<cr>
+
+    " specific coc clojure refactoring mappings
+    " TODO: fix function call
+    nnoremap <buffer> <silent> <leader>crcc :call LanguageClient#workspace_executeCommand('cycle-coll', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+    nnoremap <buffer> <silent> <leader>crth :call LanguageClient#workspace_executeCommand('thread-first', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+    nnoremap <buffer> <silent> <leader>crtt :call LanguageClient#workspace_executeCommand('thread-last', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+    nnoremap <buffer> <silent> <leader>crtf :call LanguageClient#workspace_executeCommand('thread-first-all', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+    nnoremap <buffer> <silent> <leader>crtl :call LanguageClient#workspace_executeCommand('thread-last-all', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+    nnoremap <buffer> <silent> <leader>crml :call LanguageClient#workspace_executeCommand('move-to-let', [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')])<CR>
+    nnoremap <buffer> <silent> <leader>cril :call LanguageClient#workspace_executeCommand('introduce-let', [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')])<CR>
+    nnoremap <buffer> <silent> <leader>cril :CocCommand lsp-clojure-introduce-let
+    nnoremap <buffer> <silent> <leader>crel :call LanguageClient#workspace_executeCommand('expand-let', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+    nnoremap <buffer> <silent> <leader>cram :call LanguageClient#workspace_executeCommand('add-missing-libspec', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
 endfunction
 command! SetupClojure :call SetupClojure() " add mappings for Clojure
 
@@ -3335,6 +3354,11 @@ endfunction
 
 " }}}
 
+
+function! Expand(exp) abort
+    let l:result = expand(a:exp)
+    return l:result ==# '' ? '' : "file://" . l:result
+endfunction
 
 " improved path expansion (prepend './' if necessary)  {{{
 function! ExpandPrependThisDir(expr)
