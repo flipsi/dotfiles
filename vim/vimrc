@@ -1380,6 +1380,7 @@ Plug 'w0rp/ale'
 let g:ale_list_window_size = 5
 let g:ale_lint_on_enter = 0
 let g:ale_linters = {
+\   'clojure': ['clj-kondo'],
 \   'javascript': ['eslint'],
 \   'typescript': ['tsserver', 'tslint'],
 \   'vue': ['eslint']
