@@ -2059,12 +2059,30 @@ nnoremap <leader>iE         :CocDiagnostics<cr>
 " jump to specific error (fuzzy finder)
 nnoremap <leader>jE         :CocList diagnostics<cr>
 
+" jump to definition how I want it to behave
+command! JumpDefinition :call JumpDefinition()
+function! JumpDefinition()
+    normal! mU
+    let l:view = winsaveview()
+    if CocAction('jumpDefinition', 'buffer') != v:false
+        normal! mD
+        normal! `U
+        call winrestview(l:view)
+        if winnr('#') && winnr('$') > 1
+            wincmd p
+            normal! `D
+        else
+            call CocAction('jumpDefinition', 'vsplit')
+        endif
+    endif
+endfunction
+
 " jump to definition etc.
-" nmap <leader>jd         <Plug>(coc-definition)
 nnoremap <leader>jd         <nop>
 nnoremap <leader>jdl        :call CocActionAsync('jumpDefinition', 'vsplit')<cr>
 nnoremap <leader>jdb        :call CocActionAsync('jumpDefinition', 'buffer')<cr>
-nmap     <leader>jdd        <Plug>(coc-definition)
+nmap     <leader>jdd        :JumpDefinition<cr>
+" nmap     <leader>jdd        <Plug>(coc-definition)
 nmap     <leader>jD         <Plug>(coc-declaration)
 nmap     <leader>ji         <Plug>(coc-implementation)
 
@@ -5331,11 +5349,12 @@ nnoremap <esc>n :bnext<cr>
 nnoremap <m-p>  :bprevious<cr>
 nnoremap <esc>p :bprevious<cr>
 
-" change window
+" change window - via directions
 nnoremap <silent> <leader><left>  :wincmd h<cr>
 nnoremap <silent> <leader><down>  :wincmd j<cr>
 nnoremap <silent> <leader><up>    :wincmd k<cr>
 nnoremap <silent> <leader><right> :wincmd l<cr>
+" change window - last recently used
 nnoremap <silent> <C-h>           :wincmd p<cr>
 
 " move buffer to a new window
