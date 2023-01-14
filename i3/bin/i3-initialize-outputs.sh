@@ -112,15 +112,15 @@ function main() {
 
             elif xrandr | grep -q 'DVI-I-1-1 connected'; then
 
-                MAIN_MONITOR='DVI-I-1-1'
-                SECOND_MONITOR='DVI-I-2-2'
+                MAIN_MONITOR='DVI-I-2-2'
+                SECOND_MONITOR='DVI-I-1-1'
                 THIRD_MONITOR='DP1'
                 LAPTOP_SCREEN='eDP1'
 
                 xrandr --output "$LAPTOP_SCREEN" --auto \
-                    --output "$THIRD_MONITOR" --off \
-                    --output "$MAIN_MONITOR" --primary --auto \
-                    --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR"
+                    --output "$SECOND_MONITOR" --auto --above "$LAPTOP_SCREEN" \
+                    --output "$MAIN_MONITOR" --primary --auto --left-of "$SECOND_MONITOR" \
+                    --output "$THIRD_MONITOR" --off
 
             elif xrandr | grep 'HDMI1 connected' >/dev/null; then
 
