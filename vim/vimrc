@@ -2117,6 +2117,10 @@ function! s:show_documentation()
   endif
 endfunction
 
+" Consider directories with those files project root
+autocmd FileType clojure let b:coc_root_patterns =
+            \ ['.projectile', '.git', '.env']
+
 
 " Debugger
 Plug 'puremourning/vimspector'
