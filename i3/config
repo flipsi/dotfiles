@@ -641,15 +641,24 @@ bindsym $mod+z scratchpad show
 ## resize container
 bindsym $mod+r mode "resize"
 mode "resize" {
-    set $steps 5
-    bindsym h       resize shrink width  $steps px or $steps ppt
-    bindsym Left    resize shrink width  $steps px or $steps ppt
-    bindsym j       resize shrink height $steps px or $steps ppt
-    bindsym Down    resize shrink height $steps px or $steps ppt
-    bindsym k       resize grow   height $steps px or $steps ppt
-    bindsym Up      resize grow   height $steps px or $steps ppt
-    bindsym l       resize grow   width  $steps px or $steps ppt
-    bindsym Right   resize grow   width  $steps px or $steps ppt
+    set $big_steps   30
+    set $small_steps  5
+    bindsym h           resize shrink width  $big_steps px or $big_steps ppt
+    bindsym Left        resize shrink width  $big_steps px or $big_steps ppt
+    bindsym j           resize shrink height $big_steps px or $big_steps ppt
+    bindsym Down        resize shrink height $big_steps px or $big_steps ppt
+    bindsym k           resize grow   height $big_steps px or $big_steps ppt
+    bindsym Up          resize grow   height $big_steps px or $big_steps ppt
+    bindsym l           resize grow   width  $big_steps px or $big_steps ppt
+    bindsym Right       resize grow   width  $big_steps px or $big_steps ppt
+    bindsym Shift+h     resize shrink width  $small_steps px or $small_steps ppt
+    bindsym Shift+Left  resize shrink width  $small_steps px or $small_steps ppt
+    bindsym Shift+j     resize shrink height $small_steps px or $small_steps ppt
+    bindsym Shift+Down  resize shrink height $small_steps px or $small_steps ppt
+    bindsym Shift+k     resize grow   height $small_steps px or $small_steps ppt
+    bindsym Shift+Up    resize grow   height $small_steps px or $small_steps ppt
+    bindsym Shift+l     resize grow   width  $small_steps px or $small_steps ppt
+    bindsym Shift+Right resize grow   width  $small_steps px or $small_steps ppt
     # cancel
     bindsym $mod+r mode "default"
     bindsym Return mode "default"
