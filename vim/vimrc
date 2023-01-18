@@ -2454,16 +2454,16 @@ function! SetupYarn()
     " yarn commands are project specific and defined in `package.json`.
     " The following is specific to Code Intelligence core repo.
     " ATM I don't care to make this more generic/smart.
-    nnoremap <buffer> <leader>bi  :call RunCommand("yarn --cwd ./ui install")<cr>
-    nnoremap <buffer> <leader>bd  :call RunCommand("yarn --cwd ./ui build")<cr>
-    nnoremap <buffer> <leader>br  :call RunCommand("yarn --cwd ./ui start:web:e2e")<cr>
-    nnoremap <buffer> <leader>bLL :call RunCommand("yarn --cwd ./ui lint")<cr>
-    nnoremap <buffer> <leader>bLF :call RunCommand("yarn --cwd ./ui lint:fix")<cr>
-    nnoremap <buffer> <leader>btt :call RunCommand("yarn --cwd ./ui test")<cr>
-    nnoremap <buffer> <leader>btu :call RunCommand("yarn --cwd ./ui test:unit")<cr>
-    nnoremap <buffer> <leader>bto :call RunCommand("yarn --cwd ./ui test:unit ../" . expand("%"))<cr>
-    nnoremap <buffer> <leader>btO :call RunCommand("yarn --cwd ./ui test:e2e --spec ../" . expand("%"))<cr>
-    nnoremap <buffer> <leader>bti :call RunCommand("yarn --cwd ./ui test:e2e")<cr>
+    nnoremap <buffer> <leader>bi  :call RunCommand("yarn --cwd ../ui install")<cr>
+    nnoremap <buffer> <leader>bd  :call RunCommand("yarn --cwd ../ui build")<cr>
+    nnoremap <buffer> <leader>br  :call RunCommand("yarn --cwd ../ui start:web:e2e")<cr>
+    nnoremap <buffer> <leader>bLL :call RunCommand("yarn --cwd ../ui lint")<cr>
+    nnoremap <buffer> <leader>bLF :call RunCommand("yarn --cwd ../ui lint:fix")<cr>
+    nnoremap <buffer> <leader>btt :call RunCommand("yarn --cwd ../ui test")<cr>
+    nnoremap <buffer> <leader>btu :call RunCommand("yarn --cwd ../ui test:unit")<cr>
+    nnoremap <buffer> <leader>bto :call RunCommand("yarn --cwd ../ui test:unit ../" . expand("%"))<cr>
+    nnoremap <buffer> <leader>btO :call RunCommand("yarn --cwd ../ui test:e2e --spec ../" . expand("%"))<cr>
+    nnoremap <buffer> <leader>bti :call RunCommand("yarn --cwd ../ui test:e2e")<cr>
 endfunction
 command! SetupYarn :call SetupYarn() " add mappings for development with yarn
 
