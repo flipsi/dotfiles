@@ -59,6 +59,13 @@ function get_last_recent_git_projects() {
 }
 
 
+function open_project_vim() {
+    PROJECT_PATH="$1"
+    PROJECT_NAME="$2"
+    tmux new-window -t "$SESSION_NAME_2:" -n "$PROJECT_NAME" -c "$PROJECT_PATH" "fish -i -C \"nvim --listen $PROJECT_NAME"\"
+}
+
+
 function create_sessions() {
 
     if ! (tmux has-session -t $SESSION_NAME_1 2>/dev/null); then
@@ -81,7 +88,9 @@ function create_sessions() {
 
     if ! (tmux has-session -t $SESSION_NAME_2 2>/dev/null); then
 
-        tmux new-session -d -s $SESSION_NAME_2 -n "dotfiles" -c "$HOME/dotfiles" "nvim --listen dotfiles"
+        tmux new-session -d -s $SESSION_NAME_2 -n "delete-me" # can't create a session without window
+        open_project_vim "$HOME/dotfiles" "dotfiles"
+        tmux kill-window -t "$SESSION_NAME_2:delete-me"
 
         if [[ "$HOSTNAME" = "$HOSTNAME_WORK" ]]; then
             for PROJECT in $(get_last_recent_git_projects "$PROJECTS_DIR" "$NUMBER_OF_PROJECTS"); do
