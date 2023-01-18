@@ -1395,7 +1395,13 @@ let g:ale_fixers = {
 \    'html': ['prettier']
 \}
 
+" disable hints for certain languages,
+" because coc aleady provides this
+let g:ale_linters_ignore = {'clojure': ['clj-kondo']}
+
+" add some options
 let g:ale_python_pylint_options = '--rcfile $HOME/.vim/config/pylint.rc'
+
 
 nnoremap <silent> <leader>sc :ALELint<cr>
 nnoremap <silent> <leader>sn :ALENext<cr>
