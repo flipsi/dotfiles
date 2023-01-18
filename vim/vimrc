@@ -4051,6 +4051,9 @@ iabbrev todod       TODO: delete this debugging statement
 iabbrev todof       TODO: FIX
 iabbrev wip         WIP:
 
+" awkward rolling issue on Moonlander keyboard
+iabbrev (9          ()
+
 " password store
 augroup abbreviations_password_store
     autocmd!
