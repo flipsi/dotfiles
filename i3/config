@@ -192,11 +192,12 @@ font pango:PragmataPro Mono 10
 # font pango:DejaVu Sans Mono 8
 # font pango:NotoSans 10
 
-## borders
-#for_window [class="^.*"] border pixel 1
-new_window pixel 0
-new_float  normal
-# hide_edge_borders both
+## Borders
+default_border              pixel 0
+default_floating_border     normal
+for_window [floating_from="user"] border normal # in addition to default_floating_border because it doesn't apply if floating is triggered at runtime e.g. via for_window
+hide_edge_borders           both
+smart_borders               on
 
 ## gaps (require the i3gaps fork)
 # gaps inner 10
@@ -242,7 +243,7 @@ new_float  normal
 # gruvbox_neutral_orange            #D65D0E
 
 #                       border   backgr   text     indicator
-client.focused          #282828  #282828  #BDAE93  #FB4934
+client.focused          #282828  #282828  #FB4934  #FB4934
 client.focused_inactive #282828  #282828  #928374  #282828
 client.unfocused        #282828  #282828  #504945  #282828
 client.urgent           #B8BB26  #B8BB26  #282828  #282828
@@ -610,6 +611,7 @@ bindsym $mod+s layout toggle
 
 ## toggle tiling/floating
 bindsym $mod+m floating toggle
+
 # change focus between tiling/floating windows
 bindsym $mod+Tab focus mode_toggle
 
