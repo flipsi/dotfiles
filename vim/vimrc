@@ -2230,6 +2230,7 @@ nnoremap <leader>clc        :ConjureConnect<CR>
 nnoremap <leader>cll        :ConjureEval<space>
 nnoremap <leader>cl<c-c>    :ConjureCljInterrupt<CR>
 nnoremap <leader>clr        :ConjureCljRefreshChanged<CR>
+nnoremap <leader>clR        :ConjureCljRefreshAll<CR>
 nnoremap <leader>cl<f5>     :ConjureCljRefreshAll<CR>
 
 " ignore typos
