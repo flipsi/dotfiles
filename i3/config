@@ -858,7 +858,6 @@ for_window [class="(?i)nm-connection-editor"]                                   
 for_window [class="(?i)nautilus"]                                                   floating enable
 for_window [class="(?i)blueman-manager"]                                            floating enable
 for_window [class="(?i)nemo"]                                                       floating enable
-for_window [class="(?i)pavucontrol"]                                                floating enable
 for_window [class="(?i)qjackctl"]                                                   floating enable
 for_window [class="(?i)sxiv"]                                                       fullscreen
 for_window [class="(?i)thunar"]                                                     floating enable
