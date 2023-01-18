@@ -594,6 +594,7 @@ augroup custom_fugitive_mappings
     au User FugitiveIndex nmap     <buffer> pp  :Git pull<cr>
     au User FugitiveIndex nmap     <buffer> puu :Git push<cr>
     au User FugitiveIndex nmap     <buffer> puf :Git push --force-with-lease<cr>
+    au User FugitiveIndex nmap     <buffer> puc :Shell fish -c 'git push -u (git remote \| head -n1) (git-current-branch-name)'<cr>
     au User FugitiveIndex nmap     <buffer> pr  :OpenOrCreatePullRequest<cr>
 augroup END
 
