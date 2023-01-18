@@ -199,10 +199,12 @@ for_window [floating_from="user"] border normal # in addition to default_floatin
 hide_edge_borders           both
 smart_borders               on
 
-## gaps (require the i3gaps fork)
-# gaps inner 10
-# gaps outer 2
-# smart_gaps on
+## Gaps
+set $I3_GAPS_INNER 6
+set $I3_GAPS_OUTER 6
+gaps inner $I3_GAPS_INNER
+gaps outer $I3_GAPS_OUTER
+smart_gaps inverse_outer
 
 
 ## Colors
@@ -250,13 +252,30 @@ client.urgent           #B8BB26  #B8BB26  #282828  #282828
 client.background       #282828  #282828  #CC241D  #282828
 
 
+# change look and feel at runtime
+bindsym $mod+g mode "$gui_settings"
+set $gui_settings i3 GUI settings: (g) toggle gaps  (b) toggle bar (r) toggle borders (w) change wallpaper
+mode "$gui_settings" {
+    bindsym       g     gaps outer all toggle $I3_GAPS_OUTER; gaps inner all toggle $I3_GAPS_INNER; mode "default"
+    bindsym       w     mode "$change_wallpaper"
+    bindsym       r     border toggle; mode "default"
+    bindsym       b     exec "$POLYBAR_TOGGLE"; mode "default"
+    # cancel
+    bindsym $mod+g mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
 
 ###############################################################################
 ###########  BAR  #############################################################
 ###############################################################################
 
+set $POLYBAR_START  /home/sflip/.i3/bin/i3-polybar.sh start > /tmp/i3-polybar.log 2>&1
+set $POLYBAR_TOGGLE /home/sflip/.i3/bin/i3-polybar.sh toggle > /tmp/i3-polybar.log 2>&1
 
-exec_always --no-startup-id "/home/sflip/.i3/bin/i3-polybar.sh start > /tmp/i3-polybar.log 2>&1"
+exec_always --no-startup-id "$POLYBAR_START"
 
 
 # bar {
@@ -294,7 +313,7 @@ exec_always --no-startup-id "/home/sflip/.i3/bin/i3-polybar.sh start > /tmp/i3-p
 ## hide/show bar
 # bindsym $mod+b bar mode toggle
 # bindsym $mod+b exec "polybar-msg cmd toggle" # (would be nice, but polybar shows on wrong monitor after hide: https://github.com/jaagr/polybar/issues/1484)
-bindsym $mod+b exec "/home/sflip/.i3/bin/i3-polybar.sh toggle > /tmp/i3-polybar.log 2>&1"
+bindsym $mod+b exec "$POLYBAR_TOGGLE"
 
 # set $UPDATE_STATUSBAR pkill -USR1 -x -f '^python.? /home/.*/\.i3/i3pystatus$'
 set $UPDATE_STATUSBAR true
