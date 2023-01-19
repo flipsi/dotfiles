@@ -2,7 +2,7 @@
 Name=setxkbmap
 GenericName=setxkbmap
 Comment=Set my keyboard layout
-Exec=setxkbmap de -variant nodeadkeys
+Exec=/home/sflip/shellscripts/set-keyboard-layout.sh
 Terminal=false
 Type=Application
 X-GNOME-Autostart-enabled=true
