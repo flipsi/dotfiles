@@ -8,16 +8,18 @@
 .tool-versions
 
 # IDE and editor files etc.
-.session.vim
-.tags
-.idea/
-.bsp/
 .bloop/
-.metals/
-metals.sbt
-/project/metals.sbt
+.bsp/
+.clj-kondo/
 .ensime
 .ensime_cache
+.idea/
+.lsp/
+.metals/
+.session.vim
+.tags
+/project/metals.sbt
+metals.sbt
 sftp-config.json
 
 # compiled source
