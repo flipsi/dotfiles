@@ -85,3 +85,7 @@
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     required = true
+
+; set a custom git config for all repositories in a specific folder for certain overwrites
+[includeIf "gitdir:/home/sflip/work/code-intelligence/src/"]
+    path = /home/sflip/work/code-intelligence/src/.gitconfig
