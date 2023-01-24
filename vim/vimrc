@@ -4969,11 +4969,18 @@ nnoremap dN [c
 
 if !exists('g:run_command_method')
     if has('nvim')
-        let g:run_command_method = "terminal-window"
+        let g:run_command_method = "terminal-emulator"
     else
         let g:run_command_method = "vimux"
     endif
 endif
+
+augroup set_run_command_method
+    au!
+    au FileType clojure     let g:run_command_method = "terminal-window"
+    au FileType scala       let g:run_command_method = "terminal-window"
+augroup END
+
 
 
 function! ToggleRunCommandMethod()
