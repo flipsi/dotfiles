@@ -523,12 +523,13 @@ nnoremap <leader>gpp  :Git pull<cr>
 nnoremap <leader>gpuu :Git push<cr>
 nnoremap <leader>gpuf :Git push --force-with-lease<cr>
 nnoremap <leader>gpuc :Shell fish -c 'git push -u (git remote \| head -n1) (git-current-branch-name)'<cr>
+nnoremap <leader>ge-  :Git checkout -<cr>
 nnoremap <leader>gee  :Git checkout<space>
 nnoremap <leader>geb  :exe ':Git checkout -b ' . input('Branch name: ')<cr>
-nnoremap <leader>gbm  :exe ':Confirm Git branch -m ' . input('New branch name: ')<cr>
+nnoremap <leader>gem  :Git checkout master<cr>
 nnoremap <leader>geo  :GitCheckoutInteractively<cr>
+nnoremap <leader>gbm  :exe ':Confirm Git branch -m ' . input('New branch name: ')<cr>
 nnoremap <leader>gmm  :GitMergeChooseBranchInteractively<cr>
-nnoremap <leader>ge-  :Git checkout -<cr>
 nnoremap <leader>gup  :Confirm Git submodule update<cr>
 nnoremap <leader>gh   <nop>
 nnoremap <leader>ghp  <nop>
