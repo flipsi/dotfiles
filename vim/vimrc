@@ -2126,6 +2126,12 @@ nnoremap <leader>i<return>  :if g:coc_enabled == 1
 " refactor/rename identifier
 nmap <leader>rf <Plug>(coc-rename)
 
+" cancel and confirm completion
+" inoremap <silent><expr> <C-e> coc#pum#visible() ? coc#pum#cancel() : "\<C-e>"
+" inoremap <silent><expr> <C-y> coc#pum#visible() ? coc#pum#confirm() : "\<C-y>"
+inoremap <silent><expr> <tab> coc#pum#visible() ? coc#pum#confirm() : "\<tab>"
+" (navigate with <c-n> and <c-p>)
+
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
