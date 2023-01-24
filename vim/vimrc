@@ -2182,7 +2182,6 @@ augroup is_keyword_clojure
     autocmd FileType clojure setlocal iskeyword-=/
 augroup END
 
-
 augroup clojure_on_read
     au!
     au FileType clojure call SetupClojure()
@@ -2214,7 +2213,7 @@ endfunction
 command! SetupClojure :call SetupClojure() " add mappings for Clojure
 
 function! SetupClojureForCodeIntelligenceCore()
-    nnoremap <buffer> <leader>bg  :call RunCommand("scripts/clojure-codegen.sh")<cr>
+    nnoremap <buffer> <leader>bg  :call RunCommand("../scripts/clojure-codegen.sh")<cr>
     nnoremap <buffer> <leader>bd  :call RunCommand("bazel build //backend/...")<cr>
     nnoremap <buffer> <leader>bta :call RunCommand("bazel test //backend/... --test_output=streamed")<cr>
     nnoremap <buffer> <leader>af  :exe "Dispatch! bb cljfmt " . expand("%")<cr>
