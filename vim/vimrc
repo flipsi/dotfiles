@@ -526,7 +526,7 @@ nnoremap <leader>gpuc :Shell fish -c 'git push -u (git remote \| head -n1) (git-
 nnoremap <leader>ge-  :Git checkout -<cr>
 nnoremap <leader>gee  :Git checkout<space>
 nnoremap <leader>geb  :exe ':Git checkout -b ' . input('Branch name: ')<cr>
-nnoremap <leader>gem  :Git checkout master<cr>
+nnoremap <leader>gem  :exe ':Git checkout ' . GitRepoMainOrMaster()<cr>
 nnoremap <leader>geo  :GitCheckoutInteractively<cr>
 nnoremap <leader>gbm  :exe ':Confirm Git branch -m ' . input('New branch name: ')<cr>
 nnoremap <leader>gmm  :GitMergeChooseBranchInteractively<cr>
@@ -539,6 +539,17 @@ nnoremap <leader>gho  :call GitWebUrl('line', 'open_in_web')<cr>
 nnoremap <leader>ghy  :call GitWebUrl('line', 'yank_to_clipboard')<cr>
 vnoremap <leader>gho  :<c-u>call GitWebUrl('range', 'open_in_web')<cr>
 vnoremap <leader>ghy  :<c-u>call GitWebUrl('range', 'yank_to_clipboard')<cr>
+
+
+" echo `main` if branch exists or `master` otherwise
+function! GitRepoMainOrMaster()
+    call system('git rev-parse --verify main >/dev/null 2>&1')
+    if !v:shell_error
+        return 'main'
+    else
+        return 'master'
+    endif
+endfunction
 
 
 command! GitCheckoutInteractively :call GitCheckoutInteractively() " checkout git branch chosen with fzf
