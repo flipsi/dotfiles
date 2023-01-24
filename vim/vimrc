@@ -5770,14 +5770,15 @@ augroup END
 " default textwidth
 augroup auto_textwidth
     autocmd!
+    autocmd FileType clojure         set textwidth=100 | call SetColorColumn('on')
     autocmd FileType dockerfile      set textwidth=100 | call SetColorColumn('on')
     autocmd FileType gitcommit       set textwidth=50  | call SetColorColumn('on')
+    autocmd FileType mail            set textwidth=0   | call SetColorColumn('off')
     autocmd FileType markdown        set textwidth=100 | call SetColorColumn('on')
     autocmd FileType php             set textwidth=120 | call SetColorColumn('on')
     autocmd FileType scala           set textwidth=120 | call SetColorColumn('on')
     autocmd FileType sh              set textwidth=100 | call SetColorColumn('on')
     autocmd FileType sql             set textwidth=80  | call SetColorColumn('on')
-    autocmd FileType mail            set textwidth=0   | call SetColorColumn('off')
 augroup END
 
 
