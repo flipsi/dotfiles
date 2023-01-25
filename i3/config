@@ -192,7 +192,7 @@ font pango:PragmataPro Mono 10
 # font pango:NotoSans 10
 
 ## Borders
-default_border              pixel 0
+default_border              none
 default_floating_border     normal
 for_window [floating_from="user"] border normal # in addition to default_floating_border because it doesn't apply if floating is triggered at runtime e.g. via for_window
 hide_edge_borders           both
@@ -890,6 +890,8 @@ for_window [class="(?i)nemo"]                                                   
 for_window [class="(?i)qjackctl"]                                                   floating enable
 for_window [class="(?i)sxiv"]                                                       fullscreen
 for_window [class="(?i)thunar"]                                                     floating enable
+for_window [class="(?i)thunar"]                                                     resize set 900 600
+for_window [class="(?i)thunar"]                                                     move position mouse
 for_window [class="ssh-askpass"]                                                    floating enable
 for_window [title="Print"]                                                          floating enable
 for_window [class="(?i)org.gnome.clocks"]                                           floating enable
@@ -945,22 +947,22 @@ assign [class="code-oss"]                                                       
 for_window [class="(?i)gnome-session-failed"] move to workspace                                     GnomeSessionFailed
 
 ## workspaces with window always on specific output
-for_window [class="(?i)alacritty"]                                              move workspace to output DVI-I-2-2
-for_window [class="(?i)alacritty" title="Output"]                               move workspace to output DP-1
-for_window [class="(?i)chrom"]                                                  move workspace to output DVI-I-2-2
-for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DVI-I-2-2
-for_window [class="(?i)chromium"]                                               move workspace to output DVI-I-2-2
-for_window [class="(?i)cool-retro-term"]                                        move workspace to output DVI-I-2-2
-for_window [class="(?i)firefox"]                                                move workspace to output DVI-I-2-2
-for_window [class="(?i)gnome-terminal"]                                         move workspace to output DVI-I-2-2
-for_window [class="(?i)google-chrome"]                                          move workspace to output DVI-I-2-2
-for_window [class="(?i)jetbrains-idea"]                                         move workspace to output DVI-I-2-2
-for_window [class="(?i)jetbrains-phpstorm"]                                     move workspace to output DVI-I-2-2
-for_window [class="(?i)qutebrowser"]                                            move workspace to output DVI-I-2-2
+for_window [class="(?i)alacritty"]                                              move workspace to output DP-1
+for_window [class="(?i)alacritty" title="Output"]                               move workspace to output DVI-I-2-2
+for_window [class="(?i)chrom"]                                                  move workspace to output DP-1
+for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DP-1
+for_window [class="(?i)chromium"]                                               move workspace to output DP-1
+for_window [class="(?i)cool-retro-term"]                                        move workspace to output DP-1
+for_window [class="(?i)firefox"]                                                move workspace to output DP-1
+for_window [class="(?i)gnome-terminal"]                                         move workspace to output DP-1
+for_window [class="(?i)google-chrome"]                                          move workspace to output DP-1
+for_window [class="(?i)jetbrains-idea"]                                         move workspace to output DP-1
+for_window [class="(?i)jetbrains-phpstorm"]                                     move workspace to output DP-1
+for_window [class="(?i)qutebrowser"]                                            move workspace to output DP-1
 for_window [class="(?i)signal"]                                                 move workspace to output DVI-I-1-1
 for_window [class="(?i)slack"]                                                  move workspace to output DVI-I-1-1
-for_window [class="(?i)spotify"]                                                move workspace to output DVI-I-2-2
+for_window [class="(?i)spotify"]                                                move workspace to output DP-1
 for_window [class="(?i)telegram-desktop" title="^Telegram"]                     move workspace to output DVI-I-1-1
-for_window [class="(?i)urxvt"]                                                  move workspace to output DVI-I-2-2
+for_window [class="(?i)urxvt"]                                                  move workspace to output DP-1
 for_window [class="(?i)vivaldi-stable"]                                         move workspace to output DVI-I-1-1
 for_window [class="(?i)gnome-session-failed"]                                   move workspace to output DVI-I-1-1
