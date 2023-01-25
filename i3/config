@@ -357,9 +357,10 @@ mode "$mode_x" {
     bindsym Return      mode "default"
     bindsym Escape      mode "default"
 }
-set $mode_xdootool (b) bash with my bashrc (g) Google contact email (p) testing password (s) shrug (t) timestamp
+set $mode_xdootool (c) ^ (b) bash with my bashrc (g) Google contact email (p) testing password (s) shrug (t) timestamp
 mode "$mode_xdootool" {
     bindsym b       exec --no-startup-id "xdotool type 'bbash --rcfile <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/bash/bashrc_sflip)'; xdotool key Return"; mode "default";
+    bindsym c       exec --no-startup-id "xdotool type '^'"; mode "default";
     bindsym g       exec --no-startup-id "xdotool type $(goobook-query-mail.sh)"; mode "default";
     bindsym p       exec --no-startup-id "xdotool type 'iopineiBie5fiong7yae6aeng0ooF6'"; mode "default";
     bindsym s       exec --no-startup-id "sleep 0.2; xdotool type --delay 30 '¯\_(ツ)_/¯'"; mode "default";
