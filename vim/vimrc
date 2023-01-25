@@ -4060,14 +4060,16 @@ let mapleader=' '
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FIX AND SPEEDUP MY TYPING {{{
 
-iabbrev af          autoformat
 iabbrev CI          Code Intelligence
+iabbrev af          autoformat
+iabbrev be          backend
 iabbrev dpr         deprecated
+iabbrev fe          frontend
 iabbrev sm          [SQUASHME]
 iabbrev todo        TODO:
-iabbrev todoi       TODO: implement
 iabbrev todod       TODO: delete this debugging statement
 iabbrev todof       TODO: FIX
+iabbrev todoi       TODO: implement
 iabbrev wip         WIP:
 
 " awkward rolling issue on Moonlander keyboard
