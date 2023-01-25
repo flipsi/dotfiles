@@ -10,6 +10,7 @@ function prepend_to_path
     end
 end
 
+prepend_to_path ~/.babashka/bbin/bin
 prepend_to_path ~/.local/share/coursier/bin
 prepend_to_path ~/.local/bin
 prepend_to_path ~/.cargo/bin
