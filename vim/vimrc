@@ -515,14 +515,14 @@ nnoremap <leader>gtp  :Confirm Git stash pop<cr>
 nnoremap <leader>glh  :Git log<cr>
 nnoremap <leader>gll  :tab Git log<cr>
 nnoremap <leader>glf  :tab Git log %<cr>
-nnoremap <leader>glmc :Shell glab mr create --web --fill<cr>
-nnoremap <leader>glmv :Shell glab mr view --web<cr>
-nnoremap <leader>glp  :Shell glab pipeline ci view<cr>
+nnoremap <leader>glmc :Dispatch! glab mr create --web --fill<cr>
+nnoremap <leader>glmv :Dispatch! glab mr view --web<cr>
+nnoremap <leader>glp  :Dispatch! glab pipeline ci view<cr>
 nnoremap <leader>gbb  :Git blame<cr>
 nnoremap <leader>gpp  :Git pull<cr>
 nnoremap <leader>gpuu :Git push<cr>
 nnoremap <leader>gpuf :Git push --force-with-lease<cr>
-nnoremap <leader>gpuc :Shell fish -c 'git push -u (git remote \| head -n1) (git-current-branch-name)'<cr>
+nnoremap <leader>gpuc :Dispatch! fish -c 'git push -u (git remote \| head -n1) (git-current-branch-name)'<cr>
 nnoremap <leader>ge-  :Git checkout -<cr>
 nnoremap <leader>gee  :Git checkout<space>
 nnoremap <leader>geb  :exe ':Git checkout -b ' . input('Branch name: ')<cr>
@@ -607,7 +607,7 @@ augroup custom_fugitive_mappings
     au User FugitiveIndex nmap     <buffer> pp  :Git pull<cr>
     au User FugitiveIndex nmap     <buffer> puu :Git push<cr>
     au User FugitiveIndex nmap     <buffer> puf :Git push --force-with-lease<cr>
-    au User FugitiveIndex nmap     <buffer> puc :Shell fish -c 'git push -u (git remote \| head -n1) (git-current-branch-name)'<cr>
+    au User FugitiveIndex nmap     <buffer> puc :Dispatch! fish -c 'git push -u (git remote \| head -n1) (git-current-branch-name)'<cr>
     au User FugitiveIndex nmap     <buffer> pr  :OpenOrCreatePullRequest<cr>
 augroup END
 
@@ -3499,7 +3499,7 @@ endfunction
 
 command! OpenGithubRepoWeb :call OpenGithubRepoWeb() " Open Github repo in browser
 function! OpenGithubRepoWeb()
-    call system('gh repo view --web')
+    Dispatch! gh repo view --web
 endfunction
 
 
@@ -3508,7 +3508,7 @@ function! OpenOrCreatePullRequest()
     if !HasRemoteBranch()
         GitPushNewBranch
     endif
-    call system('gh pr view --web || gh pr create --web')
+    Dispatch! gh pr view --web || gh pr create --web
 endfunction
 
 
