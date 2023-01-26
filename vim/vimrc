@@ -1030,8 +1030,8 @@ Plug 'stsewd/fzf-checkout.vim'
 " prefix all the command names
 let g:fzf_command_prefix = 'Fzf'
 
-" layout [ down / up / left / right ]
-let g:fzf_layout = { 'up': '~50%' }
+" how/where to open fzf
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 " extra interactive key bindings
 " (scroll with <c-k> and <c-j>
