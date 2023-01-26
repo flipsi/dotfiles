@@ -539,7 +539,9 @@ nnoremap <leader>gho  :call GitWebUrl('line', 'open_in_web')<cr>
 nnoremap <leader>ghy  :call GitWebUrl('line', 'yank_to_clipboard')<cr>
 vnoremap <leader>gho  :<c-u>call GitWebUrl('range', 'open_in_web')<cr>
 vnoremap <leader>ghy  :<c-u>call GitWebUrl('range', 'yank_to_clipboard')<cr>
-
+nnoremap <leader>gra  :Git rebase --abort<cr>
+nnoremap <leader>grc  :Git rebase --continue<cr>
+nnoremap <leader>gro  :GitRebaseChooseBranchInteractively<cr>
 
 " echo `main` if branch exists or `master` otherwise
 function! GitRepoMainOrMaster()
@@ -551,38 +553,28 @@ function! GitRepoMainOrMaster()
     endif
 endfunction
 
-
-command! GitCheckoutInteractively :call GitCheckoutInteractively() " checkout git branch chosen with fzf
-function! GitCheckoutInteractively()
-    let l:plugin_command_name = g:fzf_command_prefix . 'GBranches'
-    if exists(':' . l:plugin_command_name)
-        exe l:plugin_command_name
-    else
-        call fzf#run(fzf#wrap({
-                    \ 'source': 'git branch',
-                    \ 'sink': function('GitCheckout')
-                    \ }))
-    endif
+function! GitChooseBranchInteractively(sink_function_name)
+    call fzf#run(fzf#wrap({
+                \ 'source': 'git branch',
+                \ 'sink': function(a:sink_function_name)
+                \ }))
 endfunction
+
 function! GitCheckout(ref)
     exe 'Git checkout ' . a:ref
 endfunction
 
-command! GitMergeChooseBranchInteractively :call GitMergeChooseBranchInteractively() " checkout git branch chosen with fzf
-function! GitMergeChooseBranchInteractively()
-    let l:plugin_command_name = g:fzf_command_prefix . 'GBranches'
-    if exists(':' . l:plugin_command_name)
-        exe l:plugin_command_name
-    else
-        call fzf#run(fzf#wrap({
-                    \ 'source': 'git branch',
-                    \ 'sink': function('GitMerge')
-                    \ }))
-    endif
-endfunction
 function! GitMerge(branch)
     exe 'Git merge ' . a:branch
 endfunction
+
+function! GitRebase(branch)
+    exe 'Git rebase ' . a:branch
+endfunction
+
+command! GitCheckoutInteractively :call GitChooseBranchInteractively('GitCheckout') " checkout git branch chosen with fzf
+command! GitMergeChooseBranchInteractively :call GitChooseBranchInteractively('GitMerge') " merge git branch chosen with fzf
+command! GitRebaseChooseBranchInteractively :call GitChooseBranchInteractively('GitRebase') " rebase on git branch chosen with fzf
 
 " can be replaced with `<Plug><cfile>` in some cases
 function! GStatusGetFilenameUnderCursor()
