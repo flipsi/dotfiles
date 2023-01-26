@@ -76,7 +76,8 @@ abbr $args gpu    git push
 abbr $args gpuf   git push --force-with-lease
 abbr $args gpuc   git push -u \(git remote \| head -n1\) \(git-current-branch-name\)
 abbr $args gre    grep --with-filename --line-number --recursive --ignore-case --extended-regexp
-abbr $args gr     git revise
+abbr $args grr    git revise
+abbr $args gr     git rebase
 abbr $args grm    git rebase \(git-main-or-master\)
 abbr $args gra    git rebase --abort
 abbr $args grc    git rebase --continue
