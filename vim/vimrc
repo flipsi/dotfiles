@@ -1285,6 +1285,7 @@ let NERDTreeMapToggleHidden='.'
 " Plug 'tpope/vim-vinegar'
 
 " delete a buffer in Vim without closing the window
+" (required by ranger.vim)
 if has('nvim')
     Plug 'rbgrouleff/bclose.vim'
 endif
