@@ -74,7 +74,7 @@
 
 [mergetool "conflicted"]
     prompt = false
-    cmd = vim +Conflicted
+    cmd = nvim +Conflicted
 
 [mergetool "sublimerge"]
     prompt = false
