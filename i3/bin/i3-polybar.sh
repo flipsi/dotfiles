@@ -27,10 +27,14 @@ function set_env_vars() {
     HOSTNAME=$(hostname)
     case $HOSTNAME in
         falbala )
-            if xrandr | grep -q 'DVI-I-1-1 connected'; then
-                BAR_MAIN_MONITOR='DP1'
-                BAR_SECOND_MONITOR='DVI-I-2-2'
-                BAR_THIRD_MONITOR='DVI-I-1-1'
+            if xrandr | grep -q 'DP1 connected'; then
+                    BAR_MAIN_MONITOR='DP1'
+                    if xrandr | grep -q 'DVI-I-2-2 connected'; then
+                        BAR_SECOND_MONITOR='DVI-I-2-2'
+                        BAR_THIRD_MONITOR='DVI-I-1-1'
+                    else
+                        BAR_SECOND_MONITOR='eDP1'
+                    fi
             else
                 BAR_MAIN_MONITOR='eDP1'
             fi
