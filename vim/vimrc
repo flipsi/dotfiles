@@ -4840,6 +4840,9 @@ nnoremap K :<c-u>put =repeat(nr2char(10), v:count1)<cr>k
 " (very bad implementation)
 nnoremap 'li kWjdwgE
 
+" add space (one newline) below
+nnoremap <a-o> o<esc>k
+
 " add space (a few newlines) below
 "nnoremap <enter> :.+1insert \n\n\n<cr>
 nnoremap 'as mno<esc>o<esc>o<esc>o<esc>`n
