@@ -5740,16 +5740,23 @@ augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
     autocmd filetype gitcommit let b:local_autosave = 0
     autocmd filetype gitcommit let b:DeleteTrailingWhitespace_Action = 'delete'
     autocmd filetype gitcommit normal gg
-    autocmd filetype gitcommit call InsertTicketNumberFromBranchIfAny()
+    autocmd filetype gitcommit call InsertCommitMsgPrefix()
 augroup END
 
-command! InsertTicketNumberFromBranchIfAny :call InsertTicketNumberFromBranchIfAny()
-function! InsertTicketNumberFromBranchIfAny()
+command! InsertCommitMsgPrefix :call InsertCommitMsgPrefix()
+function! InsertCommitMsgPrefix()
+    " only insert prefix for new commits (not when amending etc.)
     if empty(getline('.'))
         let l:branch_name = system('git rev-parse --abbrev-ref HEAD')
-        let l:ticket_number_pattern = '.*/\zs...-\d\+\ze/.*'
+        let l:affected_code_part = system('git diff --cached --name-only | head -n1 | cut -d "/" -f1 | tr -d "\n"')
+        let l:ticket_number_pattern = '\v^\zs\u+-\d+\ze[/-].*'
         let l:ticket_number = matchstr(l:branch_name, l:ticket_number_pattern)
-        call setline(1, l:ticket_number)
+        if l:ticket_number != ''
+            let l:commit_msg_prefix = l:affected_code_part . '(' . l:ticket_number . '): '
+        else
+            let l:commit_msg_prefix = l:affected_code_part . ': '
+        endif
+        call setline(1, l:commit_msg_prefix)
         normal $l
     endif
 endfunction
