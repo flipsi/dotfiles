@@ -498,10 +498,10 @@ Plug 'tpope/vim-fugitive'
 nnoremap <leader>gel  :Git difftool<cr><esc>
 
 " git status
-" Note that if the working dir is different from the git dir, strangely enough `:Git` opens netrw/ranger if not in the first window. I workaround the issue with `wincmd 1w`.
 " nnoremap <leader>gs   :Git<cr>
 " nnoremap <leader>gs   :Gsplit :<cr>
-nnoremap <leader>gs   :silent! wincmd 1w <bar> vertical Git<cr>
+" nnoremap <leader>gs   :silent! wincmd 1w <bar> vertical Git<cr> " Note that if the working dir is different from the git dir, strangely enough `:Git` opens netrw/ranger if not in the first window. I workaround the issue with `wincmd 1w`.
+nnoremap <leader>gs   :tab Git<cr>
 
 " compare worktree with index
 nnoremap <leader>gdd  :Gdiffsplit<cr>
