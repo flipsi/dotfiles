@@ -497,14 +497,23 @@ Plug 'tpope/vim-fugitive'
  " open quickfixlist with unstaged changes
 nnoremap <leader>gel  :Git difftool<cr><esc>
 
+" git status
 " nnoremap <leader>gs   :Git<cr>
 " nnoremap <leader>gs   :Gsplit :<cr>
 nnoremap <leader>gs   :vertical Git<cr>
-nnoremap <leader>gdd  :Gdiffsplit<cr> " compare worktree with index
-nnoremap <leader>gdv  :Gvdiffsplit!<cr>gg:FindGitConflictMarkers<cr> " merge conflict view
-nnoremap <leader>gdt  :GdiffsplitTab<cr>
-nnoremap <leader>gdm  :ExecuteInNeoTerminal git diff master<cr>
-nnoremap <leader>ghd  :ExecuteInNeoTerminal gh pr diff <bar> delta<cr>
+
+" compare worktree with index
+nnoremap <leader>gdd  :Gdiffsplit<cr>
+
+" merge conflict view
+nnoremap <leader>gdv  :Gvdiffsplit!<cr>gg:FindGitConflictMarkers<cr>
+nnoremap <leader>gdt  :GdiffsplitTab<cr>gg:FindGitConflictMarkers<cr>
+
+" compare changes of branch
+nnoremap <leader>gdm  :exe ':Shell git diff ' . GitRepoMainOrMaster() . ' \| delta'<cr>
+nnoremap <leader>ghd  :Shell gh pr diff <bar> delta<cr>
+nnoremap <leader>gld  :Shell glab mr diff <bar> delta<cr>
+
 nnoremap <leader>gU   :Gread<cr>
 nnoremap <leader>gw   :Gwrite<cr>
 nnoremap <leader>gA   :Gwrite<cr>
