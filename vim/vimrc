@@ -2099,6 +2099,7 @@ nnoremap <silent> <leader>iq    :call <SID>show_documentation()<cr>
 
 " navigate to first/next/last error/warning
 nmap <leader>ig       gg<Plug>(coc-diagnostic-next)
+nmap <leader>iG        G<Plug>(coc-diagnostic-prev)
 nmap <leader>in         <Plug>(coc-diagnostic-next)
 nmap <leader>iN         <Plug>(coc-diagnostic-prev)
 
