@@ -578,11 +578,11 @@ function! GitCheckout(ref)
 endfunction
 
 function! GitMerge(branch)
-    exe 'Git merge ' . a:branch
+    exe 'Confirm Git merge ' . a:branch
 endfunction
 
 function! GitRebase(branch)
-    exe 'Git rebase ' . a:branch
+    exe 'Confirm Git rebase ' . a:branch
 endfunction
 
 command! GitCheckoutInteractively :call GitChooseBranchInteractively('GitCheckout') " checkout git branch chosen with fzf
