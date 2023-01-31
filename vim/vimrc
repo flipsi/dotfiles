@@ -5750,6 +5750,7 @@ augroup map_q_in_certain_buffers
     autocmd BufReadPost fugitive://*     nnoremap <buffer> q :bd<cr>
     autocmd BufReadPost output://*       nnoremap <buffer> q :bd<cr>
     autocmd filetype git                 nnoremap <buffer> q :bd<cr>
+    autocmd filetype fugitiveblame       nnoremap <buffer> q :bd<cr>
 augroup END
 
 
