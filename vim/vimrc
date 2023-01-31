@@ -534,13 +534,13 @@ nnoremap <leader>gpp  :Git pull<cr>
 nnoremap <leader>gpuu :Git push<cr>
 nnoremap <leader>gpuf :Git push --force-with-lease<cr>
 nnoremap <leader>gpuc :Dispatch! fish -c 'git push -u (git remote \| head -n1) (git-current-branch-name)'<cr>
-nnoremap <leader>ge-  :Git checkout -<cr>
+nnoremap <leader>ge-  :Confirm Git checkout -<cr>
 nnoremap <leader>gee  :Git checkout<space>
 nnoremap <leader>geb  :exe ':Git checkout -b ' . input('Branch name: ')<cr>
-nnoremap <leader>gem  :exe ':Git checkout ' . GitRepoMainOrMaster()<cr>
+nnoremap <leader>gem  :exe ':Confirm Git checkout ' . GitRepoMainOrMaster()<cr>
 nnoremap <leader>geo  :GitCheckoutInteractively<cr>
 nnoremap <leader>gbm  :exe ':Confirm Git branch -m ' . input('New branch name: ')<cr>
-nnoremap <leader>gmm  :exe ':Git merge ' . GitRepoMainOrMaster()<cr>
+nnoremap <leader>gmm  :exe ':Confirm Git merge ' . GitRepoMainOrMaster()<cr>
 nnoremap <leader>gmo  :GitMergeChooseBranchInteractively<cr>
 nnoremap <leader>gup  :Confirm Git submodule update<cr>
 nnoremap <leader>gh   <nop>
@@ -551,9 +551,9 @@ nnoremap <leader>gho  :call GitWebUrl('line', 'open_in_web')<cr>
 nnoremap <leader>ghy  :call GitWebUrl('line', 'yank_to_clipboard')<cr>
 vnoremap <leader>gho  :<c-u>call GitWebUrl('range', 'open_in_web')<cr>
 vnoremap <leader>ghy  :<c-u>call GitWebUrl('range', 'yank_to_clipboard')<cr>
-nnoremap <leader>gra  :Git rebase --abort<cr>
-nnoremap <leader>grc  :Git rebase --continue<cr>
-nnoremap <leader>grm  :exe ':Git rebase ' . GitRepoMainOrMaster()<cr>
+nnoremap <leader>gra  :Confirm Git rebase --abort<cr>
+nnoremap <leader>grc  :Confirm Git rebase --continue<cr>
+nnoremap <leader>grm  :exe ':Confirm Git rebase ' . GitRepoMainOrMaster()<cr>
 nnoremap <leader>gro  :GitRebaseChooseBranchInteractively<cr>
 
 " echo `main` if branch exists or `master` otherwise
