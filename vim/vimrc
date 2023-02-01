@@ -503,18 +503,11 @@ nnoremap <leader>gel  :Git difftool<cr><esc>
 " nnoremap <leader>gs   :silent! wincmd 1w <bar> vertical Git<cr> " Note that if the working dir is different from the git dir, strangely enough `:Git` opens netrw/ranger if not in the first window. I workaround the issue with `wincmd 1w`.
 nnoremap <leader>gs   :tab Git<cr>
 
-" compare worktree with index
-nnoremap <leader>gdd  :Gdiffsplit<cr>
-
-" merge conflict view
 nnoremap <leader>gdv  :Gvdiffsplit!<cr>gg:FindGitConflictMarkers<cr>
 nnoremap <leader>gdt  :GdiffsplitTab<cr>gg:FindGitConflictMarkers<cr>
-
-" compare changes of branch
+nnoremap <leader>gdd  :Gdiffsplit<cr>
 nnoremap <leader>gdm  :exe ':Shell git diff ' . GitRepoMainOrMaster() . ' \| delta'<cr>
-nnoremap <leader>ghd  :Shell gh pr diff <bar> delta<cr>
-nnoremap <leader>gld  :Shell glab mr diff <bar> delta<cr>
-
+nnoremap <leader>gdM  :GitRemoteDiffMergeRequest<cr>
 nnoremap <leader>gU   :Gread<cr>
 nnoremap <leader>gw   :Gwrite<cr>
 nnoremap <leader>gA   :Gwrite<cr>
@@ -524,17 +517,17 @@ nnoremap <leader>grh  :Confirm Git reset --hard<cr>
 nnoremap <leader>gta  :Confirm Git stash push --include-untracked<cr>
 nnoremap <leader>gtp  :Confirm Git stash pop<cr>
 nnoremap <leader>glh  :Git log<cr>
+nnoremap <leader>glm  :exe 'Git log ' . GitRepoMainOrMaster()<cr>
 nnoremap <leader>gll  :tab Git log<cr>
 nnoremap <leader>glf  :tab Git log %<cr>
-nnoremap <leader>glmc :Dispatch! glab mr create --web --fill<cr>
-nnoremap <leader>glmv :Dispatch! glab mr view --web<cr>
-nnoremap <leader>glp  :Dispatch! glab pipeline ci view<cr>
+nnoremap <leader>ghr  :GitRemoteCreateOrViewMergeRequest<cr>
+nnoremap <leader>ghp  :GitRemoteShowPipeline<cr>
 nnoremap <leader>gbb  :Git blame<cr>
 nnoremap <leader>gpp  :Git pull<cr>
 nnoremap <leader>gfm  :exe ':Confirm Git fetch ' . GitRemoteName() . ' ' . GitRepoMainOrMaster() . ':' . GitRepoMainOrMaster()<cr>
-nnoremap <leader>gpuu :Git push<cr>
+nnoremap <leader>gpuc <nop>
+nnoremap <leader>gpuu :GitPush<cr>
 nnoremap <leader>gpuf :Git push --force-with-lease<cr>
-nnoremap <leader>gpuc :Dispatch! fish -c 'git push -u (git remote \| head -n1) (git-current-branch-name)'<cr>
 nnoremap <leader>ge-  :Confirm Git checkout -<cr>
 nnoremap <leader>gee  :Git checkout<space>
 nnoremap <leader>geb  :exe ':Git checkout -b ' . input('Branch name: ')<cr>
@@ -545,9 +538,7 @@ nnoremap <leader>gmm  :exe ':Confirm Git merge ' . GitRepoMainOrMaster()<cr>
 nnoremap <leader>gmo  :GitMergeChooseBranchInteractively<cr>
 nnoremap <leader>gup  :Confirm Git submodule update<cr>
 nnoremap <leader>gh   <nop>
-nnoremap <leader>ghp  <nop>
-nnoremap <leader>ghpr :OpenOrCreatePullRequest<cr>
-nnoremap <leader>ghO  :OpenGithubRepoWeb<cr>
+nnoremap <leader>ghO  :OpenGitRepoWeb<cr>
 nnoremap <leader>gho  :call GitWebUrl('line', 'open_in_web')<cr>
 nnoremap <leader>ghy  :call GitWebUrl('line', 'yank_to_clipboard')<cr>
 vnoremap <leader>gho  :<c-u>call GitWebUrl('range', 'open_in_web')<cr>
@@ -556,44 +547,6 @@ nnoremap <leader>gra  :Confirm Git rebase --abort<cr>
 nnoremap <leader>grc  :Confirm Git rebase --continue<cr>
 nnoremap <leader>grm  :exe ':Confirm Git rebase ' . GitRepoMainOrMaster()<cr>
 nnoremap <leader>gro  :GitRebaseChooseBranchInteractively<cr>
-
-" echo name of the first (propably only) remote, e.g. `origin`
-function! GitRemoteName()
-    return system("git remote | head -n1 | tr -d '\\n'")
-endfunction
-
-" echo `main` if branch exists or `master` otherwise
-function! GitRepoMainOrMaster()
-    call system('git rev-parse --verify main >/dev/null 2>&1')
-    if !v:shell_error
-        return 'main'
-    else
-        return 'master'
-    endif
-endfunction
-
-function! GitChooseBranchInteractively(sink_function_name)
-    call fzf#run(fzf#wrap({
-                \ 'source': 'git branch',
-                \ 'sink': function(a:sink_function_name)
-                \ }))
-endfunction
-
-function! GitCheckout(ref)
-    exe 'Git checkout ' . a:ref
-endfunction
-
-function! GitMerge(branch)
-    exe 'Confirm Git merge ' . a:branch
-endfunction
-
-function! GitRebase(branch)
-    exe 'Confirm Git rebase ' . a:branch
-endfunction
-
-command! GitCheckoutInteractively :call GitChooseBranchInteractively('GitCheckout') " checkout git branch chosen with fzf
-command! GitMergeChooseBranchInteractively :call GitChooseBranchInteractively('GitMerge') " merge git branch chosen with fzf
-command! GitRebaseChooseBranchInteractively :call GitChooseBranchInteractively('GitRebase') " rebase on git branch chosen with fzf
 
 " can be replaced with `<Plug><cfile>` in some cases
 function! GStatusGetFilenameUnderCursor()
@@ -606,6 +559,8 @@ function! GdiffsplitTab(filename)
     Gdiffsplit
 endfunction
 
+" TODO: use `FileType fugitive` ?
+" https://github.com/tpope/vim-fugitive/issues/1425#issuecomment-806078240
 " custom mapping in fugitive window (:Git)
 augroup custom_fugitive_mappings
     au!
@@ -619,7 +574,7 @@ augroup custom_fugitive_mappings
     au User FugitiveIndex nmap     <buffer> puu :Git push<cr>
     au User FugitiveIndex nmap     <buffer> puf :Git push --force-with-lease<cr>
     au User FugitiveIndex nmap     <buffer> puc :Dispatch! fish -c 'git push -u (git remote \| head -n1) (git-current-branch-name)'<cr>
-    au User FugitiveIndex nmap     <buffer> pr  :OpenOrCreatePullRequest<cr>
+    au User FugitiveIndex nmap     <buffer> r   :GitRemoteCreateOrViewMergeRequest<cr>
 augroup END
 
 " in Gdiff view, navigate and stage/checkout easily
@@ -3479,6 +3434,62 @@ function! HasRemoteBranch()
 endfunction
 " }}}
 
+" name of the first (propably only) remote, e.g. `origin`
+function! GitRemoteName()
+    return system('git remote | head -n1 | tr -d "\n"')
+endfunction
+
+" URL of the first remote, e.g. `git@github.com:flipsi/dotfiles`
+function! GitRemoteUrl()
+    return system("git ls-remote --get-url " . GitRemoteName() . " | tr -d '\\n'")
+endfunction
+
+" Known host of the remote URL if any, e.g. `github` or `gitlab`.
+" This helps to decide whether to use Gitlab CLI or Github CLI.
+function! GitRemoteHoster()
+    let l:remote_url = GitRemoteUrl()
+    if match(l:remote_url, 'gitlab') >= 0
+        return 'gitlab'
+    elseif match(l:remote_url, 'github') >= 0
+        return 'github'
+    else
+        echoerr "Unknown remote hoster (not Github or Gitlab)."
+    endif
+endfunction
+
+" echo `main` if branch exists or `master` otherwise
+function! GitRepoMainOrMaster()
+    call system('git rev-parse --verify main >/dev/null 2>&1')
+    if !v:shell_error
+        return 'main'
+    else
+        return 'master'
+    endif
+endfunction
+
+function! GitChooseBranchInteractively(sink_function_name)
+    call fzf#run(fzf#wrap({
+                \ 'source': 'git branch',
+                \ 'sink': function(a:sink_function_name)
+                \ }))
+endfunction
+
+function! GitCheckout(ref)
+    exe 'Git checkout ' . a:ref
+endfunction
+
+function! GitMerge(branch)
+    exe 'Confirm Git merge ' . a:branch
+endfunction
+
+function! GitRebase(branch)
+    exe 'Confirm Git rebase ' . a:branch
+endfunction
+
+command! GitCheckoutInteractively :call GitChooseBranchInteractively('GitCheckout') " checkout git branch chosen with fzf
+command! GitMergeChooseBranchInteractively :call GitChooseBranchInteractively('GitMerge') " merge git branch chosen with fzf
+command! GitRebaseChooseBranchInteractively :call GitChooseBranchInteractively('GitRebase') " rebase on git branch chosen with fzf
+
 command! GitPush :call GitPush() " Git push or GitPushNewBranch if necessary
 function! GitPush()
     if HasRemoteBranch()
@@ -3488,12 +3499,52 @@ function! GitPush()
     endif
 endfunction
 
-
 command! GitPushNewBranch :call GitPushNewBranch() " push a new branch to remote and set tracking upstream
 function! GitPushNewBranch()
-    let l:remote = system('git remote | head -n1 | tr -d "\n"')
+    let l:remote = GitRemoteName()
     let l:branch_name = system('git rev-parse --abbrev-ref HEAD | tr -d "\n"')
     exe ':Git push -u ' . l:remote . ' ' . l:branch_name
+endfunction
+
+" Github CLI (`gh`) or Gitlab CLI (`glab`) functionality
+
+command! GitRemoteDiffMergeRequest call GitRemoteDiffMergeRequest() " Show changes or Merge Request in pager
+function! GitRemoteDiffMergeRequest()
+    if GitRemoteHoster() == 'gitlab'
+        Shell glab mr diff | delta
+    else
+        Shell gh pr diff | delta
+    endif
+endfunction
+
+command! GitRemoteCreateOrViewMergeRequest call GitRemoteCreateOrViewMergeRequest() " Open (and create if not exists) Pull Request on Github/Gitlab
+function! GitRemoteCreateOrViewMergeRequest()
+    if !HasRemoteBranch()
+        GitPushNewBranch
+    endif
+    if GitRemoteHoster() == 'gitlab'
+        Dispatch! glab mr view --web || glab mr create --web --fill
+    else
+        Dispatch! gh pr view --web || gh pr create --web
+    endif
+endfunction
+
+command! GitRemoteShowPipeline call GitRemoteShowPipeline() " Show pipeline progress
+function! GitRemoteShowPipeline()
+    if GitRemoteHoster() == 'gitlab'
+        Dispatch! glab pipeline ci view
+    else
+        echoerr "Sorry, I only have this for Gitlab at the moment..."
+    endif
+endfunction
+
+command! OpenGitRepoWeb :call OpenGitRepoWeb() " Open Github/Gitlab repo in browser
+function! OpenGitRepoWeb()
+    if GitRemoteHoster() == 'gitlab'
+        Dispatch! glab repo view --web
+    else
+        Dispatch! gh repo view --web
+    endif
 endfunction
 
 " Get Github or Gitlab URL of file and position in current revision.
@@ -3529,22 +3580,6 @@ function! GitWebUrl(line_or_range, return_or_yank_to_clipboard_or_open_in_web)
         echo "Opening " . l:web_url
         call system("$BROWSER " . l:web_url)
     endif
-endfunction
-
-" Github CLI (gh)
-
-command! OpenGithubRepoWeb :call OpenGithubRepoWeb() " Open Github repo in browser
-function! OpenGithubRepoWeb()
-    Dispatch! gh repo view --web
-endfunction
-
-
-command! OpenOrCreatePullRequest :call OpenOrCreatePullRequest() " Open (and create if not exists) Pull Request on Github
-function! OpenOrCreatePullRequest()
-    if !HasRemoteBranch()
-        GitPushNewBranch
-    endif
-    Dispatch! gh pr view --web || gh pr create --web
 endfunction
 
 
