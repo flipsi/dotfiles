@@ -531,6 +531,7 @@ nnoremap <leader>glmv :Dispatch! glab mr view --web<cr>
 nnoremap <leader>glp  :Dispatch! glab pipeline ci view<cr>
 nnoremap <leader>gbb  :Git blame<cr>
 nnoremap <leader>gpp  :Git pull<cr>
+nnoremap <leader>gfm  :exe ':Confirm Git fetch ' . GitRemoteName() . ' ' . GitRepoMainOrMaster() . ':' . GitRepoMainOrMaster()<cr>
 nnoremap <leader>gpuu :Git push<cr>
 nnoremap <leader>gpuf :Git push --force-with-lease<cr>
 nnoremap <leader>gpuc :Dispatch! fish -c 'git push -u (git remote \| head -n1) (git-current-branch-name)'<cr>
@@ -555,6 +556,11 @@ nnoremap <leader>gra  :Confirm Git rebase --abort<cr>
 nnoremap <leader>grc  :Confirm Git rebase --continue<cr>
 nnoremap <leader>grm  :exe ':Confirm Git rebase ' . GitRepoMainOrMaster()<cr>
 nnoremap <leader>gro  :GitRebaseChooseBranchInteractively<cr>
+
+" echo name of the first (propably only) remote, e.g. `origin`
+function! GitRemoteName()
+    return system("git remote | head -n1 | tr -d '\\n'")
+endfunction
 
 " echo `main` if branch exists or `master` otherwise
 function! GitRepoMainOrMaster()
