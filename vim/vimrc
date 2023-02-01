@@ -4093,9 +4093,9 @@ let mapleader=' '
 
 iabbrev CI          Code Intelligence
 iabbrev af          autoformat
-iabbrev be          backend
+iabbrev BE          backend
 iabbrev dpr         deprecated
-iabbrev fe          frontend
+iabbrev FE          frontend
 iabbrev sm          [SQUASHME]
 iabbrev todo        TODO:
 iabbrev todod       TODO: delete this debugging statement
