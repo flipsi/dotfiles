@@ -4244,7 +4244,7 @@ nnoremap <leader>ev :execute 'edit ' . resolve(expand($MYVIMRC))<cr>
 nnoremap <leader>e3 :execute 'edit ' . resolve(expand('~/.i3/config'))<cr>
 
 " reload config file
-nnoremap <leader>sv :SourceMYVIMRC<cr>
+nnoremap <leader>sv :SourceMYVIMRC<cr><esc><esc>
 nmap <f5> <leader>sv
 
 
