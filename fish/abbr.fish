@@ -70,11 +70,10 @@ abbr $args gma    git merge --abort
 abbr $args gmb    git merge-base \(git-current-branch-name\) \(git-main-or-master\)
 abbr $args gmm    git merge \(git-main-or-master\)
 abbr $args gmt    git mergetool
-abbr $args gp     git pull
-abbr $args gpp    git pull
-abbr $args gpu    git push
-abbr $args gpuf   git push --force-with-lease
-abbr $args gpuc   git push -u \(git remote \| head -n1\) \(git-current-branch-name\)
+abbr $args gpl    git pull
+abbr $args gps    git push
+abbr $args gpf    git push --force-with-lease
+abbr $args gpu    git push -u \(git remote \| head -n1\) \(git-current-branch-name\)
 abbr $args gre    grep --with-filename --line-number --recursive --ignore-case --extended-regexp
 abbr $args gri    git revise
 abbr $args gr     git rebase

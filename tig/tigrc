@@ -151,11 +151,11 @@ bind generic y !bash -c "printf %(commit) | xsel -b"
 bind generic Y !bash -c "printf %(commit) | git log --format=%B -n 1 --stdin | xsel -b"
 
 # remote commands
-bind generic f !git fetch
-bind generic pp !git pull
-bind generic pu !git push
-bind generic gpuf !git push --force-with-lease
-bind generic gpuc !bash -c "git push -u $(git remote | head -n1) $(git rev-parse --abbrev-ref HEAD)"
+bind generic f   !git fetch
+bind generic pl  !git pull
+bind generic ps  !git push
+bind generic pf  !git push --force-with-lease
+bind generic pu  !bash -c "git push -u $(git remote | head -n1) $(git rev-parse --abbrev-ref HEAD)"
 
 
 # more/less context

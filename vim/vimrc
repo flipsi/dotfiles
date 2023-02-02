@@ -543,11 +543,11 @@ nnoremap <leader>gra  :Confirm Git rebase --abort<cr>
 nnoremap <leader>grc  :Confirm Git rebase --continue<cr>
 
 " fech, pull and push
-nnoremap <leader>gpp  :Git pull<cr>
-nnoremap <leader>gpuc <nop>
-nnoremap <leader>gpuf :Git push --force-with-lease<cr>
-nnoremap <leader>gpuu :GitPush<cr>
+nnoremap <leader>gpl  :Git pull<cr>
 nnoremap <leader>gfm  :exe ':Confirm Git fetch ' . GitRemoteName() . ' ' . GitRepoMainOrMaster() . ':' . GitRepoMainOrMaster()<cr>
+nnoremap <leader>gps  :GitPush<cr>
+nnoremap <leader>gpu  :GitPush<cr>
+nnoremap <leader>gpf  :Git push --force-with-lease<cr>
 nnoremap <leader>gup  :Confirm Git submodule update<cr>
 
 " work with Github or Gitlab
