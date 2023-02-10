@@ -8,7 +8,7 @@ These files pretty much constitute my digital home.
 
 First clone this project via
 
-    git clone https://github.com/sflip/dotfiles
+    git clone --recursive https://github.com/sflip/dotfiles
 
 Then, install my configuration (symlinks/packages) with the installation script
 

@@ -1,0 +1,3 @@
+[submodule "mutt/curl_google_oauth"]
+	path = mutt/curl_google_oauth
+	url = https://github.com/jay/curl_google_oauth

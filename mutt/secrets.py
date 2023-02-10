@@ -5,7 +5,8 @@
 import argparse
 import re
 import os
-from subprocess import call, check_call, check_output
+import json
+from subprocess import run, CalledProcessError
 
 encoding = "utf-8"
 
@@ -43,7 +44,8 @@ def get_password_from_gpg_encrypted_file(accountname):
   #  cli = ["gpg", "--use-agent", "--quiet", "--batch", "-d", secrets_file]
   cli = ["gpg", "--use-agent", "--quiet",  "-d", secrets_file]
   try:
-    return check_output(cli).strip()
+    result = run(cli, capture_output=True)
+    return result.stdout.strip()
   except CalledProcessError:
     return ""
 
@@ -78,7 +80,8 @@ def get_secrets_from_gpg_encrypted_muttrc(accountname=False):
 
   cli = ["gpg", "--use-agent", "--quiet",  "-d", secrets_file]
   try:
-    muttrc = check_output(cli).decode(encoding).splitlines()
+    result = run(cli, capture_output=True)
+    muttrc = result.stdout.decode(encoding).splitlines()
     dictionary = parse_muttrc(muttrc)
     if accountname:
         return dictionary.get(accountname)
@@ -88,32 +91,18 @@ def get_secrets_from_gpg_encrypted_muttrc(accountname=False):
     return ""
 
 
-def generate_oauth_access_token(user, client_id, client_secret, refresh_token):
+def get_or_fetch_oauth_access_token(accountname):
   this_script_dir = os.path.dirname(os.path.realpath(__file__))
-  oauth2_script = os.path.join(this_script_dir, 'oauth2.py')
-  cli = [
-    'python2',
-    oauth2_script,
-    f'--user={user}',
-    f'--client_id={client_id}',
-    f'--client_secret={client_secret}',
-    f'--refresh_token={refresh_token}',
-    '--generate_oauth2_token',
-  ]
-  """
-  Access Token: ya29.a0AfH6SMBP8D4l5-bMZ2CoY6-tdiXVS6l1uGI4N_dpwYtUnLu43vtHnImaBj4gMnDByTBlSqoSTOUim8mkqAtwqAtQ2QjqqfqUMkc90phJoBzSFfgaaEZCIld4tYkyobYGGDsa5pu9XVVX8_-Fdgs9AdIDAOL7oP3gGTZR
-  Access Token Expiration Seconds: 3599
-  """
+  oauth2_script = os.path.join(this_script_dir, 'curl_google_oauth', 'bearer-refresh.pl')
+  datadir = os.path.join(os.path.expanduser('~/.local/share/mail_auth/'), accountname)
+  token_path = os.path.join(datadir, 'token.json')
   try:
-    output = check_output(cli).decode(encoding).splitlines()
-    pattern = re.compile('^Access Token: (.*)')
-    for line in output:
-      match = pattern.search(output[0])
-      if match:
-        return match.group(1)
-  except CalledProcessError:
+    run([oauth2_script, '--quiet', '--datadir', datadir])
+    with open(token_path, 'r') as token_file:
+      dict = json.load(token_file)
+      return dict["access_token"]
+  except (CalledProcessError, IOError, JSONDecodeError):
     return ""
-
 
 
 def get_password_from_password_store(accountname):
@@ -127,7 +116,8 @@ def get_password_from_password_store(accountname):
   }.get(accountname)
   cli = ["pass", pass_path]
   try:
-    return check_output(cli).strip()
+    result = run(cli, capture_output=True)
+    return result.stdout.strip()
   except CalledProcessError:
     return ""
 
@@ -135,15 +125,16 @@ def get_password_from_password_store(accountname):
 
 def edit_secrets_file(secrets_file):
   gpg_recipient = 'Philipp Moers <soziflip@gmail.com>'
-  check_call(['touch', secrets_file])
-  temporary_file = check_output(['mktemp', '--dry-run']).decode(encoding).splitlines()[0]
-  check_call(['gpg', '--output', temporary_file, '--decrypt', secrets_file])
-  check_call(['chmod', '600', temporary_file])
+  run(['touch', secrets_file], check=True)
+  result = run(['mktemp', '--dry-run'], capture_output=True)
+  temporary_file = result.stdout.decode(encoding).splitlines()[0]
+  run(['gpg', '--output', temporary_file, '--decrypt', secrets_file], check=True)
+  run(['chmod', '600', temporary_file], check=True)
   editor = os.environ.get('EDITOR') or 'nano'
-  check_call([editor, temporary_file])
-  check_call(['gpg', '--yes', '--output', secrets_file, '--recipient', gpg_recipient, '--encrypt', temporary_file])
-  call(['shred', temporary_file])
-  check_call(['rm', temporary_file])
+  run([editor, temporary_file], check=True)
+  run(['gpg', '--yes', '--output', secrets_file, '--recipient', gpg_recipient, '--encrypt', temporary_file], check=True)
+  run(['shred', temporary_file])
+  run(['rm', temporary_file], check=True)
 
 
 
@@ -152,10 +143,7 @@ def get_secret(accountname, oauth=False):
   if secrets is None:
     raise Exception(f"Secret for {accountname} not found!")
   if oauth:
-    client_id = secrets['client_id']
-    client_secret = secrets['client_secret']
-    refresh_token = secrets['refresh_token']
-    return generate_oauth_access_token(accountname, client_id, client_secret, refresh_token)
+    return get_or_fetch_oauth_access_token(accountname)
   else:
     return secrets["password"]
 

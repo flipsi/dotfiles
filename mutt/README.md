@@ -37,6 +37,12 @@ Create mail store:
 MAILDIR=~/.local/share/mail
 mkdir $MAILDIR/$EMAIL_ADDRESS
 ```
+### Setup Regular Account
+
+1. To add credentials, use `mutt-secrets.py --mode edit_secrets_file`
+1. Try syncing mailboxes with `mbsync $EMAIL_ADDRESS`
+1. Copy-paste and edit mutt account files
+
 
 ### Setup Gmail Account
 
@@ -54,11 +60,38 @@ For this to work, I have to create a project with the [Google API Console](https
 1. Next, go back the menu on the left and select ‘Credentials’. This will take you to the credentials page where you can select ‘CREATE CREDENTIALS’ at the top. Choose ‘OAuth client ID’.
 1. On the next page choose ‘Desktop app’ and give it a name. Once you select ‘CREATE’ you will be presented with your Client_id and Client_secret.
 
-The Client ID, Client Secret are then used by the oauth2.py script to generate a Refresh Token:
-`python2 ./oauth2.py --user=$EMAIL --client_id=$CLIENT_ID --client_secret=$CLIENT_SECRET --generate_oauth2_token`
+Now, use the git submodule [curl_google_oauth](https://github.com/jay/curl_google_oauth).
+The Client ID, Client Secret are used by the curl_google_oauth script to generate a Refresh Token:
+```
+$ export ACCOUNT=EMAIL_ADDRESS
+$ export DATADIR="~/.local/share/mail_auth/$ACCOUNT"
+$ mkdir -p $DATADIR
+$ chmod 700 $DATADIR
+$ cd $DATADIR
 
-Those three are stored in a GPG encrypted file. Use `mutt-secrets.py --mode edit_secrets_file`.
-On every sync or send mail, they are used to generate an access token with the oauth2.py script.
+$ cat > credential.txt << EOF
+client_id = REMOVED.apps.googleusercontent.com
+client_secret = REMOVED
+scope = https://mail.google.com/
+EOF
+
+$ ./mutt/curl_google_oauth/bearer-new.pl --datadir $DATADIR
+opening browser url https://accounts.google.com/o/oauth2/v2/auth?client_id=REMOVED.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A7777&scope=https%3A%2F%2Fmail.google.com%2F&response_type=code&access_type=offline
+
+(if open fails then copy url from auth-url.txt and paste into browser)
+
+waiting for google to send authorization code to localhost:7777
+received authorization code
+requesting token data
+received token data
+updating bearer.cfg and token.json
+token data written to bearer.cfg and token.json
+
+$ rm credential.txt
+```
+The access and refresh token are stored in the datadir permanently.
+The refresh token is used to update the access token if necessary on every usage.
+
 
 ### Setup mutt on another host
 
