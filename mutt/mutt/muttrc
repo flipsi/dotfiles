@@ -132,7 +132,7 @@ macro index,pager iv '<sync-mailbox><enter-command>source /home/sflip/.config/mu
 # default account #
 ###################
 
-source /home/sflip/.config/mutt/accounts/philipp.moers@mail.de.muttrc
+source /home/sflip/.config/mutt/accounts/mail@philippmoers.de.muttrc
 
 
 # vim: filetype=neomuttrc
