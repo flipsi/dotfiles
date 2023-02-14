@@ -852,9 +852,9 @@ mode "$goto" {
   bindsym Escape mode "default"
 }
 
-## kill specific apps (e.g. when memory really full again and the system hangs)
+## kill specific apps/windows (e.g. when memory really full again and the system hangs)
 bindsym $mod+Shift+BackSpace mode "$kill"
-set $kill Kill: (f) Firefox (g) Chrome (i) Vivaldi (j) Java (s) Sbt
+set $kill Kill: (f) Firefox (g) Chrome (i) Vivaldi (j) Java (s) Sbt (o) Output windows
 mode "$kill" {
     bindsym g       exec --no-startup-id "pkill    chrome"; mode "default"
     bindsym G       exec --no-startup-id "pkill -9 chrome"; mode "default"
@@ -866,6 +866,7 @@ mode "$kill" {
     bindsym J       exec --no-startup-id "pkill -9 java"; mode "default"
     bindsym s       exec --no-startup-id "pkill    -f 'sbt-launch.jar'"; mode "default"
     bindsym S       exec --no-startup-id "pkill -9 -f 'sbt-launch.jar'"; mode "default"
+    bindsym o       [workspace="Output"] kill; mode "default"
     # cancel
     bindsym Return mode "default"
     bindsym Escape mode "default"
