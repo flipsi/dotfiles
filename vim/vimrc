@@ -594,7 +594,7 @@ augroup custom_fugitive_mappings
     au User FugitiveIndex nmap     <buffer> ps  :Git push<cr>
     au User FugitiveIndex nmap     <buffer> pu  :GitPush<cr>
     au User FugitiveIndex nmap     <buffer> pf  :Git push --force-with-lease<cr>
-    au User FugitiveIndex nmap     <buffer> r   :GitRemoteCreateOrViewMergeRequest<cr>
+    au User FugitiveIndex nmap     <buffer> pr  :GitRemoteCreateOrViewMergeRequest<cr>
 augroup END
 
 " in Gdiff view, navigate and stage/checkout easily
