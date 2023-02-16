@@ -960,6 +960,7 @@ for_window [class="(?i)gnome-terminal"]                                         
 for_window [class="(?i)google-chrome"]                                          move workspace to output DP-1
 for_window [class="(?i)jetbrains-idea"]                                         move workspace to output DP-1
 for_window [class="(?i)jetbrains-phpstorm"]                                     move workspace to output DP-1
+for_window [class="(?i)notification-daemon"]                                    move workspace to output DP-1
 for_window [class="(?i)qutebrowser"]                                            move workspace to output DP-1
 for_window [class="(?i)signal"]                                                 move workspace to output DVI-I-1-1
 for_window [class="(?i)slack"]                                                  move workspace to output DVI-I-1-1
