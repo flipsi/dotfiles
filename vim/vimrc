@@ -4578,7 +4578,7 @@ nmap <silent> <leader>syn :ToggleSyntaxCurrentBuffer<cr>
 
 " toggle syntax highlighting after g:synmaxcol characters
 command! ToggleSyntaxLongLines :let &synmaxcol = g:synmaxcol - &synmaxcol " Disable or enable syntax highlighting (long lines)
-nmap <silent> <leader>sym :ToggleSyntaxLongLines
+nmap <silent> <leader>sym :ToggleSyntaxLongLines<cr>
 
 " toggle line numbers
 command! ToggleLineNumbers          :windo set number! <bar> :set relativenumber! " Disable or enable line numbers
