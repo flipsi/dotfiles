@@ -5556,6 +5556,7 @@ function! ResizeWindows(enter_or_leave)
 endfunction
 
 " clear windows (close quickfix and location list) and refresh screen
+" TODO: add <Plug>(coc-float-hide)
 nnoremap <silent> <bs> :nohlsearch \| :lclose \| :cclose \| :redraw! <cr> :<c-c>
 xmap <silent> <bs> <bs>gv
 
