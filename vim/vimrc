@@ -3008,7 +3008,7 @@ set spellfile=~/.vim/spellfile.utf-8.add,~/.vim/spellfile.local.utf-8.add
 
 " syntax highlighting
 syntax enable
-let g:synmaxcol=300
+let g:synmaxcol=500
 exe 'set synmaxcol=' . g:synmaxcol
 
 " highlight matching bracket when typing
