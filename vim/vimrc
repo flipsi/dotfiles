@@ -4162,6 +4162,8 @@ iabbrev af          autoformat
 iabbrev BE          backend
 iabbrev dpr         deprecated
 iabbrev FE          frontend
+iabbrev ns          namespace
+iabbrev pr          println
 iabbrev sm          [SQUASHME]
 iabbrev todo        TODO:
 iabbrev todod       TODO: delete this debugging statement
