@@ -398,6 +398,10 @@ mode "$mode_xdootool_timestamp" {
 # for i3lock, image has to be png
 set $LOCK_CMD i3lock -e -t -i ~/.i3/wallpaper.png
 
+# TODO: use xss-lock
+# exec_always --no-startup-id "xss-lock --transfer-sleep-lock -- i3lock --nofork -e -i ~/.i3/wallpaper.png"
+# set $LOCK_CMD "loginctl lock-session"
+
 ## lock/exit/suspend etc.
 bindsym XF86PowerOff mode "$mode_system"
 bindsym $mod+Escape mode "$mode_system"
