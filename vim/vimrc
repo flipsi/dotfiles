@@ -4459,8 +4459,8 @@ tnoremap <c-y><c-y> <c-\><c-n>
 
 " leave terminal insert mode and scroll up
 tnoremap <c-b>      <c-\><c-n><c-b>
-tnoremap <PageUp>   <c-\><c-n><c-b>
-tnoremap <PageDown> <c-\><c-n><c-b>
+" tnoremap <PageUp>   <c-\><c-n><c-b> " breaks TUI apps like tig
+" tnoremap <PageDown> <c-\><c-n><c-b> " breaks TUI apps like tig
 
 " leave terminal insert mode and move to last used or adjacent window
 tnoremap <c-h>          <c-\><c-n><c-w>p
