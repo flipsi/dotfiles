@@ -96,7 +96,7 @@ function setup_exit_status_printing
 end
 
 function autostart_keychain_on_some_hosts
-    # keychain takes care of ssh-agent and can also do gpg
+    # keychain takes care of ssh-agent and gpg-agent
     function keychain_start
         eval (command keychain --eval --quiet ~/.ssh/id_*)
     end
@@ -154,7 +154,9 @@ if status --is-interactive; and status --is-login
         # eval (thefuck --alias) # (does not work, so i added the function manually)
     # end
 
-    autostart_keychain_on_some_hosts
+    if in_X
+        autostart_keychain_on_some_hosts
+    end
 
 end
 

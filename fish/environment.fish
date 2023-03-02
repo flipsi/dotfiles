@@ -47,6 +47,11 @@ set -x CM_LAUNCHER "rofi"
 # end
 
 
+# required for gpg-agent to work properly
+if not set -q GPG_TTY
+    set -x GPG_TTY (tty)
+end
+
 
 # load local environment if present
 if test -f $HOME/.config/fish/environment.local.fish
