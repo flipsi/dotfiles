@@ -105,9 +105,8 @@ function create_sessions() {
 
 
 create_sessions
+tmux switch-client -t $SESSION_NAME_1
 
 if (tmux has-session -t init 2>/dev/null); then
     tmux kill-session -t init
 fi
-
-tmux switch-client -t $SESSION_NAME_1
