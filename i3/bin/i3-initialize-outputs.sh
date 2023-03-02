@@ -99,6 +99,10 @@ function main() {
 
                 sleep 0.1 && xrandr --output 'HDMI-1' --above 'eDP-1'  --auto
 
+            elif xrandr | grep 'DP-1 connected' >/dev/null; then
+
+                sleep 0.1 && xrandr --output 'DP-1' --above 'eDP-1'  --auto
+
             fi
             ;;
 
@@ -133,6 +137,10 @@ function main() {
             elif xrandr | grep 'HDMI1 connected' >/dev/null; then
 
                 sleep 0.1 && xrandr --output 'HDMI1' --above 'eDP1'  --auto
+
+            elif xrandr | grep 'DP-1 connected' >/dev/null; then
+
+                sleep 0.1 && xrandr --output 'DP-1' --above 'eDP1'  --auto
 
             fi
             ;;
