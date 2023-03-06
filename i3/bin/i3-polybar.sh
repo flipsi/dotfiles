@@ -35,6 +35,8 @@ function set_env_vars() {
                     else
                         BAR_SECOND_MONITOR='eDP1'
                     fi
+            elif xrandr | grep -q 'DP1 connected'; then
+                BAR_MAIN_MONITOR='DP1'
             else
                 BAR_MAIN_MONITOR='eDP1'
             fi
@@ -44,6 +46,8 @@ function set_env_vars() {
                 BAR_MAIN_MONITOR='DP-1'
                 BAR_SECOND_MONITOR='DVI-I-1-1'
                 BAR_THIRD_MONITOR='DVI-I-2-2'
+            elif xrandr | grep -q 'DP-1 connected'; then
+                BAR_MAIN_MONITOR='DP-1'
             else
                 BAR_MAIN_MONITOR='eDP-1'
             fi
