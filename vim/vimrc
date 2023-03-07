@@ -2227,6 +2227,7 @@ function! SetupClojureForCodeIntelligenceCore()
     nnoremap <buffer> <leader>bg  :call RunCommand("../scripts/clojure-codegen.sh")<cr>
     nnoremap <buffer> <leader>bd  :call RunCommand("bazel build //backend/...")<cr>
     nnoremap <buffer> <leader>bta :call RunCommand("bazel test //backend/... --test_output=streamed")<cr>
+    nnoremap <buffer> <leader>bto :call RunCommand("bazel test //backend/" . substitute(expand("%"), "\\(.*\\)/\\(.*\\)\.clj$", "\\1:\\2.test", ""))<cr>
     nnoremap <buffer> <leader>af  :exe "Dispatch! bazel run '@cljfmt//:cljfmt' -- --config dev-resources/cljfmt.clj " . expand("%")<cr>
     nnoremap <buffer> <leader>AF       :Dispatch! bb cljfmt<cr>
 endfunction
