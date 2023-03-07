@@ -92,3 +92,10 @@
 ; set a custom git config for all repositories in a specific folder for certain overwrites
 [includeIf "gitdir:/home/sflip/work/code-intelligence/src/"]
     path = /home/sflip/work/code-intelligence/src/.gitconfig
+
+; when using `git config --global` to update this fild, convert tabs to spaces
+; https://stackoverflow.com/a/40094388/4568748
+; TODO: FIX (it doesn't work)
+[filter "spacify"]
+    clean = expand --tabs=4 --initial
+    smudge = expand --tabs=4 --initial
