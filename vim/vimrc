@@ -1048,7 +1048,7 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-l': 'vsplit',
   \ 'ctrl-v': 'vsplit',
-  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-t': '$tab split',
   \ }
 " \ 'ctrl-k': 'previous-history',
 " \ 'ctrl-j': 'next-history',
@@ -3342,7 +3342,7 @@ endif
 command! -nargs=1 Shell :call Shell(<q-args>)
 function! Shell(commandline)
     if has('nvim')
-        tabnew
+        $tabnew
         execute 'terminal ' . a:commandline
         startinsert
     else
@@ -5785,7 +5785,7 @@ command! CloseBufferForce   :bdelete!               " Close current buffer disca
 command! CloseAllBuffers    :silent bufdo bdelete   " Close all buffers (not vim)
 command! CloseWindow        :quit                   " Close current window (not buffer)
 command! CloseOtherWindows  :only                   " Close all but current window (not buffers)
-command! NewTab             :tabnew                 " Create a new tab
+command! NewTab             :$tabnew                " Create a new tab
 command! CloseTab           :tabclose               " Close current tab (not buffer)
 command! QuitVim            :quitall                " Quit Vim (closing all windows)
 command! QuitVimForce       :quitall!               " Quit Vim (closing all windows) discarding changes
