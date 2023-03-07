@@ -8,7 +8,10 @@
     excludesfile = "~/.gitignore"
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
+
+[clone]
+    defaultRemoteName = "github" ; I clone the majority of repos from github.com
 
 [commit]
     verbose = true
@@ -16,14 +19,14 @@
 [fetch]
     prune = true
 
-[rebase]
-    autostash = true
-
 [pull]
     rebase = true
 
 [push]
     default = simple
+
+[rebase]
+    autostash = true
 
 [alias]
     fixup      = !sh -c 'REV=$(git rev-parse $1) && git commit --fixup $@ && git rebase -i --autostash --autosquash $REV^' -
