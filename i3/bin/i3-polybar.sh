@@ -32,6 +32,9 @@ function set_env_vars() {
                     if xrandr | grep -q 'DVI-I-2-2 connected'; then
                         BAR_SECOND_MONITOR='DVI-I-2-2'
                         BAR_THIRD_MONITOR='DVI-I-1-1'
+                    elif xrandr | grep -q 'HDMI2 connected'; then
+                        BAR_SECOND_MONITOR='HDMI2'
+                        BAR_THIRD_MONITOR='eDP1'
                     else
                         BAR_SECOND_MONITOR='eDP1'
                     fi
@@ -46,6 +49,11 @@ function set_env_vars() {
                 BAR_MAIN_MONITOR='DP-1'
                 BAR_SECOND_MONITOR='DVI-I-1-1'
                 BAR_THIRD_MONITOR='DVI-I-2-2'
+            elif xrandr | grep -q 'HDMI-1 connected' && xrandr | grep -q 'DP-1 connected' ; then
+                BAR_MAIN_MONITOR='DP-1'
+                BAR_SECOND_MONITOR='HDMI-1'
+            elif xrandr | grep -q 'HDMI-1 connected'; then
+                BAR_MAIN_MONITOR='HDMI-1'
             elif xrandr | grep -q 'DP-1 connected'; then
                 BAR_MAIN_MONITOR='DP-1'
             else

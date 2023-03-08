@@ -95,6 +95,12 @@ function main() {
 
                 arrange_outputs_at_home
 
+            elif xrandr | grep 'HDMI-1 connected' >/dev/null && xrandr | grep 'DP-1 connected' >/dev/null; then
+
+                sleep 0.1 && xrandr --output 'eDP-1' --off \
+                    --output 'DP-1' --auto \
+                    --output 'HDMI-1' --right-of 'DP-1'
+
             elif xrandr | grep 'HDMI-1 connected' >/dev/null; then
 
                 sleep 0.1 && xrandr --output 'HDMI-1' --above 'eDP-1'  --auto
