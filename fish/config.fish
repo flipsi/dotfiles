@@ -108,6 +108,9 @@ function autostart_keychain_on_some_hosts
     end
 end
 
+function in_X
+    set -q DISPLAY
+end
 
 #############################################################
 
