@@ -597,13 +597,11 @@ augroup custom_fugitive_mappings
     au User FugitiveIndex nmap     <buffer> pr  :GitRemoteCreateOrViewMergeRequest<cr>
 augroup END
 
-" in Gdiff view, navigate and stage/checkout easily
+" in Gdiff view, stage/checkout easily
 augroup gitdiff
     au!
-    au BufRead fugitive://* nnoremap <buffer> <down>  ]c
-    au BufRead fugitive://* nnoremap <buffer> <up>    [c
-    au BufRead fugitive://* nnoremap <buffer> <left>  do
-    au BufRead fugitive://* nnoremap <buffer> <right> dp
+    au BufRead fugitive://* nnoremap <buffer> <leader>g<left>  do
+    au BufRead fugitive://* nnoremap <buffer> <leader>g<right> dp
 augroup END
 
 " in Git commit view (opening from git log, not commit message), don't use folds
