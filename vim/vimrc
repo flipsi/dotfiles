@@ -5073,7 +5073,7 @@ nnoremap dN [c
 
 if !exists('g:run_command_method')
     if has('nvim')
-        let g:run_command_method = "terminal-emulator"
+        let g:run_command_method = "terminal-buffer"
     else
         let g:run_command_method = "vimux"
     endif
@@ -5081,24 +5081,24 @@ endif
 
 augroup set_run_command_method
     au!
-    au FileType clojure     let g:run_command_method = "terminal-window"
-    au FileType scala       let g:run_command_method = "terminal-window"
+    au FileType clojure     let g:run_command_method = "output-window"
+    au FileType scala       let g:run_command_method = "output-window"
 augroup END
 
 
 
 function! ToggleRunCommandMethod()
-    if !exists('g:run_command_method') || g:run_command_method == "terminal-window"
-        echo 'Set running method to `terminal-emulator`'
-        let g:run_command_method = "terminal-emulator"
+    if !exists('g:run_command_method') || g:run_command_method == "output-window"
+        echo 'Set running method to `terminal-buffer`'
+        let g:run_command_method = "terminal-buffer"
         RefreshRunCommandMappings
-    elseif g:run_command_method == "terminal-emulator"
+    elseif g:run_command_method == "terminal-buffer"
         echo 'Set running method to `vimux`'
         let g:run_command_method = "vimux"
         RefreshRunCommandMappings
     else
-        echo 'Set running method to `terminal-window`'
-        let g:run_command_method = "terminal-window"
+        echo 'Set running method to `output-window`'
+        let g:run_command_method = "output-window"
         RefreshRunCommandMappings
     endif
 endfunction
@@ -5106,9 +5106,9 @@ endfunction
 command! -nargs=1 -complete=file RunCommandInTerminal :call RunCommandInTerminal(<q-args>)
 function! RunCommandInTerminal(commandline)
     let g:last_terminal_command = a:commandline
-    if g:run_command_method == "terminal-emulator"
+    if g:run_command_method == "terminal-buffer"
         call ExecuteInNeoTerminal(a:commandline)
-    elseif g:run_command_method == "terminal-window"
+    elseif g:run_command_method == "output-window"
         call jobstart('alacritty --title "Output" --hold --command ' . a:commandline)
     else
       echoerr "Unknown g:run_command_method (" . g:run_command_method . ")"
@@ -5137,14 +5137,14 @@ function! GetBuildOutputFilename()
 endfunction
 
 function! IsBuildShellRunning()
-    if g:run_command_method == "terminal-emulator"
+    if g:run_command_method == "terminal-buffer"
         let l:terminal_bufnum = GetTerminalBuffer()
         return l:terminal_bufnum > 0
     elseif g:run_command_method == "vimux"
         " TODO: make this work for other shells
         return exists('g:build_shell') && match(g:build_shell, 'sbt') == 0
                     \ && IsSbtRunning()
-    elseif g:run_command_method == "terminal-window"
+    elseif g:run_command_method == "output-window"
         call system("i3-msg -t get_workspaces | tr , '\\n' | grep -q '\"name\":\"Output\"'")
         return !v:shell_error
     else
@@ -5197,7 +5197,7 @@ nnoremap <silent> <leader>bex :WebSearchForBuildError<cr>
 
 command! RefreshRunCommandMappings :call RefreshRunCommandMappings()
 function! RefreshRunCommandMappings()
-    if g:run_command_method == "terminal-emulator"
+    if g:run_command_method == "terminal-buffer"
         nnoremap <leader>bo         :RunCommandInBuildShell<space>
         nnoremap <leader>bf         :execute 'RunCommandInTerminal  ' . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
         nnoremap <leader>bF         :execute 'RunCommandInTerminal ' . ExpandPrependThisDir('%') . ' '<left>
@@ -5206,7 +5206,7 @@ function! RefreshRunCommandMappings()
         nnoremap <leader>bc         :ExecuteInNeoTerminal Tkill<cr>
         nnoremap <leader>b<c-c>     :ExecuteInNeoTerminal Tkill<cr>
         nnoremap <leader>b<bs>      :Tclose<cr>         " only hides buffer, we can still sent commands to it
-    elseif g:run_command_method == "terminal-window"
+    elseif g:run_command_method == "output-window"
         nnoremap <leader>bo         :RunCommandInBuildShell<space>
         nnoremap <leader>bf         :execute 'RunCommandInTerminal  ' . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
         nnoremap <leader>bF         :execute 'RunCommandInTerminal ' . ExpandPrependThisDir('%') . ' '<left>
