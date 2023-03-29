@@ -3584,7 +3584,9 @@ function! GitWebUrl(line_or_range, return_or_yank_to_clipboard_or_open_in_web)
         return
     endif
 
-    let l:filename = expand("%")
+    let l:git_root = system("git rev-parse --show-toplevel")
+    let l:relative_path = expand("%:p")
+    let l:absolute_path = strpart(l:relative_path, strlen(l:git_root))
     if a:line_or_range == 'range'
         let [l:startline, l:startcol, l:endline, l:endcol] = GetVisPos()
         let l:line_param = "#L" . l:startline . '-L' . l:endline
@@ -3594,7 +3596,7 @@ function! GitWebUrl(line_or_range, return_or_yank_to_clipboard_or_open_in_web)
 
     let l:web_domain = l:url_matches[1]
     let l:web_url = 'https://' . l:web_domain . '/' . l:url_matches[2] .
-                \ '/blob/' . l:revision . '/' . l:filename . l:line_param
+                \ '/blob/' . l:revision . '/' . l:absolute_path . l:line_param
 
     if a:return_or_yank_to_clipboard_or_open_in_web == 'return'
         return l:web_url
