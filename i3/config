@@ -471,7 +471,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id "playerctl -p spotify volume 0
 
 ## audio control
 bindsym $mod+Shift+0 mode "$audio"
-set $audio Audio (+/-) Volume (m/M) Mute/Unmute (e) Mute/Unmute Video Call (s) Switch output (S) ... of Spotify (p) Play sound (g) GUI
+set $audio Audio (+/-) Volume (m/M) Mute/Unmute (e) Mute/Unmute Video Call (s) Switch output (p) ... of Spotify (b) Soundboard (g) GUI
 mode "$audio" {
     bindsym plus            exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
     bindsym minus           exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
@@ -484,8 +484,8 @@ mode "$audio" {
     bindsym m               exec --no-startup-id "amixer set Master mute"; exec "$UPDATE_STATUSBAR"
     bindsym Shift+m         exec --no-startup-id "amixer set Master unmute"; exec "$UPDATE_STATUSBAR"
     bindsym s               exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output --toggle"; mode "default"
-    bindsym Shift+s         exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output --toggle --app Spotify"; mode "default"
-    bindsym p               exec --no-startup-id "~/.i3/bin/soundboard.sh"; mode "default"
+    bindsym p               exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output --toggle --app Spotify"; mode "default"
+    bindsym b               exec --no-startup-id "~/.i3/bin/soundboard.sh"; mode "default"
     bindsym e               exec --no-startup-id "~/.i3/bin/mute-video-call.sh"; mode "default"
     bindsym g               exec --no-startup-id "pavucontrol"; mode "default"
     bindsym $mod+0          exec --no-startup-id "pavucontrol"; mode "default"
