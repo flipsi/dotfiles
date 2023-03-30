@@ -550,15 +550,15 @@ nnoremap <leader>gpu  :GitPush<cr>
 nnoremap <leader>gpf  :Git push --force-with-lease<cr>
 nnoremap <leader>gup  :Confirm Git submodule update<cr>
 
-" work with Github or Gitlab
-nnoremap <leader>gh   <nop>
-nnoremap <leader>ghO  :OpenGitRepoWeb<cr>
-nnoremap <leader>gho       :call GitWebUrl('line', 'open_in_web')<cr>
-vnoremap <leader>gho  :<c-u>call GitWebUrl('range', 'open_in_web')<cr>
-nnoremap <leader>ghy       :call GitWebUrl('line', 'yank_to_clipboard')<cr>
-vnoremap <leader>ghy  :<c-u>call GitWebUrl('range', 'yank_to_clipboard')<cr>
-nnoremap <leader>ghr  :GitRemoteCreateOrViewMergeRequest<cr>
-nnoremap <leader>ghp  :GitRemoteShowPipeline<cr>
+" work with remote (Mnemonic: 'G'it Rem'o'te) Github or Gitlab
+nnoremap <leader>go   <nop>
+nnoremap <leader>goO  :OpenGitRepoWeb<cr>
+nnoremap <leader>goo       :call GitWebUrl('line', 'open_in_web')<cr>
+vnoremap <leader>goo  :<c-u>call GitWebUrl('range', 'open_in_web')<cr>
+nnoremap <leader>goy       :call GitWebUrl('line', 'yank_to_clipboard')<cr>
+vnoremap <leader>goy  :<c-u>call GitWebUrl('range', 'yank_to_clipboard')<cr>
+nnoremap <leader>gor  :GitRemoteCreateOrViewMergeRequest<cr>
+nnoremap <leader>gop  :GitRemoteShowPipeline<cr>
 
 " git log etc.
 nnoremap <leader>glh  :Git log<cr>
