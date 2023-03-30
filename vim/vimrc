@@ -5116,7 +5116,7 @@ function! RunCommandInTerminal(commandline)
     if g:run_command_method == "terminal-buffer"
         call ExecuteInNeoTerminal(a:commandline)
     elseif g:run_command_method == "output-window"
-        call jobstart('alacritty --title "Output" --hold --command ' . a:commandline)
+        call jobstart('alacritty --title "Output" --hold --command fish -c "' . a:commandline . '"')
     else
       echoerr "Unknown g:run_command_method (" . g:run_command_method . ")"
     endif
