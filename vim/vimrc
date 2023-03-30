@@ -1708,6 +1708,9 @@ Plug 'vim-scripts/toggle_words.vim'
 noremap <silent> 'tw :ToggleWord<cr>
 
 let g:toggle_words_dict = {
+            \ 'clojure': [
+            \     ['true?', 'false?'],
+            \ ],
             \ 'css': [
             \     ['div', 'span'],
             \     ['head', 'body'],
@@ -1771,6 +1774,7 @@ let g:toggle_words_dict = {
             \     ['on', 'off'],
             \     ['online', 'offline'],
             \     ['open', 'close'],
+            \     ['personal', 'group'],
             \     ['public', 'private'],
             \     ['present', 'absent'],
             \     ['question', 'answer'],
