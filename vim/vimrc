@@ -2200,18 +2200,11 @@ augroup clojure_on_read
     au!
     au FileType clojure call SetupClojure()
     au FileType clojure call SetupClojureForCodeIntelligenceCore()
+    au FileType clojure call SetupConjure()
 augroup END
 
 command! SetupClojure :call SetupClojure() " add mappings and settings for Clojure
 function! SetupClojure()
-    " TODO: make those work (eval before run)
-    " nnoremap <buffer> <leader>ltt :ConjureCljRefreshAll <bar> ConjureCljRunAllTests<cr>
-    " nnoremap <buffer> <leader>lto :ConjureEvalRootForm <bar> ConjureCljRunCurrentTest<cr>
-    " nnoremap <buffer> <leader>ltn :ConjureEvalBuf <bar> ConjureCljRunCurrentNsTests<cr>
-    nnoremap <buffer> <leader>ltt :ConjureCljRunAllTests<cr>
-    nnoremap <buffer> <leader>lto :ConjureCljRunCurrentTest<cr>
-    nnoremap <buffer> <leader>ltn :ConjureCljRunCurrentNsTests<cr>
-
     " specific coc clojure refactoring mappings
     " TODO: fix function call
     nnoremap <buffer> <silent> <leader>crcc :call LanguageClient#workspace_executeCommand('cycle-coll', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
@@ -2262,30 +2255,41 @@ endfunction
 " Clojure Interactive Development Environment
 " Plug 'liquidz/vim-iced'
 
+" Provides a couple of helper commands for 'jacking' in to a Clojure REPL by auto-starting it.
+" (For Clojure CLI use :Clj)
+Plug 'clojure-vim/vim-jack-in'
+" Start an nREPL server with all of the appropriate middleware inside your Neovim instance
+nnoremap <leader>la   :Clj -M:repl<CR>
+
 " Yet another alternative to Fireplace
 " Multi-language Interactive evaluation
+" (uses the REPL started above for evaluation)
 " Quick start for Clojure: https://github.com/Olical/conjure/wiki/Quick-start:-Clojure
 Plug 'Olical/conjure'
 let g:conjure#mapping#prefix = "<leader>l"
 " Use :ConjureSchool to get started
 " See `:vertical help conjure-mappings` for (default) mappings
-nnoremap <leader>clc        :ConjureConnect<CR>
-nnoremap <leader>clo        :ConjureEval<space>
-nnoremap <leader>cl<c-c>    :ConjureCljInterrupt<CR>
-nnoremap <leader>clr        :ConjureCljRefreshChanged<CR>
-nnoremap <leader>clR        :ConjureCljRefreshAll<CR>
-nnoremap <leader>cl<f5>     :ConjureCljRefreshAll<CR>
 
-" ignore typos
-nnoremap <leader>l          <nop>
-nnoremap <leader>cl         <nop>
+" additional mappings
+command! SetupConjure :call SetupConjure() " add Conjure mappings
+function! SetupConjure()
+    " TODO: make those work (eval before run)
+    " nnoremap <buffer> <leader>ltt :ConjureCljRefreshAll <bar> ConjureCljRunAllTests<cr>
+    " nnoremap <buffer> <leader>lto :ConjureEvalRootForm <bar> ConjureCljRunCurrentTest<cr>
+    " nnoremap <buffer> <leader>ltn :ConjureEvalBuf <bar> ConjureCljRunCurrentNsTests<cr>
+    nnoremap <buffer> <leader>ltt :ConjureCljRunAllTests<cr>
+    nnoremap <buffer> <leader>lto :ConjureCljRunCurrentTest<cr>
+    nnoremap <buffer> <leader>ltn :ConjureCljRunCurrentNsTests<cr>
 
-" Provides a couple of helper commands for 'jacking' in to a Clojure REPL by auto-starting it.
-" (For Clojure CLI use :Clj)
-Plug 'clojure-vim/vim-jack-in'
-" Start an nREPL server with all of the appropriate middleware inside your Neovim instance
-nnoremap <leader>cla   :Clj -M:repl<CR>
-
+    nnoremap <leader>lc        :ConjureConnect<CR>
+    nnoremap <leader>lo        :ConjureEval<space>
+    nnoremap <leader>l<c-c>    :ConjureCljInterrupt<CR>
+    nnoremap <leader>lr        :ConjureCljRefreshChanged<CR>
+    nnoremap <leader>lR        :ConjureCljRefreshAll<CR>
+    nnoremap <leader>l<f5>     :ConjureCljRefreshAll<CR>
+    " ignore typos
+    nnoremap <leader>l          <nop>
+endfunction
 
 
 " Vim-sexp brings the Vim philosophy of precision editing to S-expressions (as used in Lisps).
