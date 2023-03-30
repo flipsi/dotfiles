@@ -4175,7 +4175,7 @@ iabbrev todo        TODO:
 iabbrev todod       TODO: delete this debugging statement
 iabbrev todof       TODO: FIX
 iabbrev todoi       TODO: implement
-iabbrev wip         WIP:
+iabbrev wip         [WIP]
 
 " awkward rolling issue on Moonlander keyboard
 iabbrev (9          ()
