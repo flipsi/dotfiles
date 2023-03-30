@@ -2205,6 +2205,8 @@ augroup END
 
 command! SetupClojure :call SetupClojure() " add mappings and settings for Clojure
 function! SetupClojure()
+    nnoremap <silent> <leader>co :call ToggleComment('n')<cr>
+    vnoremap <silent> <leader>co :call ToggleComment('v')<cr>
     " specific coc clojure refactoring mappings
     " TODO: fix function call
     nnoremap <buffer> <silent> <leader>crcc :call LanguageClient#workspace_executeCommand('cycle-coll', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
@@ -3901,6 +3903,45 @@ command! -nargs=1 -bang Replace :call Replace(<bang>0, <q-args>)
 
 " }}}
 
+" comment the current line / form (without a plugin) {{{
+" TODO: integrate ToggleHTMLComment (does not do filetype detection which is a feature, so filetype should maybe be an optional parameter)
+function! ToggleComment(mode)
+
+    let l:filetype = &filetype
+    if l:filetype == 'clojure'
+        let l:left_marker   = '#_'
+        let l:right_marker  = ''
+    elseif l:filetype == 'html'
+        let l:left_marker   = '<!-- '
+        let l:right_marker  = ' -->'
+    endif
+
+    " visual mode
+    if a:mode == "v"
+        let lineFrom = getpos("'<")[1]
+        let lineTo   = getpos("'>")[1]
+        let range    = lineFrom . "," . lineTo
+        let text     = join(getline(lineFrom, lineTo))
+
+    " normal mode
+    elseif a:mode == "n"
+        let range = "."
+        let text = getline(".")
+
+    endif
+
+    " do the toggle
+    " TODO: escape | and ` in markers (and more, because \V doesn't work here)
+    " let l:is_commented = stridx(l:text, '\V' . l:left_marker) > -1
+    let l:is_commented = stridx(l:text, l:left_marker) > -1
+    if !l:is_commented
+        " TODO: fix for visual mode
+        execute range . "substitute`\\v^(\\s*)(.*)$`\\1" . l:left_marker . "\\2" . l:right_marker . "`"
+    else
+        execute range . "substitute`\\V" . l:left_marker . "\\v(.*)\\V" . l:right_marker . "`\\1`"
+    endif
+
+endfunction
 
 " comment the current line / visual selection with html syntax {{{
 function! ToggleHTMLComment(mode)
