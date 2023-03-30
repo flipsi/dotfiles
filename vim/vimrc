@@ -2202,6 +2202,7 @@ augroup clojure_on_read
     au FileType clojure call SetupClojureForCodeIntelligenceCore()
 augroup END
 
+command! SetupClojure :call SetupClojure() " add mappings and settings for Clojure
 function! SetupClojure()
     " TODO: make those work (eval before run)
     " nnoremap <buffer> <leader>ltt :ConjureCljRefreshAll <bar> ConjureCljRunAllTests<cr>
@@ -2224,17 +2225,20 @@ function! SetupClojure()
     nnoremap <buffer> <silent> <leader>crel :call LanguageClient#workspace_executeCommand('expand-let', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
     nnoremap <buffer> <silent> <leader>cram :call LanguageClient#workspace_executeCommand('add-missing-libspec', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
 endfunction
-command! SetupClojure :call SetupClojure() " add mappings for Clojure
 
+command! SetupClojureForCodeIntelligenceCore :call SetupClojureForCodeIntelligenceCore() " add mappings and settings for Clojure code at Code Intelligence
 function! SetupClojureForCodeIntelligenceCore()
-    nnoremap <buffer> <leader>bg  :call RunCommand("../scripts/clojure-codegen.sh")<cr>
-    nnoremap <buffer> <leader>bd  :call RunCommand("bazel build //backend/...")<cr>
-    nnoremap <buffer> <leader>bta :call RunCommand("bazel test //backend/... --test_output=streamed")<cr>
-    nnoremap <buffer> <leader>bto :call RunCommand("bazel test //backend/" . substitute(expand("%"), "\\(.*\\)/\\(.*\\)\.clj$", "\\1:\\2.test", ""))<cr>
+    let g:build_shell = ''
+    let g:prompt_regex = '^bazel-wrapper: Executing gazelle$'
+    " TODO: fix me (no real filenames in bazel output unfortunately)
+    set errorformat=ci_fuzz.backend%.%#\ (%f:%l)
+    nnoremap <buffer> <leader>bg  :call RunCommandInBuildShell("../scripts/clojure-codegen.sh")<cr>
+    nnoremap <buffer> <leader>bd  :call RunCommandInBuildShell("bazel build //backend/...")<cr>
+    nnoremap <buffer> <leader>bta :call RunCommandInBuildShell("bazel test //backend/... --test_output=streamed")<cr>
+    nnoremap <buffer> <leader>bto :call RunCommandInBuildShell("bazel test //backend/" . substitute(expand("%"), "\\(.*\\)/\\(.*\\)\.clj$", "\\1:\\2.test", ""))<cr>
     nnoremap <buffer> <leader>af  :exe "Dispatch! bazel run '@cljfmt//:cljfmt' -- --config dev-resources/cljfmt.clj " . expand("%")<cr>
     nnoremap <buffer> <leader>AF       :Dispatch! bb cljfmt<cr>
 endfunction
-command! SetupClojureForCodeIntelligenceCore :call SetupClojureForCodeIntelligenceCore() " add mappings for Clojure
 
 " https://thoughtbot.com/blog/writing-clojure-in-vim
 " https://tomekw.com/nvim-for-clojure-development/
@@ -5161,16 +5165,19 @@ endfunction
 
 " open up build shell if not already opened before executing commandline
 command! -nargs=1 RunCommandInBuildShell :call RunCommandInBuildShell(<q-args>)
-function! RunCommandInBuildShell(commandline)
-    if !IsBuildShellRunning() && exists('g:build_shell')
-        let l:build_output_file = GetBuildOutputFilename()
+function! RunCommandInBuildShell(command)
+    let l:build_output_file = GetBuildOutputFilename()
+    if !IsBuildShellRunning() && exists('g:build_shell') && strlen(g:build_shell) > 0
         let l:neoterm_autoinsert = g:neoterm_autoinsert
         let g:neoterm_autoinsert = 0
         let l:shell_cmd = g:build_shell . " | tee (tty) > " . l:build_output_file
         call RunCommand(l:shell_cmd)
         let g:neoterm_autoinsert = l:neoterm_autoinsert
+        let l:commandline = a:command
+    else
+        let l:commandline = a:command . " | tee (tty) > " . l:build_output_file
     endif
-    call RunCommand(a:commandline)
+    call RunCommand(l:commandline)
 endfunction
 
 command! -nargs=1 RunCommand :call RunCommand(<q-args>)
