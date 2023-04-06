@@ -56,13 +56,13 @@ abbr $args geb    git checkout -b
 abbr $args gf     git fetch --prune
 abbr $args gfm    git checkout --quiet --detach\; git fetch \(git remote \| head -n1\) \(git-main-or-master\):\(git-main-or-master\)\; git checkout --quiet -
 abbr $args ghpr   gh pr view --web \|\| gh pr create --web
-abbr $args gl     glab
+abbr $args gla    glab
 abbr $args glp    glab pipeline ci view
 abbr $args glm    glab mr
 abbr $args glmv   glab mr view --web
 abbr $args glmc   glab mr create --web --fill
 abbr $args gll    tig log
-abbr $args glm    tig
+abbr $args gl     tig
 abbr $args glh    git --no-pager log -n 1
 abbr $args gli    git --no-pager log -n 1 \| head -n 1 \| cut -d\" \" -f2 \| xsel --clipboard
 abbr $args gm     git merge
@@ -80,6 +80,7 @@ abbr $args gr     git rebase
 abbr $args grm    git rebase \(git-main-or-master\)
 abbr $args gra    git rebase --abort
 abbr $args grc    git rebase --continue
+abbr $args gro    git rebase --onto \(git-main-or-master\) HEAD~1 # rebase last 1 commit in current branch on master (after original branch has been squashed/rebased)
 abbr $args grh    git reset --hard
 abbr $args grr    git reset --hard \(git remote \| head -n1\)/\(git-current-branch-name\)
 abbr $args grH    git reset HEAD~1
