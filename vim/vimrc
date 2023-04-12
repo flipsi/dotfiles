@@ -2283,19 +2283,39 @@ function! SetupConjure()
     " nnoremap <buffer> <leader>ltt :ConjureCljRefreshAll <bar> ConjureCljRunAllTests<cr>
     " nnoremap <buffer> <leader>lto :ConjureEvalRootForm <bar> ConjureCljRunCurrentTest<cr>
     " nnoremap <buffer> <leader>ltn :ConjureEvalBuf <bar> ConjureCljRunCurrentNsTests<cr>
-    nnoremap <buffer> <leader>ltt :ConjureCljRunAllTests<cr>
-    nnoremap <buffer> <leader>lto :ConjureCljRunCurrentTest<cr>
-    nnoremap <buffer> <leader>ltn :ConjureCljRunCurrentNsTests<cr>
+    nnoremap <buffer> <leader>ltt :call RunConjureCommand('ConjureCljRunAllTests')<cr>
+    nnoremap <buffer> <leader>ltn :call RunConjureCommand('ConjureCljRunCurrentNsTests')<cr>
+    nnoremap <buffer> <leader>lto :call RunConjureCommand('ConjureCljRunCurrentTest')<cr>
+    nnoremap          <leader>lbb :call RunLastConjureCommand()<cr>
 
-    nnoremap <buffer> <leader>lc        :ConjureConnect<CR>
-    nnoremap <buffer> <leader>lo        :ConjureEval<space>
-    nnoremap <buffer> <leader>l<c-c>    :ConjureCljInterrupt<CR>
-    nnoremap <buffer> <leader>lr        :ConjureCljRefreshChanged<CR>
-    nnoremap <buffer> <leader>lR        :ConjureCljRefreshAll<CR>
-    nnoremap <buffer> <leader>l<f5>     :ConjureCljRefreshAll<CR>
-    nnoremap <buffer> <leader>llG       :ConjureScrollLogsToBottom<CR>
+    nnoremap <leader>lc        :ConjureConnect<CR>
+    nnoremap <leader>lo        :ConjureEval<space>
+    nnoremap <leader>l<c-c>    :ConjureCljInterrupt<CR>
+    nnoremap <leader>lr        :ConjureCljRefreshChanged<CR>
+    nnoremap <leader>lR        :ConjureCljRefreshAll<CR>
+    nnoremap <leader>l<f5>     :ConjureCljRefreshAll<CR>
+    nnoremap <leader>llG       :ConjureScrollLogsToBottom<CR>
     " ignore typos
     nnoremap <leader>l <nop>
+endfunction
+
+function! RunConjureCommand(cmd)
+    normal! mY
+    let g:last_conjure_command = a:cmd
+    ConjureScrollLogsToBottom
+    execute ":" . g:last_conjure_command
+endfunction
+
+function! RunLastConjureCommand()
+    if !exists('g:last_conjure_command')
+        echoerr "No last command found!"
+    else
+        normal! mZ
+        normal! `Y
+        ConjureScrollLogsToBottom
+        execute ":" . g:last_conjure_command
+        normal! `Z
+    endif
 endfunction
 
 " In the window with the conjure log buffer, scroll to the bottom (so that automatic tailing is enabled)
