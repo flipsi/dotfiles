@@ -2061,7 +2061,7 @@ function! CocToggle()
     endif
 endfunction
 
-let g:coc_start_at_startup = 0
+let g:coc_start_at_startup = 1
 
 " start/stop coc
 nnoremap <leader>ic  <nop>
