@@ -3685,6 +3685,32 @@ function! GetBufferList()
 endfunction
 " }}}
 
+" get buffer number by filename pattern {{{
+function! GetBufferByPattern(pattern)
+  let bufcount = bufnr("$")
+  let currbufnr = 1
+  let nummatches = 0
+  let firstmatchingbufnr = 0
+  while currbufnr <= bufcount
+    if (bufexists(currbufnr))
+      let currbufname = bufname(currbufnr)
+      if (match(currbufname, a:pattern) > -1)
+        let nummatches += 1
+        let firstmatchingbufnr = currbufnr
+      endif
+    endif
+    let currbufnr = currbufnr + 1
+  endwhile
+  if (nummatches == 1)
+    return firstmatchingbufnr
+  elseif (nummatches > 1)
+    echoerr "More than one matching buffer found"
+  else
+    echoerr "No matching buffers"
+  endif
+endfunction
+" }}}
+
 " find buffers with a running terminal (returns list of bufnum) {{{
 function! GetTerminalBuffers()
     if !has('nvim')
