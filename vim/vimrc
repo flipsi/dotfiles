@@ -588,6 +588,7 @@ augroup custom_fugitive_mappings
     au User FugitiveIndex,FugitiveChanged nnoremap <buffer> <down>   j
     au User FugitiveIndex,FugitiveChanged nnoremap <buffer> <left>   h
     au User FugitiveIndex,FugitiveChanged nnoremap <buffer> <right>  l
+    au User FugitiveIndex nmap     <buffer> !   X
     au User FugitiveIndex nmap     <buffer> w   =
     au User FugitiveIndex nnoremap <buffer> dt  :call GdiffsplitTab(GStatusGetFilenameUnderCursor())<cr>
     au User FugitiveIndex nmap     <buffer> pl  :Git pull<cr>
