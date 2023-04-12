@@ -1723,6 +1723,9 @@ let g:toggle_words_dict = {
             \     ['head', 'body'],
             \     ['header', 'footer'],
             \ ],
+            \ 'sql': [
+            \     ['SET', 'DROP'],
+            \ ],
             \ 'tex': [
             \     ['chapter', 'section', 'subsection']
             \ ],
