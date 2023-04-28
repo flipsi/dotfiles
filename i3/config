@@ -732,7 +732,7 @@ bindsym $mod+Shift+9 move container to workspace 9
 #bindsym $mod+Shift+0 move container to workspace 10
 
 ## move container to other output
-bindsym $mod+u mode "$move_container_to_output"
+bindsym $mod+Shift+u mode "$move_container_to_output"
 set $move_container_to_output Move container to output (h) left, (l) right, (j) down, (k) up
 mode "$move_container_to_output" {
     bindsym h       move container to output left;  workspace back_and_forth; mode "default"
@@ -744,13 +744,12 @@ mode "$move_container_to_output" {
     bindsym l       move container to output right; workspace back_and_forth; mode "default"
     bindsym Right   move container to output right; workspace back_and_forth; mode "default"
     # cancel
-    bindsym $mod+u mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
 ## move workspace to other output
-bindsym $mod+Shift+u mode "$move_workspace_to_output"
+bindsym $mod+u mode "$move_workspace_to_output"
 set $move_workspace_to_output Move workspace to output (h) left, (l) right, (j) down, (k) up
 mode "$move_workspace_to_output" {
     bindsym h       move workspace to output left;  mode "default"
@@ -762,7 +761,6 @@ mode "$move_workspace_to_output" {
     bindsym l       move workspace to output right; mode "default"
     bindsym Right   move workspace to output right; mode "default"
     # cancel
-    bindsym $mod+Shift+u mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
