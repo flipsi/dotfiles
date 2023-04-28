@@ -123,8 +123,8 @@ function main() {
             elif xrandr | grep -q 'DVI-I-1-1 connected'; then
 
                 MAIN_MONITOR='DP1'
-                SECOND_MONITOR='DVI-I-2-2'
-                THIRD_MONITOR='DVI-I-1-1'
+                SECOND_MONITOR='DVI-I-1-1'
+                THIRD_MONITOR='DVI-I-2-2'
                 LAPTOP_SCREEN='eDP1'
 
                 xrandr --output "$LAPTOP_SCREEN" --auto \
