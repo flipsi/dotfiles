@@ -470,7 +470,7 @@ bindsym XF86AudioLowerVolume exec --no-startup-id "playerctl -p spotify volume 0
 bindsym XF86AudioRaiseVolume exec --no-startup-id "playerctl -p spotify volume 0.05+"; exec "$UPDATE_STATUSBAR"
 
 ## audio control
-bindsym $mod+Shift+0 mode "$audio"
+bindsym $mod+0 mode "$audio"
 set $audio Audio (+/-) Volume (m/M) Mute/Unmute (e) Mute/Unmute Video Call (s) Switch output (p) ... of Spotify (b) Soundboard (g) GUI
 mode "$audio" {
     bindsym plus            exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
@@ -501,10 +501,10 @@ bindsym XF86AudioPlay        exec --no-startup-id "playerctl play-pause"; exec "
 bindsym XF86AudioNext        exec --no-startup-id "playerctl next"; exec "$UPDATE_STATUSBAR"
 bindsym XF86AudioPrev        exec --no-startup-id "playerctl previous"; exec "$UPDATE_STATUSBAR"
 
-bindsym $mod+0 mode "$music_control"
-# bindsym $mod+0 mode "$mpd_control"
-# bindsym $mod+0 mode "$spotify_control"
-# bindsym $mod+0 exec "pgrep mpd && i3-msg mode $mpd_control || i3-msg mode $music_control"
+bindsym $mod+9 mode "$music_control"
+# bindsym $mod+9 mode "$mpd_control"
+# bindsym $mod+9 mode "$spotify_control"
+# bindsym $mod+9 exec "pgrep mpd && i3-msg mode $mpd_control || i3-msg mode $music_control"
 
 ## control music (including spotify)
 set $music_control Music Control
@@ -521,7 +521,6 @@ mode "$music_control" {
     bindsym plus             exec --no-startup-id "playerctl -p spotify volume 0.05+"
     bindsym minus            exec --no-startup-id "playerctl -p spotify volume 0.05-"
     # cancel
-    bindsym $mod+Shift+0 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -708,7 +707,7 @@ bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
+# bindsym $mod+9 workspace 9
 #bindsym $mod+0 workspace 10
 
 ## move container to new workspace (tmux 'break')
