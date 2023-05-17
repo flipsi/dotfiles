@@ -2350,6 +2350,8 @@ let s:sexp_mappings = {
             \ 'sexp_swap_element_forward':      'sl',
             \ }
 
+command! ReloadSexpMappings :call s:vim_sexp_mappings()
+
 " Explicit mappings {{{
 function! s:vim_sexp_mappings()
     xmap <silent><buffer> af              <Plug>(sexp_outer_list)
@@ -2439,17 +2441,28 @@ function! s:vim_sexp_mappings()
     xmap <silent><buffer> <e              <Plug>(sexp_swap_element_backward)
     nmap <silent><buffer> >e              <Plug>(sexp_swap_element_forward)
     xmap <silent><buffer> >e              <Plug>(sexp_swap_element_forward)
-    nmap <silent><buffer> >(              <Plug>(sexp_emit_head_element)
-    xmap <silent><buffer> >(              <Plug>(sexp_emit_head_element)
-    nmap <silent><buffer> <)              <Plug>(sexp_emit_tail_element)
-    xmap <silent><buffer> <)              <Plug>(sexp_emit_tail_element)
-    nmap <silent><buffer> <(              <Plug>(sexp_capture_prev_element)
-    xmap <silent><buffer> <(              <Plug>(sexp_capture_prev_element)
-    nmap <silent><buffer> >)              <Plug>(sexp_capture_next_element)
-    xmap <silent><buffer> >)              <Plug>(sexp_capture_next_element)
+
+    " "slurp"
+    nmap <silent><buffer> <C-s><C-s>      <Plug>(sexp_capture_next_element)
+    xmap <silent><buffer> <C-s><C-s>      <Plug>(sexp_capture_next_element)
+    imap <silent><buffer> <C-s><C-s> <c-o><Plug>(sexp_capture_next_element)
+    nmap <silent><buffer> <C-s>)          <Plug>(sexp_capture_next_element)
+    xmap <silent><buffer> <C-s>)          <Plug>(sexp_capture_next_element)
+    imap <silent><buffer> <C-s>)     <c-o><Plug>(sexp_capture_next_element)
+    nmap <silent><buffer> <C-s>(          <Plug>(sexp_capture_prev_element)
+    xmap <silent><buffer> <C-s>(          <Plug>(sexp_capture_prev_element)
+    imap <silent><buffer> <C-s>(     <c-o><Plug>(sexp_capture_prev_element)
+    " "barf"
+    nmap <silent><buffer> <C-s>{          <Plug>(sexp_emit_head_element)
+    xmap <silent><buffer> <C-s>{          <Plug>(sexp_emit_head_element)
+    imap <silent><buffer> <C-s>{     <c-o><Plug>(sexp_emit_head_element)
+    nmap <silent><buffer> <C-s>}          <Plug>(sexp_emit_tail_element)
+    xmap <silent><buffer> <C-s>}          <Plug>(sexp_emit_tail_element)
+    imap <silent><buffer> <C-s>}     <c-o><Plug>(sexp_emit_tail_element)
+
     imap <silent><buffer> <BS>            <Plug>(sexp_insert_backspace)
     imap <silent><buffer> "               <Plug>(sexp_insert_double_quote)
-    " imap <silent><buffer> (               <Plug>(sexp_insert_opening_round)
+    imap <silent><buffer> (               <Plug>(sexp_insert_opening_round)
     " imap <silent><buffer> )               <Plug>(sexp_insert_closing_round)
     imap <silent><buffer> [               <Plug>(sexp_insert_opening_square)
     imap <silent><buffer> ]               <Plug>(sexp_insert_closing_square)
