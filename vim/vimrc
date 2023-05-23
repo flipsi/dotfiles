@@ -4310,14 +4310,15 @@ let mapleader=' '
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FIX AND SPEEDUP MY TYPING {{{
 
-iabbrev CI          Code Intelligence
-iabbrev af          autoformat
 iabbrev BE          backend
-iabbrev dpr         deprecated
+iabbrev CI          Code Intelligence
 iabbrev FE          frontend
+iabbrev af          autoformat
+iabbrev dpr         deprecated
 iabbrev ns          namespace
 iabbrev pr          println
 iabbrev sm          [SQUASHME]
+iabbrev tab>        tap>
 iabbrev todo        TODO:
 iabbrev todod       TODO: delete this debugging statement
 iabbrev todof       TODO: FIX
