@@ -5041,11 +5041,8 @@ nnoremap <silent> 'j :set fdm=manual<cr>:m .+1<cr>:set fdm=marker<cr>
 vnoremap <silent> 'j <esc>:set fdm=manual<cr>gv:m '>+1<cr>gv=gv:set fdm=marker<cr>
 vnoremap <silent> 'k <esc>:set fdm=manual<cr>gv:m '<-2<cr>gv=gv:set fdm=marker<cr>
 
-" join line
-nnoremap 'lj J
-
-" join line above (instead of below)
-nnoremap 'lk kddpkJ
+" join line TO the one below
+nnoremap 'J ddpkJ
 
 " split line (opposite of join line)
 " (regular 'S' can be done with 'cc' instead)
