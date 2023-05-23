@@ -945,6 +945,7 @@ assign [class="(?i)signal"]                                                     
 assign [class="(?i)telegram"]                                                                       Telegram
 assign [class="(?i)alacritty"]                                                                      Terminal
 for_window [class="(?i)alacritty" title="Output"] move to workspace                                 Output
+for_window [title="portal - jvm"] move to workspace                                                 Portal
 assign [class="(?i)cool-retro-term"]                                                                Terminal
 assign [class="(?i)gnome-terminal"]                                                                 Terminal
 assign [class="(?i)urxvt"]                                                                          Terminal
@@ -957,6 +958,9 @@ for_window [class="(?i)gnome-session-failed"] move to workspace                 
 ## workspaces with window always on specific output
 for_window [class="(?i)alacritty"]                                              move workspace to output DP-1
 for_window [class="(?i)alacritty" title="Output"]                               move workspace to output DVI-I-2-2
+for_window [class="(?i)alacritty" title="Output"]                               move workspace to output HDMI-1
+for_window [title="portal - jvm"]                                               move workspace to output DVI-I-2-2
+for_window [title="portal - jvm"]                                               move workspace to output HDMI-1
 for_window [class="(?i)chrom"]                                                  move workspace to output DP-1
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output DP-1
 for_window [class="(?i)chromium"]                                               move workspace to output DP-1
