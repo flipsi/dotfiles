@@ -2300,6 +2300,27 @@ function! SetupConjure()
     nnoremap <leader>llG       :ConjureScrollLogsToBottom<CR>
     " ignore typos
     nnoremap <leader>l <nop>
+
+endfunction
+
+augroup conjure_output
+    au!
+    au BufReadPost,WinEnter conjure-log-* call MatchConjureStuff()
+augroup END
+
+" highlight stuff in logs/output/stacktraces
+command! MatchConjureStuff :call MatchConjureStuff() " highlight/match stuff (in Conjure output window)
+function! MatchConjureStuff()
+    highlight link ConjureInterestingStacktracePath DiagnosticFloatingInfo
+    highlight link ConjureTestString DiagnosticFloatingWarn
+    highlight link ConjureFailureOrError ErrorMsg
+    highlight link ConjureExpected DiagnosticOk
+    highlight link ConjureActual DiagnosticError
+    call matchadd('ConjureInterestingStacktracePath', 'ci_fuzz\.backend')
+    call matchadd('ConjureTestString', '\(_test\|test_\)')
+    call matchadd('ConjureFailureOrError', '\(FAIL\|ERROR\)')
+    call matchadd('ConjureExpected', 'expected: ')
+    call matchadd('ConjureActual', 'actual: ')
 endfunction
 
 function! RunConjureCommand(cmd)
