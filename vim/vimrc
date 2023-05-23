@@ -2265,7 +2265,10 @@ endfunction
 " (For Clojure CLI use :Clj)
 Plug 'clojure-vim/vim-jack-in'
 " Start an nREPL server with all of the appropriate middleware inside your Neovim instance
-nnoremap <leader>la   :Clj -M:repl<CR>
+nnoremap <leader>la   <nop>
+nnoremap <leader>laA  :Clj -M:ci-dev:repl<CR>
+nnoremap <leader>laa  :Clj -M:ci-dev:repl:portal<CR>
+nnoremap <leader>lap  :ConjureEval (portal/open {:theme :portal.colors/zerodark})<cr>
 
 " Yet another alternative to Fireplace
 " Multi-language Interactive evaluation
