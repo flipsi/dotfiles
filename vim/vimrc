@@ -5008,6 +5008,9 @@ nnoremap 'I <c-x>
 " indent lines
 vnoremap < <gv
 vnoremap > >gv
+" indent block
+nnoremap =p =ap
+nnoremap =0 =ap
 
 " change tab width (hard)
 nnoremap 'rt2 :set noexpandtab <bar> :retab! <bar>
