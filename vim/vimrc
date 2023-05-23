@@ -5746,8 +5746,10 @@ tnoremap <c-y>!     <c-\><c-n>:tab split<cr>i
 " close tab
 nnoremap <c-y>q               :CloseTab<cr>
 nnoremap <c-y><c-w>           :CloseTab<cr>
+nnoremap <c-y><bs>            :CloseTab<cr>
 tnoremap <c-y>q     <c-\><c-n>:CloseTab<cr>
 tnoremap <c-y><c-w> <c-\><c-n>:CloseTab<cr>
+tnoremap <c-y><bs>  <c-\><c-n>:CloseTab<cr>
 
 " change tab
 nnoremap <c-y><tab>               :tabs<bar>exe ':tabn ' . input('Switch to tab number? ')<cr>
