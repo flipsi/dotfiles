@@ -2268,7 +2268,7 @@ Plug 'clojure-vim/vim-jack-in'
 nnoremap <leader>la   <nop>
 nnoremap <leader>laA  :Clj -M:ci-dev:repl<CR>
 nnoremap <leader>laa  :Clj -M:ci-dev:repl:portal<CR>
-nnoremap <leader>lap  :ConjureEval (portal/open {:theme :portal.colors/zerodark})<cr>
+nnoremap <leader>lap  :ConjureEval (require '[portal.api :as portal]) (portal/open {:theme :portal.colors/zerodark})<cr>
 
 " Yet another alternative to Fireplace
 " Multi-language Interactive evaluation
