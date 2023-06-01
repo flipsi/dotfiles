@@ -303,7 +303,7 @@ endfunction
 " Switch how to split terminal window
 command! SwitchNeoTermMode :call SwitchNeoTermMode()
 function! SwitchNeoTermMode()
-    let g:run_command_method = "terminal-emulator" " I don't use this function when I don't use that setting...
+    let g:run_command_method = "terminal-buffer" " I don't use this function when I don't use that setting...
     if g:neoterm_default_mod != ':botright'
         let g:neoterm_default_mod = ':botright'
         let g:neoterm_size = g:neoterm_size_horizontally
