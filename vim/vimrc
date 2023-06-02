@@ -1045,6 +1045,7 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 " (scroll with <c-k> and <c-j>
 let g:fzf_action = {
   \ 'ctrl-x': 'split',
+  \ 'ctrl-s': 'split',
   \ 'ctrl-l': 'vsplit',
   \ 'ctrl-v': 'vsplit',
   \ 'ctrl-t': '$tab split',
