@@ -2049,6 +2049,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " system:                       yay -S clojure-lsp-bin
 " vim (in clojure project):     :CocInstall coc-clojure
 
+" Golang:
+" system:                       yay -S gopls
+" vim (in Go project):          :CocInstall coc-go
+"
 nnoremap <leader>i <nop>
 nnoremap <leader>j <nop>
 
