@@ -6000,7 +6000,8 @@ nnoremap <leader>Q <nop>
 
 augroup SET_FILETYPE
     au!
-    au BufNewFile,BufReadPost *.conf set ft=conf
+    au BufNewFile,BufReadPost *.conf        set ft=conf
+    au BufNewFile,BufReadPost *.yaml.tpl    set ft=yaml
 augroup END
 
 
