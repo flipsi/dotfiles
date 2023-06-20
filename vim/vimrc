@@ -5660,12 +5660,19 @@ nnoremap <m-p>  :bprevious<cr>
 nnoremap <esc>p :bprevious<cr>
 
 " change window - via directions
-nnoremap <silent> <leader><left>  :wincmd h<cr>
-nnoremap <silent> <leader><down>  :wincmd j<cr>
-nnoremap <silent> <leader><up>    :wincmd k<cr>
-nnoremap <silent> <leader><right> :wincmd l<cr>
+nnoremap <silent> <leader><left>       :wincmd h<cr>
+vnoremap <silent> <leader><left>  <c-c>:wincmd h<cr>
+nnoremap <silent> <leader><down>       :wincmd j<cr>
+vnoremap <silent> <leader><down>  <c-c>:wincmd j<cr>
+nnoremap <silent> <leader><up>         :wincmd k<cr>
+vnoremap <silent> <leader><up>    <c-c>:wincmd k<cr>
+nnoremap <silent> <leader><right>      :wincmd l<cr>
+vnoremap <silent> <leader><right> <c-c>:wincmd l<cr>
+
 " change window - last recently used
 nnoremap <silent> <C-h>           :wincmd p<cr>
+vnoremap <silent> <C-h>      <c-c>:wincmd p<cr>
+inoremap <silent> <C-h>      <esc>:wincmd p<cr>
 
 " move buffer to a new window
 nnoremap <silent> <leader><c-l> :vsplit<cr><c-w>p:buffer #<cr><c-w>p<cr>
