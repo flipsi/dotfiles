@@ -2310,7 +2310,8 @@ endfunction
 
 augroup conjure_output
     au!
-    au BufReadPost,WinEnter conjure-log-* call MatchConjureStuff()
+    au BufWinEnter conjure-log-* call MatchConjureStuff()
+    au BufWinEnter conjure-log-* echo "yaaah"
 augroup END
 
 " highlight stuff in logs/output/stacktraces
