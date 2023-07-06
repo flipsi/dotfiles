@@ -19,6 +19,8 @@ function set_env_vars() {
     export BAR_THIRD_MONITOR
     export BAR_DPI
     export BAR_HEIGHT
+    export BAR_TRAY_POSITION_MAIN_MONITOR
+    export BAR_TRAY_POSITION_SECOND_MONITOR
     export BAR_TRAY_MAXSIZE
 
     ETH_INTERFACE=$(find_network_interface_name_by_pattern 'enp')
@@ -28,20 +30,22 @@ function set_env_vars() {
     case $HOSTNAME in
         falbala )
             if xrandr | grep -q '^DP1 connected'; then
-                    BAR_MAIN_MONITOR='DP1'
-                    if xrandr | grep -q 'DVI-I-2-2 connected'; then
-                        BAR_SECOND_MONITOR='DVI-I-2-2'
-                        BAR_THIRD_MONITOR='DVI-I-1-1'
-                    elif xrandr | grep -q 'HDMI2 connected'; then
-                        BAR_SECOND_MONITOR='HDMI2'
-                        BAR_THIRD_MONITOR='eDP1'
-                    else
-                        BAR_SECOND_MONITOR='eDP1'
-                    fi
-            elif xrandr | grep -q '^DP1 connected'; then
                 BAR_MAIN_MONITOR='DP1'
+                BAR_TRAY_POSITION_MAIN_MONITOR='none'
+                BAR_TRAY_POSITION_SECOND_MONITOR='right'
+                if xrandr | grep -q 'DVI-I-2-2 connected'; then
+                    BAR_SECOND_MONITOR='DVI-I-2-2'
+                    BAR_THIRD_MONITOR='DVI-I-1-1'
+                elif xrandr | grep -q 'HDMI2 connected'; then
+                    BAR_SECOND_MONITOR='HDMI2'
+                    BAR_THIRD_MONITOR='eDP1'
+                else
+                    BAR_SECOND_MONITOR='eDP1'
+                fi
             else
                 BAR_MAIN_MONITOR='eDP1'
+                BAR_TRAY_POSITION_MAIN_MONITOR='right'
+                BAR_TRAY_POSITION_SECOND_MONITOR='none'
             fi
             ;;
         mimir )
@@ -49,15 +53,25 @@ function set_env_vars() {
                 BAR_MAIN_MONITOR='DP-1'
                 BAR_SECOND_MONITOR='DVI-I-1-1'
                 BAR_THIRD_MONITOR='DVI-I-2-2'
+                BAR_TRAY_POSITION_MAIN_MONITOR='none'
+                BAR_TRAY_POSITION_SECOND_MONITOR='right'
             elif xrandr | grep -q 'HDMI-1 connected' && xrandr | grep -q '^DP-1 connected' ; then
                 BAR_MAIN_MONITOR='DP-1'
                 BAR_SECOND_MONITOR='HDMI-1'
+                BAR_TRAY_POSITION_MAIN_MONITOR='none'
+                BAR_TRAY_POSITION_SECOND_MONITOR='right'
             elif xrandr | grep -q 'HDMI-1 connected'; then
                 BAR_MAIN_MONITOR='HDMI-1'
+                BAR_TRAY_POSITION_MAIN_MONITOR='none'
+                BAR_TRAY_POSITION_SECOND_MONITOR='right'
             elif xrandr | grep -q '^DP-1 connected'; then
                 BAR_MAIN_MONITOR='DP-1'
+                BAR_TRAY_POSITION_MAIN_MONITOR='none'
+                BAR_TRAY_POSITION_SECOND_MONITOR='right'
             else
                 BAR_MAIN_MONITOR='eDP-1'
+                BAR_TRAY_POSITION_MAIN_MONITOR='right'
+                BAR_TRAY_POSITION_SECOND_MONITOR='none'
             fi
             ;;
         * )
