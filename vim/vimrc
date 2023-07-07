@@ -3265,7 +3265,7 @@ function! FixHighlighting()
         let g:indentLine_color_term = 237
         highlight CursorLine              ctermbg=236 cterm=NONE
         highlight CursorColumn            ctermbg=236
-        highlight ColorColumn             ctermbg=237
+        highlight ColorColumn             ctermbg=236
         highlight DiffAdd                 ctermbg=234
         highlight DiffDelete              ctermbg=234
         highlight DiffChange              ctermbg=234
@@ -3291,6 +3291,7 @@ function! FixHighlighting()
         highlight ALEErrorSign              ctermfg=203
         highlight ALEWarningSign            ctermfg=227
         highlight ALEInfoSign               ctermfg=227
+        " TODO: adjust color for unused vars (hardly readable)
         highlight ALEVirtualTextError       ctermfg=243
         highlight CocHighlightText          ctermfg=71 ctermbg=237
 
