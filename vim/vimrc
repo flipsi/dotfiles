@@ -2906,6 +2906,11 @@ augroup END
 " }}}
 " Language: SQL {{{
 
+augroup is_keyword_sql
+    autocmd!
+    autocmd FileType sql setlocal iskeyword+=-
+augroup END
+
 augroup sql_on_read
     au!
     au FileType sql if !IsScalaProject() | call SetupSQLVimux() | endif
