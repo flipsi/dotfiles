@@ -4325,14 +4325,17 @@ let mapleader=' '
 " FIX AND SPEEDUP MY TYPING {{{
 
 iabbrev BE          backend
-iabbrev CI          Code Intelligence
+iabbrev CIG         Code Intelligence
+iabbrev CIF         CI Fuzz
+iabbrev CIS         CI Sense
 iabbrev FE          frontend
 iabbrev af          autoformat
 iabbrev dpr         deprecated
 iabbrev ns          namespace
 iabbrev pr          println
 iabbrev sm          [SQUASHME]
-iabbrev tab>        tap>
+iabbrev tab>        tap> {:fun :
+iabbrev tap         (tap>
 iabbrev todo        TODO:
 iabbrev todod       TODO: delete this debugging statement
 iabbrev todof       TODO: FIX
