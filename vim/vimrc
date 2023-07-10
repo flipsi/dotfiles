@@ -3833,6 +3833,23 @@ function! CloseTerminalBuffers(bang)
 endfunction
 " }}}
 
+" Execute a command only if the current buffer is a regular one (no terminal, quickfix, help page etc.) {{{
+function! ExecuteIfRegularBuffer(cmd)
+    if &buftype == ''
+        exec a:cmd
+    endif
+endfunction
+" }}}
+
+" Execute a command in all regular windows and restore cursor position {{{
+function! WindoInRegularBuffers(cmd)
+    let l:winnr = winnr()
+    windo call ExecuteIfRegularBuffer(a:cmd)
+    exec l:winnr . 'wincmd w'
+    stopinsert
+endfunction
+" }}}
+
 
 " Show a temporary message in a floating window with a border {{{
 " From https://www.statox.fr/posts/2021/03/breaking_habits_floating_window/
@@ -4754,10 +4771,10 @@ command! ToggleSyntaxLongLines :let &synmaxcol = g:synmaxcol - &synmaxcol " Disa
 nmap <silent> <leader>sym :ToggleSyntaxLongLines<cr>
 
 " toggle line numbers
-command! ToggleLineNumbers          :windo set number! <bar> :set relativenumber! " Disable or enable line numbers
-command! ToggleRelativeLineNumbers  :windo set relativenumber!                    " Disable or enable relative line numbers
-nnoremap <silent> <leader>yL :ToggleLineNumbers <cr>
-nnoremap <silent> <leader>yl :ToggleRelativeLineNumbers <cr>
+command! ToggleLineNumbers          :call WindoInRegularBuffers('set relativenumber! | set number!')    " Disable or enable line numbers
+command! ToggleRelativeLineNumbers  :call WindoInRegularBuffers('set relativenumber!')                  " Disable or enable relative line numbers
+nnoremap <silent> <leader>yL :ToggleLineNumbers<cr>
+nnoremap <silent> <leader>yl :ToggleRelativeLineNumbers<cr>
 
 " toggle word wrap
 command! ToggleWordWrap :setlocal wrap! <bar> :set wrap? " This option changes how text is displayed. It doesn't change the text in the buffer, see 'textwidth' for that.
