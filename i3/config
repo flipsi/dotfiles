@@ -396,7 +396,7 @@ mode "$mode_xdootool_timestamp" {
 
 # command to lock screen.
 # for i3lock, image has to be png
-set $LOCK_CMD i3lock -e -t -i ~/.i3/wallpaper.png
+set $LOCK_CMD i3lock -e -t -i ~/.i3/wallpaper/gray_131313_1920x1080.png
 
 # TODO: use xss-lock
 # exec_always --no-startup-id "xss-lock --transfer-sleep-lock -- i3lock --nofork -e -i ~/.i3/wallpaper.png"
