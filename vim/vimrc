@@ -577,7 +577,8 @@ endfunction
 " switch to last used tab after closing the Git Status tab opened with GitStatusTab
 augroup gitstatusclose
     au!
-    au BufDelete fugitive://*.git// exec 'normal! ' . g:git_status_last_used_tabnr . 'gt'
+    au BufDelete fugitive://*.git//             exec 'normal! ' . g:git_status_last_used_tabnr . 'gt'
+    au BufDelete fugitive://*.git/worktrees/*/  exec 'normal! ' . g:git_status_last_used_tabnr . 'gt'
 augroup END
 
 " can be replaced with `<Plug><cfile>` in some cases
