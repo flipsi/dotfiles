@@ -5271,22 +5271,33 @@ nnoremap dN [c
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RUNNING COMMANDS, SBUILDING, MAKING AND DEBUGGING {{{
+" RUNNING COMMANDS, BUILDING, MAKING AND DEBUGGING {{{
 
-if !exists('g:run_command_method')
-    if has('nvim')
+command! SetRunCommandMethodBasedOnFiletype :call SetRunCommandMethodBasedOnFiletype()
+function! SetRunCommandMethodBasedOnFiletype()
+    let l:filetypes_for_output_window = ['clojure', 'scala']
+    if index(l:filetypes_for_output_window, &ft) >= 0
+        let g:run_command_method = "output-window"
+    elseif has('nvim')
         let g:run_command_method = "terminal-buffer"
     else
         let g:run_command_method = "vimux"
     endif
-endif
+    RefreshRunCommandMappings
+endfunction
 
-augroup set_run_command_method
+command! SetRunCommandMethodBasedOnFiletypeIfNotSet :call SetRunCommandMethodBasedOnFiletypeIfNotSet()
+function! SetRunCommandMethodBasedOnFiletypeIfNotSet()
+    if !exists('g:run_command_method')
+        SetRunCommandMethodBasedOnFiletype
+    endif
+endfunction
+
+augroup set_run_command_method_on_buf_enter
     au!
-    au FileType clojure     let g:run_command_method = "output-window"
-    au FileType scala       let g:run_command_method = "output-window"
+    au VimEnter * SetRunCommandMethodBasedOnFiletypeIfNotSet
+    au VimEnter * RefreshRunCommandMappings
 augroup END
-
 
 
 function! ToggleRunCommandMethod()
@@ -5441,7 +5452,6 @@ function! RefreshRunCommandMappings()
         echoerr "Unknown g:run_command_method (" . g:run_command_method . ")"
     endif
 endfunction
-RefreshRunCommandMappings
 
 function! RemoveEscapeSequencesFromFile(filename)
     " color escape sequences
