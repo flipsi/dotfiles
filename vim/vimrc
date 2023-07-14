@@ -5696,6 +5696,8 @@ nnoremap <silent> <leader>sL :lopen<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUFFERS, WINDOWS AND TABS {{{
 
+" open new file in /tmp
+nnoremap <leader>en :exe "e" . system("mktemp /tmp/XXXXX.txt")<cr>
 
 " change or open new buffer by searching for file name
 if s:MyMode == 'stripped'
