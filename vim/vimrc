@@ -2294,11 +2294,26 @@ nnoremap <leader>lcc  :ConjureConnect<CR>
 " Yet another alternative to Fireplace
 " Multi-language Interactive evaluation
 " (uses the REPL started above for evaluation)
-" Quick start for Clojure: https://github.com/Olical/conjure/wiki/Quick-start:-Clojure
 Plug 'Olical/conjure'
-let g:conjure#mapping#prefix = "<leader>l"
+" Quick start for Clojure: https://github.com/Olical/conjure/wiki/Quick-start:-Clojure
 " Use :ConjureSchool to get started
 " See `:vertical help conjure-mappings` for (default) mappings
+
+let g:conjure#mapping#prefix = "<leader>l"
+
+let g:conjure#log#jump_to_latest#enabled = v:true
+let g:conjure#log#break_length = 120
+let g:conjure#log#hud#minimum_lifetime_ms = 200
+let g:conjure#log#hud#width = 1
+let g:conjure#log#hud#anchor = "NW" " must be one of: NE, SE, SW, NW
+let g:conjure#log#hud#border = "none"
+
+" TODO: why doesn't this setting have any effect?
+command! ConjureToggleLogWrap :call ConjureToggleLogWrap()
+function! ConjureToggleLogWrap()
+    let g:conjure#log#wrap = ! g:conjure#log#wrap
+endfunction
+
 
 " additional mappings
 " TODO: run this in clj buffers after sourcing vimrc so that it overwrites the default mapping again
@@ -2314,11 +2329,16 @@ function! SetupConjure()
     nnoremap          <leader>lbb :call RunLastConjureCommand()<cr>
 
     nnoremap <leader>lo        :ConjureEval<space>
+    nnoremap <leader>lm        :ConjureEvalMarkedForm<CR>
+
     nnoremap <leader>l<c-c>    :ConjureCljInterrupt<CR>
     nnoremap <leader>lr        :ConjureCljRefreshChanged<CR>
     nnoremap <leader>lR        :ConjureCljRefreshAll<CR>
     nnoremap <leader>l<f5>     :ConjureCljRefreshAll<CR>
+
     nnoremap <leader>llG       :ConjureScrollLogsToBottom<CR>
+    nnoremap <leader>llw       :ConjureToggleLogWrap<CR>
+
     " ignore typos
     nnoremap <leader>l <nop>
 endfunction
