@@ -5411,7 +5411,8 @@ function! RefreshRunCommandMappings()
         nnoremap <leader>bl         :ExecuteInNeoTerminal Tclear<cr>
         nnoremap <leader>bc         :ExecuteInNeoTerminal Tkill<cr>
         nnoremap <leader>b<c-c>     :ExecuteInNeoTerminal Tkill<cr>
-        nnoremap <leader>b<bs>      :Tclose<cr>         " only hides buffer, we can still sent commands to it
+        nnoremap <leader>bq         :Tclose<cr>         " only hides buffer, we can still send commands to it
+        nnoremap <leader>b<bs>      :Tclose<cr>         " only hides buffer, we can still send commands to it
     elseif g:run_command_method == "output-window"
         nnoremap <leader>bo         :RunCommandInBuildShell<space>
         nnoremap <leader>bf         :execute 'RunCommandInTerminal  ' . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
@@ -5420,6 +5421,7 @@ function! RefreshRunCommandMappings()
         nnoremap <leader>bl         :echoerr "Not implemented"<cr>
         nnoremap <leader>bc         :echoerr "Not implemented"<cr>
         nnoremap <leader>b<c-c>     :echoerr "Not implemented"<cr>
+        nnoremap <leader>bq         :echoerr "Not implemented"<cr>
         nnoremap <leader>b<bs>      :echoerr "Not implemented"<cr>
     elseif g:run_command_method == "vimux"
         nnoremap <leader>bo         :VimuxRunCommand ""<left>
@@ -5427,14 +5429,14 @@ function! RefreshRunCommandMappings()
         nnoremap <leader>bF         :VimuxRunCommand ExpandPrependThisDir('%') . " "<left>
         nnoremap <leader>bb         :update<cr>:VimuxRunLastCommand<cr>
         nnoremap <silent> <leader>bl :VimuxClearTerminalScreen<cr>
-        nnoremap <leader>bq         :VimuxCloseRunner<cr>
-        nnoremap <leader>b<bs>      :VimuxCloseRunner<cr>
         nnoremap <leader>bz         :call VimuxZoomRunner()<cr>
         nnoremap <leader>bc         :VimuxInterruptRunner<cr>
         nnoremap <leader>b<c-c>     :VimuxInterruptRunner<cr>
         nnoremap <leader>b<c-d>     :call VimuxSendKeys("C-d")<cr>
         nnoremap <leader>b<c-b>     :VimuxInspectRunner<cr>
         nnoremap <leader><c-b><c-b> :VimuxInspectRunner<cr>
+        nnoremap <leader>bq         :VimuxCloseRunner<cr>
+        nnoremap <leader>b<bs>      :VimuxCloseRunner<cr>
     else
         echoerr "Unknown g:run_command_method (" . g:run_command_method . ")"
     endif
