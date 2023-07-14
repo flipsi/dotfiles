@@ -4587,6 +4587,10 @@ nnoremap <leader>ut :echo UnixTimestampAsDateTime(expand("<cword>"))<cr>
 nnoremap Q @
 nnoremap QQ @@
 
+augroup repeat_macros_with_enter
+    au!
+    au RecordingLeave * exec 'nnoremap <cr> @' . reg_recorded()
+augroup END
 
 
 " alternative way to go back to normal mode
@@ -5818,8 +5822,9 @@ endfunction
 
 " clear windows (close quickfix and location list) and refresh screen
 " TODO: add <Plug>(coc-float-hide)
+" TODO: unmap <cr>
 nnoremap <silent> <bs> :nohlsearch \| :lclose \| :cclose \| :redraw! <cr> :<c-c>
-xmap <silent> <bs> <bs>gv
+xmap     <silent> <bs> <bs>gv
 
 " toggle quickfix or location list
 nnoremap <silent> <leader>tq :call ToggleList("Quickfix List", 'c')<cr>
