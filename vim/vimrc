@@ -700,9 +700,23 @@ nnoremap <leader>g<down>  :GitGutterNextHunk<cr>zz9<c-e>zv
 nnoremap <leader>g<up>    :GitGutterPrevHunk<cr>zz9<c-e>zv
 nnoremap         gn       :GitGutterNextHunk<cr>zz9<c-e>zv
 nnoremap         gN       :GitGutterPrevHunk<cr>zz9<c-e>zv
-nnoremap <leader>ga       :GitGutterStageHunk<cr>:GitGutterNextHunk<cr>
+nnoremap <leader>ga       :GitGutterStageHunkAndContinueWithEnter<cr>
 nnoremap <leader>gu       :GitGutterUndoHunk<cr>
 nnoremap <leader>gi       :GitGutterPreviewHunk<cr>
+
+command! GitGutterStageHunkAndContinueWithEnter :call GitGutterStageHunkAndContinueWithEnter()
+function! GitGutterStageHunkAndContinueWithEnter()
+    GitGutterStageHunk
+    GitGutterNextHunk
+    nnoremap <cr> :GitGutterStageHunkAndContinueWithEnter<cr>
+endfunction
+
+" hack to unmap Enter (after committing is reasonable)
+augroup git_commit_unmap_enter
+    au!
+    au BufWipeout .git/COMMIT_EDITMSG unmap <cr>
+augroup END
+
 
 
 " show commit messages in a preview window
