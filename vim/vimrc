@@ -708,7 +708,7 @@ command! GitGutterStageHunkAndContinueWithEnter :call GitGutterStageHunkAndConti
 function! GitGutterStageHunkAndContinueWithEnter()
     GitGutterStageHunk
     GitGutterNextHunk
-    nnoremap <cr> :GitGutterStageHunkAndContinueWithEnter<cr>
+    nnoremap <buffer> <cr> :GitGutterStageHunkAndContinueWithEnter<cr>
 endfunction
 
 " hack to unmap Enter (after committing is reasonable)
@@ -4589,7 +4589,7 @@ nnoremap QQ @@
 
 augroup repeat_macros_with_enter
     au!
-    au RecordingLeave * exec 'nnoremap <cr> @' . reg_recorded()
+    au RecordingLeave * exec 'nnoremap <buffer> <cr> @' . reg_recorded()
 augroup END
 
 
