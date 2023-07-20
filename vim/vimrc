@@ -714,7 +714,7 @@ endfunction
 " hack to unmap Enter (after committing is reasonable)
 augroup git_commit_unmap_enter
     au!
-    au BufWipeout .git/COMMIT_EDITMSG unmap <cr>
+    au BufWipeout .git/COMMIT_EDITMSG silent! unmap <cr>
 augroup END
 
 
