@@ -2241,6 +2241,7 @@ augroup END
 
 command! SetupClojure :call SetupClojure() " add mappings and settings for Clojure
 function! SetupClojure()
+    nnoremap <silent> <leader>ct :call append('.', '(tap> {:fun "' .  GetMostPreviousMatch('(\(defn\\|deftest\)\s\+\(.*\)', '\2') . '" })')<cr>j==$hi
     nnoremap <silent> <leader>co :call ToggleComment('n')<cr>
     vnoremap <silent> <leader>co :call ToggleComment('v')<cr>
     " specific coc clojure refactoring mappings
@@ -4082,7 +4083,7 @@ endfunction
 
 " Search for pattern from the current line upwards and return the first matching line number.
 " Returns 0 if no line matches the pattern.
-" Poor map's solution to find the current function name etc. without heavy machinery.
+" Poor man's solution to find the current function name etc. without heavy machinery.
 function! GetMostPreviousMatchingLine(pattern)
     for l:line in range(line('.'), 1, -1)
         if match(getline(l:line), a:pattern) != -1
@@ -4092,6 +4093,17 @@ function! GetMostPreviousMatchingLine(pattern)
     return 0
 endfunction
 
+" Search for pattern from the current line upwards and return the first match (text).
+" Throws an exception if no line matches the pattern.
+" Poor map's solution to find the current function name etc. without heavy machinery.
+function! GetMostPreviousMatch(pattern, sub)
+    let l:matching_line = GetMostPreviousMatchingLine(a:pattern)
+    if l:matching_line == 0
+        throw "Pattern not found: " . a:pattern
+    else
+        return substitute(getline(l:matching_line), a:pattern, a:sub, '')
+    endif
+endfunction
 
 
 " Search across newlines {{{
@@ -4446,8 +4458,6 @@ iabbrev dpr         deprecated
 iabbrev ns          namespace
 iabbrev pr          println
 iabbrev sm          [SQUASHME]
-iabbrev tab>        tap> {:fun :
-iabbrev tap         (tap>
 iabbrev todo        TODO:
 iabbrev todod       TODO: delete this debugging statement
 iabbrev todof       TODO: FIX
