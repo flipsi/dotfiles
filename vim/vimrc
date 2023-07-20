@@ -2261,15 +2261,35 @@ command! SetupClojureForCodeIntelligenceCore :call SetupClojureForCodeIntelligen
 function! SetupClojureForCodeIntelligenceCore()
     let g:build_shell = ''
     let g:prompt_regex = '^bazel-wrapper: Executing gazelle$'
-    " TODO: fix me (no real filenames in bazel output unfortunately)
+    " TODO: fix me (no real filenames in Clojure stacktraces unfortunately)
     set errorformat=ci_fuzz.backend%.%#\ (%f:%l)
-    nnoremap <buffer> <leader>bgg :call RunCommandInBuildShell("../scripts/clojure-codegen.sh")<cr>
+    nnoremap <buffer> <leader>bgg :echomsg "Not necessary anymore! Want protobut generation? Use <leader>bgd ;)"<cr>
     nnoremap <buffer> <leader>bgd :call RunCommandInBuildShell("bazel build //backend:repl_runtime_deps_deploy.jar")<cr>
-    nnoremap <buffer> <leader>bd  :call RunCommandInBuildShell("bazel build //backend/...")<cr>
-    nnoremap <buffer> <leader>bta :call RunCommandInBuildShell("bazel test //backend/... --test_output=streamed")<cr>
-    nnoremap <buffer> <leader>bto :call RunCommandInBuildShell("bazel test //backend/" . substitute(expand("%"), "\\(.*\\)/\\(.*\\)\.clj$", "\\1:\\2.test", ""))<cr>
+    nnoremap <buffer> <leader>bd  :call RunCommandInBuildShell("bb build-backend-image")<cr>
+    nnoremap <buffer> <leader>bta :call RunCommandInBuildShell("clj -X:test")<cr>
+    nnoremap <buffer> <leader>btn :call RunCommandInBuildShell("bb kaocha --focus " . CalculateKaochaFocusUnit('namespace'))<cr>
+    nnoremap <buffer> <leader>bto :call RunCommandInBuildShell("bb kaocha --focus " . CalculateKaochaFocusUnit('singletest'))<cr>
     nnoremap <buffer> <leader>af  :exe "Dispatch! bazel run '@cljfmt//:cljfmt' -- --config dev-resources/cljfmt.clj " . expand("%")<cr>
     nnoremap <buffer> <leader>AF       :Dispatch! bb cljfmt<cr>
+endfunction
+
+function! CalculateKaochaFocusUnit(namespace_or_singletest)
+    let l:deftest_pattern = '^(deftest\s\+\(.\+\)'
+    let l:lines_that_match_namespace_declaration = GetMatches('^(ns.*', 1, line('$'))
+    let l:lines_that_match_deftest   = GetMatches(l:deftest_pattern, 1, line('$'))
+    if len(l:lines_that_match_namespace_declaration) == 0 || len(l:lines_that_match_deftest) == 0
+        throw "Could not find any test in current file."
+    endif
+    let l:namespace  = substitute(l:lines_that_match_namespace_declaration[0], '^(ns\s\+\(\w\+\)', '\1', '')
+    if a:namespace_or_singletest == 'namespace'
+        return l:namespace
+    elseif a:namespace_or_singletest == 'singletest'
+        let l:nearest_deftest_line = GetMostPreviousMatchingLine(l:deftest_pattern)
+        let l:nearest_deftest_name = substitute(getline(l:nearest_deftest_line), l:deftest_pattern, '\1', '')
+        return l:namespace . '/' . l:nearest_deftest_name
+    else
+        throw "Invalid argument for CalculateKaochaFocusUnit: " . a:namespace_or_singletest
+    endif
 endfunction
 
 " https://thoughtbot.com/blog/writing-clojure-in-vim
