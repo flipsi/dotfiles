@@ -3517,6 +3517,21 @@ endfunction
 " }}}
 
 
+" Like vim's builtin input() but only for a fixed amount of characters {{{
+function! InputNChars(number_of_chars, prompt)
+    echo a:prompt
+    let l:number = a:number_of_chars
+    let l:result = ""
+    while l:number > 0
+        let l:input = nr2char(getchar())
+        let l:result .= l:input
+        let l:number -= 1
+        echon l:input
+    endwhile
+    return l:result
+endfunction
+" }}}
+
 " Confirm before executing a command {{{
 command! -nargs=1 Confirm :call Confirm(<q-args>)
 function! Confirm(vimcommand)
@@ -5201,9 +5216,9 @@ nnoremap <a-o> o<esc>k
 nnoremap 'as mno<esc>o<esc>o<esc>o<esc>`n
 
 " add a line of characters
-nnoremap 'al :call InsertCharLine(input("Insert character: "), 80)<cr>
+nnoremap 'al :call InsertCharLine(InputNChars(1, "Insert character: "), 80)<cr>
 " add a box of characters ('comment box')
-nnoremap 'ab :call InsertCharBox(input("Insert character: "))<cr>
+nnoremap 'ab :call InsertCharBox(InputNChars(1, "Insert character: "))<cr>
 " add a line of characters below, just as long as the current line
 nnoremap 'au- yyp^v$r-
 nnoremap 'au= yyp^v$r=
@@ -5896,8 +5911,9 @@ tnoremap <c-y><c-w> <c-\><c-n>:CloseTab<cr>
 tnoremap <c-y><bs>  <c-\><c-n>:CloseTab<cr>
 
 " change tab
-nnoremap <c-y><tab>               :tabs<bar>exe ':tabn ' . input('Switch to tab number? ')<cr>
-tnoremap <c-y><tab>     <c-\><c-n>:tabs<bar>exe ':tabn ' . input('Switch to tab number? ')<cr>
+" TODO: don't have to hit <cr> one more time
+nnoremap <c-y><tab>               :tabs<bar>exe ':tabn ' . InputNChars(1, 'Switch to tab number? ')<cr>
+tnoremap <c-y><tab>     <c-\><c-n>:tabs<bar>exe ':tabn ' . InputNChars(1, 'Switch to tab number? ')<cr>
 nnoremap <c-y><space>             g<tab>
 tnoremap <c-y><space>   <c-\><c-n>g<tab>
 nnoremap <c-y><c-n>           :tabnext<cr>
