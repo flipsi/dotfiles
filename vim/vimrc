@@ -4473,9 +4473,11 @@ augroup END
 " ignore typos with text edit leader
 nnoremap ' <nop>
 
+" show current working directory
+nnoremap <leader>pwd :pwd<cr>
+
 " show absolute path of current file (':help filename-modifiers')
 nnoremap <leader><c-g> :echo expand("%:~")<cr>
-
 
 " copy current filename/path/dir (unnamed register/clipboard/fucking everywhere) {{{
 command! CopyFileName                   :call CopyFileNameOrPathOrDir("%:t")    " Copy name of current file
