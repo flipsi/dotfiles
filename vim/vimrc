@@ -4045,6 +4045,19 @@ function! GetMatches(pattern, line1, line2)
   return hits
 endfunction
 
+" Search for pattern from the current line upwards and return the first matching line number.
+" Returns 0 if no line matches the pattern.
+" Poor map's solution to find the current function name etc. without heavy machinery.
+function! GetMostPreviousMatchingLine(pattern)
+    for l:line in range(line('.'), 1, -1)
+        if match(getline(l:line), a:pattern) != -1
+            return l:line
+        endif
+    endfor
+    return 0
+endfunction
+
+
 
 " Search across newlines {{{
 " separated with whitespace (if no '!'),
