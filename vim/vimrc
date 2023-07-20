@@ -552,7 +552,7 @@ nnoremap <leader>gup  :Confirm Git submodule update<cr>
 
 " work with remote (Mnemonic: 'G'it Rem'o'te) Github or Gitlab
 nnoremap <leader>go   <nop>
-nnoremap <leader>goO  :OpenGitRepoWeb<cr>
+nnoremap <leader>gow  :OpenGitRepoWeb<cr>
 nnoremap <leader>goo       :call GitWebUrl('line', 'open_in_web')<cr>
 vnoremap <leader>goo  :<c-u>call GitWebUrl('range', 'open_in_web')<cr>
 nnoremap <leader>goy       :call GitWebUrl('line', 'yank_to_clipboard')<cr>
