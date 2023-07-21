@@ -692,29 +692,36 @@ xmap ah <plug>GitGutterTextObjectOuterVisual
 
 nnoremap <leader>yG       :GitGutterToggle<cr>
 nnoremap <leader>yg       :GitGutter<cr> " redraw
-nnoremap <leader>gg     gg:GitGutterNextHunk<cr>zz9<c-e>zv
-nnoremap <leader>gG      G:GitGutterPrevHunk<cr>zz9<c-e>zv
-nnoremap <leader>gn       :GitGutterNextHunk<cr>zz9<c-e>zv
-nnoremap <leader>gN       :GitGutterPrevHunk<cr>zz9<c-e>zv
-nnoremap <leader>g<down>  :GitGutterNextHunk<cr>zz9<c-e>zv
-nnoremap <leader>g<up>    :GitGutterPrevHunk<cr>zz9<c-e>zv
+nnoremap <leader>gi       :GitGutterPreviewHunk<cr>
+nnoremap <leader>gu       :GitGutterUndoHunk<cr>
+nnoremap <leader>ga       :GitGutterStageHunk<bar>GitGutterNextHunk<cr>:EnableGitGutterMode<cr>
+nnoremap <leader>gg     gg:GitGutterNextHunk<cr>zz9<c-e>zv:EnableGitGutterMode<cr>
+nnoremap <leader>gG      G:GitGutterPrevHunk<cr>zz9<c-e>zv:EnableGitGutterMode<cr>
+nnoremap <leader>g<down>  :GitGutterNextHunk<cr>zz9<c-e>zv:EnableGitGutterMode<cr>
+nnoremap <leader>g<up>    :GitGutterPrevHunk<cr>zz9<c-e>zv:EnableGitGutterMode<cr>
+nnoremap <leader>gn       :GitGutterNextHunk<cr>zz9<c-e>zv:EnableGitGutterMode<cr>
+nnoremap <leader>gN       :GitGutterPrevHunk<cr>zz9<c-e>zv:EnableGitGutterMode<cr>
 nnoremap         gn       :GitGutterNextHunk<cr>zz9<c-e>zv
 nnoremap         gN       :GitGutterPrevHunk<cr>zz9<c-e>zv
-nnoremap <leader>ga       :GitGutterStageHunkAndContinueWithEnter<cr>
-nnoremap <leader>gu       :GitGutterUndoHunk<cr>
-nnoremap <leader>gi       :GitGutterPreviewHunk<cr>
 
-command! GitGutterStageHunkAndContinueWithEnter :call GitGutterStageHunkAndContinueWithEnter()
-function! GitGutterStageHunkAndContinueWithEnter()
-    GitGutterStageHunk
-    GitGutterNextHunk
-    nnoremap <buffer> <cr> :GitGutterStageHunkAndContinueWithEnter<cr>
+command! EnableGitGutterMode :call EnableGitGutterMode()
+function! EnableGitGutterMode()
+    nnoremap <down>    :GitGutterNextHunk<cr>zz9<c-e>zv
+    nnoremap <up>      :GitGutterPrevHunk<cr>zz9<c-e>zv
+    nnoremap <cr>      :GitGutterStageHunk<bar>GitGutterNextHunk<cr>
 endfunction
 
-" hack to unmap Enter (after committing is reasonable)
-augroup git_commit_unmap_enter
+command! DisableGitGutterMode :call DisableGitGutterMode()
+function! DisableGitGutterMode()
+    silent! nunmap <down>
+    silent! nunmap <up>
+    silent! nunmap <cr>
+endfunction
+
+" automatically unmap (after committing is reasonable)
+augroup gitgutter_unmap
     au!
-    au BufWipeout .git/COMMIT_EDITMSG silent! unmap <cr>
+    au BufWipeout .git/COMMIT_EDITMSG DisableGitGutterMode
 augroup END
 
 
@@ -5883,7 +5890,7 @@ endfunction
 " clear windows (close quickfix and location list) and refresh screen
 " TODO: add <Plug>(coc-float-hide)
 " TODO: unmap <cr>
-nnoremap <silent> <bs> :nohlsearch \| :lclose \| :cclose \| :redraw! <cr> :<c-c>
+nnoremap <silent> <bs> :nohlsearch \| :lclose \| :cclose \| :redraw! \| :DisableGitGutterMode <cr> :<c-c>
 xmap     <silent> <bs> <bs>gv
 
 " toggle quickfix or location list
