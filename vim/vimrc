@@ -2428,7 +2428,7 @@ endfunction
 command! ConjureScrollLogsToBottom :call ConjureScrollLogsToBottom() " Like hitting `G` in conjure log window
 function! ConjureScrollLogsToBottom()
     let l:winid = win_getid()
-    let l:conjure_log_buffer = GetBufferByPattern('conjure-log')
+    let l:conjure_log_buffer = GetBufferByPattern('conjure-log', 'list')[0]
     let l:conjure_log_window = bufwinnr(l:conjure_log_buffer)
     execute conjure_log_window . "windo normal G"
     call win_gotoid(l:winid)
@@ -3858,28 +3858,32 @@ endfunction
 " }}}
 
 " get buffer number by filename pattern {{{
-function! GetBufferByPattern(pattern)
-  let bufcount = bufnr("$")
-  let currbufnr = 1
-  let nummatches = 0
-  let firstmatchingbufnr = 0
-  while currbufnr <= bufcount
-    if (bufexists(currbufnr))
-      let currbufname = bufname(currbufnr)
-      if (match(currbufname, a:pattern) > -1)
-        let nummatches += 1
-        let firstmatchingbufnr = currbufnr
-      endif
+function! GetBufferByPattern(pattern, one_or_list)
+    let bufcount = bufnr("$")
+    let currbufnr = 1
+    let matches = []
+    while currbufnr <= bufcount
+        if (bufexists(currbufnr))
+            let currbufname = bufname(currbufnr)
+            if (match(currbufname, a:pattern) > -1)
+                let matches = add(matches, currbufnr)
+            endif
+        endif
+        let currbufnr = currbufnr + 1
+    endwhile
+    if (a:one_or_list == 'one')
+        if (len(matches) == 1)
+            return matches[0]
+        elseif (len(matches) > 1)
+            throw "More than one matching buffer found"
+        else
+            throw "No matching buffers"
+        endif
+    elseif (a:one_or_list == 'list')
+        return matches
+    else
+        throw "Argument should be 'one' or 'list'."
     endif
-    let currbufnr = currbufnr + 1
-  endwhile
-  if (nummatches == 1)
-    return firstmatchingbufnr
-  elseif (nummatches > 1)
-    echoerr "More than one matching buffer found"
-  else
-    echoerr "No matching buffers"
-  endif
 endfunction
 " }}}
 
