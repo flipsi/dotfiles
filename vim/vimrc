@@ -695,14 +695,14 @@ nnoremap <leader>yg       :GitGutter<cr> " redraw
 nnoremap <leader>gi       :GitGutterPreviewHunk<cr>
 nnoremap <leader>gu       :GitGutterUndoHunk<cr>
 nnoremap <leader>ga       :GitGutterStageHunk<bar>GitGutterNextHunk<cr>:EnableGitGutterMode<cr>
-nnoremap <leader>gg     gg:GitGutterNextHunk<cr>zz9<c-e>zv:EnableGitGutterMode<cr>
-nnoremap <leader>gG      G:GitGutterPrevHunk<cr>zz9<c-e>zv:EnableGitGutterMode<cr>
-nnoremap <leader>g<down>  :GitGutterNextHunk<cr>zz9<c-e>zv:EnableGitGutterMode<cr>
-nnoremap <leader>g<up>    :GitGutterPrevHunk<cr>zz9<c-e>zv:EnableGitGutterMode<cr>
-nnoremap <leader>gn       :GitGutterNextHunk<cr>zz9<c-e>zv:EnableGitGutterMode<cr>
-nnoremap <leader>gN       :GitGutterPrevHunk<cr>zz9<c-e>zv:EnableGitGutterMode<cr>
-nnoremap         gn       :GitGutterNextHunk<cr>zz9<c-e>zv
-nnoremap         gN       :GitGutterPrevHunk<cr>zz9<c-e>zv
+nnoremap <leader>gg     gg:GitGutterNextHunk<cr>zzzv:EnableGitGutterMode<cr>
+nnoremap <leader>gG      G:GitGutterPrevHunk<cr>zzzv:EnableGitGutterMode<cr>
+nnoremap <leader>g<down>  :GitGutterNextHunk<cr>zzzv:EnableGitGutterMode<cr>
+nnoremap <leader>g<up>    :GitGutterPrevHunk<cr>zzzv:EnableGitGutterMode<cr>
+nnoremap <leader>gn       :GitGutterNextHunk<cr>zzzv:EnableGitGutterMode<cr>
+nnoremap <leader>gN       :GitGutterPrevHunk<cr>zzzv:EnableGitGutterMode<cr>
+nnoremap         gn       :GitGutterNextHunk<cr>zzzv
+nnoremap         gN       :GitGutterPrevHunk<cr>zzzv
 
 command! EnableGitGutterMode :call EnableGitGutterMode()
 function! EnableGitGutterMode()
