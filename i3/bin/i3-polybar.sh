@@ -68,6 +68,11 @@ function set_env_vars() {
                 BAR_MAIN_MONITOR='DP-1'
                 BAR_TRAY_POSITION_MAIN_MONITOR='none'
                 BAR_TRAY_POSITION_SECOND_MONITOR='right'
+            elif xrandr | grep -q '^DP-3 connected'; then
+                BAR_MAIN_MONITOR='DP-3'
+                BAR_SECOND_MONITOR='eDP-1'
+                BAR_TRAY_POSITION_MAIN_MONITOR='none'
+                BAR_TRAY_POSITION_SECOND_MONITOR='right'
             else
                 BAR_MAIN_MONITOR='eDP-1'
                 BAR_TRAY_POSITION_MAIN_MONITOR='right'

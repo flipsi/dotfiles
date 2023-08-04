@@ -101,19 +101,34 @@ bindsym XF86TouchpadToggle  exec --no-startup-id "$SHELLSCRIPT_PATH/xinput-toggl
 
 ## reload the configuration file or restart i3 [preserves session] etc.
 bindsym $mod+F5 mode "$refresh"
-set $refresh (l) reload config, (s) restart i3, (i) initialize, (x/o) setup outputs, (d/D) setup DPI, (Z/z) save/restore layout
+set $refresh (l) reload config, (s) restart i3, (i) initialize, (o) setup outputs, (d/D) setup DPI, (Z/z) save/restore layout
 mode "$refresh" {
     bindsym l reload; mode "default"
     bindsym s restart
     bindsym i           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"; mode "default"
-    bindsym x           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
-    bindsym o           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh --only > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
+    bindsym o           mode "$setup_outputs"
     bindsym d           exec --no-startup-id "/home/sflip/dotfiles/setup-dpi.sh --regular > /tmp/setup-dpi.log 2>&1"; mode "default"
     bindsym Shift+d     exec --no-startup-id "/home/sflip/dotfiles/setup-dpi.sh --high > /tmp/setup-dpi.log 2>&1"; mode "default"
     bindsym Shift+z     exec --no-startup-id "/home/sflip/.i3/bin/i3-workspaces-save-and-restore.py save"; mode "default"
     bindsym z           exec --no-startup-id "/home/sflip/.i3/bin/i3-workspaces-save-and-restore.py restore"; mode "default"
     bindsym a           exec --no-startup-id "/home/sflip/.i3/bin/i3-config-mod-assign-chrome-app.sh > /tmp/i3-config-mod-assign-chrome-app.log 2>&1"; mode "default"
     # cancel
+    bindsym $mod+F5 mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+## setup outputs
+bindsym $mod+F4 mode "$setup_outputs"
+set $setup_outputs (o) setup outputs regularly (l/O) only laptop (f) fix offset (s) swapped
+mode "$setup_outputs" {
+    bindsym o           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
+    bindsym l           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh --only > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
+    bindsym Shift+o     exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh --only > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
+    bindsym f           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh --fix-offset > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
+    bindsym s           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh --swapped > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
+    # cancel
+    bindsym $mod+F4 mode "default"
     bindsym $mod+F5 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"

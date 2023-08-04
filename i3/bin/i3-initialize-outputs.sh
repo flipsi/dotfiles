@@ -1,10 +1,14 @@
 #!/bin/bash
 
-TEMP=$(getopt -o o --long only -n 'test.sh' -- "$@")
+set -e
+
+TEMP=$(getopt -o osf --long only,swapped,fix-offset -n "$0" -- "$@")
 eval set -- "$TEMP"
 while true ; do
     case "$1" in
         -o|--only) ONLY=true ; shift ;;
+        -s|--swapped) DISPLAY_LINK_OUTPUTS_SWAPPED=true ; shift ;;
+        -f|--fix-offset) FIX_THIRD_MONITOR_OFFSET=true ; shift ;;
         --) shift ; break ;;
         *) echo 'Internal error!' ; exit 1 ;;
     esac
@@ -61,53 +65,63 @@ function main() {
 
             elif xrandr | grep -q 'HDMI2 connected'; then
 
-            # on big tv, turn off laptop screen
-            if xrandr | grep -q '4096x2160'; then
-                xrandr --output 'HDMI2' --mode 4096x2160 --output 'eDP1' --off
-            else
-                xrandr --output 'HDMI2' --mode 1920x1080 --pos 0x540 --rotate normal --output 'HDMI1' --off --output 'DP1' --off --output 'eDP1' --mode 960x540 --pos 0x0 --rotate normal --output VIRTUAL1 --off
-            fi
+                # on big tv, turn off laptop screen
+                if xrandr | grep -q '4096x2160'; then
+                    xrandr --output 'HDMI2' --mode 4096x2160 --output 'eDP1' --off
+                else
+                    xrandr --output 'HDMI2' --mode 1920x1080 --pos 0x540 --rotate normal --output 'HDMI1' --off --output 'DP1' --off --output 'eDP1' --mode 960x540 --pos 0x0 --rotate normal --output VIRTUAL1 --off
+                fi
 
-        elif xrandr | grep 'eDP1 connected 960x540' >/dev/null; then
+            elif xrandr | grep 'eDP1 connected 960x540' >/dev/null; then
 
-            xrandr --output 'HDMI2' --off
-            xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
-            xrandr --addmode 'eDP1' "1920x1080_60.00"
-            xrandr --output 'eDP1' --mode "1920x1080_60.00"
+                xrandr --output 'HDMI2' --off
+                xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
+                xrandr --addmode 'eDP1' "1920x1080_60.00"
+                xrandr --output 'eDP1' --mode "1920x1080_60.00"
 
             fi
             ;;
 
         mimir )
 
+            LAPTOP_SCREEN='eDP-1'
+
             if test -n "$ONLY"; then
 
                 OUTPUT_TO_KEEP='eDP-1'
-
                 disable_all_but_one_output
 
             elif xrandr | grep -q 'DVI-I-1-1 connected'; then
 
                 MAIN_MONITOR='DP-1'
-                SECOND_MONITOR='DVI-I-1-1'
-                THIRD_MONITOR='DVI-I-2-2'
-                LAPTOP_SCREEN='eDP-1'
+                if test -n "$DISPLAY_LINK_OUTPUTS_SWAPPED"; then
+                    SECOND_MONITOR='DVI-I-2-2'
+                    THIRD_MONITOR='DVI-I-1-1'
+                else
+                    SECOND_MONITOR='DVI-I-1-1'
+                    THIRD_MONITOR='DVI-I-2-2'
+                fi
 
+                if test -n "$FIX_THIRD_MONITOR_OFFSET"; then
+                    xrandr --output "$THIRD_MONITOR" --off
+                    sleep 2
+                fi
                 arrange_outputs_at_home
 
+            # when displaylink is broken again and I connect multiple cables
             elif xrandr | grep 'HDMI-1 connected' >/dev/null && xrandr | grep 'DP-1 connected' >/dev/null; then
-
-                sleep 0.1 && xrandr --output 'eDP-1' --off \
+                xrandr --output "$LAPTOP_SCREEN" --off \
                     --output 'DP-1' --auto \
                     --output 'HDMI-1' --right-of 'DP-1'
 
             elif xrandr | grep 'HDMI-1 connected' >/dev/null; then
-
-                sleep 0.1 && xrandr --output 'HDMI-1' --above 'eDP-1'  --auto
+                xrandr --output 'HDMI-1' --above "$LAPTOP_SCREEN"  --auto
 
             elif xrandr | grep 'DP-1 connected' >/dev/null; then
+                xrandr --output 'DP-1' --above "$LAPTOP_SCREEN"  --auto
 
-                sleep 0.1 && xrandr --output 'DP-1' --above 'eDP-1'  --auto
+            elif xrandr | grep 'DP-3 connected' >/dev/null; then
+                xrandr --output 'DP-3' --right-of "$LAPTOP_SCREEN"  --auto
 
             fi
             ;;
@@ -141,11 +155,9 @@ function main() {
                     --output "$MAIN_MONITOR" --primary --auto --left-of "$LAPTOP_SCREEN"
 
             elif xrandr | grep 'HDMI1 connected' >/dev/null; then
-
                 sleep 0.1 && xrandr --output 'HDMI1' --above 'eDP1'  --auto
 
             elif xrandr | grep 'DP-1 connected' >/dev/null; then
-
                 sleep 0.1 && xrandr --output 'DP-1' --above 'eDP1'  --auto
 
             fi
