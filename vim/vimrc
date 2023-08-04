@@ -322,7 +322,8 @@ endfunction
     " au VimEnter * silent! nunmap ,tt
 " augroup END
 
-nnoremap <leader>tm     :SwitchNeoTermMode<cr>
+nnoremap <leader>ott    :SwitchNeoTermMode<cr>
+nnoremap <leader>tm     :echo "Use <leader>ott from now on, please!"<cr> " legacy binding
 nnoremap <leader>tt     :Topen<cr>
 nnoremap <leader>tn     :Tnew<cr>
 nnoremap <leader>t<bs>  :Tclose<cr>         " only hides buffer, we can still sent commands to it
