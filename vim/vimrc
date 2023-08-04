@@ -713,8 +713,8 @@ endfunction
 
 command! DisableGitGutterMode :call DisableGitGutterMode()
 function! DisableGitGutterMode()
-    silent! nunmap <down>
-    silent! nunmap <up>
+    nnoremap <down> g<down>
+    nnoremap <up>   g<up>
     silent! nunmap <cr>
 endfunction
 
@@ -5872,21 +5872,17 @@ function! ResizeWindows(enter_or_leave)
         nnoremap <silent> <right>   2<c-w>>
         echo "[RESIZE MODE] (press h,j,k,l or arrow keys to resize and <enter> or <esc> to leave move)"
     else
-        " nmap h <nop>
-        " nmap j <nop>
-        " nmap k <nop>
-        " nmap l <nop>
-        nunmap h
-        nunmap j
-        nunmap k
-        nunmap l
-        nunmap <down>
-        nunmap <up>
-        nunmap <left>
-        nunmap <right>
-        nunmap <return>
-        nunmap <esc>
-        nunmap <c-c>
+        nnoremap    j       gj
+        nnoremap    k       gk
+        nunmap      h
+        nunmap      l
+        nnoremap    <down>  g<down>
+        nnoremap    <up>    g<up>
+        nunmap      <left>
+        nunmap      <right>
+        nunmap      <return>
+        nunmap      <esc>
+        nunmap      <c-c>
         echo "Windows resized."
     endif
 endfunction
