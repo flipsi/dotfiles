@@ -593,23 +593,21 @@ function! GdiffsplitTab(filename)
     Gdiffsplit
 endfunction
 
-" TODO: use `FileType fugitive` ?
-" https://github.com/tpope/vim-fugitive/issues/1425#issuecomment-806078240
 " custom mapping in fugitive window (:Git)
 augroup custom_fugitive_mappings
     au!
-    au User FugitiveIndex,FugitiveChanged nnoremap <buffer> <up>     k
-    au User FugitiveIndex,FugitiveChanged nnoremap <buffer> <down>   j
-    au User FugitiveIndex,FugitiveChanged nnoremap <buffer> <left>   h
-    au User FugitiveIndex,FugitiveChanged nnoremap <buffer> <right>  l
-    au User FugitiveIndex nmap     <buffer> !   X
-    au User FugitiveIndex nmap     <buffer> w   =
-    au User FugitiveIndex nnoremap <buffer> dt  :call GdiffsplitTab(GStatusGetFilenameUnderCursor())<cr>
-    au User FugitiveIndex nmap     <buffer> pl  :Git pull<cr>
-    au User FugitiveIndex nmap     <buffer> ps  :Git push<cr>
-    au User FugitiveIndex nmap     <buffer> pu  :GitPush<cr>
-    au User FugitiveIndex nmap     <buffer> pf  :Git push --force-with-lease<cr>
-    au User FugitiveIndex nmap     <buffer> pr  :GitRemoteCreateOrViewMergeRequest<cr>
+    au FileType fugitive nnoremap <buffer> <up>     k
+    au FileType fugitive nnoremap <buffer> <down>   j
+    au FileType fugitive nnoremap <buffer> <left>   h
+    au FileType fugitive nnoremap <buffer> <right>  l
+    au FileType fugitive nmap     <buffer> !   X
+    au FileType fugitive nmap     <buffer> w   =
+    au FileType fugitive nnoremap <buffer> dt  :call GdiffsplitTab(GStatusGetFilenameUnderCursor())<cr>
+    au FileType fugitive nmap     <buffer> pl  :Git pull<cr>
+    au FileType fugitive nmap     <buffer> ps  :Git push<cr>
+    au FileType fugitive nmap     <buffer> pu  :GitPush<cr>
+    au FileType fugitive nmap     <buffer> pf  :Git push --force-with-lease<cr>
+    au FileType fugitive nmap     <buffer> pr  :GitRemoteCreateOrViewMergeRequest<cr>
 augroup END
 
 " in Gdiff view, stage/checkout easily
