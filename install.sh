@@ -321,7 +321,10 @@ function create_link_for_target() {
 
         nvim )
             mkdir -p "$HOME/.config/nvim/"
-            create_link "$PWD/nvim/init.vim" "$HOME/.config/nvim/init.vim"
+            if [[ -L  "$HOME/.config/nvim/init.vim" ]]; then
+                rm  "$HOME/.config/nvim/init.vim"
+            fi
+            create_link "$PWD/nvim/init.lua" "$HOME/.config/nvim/init.lua"
             create_link "$PWD/vim/vim/coc-settings.json" "$HOME/.config/nvim/coc-settings.json"
             ;;
 
