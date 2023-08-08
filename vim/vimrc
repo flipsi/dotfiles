@@ -177,7 +177,7 @@ nnoremap <leader> <nop>
 if !exists("*SourceMYVIMRC")
     function SourceMYVIMRC()
         echo 'Sourcing vimrc ...'
-        source $MYVIMRC
+        source ~/.vimrc
         syntax enable
         AirlineRefresh
         FixHighlighting
@@ -4547,7 +4547,7 @@ nnoremap <leader>eG :call EditGitDirtyFiles()<cr>
 
 " open config file
 "nnoremap <leader>ev :edit ~/dotfiles/vim/vimrc<cr>
-nnoremap <leader>ev :execute 'edit ' . resolve(expand($MYVIMRC))<cr>
+nnoremap <leader>ev :execute 'edit ' . resolve(expand('~/.vimrc'))<cr>
 nnoremap <leader>e3 :execute 'edit ' . resolve(expand('~/.i3/config'))<cr>
 
 " reload config file
