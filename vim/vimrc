@@ -2273,7 +2273,8 @@ function! SetupClojureForCodeIntelligenceCore()
     nnoremap <buffer> <leader>bgg :echomsg "Not necessary anymore! Want protobut generation? Use <leader>bgd ;)"<cr>
     nnoremap <buffer> <leader>bgd :call RunCommandInBuildShell("bazel build //backend:repl_runtime_deps_deploy.jar")<cr>
     nnoremap <buffer> <leader>bd  :call RunCommandInBuildShell("bb build-backend-image")<cr>
-    nnoremap <buffer> <leader>bta :call RunCommandInBuildShell("clj -X:test")<cr>
+    nnoremap <buffer> <leader>btA :call RunCommandInBuildShell("clj -X:test")<cr>
+    nnoremap <buffer> <leader>bta :call RunCommandInBuildShell("bb kaocha --focus-meta :backend")<cr>
     nnoremap <buffer> <leader>btn :call RunCommandInBuildShell("bb kaocha --focus " . CalculateKaochaFocusUnit('namespace'))<cr>
     nnoremap <buffer> <leader>bto :call RunCommandInBuildShell("bb kaocha --focus " . CalculateKaochaFocusUnit('singletest'))<cr>
     nnoremap <buffer> <leader>af  :exe "Dispatch! bazel run '@cljfmt//:cljfmt' -- --config dev-resources/cljfmt.clj " . expand("%")<cr>
