@@ -6,10 +6,10 @@
 
 
 ## CAUTION:
-## This config has a dependency to [https://github.com/sflip/shellscripts]
+## This config has a dependency to [https://github.com/flipsi/shellscripts]
 
-set $SHELLSCRIPT_PATH /home/sflip/shellscripts
-set $WALLPAPER_PATH /home/sflip/img-wallpaper
+set $SHELLSCRIPT_PATH $HOME/shellscripts
+set $WALLPAPER_PATH $HOME/img-wallpaper
 
 
 
@@ -18,8 +18,8 @@ set $WALLPAPER_PATH /home/sflip/img-wallpaper
 ###############################################################################
 
 ## some setup logic I rather do with a shell script
-exec "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"
-exec "/home/sflip/.i3/bin/i3-initialize-outputs.sh > /tmp/i3-initialize-outputs.log 2>&1"
+exec "$HOME/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"
+exec "$HOME/.i3/bin/i3-initialize-outputs.sh > /tmp/i3-initialize-outputs.log 2>&1"
 
 ## set keyboard layout
 exec "$SHELLSCRIPT_PATH/set-keyboard-layout.sh"
@@ -105,13 +105,13 @@ set $refresh (l) reload config, (s) restart i3, (i) initialize, (o) setup output
 mode "$refresh" {
     bindsym l reload; mode "default"
     bindsym s restart
-    bindsym i           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"; mode "default"
+    bindsym i           exec --no-startup-id "$HOME/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"; mode "default"
     bindsym o           mode "$setup_outputs"
-    bindsym d           exec --no-startup-id "/home/sflip/dotfiles/setup-dpi.sh --regular > /tmp/setup-dpi.log 2>&1"; mode "default"
-    bindsym Shift+d     exec --no-startup-id "/home/sflip/dotfiles/setup-dpi.sh --high > /tmp/setup-dpi.log 2>&1"; mode "default"
-    bindsym Shift+z     exec --no-startup-id "/home/sflip/.i3/bin/i3-workspaces-save-and-restore.py save"; mode "default"
-    bindsym z           exec --no-startup-id "/home/sflip/.i3/bin/i3-workspaces-save-and-restore.py restore"; mode "default"
-    bindsym a           exec --no-startup-id "/home/sflip/.i3/bin/i3-config-mod-assign-chrome-app.sh > /tmp/i3-config-mod-assign-chrome-app.log 2>&1"; mode "default"
+    bindsym d           exec --no-startup-id "$HOME/dotfiles/setup-dpi.sh --regular > /tmp/setup-dpi.log 2>&1"; mode "default"
+    bindsym Shift+d     exec --no-startup-id "$HOME/dotfiles/setup-dpi.sh --high > /tmp/setup-dpi.log 2>&1"; mode "default"
+    bindsym Shift+z     exec --no-startup-id "$HOME/.i3/bin/i3-workspaces-save-and-restore.py save"; mode "default"
+    bindsym z           exec --no-startup-id "$HOME/.i3/bin/i3-workspaces-save-and-restore.py restore"; mode "default"
+    bindsym a           exec --no-startup-id "$HOME/.i3/bin/i3-config-mod-assign-chrome-app.sh > /tmp/i3-config-mod-assign-chrome-app.log 2>&1"; mode "default"
     # cancel
     bindsym $mod+F5 mode "default"
     bindsym Return mode "default"
@@ -122,11 +122,11 @@ mode "$refresh" {
 bindsym $mod+F4 mode "$setup_outputs"
 set $setup_outputs (o) setup outputs regularly (l/O) only laptop (f) fix offset (s) swapped
 mode "$setup_outputs" {
-    bindsym o           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
-    bindsym l           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh --only > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
-    bindsym Shift+o     exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh --only > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
-    bindsym f           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh --fix-offset > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
-    bindsym s           exec --no-startup-id "/home/sflip/.i3/bin/i3-initialize-outputs.sh --swapped > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
+    bindsym o           exec --no-startup-id "$HOME/.i3/bin/i3-initialize-outputs.sh > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
+    bindsym l           exec --no-startup-id "$HOME/.i3/bin/i3-initialize-outputs.sh --only > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
+    bindsym Shift+o     exec --no-startup-id "$HOME/.i3/bin/i3-initialize-outputs.sh --only > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
+    bindsym f           exec --no-startup-id "$HOME/.i3/bin/i3-initialize-outputs.sh --fix-offset > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
+    bindsym s           exec --no-startup-id "$HOME/.i3/bin/i3-initialize-outputs.sh --swapped > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
     # cancel
     bindsym $mod+F4 mode "default"
     bindsym $mod+F5 mode "default"
@@ -160,7 +160,7 @@ mode "$change_keyboard_layout" {
 
 ## show keyboard layout
 set $keyboard_layout_image_source https://romanzolotarev.com/typing-norman.png
-set $keyboard_layout_image /home/sflip/.i3/keyboard_layout.png
+set $keyboard_layout_image $HOME/.i3/keyboard_layout.png
 exec "test -f $keyboard_layout_image || $( sleep 20 && curl $keyboard_layout_image_source > $keyboard_layout_image )"
 bindsym $mod+Shift+F1 exec --no-startup-id "pkill -fx 'sxiv -z 100 $keyboard_layout_image' || sxiv -z 100 $keyboard_layout_image"
 
@@ -177,21 +177,21 @@ exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
 bindsym $mod+F7 mode "$change_wallpaper"
 set $change_wallpaper Wallpaper: (i) choose interactively (r) random (m) random per output (b) restore (g) default gray (0-9) shades of gray
 mode "$change_wallpaper" {
-    bindsym g exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_3A3A3A_1920x1080.png"
+    bindsym g exec --no-startup-id "feh --bg-scale $HOME/.i3/wallpaper/gray_3A3A3A_1920x1080.png"
     bindsym i exec --no-startup-id "feh --bg-scale $(fd '.*\.(jpg|jpeg|png)$' $WALLPAPER_PATH | rofi -dmenu)"; mode "default
     bindsym r exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
     bindsym m exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh --multi"
     bindsym b exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh --backwards"
-    bindsym 0 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/black_1920x1080.png"
-    bindsym 1 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_0C0C0C_1920x1080.png"
-    bindsym 2 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_1E1E1E_1920x1080.png"
-    bindsym 3 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_2F2F2F_1920x1080.png"
-    bindsym 4 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_3A3A3A_1920x1080.png"
-    bindsym 5 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_575757_1920x1080.png"
-    bindsym 6 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_6E6E6E_1920x1080.png"
-    bindsym 7 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_919191_1920x1080.png"
-    bindsym 8 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/gray_DDDDDD_1920x1080.png"
-    bindsym 9 exec --no-startup-id "feh --bg-scale /home/sflip/.i3/wallpaper/white_1920x1080.png"
+    bindsym 0 exec --no-startup-id "feh --bg-scale $HOME/.i3/wallpaper/black_1920x1080.png"
+    bindsym 1 exec --no-startup-id "feh --bg-scale $HOME/.i3/wallpaper/gray_0C0C0C_1920x1080.png"
+    bindsym 2 exec --no-startup-id "feh --bg-scale $HOME/.i3/wallpaper/gray_1E1E1E_1920x1080.png"
+    bindsym 3 exec --no-startup-id "feh --bg-scale $HOME/.i3/wallpaper/gray_2F2F2F_1920x1080.png"
+    bindsym 4 exec --no-startup-id "feh --bg-scale $HOME/.i3/wallpaper/gray_3A3A3A_1920x1080.png"
+    bindsym 5 exec --no-startup-id "feh --bg-scale $HOME/.i3/wallpaper/gray_575757_1920x1080.png"
+    bindsym 6 exec --no-startup-id "feh --bg-scale $HOME/.i3/wallpaper/gray_6E6E6E_1920x1080.png"
+    bindsym 7 exec --no-startup-id "feh --bg-scale $HOME/.i3/wallpaper/gray_919191_1920x1080.png"
+    bindsym 8 exec --no-startup-id "feh --bg-scale $HOME/.i3/wallpaper/gray_DDDDDD_1920x1080.png"
+    bindsym 9 exec --no-startup-id "feh --bg-scale $HOME/.i3/wallpaper/white_1920x1080.png"
     # cancel
     bindsym $mod+F7 mode "default"
     bindsym Return mode "default"
@@ -287,8 +287,8 @@ mode "$gui_settings" {
 ###########  BAR  #############################################################
 ###############################################################################
 
-set $POLYBAR_START  /home/sflip/.i3/bin/i3-polybar.sh start > /tmp/i3-polybar.log 2>&1
-set $POLYBAR_TOGGLE /home/sflip/.i3/bin/i3-polybar.sh toggle > /tmp/i3-polybar.log 2>&1
+set $POLYBAR_START  $HOME/.i3/bin/i3-polybar.sh start > /tmp/i3-polybar.log 2>&1
+set $POLYBAR_TOGGLE $HOME/.i3/bin/i3-polybar.sh toggle > /tmp/i3-polybar.log 2>&1
 
 exec_always --no-startup-id "$POLYBAR_START"
 
@@ -430,7 +430,7 @@ mode "$mode_system" {
     bindsym h exec --no-startup-id "systemctl hibernate"; mode "default"
     bindsym r exec --no-startup-id "systemctl reboot"
     bindsym p exec --no-startup-id "systemctl poweroff"
-    bindsym o exec --no-startup-id "/home/sflip/.i3/bin/i3-terminate.sh"; exec --no-startup-id "i3-nagbar -t warning -m 'About to Poweroff... ' -b Abort 'pkill -f i3-terminate.sh'"; mode "default"
+    bindsym o exec --no-startup-id "$HOME/.i3/bin/i3-terminate.sh"; exec --no-startup-id "i3-nagbar -t warning -m 'About to Poweroff... ' -b Abort 'pkill -f i3-terminate.sh'"; mode "default"
     # cancel
     bindsym $mod+Escape mode "default"
     bindsym Return mode "default"
@@ -699,7 +699,7 @@ workspace_auto_back_and_forth no
 
 
 ## open new workspace
-bindsym $mod+i exec --no-startup-id "/home/sflip/.i3/bin/i3-new-workspace.sh"
+bindsym $mod+i exec --no-startup-id "$HOME/.i3/bin/i3-new-workspace.sh"
 
 ## rename workspace
 bindsym $mod+comma exec --no-startup-id i3-input -F 'rename workspace to "%s"' -P 'rename workspace to: '
@@ -727,7 +727,7 @@ bindsym $mod+8 workspace 8
 #bindsym $mod+0 workspace 10
 
 ## move container to new workspace (tmux 'break')
-bindsym $mod+Shift+i exec --no-startup-id "/home/sflip/.i3/bin/i3-new-workspace.sh --move-container"
+bindsym $mod+Shift+i exec --no-startup-id "$HOME/.i3/bin/i3-new-workspace.sh --move-container"
 
 ## move container to LRU workspace
 bindsym $mod+Shift+space move container to workspace back_and_forth
@@ -802,7 +802,7 @@ mode "$launch" {
     bindsym f       exec --no-startup-id "firefox"; mode "default"
     bindsym g       exec --no-startup-id "google-chrome-stable"; mode "default"
     bindsym i       exec --no-startup-id "vivaldi-stable"; mode "default"
-    bindsym j       exec --no-startup-id "/home/sflip/opt/idea-IU-201.7223.91/bin/idea.sh nosplash || idea"; mode "default"
+    bindsym j       exec --no-startup-id "$HOME/opt/idea-IU-201.7223.91/bin/idea.sh nosplash || idea"; mode "default"
     bindsym m       exec --no-startup-id "spotify"; mode "default"
     bindsym q       exec --no-startup-id "qutebrowser"; mode "default"
     bindsym n       exec --no-startup-id "thunar || nautilus"; mode "default"
