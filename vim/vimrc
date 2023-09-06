@@ -2308,12 +2308,14 @@ endfunction
 
 function! CalculateKaochaFocusUnit(namespace_or_singletest)
     let l:deftest_pattern = '^(deftest\s\+\(.\+\)'
-    let l:lines_that_match_namespace_declaration = GetMatches('^(ns.*', 1, line('$'))
+    " let l:lines_that_match_namespace_declaration = GetMatches('^(ns.*', 1, line('$'))
+    let l:lines_that_match_namespace_declaration = GetMatches('\s\+ci-fuzz.*', 1, line('$')) " stupid workaround, because GetMatches does not work across line breaks
     let l:lines_that_match_deftest   = GetMatches(l:deftest_pattern, 1, line('$'))
     if len(l:lines_that_match_namespace_declaration) == 0 || len(l:lines_that_match_deftest) == 0
         throw "Could not find any test in current file."
     endif
-    let l:namespace  = substitute(l:lines_that_match_namespace_declaration[0], '^(ns\s\+\(\w\+\)', '\1', '')
+    " let l:namespace  = substitute(l:lines_that_match_namespace_declaration[0], '^(ns\s\+\(\w\+\)', '\1', '')
+    let l:namespace  = substitute(l:lines_that_match_namespace_declaration[0], '\s\+\(\w\+\)', '\1', '')
     if a:namespace_or_singletest == 'namespace'
         return l:namespace
     elseif a:namespace_or_singletest == 'singletest'
