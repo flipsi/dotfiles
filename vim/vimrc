@@ -557,8 +557,8 @@ nnoremap <leader>gee  :Git checkout<space>
 nnoremap <leader>geo  :GitCheckoutInteractively<cr>
 nnoremap <leader>gem  :exe ':Confirm Git checkout ' . GitRepoMainOrMaster()<cr>
 nnoremap <leader>ge-  :Confirm Git checkout -<cr>
-nnoremap <leader>geb  :exe ':Git checkout -b ' . input('Branch name: ')<cr>
-nnoremap <leader>gbm  :exe ':Confirm Git branch -m ' . input('Renaming branch to: ')<cr>
+nnoremap <leader>geb  :silent! exe ':Git checkout -b ' . input('Branch name: ')<cr>
+nnoremap <leader>gbm  :silent! exe ':Confirm Git branch -m ' . input('Renaming branch to: ')<cr>
 
 " merge and rebase
 nnoremap <leader>gmo  :GitMergeChooseBranchInteractively<cr>
