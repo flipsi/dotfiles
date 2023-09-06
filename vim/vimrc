@@ -279,9 +279,13 @@ autocmd VimEnter * nested
 
 Plug 'kassio/neoterm'
 
+" layout options, see SetNeoTermModeAutomatically()
+let g:neoterm_mode = 'automatically'
+let g:neoterm_default_mod = ''
+let g:neoterm_size_horizontally = '20'
+let g:neoterm_size_vertically = ''
+
 let g:neoterm_shell = 'fish'
-let g:neoterm_default_mod = ':botright'
-let g:neoterm_size = '20'
 let g:neoterm_autoinsert = 1
 let g:neoterm_autoscroll = 1
 let g:neoterm_automap_keys = '' " don't add default mapping (,tt)
@@ -304,15 +308,35 @@ endfunction
 command! SwitchNeoTermMode :call SwitchNeoTermMode()
 function! SwitchNeoTermMode()
     let g:run_command_method = "terminal-buffer" " I don't use this function when I don't use that setting...
-    if g:neoterm_default_mod != ':botright'
+    if g:neoterm_mode == 'automatically'
+        let g:neoterm_mode = ':botright'
         let g:neoterm_default_mod = ':botright'
         let g:neoterm_size = g:neoterm_size_horizontally
         echo 'Splitting terminal at the bottom'
-    else
+    elseif g:neoterm_mode == ':botright'
+        let g:neoterm_mode = ':vertical'
         let g:neoterm_default_mod = ':vertical'
-        let g:neoterm_size_horizontally = g:neoterm_size
-        let g:neoterm_size = ''
+        let g:neoterm_size = g:neoterm_size_vertically
         echo 'Splitting terminal vertically'
+    else
+        let g:neoterm_mode = 'automatically'
+        let g:neoterm_default_mod = ''
+        let g:neoterm_size =''
+        echo 'Splitting terminal based on window layout'
+    endif
+endfunction
+
+" If enabled (g:neoterm_mode), set how to split terminal window (g:neoterm_default_mod) based on current window layout
+command! SetNeoTermModeAutomatically :call SetNeoTermModeAutomatically()
+function! SetNeoTermModeAutomatically()
+    if g:neoterm_mode == 'automatically'
+        if winnr('$') == 1
+            let g:neoterm_default_mod = ':vertical'
+            let g:neoterm_size = g:neoterm_size_vertically
+        else
+            let g:neoterm_default_mod = ':botright'
+            let g:neoterm_size = g:neoterm_size_horizontally
+        endif
     endif
 endfunction
 
@@ -324,7 +348,8 @@ endfunction
 
 nnoremap <leader>ott    :SwitchNeoTermMode<cr>
 nnoremap <leader>tm     :echo "Use <leader>ott from now on, please!"<cr> " legacy binding
-nnoremap <leader>tt     :Topen<cr>
+
+nnoremap <leader>tt     :call SetNeoTermModeAutomatically() <bar> Topen<cr>
 nnoremap <leader>tn     :Tnew<cr>
 nnoremap <leader>t<bs>  :Tclose<cr>         " only hides buffer, we can still sent commands to it
 
