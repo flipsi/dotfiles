@@ -3019,13 +3019,28 @@ augroup sql_on_read
     au FileType sql if !IsScalaProject() | call SetupSQLDadBod() | endif
 augroup END
 
-command! SetupSQL :call SetupSQLDadBod()<bar> call SetupSQLVimux() " add mappings for development with SQL
+command! SetupSQL :call SetupSQLDadBod()<bar> call SetupSQLShellMappings() " add mappings for development with SQL
 
-function! SetupSQLVimux()
-    nnoremap <buffer> <leader>bm  :call RunCommand("\\. " . expand('%:p'))<cr>
-    nnoremap <buffer> <leader>bp  :call RunCommand("\\i " . expand('%:p'))<cr>
+function! SetupSQLShellMappings()
+    nnoremap <buffer> <leader>br  :call RunSQLFileInShell()<cr>
 endfunction
-command! SetupSQLVimux :call SetupSQLVimux() " add mappings for development with SQL (Vimux)
+command! SetupSQLShellMappings :call SetupSQLShellMappings() " add mappings for development with SQL (Vimux)
+
+function! RunSQLFileInShell()
+    " Detect SQL dialect by running client process and assume it is running in a vim-managed terminal. Most of the time, that's good enough for me.
+    call system('pgrep psql')
+    let l:psql_running = !v:shell_error
+    call system('pgrep mysql')
+    let l:mysql_running = !v:shell_error
+    if l:psql_running
+        call RunCommand("\\i " . expand('%:p'))
+    elseif l:mysql_running
+        call RunCommand("\\. " . expand('%:p'))
+    else
+        throw "Could not detect any running SQL shell. Please launch one."
+    endif
+endfunction
+command! RunSQLFileInShell :call RunSQLFileInShell()
 
 
 Plug 'tpope/vim-dadbod'
