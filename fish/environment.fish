@@ -48,9 +48,7 @@ set -x CM_LAUNCHER "rofi"
 
 
 # required for gpg-agent to work properly
-if not set -q GPG_TTY
-    set -x GPG_TTY (tty)
-end
+set -x GPG_TTY (tty)
 
 
 # load local environment if present
