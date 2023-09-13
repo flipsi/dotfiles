@@ -35,6 +35,7 @@ SUPPORTED_TARGETS=(\
     gcalcli \
     ghci \
     git \
+    gnupg \
     gtk \
     i3 \
     intellij\
@@ -218,6 +219,11 @@ function create_link_for_target() {
         git )
             create_link "$PWD/git/gitconfig" "$HOME/.gitconfig"
             create_link "$PWD/git/gitignore" "$HOME/.gitignore"
+            ;;
+
+        gnupg )
+            mkdir -p "$HOME/.gnupg"
+            create_link "$PWD/gnupg/gpg-agent.conf" "$HOME/.gnupg/gpg-agent.conf"
             ;;
 
         gtk )
