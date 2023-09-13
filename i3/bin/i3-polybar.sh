@@ -22,6 +22,15 @@ function set_env_vars() {
     export BAR_TRAY_POSITION_MAIN_MONITOR
     export BAR_TRAY_POSITION_SECOND_MONITOR
     export BAR_TRAY_MAXSIZE
+    export BAR_MODULES_MAIN_LEFT
+    export BAR_MODULES_MAIN_CENTER
+    export BAR_MODULES_MAIN_RIGHT
+    export BAR_MODULES_SECOND_LEFT
+    export BAR_MODULES_SECOND_CENTER
+    export BAR_MODULES_SECOND_RIGHT
+    export BAR_MODULES_THIRD_LEFT
+    export BAR_MODULES_THIRD_CENTER
+    export BAR_MODULES_THIRD_RIGHT
 
     ETH_INTERFACE=$(find_network_interface_name_by_pattern 'enp')
     WLAN_INTERFACE=$(find_network_interface_name_by_pattern '(wlan|wlp)')
@@ -31,8 +40,6 @@ function set_env_vars() {
         falbala )
             if xrandr | grep -q '^DP1 connected'; then
                 BAR_MAIN_MONITOR='DP1'
-                BAR_TRAY_POSITION_MAIN_MONITOR='none'
-                BAR_TRAY_POSITION_SECOND_MONITOR='right'
                 if xrandr | grep -q 'DVI-I-2-2 connected'; then
                     BAR_SECOND_MONITOR='DVI-I-2-2'
                     BAR_THIRD_MONITOR='DVI-I-1-1'
@@ -44,8 +51,6 @@ function set_env_vars() {
                 fi
             else
                 BAR_MAIN_MONITOR='eDP1'
-                BAR_TRAY_POSITION_MAIN_MONITOR='right'
-                BAR_TRAY_POSITION_SECOND_MONITOR='none'
             fi
             ;;
         mimir )
@@ -53,30 +58,18 @@ function set_env_vars() {
                 BAR_MAIN_MONITOR='DP-1'
                 BAR_SECOND_MONITOR='DVI-I-1-1'
                 BAR_THIRD_MONITOR='DVI-I-2-2'
-                BAR_TRAY_POSITION_MAIN_MONITOR='none'
-                BAR_TRAY_POSITION_SECOND_MONITOR='right'
             elif xrandr | grep -q 'HDMI-1 connected' && xrandr | grep -q '^DP-1 connected' ; then
                 BAR_MAIN_MONITOR='DP-1'
                 BAR_SECOND_MONITOR='HDMI-1'
-                BAR_TRAY_POSITION_MAIN_MONITOR='none'
-                BAR_TRAY_POSITION_SECOND_MONITOR='right'
             elif xrandr | grep -q 'HDMI-1 connected'; then
                 BAR_MAIN_MONITOR='HDMI-1'
-                BAR_TRAY_POSITION_MAIN_MONITOR='none'
-                BAR_TRAY_POSITION_SECOND_MONITOR='right'
             elif xrandr | grep -q '^DP-1 connected'; then
                 BAR_MAIN_MONITOR='DP-1'
-                BAR_TRAY_POSITION_MAIN_MONITOR='none'
-                BAR_TRAY_POSITION_SECOND_MONITOR='right'
             elif xrandr | grep -q '^DP-3 connected'; then
                 BAR_MAIN_MONITOR='DP-3'
                 BAR_SECOND_MONITOR='eDP-1'
-                BAR_TRAY_POSITION_MAIN_MONITOR='none'
-                BAR_TRAY_POSITION_SECOND_MONITOR='right'
             else
                 BAR_MAIN_MONITOR='eDP-1'
-                BAR_TRAY_POSITION_MAIN_MONITOR='right'
-                BAR_TRAY_POSITION_SECOND_MONITOR='none'
             fi
             ;;
         * )
@@ -89,13 +82,9 @@ function set_env_vars() {
             elif xrandr | grep -q 'HDMI-A-0 connected' && xrandr | grep -q 'DisplayPort-0 connected'; then
                 BAR_MAIN_MONITOR='DisplayPort-0'
                 BAR_SECOND_MONITOR='HDMI-A-0'
-                BAR_TRAY_POSITION_MAIN_MONITOR='none'
-                BAR_TRAY_POSITION_SECOND_MONITOR='right'
             elif xrandr | grep -q 'DisplayPort-0 connected'; then
                 BAR_MAIN_MONITOR='DisplayPort-0'
                 BAR_SECOND_MONITOR='eDP'
-                BAR_TRAY_POSITION_MAIN_MONITOR='none'
-                BAR_TRAY_POSITION_SECOND_MONITOR='right'
             elif xrandr | grep -q 'DVI-I-1-1 connected'; then
                 # BAR_MAIN_MONITOR=$(xrandr | grep -E '[^e]DP.-?. connected' | cut -d' ' -f-2 | head -n1) # ^ not working
                 BAR_MAIN_MONITOR=$(xrandr | grep -E 'DP.-?. connected' | cut -d' ' -f-2 | head -n1)
@@ -119,6 +108,35 @@ function set_env_vars() {
     BAR_DPI=108
     BAR_HEIGHT=24
     BAR_TRAY_MAXSIZE=16
+
+    if [[ -n "$BAR_THIRD_MONITOR" ]]; then
+        BAR_MODULES_MAIN_LEFT="pulseaudio spotify"
+        BAR_MODULES_MAIN_CENTER="i3"
+        BAR_MODULES_MAIN_RIGHT="xkeyboard date powermenu"
+        BAR_MODULES_SECOND_LEFT="battery wlan eth"
+        BAR_MODULES_SECOND_CENTER="i3"
+        BAR_MODULES_SECOND_RIGHT="spotify pulseaudio xkeyboard date powermenu"
+        BAR_MODULES_THIRD_LEFT="filesystem"
+        BAR_MODULES_THIRD_CENTER="i3"
+        BAR_MODULES_THIRD_RIGHT="cpu memory"
+        BAR_TRAY_POSITION_MAIN_MONITOR='none'
+        BAR_TRAY_POSITION_SECOND_MONITOR='right'
+    elif [[ -n "$BAR_SECOND_MONITOR" ]]; then
+        BAR_MODULES_MAIN_LEFT="cpu memory"
+        BAR_MODULES_MAIN_CENTER="i3"
+        BAR_MODULES_MAIN_RIGHT="spotify pulseaudio xkeyboard date"
+        BAR_MODULES_SECOND_LEFT="powermenu battery wlan eth"
+        BAR_MODULES_SECOND_CENTER="i3"
+        BAR_MODULES_SECOND_RIGHT="weather"
+        BAR_TRAY_POSITION_MAIN_MONITOR='none'
+        BAR_TRAY_POSITION_SECOND_MONITOR='right'
+    else
+        BAR_MODULES_MAIN_LEFT="i3"
+        BAR_MODULES_MAIN_CENTER="battery wlan eth"
+        BAR_MODULES_MAIN_RIGHT="spotify pulseaudio xkeyboard date powermenu"
+        BAR_TRAY_POSITION_MAIN_MONITOR='right'
+        BAR_TRAY_POSITION_SECOND_MONITOR='none'
+    fi
 }
 
 function stop() {
