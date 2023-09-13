@@ -101,7 +101,7 @@ function autostart_keychain_on_some_hosts
         eval (command keychain --eval --quiet ~/.ssh/id_*)
     end
     if command -v keychain >/dev/null
-        set -l host_where_to_start_keychain_automatically 'falbala' 'mimir'
+        set -l host_where_to_start_keychain_automatically 'falbala' 'mimir' 'frey'
         if contains $hostname $host_where_to_start_keychain_automatically
             keychain_start
         end
