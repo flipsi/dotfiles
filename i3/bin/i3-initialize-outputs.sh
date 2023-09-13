@@ -126,6 +126,28 @@ function main() {
             fi
             ;;
 
+        frey )
+
+            LAPTOP_SCREEN='eDP'
+            MAIN_MONITOR='DisplayPort-0'
+            SECOND_MONITOR='HDMI-A-0'
+
+            # when displaylink is broken again and I connect multiple cables
+            if xrandr | grep -q "$MAIN_MONITOR connected" && \
+                xrandr | grep -q "$SECOND_MONITOR connected"; then
+                            echo yes
+                xrandr --output "$LAPTOP_SCREEN" --off \
+                    --output "$MAIN_MONITOR" --auto \
+                    --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR"
+
+            # when displaylink is broken again and I connect multiple cables
+            elif xrandr | grep -q "$MAIN_MONITOR connected"; then
+                xrandr --output "$MAIN_MONITOR" --auto \
+                    --output "$LAPTOP_SCREEN" --right-of "$MAIN_MONITOR"
+
+            fi
+            ;;
+
         falbala )
 
             if test -n "$ONLY"; then
