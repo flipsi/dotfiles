@@ -10,7 +10,7 @@ HOSTNAME=$(hostname)
 SESSION_NAME_1="main"
 SESSION_NAME_2="src"
 
-HOSTNAME_WORK="mimir"
+HOSTNAME_WORK="frey"
 PROJECTS_DIR="$HOME/work/code-intelligence/src"
 NUMBER_OF_PROJECTS=3
 
@@ -28,7 +28,7 @@ function has_internet_connection() {
             fi
         done
     fi
-    return $INTERNET_CONNECTION
+    return "$INTERNET_CONNECTION"
 }
 
 
@@ -90,10 +90,14 @@ function create_sessions() {
 
         tmux new-session -d -s $SESSION_NAME_2 -n "delete-me" # can't create a session without window
         open_project_vim "$HOME/dotfiles" "dotfiles"
+        open_project_vim "$HOME/shellscripts" "shellscripts"
         tmux kill-window -t "$SESSION_NAME_2:delete-me"
 
         if [[ "$HOSTNAME" = "$HOSTNAME_WORK" ]]; then
             for PROJECT in $(get_last_recent_git_projects "$PROJECTS_DIR" "$NUMBER_OF_PROJECTS"); do
+                if [[ "$PROJECTS_DIR" == "$HOME/work/code-intelligence/src" ]] && [[ "$PROJECT" == "core" ]]; then
+                    PROJECT="core/backend"
+                fi
                 tmux new-window -t $SESSION_NAME_2: -n "$PROJECT" -c \
                     "$PROJECTS_DIR/$PROJECT" "fish -i -C \"nvim --listen $PROJECT"\"
             done
