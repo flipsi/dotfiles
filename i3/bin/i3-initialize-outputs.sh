@@ -196,5 +196,5 @@ function main() {
 
 main
 
-# setup_wallpaper
+setup_wallpaper
 
