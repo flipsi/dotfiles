@@ -952,6 +952,7 @@ assign [class="(?i)audacity"]                                                   
 assign [class="(?i)ardour"]                                                                         Recording
 assign [class="(?i)skype"]                                                                          Skype
 assign [class="(?i)slack"]                                                                          Slack
+assign [class="(?i)pavucontrol"]                                                                    Audio
 assign [class="(?i)qjackctl"]                                                                       Audiosettings
 assign [class="(?i)kaffeine"]                                                                       Kaffeine
 assign [class="(?i)mediathek"]                                                                      Mediathek
