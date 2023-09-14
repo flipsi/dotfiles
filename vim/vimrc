@@ -3015,7 +3015,7 @@ augroup END
 
 augroup sql_on_read
     au!
-    au FileType sql if !IsScalaProject() | call SetupSQLVimux() | endif
+    au FileType sql if !IsScalaProject() | call SetupSQLShellMappings() | endif
     au FileType sql if !IsScalaProject() | call SetupSQLDadBod() | endif
 augroup END
 
