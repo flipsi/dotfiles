@@ -417,6 +417,7 @@ Plug 'sjl/badwolf'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'ayu-theme/ayu-vim'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'sainnhe/gruvbox-material'
 
 
 " cycle through colorschemes
@@ -520,7 +521,7 @@ let g:airline#extensions#grepper#enabled = 1
 
 Plug 'tpope/vim-fugitive'
 
- " open quickfixlist with unstaged changes
+" open quickfixlist with unstaged changes
 nnoremap <leader>gel  :Git difftool<cr><esc>
 
 " git status
@@ -3243,7 +3244,7 @@ set relativenumber
 set numberwidth=6
 
 " highlight current cursor position
-let g:cursorposition = 0
+let g:cursorposition = 1
 if g:cursorposition
     set cursorline cursorcolumn
 endif
@@ -3372,6 +3373,10 @@ set previewheight=40
 
 " colorscheme {{{
 
+" Enables 24-bit RGB color in the |TUI|
+set termguicolors
+
+
 let g:light_or_dark_theme = 'dark'
 
 
@@ -3380,9 +3385,13 @@ function! FixHighlighting()
     if g:light_or_dark_theme == 'dark'
         let g:indentLine_setColors = 1
         let g:indentLine_color_term = 237
-        highlight CursorLine              ctermbg=236 cterm=NONE
-        highlight CursorColumn            ctermbg=236
-        highlight ColorColumn             ctermbg=236
+        " let g:indentLine_bgcolor_term =
+        let g:indentLine_color_gui = '#3C3836'
+        " let g:indentLine_bgcolor_gui = '#32302F'
+        " highlight Cursor                  cterm=NONE guibg=#32302F
+        highlight CursorLine              ctermbg=236 guibg=#32302F cterm=NONE
+        highlight CursorColumn            ctermbg=236 guibg=#32302F
+        highlight ColorColumn             ctermbg=236 guibg=#32302F                         " text exceeds textwidth
         highlight DiffAdd                 ctermbg=234
         highlight DiffDelete              ctermbg=234
         highlight DiffChange              ctermbg=234
@@ -3390,8 +3399,8 @@ function! FixHighlighting()
         highlight ShowTrailingWhitespace  ctermbg=235
         highlight VertSplit               ctermfg=238
         highlight Folded                  ctermfg=238 ctermfg=248
-        highlight LineNr                  ctermbg=237 ctermfg=243
-        " highlight SignColumn              ctermbg=237
+        highlight LineNr                  ctermbg=237 ctermfg=243 guibg=#3C3836
+        " highlight SignColumn              ctermbg=237 guibg=#32302F
         " highlight GitGutterAdd            ctermbg=235
         " highlight GitGutterChange         ctermbg=235
         " highlight GitGutterDelete         ctermbg=235
