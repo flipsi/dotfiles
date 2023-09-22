@@ -1520,6 +1520,27 @@ vnoremap <script> <silent> <leader>kb
             \ :call cheat#cheat("", -1, -1, 2, 0, '!')<cr>
 
 
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Treesitter {{{
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" list all available languages and their installation status with
+" :TSInstallInfo
+"
+" install language parser:
+" TSInstall <language>
+
+" Show context / Sticky scroll
+Plug 'wellle/context.vim'
+
+let g:context_highlight_normal = 'Normal'
+let g:context_highlight_border = 'Comment'
+let g:context_highlight_tag    = 'Special'
+
+nnoremap <silent> <leader>yC :ContextToggle <cr>
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -2112,6 +2133,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " system:                       yay -S gopls
 " vim (in Go project):          :CocInstall coc-go
 "
+
+Plug 'neovim/nvim-lspconfig'
+
+
 nnoremap <leader>i <nop>
 nnoremap <leader>j <nop>
 
@@ -2228,6 +2253,11 @@ endfunction
 " Consider directories with those files project root
 autocmd FileType clojure let b:coc_root_patterns =
             \ ['.projectile', '.git', '.env']
+
+
+" show your current code context in statusline (like function name)
+" TODO: configure
+Plug 'SmiteshP/nvim-navic'
 
 
 " Debugger
