@@ -5483,13 +5483,6 @@ function! SetRunCommandMethodBasedOnFiletypeIfNotSet()
     endif
 endfunction
 
-augroup set_run_command_method_on_buf_enter
-    au!
-    au VimEnter * SetRunCommandMethodBasedOnFiletypeIfNotSet
-    au VimEnter * RefreshRunCommandMappings
-augroup END
-
-
 function! ToggleRunCommandMethod()
     if !exists('g:run_command_method') || g:run_command_method == "output-window"
         echo 'Set running method to `terminal-buffer`'
@@ -5540,6 +5533,7 @@ function! GetBuildOutputFilename()
 endfunction
 
 function! IsBuildShellRunning()
+    SetRunCommandMethodBasedOnFiletypeIfNotSet
     if g:run_command_method == "terminal-buffer"
         let l:terminal_bufnum = GetTerminalBuffer()
         return l:terminal_bufnum > 0
@@ -5574,6 +5568,7 @@ endfunction
 
 command! -nargs=1 RunCommand :call RunCommand(<q-args>)
 function! RunCommand(command)
+    SetRunCommandMethodBasedOnFiletypeIfNotSet
     if g:run_command_method == "vimux"
         call VimuxRunCommand(a:command)
     else
