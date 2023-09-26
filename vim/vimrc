@@ -2431,7 +2431,9 @@ function! SetupConjure()
     nnoremap          <leader>lbb :call RunLastConjureCommand()<cr>
 
     nnoremap <leader>lo        :ConjureEval<space>
+    nnoremap <leader>lev       :exe "ConjureEval " . @+ <cr> " contents from clipboard
     nnoremap <leader>lm        :ConjureEvalMarkedForm<CR>
+    " TODO: eval root without `(comment `
 
     nnoremap <leader>l<c-c>    :ConjureCljInterrupt<CR>
     nnoremap <leader>lr        :ConjureCljRefreshChanged<CR>
