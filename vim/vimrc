@@ -5403,6 +5403,22 @@ nnoremap <silent> 'dsD :%s:\v(\S) {2}(\S):\1 \2:<cr>
 nnoremap <silent> 'dsm :.s:\v(\S) {2,}(\S):\1 \2:<cr>
 nnoremap <silent> 'dsM :.s:\v(\S) {2,}(\S):\1 \2:<cr>
 
+" delete whitespace before and after parentheses/brackets/braces in current line
+" poor-man's auto formatting for current line, but without relying on plugins and language-agnostic
+" TODO: make this repeatable with .
+" e.g.    "foo ( bar: [ Int ] ) ( implicit x: X ) : { 42 }"
+" becomes "foo (bar: [Int]) (implicit x: X) : {42}"
+command! DeleteWhitespaceAroundParentheses :call DeleteWhitespaceAroundParentheses()
+function! DeleteWhitespaceAroundParentheses()
+    silent! .s:( :(:
+    silent! .s: ):):
+    silent! .s:\[ :[:
+    silent! .s: \]:]:
+    silent! .s:{ :{:
+    silent! .s: }:}:
+endfunction
+
+nnoremap 'dsp :DeleteWhitespaceAroundParentheses<cr>
 
 " convert a vim plugin github url into appropriate format for vim-plug
 nnoremap 'pi :.s:\m.*http.*github\.com/\([^/]*/[^/]*\).*:Plug '\1':<cr>
