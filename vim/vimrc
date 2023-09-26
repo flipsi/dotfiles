@@ -6158,6 +6158,34 @@ command! -nargs=1 InsertGoogleContact :r!goobook-query-mail.sh <args> " Interact
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SAVING AND CLOSING {{{
 
+"
+" :CloseAllFloatingWindows
+" Closes all floating windows, useful for cleaning up messed up pop-ups
+" copied from
+" https://www.reddit.com/r/neovim/comments/skkwnd/how_do_i_close_a_floating_window/hvlwo91/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+
+" unfortunately fucks up my vimrc syntax highlighting, so uncomment when needed
+
+" if has('nvim-0.4.0')
+  " command! CloseAllFloatingWindows   lua _G.CloseAllFloatingWindows()
+" lua<<EOF
+  " _G.CloseAllFloatingWindows = function()
+    " local closed_windows = {}
+    " for _, win in ipairs(vim.api.nvim_list_wins()) do
+      " local config = vim.api.nvim_win_get_config(win)
+      " if config.relative ~= "" then  -- is_floating_window?
+        " vim.api.nvim_win_close(win, false)  -- do not force
+        " table.insert(closed_windows, win)
+      " end
+    " end
+    " print(string.format('Closed %d windows: %s', #closed_windows, vim.inspect(closed_windows)))
+  " end
+" EOF
+" endif
+
+nnoremap <leader>qf :CloseAllFloatingWindows<cr>
+
+
 function! MkdirIfNotExists(dir)
     if !isdirectory(a:dir)
         silent! call system('mkdir -p "' . a:dir . '"')
