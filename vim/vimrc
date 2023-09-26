@@ -2333,7 +2333,7 @@ function! SetupClojureForCodeIntelligenceCore()
     nnoremap <buffer> <leader>bta :call RunCommandInBuildShell("bb kaocha --focus-meta :backend")<cr>
     nnoremap <buffer> <leader>btn :call RunCommandInBuildShell("bb kaocha --focus " . CalculateKaochaFocusUnit('namespace'))<cr>
     nnoremap <buffer> <leader>bto :call RunCommandInBuildShell("bb kaocha --focus " . CalculateKaochaFocusUnit('singletest'))<cr>
-    nnoremap <buffer> <leader>af  :exe "Dispatch! bb format " . expand("%")<cr>
+    nnoremap <buffer> <leader>af  :exe "Dispatch! bb format fix " . expand("%")<cr>
     nnoremap <buffer> <leader>AF       :Dispatch! bb format<cr>
 endfunction
 
