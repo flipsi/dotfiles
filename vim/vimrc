@@ -2534,7 +2534,7 @@ endfunction
 command! ConjureLogsScrollToBottom :ConjureLogsExecute normal G
 
 " find test beginning of runner output easily in log buffer
-command! ConjureLogsFindBeginningOfTestOutput ConjureLogsExecute normal! ?\(run-current-test\|run-ns-tests\)
+command! ConjureLogsFindBeginningOfTestOutput ConjureLogsExecute normal! ?\(run-current-test\|run-ns-tests\)zt
 
 
 " Vim-sexp brings the Vim philosophy of precision editing to S-expressions (as used in Lisps).
