@@ -478,13 +478,37 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 let g:airline#extensions#coc#enabled = 1
 
-let g:airline_section_a = '%{expand("%:t")}'
+
+let g:airline_section_mode_default = '%#__accent_bold#%{airline#util#wrap(airline#parts#mode(),0)}%#__restore__#%{airline#util#append(airline#parts#crypt(),0)}%{airline#util#append(airline#parts#paste(),0)}%{airline#util#append(airline#extensions#keymap#status(),0)}%{airline#util#append(airline#parts#spell(),0)}%{airline#util#append("",0)}%{airline#util#append("",0)}%{airline#util#append(airline#parts#iminsert(),0)}'
+let g:airline_section_my_filename = ' %{expand("%:t")}'
+let g:airline_section_a = g:airline_section_mode_default . g:airline_section_my_filename
+
 let g:airline_section_b = '%{airline#util#wrap(airline#extensions#hunks#get_hunks(),100)}%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'
+
 if g:airline#extensions#coc#enabled == 1
     let g:airline_section_c = '%{coc#status()}'
 else
     let g:airline_section_c = '%{expand("%:h")}'
 endif
+
+command! -nargs=1 AirlineIndicateCustomMode :call AirlineIndicateCustomMode(<f-args>)
+function! AirlineIndicateCustomMode(modename)
+    if s:MyMode == 'mastery'
+        " TODO use airline#section#create() ?
+        let g:airline_section_a = '%#__accent_bold#[' . a:modename . ']% ' . g:airline_section_my_filename
+        AirlineRefresh
+    endif
+endfunction
+
+command! AirlineResetCustomMode :call AirlineResetCustomMode()
+function! AirlineResetCustomMode()
+    if s:MyMode == 'mastery'
+        let g:airline_section_a = g:airline_section_mode_default . g:airline_section_my_filename
+        AirlineRefresh
+    endif
+endfunction
+
+
 
 let g:airline_powerline_fonts=0
 if !exists('g:airline_symbols')
@@ -734,6 +758,7 @@ function! EnableGitGutterMode()
     nnoremap <down>    :GitGutterNextHunk<cr>zz9<c-e>zv
     nnoremap <up>      :GitGutterPrevHunk<cr>zz9<c-e>zv
     nnoremap <cr>      :GitGutterStageHunk<bar>GitGutterNextHunk<cr>
+    AirlineIndicateCustomMode GITGUTTER MODE
 endfunction
 
 command! DisableGitGutterMode :call DisableGitGutterMode()
@@ -741,6 +766,7 @@ function! DisableGitGutterMode()
     nnoremap <down> g<down>
     nnoremap <up>   g<up>
     silent! nunmap <cr>
+    AirlineResetCustomMode
 endfunction
 
 " automatically unmap (after committing is reasonable)
@@ -5980,6 +6006,7 @@ function! ResizeWindows(enter_or_leave)
         nnoremap <silent> <left>    2<c-w><
         nnoremap <silent> l         2<c-w>>
         nnoremap <silent> <right>   2<c-w>>
+        AirlineIndicateCustomMode RESIZE MODE
         echo "[RESIZE MODE] (press h,j,k,l or arrow keys to resize and <enter> or <esc> to leave move)"
     else
         nnoremap    j       gj
@@ -5994,6 +6021,7 @@ function! ResizeWindows(enter_or_leave)
         nunmap      <esc>
         nunmap      <c-c>
         echo "Windows resized."
+        AirlineResetCustomMode
     endif
 endfunction
 
