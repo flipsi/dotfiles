@@ -2417,8 +2417,8 @@ let g:conjure#log#hud#anchor = "NW" " must be one of: NE, SE, SW, NW
 let g:conjure#log#hud#border = "none"
 
 " TODO: why doesn't this setting have any effect?
-command! ConjureToggleLogWrap :call ConjureToggleLogWrap()
-function! ConjureToggleLogWrap()
+command! ConjureLogsToggleWrap :call ConjureLogsToggleWrap()
+function! ConjureLogsToggleWrap()
     let g:conjure#log#wrap = ! g:conjure#log#wrap
 endfunction
 
@@ -2446,8 +2446,9 @@ function! SetupConjure()
     nnoremap <leader>lR        :ConjureCljRefreshAll<CR>
     nnoremap <leader>l<f5>     :ConjureCljRefreshAll<CR>
 
-    nnoremap <leader>llG       :ConjureScrollLogsToBottom<CR>
-    nnoremap <leader>llw       :ConjureToggleLogWrap<CR>
+    nnoremap <leader>llw       :ConjureLogsToggleWrap<CR>
+    nnoremap <leader>llG       :ConjureLogsScrollToBottom<CR>
+    nnoremap <leader>llb       :ConjureLogsFindBeginningOfTestOutput<cr>
 
     " ignore typos
     nnoremap <leader>l <nop>
@@ -2476,7 +2477,7 @@ endfunction
 function! RunConjureCommand(cmd)
     normal! mY
     let g:last_conjure_command = a:cmd
-    ConjureScrollLogsToBottom
+    ConjureLogsScrollToBottom
     execute ":" . g:last_conjure_command
 endfunction
 
@@ -2486,21 +2487,28 @@ function! RunLastConjureCommand()
     else
         normal! mZ
         normal! `Y
-        ConjureScrollLogsToBottom
+        ConjureLogsScrollToBottom
         execute ":" . g:last_conjure_command
         normal! `Z
     endif
 endfunction
 
-" In the window with the conjure log buffer, scroll to the bottom (so that automatic tailing is enabled)
-command! ConjureScrollLogsToBottom :call ConjureScrollLogsToBottom() " Like hitting `G` in conjure log window
-function! ConjureScrollLogsToBottom()
+" Execute a command in the Conjure log window
+command! -nargs=1 ConjureLogsExecute :call ConjureLogsExecute(<f-args>)
+function! ConjureLogsExecute(cmd)
     let l:winid = win_getid()
     let l:conjure_log_buffer = GetBufferByPattern('conjure-log', 'list')[0]
     let l:conjure_log_window = bufwinnr(l:conjure_log_buffer)
-    execute conjure_log_window . "windo normal G"
+    execute conjure_log_window . "windo " . a:cmd
     call win_gotoid(l:winid)
+    " echo "Executed in log window: " . a:cmd
 endfunction
+
+" In the window with the conjure log buffer, scroll to the bottom (so that automatic tailing is enabled)
+command! ConjureLogsScrollToBottom :ConjureLogsExecute normal G
+
+" find test beginning of runner output easily in log buffer
+command! ConjureLogsFindBeginningOfTestOutput ConjureLogsExecute normal! ?\(run-current-test\|run-ns-tests\)
 
 
 " Vim-sexp brings the Vim philosophy of precision editing to S-expressions (as used in Lisps).
