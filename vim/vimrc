@@ -2254,6 +2254,11 @@ endfunction
 autocmd FileType clojure let b:coc_root_patterns =
             \ ['.projectile', '.git', '.env']
 
+" echo project root
+nnoremap <leader>icr :CocCommand workspace.workspaceFolders<cr>
+" Hint: If this is wrong and .lsp dirs are created in the wrong dir, deleting .session.vim could help.
+" Hint: If afterwards, pwd is set to where .git is, not working dir, manually cd into working dir again.
+
 
 " show your current code context in statusline (like function name)
 " TODO: configure
