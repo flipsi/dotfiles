@@ -2308,7 +2308,8 @@ augroup END
 
 command! SetupClojure :call SetupClojure() " add mappings and settings for Clojure
 function! SetupClojure()
-    nnoremap <silent> <leader>ct :call append('.', '(tap> {:fun "' .  GetMostPreviousMatch('(\(defn\\|deftest\)\s\+\(.*\)', '\2') . '" })')<cr>j==$hi
+    nnoremap <silent> 'at        :call append('.', '(tap> {:fun "' .  GetMostPreviousMatch('(\(defn-\?\\|deftest\)\s\+\(.*\)', '\2') . '" })')<cr>j==$hi
+    nnoremap <silent> <leader>ct :call append('.', '(tap> {:fun "' .  GetMostPreviousMatch('(\(defn-\?\\|deftest\)\s\+\(.*\)', '\2') . '" })')<cr>j==$hi
     nnoremap <silent> <leader>co :call ToggleComment('n')<cr>
     vnoremap <silent> <leader>co :call ToggleComment('v')<cr>
     " specific coc clojure refactoring mappings
