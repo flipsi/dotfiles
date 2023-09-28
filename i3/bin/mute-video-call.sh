@@ -23,5 +23,5 @@ function mute_or_unmute_slack_huddle() {
 }
 
 ACTIVE_WINDOW=$(xdotool getactivewindow)
-mute_or_unmute_slack_huddle || mute_or_unmute_google_meet
+mute_or_unmute_google_meet || mute_or_unmute_slack_huddle
 xdotool windowactivate "$ACTIVE_WINDOW"
