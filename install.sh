@@ -457,6 +457,7 @@ function create_link_for_target() {
             create_link "$PWD/vim/vim/spell" "$HOME/.vim/spell"
             create_link "$PWD/vim/vim/spellfile.utf-8.add" "$HOME/.vim/spellfile.utf-8.add"
             create_link "$PWD/vim/vim/syntax" "$HOME/.vim/syntax"
+            create_link "$PWD/vim/vim/ftdetect" "$HOME/.vim/ftdetect"
             mkdir -p "$HOME/bin"
             create_link "$PWD/vim/bin/goobook-query-mail.sh" "$HOME/bin/goobook-query-mail.sh"
             create_link "$PWD/vim/agignore" "$HOME/.agignore"

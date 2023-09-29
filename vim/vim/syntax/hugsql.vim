@@ -2117,32 +2117,32 @@ endif
 unlet s:plgroups
 
 " Default highlighting
-hi def link sqlCatalog        Constant
-hi def link sqlComment        Comment
-hi def link sqlConstant       Constant
-hi def link sqlErrorCode      Special
-hi def link sqlFunction       Function
-hi def link sqlIdentifier     Identifier
-hi def link sqlKeyword        sqlSpecial
-hi def link sqlPlpgsqlKeyword sqlSpecial
-hi def link sqlPlpgsqlVariable Identifier
-hi def link sqlPlpgsqlOperator sqlOperator
-hi def link sqlNumber         Number
-hi def link sqlOperator       sqlStatement
-hi def link sqlOption         Define
-hi def link sqlSpecial        Special
-hi def link sqlStatement      Statement
-hi def link sqlString         String
-hi def link sqlTable          Identifier
-hi def link sqlType           Type
-hi def link sqlView           sqlTable
-hi def link sqlTodo           Todo
-hi def link sqlPsqlCommand    SpecialKey
-hi def link sqlPsqlKeyword    Keyword
-hi def link sqlCreateTypeKeyword sqlKeyword
-hi def link sqlCreateOperatorKeyword sqlKeyword
-hi def link sqlCreateTextSearchKeyword sqlKeyword
-hi def link hugsqlVariable    Special
+hi def link sqlCatalog                    Constant
+hi def link sqlComment                    Comment
+hi def link sqlConstant                   Constant
+hi def link sqlErrorCode                  Special
+hi def link sqlFunction                   Function
+hi def link sqlIdentifier                 Identifier
+hi def link sqlKeyword                    sqlSpecial
+hi def link sqlPlpgsqlKeyword             sqlSpecial
+hi def link sqlPlpgsqlVariable            Identifier
+hi def link sqlPlpgsqlOperator            sqlOperator
+hi def link sqlNumber                     Number
+hi def link sqlOperator                   sqlStatement
+hi def link sqlOption                     Define
+hi def link sqlSpecial                    Special
+hi def link sqlStatement                  Statement
+hi def link sqlString                     String
+hi def link sqlTable                      Identifier
+hi def link sqlType                       Type
+hi def link sqlView                       sqlTable
+hi def link sqlTodo                       Todo
+hi def link sqlPsqlCommand                SpecialKey
+hi def link sqlPsqlKeyword                Keyword
+hi def link sqlCreateTypeKeyword          sqlKeyword
+hi def link sqlCreateOperatorKeyword      sqlKeyword
+hi def link sqlCreateTextSearchKeyword    sqlKeyword
+hi def link hugsqlVariable                Special
 
 let b:current_syntax = "sql"
 
