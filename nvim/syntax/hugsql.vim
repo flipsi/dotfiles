@@ -1,11 +1,11 @@
 " Vim syntax file
-" Language:     SQL (PostgreSQL dialect), PL/pgSQL, PL/…, PostGIS, …
-" Maintainer:   Lifepillar
-" Version:      2.3.1
-" License:      Vim license (see `:help license`)
+" Language:         SQL (PostgreSQL dialect) template for hugsql (https://www.hugsql.org)
+" Maintainer:       flipsi
+" Version:          1.0.0
+" License:          Vim license (see `:help license`)
+" Latest Revision:  2023-09-29
 
 " Based on PostgreSQL 14.1
-" Automatically generated on 2021-12-03 at 11:21:19
 
 if exists("b:current_syntax")
   finish
@@ -2025,6 +2025,10 @@ syn keyword sqlOption contained client_min_messages search_path
 
 syntax case match
 
+" hugsql
+syn match hugsqlVariable ":.*$"
+
+
 " Psql Keywords
 syn match sqlPsqlCommand contained nextgroup=sqlPsqlKeyword,sqlNumber,sqlString /\\[aCfHhortTxz]\>\|\\[?!]/
 syn match sqlPsqlCommand contained nextgroup=sqlPsqlKeyword,sqlNumber,sqlString /\\c\%(\%(d\|onnect\|onninfo\|opy\%(right\)\?\|rosstabview\)\?\)\>/
@@ -2138,6 +2142,7 @@ hi def link sqlPsqlKeyword    Keyword
 hi def link sqlCreateTypeKeyword sqlKeyword
 hi def link sqlCreateOperatorKeyword sqlKeyword
 hi def link sqlCreateTextSearchKeyword sqlKeyword
+hi def link hugsqlVariable    Special
 
 let b:current_syntax = "sql"
 
