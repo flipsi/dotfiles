@@ -6226,24 +6226,26 @@ command! -nargs=1 InsertGoogleContact :r!goobook-query-mail.sh <args> " Interact
 " copied from
 " https://www.reddit.com/r/neovim/comments/skkwnd/how_do_i_close_a_floating_window/hvlwo91/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 
-" unfortunately fucks up my vimrc syntax highlighting, so uncomment when needed
+" unfortunately the heredoc fucked up my vimrc syntax highlighting...
+" but there is a workaround: reverting to v0.7.2 lua syntax (see https://stackoverflow.com/a/75191068/4568748)
+" `curl -sS https://raw.githubusercontent.com/neovim/neovim/v0.7.2/runtime/syntax/lua.vim > $VIMRUNTIME/syntax/lua.vim`
 
-" if has('nvim-0.4.0')
-  " command! CloseAllFloatingWindows   lua _G.CloseAllFloatingWindows()
-" lua<<EOF
-  " _G.CloseAllFloatingWindows = function()
-    " local closed_windows = {}
-    " for _, win in ipairs(vim.api.nvim_list_wins()) do
-      " local config = vim.api.nvim_win_get_config(win)
-      " if config.relative ~= "" then  -- is_floating_window?
-        " vim.api.nvim_win_close(win, false)  -- do not force
-        " table.insert(closed_windows, win)
-      " end
-    " end
-    " print(string.format('Closed %d windows: %s', #closed_windows, vim.inspect(closed_windows)))
-  " end
-" EOF
-" endif
+if has('nvim-0.4.0')
+  command! CloseAllFloatingWindows   lua _G.CloseAllFloatingWindows()
+lua<<EOF
+  _G.CloseAllFloatingWindows = function()
+    local closed_windows = {}
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      local config = vim.api.nvim_win_get_config(win)
+      if config.relative ~= "" then  -- is_floating_window?
+        vim.api.nvim_win_close(win, false)  -- do not force
+        table.insert(closed_windows, win)
+      end
+    end
+    print(string.format('Closed %d windows: %s', #closed_windows, vim.inspect(closed_windows)))
+  end
+EOF
+endif
 
 nnoremap <leader>qf :CloseAllFloatingWindows<cr>
 
