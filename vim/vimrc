@@ -4595,6 +4595,7 @@ iabbrev CIF         CI Fuzz
 iabbrev CIS         CI Sense
 iabbrev FE          frontend
 iabbrev af          autoformat
+iabbrev admini      administrator
 iabbrev dpr         deprecated
 iabbrev ns          namespace
 iabbrev pr          println
