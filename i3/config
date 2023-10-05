@@ -480,25 +480,24 @@ bindsym $mod+Control+plus   exec --no-startup-id "$SHELLSCRIPT_PATH/xfce4-termin
 bindsym $mod+Control+minus  exec --no-startup-id "$SHELLSCRIPT_PATH/xfce4-terminal-fontsize decrease"
 
 ## set volume
-# bindsym XF86AudioLowerVolume exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
-# bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
+# bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 0 -5%"; exec "$UPDATE_STATUSBAR"
+# bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 0 +5%"; exec "$UPDATE_STATUSBAR"
 bindsym XF86AudioLowerVolume exec --no-startup-id "playerctl -p spotify volume 0.05-"; exec "$UPDATE_STATUSBAR"
 bindsym XF86AudioRaiseVolume exec --no-startup-id "playerctl -p spotify volume 0.05+"; exec "$UPDATE_STATUSBAR"
 
 ## audio control
 bindsym $mod+0 mode "$audio"
-set $audio Audio (+/-) Volume (m/M) Mute/Unmute (e) Mute/Unmute Video Call (t) Toggle output (s) ... of Spotify (b) Soundboard (g) GUI
+set $audio Audio (+/-) Volume (m) Mute/Unmute (e) Mute/Unmute Video Call (t) Toggle output (s) ... of Spotify (b) Soundboard (g) GUI
 mode "$audio" {
-    bindsym plus            exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
-    bindsym minus           exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
-    bindsym Up              exec --no-startup-id "amixer sset Master 1%+"; exec "$UPDATE_STATUSBAR"
-    bindsym Down            exec --no-startup-id "amixer sset Master 1%-"; exec "$UPDATE_STATUSBAR"
-    bindsym a               exec --no-startup-id "amixer sset Master 5%+"; exec "$UPDATE_STATUSBAR"
-    bindsym z               exec --no-startup-id "amixer sset Master 5%-"; exec "$UPDATE_STATUSBAR"
-    bindsym Right           exec --no-startup-id "amixer sset Master 5%+"; exec "$UPDATE_STATUSBAR"
-    bindsym Left            exec --no-startup-id "amixer sset Master 5%-"; exec "$UPDATE_STATUSBAR"
-    bindsym m               exec --no-startup-id "amixer set Master mute"; exec "$UPDATE_STATUSBAR"
-    bindsym Shift+m         exec --no-startup-id "amixer set Master unmute"; exec "$UPDATE_STATUSBAR"
+    bindsym plus            exec --no-startup-id "pactl set-sink-volume 0 +1%"; exec "$UPDATE_STATUSBAR"
+    bindsym minus           exec --no-startup-id "pactl set-sink-volume 0 -1%"; exec "$UPDATE_STATUSBAR"
+    bindsym Up              exec --no-startup-id "pactl set-sink-volume 0 +1%"; exec "$UPDATE_STATUSBAR"
+    bindsym Down            exec --no-startup-id "pactl set-sink-volume 0 -1%"; exec "$UPDATE_STATUSBAR"
+    bindsym a               exec --no-startup-id "pactl set-sink-volume 0 +5%"; exec "$UPDATE_STATUSBAR"
+    bindsym z               exec --no-startup-id "pactl set-sink-volume 0 -5%"; exec "$UPDATE_STATUSBAR"
+    bindsym Right           exec --no-startup-id "pactl set-sink-volume 0 +5%"; exec "$UPDATE_STATUSBAR"
+    bindsym Left            exec --no-startup-id "pactl set-sink-volume 0 -5%"; exec "$UPDATE_STATUSBAR"
+    bindsym m               exec --no-startup-id "pactl set-sink-mute 0 toggle"; exec "$UPDATE_STATUSBAR"
     bindsym t               exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output --toggle"; mode "default"
     bindsym s               exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output --toggle --app Spotify"; mode "default"
     bindsym b               exec --no-startup-id "~/.i3/bin/soundboard.sh"; mode "default"
@@ -513,9 +512,9 @@ mode "$audio" {
 bindsym $mod+Control+e       exec --no-startup-id "~/.i3/bin/mute-video-call.sh"
 
 ## music control
-bindsym XF86AudioPlay        exec --no-startup-id "playerctl play-pause"; exec "$UPDATE_STATUSBAR"
-bindsym XF86AudioNext        exec --no-startup-id "playerctl next"; exec "$UPDATE_STATUSBAR"
-bindsym XF86AudioPrev        exec --no-startup-id "playerctl previous"; exec "$UPDATE_STATUSBAR"
+bindsym XF86AudioPlay        exec --no-startup-id "playerctl -p spotify play-pause"; exec "$UPDATE_STATUSBAR"
+bindsym XF86AudioNext        exec --no-startup-id "playerctl -p spotify next"; exec "$UPDATE_STATUSBAR"
+bindsym XF86AudioPrev        exec --no-startup-id "playerctl -p spotify previous"; exec "$UPDATE_STATUSBAR"
 
 bindsym $mod+9 mode "$music_control"
 # bindsym $mod+9 mode "$mpd_control"
