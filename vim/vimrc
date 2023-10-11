@@ -3332,7 +3332,6 @@ if g:cursorposition
     set cursorline cursorcolumn
 endif
 " ... but not in insert mode or inactive windows
-" TODO: fix this for focus lost in terminal
 augroup cursorposition
     au!
     au WinLeave,InsertEnter *
@@ -3344,7 +3343,7 @@ augroup cursorposition
     au FocusLost   *
                 \ set nocursorline nocursorcolumn
     au FocusGained *
-                \ if g:cursorposition && mode() != 'i'
+                \ if g:cursorposition && mode() != 'i' && !IsTerminalBuffer()
                 \ | set cursorline cursorcolumn
                 \ | endif
 augroup END
@@ -4018,6 +4017,18 @@ function! GetBufferByPattern(pattern, one_or_list)
     else
         throw "Argument should be 'one' or 'list'."
     endif
+endfunction
+" }}}
+
+" Check wether current buffer is Terminal buffer or not. Returns 0 (false) if not, 1 (true) otherwise {{{
+function! IsTerminalBuffer()
+    if !has('nvim')
+        " TODO: make this work in regular vim
+        echoerr "Sorry, this is only implemented in neovim (right now)."
+        return
+    endif
+    " terminals have b:terminal_job_id defined
+    return getbufvar("", "terminal_job_id", 0) > 1
 endfunction
 " }}}
 
