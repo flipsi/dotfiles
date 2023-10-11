@@ -3,6 +3,7 @@
 curl v4.ident.me # public IP address
 curl wttr.in # weather report
 curl -T $FILENAME temp.sh # upload file for sharing (expires after 3 days)
+docker run -it --rm alpine
 ssh clidle.ddns.net -p 3000 # wordle game
 date +%s # unix timestamp
 git branch -vv --merged | grep "\[.*/.*: gone\]" | cut -d" " -f3 | xargs git branch -d # delete merged branches
