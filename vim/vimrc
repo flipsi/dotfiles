@@ -3306,7 +3306,7 @@ syntax enable
 let g:synmaxcol=500
 augroup synmaxcol_per_filetype
     au!
-    au BufEnter conjure-log-*.cljc set synmaxcol=1200
+    au BufEnter conjur*.cljc set synmaxcol=1500
 augroup END
 exe 'set synmaxcol=' . g:synmaxcol
 
