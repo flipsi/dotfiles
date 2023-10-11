@@ -82,12 +82,12 @@ function set_env_vars() {
             elif xrandr | grep -q 'HDMI-A-0 connected' && xrandr | grep -q 'DisplayPort-0 connected'; then
                 BAR_MAIN_MONITOR='DisplayPort-0'
                 BAR_SECOND_MONITOR='HDMI-A-0'
-            elif xrandr | grep -q 'DisplayPort-0 connected'; then
-                BAR_MAIN_MONITOR='DisplayPort-0'
+            elif xrandr | grep -q 'DisplayPort-. connected'; then
+                BAR_MAIN_MONITOR=$(xrandr | grep -E 'DisplayPort-. connected' | cut -d' ' -f1 | head -n1)
                 BAR_SECOND_MONITOR='eDP'
             elif xrandr | grep -q 'DVI-I-1-1 connected'; then
-                # BAR_MAIN_MONITOR=$(xrandr | grep -E '[^e]DP.-?. connected' | cut -d' ' -f-2 | head -n1) # ^ not working
-                BAR_MAIN_MONITOR=$(xrandr | grep -E 'DP.-?. connected' | cut -d' ' -f-2 | head -n1)
+                # BAR_MAIN_MONITOR=$(xrandr | grep -E '[^e]DP.-?. connected' | cut -d' ' -f2 | head -n1) # ^ not working
+                BAR_MAIN_MONITOR=$(xrandr | grep -E 'DP.-?. connected' | cut -d' ' -f2 | head -n1)
                 BAR_SECOND_MONITOR='DVI-I-2-2'
                 BAR_THIRD_MONITOR='DVI-I-1-1'
             elif xrandr | grep -q 'DP1 connected'; then
