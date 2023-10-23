@@ -135,10 +135,10 @@ function main() {
             # when displaylink is broken again and I connect multiple cables
             if xrandr | grep -q "$MAIN_MONITOR connected" && \
                 xrandr | grep -q "$SECOND_MONITOR connected"; then
-                            echo yes
-                xrandr --output "$LAPTOP_SCREEN" --off \
-                    --output "$MAIN_MONITOR" --auto \
-                    --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR"
+                xrandr \
+                    --output "$LAPTOP_SCREEN" --off  \
+                    --output "$SECOND_MONITOR" --mode 2560x1440 --pos 0x0 --rotate left \
+                    --output "$MAIN_MONITOR" --primary --mode 2560x1440 --pos 1440x500 --rotate normal \
 
             # when displaylink is broken again and I connect multiple cables
             elif xrandr | grep -q "$MAIN_MONITOR connected"; then
