@@ -595,6 +595,43 @@ bindsym Shift+$mod+Control+s    exec --no-startup-id "xfce4-screenshooter --regi
 
 
 ###############################################################################
+###########  CLOSING AND KILLING  #############################################
+###############################################################################
+
+## kill focused container
+bindsym $mod+Shift+q kill
+# bindsym $mod+BackSpace kill  ## Occasionally I accidentally hit this when I wanted to hit CTRL+BackSpace
+
+bindsym $mod+BackSpace mode "$mode_kill"
+set $mode_kill Killing: (Backspace) close i3 window (a) kill specific app
+mode "$mode_kill" {
+   bindsym      BackSpace  kill; mode "default"
+   bindsym $mod+BackSpace  kill; mode "default"
+   bindsym a               mode "$mode_kill_app"
+   bindsym Escape          mode "default"
+}
+
+## kill specific apps/windows (e.g. when memory really full again and the system hangs)
+bindsym $mod+Shift+BackSpace mode "$mode_kill_app"
+set $mode_kill_app Kill app: (f) Firefox (g) Chrome (i) Vivaldi (j) Java (s) Sbt (o) Output windows
+mode "$mode_kill_app" {
+    bindsym g       exec --no-startup-id "pkill    chrome"; mode "default"
+    bindsym G       exec --no-startup-id "pkill -9 chrome"; mode "default"
+    bindsym f       exec --no-startup-id "pkill    firefox"; mode "default"
+    bindsym F       exec --no-startup-id "pkill -9 firefox"; mode "default"
+    bindsym i       exec --no-startup-id "pkill    vivaldi-stable"; mode "default"
+    bindsym I       exec --no-startup-id "pkill -9 vivaldi-stable"; mode "default"
+    bindsym j       exec --no-startup-id "pkill    java"; mode "default"
+    bindsym J       exec --no-startup-id "pkill -9 java"; mode "default"
+    bindsym s       exec --no-startup-id "pkill    -f 'sbt-launch.jar'"; mode "default"
+    bindsym S       exec --no-startup-id "pkill -9 -f 'sbt-launch.jar'"; mode "default"
+    bindsym o       [workspace="Output"] kill; mode "default"
+    # cancel
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+###############################################################################
 ###########  INTRA WORKSPACE  #################################################
 ###############################################################################
 
@@ -612,10 +649,6 @@ bindsym $mod+Return exec --no-startup-id "rofi -modi window,run,combi -show comb
 ## launch any application
 # bindsym $mod+Shift+Return exec --no-startup-id "dmenu_run $DMENU_OPTIONS"
 bindsym $mod+Shift+Return exec --no-startup-id "rofi -show run"
-
-## kill focused container
-bindsym $mod+BackSpace kill
-bindsym $mod+Shift+q kill
 
 ## change focus
 bindsym $mod+h      focus left
@@ -873,26 +906,6 @@ mode "$goto" {
   # cancel
   bindsym Return mode "default"
   bindsym Escape mode "default"
-}
-
-## kill specific apps/windows (e.g. when memory really full again and the system hangs)
-bindsym $mod+Shift+BackSpace mode "$kill"
-set $kill Kill: (f) Firefox (g) Chrome (i) Vivaldi (j) Java (s) Sbt (o) Output windows
-mode "$kill" {
-    bindsym g       exec --no-startup-id "pkill    chrome"; mode "default"
-    bindsym G       exec --no-startup-id "pkill -9 chrome"; mode "default"
-    bindsym f       exec --no-startup-id "pkill    firefox"; mode "default"
-    bindsym F       exec --no-startup-id "pkill -9 firefox"; mode "default"
-    bindsym i       exec --no-startup-id "pkill    vivaldi-stable"; mode "default"
-    bindsym I       exec --no-startup-id "pkill -9 vivaldi-stable"; mode "default"
-    bindsym j       exec --no-startup-id "pkill    java"; mode "default"
-    bindsym J       exec --no-startup-id "pkill -9 java"; mode "default"
-    bindsym s       exec --no-startup-id "pkill    -f 'sbt-launch.jar'"; mode "default"
-    bindsym S       exec --no-startup-id "pkill -9 -f 'sbt-launch.jar'"; mode "default"
-    bindsym o       [workspace="Output"] kill; mode "default"
-    # cancel
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
 }
 
 ## windows always floating/fullscreen
