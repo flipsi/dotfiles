@@ -2,6 +2,9 @@
 
 set -e
 
+DIRNAME=$(dirname "$0")
+
+
 TEMP=$(getopt -o osf --long only,swapped,fix-offset -n "$0" -- "$@")
 eval set -- "$TEMP"
 while true ; do
@@ -220,6 +223,8 @@ function main() {
 }
 
 main
+"$DIRNAME/i3-polybar.sh" stop
+"$DIRNAME/i3-polybar.sh" start
 
 setup_wallpaper
 
