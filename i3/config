@@ -217,8 +217,10 @@ smart_borders               on
 ## Gaps
 set $I3_GAPS_INNER 6
 set $I3_GAPS_OUTER 6
-gaps inner $I3_GAPS_INNER
-gaps outer $I3_GAPS_OUTER
+gaps inner 0
+gaps outer 0
+# gaps inner $I3_GAPS_INNER
+# gaps outer $I3_GAPS_OUTER
 smart_gaps inverse_outer
 
 
