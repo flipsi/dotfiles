@@ -28,7 +28,7 @@ function arrange_outputs_at_home() {
             xrandr \
                 --output "$LAPTOP_SCREEN" --off \
                 --output "$THIRD_MONITOR" --mode 2560x1440 --pos 0x0 --rotate left \
-                --output "$MAIN_MONITOR" --primary --mode 2560x1440 --pos 1440x500 --rotate normal \
+                --output "$MAIN_MONITOR" --primary --mode 2560x1440 --pos 1440x560 --rotate normal \
                 --output "$SECOND_MONITOR" --mode 2560x1440 --pos 4000x560 --rotate normal \
                 || ( \
                 sleep 0.1 && xrandr --output "$LAPTOP_SCREEN" --off && \
