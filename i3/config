@@ -969,6 +969,7 @@ assign [class="(?i)pale moon"]                                                  
 assign [class="(?i)qutebrowser"]                                                                    Web
 assign [class="(?i)vivaldi-stable"]                                                                 Vivaldi
 assign [class="code-oss"]                                                                           VS Code
+assign [class="(?i)gimp"]                                                                           Gimp
 for_window [class="(?i)gnome-session-failed"] move to workspace                                     GnomeSessionFailed
 
 ## workspaces with window always on specific output
