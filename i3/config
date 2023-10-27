@@ -171,7 +171,7 @@ bindsym $mod+Shift+F1 exec --no-startup-id "pkill -fx 'sxiv -z 100 $keyboard_lay
 ###############################################################################
 
 ## set wallpaper
-exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
+# exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
 
 ## change wallpaper
 bindsym $mod+F7 mode "$change_wallpaper"
