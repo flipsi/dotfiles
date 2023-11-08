@@ -968,7 +968,7 @@ assign [class="(?i)ardour"]                                                     
 assign [class="(?i)skype"]                                                                          Skype
 assign [class="(?i)slack"]                                                                          Slack
 for_window [class="(?i)slack" title=".*Huddle"] move to workspace                                   Huddle
-assign [class="(?i)pavucontrol"]                                                                    Audio
+# assign [class="(?i)pavucontrol"]                                                                    Audio
 assign [class="(?i)qjackctl"]                                                                       Audiosettings
 assign [class="(?i)kaffeine"]                                                                       Kaffeine
 assign [class="(?i)mediathek"]                                                                      Mediathek
@@ -984,7 +984,7 @@ assign [class="(?i)gnome-terminal"]                                             
 assign [class="(?i)urxvt"]                                                                          Terminal
 assign [class="(?i)pale moon"]                                                                      Web
 assign [class="(?i)qutebrowser"]                                                                    Web
-assign [class="(?i)vivaldi-stable"]                                                                 Vivaldi
+# assign [class="(?i)vivaldi-stable"]                                                                 Vivaldi
 assign [class="code-oss"]                                                                           VS Code
 assign [class="(?i)gimp"]                                                                           Gimp
 for_window [class="(?i)gnome-session-failed"] move to workspace                                     GnomeSessionFailed
@@ -1003,7 +1003,7 @@ for_window [class="(?i)chrom"]                                                  
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)chromium"]                                               move workspace to output $PRIMARY_OUTPUT
 # for_window [class="(?i)vivaldi-stable"]                                         move workspace to output $SECONDARY_OUTPUT
-for_window [class="pavucontrol"]                                                move workspace to output $SECONDARY_OUTPUT
+# for_window [class="pavucontrol"]                                                move workspace to output $SECONDARY_OUTPUT
 for_window [class="(?i)cool-retro-term"]                                        move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)firefox"]                                                move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)gnome-terminal"]                                         move workspace to output $PRIMARY_OUTPUT
