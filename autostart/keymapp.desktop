@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=keymapp
+GenericName=keymapp
+Comment=A live visual reference for your ZSA keyboard
+Exec=keymapp
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true

@@ -162,6 +162,7 @@ function create_link_for_target() {
             create_link "$PWD/autostart/numlockx.desktop" "$HOME/.config/autostart/numlockx.desktop"
             create_link "$PWD/autostart/syndaemon.desktop" "$HOME/.config/autostart/syndaemon.desktop"
             create_link "$PWD/autostart/unclutter.desktop" "$HOME/.config/autostart/unclutter.desktop"
+            create_link "$PWD/autostart/keymapp.desktop" "$HOME/.config/autostart/keymapp.desktop"
             ;;
 
         bash )
