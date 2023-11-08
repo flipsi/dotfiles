@@ -950,6 +950,7 @@ for_window [class="(?i)chrom" instance="crx_flcchhclanjfdanlfphjfnhbjdbejong"] m
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"] move to workspace    Trello
 for_window [class="(?i)chrom" instance="crx_egojblamhmleganbihdffcjdjilokgah"] move to workspace    Netflix
 for_window [class="(?i)chrom" instance="crx_moojpbfihphioopfbccejjoefangiaip"] move to workspace    Notes
+assign [class="(?i)keymapp"]                                                                        Keymapp
 assign [class="Wine"]                                                                               Poker
 assign [class="pokerstars"]                                                                         Poker
 assign [class="(?i)chromium"]                                                                       Chromium
@@ -997,6 +998,7 @@ for_window [class="(?i)alacritty" title="Output"]                               
 for_window [class="(?i)alacritty" title="Output"]                               move workspace to output $TERNARY_OUTPUT
 for_window [title="portal - jvm"]                                               move workspace to output $SECONDARY_OUTPUT
 for_window [title="portal - jvm"]                                               move workspace to output $TERNARY_OUTPUT
+for_window [title="(?i)keymapp"]                                                move workspace to output $SECONDARY_OUTPUT
 for_window [class="(?i)chrom"]                                                  move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)chromium"]                                               move workspace to output $PRIMARY_OUTPUT
