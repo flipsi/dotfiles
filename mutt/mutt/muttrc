@@ -69,7 +69,7 @@ set edit_headers                                          # edit headers of outg
 set signature = "$my_muttdir/signature"                   # append this to every mail
 set attribution = "\n%f wrote on %d:"                       # include quotations like this
 
-set editor="vim -c 'startinsert' -c 'set wrap' '+/^$'"      # write mails in vim
+set editor="nvim -c 'startinsert' -c 'set wrap' '+/^$'"      # write mails in neovim
 
 # gpg settings
 # set pgp_use_gpg_agent = yes
