@@ -5290,7 +5290,7 @@ nnoremap <leader>fe /\v(error\|fail)<cr>
 
 " yank/delete line without line break (in difference to yy/dd)
 nnoremap Y ^y$
-nnoremap D 0d$j
+nnoremap D 0d$"_dd
 
 " select last pasted/edited text
 nnoremap gV `[v`]
