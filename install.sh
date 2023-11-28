@@ -579,6 +579,10 @@ function package_install_target() {
             LIST_OF_SYSTEM_PACKAGES="rxvt-unicode urxvt-perls urxvt-resize-font-git"
             ;;
 
+        neovim )
+            LIST_OF_SYSTEM_PACKAGES="neovim python-neovim"
+            ;;
+
         vim )
             if [[ "$PLATFORM" = arch ]]; then
                 LIST_OF_SYSTEM_PACKAGES="gvim"
