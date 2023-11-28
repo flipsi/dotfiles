@@ -291,6 +291,7 @@ function create_link_for_target() {
             ;;
 
         mpd )
+            mkdir -p "$HOME/.config/.mpd"
             create_link /mnt/extern/data/music "$HOME/.mpd/music"
             create_link "$PWD/mpd/mpdconf" "$HOME/.mpdconf"
             ;;
@@ -356,6 +357,7 @@ function create_link_for_target() {
             ;;
 
         qutebrowser )
+            mkdir -p "$HOME/.config/.qutebrowser"
             create_link "$PWD/qutebrowser/config.py" "$HOME/.config/qutebrowser/config.py"
             ;;
 
@@ -444,13 +446,14 @@ function create_link_for_target() {
             ;;
 
         vim )
+            mkdir -p "$HOME/.vim"
+            mkdir -p "$HOME/.vim/config"
+            mkdir -p "$HOME/.vim/undodir"
             create_link "$PWD/vim/vimrc" "$HOME/.vimrc"
             create_link "$PWD/vim/gvimrc" "$HOME/.gvimrc"
             create_link "$PWD/vim/ctags" "$HOME/.ctags"
             create_link "$PWD/vim/config/" "$HOME/.vim/config"
             create_link "$PWD/vim/config/eslintrc.json" "$HOME/.eslintrc.json"
-            mkdir -p "$HOME/.vim"
-            mkdir -p "$HOME/.vim/undodir"
             create_link "$PWD/vim/vim/coc-settings.json" "$HOME/.vim/coc-settings.json"
             create_link "$PWD/vim/vim/filetype.vim" "$HOME/.vim/filetype.vim"
             create_link "$PWD/vim/vim/sflipsnippets" "$HOME/.vim/sflipsnippets"
