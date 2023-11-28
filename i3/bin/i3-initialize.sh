@@ -104,6 +104,9 @@ function autostart
     if not pgrep alacritty
         nohup alacritty --command tmux -2 new-session -A -s init &
     end
+    if not pgrep spotify
+        nohup spotify &
+    end
     if not pgrep telegram-desktop
         nohup telegram-desktop &
     end
