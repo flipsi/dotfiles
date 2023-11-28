@@ -103,11 +103,11 @@ function print_supported_targets() {
 
 function install_xresources_inclusion() {
     local sourcestring="#include "\""$1"\"
+    touch "$HOME/.Xresources"
     if [[ $UNINSTALL != true ]]; then
         grep -q -F "$sourcestring" "$HOME/.Xresources"  || echo "$sourcestring" >> "$HOME/.Xresources"
         xrdb -all "$HOME/.Xresources"
     else
-        touch "$HOME/.Xresources"
         sed -i -- "/^${sourcestring//\//\\/}$/d" "$HOME/.Xresources"
     fi
 }
