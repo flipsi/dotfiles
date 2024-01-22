@@ -2816,6 +2816,12 @@ function! SetupLatex()
     setlocal wrap
     nnoremap <buffer> <leader>bb :VimtexCompile<cr>
     nnoremap <buffer> <leader>br :VimtexCompileSS<cr>
+    " fallback build if there's a shitty error again
+    nnoremap <buffer> <leader>bp :call RunCommandInBuildShell('pdflatex ' . ExpandPrependThisDir('%'))<cr>
+    " open PDF with zathura
+    nnoremap <buffer> <leader>bz :execute 'Dispatch zathura ' . expand('%:r') . '.pdf'<cr>
+    " print PDF
+    nnoremap <buffer> <leader>bP :execute 'Dispatch lpr ' . expand('%:r') . '.pdf'<cr>
 endfunction
 
 
