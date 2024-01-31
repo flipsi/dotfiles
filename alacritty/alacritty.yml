@@ -1,4 +1,6 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator
+#
+# THIS FILE IS DEPRECATED! USE alacritty.toml INSTEAD!
 
 
 # Any items in the `env` entry below will be added as
