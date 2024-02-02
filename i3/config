@@ -385,7 +385,6 @@ mode "$mode_xdootool" {
     bindsym t       mode "$mode_xdootool_timestamp"
     bindsym Shift+s exec --no-startup-id "sleep 0.2; xdotool type --delay 30 '¯\\\_(ツ)\_/¯'"; mode "default";
     # cancel
-    bindsym BackSpace   mode "$mode_x"
     bindsym $mod+Escape mode "default"
     bindsym Return      mode "default"
     bindsym Escape      mode "default"
@@ -401,7 +400,6 @@ mode "$mode_xdootool_timestamp" {
     bindsym Shift+a exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%Y%m%d%H%M)\\""; mode "default";
     bindsym u       exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%s)\\""; mode "default";
     # cancel
-    bindsym BackSpace   mode "$mode_x"
     bindsym $mod+Escape mode "default"
     bindsym Return      mode "default"
     bindsym Escape      mode "default"
