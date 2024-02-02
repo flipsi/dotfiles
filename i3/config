@@ -375,22 +375,22 @@ mode "$mode_x" {
     bindsym Return      mode "default"
     bindsym Escape      mode "default"
 }
-set $mode_xdootool (c) ^ (b) bash with my bashrc (g) Google contact email (p) testing password (s) shrug (t) timestamp
-mode "$mode_xdootool" {
+set $mode_xdotool (c) ^ (b) bash with my bashrc (g) Google contact email (p) testing password (s) shrug (t) timestamp
+mode "$mode_xdotool" {
     bindsym b       exec --no-startup-id "xdotool type 'bbash --rcfile <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/bash/bashrc_sflip)'; xdotool key Return"; mode "default";
     bindsym c       exec --no-startup-id "xdotool type '^'"; mode "default";
     bindsym g       exec --no-startup-id "xdotool type $(goobook-query-mail.sh)"; mode "default";
     bindsym p       exec --no-startup-id "xdotool type 'iopineiBie5fiong7yae6aeng0ooF6'"; mode "default";
     bindsym s       exec --no-startup-id "sleep 0.2; xdotool type --delay 30 '¯\_(ツ)_/¯'"; mode "default";
-    bindsym t       mode "$mode_xdootool_timestamp"
+    bindsym t       mode "$mode_xdotool_timestamp"
     bindsym Shift+s exec --no-startup-id "sleep 0.2; xdotool type --delay 30 '¯\\\_(ツ)\_/¯'"; mode "default";
     # cancel
     bindsym $mod+Escape mode "default"
     bindsym Return      mode "default"
     bindsym Escape      mode "default"
 }
-set $mode_xdootool_timestamp Format: (d) YYYY-MM-DD  (D) YYYYMMDD (g) DD.MM.YYYY (t) HH:MM (T) HHMM (a) YYYY-MM-DD-HH-MM (A) YYYYMMDDHHMM (u) unix timestamp
-mode "$mode_xdootool_timestamp" {
+set $mode_xdotool_timestamp Format: (d) YYYY-MM-DD  (D) YYYYMMDD (g) DD.MM.YYYY (t) HH:MM (T) HHMM (a) YYYY-MM-DD-HH-MM (A) YYYYMMDDHHMM (u) unix timestamp
+mode "$mode_xdotool_timestamp" {
     bindsym d       exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%Y-%m-%d)\\""; mode "default";
     bindsym Shift+d exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%Y%m%d)\\""; mode "default";
     bindsym g       exec --no-startup-id "sleep 0.2; xdotool type \\"$(date +%d.%m.%Y)\\""; mode "default";
