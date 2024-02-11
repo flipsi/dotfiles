@@ -113,6 +113,7 @@ abbr $args nv     nvlc
 abbr $args ns     netctl status
 abbr $args na     sudo netctl start
 abbr $args no     sudo netctl stop
+abbr $args nr     sudo netctl restart
 abbr $args o      open
 abbr $args p      pass
 abbr $args pe     pass edit
