@@ -32,12 +32,12 @@ function arrange_outputs_at_home() {
                 --output "$LAPTOP_SCREEN" --off \
                 --output "$THIRD_MONITOR" --mode 2560x1440 --pos 0x0 --rotate left \
                 --output "$MAIN_MONITOR" --primary --mode 2560x1440 --pos 1440x560 --rotate normal \
-                --output "$SECOND_MONITOR" --mode 2560x1440 --pos 4000x560 --rotate normal \
+                --output "$SECOND_MONITOR" --mode 2560x1440 --pos 4000x0 --rotate left \
                 || ( \
                 sleep 0.1 && xrandr --output "$LAPTOP_SCREEN" --off && \
                 sleep 0.1 && xrandr --output "$THIRD_MONITOR" --off && \
                 sleep 0.1 && xrandr --output "$MAIN_MONITOR" --primary --auto && \
-                sleep 0.1 && xrandr --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR" && \
+                sleep 0.1 && xrandr --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR" --rotate right && \
                 sleep 0.1 && xrandr --output "$THIRD_MONITOR" --auto --left-of "$MAIN_MONITOR" --rotate left
             )
 
