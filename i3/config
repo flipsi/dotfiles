@@ -360,10 +360,10 @@ mode "$mode_clipboard" {
 bindsym $mod+x mode "$mode_x"
 set $mode_x (x) type with xdotool (t) type timestamp with xdotool (g) Google on Duckduckgo (p) generate password in clipboard (n) click away notification
 mode "$mode_x" {
-    bindsym  $mod+x mode "$mode_xdootool"
-    bindsym       x mode "$mode_xdootool"
-    bindsym  $mod+t mode "$mode_xdootool_timestamp"
-    bindsym       t mode "$mode_xdootool_timestamp"
+    bindsym  $mod+x mode "$mode_xdotool"
+    bindsym       x mode "$mode_xdotool"
+    bindsym  $mod+t mode "$mode_xdotool_timestamp"
+    bindsym       t mode "$mode_xdotool_timestamp"
     bindsym  $mod+p exec --no-startup-id "pwgen 22 1 | tr -d '\n' | xclip -selection clipboard"; mode "default"
     bindsym       p exec --no-startup-id "pwgen 22 1 | tr -d '\n' | xclip -selection clipboard"; mode "default"
     bindsym  $mod+g exec --no-startup-id "xdotool key --delay 100 g i Home; xdotool type '!g '; xdotool key KP_Enter "; mode "default"
