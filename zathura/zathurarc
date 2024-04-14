@@ -1,4 +1,5 @@
-set pages-per-row 1
+set pages-per-row 2
+set first-page-column 0
 set incremental-search
 set window-title-basename true
 
