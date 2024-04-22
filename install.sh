@@ -39,6 +39,7 @@ SUPPORTED_TARGETS=(\
     gtk \
     i3 \
     intellij\
+    k9s \
     kitty \
     kbd \
     konsole \
@@ -250,6 +251,11 @@ function create_link_for_target() {
             for DIR in $INTELLIJ_DIRS; do
                 create_link "$PWD/intellij/idea.properties" "$DIR/config/idea.properties"
             done
+            ;;
+
+        k9s )
+            mkdir -p "$HOME/.config/k9s"
+            create_link "$PWD/k9s/config.yml" "$HOME/.config/k9s/config.yml"
             ;;
 
         kbd )
