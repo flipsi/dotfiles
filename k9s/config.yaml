@@ -12,6 +12,7 @@ k9s:
     crumbsless: false
     reactive: false
     noIcons: false
+    skin: gruvbox-dark
     defaultsToFullScreen: false
   skipLatestRevCheck: false
   disablePodCounting: false
