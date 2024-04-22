@@ -255,7 +255,8 @@ function create_link_for_target() {
 
         k9s )
             mkdir -p "$HOME/.config/k9s"
-            create_link "$PWD/k9s/config.yml" "$HOME/.config/k9s/config.yml"
+            create_link "$PWD/k9s/config.yaml" "$HOME/.config/k9s/config.yaml"
+            create_link "$PWD/k9s/skins" "$HOME/.config/k9s/skins"
             ;;
 
         kbd )
