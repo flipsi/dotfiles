@@ -617,18 +617,18 @@ key = "F12"
 mods = "Super"
 
 [mouse]
-faux_scrolling_lines = 1
+# faux_scrolling_lines = 1
 hide_when_typing = false
 
 [[mouse.bindings]]
 action = "PasteSelection"
 mouse = "Middle"
 
-[mouse.double_click]
-threshold = 300
+# [mouse.double_click]
+# threshold = 300
 
-[mouse.triple_click]
-threshold = 300
+# [mouse.triple_click]
+# threshold = 300
 
 [selection]
 semantic_escape_chars = ",│`|:\"' ()[]{}<>"
