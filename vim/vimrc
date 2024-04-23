@@ -2745,8 +2745,8 @@ augroup typescript_on_read
     au FileType typescript call SetupTsuquyomi()
     au FileType typescript.tsx call SetupYarn()
     au FileType typescript.tsx call SetupTsuquyomi()
-    " nnoremap <buffer> <leader>AF  :call RunCommand("prettier --parser typescript --write **.tsx")<cr>
-    nnoremap <buffer> <leader>AF  :call RunCommand("yarn format")<cr>
+    nnoremap <buffer> <leader>AF  :call RunCommand("prettier --parser typescript --write **.tsx")<cr>
+    " nnoremap <buffer> <leader>AF  :call RunCommand("yarn format")<cr>
 augroup END
 
 function! SetupNpm()
@@ -2764,13 +2764,17 @@ function! SetupYarn()
     " ATM I don't care to make this more generic/smart.
     nnoremap <buffer> <leader>bi  :call RunCommand("yarn --cwd ../ui install")<cr>
     nnoremap <buffer> <leader>bd  :call RunCommand("yarn --cwd ../ui build")<cr>
-    nnoremap <buffer> <leader>br  :call RunCommand("yarn --cwd ../ui start:web:e2e")<cr>
+    nnoremap <buffer> <leader>bR  :call RunCommand("yarn --cwd ../ui start:web:e2e")<cr>
+    nnoremap <buffer> <leader>br  :call RunCommand("yarn --cwd ../ui dev")<cr>
+    nnoremap <buffer> <leader>bgg :call RunCommand("../scripts/ui-codegen.sh")<cr>
+    nnoremap <buffer> <leader>bgi :call RunCommand("yarn --cwd ../ui i18nInterface")<cr>
     nnoremap <buffer> <leader>bLL :call RunCommand("yarn --cwd ../ui lint")<cr>
     nnoremap <buffer> <leader>bLF :call RunCommand("yarn --cwd ../ui lint:fix")<cr>
     nnoremap <buffer> <leader>btt :call RunCommand("yarn --cwd ../ui test")<cr>
     nnoremap <buffer> <leader>btu :call RunCommand("yarn --cwd ../ui test:unit")<cr>
-    nnoremap <buffer> <leader>bto :call RunCommand("yarn --cwd ../ui test:unit ../" . expand("%"))<cr>
-    nnoremap <buffer> <leader>btO :call RunCommand("yarn --cwd ../ui test:e2e --spec ../" . expand("%"))<cr>
+    nnoremap <buffer> <leader>bto :call RunCommand("yarn --cwd ../ui test " . expand("%"))<cr>
+    nnoremap <buffer> <leader>btw :call RunCommand("yarn --cwd ../ui test:watch " . expand("%"))<cr>
+    nnoremap <buffer> <leader>btO :call RunCommand("yarn --cwd ../ui test:e2e --spec " . expand("%"))<cr>
     nnoremap <buffer> <leader>bti :call RunCommand("yarn --cwd ../ui test:e2e")<cr>
 endfunction
 command! SetupYarn :call SetupYarn() " add mappings for development with yarn
