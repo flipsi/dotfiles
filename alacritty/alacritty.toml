@@ -68,6 +68,7 @@ y = 0
 
 [font.italic]
 family = "PragmataPro Mono"
+# family = MesloLGS Nerd Font Mono
 # family = Fantasque Sans Mono
 # family = Fira Mono
 # family = Source Code Pro

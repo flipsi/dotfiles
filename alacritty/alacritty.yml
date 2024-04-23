@@ -66,6 +66,7 @@ font:
   normal:
     # family: Fantasque Sans Mono
     family: PragmataPro Mono
+    # family: "MesloLGS Nerd Font Mono"
     # family: Fira Mono
     # family: Source Code Pro
     # family: Sudo
