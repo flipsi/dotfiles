@@ -153,7 +153,6 @@ function create_link_for_target() {
 
         alacritty )
             mkdir -p "$HOME/.config/alacritty"
-            create_link "$PWD/alacritty/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml" # TODO: stop supporting old alacritty versions
             create_link "$PWD/alacritty/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
             ;;
 
