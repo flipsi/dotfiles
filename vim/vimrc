@@ -3393,7 +3393,7 @@ set sidescroll=1
 set incsearch
 set ignorecase
 set smartcase
-set gdefault
+set gdefault " DEPRECATED TODO: check my vimrc usages
 set nohlsearch
 set nowrapscan
 
@@ -6102,9 +6102,17 @@ tnoremap <c-y><c-w> <c-\><c-n>:CloseTab<cr>
 tnoremap <c-y><bs>  <c-\><c-n>:CloseTab<cr>
 
 " change tab
-" TODO: don't have to hit <cr> one more time
-nnoremap <c-y><tab>               :tabs<bar>exe ':tabn ' . InputNChars(1, 'Switch to tab number? ')<cr>
-tnoremap <c-y><tab>     <c-\><c-n>:tabs<bar>exe ':tabn ' . InputNChars(1, 'Switch to tab number? ')<cr>
+command! ChangeTabInteractively :call ChangeTabInteractively()
+function! ChangeTabInteractively()
+    tabs
+    let l:input = InputNChars(1, 'Switch to tab number? ')
+    if !empty(gettabinfo(l:input))
+        exe ':tabn ' . l:input
+    endif
+    redraw " only so I don't have to hit <cr> one more time
+endfunction
+nnoremap <c-y><tab>               :ChangeTabInteractively<cr>
+tnoremap <c-y><tab>     <c-\><c-n>:ChangeTabInteractively<cr>
 nnoremap <c-y><space>             g<tab>
 tnoremap <c-y><space>   <c-\><c-n>g<tab>
 nnoremap <c-y><c-n>           :tabnext<cr>
