@@ -3106,6 +3106,14 @@ augroup END
 " }}}
 " Language: SQL {{{
 
+" See :help ft_sql.txt
+
+" Set custom dialect for files with '.sql' extension
+let g:sql_type_default = 'pgsql'
+" or manually set with:
+" :SQLSetType pgsql.vim
+
+
 augroup is_keyword_sql
     autocmd!
     autocmd FileType sql setlocal iskeyword+=-
@@ -3115,6 +3123,7 @@ augroup sql_on_read
     au!
     au FileType sql if !IsScalaProject() | call SetupSQLShellMappings() | endif
     au FileType sql if !IsScalaProject() | call SetupSQLDadBod() | endif
+    " TODO: set to hugsql if WHAT CONDITION ???
 augroup END
 
 command! SetupSQL :call SetupSQLDadBod()<bar> call SetupSQLShellMappings() " add mappings for development with SQL
@@ -3139,6 +3148,10 @@ function! RunSQLFileInShell()
     endif
 endfunction
 command! RunSQLFileInShell :call RunSQLFileInShell()
+
+
+" more advanced syntax highlighting for PostgreSQL dialect and auto-completion
+Plug 'lifepillar/pgsql.vim'
 
 
 Plug 'tpope/vim-dadbod'
