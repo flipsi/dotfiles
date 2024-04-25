@@ -2246,7 +2246,8 @@ nnoremap <leader>es :CocList outline<cr>
 nmap <leader>fU <Plug>(coc-references)
 nmap <leader>fu :call SaveCursorAndWindowPosition()
             \ <bar> exe "normal \<Plug>(coc-references)"
-            \ <bar> sleep 200m
+            \ <bar> sleep 100m
+            \ <bar> cclose <bar> bot copen
             \ <bar> echo 'Found ' . len(getqflist()) . ' usages (including declaration).'
             \ <bar> RestoreCursorAndWindowPosition <cr>
 
@@ -4169,23 +4170,27 @@ endfunction
 
 " toggle quickfix or location list {{{
 function! ToggleList(bufname, pfx)
-  let buflist = GetBufferList()
-  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
-    if bufwinnr(bufnum) != -1
-      exec(a:pfx.'close')
-      return
+    let buflist = GetBufferList()
+    for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+        if bufwinnr(bufnum) != -1
+            exec(a:pfx . 'close')
+            return
+        endif
+    endfor
+    if a:pfx == 'l' && len(getloclist(0)) == 0
+        echohl ErrorMsg
+        echo "Location List is Empty."
+        return
     endif
-  endfor
-  if a:pfx == 'l' && len(getloclist(0)) == 0
-      echohl ErrorMsg
-      echo "Location List is Empty."
-      return
-  endif
-  let winnr = winnr()
-  exec(a:pfx.'open')
-  if winnr() != winnr
-    wincmd p
-  endif
+    let winnr = winnr()
+    if a:pfx == 'c'
+        bot copen
+    else
+        lopen
+    endif
+    if winnr() != winnr
+        wincmd p
+    endif
 endfunction
 " }}}
 
@@ -5802,7 +5807,7 @@ function! OpenBuildErrorsInQuickfixList()
     exe 'cfile' . l:errorfile
     if len(getqflist()) > 0
         let g:jumplist = 'quickfixlist'
-        copen
+        bot copen
         cfirst
     else
         echomsg "No build errors."
