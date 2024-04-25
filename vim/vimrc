@@ -2364,9 +2364,9 @@ function! SetupClojureForCodeIntelligenceCore()
     let g:prompt_regex = '^bazel-wrapper: Executing gazelle$'
     " TODO: fix me (no real filenames in Clojure stacktraces unfortunately)
     set errorformat=ci_fuzz.backend%.%#\ (%f:%l)
-    nnoremap <buffer> <leader>bgg :echomsg "Not necessary anymore! Want protobut generation? Use <leader>bgd ;)"<cr>
-    nnoremap <buffer> <leader>bgd :call RunCommandInBuildShell("bazel build //backend:repl_runtime_deps_deploy.jar")<cr>
-    nnoremap <buffer> <leader>bd  :call RunCommandInBuildShell("bb build-backend-image")<cr>
+    nnoremap <buffer> <leader>bdp :call RunCommandInBuildShell("bb build-backend-deps")<cr>
+    nnoremap <buffer> <leader>bdP :call RunCommandInBuildShell("bazel build //backend:repl_runtime_deps_deploy.jar")<cr>
+    nnoremap <buffer> <leader>bdd :call RunCommandInBuildShell("bb build:backend")<cr>
     nnoremap <buffer> <leader>btA :call RunCommandInBuildShell("clj -X:test")<cr>
     nnoremap <buffer> <leader>bta :call RunCommandInBuildShell("bb kaocha --focus-meta :backend")<cr>
     nnoremap <buffer> <leader>btn :call RunCommandInBuildShell("bb kaocha --focus " . CalculateKaochaFocusUnit('namespace'))<cr>
@@ -2472,6 +2472,8 @@ function! SetupConjure()
     nnoremap <buffer> <leader>ltn :call RunConjureCommand('ConjureCljRunCurrentNsTests')<cr>
     nnoremap <buffer> <leader>lto :call RunConjureCommand('ConjureCljRunCurrentTest')<cr>
     nnoremap          <leader>lbb :call RunLastConjureCommand()<cr>
+
+    nnoremap <buffer> <leader>lbc :exe "ConjureEval (nextjournal.clerk/show! \"" . expand("%:p") . "\")"<cr>
 
     nnoremap <leader>lo        :ConjureEval<space>
     nnoremap <leader>lev       :exe "ConjureEval " . @+ <cr> " contents from clipboard
