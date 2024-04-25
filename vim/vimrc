@@ -2439,19 +2439,15 @@ Plug 'Olical/conjure'
 " Use :ConjureSchool to get started
 " See `:vertical help conjure-mappings` for (default) mappings
 
-" If combined with the context.vim plugin, the HUD has a too low zindex, so the context floating window overlaps the HUD, which is not what I want.
-" I created https://github.com/Olical/conjure/issues/529 for this.
-" To workaround this until the issue is resolved, I manually patch the zindex in $HOME/.local/share/nvim/plugged/conjure/lua/conjure/log.lua
-" This propably is overwritten by any update, especially because the lua is generated from fennel. ¯\_(ツ)_/¯
-
 let g:conjure#mapping#prefix = "<leader>l"
 
 let g:conjure#log#jump_to_latest#enabled = v:false
 let g:conjure#log#break_length = 120
 let g:conjure#log#hud#minimum_lifetime_ms = 200
 let g:conjure#log#hud#width = 1
-let g:conjure#log#hud#anchor = "NW" " must be one of: NE, SE, SW, NW
+let g:conjure#log#hud#anchor = "SW" " must be one of: NE, SE, SW, NW
 let g:conjure#log#hud#border = "none"
+let g:conjure#log#hud#zindex = 50
 
 " TODO: why doesn't this setting have any effect?
 command! ConjureLogsToggleWrap :call ConjureLogsToggleWrap()
