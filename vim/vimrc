@@ -6409,6 +6409,8 @@ augroup END
 
 augroup map_q_in_certain_buffers
     autocmd!
+    " TODO: FIX this for conjure log
+    autocmd BufReadPost conjure-log-*    nnoremap <buffer> q :bd<cr>
     autocmd BufReadPost fugitive://*     nnoremap <buffer> q :bd<cr>
     autocmd BufReadPost output://*       nnoremap <buffer> q :bd<cr>
     autocmd filetype git                 nnoremap <buffer> q :bd<cr>
