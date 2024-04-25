@@ -4103,6 +4103,18 @@ function! WindoInRegularBuffers(cmd)
 endfunction
 " }}}
 
+command! SaveCursorAndWindowPosition :call SaveCursorAndWindowPosition()
+function! SaveCursorAndWindowPosition()
+    let g:saved_win_id = win_getid()
+    normal! mZ
+endfunction
+
+command! RestoreCursorAndWindowPosition :call RestoreCursorAndWindowPosition()
+function! RestoreCursorAndWindowPosition()
+    call win_gotoid(g:saved_win_id)
+    normal! `Z
+endfunction
+
 
 " Show a temporary message in a floating window with a border {{{
 " From https://www.statox.fr/posts/2021/03/breaking_habits_floating_window/
@@ -4504,19 +4516,16 @@ nnoremap <leader>iS :call SendBufferViaSlackChooseChannel()<cr>
 let g:match_id_base = 86750
 
 function! ToggleHighlightInterestingWord(n)
-    let l:win_id = win_getid()
-    normal! mZ
+    SaveCursorAndWindowPosition
     let match_id = g:match_id_base + a:n
     silent! windo let new_match = matchdelete(match_id)
     if new_match
-        call win_gotoid(l:win_id)
-        normal! `Z
+        RestoreCursorAndWindowPosition
         normal! "zyiw
         let pattern = '\V\<' . escape(@z, '\') . '\>'
         windo call matchadd("InterestingWord" . a:n, pattern, 1, match_id)
     endif
-    call win_gotoid(l:win_id)
-    normal! `Z
+    RestoreCursorAndWindowPosition
 endfunction
 
 function! RemoveAllInterestingWordHighlights()
