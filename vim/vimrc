@@ -5609,7 +5609,7 @@ nnoremap dN [c
 
 command! SetRunCommandMethodBasedOnFiletype :call SetRunCommandMethodBasedOnFiletype()
 function! SetRunCommandMethodBasedOnFiletype()
-    let l:filetypes_for_output_window = ['clojure', 'scala']
+    let l:filetypes_for_output_window = ['typescript', 'clojure', 'scala']
     if index(l:filetypes_for_output_window, &ft) >= 0
         let g:run_command_method = "output-window"
     elseif has('nvim')
