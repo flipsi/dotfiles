@@ -2795,6 +2795,10 @@ command! SetupTsuquyomi :call SetupTsuquyomi() " add mappings for development wi
 " }}}
 " Language: LaTeX {{{
 
+" TODO: use neovim builtin X window and window manager support to open pdf within vim
+" https://www.reddit.com/r/neovim/s/gmyYf84Ydq
+" https://github.com/altermo/nwm
+
 Plug 'lervag/vimtex'
 
 " let g:tex_flavor = 'latex'
