@@ -2243,7 +2243,12 @@ nmap     <leader>ji         <Plug>(coc-implementation)
 nnoremap <leader>es :CocList outline<cr>
 
 " find usages and show in quickfix list
-nmap <leader>fu         <Plug>(coc-references)
+nmap <leader>fU <Plug>(coc-references)
+nmap <leader>fu :call SaveCursorAndWindowPosition()
+            \ <bar> exe "normal \<Plug>(coc-references)"
+            \ <bar> sleep 200m
+            \ <bar> echo 'Found ' . len(getqflist()) . ' usages (including declaration).'
+            \ <bar> RestoreCursorAndWindowPosition <cr>
 
 " actions
 nmap <leader>ia         <Plug>(coc-codeaction)
