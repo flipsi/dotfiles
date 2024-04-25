@@ -5091,6 +5091,7 @@ nnoremap <leader>o <nop>
 
 " toggle syntax highlighting
 nmap <silent> <leader>syn :ToggleSyntaxCurrentBuffer<cr>
+nmap <silent> <leader>syt :TSToggle highlight<cr> " TreeSitter
 
 " toggle syntax highlighting after g:synmaxcol characters
 command! ToggleSyntaxLongLines :let &synmaxcol = g:synmaxcol - &synmaxcol " Disable or enable syntax highlighting (long lines)
