@@ -41,6 +41,13 @@ SYNC_COMMAND="mbsync -a --verbose >> $SYNC_LOGFILE 2>&1"
 TMUX_TITLE="mail"
 
 
+function require {
+  command -v "$1" >/dev/null 2>&1 || {
+    echo >&2 "Error: '$1' is required, but was not found."; exit 1;
+  }
+}
+
+
 function parse_arguments() {
     while [[ $# -ge 1 ]]; do
         case "$1" in
@@ -170,6 +177,8 @@ function undo_rename_window() {
 }
 
 
+require "$MUTT_COMMAND"
+require "$SYNC_APP"
 parse_arguments "$@"
 rename_window
 start_mail_util
