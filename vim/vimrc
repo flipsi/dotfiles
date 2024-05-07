@@ -5511,8 +5511,12 @@ vnoremap 'o :sort<cr>
 
 
 " correct typos like 'DAmnitypefast' to titlecase ('Damnitypefast')
-nnoremap 'tu blguee
+nnoremap 'tu      blguee
 inoremap 'tu <esc>blgueea
+
+" fix namespace for Clojure autocompletion
+nnoremap 'tn      F/dF/e
+inoremap 'tn <esc>F/dF/ea
 
 
 if s:MyMode == 'stripped'
