@@ -3477,8 +3477,8 @@ set hidden
 set splitbelow
 " puts new vsplit windows to the right of the current
 set splitright
-" don't resize remaining windows after closing one (keep window layout)
-set noequalalways
+" (don't) resize remaining windows after closing one (keep window layout)
+set equalalways
 
 " preview-window (e.g. used by vim-dadbod)
 set previewheight=40
