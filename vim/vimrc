@@ -2772,8 +2772,11 @@ function! SetupYarn()
     nnoremap <buffer> <leader>br  :call RunCommand("yarn --cwd ../ui dev")<cr>
     nnoremap <buffer> <leader>bgg :call RunCommand("../scripts/ui-codegen.sh")<cr>
     nnoremap <buffer> <leader>bgi :call RunCommand("yarn --cwd ../ui i18nInterface")<cr>
-    nnoremap <buffer> <leader>bLL :call RunCommand("yarn --cwd ../ui lint")<cr>
-    nnoremap <buffer> <leader>bLF :call RunCommand("yarn --cwd ../ui lint:fix")<cr>
+    nnoremap <buffer> <leader>bll :call RunCommand("yarn --cwd ../ui lint")<cr>
+    nnoremap <buffer> <leader>blf :call RunCommand("yarn --cwd ../ui lint:fix")<cr>
+    nnoremap <buffer> <leader>bcf :call RunCommand("./build/ci/scripts/yarn-check-format.sh")<cr>
+    nnoremap <buffer> <leader>bcF :call RunCommand("yarn --cwd ../ui run format:check")<cr>
+    nnoremap <buffer> <leader>AF  :call RunCommand("yarn --cwd ../ui run format")<cr>
     nnoremap <buffer> <leader>btt :call RunCommand("yarn --cwd ../ui test")<cr>
     nnoremap <buffer> <leader>btu :call RunCommand("yarn --cwd ../ui test:unit")<cr>
     nnoremap <buffer> <leader>bto :call RunCommand("yarn --cwd ../ui test " . expand("%"))<cr>
@@ -5752,8 +5755,7 @@ function! RefreshRunCommandMappings()
         nnoremap <leader>bf         :execute 'RunCommandInTerminal  ' . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
         nnoremap <leader>bF         :execute 'RunCommandInTerminal ' . ExpandPrependThisDir('%') . ' '<left>
         nnoremap <leader>bb         :update<cr> :call RunLastCommandInTerminal()<cr>
-        nnoremap <leader>bl         :ExecuteInNeoTerminal Tclear<cr>
-        nnoremap <leader>bc         :ExecuteInNeoTerminal Tkill<cr>
+        nnoremap <leader>b<c-l>     :ExecuteInNeoTerminal Tclear<cr>
         nnoremap <leader>b<c-c>     :ExecuteInNeoTerminal Tkill<cr>
         nnoremap <leader>bq         :Tclose<cr>         " only hides buffer, we can still send commands to it
         nnoremap <leader>b<bs>      :Tclose<cr>         " only hides buffer, we can still send commands to it
@@ -5762,8 +5764,7 @@ function! RefreshRunCommandMappings()
         nnoremap <leader>bf         :execute 'RunCommandInTerminal  ' . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
         nnoremap <leader>bF         :execute 'RunCommandInTerminal ' . ExpandPrependThisDir('%') . ' '<left>
         nnoremap <leader>bb         :update<cr> :call RunLastCommandInTerminal()<cr>
-        nnoremap <leader>bl         :echoerr "Not implemented"<cr>
-        nnoremap <leader>bc         :echoerr "Not implemented"<cr>
+        nnoremap <leader>b<c-l>     :echoerr "Not implemented"<cr>
         nnoremap <leader>b<c-c>     :echoerr "Not implemented"<cr>
         nnoremap <leader>bq         :echoerr "Not implemented"<cr>
         nnoremap <leader>b<bs>      :echoerr "Not implemented"<cr>
@@ -5772,11 +5773,10 @@ function! RefreshRunCommandMappings()
         nnoremap <leader>bf         :VimuxRunCommand " " . expand('%')<left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
         nnoremap <leader>bF         :VimuxRunCommand ExpandPrependThisDir('%') . " "<left>
         nnoremap <leader>bb         :update<cr>:VimuxRunLastCommand<cr>
-        nnoremap <silent> <leader>bl :VimuxClearTerminalScreen<cr>
-        nnoremap <leader>bz         :call VimuxZoomRunner()<cr>
-        nnoremap <leader>bc         :VimuxInterruptRunner<cr>
+        nnoremap <silent> <leader>b<c-l> :VimuxClearTerminalScreen<cr>
         nnoremap <leader>b<c-c>     :VimuxInterruptRunner<cr>
         nnoremap <leader>b<c-d>     :call VimuxSendKeys("C-d")<cr>
+        nnoremap <leader>bz         :call VimuxZoomRunner()<cr>
         nnoremap <leader>b<c-b>     :VimuxInspectRunner<cr>
         nnoremap <leader><c-b><c-b> :VimuxInspectRunner<cr>
         nnoremap <leader>bq         :VimuxCloseRunner<cr>
