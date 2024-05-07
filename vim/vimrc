@@ -2423,13 +2423,14 @@ endfunction
 Plug 'clojure-vim/vim-jack-in'
 " Start an nREPL server with all of the appropriate middleware inside your Neovim instance
 nnoremap <leader>la   <nop>
-nnoremap <leader>laa  :Clj -M:ci-dev:repl
-nnoremap <leader>lap  :Clj -M:ci-dev:repl:portal<CR>
-nnoremap <leader>lac  :Clj -M:ci-dev:repl:clerk<CR>
+nnoremap <leader>laA  :Clj -M:ci-dev:repl
+nnoremap <leader>laa  :Clj -M:ci-dev:repl<cr>
+nnoremap <leader>lap  :Clj -M:ci-dev:repl:portal<cr>
+nnoremap <leader>lac  :Clj -M:ci-dev:repl:clerk<cr>
 nnoremap <leader>lxp  :ConjureEval (require '[portal.api :as portal]) (portal/open {:theme :portal.colors/zerodark})<cr>
 nnoremap <leader>lxd  :ConjureEval (require '[clojure.repl :refer [doc]])<cr>
 nnoremap <leader>lxc  :ConjureEval (require '[clojure.clerk :as :clerk])<cr>
-nnoremap <leader>lcc  :ConjureConnect<CR>
+nnoremap <leader>lcc  :ConjureConnect<cr>
 
 " Yet another alternative to Fireplace
 " Multi-language Interactive evaluation
