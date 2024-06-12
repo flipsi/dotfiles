@@ -44,7 +44,9 @@ abbr $args gbm    git branch -m
 abbr $args gc     git commit
 abbr $args gca    git commit --amend
 abbr $args gcm    git commit -m
+abbr $args gcmi   git commit -m \'Initial commit\'
 abbr $args gcl    git clone --recursive
+abbr $args gcp    git cherry-pick
 abbr $args gcf    git clean -f -d
 abbr $args gd     git diff
 abbr $args gda    git diff --cached
@@ -53,10 +55,10 @@ abbr $args ge     git checkout
 abbr $args ge-    git checkout -
 abbr $args gem    git checkout \(git-main-or-master\)
 abbr $args geb    git checkout -b
-abbr $args gcp    git cherry-pick
 abbr $args gf     git fetch --prune
 abbr $args gfm    git checkout --quiet --detach\; git fetch \(git remote \| head -n1\) \(git-main-or-master\):\(git-main-or-master\)\; git checkout --quiet -
 abbr $args ghpr   gh pr view --web \|\| gh pr create --web
+abbr $args gi     git init
 abbr $args gla    glab
 abbr $args glp    glab pipeline ci view
 abbr $args glm    glab mr
