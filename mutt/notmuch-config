@@ -11,7 +11,7 @@
 # configured here named ".notmuch".
 #
 [database]
-path=/home/sflip/.local/share/mail
+path=/home/flipsi/.local/share/mail
 
 # User configuration
 #

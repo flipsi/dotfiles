@@ -122,17 +122,17 @@ source $my_muttdir/colors/mutt-colors-solarized/mutt-colors-solarized-dark-256.m
 
 source $my_muttdir/keybindings.muttrc
 
-macro index,pager im '<sync-mailbox><enter-command>source /home/sflip/.config/mutt/accounts/philipp.moers@mail.de.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to philipp.moers@mail.de"
-macro index,pager ip '<sync-mailbox><enter-command>source /home/sflip/.config/mutt/accounts/mail@philippmoers.de.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to mail@philippmoers.de"
-macro index,pager is '<sync-mailbox><enter-command>source /home/sflip/.config/mutt/accounts/soziflip@gmail.com.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to soziflip@gmail.com"
-macro index,pager iv '<sync-mailbox><enter-command>source /home/sflip/.config/mutt/accounts/valentina@philippmoers.de.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to valentina@philippmoers.de"
+macro index,pager im '<sync-mailbox><enter-command>source /home/flipsi/.config/mutt/accounts/philipp.moers@mail.de.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to philipp.moers@mail.de"
+macro index,pager ip '<sync-mailbox><enter-command>source /home/flipsi/.config/mutt/accounts/mail@philippmoers.de.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to mail@philippmoers.de"
+macro index,pager is '<sync-mailbox><enter-command>source /home/flipsi/.config/mutt/accounts/soziflip@gmail.com.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to soziflip@gmail.com"
+macro index,pager iv '<sync-mailbox><enter-command>source /home/flipsi/.config/mutt/accounts/valentina@philippmoers.de.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to valentina@philippmoers.de"
 
 
 ###################
 # default account #
 ###################
 
-source /home/sflip/.config/mutt/accounts/mail@philippmoers.de.muttrc
+source /home/flipsi/.config/mutt/accounts/mail@philippmoers.de.muttrc
 
 
 # vim: filetype=neomuttrc

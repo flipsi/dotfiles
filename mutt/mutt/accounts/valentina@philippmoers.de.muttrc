@@ -6,9 +6,9 @@ set realname = "Valentina Greif"
 set from = "valentina@philippmoers.de"
 
 set sendmail = "msmtp -a valentina@philippmoers.de"
-set folder = "/home/sflip/.local/share/mail/valentina@philippmoers.de"
-set header_cache = /home/sflip/.cache/mutt-wizard/valentina@philippmoers.de/headers
-set message_cachedir = /home/sflip/.cache/mutt-wizard/valentina@philippmoers.de/bodies
+set folder = "/home/flipsi/.local/share/mail/valentina@philippmoers.de"
+set header_cache = /home/flipsi/.cache/mutt-wizard/valentina@philippmoers.de/headers
+set message_cachedir = /home/flipsi/.cache/mutt-wizard/valentina@philippmoers.de/bodies
 set mbox_type = Maildir
 
 set copy = yes

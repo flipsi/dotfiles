@@ -74,8 +74,8 @@ SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore mail@philippmoers.de-local
-Path /home/sflip/.local/share/mail/mail@philippmoers.de/
-Inbox /home/sflip/.local/share/mail/mail@philippmoers.de/INBOX
+Path /home/flipsi/.local/share/mail/mail@philippmoers.de/
+Inbox /home/flipsi/.local/share/mail/mail@philippmoers.de/INBOX
 Flatten .
 
 #### one channel for all folders ####
@@ -149,8 +149,8 @@ SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore philipp.moers@mail.de-local
-Path /home/sflip/.local/share/mail/philipp.moers@mail.de/
-Inbox /home/sflip/.local/share/mail/philipp.moers@mail.de/INBOX
+Path /home/flipsi/.local/share/mail/philipp.moers@mail.de/
+Inbox /home/flipsi/.local/share/mail/philipp.moers@mail.de/INBOX
 Flatten .
 
 Channel philipp.moers@mail.de
@@ -178,8 +178,8 @@ CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore soziflip@gmail.com-local
 Subfolders Verbatim
-Path /home/sflip/.local/share/mail/soziflip@gmail.com/
-Inbox /home/sflip/.local/share/mail/soziflip@gmail.com/INBOX
+Path /home/flipsi/.local/share/mail/soziflip@gmail.com/
+Inbox /home/flipsi/.local/share/mail/soziflip@gmail.com/INBOX
 
 Group soziflip@gmail.com
 Channel soziflip@gmail.com-inbox
@@ -251,8 +251,8 @@ SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore valentina@philippmoers.de-local
-Path /home/sflip/.local/share/mail/valentina@philippmoers.de/
-Inbox /home/sflip/.local/share/mail/valentina@philippmoers.de/INBOX
+Path /home/flipsi/.local/share/mail/valentina@philippmoers.de/
+Inbox /home/flipsi/.local/share/mail/valentina@philippmoers.de/INBOX
 Flatten .
 
 Group   valentina@philippmoers.de

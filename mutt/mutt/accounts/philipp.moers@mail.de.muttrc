@@ -6,9 +6,9 @@ set realname = "Philipp Moers"
 set from = "philipp.moers@mail.de"
 
 set sendmail = "msmtp -a philipp.moers@mail.de"
-set folder = "/home/sflip/.local/share/mail/philipp.moers@mail.de"
-set header_cache = /home/sflip/.cache/mutt-wizard/philipp.moers@mail.de/headers
-set message_cachedir = /home/sflip/.cache/mutt-wizard/philipp.moers@mail.de/bodies
+set folder = "/home/flipsi/.local/share/mail/philipp.moers@mail.de"
+set header_cache = /home/flipsi/.cache/mutt-wizard/philipp.moers@mail.de/headers
+set message_cachedir = /home/flipsi/.cache/mutt-wizard/philipp.moers@mail.de/bodies
 set mbox_type = Maildir
 
 set copy = yes
