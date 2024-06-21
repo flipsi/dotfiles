@@ -30,7 +30,7 @@ I wrote a script called [mail.sh](./mail.sh) to wrap mutt with a mail sync mecha
 
 Install required dependencies:
 ```
-yay -S mutt-wizard neomutt isync msmtp pass python2 cyrus-sasl-xoauth2
+yay -S mutt-wizard neomutt msmtp isync pass notmuch notmuch-mutt cyrus-sasl-xoauth2 goobook elinks
 ```
 Create mail store:
 ```
@@ -39,7 +39,7 @@ mkdir $MAILDIR/$EMAIL_ADDRESS
 ```
 ### Setup Regular Account
 
-1. To add credentials, use `mutt-secrets.py --mode edit_secrets_file`
+1. To add credentials, use `mutt-secrets.py --mode edit`
 1. Try syncing mailboxes with `mbsync $EMAIL_ADDRESS`
 1. Copy-paste and edit mutt account files
 
@@ -97,8 +97,17 @@ The refresh token is used to update the access token if necessary on every usage
 
 * Install config with the install script of this repo
 * Install dependencies (see above)
+* Copy encrypted credentials file `dotfiles/mutt/mutt/secrets.gpg` (gitignored) to the host via secure channel
 * Copy GPG key `CA1DD30B080E5D7FADCE04ECFC218BA7F39AC976` to the host
-* Copy encrypted credentials file `mutt/mutt/secrets.gpg` to the host
+```
+# on other host
+gpg --export --armor CA1DD30B080E5D7FADCE04ECFC218BA7F39AC976 > tmp/gpg.public.key
+gpg --export-secret-keys --armor CA1DD30B080E5D7FADCE04ECFC218BA7F39AC976 --output tmp/gpg.sec.plain
+# copy to new host via secure channel and delete files!
+# on new host
+gpg --import tmp/gpg.sec.plain
+gpg --edit-key CA1DD30B080E5D7FADCE04ECFC218BA7F39AC976 trust quit
+```
 
 
 ## Gmail peculiarities
@@ -122,6 +131,16 @@ http://blog.onodera.asia/2020/06/how-to-use-google-g-suite-oauth2-with.html
 ## Troubleshooting
 
 To make it work with Gmail, I had to [remove the flattening mechanism](https://github.com/LukeSmithxyz/mutt-wizard/issues/517#issuecomment-684506780).
+
+To fix the initial isync error:
+```
+> mbsync mail@philippmoers.de
+C: 0/6  B: 0/6  F: +0/0 *0/0 #0/0  N: +0/0 *0/0 #0/0
+Maildir error: cannot open store '/home/flipsi/.local/share/mail/mail@philippmoers.de/'
+C: 6/6  B: 0/6  F: +0/0 *0/0 #0/0  N: +0/0 *0/0 #0/0
+```
+I had to `mkdir /home/flipsi/.local/share/mail/mail@philippmoers.de`.
+
 
 To fix the following isync error:
 ```

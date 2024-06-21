@@ -68,7 +68,7 @@ IMAPStore mail@philippmoers.de-remote
 Host imap.strato.de
 Port 993
 User mail@philippmoers.de
-PassCmd "mutt-secrets.py --mode get_secret --account mail@philippmoers.de"
+PassCmd "mutt-secrets.py --mode get --account mail@philippmoers.de"
 AuthMechs LOGIN
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
@@ -143,7 +143,7 @@ IMAPStore philipp.moers@mail.de-remote
 Host imap.mail.de
 Port 993
 User philipp.moers@mail.de
-PassCmd "mutt-secrets.py --mode get_secret --account philipp.moers@mail.de"
+PassCmd "mutt-secrets.py --mode get --account philipp.moers@mail.de"
 AuthMechs LOGIN
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
@@ -172,7 +172,7 @@ Host imap.gmail.com
 Port 993
 User soziflip@gmail.com
 AuthMechs XOAUTH2
-PassCmd "mutt-secrets.py --mode get_secret --oauth --account soziflip@gmail.com"
+PassCmd "mutt-secrets.py --mode get --oauth --account soziflip@gmail.com"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
@@ -245,7 +245,7 @@ IMAPStore valentina@philippmoers.de-remote
 Host imap.strato.de
 Port 993
 User valentina@philippmoers.de
-PassCmd "mutt-secrets.py --mode get_secret --account valentina@philippmoers.de"
+PassCmd "mutt-secrets.py --mode get --account valentina@philippmoers.de"
 AuthMechs LOGIN
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt

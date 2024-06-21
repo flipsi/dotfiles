@@ -62,7 +62,7 @@ def get_secrets_from_gpg_encrypted_muttrc(accountname=False):
     '03': 'valentina@philippmoers.de',
   }
   def parse_muttrc(muttrc):
-    pattern = re.compile('^set my_(\d\d)_(\w*)\s*=\s*"(.*)"')
+    pattern = re.compile('^set my_(\\d\\d)_(\\w*)\\s*=\\s*"(.*)"')
     dictionary = {}
     for line in muttrc:
       match = pattern.search(line)
@@ -153,21 +153,21 @@ def main():
   global secrets_file
 
   parser=argparse.ArgumentParser(description="Get credentials for email services")
-  parser.add_argument("--mode", help="One of [get_secret, edit_secrets_file]. Defaults to get_secret")
-  parser.add_argument("--account", help="name of the account for get_secret mode")
+  parser.add_argument("--mode", help="One of [get, edit]. Defaults to get")
+  parser.add_argument("--account", help="name of the account for get mode")
   parser.add_argument("--oauth", action="store_true", help="Generate OAuth2 access token")
 
 
   args = parser.parse_args()
-  mode = args.mode or 'get_secret'
-  if mode == "get_secret":
+  mode = args.mode or 'get'
+  if mode == "get":
     if not args.account:
       print("missing argument --account")
       os._exit(1)
     else:
       credential = get_secret(args.account, args.oauth)
       print(credential)
-  elif mode == 'edit_secrets_file':
+  elif mode == 'edit':
     edit_secrets_file(secrets_file)
   else:
       print(f"mode {args.mode} not implemented")

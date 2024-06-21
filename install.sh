@@ -576,7 +576,7 @@ function package_install_target() {
             ;;
 
         mutt )
-            LIST_OF_SYSTEM_PACKAGES="neomutt msmtp isync notmuch notmuch-mutt goobook elinks"
+            echo 'WARNING: See mutt/README.md for packages to install!'
             ;;
 
         taskwarrior )
