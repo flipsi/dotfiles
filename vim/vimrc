@@ -146,7 +146,12 @@ set runtimepath+=~/.vim/syntax
 
 " compute if we should use mastery of the world or stripped mode
 function! ComputeMyMode()
-    if filereadable(expand("~/.vim/autoload/plug.vim"))
+    if has('nvim')
+        let l:plugin_file = '~/.local/share/nvim/site/autoload/plug.vim'
+    else
+        let l:plugin_file = '"~/.vim/autoload/plug.vim"'
+    endif
+    if filereadable(expand(l:plugin_file))
         return 'mastery'
     else
         return 'stripped'
