@@ -9,12 +9,10 @@ abbr $args ca     gcalcli
 abbr $args cdi    cd_interactively
 abbr $args cdi.   cd_interactively .
 abbr $args cdir   cd_interactively /
-abbr $args cc     cictl
-abbr $args cif    cifuzz
-abbr $args ci     cifuzz-dev
-abbr $args cia    cifuzz-dev up -d --local
-abbr $args cio    cifuzz-dev stop
-abbr $args cip    cifuzz-dev ps
+abbr $args cf     cifuzz
+abbr $args ck     ckit
+abbr $args cku    ckit server up -d -r
+abbr $args ckd    ckit server down
 abbr $args d      docker
 abbr $args dl     docker logs -n 60
 abbr $args dlf    docker logs -n 60 -f
@@ -62,6 +60,7 @@ abbr $args gi     git init
 abbr $args gla    glab
 abbr $args glp    glab pipeline ci view
 abbr $args glm    glab mr
+abbr $args glml   glab mr list --assignee @me \&\& glab mr list --reviewer @me
 abbr $args glmv   glab mr view --web
 abbr $args glmc   glab mr create --web --fill
 abbr $args gll    tig log
@@ -100,6 +99,7 @@ abbr $args gwa    git worktree add -b
 abbr $args gwl    git worktree list
 abbr $args gwr    git worktree remove
 abbr $args h      bpytop \|\| htop
+abbr $args kc     kubectl
 abbr $args l      less
 abbr $args ll     exa_or_ls -l
 abbr $args lll    exa_or_ls -l -a
@@ -124,10 +124,14 @@ abbr $args pn     pass generate --no-symbols --clip
 abbr $args pgpl   pass git pull
 abbr $args pgps   pass git push
 abbr $args pk     pkill
-abbr $args rrm    rm -rf
-abbr $args se     sudoedit
 abbr $args r      ranger
+abbr $args ra     radio start --random
+abbr $args ro     radio stop
+abbr $args rs     radio status
+abbr $args rv     radio volume
+abbr $args rrm    rm -rf
 abbr $args s      systemctl status --no-pager
+abbr $args se     sudoedit
 abbr $args sj     journalctl --no-pager -n15 -u
 abbr $args sa     sudo systemctl start
 abbr $args so     sudo systemctl stop
