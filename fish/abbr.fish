@@ -131,9 +131,9 @@ abbr $args rs     radio status
 abbr $args rv     radio volume
 abbr $args rrm    rm -rf
 abbr $args s      systemctl status --no-pager
+abbr $args sa     sudo systemctl start
 abbr $args se     sudoedit
 abbr $args sj     journalctl --no-pager -n15 -u
-abbr $args sa     sudo systemctl start
 abbr $args so     sudo systemctl stop
 abbr $args sr     sudo systemctl restart
 abbr $args t      trans :de
@@ -155,3 +155,5 @@ abbr $args ys     yay -S
 abbr $args ysi    yay -Si
 abbr $args yu     yay -Syu
 abbr $args yy     yay -Syu --noconfirm
+abbr $args --set-cursor=URL yt  yt-dlp \'URL\'
+abbr $args --set-cursor=URL yta yt-dlp --extract-audio --audio-quality 0 --audio-format best \'URL\'
