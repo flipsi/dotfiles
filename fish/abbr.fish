@@ -143,7 +143,6 @@ abbr $args u      unison
 abbr $args v      nvim
 # abbr $args vs     vim --servername \(basename \(pwd\)\)
 abbr $args vs     nvim --listen \(basename \(pwd\)\)
-abbr $args vd     nvim $HOME/work/code-intelligence/notes/standup/\(date '+%Y-%m-%d'\).md
 abbr $args x      xrandr
 abbr $args xi     startx ~/.xinitrc
 abbr $args xo     xrandr --output
