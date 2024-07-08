@@ -444,6 +444,15 @@ Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
 nnoremap <leader>yb :RainbowToggle<cr>
 
+augroup rainbow_disable_in_terminal_buffers
+    au!
+    " au TermOpen * if exists(":RainbowToggleOff") | RainbowToggleOff | endif
+    au TermOpen * RainbowToggleOff
+augroup END
+
+" TODO: fork plugin and disable per filetype
+" https://github.com/luochen1990/rainbow/issues/187
+
 
 
 " }}}
