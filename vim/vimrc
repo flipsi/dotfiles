@@ -4887,10 +4887,12 @@ nnoremap <leader>ut :echo UnixTimestampAsDateTime(expand("<cword>"))<cr>
 nnoremap Q @
 nnoremap QQ @@
 
-augroup repeat_macros_with_enter
-    au!
-    au RecordingLeave * exec 'nnoremap <buffer> <cr> @' . reg_recorded()
-augroup END
+if exists('##RecordingLeave')
+    augroup repeat_macros_with_enter
+        au!
+        au RecordingLeave * exec 'nnoremap <buffer> <cr> @' . reg_recorded()
+    augroup END
+endif
 
 
 " alternative way to go back to normal mode
