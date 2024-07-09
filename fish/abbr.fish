@@ -26,6 +26,7 @@ abbr $args dco    docker-compose stop
 abbr $args dcl    docker-compose logs
 abbr $args dclf   docker-compose logs -f
 abbr $args dcp    docker-compose pull
+abbr $args es     echo \$status
 abbr $args fi     fzf_wrapper --find --ranger
 abbr $args fl     fzf_wrapper --locate --ranger
 abbr $args g      git
