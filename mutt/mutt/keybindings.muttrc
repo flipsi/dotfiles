@@ -1,9 +1,30 @@
 # vim: filetype=neomuttrc
 
-bind generic,index u noop
-bind generic,index f noop
-bind generic,index g noop
-bind pager         y noop
+bind generic,index,pager,attach      CS noop
+bind generic,index,pager,attach      Ca noop
+bind generic,index,pager,attach      Cd noop
+bind generic,index,pager,attach      Ci noop
+bind generic,index,pager,attach      Cj noop
+bind generic,index,pager,attach      Cs noop
+bind generic,index,pager,attach      Ct noop
+bind generic,index,pager,attach      M  noop
+bind generic,index,pager,attach      MS noop
+bind generic,index,pager,attach      Ma noop
+bind generic,index,pager,attach      Ma noop
+bind generic,index,pager,attach      Md noop
+bind generic,index,pager,attach      Mi noop
+bind generic,index,pager,attach      Mj noop
+bind generic,index,pager,attach      Ms noop
+bind generic,index,pager,attach      Mt noop
+bind generic,index,pager,attach      f  noop
+bind generic,index,pager,attach      g  noop
+bind generic,pager,pager,attach      ga noop
+bind generic,index,pager,attach      gd noop
+bind generic,index,pager,attach      gi noop
+bind generic,index,pager,attach      gj noop
+bind generic,index,pager,attach      gk noop
+bind generic,index,pager,attach      u  noop
+bind pager                           y  noop
 
 
 ##############
@@ -31,10 +52,14 @@ bind generic,pager,index N search-opposite
 bind  index ff  limit # filter mailbox by string (prefix `=` or regex (prefix `~`)
 macro index uf "<limit>all\n"
 
-bind index j next-entry
-bind index k previous-entry
-macro index gj "<next-entry><next-entry><next-entry><next-entry><next-entry><next-entry><next-entry>"
-macro index gk "<previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry>"
+bind  index,attach  j       next-entry
+bind  index,attach  k       previous-entry
+bind  index,attach  <Down>  next-entry
+bind  index,attach  <Up>    previous-entry
+macro index,attach  gj      "<next-entry><next-entry><next-entry><next-entry><next-entry><next-entry><next-entry>"
+macro index,attach  gk      "<previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry>"
+macro index,attach  g<Down> "<next-entry><next-entry><next-entry><next-entry><next-entry><next-entry><next-entry>"
+macro index,attach  g<Up>   "<previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry>"
 bind index J next-thread
 bind index K previous-thread
 bind index z collapse-thread
@@ -50,16 +75,15 @@ bind pager k previous-line
 # Mail actions #
 ################
 
-bind pager r  reply
-bind pager R  group-reply
-bind index F  forward-message
-bind index d  delete-message
-bind pager d  delete-message # mark for deletion
-bind index ud undelete-message
-bind index D  sync-mailbox # perform deletions in mailbox
-bind index S  save-message
-bind index b  bounce-message
-bind index t  toggle-new
+bind index,pager          r  reply
+bind index,pager          R  group-reply
+bind index,pager          F  forward-message
+bind index,pager          d  delete-message # mark for deletion
+bind index                ud undelete-message
+bind index                D  sync-mailbox # perform deletions in mailbox
+bind index,pager          S  save-message # save to a mailbox
+bind index,pager          b  bounce-message
+bind index                t  toggle-new
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 
