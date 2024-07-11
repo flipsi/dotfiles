@@ -128,11 +128,16 @@ macro index,pager is '<sync-mailbox><enter-command>source /home/flipsi/.config/m
 macro index,pager iv '<sync-mailbox><enter-command>source /home/flipsi/.config/mutt/accounts/valentina@philippmoers.de.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to valentina@philippmoers.de"
 
 
-###################
-# default account #
-###################
+#####################
+# startup behaviour #
+#####################
 
+# load default account
 source /home/flipsi/.config/mutt/accounts/mail@philippmoers.de.muttrc
 
+
+# select first message (rather than the first *unread* message)
+# https://unix.stackexchange.com/a/255934/119362
+push <first-entry>
 
 # vim: filetype=neomuttrc
