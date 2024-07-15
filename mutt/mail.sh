@@ -98,6 +98,10 @@ function start_mail_util() {
         offline )
             eval $MUTT_COMMAND
             ;;
+        * )
+            echo "Invalid mode. Please use one of ['sync', 'offline', 'ask']."
+            exit 1
+            ;;
     esac
 }
 
