@@ -81,7 +81,9 @@ bind index,pager          F  forward-message
 bind index,pager          d  delete-message # mark for deletion
 bind index                ud undelete-message
 bind index                D  sync-mailbox # perform deletions in mailbox
-bind index,pager          S  save-message # save to a mailbox
+bind index,pager          S  save-message # save to a mailbox, which I basically never do.   Instead save to file:
+macro index,pager         s  "| ~/.config/mutt/save-email-to-file.sh $HOME/tmp<enter>:echo 'Email saved to $HOME/tmp'<enter>"
+macro attach              s <save-entry><kill-line>$HOME/tmp/
 bind index,pager          b  bounce-message
 bind index                t  toggle-new
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
