@@ -5,9 +5,12 @@ curl v4.ident.me # public IP address
 curl wttr.in # weather report
 date +%s # unix timestamp
 docker run -it --rm alpine
+docker pull postgres && docker run -p 5432:5432 --rm --name some-postgres -e POSTGRES_PASSWORD=strong postgres # ad hoc PostgreSQL database
+psql -h 127.0.0.1 -U postgres # connect to local PostgreSQL database
 git branch -vv --merged | grep "\[.*/.*: gone\]" | cut -d" " -f3 | xargs git branch -d # delete merged branches
 git checkout --quiet --detach; git fetch (git remote | head -n1) master:master; git checkout --quiet -
 picom-trans -s -o 90 # set transparency for window to be clicked on
+python -m http.server # start local HTTP server with file listing of current directory
 ss -lt src :5432 # show all TCP sockets listening on a specific port
 ssh clidle.ddns.net -p 3000 # wordle game
 sudoedit /etc/X11/xorg.conf.d/00-keyboard.conf # configure Xorg keyboard layout
