@@ -6370,6 +6370,8 @@ command! -nargs=1 InsertGoogleContact :r!goobook-query-mail.sh <args> " Interact
 " inoremap <leader>igm <esc>diw:r!goobook-query-mail.sh<space><c-r>"<cr><cr>
 
 
+" print current buffer
+nnoremap <leader>pr :exec 'Dispatch lpr ' . expand('%')<cr>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
