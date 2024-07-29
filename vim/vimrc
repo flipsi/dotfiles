@@ -1953,6 +1953,11 @@ Plug 'honza/vim-snippets'
 " http://stackoverflow.com/questions/12471398/how-to-enable-snippet-for-html-in-php-files
 autocmd filetype php set filetype=php.html
 
+" fix indenting with == in PHP files
+" https://stackoverflow.com/a/27017167/4568748
+autocmd filetype php set filetype=html
+autocmd filetype php set syntax=php
+
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
