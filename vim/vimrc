@@ -2474,6 +2474,7 @@ Plug 'Olical/conjure'
 
 let g:conjure#mapping#prefix = "<leader>l"
 
+let g:conjure#log#hud#ignore_low_priority = v:true
 let g:conjure#log#jump_to_latest#enabled = v:false
 let g:conjure#log#break_length = 120
 let g:conjure#log#hud#minimum_lifetime_ms = 200
