@@ -259,6 +259,17 @@ if s:MyMode == 'mastery'
     call plug#begin()
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Extend gx to use it beyond just URLs! {{{
+
+" ... e.g. vim plugin URLS, markdown URLs etc.
+"
+Plug 'stsewd/gx-extended.vim'
+
+" Note this issue https://github.com/stsewd/gx-extended.vim/issues/10
+
+
+" }}}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim sessions {{{
 
@@ -5624,20 +5635,24 @@ nnoremap 'dsp :DeleteWhitespaceAroundParentheses<cr>
 nnoremap 'pi :.s:\m.*http.*github\.com/\([^/]*/[^/]*\).*:Plug '\1':<cr>
 
 " open plugin under cursor on Github
+" better use gx-extended plugin for that!
 command! OpenVimPlugOnInGithub :call OpenVimPlugOnInGithub()
 function! OpenVimPlugOnInGithub()
     let l:line = getline(".")
     let l:plugin_identifier = matchstr(l:line, "\\m.*Plug '\\zs.\\+/.\\+\\ze'.*")
     if !empty(l:plugin_identifier)
         call system('xdg-open https://github.com/' . l:plugin_identifier)
+    " else
+        " normal! gx " TODO: fix (the ! is the problem)
     else
         echo "Sorry, this does not look like a line with a plugin name."
     endif
 endfunction
+
 augroup open_vim_plugins_on_github
     autocmd!
     autocmd BufRead vimrc nnoremap <buffer> <leader>px :call OpenVimPlugOnInGithub()<cr>
-    autocmd BufRead vimrc nnoremap <buffer>         gx :call OpenVimPlugOnInGithub()<cr>
+    " autocmd BufRead vimrc nnoremap <buffer>         gx :call OpenVimPlugOnInGithub()<cr>
 augroup END
 
 
