@@ -342,6 +342,7 @@ function create_link_for_target() {
             create_link "$PWD/nvim/init.lua" "$HOME/.config/nvim/init.lua"
             create_link "$PWD/nvim/syntax" "$HOME/.config/nvim/syntax"
             create_link "$PWD/vim/vim/coc-settings.json" "$HOME/.config/nvim/coc-settings.json"
+            create_link "$PWD/vim/markdownlint.yaml" "$HOME/.markdownlint.yaml"
             ;;
 
         pentadactyl )
@@ -463,6 +464,7 @@ function create_link_for_target() {
             create_link "$PWD/vim/config/" "$HOME/.vim/config"
             create_link "$PWD/vim/config/eslintrc.json" "$HOME/.eslintrc.json"
             create_link "$PWD/vim/vim/coc-settings.json" "$HOME/.vim/coc-settings.json"
+            create_link "$PWD/vim/markdownlint.yaml" "$HOME/.markdownlint.yaml"
             create_link "$PWD/vim/vim/filetype.vim" "$HOME/.vim/filetype.vim"
             create_link "$PWD/vim/vim/sflipsnippets" "$HOME/.vim/sflipsnippets"
             create_link "$PWD/vim/vim/spell" "$HOME/.vim/spell"

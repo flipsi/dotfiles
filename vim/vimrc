@@ -1465,6 +1465,7 @@ nnoremap <silent> <leader>si :SyntasticInfo<cr>
 " - fsc
 " - scalac
 " - shellcheck
+" - markdownlint
 
 let g:syntastic_php_checkers = ['phpcs', 'phplint', 'php']
 " let g:syntastic_javascript_checkers = ['eslint', 'jshint', 'jslint']
@@ -1508,6 +1509,7 @@ Plug 'w0rp/ale'
 let g:ale_list_window_size = 5
 let g:ale_lint_on_enter = 0
 let g:ale_linters = {
+\   'markdown': ['markdownlint'],
 \   'clojure': ['clj-kondo'],
 \   'javascript': ['eslint'],
 \   'typescript': ['tsserver', 'tslint'],
@@ -1517,6 +1519,7 @@ let g:ale_fixers = {
 \    'javascript': ['eslint'],
 \    'typescript': ['prettier'],
 \    'vue': ['eslint'],
+\    'markdown': ['prettier'],
 \    'scss': ['prettier'],
 \    'html': ['prettier']
 \}
@@ -2009,6 +2012,7 @@ xmap 'L <plug>(EasyAlign)
 nmap 'L <plug>(EasyAlign)
 
 
+" The tabular plugin must come before vim-markdown.
 Plug 'godlygeek/tabular'
 
 Plug 'tommcdo/vim-lion'
@@ -2175,7 +2179,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Golang:
 " system:                       yay -S gopls
 " vim (in Go project):          :CocInstall coc-go
-"
+
+" Markdown:
+" system:                       yay -S markdownlint
+" vim (in Go project):          :CocInstall coc-markdownlint
+
 
 " Plug 'neovim/nvim-lspconfig'
 
@@ -2338,7 +2346,8 @@ nnoremap <leader>ddbp   :call vimspector#CleanLineBreakpoint()<CR>
 Plug 'sheerun/vim-polyglot'
 
 " helm is disabled so *.tpl files are considered smarty files
-let g:polyglot_disabled = ['helm']
+" markdown is disabled to use and configure the latest version explicitly
+let g:polyglot_disabled = ['helm', 'markdown']
 
 
 " Language: Clojure {{{
@@ -2861,10 +2870,39 @@ endfunction
 " }}}
 " Language: Markdown {{{
 
+" " depends on 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
+
+" Remember :Toc command
+
+let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_folding_level = 0 " does not do what I want
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_strikethrough = 1
+
+
+" (partially stolen from https://codeinthehole.com/tips/writing-markdown-in-vim/)
+"
+" Indentation for new lists. We don't insert bullets as it doesn't play
+" nicely with `gq` formatting. It relies on a hack of treating bullets
+" as comment characters.
+" See https://github.com/plasticboy/vim-markdown/issues/232
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_auto_insert_bullets = 0
+
+" Filetype names and aliases for fenced code blocks.
+let g:vim_markdown_fenced_languages = ['php', 'py=python', 'js=javascript', 'bash=sh', 'viml=vim']
+
+
+
 Plug 'shime/vim-livedown'
 " requires `npm install -g livedown`
 
-let g:livedown_browser = 'surf'
+let g:livedown_autorun = 0
+
+" let g:livedown_browser = 'surf'
+let g:livedown_browser = 'qutebrowser'
+
 
 augroup markdown_on_read
     au!

@@ -1,0 +1,13 @@
+# ~/.markdownlint.yaml
+
+# Enable all rules by default
+# https://github.com/markdownlint/markdownlint/blob/main/docs/RULES.md
+default: true
+
+# Allow inline HTML which is useful in Github-flavour markdown for:
+# - crafting headings with friendly hash fragments.
+# - adding collapsible sections with <details> and <summary>.
+MD033: false
+
+# Ignore line length rules (as Prettier handles this).
+MD013: false
