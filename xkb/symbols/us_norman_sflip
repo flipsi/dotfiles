@@ -26,13 +26,6 @@ xkb_symbols "basic" {
     key <AC09> { [ o, O, odiaeresis, Odiaeresis ] };
     key <AD07> { [ u, U, udiaeresis, Udiaeresis ] };
 
-
-    // qwerty hjkl (vim movements) with AltGr
-    key <AC06>  { [ y, Y, h,   VoidSymbol ] };
-    key <AC07>  { [ n, N, j,   VoidSymbol ] };
-    key <AC08>  { [ i, I, k,   VoidSymbol ] };
-    key <AC09>  { [ o, O, l,   VoidSymbol ] };
-
     // Home and End with AltGr
     key <AB08> { [ comma, less, Home, VoidSymbol ] };
     key <AB09> { [ period, greater, End, VoidSymbol ] };
