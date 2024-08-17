@@ -20,15 +20,14 @@ xkb_symbols "basic" {
     //replace key <AA00> { [ Caps_Lock ] };
     replace key <AA00> { [ Escape ] };
 
-
     // umlauts (ä, ö, ü)
     key <AC01> { [ a, A, adiaeresis, Adiaeresis ] };
     key <AC09> { [ o, O, odiaeresis, Odiaeresis ] };
     key <AD07> { [ u, U, udiaeresis, Udiaeresis ] };
 
-    // Home and End with AltGr
-    key <AB08> { [ comma, less, Home, VoidSymbol ] };
-    key <AB09> { [ period, greater, End, VoidSymbol ] };
+    // Home and End on h and g (to imitate Moonlander layout)
+    key <AC05> { [ g, G, End, VoidSymbol ] };
+    key <AC06> { [ y, Y, Home, VoidSymbol ] };
 
     // left hand number block with AltGr (and ß on s)
     key <AD02> { [ w, W, 7, ampersand ] };
