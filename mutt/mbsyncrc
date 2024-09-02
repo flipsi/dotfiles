@@ -135,6 +135,81 @@ Near :mail@philippmoers.de-local:Junk
 Create Both
 Expunge Both
 
+#################################
+# account: news@philippmoers.de #
+#################################
+
+IMAPStore news@philippmoers.de-remote
+Host imap.strato.de
+Port 993
+User news@philippmoers.de
+PassCmd "mutt-secrets.py --mode get --account news@philippmoers.de"
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore news@philippmoers.de-local
+Path /home/flipsi/.local/share/mail/news@philippmoers.de/
+Inbox /home/flipsi/.local/share/mail/news@philippmoers.de/INBOX
+Flatten .
+
+#### one channel for all folders ####
+
+# Channel news@philippmoers.de
+# Far  :news@philippmoers.de-remote:
+# Near :news@philippmoers.de-local:
+# Create Both
+# Expunge Both
+# SyncState *
+# MaxMessages 0
+# ExpireUnread no
+
+#### multiple channels (one for each folder) to rename folders ####
+
+Group   news@philippmoers.de
+Channel news@philippmoers.de-inbox
+Channel news@philippmoers.de-archive
+Channel news@philippmoers.de-drafts
+Channel news@philippmoers.de-sent
+Channel news@philippmoers.de-trash
+Channel news@philippmoers.de-junk
+
+Channel news@philippmoers.de-inbox
+Far  :news@philippmoers.de-remote:"INBOX"
+Near :news@philippmoers.de-local:INBOX
+Create Both
+Expunge Both
+
+Channel news@philippmoers.de-archive
+Far  :news@philippmoers.de-remote:"Archive"
+Near :news@philippmoers.de-local:Archive
+Create Both
+Expunge Both
+
+Channel news@philippmoers.de-drafts
+Far  :news@philippmoers.de-remote:"Drafts"
+Near :news@philippmoers.de-local:Drafts
+Create Both
+Expunge Both
+
+Channel news@philippmoers.de-sent
+Far  :news@philippmoers.de-remote:"Sent Items"
+Near :news@philippmoers.de-local:Sent
+Create Both
+Expunge Both
+
+Channel news@philippmoers.de-trash
+Far  :news@philippmoers.de-remote:"Trash"
+Near :news@philippmoers.de-local:Trash
+Create Both
+Expunge Both
+
+Channel news@philippmoers.de-junk
+Far  :news@philippmoers.de-remote:"Spam"
+Near :news@philippmoers.de-local:Junk
+Create Both
+Expunge Both
+
 ##################################
 # account: philipp.moers@mail.de #
 ##################################

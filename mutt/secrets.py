@@ -60,6 +60,8 @@ def get_secrets_from_gpg_encrypted_muttrc(accountname=False):
     '01': 'soziflip@gmail.com',
     '02': 'mail@philippmoers.de',
     '03': 'valentina@philippmoers.de',
+    '04': 'leonhard@philippmoers.de',
+    '05': 'news@philippmoers.de',
   }
   def parse_muttrc(muttrc):
     pattern = re.compile('^set my_(\\d\\d)_(\\w*)\\s*=\\s*"(.*)"')
