@@ -70,7 +70,7 @@ Port 993
 User mail@philippmoers.de
 PassCmd "mutt-secrets.py --mode get --account mail@philippmoers.de"
 AuthMechs LOGIN
-SSLType IMAPS
+TLSType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore mail@philippmoers.de-local
@@ -145,7 +145,7 @@ Port 993
 User news@philippmoers.de
 PassCmd "mutt-secrets.py --mode get --account news@philippmoers.de"
 AuthMechs LOGIN
-SSLType IMAPS
+TLSType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore news@philippmoers.de-local
@@ -220,7 +220,7 @@ Port 993
 User philipp.moers@mail.de
 PassCmd "mutt-secrets.py --mode get --account philipp.moers@mail.de"
 AuthMechs LOGIN
-SSLType IMAPS
+TLSType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore philipp.moers@mail.de-local
@@ -248,7 +248,7 @@ Port 993
 User soziflip@gmail.com
 AuthMechs XOAUTH2
 PassCmd "mutt-secrets.py --mode get --oauth --account soziflip@gmail.com"
-SSLType IMAPS
+TLSType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore soziflip@gmail.com-local
@@ -322,7 +322,7 @@ Port 993
 User valentina@philippmoers.de
 PassCmd "mutt-secrets.py --mode get --account valentina@philippmoers.de"
 AuthMechs LOGIN
-SSLType IMAPS
+TLSType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore valentina@philippmoers.de-local
