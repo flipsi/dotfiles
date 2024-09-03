@@ -266,7 +266,8 @@ if s:MyMode == 'mastery'
 "
 Plug 'stsewd/gx-extended.vim'
 
-" Note this issue https://github.com/stsewd/gx-extended.vim/issues/10
+nmap gx <Plug>(gxext-normal)
+xmap gx <Plug>(gxext-visual)
 
 
 " }}}
