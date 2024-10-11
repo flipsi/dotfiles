@@ -1017,5 +1017,6 @@ for_window [class="(?i)slack" title="^slack$"]                                  
 for_window [class="(?i)slack" title=".*Huddle"]                                 move container to output $PRIMARY_OUTPUT
 for_window [class="(?i)spotify"]                                                move workspace to output $TERNARY_OUTPUT
 for_window [class="(?i)telegram-desktop" title="^Telegram"]                     move workspace to output $TERNARY_OUTPUT
+for_window [class="(?i)signal"]                                                 move workspace to output $TERNARY_OUTPUT
 for_window [class="(?i)urxvt"]                                                  move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)gnome-session-failed"]                                   move workspace to output $PRIMARY_OUTPUT
