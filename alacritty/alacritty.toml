@@ -139,6 +139,12 @@ key = "Minus"
 mods = "Control"
 
 [[keyboard.bindings]]
+key = "i"
+mods = "Control|Alt"
+# chars = "\uE000i" # Unicode Private Use Area (PUA), use character in tmux
+chars = "î" # ASCII 238 / 0xEE
+
+[[keyboard.bindings]]
 chars = "\u001BOH"
 key = "Home"
 mode = "AppCursor"
