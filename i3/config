@@ -967,7 +967,7 @@ assign [class="(?i)ardour"]                                                     
 assign [class="(?i)skype"]                                                                          Skype
 assign [class="(?i)slack"]                                                                          Slack
 for_window [class="(?i)slack" title=".*Huddle"] move to workspace                                   Huddle
-# assign [class="(?i)pavucontrol"]                                                                    Audio
+assign [class="(?i)pavucontrol"]                                                                    Audio
 assign [class="(?i)qjackctl"]                                                                       Audiosettings
 assign [class="(?i)kaffeine"]                                                                       Kaffeine
 assign [class="(?i)mediathek"]                                                                      Mediathek
@@ -986,6 +986,7 @@ assign [class="(?i)qutebrowser"]                                                
 # assign [class="(?i)vivaldi-stable"]                                                                 Vivaldi
 assign [class="code-oss"]                                                                           VS Code
 assign [class="(?i)gimp"]                                                                           Gimp
+for_window [class="(?i)libreoffice"] move to workspace                                              Doc
 for_window [class="(?i)gnome-session-failed"] move to workspace                                     GnomeSessionFailed
 
 ## workspaces with window always on specific output
@@ -1002,7 +1003,7 @@ for_window [class="(?i)chrom"]                                                  
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)chromium"]                                               move workspace to output $PRIMARY_OUTPUT
 # for_window [class="(?i)vivaldi-stable"]                                         move workspace to output $SECONDARY_OUTPUT
-# for_window [class="pavucontrol"]                                                move workspace to output $SECONDARY_OUTPUT
+for_window [class="pavucontrol"]                                                move workspace to output $SECONDARY_OUTPUT
 for_window [class="(?i)cool-retro-term"]                                        move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)firefox"]                                                move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)gnome-terminal"]                                         move workspace to output $PRIMARY_OUTPUT
@@ -1012,11 +1013,11 @@ for_window [class="(?i)jetbrains-phpstorm"]                                     
 for_window [class="(?i)notification-daemon"]                                    move workspace to output $SECONDARY_OUTPUT
 for_window [class="(?i)notification-daemon"]                                    move workspace to output $TERNARY_OUTPUT
 for_window [class="(?i)qutebrowser"]                                            move workspace to output $PRIMARY_OUTPUT
-for_window [class="(?i)signal"]                                                 move workspace to output $PRIMARY_OUTPUT
-for_window [class="(?i)slack" title="^slack$"]                                  move workspace to output $TERNARY_OUTPUT
+for_window [class="(?i)slack" title="^slack$"]                                  move workspace to output $SECONDARY_OUTPUT
 for_window [class="(?i)slack" title=".*Huddle"]                                 move container to output $PRIMARY_OUTPUT
 for_window [class="(?i)spotify"]                                                move workspace to output $TERNARY_OUTPUT
-for_window [class="(?i)telegram-desktop" title="^Telegram"]                     move workspace to output $TERNARY_OUTPUT
-for_window [class="(?i)signal"]                                                 move workspace to output $TERNARY_OUTPUT
+for_window [class="(?i)telegram-desktop" title="^Telegram"]                     move workspace to output $SECONDARY_OUTPUT
+for_window [class="(?i)signal"]                                                 move workspace to output $SECONDARY_OUTPUT
+for_window [class="(?i)libreoffice-writer"]                                     move workspace to output $SECONDARY_OUTPUT
 for_window [class="(?i)urxvt"]                                                  move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)gnome-session-failed"]                                   move workspace to output $PRIMARY_OUTPUT
