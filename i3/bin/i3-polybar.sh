@@ -19,8 +19,6 @@ function set_env_vars() {
     export BAR_THIRD_MONITOR
     export BAR_DPI
     export BAR_HEIGHT
-    export BAR_TRAY_POSITION_MAIN_MONITOR
-    export BAR_TRAY_POSITION_SECOND_MONITOR
     export BAR_TRAY_MAXSIZE
     export BAR_MODULES_MAIN_LEFT
     export BAR_MODULES_MAIN_CENTER
@@ -32,7 +30,7 @@ function set_env_vars() {
     export BAR_MODULES_THIRD_CENTER
     export BAR_MODULES_THIRD_RIGHT
 
-    ETH_INTERFACE=$(find_network_interface_name_by_pattern 'enp')
+    ETH_INTERFACE='enp7s0f3u1u3u1'
     WLAN_INTERFACE=$(find_network_interface_name_by_pattern '(wlan|wlp)')
 
     HOSTNAME=$(hostname)
@@ -122,27 +120,21 @@ function set_env_vars() {
         BAR_MODULES_MAIN_RIGHT="xkeyboard date powermenu"
         BAR_MODULES_SECOND_LEFT="battery wlan eth"
         BAR_MODULES_SECOND_CENTER="i3"
-        BAR_MODULES_SECOND_RIGHT="spotify pulseaudio xkeyboard date powermenu"
+        BAR_MODULES_SECOND_RIGHT="spotify pulseaudio xkeyboard date powermenu tray"
         BAR_MODULES_THIRD_LEFT="filesystem"
         BAR_MODULES_THIRD_CENTER="i3"
         BAR_MODULES_THIRD_RIGHT="cpu memory"
-        BAR_TRAY_POSITION_MAIN_MONITOR='none'
-        BAR_TRAY_POSITION_SECOND_MONITOR='right'
     elif [[ -n "$BAR_SECOND_MONITOR" ]]; then
         BAR_MODULES_MAIN_LEFT="cpu memory"
         BAR_MODULES_MAIN_CENTER="i3"
         BAR_MODULES_MAIN_RIGHT="spotify pulseaudio xkeyboard date"
         BAR_MODULES_SECOND_LEFT="powermenu battery wlan eth"
         BAR_MODULES_SECOND_CENTER="i3"
-        BAR_MODULES_SECOND_RIGHT="weather"
-        BAR_TRAY_POSITION_MAIN_MONITOR='none'
-        BAR_TRAY_POSITION_SECOND_MONITOR='right'
+        BAR_MODULES_SECOND_RIGHT="weather tray"
     else
         BAR_MODULES_MAIN_LEFT="i3"
-        BAR_MODULES_MAIN_CENTER="battery wlan eth"
+        BAR_MODULES_MAIN_CENTER="battery wlan eth tray"
         BAR_MODULES_MAIN_RIGHT="spotify pulseaudio xkeyboard date powermenu"
-        BAR_TRAY_POSITION_MAIN_MONITOR='right'
-        BAR_TRAY_POSITION_SECOND_MONITOR='none'
     fi
 }
 
