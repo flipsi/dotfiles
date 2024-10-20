@@ -172,6 +172,7 @@ bindsym $mod+Shift+F1 exec --no-startup-id "pkill -fx 'sxiv -z 100 $keyboard_lay
 
 ## set wallpaper
 # exec --no-startup-id "$SHELLSCRIPT_PATH/random-wallpaper.sh"
+# exec --no-startup-id "feh --bg-scale $HOME/.i3/wallpaper/gray_3A3A3A_1920x1080.png"
 
 ## change wallpaper
 bindsym $mod+F7 mode "$change_wallpaper"
@@ -262,11 +263,11 @@ smart_gaps inverse_outer
 # gruvbox_neutral_orange            #D65D0E
 
 #                       border   backgr   text     indicator
-client.focused          #282828  #282828  #FB4934  #FB4934
-client.focused_inactive #282828  #282828  #928374  #282828
-client.unfocused        #282828  #282828  #504945  #282828
-client.urgent           #B8BB26  #B8BB26  #282828  #282828
-client.background       #282828  #282828  #CC241D  #282828
+client.focused          #1D2021  #1D2021  #FB4934  #FB4934
+client.focused_inactive #1D2021  #1D2021  #928374  #1D2021
+client.unfocused        #1D2021  #1D2021  #504945  #1D2021
+client.urgent           #B8BB26  #B8BB26  #1D2021  #1D2021
+client.background       #1D2021  #1D2021  #CC241D  #1D2021
 
 
 # change look and feel at runtime
