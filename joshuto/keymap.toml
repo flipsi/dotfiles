@@ -9,10 +9,8 @@ keymap = [
   { keys = ["ctrl+w"], commands = ["close_tab"] },
   { keys = ["q"], commands = ["close_tab"] },
   { keys = ["ctrl+c"], commands = ["quit"] },
-  { keys = ["ctrl+d"], commands = ["quit"] },
-  # { keys = ["ctrl+z"], commands = ["suspend"] }, # Keymap error: Unrecognized command 'suspend' Failed to parse commands: ["suspend"]
-
-  { keys = ["Q"], commands = ["quit --output-current-directory"] },
+  { keys = ["ctrl+d"], commands = ["quit --output-current-directory"] },
+  { keys = ["Q"], commands = ["quit --output-current-directory"] }, # cd into current directory (see joshuto fish/bash function)
 
   { keys = ["R"], commands = ["reload_dirlist"] },
   { keys = ["z", "h"], commands = ["toggle_hidden"] },
