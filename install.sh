@@ -246,10 +246,14 @@ function create_link_for_target() {
 
         intellij )
             create_link "$PWD/intellij/ideavimrc" "$HOME/.ideavimrc"
-            INTELLIJ_DIRS=$(find $HOME -maxdepth 1 -type d -name '.IntelliJIdea*')
+            INTELLIJ_DIRS=$(find "$HOME" -maxdepth 1 -type d -name '.IntelliJIdea*')
             for DIR in $INTELLIJ_DIRS; do
                 create_link "$PWD/intellij/idea.properties" "$DIR/config/idea.properties"
             done
+            ;;
+
+        joshuto )
+            create_link "$PWD/joshuto" "$HOME/.config/joshuto"
             ;;
 
         k9s )
