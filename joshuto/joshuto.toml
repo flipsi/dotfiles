@@ -1,3 +1,5 @@
+# joshuto config
+
 numbered_command = false
 
 mouse_support = true
@@ -12,19 +14,16 @@ zoxide_update = false
 custom_commands = []
 
 [display]
-# default, hsplit
-mode = "default"
+mode = "default" # default, hsplit
 
-automatically_count_files = false
-collapse_preview = true
-# ratios for parent view (optional), current view and preview
-column_ratio = [1, 4, 4]
+automatically_count_files = true
+collapse_preview = false
+column_ratio = [3, 6, 8]
 scroll_offset = 6
 show_borders = true
 show_hidden = false
 show_icons = false
-# none, absolute, relative
-line_number_style = "none"
+line_number_style = "none" # none, absolute, relative
 
 # size, mtime, user, gourp, perm. can be combined with |.
 # `none` to disable, `all` to enable all
@@ -32,8 +31,7 @@ line_number_style = "none"
 linemode = "size"
 
 [display.sort]
-# lexical, mtime, natural, size, ext
-sort_method = "natural"
+sort_method = "natural" # lexical, mtime, natural, size, ext
 case_sensitive = false
 directories_first = true
 reverse = false
@@ -46,13 +44,9 @@ preview_script = "~/.config/joshuto/preview_file.sh" # make sure it's marked as 
 [search]
 # insensitive, sensitive, smart
 string_case_sensitivity = "insensitive"
-# see above
 glob_case_sensitivity = "sensitive"
-# see above
 regex_case_sensitivity = "sensitive"
-# see above
 fzf_case_sensitivity = "insensitive"
 
 [tab]
-# inherit, home, root
-home_page = "home"
+home_page = "home" # inherit, home, root

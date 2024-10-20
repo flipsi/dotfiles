@@ -2,13 +2,14 @@
 
 keymap = [
   { keys = ["escape"], commands = ["escape"] },
-  { keys = ["ctrl+t"], commands = ["new_tab"] },
+  { keys = ["alt+i"], commands = ["new_tab"] },
   { keys = ["alt+t"], commands = ["new_tab --cursor"] },
   { keys = ["T"], commands = ["new_tab --current"] },
   { keys = ["W"], commands = ["close_tab"] },
   { keys = ["ctrl+w"], commands = ["close_tab"] },
   { keys = ["q"], commands = ["close_tab"] },
   { keys = ["ctrl+c"], commands = ["quit"] },
+  { keys = ["ctrl+d"], commands = ["quit"] },
   # { keys = ["ctrl+z"], commands = ["suspend"] }, # Keymap error: Unrecognized command 'suspend' Failed to parse commands: ["suspend"]
 
   { keys = ["Q"], commands = ["quit --output-current-directory"] },
@@ -16,14 +17,21 @@ keymap = [
   { keys = ["R"], commands = ["reload_dirlist"] },
   { keys = ["z", "h"], commands = ["toggle_hidden"] },
   { keys = ["ctrl+h"], commands = ["toggle_hidden"] },
+  { keys = ["."], commands = ["toggle_hidden"] },
   { keys = ["\t"], commands = ["tab_switch 1"] },
   { keys = ["backtab"], commands = ["tab_switch -1"] },
+  { keys = ["alt+n"], commands = ["tab_switch 1"] },
+  { keys = ["alt+p"], commands = ["tab_switch -1"] },
 
   { keys = ["alt+1"], commands = ["tab_switch_index 1"] },
   { keys = ["alt+2"], commands = ["tab_switch_index 2"] },
   { keys = ["alt+3"], commands = ["tab_switch_index 3"] },
   { keys = ["alt+4"], commands = ["tab_switch_index 4"] },
   { keys = ["alt+5"], commands = ["tab_switch_index 5"] },
+  { keys = ["alt+6"], commands = ["tab_switch_index 6"] },
+  { keys = ["alt+7"], commands = ["tab_switch_index 7"] },
+  { keys = ["alt+8"], commands = ["tab_switch_index 8"] },
+  { keys = ["alt+9"], commands = ["tab_switch_index 9"] },
 
   { keys = ["1"], commands = ["numbered_command 1"] },
   { keys = ["2"], commands = ["numbered_command 2"] },
@@ -36,6 +44,8 @@ keymap = [
   { keys = ["9"], commands = ["numbered_command 9"] },
 
   # arrow keys
+  { keys = ["g", "arrow_up"], commands = ["cursor_move_up", "cursor_move_up", "cursor_move_up", "cursor_move_up", "cursor_move_up", "cursor_move_up", "cursor_move_up", "cursor_move_up"] },
+  { keys = ["g", "arrow_down"], commands = ["cursor_move_down", "cursor_move_down", "cursor_move_down", "cursor_move_down", "cursor_move_down", "cursor_move_down", "cursor_move_down", "cursor_move_down"] },
   { keys = ["arrow_up"], commands = ["cursor_move_up"] },
   { keys = ["arrow_down"], commands = ["cursor_move_down"] },
   { keys = ["arrow_left"], commands = ["cd .."] },
@@ -43,10 +53,10 @@ keymap = [
   { keys = ["\n"], commands = ["open"] },
   { keys = ["home"], commands = ["cursor_move_home"] },
   { keys = ["end"], commands = ["cursor_move_end"] },
-  { keys = ["page_up"], commands = ["cursor_move_page_up"] },
-  { keys = ["page_down"], commands = ["cursor_move_page_down"] },
+  { keys = ["page_up"], commands = ["cursor_move_page_up 0.5"] },
+  { keys = ["page_down"], commands = ["cursor_move_page_down 0.5"] },
   { keys = ["ctrl+u"], commands = ["cursor_move_page_up 0.5"] },
-  { keys = ["ctrl+d"], commands = ["cursor_move_page_down 0.5"] },
+  # { keys = ["ctrl+d"], commands = ["cursor_move_page_down 0.5"] },
   { keys = ["ctrl+b"], commands = ["cursor_move_page_up"] },
   { keys = ["ctrl+f"], commands = ["cursor_move_page_down"] },
 
@@ -57,7 +67,6 @@ keymap = [
   { keys = ["l"], commands = ["open"] },
   { keys = ["g", "g"], commands = ["cursor_move_home"] },
   { keys = ["G"], commands = ["cursor_move_end"] },
-  { keys = ["r"], commands = ["open_with"] },
 
   { keys = ["H"], commands = ["cursor_move_page_home"] },
   { keys = ["L"], commands = ["cursor_move_page_middle"] },
@@ -69,6 +78,7 @@ keymap = [
   { keys = ["c", "d"], commands = [":cd "] },
   { keys = ["d", "d"], commands = ["cut_files"] },
   { keys = ["y", "y"], commands = ["copy_files"] },
+  { keys = ["y", "f"], commands = ["copy_filename"] },
   { keys = ["y", "n"], commands = ["copy_filename"] },
   { keys = ["y", "."], commands = ["copy_filename_without_extension"] },
   { keys = ["y", "p"], commands = ["copy_filepath"] },
@@ -78,47 +88,72 @@ keymap = [
   { keys = ["p", "l"], commands = ["symlink_files --relative=false"] },
   { keys = ["p", "L"], commands = ["symlink_files --relative=true"] },
 
+  { keys = ["a", "p"], commands = ["shell apack %s archive.zip"] }, # TODO: FIX
+  { keys = ["u", "p"], commands = ["shell aupack %s"] }, # TODO: FIX
+
+  { keys = ["y", "b"], commands = ["shell cp -r %s %s.$(date +%F-%%H%M%S).bak"] }, # TODO: FIX
+  { keys = ["y", "B"], commands = ["shell sudo cp -r %s %s.$(date +%F-%H%M%S).bak"] }, # TODO: FIX
   { keys = ["delete"], commands = ["delete_files"] },
   { keys = ["d", "D"], commands = ["delete_files"] },
+  { keys = ["x", "r"], commands = ["shell rm -rf %s"] }, # TODO: FIX
 
   { keys = ["p", "p"], commands = ["paste_files"] },
   { keys = ["p", "o"], commands = ["paste_files --overwrite=true"] },
 
-  { keys = ["a"], commands = ["rename_append"] },
-  { keys = ["A"], commands = ["rename_prepend"] },
-
-  { keys = ["f", "t"], commands = [":touch "] },
+  { keys = ["c", "w"], commands = [":rename "] },
+  { keys = ["c", "i", "w"], commands = [":rename "] },
+  { keys = ["c", "a", "w"], commands = [":rename "] },
+  { keys = ["A"], commands = ["rename_append_base"] },
+  { keys = ["I"], commands = ["rename_prepend"] },
+  { keys = ["c", "W"], commands = ["bulk_rename"] },
 
   { keys = [" "], commands = ["select --toggle=true"] },
+  { keys = ["s"], commands = ["select --toggle=true"] },
   { keys = ["t"], commands = ["select --all=true --toggle=true"] },
+  { keys = ["u", "s"], commands = ["select --all=true --select=false"] }, # TODO: FIX ("--select" doesn't exist)
+  { keys = ["v"], commands = ["toggle_visual"] },
   { keys = ["V"], commands = ["toggle_visual"] },
 
   { keys = ["w"], commands = ["show_tasks --exit-key=w"] },
-  { keys = ["b", "b"], commands = ["bulk_rename"] },
-  { keys = ["="], commands = ["set_mode"] },
+  { keys = ["+"], commands = ["set_mode"] }, # chmod
 
   { keys = [":"], commands = [":"] },
-  { keys = [";"], commands = [":"] },
+  { keys = [";"], commands = [":shell "] },
+  { keys = ["i", "f"], commands = ["shell fish"] },
+  { keys = ["i", "b"], commands = ["shell bash"] },
+  { keys = ["i", "u"], commands = ["shell thunar ."] },
+  { keys = ["i", "t"], commands = ["shell tig status"] },
+  { keys = ["g", "s"], commands = ["shell tig status"] },
+  { keys = ["g", "p", "l"], commands = ["shell git pull"] },
+  { keys = ["g", "p", "s"], commands = ["shell git push"] },
+  { keys = ["d", "u"], commands = ["shell ncdu ."] },
+  # { keys = ["d", "u"], commands = ["shell du -h --max-depth=1 ."] },
 
-  { keys = ["'"], commands = [":shell "] },
+  { keys = ["a", "f"], commands = [":touch "] },
+  { keys = ["a", "d"], commands = [":mkdir "] },
   { keys = ["m", "k"], commands = [":mkdir "] },
-  { keys = ["c", "w"], commands = [":rename "] },
 
   { keys = ["/"], commands = [":search "] },
   { keys = ["|"], commands = [":search_inc "] },
   { keys = ["\\"], commands = [":search_glob "] },
-  { keys = ["S"], commands = ["search_fzf"] },
-  { keys = ["C"], commands = ["subdir_fzf"] },
-
+  { keys = ["f", "z"], commands = ["search_fzf"] },
+  { keys = ["f", "i"], commands = ["subdir_fzf"] },
+  { keys = ["f", "l"], commands = [":shell fzf_wrapper --locate --joshuto "] }, # TODO: don't nest joshuto instances
+  { keys = ["f", "f"], commands = [":filter "] },
+  { keys = ["u", "f"], commands = ["filter"] },
   { keys = ["n"], commands = ["search_next"] },
   { keys = ["N"], commands = ["search_prev"] },
 
-  { keys = ["s", "r"], commands = ["sort reverse"] },
-  { keys = ["s", "l"], commands = ["sort lexical"] },
-  { keys = ["s", "m"], commands = ["sort mtime"] },
-  { keys = ["s", "n"], commands = ["sort natural"] },
-  { keys = ["s", "s"], commands = ["sort size"] },
-  { keys = ["s", "e"], commands = ["sort ext"] },
+  { keys = ["o", "w"], commands = ["open_with"] },
+  { keys = ["e", "e"], commands = ["shell nvim %s"] },
+
+  { keys = ["o", "r"], commands = ["sort reverse"] },
+  { keys = ["o", "l"], commands = ["sort lexical"] },
+  { keys = ["o", "m"], commands = ["sort mtime"] },
+  { keys = ["o", "n"], commands = ["sort natural"] },
+  { keys = ["o", "b"], commands = ["sort natural"] }, # "basename" like in ranger
+  { keys = ["o", "s"], commands = ["sort size"] },
+  { keys = ["o", "e"], commands = ["sort ext"] },
 
   { keys = ["m", "s"], commands = ["linemode size"] },
   { keys = ["m", "m"], commands = ["linemode mtime"] },
@@ -127,11 +162,16 @@ keymap = [
   { keys = ["m", "U"], commands = ["linemode user | group"] },
   { keys = ["m", "p"], commands = ["linemode perm"] },
 
-  { keys = ["g", "r"], commands = ["cd /"] },
-  { keys = ["g", "c"], commands = ["cd ~/.config"] },
-  { keys = ["g", "d"], commands = ["cd ~/Downloads"] },
-  { keys = ["g", "e"], commands = ["cd /etc"] },
   { keys = ["g", "h"], commands = ["cd ~/"] },
+  { keys = ["'", "c"], commands = ["cd ~/.config"] },
+  { keys = ["'", "d"], commands = ["cd ~/dotfiles"] },
+  { keys = ["'", "s"], commands = ["cd ~/Sync"] },
+  { keys = ["'", "t"], commands = ["cd ~/tmp"] },
+  { keys = ["'", "T"], commands = ["cd /tmp"] },
+  { keys = ["'", "r"], commands = ["cd /"] },
+  { keys = ["'", "e"], commands = ["cd /etc"] },
+  { keys = ["'", "m"], commands = ["cd /mnt"] },
+
   { keys = ["?"], commands = ["help"] },
 ]
 

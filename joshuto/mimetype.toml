@@ -1,5 +1,8 @@
 [class]
 audio_default = [
+  { command = "nvlc", args = [
+    "--",
+  ] },
   { command = "mpv", args = [
     "--",
   ] },
@@ -7,6 +10,9 @@ audio_default = [
 ]
 
 image_default = [
+  { command = "sxiv", args = [
+    "--",
+  ], fork = true, silent = true },
   { command = "qimgv", args = [
     "--",
   ], fork = true, silent = true },
@@ -32,6 +38,7 @@ video_default = [
 ]
 
 text_default = [
+  { command = "nvim" },
   { command = "micro" },
   { command = "gedit", fork = true, silent = true },
   { command = "bat", args = [
@@ -39,9 +46,14 @@ text_default = [
   ] },
 ]
 
-reader_default = [{ command = "evince", fork = true, silent = true }]
+reader_default = [
+  { command = "zathura", fork = true, silent = true },
+  { command = "evince", fork = true, silent = true }
+]
 
-libreoffice_default = [{ command = "libreoffice", fork = true, silent = true }]
+libreoffice_default = [
+  { command = "libreoffice", fork = true, silent = true }
+]
 
 [extension]
 
