@@ -27,8 +27,8 @@ abbr $args dcl    docker-compose logs
 abbr $args dclf   docker-compose logs -f
 abbr $args dcp    docker-compose pull
 abbr $args es     echo \$status
-abbr $args fi     fzf_wrapper --find --ranger
-abbr $args fl     fzf_wrapper --locate --ranger
+abbr $args fi     fzf_wrapper --find --joshuto
+abbr $args fl     fzf_wrapper --locate --joshuto
 abbr $args g      git
 abbr $args ga     git add
 abbr $args gaa    git add --all
@@ -101,6 +101,7 @@ abbr $args gwl    git worktree list
 abbr $args gwr    git worktree remove
 abbr $args h      bpytop \|\| htop
 abbr $args kc     kubectl
+abbr $args j      joshuto
 abbr $args l      less
 abbr $args ll     exa_or_ls -l
 abbr $args lll    exa_or_ls -l -a

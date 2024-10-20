@@ -1442,6 +1442,12 @@ augroup ranger_autoclose
     au BufWipeout term://*ranger* quit | wincmd =
 augroup END
 
+" ranger alternative
+Plug 'theniceboy/joshuto.nvim'
+
+" open ranger in a vertical split window at the left
+nnoremap <silent> <m-i>   :Joshuto <cr>
+nnoremap <silent> <esc>i  :Joshuto <cr>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

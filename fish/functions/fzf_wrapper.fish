@@ -22,6 +22,7 @@ OPTIONS
     -o, --open   : open with default application
     -e, --edit   : edit with editor ($EDITOR)
     -r, --ranger : select file with ranger file manager
+    -j, --joshuto : select file with joshuto file manager
 
 AUTHOR
     Philipp Moers <soziflip@gmail.com>
@@ -40,6 +41,7 @@ echo 'Choose action: [c]opy filepath
                [o]pen with default application
                [e]dit with editor
                [r]anger file manager
+               [j]oshuto file manager
 '
     end
 
@@ -54,6 +56,8 @@ echo 'Choose action: [c]opy filepath
                 echo edit
             case r
                 echo ranger
+            case j
+                echo joshuto
             case '*'
                 echo none
         end
@@ -78,6 +82,8 @@ echo 'Choose action: [c]opy filepath
             case '-e' '--edit'
                 set action edit
             case '-r' '--ranger'
+                set action ranger
+            case '-j' '--joshuto'
                 set action ranger
             case '*'
                 set pattern $pattern $argv[1]
@@ -125,6 +131,8 @@ echo 'Choose action: [c]opy filepath
                 eval $EDITOR \"$file\"
             case ranger
                 ranger --selectfile=$file
+            case joshuto
+                joshuto "$file"
         end
     end
 
