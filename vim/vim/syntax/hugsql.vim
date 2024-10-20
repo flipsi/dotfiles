@@ -1999,9 +1999,9 @@ syn match sqlOperator contained "\%(\*>\|->\|<%\|<<\|<=\|<>\|<@\|<\^\|=>\|>=\|>>
 syn match sqlOperator contained "\%(||\|\~\*\|\~=\|\~>\|\~\~\|\#\|%\|&\|\*\|+\|-\|/\|<\|=\|>\|?\|@\|\^\||\|\~\)\ze\%([^!?~#^@<=>%&|*/+-]\|$\)"
 
 " Comments
-syn region sqlComment    start="/\*" end="\*/" contains=sqlTodo,@Spell,sqlComment
-syn match  sqlComment    "#\s.*$"              contains=sqlTodo,@Spell
-syn match  sqlComment    "--.*$"               contains=sqlTodo,@Spell
+syn region sqlComment    start="/\*" end="\*/" contains=hugsqlMetaTag,sqlTodo,@Spell,sqlComment
+syn match  sqlComment    "#\s.*$"              contains=hugsqlMetaTag,sqlTodo,@Spell
+syn match  sqlComment    "--.*$"               contains=hugsqlMetaTag,sqlTodo,@Spell
 
 " CREATE TYPE statement
 syn region sqlCreateType start=+create\s\+type.*(+ end=+)+
@@ -2023,11 +2023,12 @@ syn keyword sqlCreateTextSearchKeyword contained text parser copy template start
 " Options
 syn keyword sqlOption contained client_min_messages search_path
 
-syntax case match
-
 " hugsql
-syn match hugsqlVariable ":.*$"
+syn match hugsqlMetaTag contained ":\v<\w+>"
+syn match hugsqlVariable ":\v<\w+>"
 
+
+syntax case match
 
 " Psql Keywords
 syn match sqlPsqlCommand contained nextgroup=sqlPsqlKeyword,sqlNumber,sqlString /\\[aCfHhortTxz]\>\|\\[?!]/
@@ -2117,32 +2118,33 @@ endif
 unlet s:plgroups
 
 " Default highlighting
-hi def link sqlCatalog                    Constant
-hi def link sqlComment                    Comment
-hi def link sqlConstant                   Constant
-hi def link sqlErrorCode                  Special
-hi def link sqlFunction                   Function
-hi def link sqlIdentifier                 Identifier
-hi def link sqlKeyword                    sqlSpecial
-hi def link sqlPlpgsqlKeyword             sqlSpecial
-hi def link sqlPlpgsqlVariable            Identifier
-hi def link sqlPlpgsqlOperator            sqlOperator
-hi def link sqlNumber                     Number
-hi def link sqlOperator                   sqlStatement
-hi def link sqlOption                     Define
-hi def link sqlSpecial                    Special
-hi def link sqlStatement                  Statement
-hi def link sqlString                     String
-hi def link sqlTable                      Identifier
-hi def link sqlType                       Type
-hi def link sqlView                       sqlTable
-hi def link sqlTodo                       Todo
-hi def link sqlPsqlCommand                SpecialKey
-hi def link sqlPsqlKeyword                Keyword
-hi def link sqlCreateTypeKeyword          sqlKeyword
-hi def link sqlCreateOperatorKeyword      sqlKeyword
-hi def link sqlCreateTextSearchKeyword    sqlKeyword
-hi def link hugsqlVariable                Special
+hi link sqlCatalog                    Constant
+hi link sqlComment                    Comment
+hi link sqlConstant                   Constant
+hi link sqlErrorCode                  Special
+hi link sqlFunction                   Function
+hi link sqlIdentifier                 Identifier
+hi link sqlKeyword                    sqlSpecial
+hi link sqlPlpgsqlKeyword             sqlSpecial
+hi link sqlPlpgsqlVariable            Identifier
+hi link sqlPlpgsqlOperator            sqlOperator
+hi link sqlNumber                     Number
+hi link sqlOperator                   sqlStatement
+hi link sqlOption                     Define
+hi link sqlSpecial                    Special
+hi link sqlStatement                  Statement
+hi link sqlString                     String
+hi link sqlTable                      Identifier
+hi link sqlType                       Type
+hi link sqlView                       sqlTable
+hi link sqlTodo                       Todo
+hi link sqlPsqlCommand                SpecialKey
+hi link sqlPsqlKeyword                Keyword
+hi link sqlCreateTypeKeyword          sqlKeyword
+hi link sqlCreateOperatorKeyword      sqlKeyword
+hi link sqlCreateTextSearchKeyword    sqlKeyword
+hi link hugsqlVariable                Identifier
+hi link hugsqlMetaTag                 Identifier
 
 let b:current_syntax = "sql"
 
