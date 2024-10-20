@@ -43,27 +43,25 @@ function fish_prompt --description 'Prompt anzeigen'
         # set_color $fish_my_color_gray_dark
         # echo_horizontal_line
 
-        echo # newline because whitespace is good
+        echo # newline because whitespace is good for the eyes
 
-        # user
-        set_color --bold $fish_my_color_accent_dark
+        # user and host
+        if set -q RANGER_LEVEL
+            set_color --bold $fish_my_color_green
+        else if set -q JOSHUTO
+            set_color --bold $fish_my_color_green
+        else if set -q VIMRUNTIME
+            set_color --bold $fish_my_color_green
+        else
+            set_color --bold $fish_my_color_accent_dark
+        end
         echo -n $USER'@'
-
-        # host
-        set_color --bold $fish_my_color_accent_dark
         echo -n $__fish_prompt_hostname
-        set_color $fish_my_color_accent_dark
         echo -n ' '
 
         # working directory
         set wd (pwd)
-        if set -q RANGER_LEVEL
-            set_color --bold $fish_my_color_gray_bright
-        else if set -q VIMRUNTIME
-            set_color --bold $fish_my_color_gray_bright
-        else
-            set_color --italics $fish_my_color_gray_dark
-        end
+        set_color --italics $fish_my_color_gray_bright
         echo -n $wd
 
         # git

@@ -117,7 +117,7 @@ keymap = [
 
   { keys = [":"], commands = [":"] },
   { keys = [";"], commands = [":shell "] },
-  { keys = ["i", "f"], commands = ["shell fish"] },
+  { keys = ["i", "f"], commands = ["shell fish -C 'set -x JOSHUTO 1'"] },
   { keys = ["i", "b"], commands = ["shell bash"] },
   { keys = ["i", "u"], commands = ["shell thunar ."] },
   { keys = ["i", "t"], commands = ["shell tig status"] },
