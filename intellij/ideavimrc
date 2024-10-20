@@ -16,6 +16,9 @@ set commentary
 
 " Settings
 
+set visualbell
+set noerrorbells
+
 set incsearch
 set ignorecase
 set smartcase
@@ -43,6 +46,8 @@ nnoremap <a-k> 15<c-y>
 
 noremap gj 10j
 noremap gk 10k
+noremap g<down> 10j
+noremap g<up>   10k
 
 nnoremap s F
 nnoremap , ;
@@ -137,10 +142,10 @@ nnoremap <leader>ya         :action EditorToggleShowWhitespaces<cr>
 nnoremap <leader>.          :action JumpToLastChange<cr>
 nnoremap <leader>gn         :action VcsShowNextChangeMarker<cr>
 nnoremap <leader>gN         :action VcsShowPrevChangeMarker<cr>
-nnoremap <leader>kn         :action GotoNextError<cr>
-nnoremap <leader>k<down>    :action GotoNextError<cr>
-nnoremap <leader>kN         :action GotoPreviousError<cr>
-nnoremap <leader>k<up>      :action GotoPreviousError<cr>
+nnoremap <leader>in         :action GotoNextError<cr>
+nnoremap <leader>iN         :action GotoPreviousError<cr>
+nnoremap <leader>i<down>    :action GotoNextError<cr>
+nnoremap <leader>i<up>      :action GotoPreviousError<cr>
 
 nnoremap <leader>w          :action SaveDocument<cr>
 nnoremap <leader>qq         :action CloseContent<cr>
@@ -193,7 +198,7 @@ nnoremap <leader>ff         :action Find<cr>
 nnoremap <leader>/          :action FindInPath<cr>
 
 nnoremap <leader>ie         :action ShowErrorDescription<cr>
-nnoremap <leader>in         :action ShowNavBar<cr>
+" nnoremap <leader>in         :action ShowNavBar<cr>
 nnoremap <leader>it         :action Scala.TypeInfo<cr>
 nnoremap <leader>iq         :action QuickJavaDoc<cr>
 
@@ -219,13 +224,13 @@ nnoremap <leader>rn         :action RenameFile<cr>
 nnoremap <leader>rp         :action Replace<cr>
 vnoremap <leader>rp         "+y:action Replace<cr>
 
-nnoremap <leader>bp         :action ToggleLineBreakpoint<cr>
 nnoremap <leader>br         :action Run<cr>
 nnoremap <leader>bR         :action ChooseRunConfiguration<cr>
 nnoremap <leader>bc         :action RunClass<cr>
 nnoremap <leader>bd         :action Debug<cr>
 nnoremap <leader>bD         :action ChooseDebugConfiguration<cr>
-" nnoremap <leader>bb         :action Rerun<cr>
+nnoremap <leader>bp         :action ToggleLineBreakpoint<cr>
+nnoremap <leader>bb         :action Rerun<cr>
 
 nnoremap <leader>b<c-l>     :action :cursive.repl.actions.clear-repl<cr>
 nnoremap <leader>b<c-c>     :action :cursive.repl.actions.interrupt<cr>
@@ -236,4 +241,4 @@ nnoremap <leader>let        :action :cursive.repl.actions.run-top-sexp<cr>
 nnoremap <leader>bto        :action :cursive.testing.actions.run-single-test<cr>
 nnoremap <leader>btn        :action :cursive.testing.actions.run-ns-tests<cr>
 nnoremap <leader>btl        :action :cursive.testing.actions.rerun-last-test<cr>
-nnoremap <leader>bb         :action :cursive.repl.actions.run-last-sexp<cr>
+" nnoremap <leader>bb         :action :cursive.repl.actions.run-last-sexp<cr>
