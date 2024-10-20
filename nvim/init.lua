@@ -10,3 +10,8 @@ vim.cmd('source $HOME/.vimrc')
 
 -- But some Neovim only stuff will end up here probably, because Neovim has
 -- become my main editor in my dev setup.
+
+require('plugins.lsp')
+-- require('plugins.nvim-metals') -- I don't want what's in this file!
+require('plugins.nvim-metals-minimal') -- I don't want what's in this file!
+

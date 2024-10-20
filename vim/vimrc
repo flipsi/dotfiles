@@ -259,6 +259,10 @@ if s:MyMode == 'mastery'
     call plug#begin()
 
 
+if has('nvim')
+    Plug 'nvim-lua/plenary.nvim'
+endif
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Extend gx to use it beyond just URLs! {{{
 
@@ -506,8 +510,12 @@ let g:airline#extensions#tabline#show_tab_count = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
-let g:airline#extensions#coc#enabled = 1
-
+if has('nvim')
+    let g:airline#extensions#lsp#enabled = 1
+    let g:airline#extensions#coc#enabled = 0
+else
+    let g:airline#extensions#coc#enabled = 1
+endif
 
 let g:airline_section_mode_default = '%#__accent_bold#%{airline#util#wrap(airline#parts#mode(),0)}%#__restore__#%{airline#util#append(airline#parts#crypt(),0)}%{airline#util#append(airline#parts#paste(),0)}%{airline#util#append(airline#extensions#keymap#status(),0)}%{airline#util#append(airline#parts#spell(),0)}%{airline#util#append("",0)}%{airline#util#append("",0)}%{airline#util#append(airline#parts#iminsert(),0)}'
 let g:airline_section_my_filename = ' %{expand("%:t")}'
@@ -2185,154 +2193,177 @@ nnoremap <leader>icp :ColorPicker<cr>
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Completion and other smart IDE features via LSP {{{
+"
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+if has('nvim')
 
-" Install CoC plugins manually on each host:
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'williamboman/mason.nvim'
+    Plug 'williamboman/mason-lspconfig.nvim'
 
-" Clojure:
-" system:                       yay -S clojure-lsp-bin
-" vim (in clojure project):     :CocInstall coc-clojure
+    " Plug 'mfussenegger/nvim-jdtls' " Java LSP
 
-" Golang:
-" system:                       yay -S gopls
-" vim (in Go project):          :CocInstall coc-go
+    " Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v4.x'}
+    " https://lsp-zero.netlify.app/docs/getting-started.html
+    " Plot twist: You can get the same setup without lsp-zero.
 
-" Markdown:
-" system:                       yay -S markdownlint
-" vim (in Go project):          :CocInstall coc-markdownlint
+    " Config see lsp.lua
+
+else
+
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Switched to the more modern built-in nvim LSP.
+    " (I was hesitant because I wanted my setup to work with vanilla vim too, but let's be honest, I don't use it anymore for real development.)
+
+    " Install CoC plugins manually on each host:
+
+    " Scala:
+    " vim (in Scala project):       :CocInstall coc-metals " DEPRECATED
+
+    " Clojure:
+    " system:                       yay -S clojure-lsp-bin
+    " vim (in Clojure project):     :CocInstall coc-clojure
+
+    " Golang:
+    " system:                       yay -S gopls
+    " vim (in Go project):          :CocInstall coc-go
+
+    " Markdown:
+    " system:                       yay -S markdownlint
+    " vim (in Go project):          :CocInstall coc-markdownlint
 
 
-" Plug 'neovim/nvim-lspconfig'
+    nnoremap <leader>i <nop>
+    nnoremap <leader>j <nop>
 
-
-nnoremap <leader>i <nop>
-nnoremap <leader>j <nop>
-
-command! CocToggle :call CocToggle() " Enable or Disable COC
-function! CocToggle()
-    if !exists('g:coc_workspace_initialized') || g:coc_workspace_initialized == 0
-        CocStart
-    elseif g:coc_enabled == 1
-        CocDisable
-    else
-        CocEnable
-    endif
-endfunction
-
-let g:coc_start_at_startup = 1
-
-" start/stop coc
-nnoremap <leader>ic  <nop>
-nnoremap <leader>ica :CocStart<cr>
-nnoremap <leader>ict :CocToggle<cr>
-nnoremap <leader>ici :CocInfo<cr>
-
-" choose coc command (fuzzy finder)
-nnoremap <leader>icc :CocList commands<cr>
-
-" hide error/warning popup
-nmap <leader>i<bs>      <Plug>(coc-float-hide)
-
-" show error/warning in a popup
-nmap <leader>ie         <Plug>(coc-diagnostic-info)
-
-" highlight symbol under cursor
-nnoremap <leader>ih             :call CocActionAsync('highlight')<cr>
-
-" show infos about function under cursor in popup
-nnoremap <silent> <leader>iq    :call <SID>show_documentation()<cr>
-
-" navigate to first/next/last error/warning
-nmap <leader>ig       gg<Plug>(coc-diagnostic-next)
-nmap <leader>iG        G<Plug>(coc-diagnostic-prev)
-nmap <leader>in         <Plug>(coc-diagnostic-next)
-nmap <leader>iN         <Plug>(coc-diagnostic-prev)
-
-" open errors in location list
-nnoremap <leader>iE         :CocDiagnostics<cr>
-
-" jump to specific error (fuzzy finder)
-nnoremap <leader>jE         :CocList diagnostics<cr>
-
-" jump to definition how I want it to behave
-command! JumpDefinition :call JumpDefinition()
-function! JumpDefinition()
-    normal! mU
-    let l:view = winsaveview()
-    if CocAction('jumpDefinition', 'buffer') != v:false
-        normal! mD
-        normal! `U
-        call winrestview(l:view)
-        if winnr('#') && winnr('$') > 1
-            wincmd p
-            normal! `D
+    command! CocToggle :call CocToggle() " Enable or Disable COC
+    function! CocToggle()
+        if !exists('g:coc_workspace_initialized') || g:coc_workspace_initialized == 0
+            CocStart
+        elseif g:coc_enabled == 1
+            CocDisable
         else
-            call CocAction('jumpDefinition', 'vsplit')
+            CocEnable
         endif
+    endfunction
+
+    let g:coc_start_at_startup = 1
+
+    " start/stop coc
+    nnoremap <leader>ic  <nop>
+    nnoremap <leader>ica :CocStart<cr>
+    nnoremap <leader>ict :CocToggle<cr>
+    nnoremap <leader>ici :CocInfo<cr>
+
+    " choose coc command (fuzzy finder)
+    nnoremap <leader>icc :CocList commands<cr>
+
+    " hide error/warning popup
+    nmap <leader>i<bs>      <Plug>(coc-float-hide)
+
+    " show error/warning in a popup
+    nmap <leader>ie         <Plug>(coc-diagnostic-info)
+
+    " highlight symbol under cursor
+    nnoremap <leader>ih             :call CocActionAsync('highlight')<cr>
+
+    " show infos about function under cursor in popup
+    nnoremap <silent> <leader>iq    :call <SID>show_documentation()<cr>
+
+    " navigate to first/next/last error/warning
+    nmap <leader>ig       gg<Plug>(coc-diagnostic-next)
+    nmap <leader>iG        G<Plug>(coc-diagnostic-prev)
+    nmap <leader>in         <Plug>(coc-diagnostic-next)
+    nmap <leader>iN         <Plug>(coc-diagnostic-prev)
+
+    " open errors in location list
+    nnoremap <leader>iE         :CocDiagnostics<cr>
+
+    " jump to specific error (fuzzy finder)
+    nnoremap <leader>jE         :CocList diagnostics<cr>
+
+    " jump to definition how I want it to behave
+    command! JumpDefinition :call JumpDefinition()
+    function! JumpDefinition()
+        normal! mU
+        let l:view = winsaveview()
+        if CocAction('jumpDefinition', 'buffer') != v:false
+            normal! mD
+            normal! `U
+            call winrestview(l:view)
+            if winnr('#') && winnr('$') > 1
+                wincmd p
+                normal! `D
+            else
+                call CocAction('jumpDefinition', 'vsplit')
+            endif
+        endif
+    endfunction
+
+    " jump to definition etc.
+    nnoremap <leader>jd         <nop>
+    nnoremap <leader>jdl        :call CocActionAsync('jumpDefinition', 'vsplit')<cr>
+    nnoremap <leader>jdb        :call CocActionAsync('jumpDefinition', 'buffer')<cr>
+    nmap     <leader>jdd        :JumpDefinition<cr>
+    " nmap     <leader>jdd        <Plug>(coc-definition)
+    nmap     <leader>jD         <Plug>(coc-declaration)
+    nmap     <leader>ji         <Plug>(coc-implementation)
+
+    " jump to symbol (class, object, etc.)
+    nnoremap <leader>es :CocList outline<cr>
+
+    " find usages and show in quickfix list
+    nmap <leader>fU <Plug>(coc-references)
+    nmap <leader>fu :call SaveCursorAndWindowPosition()
+                \ <bar> exe "normal \<Plug>(coc-references)"
+                \ <bar> sleep 100m
+                \ <bar> cclose <bar> bot copen
+                \ <bar> echo 'Found ' . len(getqflist()) . ' usages (including declaration).'
+                \ <bar> RestoreCursorAndWindowPosition <cr>
+
+    " actions
+    nmap <leader>ia         <Plug>(coc-codeaction)
+    nnoremap <leader>iio    :CocCommand editor.action.organizeImport<cr>
+    nnoremap <leader>iif    :call CocActionAsync('fold', 'imports')<cr>
+    " nmap <leader>i<return>  <Plug>(coc-fix-current)
+    nnoremap <leader>i<return>  :if g:coc_enabled == 1
+                \ <bar> execute "normal \<Plug>(coc-fix-current)"
+                \ <bar> else
+                \ <bar> call AutoImportFake()
+                \ <bar> endif <cr>
+
+    " refactor/rename identifier
+    nmap <leader>rf <Plug>(coc-rename)
+
+    " cancel and confirm completion
+    " inoremap <silent><expr> <C-e> coc#pum#visible() ? coc#pum#cancel() : "\<C-e>"
+    " inoremap <silent><expr> <C-y> coc#pum#visible() ? coc#pum#confirm() : "\<C-y>"
+    inoremap <silent><expr> <tab> coc#pum#visible() ? coc#pum#confirm() : "\<tab>"
+    " (navigate with <c-n> and <c-p>)
+
+
+    function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+        call CocActionAsync('doHover')
+    else
+        execute '!' . &keywordprg . " " . expand('<cword>')
     endif
-endfunction
+    endfunction
 
-" jump to definition etc.
-nnoremap <leader>jd         <nop>
-nnoremap <leader>jdl        :call CocActionAsync('jumpDefinition', 'vsplit')<cr>
-nnoremap <leader>jdb        :call CocActionAsync('jumpDefinition', 'buffer')<cr>
-nmap     <leader>jdd        :JumpDefinition<cr>
-" nmap     <leader>jdd        <Plug>(coc-definition)
-nmap     <leader>jD         <Plug>(coc-declaration)
-nmap     <leader>ji         <Plug>(coc-implementation)
+    " Consider directories with those files project root
+    autocmd FileType clojure let b:coc_root_patterns =
+                \ ['.projectile', '.git', '.env']
 
-" jump to symbol (class, object, etc.)
-nnoremap <leader>es :CocList outline<cr>
+    " echo project root
+    nnoremap <leader>icr :CocCommand workspace.workspaceFolders<cr>
+    " Hint: If this is wrong and .lsp dirs are created in the wrong dir, deleting .session.vim could help.
+    " Hint: If afterwards, pwd is set to where .git is, not working dir, manually cd into working dir again.
 
-" find usages and show in quickfix list
-nmap <leader>fU <Plug>(coc-references)
-nmap <leader>fu :call SaveCursorAndWindowPosition()
-            \ <bar> exe "normal \<Plug>(coc-references)"
-            \ <bar> sleep 100m
-            \ <bar> cclose <bar> bot copen
-            \ <bar> echo 'Found ' . len(getqflist()) . ' usages (including declaration).'
-            \ <bar> RestoreCursorAndWindowPosition <cr>
-
-" actions
-nmap <leader>ia         <Plug>(coc-codeaction)
-nnoremap <leader>iio    :CocCommand editor.action.organizeImport<cr>
-nnoremap <leader>iif    :call CocActionAsync('fold', 'imports')<cr>
-" nmap <leader>i<return>  <Plug>(coc-fix-current)
-nnoremap <leader>i<return>  :if g:coc_enabled == 1
-            \ <bar> execute "normal \<Plug>(coc-fix-current)"
-            \ <bar> else
-            \ <bar> call AutoImportFake()
-            \ <bar> endif <cr>
-
-" refactor/rename identifier
-nmap <leader>rf <Plug>(coc-rename)
-
-" cancel and confirm completion
-" inoremap <silent><expr> <C-e> coc#pum#visible() ? coc#pum#cancel() : "\<C-e>"
-" inoremap <silent><expr> <C-y> coc#pum#visible() ? coc#pum#confirm() : "\<C-y>"
-inoremap <silent><expr> <tab> coc#pum#visible() ? coc#pum#confirm() : "\<tab>"
-" (navigate with <c-n> and <c-p>)
-
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-" Consider directories with those files project root
-autocmd FileType clojure let b:coc_root_patterns =
-            \ ['.projectile', '.git', '.env']
-
-" echo project root
-nnoremap <leader>icr :CocCommand workspace.workspaceFolders<cr>
-" Hint: If this is wrong and .lsp dirs are created in the wrong dir, deleting .session.vim could help.
-" Hint: If afterwards, pwd is set to where .git is, not working dir, manually cd into working dir again.
+endif
 
 
 " show your current code context in statusline (like function name)
@@ -3008,6 +3039,16 @@ command! SetupRust :call SetupRust() " add mappings for development with Rust
 
 " }}}
 " Language: Scala {{{
+"
+Plug 'derekwyatt/vim-scala'
+Plug 'derekwyatt/vim-sbt'
+
+
+if has('nvim')
+    Plug 'scalameta/nvim-metals'
+endif
+
+" ----- Scala legacy below
 
 " Plug 'ervandew/eclim'
 
@@ -3026,9 +3067,6 @@ noremap <leader>aei :ScalaImport<cr>
 noremap <leader>ae<return> :ScalaSearch<cr>
 
 
-
-Plug 'derekwyatt/vim-scala'
-Plug 'derekwyatt/vim-sbt'
 
 " Plug 'mdreves/vim-scaladoc' " uses python 2 which is ridiculous
 " nnoremap <leader>sd :call scaladoc#Search(expand("<cword>"))<cr>
@@ -3119,9 +3157,12 @@ function! SetupScala()
                 " \%E\ %#[info]\ %.%#\ ***\ FAILED\ ***,%C\ %#[info]\ %m\ (%f:%l)%Z,
     match ErrorMsg '\*\*\* FAILED \*\*\*'
 
-    " TODO delete supershell escape sequences instead of supressing them
-    let g:build_shell = 'sbt --color=true --supershell=false'
-    let g:prompt_regex = '^sbt:.*>\|^>\.\.\.\.'
+    " " TODO delete supershell escape sequences instead of supressing them
+    " let g:build_shell = 'sbt --color=true --supershell=false'
+    " let g:prompt_regex = '^sbt:.*>\|^>\.\.\.\.'
+    "
+    let g:build_shell = 'scala'
+    let g:prompt_regex = '^scala>'
 
     highlight link SbtPrompt LineNr
     augroup sbt_prompt_highlighting

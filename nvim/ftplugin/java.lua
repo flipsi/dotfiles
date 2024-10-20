@@ -1,0 +1,8 @@
+-- don't use this
+-- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/guides/setup-with-nvim-jdtls.md#working-with-nvim-jdtls
+--
+-- local config = {
+    -- cmd = {'/home/flipsi/.local/share/nvim/mason/bin/jdtls'},
+    -- root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+-- }
+-- require('jdtls').start_or_attach(config)

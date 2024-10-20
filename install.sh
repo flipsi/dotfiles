@@ -335,11 +335,13 @@ function create_link_for_target() {
             ;;
 
         neovim )
-            mkdir -p "$HOME/.config/nvim/"
+            mkdir -p "$HOME/.config/nvim/lua"
             if [[ -L  "$HOME/.config/nvim/init.vim" ]]; then
                 rm "$HOME/.config/nvim/init.vim"
             fi
             create_link "$PWD/nvim/init.lua" "$HOME/.config/nvim/init.lua"
+            create_link "$PWD/nvim/lua/plugins" "$HOME/.config/nvim/lua/plugins"
+            create_link "$PWD/nvim/ftplugin" "$HOME/.config/nvim/ftplugin"
             create_link "$PWD/nvim/syntax" "$HOME/.config/nvim/syntax"
             create_link "$PWD/vim/vim/coc-settings.json" "$HOME/.config/nvim/coc-settings.json"
             create_link "$PWD/vim/markdownlint.yaml" "$HOME/.markdownlint.yaml"
