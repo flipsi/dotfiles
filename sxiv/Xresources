@@ -1,2 +1,8 @@
 Sxiv.foreground: #a89984
 Sxiv.background: #32302f
+
+Nsxiv.window.foreground: #a89984
+Nsxiv.window.background: #32302f
+Nsxiv.bar.foreground: #a89984
+Nsxiv.bar.background: #282828
+Nsxiv.bar.font: PragmataPro Mono 8
