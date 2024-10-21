@@ -83,20 +83,26 @@ keymap = [
   { keys = ["y", "a"], commands = ["copy_filepath --all-selected=true"] },
   { keys = ["y", "d"], commands = ["copy_dirpath"] },
 
-  { keys = ["p", "l"], commands = ["symlink_files --relative=false"] },
-  { keys = ["p", "L"], commands = ["symlink_files --relative=true"] },
+  # in difference to ranger, symlinks are created on yank, not paste, see https://github.com/kamiyaa/joshuto/issues/544#issuecomment-2426252447
+  { keys = ["y", "l"], commands = ["symlink_files --relative=false"] },
+  { keys = ["y", "L"], commands = ["symlink_files --relative=true"] },
+  { keys = ["p", "p"], commands = ["paste_files"] },
+  { keys = ["p", "o"], commands = ["paste_files --overwrite=true"] },
 
-  { keys = ["a", "p"], commands = ["shell apack %s archive.zip"] }, # TODO: FIX
-  { keys = ["u", "p"], commands = ["shell aupack %s"] }, # TODO: FIX
+  { keys = ["a", "p"], commands = ["shell apack archive.zip %s"] },
+  { keys = ["u", "p"], commands = ["shell aunpack %s"] },
 
+  # There are multiple issues involved, see
+  # https://github.com/kamiyaa/joshuto/issues/568 and
+  # https://github.com/kamiyaa/joshuto/issues/567
   { keys = ["y", "b"], commands = ["shell cp -r %s %s.$(date +%F-%%H%M%S).bak"] }, # TODO: FIX
   { keys = ["y", "B"], commands = ["shell sudo cp -r %s %s.$(date +%F-%H%M%S).bak"] }, # TODO: FIX
   { keys = ["delete"], commands = ["delete_files"] },
   { keys = ["d", "D"], commands = ["delete_files"] },
-  { keys = ["x", "r"], commands = ["shell rm -rf %s"] }, # TODO: FIX
-
-  { keys = ["p", "p"], commands = ["paste_files"] },
-  { keys = ["p", "o"], commands = ["paste_files --overwrite=true"] },
+  { keys = ["x", "t"], commands = ["delete_files"] }, # should use trash (see `use_trash` setting!)
+  { keys = ["x", "r"], commands = ["delete_files --permanently"] }, # bypass trash
+  { keys = ["x", "R"], commands = ["shell sudo rm -rf %s"] },
+  { keys = ["u", "t"], commands = ["shell trash-restore"] }, # TODO: FIX (interactive commands like this don't seem to work? but nvim does... See https://github.com/kamiyaa/joshuto/issues/569)
 
   { keys = ["c", "w"], commands = [":rename "] },
   { keys = ["c", "i", "w"], commands = [":rename "] },
@@ -108,7 +114,7 @@ keymap = [
   { keys = [" "], commands = ["select --toggle=true"] },
   { keys = ["s"], commands = ["select --toggle=true"] },
   { keys = ["t"], commands = ["select --all=true --toggle=true"] },
-  { keys = ["u", "s"], commands = ["select --all=true --select=false"] }, # TODO: FIX ("--select" doesn't exist)
+  { keys = ["u", "s"], commands = ["select --all=false --toggle=false"] },
   { keys = ["v"], commands = ["toggle_visual"] },
   { keys = ["V"], commands = ["toggle_visual"] },
 
@@ -122,6 +128,7 @@ keymap = [
   { keys = ["i", "u"], commands = ["shell thunar ."] },
   { keys = ["i", "t"], commands = ["shell tig status"] },
   { keys = ["g", "s"], commands = ["shell tig status"] },
+  { keys = ["g", "l", "l"], commands = ["shell tig log"] },
   { keys = ["g", "p", "l"], commands = ["shell git pull"] },
   { keys = ["g", "p", "s"], commands = ["shell git push"] },
   { keys = ["d", "u"], commands = ["shell ncdu ."] },
@@ -144,6 +151,8 @@ keymap = [
 
   { keys = ["o", "w"], commands = ["open_with"] },
   { keys = ["e", "e"], commands = ["shell nvim %s"] },
+  { keys = ["i", "v"], commands = ["shell nvim"] },
+  # TODO: sxiv with sibling files
 
   { keys = ["o", "r"], commands = ["sort reverse"] },
   { keys = ["o", "l"], commands = ["sort lexical"] },

@@ -14,14 +14,16 @@ lscolors_enabled = false
 
 [tabs]
 [tabs.styles]
+fg = "dark_gray"
 
 # Style of active tab & current directory
 [tabs.styles.active]
+fg = "gray"
+bg = "light_cyan"
 bold = true
 
 # Style of inactive tabs
 [tabs.styles.inactive]
-fg = "dark_gray"
 
 # Style of the left/front tab scroll tag (when tabs overflow)
 [tabs.styles.scroll_front]
@@ -99,6 +101,7 @@ bold = true
 [ext]
 
 pdf.fg = "blue"
+PDF.fg = "blue"
 
 bmp.fg = "yellow"
 gif.fg = "yellow"
@@ -111,6 +114,7 @@ pgm.fg = "yellow"
 png.fg = "yellow"
 ppm.fg = "yellow"
 svg.fg = "yellow"
+webp.fg = "yellow"
 
 wav.fg = "magenta"
 flac.fg = "magenta"
