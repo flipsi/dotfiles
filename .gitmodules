@@ -1,3 +1,6 @@
 [submodule "mutt/curl_google_oauth"]
     path = mutt/curl_google_oauth
     url = https://github.com/jay/curl_google_oauth
+[submodule "sxiv/nsxiv-extra"]
+    path = sxiv/nsxiv-extra
+    url = https://codeberg.org/nsxiv/nsxiv-extra/

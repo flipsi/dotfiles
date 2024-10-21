@@ -10,19 +10,11 @@ audio_default = [
 ]
 
 image_default = [
-  { command = "sxiv", args = [
-    "--",
-  ], fork = true, silent = true },
-  { command = "qimgv", args = [
-    "--",
-  ], fork = true, silent = true },
-  { command = "krita", args = [
-    "--",
-  ], fork = true, silent = true },
+  { command = "nsxiv-rifle", args = [ "--", ], fork = true, silent = true },
+  { command = "qimgv", args = [ "--", ], fork = true, silent = true },
+  { command = "krita", args = [ "--", ], fork = true, silent = true },
   { command = "exiftool", pager = true },
-  { command = "swappy", args = [
-    "-f",
-  ], fork = true },
+  { command = "swappy", args = [ "-f", ], fork = true },
 ]
 
 video_default = [

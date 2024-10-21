@@ -415,6 +415,9 @@ function create_link_for_target() {
             ;;
 
         sxiv )
+            mkdir -p "$HOME/bin"
+            # create_link "$PWD/sxiv/nsxiv-extra/scripts/nsxiv-rifle/nsxiv-rifle" "$HOME/bin/nsxiv" sadly, the script doesn't use env to invoke nsxiv
+            create_link "$PWD/sxiv/nsxiv-extra/scripts/nsxiv-rifle/nsxiv-rifle" "$HOME/bin/nsxiv-rifle"
             install_xresources_inclusion  "$PWD/sxiv/Xresources"
             ;;
 
