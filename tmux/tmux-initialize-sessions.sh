@@ -7,12 +7,8 @@
 set -e
 
 HOSTNAME=$(hostname)
-SESSION_NAME_1="main"
-SESSION_NAME_2="src"
-
-HOSTNAME_WORK="frey"
-PROJECTS_DIR="$HOME/work/code-intelligence/src"
-NUMBER_OF_PROJECTS=3
+SESSION_NAME_MAIN="main"
+SESSION_NAME_CODE="code"
 
 
 function has_internet_connection() {
@@ -30,7 +26,6 @@ function has_internet_connection() {
     fi
     return "$INTERNET_CONNECTION"
 }
-
 
 # For a given directory, return a list of the most recently updated git projects within it
 function get_last_recent_git_projects() {
@@ -58,59 +53,61 @@ function get_last_recent_git_projects() {
     echo "${RESULT[@]}"
 }
 
-
-function open_project_vim() {
+function open_project_in_vim() {
     PROJECT_PATH="$1"
     PROJECT_NAME="$2"
-    tmux new-window -t "$SESSION_NAME_2:" -n "$PROJECT_NAME" -c "$PROJECT_PATH" "fish -i -C \"nvim --listen $PROJECT_NAME"\"
+    tmux new-window -t "$SESSION_NAME_CODE:" -n "$PROJECT_NAME" -c "$PROJECT_PATH" \
+        "fish -i -C \"nvim --listen $PROJECT_NAME"\"
 }
 
+function create_session_main() {
+    if ! (tmux has-session -t $SESSION_NAME_MAIN 2>/dev/null); then
 
-function create_sessions() {
-
-    if ! (tmux has-session -t $SESSION_NAME_1 2>/dev/null); then
-
-        tmux new-session -d -s $SESSION_NAME_1 -c "$HOME"
-        tmux new-window -t $SESSION_NAME_1: -n "top" "bpytop || htop"
+        tmux new-session -d -s $SESSION_NAME_MAIN -n "delete-me" # can't create a session without window
+        tmux new-window -t $SESSION_NAME_MAIN: -n "top" "bpytop || htop"
+        tmux kill-window -t "$SESSION_NAME_MAIN:delete-me"
 
         if has_internet_connection; then
-            if [[ "$HOSTNAME" = "falbala" ]]; then
-                tmux new-window -t $SESSION_NAME_1: -n mail "mail --mode sync --disable-tmux-rename --disable-tail-logs"
+            if [[ -d $HOME/.local/share/mail/ ]]; then
+                tmux new-window -t $SESSION_NAME_MAIN: -n mail "mail --mode sync --disable-tmux-rename --disable-tail-logs"
             fi
         fi
-
-        tmux new-window -t $SESSION_NAME_1: -n "tmp" "ranger $HOME/tmp"
-
-        tmux select-window -t $SESSION_NAME_1:2 # (set 'last' window)
-        tmux select-window -t $SESSION_NAME_1:1 # (set active window)
-
     fi
-
-    if ! (tmux has-session -t $SESSION_NAME_2 2>/dev/null); then
-
-        tmux new-session -d -s $SESSION_NAME_2 -n "delete-me" # can't create a session without window
-        open_project_vim "$HOME/dotfiles" "dotfiles"
-        open_project_vim "$HOME/shellscripts" "shellscripts"
-        tmux kill-window -t "$SESSION_NAME_2:delete-me"
-
-        if [[ "$HOSTNAME" = "$HOSTNAME_WORK" ]]; then
-            for PROJECT in $(get_last_recent_git_projects "$PROJECTS_DIR" "$NUMBER_OF_PROJECTS"); do
-                if [[ "$PROJECTS_DIR" == "$HOME/work/code-intelligence/src" ]] && [[ "$PROJECT" == "core" ]]; then
-                    PROJECT="core/backend"
-                fi
-                tmux new-window -t $SESSION_NAME_2: -n "$PROJECT" -c \
-                    "$PROJECTS_DIR/$PROJECT" "fish -i -C \"nvim --listen $PROJECT"\"
-            done
-        fi
-
-    fi
-
 }
 
+function create_session_code() {
+    if ! (tmux has-session -t $SESSION_NAME_CODE 2>/dev/null); then
 
-create_sessions
-tmux switch-client -t $SESSION_NAME_1
+        tmux new-session -d -s $SESSION_NAME_CODE -n "delete-me" # can't create a session without window
+        open_project_in_vim "$HOME/projects/dotfiles" "dotfiles"
+        tmux kill-window -t "$SESSION_NAME_CODE:delete-me"
+
+        PROJECTS_DIR="$HOME/projects"
+        NUMBER_OF_PROJECTS=3
+
+        if [[ -d "$PROJECTS_DIR" ]]; then
+            for PROJECT in $(get_last_recent_git_projects "$PROJECTS_DIR" "$NUMBER_OF_PROJECTS"); do
+                echo "$PROJECT"
+                if [[ "$PROJECT" != "dotfiles" ]]; then
+                    open_project_in_vim "$PROJECTS_DIR/$PROJECT" "$PROJECT"
+                fi
+            done
+        fi
+    fi
+}
+
+function set_state()
+{
+
+    tmux switch-client -t $SESSION_NAME_MAIN
+    tmux select-window -t $SESSION_NAME_MAIN:2 # (set 'last' window)
+    tmux select-window -t $SESSION_NAME_MAIN:1 # (set active window)
+}
 
 if (tmux has-session -t init 2>/dev/null); then
     tmux kill-session -t init
 fi
+
+create_session_main
+create_session_code
+set_state
