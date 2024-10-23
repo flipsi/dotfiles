@@ -18,13 +18,15 @@ while true ; do
 done
 
 function setup_wallpaper() {
-    if [[ -f "$HOME/.i3/wallpaper" ]]; then
-        feh --bg-scale "$HOME/.i3/wallpaper"
+    WALLPAPER="$HOME/.i3/wallpaper/gray_3A3A3A_1920x1080.png"
+    if [[ -f "$WALLPAPER" ]]; then
+        feh --bg-scale "$WALLPAPER"
     fi
 }
 
 
 function arrange_outputs_at_home() {
+    # TODO: pick highest resolution automatically?
     if xrandr | grep -q "$MAIN_MONITOR connected" && \
         xrandr | grep -q "$SECOND_MONITOR connected" && \
         xrandr | grep -q "$THIRD_MONITOR connected"; then
@@ -51,7 +53,20 @@ function arrange_outputs_at_home() {
                 sleep 0.1 && xrandr --output "$LAPTOP_SCREEN" --off && \
                 sleep 0.1 && xrandr --output "$THIRD_MONITOR" --off && \
                 sleep 0.1 && xrandr --output "$MAIN_MONITOR" --primary --auto && \
-                sleep 0.1 && xrandr --output "$SECOND_MONITOR" --auto --left-of "$MAIN_MONITOR" --rotate left
+                sleep 0.1 && xrandr --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR" --rotate right
+            )
+
+    elif xrandr | grep -q "$MAIN_MONITOR connected" && \
+        xrandr | grep -q "$THIRD_MONITOR connected"; then
+            xrandr \
+                --output "$LAPTOP_SCREEN" --off \
+                --output "$MAIN_MONITOR" --primary --mode 2560x1440 --rotate normal \
+                --output "$THIRD_MONITOR" --mode 2560x1440 --pos 2560x0 --rotate left \
+                || ( \
+                sleep 0.1 && xrandr --output "$LAPTOP_SCREEN" --off && \
+                sleep 0.1 && xrandr --output "$SECOND_MONITOR" --off && \
+                sleep 0.1 && xrandr --output "$MAIN_MONITOR" --primary --auto && \
+                sleep 0.1 && xrandr --output "$THIRD_MONITOR" --auto --left-of "$MAIN_MONITOR" --rotate right
             )
 
     fi
