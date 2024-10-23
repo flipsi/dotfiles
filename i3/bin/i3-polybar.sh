@@ -19,7 +19,7 @@ function set_env_vars() {
     export BAR_THIRD_MONITOR
     export BAR_DPI
     export BAR_HEIGHT
-    export BAR_TRAY_MAXSIZE
+    export BAR_TRAY_SIZE
     export BAR_MODULES_MAIN_LEFT
     export BAR_MODULES_MAIN_CENTER
     export BAR_MODULES_MAIN_RIGHT
@@ -76,7 +76,7 @@ function set_env_vars() {
                 BAR_SECOND_MONITOR='eDP1'
                 BAR_DPI=300
                 BAR_HEIGHT=60
-                BAR_TRAY_MAXSIZE=28
+                BAR_TRAY_SIZE=28
             elif xrandr | grep -q 'HDMI-A-0 connected' && xrandr | grep -q 'DisplayPort-0 connected' && xrandr | grep -q 'DisplayPort-1 connected'; then
                 BAR_MAIN_MONITOR='DisplayPort-0'
                 BAR_SECOND_MONITOR='DisplayPort-1'
@@ -112,7 +112,7 @@ function set_env_vars() {
     esac
     BAR_DPI=108
     BAR_HEIGHT=24
-    BAR_TRAY_MAXSIZE=16
+    BAR_TRAY_SIZE=16
 
     if [[ -n "$BAR_THIRD_MONITOR" ]]; then
         BAR_MODULES_MAIN_LEFT="pulseaudio spotify"
