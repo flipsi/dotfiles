@@ -18,15 +18,10 @@ image_default = [
 ]
 
 video_default = [
-  { command = "mpv", args = [
-    "--",
-  ], fork = true, silent = true },
+  { command = "vlc", args = [ "--fullscreen", "--", ], fork = true, silent = true },
+  { command = "mpv", args = [ "--", ], fork = true, silent = true },
   { command = "mediainfo", pager = true },
-  { command = "mpv", args = [
-    "--mute",
-    "on",
-    "--",
-  ], fork = true, silent = true },
+  { command = "mpv", args = [ "--mute", "on", "--", ], fork = true, silent = true },
 ]
 
 text_default = [
@@ -51,17 +46,29 @@ libreoffice_default = [
 
 ## image formats
 avif.inherit = "image_default"
+AVIF.inherit = "image_default"
 bmp.inherit = "image_default"
+BMP.inherit = "image_default"
 gif.inherit = "image_default"
+GIF.inherit = "image_default"
 heic.inherit = "image_default"
+HEIC.inherit = "image_default"
 jpeg.inherit = "image_default"
+JPEG.inherit = "image_default"
 jpe.inherit = "image_default"
+JPE.inherit = "image_default"
 jpg.inherit = "image_default"
+JPG.inherit = "image_default"
 jxl.inherit = "image_default"
+JXL.inherit = "image_default"
 pgm.inherit = "image_default"
+PGM.inherit = "image_default"
 png.inherit = "image_default"
+PNG.inherit = "image_default"
 ppm.inherit = "image_default"
+PPM.inherit = "image_default"
 webp.inherit = "image_default"
+WEBP.inherit = "image_default"
 
 svg.app_list = [
   { command = "inkview", fork = true, silent = true },
@@ -74,30 +81,53 @@ tiff.app_list = [
 
 ## audio formats
 aac.inherit = "audio_default"
+AAC.inherit = "audio_default"
 ac3.inherit = "audio_default"
+AC3.inherit = "audio_default"
 aiff.inherit = "audio_default"
+AIFF.inherit = "audio_default"
 ape.inherit = "audio_default"
+APE.inherit = "audio_default"
 dts.inherit = "audio_default"
+DTS.inherit = "audio_default"
 flac.inherit = "audio_default"
+FLAC.inherit = "audio_default"
 m4a.inherit = "audio_default"
+M4A.inherit = "audio_default"
 mp3.inherit = "audio_default"
+MP3.inherit = "audio_default"
 oga.inherit = "audio_default"
+OGA.inherit = "audio_default"
 ogg.inherit = "audio_default"
+OGG.inherit = "audio_default"
 opus.inherit = "audio_default"
+OPUS.inherit = "audio_default"
 wav.inherit = "audio_default"
+WAV.inherit = "audio_default"
 wv.inherit = "audio_default"
+WV.inherit = "audio_default"
 
 ## video formats
 avi.inherit = "video_default"
+AVI.inherit = "video_default"
 av1.inherit = "video_default"
+AV1.inherit = "video_default"
 flv.inherit = "video_default"
+FLV.inherit = "video_default"
 mkv.inherit = "video_default"
+MKV.inherit = "video_default"
 m4v.inherit = "video_default"
+M4V.inherit = "video_default"
 mov.inherit = "video_default"
+MOV.inherit = "video_default"
 mp4.inherit = "video_default"
+MP4.inherit = "video_default"
 ts.inherit = "video_default"
+TS.inherit = "video_default"
 webm.inherit = "video_default"
+WEBM.inherit = "video_default"
 wmv.inherit = "video_default"
+WMV.inherit = "video_default"
 
 ## text formats
 build.inherit = "text_default"
@@ -215,13 +245,20 @@ ods.inherit = "libreoffice_default"
 odp.inherit = "libreoffice_default"
 
 doc.inherit = "libreoffice_default"
+DOC.inherit = "libreoffice_default"
 docx.inherit = "libreoffice_default"
+DOCX.inherit = "libreoffice_default"
 xls.inherit = "libreoffice_default"
+XLS.inherit = "libreoffice_default"
 xlsx.inherit = "libreoffice_default"
+XLSX.inherit = "libreoffice_default"
 ppt.inherit = "libreoffice_default"
+PPT.inherit = "libreoffice_default"
 pptx.inherit = "libreoffice_default"
+PPTX.inherit = "libreoffice_default"
 
 pdf.inherit = "reader_default"
+PDF.inherit = "reader_default"
 
 kra.app_list = [{ command = "krita", fork = true, silent = true }]
 kdenlive.app_list = [{ command = "kdenlive", fork = true, silent = true }]
