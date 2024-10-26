@@ -154,6 +154,13 @@ local cmp = require('cmp')
 cmp.setup({
   sources = {
     {name = 'nvim_lsp'},
+    {name = 'ultisnips'},
+    {name = 'buffer', option = {
+        -- complete words from all buffers
+        get_bufnrs = function()
+          return vim.api.nvim_list_bufs()
+        end
+    }},
   },
   snippet = {
     expand = function(args)
