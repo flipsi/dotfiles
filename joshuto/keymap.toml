@@ -95,11 +95,11 @@ keymap = [
   { keys = ["a", "p"], commands = ["shell apack archive.zip %s"] },
   { keys = ["u", "p"], commands = ["shell aunpack %s"] },
 
-  # There are multiple issues involved, see
-  # https://github.com/kamiyaa/joshuto/issues/568 and
-  # https://github.com/kamiyaa/joshuto/issues/567
-  { keys = ["y", "b"], commands = ["shell cp -r %s %s.$(date +%F-%%H%M%S).bak"] }, # TODO: FIX
-  { keys = ["y", "B"], commands = ["shell sudo cp -r %s %s.$(date +%F-%H%M%S).bak"] }, # TODO: FIX
+  # { keys = ["y", "b"], commands = ["shell cp -r %s %s.$(date +%F-%%H%M%S).bak"] },
+  # { keys = ["y", "B"], commands = ["shell sudo cp -r %s %s.$(date +%F-%H%M%S).bak"] },
+  { keys = ["y", "b"], commands = ["shell backup-file.sh %s"] },
+  { keys = ["y", "B"], commands = ["shell sudo backup-file.sh %s"] },
+
   { keys = ["delete"], commands = ["delete_files"] },
   { keys = ["d", "D"], commands = ["delete_files"] },
   { keys = ["x", "t"], commands = ["delete_files"] }, # should use trash (see `use_trash` setting!)

@@ -5,6 +5,7 @@ else
 end
 
 abbr $args agl    ag -l
+abbr $args bak    backup-file.sh
 abbr $args ca     gcalcli
 abbr $args cdi    cd_interactively
 abbr $args cdi.   cd_interactively .
