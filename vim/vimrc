@@ -2210,13 +2210,16 @@ if has('nvim')
     Plug 'williamboman/mason.nvim'
     Plug 'williamboman/mason-lspconfig.nvim'
 
-    " Plug 'mfussenegger/nvim-jdtls' " Java LSP
+    " Plug 'mfussenegger/nvim-jdtls' " Java LSP - I don't need this.
 
     " Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v4.x'}
     " https://lsp-zero.netlify.app/docs/getting-started.html
     " Plot twist: You can get the same setup without lsp-zero.
 
     " Config see lsp.lua
+
+    nnoremap <leader>iia :LspStart<cr>
+    nnoremap <leader>iio :LspStop<cr>
 
 else
 
