@@ -85,10 +85,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>ii', ':LspInfo<cr>', opts)
     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
     vim.keymap.set('n', '<leader>iq', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-    vim.keymap.set('n', '<leader>idn', '<cmd>lua vim.diagnostic.hide(nil, 0)<cr>', opts) -- only buffer
-    vim.keymap.set('n', '<leader>idN', '<cmd>lua vim.diagnostic.hide()<cr>', opts) -- globally
-    vim.keymap.set('n', '<leader>idy', '<cmd>lua vim.diagnostic.show(nil, 0)<cr>', opts) -- only buffer
-    vim.keymap.set('n', '<leader>idY', '<cmd>lua vim.diagnostic.show()<cr>', opts) -- globally
+    vim.keymap.set('n', '<leader>idd', '<cmd>lua vim.diagnostic.disable()<cr>', opts)
+    vim.keymap.set('n', '<leader>ide', '<cmd>lua vim.diagnostic.enable()<cr>', opts)
     vim.keymap.set('n', '<leader>in', '<cmd>lua vim.diagnostic.goto_next()<cr>', opts)
     vim.keymap.set('n', '<leader>iN', '<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
     vim.keymap.set('n', '<leader>igg', 'gg<cmd>lua vim.diagnostic.goto_next()<cr>', opts)
