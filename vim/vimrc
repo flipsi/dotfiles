@@ -1612,6 +1612,11 @@ let g:context_highlight_normal = 'Normal'
 let g:context_highlight_border = 'Comment'
 let g:context_highlight_tag    = 'Special'
 
+let g:context_filetype_blacklist = [
+            \ 'json',
+            \ 'toml',
+            \ ]
+
 nnoremap <silent> <leader>yC :ContextToggle <cr>
 
 
