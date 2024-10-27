@@ -2020,18 +2020,15 @@ nnoremap <silent> 'adj :JsDoc<cr>
 
 " show indentation level
 Plug 'Yggdroot/indentLine'
+
 let g:indentLine_enabled = 1
 " let g:indentLine_char = '┊'
 let g:indentLine_char = '|'
-nnoremap <leader>yI :IndentLinesToggle<cr>
+let g:indentLine_fileTypeExclude = ['text', 'sh']
+let g:indentLine_bufTypeExclude = ['help', 'terminal']
+let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*']
 
-" Does not work. TODO: Fix it!
-augroup indentline_enabled
-    au!
-    au BufWinEnter */vim/*/doc/*,*/\.vim/bundle/*doc/*
-                \ IndentLinesDisable
-                " \ echo 'jaaa' | IndentLinesDisable
-augroup END
+nnoremap <leader>yI :IndentLinesToggle<cr>
 
 
 " align plugin
