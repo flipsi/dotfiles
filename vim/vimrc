@@ -1658,8 +1658,9 @@ nmap <leader>nn <plug>yankstack_substitute_newer_paste
 "call yankstack#setup() " DOES NOT WORK HERE
 
 
-" add and toggle comments with <leader>c<space> etc
-Plug 'scrooloose/nerdcommenter'
+" Note: use built-in commenting (since nvim 0.10) (gc)
+"
+" Plug 'scrooloose/nerdcommenter'
 " use leading space, but delete trailing space
 let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 1
@@ -1689,8 +1690,10 @@ for i in range(1, 50)
     exe "nmap 'c"          . i . "k        V" . i . "k\<plug\>NERDCommenterComment"
     exe "nmap 'c"          . i . "\<up\>   V" . i . "k\<plug\>NERDCommenterComment"
 endfor
+
 " duplicate a line and comment out the first one
-nmap <leader>cd <leader>cyp
+nmap <leader>cd yygccp
+
 " do not comment on new lines (except when already in insert mode)
 nnoremap o o<esc>S
 nnoremap O O<esc>S
