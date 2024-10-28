@@ -52,14 +52,14 @@ bind generic,pager,index N search-opposite
 bind  index ff  limit # filter mailbox by string (prefix `=` or regex (prefix `~`)
 macro index uf "<limit>all\n"
 
-bind  index,attach  j       next-entry
-bind  index,attach  k       previous-entry
-bind  index,attach  <Down>  next-entry
-bind  index,attach  <Up>    previous-entry
-macro index,attach  gj      "<next-entry><next-entry><next-entry><next-entry><next-entry><next-entry><next-entry>"
-macro index,attach  gk      "<previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry>"
-macro index,attach  g<Down> "<next-entry><next-entry><next-entry><next-entry><next-entry><next-entry><next-entry>"
-macro index,attach  g<Up>   "<previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry>"
+bind  index,attach,browser  j       next-entry
+bind  index,attach,browser  k       previous-entry
+bind  index,attach,browser  <Down>  next-entry
+bind  index,attach,browser  <Up>    previous-entry
+macro index,attach,browser  gj      "<next-entry><next-entry><next-entry><next-entry><next-entry><next-entry><next-entry>"
+macro index,attach,browser  gk      "<previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry>"
+macro index,attach,browser  g<Down> "<next-entry><next-entry><next-entry><next-entry><next-entry><next-entry><next-entry>"
+macro index,attach,browser  g<Up>   "<previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry>"
 bind index J next-thread
 bind index K previous-thread
 bind index z collapse-thread
