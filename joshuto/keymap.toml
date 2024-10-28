@@ -100,6 +100,8 @@ keymap = [
   { keys = ["y", "b"], commands = ["shell backup-file.sh %s"] },
   { keys = ["y", "B"], commands = ["shell sudo backup-file.sh %s"] },
 
+  { keys = ["m", "v", "d"], commands = ["shell mv-to-dir.sh %s"] },
+
   { keys = ["delete"], commands = ["delete_files"] },
   { keys = ["d", "D"], commands = ["delete_files"] },
   { keys = ["x", "t"], commands = ["delete_files"] }, # should use trash (see `use_trash` setting!)

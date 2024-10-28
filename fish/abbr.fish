@@ -115,6 +115,7 @@ abbr $args mip    make init plan
 abbr $args mkd    mkdir_cd
 abbr $args mp     make plan
 abbr $args mpa    make plan apply
+abbr $args mvd    mv-to-dir.sh
 abbr $args nv     nvlc
 abbr $args ns     netctl status
 abbr $args na     sudo netctl start
