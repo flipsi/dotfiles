@@ -2,10 +2,11 @@ delay=0
 region=1
 action=1
 show_mouse=0
-screenshot_dir=file:/home/sflip/img-screenshots
+screenshot_dir=file:/home/flipsi/img-screenshots
 app=none
 last_user=
 last_extension=png
-enable_imgur_upload=false
 show_in_folder=false
+custom_action_command=none
+show_border=1
 
