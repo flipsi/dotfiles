@@ -18,7 +18,7 @@ fg = "dark_gray"
 
 # Style of active tab & current directory
 [tabs.styles.active]
-fg = "gray"
+fg = "dark_gray"
 bg = "light_cyan"
 bold = true
 
