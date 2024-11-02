@@ -14,7 +14,7 @@ zoxide_update = false
 custom_commands = []
 
 [display]
-mode = "default" # default, hsplit
+mode = "minimal" # minimal, default, hsplit
 
 automatically_count_files = true
 collapse_preview = false

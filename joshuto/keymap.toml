@@ -12,6 +12,9 @@ keymap = [
   { keys = ["ctrl+d"], commands = ["quit --output-current-directory"] },
   { keys = ["Q"], commands = ["quit --output-current-directory"] }, # cd into current directory (see joshuto fish/bash function)
 
+  { keys = ["z", "d"], commands = ["set_display_mode default"] },
+  { keys = ["z", "m"], commands = ["set_display_mode minimal"] },
+  { keys = ["z", "s"], commands = ["set_display_mode hsplit"] },
   { keys = ["R"], commands = ["reload_dirlist"] },
   { keys = ["z", "h"], commands = ["toggle_hidden"] },
   { keys = ["ctrl+h"], commands = ["toggle_hidden"] },
