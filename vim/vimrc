@@ -1,6 +1,6 @@
 "  Author:  Philipp Moers
 "           soziflip@gmail.com
-"           https://github.com/sflip/dotfiles
+"           https://github.com/flipsi/dotfiles
 "           https://philippmoers.de
 "
 "  ~/.vimrc
@@ -25,7 +25,7 @@
 " If you are reading this configuration file on whe web and want use it right
 " away, start vim like this:
 "
-"       bash -c "vim -u <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/vim/vimrc) FILE"
+"       bash -c "vim -u <(curl https://raw.githubusercontent.com/flipsi/dotfiles/master/vim/vimrc) FILE"
 "
 "
 " In case you open this file in vim and don't know how to use folds:
@@ -3316,7 +3316,7 @@ command! SetupSQLDadBod :call SetupSQLDadBod() " add mappings for development wi
 " Plug 'cosminadrianpopescu/vim-sql-workbench'
 " (This plugin sound promising, but is shit)
 
-" let g:sw_config_dir = '/home/sflip/.sqlworkbench'
+" let g:sw_config_dir = '/home/flipsi/.sqlworkbench'
 " let g:sw_exe = '/opt/SQLWorkbench/sqlwbconsole.sh'
 " " let g:sw_cache = ''
 
