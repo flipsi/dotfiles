@@ -70,11 +70,10 @@ keymap = [
   { keys = ["L"], commands = ["cursor_move_page_middle"] },
   { keys = ["M"], commands = ["cursor_move_page_end"] },
 
-  # TODO: reuse original command as soon as it's fixed https://github.com/kamiyaa/joshuto/issues/570
-  # { keys = ["["], commands = ["parent_cursor_move_up"] },
-  # { keys = ["]"], commands = ["parent_cursor_move_down"] },
-  { keys = ["["], commands = ["cd ..", "cursor_move_up", "open"] },
-  { keys = ["]"], commands = ["cd ..", "cursor_move_down", "open"] },
+  { keys = ["["], commands = ["parent_cursor_move_up"] },
+  { keys = ["]"], commands = ["parent_cursor_move_down"] },
+  # { keys = ["["], commands = ["cd ..", "cursor_move_up", "open"] }, # for versions where the parent cursor move is not yet fixed (https://github.com/kamiyaa/joshuto/issues/570)
+  # { keys = ["]"], commands = ["cd ..", "cursor_move_down", "open"] },  # for versions where the parent cursor move is not yet fixed (https://github.com/kamiyaa/joshuto/issues/570)
 
   { keys = ["c", "d"], commands = [":cd "] },
   { keys = ["d", "d"], commands = ["cut_files"] },
