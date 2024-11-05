@@ -93,6 +93,11 @@ function desktop_session
 
 end
 
+function initialize-tmux-sessions
+    if test -x $HOME/dotfiles/tmux/tmux-initialize-sessions.sh
+        $HOME/dotfiles/tmux/tmux-initialize-sessions.sh >> /tmp/tmux-initialize-sessions.log 2>&1
+    end
+end
 
 function autostart
     if not pgrep -x vivaldi-stable
@@ -102,7 +107,7 @@ function autostart
         nohup chromium &
     end
     if not pgrep alacritty
-        nohup alacritty --command tmux -2 new-session -A -s init &
+        nohup alacritty --command tmux -2 new-session -A -s main &
     end
     if not pgrep spotify
         nohup spotify &
@@ -113,14 +118,9 @@ function autostart
 end
 
 
+initialize-tmux-sessions
 setup_power_management
 desktop_session
 setup_musicserver
 autostart
 toggle_redshift
-
-
-if test -x $HOME/dotfiles/tmux/tmux-initialize-sessions.sh
-    $HOME/dotfiles/tmux/tmux-initialize-sessions.sh >> /tmp/tmux-initialize-sessions.log 2>&1
-end
-
