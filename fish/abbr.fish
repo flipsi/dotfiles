@@ -103,6 +103,7 @@ abbr $args gwl    git worktree list
 abbr $args gwr    git worktree remove
 abbr $args h      bpytop \|\| htop
 abbr $args kc     kubectl
+abbr $args i      nsxiv-rifle
 abbr $args j      joshuto
 abbr $args l      less
 abbr $args ll     exa_or_ls -l
@@ -134,6 +135,7 @@ abbr $args ra     radio start --random
 abbr $args ro     radio stop
 abbr $args rs     radio status
 abbr $args rv     radio volume
+abbr $args rsy    rsync -vP -a
 abbr $args rrm    rm -rf
 abbr $args s      systemctl status --no-pager
 abbr $args sa     sudo systemctl start
