@@ -32,9 +32,11 @@
     fixup      = !sh -c 'REV=$(git rev-parse $1) && git commit --fixup $@ && git rebase -i --autostash --autosquash $REV^' -
     l          = log --pretty=format:"%C(blue)%ad\\ %C(yellow)%h\\ %C(green)%cn%C(red)%d\\ %C(reset)%s" --decorate --date=short
     ll         = log --pretty=format:"%C(blue)%ad\\ %C(yellow)%h\\ %C(green)%cn%C(red)%d\\ %C(reset)%s" --decorate --date=short --numstat
-    save       = !sh -c 'git checkout -b "stash/$1" && git commit -m "$1" && git checkout -' - ; a better stash save
+    main-or-master = !sh -c 'git rev-parse --verify main >/dev/null 2>&1 && echo -n "main" || echo -n "master"'
     pop        = !sh -c 'git rebase $(git rev-parse --abbrev-ref HEAD) "stash/$1"' - ; a better stash pop
     pop-prefix = !sh -c 'git rebase $(git rev-parse --abbrev-ref HEAD) "$1"' - ; (for tig)
+    save       = !sh -c 'git checkout -b "stash/$1" && git commit -m "$1" && git checkout -' - ; a better stash save
+    rebase-onto = "!f() { git rebase --onto $(git main-or-master) $(git merge-base \"$1\" \"$2\") \"$1\"; }; f"
 
 [interactive]
     diffFilter = delta --color-only
