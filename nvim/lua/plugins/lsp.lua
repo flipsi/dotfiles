@@ -154,6 +154,8 @@ cmp.setup({
     {name = 'nvim_lsp'},
     {name = 'ultisnips'},
     {name = 'buffer', option = {
+        -- make umlauts etc. part of keywords in terms of completion tokens
+        keyword_pattern = [[\k\+]],
         -- complete words from all buffers
         get_bufnrs = function()
           return vim.api.nvim_list_bufs()
