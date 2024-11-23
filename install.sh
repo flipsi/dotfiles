@@ -84,6 +84,7 @@ SUPPORTED_TARGETS=(\
     xkb \
     xmonad \
     zathura \
+    zellij \
 )
 
 ADDITIONAL_PACKAGE_TARGETS=(\
@@ -555,6 +556,10 @@ function create_link_for_target() {
         zathura )
             mkdir -p "$HOME/.config/zathura"
             create_link "$PWD/zathura/zathurarc" "$HOME/.config/zathura/zathurarc"
+            ;;
+
+        zellij )
+            create_link "$PWD/zellij" "$HOME/.config/zellij"
             ;;
 
         * )
