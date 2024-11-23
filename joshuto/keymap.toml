@@ -158,8 +158,8 @@ keymap = [
 
   { keys = ["o", "w"], commands = ["open_with"] },
   { keys = ["e", "e"], commands = ["shell nvim %s"] },
-  { keys = ["i", "v"], commands = ["shell nvim"] },
-  # TODO: sxiv with sibling files
+  { keys = ["i", "v", "v"], commands = ["shell nvim"] },
+  { keys = ["i", "v", "d"], commands = ["shell neovide"] },
 
   { keys = ["o", "r"], commands = ["sort reverse"] },
   { keys = ["o", "l"], commands = ["sort lexical"] },

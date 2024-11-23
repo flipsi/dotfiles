@@ -982,6 +982,7 @@ for_window [title="portal - jvm"] move to workspace                             
 assign [class="(?i)cool-retro-term"]                                                                Terminal
 assign [class="(?i)gnome-terminal"]                                                                 Terminal
 assign [class="(?i)urxvt"]                                                                          Terminal
+assign [class="(?i)neovide"]                                                                        Neovide
 assign [class="(?i)pale moon"]                                                                      Web
 assign [class="(?i)qutebrowser"]                                                                    Web
 # assign [class="(?i)vivaldi-stable"]                                                                 Vivaldi

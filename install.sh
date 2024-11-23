@@ -53,6 +53,7 @@ SUPPORTED_TARGETS=(\
     ncmpcpp \
     ncspot \
     neovim \
+    neovide \
     picom \
     pentadactyl \
     polybar \
@@ -336,6 +337,11 @@ function create_link_for_target() {
         ncspot )
             mkdir -p "$HOME/.config/ncspot/"
             create_link "$PWD/ncspot/config.toml" "$HOME/.config/ncspot/config.toml"
+            ;;
+
+        neovide )
+            mkdir -p "$HOME/.config/neovide"
+            create_link "$PWD/neovide/config.toml" "$HOME/.config/neovide/config.toml"
             ;;
 
         neovim )

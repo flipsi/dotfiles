@@ -3496,7 +3496,7 @@ set relativenumber
 set numberwidth=6
 
 " highlight current cursor position
-let g:cursorposition = 1
+let g:cursorposition = !exists("g:neovide")
 if g:cursorposition
     set cursorline cursorcolumn
 endif
@@ -4826,6 +4826,37 @@ augroup abbreviations_password_store
     autocmd BufRead /dev/shm/pass.* iabbrev auto autotype: email :tab pass :enter
 augroup END
 
+
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GUI settings {{{
+
+set guifont=PragmataPro\ Mono
+
+if exists("g:neovide")
+
+    let g:neovide_transparency = 0.9
+
+    let neovide_position_animation_length = 0.1
+    let neovide_cursor_animation_length = 0.05
+    let neovide_cursor_trail_size = 0
+    let neovide_cursor_animate_in_insert_mode = 0
+    let neovide_cursor_animate_command_line = 0
+    let neovide_scroll_animation_far_lines = 5
+    let neovide_scroll_animation_length = 0.05
+
+
+    " change font size in
+    if !exists('g:neovide_scale_factor')
+        let g:neovide_scale_factor=0.7
+    endif
+    function! ChangeScaleFactor(delta)
+        let g:neovide_scale_factor = g:neovide_scale_factor * a:delta
+    endfunction
+    nnoremap <expr><C-+> ChangeScaleFactor(1.2)
+    nnoremap <expr><C--> ChangeScaleFactor(1/1.2)
+
+endif
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -6211,7 +6242,7 @@ nnoremap <silent> <leader><c-h> :vertical split<cr>
 nnoremap <silent> <c-w>> <c-w>r
 nnoremap <silent> <c-w>< <c-w>R
 
-" resize windows to equal size, even when in termial
+" resize windows to equal size, even when in terminal
 nnoremap <silent> <c-y>=           <c-w>=
 tnoremap <silent> <c-y>= <c-\><c-n><c-w>=
 
@@ -6419,8 +6450,12 @@ function! Tig(from_current_file)
     else
         let l:command = 'tig status'
     endif
-    call VimuxRunCommand(l:command)
-    call VimuxZoomRunner()
+    if exists("g:neovide") || !exists("$TMUX")
+        call RunCommandInTerminal(l:command)
+    else
+        call VimuxRunCommand(l:command)
+        call VimuxZoomRunner()
+    endif
 endfunction
 command! TigFromWorkingDir  :call Tig(0) " Interactive Git interface (from working directory)
 command! TigFromCurrentFile :call Tig(1) " Interactive Git interface (from current file)
