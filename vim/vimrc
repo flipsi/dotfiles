@@ -3797,10 +3797,10 @@ function! SetColorscheme()
             " dark colorschemes that I like or once liked:
             " ----------------------------------------------
             " apprentice badwolf blackboard blacklight candycode dante desertEx
-            " gruvbox iceberg jellybeans luna-term meta5 materialbox molokai
-            " onedark pride seoul256 Tomorrow-Night up woju
+            " gruvbox gruvbox-material iceberg jellybeans luna-term meta5
+            " materialbox molokai onedark pride seoul256 Tomorrow-Night up woju
 
-            colorscheme gruvbox
+            colorscheme gruvbox-material
 
             " dark airlinethemes that I like or once liked:
             " ----------------------------------------------
