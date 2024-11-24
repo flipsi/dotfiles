@@ -3395,7 +3395,7 @@ let g:powerline_loaded = 1
 
 " {{{
 
-" options {{{
+" OPTIONS {{{
 
 
 " set timeout for escape sequences
@@ -3621,8 +3621,77 @@ set previewheight=40
 
 " }}}
 
+" FILETYPE SPECIFIC SETTINGS {{{
 
-" colorscheme {{{
+
+augroup SET_FILETYPE
+    au!
+    au BufNewFile,BufReadPost *.conf        set ft=conf
+    au BufNewFile,BufReadPost *.yaml.tpl    set ft=yaml
+augroup END
+
+
+augroup FILETYPE_SPECIFIC_SETTINGS_QUICKFIX
+    autocmd!
+    autocmd filetype qf setlocal norelativenumber
+    autocmd filetype qf setlocal colorcolumn=
+augroup END
+
+
+augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
+    autocmd!
+    autocmd filetype gitcommit setlocal nonumber norelativenumber
+    autocmd filetype gitcommit let b:local_autosave = 0
+    autocmd filetype gitcommit let b:DeleteTrailingWhitespace_Action = 'delete'
+    autocmd filetype gitcommit normal gg
+    autocmd filetype gitcommit call InsertCommitMsgPrefix()
+augroup END
+
+command! InsertCommitMsgPrefix :call InsertCommitMsgPrefix()
+function! InsertCommitMsgPrefix()
+    " only insert prefix for new commits (not when amending etc.)
+    if empty(getline('.'))
+        let l:branch_name = GitCurrentBranchName()
+        let l:affected_code_part = system('git diff --cached --name-only | head -n1 | cut -d "/" -f1 | tr -d "\n"')
+        let l:ticket_number_pattern = '\v^\zs\u+-\d+\ze[/-].*'
+        let l:ticket_number = matchstr(l:branch_name, l:ticket_number_pattern)
+        if l:ticket_number != ''
+            let l:commit_msg_prefix = l:affected_code_part . '(' . l:ticket_number . '): '
+        else
+            let l:commit_msg_prefix = l:affected_code_part . ': '
+        endif
+        call setline(1, l:commit_msg_prefix)
+        normal $l
+    endif
+endfunction
+
+
+augroup FILETYPE_SPECIFIC_SETTINGS_JSON
+    autocmd!
+    autocmd! FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
+    autocmd! FileType json syntax match Comment +\/\/.\+$+
+augroup END
+
+
+" default textwidth
+augroup auto_textwidth
+    autocmd!
+    autocmd FileType clojure         set textwidth=100 | call SetColorColumn('on')
+    autocmd FileType dockerfile      set textwidth=100 | call SetColorColumn('on')
+    autocmd FileType gitcommit       set textwidth=50  | call SetColorColumn('on')
+    autocmd FileType mail            set textwidth=0   | call SetColorColumn('off')
+    autocmd FileType markdown        set textwidth=100 | call SetColorColumn('on')
+    autocmd FileType php             set textwidth=120 | call SetColorColumn('on')
+    autocmd FileType scala           set textwidth=120 | call SetColorColumn('on')
+    autocmd FileType sh              set textwidth=100 | call SetColorColumn('on')
+    autocmd FileType sql             set textwidth=80  | call SetColorColumn('on')
+augroup END
+
+
+
+" }}}
+
+" COLORSCHEME {{{
 
 " Enables 24-bit RGB color in the |TUI|
 set termguicolors
@@ -3782,11 +3851,7 @@ nnoremap <leader>oC :ToggleColorschemeDarkOrLight<cr>
 
 " }}}
 
-
-
-
 " cursor change in insert mode (from block to i-beam) {{{
-
 " http://stackoverflow.com/questions/6488683/how-do-i-change-the-vim-cursor-in-insert-normal-mode
 
 " escape sequence depends on the terminal ('konsole', 'urxvt')
@@ -3807,9 +3872,7 @@ elseif terminal == 'urxvt'
 endif
 
 
-
 " }}}
-
 
 
 " }}}
@@ -6492,34 +6555,10 @@ nnoremap <leader>pr :exec 'Dispatch lpr ' . expand('%')<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SAVING AND CLOSING {{{
 
-"
-" :CloseAllFloatingWindows
-" Closes all floating windows, useful for cleaning up messed up pop-ups
-" copied from
-" https://www.reddit.com/r/neovim/comments/skkwnd/how_do_i_close_a_floating_window/hvlwo91/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 
-" unfortunately the heredoc fucked up my vimrc syntax highlighting...
-" but there is a workaround: reverting to v0.7.2 lua syntax (see https://stackoverflow.com/a/75191068/4568748)
-" `curl -sS https://raw.githubusercontent.com/neovim/neovim/v0.7.2/runtime/syntax/lua.vim > $VIMRUNTIME/syntax/lua.vim`
-
-if has('nvim-0.4.0')
-  command! CloseAllFloatingWindows   lua _G.CloseAllFloatingWindows()
-lua<<EOF
-  _G.CloseAllFloatingWindows = function()
-    local closed_windows = {}
-    for _, win in ipairs(vim.api.nvim_list_wins()) do
-      local config = vim.api.nvim_win_get_config(win)
-      if config.relative ~= "" then  -- is_floating_window?
-        vim.api.nvim_win_close(win, false)  -- do not force
-        table.insert(closed_windows, win)
-      end
-    end
-    print(string.format('Closed %d windows: %s', #closed_windows, vim.inspect(closed_windows)))
-  end
-EOF
-endif
-
-nnoremap <leader>qf :CloseAllFloatingWindows<cr>
+" ignore typos
+nnoremap <leader>q <nop>
+nnoremap <leader>Q <nop>
 
 
 function! MkdirIfNotExists(dir)
@@ -6600,84 +6639,38 @@ augroup map_q_in_certain_buffers
     autocmd filetype fugitiveblame       nnoremap <buffer> q :bd<cr>
 augroup END
 
+"
+" :CloseAllFloatingWindows
+" Closes all floating windows, useful for cleaning up messed up pop-ups
+" copied from
+" https://www.reddit.com/r/neovim/comments/skkwnd/how_do_i_close_a_floating_window/hvlwo91/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 
-" ... but ignore typos
-nnoremap <leader>q <nop>
-nnoremap <leader>Q <nop>
+" unfortunately the heredoc fucked up my vimrc syntax highlighting...
+" but there is a workaround: reverting to v0.7.2 lua syntax (see https://stackoverflow.com/a/75191068/4568748)
+" `curl -sS https://raw.githubusercontent.com/neovim/neovim/v0.7.2/runtime/syntax/lua.vim > $VIMRUNTIME/syntax/lua.vim`
+" Also, I best keep this at the bottom of my vimrc to minimize the annoyance.
 
+if has('nvim-0.4.0')
+  command! CloseAllFloatingWindows   lua _G.CloseAllFloatingWindows()
+lua<<EOF
+  _G.CloseAllFloatingWindows = function()
+    local closed_windows = {}
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      local config = vim.api.nvim_win_get_config(win)
+      if config.relative ~= "" then  -- is_floating_window?
+        vim.api.nvim_win_close(win, false)  -- do not force
+        table.insert(closed_windows, win)
+      end
+    end
+    print(string.format('Closed %d windows: %s', #closed_windows, vim.inspect(closed_windows)))
+  end
+EOF
+endif
 
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" FILETYPE SPECIFIC SETTINGS {{{
-
-
-augroup SET_FILETYPE
-    au!
-    au BufNewFile,BufReadPost *.conf        set ft=conf
-    au BufNewFile,BufReadPost *.yaml.tpl    set ft=yaml
-augroup END
-
-
-augroup FILETYPE_SPECIFIC_SETTINGS_QUICKFIX
-    autocmd!
-    autocmd filetype qf setlocal norelativenumber
-    autocmd filetype qf setlocal colorcolumn=
-augroup END
-
-
-augroup FILETYPE_SPECIFIC_SETTINGS_GITCOMMIT
-    autocmd!
-    autocmd filetype gitcommit setlocal nonumber norelativenumber
-    autocmd filetype gitcommit let b:local_autosave = 0
-    autocmd filetype gitcommit let b:DeleteTrailingWhitespace_Action = 'delete'
-    autocmd filetype gitcommit normal gg
-    autocmd filetype gitcommit call InsertCommitMsgPrefix()
-augroup END
-
-command! InsertCommitMsgPrefix :call InsertCommitMsgPrefix()
-function! InsertCommitMsgPrefix()
-    " only insert prefix for new commits (not when amending etc.)
-    if empty(getline('.'))
-        let l:branch_name = GitCurrentBranchName()
-        let l:affected_code_part = system('git diff --cached --name-only | head -n1 | cut -d "/" -f1 | tr -d "\n"')
-        let l:ticket_number_pattern = '\v^\zs\u+-\d+\ze[/-].*'
-        let l:ticket_number = matchstr(l:branch_name, l:ticket_number_pattern)
-        if l:ticket_number != ''
-            let l:commit_msg_prefix = l:affected_code_part . '(' . l:ticket_number . '): '
-        else
-            let l:commit_msg_prefix = l:affected_code_part . ': '
-        endif
-        call setline(1, l:commit_msg_prefix)
-        normal $l
-    endif
-endfunction
-
-
-augroup FILETYPE_SPECIFIC_SETTINGS_JSON
-    autocmd!
-    autocmd! FileType json setlocal conceallevel=0 foldmethod=syntax foldlevel=999
-    autocmd! FileType json syntax match Comment +\/\/.\+$+
-augroup END
-
-
-" default textwidth
-augroup auto_textwidth
-    autocmd!
-    autocmd FileType clojure         set textwidth=100 | call SetColorColumn('on')
-    autocmd FileType dockerfile      set textwidth=100 | call SetColorColumn('on')
-    autocmd FileType gitcommit       set textwidth=50  | call SetColorColumn('on')
-    autocmd FileType mail            set textwidth=0   | call SetColorColumn('off')
-    autocmd FileType markdown        set textwidth=100 | call SetColorColumn('on')
-    autocmd FileType php             set textwidth=120 | call SetColorColumn('on')
-    autocmd FileType scala           set textwidth=120 | call SetColorColumn('on')
-    autocmd FileType sh              set textwidth=100 | call SetColorColumn('on')
-    autocmd FileType sql             set textwidth=80  | call SetColorColumn('on')
-augroup END
-
+nnoremap <leader>qf :CloseAllFloatingWindows<cr>
 
 
 " }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 " }}}
@@ -6716,6 +6709,7 @@ endfor
 
 
 " }}}
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim:tw=0:ts=4:sts=4:sw=4:fdm=marker:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
