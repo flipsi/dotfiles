@@ -3716,6 +3716,8 @@ endfunction
 
 function! FixHighlighting()
 
+    " check with :verbose hi GROUP
+
     if g:light_or_dark_theme == 'dark'
         let g:indentLine_setColors = 1
         let g:indentLine_color_term = 237
@@ -3751,10 +3753,20 @@ function! FixHighlighting()
         highlight ALEErrorSign              ctermfg=203
         highlight ALEWarningSign            ctermfg=227
         highlight ALEInfoSign               ctermfg=227
-        "  TODO: adjust color for unused vars (hardly readable)
         highlight ALEVirtualTextError       ctermfg=243
+        " highlight Pmenu                     ctermbg=206 " popup (autocompletion) menu normal item   " Note this may be overriden by CocFloating
+        " highlight PmenuSel                  ctermbg=206 " popup (autocompletion) menu selected item
+        " highlight PmenuSbar                 ctermbg=206 " popup (autocompletion) menu scrollbar background
+        " highlight PmenuThumb                ctermbg=206 " popup (autocompletion) menu scrollbar
+        " highlight CocMenuSel                ctermbg=205
+        highlight NormalFloat               ctermbg=240 " TODO: FIX (doesn't work as expected)
+        " highlight CocFloating               ctermbg=245
+        " highlight CocFloatActive            ctermbg=245 ctermfg=220
+        " highlight CocFloatSbar              ctermbg=249
+        " highlight CocFloatThumb             ctermbg=253
         highlight CocHighlightText          ctermfg=71 ctermbg=237
-
+        highlight CocUnusedHighlight        ctermfg=192 " makes contrast for unused defs acceptable again, but doesn't pick up said color. TODO: FIX
+        " highlight CocWarningHighlight       ctermfg=213
     elseif g:light_or_dark_theme == 'light'
         let g:indentLine_setColors = 1
         let g:indentLine_color_term = 250
