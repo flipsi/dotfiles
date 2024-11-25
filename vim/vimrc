@@ -5955,6 +5955,11 @@ function! SetRunCommandMethodBasedOnFiletypeIfNotSet()
     endif
 endfunction
 
+augroup augroup_SetRunCommandMethodBasedOnFiletypeIfNotSet
+    au!
+    au BufReadPost * SetRunCommandMethodBasedOnFiletypeIfNotSet
+augroup END
+
 function! ToggleRunCommandMethod()
     if !exists('g:run_command_method') || g:run_command_method == "output-window"
         echo 'Set running method to `terminal-buffer`'
