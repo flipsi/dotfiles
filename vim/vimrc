@@ -191,7 +191,9 @@ if !exists("*SourceMYVIMRC")
         FixHighlighting
         let l:win_id = win_getid()
         normal! mZ
-        windo RainbowToggleOn
+        if exists("*RainbowToggleOn")
+            windo RainbowToggleOn
+        endif
         call win_gotoid(l:win_id)
         normal! `Z
         redraw
