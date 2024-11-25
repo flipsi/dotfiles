@@ -2124,42 +2124,49 @@ Plug 'tommcdo/vim-lion'
 
 " (also remember ==)
 
-Plug 'Chiel92/vim-autoformat'
+if has('nvim')
 
-" install formatters on the system:
-" - js-beautify (for HTML, CSS, JavaScript, JSON)
-" - prettier (for JavaScript, TypeScript)
-" - scalafmt (for scala)
+    Plug 'stevearc/conform.nvim'
 
-nnoremap 'af :Autoformat<cr>:GitGutter<cr>
-vnoremap 'af :Autoformat<cr>:GitGutter<cr>
-nmap <leader>af 'af
-vmap <leader>af 'af
+else
 
-let g:formatdef_php = '" php-cs-fixer.phar fix"'
-let g:formatters_php = ['php']
+    Plug 'Chiel92/vim-autoformat'
 
-let g:formatdef_scalafmt = '"scalafmt --stdin 2>/dev/null"'
-let g:formatters_scala = ['scalafmt']
+    " install formatters on the system:
+    " - js-beautify (for HTML, CSS, JavaScript, JSON)
+    " - prettier (for JavaScript, TypeScript)
+    " - scalafmt (for scala)
 
-let g:formatdef_prettier_typescript = '"prettier --parser typescript"'
-let g:formatters_typescript = ['prettier_typescript']
+    nnoremap 'af :Autoformat<cr>:GitGutter<cr>
+    vnoremap 'af :Autoformat<cr>:GitGutter<cr>
+    nmap <leader>af 'af
+    vmap <leader>af 'af
+
+    let g:formatdef_php = '" php-cs-fixer.phar fix"'
+    let g:formatters_php = ['php']
+
+    let g:formatdef_scalafmt = '"scalafmt --stdin 2>/dev/null"'
+    let g:formatters_scala = ['scalafmt']
+
+    let g:formatdef_prettier_typescript = '"prettier --parser typescript"'
+    let g:formatters_typescript = ['prettier_typescript']
 
 
-" autoformat for json does not work out with the plugin above. do this instead:
-augroup json_map_autoformat
-    au!
-    au FileType json nnoremap <buffer> 'af :%!python -m json.tool<cr>
-    au FileType json nmap <buffer> <leader>af 'af
-augroup END
+    " autoformat for json does not work out with the plugin above. do this instead:
+    augroup json_map_autoformat
+        au!
+        au FileType json nnoremap <buffer> 'af :%!python -m json.tool<cr>
+        au FileType json nmap <buffer> <leader>af 'af
+    augroup END
 
-" autoformat for sql
-augroup sql_map_autoformat
-    au!
-    au FileType sql nnoremap <buffer> 'af :%!sql-formatter-cli -<cr>
-    au FileType sql nmap <buffer> <leader>af 'af
-augroup END
+    " autoformat for sql
+    augroup sql_map_autoformat
+        au!
+        au FileType sql nnoremap <buffer> 'af :%!sql-formatter-cli -<cr>
+        au FileType sql nmap <buffer> <leader>af 'af
+    augroup END
 
+endif
 
 " change wrapping of function arguments
 Plug 'FooSoft/vim-argwrap'
@@ -2295,6 +2302,9 @@ if has('nvim')
     " Plot twist: You can get the same setup without lsp-zero.
 
     " Config see lsp.lua
+
+    nnoremap <leader>iii :LspInstall<space>
+    nnoremap <leader>iim :Mason<cr>
 
     nnoremap <leader>iia :LspStart<cr>
     nnoremap <leader>iio :LspStop<cr>
@@ -3007,6 +3017,17 @@ endfunction
 
 " }}}
 " Language: Markdown {{{
+
+if has('nvim')
+
+    Plug 'MeanderingProgrammer/render-markdown.nvim'
+
+    " commands:
+    " :RenderMarkdown enable
+    " :RenderMarkdown disable
+    " :RenderMarkdown toggle
+
+endif
 
 " " depends on 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'

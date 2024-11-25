@@ -29,6 +29,7 @@ local ensure_installed = {
   -- 'metals', -- Scala -- not available because https://github.com/williamboman/mason.nvim/issues/369#issuecomment-1427541293
   'pylsp', -- Python
   'lua_ls',
+  -- 'lua-language-server'
   -- 'rust_analyzer'
   -- 'yamlls'
 }

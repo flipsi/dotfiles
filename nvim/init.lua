@@ -46,6 +46,7 @@ require('nvim-highlight-colors').setup({
 
 
 require('flipsi.plugins.mini')
+require('flipsi.plugins.formatting')
 require('flipsi.plugins.lsp')
 -- require('flipsi.plugins.nvim-metals') -- I don't want what's in this file!
 require('flipsi.plugins.nvim-metals-minimal') -- I don't want what's in this file!
