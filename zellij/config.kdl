@@ -129,12 +129,14 @@ keybinds clear-defaults=true {
         }
     }
     shared_among "normal" "locked" {
-        bind "Ctrl Alt left" { MoveFocusOrTab "left"; }
-        bind "Ctrl Alt down" { MoveFocus "down"; }
-        bind "Ctrl Alt up" { MoveFocus "up"; }
-        bind "Ctrl Alt right" { MoveFocusOrTab "right"; }
-        bind "Ctrl Alt +" { Resize "Increase"; }
-        bind "Ctrl Alt -" { Resize "Decrease"; }
+        bind "Ctrl left"  { MoveFocus "left"; }
+        bind "Ctrl down"  { MoveFocus "down"; }
+        bind "Ctrl up"    { MoveFocus "up"; }
+        bind "Ctrl right" { MoveFocus "right"; }
+        bind "Ctrl Shift up"    { Resize "Increase"; }
+        bind "Ctrl Shift down"  { Resize "Decrease"; }
+        bind "Ctrl Alt +"       { Resize "Increase"; }
+        bind "Ctrl Alt -"       { Resize "Decrease"; }
         bind "Ctrl Alt o" { NewPane "up" ; SwitchToMode "locked"; }
         bind "Ctrl Alt O" { NewPane "right" ; SwitchToMode "locked"; }
         bind "Ctrl Alt i" { NewTab; SwitchToMode "locked"; }
