@@ -1499,6 +1499,7 @@ nmap <leader>qO :BufOnly<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " static code analysis {{{
 
+" old school synchronous linter
 " Plug 'scrooloose/syntastic'
 
 let g:syntastic_always_populate_loc_list = 1
@@ -1514,11 +1515,10 @@ let g:syntastic_mode_map = {
 " let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 let g:syntastic_c_cppcheck_args = ' -std=c++11 -stdlib=libc++'
 
-nnoremap <silent> <leader>sc :SyntasticCheck<cr>
-nnoremap <silent> <leader>sr :SyntasticReset<cr>
-nnoremap <silent> <leader>st :SyntasticToggleMode<cr>
-nnoremap <silent> <leader>si :SyntasticInfo<cr>
-
+" nnoremap <silent> <leader>sc :SyntasticCheck<cr>
+" nnoremap <silent> <leader>sr :SyntasticReset<cr>
+" nnoremap <silent> <leader>st :SyntasticToggleMode<cr>
+" nnoremap <silent> <leader>si :SyntasticInfo<cr>
 
 " install linters on the system:
 " - pylint
@@ -1566,42 +1566,53 @@ let g:syntastic_quiet_messages = { "regex": [
 
 
 
-" asynchronous alternative to syntastic
-Plug 'w0rp/ale'
+if !has('nvim')
 
-let g:ale_list_window_size = 5
-let g:ale_lint_on_enter = 0
-let g:ale_linters = {
-\   'markdown': ['markdownlint'],
-\   'clojure': ['clj-kondo'],
-\   'javascript': ['eslint'],
-\   'typescript': ['tsserver', 'tslint'],
-\   'vue': ['eslint']
-\}
-let g:ale_fixers = {
-\    'javascript': ['eslint'],
-\    'typescript': ['prettier'],
-\    'vue': ['eslint'],
-\    'markdown': ['prettier'],
-\    'scss': ['prettier'],
-\    'html': ['prettier']
-\}
+    " asynchronous alternative to syntastic
+    Plug 'w0rp/ale'
 
-" disable hints for certain languages,
-" because coc aleady provides this
-let g:ale_linters_ignore = {'clojure': ['clj-kondo']}
+    let g:ale_list_window_size = 5
+    let g:ale_lint_on_enter = 0
+    let g:ale_linters = {
+                \   'markdown': ['markdownlint'],
+                \   'clojure': ['clj-kondo'],
+                \   'javascript': ['eslint'],
+                \   'typescript': ['tsserver', 'tslint'],
+                \   'vue': ['eslint']
+                \}
+    let g:ale_fixers = {
+                \    'javascript': ['eslint'],
+                \    'typescript': ['prettier'],
+                \    'vue': ['eslint'],
+                \    'markdown': ['prettier'],
+                \    'scss': ['prettier'],
+                \    'html': ['prettier']
+                \}
 
-" add some options
-let g:ale_python_pylint_options = '--rcfile $HOME/.vim/config/pylint.rc'
+    " disable hints for certain languages,
+    " because coc aleady provides this
+    let g:ale_linters_ignore = {'clojure': ['clj-kondo']}
 
+    " add some options
+    let g:ale_python_pylint_options = '--rcfile $HOME/.vim/config/pylint.rc'
 
-nnoremap <silent> <leader>sc :ALELint<cr>
-nnoremap <silent> <leader>sn :ALENext<cr>
-nnoremap <silent> <leader>sN :ALEPrevious<cr>
-nnoremap <silent> <leader>sp :ALEPrevious<cr>
-nnoremap <silent> <leader>sr :ALEDisable<cr>
-nnoremap <silent> <leader>st :ALEToggle<cr>
-nnoremap <silent> <leader>si :ALEInfo<cr>
+    nnoremap <silent> <leader>sc :ALELint<cr>
+    nnoremap <silent> <leader>sn :ALENext<cr>
+    nnoremap <silent> <leader>sN :ALEPrevious<cr>
+    nnoremap <silent> <leader>sp :ALEPrevious<cr>
+    nnoremap <silent> <leader>sr :ALEDisable<cr>
+    nnoremap <silent> <leader>st :ALEToggle<cr>
+    nnoremap <silent> <leader>si :ALEInfo<cr>
+
+else
+
+    Plug 'mfussenegger/nvim-lint'
+
+    " With ale we already got an asynchronous linter, why write yet another one?
+    " Because ale also includes its own language server client.
+    " nvim-lint instead has a more narrow scope: It spawns linters, parses their output, and reports the results via the vim.diagnostic module.
+
+endif
 
 " evaluate expression live, which is awesome
 " Plug 'metakirby5/codi.vim'
