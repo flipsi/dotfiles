@@ -5740,46 +5740,38 @@ nnoremap 'au= yyp^v$r=
 nnoremap 'au# yyp^v$r#
 
 " enter substitution mode quickly
-nnoremap <c-s><c-s> :%s::<left>
+nnoremap <c-s><c-s> :%s::c<left><left>
 
 
 " in visual mode, use 's' for substitution
 " (to change only a single occurence, use 'c'. by default they are the same)
 
-" substitute occurrences of selection in this buffer
-vnoremap <c-s>         yms:%s`\V\C<c-r>"`<c-r>"`c<bar>norm!`s
-    \ <left><left><left><left><left><left><left><left><left><left><left>
+" substitute occurrences of selection in this buffer (beginning from the top)
+vmap     <c-s><c-s>     <c-s><c-s>
+vnoremap <c-s>s         yms:%s`\V\C<c-r>"`<c-r>"`c<bar>norm!`s <left><left><left><left><left><left><left><left><left><left><left>
 " the same, but with keyword matching
-vnoremap <leader><c-s> yms:%s`\V\C\<<c-r>"\>`<c-r>"`c<bar>norm!`s
-    \ <left><left><left><left><left><left><left><left><left><left><left>
+vnoremap <c-s>k         yms:%s`\V\C\<<c-r>"\>`<c-r>"`c<bar>norm!`s <left><left><left><left><left><left><left><left><left><left><left>
 
-" substitute occurrences of selection in this buffer from current line and below
-vnoremap s             yms:,$s`\V\C<c-r>"`<c-r>"`c<bar>norm!`s
-    \ <left><left><left><left><left><left><left><left><left><left><left>
+" substitute occurrences of selection in this buffer - beginning from current line (continue from top once bottom reached)
+vnoremap ss             yms:,$s`\V\C<c-r>"`<c-r>"`c<bar>norm!`s <left><left><left><left><left><left><left><left><left><left><left>
 " the same, but with keyword matching
-vnoremap <leader>s     yms:,$s`\V\C\<<c-r>"\>`<c-r>"`c<bar>norm!`s
-    \ <left><left><left><left><left><left><left><left><left><left><left>
+vnoremap sk             yms:,$s`\V\C\<<c-r>"\>`<c-r>"`c<bar>norm!`s <left><left><left><left><left><left><left><left><left><left><left>
 
 " " (these are actually two substitutions, so that we start at the current line
 " " but continue from the first. source: http://stackoverflow.com/a/7608016)
-" vnoremap s             yms:,$s:\V\C<c-r>":<c-r>":c<bar>1,''-&&<bar>norm!`s
+" vnoremap ss            yms:,$s:\V\C<c-r>":<c-r>":c<bar>1,''-&&<bar>norm!`s
     " \ <left><left><left><left><left><left><left><left><left>
     " \ <left><left><left><left><left><left><left><left><left><left><left>
 " " the same, but with keyword matching
-" vnoremap <leader>s     yms:,$s:\V\C\<<c-r>"\>:<c-r>":c<bar>1,''-&&<bar>norm!`s
+" vnoremap sk    yms:,$s:\V\C\<<c-r>"\>:<c-r>":c<bar>1,''-&&<bar>norm!`s
     " \ <left><left><left><left><left><left><left><left><left>
     " \ <left><left><left><left><left><left><left><left><left><left><left>
 
-" substitute motions
-for mov in ['e', 'E', 'b', 'B']
-    exe "nmap \<c-s>" . mov . " v" . mov . "\<c-s>"
-endfor
-" substitute text objects
-nmap <c-s>iw viw<leader><c-s>
-nmap <c-s>iW viW<c-s>
-"substitute word under cursor
-nmap <c-s>w viw<leader><c-s>
-nmap <c-s>W viW<c-s>
+" substitute text objects or word under cursor
+nmap <c-s>iw viw<c-s>s
+nmap <c-s>iW viW<c-s>s
+nmap <c-s>w  viw<c-s>s
+nmap <c-s>W  viW<c-s>s
 
 " substitute word under cursor in multiple files (add them with ':arg **' before)
 " (instead of using the far plugin)
@@ -6356,7 +6348,7 @@ inoremap <silent> <c-y><c-l>      <esc>:wincmd p<cr>
 
 " move buffer to a new window
 nnoremap <silent> <leader><c-l> :vsplit<cr><c-w>p:buffer #<cr><c-w>p<cr>
-nnoremap <silent> <leader><c-h> :vertical split<cr>
+nnoremap <silent> <leader><c-s> :vertical split<cr>
 
 " swap/rotate windows
 nnoremap <silent> <c-w>> <c-w>r
