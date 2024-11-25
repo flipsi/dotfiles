@@ -41,6 +41,8 @@ map('n', '<Leader>rV', ':luafile ~/.config/nvim/init.lua', silentnoremap)
 -- TODO: move subdirs of lua into `flipsi` subdir/namespace to avoid collisions!
 
 
+require('plugins.mini')
+
 require('plugins.lsp')
 -- require('plugins.nvim-metals') -- I don't want what's in this file!
 require('plugins.nvim-metals-minimal') -- I don't want what's in this file!

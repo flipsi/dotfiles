@@ -1631,15 +1631,19 @@ vnoremap <script> <silent> <leader>kb
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Treesitter {{{
-
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-" list all available languages and their installation status with
-" :TSInstallInfo
+" Treesitter (live AST of the code as you type) {{{
 "
-" install language parser:
-" TSInstall <language>
+if has('nvim')
+
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+    " list all available languages and their installation status with
+    " :TSInstallInfo
+    "
+    " install language parser:
+    " TSInstall <language>
+    "
+endif
 
 " Show context / Sticky scroll
 Plug 'wellle/context.vim'
@@ -1658,17 +1662,19 @@ nnoremap <silent> <leader>yC :ContextToggle <cr>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" read the docs {{{
+" Several (treesitter-enhanced) improvements {{{
 
-" Plug 'thinca/vim-ref'
-
-":Ref STUFF
+if has('nvim')
+    Plug 'echasnovski/mini.nvim'
+else
+    Plug 'tpope/vim-unimpaired'
+endif
 
 
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" text editing {{{
+" miscellaneous text editing plugins {{{
 
 " adjustments for text (not code)
 Plug 'preservim/vim-pencil'
@@ -1698,41 +1704,58 @@ nmap <leader>nn <plug>yankstack_substitute_newer_paste
 "call yankstack#setup() " DOES NOT WORK HERE
 
 
-" Note: use built-in commenting (since nvim 0.10) (gc)
-"
-" Plug 'scrooloose/nerdcommenter'
-" use leading space, but delete trailing space
-let g:NERDSpaceDelims = 1
-let g:NERDTrimTrailingWhitespace = 1
-" do not nest by default
-let g:NERDDefaultNesting = 1
-let g:NERDAltDelims_javascript = 0
-" align multiline comments
-let g:NERDDefaultAlign = 'left'
-" nmap 'c <leader>c
-" xmap 'c <leader>c
-" comment text objects and movements
-nmap <leader>c<down> V<down><plug>NERDCommenterInvert
-nmap <leader>c<up>   V<up><plug>NERDCommenterInvert
-nmap        'c<down> V<down><plug>NERDCommenterComment
-nmap        'c<up>   V<up><plug>NERDCommenterComment
-for mov in ['j', 'k', 'gg', 'G', '(', ')', '{', '}', 'as', 'is', 'ap', 'ip']
-    exe "nmap \<leader\>c" . mov . " V" . mov . "\<plug\>NERDCommenterInvert"
-    exe "nmap 'c"          . mov . " V" . mov . "\<plug\>NERDCommenterComment"
-endfor
-for i in range(1, 50)
-    exe "nmap \<leader\>c" . i . "j        V" . i . "j\<plug\>NERDCommenterInvert"
-    exe "nmap \<leader\>c" . i . "\<down\> V" . i . "j\<plug\>NERDCommenterInvert"
-    exe "nmap \<leader\>c" . i . "k        V" . i . "k\<plug\>NERDCommenterInvert"
-    exe "nmap \<leader\>c" . i . "\<up\>   V" . i . "k\<plug\>NERDCommenterInvert"
-    exe "nmap 'c"          . i . "j        V" . i . "j\<plug\>NERDCommenterComment"
-    exe "nmap 'c"          . i . "\<down\> V" . i . "j\<plug\>NERDCommenterComment"
-    exe "nmap 'c"          . i . "k        V" . i . "k\<plug\>NERDCommenterComment"
-    exe "nmap 'c"          . i . "\<up\>   V" . i . "k\<plug\>NERDCommenterComment"
-endfor
+if has('nvim')
+
+    " Note: neovim has built-in commenting (since nvim 0.10) (see :help commenting)
+    " https://www.reddit.com/r/neovim/comments/1bwlvrt/neovim_now_has_builtin_commenting/
+    "
+    nmap <leader>c gc
+
+    " However, leading space padding (e.g. in vimscript) is 'broken'.
+    "
+    " enhance built-in commenting
+    "Plug 'folke/ts-comments.nvim'
+    "
+    " ... so I use mini.comment (from 'echasnovski/mini.nvim')
+
+else
+    " alternative from the pope: Plug 'tpope/vim-commentary'
+    "
+    Plug 'scrooloose/nerdcommenter'
+    " use leading space, but delete trailing space
+    let g:NERDSpaceDelims = 1
+    let g:NERDTrimTrailingWhitespace = 1
+    " do not nest by default
+    let g:NERDDefaultNesting = 1
+    let g:NERDAltDelims_javascript = 0
+    " align multiline comments
+    let g:NERDDefaultAlign = 'left'
+    " nmap 'c <leader>c
+    " xmap 'c <leader>c
+    " comment text objects and movements
+    nmap <leader>c<down> V<down><plug>NERDCommenterInvert
+    nmap <leader>c<up>   V<up><plug>NERDCommenterInvert
+    nmap        'c<down> V<down><plug>NERDCommenterComment
+    nmap        'c<up>   V<up><plug>NERDCommenterComment
+    for mov in ['j', 'k', 'gg', 'G', '(', ')', '{', '}', 'as', 'is', 'ap', 'ip']
+        exe "nmap \<leader\>c" . mov . " V" . mov . "\<plug\>NERDCommenterInvert"
+        exe "nmap 'c"          . mov . " V" . mov . "\<plug\>NERDCommenterComment"
+    endfor
+    for i in range(1, 50)
+        exe "nmap \<leader\>c" . i . "j        V" . i . "j\<plug\>NERDCommenterInvert"
+        exe "nmap \<leader\>c" . i . "\<down\> V" . i . "j\<plug\>NERDCommenterInvert"
+        exe "nmap \<leader\>c" . i . "k        V" . i . "k\<plug\>NERDCommenterInvert"
+        exe "nmap \<leader\>c" . i . "\<up\>   V" . i . "k\<plug\>NERDCommenterInvert"
+        exe "nmap 'c"          . i . "j        V" . i . "j\<plug\>NERDCommenterComment"
+        exe "nmap 'c"          . i . "\<down\> V" . i . "j\<plug\>NERDCommenterComment"
+        exe "nmap 'c"          . i . "k        V" . i . "k\<plug\>NERDCommenterComment"
+        exe "nmap 'c"          . i . "\<up\>   V" . i . "k\<plug\>NERDCommenterComment"
+    endfor
+
+endif
 
 " duplicate a line and comment out the first one
-nmap <leader>cd yygccp
+nmap <leader>cd yy<leader>cp
 
 " do not comment on new lines (except when already in insert mode)
 nnoremap o o<esc>S
@@ -2251,6 +2274,11 @@ nnoremap <leader>icp :ColorPicker<cr>
 " Completion and other smart IDE features via LSP {{{
 "
 
+" Looking up references is not needed when one has LSP, right?
+" Plug 'thinca/vim-ref'
+":Ref STUFF
+"
+"
 if has('nvim')
 
     Plug 'neovim/nvim-lspconfig'
@@ -4928,6 +4956,7 @@ iabbrev FE          frontend
 iabbrev af          autoformat
 iabbrev admini      administrator
 iabbrev dpr         deprecated
+iabbrev misc        miscellaneous
 iabbrev ns          namespace
 iabbrev pr          println
 iabbrev sm          [SQUASHME]
@@ -5736,6 +5765,7 @@ nnoremap K :<c-u>put =repeat(nr2char(10), v:count1)<cr>k
 nnoremap 'li kWjdwgE
 
 " add space (one newline) below
+" TODO: fix that mini.comment adds commentstrings, I don't want that
 nnoremap <a-o> o<esc>k
 
 " add space (a few newlines) below
