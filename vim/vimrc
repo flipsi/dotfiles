@@ -3735,7 +3735,7 @@ function! FixHighlighting()
         highlight ShowTrailingWhitespace  ctermbg=235
         highlight VertSplit               ctermfg=238
         highlight Folded                  ctermfg=238 ctermfg=248
-        highlight LineNr                  ctermbg=237 ctermfg=243 guibg=#3C3836
+        highlight LineNr                  ctermbg=237 ctermfg=243 guibg=#32302F
         " highlight SignColumn              ctermbg=237 guibg=#32302F
         " highlight GitGutterAdd            ctermbg=235
         " highlight GitGutterChange         ctermbg=235
