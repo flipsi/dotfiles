@@ -28,9 +28,9 @@ map('n', '<Leader>sv', '<Cmd>lua reload_config()<CR>', silentnoremap)
 map('n', '<Leader>rv', '<Cmd>lua reload_config()<CR>', silentnoremap)
 map('n', '<Leader>rV', ':luafile ~/.config/nvim/init.lua', silentnoremap)
 
--- I continue to use vim-plug as my plugin manager.
+-- I continue to use vim-plug as my plugin manager, both in vim and neovim.
 -- People have been using packer, but it has been deprecated by now.
--- lazy.nvim is the new shit, but migration has it's caveats, see:
+-- lazy.nvim is the new shit, but migration has its caveats, see:
 -- https://dimtion.fr/blog/trying-out-lazy-nvim/
 
 -- Plugins to install will still have to be added to vimrc, because `plug#begin()` can't be invoked twice (https://github.com/junegunn/vim-plug/issues/454#issuecomment-202878485).
@@ -38,17 +38,15 @@ map('n', '<Leader>rV', ':luafile ~/.config/nvim/init.lua', silentnoremap)
 -- TODO: I may be able to move the plugin end call to here...
 
 
--- TODO: move subdirs of lua into `flipsi` subdir/namespace to avoid collisions!
-
-
-require('plugins.mini')
-
-require('plugins.lsp')
--- require('plugins.nvim-metals') -- I don't want what's in this file!
-require('plugins.nvim-metals-minimal') -- I don't want what's in this file!
 
 require('nvim-highlight-colors').setup({
   render = 'background',
   enable_tailwind = true
 })
+
+
+require('flipsi.plugins.mini')
+require('flipsi.plugins.lsp')
+-- require('flipsi.plugins.nvim-metals') -- I don't want what's in this file!
+require('flipsi.plugins.nvim-metals-minimal') -- I don't want what's in this file!
 
