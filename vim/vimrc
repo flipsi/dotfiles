@@ -5636,6 +5636,16 @@ nnoremap <leader>fe /\v(error\|fail)<cr>
 nnoremap Y ^y$
 nnoremap D 0d$"_dd
 
+" delete line content (replacing with empty line to avoid 'Cumulative Layout Shift')
+nnoremap 'dd         :.s:.*::<cr>
+nnoremap 'd<down> :.,+1s:.*::<cr>
+nnoremap 'dj      :.,+1s:.*::<cr>
+nnoremap 'd<up>   :-1,.s:.*::<cr>
+nnoremap 'dk      :-1,.s:.*::<cr>
+nnoremap 'd}    :.,/^$/s:.*::<cr>
+nnoremap 'd{    :?^$?,.s:.*::<cr>
+vnoremap 'd           :s:.*::<cr>
+
 " select last pasted/edited text
 nnoremap gV `[v`]
 
