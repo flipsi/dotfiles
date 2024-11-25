@@ -5629,7 +5629,7 @@ nnoremap <leader>fe /\v(error\|fail)<cr>
 " TEXT EDITING {{{
 
 
-" text edit leader is minus ('-')
+" text edit leader is single quote (')
 
 
 " yank/delete line without line break (in difference to yy/dd)
