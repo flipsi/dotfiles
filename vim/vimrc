@@ -457,24 +457,46 @@ let g:Illuminate_highlightUnderCursor = 0
 
 
 " highlight different parentheses pairs with different colors
-Plug 'luochen1990/rainbow'
-let g:rainbow_active = 1
-nnoremap <leader>yb :RainbowToggle<cr>
+if has('nvim')
 
-augroup rainbow_disable_in_terminal_buffers
-    au!
-    " au TermOpen * if exists(":RainbowToggleOff") | RainbowToggleOff | endif
-    au TermOpen * RainbowToggleOff
-augroup END
+    Plug 'hiphish/rainbow-delimiters.nvim'
 
-" TODO: fork plugin and disable per filetype
-" https://github.com/luochen1990/rainbow/issues/187
+    nnoremap <leader>yb :lua require('rainbow-delimiters').toggle(0)<cr>
 
+else
+
+    Plug 'luochen1990/rainbow'
+    let g:rainbow_active = 1
+    nnoremap <leader>yb :RainbowToggle<cr>
+
+    augroup rainbow_disable_in_terminal_buffers
+        au!
+        " au TermOpen * echo "zack" " TODO: delete this debugging statement
+        " TODO: FIX
+        " au TermOpen * RainbowToggleOff
+        " au TermOpen * if exists(":RainbowToggleOff") | RainbowToggleOff | endif
+    augroup END
+
+    augroup rainbow_disable_in_terminal_buffers_too_late_but_used_to_work
+        au!
+        au BufEnter term://* echo "zzzack"
+        au BufEnter term://* RainbowToggleOff
+    augroup END
+
+    " TODO: fork plugin and disable per filetype
+    " https://github.com/luochen1990/rainbow/issues/187
+    "
+endif
 
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " distraction free mode {{{
+
+if has('nvim')
+    Plug 'folke/zen-mode.nvim'
+    nnoremap <leader>yz :ZenMode<cr>
+endif
 
 Plug 'junegunn/goyo.vim'
 
@@ -484,7 +506,7 @@ let g:goyo_height="100%"
 nnoremap <leader>yy :Goyo<cr>
 
 
-" maximize (tmux 'zoom') current window temporarily
+" maximize (like tmux 'zoom') current window temporarily
 Plug 'szw/vim-maximizer'
 let g:maximizer_set_default_mapping = 0
 nnoremap <silent><leader>ym :MaximizerToggle!<CR>
@@ -938,6 +960,16 @@ omap l :<C-U>call sneak#wrap(v:operator,   2, 1, 0, 0)<CR>
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " better and custom text objects {{{
+
+"TODO: use treesitter enhanced mini.nvim
+"EasyAlign -> mini.align
+"flash.nvim -> mini.jump
+"lualine -> mini.statusline
+"nvim-autopairs -> mini.pairs
+"nvim-web-devicons -> mini.icons
+"vim-sandwich -> mini.surround
+"vim-unimpaired -> mini.bracketed
+"see https://evantravers.com/articles/2024/09/17/making-my-nvim-act-more-like-helix-with-mini-nvim/
 
 Plug 'wellle/targets.vim'
 
@@ -1634,6 +1666,10 @@ nnoremap <silent> <leader>yC :ContextToggle <cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " text editing {{{
 
+" adjustments for text (not code)
+Plug 'preservim/vim-pencil'
+nnoremap <leader>yi :TogglePencil<cr>
+
 
 " replace some motion or text object or selection with current yank
 Plug 'vim-scripts/ReplaceWithRegister'
@@ -2182,7 +2218,11 @@ nnoremap <silent> 'dst :%DeleteTrailingWhitespace<cr>
 " colors (hex codes and such) {{{
 
 " make colors visible (e.g. '#DD8844' will have orange background)
-Plug 'ap/vim-css-color'
+if has('nvim')
+    Plug 'brenoprata10/nvim-highlight-colors'
+else
+    Plug 'ap/vim-css-color'
+endif
 
 " convert between color formats (color under cursor or visually selected)
 Plug 'amadeus/vim-convert-color-to'
@@ -2191,6 +2231,7 @@ nnoremap 'ccr :ConvertColorTo rgb<cr>
 nnoremap 'cca :ConvertColorTo rgba<cr>
 
 " launch colorpicker and insert color code
+" TODO: find something that is not old and broken
 Plug 'blindFS/vim-colorpicker'
 nnoremap <leader>icp :ColorPicker<cr>
 

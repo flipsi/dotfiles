@@ -169,4 +169,7 @@ cmp.setup({
     end,
   },
   mapping = cmp.mapping.preset.insert({}),
+  formatting = {
+    format = require("nvim-highlight-colors").format
+  }
 })
