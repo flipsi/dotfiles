@@ -3535,20 +3535,32 @@ set fileencoding=utf-8
 " (still have to change buffer or call :checktime)
 set autoread
 
-" automatically save buffer when it loses focus
-if s:MyMode == 'mastery'
-    let g:autosave = 1
-else
-    let g:autosave = 0
-endif
+
+" don't normally use autosave
+let g:autosave = 0 " enable via autocommand below or on demand with AutoSaveEnable
+
+" but automatically save files if in git repository
+augroup enable_autosave_in_git_repos
+    au!
+    au VimEnter * if IsGitRepository(getcwd())
+    au VimEnter *   AutoSaveEnable
+    au VimEnter * endif
+augroup END
+
+" actual autosave autocommand
 augroup autosave
     au!
-    au BufLeave,FocusLost * if (g:autosave && !exists("b:local_autosave"))
-                          \ || (g:autosave && exists("b:local_autosave") && b:local_autosave)
-                          \ || (!g:autosave && exists("b:local_autosave") && b:local_autosave)
-    au BufLeave,FocusLost *     silent! update
-    au BufLeave,FocusLost * endif
+    " au BufLeave,FocusLost * if g:autosave | call SaveIfWritable() | endif
+    au InsertLeave,CursorHold * if g:autosave | call SaveIfWritable() | endif
 augroup END
+
+function! SaveIfWritable()
+    if filewritable(expand('%')) == 1 || ! findfile(expand('%:t'), expand('%:h'))
+        silent! update
+    endif
+endfunction
+
+
 
 " automatically change working directory to current file
 " set autochdir
@@ -5404,24 +5416,17 @@ nnoremap <leader>ot8 :set expandtab tabstop=8 shiftwidth=4 softtabstop=4<cr>
 " toggle paste mode
 nnoremap <leader>op :set paste! <bar> :set paste?<cr>
 
-" autosave (aka 'autowrite')
-command! DisableAutoSave        :let g:autosave = 0         " Don't save file autosave on focus lost (globally)
-command! EnableAutoSave         :let g:autosave = 1         " Save file autosave on focus lost (globally)
-command! DisableAutoSaveForFile :let b:local_autosave = 0   " Don't save file autosave on focus lost (only current file)
-command! EnableAutoSaveForFile  :let b:local_autosave = 1   " Save file autosave on focus lost (only current file)
+" autosave
+command! AutoSaveDisable        :set noautowriteall<bar> let g:autosave = 0 " Don't save file automatically (globally)
+command! AutoSaveEnable         :set autowriteall  <bar> let g:autosave = 1 " Save file automatically (globally)
+command! AutoSaveToggle         :set autowriteall! <bar>
+                                \ if !exists("g:autosave") <bar> let g:autosave = 0 <bar> endif <bar>
+                                \ let g:autosave = 1 - g:autosave <bar>
+                                \ echo g:autosave == 1 ?
+                                \ 'Autosave enabled' :
+                                \ 'Autosave disabled'
 
-" toggle autosave
-nnoremap <silent> <leader>oWW
-            \ :if !exists("b:local_autosave") <bar> let b:local_autosave = 0 <bar> endif <cr>
-            \ :let b:local_autosave = 1 - b:local_autosave <cr>
-            \ :echo b:local_autosave == 1 ?
-            \ 'autosave enabled for local buffer' :
-            \ 'autosave disabled for local buffer'<cr>
-nnoremap <silent> <leader>oWA
-            \ :let g:autosave = 1 - g:autosave <cr>
-            \ :echo g:autosave == 1 ?
-            \ 'autosave enabled' :
-            \ 'autosave disabled'<cr>
+nnoremap <silent> <leader>oWA :AutoSaveToggle<cr>
 
 " toggle search preferences
 command! EnableHighlightSearch  :set hlsearch       " When there is a previous search pattern, highlight all its matches.
