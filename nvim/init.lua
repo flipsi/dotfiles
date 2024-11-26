@@ -45,6 +45,7 @@ require('nvim-highlight-colors').setup({
 })
 
 
+require('flipsi.close-all-floating-windows')
 require('flipsi.plugins.mini')
 require('flipsi.plugins.linting')
 require('flipsi.plugins.formatting')
