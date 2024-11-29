@@ -22,7 +22,7 @@ local ensure_installed = {
   -- 'dockerls',
   'html',
   'jsonls',
-  -- 'jdtls', -- Java
+  'jdtls', -- Java
   'gopls', -- golang
   'kotlin_language_server',
   -- 'marksman', -- markdown
@@ -83,26 +83,40 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(event)
     local opts = {buffer = event.buf}
 
-    vim.keymap.set('n', '<leader>ii', ':LspInfo<cr>', opts)
-    vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
     vim.keymap.set('n', '<leader>iq', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-    vim.keymap.set('n', '<leader>idd', '<cmd>lua vim.diagnostic.disable()<cr>', opts)
-    vim.keymap.set('n', '<leader>ide', '<cmd>lua vim.diagnostic.enable()<cr>', opts)
-    vim.keymap.set('n', '<leader>in', '<cmd>lua vim.diagnostic.goto_next()<cr>', opts)
-    vim.keymap.set('n', '<leader>iN', '<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
-    vim.keymap.set('n', '<leader>igg', 'gg<cmd>lua vim.diagnostic.goto_next()<cr>', opts)
-    vim.keymap.set('n', '<leader>iG', 'G<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
+    vim.keymap.set('n', 'K',          '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
     vim.keymap.set('n', 'gdd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
     vim.keymap.set('n', 'gds', ':vsplit | lua vim.lsp.buf.definition()<cr>', opts)
     vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
     vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
     vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-    vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+    vim.keymap.set('n', 'gr',         '<cmd>lua vim.lsp.buf.references()<cr>', opts)
     vim.keymap.set('n', '<leader>fu', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
     vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
     vim.keymap.set({'n', 'x'}, '<leader>rf', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
     vim.keymap.set({'n', 'x'}, '<leader>af', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-    vim.keymap.set({'n', 'x'}, '<leader>ia', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+    vim.keymap.set({'n', 'x'}, '<leader>iaa', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+
+    -- -- non-spec LSP features per LS, like "organize imports"
+    -- note that for jdtls, organizing imports is a code action
+
+    local clients = vim.lsp.get_active_clients()
+
+    if #clients == 0 then
+      print("No active LSP clients.")
+    else
+      for _, client in pairs(clients) do
+        -- print(vim.inspect(client))
+        if (client.name == 'jdtls') then
+          -- FIXME
+          vim.keymap.set('n', '<leader>ioi',   '<cmd>lua require("lspconfig").jdtls.organize_imports()<cr>', opts)
+          -- vim.keymap.set('n', '<leader>iaev' , '<cmd>lua jdtls.extract_variable()<cr>', opts)
+          -- vim.keymap.set('n', '<leader>iaec',  '<cmd>lua jdtls.extract_constant()<cr>', opts)
+          -- vim.keymap.set('v', "<leader>iaem", [[<ESC><CMD>lua jdtls.extract_method(true)<CR>]], { noremap=true, silent=true, buffer=event.buf, desc = "Extract method" })
+        end
+      end
+    end
+
   end,
 })
 
@@ -130,12 +144,16 @@ local pylsp_settings = {
     }
 }
 
+-- TODO: configure?
+-- https://sookocheff.com/post/vim/neovim-java-ide/
+local jdtls_settings = { }
+
 require("lspconfig").bashls.setup { capabilities = capabilities }
 require("lspconfig").clangd.setup { capabilities = capabilities }
 require("lspconfig").cmake.setup { capabilities = capabilities }
 require("lspconfig").cssls.setup { capabilities = capabilities }
 require("lspconfig").dockerls.setup { capabilities = capabilities }
--- require("lspconfig").jdtls.setup { capabilities = capabilities }
+require("lspconfig").jdtls.setup { settings = jdtls_settings, capabilities = capabilities }
 require("lspconfig").jsonls.setup { capabilities = capabilities }
 require("lspconfig").lua_ls.setup { settings = lua_settings, capabilities = capabilities }
 require("lspconfig").marksman.setup { capabilities = capabilities }

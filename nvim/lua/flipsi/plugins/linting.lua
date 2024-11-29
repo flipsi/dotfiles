@@ -5,15 +5,17 @@ local lint = require('lint')
 lint.linters_by_ft = {
     bash = { "shellcheck", "bash" },
     fish = { "shellcheck", "fish" },
-    java = { "sonarlint-language-server", "sonarqube", "semgrep", "spotbugs" },
+    -- java = { "semgrep", "sonarlint-language-server", "sonarqube", "spotbugs" },
+    java = { "semgrep" },
     javascript = { "ast-grep", "eslint_d" },
     javascriptreact = { "ast-grep", "eslint_d" },
     go = { "gospel" },
     haskell = { "hlint" },
     html = { "htmllint" },
     latex = { "vale" },
-    lua = { "ast-grep" },
-    markdown = { "vale", "alex", "markdownlint" },
+    lua = { "ast_grep" },
+    -- markdown = { "vale", "alex", "markdownlint" },
+    markdown = { "alex", },
     python = { "pylint" },
     svelte = { "eslint_d" },
     typescript = { "ast-grep", "eslint_d" },
@@ -22,8 +24,11 @@ lint.linters_by_ft = {
 
 vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
     callback = function()
-        lint.try_lint()
-        -- lint.try_lint("cspell")
+        -- lint.try_lint()
+        -- lint.try_lint("cspell") -- specific linter
+
+        -- suppress errors
+        local ok, result = pcall(lint.try_lint)
     end,
 })
 

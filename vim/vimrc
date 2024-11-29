@@ -2306,7 +2306,10 @@ if has('nvim')
     Plug 'williamboman/mason.nvim'
     Plug 'williamboman/mason-lspconfig.nvim'
 
-    " Plug 'mfussenegger/nvim-jdtls' " Java LSP - I don't need this.
+    " Plug 'mfussenegger/nvim-jdtls' " Java LSP
+    " IMPORTANT: If you want all the features jdtls has to offer, [nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls)
+    " is highly recommended. If all you need is diagnostics, completion, imports, gotos and formatting and some code actions
+    " you can keep reading here.
 
     " Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v4.x'}
     " https://lsp-zero.netlify.app/docs/getting-started.html
@@ -2314,11 +2317,22 @@ if has('nvim')
 
     " Config see lsp.lua
 
+    nnoremap <leader>ii  <nop>
     nnoremap <leader>iii :LspInstall<space>
     nnoremap <leader>iim :Mason<cr>
 
+    nnoremap <leader>iis :LspInfo<cr>
     nnoremap <leader>iia :LspStart<cr>
     nnoremap <leader>iio :LspStop<cr>
+
+    nnoremap <leader>idd    :lua vim.diagnostic.disable()<cr>
+    nnoremap <leader>ide    :lua vim.diagnostic.enable()<cr>
+    nnoremap <leader>in     :lua vim.diagnostic.goto_next()<cr>
+    nnoremap <leader>iN     :lua vim.diagnostic.goto_prev()<cr>
+    nnoremap <leader>igg  gg:lua vim.diagnostic.goto_next()<cr>
+    nnoremap <leader>iG    G:lua vim.diagnostic.goto_prev()<cr>
+
+    " for more (dynamic/buffer local) mappings also see lsp.lua
 
 else
 
@@ -2361,13 +2375,14 @@ else
     let g:coc_start_at_startup = 1
 
     " start/stop coc
-    nnoremap <leader>ic  <nop>
-    nnoremap <leader>ica :CocStart<cr>
-    nnoremap <leader>ict :CocToggle<cr>
-    nnoremap <leader>ici :CocInfo<cr>
+    nnoremap <leader>ii  <nop>
+    nnoremap <leader>iis :CocInfo<cr>
+    nnoremap <leader>iia :CocStart<cr>
+    nnoremap <leader>iio :CocStop<cr>
+    nnoremap <leader>iit :CocToggle<cr>
 
     " choose coc command (fuzzy finder)
-    nnoremap <leader>icc :CocList commands<cr>
+    nnoremap <leader>iic :CocList commands<cr>
 
     " hide error/warning popup
     nmap <leader>i<bs>      <Plug>(coc-float-hide)
@@ -2382,7 +2397,7 @@ else
     nnoremap <silent> <leader>iq    :call <SID>show_documentation()<cr>
 
     " navigate to first/next/last error/warning
-    nmap <leader>ig       gg<Plug>(coc-diagnostic-next)
+    nmap <leader>igg      gg<Plug>(coc-diagnostic-next)
     nmap <leader>iG        G<Plug>(coc-diagnostic-prev)
     nmap <leader>in         <Plug>(coc-diagnostic-next)
     nmap <leader>iN         <Plug>(coc-diagnostic-prev)
@@ -2434,8 +2449,8 @@ else
 
     " actions
     nmap <leader>ia         <Plug>(coc-codeaction)
-    nnoremap <leader>iio    :CocCommand editor.action.organizeImport<cr>
-    nnoremap <leader>iif    :call CocActionAsync('fold', 'imports')<cr>
+    nnoremap <leader>ioi    :CocCommand editor.action.organizeImport<cr>
+    nnoremap <leader>ifi    :call CocActionAsync('fold', 'imports')<cr>
     " nmap <leader>i<return>  <Plug>(coc-fix-current)
     nnoremap <leader>i<return>  :if g:coc_enabled == 1
                 \ <bar> execute "normal \<Plug>(coc-fix-current)"
@@ -2468,7 +2483,7 @@ else
                 \ ['.projectile', '.git', '.env']
 
     " echo project root
-    nnoremap <leader>icr :CocCommand workspace.workspaceFolders<cr>
+    nnoremap <leader>iir :CocCommand workspace.workspaceFolders<cr>
     " Hint: If this is wrong and .lsp dirs are created in the wrong dir, deleting .session.vim could help.
     " Hint: If afterwards, pwd is set to where .git is, not working dir, manually cd into working dir again.
 
