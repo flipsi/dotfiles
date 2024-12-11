@@ -30,7 +30,8 @@ function set_env_vars() {
     export BAR_MODULES_THIRD_CENTER
     export BAR_MODULES_THIRD_RIGHT
 
-    ETH_INTERFACE='enp7s0f3u1u3u1'
+    # ETH_INTERFACE='enp0s13f0u1u6'
+    ETH_INTERFACE=$(find_network_interface_name_by_pattern 'enp')
     WLAN_INTERFACE=$(find_network_interface_name_by_pattern '(wlan|wlp)')
 
     HOSTNAME=$(hostname)
