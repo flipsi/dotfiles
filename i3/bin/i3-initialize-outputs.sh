@@ -232,6 +232,33 @@ function main() {
             fi
             ;;
 
+        nott )
+
+            if test -n "$ONLY"; then
+
+                OUTPUT_TO_KEEP='eDP-1'
+
+                disable_all_but_one_output
+
+            elif xrandr | grep -q 'HDMI-1 connected'; then
+
+                MAIN_MONITOR='DP-1'
+                SECOND_MONITOR='DP-3'
+                THIRD_MONITOR='HDMI-1'
+                LAPTOP_SCREEN='eDP-1'
+                arrange_outputs_at_home
+
+            elif xrandr | grep -q 'DP-3 connected'; then
+
+                MAIN_MONITOR='DP-3'
+                LAPTOP_SCREEN='eDP-1'
+                xrandr \
+                    --output "$LAPTOP_SCREEN" --auto \
+                    --output "$MAIN_MONITOR" --auto --right-of "$LAPTOP_SCREEN"
+
+            fi
+            ;;
+
         * )
 
             echo ERROR: Unknown host!

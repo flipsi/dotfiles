@@ -77,6 +77,10 @@ function set_env_vars() {
                 BAR_DPI=300
                 BAR_HEIGHT=60
                 BAR_TRAY_SIZE=28
+            elif xrandr | grep -q 'HDMI-1 connected' && xrandr | grep -q 'DP-1 connected' && xrandr | grep -q 'DP-3 connected'; then
+                BAR_MAIN_MONITOR='DP-1'
+                BAR_SECOND_MONITOR='DP-3'
+                BAR_THIRD_MONITOR='HDMI-1'
             elif xrandr | grep -q 'HDMI-A-0 connected' && xrandr | grep -q 'DisplayPort-0 connected' && xrandr | grep -q 'DisplayPort-1 connected'; then
                 BAR_MAIN_MONITOR='DisplayPort-0'
                 BAR_SECOND_MONITOR='DisplayPort-1'
@@ -98,6 +102,9 @@ function set_env_vars() {
             elif xrandr | grep -q 'DP1 connected'; then
                 BAR_MAIN_MONITOR='DP1'
                 BAR_SECOND_MONITOR='eDP1'
+            elif xrandr | grep -q 'DP-1 connected'; then
+                BAR_MAIN_MONITOR='DP-1'
+                BAR_SECOND_MONITOR='eDP-1'
             elif xrandr | grep -q 'DP.-2 connected'; then
                 BAR_MAIN_MONITOR=$(xrandr | grep 'DP.-2 connected' | cut -d' ' -f1 | head -n1)
                 BAR_SECOND_MONITOR=$(xrandr | grep 'DP.-1 connected' | cut -d' ' -f1 | head -n1)
