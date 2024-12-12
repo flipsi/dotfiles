@@ -213,7 +213,6 @@ default_border              none
 default_floating_border     normal
 for_window [floating_from="user"] border normal # in addition to default_floating_border because it doesn't apply if floating is triggered at runtime e.g. via for_window
 hide_edge_borders           both
-smart_borders               on
 
 ## Gaps
 set $I3_GAPS_INNER 6
