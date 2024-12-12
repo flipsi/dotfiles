@@ -79,18 +79,20 @@ function create_session_code() {
     if ! (tmux has-session -t $SESSION_NAME_CODE 2>/dev/null); then
 
         tmux new-session -d -s $SESSION_NAME_CODE -n "delete-me" # can't create a session without window
-        open_project_in_vim "$HOME/projects/dotfiles" "dotfiles"
+        open_project_in_vim "$HOME/src-projects/dotfiles" "dotfiles"
+        open_project_in_vim "$HOME/src-projects/shellscripts" "shellscripts"
         tmux kill-window -t "$SESSION_NAME_CODE:delete-me"
 
-        PROJECTS_DIR="$HOME/projects"
+        PROJECTS_DIR="$HOME/work-projects"
         NUMBER_OF_PROJECTS=3
 
+            echo aaaa
         if [[ -d "$PROJECTS_DIR" ]]; then
+            echo eins
             for PROJECT in $(get_last_recent_git_projects "$PROJECTS_DIR" "$NUMBER_OF_PROJECTS"); do
+                echo zwei
                 echo "$PROJECT"
-                if [[ "$PROJECT" != "dotfiles" ]]; then
-                    open_project_in_vim "$PROJECTS_DIR/$PROJECT" "$PROJECT"
-                fi
+                open_project_in_vim "$PROJECTS_DIR/$PROJECT" "$PROJECT"
             done
         fi
     fi
