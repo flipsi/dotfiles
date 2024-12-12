@@ -829,12 +829,14 @@ mode "$move_workspace_to_output" {
 
 ## start an application
 bindsym $mod+Shift+o mode "$launch"
-set $launch Launch: (o) Terminal (n) GUI file manager (f) Firefox (g) Chrome (r) Chromium (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram
+set $launch Launch: (o) Terminal (n) GUI file manager (f) Firefox (g) Chrome (r) Chromium (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram (u) Outlook (e) Teams
 mode "$launch" {
     bindsym o               mode "$terminal"
     bindsym Shift+o         mode "$terminal"
     bindsym $mod+o          mode "$terminal"
     bindsym $mod+Shift+o    mode "$terminal"
+    bindsym u       exec --no-startup-id "/opt/outlook-for-linux/outlook-for-linux"; mode "default"
+    bindsym e       exec --no-startup-id "teams"; mode "default"
     bindsym r       exec --no-startup-id "chromium"; mode "default"
     bindsym f       exec --no-startup-id "firefox"; mode "default"
     bindsym g       exec --no-startup-id "google-chrome-stable"; mode "default"
@@ -876,7 +878,7 @@ mode "$terminal" {
 
 ## switch to a specific window or workspace
 bindsym $mod+o mode "$goto"
-set $goto Goto: (o) Terminal (i) Vivaldi (f) Firefox (g) Chrome (r) Chromium (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram (a) Audacity (w) Wine
+set $goto Goto: (o) Terminal (i) Vivaldi (f) Firefox (g) Chrome (r) Chromium (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram (a) Audacity (w) Wine (u) Outlook (e) Teams
 mode "$goto" {
   bindsym a         [class="(?i)audacity"]              focus; mode "default"
   bindsym $mod+a    [class="(?i)audacity"]              focus; mode "default"
@@ -906,6 +908,10 @@ mode "$goto" {
   bindsym $mod+g    [class="(?i)google-chrome" instance="google-chrome"] focus; mode "default"
   bindsym b         [class="(?i)chrom" instance="(crx_flcchhclanjfdanlfphjfnhbjdbejong|crx_goifhkhiimheobgjhfbnkkibebioelpk)"] focus; mode "default"
   bindsym $mod+b    [class="(?i)chrom" instance="(crx_flcchhclanjfdanlfphjfnhbjdbejong|crx_goifhkhiimheobgjhfbnkkibebioelpk)"] focus; mode "default"
+  bindsym u         [class="(?i)outlook-for-linux"]         focus; mode "default"
+  bindsym $mod+u    [class="(?i)outlook-for-linux"]         focus; mode "default"
+  bindsym e         [class="(?i)microsoft teams - preview"] focus; mode "default"
+  bindsym $mod+e    [class="(?i)microsoft teams - preview"] focus; mode "default"
   # cancel
   bindsym Return mode "default"
   bindsym Escape mode "default"
@@ -986,6 +992,8 @@ assign [class="(?i)cool-retro-term"]                                            
 assign [class="(?i)gnome-terminal"]                                                                 Terminal
 assign [class="(?i)urxvt"]                                                                          Terminal
 assign [class="(?i)neovide"]                                                                        Neovide
+for_window [class="(?i)outlook-for-linux"] move to workspace                                        Outlook
+for_window [class="(?i)microsoft teams - preview"] move to workspace                                Teams
 assign [class="(?i)pale moon"]                                                                      Web
 assign [class="(?i)qutebrowser"]                                                                    Web
 # assign [class="(?i)vivaldi-stable"]                                                                 Vivaldi
