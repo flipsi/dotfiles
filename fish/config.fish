@@ -49,6 +49,10 @@ end
 
 #############################################################
 
+function in_X
+    set -q DISPLAY
+end
+
 function set_hostname
     # find out host once (useful for multiple things, but saves cycles)
     if test -z $hostname
@@ -96,21 +100,52 @@ function setup_exit_status_printing
 end
 
 function autostart_keychain_on_some_hosts
-    # keychain takes care of ssh-agent and gpg-agent
-    function keychain_start
-        eval (command keychain --eval --quiet ~/.ssh/id_*)
-    end
-    if command -v keychain >/dev/null
-        set -l host_where_to_start_keychain_automatically 'falbala' 'mimir' 'frey' 'nott'
-        if contains $hostname $host_where_to_start_keychain_automatically
-            keychain_start
+    if in_X
+        # keychain takes care of ssh-agent and gpg-agent
+        function keychain_start
+            eval (command keychain --eval --quiet ~/.ssh/id_*)
+        end
+        if command -v keychain >/dev/null
+            set -l host_where_to_start_keychain_automatically 'falbala' 'mimir' 'frey' 'nott'
+            if contains $hostname $host_where_to_start_keychain_automatically
+                keychain_start
+            end
         end
     end
 end
 
-function in_X
-    set -q DISPLAY
+function load_abbreviations
+    source $HOME/.config/fish/abbr.fish
+    if test -f $HOME/.config/fish/abbr.local.fish
+        source $HOME/.config/fish/abbr.local.fish
+    end
 end
+
+function alias_hub
+    if command -v hub >/dev/null
+        alias git hub
+    end
+end
+
+function load_pyenv
+    if command -v pyenv >/dev/null
+        pyenv init - | source
+    end
+end
+
+
+function source_sdkman
+    if test -f "$HOME/.sdkman/bin/sdkman-init.sh"
+        source "$HOME/.sdkman/bin/sdkman-init.sh"
+    end
+end
+
+function source_asdf_version_manager
+    if test -f ~/.asdf/asdf.fish
+        source ~/.asdf/asdf.fish
+    end
+end
+
 
 #############################################################
 
@@ -121,35 +156,23 @@ end
 
 
 if status --is-interactive
-
-    # load abbreviations
-    source $HOME/.config/fish/abbr.fish
-    if test -f $HOME/.config/fish/abbr.local.fish
-        source $HOME/.config/fish/abbr.local.fish
-    end
-
+    load_abbreviations
 end
 
 if status --is-interactive; and status --is-login
 
-    # aliases (also see abbr file)
-    if command -v hub >/dev/null
-        alias git hub
-    end
-
-    # asdf version manager
-    if test -f ~/.asdf/asdf.fish
-        source ~/.asdf/asdf.fish
-    end
-
     set_color_theme
+    setup_exit_status_printing
+    autostart_keychain_on_some_hosts
+    alias_hub
+    load_pyenv
+    # source_sdkman # doesn't work for fish
+    source_asdf_version_manager
 
     # configuration for fish-command-timer
     set -x fish_command_timer_enabled      1
     set -x fish_command_timer_color        $fish_my_color_gray_middle
     set -x fish_command_timer_time_format  '%b %d %I:%M%p'
-
-    setup_exit_status_printing
 
     # correct typos the fun way
     # https://github.com/nvbn/thefuck
@@ -157,15 +180,5 @@ if status --is-interactive; and status --is-login
         # eval (thefuck --alias) # (does not work, so i added the function manually)
     # end
 
-    if in_X
-        autostart_keychain_on_some_hosts
-    end
-
 end
-
-# Load pyenv automatically by appending
-if command -v pyenv >/dev/null
-    pyenv init - | source
-end
-
 
