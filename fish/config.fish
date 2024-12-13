@@ -163,3 +163,9 @@ if status --is-interactive; and status --is-login
 
 end
 
+# Load pyenv automatically by appending
+if command -v pyenv >/dev/null
+    pyenv init - | source
+end
+
+
