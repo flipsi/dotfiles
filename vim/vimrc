@@ -4291,7 +4291,7 @@ function! GitWebUrl(line_or_range, return_or_yank_to_clipboard_or_open_in_web)
     let l:remote_name = system('git remote | head -n1')
     let l:revision = system('git rev-parse HEAD | tr -d "\n"')
     let l:remote_url = system('git ls-remote --get-url ' . l:remote_name)
-    let l:url_matches = matchlist(l:remote_url, '\m\(github\.com\|gitlab.*\.com\)[:/]\(.\{-}\)\(\.git\)\?\n')
+    let l:url_matches = matchlist(l:remote_url, '\m\(github\.com\|gitlab.*\.com\|bitbucket.*\.org\)[:/]\(.\{-}\)\(\.git\)\?\n')
     if v:shell_error || len(l:url_matches) == 0
         echo "Could not extract web URL."
         return
@@ -4300,16 +4300,31 @@ function! GitWebUrl(line_or_range, return_or_yank_to_clipboard_or_open_in_web)
     let l:git_root = system("git rev-parse --show-toplevel")
     let l:relative_path = expand("%:p")
     let l:absolute_path = strpart(l:relative_path, strlen(l:git_root))
-    if a:line_or_range == 'range'
-        let [l:startline, l:startcol, l:endline, l:endcol] = GetVisPos()
-        let l:line_param = "#L" . l:startline . '-L' . l:endline
+    let l:web_domain = l:url_matches[1]
+
+    if match(l:web_domain, 'bitbucket\.org') >= 0
+        if a:line_or_range == 'range'
+            let [l:startline, l:startcol, l:endline, l:endcol] = GetVisPos()
+            let l:line_param = "#lines-" . l:startline . ':' . l:endline
+        else
+            let l:line_param = "#lines-" . line('.')
+        endif
     else
-        let l:line_param = "#L". line('.')
+        if a:line_or_range == 'range'
+            let [l:startline, l:startcol, l:endline, l:endcol] = GetVisPos()
+            let l:line_param = "#L" . l:startline . '-L' . l:endline
+        else
+            let l:line_param = "#L". line('.')
+        endif
     endif
 
-    let l:web_domain = l:url_matches[1]
-    let l:web_url = 'https://' . l:web_domain . '/' . l:url_matches[2] .
-                \ '/blob/' . l:revision . '/' . l:absolute_path . l:line_param
+    if match(l:web_domain, 'bitbucket\.org') >= 0
+        let l:web_url = 'https://' . l:web_domain . '/' . l:url_matches[2] .
+                    \ '/src/' . l:revision . '/' . l:absolute_path . l:line_param
+    else
+        let l:web_url = 'https://' . l:web_domain . '/' . l:url_matches[2] .
+                    \ '/blob/' . l:revision . '/' . l:absolute_path . l:line_param
+    endif
 
     if a:return_or_yank_to_clipboard_or_open_in_web == 'return'
         return l:web_url
