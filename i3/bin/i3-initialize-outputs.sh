@@ -248,6 +248,14 @@ function main() {
                 LAPTOP_SCREEN='eDP-1'
                 arrange_outputs_at_home
 
+            elif xrandr | grep -q 'DP-1 connected'; then
+
+                MAIN_MONITOR='DP-1'
+                LAPTOP_SCREEN='eDP-1'
+                xrandr \
+                    --output "$LAPTOP_SCREEN" --auto \
+                    --output "$MAIN_MONITOR" --auto --right-of "$LAPTOP_SCREEN"
+
             elif xrandr | grep -q 'DP-3 connected'; then
 
                 MAIN_MONITOR='DP-3'
@@ -255,8 +263,8 @@ function main() {
                 xrandr \
                     --output "$LAPTOP_SCREEN" --auto \
                     --output "$MAIN_MONITOR" --auto --right-of "$LAPTOP_SCREEN"
-
             fi
+
             ;;
 
         * )
