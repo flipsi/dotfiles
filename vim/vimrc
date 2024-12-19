@@ -3887,13 +3887,13 @@ function! FixHighlighting()
         highlight DiffText                ctermbg=233
         highlight ShowTrailingWhitespace  ctermbg=235
         highlight VertSplit               ctermfg=238
-        highlight Folded                  ctermfg=238 ctermfg=248
-        highlight LineNr                  ctermbg=237 ctermfg=243 guibg=#32302F
-        highlight SignColumn              ctermbg=237 guibg=#32302F
-        " highlight GitGutterAdd            ctermbg=235
-        " highlight GitGutterChange         ctermbg=235
-        " highlight GitGutterDelete         ctermbg=235
-        " highlight GitGutterChangeDelete   ctermbg=235
+        highlight Folded                  ctermfg=238 ctermfg=248 guibg=#32302F
+        highlight LineNr                  ctermbg=237 ctermfg=243 guibg=#262626
+        highlight SignColumn              ctermbg=237 ctermfg=243 guibg=#262626
+        highlight GitGutterAdd            ctermbg=237 ctermfg=107 guibg=#262626 guifg=#79740e
+        highlight GitGutterChange         ctermbg=237 ctermfg=107 guibg=#262626 guifg=#427b58
+        highlight GitGutterDelete         ctermbg=237 ctermfg=107 guibg=#262626 guifg=#af3a03
+        highlight GitGutterChangeDelete   ctermbg=237 ctermfg=107 guibg=#262626 guifg=#427b58
         " highlight Conceal                 ctermbg=236
         " highlight Search                  ctermbg=237 ctermfg=white
         " highlight Error                   ctermbg=162
@@ -3961,7 +3961,7 @@ function! SetColorscheme()
             " kalisi laederon lucius minimalist raven serene tomorrow ubaryd wombat
             " zenburn
 
-            let g:airline_theme='distinguished'
+            let g:airline_theme='base16_grayscale'
 
         elseif g:light_or_dark_theme == 'light'
             set background=light
