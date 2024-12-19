@@ -14,7 +14,9 @@ set surround
 set commentary
 
 
-" Settings
+"---------------------------------------------------------------------------------------------------
+
+" SETTINGS
 
 set visualbell
 set noerrorbells
@@ -31,21 +33,28 @@ set sidescrolloff=5
 set sidescroll=1
 
 
-" Mappings
+"---------------------------------------------------------------------------------------------------
+
+" MAPPINGS
 
 let mapleader = " "
 
-nnoremap <F5> :source ~/.ideavimrc<cr>
+nnoremap <F5>           :source ~/.ideavimrc<cr>
+nnoremap <leader>sv     :source ~/.ideavimrc<cr>
+nnoremap <leader>ev     :edit ~/.ideavimrc<cr>
 
-nnoremap <bs> :action HideActiveWindow<cr>
+" VIEWPORT MOVEMENT ----------
 
-inoremap jk <c-c>
+" inoremap jk <c-c>
 
 nnoremap <a-j> 15<c-e>
 nnoremap <a-k> 15<c-y>
 
-noremap gj 10j
-noremap gk 10k
+
+" CURSOR MOVEMENT ----------
+
+noremap gj      10j
+noremap gk      10k
 noremap g<down> 10j
 noremap g<up>   10k
 
@@ -57,14 +66,6 @@ nnoremap v <c-v>
 nnoremap <c-v> v
 vnoremap v <c-c>
 
-nnoremap <C-c><C-c>     :action EditorCopy<cr>
-nnoremap <leader><c-v>  :action EditorPasteFromX11<cr>
-nnoremap <c-v><c-v>     :action EditorPaste<cr>
-inoremap <c-v><c-v>     <Esc>l:action EditorPaste<cr>i
-
-nnoremap Q @
-nnoremap QQ @@
-
 nnoremap <c-a> ^
 vnoremap <c-a> ^
 onoremap <c-a> ^
@@ -74,6 +75,40 @@ onoremap <c-e> $
 inoremap <c-e> <End>
 cnoremap <c-a> <Home>
 
+" select last pasted/edited text
+nnoremap gV `[v`]
+
+nnoremap <leader>.          :action JumpToLastChange<cr>
+nnoremap <leader>gn         :action VcsShowNextChangeMarker<cr>
+nnoremap <leader>gN         :action VcsShowPrevChangeMarker<cr>
+nnoremap <leader>in         :action GotoNextError<cr>
+nnoremap <leader>iN         :action GotoPreviousError<cr>
+nnoremap <leader>igg      gg:action GotoNextError<cr>
+nnoremap <leader>iG        G:action GotoPreviousError<cr>
+nnoremap <leader>i<down>    :action GotoNextError<cr>
+nnoremap <leader>i<up>      :action GotoPreviousError<cr>
+
+nnoremap <leader>ji         :action GotoImplementation<cr>
+nnoremap <leader>js         :action GotoSuperMethod<cr>
+nnoremap <leader>jd         :action GotoDeclaration<cr>
+nnoremap <leader>jt         :action GotoTest<cr>
+nnoremap <leader>jr         :action GotoRelated<cr>
+
+
+" TEXT EDITING ----------
+
+nnoremap <a-u>              :undo<cr>
+nnoremap <a-s-u>            :redo<cr>
+
+nnoremap <C-c><C-c>     :action EditorCopy<cr>
+nnoremap <leader><c-v>  :action EditorPasteFromX11<cr>
+nnoremap <c-v><c-v>     :action EditorPaste<cr>
+inoremap <c-v><c-v>     <Esc>l:action EditorPaste<cr>i
+
+nnoremap Q @
+nnoremap QQ @@
+
+nnoremap caE ggcG
 nnoremap dl d$
 nnoremap cl c$
 nnoremap yl y$
@@ -88,14 +123,10 @@ vnoremap < <gv
 vnoremap > >gv
 
 " move line up or down
-" (:m closes folds https://groups.google.com/forum/#!topic/vim_dev/QGgbjv4uyZc)
-nnoremap <silent> -k :set fdm=manual<CR>:m .-2<CR>:set fdm=marker<CR>
-nnoremap <silent> -j :set fdm=manual<CR>:m .+1<CR>:set fdm=marker<CR>
-vnoremap <silent> -j <Esc>:set fdm=manual<CR>gv:m '>+1<CR>gv=gv:set fdm=marker<CR>
-vnoremap <silent> -k <Esc>:set fdm=manual<CR>gv:m '<-2<CR>gv=gv:set fdm=marker<CR>
-
-" select last pasted/edited text
-nnoremap gV `[v`]
+nnoremap <silent> '<down>   ddp
+nnoremap <silent> '<up>     ddkP
+nnoremap <silent> 'j        ddp
+nnoremap <silent> 'k        ddkP
 
 " change case of word under cursor
 nnoremap cC viw~
@@ -114,17 +145,37 @@ nnoremap -ul yyp
 nnoremap -up yap<S-}>p
 vnoremap -u yP
 
+" add newline(s)
+nnoremap <a-o>   o<c-c>k
+nnoremap <a-s-o> O<c-c>j
+nnoremap 'as mno<Esc>o<Esc>o<Esc>o<Esc>`n
+
 " delete leading whitespace (can be prefixed with a count)
-nnoremap <silent> -dsl :s:^\s\+::<cr>
+nnoremap <silent> 'dsl :s:^\s\+::<cr>
+
 " replace double/multiple spaces with one space
-nnoremap <silent> -dsd :.s:\v(\S) {2}(\S):\1 \2:<cr>
-nnoremap <silent> -dsD :%s:\v(\S) {2}(\S):\1 \2:<cr>
-nnoremap <silent> -dsm :.s:\v(\S) {2,}(\S):\1 \2:<cr>
-nnoremap <silent> -dsM :.s:\v(\S) {2,}(\S):\1 \2:<cr>
+nnoremap <silent> 'dsd :.s:\v(\S) {2}(\S):\1 \2:<cr>
+nnoremap <silent> 'dsD :%s:\v(\S) {2}(\S):\1 \2:<cr>
+nnoremap <silent> 'dsm :.s:\v(\S) {2,}(\S):\1 \2:<cr>
+nnoremap <silent> 'dsM :.s:\v(\S) {2,}(\S):\1 \2:<cr>
+
+" comment code
+nnoremap <leader>c<leader>  :action CommentByLineComment<cr>
+vmap <leader>c              gc
+omap <leader>c              gc
+
+" search and replace
+nnoremap <leader>rp         :action Replace<cr>
+vnoremap <leader>rp      "+y:action Replace<cr>
+
+" IDE enhanced changes
+nnoremap <leader>rf         :action RenameElement<cr>
+nnoremap <leader>af         :action ReformatCode<cr>
+nnoremap <leader>ai         :action OptimizeImports<cr>
+nnoremap <leader>rn         :action RenameFile<cr>
 
 
-nnoremap K o<c-c>k
-nnoremap -as mno<Esc>o<Esc>o<Esc>o<Esc>`n
+" VIEW ----------
 
 nnoremap <c-g>+             :action EditorIncreaseFontSize<cr>
 nnoremap <c-g>-             :action EditorDecreaseFontSize<cr>
@@ -139,69 +190,73 @@ nnoremap <leader>yl         :set relativenumber!<cr>
 nnoremap <leader>yL         :action EditorToggleShowLineNumbers<cr>
 nnoremap <leader>ya         :action EditorToggleShowWhitespaces<cr>
 
-nnoremap <leader>.          :action JumpToLastChange<cr>
-nnoremap <leader>gn         :action VcsShowNextChangeMarker<cr>
-nnoremap <leader>gN         :action VcsShowPrevChangeMarker<cr>
-nnoremap <leader>in         :action GotoNextError<cr>
-nnoremap <leader>iN         :action GotoPreviousError<cr>
-nnoremap <leader>i<down>    :action GotoNextError<cr>
-nnoremap <leader>i<up>      :action GotoPreviousError<cr>
+" GOTO AND FIND ----------
 
-nnoremap <leader>w          :action SaveDocument<cr>
-nnoremap <leader>qq         :action CloseContent<cr>
-nnoremap <leader>qa         :action CloseAllEditors<cr>
-nnoremap <leader><bs>       :action CloseContent<cr>
+nnoremap <leader>ac         :action NewClass<cr>
 
-nnoremap <a-u>              :undo<cr>
-nnoremap <a-s-u>            :redo<cr>
-
-nnoremap <a-n>              :action NextTab<cr>
-nnoremap <a-p>              :action PreviousTab<cr>
-nnoremap <leader><right>    <c-w>l
-nnoremap <leader><left>     <c-w>h
-nnoremap <c-l>              <c-w>l
-nnoremap <c-h>              <c-w>h
-nnoremap <leader><c-l>      :action SplitVertically<cr>
-nnoremap <leader><c-x>      :action SplitHorizontally<cr>
-nnoremap <leader>qw         :action Unsplit<cr>
-nnoremap <c-w>L             :action com.mnw.tabmover.actions.MoveTabToNextSplitter<cr>
-nnoremap <c-w>H             :action com.mnw.tabmover.actions.MoveTabToPreviousSplitter<cr>
-nnoremap <c-w><c-w>         :action com.mnw.tabmover.actions.ShowTabMoveActions<cr>
-
-nnoremap <leader>te         :action ActivateProjectToolWindow<cr>
-nnoremap <leader>tr         :action ActivateRunToolWindow<cr>
-nnoremap <leader>tt         :action ActivateTerminalToolWindow<cr>
-nnoremap <leader>if         :action ActivateTerminalToolWindow<cr>
-nnoremap <leader>tb         :action Activatesbt-shell-toolwindowToolWindow<cr>
-nnoremap <leader>ts         :action ShowSettings<cr>
-
-" nnoremap <leader><leader>   :action Switcher<cr> " Unusable in i3
-nnoremap <leader><leader>   :action SearchEverywhere<cr>
-
+nnoremap <leader><leader>   :action Switcher<cr>
+nnoremap <leader>ee         :action SearchEverywhere<cr>
 nnoremap <leader>ec         :action GotoClass<cr>
 nnoremap <leader>es         :action GotoSymbol<cr>
 nnoremap <leader>ef         :action GotoFile<cr>
 nnoremap <leader>eo         :action GotoFile<cr>
 nnoremap <leader>ea         :action GotoAction<cr>
 
-nnoremap <leader>ji         :action GotoImplementation<cr>
-nnoremap <leader>js         :action GotoSuperMethod<cr>
-nnoremap <leader>jd         :action GotoDeclaration<cr>
-nnoremap <leader>jt         :action GotoTest<cr>
-nnoremap <leader>jr         :action GotoRelated<cr>
-
 nnoremap <leader>*          :action ShowUsages<cr>
 nnoremap <leader>su         :action ShowUsages<cr>
-nnoremap <leader>fc         /\v^[<\|=>]{7}( .*\|$)<cr>
 nnoremap <leader>fu         :action FindUsages<cr>
+
+nnoremap <leader>fc         /\v^[<\|=>]{7}( .*\|$)<cr>
 nnoremap <leader>ff         :action Find<cr>
 nnoremap <leader>/          :action FindInPath<cr>
+
+" SAVING AND CLOSING ----------
+"
+nnoremap <leader>w          :action SaveDocument<cr>
+nnoremap <leader>qb         :action CloseContent<cr>
+nnoremap <leader>qq         :action CloseContent<cr>
+nnoremap <leader>qa         :action CloseAllEditors<cr>
+nnoremap <leader><bs>       :action CloseContent<cr>
+
+" TABS AND WINDOWS ----------
+
+nnoremap <a-n>              :tabnext<cr>
+nnoremap <a-p>              :tabprevious<cr>
+nnoremap <c-right>          <c-w>l
+nnoremap <c-left>           <c-w>h
+nnoremap <c-y><c-l>         <c-w>W
+nnoremap <leader><c-l>      :action SplitVertically<cr><c-w>W:action CloseContent<cr><c-w>W
+nnoremap <leader><c-x>      :action SplitHorizontally<cr>
+nnoremap <leader>qw         :action Unsplit<cr>
+nnoremap <c-w>L             :action com.mnw.tabmover.actions.MoveTabToNextSplitter<cr>
+nnoremap <c-w>H             :action com.mnw.tabmover.actions.MoveTabToPreviousSplitter<cr>
+nnoremap <c-w><c-w>         :action com.mnw.tabmover.actions.ShowTabMoveActions<cr>
+
+" TOOL WINDOWS ----------
 
 nnoremap <leader>ie         :action ShowErrorDescription<cr>
 " nnoremap <leader>in         :action ShowNavBar<cr>
 nnoremap <leader>it         :action Scala.TypeInfo<cr>
 nnoremap <leader>iq         :action QuickJavaDoc<cr>
 
+nnoremap <a-i>              :action ActivateProjectToolWindow<cr>
+nnoremap <leader>te         :action ActivateProjectToolWindow<cr>
+nnoremap <leader>tr         :action ActivateRunToolWindow<cr>
+nnoremap <leader>tb         :action editRunConfigurations<cr>
+nnoremap <leader>tt         :action ActivateTerminalToolWindow<cr>
+nnoremap <leader>if         :action ActivateTerminalToolWindow<cr>
+nnoremap <leader>tS         :action Activatesbt-shell-toolwindowToolWindow<cr>
+nnoremap <leader>tp         :action ShowProjectStructureSettings<cr>
+nnoremap <leader>ts         :action ShowSettings<cr>
+
+" hide tool windows with <s-esc> (Shift Escape)
+
+" hide overlay
+nnoremap <bs> :action HideActiveWindow<cr>
+
+
+" GIT ----------
+"
 " nnoremap <leader>gd         :action Compare.LastVersion<cr>
 nnoremap <leader>gd         :action Compare.SameVersion<cr>
 nnoremap <leader>gD         :action Git.CompareWithBranch<cr>
@@ -211,18 +266,8 @@ nnoremap <leader>gU         :action ChangesView.Revert<cr>
 nnoremap <leader>ga         :echo "Sorry, seems like there is no command to add a single hunk."<cr>
 nnoremap <leader>gu         :action Vcs.RollbackChangedLines<cr>
 
-nnoremap <leader>c<leader>  :action CommentByLineComment<cr>
-vmap <leader>c              gc
-omap <leader>c              gc
 
-nnoremap <leader>af         :action ReformatCode<cr>
-" nnoremap <leader>af         :action ScalaFmtFormat<cr> " seems deprecated
-nnoremap <leader>ai         :action OptimizeImports<cr>
-
-nnoremap <leader>rf         :action RenameElement<cr>
-nnoremap <leader>rn         :action RenameFile<cr>
-nnoremap <leader>rp         :action Replace<cr>
-vnoremap <leader>rp         "+y:action Replace<cr>
+" BUILDING AND RUNNING ----------
 
 nnoremap <leader>br         :action Run<cr>
 nnoremap <leader>bR         :action ChooseRunConfiguration<cr>
@@ -231,6 +276,8 @@ nnoremap <leader>bd         :action Debug<cr>
 nnoremap <leader>bD         :action ChooseDebugConfiguration<cr>
 nnoremap <leader>bp         :action ToggleLineBreakpoint<cr>
 nnoremap <leader>bb         :action Rerun<cr>
+nnoremap <leader>bs         :action Stop<cr>
+nnoremap <leader>b<bs>      :action Stop<cr>
 
 nnoremap <leader>b<c-l>     :action :cursive.repl.actions.clear-repl<cr>
 nnoremap <leader>b<c-c>     :action :cursive.repl.actions.interrupt<cr>
@@ -242,3 +289,7 @@ nnoremap <leader>bto        :action :cursive.testing.actions.run-single-test<cr>
 nnoremap <leader>btn        :action :cursive.testing.actions.run-ns-tests<cr>
 nnoremap <leader>btl        :action :cursive.testing.actions.rerun-last-test<cr>
 " nnoremap <leader>bb         :action :cursive.repl.actions.run-last-sexp<cr>
+"
+"
+" actionlist takes a search pattern
+nnoremap <leader>al         :actionlist<space>
