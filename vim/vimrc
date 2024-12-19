@@ -5795,10 +5795,14 @@ nnoremap 'rt8 :set noexpandtab <bar> :retab! <bar>
 
 " move line up or down
 " (:m closes folds https://groups.google.com/forum/#!topic/vim_dev/QGgbjv4uyZc)
-nnoremap <silent> 'k :set fdm=manual<cr>:m .-2<cr>:set fdm=marker<cr>
-nnoremap <silent> 'j :set fdm=manual<cr>:m .+1<cr>:set fdm=marker<cr>
-vnoremap <silent> 'j <esc>:set fdm=manual<cr>gv:m '>+1<cr>gv=gv:set fdm=marker<cr>
-vnoremap <silent> 'k <esc>:set fdm=manual<cr>gv:m '<-2<cr>gv=gv:set fdm=marker<cr>
+nnoremap <silent> '<down>   :set fdm=manual<cr>:m .+1<cr>:set fdm=marker<cr>
+vnoremap <silent> '<down>   <esc>:set fdm=manual<cr>gv:m '>+1<cr>gv=gv:set fdm=marker<cr>
+nnoremap <silent> '<up>     :set fdm=manual<cr>:m .-2<cr>:set fdm=marker<cr>
+vnoremap <silent> '<up>     <esc>:set fdm=manual<cr>gv:m '<-2<cr>gv=gv:set fdm=marker<cr>
+nnoremap <silent> 'j        :set fdm=manual<cr>:m .+1<cr>:set fdm=marker<cr>
+vnoremap <silent> 'j        <esc>:set fdm=manual<cr>gv:m '>+1<cr>gv=gv:set fdm=marker<cr>
+nnoremap <silent> 'k        :set fdm=manual<cr>:m .-2<cr>:set fdm=marker<cr>
+vnoremap <silent> 'k        <esc>:set fdm=manual<cr>gv:m '<-2<cr>gv=gv:set fdm=marker<cr>
 
 " join line TO the one below
 nnoremap 'J ddpkJ
