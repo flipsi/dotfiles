@@ -2932,6 +2932,25 @@ Plug 'dag/vim-fish'
 
 
 " }}}
+" Language: java {{{
+
+augroup java_on_read
+    au!
+    au FileType java call SetupMaven()
+augroup END
+
+function! SetupMaven()
+    nnoremap <buffer> <leader>bI  :call RunCommand("mvn install")<cr>
+    nnoremap <buffer> <leader>bi  :call RunCommand("mvn install -DskipTests")<cr>
+    nnoremap <buffer> <leader>bv  :call RunCommand("mvn validate")<cr>
+    nnoremap <buffer> <leader>bc  :call RunCommand("mvn compile")<cr>
+    nnoremap <buffer> <leader>bp  :call RunCommand("mvn package")<cr>
+    nnoremap <buffer> <leader>btt :call RunCommand("mvn test")<cr>
+    nnoremap <buffer> <leader>bC  :call RunCommand("mvn clean")<cr>
+endfunction
+command! SetupMaven :call SetupMaven()
+
+" }}}
 " Language: javascript {{{
 
 Plug 'ianks/vim-tsx'
