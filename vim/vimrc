@@ -3406,7 +3406,9 @@ augroup END
 command! SetupSQL :call SetupSQLDadBod()<bar> call SetupSQLShellMappings() " add mappings for development with SQL
 
 function! SetupSQLShellMappings()
-    nnoremap <buffer> <leader>br  :call RunSQLFileInShell()<cr>
+    nnoremap <buffer> <m-enter>     yip:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
+    nnoremap <buffer> <leader>bp    yip:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
+    nnoremap <buffer> <leader>br    :call RunSQLFileInShell()<cr>
 endfunction
 command! SetupSQLShellMappings :call SetupSQLShellMappings() " add mappings for development with SQL (Vimux)
 
