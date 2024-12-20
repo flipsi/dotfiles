@@ -18,6 +18,14 @@ function mute_or_unmute_google_meet() {
         key ctrl+d
 }
 
+function mute_or_unmute_microsoft_teams() {
+    local WINDOW_NAME_MS_TEAMS='.* \| Microsoft Teams.*'
+    xdotool search --name "$WINDOW_NAME_MS_TEAMS" \
+        windowactivate --sync \
+        sleep "$SLEEP_INTERVAL" \
+        key ctrl+shift+m
+}
+
 function mute_or_unmute_slack_huddle() {
     local WINDOW_NAME_SLACK_MAIN=' - Slack'
     local WINDOW_NAME_SLACK_HUDDLE='^Slack - .+ - Huddle$'
@@ -32,5 +40,8 @@ function mute_or_unmute_slack_huddle() {
     }
 
 ACTIVE_WINDOW=$(xdotool getactivewindow)
-mute_or_unmute_google_meet || mute_or_unmute_slack_huddle
+false \
+    || mute_or_unmute_microsoft_teams \
+    || mute_or_unmute_google_meet \
+    || mute_or_unmute_slack_huddle
 xdotool windowactivate "$ACTIVE_WINDOW"
