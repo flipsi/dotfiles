@@ -30,15 +30,17 @@ function has_internet_connection() {
 # For a given directory, return a list of the most recently updated git projects within it
 function get_last_recent_git_projects() {
     PROJECTS_DIR="$1"
+    SEARCH_DEPTH=2
     NUMBER_OF_PROJECTS="$2"
     PROJECTS_DIR=${PROJECTS_DIR%/} # remove trailing slash if any
 
     # get list of git projects and their last commit timestamp
-    for CHILD in "$PROJECTS_DIR"/*; do
+    while IFS= read -r -d '' CHILD; do
         if [[ -d "$CHILD/.git" ]]; then
-            PROJECTS=("$(git -C "$CHILD" log -1 --format=%ct) $(basename "$CHILD")" "${PROJECTS[@]}")
+            PROJECT_NAME="${CHILD#"$PROJECTS_DIR/"}"
+            PROJECTS=("$(git -C "$CHILD" log -1 --format=%ct) $PROJECT_NAME" "${PROJECTS[@]}")
         fi
-    done
+    done <  <(find "$PROJECTS_DIR" -maxdepth "$SEARCH_DEPTH" -type d -print0)
 
     # sort by timestamp
     # shellcheck disable=SC2207
@@ -84,13 +86,10 @@ function create_session_code() {
         tmux kill-window -t "$SESSION_NAME_CODE:delete-me"
 
         PROJECTS_DIR="$HOME/work-projects"
-        NUMBER_OF_PROJECTS=3
+        NUMBER_OF_PROJECTS=8
 
-            echo aaaa
         if [[ -d "$PROJECTS_DIR" ]]; then
-            echo eins
             for PROJECT in $(get_last_recent_git_projects "$PROJECTS_DIR" "$NUMBER_OF_PROJECTS"); do
-                echo zwei
                 echo "$PROJECT"
                 open_project_in_vim "$PROJECTS_DIR/$PROJECT" "$PROJECT"
             done
