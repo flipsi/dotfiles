@@ -141,6 +141,7 @@ abbr $args s      systemctl status --no-pager
 abbr $args sa     sudo systemctl start
 abbr $args se     sudoedit
 abbr $args sj     journalctl --no-pager -n15 -u
+abbr $args sll    sudo ls -la
 abbr $args so     sudo systemctl stop
 abbr $args sr     sudo systemctl restart
 abbr $args t      trans :de
