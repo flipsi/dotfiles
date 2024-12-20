@@ -415,6 +415,10 @@ function create_link_for_target() {
             create_link "$PWD/screen/screenrc" "$HOME/.screenrc"
             ;;
 
+        shellcheck )
+            create_link "$PWD/shellcheck/shellcheckrc" "$HOME/.shellcheckrc"
+            ;;
+
         sublime-text-3 )
             mkdir -p "$HOME/.config/sublime-text-3/Packages"
             create_link "$PWD/sublime/User" "$HOME/.config/sublime-text-3/Packages/User"
