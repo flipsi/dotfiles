@@ -125,10 +125,10 @@ function set_env_vars() {
     if [[ -n "$BAR_THIRD_MONITOR" ]]; then
         BAR_MODULES_MAIN_LEFT="pulseaudio spotify"
         BAR_MODULES_MAIN_CENTER="i3"
-        BAR_MODULES_MAIN_RIGHT="xkeyboard date powermenu"
+        BAR_MODULES_MAIN_RIGHT="xkeyboard weather"
         BAR_MODULES_SECOND_LEFT="battery wlan eth"
         BAR_MODULES_SECOND_CENTER="i3"
-        BAR_MODULES_SECOND_RIGHT="spotify pulseaudio xkeyboard date powermenu tray"
+        BAR_MODULES_SECOND_RIGHT="date tray powermenu"
         BAR_MODULES_THIRD_LEFT="filesystem"
         BAR_MODULES_THIRD_CENTER="i3"
         BAR_MODULES_THIRD_RIGHT="cpu memory"
