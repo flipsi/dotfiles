@@ -24,51 +24,118 @@ function setup_wallpaper() {
     fi
 }
 
+function is_screen_enabled() {
+    local screen="$1"
+    xrandr | grep -w "$screen" | grep -qP '\d+x\d+\+\d+\+\d+'
+}
 
-function arrange_outputs_at_home() {
-    # TODO: pick highest resolution automatically?
-    if xrandr | grep -q "$MAIN_MONITOR connected" && \
-        xrandr | grep -q "$SECOND_MONITOR connected" && \
-        xrandr | grep -q "$THIRD_MONITOR connected"; then
-            xrandr \
-                --output "$LAPTOP_SCREEN" --off \
-                --output "$THIRD_MONITOR" --mode 2560x1440 --pos 0x0 --rotate left \
-                --output "$MAIN_MONITOR" --primary --mode 2560x1440 --pos 1440x560 --rotate normal \
-                --output "$SECOND_MONITOR" --mode 2560x1440 --pos 4000x0 --rotate left \
-                || ( \
-                sleep 0.1 && xrandr --output "$LAPTOP_SCREEN" --off && \
-                sleep 0.1 && xrandr --output "$THIRD_MONITOR" --off && \
-                sleep 0.1 && xrandr --output "$MAIN_MONITOR" --primary --auto && \
-                sleep 0.1 && xrandr --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR" --rotate right && \
-                sleep 0.1 && xrandr --output "$THIRD_MONITOR" --auto --left-of "$MAIN_MONITOR" --rotate left
-            )
+function get_laptop_screen() {
+    xrandr | grep -E 'eDP-?.? connected' | head -n1 | cut -d ' ' -f1
+}
 
-    elif xrandr | grep -q "$MAIN_MONITOR connected" && \
-        xrandr | grep -q "$SECOND_MONITOR connected"; then
-            xrandr \
-                --output "$LAPTOP_SCREEN" --off \
-                --output "$SECOND_MONITOR" --mode 2560x1440 --pos 0x0 --rotate left \
-                --output "$MAIN_MONITOR" --primary --mode 2560x1440 --pos 1440x500 --rotate normal \
-                || ( \
-                sleep 0.1 && xrandr --output "$LAPTOP_SCREEN" --off && \
-                sleep 0.1 && xrandr --output "$THIRD_MONITOR" --off && \
-                sleep 0.1 && xrandr --output "$MAIN_MONITOR" --primary --auto && \
-                sleep 0.1 && xrandr --output "$SECOND_MONITOR" --auto --right-of "$MAIN_MONITOR" --rotate right
-            )
+function get_external_screen() { # (assuming there is only one)
+    xrandr | grep ' connected' | grep -v -E 'eDP-?.? connected' | head -n1 | cut -d ' ' -f1
+}
 
-    elif xrandr | grep -q "$MAIN_MONITOR connected" && \
-        xrandr | grep -q "$THIRD_MONITOR connected"; then
-            xrandr \
-                --output "$LAPTOP_SCREEN" --off \
-                --output "$MAIN_MONITOR" --primary --mode 2560x1440 --rotate normal \
-                --output "$THIRD_MONITOR" --mode 2560x1440 --pos 2560x0 --rotate left \
-                || ( \
-                sleep 0.1 && xrandr --output "$LAPTOP_SCREEN" --off && \
-                sleep 0.1 && xrandr --output "$SECOND_MONITOR" --off && \
-                sleep 0.1 && xrandr --output "$MAIN_MONITOR" --primary --auto && \
-                sleep 0.1 && xrandr --output "$THIRD_MONITOR" --auto --left-of "$MAIN_MONITOR" --rotate right
-            )
+function get_remaining_screen() { # (assuming there is only one)
+    xrandr | grep ' connected' | head -n1 | cut -d ' ' -f1
+}
 
+function get_screen_with_greater_x_position() {
+    local screen1="$1"
+    local screen2="$2"
+    x1=$(xrandr | grep -w "$screen1" | grep -oP '\+\K\d+' | head -n1)
+    x2=$(xrandr | grep -w "$screen2" | grep -oP '\+\K\d+' | head -n1)
+    if [[ "$x1" -gt "$x2" ]]; then
+        echo "$screen1"
+    elif [[ "$x2" -gt "$x1" ]]; then
+        echo "$screen2"
+    else
+        echo "Both screens have the same X position."
+    fi
+}
+
+# TODO: pick highest resolution automatically?
+#
+function arrange_outputs() {
+
+    # only at home, I've got 3 external screens (2 of them in portrait mode, so rotate them).
+    # use them and disable laptop screen.
+    if true && \
+        xrandr | grep -q "$MAIN_SCREEN connected" && \
+        xrandr | grep -q "$SECOND_SCREEN connected" && \
+        xrandr | grep -q "$THIRD_SCREEN connected"; then
+        xrandr \
+            --output "$LAPTOP_SCREEN" --off \
+            --output "$THIRD_SCREEN" --mode 2560x1440 --pos 0x0 --rotate left \
+            --output "$MAIN_SCREEN" --primary --mode 2560x1440 --pos 1440x560 --rotate normal \
+            --output "$SECOND_SCREEN" --mode 2560x1440 --pos 4000x0 --rotate left \
+            || ( \
+            sleep 0.1 && xrandr --output "$LAPTOP_SCREEN" --off && \
+            sleep 0.1 && xrandr --output "$THIRD_SCREEN" --off && \
+            sleep 0.1 && xrandr --output "$MAIN_SCREEN" --primary --auto && \
+            sleep 0.1 && xrandr --output "$SECOND_SCREEN" --auto --right-of "$MAIN_SCREEN" --rotate right && \
+            sleep 0.1 && xrandr --output "$THIRD_SCREEN" --auto --left-of "$MAIN_SCREEN" --rotate left
+        )
+
+    # but one of the 3 may be disconnected
+    elif true && \
+        xrandr | grep -q "$MAIN_SCREEN connected" && \
+        xrandr | grep -q "$SECOND_SCREEN connected"; then
+        xrandr \
+            --output "$LAPTOP_SCREEN" --off \
+            --output "$MAIN_SCREEN" --primary --mode 2560x1440 --rotate normal \
+            --output "$SECOND_SCREEN" --mode 2560x1440 --pos 2560x0 --rotate left \
+            || ( \
+            sleep 0.1 && xrandr --output "$LAPTOP_SCREEN" --off && \
+            sleep 0.1 && xrandr --output "$SECOND_SCREEN" --off && \
+            sleep 0.1 && xrandr --output "$MAIN_SCREEN" --primary --auto && \
+            sleep 0.1 && xrandr --output "$SECOND_SCREEN" --auto --left-of "$MAIN_SCREEN" --rotate right
+        )
+
+    # or the other
+    elif true && \
+        xrandr | grep -q "$MAIN_SCREEN connected" && \
+        xrandr | grep -q "$THIRD_SCREEN connected"; then
+        xrandr \
+            --output "$LAPTOP_SCREEN" --off \
+            --output "$THIRD_SCREEN" --mode 2560x1440 --pos 0x0 --rotate left \
+            --output "$MAIN_SCREEN" --primary --mode 2560x1440 --pos 1440x500 --rotate normal \
+            || ( \
+            sleep 0.1 && xrandr --output "$LAPTOP_SCREEN" --off && \
+            sleep 0.1 && xrandr --output "$THIRD_SCREEN" --off && \
+            sleep 0.1 && xrandr --output "$MAIN_SCREEN" --primary --auto && \
+            sleep 0.1 && xrandr --output "$THIRD_SCREEN" --auto --right-of "$MAIN_SCREEN" --rotate right
+        )
+
+    # otherwise (in the office) use the one external screen as primary, and laptop screen as secondary.
+    # (here the configuration with $MAIN_SCREEN, $SECOND_SCREEN, $THIRD_SCREEN is irrelevant)
+    else
+        EXTERNAL_SCREEN="${MAIN_SCREEN:-$(get_external_screen)}"
+        LAPTOP_SCREEN="${LAPTOP_SCREEN:-$(get_laptop_screen)}"
+        if [[ -n "$EXTERNAL_SCREEN" ]] ; then
+            if ! is_screen_enabled "$EXTERNAL_SCREEN"; then
+                xrandr \
+                    --output "$LAPTOP_SCREEN" --auto \
+                    --output "$MAIN_SCREEN" --primary --auto --right-of "$LAPTOP_SCREEN"
+            else
+                # swap left and right on every invocation, which could be handy
+                right_screen=$(get_screen_with_greater_x_position "$LAPTOP_SCREEN" "$EXTERNAL_SCREEN")
+                if [[ "$right_screen" = "$EXTERNAL_SCREEN" ]]; then
+                    xrandr \
+                        --output "$LAPTOP_SCREEN" --auto \
+                        --output "$MAIN_SCREEN" --primary --auto --left-of "$LAPTOP_SCREEN"
+                else
+                    xrandr \
+                        --output "$LAPTOP_SCREEN" --auto \
+                        --output "$MAIN_SCREEN" --primary --auto --right-of "$LAPTOP_SCREEN"
+                fi
+            fi
+        else
+            # if everything else fails, enable laptop/remaining screen
+            xrandr --output "$LAPTOP_SCREEN" --auto || \
+            xrandr --output "$(get_remaining_screen)" --auto
+        fi
     fi
 }
 
@@ -88,197 +155,59 @@ function disable_all_but_one_output() {
     xrandr --output "$OUTPUT_TO_KEEP" --auto
 }
 
+function fix_resolution() {
+    # if resolution is "broken" (lower than native), fix it "manually" like this:
+    LAPTOP_SCREEN=${LAPTOP_SCREEN:-$(get_laptop_screen)}
+    if xrandr | grep "$LAPTOP_SCREEN connected 960x540" >/dev/null; then
+        xrandr --output "$(get_external_screen)" --off
+        xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
+        xrandr --addmode "$LAPTOP_SCREEN" "1920x1080_60.00"
+        xrandr --output "$LAPTOP_SCREEN" --mode "1920x1080_60.00"
+    fi
+}
+
 function main() {
 
     case $(hostname) in
 
-        asterix )
-
-            if test -n "$ONLY"; then
-
-                xrandr --output 'HDMI2' --off
-                xrandr --output 'eDP1' --mode '1920x1080_60.00' --auto
-
-            elif xrandr | grep -q 'HDMI2 connected'; then
-
-                # on big tv, turn off laptop screen
-                if xrandr | grep -q '4096x2160'; then
-                    xrandr --output 'HDMI2' --mode 4096x2160 --output 'eDP1' --off
-                else
-                    xrandr --output 'HDMI2' --mode 1920x1080 --pos 0x540 --rotate normal --output 'HDMI1' --off --output 'DP1' --off --output 'eDP1' --mode 960x540 --pos 0x0 --rotate normal --output VIRTUAL1 --off
-                fi
-
-            elif xrandr | grep 'eDP1 connected 960x540' >/dev/null; then
-
-                xrandr --output 'HDMI2' --off
-                xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
-                xrandr --addmode 'eDP1' "1920x1080_60.00"
-                xrandr --output 'eDP1' --mode "1920x1080_60.00"
-
-            fi
-            ;;
-
-        mimir )
-
-            LAPTOP_SCREEN='eDP-1'
-
-            if test -n "$ONLY"; then
-
-                OUTPUT_TO_KEEP='eDP-1'
-                disable_all_but_one_output
-
-            elif xrandr | grep -q 'DVI-I-1-1 connected'; then
-
-                MAIN_MONITOR='DP-1'
-                if test -n "$DISPLAY_LINK_OUTPUTS_SWAPPED"; then
-                    SECOND_MONITOR='DVI-I-2-2'
-                    THIRD_MONITOR='DVI-I-1-1'
-                else
-                    SECOND_MONITOR='DVI-I-1-1'
-                    THIRD_MONITOR='DVI-I-2-2'
-                fi
-
-                if test -n "$FIX_THIRD_MONITOR_OFFSET"; then
-                    xrandr --output "$THIRD_MONITOR" --off
-                    sleep 2
-                fi
-                arrange_outputs_at_home
-
-            # when displaylink is broken again and I connect multiple cables
-            elif xrandr | grep 'HDMI-1 connected' >/dev/null && xrandr | grep 'DP-1 connected' >/dev/null; then
-                xrandr --output "$LAPTOP_SCREEN" --off \
-                    --output 'DP-1' --auto \
-                    --output 'HDMI-1' --right-of 'DP-1'
-
-            elif xrandr | grep 'HDMI-1 connected' >/dev/null; then
-                xrandr --output 'HDMI-1' --above "$LAPTOP_SCREEN"  --auto
-
-            elif xrandr | grep 'DP-1 connected' >/dev/null; then
-                xrandr --output 'DP-1' --above "$LAPTOP_SCREEN"  --auto
-
-            elif xrandr | grep 'DP-3 connected' >/dev/null; then
-                xrandr --output 'DP-3' --right-of "$LAPTOP_SCREEN"  --auto
-
-            fi
+        falbala )
+            LAPTOP_SCREEN='eDP1'
+            MAIN_SCREEN='DP1'
+            SECOND_SCREEN='HDMI2'
+            THIRD_SCREEN='DisplayPort-0'
             ;;
 
         frey )
-
             LAPTOP_SCREEN='eDP'
-            MAIN_MONITOR='DisplayPort-0'
-            SECOND_MONITOR='DisplayPort-1'
-            THIRD_MONITOR='HDMI-A-0'
-
-            if xrandr | grep -q "$MAIN_MONITOR connected" && \
-                xrandr | grep -q "$SECOND_MONITOR connected" && \
-                xrandr | grep -q "$THIRD_MONITOR connected"; then
-                            arrange_outputs_at_home
-
-            elif xrandr | grep -q "$MAIN_MONITOR connected" && \
-                xrandr | grep -q "$SECOND_MONITOR connected"; then
-                            arrange_outputs_at_home
-
-            elif xrandr | grep -q "$MAIN_MONITOR connected" && \
-                xrandr | grep -q "$THIRD_MONITOR connected"; then
-                            SECOND_MONITOR='HDMI-A-0'
-                            THIRD_MONITOR='DisplayPort-1'
-                            arrange_outputs_at_home
-
-            elif xrandr | grep -q "$MAIN_MONITOR connected"; then
-                xrandr --output "$MAIN_MONITOR" --auto \
-                    --output "$LAPTOP_SCREEN" --right-of "$MAIN_MONITOR"
-
-            fi
-            ;;
-
-        falbala )
-
-            if test -n "$ONLY"; then
-
-                OUTPUT_TO_KEEP='eDP1'
-
-                disable_all_but_one_output
-
-            elif xrandr | grep -q 'HDMI2 connected'; then
-
-                MAIN_MONITOR='DP1'
-                SECOND_MONITOR='HDMI2'
-                THIRD_MONITOR='DisplayPort-0'
-                LAPTOP_SCREEN='eDP1'
-                arrange_outputs_at_home
-
-            elif xrandr | grep -q 'DVI-I-1-1 connected'; then
-
-                MAIN_MONITOR='DP1'
-                SECOND_MONITOR='DVI-I-1-1'
-                THIRD_MONITOR='DVI-I-2-2'
-                LAPTOP_SCREEN='eDP1'
-                arrange_outputs_at_home
-
-            elif xrandr | grep -q 'DP1 connected'; then
-
-                MAIN_MONITOR='DP1'
-                SECOND_MONITOR='eDP1'
-
-                xrandr --output "$LAPTOP_SCREEN" --auto \
-                    --output "$MAIN_MONITOR" --primary --auto --left-of "$LAPTOP_SCREEN"
-
-            elif xrandr | grep 'HDMI1 connected' >/dev/null; then
-                sleep 0.1 && xrandr --output 'HDMI1' --above 'eDP1'  --auto
-
-            elif xrandr | grep 'DP-1 connected' >/dev/null; then
-                sleep 0.1 && xrandr --output 'DP-1' --above 'eDP1'  --auto
-
-            fi
+            MAIN_SCREEN='DisplayPort-0'
+            SECOND_SCREEN='DisplayPort-1'
+            THIRD_SCREEN='HDMI-A-0'
             ;;
 
         nott )
-
-            if test -n "$ONLY"; then
-
-                OUTPUT_TO_KEEP='eDP-1'
-
-                disable_all_but_one_output
-
-            elif xrandr | grep -q 'HDMI-1 connected'; then
-
-                MAIN_MONITOR='DP-1'
-                SECOND_MONITOR='DP-3'
-                THIRD_MONITOR='HDMI-1'
-                LAPTOP_SCREEN='eDP-1'
-                arrange_outputs_at_home
-
-            elif xrandr | grep -q 'DP-1 connected'; then
-
-                MAIN_MONITOR='DP-1'
-                LAPTOP_SCREEN='eDP-1'
-                xrandr \
-                    --output "$LAPTOP_SCREEN" --auto \
-                    --output "$MAIN_MONITOR" --auto --right-of "$LAPTOP_SCREEN"
-
-            elif xrandr | grep -q 'DP-3 connected'; then
-
-                MAIN_MONITOR='DP-3'
-                LAPTOP_SCREEN='eDP-1'
-                xrandr \
-                    --output "$LAPTOP_SCREEN" --auto \
-                    --output "$MAIN_MONITOR" --auto --right-of "$LAPTOP_SCREEN"
-            fi
-
+            LAPTOP_SCREEN='eDP-1'
+            MAIN_SCREEN='DP-1'
+            SECOND_SCREEN='DP-3'
+            THIRD_SCREEN='HDMI-1'
             ;;
 
         * )
+            LAPTOP_SCREEN="$(get_laptop_screen)"
+            MAIN_SCREEN="$(get_external_screen)"
+            ;;
 
-            echo ERROR: Unknown host!
-            exit 1
+    esac
 
-        esac
+    if test -n "$ONLY"; then
+        OUTPUT_TO_KEEP="$(get_laptop_screen)"
+        disable_all_but_one_output
+    else
+        arrange_outputs
+    fi
 
 }
 
 main
-"$DIRNAME/i3-polybar.sh" stop
-"$DIRNAME/i3-polybar.sh" start
-
+"$DIRNAME/i3-polybar.sh" restart
 setup_wallpaper
 
