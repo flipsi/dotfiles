@@ -18,8 +18,9 @@ set $WALLPAPER_PATH $HOME/img-wallpaper
 ###############################################################################
 
 ## some setup logic I rather do with a shell script
-exec "$HOME/.i3/bin/i3-initialize.sh > /tmp/i3-initialize.log 2>&1"
-exec "$HOME/.i3/bin/i3-initialize-outputs.sh > /tmp/i3-initialize-outputs.log 2>&1"
+exec "$HOME/.i3/bin/i3-setup-power-and-lock-management.sh >> /tmp/i3-setup-power-and-lock-management.log 2>&1"
+exec "$HOME/.i3/bin/i3-initialize.sh >> /tmp/i3-initialize.log 2>&1"
+exec "$HOME/.i3/bin/i3-initialize-outputs.sh >> /tmp/i3-initialize-outputs.log 2>&1"
 
 ## set keyboard layout
 exec "$SHELLSCRIPT_PATH/set-keyboard-layout.sh"
@@ -98,6 +99,9 @@ bindsym --release Mod2+button2 kill
 
 ## enable/disable touchpad
 bindsym XF86TouchpadToggle  exec --no-startup-id "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
+
+## fix outputs, keyboard layout, lock settings etc.
+bindsym $mod+Control+f exec --no-startup-id "$HOME/.i3/bin/fix-everything.sh >> /tmp/fix-everyhing.log"
 
 ## reload the configuration file or restart i3 [preserves session] etc.
 bindsym $mod+F5 mode "$refresh"
@@ -292,7 +296,8 @@ mode "$gui_settings" {
 set $POLYBAR_START  $HOME/.i3/bin/i3-polybar.sh start > /tmp/i3-polybar.log 2>&1
 set $POLYBAR_TOGGLE $HOME/.i3/bin/i3-polybar.sh toggle > /tmp/i3-polybar.log 2>&1
 
-exec_always --no-startup-id "$POLYBAR_START"
+# started by i3-initialize-outputs.sh
+# exec_always --no-startup-id "$POLYBAR_START"
 
 
 # bar {
