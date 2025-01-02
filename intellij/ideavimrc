@@ -242,10 +242,11 @@ nnoremap <leader>iq         :action QuickJavaDoc<cr>
 nnoremap <a-i>              :action ActivateProjectToolWindow<cr>
 nnoremap <leader>te         :action ActivateProjectToolWindow<cr>
 nnoremap <leader>tr         :action ActivateRunToolWindow<cr>
-nnoremap <leader>tb         :action editRunConfigurations<cr>
+nnoremap <leader>tn         :action ActivateNotificationsToolWindow<cr>
 nnoremap <leader>tt         :action ActivateTerminalToolWindow<cr>
 nnoremap <leader>if         :action ActivateTerminalToolWindow<cr>
 nnoremap <leader>tS         :action Activatesbt-shell-toolwindowToolWindow<cr>
+nnoremap <leader>tb         :action editRunConfigurations<cr>
 nnoremap <leader>tp         :action ShowProjectStructureSettings<cr>
 nnoremap <leader>ts         :action ShowSettings<cr>
 
