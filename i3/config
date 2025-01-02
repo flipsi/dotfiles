@@ -949,6 +949,7 @@ for_window [title="Print"]                                                      
 for_window [class="(?i)org.gnome.clocks"]                                           floating enable
 for_window [window_role="(?i)vlc-main"]                                             floating enable
 for_window [window_role="(?i)vlc-main"]                                             resize set 750 450
+for_window [class="jetbrains-idea" window_type="dialog"]                           floating disable
 
 ## windows always on specific workspace
 for_window [class="(?i)chrom" instance="crx_acmikcjocccblbiibfdfjkghclpmmpip"] move to workspace    Banking
