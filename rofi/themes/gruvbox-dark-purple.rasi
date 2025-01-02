@@ -60,7 +60,8 @@
     selected-urgent-foreground:  @urgent-foreground;
 }
 
-@import "gruvbox-common.rasi"
+/* @import "gruvbox-common.rasi" */
+@import "gruvbox-common.rasinc"
 
 #listview {
     lines: 15;
