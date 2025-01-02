@@ -157,12 +157,12 @@ abbr $args x      xrandr
 abbr $args xi     startx ~/.xinitrc
 abbr $args xo     xrandr --output
 abbr $args y      yay
+abbr $args yy     yay -Sy
 abbr $args yc     yay -Yc
-abbr $args yi     yay -Qi
 abbr $args yr     yay -R
 abbr $args ys     yay -S
+abbr $args yu     yay -Syu --noconfirm \| tee --append os/yay-update-(date +%Y-%m-%d-%H-%M).log
+abbr $args yqi    yay -Qi
 abbr $args ysi    yay -Si
-abbr $args yu     yay -Syu
-abbr $args yy     yay -Syu --noconfirm \| tee --append os/yay-update-(date +%Y-%m-%d-%H-%M).log
 abbr $args --set-cursor=URL yt  yt-dlp \'URL\'
 abbr $args --set-cursor=URL yta yt-dlp --extract-audio --audio-quality 0 --audio-format best \'URL\'
