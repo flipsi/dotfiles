@@ -43,6 +43,10 @@ nnoremap <F5>           :source ~/.ideavimrc<cr>
 nnoremap <leader>sv     :source ~/.ideavimrc<cr>
 nnoremap <leader>ev     :edit ~/.ideavimrc<cr>
 
+" copy filepath
+" (to show filepath, hover over tab)
+nnoremap <leader>yp     :action CopyAbsolutePath<cr>
+
 " VIEWPORT MOVEMENT ----------
 
 " inoremap jk <c-c>
