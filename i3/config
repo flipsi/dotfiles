@@ -651,7 +651,7 @@ workspace_layout stacked
 
 ## launch an application (that has a .desktop-file)
 # bindsym $mod+Return exec --no-startup-id "i3-dmenu-desktop -dmenu='dmenu $DMENU_OPTIONS'"
-# bindsym $mod+Return exec --no-startup-id "rofi -show drun $ROFI_OPTIONS"
+# bindsym $mod+Return exec --no-startup-id "rofi -show drun"
 bindsym $mod+Return exec --no-startup-id "rofi -modi window,run,combi -show combi -combi-modi window,drun"
 
 ## launch any application
@@ -754,7 +754,7 @@ bindsym $mod+Shift+t exec --no-startup-id i3-input -F '[con_mark=%s] focus' -P '
 bindsym $mod+e [urgent=latest] focus
 bindsym $mod+space workspace back_and_forth
 # bindsym $mod+numbersign workspace back_and_forth
-bindsym $mod+w exec --no-startup-id "rofi -show window $ROFI_OPTIONS"
+bindsym $mod+w exec --no-startup-id "rofi -show window"
 bindsym $mod+n workspace next_on_output
 bindsym $mod+p workspace prev_on_output
 bindsym $mod+1 workspace 1
