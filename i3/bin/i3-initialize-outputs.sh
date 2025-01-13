@@ -62,9 +62,9 @@ function arrange_outputs() {
     # only at home, I've got 3 external screens (2 of them in portrait mode, so rotate them).
     # use them and disable laptop screen.
     if true && \
-        xrandr | grep -q "$MAIN_SCREEN connected" && \
-        xrandr | grep -q "$SECOND_SCREEN connected" && \
-        xrandr | grep -q "$THIRD_SCREEN connected"; then
+        xrandr | grep -q "^$MAIN_SCREEN connected" && \
+        xrandr | grep -q "^$SECOND_SCREEN connected" && \
+        xrandr | grep -q "^$THIRD_SCREEN connected"; then
         xrandr \
             --output "$LAPTOP_SCREEN" --off \
             --output "$THIRD_SCREEN" --mode 2560x1440 --pos 0x0 --rotate left \
@@ -80,8 +80,8 @@ function arrange_outputs() {
 
     # but one of the 3 may be disconnected
     elif true && \
-        xrandr | grep -q "$MAIN_SCREEN connected" && \
-        xrandr | grep -q "$SECOND_SCREEN connected"; then
+        xrandr | grep -q "^$MAIN_SCREEN connected" && \
+        xrandr | grep -q "^$SECOND_SCREEN connected"; then
         xrandr \
             --output "$LAPTOP_SCREEN" --off \
             --output "$MAIN_SCREEN" --primary --mode 2560x1440 --rotate normal \
@@ -95,8 +95,8 @@ function arrange_outputs() {
 
     # or the other
     elif true && \
-        xrandr | grep -q "$MAIN_SCREEN connected" && \
-        xrandr | grep -q "$THIRD_SCREEN connected"; then
+        xrandr | grep -q "^$MAIN_SCREEN connected" && \
+        xrandr | grep -q "^$THIRD_SCREEN connected"; then
         xrandr \
             --output "$LAPTOP_SCREEN" --off \
             --output "$THIRD_SCREEN" --mode 2560x1440 --pos 0x0 --rotate left \
@@ -140,7 +140,7 @@ function arrange_outputs() {
 }
 
 function disable_all_but_one_output() {
-    if ! xrandr | grep -q "$OUTPUT_TO_KEEP connected"; then
+    if ! xrandr | grep -q "^$OUTPUT_TO_KEEP connected"; then
         echo "Only output $OUTPUT_TO_KEEP seems unavailable. Aborting."
         exit 1
     fi
@@ -158,7 +158,7 @@ function disable_all_but_one_output() {
 function fix_resolution() {
     # if resolution is "broken" (lower than native), fix it "manually" like this:
     LAPTOP_SCREEN=${LAPTOP_SCREEN:-$(get_laptop_screen)}
-    if xrandr | grep "$LAPTOP_SCREEN connected 960x540" >/dev/null; then
+    if xrandr | grep -q "^$LAPTOP_SCREEN connected 960x540" >/dev/null; then
         xrandr --output "$(get_external_screen)" --off
         xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
         xrandr --addmode "$LAPTOP_SCREEN" "1920x1080_60.00"
