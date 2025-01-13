@@ -18,8 +18,10 @@ abbr $args d      docker
 abbr $args dl     docker logs -n 60
 abbr $args dlf    docker logs -n 60 -f
 abbr $args dps    docker ps
+abbr $args dpsa   docker ps -a
 abbr $args dr     docker run
 abbr $args do     docker stop
+abbr $args drm    docker rm
 abbr $args dc     docker-compose
 abbr $args dca    docker-compose up -d
 abbr $args dce    docker-compose exec
@@ -108,7 +110,9 @@ abbr $args i      nsxiv-rifle
 abbr $args j      joshuto
 abbr $args l      less
 abbr $args ll     exa_or_ls -l
+abbr $args lla    exa_or_ls -l -a
 abbr $args lll    exa_or_ls -l -a
+abbr $args lsl    ls -l
 abbr $args lt     exa_or_tree -l
 abbr $args m      man
 abbr $args ma     make apply
