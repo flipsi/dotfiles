@@ -111,24 +111,24 @@ function arrange_outputs() {
     # otherwise (in the office) use the one external screen as primary, and laptop screen as secondary.
     # (here the configuration with $MAIN_SCREEN, $SECOND_SCREEN, $THIRD_SCREEN is irrelevant)
     else
-        EXTERNAL_SCREEN="${MAIN_SCREEN:-$(get_external_screen)}"
-        LAPTOP_SCREEN="${LAPTOP_SCREEN:-$(get_laptop_screen)}"
+        EXTERNAL_SCREEN="$(get_external_screen)"
+        LAPTOP_SCREEN="$(get_laptop_screen)"
         if [[ -n "$EXTERNAL_SCREEN" ]] ; then
             if ! is_screen_enabled "$EXTERNAL_SCREEN"; then
                 xrandr \
                     --output "$LAPTOP_SCREEN" --auto \
-                    --output "$MAIN_SCREEN" --primary --auto --right-of "$LAPTOP_SCREEN"
+                    --output "$EXTERNAL_SCREEN" --primary --auto --right-of "$LAPTOP_SCREEN"
             else
                 # swap left and right on every invocation, which could be handy
                 right_screen=$(get_screen_with_greater_x_position "$LAPTOP_SCREEN" "$EXTERNAL_SCREEN")
                 if [[ "$right_screen" = "$EXTERNAL_SCREEN" ]]; then
                     xrandr \
                         --output "$LAPTOP_SCREEN" --auto \
-                        --output "$MAIN_SCREEN" --primary --auto --left-of "$LAPTOP_SCREEN"
+                        --output "$EXTERNAL_SCREEN" --primary --auto --left-of "$LAPTOP_SCREEN"
                 else
                     xrandr \
                         --output "$LAPTOP_SCREEN" --auto \
-                        --output "$MAIN_SCREEN" --primary --auto --right-of "$LAPTOP_SCREEN"
+                        --output "$EXTERNAL_SCREEN" --primary --auto --right-of "$LAPTOP_SCREEN"
                 fi
             fi
         else
