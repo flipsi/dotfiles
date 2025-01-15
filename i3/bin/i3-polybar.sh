@@ -136,7 +136,7 @@ function set_env_vars() {
         BAR_MODULES_THIRD_CENTER="i3"
         BAR_MODULES_THIRD_RIGHT="cpu memory"
     elif [[ -n "$BAR_SECOND_MONITOR" ]]; then
-        BAR_MODULES_MAIN_LEFT="cpu memory"
+        BAR_MODULES_MAIN_LEFT="cpu memory filesystem"
         BAR_MODULES_MAIN_CENTER="i3"
         BAR_MODULES_MAIN_RIGHT="spotify pulseaudio xkeyboard date"
         BAR_MODULES_SECOND_LEFT="powermenu battery wlan eth"
