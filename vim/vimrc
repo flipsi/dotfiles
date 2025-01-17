@@ -1813,7 +1813,7 @@ vmap 'B S}
 nmap 'b ysiw)
 nmap 'B ysiw}
 vmap '` S`
-nmap '` ysiw`
+nmap '` ysiW`
 nmap d' ds'
 nmap d" ds"
 nmap dq ds'
