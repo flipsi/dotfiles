@@ -12,6 +12,7 @@ end
 
 prepend_to_path ~/.babashka/bbin/bin
 prepend_to_path ~/.cargo/bin
+prepend_to_path ~/.npm-global/bin
 prepend_to_path ~/.gem/ruby/2.4.0/bin
 prepend_to_path ~/.gem/ruby/2.6.0/bin
 prepend_to_path ~/.i3/bin
