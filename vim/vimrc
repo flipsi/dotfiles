@@ -3071,6 +3071,7 @@ if has('nvim')
     " :RenderMarkdown enable
     " :RenderMarkdown disable
     " :RenderMarkdown toggle
+    nmap <leader>syM :RenderMarkdown toggle<cr>
 
 endif
 
