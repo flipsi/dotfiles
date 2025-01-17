@@ -358,6 +358,11 @@ function create_link_for_target() {
             create_link "$PWD/vim/markdownlint.yaml" "$HOME/.markdownlint.yaml"
             ;;
 
+        outlook-for-linux )
+            mkdir -p "$HOME/.config/outlook-for-linux"
+            create_link "$PWD/outlook-for-linux/config.json" "$HOME/.config/outlook-for-linux/config.json"
+            ;;
+
         pentadactyl )
             create_link "$PWD/pentadactyl/pentadactyl" "$HOME/.pentadactyl"
             create_link "$PWD/pentadactyl/pentadactylrc" "$HOME/.pentadactylrc"
