@@ -130,6 +130,7 @@ abbr $args nr     sudo netctl restart
 abbr $args o      open
 abbr $args p      pass
 abbr $args pe     pass edit
+abbr $args pig    ping google.com
 abbr $args pg     pgrep
 abbr $args pn     pass generate --no-symbols --clip
 abbr $args pgpl   pass git pull
