@@ -44,7 +44,7 @@ nnoremap <leader>sv     :source ~/.ideavimrc<cr>
 nnoremap <leader>ev     :edit ~/.ideavimrc<cr>
 
 " copy filepath
-" (to show filepath, hover over tab)
+" (to show filepath, see breadcrumbs at bottom status line or hover over tab)
 nnoremap <leader>yp     :action CopyAbsolutePath<cr>
 
 " VIEWPORT MOVEMENT ----------
@@ -243,16 +243,21 @@ nnoremap <leader>ie         :action ShowErrorDescription<cr>
 nnoremap <leader>it         :action Scala.TypeInfo<cr>
 nnoremap <leader>iq         :action QuickJavaDoc<cr>
 
-nnoremap <a-i>              :action ActivateProjectToolWindow<cr>
-nnoremap <leader>te         :action ActivateProjectToolWindow<cr>
+nnoremap <a-i>              :action SelectInProjectView<cr>
+nnoremap <leader>te         :action SelectInProjectView<cr>
+nnoremap <leader>tE         :action ActivateProjectToolWindow<cr>
+nnoremap <leader>td         :action ActivateDatabaseToolWindow<cr>
 nnoremap <leader>tr         :action ActivateRunToolWindow<cr>
 nnoremap <leader>tn         :action ActivateNotificationsToolWindow<cr>
 nnoremap <leader>tt         :action ActivateTerminalToolWindow<cr>
 nnoremap <leader>if         :action ActivateTerminalToolWindow<cr>
+nnoremap <leader>ts         :action ActivateServicesToolWindow<cr>
 nnoremap <leader>tS         :action Activatesbt-shell-toolwindowToolWindow<cr>
+
 nnoremap <leader>tb         :action editRunConfigurations<cr>
 nnoremap <leader>tp         :action ShowProjectStructureSettings<cr>
-nnoremap <leader>ts         :action ShowSettings<cr>
+nnoremap <leader>t.         :action ShowSettings<cr>
+nnoremap <c-.>              :action ShowSettings<cr>
 
 " hide tool windows with <s-esc> (Shift Escape)
 
