@@ -88,14 +88,19 @@ keymap = [
   { keys = ["y", "a"], commands = ["copy_filepath --all-selected=true"] },
   { keys = ["y", "d"], commands = ["copy_dirpath"] },
 
-  # in difference to ranger, symlinks are created on yank, not paste, see https://github.com/kamiyaa/joshuto/issues/544#issuecomment-2426252447
-  { keys = ["y", "l"], commands = ["symlink_files --relative=false"] },
-  { keys = ["y", "L"], commands = ["symlink_files --relative=true"] },
   { keys = ["p", "p"], commands = ["paste_files"] },
   { keys = ["p", "o"], commands = ["paste_files --overwrite=true"] },
 
-  { keys = ["a", "p"], commands = ["shell apack archive.zip %s"] },
-  { keys = ["u", "p"], commands = ["shell aunpack %s"] },
+  # in difference to ranger, symlinks are created on yank, not paste, see https://github.com/kamiyaa/joshuto/issues/544#issuecomment-2426252447
+  # resolved! https://github.com/kamiyaa/joshuto/issues/575#issuecomment-2507036838
+  # check version with `joshuto --version`  and compare with https://github.com/kamiyaa/joshuto/commits/main/
+  # If newer than 928f9f3 use this:
+  { keys = ["p", "l"], commands = ["symlink_files --relative=false"] },
+  { keys = ["p", "L"], commands = ["symlink_files --relative=true"] },
+  # If older 928f9f3 then I want these remappings:
+  { keys = ["y", "l"], commands = ["symlink_files --relative=false"] },
+  { keys = ["y", "L"], commands = ["symlink_files --relative=true"] },
+  # { keys = ["p", "l"], commands = ["paste_files"] },
 
   # { keys = ["y", "b"], commands = ["shell cp -r %s %s.$(date +%F-%%H%M%S).bak"] },
   # { keys = ["y", "B"], commands = ["shell sudo cp -r %s %s.$(date +%F-%H%M%S).bak"] },
@@ -103,6 +108,9 @@ keymap = [
   { keys = ["y", "B"], commands = ["shell sudo backup-file.sh %s"] },
 
   { keys = ["m", "v", "d"], commands = ["shell mv-to-dir.sh %s"] },
+
+  { keys = ["a", "p"], commands = ["shell apack archive.zip %s"] },
+  { keys = ["u", "p"], commands = ["shell aunpack %s"] },
 
   { keys = ["delete"], commands = ["delete_files"] },
   { keys = ["d", "D"], commands = ["delete_files"] },
