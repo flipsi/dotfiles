@@ -101,7 +101,8 @@ bindsym --release Mod2+button2 kill
 bindsym XF86TouchpadToggle  exec --no-startup-id "$SHELLSCRIPT_PATH/xinput-toggle-enabled"
 
 ## fix outputs, keyboard layout, lock settings etc.
-bindsym $mod+Control+f exec --no-startup-id "$HOME/.i3/bin/fix-everything.sh >> /tmp/fix-everyhing.log"
+bindsym $mod+Control+f exec --no-startup-id "$HOME/.i3/bin/fix-everything.sh >> /tmp/fix-everything.log"
+bindsym $mod+F3        exec --no-startup-id "$HOME/.i3/bin/fix-everything.sh >> /tmp/fix-everything.log"
 
 ## reload the configuration file or restart i3 [preserves session] etc.
 bindsym $mod+F5 mode "$refresh"
@@ -139,6 +140,7 @@ mode "$setup_outputs" {
 }
 
 ## change keyboard layout
+bindsym $mod+F2 exec --no-startup-id "$SHELLSCRIPT_PATH/set-keyboard-layout.sh"; mode "default"
 bindsym $mod+F1 mode "$change_keyboard_layout"
 set $change_keyboard_layout Keyboard layout: (a) automatically (F1) de (F2) norman_sflip (F3) us (F4) us_sflip (F5) neo (F6) dvorak (F7) programmer dvorak
 mode "$change_keyboard_layout" {
