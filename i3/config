@@ -1028,7 +1028,7 @@ for_window [title="(?i)keymapp"]                                                
 for_window [class="(?i)chrom"]                                                  move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)chromium"]                                               move workspace to output $PRIMARY_OUTPUT
-for_window [class="(?i)vivaldi-stable"]                                         move workspace to output $SECONDARY_OUTPUT
+# for_window [class="(?i)vivaldi-stable"]                                         move workspace to output $SECONDARY_OUTPUT
 for_window [class="(?i)firefox"]                                                move workspace to output $PRIMARY_OUTPUT
 for_window [class="pavucontrol"]                                                move workspace to output $SECONDARY_OUTPUT
 for_window [class="(?i)jetbrains-idea"]                                         move workspace to output $PRIMARY_OUTPUT
