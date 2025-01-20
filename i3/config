@@ -1002,43 +1002,45 @@ assign [class="(?i)urxvt"]                                                      
 assign [class="(?i)neovide"]                                                                        Neovide
 for_window [class="(?i)outlook-for-linux"] move to workspace                                        Outlook
 for_window [class="(?i)microsoft teams - preview"] move to workspace                                Teams
+assign [class="code-oss"]                                                                           VS Code
 assign [class="(?i)pale moon"]                                                                      Web
 assign [class="(?i)qutebrowser"]                                                                    Web
+assign [class="mysql-workbench-bin"]                                                                MySQL Workbench
 # assign [class="(?i)vivaldi-stable"]                                                                 Vivaldi
-assign [class="code-oss"]                                                                           VS Code
 assign [class="(?i)gimp"]                                                                           Gimp
 for_window [class="(?i)libreoffice"] move to workspace                                              Doc
 for_window [class="(?i)gnome-session-failed"] move to workspace                                     GnomeSessionFailed
 
 ## workspaces with window always on specific output
-set $PRIMARY_OUTPUT DisplayPort-0
-set $SECONDARY_OUTPUT DisplayPort-1
-set $TERNARY_OUTPUT HDMI-A-0
+set $PRIMARY_OUTPUT DP-1
+set $SECONDARY_OUTPUT HDMI-1
+set $TERNARY_OUTPUT DP-3
 for_window [class="(?i)alacritty"]                                              move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)alacritty" title="Output"]                               move workspace to output $SECONDARY_OUTPUT
 for_window [class="(?i)alacritty" title="Output"]                               move workspace to output $TERNARY_OUTPUT
 for_window [title="portal - jvm"]                                               move workspace to output $SECONDARY_OUTPUT
 for_window [title="portal - jvm"]                                               move workspace to output $TERNARY_OUTPUT
+for_window [class="(?i)cool-retro-term"]                                        move workspace to output $PRIMARY_OUTPUT
+for_window [class="(?i)gnome-terminal"]                                         move workspace to output $PRIMARY_OUTPUT
+for_window [class="(?i)google-chrome"]                                          move workspace to output $PRIMARY_OUTPUT
+for_window [class="(?i)urxvt"]                                                  move workspace to output $PRIMARY_OUTPUT
 for_window [title="(?i)keymapp"]                                                move workspace to output $SECONDARY_OUTPUT
 for_window [class="(?i)chrom"]                                                  move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)chromium"]                                               move workspace to output $PRIMARY_OUTPUT
-# for_window [class="(?i)vivaldi-stable"]                                         move workspace to output $SECONDARY_OUTPUT
-for_window [class="pavucontrol"]                                                move workspace to output $SECONDARY_OUTPUT
-for_window [class="(?i)cool-retro-term"]                                        move workspace to output $PRIMARY_OUTPUT
+for_window [class="(?i)vivaldi-stable"]                                         move workspace to output $SECONDARY_OUTPUT
 for_window [class="(?i)firefox"]                                                move workspace to output $PRIMARY_OUTPUT
-for_window [class="(?i)gnome-terminal"]                                         move workspace to output $PRIMARY_OUTPUT
-for_window [class="(?i)google-chrome"]                                          move workspace to output $PRIMARY_OUTPUT
+for_window [class="pavucontrol"]                                                move workspace to output $SECONDARY_OUTPUT
 for_window [class="(?i)jetbrains-idea"]                                         move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)jetbrains-phpstorm"]                                     move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)notification-daemon"]                                    move workspace to output $SECONDARY_OUTPUT
 for_window [class="(?i)notification-daemon"]                                    move workspace to output $TERNARY_OUTPUT
 for_window [class="(?i)qutebrowser"]                                            move workspace to output $PRIMARY_OUTPUT
-for_window [class="(?i)slack" title="^slack$"]                                  move workspace to output $SECONDARY_OUTPUT
+for_window [class="(?i)slack" title="^slack$"]                                  move workspace to output $TERNARY_OUTPUT
 for_window [class="(?i)slack" title=".*Huddle"]                                 move container to output $PRIMARY_OUTPUT
-for_window [class="(?i)spotify"]                                                move workspace to output $TERNARY_OUTPUT
-for_window [class="(?i)telegram-desktop" title="^Telegram"]                     move workspace to output $SECONDARY_OUTPUT
-for_window [class="(?i)signal"]                                                 move workspace to output $SECONDARY_OUTPUT
+for_window [class="(?i)Microsoft Teams"]                                        move container to output $TERNARY_OUTPUT
+for_window [class="(?i)spotify"]                                                move workspace to output $SECONDARY_OUTPUT
+for_window [class="(?i)telegram-desktop" title="^Telegram"]                     move workspace to output $TERNARY_OUTPUT
+for_window [class="(?i)signal"]                                                 move workspace to output $TERNARY_OUTPUT
 for_window [class="(?i)libreoffice-writer"]                                     move workspace to output $SECONDARY_OUTPUT
-for_window [class="(?i)urxvt"]                                                  move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)gnome-session-failed"]                                   move workspace to output $PRIMARY_OUTPUT
