@@ -146,6 +146,11 @@ mods = "Control|Alt"
 chars = "î" # ASCII 238 / 0xEE
 
 [[keyboard.bindings]]
+key = "w"
+mods = "Control|Alt"
+chars = "ŵ" # ASCII 175
+
+[[keyboard.bindings]]
 chars = "\u001BOH"
 key = "Home"
 mode = "AppCursor"
