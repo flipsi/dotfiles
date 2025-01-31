@@ -46,13 +46,16 @@ nnoremap <leader>ev     :edit ~/.ideavimrc<cr>
 " copy filepath
 " (to show filepath, see breadcrumbs at bottom status line or hover over tab)
 nnoremap <leader>yp     :action CopyAbsolutePath<cr>
+nnoremap <leader>yf     :action CopyFileName<cr>
 
 " VIEWPORT MOVEMENT ----------
 
 " inoremap jk <c-c>
 
-nnoremap <a-j> 15<c-e>
-nnoremap <a-k> 15<c-y>
+nnoremap <a-j>          15<c-e>
+nnoremap <a-k>          15<c-y>
+nnoremap <a-down>       15<c-e>
+nnoremap <a-up>         15<c-y>
 
 
 " CURSOR MOVEMENT ----------
@@ -85,6 +88,8 @@ nnoremap gV `[v`]
 nnoremap <leader>.          :action JumpToLastChange<cr>
 nnoremap <leader>gn         :action VcsShowNextChangeMarker<cr>
 nnoremap <leader>gN         :action VcsShowPrevChangeMarker<cr>
+nnoremap <leader>g<down>    :action VcsShowNextChangeMarker<cr>
+nnoremap <leader>g<up>      :action VcsShowPrevChangeMarker<cr>
 nnoremap <leader>in         :action GotoNextError<cr>
 nnoremap <leader>iN         :action GotoPreviousError<cr>
 nnoremap <leader>igg      gg:action GotoNextError<cr>
@@ -104,6 +109,10 @@ nnoremap <leader>jr         :action GotoRelated<cr>
 nnoremap <a-u>              :undo<cr>
 nnoremap <a-s-u>            :redo<cr>
 
+nnoremap vv V
+
+" system clipboard interaction
+vnoremap <C-c>          :action EditorCopy<cr>
 nnoremap <C-c><C-c>     :action EditorCopy<cr>
 nnoremap <leader><c-v>  :action EditorPasteFromX11<cr>
 nnoremap <c-v><c-v>     :action EditorPaste<cr>
@@ -203,7 +212,7 @@ nnoremap <leader>ee         :action SearchEverywhere<cr>
 nnoremap <leader>ec         :action GotoClass<cr>
 nnoremap <leader>es         :action GotoSymbol<cr>
 nnoremap <leader>ef         :action GotoFile<cr>
-nnoremap <leader>eo         :action GotoFile<cr>
+nnoremap <leader>eo         :action SearchEverywhere<cr>
 nnoremap <leader>ea         :action GotoAction<cr>
 
 nnoremap <leader>*          :action ShowUsages<cr>
@@ -213,6 +222,7 @@ nnoremap <leader>fu         :action FindUsages<cr>
 nnoremap <leader>fc         /\v^[<\|=>]{7}( .*\|$)<cr>
 nnoremap <leader>ff         :action Find<cr>
 nnoremap <leader>/          :action FindInPath<cr>
+vnoremap <leader>*          :action FindInPath<cr>
 
 " SAVING AND CLOSING ----------
 "
@@ -232,6 +242,8 @@ nnoremap <c-y><c-l>         <c-w>W
 nnoremap <leader><c-l>      :action SplitVertically<cr><c-w>W:action CloseContent<cr><c-w>W
 nnoremap <leader><c-x>      :action SplitHorizontally<cr>
 nnoremap <leader>qw         :action Unsplit<cr>
+nnoremap <a-s-n>            :action com.mnw.tabmover.actions.MoveTabDownAction<cr>
+nnoremap <a-s-p>            :action com.mnw.tabmover.actions.MoveTabUpAction<cr>
 nnoremap <c-w>L             :action com.mnw.tabmover.actions.MoveTabToNextSplitter<cr>
 nnoremap <c-w>H             :action com.mnw.tabmover.actions.MoveTabToPreviousSplitter<cr>
 nnoremap <c-w><c-w>         :action com.mnw.tabmover.actions.ShowTabMoveActions<cr>
