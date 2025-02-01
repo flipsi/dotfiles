@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 SND_HOME="$HOME/snd/"
-STOP_KEY="Control+c"
+STOP_KEY="Control+Alt+c"
 
 snd="$(find "$SND_HOME" -maxdepth 1 -type f -printf '%f\n' | \
     sort -nr | \
