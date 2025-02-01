@@ -992,6 +992,7 @@ assign [class="(?i)mediathek"]                                                  
 assign [class="(?i)spotify"]                                                                        Spotify
 for_window [class="Spotify"] move to workspace                                                      Spotify
 assign [class="(?i)signal"]                                                                         Signal
+assign [class="(?i)zathura"]                                                                        PDF
 assign [class="(?i)telegram"]                                                                       Telegram
 assign [class="(?i)alacritty"]                                                                      Terminal
 for_window [class="(?i)alacritty" title="Output"] move to workspace                                 Output
