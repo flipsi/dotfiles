@@ -1001,12 +1001,14 @@ assign [class="(?i)telegram"]                                                   
 assign [class="(?i)alacritty"]                                                                      Terminal
 for_window [class="(?i)alacritty" title="Output"] move to workspace                                 Output
 for_window [title="portal - jvm"] move to workspace                                                 Portal
+assign [class="(?i)Postman"]                                                                        Postman
 assign [class="(?i)cool-retro-term"]                                                                Terminal
 assign [class="(?i)gnome-terminal"]                                                                 Terminal
 assign [class="(?i)urxvt"]                                                                          Terminal
 assign [class="(?i)neovide"]                                                                        Neovide
 for_window [class="(?i)outlook-for-linux"] move to workspace                                        Outlook
-for_window [class="(?i)microsoft teams - preview"] move to workspace                                Teams
+for_window [class="(?i)microsoft teams"] move to workspace                                          Teams
+for_window [class="(?i)chrom" instance="crx_cifhbcnohmdccbgoicgdjpfamggdegmo"]  move to workspace   Teams
 assign [class="code-oss"]                                                                           VS Code
 assign [class="(?i)pale moon"]                                                                      Web
 assign [class="(?i)qutebrowser"]                                                                    Web
@@ -1018,6 +1020,7 @@ for_window [class="(?i)gnome-session-failed"] move to workspace                 
 
 ## workspaces with window always on specific output
 set $PRIMARY_OUTPUT DP-1
+set $SECONDARY_OUTPUT eDP-1
 set $SECONDARY_OUTPUT HDMI-1
 set $TERNARY_OUTPUT DP-3
 for_window [class="(?i)alacritty"]                                              move workspace to output $PRIMARY_OUTPUT
@@ -1030,8 +1033,9 @@ for_window [class="(?i)gnome-terminal"]                                         
 for_window [class="(?i)google-chrome"]                                          move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)urxvt"]                                                  move workspace to output $PRIMARY_OUTPUT
 for_window [title="(?i)keymapp"]                                                move workspace to output $SECONDARY_OUTPUT
-for_window [class="(?i)chrom"]                                                  move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)chrom" instance="crx_goifhkhiimheobgjhfbnkkibebioelpk"]  move workspace to output $PRIMARY_OUTPUT
+for_window [class="(?i)chrom" instance="crx_cifhbcnohmdccbgoicgdjpfamggdegmo"]  move workspace to output $TERNARY_OUTPUT
+for_window [class="(?i)chrom"]                                                  move workspace to output $PRIMARY_OUTPUT
 for_window [class="(?i)chromium"]                                               move workspace to output $PRIMARY_OUTPUT
 # for_window [class="(?i)vivaldi-stable"]                                         move workspace to output $SECONDARY_OUTPUT
 for_window [class="(?i)firefox"]                                                move workspace to output $PRIMARY_OUTPUT
