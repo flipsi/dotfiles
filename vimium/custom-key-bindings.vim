@@ -14,6 +14,8 @@ map  t      Vomnibar.activateInNewTab
 
 map <a-p>   previousTab
 map <a-n>   nextTab
+map g<up>   previousTab
+map g<down> nextTab
 map gp      togglePinTab
 
 map !       moveTabToNewWindow
