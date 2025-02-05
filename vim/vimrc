@@ -5295,15 +5295,18 @@ cnoremap <c-g> <c-c>
 
 " scroll a little smoother
 " (this actually is suggested in :help scroll-smooth)
+noremap <PageDown>  <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
 noremap <m-j>       <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
 noremap <esc>j      <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
-noremap <m-down>    <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
-noremap <esc><down> <c-e><c-e><c-e><c-e><c-e><c-e><c-e><c-e>
+noremap <PageUp>    <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 noremap <m-k>       <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 noremap <esc>k      <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
-noremap <m-up>      <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
-noremap <esc><up>   <c-y><c-y><c-y><c-y><c-y><c-y><c-y><c-y>
 
+" scroll page-wise
+noremap <m-down>    <c-f>
+noremap <esc><down> <c-f>
+noremap <m-up>      <c-b>
+noremap <esc><up>   <c-b>
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

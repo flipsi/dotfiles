@@ -50,12 +50,12 @@ nnoremap <leader>yf     :action CopyFileName<cr>
 
 " VIEWPORT MOVEMENT ----------
 
-" inoremap jk <c-c>
-
+nnoremap <PageDown>     15<c-e>
+nnoremap <PageUp>       15<c-y>
 nnoremap <a-j>          15<c-e>
 nnoremap <a-k>          15<c-y>
-nnoremap <a-down>       15<c-e>
-nnoremap <a-up>         15<c-y>
+nnoremap <a-down>       <c-f>
+nnoremap <a-up>         <c-b>
 
 
 " CURSOR MOVEMENT ----------
