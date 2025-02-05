@@ -1244,12 +1244,14 @@ nnoremap <leader>et  :FzfTags<cr>
 xnoremap <leader>et y:FzfTags <c-r>"<cr>
 
 " type a search pattern
-nnoremap <leader>j/         :FzfAg!<cr>
+nnoremap <leader>f/         :FzfAg!<cr>
+nnoremap <leader>ff         :FzfAg!<cr>
 " search for word under cursor
-nnoremap <leader>j*         :FzfAg! <c-r><c-w><cr>
-nmap     <leader>jj         <leader>j*
+nnoremap <leader>f*         :FzfAg! <c-r><c-w><cr>
+nnoremap <leader>fw         :FzfAg! <c-r><c-w><cr>
 " search for visual selection
-xnoremap <leader>j*         y:<c-u>FzfAg! <c-r>"<cr>
+xnoremap <leader>f*         y:<c-u>FzfAg! <c-r>"<cr>
+xnoremap <leader>fw         y:<c-u>FzfAg! <c-r>"<cr>
 
 " fuzzy search commands
 nnoremap <leader>:          :FzfCommands<cr>
@@ -5724,7 +5726,7 @@ xnoremap g+ ygg/\V<c-r>"<cr>zv
 
 
 " find lines that are too long
-nnoremap <leader>fw :exec '/\v^.{' . &textwidth . '}.'<cr>
+nnoremap <leader>fW :exec '/\v^.{' . &textwidth . '}.'<cr>
 
 " find trailing whitespace
 nnoremap <leader>fst /\v\s+$<cr>

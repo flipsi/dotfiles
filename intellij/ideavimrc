@@ -220,9 +220,11 @@ nnoremap <leader>su         :action ShowUsages<cr>
 nnoremap <leader>fu         :action FindUsages<cr>
 
 nnoremap <leader>fc         /\v^[<\|=>]{7}( .*\|$)<cr>
-nnoremap <leader>ff         :action Find<cr>
-nnoremap <leader>/          :action FindInPath<cr>
-vnoremap <leader>*          :action FindInPath<cr>
+nnoremap <leader>f/         :action Find<cr>
+nnoremap <leader>ff         :action FindInPath<cr>
+nnoremap <leader>fw         viw:action FindInPath<cr>
+nnoremap <leader>f*         viw:action FindInPath<cr>
+vnoremap <leader>fw            :action FindInPath<cr>
 
 " SAVING AND CLOSING ----------
 "
