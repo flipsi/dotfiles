@@ -807,7 +807,7 @@ nnoremap <leader>yg       :GitGutter<cr> " redraw
 nnoremap <leader>gi       :GitGutterPreviewHunk<cr>
 nnoremap <leader>gu       :GitGutterUndoHunk<cr>
 nnoremap <leader>ga       :GitGutterStageHunk<bar>GitGutterNextHunk<cr>:EnableGitGutterMode<cr>
-nnoremap <leader>gg     gg:GitGutterNextHunk<cr>zzzv
+nnoremap <leader>gg     gg:GitGutterNextHunk<cr>zzzv:EnableGitGutterMode<cr>
 nnoremap <leader>gG      G:GitGutterPrevHunk<cr>zzzv:EnableGitGutterMode<cr>
 nnoremap <leader>g<down>  :GitGutterNextHunk<cr>zzzv:EnableGitGutterMode<cr>
 nnoremap <leader>g<up>    :GitGutterPrevHunk<cr>zzzv:EnableGitGutterMode<cr>
@@ -818,16 +818,14 @@ nnoremap         gN       :GitGutterPrevHunk<cr>zzzv
 
 command! EnableGitGutterMode :call EnableGitGutterMode()
 function! EnableGitGutterMode()
-    nnoremap <down>    :GitGutterNextHunk<cr>zz9<c-e>zv
-    nnoremap <up>      :GitGutterPrevHunk<cr>zz9<c-e>zv
+    let g:gitguttermode = 1
     nnoremap <cr>      :GitGutterStageHunk<bar>GitGutterNextHunk<cr>
     AirlineIndicateCustomMode GITGUTTER MODE
 endfunction
 
 command! DisableGitGutterMode :call DisableGitGutterMode()
 function! DisableGitGutterMode()
-    nnoremap <down> g<down>
-    nnoremap <up>   g<up>
+    let g:gitguttermode = 0
     silent! nunmap <cr>
     AirlineResetCustomMode
 endfunction
@@ -4604,6 +4602,15 @@ function! ToggleList(bufname, pfx)
 endfunction
 " }}}
 
+" return 1 iff the quickfix window is open  {{{
+function! HasQuickfixList()
+    for winnr in range(1, winnr('$'))
+        if getwinvar(winnr, '&syntax') == 'qf'
+            return 1
+        endif
+    endfor
+    return 0
+endfunction
 
 " return 1 iff the active window contains a quickfix buffer and there are no other windows with normal buffers. {{{
 function! IsOrphanQuickfixList()
@@ -4616,6 +4623,7 @@ function! IsOrphanQuickfixList()
     endwhile
     return getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"
 endfunction
+
 " improve quickfix/location list
 augroup quickfix
     au!
@@ -5600,11 +5608,34 @@ nnoremap gj      8j
 vnoremap gj      8j
 nnoremap gk      8k
 vnoremap gk      8k
-nnoremap g<down> 8j
-vnoremap g<down> 8j
-nnoremap g<up>   8k
-vnoremap g<up>   8k
 
+" move faster or through quickfixlist or git hunks
+nnoremap g<down> :call JumpDownSoToSpeak()<cr>
+vnoremap g<down> :call JumpDownSoToSpeak()<cr>
+nnoremap g<up>   :call JumpUpSoToSpeak()<cr>
+vnoremap g<up>   :call JumpUpSoToSpeak()<cr>
+
+function! JumpDownSoToSpeak()
+    if HasQuickfixList()
+        call JumpThroughList(0, 0, 0)
+    elseif g:gitguttermode == 1
+        GitGutterNextHunk
+        normal zz9<c-e>zv
+    else
+        normal 8j
+    endif
+endfunction
+
+function! JumpUpSoToSpeak()
+    if HasQuickfixList()
+        call JumpThroughList(1, 0, 0)
+    elseif g:gitguttermode == 1
+        GitGutterPrevHunk
+        normal zz9<c-e>zv
+    else
+        normal 8k
+    endif
+endfunction
 
 " move with emacs-keys like in most shells
 " (noremap! with the '!' is for insert and ex mode)
