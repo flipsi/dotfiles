@@ -3813,7 +3813,7 @@ function! InsertCommitMsgPrefix()
         let l:ticket_number_pattern = '\v^\zs\u+-\d+\ze[/-].*'
         let l:ticket_number = matchstr(l:branch_name, l:ticket_number_pattern)
         if l:ticket_number != ''
-            let l:commit_msg_prefix = l:affected_code_part . '(' . l:ticket_number . '): '
+            let l:commit_msg_prefix = l:ticket_number . ' #comment '
         else
             let l:commit_msg_prefix = l:affected_code_part . ': '
         endif
