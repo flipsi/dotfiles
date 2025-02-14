@@ -6,6 +6,7 @@ curl wttr.in # weather report
 date +%s # unix timestamp
 docker run -it --rm alpine
 docker pull postgres && docker run -p 5432:5432 --rm --name some-postgres -e POSTGRES_PASSWORD=strong postgres # ad hoc PostgreSQL database
+exec su -l $USER # reload user groups in current shell
 psql -h 127.0.0.1 -U postgres # connect to local PostgreSQL database
 git branch -vv --merged | grep "\[.*/.*: gone\]" | cut -d" " -f3 | xargs git branch -d # delete merged branches
 git checkout --quiet --detach; git fetch (git remote | head -n1) master:master; git checkout --quiet -
