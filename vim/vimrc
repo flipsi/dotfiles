@@ -3111,6 +3111,7 @@ let g:livedown_browser = 'qutebrowser'
 
 augroup markdown_on_read
     au!
+    au FileType markdown normal zr
     au FileType markdown call SetupMarkdown()
 augroup END
 function! SetupMarkdown()
