@@ -86,7 +86,7 @@ function create_session_code() {
         tmux kill-window -t "$SESSION_NAME_CODE:delete-me"
 
         PROJECTS_DIR="$HOME/work-projects"
-        NUMBER_OF_PROJECTS=8
+        NUMBER_OF_PROJECTS=5
 
         if [[ -d "$PROJECTS_DIR" ]]; then
             for PROJECT in $(get_last_recent_git_projects "$PROJECTS_DIR" "$NUMBER_OF_PROJECTS"); do
