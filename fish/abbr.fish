@@ -50,6 +50,7 @@ abbr $args gcm    git commit -m
 abbr $args gcmi   git commit -m \'Initial commit\'
 abbr $args gcl    git clone --recursive
 abbr $args gcp    git cherry-pick
+abbr $args gcpa   git cherry-pick --abort
 abbr $args gcf    git clean -f -d
 abbr $args gd     git diff
 abbr $args gda    git diff --cached
