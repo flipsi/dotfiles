@@ -847,12 +847,15 @@ mode "$launch" {
     bindsym $mod+o          mode "$terminal"
     bindsym $mod+Shift+o    mode "$terminal"
     bindsym u       exec --no-startup-id "/opt/outlook-for-linux/outlook-for-linux"; mode "default"
-    bindsym e       exec --no-startup-id "teams"; mode "default"
+    # bindsym e       exec --no-startup-id "teams"; mode "default"
+    bindsym e       exec --no-startup-id "chromium --profile-directory=Default --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo "; mode "default"
     bindsym r       exec --no-startup-id "chromium"; mode "default"
     bindsym f       exec --no-startup-id "firefox"; mode "default"
     bindsym g       exec --no-startup-id "google-chrome-stable"; mode "default"
     bindsym i       exec --no-startup-id "vivaldi-stable"; mode "default"
     bindsym j       exec --no-startup-id "$HOME/opt/idea-IU-243.22562.145/bin/idea nosplash || idea"; mode "default"
+    # bindsym j       exec --no-startup-id "$HOME/opt/idea-IU-233.15619.7/bin/idea nosplash || idea"; mode "default"
+    bindsym J       exec --no-startup-id "idea"; mode "default"
     bindsym m       exec --no-startup-id "spotify"; mode "default"
     bindsym q       exec --no-startup-id "qutebrowser"; mode "default"
     bindsym n       exec --no-startup-id "thunar || nautilus"; mode "default"
@@ -1052,6 +1055,7 @@ for_window [class="(?i)qutebrowser"]                                            
 for_window [class="(?i)slack" title="^slack$"]                                  move workspace to output $TERNARY_OUTPUT
 for_window [class="(?i)slack" title=".*Huddle"]                                 move container to output $PRIMARY_OUTPUT
 for_window [class="(?i)Microsoft Teams"]                                        move container to output $TERNARY_OUTPUT
+for_window [class="(?i)chrom" instance="crx_cifhbcnohmdccbgoicgdjpfamggdegmo"]  move container to output $TERNARY_OUTPUT
 for_window [class="(?i)spotify"]                                                move workspace to output $SECONDARY_OUTPUT
 for_window [class="(?i)telegram-desktop" title="^Telegram"]                     move workspace to output $TERNARY_OUTPUT
 for_window [class="(?i)signal"]                                                 move workspace to output $TERNARY_OUTPUT
