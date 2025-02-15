@@ -453,14 +453,11 @@ bindsym $mod+l exec --no-startup-id "$LOCK_CMD"
 bindsym $mod+F10 mode "$mode_light"
 set $mode_light Screen and light settings: (+/-) screen brightness (n) toggle night adjustment (k/b) keyboard brighness
 mode "$mode_light" {
-    bindsym plus            exec --no-startup-id "xbacklight -inc 2"
-    bindsym minus           exec --no-startup-id "xbacklight -dec 2"
-    bindsym Up              exec --no-startup-id "xbacklight -inc 2"
-    bindsym Down            exec --no-startup-id "xbacklight -dec 2"
-    bindsym a               exec --no-startup-id "xbacklight -inc 5"
-    bindsym z               exec --no-startup-id "xbacklight -dec 5"
-    bindsym Right           exec --no-startup-id "xbacklight -inc 5"
-    bindsym Left            exec --no-startup-id "xbacklight -dec 5"
+    # this may not work if it requires root privileges (sudo password prompt)
+    bindsym plus            exec --no-startup-id "$SHELLSCRIPT_PATH/screen-brightness up"
+    bindsym minus           exec --no-startup-id "$SHELLSCRIPT_PATH/screen-brightness down"
+    bindsym Up              exec --no-startup-id "$SHELLSCRIPT_PATH/screen-brightness up"
+    bindsym Down            exec --no-startup-id "$SHELLSCRIPT_PATH/screen-brightness down"
     bindsym n               exec --no-startup-id "pkill -USR1 '^redshift$'"; mode "default"
     bindsym k               exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness up"
     bindsym b               exec --no-startup-id "$SHELLSCRIPT_PATH/keyboard-brightness down"
@@ -469,6 +466,9 @@ mode "$mode_light" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+## set screen brightness with function keys
+bindsym XF86MonBrightnessUp   exec --no-startup-id "$HOME/.i3/bin/screen-brightness.sh up"
+bindsym XF86MonBrightnessDown exec --no-startup-id "$HOME/.i3/bin/screen-brightness.sh down"
 
 # # toggle display
 # bindsym XF86Display exec --no-startup-id "xset -q | grep -q 'Monitor is On' && xset dpms force off || xset dpms force on"
