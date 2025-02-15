@@ -5296,6 +5296,9 @@ endif
 
 
 " alternative way to go back to normal mode
+" (map double esc on custom keyboard layout to F9)
+inoremap <F9> <esc>
+cnoremap <F9> <esc>
 inoremap jk <esc>
 cnoremap jk <c-c>
 cnoremap <c-g> <c-c>

@@ -43,6 +43,14 @@ nnoremap <F5>           :source ~/.ideavimrc<cr>
 nnoremap <leader>sv     :source ~/.ideavimrc<cr>
 nnoremap <leader>ev     :edit ~/.ideavimrc<cr>
 
+" alternative way to go back to normal mode
+" (map double esc on custom keyboard layout to F9)
+inoremap <F9> <esc>
+cnoremap <F9> <esc>
+inoremap jk <esc>
+cnoremap jk <c-c>
+cnoremap <c-g> <c-c>
+
 " copy filepath
 " (to show filepath, see breadcrumbs at bottom status line or hover over tab)
 nnoremap <leader>yp     :action CopyAbsolutePath<cr>
