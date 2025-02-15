@@ -23,6 +23,9 @@ prepend_to_path ~/cifuzz/bin
 prepend_to_path ~/go/bin
 prepend_to_path ~/shellscripts
 
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+prepend_to_path $BUN_INSTALL/bin
 
 # edit files with neovim or vim
 if command -v nvim >/dev/null 2>&1
