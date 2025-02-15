@@ -830,6 +830,8 @@ function! DisableGitGutterMode()
     AirlineResetCustomMode
 endfunction
 
+let g:gitguttermode = 0
+
 " automatically unmap (after committing is reasonable)
 augroup gitgutter_unmap
     au!
