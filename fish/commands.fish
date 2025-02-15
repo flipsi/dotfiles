@@ -17,3 +17,4 @@ ssh clidle.ddns.net -p 3000 # wordle game
 sudoedit /etc/X11/xorg.conf.d/00-keyboard.conf # configure Xorg keyboard layout
 yay -Sc # clear pacman cache (to free disk space)
 yay -Yc # remove unused dependencies
+sudo udevadm control --reload-rules && sudo udevadm trigger # reload udev rules without reboot
