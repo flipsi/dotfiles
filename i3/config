@@ -641,6 +641,10 @@ mode "$mode_kill_app" {
     bindsym Escape mode "default"
 }
 
+## kill specific windows automatically after a while
+for_window [class="Blueman-applet" window_type="dialog"] exec --no-startup-id $HOME/.i3/bin/i3-kill-window-soon.sh "[class="\""Blueman-applet"\"" window_type="\""dialog"\""]" 2
+
+
 ###############################################################################
 ###########  INTRA WORKSPACE  #################################################
 ###############################################################################
