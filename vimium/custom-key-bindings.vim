@@ -23,14 +23,16 @@ map d       removeTab
 map qq      removeTab
 map u       restoreTab
 
+map <c-left> goBack
+map <c-right> goForward
+
 map l       LinkHints.activateModeToOpenInNewTab
 map gl      LinkHints.activateModeToDownloadLink
+" remember yf to copy link addresses
 
 " global marks with lowercase letters, local marks with uppercase letters
 map m       Marks.activateCreateMode swap
 map '       Marks.activateGotoMode swap
-
-map ö       enterFindMode
 
 
 
