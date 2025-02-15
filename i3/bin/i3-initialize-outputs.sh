@@ -4,6 +4,9 @@ set -e
 
 DIRNAME=$(dirname "$0")
 
+# When detecting only one external monitor, arrange it above the internal one.
+# If not set, it alternates between left and right on every invocation.
+PREFER_ABOVE=1
 
 TEMP=$(getopt -o osf --long only,swapped,fix-offset -n "$0" -- "$@")
 eval set -- "$TEMP"
@@ -118,8 +121,12 @@ function arrange_outputs() {
                 xrandr \
                     --output "$LAPTOP_SCREEN" --auto \
                     --output "$EXTERNAL_SCREEN" --primary --auto --right-of "$LAPTOP_SCREEN"
+            elif [[ -n "$PREFER_ABOVE" ]]; then
+                xrandr \
+                    --output "$LAPTOP_SCREEN" --auto \
+                    --output "$EXTERNAL_SCREEN" --primary --auto --above "$LAPTOP_SCREEN"
             else
-                # swap left and right on every invocation, which could be handy
+                # swap left and right on every invocation
                 right_screen=$(get_screen_with_greater_x_position "$LAPTOP_SCREEN" "$EXTERNAL_SCREEN")
                 if [[ "$right_screen" = "$EXTERNAL_SCREEN" ]]; then
                     xrandr \
@@ -208,6 +215,7 @@ function main() {
 }
 
 main
+sleep 1
 "$DIRNAME/i3-polybar.sh" restart
 setup_wallpaper
 
