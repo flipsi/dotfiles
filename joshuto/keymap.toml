@@ -210,6 +210,7 @@ keymap = [
   { keys = ["'", "s", "w"], commands = ["cd ~/Sync/wohnen"] },
   { keys = ["'", "t"     ], commands = ["cd ~/tmp"] },
   { keys = ["'", "w", "m"], commands = ["cd ~/work/reply/misc"] },
+  { keys = ["'", "w", "n"], commands = ["cd ~/work/reply/notes"] },
   { keys = ["'", "w", "p"], commands = ["cd ~/work-projects"] },
   { keys = ["'", "w", "w"], commands = ["cd ~/work/reply"] },
 
