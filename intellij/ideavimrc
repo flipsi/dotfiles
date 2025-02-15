@@ -215,13 +215,14 @@ nnoremap <leader>ya         :action EditorToggleShowWhitespaces<cr>
 
 nnoremap <leader>ac         :action NewClass<cr>
 
-nnoremap <leader><leader>   :action Switcher<cr>
-nnoremap <leader>ee         :action SearchEverywhere<cr>
-nnoremap <leader>ec         :action GotoClass<cr>
-nnoremap <leader>es         :action GotoSymbol<cr>
-nnoremap <leader>ef         :action GotoFile<cr>
-nnoremap <leader>eo         :action SearchEverywhere<cr>
+nnoremap <leader><leader>   :action SearchEverywhere<cr>
 nnoremap <leader>ea         :action GotoAction<cr>
+nnoremap <leader>ec         :action GotoClass<cr>
+nnoremap <leader>ee         :action SearchEverywhere<cr>
+nnoremap <leader>ef         :action GotoFile<cr>
+nnoremap <leader>eb         :action GotoFile<cr> " TODO: only open files, but there seems to be no action for that
+nnoremap <leader>eo         :action SearchEverywhere<cr>
+nnoremap <leader>es         :action GotoSymbol<cr>
 
 nnoremap <leader>*          :action ShowUsages<cr>
 nnoremap <leader>su         :action ShowUsages<cr>
