@@ -4215,8 +4215,10 @@ function! GitRemoteHoster()
         return 'gitlab'
     elseif match(l:remote_url, 'github') >= 0
         return 'github'
+    elseif match(l:remote_url, 'bitbucket') >= 0
+        return 'bitbucket'
     else
-        echoerr "Unknown remote hoster (not Github or Gitlab)."
+        echoerr "Unknown remote hoster: " . l:remote_url
     endif
 endfunction
 
@@ -4287,8 +4289,12 @@ function! GitRemoteCreateOrViewMergeRequest()
     endif
     if GitRemoteHoster() == 'gitlab'
         Dispatch! glab mr view --web || glab mr create --web --fill
-    else
+    elseif GitRemoteHoster() == 'github'
         Dispatch! gh pr view --web || gh pr create --web
+    elseif GitRemoteHoster() == 'bitbucket'
+        OpenGitRepoWeb
+    else
+        echoerr "Unknown remote hoster: " . l:remote_url
     endif
 endfunction
 
@@ -4305,8 +4311,10 @@ command! OpenGitRepoWeb :call OpenGitRepoWeb() " Open Github/Gitlab repo in brow
 function! OpenGitRepoWeb()
     if GitRemoteHoster() == 'gitlab'
         Dispatch! glab repo view --web
-    else
+    elseif GitRemoteHoster() == 'github'
         Dispatch! gh repo view --web
+    else
+        call GitWebUrl('pull-requests', 'open_in_web')
     endif
 endfunction
 
@@ -4328,28 +4336,39 @@ function! GitWebUrl(line_or_range, return_or_yank_to_clipboard_or_open_in_web)
     let l:absolute_path = strpart(l:relative_path, strlen(l:git_root))
     let l:web_domain = l:url_matches[1]
 
-    if match(l:web_domain, 'bitbucket\.org') >= 0
-        if a:line_or_range == 'range'
-            let [l:startline, l:startcol, l:endline, l:endcol] = GetVisPos()
+    if a:line_or_range == 'range'
+        let [l:startline, l:startcol, l:endline, l:endcol] = GetVisPos()
+        if match(l:web_domain, 'bitbucket\.org') >= 0
             let l:line_param = "#lines-" . l:startline . ':' . l:endline
+            let l:path_prefix = '/src/' . l:revision . '/'
         else
-            let l:line_param = "#lines-" . line('.')
-        endif
-    else
-        if a:line_or_range == 'range'
-            let [l:startline, l:startcol, l:endline, l:endcol] = GetVisPos()
             let l:line_param = "#L" . l:startline . '-L' . l:endline
+            let l:path_prefix = '/blob/' . l:revision . '/'
+        endif
+    elseif a:line_or_range == 'line'
+        if match(l:web_domain, 'bitbucket\.org') >= 0
+            let l:line_param = "#lines-" . line('.')
+            let l:path_prefix = '/src/' . l:revision . '/'
         else
             let l:line_param = "#L". line('.')
+            let l:path_prefix = '/blob/' . l:revision . '/'
+        endif
+    elseif a:line_or_range == 'pull-requests'
+        if match(l:web_domain, 'github\.com') >= 0
+            let l:pull_requests_path = '/pulls'
+        elseif match(l:web_domain, 'gitlab\.com') >= 0
+            let l:pull_requests_path = '/-/merge_requests'
+        elseif match(l:web_domain, 'bitbucket\.org') >= 0
+            let l:pull_requests_path = '/pull-requests'
+        else
+            let l:pull_requests_path = '/pull-requests'
         endif
     endif
 
-    if match(l:web_domain, 'bitbucket\.org') >= 0
-        let l:web_url = 'https://' . l:web_domain . '/' . l:url_matches[2] .
-                    \ '/src/' . l:revision . '/' . l:absolute_path . l:line_param
+    if a:line_or_range == 'pull-requests'
+        let l:web_url = 'https://' . l:web_domain . '/' . l:url_matches[2] . l:pull_requests_path
     else
-        let l:web_url = 'https://' . l:web_domain . '/' . l:url_matches[2] .
-                    \ '/blob/' . l:revision . '/' . l:absolute_path . l:line_param
+        let l:web_url = 'https://' . l:web_domain . '/' . l:url_matches[2] . l:path_prefix . l:absolute_path . l:line_param
     endif
 
     if a:return_or_yank_to_clipboard_or_open_in_web == 'return'
