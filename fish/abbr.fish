@@ -30,7 +30,17 @@ abbr $args dcl    docker-compose logs
 abbr $args dclf   docker-compose logs -f
 abbr $args dcp    docker-compose pull
 abbr $args du     du -sh
+abbr $args dn     sudo dnf
+abbr $args dni    sudo dnf install
+abbr $args dnr    sudo dnf remove
+abbr $args dns    dnf search
+abbr $args dnq    dnf info
+abbr $args dnu    sudo dnf upgrade \| tee --append os/dnf-upgrade-(date +%Y-%m-%d-%H-%M).log
+abbr $args dnuc   sudo dnf upgrade -y \| tee --append os/dnf-upgrade-(date +%Y-%m-%d-%H-%M).log
 abbr $args es     echo \$status
+abbr $args fps    flatpak search
+abbr $args fpi    flatpak install
+abbr $args fpr    flatpak uninstall
 abbr $args fi     fzf_wrapper --find --joshuto
 abbr $args fl     fzf_wrapper --locate --joshuto
 abbr $args g      git
@@ -168,6 +178,7 @@ abbr $args yc     yay -Yc
 abbr $args yr     yay -R
 abbr $args ys     yay -S
 abbr $args yu     yay -Syu --noconfirm \| tee --append os/yay-update-(date +%Y-%m-%d-%H-%M).log
+abbr $args yuc    yay -Syu \| tee --append os/yay-update-(date +%Y-%m-%d-%H-%M).log
 abbr $args yqi    yay -Qi
 abbr $args ysi    yay -Si
 abbr $args --set-cursor=URL yt  yt-dlp \'URL\'
