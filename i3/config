@@ -355,7 +355,7 @@ mode "$mode_clipboard" {
     bindsym  $mod+c exec --no-startup-id "CM_LAUNCHER=rofi clipmenu"; mode "default";
     bindsym       c exec --no-startup-id "CM_LAUNCHER=rofi clipmenu"; mode "default";
     bindsym Shift+c exec --no-startup-id "CM_LAUNCHER=dmenu clipmenu $DMENU_OPTIONS"; mode "default";
-    bindsym       p exec --no-startup-id "rofi-pass"; mode "default";
+    bindsym       p exec --no-startup-id "rofi-pass"; mode "default"; # rofi-pass is unmaintained by now :( TODO: replace
     bindsym Shift+p exec --no-startup-id "passmenu $DMENU_OPTIONS"; mode "default";
     # cancel
     bindsym $mod+Escape mode "default"
@@ -849,14 +849,14 @@ mode "$launch" {
     bindsym u       exec --no-startup-id "/opt/outlook-for-linux/outlook-for-linux"; mode "default"
     # bindsym e       exec --no-startup-id "teams"; mode "default"
     bindsym e       exec --no-startup-id "chromium --profile-directory=Default --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo "; mode "default"
-    bindsym r       exec --no-startup-id "chromium"; mode "default"
+    bindsym r       exec --no-startup-id "chromium || chromium-browser"; mode "default"
     bindsym f       exec --no-startup-id "firefox"; mode "default"
     bindsym g       exec --no-startup-id "google-chrome-stable"; mode "default"
-    bindsym i       exec --no-startup-id "vivaldi-stable"; mode "default"
+    bindsym i       exec --no-startup-id "flatpak run com.vivaldi.Vivaldi || vivaldi-stable || vivaldi"; mode "default"
     bindsym j       exec --no-startup-id "$HOME/opt/idea-IU-243.22562.145/bin/idea nosplash || idea"; mode "default"
     # bindsym j       exec --no-startup-id "$HOME/opt/idea-IU-233.15619.7/bin/idea nosplash || idea"; mode "default"
     bindsym J       exec --no-startup-id "idea"; mode "default"
-    bindsym m       exec --no-startup-id "spotify"; mode "default"
+    bindsym m       exec --no-startup-id "flatpak run com.spotify.Client || spotify"; mode "default"
     bindsym q       exec --no-startup-id "qutebrowser"; mode "default"
     bindsym n       exec --no-startup-id "thunar || nautilus"; mode "default"
     bindsym s       exec --no-startup-id "slack"; mode "default"
