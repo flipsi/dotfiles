@@ -856,6 +856,7 @@ mode "$launch" {
     bindsym j       exec --no-startup-id "$HOME/opt/idea-IU-243.22562.145/bin/idea nosplash || idea"; mode "default"
     # bindsym j       exec --no-startup-id "$HOME/opt/idea-IU-233.15619.7/bin/idea nosplash || idea"; mode "default"
     bindsym J       exec --no-startup-id "idea"; mode "default"
+    bindsym k       exec --no-startup-id "keymapp"; mode "default"
     bindsym m       exec --no-startup-id "flatpak run com.spotify.Client || spotify"; mode "default"
     bindsym q       exec --no-startup-id "qutebrowser"; mode "default"
     bindsym n       exec --no-startup-id "thunar || nautilus"; mode "default"
