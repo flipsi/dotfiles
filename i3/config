@@ -48,7 +48,7 @@ exec "xset -b"
 
 ## autostart .desktop files the convenient way
 ## https://faq.i3wm.org/question/2155/how-can-i-use-autostart-desktop-files-in-i3.1.html
-exec --no-startup-id "dex --autostart --environment i3"
+exec --no-startup-id "dex --autostart --environment i3 || dex-autostart --autostart --environment i3"
 
 ## composite manager for window overlays, smooth workspace changes, etc.
 exec --no-startup-id "picom -b"
