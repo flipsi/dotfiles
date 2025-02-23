@@ -355,7 +355,7 @@ mode "$mode_clipboard" {
     bindsym  $mod+c exec --no-startup-id "CM_LAUNCHER=rofi clipmenu"; mode "default";
     bindsym       c exec --no-startup-id "CM_LAUNCHER=rofi clipmenu"; mode "default";
     bindsym Shift+c exec --no-startup-id "CM_LAUNCHER=dmenu clipmenu $DMENU_OPTIONS"; mode "default";
-    bindsym       p exec --no-startup-id "rofi-pass"; mode "default"; # rofi-pass is unmaintained by now :( TODO: replace
+    bindsym       p exec --no-startup-id "rofi-pass || $SHELLSCRIPT_PATH/rofi-pass.sh"; mode "default";
     bindsym Shift+p exec --no-startup-id "passmenu $DMENU_OPTIONS"; mode "default";
     # cancel
     bindsym $mod+Escape mode "default"
