@@ -38,9 +38,10 @@ abbr $args dnq    dnf info
 abbr $args dnu    sudo dnf upgrade \| tee --append os/dnf-upgrade-(date +%Y-%m-%d-%H-%M).log
 abbr $args dnuc   sudo dnf upgrade -y \| tee --append os/dnf-upgrade-(date +%Y-%m-%d-%H-%M).log
 abbr $args es     echo \$status
-abbr $args fps    flatpak search
 abbr $args fpi    flatpak install
 abbr $args fpr    flatpak uninstall
+abbr $args fps    flatpak search
+abbr $args fpu    flatpak update -y
 abbr $args fi     fzf_wrapper --find --joshuto
 abbr $args fl     fzf_wrapper --locate --joshuto
 abbr $args g      git
