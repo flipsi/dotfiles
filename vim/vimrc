@@ -3811,7 +3811,7 @@ function! InsertCommitMsgPrefix()
     if empty(getline('.'))
         let l:branch_name = GitCurrentBranchName()
         let l:affected_code_part = system('git diff --cached --name-only | head -n1 | cut -d "/" -f1 | tr -d "\n"')
-        let l:ticket_number_pattern = '\v^\zs\u+-\d+\ze[/-].*'
+        let l:ticket_number_pattern = '\v^.*/\zs\u+-\d+\ze[/-].*'
         let l:ticket_number = matchstr(l:branch_name, l:ticket_number_pattern)
         if l:ticket_number != ''
             let l:commit_msg_prefix = l:ticket_number . ' #comment '
