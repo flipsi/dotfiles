@@ -31,12 +31,12 @@ abbr $args dclf   docker-compose logs -f
 abbr $args dcp    docker-compose pull
 abbr $args du     du -sh
 abbr $args dn     sudo dnf
-abbr $args dni    sudo dnf install
+abbr $args dni    sudo dnf install -y
 abbr $args dnr    sudo dnf remove
 abbr $args dns    dnf search
 abbr $args dnq    dnf info
-abbr $args dnu    sudo dnf upgrade \| tee --append os/dnf-upgrade-(date +%Y-%m-%d-%H-%M).log
-abbr $args dnuc   sudo dnf upgrade -y \| tee --append os/dnf-upgrade-(date +%Y-%m-%d-%H-%M).log
+abbr $args dnu    sudo dnf upgrade --refresh \| tee --append os/dnf-upgrade-(date +%Y-%m-%d-%H-%M).log
+abbr $args dnuc   sudo dnf upgrade --refresh -y \| tee --append os/dnf-upgrade-(date +%Y-%m-%d-%H-%M).log
 abbr $args es     echo \$status
 abbr $args fpi    flatpak install
 abbr $args fpr    flatpak uninstall
