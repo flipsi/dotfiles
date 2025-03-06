@@ -10,6 +10,7 @@ function prepend_to_path
     end
 end
 
+prepend_to_path /usr/sbin
 prepend_to_path ~/.babashka/bbin/bin
 prepend_to_path ~/.cargo/bin
 prepend_to_path ~/.npm-global/bin
