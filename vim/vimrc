@@ -321,6 +321,7 @@ let g:neoterm_automap_keys = '' " don't add default mapping (,tt)
 command! -nargs=1 ExecuteInNeoTerminal :call ExecuteInNeoTerminal(<q-args>)
 function! ExecuteInNeoTerminal(vimcommand)
     let g:suppress_terminal_autoinsert = 1
+    call SetNeoTermModeAutomatically()
     if index(['Tkill','Tclear'], a:vimcommand) >= 0
         execute a:vimcommand
     else
@@ -356,7 +357,8 @@ endfunction
 command! SetNeoTermModeAutomatically :call SetNeoTermModeAutomatically()
 function! SetNeoTermModeAutomatically()
     if g:neoterm_mode == 'automatically'
-        if winnr('$') == 1
+        " if winnr('$') == 1
+        if len(filter(range(1, winnr('$')), 'winwidth(v:val) != &columns')) == 0
             let g:neoterm_default_mod = ':vertical'
             let g:neoterm_size = g:neoterm_size_vertically
         else
