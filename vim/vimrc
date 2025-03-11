@@ -5985,6 +5985,8 @@ nmap <c-s>/ gggn<c-s>
 nnoremap 'o vip:sort<cr>
 vnoremap 'o :sort<cr>
 
+" reverse order of lines in selection
+vnoremap 'O :!tac<cr>
 
 " correct typos like 'DAmnitypefast' to titlecase ('Damnitypefast')
 nnoremap 'tu      blguee
