@@ -1,0 +1,11 @@
+snippet eof "multiline string to variable with parameter expansion"
+IFS='' read -r -d '' $1 <<EOF
+	$0
+EOF
+endsnippet
+
+snippet eoff "multiline string to variable without parameter expansion"
+IFS='' read -r -d '' $1 <<"EOF"
+	$0
+EOF
+endsnippet
