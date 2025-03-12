@@ -1251,6 +1251,7 @@ nnoremap <leader>ff         :FzfAg!<cr>
 " search for word under cursor
 nnoremap <leader>f*         :FzfAg! <c-r><c-w><cr>
 nnoremap <leader>fw         :FzfAg! <c-r><c-w><cr>
+nnoremap <leader>fW         :FzfAg! <c-r><c-a><cr>
 " search for visual selection
 xnoremap <leader>f*         y:<c-u>FzfAg! <c-r>"<cr>
 xnoremap <leader>fw         y:<c-u>FzfAg! <c-r>"<cr>
@@ -5786,7 +5787,7 @@ xnoremap g+ ygg/\V<c-r>"<cr>zv
 
 
 " find lines that are too long
-nnoremap <leader>fW :exec '/\v^.{' . &textwidth . '}.'<cr>
+nnoremap <leader>fL :exec '/\v^.{' . &textwidth . '}.'<cr>
 
 " find trailing whitespace
 nnoremap <leader>fst /\v\s+$<cr>
