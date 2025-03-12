@@ -5079,6 +5079,7 @@ let mapleader=' '
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FIX AND SPEEDUP MY TYPING {{{
 
+iabbrev asap        as soon as possible
 iabbrev BE          backend
 iabbrev CIG         Code Intelligence
 iabbrev CIF         CI Fuzz
