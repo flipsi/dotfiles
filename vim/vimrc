@@ -5639,9 +5639,9 @@ vnoremap gk      8k
 
 " move faster or through quickfixlist or git hunks
 nnoremap g<down> :call JumpDownSoToSpeak()<cr>
-vnoremap g<down> :call JumpDownSoToSpeak()<cr>
+vnoremap g<down> 8j
 nnoremap g<up>   :call JumpUpSoToSpeak()<cr>
-vnoremap g<up>   :call JumpUpSoToSpeak()<cr>
+vnoremap g<up>   8k
 
 function! JumpDownSoToSpeak()
     if HasQuickfixList()
