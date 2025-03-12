@@ -1248,11 +1248,11 @@ xnoremap <leader>et y:FzfTags <c-r>"<cr>
 " type a search pattern
 nnoremap <leader>f/         :FzfAg!<cr>
 nnoremap <leader>ff         :FzfAg!<cr>
-" search for word under cursor
+" search for word under cursor in working dir
 nnoremap <leader>f*         :FzfAg! <c-r><c-w><cr>
 nnoremap <leader>fw         :FzfAg! <c-r><c-w><cr>
 nnoremap <leader>fW         :FzfAg! <c-r><c-a><cr>
-" search for visual selection
+" search for visual selection in working dir
 xnoremap <leader>f*         y:<c-u>FzfAg! <c-r>"<cr>
 xnoremap <leader>fw         y:<c-u>FzfAg! <c-r>"<cr>
 
@@ -5774,10 +5774,24 @@ nmap gD gDztzv
 nnoremap <leader>fn :SearchMultiLine<space>
 
 
-" find word under cursor
-nnoremap *  *zv
-nnoremap +  #zv
-nnoremap g+ #gg/<c-p><cr>zv
+nnoremap * <nop>
+nnoremap + <nop>
+
+" find word under cursor in current buffer
+nnoremap **  *zv
+nnoremap ++  #zv
+" find WORD under cursor in current buffer
+nnoremap *w  yiW/\V<c-r>"<cr>zv
+nnoremap *W  yiW/\V<c-r>"<cr>zv
+nnoremap +w  yiW?\V<c-r>"<cr>zv
+nnoremap +W  yiW?\V<c-r>"<cr>zv
+" find word under cursor in current buffer starting at the top
+nnoremap g** #gg/<c-p><cr>zv
+nnoremap g++ #gg/<c-p><cr>zv
+" find WORD under cursor in current buffer starting at the top
+nnoremap g+w yiWgg/\V<c-r>"<cr>zv
+nnoremap g+W yiWgg/\V<c-r>"<cr>zv
+
 
 " find visual selection
 " (i use this instead of g* and g# anyway)
