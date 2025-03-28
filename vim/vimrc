@@ -4189,6 +4189,15 @@ function! GitCurrentBranchName()
     return system('git rev-parse --abbrev-ref HEAD | tr -d "\n"')
 endfunction
 
+" determine (Jira) ticket number like XYZ-123 from current branch name
+function! GitTicketNumberFromBranch()
+    let l:branch_name = GitCurrentBranchName()
+    let l:affected_code_part = system('git diff --cached --name-only | head -n1 | cut -d "/" -f1 | tr -d "\n"')
+    let l:ticket_number_pattern = '\v^.*/\zs\u+-\d+\ze[/-].*'
+    let l:ticket_number = matchstr(l:branch_name, l:ticket_number_pattern)
+    return l:ticket_number
+endfunction
+
 " determine whether current branch has a tracking remote or not {{{
 function! HasRemoteBranch()
     call system('git rev-parse --abbrev-ref --symbolic-full-name @{u} >/dev/null 2>&1')
@@ -4291,10 +4300,33 @@ function! GitRemoteCreateOrViewMergeRequest()
     elseif GitRemoteHoster() == 'github'
         Dispatch! gh pr view --web || gh pr create --web
     elseif GitRemoteHoster() == 'bitbucket'
-        OpenGitRepoWeb
+        GitRemoteCreateOrViewMergeRequestOnBitbucket
     else
         echoerr "Unknown remote hoster: " . l:remote_url
     endif
+endfunction
+
+command! GitRemoteCreateOrViewMergeRequestOnBitbucket call GitRemoteCreateOrViewMergeRequestOnBitbucket() " Open (and create if not exists) Pull Request on Github/Gitlab
+function! GitRemoteCreateOrViewMergeRequestOnBitbucket()
+    " TODO: check if PR already exists and open
+    let l:branch_name = GitCurrentBranchName()
+    let l:ticket_number = GitTicketNumberFromBranch()
+    " Dispatch git branch " TODO: fix that input works with that
+    let l:target_branch = input("Target branch: ")
+    " cclose
+    let l:title = l:ticket_number . ' ' . input("Pull request title:" . l:ticket_number . ' ')
+    let l:description = input("Description: ")
+    let l:repo = substitute(GitRemoteUrl(), '.*:\(.*\)', '\1', '')
+    let l:api_url = 'https://api.bitbucket.org/2.0/repositories/' . l:repo . '/pullrequests'
+    let l:payload = '{"title": "' . l:title . '", "source": {"branch": {"name": "' . l:branch_name . '"}}, "destination": {"branch": {"name": "' . l:target_branch . '"}}, "description": "' . l:description . '"}'
+    " TODO: authenticate
+    " either with       -u p.moers@reply.de:(pass reply/bitbucket/app-passwords/CLI) 
+    " or with           --header "Authorization: Bearer $(pass reply/bitbucket/api-tokens/workspace-sideup/CLI | head -n1 | tr -d '\n')" \
+    " but both don't work
+    let l:command = 'curl -X POST -H "Content-Type: application/json" -d ' . shellescape(l:payload) . ' ' . l:api_url
+    exec 'Dispatch ' . l:command
+    echo "Pull request created."
+    OpenGitRepoWeb
 endfunction
 
 command! GitRemoteShowPipeline call GitRemoteShowPipeline() " Show pipeline progress
