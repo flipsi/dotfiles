@@ -29,16 +29,18 @@
     autostash = true
 
 [alias]
-    fixup      = !sh -c 'REV=$(git rev-parse $1) && git commit --fixup $@ && git rebase -i --autostash --autosquash $REV^' -
-    l          = log --pretty=format:"%C(blue)%ad\\ %C(yellow)%h\\ %C(green)%cn%C(red)%d\\ %C(reset)%s" --decorate --date=short
-    ll         = log --pretty=format:"%C(blue)%ad\\ %C(yellow)%h\\ %C(green)%cn%C(red)%d\\ %C(reset)%s" --decorate --date=short --numstat
+    blame-better   = blame -w -C -C -C
+    diff-words     = diff --word-diff
+    fixup          = !sh -c 'REV=$(git rev-parse $1) && git commit --fixup $@ && git rebase -i --autostash --autosquash $REV^' -
+    l              = log --pretty=format:"%C(blue)%ad\\ %C(yellow)%h\\ %C(green)%cn%C(red)%d\\ %C(reset)%s" --decorate --date=short
+    ll             = log --pretty=format:"%C(blue)%ad\\ %C(yellow)%h\\ %C(green)%cn%C(red)%d\\ %C(reset)%s" --decorate --date=short --numstat
     main-or-master = !sh -c 'git rev-parse --verify main >/dev/null 2>&1 && echo -n "main" || echo -n "master"'
-    pop        = !sh -c 'git rebase $(git rev-parse --abbrev-ref HEAD) "stash/$1"' - ; a better stash pop
-    pop-prefix = !sh -c 'git rebase $(git rev-parse --abbrev-ref HEAD) "$1"' - ; (for tig)
-    save       = !sh -c 'git checkout -b "stash/$1" && git commit -m "$1" && git checkout -' - ; a better stash save
-    rebase-onto = "!f() { git rebase --onto $(git main-or-master) $(git merge-base \"$1\" \"$2\") \"$1\"; }; f"
-    edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u | sed -r 's/ /\\\\ /g' ; }; f | xargs nvim"
-    add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+    pop            = !sh -c 'git rebase $(git rev-parse --abbrev-ref HEAD) "stash/$1"' - ; a better stash pop
+    pop-prefix     = !sh -c 'git rebase $(git rev-parse --abbrev-ref HEAD) "$1"' - ; (for tig)
+    save           = !sh -c 'git checkout -b "stash/$1" && git commit -m "$1" && git checkout -' - ; a better stash save
+    rebase-onto    = "!f() { git rebase --onto $(git main-or-master) $(git merge-base \"$1\" \"$2\") \"$1\"; }; f"
+    edit-unmerged  = "!f() { git ls-files --unmerged | cut -f2 | sort -u | sed -r 's/ /\\\\ /g' ; }; f | xargs nvim"
+    add-unmerged   = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
 
 [interactive]
     diffFilter = delta --color-only
@@ -48,10 +50,10 @@
     side-by-side = true
     line-numbers = true
     whitespace-error-style = 22 reverse
-    plus-style =                "#FBF1C7 #98971A"
-    minus-style =               "#9D0006 #1D2021"
-    plus-emph-style =           "#1D2021 #83A598"
-    minus-emph-style =          "#282828 #CC241D"
+    plus-style =        "#FBF1C7 #98971A"
+    minus-style =       "#9D0006 #1D2021"
+    plus-emph-style =       "#1D2021 #83A598"
+    minus-emph-style =      "#282828 #CC241D"
     line-numbers-minus-style =  "#CC241D"
     line-numbers-plus-style =   "#98971A"
     syntax-theme = 1337
