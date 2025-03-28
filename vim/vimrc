@@ -4919,39 +4919,6 @@ endfunction
 " }}}
 
 
-
-" change search mode (what happens when hitting n) {{{
-" http://vim.wikia.com/wiki/Make_search_results_appear_in_the_middle_of_the_screen
-" TODO: make it easy to change default
-function! s:SearchMode()
-  if !exists('s:searchmode') || s:searchmode == 0
-    echo 'Search next: scroll as few times as possible (smart)'
-    nnoremap <silent> n n:call <sid>MaybeScroll()<cr>zv
-    nnoremap <silent> N N:call <sid>MaybeScroll()<cr>zv
-    let s:searchmode = 1
-  elseif s:searchmode == 1
-    echo 'Search next: scroll hit to middle'
-    nnoremap n nzzzv
-    nnoremap N Nzzzv
-    let s:searchmode = 2
-  else
-    echo 'Search next: normal'
-    " nunmap n
-    " nunmap N
-    nnoremap n nzv
-    nnoremap N Nzv
-    let s:searchmode = 0
-  endif
-endfunction
-" If cursor is on top, scroll to bottom, if it is on bottom, scroll to top
-function! s:MaybeScroll()
-  if winline() == &scrolloff + 1
-    normal! zb
-  elseif winline() == winheight(0) - &scrolloff
-    normal! zt
-  endif
-endfunction
-
 " }}}
 
 
@@ -5754,6 +5721,58 @@ nnoremap <c-i> <c-i>zz
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SEARCHING AND FINDING {{{
 
+" Search Mode and Search Direction {{{
+
+nnoremap <silent> <leader>on :call <sid>ChangeSearchMode()<CR>
+nnoremap          <leader>oN :call ToggleSearchDirection()<CR>
+
+let g:n_always_forward = 0
+let g:search_mode = 1
+
+" Toggle search direction behavior
+function! ToggleSearchDirection()
+    let g:n_always_forward = !g:n_always_forward
+    echo "Search direction: " . (g:n_always_forward ? "Always forward" : "Default (n/N depends)")
+    call s:UpdateSearchMappings()
+endfunction
+
+" Cycle search mode
+function! s:ChangeSearchMode(...)
+    if !(a:0 > 0 && a:1 == 1)
+        let g:search_mode = (g:search_mode + 1) % 3
+    endif
+
+    echo 'Search mode: ' . (g:search_mode == 1 ? 'scroll smartly (as few times as possible)'
+                \ : g:search_mode == 2 ? 'scroll to middle'
+                \ : 'normal')
+    call s:UpdateSearchMappings()
+endfunction
+
+" Update n/N mappings based on mode and direction
+function! s:UpdateSearchMappings()
+    let l:scroll_cmd = g:search_mode == 1 ? ":call <sid>MaybeScroll()<CR>zv"
+                \ : g:search_mode == 2 ? "zzzv"
+                \ : "zv"
+
+    if g:n_always_forward
+        execute 'nnoremap <silent> <expr> n "Nn"[v:searchforward] . "' . l:scroll_cmd . '"'
+        execute 'nnoremap <silent> <expr> N "nN"[v:searchforward] . "' . l:scroll_cmd . '"'
+    else
+        execute 'nnoremap <silent> n n' . l:scroll_cmd
+        execute 'nnoremap <silent> N N' . l:scroll_cmd
+    endif
+endfunction
+
+" If cursor is on top, scroll to bottom, if it is on bottom, scroll to top
+function! s:MaybeScroll()
+    if winline() == &scrolloff + 1
+        normal! zb
+    elseif winline() == winheight(0) - &scrolloff
+        normal! zt
+    endif
+endfunction
+
+" }}}
 
 " restart search from BOF/EOF
 " (is useful when 'nowrapscan' is set)
@@ -5764,12 +5783,10 @@ nmap g? G$N
 nmap <silent> gt :ijump! 1    /<c-r>/<cr>zv
 " nmap g? :ijump! 9999 /<c-r>/<cr> " does not work
 
-
 " number of occurrences
 nnoremap <leader>n* *<c-o>:%s///ngg<cr>
 nnoremap <leader>n/  :%s:<c-r>/::ngg<cr>
 xnoremap <leader>n/ y:%s:\V<c-r>"::ngg<cr>
-
 
 
 " search in multiple files
@@ -5778,19 +5795,6 @@ if s:MyMode == 'stripped'
             \ :call ToggleList("Quickfix List", 'c')<cr>
             \ :vimgrep // **/*<left><left><left><left><left><left>
 endif
-
-
-
-" find next and previous occurence like usual when we searched backwards
-" TODO: make this work with SearchMode()
-" nnoremap <expr> n  'Nn'[v:searchforward]
-" nnoremap <expr> N  'nN'[v:searchforward]
-
-" keep search matches in the middle of the window and open folds
-" nnoremap n nzzzv
-" nnoremap N Nzzzv
-silent call <sid>SearchMode()
-nnoremap <silent> <leader>on :call <sid>SearchMode()<cr>
 
 
 " 'goto definition' with viewport adjustments
