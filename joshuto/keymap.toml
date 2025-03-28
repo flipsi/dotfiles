@@ -184,6 +184,9 @@ keymap = [
   { keys = ["m", "U"], commands = ["linemode user | group"] },
   { keys = ["m", "p"], commands = ["linemode perm"] },
 
+  # TODO: don't nest joshuto instances as soon as https://github.com/kamiyaa/joshuto/issues/568 is fixed
+  { keys = ["alt+o"], commands = ["shell fish -C 'cd_interactively ~ joshuto'"] },
+
   { keys = ["g", "e"     ], commands = ["cd /etc"] },
   { keys = ["g", "m"     ], commands = ["cd /mnt"] },
   { keys = ["g", "r"     ], commands = ["cd /"] },
