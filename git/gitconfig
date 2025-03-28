@@ -95,6 +95,10 @@
     process = git-lfs filter-process
     required = true
 
+[rerere]
+    enabled = true
+    autoUpdate = true
+
 ; set a custom git config for all repositories in a specific folder for certain overwrites
 [includeIf "gitdir:/home/flipsi/work-projects/"]
     path = /home/flipsi/work-projects/.gitconfig
