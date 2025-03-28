@@ -67,6 +67,7 @@ function create_session_main() {
 
         tmux new-session -d -s $SESSION_NAME_MAIN -n "delete-me" # can't create a session without window
         tmux new-window -t $SESSION_NAME_MAIN: -n "top" "bpytop || htop"
+        tmux new-window -t $SESSION_NAME_MAIN: -n "spotify" "spotify_player"
         tmux kill-window -t "$SESSION_NAME_MAIN:delete-me"
 
         if has_internet_connection; then
