@@ -1462,6 +1462,8 @@ let NERDTreeMapToggleHidden='.'
 " (required by ranger.vim)
 if has('nvim')
     Plug 'rbgrouleff/bclose.vim'
+    let g:bclose_no_plugin_maps = 1
+    " let g:no_plugin_maps = true
 endif
 
 " use ranger file manager as file chooser etc.
@@ -2970,7 +2972,7 @@ augroup END
 
 augroup typescript_on_read
     au!
-    au FileType typescript call SetupYarn()
+    " au FileType typescript call SetupYarn()
     au FileType typescript call SetupTsuquyomi()
     au FileType typescript.tsx call SetupYarn()
     au FileType typescript.tsx call SetupTsuquyomi()
@@ -2989,25 +2991,19 @@ command! SetupNpm :call SetupNpm() " add mappings for development with NodeJS
 
 function! SetupYarn()
     " yarn commands are project specific and defined in `package.json`.
-    " The following is specific to Code Intelligence core repo.
-    " ATM I don't care to make this more generic/smart.
-    nnoremap <buffer> <leader>bi  :call RunCommand("yarn --cwd ../ui install")<cr>
-    nnoremap <buffer> <leader>bd  :call RunCommand("yarn --cwd ../ui build")<cr>
-    nnoremap <buffer> <leader>bR  :call RunCommand("yarn --cwd ../ui start:web:e2e")<cr>
-    nnoremap <buffer> <leader>br  :call RunCommand("yarn --cwd ../ui dev")<cr>
-    nnoremap <buffer> <leader>bgg :call RunCommand("../scripts/ui-codegen.sh")<cr>
-    nnoremap <buffer> <leader>bgi :call RunCommand("yarn --cwd ../ui i18nInterface")<cr>
-    nnoremap <buffer> <leader>bll :call RunCommand("yarn --cwd ../ui lint")<cr>
-    nnoremap <buffer> <leader>blf :call RunCommand("yarn --cwd ../ui lint:fix")<cr>
-    nnoremap <buffer> <leader>bcf :call RunCommand("./build/ci/scripts/yarn-check-format.sh")<cr>
-    nnoremap <buffer> <leader>bcF :call RunCommand("yarn --cwd ../ui run format:check")<cr>
-    nnoremap <buffer> <leader>AF  :call RunCommand("yarn --cwd ../ui run format")<cr>
-    nnoremap <buffer> <leader>btt :call RunCommand("yarn --cwd ../ui test")<cr>
-    nnoremap <buffer> <leader>btu :call RunCommand("yarn --cwd ../ui test:unit")<cr>
-    nnoremap <buffer> <leader>bto :call RunCommand("yarn --cwd ../ui test " . expand("%"))<cr>
-    nnoremap <buffer> <leader>btw :call RunCommand("yarn --cwd ../ui test:watch " . expand("%"))<cr>
-    nnoremap <buffer> <leader>btO :call RunCommand("yarn --cwd ../ui test:e2e --spec " . expand("%"))<cr>
-    nnoremap <buffer> <leader>bti :call RunCommand("yarn --cwd ../ui test:e2e")<cr>
+    nnoremap <buffer> <leader>bi  :call RunCommand("yarn install")<cr>
+    nnoremap <buffer> <leader>bd  :call RunCommand("yarn build")<cr>
+    nnoremap <buffer> <leader>br  :call RunCommand("yarn dev")<cr>
+    nnoremap <buffer> <leader>bll :call RunCommand("yarn lint")<cr>
+    nnoremap <buffer> <leader>blf :call RunCommand("yarn lint:fix")<cr>
+    nnoremap <buffer> <leader>bcf :call RunCommand("yarn run format:check")<cr>
+    nnoremap <buffer> <leader>AF  :call RunCommand("yarn run format")<cr>
+    nnoremap <buffer> <leader>btt :call RunCommand("yarn test")<cr>
+    nnoremap <buffer> <leader>btu :call RunCommand("yarn test:unit")<cr>
+    nnoremap <buffer> <leader>bto :call RunCommand("yarn test " . expand("%"))<cr>
+    nnoremap <buffer> <leader>btw :call RunCommand("yarn test:watch " . expand("%"))<cr>
+    nnoremap <buffer> <leader>btO :call RunCommand("yarn test:e2e --spec " . expand("%"))<cr>
+    nnoremap <buffer> <leader>bti :call RunCommand("yarn test:e2e")<cr>
 endfunction
 command! SetupYarn :call SetupYarn() " add mappings for development with yarn
 
@@ -6231,6 +6227,18 @@ endfunction
 
 " old-school make
 nnoremap <leader>bm :make<cr>
+
+" run custom build script if present
+nnoremap <leader>bd :call RunCommand(FindCustomBuildScript())<cr>
+function! FindCustomBuildScript()
+    let l:filenames = ["./make.sh", "./build.sh", "../build.sh"]
+    for file in l:filenames
+        if filereadable(file)
+            return file
+        endif
+        throw "No build script found."
+    endfor
+endfunction
 
 " change how commands are run
 nnoremap <leader>or :call ToggleRunCommandMethod()<cr>
