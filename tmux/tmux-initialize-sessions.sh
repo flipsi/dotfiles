@@ -28,7 +28,7 @@ function has_internet_connection() {
 }
 
 # For a given directory, return a list of the most recently updated git projects within it
-function get_last_recent_git_projects() {
+function get_recent_git_projects() {
     PROJECTS_DIR="$1"
     SEARCH_DEPTH=2
     NUMBER_OF_PROJECTS="$2"
@@ -62,6 +62,17 @@ function open_project_in_vim() {
         "fish -i -C \"nvim --listen $PROJECT_NAME"\"
 }
 
+function open_recent_subdir_projects() {
+    PROJECTS_DIR="$1"
+    NUMBER_OF_PROJECTS="$2"
+    if [[ -d "$PROJECTS_DIR" ]]; then
+        for PROJECT in $(get_recent_git_projects "$PROJECTS_DIR" "$NUMBER_OF_PROJECTS"); do
+            echo "$PROJECT"
+            open_project_in_vim "$PROJECTS_DIR/$PROJECT" "$PROJECT"
+        done
+    fi
+}
+
 function create_session_main() {
     if ! (tmux has-session -t $SESSION_NAME_MAIN 2>/dev/null); then
 
@@ -82,19 +93,17 @@ function create_session_code() {
     if ! (tmux has-session -t $SESSION_NAME_CODE 2>/dev/null); then
 
         tmux new-session -d -s $SESSION_NAME_CODE -n "delete-me" # can't create a session without window
-        open_project_in_vim "$HOME/src-projects/dotfiles" "dotfiles"
-        open_project_in_vim "$HOME/src-projects/shellscripts" "shellscripts"
+
+        if [[ "$HOSTNAME" = "nott" ]]; then
+            open_project_in_vim "$HOME/src-projects/dotfiles" "dotfiles"
+            open_project_in_vim "$HOME/src-projects/shellscripts" "shellscripts"
+            open_recent_subdir_projects "$HOME/work-projects" 7
+        else
+            open_recent_subdir_projects "$HOME/src-projects" 5
+        fi
+
         tmux kill-window -t "$SESSION_NAME_CODE:delete-me"
 
-        PROJECTS_DIR="$HOME/work-projects"
-        NUMBER_OF_PROJECTS=5
-
-        if [[ -d "$PROJECTS_DIR" ]]; then
-            for PROJECT in $(get_last_recent_git_projects "$PROJECTS_DIR" "$NUMBER_OF_PROJECTS"); do
-                echo "$PROJECT"
-                open_project_in_vim "$PROJECTS_DIR/$PROJECT" "$PROJECT"
-            done
-        fi
     fi
 }
 
