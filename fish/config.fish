@@ -14,6 +14,15 @@ source $HOME/.config/fish/environment.fish
 #########################
 
 function set_xdg_default_app
+    set -l TYPE $argv[1]
+    set -l APP $argv[2]
+    set -l CHECK (xdg-settings check "$TYPE" "$APP")
+    if [ "$CHECK" = 'no' ]
+        xdg-settings set "$TYPE" "$APP"
+    end
+end
+
+function set_xdg_default_app_for_mimetime
     set -l MIME_TYPE $argv[1]
     set -l APP $argv[2]
     set -l CURRENT_APP (xdg-mime query default "$MIME_TYPE")
@@ -23,12 +32,18 @@ function set_xdg_default_app
 end
 
 function set_xdg_default_apps
+    if command -v xdg-settings >/dev/null
+        # set_xdg_default_app 'default-web-browser' 'org.mozilla.firefox.desktop'
+        set_xdg_default_app 'default-web-browser' 'com.vivaldi.Vivaldi.desktop'
+    end
     if command -v xdg-mime >/dev/null
-        set_xdg_default_app 'application/pdf'           'org.pwmt.zathura.desktop'
-        set_xdg_default_app 'image/jpeg'                'sxiv.desktop'
-        set_xdg_default_app 'image/png'                 'sxiv.desktop'
-        set_xdg_default_app 'x-scheme-handler/http'     'vivaldi-stable.desktop'
-        set_xdg_default_app 'x-scheme-handler/https'    'vivaldi-stable.desktop'
+        set_xdg_default_app_for_mimetime 'application/pdf'           'org.pwmt.zathura.desktop'
+        set_xdg_default_app_for_mimetime 'image/jpeg'                'sxiv.desktop'
+        set_xdg_default_app_for_mimetime 'image/png'                 'sxiv.desktop'
+        set_xdg_default_app_for_mimetime 'x-scheme-handler/http'     'vivaldi-stable.desktop'
+        set_xdg_default_app_for_mimetime 'x-scheme-handler/https'    'vivaldi-stable.desktop'
+        set_xdg_default_app_for_mimetime 'x-scheme-handler/http'     'com.vivaldi.Vivaldi.desktop'
+        set_xdg_default_app_for_mimetime 'x-scheme-handler/https'    'com.vivaldi.Vivaldi.desktop'
     end
 end
 
