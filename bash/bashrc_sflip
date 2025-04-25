@@ -118,11 +118,15 @@ if [ -t 1 ]; then
     fi
 fi
 
-[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
-if [[ -d /usr/share/nvm ]]; then
-    source /usr/share/nvm/nvm.sh
-    source /usr/share/nvm/bash_completion
-    source /usr/share/nvm/install-nvm-exec
+# [ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
+# if [[ -d /usr/share/nvm ]]; then
+#     source /usr/share/nvm/nvm.sh
+#     source /usr/share/nvm/bash_completion
+#     source /usr/share/nvm/install-nvm-exec
+# fi
+
+if command -v fnm >/dev/null; then
+    eval "$(fnm env --use-on-cd --shell bash)"
 fi
 
 ## has been added to bashrc already and seems to work only there, because it has to be "the last thing"...

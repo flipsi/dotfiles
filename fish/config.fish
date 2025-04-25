@@ -161,7 +161,6 @@ function source_asdf_version_manager
     end
 end
 
-
 #############################################################
 
 if status --is-login
