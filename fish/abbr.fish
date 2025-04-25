@@ -71,6 +71,7 @@ abbr $args ge     git checkout
 abbr $args ge-    git checkout -
 abbr $args gem    git checkout \(git-main-or-master\)
 abbr $args geb    git checkout -b
+abbr $args ged    git checkout develop
 abbr $args gf     git fetch --prune
 abbr $args gfm    git checkout --quiet --detach\; git fetch \(git remote \| head -n1\) \(git-main-or-master\):\(git-main-or-master\)\; git checkout --quiet -
 abbr $args ghpr   gh pr view --web \|\| gh pr create --web
