@@ -126,6 +126,7 @@ function create_link() {
         elif [[ $INTERACTIVE = true ]]; then
             ln -nsi "$DESTPATH" "$LINKPATH"
         else
+            # TODO: bakup if existing but not symlink
             ln -ns "$DESTPATH" "$LINKPATH"
         fi
 
@@ -205,8 +206,9 @@ function create_link_for_target() {
         fish )
             mkdir -p "$HOME/.config/fish"
             create_link "$PWD/fish/functions" "$HOME/.config/fish/functions"
-            create_link "$PWD/fish/completions" "$HOME/.config/fish/completions"
+            create_link "$PWD/fish/conf.d" "$HOME/.config/fish/conf.d"
             create_link "$PWD/fish/config.fish" "$HOME/.config/fish/config.fish"
+            create_link "$PWD/fish/completions" "$HOME/.config/fish/completions"
             create_link "$PWD/fish/environment.fish" "$HOME/.config/fish/environment.fish"
             create_link "$PWD/fish/abbr.fish" "$HOME/.config/fish/abbr.fish"
             create_link "$PWD/fish/commands.fish" "$HOME/.config/fish/commands.fish"
