@@ -86,27 +86,9 @@ function initialize-tmux-sessions
     end
 end
 
-function autostart
-    if not pgrep -x vivaldi-stable
-        nohup vivaldi-stable &
-    end
-    if not pgrep -x chromium
-        nohup chromium &
-    end
-    if not pgrep alacritty
-        nohup alacritty --command tmux -2 new-session -A -s main &
-    end
-    if not pgrep spotify
-        nohup spotify &
-    end
-    if not pgrep telegram-desktop
-        nohup telegram-desktop &
-    end
-end
-
+# to autostart applications, use dex
 
 initialize-tmux-sessions
-setup_power_management
 desktop_session
 setup_musicserver
 autostart
