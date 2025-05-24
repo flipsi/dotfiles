@@ -36,7 +36,9 @@ else
 end
 
 # web browser
-set -x BROWSER vivaldi-stable
+if ! cat /etc/os-release | grep -q Fedora
+    set -x BROWSER vivaldi-stable
+end
 
 # setup fzf to use ag instead of find
 set -x FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git -f -g ""'
