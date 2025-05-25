@@ -23,7 +23,8 @@ map d navigate next
 map u navigate previous
 map c set recolor
 map b toggle_statusbar
+map e set pages-per-row\ 1
+map z set pages-per-row\ 2
 map <F11> toggle_fullscreen
 #map f toggle_fullscreen
 #map F follow
-
