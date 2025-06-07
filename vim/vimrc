@@ -6288,6 +6288,9 @@ vnoremap <leader>bss y:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>gv
 nnoremap <leader>b'  yi':call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
 nnoremap <leader>b"  yi":call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
 nnoremap <leader>b`  yi`:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
+nnoremap <leader>bib yi(:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
+nnoremap <leader>bi( yi(:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
+nnoremap <leader>bi) yi(:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
 nnoremap <leader>bsp yip:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
 
 " inspect built errors somewhere
