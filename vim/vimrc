@@ -4320,7 +4320,7 @@ function! GitRemoteCreateOrViewMergeRequestOnBitbucket()
     let l:api_url = 'https://api.bitbucket.org/2.0/repositories/' . l:repo . '/pullrequests'
     let l:payload = '{"title": "' . l:title . '", "source": {"branch": {"name": "' . l:branch_name . '"}}, "destination": {"branch": {"name": "' . l:target_branch . '"}}, "description": "' . l:description . '"}'
     " TODO: authenticate
-    " either with       -u p.moers@reply.de:(pass reply/bitbucket/app-passwords/CLI) 
+    " either with       -u p.moers@reply.de:(pass reply/bitbucket/app-passwords/CLI)
     " or with           --header "Authorization: Bearer $(pass reply/bitbucket/api-tokens/workspace-sideup/CLI | head -n1 | tr -d '\n')" \
     " but both don't work
     let l:command = 'curl -X POST -H "Content-Type: application/json" -d ' . shellescape(l:payload) . ' ' . l:api_url
