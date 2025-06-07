@@ -6272,8 +6272,8 @@ function! FindCustomBuildScript()
         if filereadable(file)
             return file
         endif
-        throw "No build script found."
     endfor
+    throw "No build script found."
 endfunction
 
 " change how commands are run
