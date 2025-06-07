@@ -6298,13 +6298,14 @@ nnoremap <leader>to :RunCommandInTerminal<space>
 " run current line or selection as shell command
 nnoremap <leader>bss :call RunCommand(getline('.'))<cr>
 vnoremap <leader>bss y:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>gv
+nnoremap <leader>bsp yip:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
+nnoremap <leader>bsw yiw:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
 nnoremap <leader>b'  yi':call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
 nnoremap <leader>b"  yi":call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
 nnoremap <leader>b`  yi`:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
-nnoremap <leader>bib yi(:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
-nnoremap <leader>bi( yi(:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
-nnoremap <leader>bi) yi(:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
-nnoremap <leader>bsp yip:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
+nnoremap <leader>bsb yi(:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
+nnoremap <leader>b(  yi(:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
+nnoremap <leader>b)  yi(:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
 
 " inspect built errors somewhere
 nnoremap <silent> <leader>bee :OpenBuildErrorsInQuickfixList<cr><esc>hj
