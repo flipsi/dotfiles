@@ -26,7 +26,7 @@ end
 map('n', '<Leader>sv', '<Cmd>lua reload_config()<CR>', silentnoremap)
 -- ... so I use a separate mapping for now
 map('n', '<Leader>rv', '<Cmd>lua reload_config()<CR>', silentnoremap)
-map('n', '<Leader>rV', ':luafile ~/.config/nvim/init.lua', silentnoremap)
+map('n', '<Leader>rV', ':luafile ~/.config/nvim/init.lua<CR>', silentnoremap)
 
 -- I continue to use vim-plug as my plugin manager, both in vim and neovim.
 -- People have been using packer, but it has been deprecated by now.
