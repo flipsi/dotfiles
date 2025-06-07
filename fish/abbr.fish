@@ -67,6 +67,7 @@ abbr $args gcf    git clean -f -d
 abbr $args gd     git diff
 abbr $args gda    git diff --cached
 abbr $args gdc    git diff --cached
+abbr $args gdm    git diff \(git-main-or-master\)
 abbr $args ge     git checkout
 abbr $args ge-    git checkout -
 abbr $args gem    git checkout \(git-main-or-master\)
