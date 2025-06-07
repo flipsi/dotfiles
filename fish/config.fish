@@ -22,10 +22,27 @@ function set_xdg_default_app
     end
 end
 
+function mime_app_available
+    set -l MIME_TYPE $argv[1]
+    set -l APP $argv[2]
+    # Apparently, the xdg-mime command can't be used to do this. How disappointing is that?
+    for FILE in $HOME/.config/mimeapps.list /usr/share/applications/mimeinfo.cache /usr/local/share/applications/mimeapps.list /usr/share/applications/mimeapps.list
+        if test -f "$FILE"
+            if grep -q -E "^$MIME_TYPE=.*$APP" "$FILE"
+                return 0
+            end
+        end
+    end
+    return 1
+end
+
 function set_xdg_default_app_for_mimetime
     set -l MIME_TYPE $argv[1]
     set -l APP $argv[2]
     set -l CURRENT_APP (xdg-mime query default "$MIME_TYPE")
+    if ! mime_app_available "$MIME_TYPE" "$APP"
+        return # abort if app not available (otherwise it will silently set some weird default and overwrite previous settings!)
+    end
     if test -z "$CURRENT_APP" -o "$CURRENT_APP" != "$APP"
         xdg-mime default "$APP" "$MIME_TYPE"
     end
@@ -33,8 +50,10 @@ end
 
 function set_xdg_default_apps
     if command -v xdg-settings >/dev/null
-        # set_xdg_default_app 'default-web-browser' 'org.mozilla.firefox.desktop'
-        set_xdg_default_app 'default-web-browser' 'com.vivaldi.Vivaldi.desktop'
+        if test -z "$BROWSER"
+            set_xdg_default_app 'default-web-browser' 'org.mozilla.firefox.desktop'
+            set_xdg_default_app 'default-web-browser' 'com.vivaldi.Vivaldi.desktop'
+        end
     end
     if command -v xdg-mime >/dev/null
         set_xdg_default_app_for_mimetime 'application/pdf'           'org.pwmt.zathura.desktop'
