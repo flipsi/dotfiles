@@ -132,6 +132,7 @@ mode "$setup_outputs" {
     bindsym Shift+o     exec --no-startup-id "$HOME/.i3/bin/i3-initialize-outputs.sh --only > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
     bindsym f           exec --no-startup-id "$HOME/.i3/bin/i3-initialize-outputs.sh --fix-offset > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
     bindsym s           exec --no-startup-id "$HOME/.i3/bin/i3-initialize-outputs.sh --swapped > /tmp/i3-initialize-outputs.log 2>&1"; mode "default"
+    # TODO: implement script to move all workspaces to one remaining output https://faq.i3wm.org/question/316/move-all-workspaces-to-one-monitror-and-back.1.html https://github.com/i3/i3/pull/3767
     # cancel
     bindsym $mod+F4 mode "default"
     bindsym $mod+F5 mode "default"
