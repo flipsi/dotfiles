@@ -8,6 +8,7 @@
 .tool-versions
 
 # IDE and editor files etc.
+.aider*
 .bloop/
 .bsp/
 .clj-kondo/

@@ -2517,6 +2517,19 @@ nmap     <leader>dcbp   <Plug>VimspectorToggleConditionalBreakpoint
 nnoremap <leader>ddbp   :call vimspector#CleanLineBreakpoint()<CR>
 
 
+" }}}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AI coding assistance (chatbot integration etc.) {{{
+"
+
+if has('nvim')
+
+    " system:
+    "           pipx install aider-install
+    "           aider-install
+    Plug 'joshuavial/aider.nvim'
+
+endif
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
