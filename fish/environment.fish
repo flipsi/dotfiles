@@ -5,8 +5,12 @@ set -x LANG en_US.UTF-8
 
 function prepend_to_path
     set -l DIR $argv[1]
-    if test -n "$DIR" -a -d "$DIR"
-        set -x PATH "$DIR" $PATH
+    if type -q fish_add_path
+        fish_add_path "$DIR"
+    else
+        if not contains "$DIR" $PATH -a test -n "$DIR" -a -d "$DIR"
+            set -x PATH "$DIR" $PATH
+        end
     end
 end
 
