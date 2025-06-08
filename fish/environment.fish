@@ -38,13 +38,13 @@ function set_var_from_pass
     set -l key $argv[2]
     set -l line $argv[3]
     if command -v pass >/dev/null 2>&1
-        if not test (pass find $key | wc -l) = 1
-            set -x $var (pass $key | grep "$line" | head -n1 | cut -d ' ' -f 2 | tr -d '\n') >/dev/null 2>&1
+        if pass $key >/dev/null &>/dev/null
+            set -U $var (pass $key | grep "$line" | head -n1 | cut -d ' ' -f 2 | tr -d '\n')
         end
     end
 end
 
-set_var_from_pass OPENROUTER_API_KEY reply/openrouter.ai '^api-key'
+set_var_from_pass OPENROUTER_API_KEY 'reply/openrouter.ai' '^api-key'
 
 # edit files with neovim or vim
 if command -v nvim >/dev/null 2>&1
