@@ -30,8 +30,13 @@ I wrote a script called [mail.sh](./mail.sh) to wrap mutt with a mail sync mecha
 
 Install required dependencies:
 ```
+# Arch Linux
 yay -S mutt-wizard neomutt msmtp isync pass notmuch notmuch-mutt cyrus-sasl-xoauth2 goobook elinks urlscan
+
+# Fedora
+sudo dnf install mutt-wizard neomutt msmtp isync pass notmuch notmuch-mutt goobook elinks urlscan
 ```
+
 Create mail store:
 ```
 MAILDIR=~/.local/share/mail
@@ -47,11 +52,17 @@ mkdir $MAILDIR/$EMAIL_ADDRESS
 ### Setup Gmail Account
 
 In Gmail, I do not want to have to enable LSA (Less Secure Apps) so that one can authenticate with
-my plain text Google password from any application. Instead, I configure isync and msmtp to use
-OAuth.
+my plain text Google password from any application.
 
-For this to work, I have to create a project with the [Google API Console](https://console.developers.google.com/)
+Instead, I configure isync and msmtp to use OAuth.
+For this to work, I need a project setup in the [Google API Console](https://console.developers.google.com/)
 (my own "mutt" Google App) for every Google account I want to access:
+
+For the first setup, follow the steps below to create it, otherwise skip them and use existing
+credentials. I may have them stored in the mutt secrets file (unused there).
+
+#### Create a Google App to receive OAuth credentials
+
 1. Open the ‘Select a project’ drop down menu at the top left of the page, this will open a pop-up window.
 1. In the top right of the window select ‘NEW PROJECT’. This will take you to the project creation page.
 1. You can leave the default name if you choose but I recommend giving it a descriptive name, then select ‘CREATE’. It might take a few seconds but you should get a notification telling you the project has been created.
@@ -60,34 +71,42 @@ For this to work, I have to create a project with the [Google API Console](https
 1. Next, go back the menu on the left and select ‘Credentials’. This will take you to the credentials page where you can select ‘CREATE CREDENTIALS’ at the top. Choose ‘OAuth client ID’.
 1. On the next page choose ‘Desktop app’ and give it a name. Once you select ‘CREATE’ you will be presented with your Client_id and Client_secret.
 
+#### Use existing OAuth credentials
+
 Now, use the git submodule [curl_google_oauth](https://github.com/jay/curl_google_oauth).
 The Client ID, Client Secret are used by the curl_google_oauth script to generate a Refresh Token:
 ```
-$ export ACCOUNT=EMAIL_ADDRESS
-$ export DATADIR="~/.local/share/mail_auth/$ACCOUNT"
-$ mkdir -p $DATADIR
-$ chmod 700 $DATADIR
-$ cd $DATADIR
+bash
+export ACCOUNT='soziflip@gmail.com'
+export DATADIR="$HOME/.local/share/mail_auth/$ACCOUNT"
+mkdir -p $DATADIR
+chmod 700 $DATADIR
 
-$ cat > credential.txt << EOF
+pushd $DATADIR
+
+cat > credential.txt << EOF
 client_id = REMOVED.apps.googleusercontent.com
 client_secret = REMOVED
 scope = https://mail.google.com/
 EOF
 
-$ ./mutt/curl_google_oauth/bearer-new.pl --datadir $DATADIR
-opening browser url https://accounts.google.com/o/oauth2/v2/auth?client_id=REMOVED.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A7777&scope=https%3A%2F%2Fmail.google.com%2F&response_type=code&access_type=offline
+nvim credential.txt
 
-(if open fails then copy url from auth-url.txt and paste into browser)
+popd
 
-waiting for google to send authorization code to localhost:7777
-received authorization code
-requesting token data
-received token data
-updating bearer.cfg and token.json
-token data written to bearer.cfg and token.json
+./mutt/curl_google_oauth/bearer-new.pl --datadir $DATADIR
+# opening browser url https://accounts.google.com/o/oauth2/v2/auth?client_id=REMOVED.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A7777&scope=https%3A%2F%2Fmail.google.com%2F&response_type=code&access_type=offline
+#
+# (if open fails then copy url from auth-url.txt and paste into browser)
+#
+# waiting for google to send authorization code to localhost:7777
+# received authorization code
+# requesting token data
+# received token data
+# updating bearer.cfg and token.json
+# token data written to bearer.cfg and token.json
 
-$ rm credential.txt
+rm credential.txt
 ```
 The access and refresh token are stored in the datadir permanently.
 The refresh token is used to update the access token if necessary on every usage.
@@ -100,14 +119,21 @@ The refresh token is used to update the access token if necessary on every usage
 * Copy encrypted credentials file `dotfiles/mutt/mutt/secrets.gpg` (gitignored) to the host via secure channel
 * Copy GPG key `CA1DD30B080E5D7FADCE04ECFC218BA7F39AC976` to the host
 ```
-# on other host
+# on old host
 gpg --export --armor CA1DD30B080E5D7FADCE04ECFC218BA7F39AC976 > tmp/gpg.public.key
 gpg --export-secret-keys --armor CA1DD30B080E5D7FADCE04ECFC218BA7F39AC976 --output tmp/gpg.sec.plain
+
 # copy to new host via secure channel and delete files!
+
 # on new host
 gpg --import tmp/gpg.sec.plain
 gpg --edit-key CA1DD30B080E5D7FADCE04ECFC218BA7F39AC976 trust quit
 ```
+
+* Create maildirs `mkdir $MAILDIR/$EMAIL_ADDRESS`
+* For Gmail, rerun token generation (see above)
+* `mbsync`
+
 
 
 ## Gmail peculiarities
