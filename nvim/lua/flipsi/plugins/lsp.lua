@@ -100,7 +100,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- -- non-spec LSP features per LS, like "organize imports"
     -- note that for jdtls, organizing imports is a code action
 
-    local clients = vim.lsp.get_active_clients()
+    -- local clients = vim.lsp.get_active_clients() # deprecated
+    local clients = vim.lsp.get_clients()
 
     if #clients == 0 then
       print("No active LSP clients.")
