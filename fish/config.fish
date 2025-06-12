@@ -130,6 +130,21 @@ function autostart_keychain_on_some_hosts
     end
 end
 
+function pull_dotfiles_etc
+    if read_confirm 'Pull dotfiles etc? '
+        for dir in "$HOME/src-projects/dotfiles" "$HOME/src-projects/shellscripts"
+            if test -d "$dir"
+                echo "Pulling " (basename "$dir") "..."
+                pushd "$dir"
+                git pull
+                popd
+            else
+                echo "WARNING: " (basename "$dir") " not found!"
+            end
+        end
+    end
+end
+
 function load_abbreviations
     source $HOME/.config/fish/abbr.fish
     if test -f $HOME/.config/fish/abbr.local.fish
@@ -186,12 +201,8 @@ set fish_greeting "" # don't show welcome message
 
 load_environment
 
-if status --is-interactive; and status --is-login; and just_booted
-    autostart_keychain_on_some_hosts
-end
-
-if status --is-login; and just_booted; and in_X
-    set_xdg_default_apps # this takes rather long
+if status --is-interactive
+    load_abbreviations
 end
 
 if status --is-interactive; and status --is-login
@@ -205,7 +216,11 @@ if status --is-interactive; and status --is-login
     # configure_thefuck
 end
 
-if status --is-interactive
-    load_abbreviations
+if status --is-login; and just_booted; and in_X
+    set_xdg_default_apps # this takes rather long
 end
 
+if status --is-interactive; and status --is-login; and just_booted; and not in_X
+    autostart_keychain_on_some_hosts
+    pull_dotfiles_etc
+end
