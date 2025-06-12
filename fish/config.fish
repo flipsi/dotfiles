@@ -1,17 +1,7 @@
-# don't show welcome message
-set fish_greeting ""
-
-
-#########################
-# environment variables #
-#########################
-
-source $HOME/.config/fish/environment.fish
-
-
-#########################
-# default applications  #
-#########################
+function just_booted
+    set uptime_seconds (cat /proc/uptime | cut -d' ' -f1 | cut -d'.' -f1)
+    test $uptime_seconds -lt 200
+end
 
 function set_xdg_default_app
     set -l TYPE $argv[1]
@@ -87,14 +77,6 @@ function in_X
     set -q DISPLAY
 end
 
-function set_hostname
-    # find out host once (useful for multiple things, but saves cycles)
-    if test -z $hostname
-        set hostname (hostname)
-    end
-end
-
-
 function set_color_theme
 
     # change colors
@@ -155,6 +137,24 @@ function load_abbreviations
     end
 end
 
+function load_environment
+    source $HOME/.config/fish/environment.fish
+end
+
+function configure_fish_command_timer
+    set -x fish_command_timer_enabled      1
+    set -x fish_command_timer_color        $fish_my_color_gray_middle
+    set -x fish_command_timer_time_format  '%b %d %I:%M%p'
+end
+
+function configure_thefuck
+    # correct typos the fun way
+    # https://github.com/nvbn/thefuck
+    if command -v thefuck >/dev/null
+        eval (thefuck --alias) # (does not work, so i added the function manually)
+    end
+end
+
 function alias_hub
     if command -v hub >/dev/null
         alias git hub
@@ -182,36 +182,30 @@ end
 
 #############################################################
 
-if status --is-login
-    set_xdg_default_apps
-    set_hostname
+set fish_greeting "" # don't show welcome message
+
+load_environment
+
+if status --is-interactive; and status --is-login; and just_booted
+    autostart_keychain_on_some_hosts
 end
 
-
-if status --is-interactive
-    load_abbreviations
+if status --is-login; and just_booted; and in_X
+    set_xdg_default_apps # this takes rather long
 end
 
 if status --is-interactive; and status --is-login
-
-    set_color_theme
-    setup_exit_status_printing
-    autostart_keychain_on_some_hosts
     alias_hub
     load_pyenv
     # source_sdkman # doesn't work for fish
+    set_color_theme
     source_asdf_version_manager
+    setup_exit_status_printing
+    configure_fish_command_timer
+    # configure_thefuck
+end
 
-    # configuration for fish-command-timer
-    set -x fish_command_timer_enabled      1
-    set -x fish_command_timer_color        $fish_my_color_gray_middle
-    set -x fish_command_timer_time_format  '%b %d %I:%M%p'
-
-    # correct typos the fun way
-    # https://github.com/nvbn/thefuck
-    # if command -v thefuck >/dev/null
-        # eval (thefuck --alias) # (does not work, so i added the function manually)
-    # end
-
+if status --is-interactive
+    load_abbreviations
 end
 

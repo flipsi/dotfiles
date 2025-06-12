@@ -2,6 +2,9 @@
 # set -x LANG de_DE.UTF-8
 set -x LANG en_US.UTF-8
 
+if test -z $hostname
+    set hostname (hostname)
+end
 
 function prepend_to_path
     set -l DIR $argv[1]
