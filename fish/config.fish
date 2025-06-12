@@ -130,6 +130,19 @@ function autostart_keychain_on_some_hosts
     end
 end
 
+function fix_network_if_offline
+    if not ping -c 1 8.8.8.8 >/dev/null 2>&1
+        if read_confirm "We're offline. Fix network? "
+            set -l script "$HOME/src-projects/dotfiles/i3/bin/fix-network.sh"
+            if test -f "$script"
+                eval "$script"
+            else
+                echo "WARNING: $script not found!"
+            end
+        end
+    end
+end
+
 function pull_dotfiles_etc
     if read_confirm 'Pull dotfiles etc? '
         for dir in "$HOME/src-projects/dotfiles" "$HOME/src-projects/shellscripts"
@@ -222,5 +235,7 @@ end
 
 if status --is-interactive; and status --is-login; and just_booted; and not in_X
     autostart_keychain_on_some_hosts
+    fix_network_if_offline
     pull_dotfiles_etc
 end
+
