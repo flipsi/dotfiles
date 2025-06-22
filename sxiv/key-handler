@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# Called by nsxiv(1) after the external prefix key (C-x by default) is pressed.
+# The next key combo is passed as its first argument. Passed via stdin are the
+# images to act upon: all marked images, if in thumbnail mode and at least one
+# image has been marked, otherwise the current image. nsxiv(1) will block until
+# the handler terminates. It then checks which images have been modified and
+# reloads them.
+
+# By default nsxiv(1) will send one image per-line to stdin, however when using
+# -0 the image list will be NULL separated and the environment variable
+# "$NSXIV_USING_NULL" will be set to 1.
+
+[ "$NSXIV_USING_NULL" = 1 ] && DELIM='\0' || DELIM='\n'
+
+FILES=()
+while read -r file; do
+    FILES+=("$file")
+done
+
+case "$1" in
+    "d" )
+        trash "${FILES[@]}"
+        ;;
+
+    "D" )
+        rm "${FILES[@]}"
+        ;;
+
+    "g" )
+        gimp "${FILES[@]}"
+        ;;
+
+    "j" )
+        for f in "${FILES[@]}"; do
+            local basename=$(echo "$f" | sed 's/\.[^.]*$//')
+            magick convert "$f" "$basename.jpg"
+        done
+        ;;
+
+    "r" )
+        for f in "${FILES[@]}"; do
+            magick convert -rotate 90 "$f" "$f"
+        done
+        ;;
+
+    # FIXME
+    # ">" ) 
+    #     for f in "${FILES[@]}"; do
+    #         magick convert -rotate 90 "$f" "$f"
+    #     done
+    #     ;;
+
+    "o" )
+        for f in "${FILES[@]}"; do
+            magick convert -rotate 270 "$f" "$f"
+        done
+        ;;
+
+    # FIXME
+    # "<" )
+    #     for f in "${FILES[@]}"; do
+    #         magick convert -rotate 270 "$f" "$f"
+    #     done
+    #     ;;
+
+    "C-c" )
+        FILE=${FILES[1]}
+        TYPE=$(file -i "$FILE" | sed -r 's|.*(image/[a-z]+);.*|\1|')
+        xclip -sel clip -t "$TYPE" -i "$FILE"
+        ;;
+
+    esac
+
