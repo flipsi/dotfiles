@@ -40,9 +40,11 @@ function set_var_from_pass
     set -l var $argv[1]
     set -l key $argv[2]
     set -l line $argv[3]
-    if command -v pass >/dev/null 2>&1
-        if pass $key >/dev/null &>/dev/null
-            set -U $var (pass $key | grep "$line" | head -n1 | cut -d ' ' -f 2 | tr -d '\n')
+    if not set -q $var
+        if command -v pass >/dev/null 2>&1
+            if pass $key >/dev/null &>/dev/null
+                set -U $var (pass $key | grep "$line" | head -n1 | cut -d ' ' -f 2 | tr -d '\n')
+            end
         end
     end
 end
