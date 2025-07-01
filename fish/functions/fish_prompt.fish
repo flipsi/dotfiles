@@ -52,6 +52,10 @@ function fish_prompt --description 'Prompt anzeigen'
             set_color --bold $fish_my_color_green
         else if set -q VIMRUNTIME
             set_color --bold $fish_my_color_green
+        else if set -q NVIM_LOG_FILE # neovim shell
+            set_color --bold $fish_my_color_green
+        else if env | grep -q '.local/share/nvim/mason/bin' # neovim Tig
+            set_color --bold $fish_my_color_green
         else
             set_color --bold $fish_my_color_accent_dark
         end
