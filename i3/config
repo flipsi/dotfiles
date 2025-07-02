@@ -864,7 +864,7 @@ mode "$launch" {
     bindsym q       exec --no-startup-id "qutebrowser"; mode "default"
     bindsym n       exec --no-startup-id "thunar || nautilus"; mode "default"
     bindsym s       exec --no-startup-id "flatpak run com.slack.Slack || slack"; mode "default"
-    bindsym t       exec --no-startup-id "flatpak run org.telegram.desktop || telegram-desktop"; mode "default"
+    bindsym t       exec --no-startup-id "flatpak run org.telegram.desktop || telegram-desktop || Telegram"; mode "default"
     # cancel
     bindsym Return mode "default"
     bindsym Escape mode "default"
