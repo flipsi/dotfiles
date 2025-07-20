@@ -119,7 +119,7 @@ function autostart_keychain_on_some_hosts
     if in_X
         # keychain takes care of ssh-agent and gpg-agent
         function keychain_start
-            eval (command keychain --eval --quiet ~/.ssh/id_*)
+            eval (command keychain --eval --quiet --timeout 5000 ~/.ssh/id_*)
         end
         if command -v keychain >/dev/null
             set -l host_where_to_start_keychain_automatically 'falbala' 'mimir' 'frey' 'nott'
@@ -233,8 +233,11 @@ if status --is-login; and just_booted; and in_X
     set_xdg_default_apps # this takes rather long
 end
 
-if status --is-interactive; and status --is-login; and just_booted; and not in_X
+if status --is-interactive; and status --is-login; and just_booted
     autostart_keychain_on_some_hosts
+end
+
+if status --is-interactive; and status --is-login; and just_booted; and not in_X
     fix_network_if_offline
     pull_dotfiles_etc
 end
