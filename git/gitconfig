@@ -24,6 +24,7 @@
 
 [push]
     default = simple
+    followTags = true # https://stackoverflow.com/a/26438076
 
 [rebase]
     autostash = true
