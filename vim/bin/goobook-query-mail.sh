@@ -12,10 +12,11 @@ Usage: $(basename "$0") <SEARCH>
 Credits to this blog post:
 https://atechnologyjobisnoexcuse.com/2010/04/google-contacts-in-mutt-and-vim/
 
-On Arch Linux, I recommend installing goobook via pip:
-  \`pip install --user goobook\`
-because for the goobook AUR package there as package conflict:
-  Installing python-xdg will remove: python-pyxdg, python-pyxdg (python-xdg)
+New maintainer and hosted on Gitlab now:
+https://gitlab.com/goobook/goobook
+
+Recommended way to install:
+  \`pipx install goobook\`
 EOF
 }
 
