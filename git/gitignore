@@ -26,6 +26,13 @@ sftp-config.json
 # compiled source
 *.class
 
+# LaTeX
+*.aux
+*.fdb_latexmk
+*.fls
+# *.log
+*.synctex.gz
+
 # misc
 .ignore
 nohup.out
