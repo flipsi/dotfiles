@@ -3060,6 +3060,14 @@ augroup latex_on_read
     au FileType tex   SetupLatex
 augroup END
 
+" Fix main file detection ("VimTeX: Compilation error due to failed mainfile detection!")
+" See :help vimtex-multi-file
+" FIXME  This is a stupid workaround and does not work for multi-file projects.
+augroup VimTeX
+    autocmd!
+    autocmd BufReadPre *.tex let b:vimtex_main = expand('%')
+augroup END
+
 command! SetupLatex :call SetupLatex() " add mappings for LaTeX
 function! SetupLatex()
     setlocal wrap
