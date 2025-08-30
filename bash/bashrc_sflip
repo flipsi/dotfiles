@@ -8,7 +8,7 @@
 
 # If you want to start a bash instance with this config from any machine (with internet access), just run:
 #
-#       bash --rcfile <(curl https://raw.githubusercontent.com/sflip/dotfiles/master/bash/bashrc_sflip)
+#       bash --rcfile <(curl https://raw.githubusercontent.com/flipsi/dotfiles/master/bash/bashrc_sflip)
 
 
 alias ..='cd ..'
