@@ -3121,7 +3121,8 @@ augroup END
 
 " Fix main file detection ("VimTeX: Compilation error due to failed mainfile detection!")
 " See :help vimtex-multi-file
-" FIXME  This is a stupid workaround and does not work for multi-file projects.
+" FIXME This is a stupid workaround and does not work for multi-file projects.
+" FIXME does only work for existing files, not new files.
 augroup VimTeX
     autocmd!
     autocmd BufReadPre *.tex let b:vimtex_main = expand('%')
