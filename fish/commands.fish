@@ -15,6 +15,7 @@ python -m http.server # start local HTTP server with file listing of current dir
 ss -lt src :5432 # show all TCP sockets listening on a specific port
 ssh clidle.ddns.net -p 3000 # wordle game
 sudoedit /etc/X11/xorg.conf.d/00-keyboard.conf # configure Xorg keyboard layout
+sudo pacman -Sy archlinux-keyring # update keys for pacman upgrade
 yay -Sc # clear pacman cache (to free disk space)
 yay -Yc # remove unused dependencies
 sudo udevadm control --reload-rules && sudo udevadm trigger # reload udev rules without reboot
