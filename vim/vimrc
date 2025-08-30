@@ -6961,6 +6961,9 @@ nnoremap <leader>qo         :CloseOtherWindows<cr>
 nnoremap <c-d>              :exe 'CloseTerminalBuffers!' <bar> :QuitVim<cr>
 nnoremap <leader><c-d><c-d> :exe 'CloseTerminalBuffers!' <bar> :QuitVimForce<cr>
 
+" fix ZQ when in visual mode
+vnoremap ZQ <esc>ZQ
+
 " How to delete multiple buffers:
 " You can use <C-a> to complete all matches. So if you type :bd *.xml and then hit <C-a>, vim will complete the command to :bd file1.xml file2.xml file3.xml.
 " Source: https://stackoverflow.com/a/9499234/4568748
