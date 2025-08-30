@@ -1,10 +1,7 @@
-<snippet>
-    <content><![CDATA[
-% ------------------------------------------------------------------------------
 % Author: Philipp Moers <soziflip@gmail.com>
-% 
+%
 % Latex Brief-Vorlage
-% 
+%
 % ------------------------------------------------------------------------------
 
 \documentclass
@@ -19,12 +16,14 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
-
+\usepackage[a4paper]{geometry}
 \usepackage{lmodern} % Latin Modern typeface (font)
 \usepackage[T1]{fontenc} % T1 font encoding for high quality font output
+
 \renewcommand{\familydefault}{\sfdefault} % Latin Modern's sans serif font family as default
 
 % \enlargethispage{4cm}   % frühzeitigen Seitenumbruch verhindern
+% \geometry{a4paper, left=30mm, right=20mm, top=85mm, bottom=20mm}
 
 
 % ------------------------------------------------------------------------------
@@ -45,26 +44,26 @@ foldmarks=false
 }
 
 \setkomavar{fromname}{Philipp Moers} % Name
-\setkomavar{fromaddress}{Korbinianstraße 9\\\\80807 München} % Adresse
-\setkomavar{fromfax}[]{philipp.moers@mail.de} % Faxnummer       % DIRTY HACK
+\setkomavar{fromaddress}{FLIPSIS_PERSONAL_ADDRESS} % Adresse
+\setkomavar{fromfax}[]{FLIPSIS_PERSONAL_EMAIL} % Faxnummer       % DIRTY HACK
 % \setkomavar{fromemail}[]{} % Email-Adresse
 \setkomavar{fromemail}[]{} % Email-Adresse
-\setkomavar{fromphone}[]{0178 55 678 00} % Telefonnummer
+\setkomavar{fromphone}[]{FLIPSIS_PERSONAL_PHONE} % Telefonnummer
 \setkomavar{fromurl}[]{} % Website
 % \setkomavar{frombank}{}
 % \setkomavar{fromlogo}{\includegraphics{logo.png}}
 
 \setkomavar{location}{%
     \raggedright\footnotesize{%
-    \usekomavar{fromname}\\\\
-    \usekomavar{fromaddress}\\\\
-    \usekomavar*{fromphone}\usekomavar{fromphone}\\\\
-    \usekomavar*{fromfax}\usekomavar{fromfax}\\\\
+    \usekomavar{fromname}\\
+    \usekomavar{fromaddress}\\
+    \usekomavar*{fromphone}\usekomavar{fromphone}\\
+    \usekomavar*{fromfax}\usekomavar{fromfax}\\
     \usekomavar*{fromemail}\usekomavar{fromemail}
     \usekomavar*{fromurl}\usekomavar{fromurl}}
 }
 
-\setkomavar{signature}{\usekomavar{fromname}\\\\}
+\setkomavar{signature}{\usekomavar{fromname}\\}
 \renewcommand*{\raggedsignature}{\raggedright}
 
 % Geschäftszeichenzeile
@@ -86,34 +85,27 @@ foldmarks=false
 \begin{letter}
 % Zielanschrift
 {%
-    ${1:So ein Typ\\\\
-    Lustigstraße 123\\\\
-    80538 München\\\\
-    Deutschland}
+    So ein Typ\\
+    Lustigstraße 123\\
+    80538 München\\
+    Deutschland
 }
 
-\setkomavar{subject}{${2:Betreff}}
+\setkomavar{subject}{Betreff}
 
-\opening{${3:Sehr geehrte},}
+\opening{Sehr geehrte Damen und Herren,}
 
-$0
+lorem ipsum
 
 
 \closing{Mit freundlichen Grüßen}
 
 
 %   Anlagen
-% \textbf{Anlagen}\\\\
-% Anlage 1\\\\
-% Anlage 2\\\\
+% \textbf{Anlagen}\\
+% Anlage 1\\
+% Anlage 2\\
 
 
 \end{letter}
 \end{document}
-
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>brief</tabTrigger>
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <scope>text.tex.latex</scope>
-</snippet>

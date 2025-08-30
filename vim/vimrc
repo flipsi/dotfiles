@@ -2062,7 +2062,6 @@ let g:UltiSnipsSnippetDirectories=['UltiSnips', 'sflipsnippets']
 " snippet packs
 Plug 'honza/vim-snippets'
 
-
 " make html snippets work in php
 " (this is a hack. but the 'ultisnips extends' approach does not work)
 " http://stackoverflow.com/questions/12471398/how-to-enable-snippet-for-html-in-php-files
@@ -2072,6 +2071,65 @@ autocmd filetype php set filetype=php.html
 " https://stackoverflow.com/a/27017167/4568748
 autocmd filetype php set filetype=html
 autocmd filetype php set syntax=php
+
+
+" For some files, I don't want fancy features that require snippets to contain escape sequences.
+" But I want to substitute variables with personal data after expansion.
+" So I built these custom functions:
+
+function! InsertMyTemplate()
+    let l:template_dir = expand('$HOME/dotfiles/vim/templates/')
+
+    " List all files in the template directory
+    let l:files = split(globpath(l:template_dir, '*'), "\n")
+    if empty(l:files)
+        echoerr "No templates found in " . l:template_dir
+        return
+    endif
+
+    " Strip directory paths, keep only filenames
+    let l:filenames = map(l:files, 'fnamemodify(v:val, ":t")')
+
+    " Call rofi to select a template interactively
+    let l:choice = system('printf "%s\n" ' . join(l:filenames, ' ') . ' | rofi -dmenu -i -p "Select template:"')
+    let l:choice = substitute(l:choice, '\n$', '', '')  " Remove trailing newline
+
+    if empty(l:choice)
+        echo "No template selected."
+        return
+    endif
+
+    let l:path = l:template_dir . l:choice
+    call InsertMyTemplateByPath(l:path)
+endfunction
+
+function! InsertMyTemplateByPath(path)
+    exe '.-1read ' . a:path
+    let l:variable_substitution_prefix = 'FLIPSIS_PERSONAL_'
+    call SubstituteVariables(l:variable_substitution_prefix)
+endfunction
+
+function! SubstituteVariables(prefix)
+    let l:pattern = '\v' . escape(a:prefix, '\.^$*[]') . '\k*'
+    let l:view = winsaveview()
+    silent execute '%s/' . l:pattern . '/\=ReadTemplateValueFromDisk(submatch(0))/ge'
+    call winrestview(l:view)
+endfunction
+
+function! ReadTemplateValueFromDisk(variable_name)
+    call system('touch /tmp/vimtest/' . a:variable_name)
+    let l:newline_join_string = "\\\\"
+    let l:variable_file = expand('$HOME/dotfiles/vim/template_values/') . a:variable_name
+    if filereadable(l:variable_file)
+        let l:lines = readfile(l:variable_file)
+        return join(l:lines, l:newline_join_string)
+    else
+        throw 'Could not find file for variable substitution: ' . l:variable_file . '. Please create it!'
+    endif
+endfunction
+
+
+nnoremap 'S :call InsertMyTemplate()<cr>
 
 
 " }}}
@@ -2369,6 +2427,7 @@ else
     nnoremap <leader>j <nop>
 
     command! CocToggle :call CocToggle() " Enable or Disable COC
+
     function! CocToggle()
         if !exists('g:coc_workspace_initialized') || g:coc_workspace_initialized == 0
             CocStart

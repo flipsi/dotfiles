@@ -8,6 +8,7 @@ sublime/User/Color Highlighter/
 sublime/User/Package Control.*
 sublime/User/Package Control.cache
 sublime/User/SublimeLinter/
+vim/template_values
 xfce4/terminal/accels.scm
 xfce4/xfconf/xfce-perchannel-xml/displays.xml
 xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
