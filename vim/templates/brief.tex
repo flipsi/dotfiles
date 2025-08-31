@@ -19,6 +19,7 @@
 \usepackage[a4paper]{geometry}
 \usepackage{lmodern} % Latin Modern typeface (font)
 \usepackage[T1]{fontenc} % T1 font encoding for high quality font output
+\usepackage{xcolor}
 
 \renewcommand{\familydefault}{\sfdefault} % Latin Modern's sans serif font family as default
 
@@ -31,16 +32,17 @@
 
 \KOMAoptions
 {
+firsthead=false,
 % fromemail=true,       % Email wird im Briefkopf angezeigt
 % fromphone=true,       % Telefonnumer wird im Briefkopf angezeigt
 fromfax=false,            % Faxnummer wird im Briefkopf angezeit    % WHY DOES THAT NOT WORK
 % fromurl=true,         % URL wird im Briefkopf angezeigt
 % fromlogo=true,        % Logo wird im Briefkopf angezeigt
 % subject=titled,       % Druckt "Betrifft: " vor dem Betreff
-locfield=wide,          % Breite Absenderergänzung (location)
+locfield=narrow,          % Breite Absenderergänzung (location)
 fromalign=left,         % Ausrichtung des Briefkopfes
-fromrule=afteraddress,  % Trennlinie unter dem Briefkopf
-foldmarks=false
+fromrule=off,  % Trennlinie unter dem Briefkopf
+foldmarks=true
 }
 
 \setkomavar{fromname}{Philipp Moers} % Name
@@ -73,7 +75,8 @@ foldmarks=false
 \setkomavar{customer}{}         % Kundennummer
 \setkomavar{invoice}{}          % Rechnungsnummer
 \setkomavar{place}{München}    % Ort
-\setkomavar{date}{\today}       % Datum
+% \setkomavar{date}{\today}       % Datum
+\setkomavar{date}{\color{red} Entwurf vom \today}       % Datum
 
 \setkomavar{title}{\vspace{9pt}}  % Ersatz für hässliche Titelzeile
 
