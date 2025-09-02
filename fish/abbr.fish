@@ -140,6 +140,7 @@ abbr $args mvd    mv-to-dir.sh
 abbr $args nv     nvlc
 abbr $args ns     netctl status
 abbr $args na     sudo netctl start
+abbr $args ne     sudo netctl edit
 abbr $args no     sudo netctl stop
 abbr $args nr     sudo netctl restart
 abbr $args nn     fix-network.sh
