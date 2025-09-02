@@ -91,5 +91,4 @@ end
 initialize-tmux-sessions
 desktop_session
 setup_musicserver
-autostart
 toggle_redshift
