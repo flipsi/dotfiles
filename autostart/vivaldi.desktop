@@ -2,5 +2,5 @@
 Type=Application
 Name=vivaldi
 Comment=Vivaldi Web Browser
-Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 com.vivaldi.Vivaldi || vivaldi-stable || vivaldi
+Exec=sh -c '/usr/bin/flatpak run --branch=stable --arch=x86_64 com.vivaldi.Vivaldi || vivaldi-stable || vivaldi'
 Terminal=false

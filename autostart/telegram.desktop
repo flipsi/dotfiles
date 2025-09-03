@@ -2,5 +2,5 @@
 Type=Application
 Name=telegram
 Comment=Telegram Messenger Desktop Client
-Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 org.telegram.desktop || telegram-desktop || Telegram
+Exec=sh -c '/usr/bin/flatpak run --branch=stable --arch=x86_64 org.telegram.desktop || telegram-desktop || Telegram'
 Terminal=false
