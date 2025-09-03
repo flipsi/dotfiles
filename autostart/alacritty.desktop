@@ -2,7 +2,7 @@
 Name=alacritty
 GenericName=alacritty
 Comment=Terminal Emulator
-Exec=alacritty
+Exec=alacritty --command tmux -2 new-session -A -s main
 Terminal=false
 Type=Application
 X-GNOME-Autostart-enabled=true
