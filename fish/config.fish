@@ -127,6 +127,9 @@ function autostart_keychain_on_some_hosts
                 keychain_start
             end
         end
+    else
+        # something starts ssh-agent before I start my window manager, I don't know what, so let's get rid of the password prompt like this:
+        pkill ssh-agent
     end
 end
 
