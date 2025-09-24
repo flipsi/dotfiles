@@ -142,6 +142,8 @@ function fix_network_if_offline
             else
                 echo "WARNING: $script not found!"
             end
+        else
+            false
         end
     end
 end
@@ -241,7 +243,7 @@ if status --is-interactive; and status --is-login; and just_booted
 end
 
 if status --is-interactive; and status --is-login; and just_booted; and not in_X
-    fix_network_if_offline
+    fix_network_if_offline; and pull_dotfiles_etc
     pull_dotfiles_etc
 end
 
