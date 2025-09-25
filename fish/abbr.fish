@@ -77,12 +77,19 @@ abbr $args gf     git fetch --prune
 abbr $args gfm    git checkout --quiet --detach\; git fetch \(git remote \| head -n1\) \(git-main-or-master\):\(git-main-or-master\)\; git checkout --quiet -
 abbr $args ghpr   gh pr view --web \|\| gh pr create --web
 abbr $args gi     git init
+abbr $args gia    git bisect start
+abbr $args gib    git bisect bad
+abbr $args gig    git bisect good
+abbr $args gio    git bisect reset # stop/abort
+abbr $args gis    git bisect
+abbr $args giv    git bisect visualize
 # abbr $args gla    glab
 # abbr $args glp    glab pipeline ci view
 # abbr $args glm    glab mr
 # abbr $args glml   glab mr list --assignee @me \&\& glab mr list --reviewer @me
 # abbr $args glmv   glab mr view --web
 # abbr $args glmc   glab mr create --web --fill
+abbr $args gl     tig
 abbr $args gll    tig log
 abbr $args glh    git --no-pager log -n 1
 abbr $args gli    git --no-pager log -n 1 \| head -n 1 \| cut -d\" \" -f2 \| xsel --clipboard
@@ -106,8 +113,10 @@ abbr $args grc    git rebase --continue
 abbr $args gro    git rebase --onto \(git-main-or-master\) HEAD~1 # rebase last 1 commit in current branch on master (after original branch has been squashed/rebased)
 abbr $args grh    git reset --hard
 abbr $args grr    git reset --hard \(git remote \| head -n1\)/\(git-current-branch-name\)
+abbr $args grs    git reset
 abbr $args grH    git reset HEAD~1
 abbr $args grl    git revert HEAD
+abbr $args grv    git revert
 abbr $args gs     tig status
 abbr $args gta    git stash push --include-untracked
 abbr $args gtp    git stash pop
@@ -137,6 +146,10 @@ abbr $args mkd    mkdir_cd
 abbr $args mp     make plan
 abbr $args mpa    make plan apply
 abbr $args mvd    mv-to-dir.sh
+abbr $args mvc    mvn clean
+abbr $args mvi    mvn install -DskipTests
+abbr $args mvp    mvn package -DskipTests -U
+abbr $args mvt    mvn test
 abbr $args nv     nvlc
 abbr $args ns     netctl status
 abbr $args na     sudo netctl start
