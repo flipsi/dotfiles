@@ -47,6 +47,7 @@ require('nvim-highlight-colors').setup({
 
 require('flipsi.helpers')
 require('flipsi.plugins.aider')
+require('flipsi.plugins.git-conflict')
 require('flipsi.plugins.mini')
 require('flipsi.plugins.linting')
 require('flipsi.plugins.formatting')

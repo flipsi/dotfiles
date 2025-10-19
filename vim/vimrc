@@ -747,6 +747,15 @@ nnoremap <leader>g<right>   :diffget //2<cr>    " get changes from the left
 
 
 
+" Highlight and resolve merge conflicts in file without diff view
+
+Plug 'akinsho/git-conflict.nvim'
+
+" See nvim/lua/flipsi/plugins/git-conflict.lua for mappings
+"
+nnoremap <leader>gec   GitConflictListQf
+
+
 " Resolve merge conflicts the easy way (used as `git mergetool`)
 
 Plug 'christoomey/vim-conflicted'
