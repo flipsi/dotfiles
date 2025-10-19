@@ -627,7 +627,7 @@ nnoremap <leader>gcc  :Git commit<cr>
 nnoremap <leader>gca  :Git commit --amend<cr>
 
 " reset
-nnoremap <leader>grH        :Confirm Git reset HEAD~1<cr>
+nnoremap <leader>grH        :Confirm Git reset --hard HEAD~1<cr>
 nnoremap <leader>grh        :Confirm Git reset --hard<cr>
 nnoremap <leader>grr  :exe ':Confirm Git reset --hard ' . GitRemoteName() . '/' . GitCurrentBranchName()<cr>
 

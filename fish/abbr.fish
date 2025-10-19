@@ -111,10 +111,11 @@ abbr $args grm    git rebase \(git-main-or-master\)
 abbr $args gra    git rebase --abort
 abbr $args grc    git rebase --continue
 abbr $args gro    git rebase --onto \(git-main-or-master\) HEAD~1 # rebase last 1 commit in current branch on master (after original branch has been squashed/rebased)
+abbr $args grs    git reset
 abbr $args grh    git reset --hard
 abbr $args grr    git reset --hard \(git remote \| head -n1\)/\(git-current-branch-name\)
-abbr $args grs    git reset
 abbr $args grH    git reset HEAD~1
+abbr $args grHH   git reset --hard HEAD~1
 abbr $args grl    git revert HEAD
 abbr $args grv    git revert
 abbr $args gs     tig status

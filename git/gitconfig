@@ -25,9 +25,12 @@
 [push]
     default = simple
     followTags = true # https://stackoverflow.com/a/26438076
+    autoSetupRemote = true
 
 [rebase]
-    autostash = true
+    autoStash = true
+    ; autoSquash = true
+    updateRefs = true
 
 [alias]
     blame-better   = blame -w -C -C -C
@@ -65,9 +68,12 @@
     file-decoration-style = none
 
 [diff]
+    algorithm = patience
     tool = vimdiff
     guitool = sublimerge
-    colorMoved = default
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
     ; wsErrorHighlight = context
 
 [difftool "vimdiff"]
@@ -80,6 +86,7 @@
     cmd = diff -i $LOCAL $REMOTE
 
 [merge]
+    conflictstyle = zdiff3
     tool = conflicted
 
 [mergetool "conflicted"]
