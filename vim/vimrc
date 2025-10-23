@@ -6919,6 +6919,7 @@ function! ClearScreenAndModes()
     " <Plug>(coc-float-hide) " TODO
     DisableGitConflictMode
     DisableGitGutterMode
+    FixHighlighting
     silent! unmap <cr>
 endfunction
 nnoremap <silent> <bs> :ClearScreenAndModes<cr> :<c-c>
