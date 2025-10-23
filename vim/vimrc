@@ -7027,8 +7027,10 @@ nnoremap <leader><bs>       :CloseBuffer<cr>
 nnoremap <leader>QQ         :CloseBufferForce<cr>
 nnoremap <leader>qw         :CloseWindow<cr>
 nnoremap <leader>qo         :CloseOtherWindows<cr>
-nnoremap <c-d>              :exe 'CloseTerminalBuffers!' <bar> :QuitVim<cr>
-nnoremap <leader><c-d><c-d> :exe 'CloseTerminalBuffers!' <bar> :QuitVimForce<cr>
+nnoremap <c-d>                   :exe 'CloseTerminalBuffers!' <bar> :QuitVim<cr>
+vnoremap <c-d>              <esc>:exe 'CloseTerminalBuffers!' <bar> :QuitVim<cr>
+nnoremap <leader><c-d><c-d>      :exe 'CloseTerminalBuffers!' <bar> :QuitVimForce<cr>
+vnoremap <leader><c-d><c-d> <esc>:exe 'CloseTerminalBuffers!' <bar> :QuitVimForce<cr>
 
 " fix ZQ when in visual mode
 vnoremap ZQ <esc>ZQ
