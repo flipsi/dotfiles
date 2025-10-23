@@ -746,18 +746,10 @@ nnoremap <leader>g<left>    :diffget //3<cr>    " get changes from the right
 nnoremap <leader>g<right>   :diffget //2<cr>    " get changes from the left
 
 
+"""""""""
 
-" Highlight and resolve merge conflicts in file without diff view
-
-Plug 'akinsho/git-conflict.nvim'
-
-" See nvim/lua/flipsi/plugins/git-conflict.lua for mappings
-"
-nnoremap <leader>gec   GitConflictListQf
-
-
-" Resolve merge conflicts the easy way (used as `git mergetool`)
-
+" Resolve merge conflicts the easy way (used as `git mergetool` or with the mappings below)
+" [Requires fugitive]
 Plug 'christoomey/vim-conflicted'
 
 nnoremap <leader>gmt :Conflicted<cr>
@@ -768,13 +760,23 @@ nnoremap <leader>gmn :GitNextConflict<cr>
 let g:diffget_local_map = '<left>'
 let g:diffget_upstream_map = '<right>'
 
+"""""""""
+
+" Highlight and resolve merge conflicts in file without diff view
+
+Plug 'akinsho/git-conflict.nvim' " inspired by conflict-marker (see below)
+
+" See nvim/lua/flipsi/plugins/git-conflict.lua for mappings
+"
+nnoremap <leader>gec   GitConflictListQf
+
+
+"""""""""
 
 " Resolve merge conflicts from within vim
 " (simply when conflict markers are present)
 
-" Plug 'rhysd/conflict-marker.vim'
-" or:
-" https://github.com/sindrets/diffview.nvim
+" Plug 'rhysd/conflict-marker.vim' " superseded by git-conflict (see above)
 
 let g:conflict_marker_highlight_group = ''
 let g:conflict_marker_begin = '^<<<<<<< .*$'
@@ -793,7 +795,149 @@ highlight ConflictMarkerCommonAncestorsHunk guibg=#754a81
 " cn    choose none (remove both versions and conflict markers)
 
 
+"""""""""
+
+" https://github.com/sindrets/diffview.nvim
+" never configured
+
 " show git status of lines on the left
+
+"""""""""
+
+" VIBE CODED MERGE CONFLICT HELPERS
+" rebecause I'm not happy with the plugins above)
+"
+command! HighlightGitConflictMarkers call HighlightGitConflictMarkers()
+function! HighlightGitConflictMarkers()
+    highlight default GitConflictMarkerGrey ctermfg=NONE ctermbg=238 guifg=NONE guibg=#444444
+    syntax match GitConflictMarkerStart /^\s*<<<<<<<.*$/
+    syntax match GitConflictMarkerBase  /^\s*|||||||.*$/
+    syntax match GitConflictMarkerSep   /^\s*=======$/
+    syntax match GitConflictMarkerEnd   /^\s*>>>>>>>.*$/
+    highlight default link GitConflictMarkerStart GitConflictMarkerGrey
+    highlight default link GitConflictMarkerBase  GitConflictMarkerGrey
+    highlight default link GitConflictMarkerSep   GitConflictMarkerGrey
+    highlight default link GitConflictMarkerEnd   GitConflictMarkerGrey
+endfunction
+
+" Patterns
+let g:GitConflictStartPat = '^\s*<<<<<<<.*'
+let g:GitConflictBasePat  = '^\s*|||||||\s*'
+let g:GitConflictSepPat   = '^\s*=======$'
+let g:GitConflictEndPat   = '^\s*>>>>>>>.*'
+
+function! GitConflictNext() abort
+  call search(g:GitConflictStartPat . '\|' . g:GitConflictSepPat . '\|' . g:GitConflictEndPat, 'W')
+  normal! zt
+endfunction
+
+function! GitConflictPrev() abort
+  call search(g:GitConflictStartPat . '\|' . g:GitConflictSepPat . '\|' . g:GitConflictEndPat, 'bW')
+  normal! zt
+endfunction
+
+function! s:GitConflictLocate() abort
+  let sp = getpos('.')
+  let cur = sp[1]
+  let start = getline(cur) =~# g:GitConflictStartPat ? cur : search(g:GitConflictStartPat, 'bnW')
+  if start == 0 | let start = search(g:GitConflictStartPat, 'nW') | endif
+  if start == 0 | call setpos('.', sp) | return {} | endif
+  call cursor(start, 1)
+  let eq  = search(g:GitConflictSepPat, 'nW')
+  let en  = search(g:GitConflictEndPat, 'nW')
+  if eq == 0 || en == 0 || eq <= start || en <= eq | call setpos('.', sp) | return {} | endif
+  let base = search(g:GitConflictBasePat, 'nW')
+  if base == 0 || base <= start || base >= eq | let base = -1 | endif
+  if getline(cur) !~# g:GitConflictStartPat && (cur < start || cur > en) | call setpos('.', sp) | return {} | endif
+  call setpos('.', sp)
+  return {'start': start, 'base': base, 'eq': eq, 'end': en}
+endfunction
+
+function! s:GitConflictReplace(r) abort
+  call setline(a:r.start, a:r.list)
+  let n = len(a:r.list)
+  let ds = a:r.start + n
+  if a:r.end >= ds | execute ds . ',' . a:r.end . 'delete _' | endif
+  call cursor(a:r.start + max([n - 1, 0]), 1)
+endfunction
+
+function! GitConflictDebug() abort
+  let l = s:GitConflictLocate() | if empty(l) | return | endif
+  echo l
+endfunction
+
+function! GitConflictKeepOurs() abort
+  let l = s:GitConflictLocate() | if empty(l) | return | endif
+  let s = l.start + 1
+  let e = (l.base > 0 ? l.base - 1 : l.eq - 1) " stop before base or =======
+  call s:GitConflictReplace({'start': l.start, 'end': l.end, 'list': (e >= s ? getline(s, e) : [])})
+endfunction
+
+function! GitConflictKeepTheirs() abort
+  let l = s:GitConflictLocate() | if empty(l) | return | endif
+  let s = l.eq + 1
+  let e = l.end - 1 " after ======= up to before >>>>>>>
+  call s:GitConflictReplace({'start': l.start, 'end': l.end, 'list': (e >= s ? getline(s, e) : [])})
+endfunction
+
+function! GitConflictKeepBoth() abort
+  let l = s:GitConflictLocate() | if empty(l) | return | endif
+  let os = l.start + 1
+  let oe = (l.base > 0 ? l.base - 1 : l.eq - 1) " ours ends before base/=======
+  let ts = l.eq + 1
+  let te = l.end - 1                      " theirs excludes >>>>>>>
+  let ours   = (oe >= os ? getline(os, oe) : [])
+  let theirs = (te >= ts ? getline(ts, te) : [])
+  let out = copy(ours)
+  if !empty(ours) && !empty(theirs) | call add(out, '') | endif
+  call extend(out, theirs)
+  call s:GitConflictReplace({'start': l.start, 'end': l.end, 'list': out})
+endfunction
+
+command! GitConflictNext       call GitConflictNext()
+command! GitConflictPrev       call GitConflictPrev()
+command! GitConflictKeepOurs   call GitConflictKeepOurs()
+command! GitConflictKeepTheirs call GitConflictKeepTheirs()
+command! GitConflictKeepBoth   call GitConflictKeepBoth()
+command! GitConflictDebug      call GitConflictDebug()
+
+command! EnableGitConflictMode :call EnableGitConflictMode()
+function! EnableGitConflictMode()
+    let g:gitconflictmode = 1
+    AirlineIndicateCustomMode GITCONFLICT MODE
+    HighlightGitConflictMarkers
+    nnoremap kd :GitConflictDebug<CR>
+    nnoremap ]c :GitConflictNext<CR>
+    nnoremap [c :GitConflictPrev<CR>
+    " Or use JumpUpSoToSpeak/JumpDownSoToSpeak
+    nnoremap ko :GitConflictKeepOurs<CR>
+    nnoremap kt :GitConflictKeepTheirs<CR>
+    nnoremap kb :GitConflictKeepBoth<CR>
+endfunction
+
+command! DisableGitConflictMode :call DisableGitConflictMode()
+function! DisableGitConflictMode()
+    let g:gitconflictmode = 0
+    AirlineResetCustomMode
+    silent! nunmap ]c
+    silent! nunmap [c
+    silent! nunmap ko
+    silent! nunmap kt
+    silent! nunmap kb
+endfunction
+
+let g:gitconflictmode = 0
+
+nnoremap <leader>gk :EnableGitConflictMode<cr>
+
+" automatically unmap (after committing is reasonable)
+augroup gitgutter_unmap
+    au!
+    au BufWipeout .git/COMMIT_EDITMSG DisableGitConflictMode
+augroup END
+
+
+"""""""""
 
 Plug 'airblade/vim-gitgutter'
 
@@ -4014,6 +4158,7 @@ function! FixHighlighting()
         highlight CocHighlightText          ctermfg=71 ctermbg=237
         highlight CocUnusedHighlight        ctermfg=192 " makes contrast for unused defs acceptable again, but doesn't pick up said color. TODO: FIX
         " highlight CocWarningHighlight       ctermfg=213
+        call HighlightGitConflictMarkers()
     elseif g:light_or_dark_theme == 'light'
         let g:indentLine_setColors = 1
         let g:indentLine_color_term = 250
@@ -5732,6 +5877,8 @@ vnoremap g<up>   8k
 function! JumpDownSoToSpeak()
     if HasQuickfixList()
         call JumpThroughList(0, 0, 0)
+    elseif g:gitconflictmode == 1
+        GitConflictNext
     elseif g:gitguttermode == 1
         GitGutterNextHunk
         normal zz9<c-e>zv
@@ -5743,6 +5890,8 @@ endfunction
 function! JumpUpSoToSpeak()
     if HasQuickfixList()
         call JumpThroughList(1, 0, 0)
+    elseif g:gitconflictmode == 1
+        GitConflictPrev
     elseif g:gitguttermode == 1
         GitGutterPrevHunk
         normal zz9<c-e>zv
@@ -5939,6 +6088,8 @@ nmap <leader>fj [I:let nr = input("Which one: ")
 
 " find git merge conflict markers
 command! FindGitConflictMarkers /\v^[<|=>]{7}( .*|$)
+" TODO fix
+" nnoremap <leader>fc :FindGitConflictMarkers<bar>EnableGitConflictMode<cr>
 nnoremap <leader>fc :FindGitConflictMarkers<cr>
 
 " find errors and stuff
@@ -6761,6 +6912,8 @@ endfunction
 " clear windows (close quickfix and location list) and refresh screen
 " TODO: add <Plug>(coc-float-hide)
 " TODO: unmap <cr>
+" TODO: DisableGitConflictMode
+"nnoremap <silent> <bs> :nohlsearch \| :lclose \| :cclose \| :redraw! \| :DisableGitConflictMode \| :DisableGitGutterMode <cr> :<c-c>
 nnoremap <silent> <bs> :nohlsearch \| :lclose \| :cclose \| :redraw! \| :DisableGitGutterMode <cr> :<c-c>
 xmap     <silent> <bs> <bs>gv
 
