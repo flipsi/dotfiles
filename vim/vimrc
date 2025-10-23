@@ -6910,11 +6910,18 @@ function! ResizeWindows(enter_or_leave)
 endfunction
 
 " clear windows (close quickfix and location list) and refresh screen
-" TODO: add <Plug>(coc-float-hide)
-" TODO: unmap <cr>
-" TODO: DisableGitConflictMode
-"nnoremap <silent> <bs> :nohlsearch \| :lclose \| :cclose \| :redraw! \| :DisableGitConflictMode \| :DisableGitGutterMode <cr> :<c-c>
-nnoremap <silent> <bs> :nohlsearch \| :lclose \| :cclose \| :redraw! \| :DisableGitGutterMode <cr> :<c-c>
+command! ClearScreenAndModes :call ClearScreenAndModes()
+function! ClearScreenAndModes()
+    nohlsearch
+    lclose
+    cclose
+    redraw!
+    " <Plug>(coc-float-hide) " TODO
+    DisableGitConflictMode
+    DisableGitGutterMode
+    silent! unmap <cr>
+endfunction
+nnoremap <silent> <bs> :ClearScreenAndModes<cr> :<c-c>
 xmap     <silent> <bs> <bs>gv
 
 " toggle quickfix or location list
@@ -6939,6 +6946,7 @@ tnoremap <c-y><c-t> <c-\><c-n>:NewTab<cr>
 tnoremap <c-y>t     <c-\><c-n>:NewTab<cr>
 
 " open current buffer in a new tab
+" TODO: optionally remove window from original tab
 nnoremap <leader><c-t>        :tab split<cr>
 nnoremap <c-y>!               :tab split<cr>
 tnoremap <c-y>!     <c-\><c-n>:tab split<cr>i
