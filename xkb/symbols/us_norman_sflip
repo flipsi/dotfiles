@@ -3,6 +3,11 @@
 // This is a symbols file for X KeyBoard extension (XKB).
 // It contains a custom keyboard layout.
 
+// Most of the time I use the Voyager keyboard with a norman layout and layers for arrow keys etc.
+// which depends on the German de layout (without dead keys).
+// https://configure.zsa.io/voyager/layouts/Ky03A/latest/7
+//
+// This layout is for laptops when I don't have the Voyager with me.
 
 partial default alphanumeric_keys
 
@@ -10,24 +15,30 @@ xkb_symbols "basic" {
 
     include "us(norman)"
 
-    // change capslock/control/escape
-
-    // original capslock:
+    // original capslock as CTRL:
     //replace key <AC00> { [ Escape ] };
     replace key <AC00> { [ Control_L ] };
 
-    // original control:
+    // original control as Escape:
     //replace key <AA00> { [ Caps_Lock ] };
     replace key <AA00> { [ Escape ] };
 
     // umlauts (ä, ö, ü)
+    // (Can't use the norman o for ö (because arrow keys), so use de o key instead which is norman l.)
     key <AC01> { [ a, A, adiaeresis, Adiaeresis ] };
-    key <AC09> { [ o, O, odiaeresis, Odiaeresis ] };
+//  key <AC09> { [ o, O, odiaeresis, Odiaeresis ] };
     key <AD07> { [ u, U, udiaeresis, Udiaeresis ] };
+    key <AD09> { [ l, L, odiaeresis, Odiaeresis ] };
 
-    // Home and End on h and g (to imitate Moonlander layout)
-    key <AC05> { [ g, G, End, VoidSymbol ] };
-    key <AC06> { [ y, Y, Home, VoidSymbol ] };
+    // Arrow keys like vim
+    key <AC06> { [ y, Y, Left,  VoidSymbol ] };
+    key <AC07> { [ n, N, Down,  VoidSymbol ] };
+    key <AC08> { [ i, I, Up,    VoidSymbol ] };
+    key <AC09> { [ o, O, Right, VoidSymbol ] };
+
+    // Home and End below Left and Right (to imitate Voyager layout)
+    key <AB07> { [ m,       M,         Home,    VoidSymbol      ] };
+    key <AB10> { [ slash,   question,  End,     backslash       ] };
 
     // left hand number block with AltGr (and ß on s)
     key <AD02> { [ w, W, 7, ampersand ] };
