@@ -1,5 +1,6 @@
 # this is a collection of useful commands that might get lost if not written down
 
+sudo nmcli device wifi connect WIFIonICE
 curl -T $FILENAME temp.sh # upload file for sharing (expires after 3 days)
 curl v4.ident.me # public IP address
 curl wttr.in # weather report
