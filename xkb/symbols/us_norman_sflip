@@ -25,6 +25,7 @@ xkb_symbols "basic" {
 
     // umlauts (ä, ö, ü)
     // (Can't use the norman o for ö (because arrow keys), so use de o key instead which is norman l.)
+    // (Want to use the u for ü instead of PageDown/PageUp)
     key <AC01> { [ a, A, adiaeresis, Adiaeresis ] };
 //  key <AC09> { [ o, O, odiaeresis, Odiaeresis ] };
     key <AD07> { [ u, U, udiaeresis, Udiaeresis ] };
@@ -35,6 +36,10 @@ xkb_symbols "basic" {
     key <AC07> { [ n, N, Down,  VoidSymbol ] };
     key <AC08> { [ i, I, Up,    VoidSymbol ] };
     key <AC09> { [ o, O, Right, VoidSymbol ] };
+
+    // PageDown/PageUp on comma/period
+    key <AB08> { [ comma,  less,     Next,      VoidSymbol  ] };
+    key <AB09> { [ period, greater,  Prior,     VoidSymbol ] };
 
     // Home and End below Left and Right (to imitate Voyager layout)
     key <AB07> { [ m,       M,         Home,    VoidSymbol      ] };
