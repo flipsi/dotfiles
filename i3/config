@@ -451,9 +451,8 @@ bindsym $mod+l exec --no-startup-id "$LOCK_CMD"
 
 
 ## screen and light settings
-## TODO screen brightness for separate outputs
 bindsym $mod+F10 mode "$mode_light"
-set $mode_light Screen and light settings: (+/-) screen brightness (n) toggle night adjustment (k/b) keyboard brighness
+set $mode_light Screen and light settings: (+/-) or (up/down) screen brightness (n) toggle night adjustment (k/b) keyboard brighness
 mode "$mode_light" {
     # this may not work if it requires root privileges (sudo password prompt)
     bindsym plus            exec --no-startup-id "$SHELLSCRIPT_PATH/screen-brightness up"
