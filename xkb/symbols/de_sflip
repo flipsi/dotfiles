@@ -38,15 +38,11 @@
 // If there are errors in the file, use the piping method above
 // in order to get debug output from xkbcomp
 
-
-
 partial default alphanumeric_keys
 
 xkb_symbols "basic" {
 
     include "de"
-
-
 
     // change capslock/control/escape
 
@@ -58,8 +54,6 @@ xkb_symbols "basic" {
     //replace key <AA00> { [ Caps_Lock ] };
     replace key <AA00> { [ Escape ] };
 
-
-
     // vim movements with AltGr
 
     key <AC06>  { [ h, H, Left,   VoidSymbol ] };
@@ -67,14 +61,10 @@ xkb_symbols "basic" {
     key <AC08>  { [ k, K, Up,     VoidSymbol ] };
     key <AC09>  { [ l, L, Right,  VoidSymbol ] };
 
-
-
     // pos1 and end easily in home row
 
     key <AC01>  { [ a, A, Home,   ampersand  ] };
     key <AC05>  { [ g, G, End,    VoidSymbol ] };
-
-
 
     // numbers and parentheses/braces/brackets with left hand
 
@@ -90,7 +80,6 @@ xkb_symbols "basic" {
     key <AB04>  { [ v, V, 3,      bracketright ]   };
 
 
-
     // greater, less, slash and questionmark like on english layout with AltGr
 
     key <AB08>  { [ comma,  semicolon,  less,       0	        ] };
@@ -103,3 +92,5 @@ xkb_symbols "basic" {
     key <AD01> { [ q,       Q,          at,         grave       ] };
 
 };
+
+// vim: set filetype=xkb
