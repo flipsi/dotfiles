@@ -81,12 +81,31 @@ foldmarks=true
 
 \setkomavar{title}{\vspace{9pt}}  % Ersatz für hässliche Titelzeile
 
+% % For multiple recipients, add csv and use this:
+% \usepackage{datatool}
+% \DTLsetseparator{,}
+% \DTLloaddb{recipients}{recipients.csv}
 
 % ------------------------------------------------------------------------------
-%   Brief
 
 \begin{document}
+
+% \DTLforeach{recipients}{%
+%     \Title=Title,\Name=Name,\Street=Street,\Zip=Zip,\City=City}{%
+
+% Add closing } after letter!
+
 \begin{letter}
+
+% % Zielanschrift
+% {%
+%     \Title \\
+%     \Name \\
+%     \Street \\
+%     \Zip\\
+%     \City
+% }
+
 % Zielanschrift
 {%
     So ein Typ\\
@@ -112,4 +131,5 @@ lorem ipsum
 
 
 \end{letter}
+% }
 \end{document}
