@@ -16,6 +16,7 @@ keymap = [
   { keys = ["z", "m"], commands = ["set_display_mode minimal"] },
   { keys = ["z", "s"], commands = ["set_display_mode hsplit"] },
   { keys = ["R"], commands = ["reload_dirlist"] },
+  { keys = ["f5"], commands = ["reload_dirlist"] }, # FIXME
   { keys = ["z", "h"], commands = ["toggle_hidden"] },
   { keys = ["ctrl+h"], commands = ["toggle_hidden"] },
   { keys = ["."], commands = ["toggle_hidden"] },
@@ -129,7 +130,7 @@ keymap = [
   { keys = [" "], commands = ["select --toggle=true"] },
   { keys = ["s"], commands = ["select --toggle=true"] },
   { keys = ["t"], commands = ["select --all=true --toggle=true"] },
-  { keys = ["u", "s"], commands = ["select --all=false --toggle=false"] },
+  { keys = ["u", "s"], commands = ["select --all=false --toggle=false"] }, # FIXME ("--all=true" works)
   { keys = ["v"], commands = ["toggle_visual"] },
   { keys = ["V"], commands = ["toggle_visual"] },
 
