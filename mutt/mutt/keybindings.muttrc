@@ -1,6 +1,8 @@
 # vim: filetype=neomuttrc
 
-bind generic,index,pager,attach      CS noop
+# (try to) prevent binding warnings at startup (https://neomutt.org/guide/configuration.html#6-4-%C2%A0warnings-about-duplicated-bindings)
+bind index,pager                     i  noop
+bind generic,index,pager,attach      C  noop
 bind generic,index,pager,attach      Ca noop
 bind generic,index,pager,attach      Cd noop
 bind generic,index,pager,attach      Ci noop
@@ -17,6 +19,8 @@ bind generic,index,pager,attach      Mj noop
 bind generic,index,pager,attach      Ms noop
 bind generic,index,pager,attach      Mt noop
 bind generic,index,pager,attach      f  noop
+# bind index                           g  noop # Binding 'gj' will alias 'g'  Before, try: 'bind index g noop'  https://neomutt.org/guide/configuration.html#bind-warnings
+bind index                           gj noop # Binding 'g' will alias 'gj'  Before, try: 'bind index gj noop'  https://neomutt.org/guide/configuration.html#bind-warnings
 bind generic,index,pager,attach      g  noop
 bind generic,pager,pager,attach      ga noop
 bind generic,index,pager,attach      gd noop
