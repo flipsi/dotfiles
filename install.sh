@@ -781,6 +781,7 @@ function package_install_target() {
 
 
 
+set -e
 
 # cd into directory of this very script
 # (otherwise the creating of links won't work!)
