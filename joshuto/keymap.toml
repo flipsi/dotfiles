@@ -170,7 +170,7 @@ keymap = [
   { keys = ["i", "v", "v"], commands = ["shell nvim"] },
   { keys = ["i", "v", "d"], commands = ["shell neovide"] },
 
-  { keys = ["o", "p"], commands = ["lpr %s"] },
+  { keys = ["o", "p"], commands = ["shell lpr %s"] }, # print
 
   { keys = ["o", "r"], commands = ["sort reverse"] },
   { keys = ["o", "l"], commands = ["sort lexical"] },
