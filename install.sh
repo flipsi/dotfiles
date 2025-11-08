@@ -445,6 +445,7 @@ function create_link_for_target() {
             install_xresources_inclusion  "$PWD/sxiv/Xresources"
             mkdir -p "$HOME/.config/nsxiv/exec"
             create_link "$PWD/sxiv/key-handler" "$HOME/.config/nsxiv/exec/key-handler"
+            echo "Remember to compile custom version of nsxiv! See https://codeberg.org/flipsi/nsxiv/src/branch/config/flipsi"
             ;;
 
         taskwarrior )
@@ -704,6 +705,19 @@ function package_install_target() {
 
             mopidy )
                 mopidy local scan
+                ;;
+
+            nsxiv )
+                if [[ ! -d "$HOME/src/nsxiv" ]]; then
+                    mkdir -p "$HOME/src/nsxiv"
+                    git clone ssh://git@codeberg.org/flipsi/nsxiv.git
+                    pushd "$HOME/src/nsxiv"
+                    echo "You might want to look into the README and install dependencies."
+                    make
+                    # make PREFIX="$HOME/bin" install # /bin is implicit (error in README)
+                    make PREFIX="$HOME" install
+                    popd
+                fi
                 ;;
 
             tmux )

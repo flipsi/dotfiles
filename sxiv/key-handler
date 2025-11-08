@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Note from @flipsi: I configure the prefix key to `o` in https://codeberg.org/flipsi/nsxiv/src/branch/config/flipsi
+
 # Called by nsxiv(1) after the external prefix key (C-x by default) is pressed.
 # The next key combo is passed as its first argument. Passed via stdin are the
 # images to act upon: all marked images, if in thumbnail mode and at least one
