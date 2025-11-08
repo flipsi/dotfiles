@@ -126,7 +126,10 @@ function create_link() {
         elif [[ $INTERACTIVE = true ]]; then
             ln -nsi "$DESTPATH" "$LINKPATH"
         else
-            # TODO: bakup if existing but not symlink
+            # empty dirs can be replaced, otherwise abort
+            if [ -z "$(ls -A "$LINKPATH")" ]; then
+                rmdir "$LINKPATH"
+            fi
             ln -ns "$DESTPATH" "$LINKPATH"
         fi
 
