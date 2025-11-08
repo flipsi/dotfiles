@@ -130,7 +130,7 @@ keymap = [
   { keys = [" "], commands = ["select --toggle=true"] },
   { keys = ["s"], commands = ["select --toggle=true"] },
   { keys = ["t"], commands = ["select --all=true --toggle=true"] },
-  { keys = ["u", "s"], commands = ["select --all=false --toggle=false"] }, # FIXME ("--all=true" works)
+  { keys = ["u", "s"], commands = ["select --all=true --toggle=false", "select --all=true --toggle=true"] }, # unselect all
   { keys = ["v"], commands = ["toggle_visual"] },
   { keys = ["V"], commands = ["toggle_visual"] },
 
