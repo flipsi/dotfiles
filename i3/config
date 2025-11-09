@@ -624,7 +624,7 @@ mode "$mode_kill" {
 
 ## kill specific apps/windows (e.g. when memory really full again and the system hangs)
 bindsym $mod+Shift+BackSpace mode "$mode_kill_app"
-set $mode_kill_app Kill app: (f) Firefox (g) Chrome (i) Vivaldi (j) Java (s) Sbt (o) Output windows (d) dialog windows
+set $mode_kill_app Kill app: (f) Firefox (g) Chrome (i) Vivaldi (j) Java (s) Sbt (o) Output windows (d) dialog windows (z) zathura
 mode "$mode_kill_app" {
     bindsym g       exec --no-startup-id "pkill    chrome"; mode "default"
     bindsym G       exec --no-startup-id "pkill -9 chrome"; mode "default"
@@ -636,6 +636,8 @@ mode "$mode_kill_app" {
     bindsym J       exec --no-startup-id "pkill -9 java"; mode "default"
     bindsym s       exec --no-startup-id "pkill    -f 'sbt-launch.jar'"; mode "default"
     bindsym S       exec --no-startup-id "pkill -9 -f 'sbt-launch.jar'"; mode "default"
+    bindsym z       exec --no-startup-id "pkill    -f 'zathura'"; mode "default"
+    bindsym Z       exec --no-startup-id "pkill -9 -f 'zathura'"; mode "default"
     bindsym o       [workspace="Output"]        kill; mode "default"
     bindsym d       [window_type="dialog"]      kill; mode "default"
     # cancel
