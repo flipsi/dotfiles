@@ -79,9 +79,6 @@ end
 
 function set_color_theme
 
-    # change colors
-    fish_my_colors gruvbox
-
     # change colors for virtual console
     set_tty_colors gruvbox
 
