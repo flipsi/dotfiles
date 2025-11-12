@@ -65,6 +65,9 @@ function fish_prompt --description 'Prompt anzeigen'
 
         # working directory
         set wd (pwd)
+        set_color $fish_my_color_gray_dark
+        set_color --background normal # doesn't work, can't set background
+        set_color --background $dark1 # background is foreground here somehow
         set_color --italics $fish_my_color_gray_bright
         echo -n $wd
 
