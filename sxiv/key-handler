@@ -21,6 +21,12 @@ while read -r file; do
 done
 
 case "$1" in
+    "c" )
+        DIR_TO_COPY_TO="$HOME/tmp/image-copy"
+        mkdir -p "$DIR_TO_COPY_TO"
+        cp "${FILES[@]}" "$DIR_TO_COPY_TO"
+        ;;
+
     "d" )
         trash "${FILES[@]}"
         ;;
@@ -47,7 +53,7 @@ case "$1" in
         ;;
 
     # FIXME
-    # ">" ) 
+    # ">" )
     #     for f in "${FILES[@]}"; do
     #         magick convert -rotate 90 "$f" "$f"
     #     done
