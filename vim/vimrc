@@ -6487,7 +6487,11 @@ function! RunCommandInBuildShell(command)
         let g:neoterm_autoinsert = l:neoterm_autoinsert
         let l:commandline = a:command
     else
-        let l:commandline = a:command . " | tee (tty) > " . l:build_output_file
+        " let l:commandline = a:command . " | tee (tty) > " . l:build_output_file
+        " fix color codes when teeing to file
+        " https://stackoverflow.com/questions/3515208/can-colorized-output-be-captured-via-shell-redirect
+        let l:commandline = "unbuffer " . a:command . " | tee (tty) > " . l:build_output_file
+        " let l:commandline = "script --flush --quiet --return --append " . l:build_output_file . " --command " . a:command
     endif
     call RunCommand(l:commandline)
 endfunction
