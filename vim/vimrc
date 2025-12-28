@@ -1849,7 +1849,7 @@ endif
 
 " adjustments for text (not code)
 Plug 'preservim/vim-pencil'
-nnoremap <leader>yi :TogglePencil<cr>
+nnoremap <leader>y/ :TogglePencil<cr>
 
 
 " replace some motion or text object or selection with current yank
