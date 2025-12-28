@@ -2487,6 +2487,8 @@ else
     Plug 'ap/vim-css-color'
 endif
 
+nnoremap <leader>yh :HighlightColors Toggle<cr>
+
 " convert between color formats (color under cursor or visually selected)
 Plug 'amadeus/vim-convert-color-to'
 nnoremap 'cch :ConvertColorTo hex<cr>
