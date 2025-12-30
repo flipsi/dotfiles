@@ -1,6 +1,6 @@
 set pages-per-row 2
 set first-page-column 0
-set incremental-search
+set incremental-search 0
 set window-title-basename true
 
 set selection-clipboard 'clipboard'
