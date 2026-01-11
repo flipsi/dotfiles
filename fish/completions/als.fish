@@ -1,0 +1,1 @@
+/usr/share/fish/completions/als.fish
