@@ -1,6 +1,8 @@
+# Configuration file for zathura document viewer
+
 set pages-per-row 2
 set first-page-column 0
-set incremental-search 0
+set incremental-search 0 # Only enable in newer versions to avoid annoying behavior: https://github.com/pwmt/zathura/pull/852
 set window-title-basename true
 
 set selection-clipboard 'clipboard'
@@ -28,3 +30,6 @@ map z set pages-per-row\ 2
 map <F11> toggle_fullscreen
 #map f toggle_fullscreen
 #map F follow
+
+
+# vim: set ft=vim:
