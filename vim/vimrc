@@ -399,10 +399,14 @@ Plug 'christoomey/vim-tmux-navigator'
 " NOTE that this doesn't work in terminal buffers, see https://github.com/christoomey/vim-tmux-navigator/pull/172
 let g:tmux_navigator_save_on_switch = 1
 let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <C-left>    :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-down>    :TmuxNavigateDown<cr>
-nnoremap <silent> <C-up>      :TmuxNavigateUp<cr>
-nnoremap <silent> <C-right>   :TmuxNavigateRight<cr>
+nnoremap <silent> <C-left>       :TmuxNavigateLeft<cr>
+vnoremap <silent> <C-left>  <Esc>:TmuxNavigateLeft<cr>
+nnoremap <silent> <C-down>       :TmuxNavigateDown<cr>
+vnoremap <silent> <C-down>  <Esc>:TmuxNavigateDown<cr>
+nnoremap <silent> <C-up>         :TmuxNavigateUp<cr>
+vnoremap <silent> <C-up>    <Esc>:TmuxNavigateUp<cr>
+nnoremap <silent> <C-right>      :TmuxNavigateRight<cr>
+vnoremap <silent> <C-right> <Esc>:TmuxNavigateRight<cr>
 "nnoremap <silent> <esc><c-space>   :TmuxNavigatePrevious<cr>
 
 
