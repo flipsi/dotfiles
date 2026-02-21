@@ -817,20 +817,20 @@ mode "$move_container_to_output" {
 
 ## move workspace to other output
 bindsym $mod+u mode "$move_workspace_to_output"
-set $move_workspace_to_output Move workspace to output (h) left, (l) right, (j) down, (k) up
+set $move_workspace_to_output Move workspace to output (h) left, (l) right, (j) down, (k) up - with super key, swap!
 mode "$move_workspace_to_output" {
     bindsym h           move workspace to output left;  mode "default"
     bindsym Left        move workspace to output left;  mode "default"
-    bindsym $mod+Left   move workspace to output left;  mode "default"
+    bindsym $mod+Left   exec --no-startup-id "$HOME/.i3/bin/i3-swap-workspaces.sh left"; mode "default"
     bindsym j           move workspace to output down;  mode "default"
     bindsym Down        move workspace to output down;  mode "default"
-    bindsym $mod+Down   move workspace to output down;  mode "default"
+    bindsym $mod+Down   exec --no-startup-id "$HOME/.i3/bin/i3-swap-workspaces.sh down"; mode "default"
     bindsym k           move workspace to output up;    mode "default"
     bindsym Up          move workspace to output up;    mode "default"
-    bindsym $mod+Up     move workspace to output up;    mode "default"
+    bindsym $mod+Up     exec --no-startup-id "$HOME/.i3/bin/i3-swap-workspaces.sh up"; mode "default"
     bindsym l           move workspace to output right; mode "default"
     bindsym Right       move workspace to output right; mode "default"
-    bindsym $mod+Right  move workspace to output right; mode "default"
+    bindsym $mod+Right  exec --no-startup-id "$HOME/.i3/bin/i3-swap-workspaces.sh right"; mode "default"
     # cancel
     bindsym Return mode "default"
     bindsym Escape mode "default"

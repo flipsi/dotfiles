@@ -1,30 +1,60 @@
 #!/usr/bin/env bash
 
 if ! command -v jq &>/dev/null; then
-    echo "jq could not be found"
     exit 1
 fi
 
-# Goal: move workspace $1 to the currently focused output, move the workspace on the current output
-# to the output where $1 was.
+arg=$1
 
-# The workspace we want to end up on
-dest_ws=$1
-# The output where the destination ws resides
-output_of_dest_ws=$(i3-msg -t get_workspaces | jq .[] | jq -r 'select(.name == "'$dest_ws'").output')
-# The currently focused output
-current_output=$(i3-msg -t get_workspaces | jq .[] | jq -r "select(.focused == true).output")
-# The workspace on the current output
-current_ws=$(i3-msg -t get_workspaces | jq .[] | jq -r "select(.focused == true).name")
+function workspace_exists
+{
+    i3-msg -t get_workspaces | jq -e --arg ws "$arg" '.[] | select(.name==$ws)' >/dev/null
+}
 
-# Send away the current workspace
-i3-msg move workspace to output $output_of_dest_ws
-# Select the destination workspace
-i3-msg workspace $dest_ws
+function get_focused_output
+{
+    i3-msg -t get_workspaces | jq -r '.[] | select(.focused).output'
+}
 
-# Move the destination workspace to what was the current output in the beginning
-i3-msg move workspace to output $current_output
+function get_visible_workspace_on_focused_output
+{
+    i3-msg -t get_workspaces | jq -r '.[] | select(.visible and .focused).name'
+}
 
-# Re-activate the destination workspace
-# sleep 0.2
-i3-msg workspace $dest_ws
+current_output=$(get_focused_output)
+
+current_ws=$(get_visible_workspace_on_focused_output)
+
+if workspace_exists; then
+
+    dest_ws=$arg
+
+    i3-msg workspace "$dest_ws" >/dev/null
+
+    dest_output=$(get_focused_output)
+
+    i3-msg focus output "$current_output" >/dev/null
+
+else
+
+    i3-msg focus output "$arg" >/dev/null 2>&1 || exit 0
+
+    dest_output=$(get_focused_output)
+
+    dest_ws=$(get_visible_workspace_on_focused_output)
+
+    i3-msg focus output "$current_output" >/dev/null
+
+fi
+
+if [ "$dest_ws" = "$current_ws" ]; then
+    exit 0
+fi
+
+i3-msg move workspace to output "$dest_output" >/dev/null
+
+i3-msg workspace "$dest_ws" >/dev/null
+
+i3-msg move workspace to output "$current_output" >/dev/null
+
+i3-msg workspace "$dest_ws" >/dev/null
