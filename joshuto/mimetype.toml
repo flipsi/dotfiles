@@ -231,6 +231,7 @@ zst.app_list = [
 
 # misc formats
 aup.app_list = [{ command = "audacity", fork = true, silent = true }]
+aup3.app_list = [{ command = "audacity", fork = true, silent = true }]
 
 m3u.app_list = [
   { command = "micro" },
