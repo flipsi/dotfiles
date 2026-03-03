@@ -49,7 +49,8 @@ function set_var_from_pass
     end
 end
 
-set_var_from_pass OPENROUTER_API_KEY 'reply/openrouter.ai' '^api-key'
+set_var_from_pass OPENROUTER_API_KEY 'openrouter.ai/pmoers@web.de' '^api-key'
+set_var_from_pass GEMINI_API_KEY 'gemini/soziflip' '^api-key'
 
 # edit files with neovim or vim
 if command -v nvim >/dev/null 2>&1
