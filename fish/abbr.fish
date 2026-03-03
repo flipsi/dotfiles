@@ -57,6 +57,7 @@ abbr $args gbD    git branch -D
 abbr $args gbm    git branch -m
 abbr $args gc     git commit
 abbr $args gca    git commit --amend
+abbr $args gcan   git commit --amend --no-edit
 abbr $args --set-cursor=MSG gcm    git commit -m \'MSG\'
 abbr $args gcmi   git commit -m \'Initial commit\'
 abbr $args gcl    git clone --recursive
