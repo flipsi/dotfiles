@@ -183,7 +183,7 @@ abbr $args so     sudo systemctl stop
 abbr $args sr     sudo systemctl restart
 abbr $args t      trans :de
 abbr $args te     trans de:en
-abbr $args tf     trans de:fr
+abbr $args tf     tail -f
 abbr $args u      unison
 abbr $args v      nvim
 # abbr $args vs     vim --servername \(basename \(pwd\)\)
