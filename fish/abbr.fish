@@ -15,6 +15,7 @@ abbr $args ck     ckit
 abbr $args cku    ckit server up -d -r
 abbr $args ckd    ckit server down
 abbr $args d      docker
+abbr $args da     docker start
 abbr $args dl     docker logs -n 60
 abbr $args dlf    docker logs -n 60 -f
 abbr $args dps    docker ps
@@ -119,6 +120,7 @@ abbr $args grH    git reset HEAD~1
 abbr $args grHH   git reset --hard HEAD~1
 abbr $args grl    git revert HEAD
 abbr $args grv    git revert
+abbr $args grva   git revert --abort
 abbr $args gs     tig status
 abbr $args gta    git stash push --include-untracked
 abbr $args gtp    git stash pop
