@@ -10,6 +10,13 @@ function find_network_interface_name_by_pattern() {
         | tail -n 1
 }
 
+function find_active_network_interface_name_by_pattern() {
+    PATTERN="$1"
+    ip -br link \
+        | grep -E "$PATTERN" \
+        | awk '$2=="UP"{print $1; exit}'
+}
+
 function set_env_vars() {
     export HOSTNAME
     export  ETH_INTERFACE
@@ -30,8 +37,7 @@ function set_env_vars() {
     export BAR_MODULES_THIRD_CENTER
     export BAR_MODULES_THIRD_RIGHT
 
-    # ETH_INTERFACE='enp0s13f0u1u6'
-    ETH_INTERFACE=$(find_network_interface_name_by_pattern 'enp')
+    ETH_INTERFACE=$(find_active_network_interface_name_by_pattern 'enp')
     WLAN_INTERFACE=$(find_network_interface_name_by_pattern '(wlan|wlp)')
 
     HOSTNAME=$(hostname)
