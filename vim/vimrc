@@ -668,7 +668,6 @@ nnoremap <leader>gfm  :exe ':Confirm Git fetch ' . GitRemoteName() . ' ' . GitRe
 nnoremap <leader>gps  :GitPush<cr>
 nnoremap <leader>gpu  :GitPush<cr>
 nnoremap <leader>gpf  :Git push --force-with-lease<cr>
-nnoremap <leader>gup  :Confirm Git submodule update<cr>
 
 " work with remote (Mnemonic: 'G'it Rem'o'te) Github or Gitlab
 nnoremap <leader>go   <nop>
