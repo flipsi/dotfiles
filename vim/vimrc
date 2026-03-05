@@ -742,6 +742,38 @@ augroup gitcommit_view
     au BufRead fugitive:///*/.git//?\\\{40\} normal zR
 augroup END
 
+function! s:CommitUnderCursor() abort
+  " In :Git blame buffers the line begins with the abbreviated/full SHA.
+  " Extract the first hex token (7..40 chars).
+  let l:line = getline('.')
+  let l:sha  = matchstr(l:line, '^\x\{7,40}')
+  return l:sha
+endfunction
+
+function! s:BlameYankRemoteCommitUrl() abort
+  let l:sha = s:CommitUnderCursor()
+  let l:url = s:RemoteCommitLink(l:sha)
+
+  if empty(l:url)
+    echohl WarningMsg | echom 'No commit/remote URL found for this line.' | echohl None
+    return
+  endif
+
+  " Yank to unnamed register and system clipboard if available
+  let @" = l:url
+  if has('clipboard')
+    let @+ = l:url
+  endif
+  echom l:url
+endfunction
+
+" --- mapping for Fugitive blame buffers ---
+augroup FugitiveBlameRemoteUrl
+  autocmd!
+  " Trigger when entering a buffer that Fugitive marks as a blame buffer
+  autocmd FileType fugitiveblame nnoremap <silent><buffer> yy :call <SID>BlameYankRemoteCommitUrl()<CR>
+augroup END
+
 
 " resolve 3-way merge conflicts (diff view)
 nnoremap <leader>g<down>    ]c
@@ -4471,6 +4503,15 @@ function! GitRemoteHoster()
     endif
 endfunction
 
+function! s:GitRemoteUrl(remote) abort
+  " Prefer git's own URL resolution; fall back to config
+  let l:url = system('git remote get-url ' . shellescape(a:remote) . ' | tr -d "\n"')
+  if v:shell_error
+    let l:url = system('git config --get remote.' . shellescape(a:remote) . '.url | tr -d "\n"')
+  endif
+  return l:url
+endfunction
+
 " echo `main` if branch exists or `master` otherwise
 function! GitRepoMainOrMaster()
     call system('git rev-parse --verify main >/dev/null 2>&1')
@@ -4479,6 +4520,50 @@ function! GitRepoMainOrMaster()
     else
         return 'master'
     endif
+endfunction
+
+function! s:NormalizeRemoteToHttps(url) abort
+ let l:u = substitute(a:url, '\n\+$', '', '')
+
+ " Handle scp-style: user@host:path
+ if l:u =~# '^[^@]\+@[^:]\+:.'
+ let l:host = matchstr(l:u, '^[^@]\+@\zs[^:]\+\ze:')
+ let l:path = matchstr(l:u, '^[^@]\+@[^:]\+:\zs.*$')
+ let l:u = 'https://' . l:host . '/' . l:path
+ endif
+
+ " Handle ssh://[user@]host/path
+ if l:u =~# '^ssh://'
+ let l:u = substitute(l:u, '^ssh://', '', '')
+ " drop optional user@
+ let l:u = substitute(l:u, '^[^@/]\+@', '', '')
+ let l:u = 'https://' . l:u
+ endif
+
+ let l:u = substitute(l:u, '\.git$', '', '')
+ return l:u
+endfunction
+
+function! s:RemoteCommitLink(sha) abort
+  if empty(a:sha)
+    return ''
+  endif
+
+  let l:remote = GitRemoteName()
+  if empty(l:remote)
+    return ''
+  endif
+
+  let l:raw = s:GitRemoteUrl(l:remote)
+  if empty(l:raw)
+    return ''
+  endif
+
+  let l:base = s:NormalizeRemoteToHttps(l:raw)
+  echo l:raw . ' TOOO ' . l:base
+
+  " GitHub/GitLab/Bitbucket all accept /commit/<sha> for the common case.
+  return l:base . '/commit/' . a:sha
 endfunction
 
 function! GitChooseBranchInteractively(sink_function_name)
