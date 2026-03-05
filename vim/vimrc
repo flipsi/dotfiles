@@ -3209,13 +3209,19 @@ augroup java_on_read
 augroup END
 
 function! SetupMaven()
+    nnoremap <buffer> <leader>bC  :call RunCommand("mvn clean")<cr>
     nnoremap <buffer> <leader>bI  :call RunCommand("mvn install")<cr>
     nnoremap <buffer> <leader>bi  :call RunCommand("mvn install -DskipTests")<cr>
     nnoremap <buffer> <leader>bv  :call RunCommand("mvn validate")<cr>
     nnoremap <buffer> <leader>bc  :call RunCommand("mvn compile")<cr>
     nnoremap <buffer> <leader>bp  :call RunCommand("mvn package")<cr>
+    nnoremap <buffer> <leader>blc :call RunCommand("mvn checkstyle:check")<cr>
     nnoremap <buffer> <leader>btt :call RunCommand("mvn test")<cr>
-    nnoremap <buffer> <leader>bC  :call RunCommand("mvn clean")<cr>
+    " TODO: implement
+    nnoremap <buffer> <leader>bto :call RunCommand("mvn test -Dtest=FIXME")<cr>
+    nnoremap <buffer> <leader>btf :call RunCommand("mvn test -Dtest=FIXME")<cr>
+    " FIXME: this is customer/project specific:
+    nnoremap <buffer> <leader>btc :call RunCommand("bash -c 'cd tqg-wms-configuration && rm -rf ./target && mvn test'")<cr>
 endfunction
 command! SetupMaven :call SetupMaven()
 
