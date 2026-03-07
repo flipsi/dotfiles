@@ -1,17 +1,12 @@
 ---
--- LSP configuration
+-- LSP configuration (Neovim 0.11 native)
 ---
 vim.opt.signcolumn = 'yes'
 
-local lspconfig = require('lspconfig')
 
 --
--- Manage installation of language servers with mason
+-- Manage installation of language servers with mason (optional but fine)
 --
--- Install with :LspInstall
-
--- List of available language servers:
--- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 local ensure_installed = {
   'bashls',
   'cssls',
@@ -68,99 +63,100 @@ require('mason-lspconfig').setup({
       --     })
       -- end,
     },
-  })
-
--- Add cmp_nvim_lsp capabilities settings to lspconfig
-lspconfig.util.default_config.capabilities = vim.tbl_deep_extend(
-  'force',
-  lspconfig.util.default_config.capabilities,
-  require('cmp_nvim_lsp').default_capabilities()
-)
-
--- Executes the callback function every time a language server is attached to a buffer.
-vim.api.nvim_create_autocmd('LspAttach', {
-  desc = 'LSP actions',
-  callback = function(event)
-    local opts = {buffer = event.buf}
-
-    vim.keymap.set('n', '<leader>iq', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-    vim.keymap.set('n', 'K',          '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-    vim.keymap.set('n', 'gdd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-    vim.keymap.set('n', 'gds', ':vsplit | lua vim.lsp.buf.definition()<cr>', opts)
-    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-    vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-    vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-    vim.keymap.set('n', 'gr',         '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-    vim.keymap.set('n', '<leader>fu', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-    vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-    vim.keymap.set({'n', 'x'}, '<leader>rf', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-    vim.keymap.set({'n', 'x'}, '<leader>af', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-    vim.keymap.set({'n', 'x'}, '<leader>iaa', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-
-    -- -- non-spec LSP features per LS, like "organize imports"
-    -- note that for jdtls, organizing imports is a code action
-
-    -- local clients = vim.lsp.get_active_clients() # deprecated
-    local clients = vim.lsp.get_clients()
-
-    if #clients == 0 then
-      print("No active LSP clients.")
-    else
-      for _, client in pairs(clients) do
-        -- print(vim.inspect(client))
-        if (client.name == 'jdtls') then
-          -- FIXME
-          vim.keymap.set('n', '<leader>ioi',   '<cmd>lua require("lspconfig").jdtls.organize_imports()<cr>', opts)
-          -- vim.keymap.set('n', '<leader>iaev' , '<cmd>lua jdtls.extract_variable()<cr>', opts)
-          -- vim.keymap.set('n', '<leader>iaec',  '<cmd>lua jdtls.extract_constant()<cr>', opts)
-          -- vim.keymap.set('v', "<leader>iaem", [[<ESC><CMD>lua jdtls.extract_method(true)<CR>]], { noremap=true, silent=true, buffer=event.buf, desc = "Extract method" })
-        end
-      end
-    end
-
-  end,
 })
-
-
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Setup language servers (should happen *exactly* once per LS):
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+-- Native server configs (these names must match Neovim's built-in server names)
+vim.lsp.config('bashls',   { capabilities = capabilities })
+vim.lsp.config('cssls',    { capabilities = capabilities })
+vim.lsp.config('html',     { capabilities = capabilities })
+vim.lsp.config('jsonls',   { capabilities = capabilities })
+vim.lsp.config('gopls',    { capabilities = capabilities })
+vim.lsp.config('clojure_lsp', { capabilities = capabilities })
+vim.lsp.config('kotlin_language_server', { capabilities = capabilities })
+
+local lombok_jar = vim.fn.expand("~/.local/share/nvim/mason/share/jdtls/lombok.jar") -- adjust to your path
+
+vim.lsp.config('jdtls', {
+  capabilities = capabilities,
+  cmd = {
+    'jdtls',
+    '--jvm-arg=-javaagent:' .. lombok_jar,
+  },
+  settings = {
+    java = {
+      configuration = {
+        annotationProcessing = { enabled = true },
+      },
+    },
+  },
+})
+
 local lua_settings = {
   Lua = {
-    diagnostics = {
-      globals = { 'vim' },
-    }
-  }
+    diagnostics = { globals = { 'vim' } },
+  },
 }
+
+vim.lsp.config('lua_ls', {
+  capabilities = capabilities,
+  settings = lua_settings,
+})
 
 local pylsp_settings = {
   pylsp = {
-      plugins = {
-        pycodestyle = {
-          ignore = {'E501'},
-          maxLineLength = 100
-        }
-      }
-    }
+    plugins = {
+      pycodestyle = {
+        ignore = { 'E501' },
+        maxLineLength = 100,
+      },
+    },
+  },
 }
 
--- TODO: configure?
--- https://sookocheff.com/post/vim/neovim-java-ide/
-local jdtls_settings = { }
+vim.lsp.config('pylsp', {
+  capabilities = capabilities,
+  settings = pylsp_settings,
+})
 
-require("lspconfig").bashls.setup { capabilities = capabilities }
-require("lspconfig").clangd.setup { capabilities = capabilities }
-require("lspconfig").cmake.setup { capabilities = capabilities }
-require("lspconfig").cssls.setup { capabilities = capabilities }
-require("lspconfig").dockerls.setup { capabilities = capabilities }
-require("lspconfig").jdtls.setup { settings = jdtls_settings, capabilities = capabilities }
-require("lspconfig").jsonls.setup { capabilities = capabilities }
-require("lspconfig").lua_ls.setup { settings = lua_settings, capabilities = capabilities }
-require("lspconfig").marksman.setup { capabilities = capabilities }
-require("lspconfig").pylsp.setup { settings = pylsp_settings, capabilities = capabilities }
-require('lspconfig').rust_analyzer.setup({})
-require("lspconfig").yamlls.setup { capabilities = capabilities }
+-- Enable servers (do this once)
+for _, server in ipairs(ensure_installed) do
+  vim.lsp.enable(server)
+end
+
+-- Keymaps on attach (your existing ones are fine)
+vim.api.nvim_create_autocmd('LspAttach', {
+  desc = 'LSP actions',
+  callback = function(event)
+    local opts = { buffer = event.buf }
+
+    vim.keymap.set('n', '<leader>iq', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gdd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'gds', function() vim.cmd('vsplit'); vim.lsp.buf.definition() end, opts)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<leader>fu', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set({ 'n', 'x' }, '<leader>rf', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'x' }, '<leader>af', function() vim.lsp.buf.format({ async = true }) end, opts)
+    vim.keymap.set({ 'n', 'x' }, '<leader>iaa', vim.lsp.buf.code_action, opts)
+
+    -- Organize imports (generic LSP way; works if server supports it)
+    vim.keymap.set('n', '<leader>ioi', function()
+      vim.lsp.buf.code_action({
+        apply = true,
+        context = { only = { "source.organizeImports" } },
+      })
+    end, opts)
+  end,
+})
+
 
 
 
