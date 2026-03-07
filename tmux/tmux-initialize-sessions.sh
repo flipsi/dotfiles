@@ -6,9 +6,10 @@
 
 set -e
 
+SESSION_MAIN="main"
+SESSION_CODE="code"
+
 HOSTNAME=$(hostname)
-SESSION_NAME_MAIN="main"
-SESSION_NAME_CODE="code"
 
 
 function has_internet_connection() {
@@ -27,92 +28,109 @@ function has_internet_connection() {
     return "$INTERNET_CONNECTION"
 }
 
-# For a given directory, return a list of the most recently updated git projects within it
-function get_recent_git_projects() {
-    PROJECTS_DIR="$1"
-    SEARCH_DEPTH=2
-    NUMBER_OF_PROJECTS="$2"
-    PROJECTS_DIR=${PROJECTS_DIR%/} # remove trailing slash if any
+function tmux_new_window_once() {
+    local session="$1"
+    local window="$2"
+    local command_line="$3"
+    local directory="${4:-$HOME}"
 
-    # get list of git projects and their last commit timestamp
-    while IFS= read -r -d '' CHILD; do
-        if [[ -d "$CHILD/.git" ]]; then
-            PROJECT_NAME="${CHILD#"$PROJECTS_DIR/"}"
-            PROJECTS=("$(git -C "$CHILD" log -1 --format=%ct) $PROJECT_NAME" "${PROJECTS[@]}")
-        fi
-    done <  <(find "$PROJECTS_DIR" -maxdepth "$SEARCH_DEPTH" -type d -print0)
+    if ! tmux has-session -t "$session" 2>/dev/null; then
+        echo "tmux new session $session"
+        tmux new-session -d -s "$session" -n "delete-me" # can't create a session without window
+    fi
 
-    # sort by timestamp
-    # shellcheck disable=SC2207
-    IFS=$'\n' PROJECTS=($(sort --reverse <<<"${PROJECTS[*]}"))
-    unset IFS
+    if tmux list-windows -t "$session" -F '#W' | grep -qx "$window"; then
+        echo "tmux window $session:$window already exists."
+    else
+        echo "tmux new window $session:$window"
+        tmux new-window -t "$session:" -n "$window" -c "$directory" "$command_line"
+        tmux set-window-option -t "$session:$window" automatic-rename off
+    fi
 
-    # get the first $NUMBER_OF_PROJECTS entries and throw away timestamp
-    for PROJECT in "${PROJECTS[@]:0:$NUMBER_OF_PROJECTS}"; do
-        RESULT=("$(echo "$PROJECT" | cut -d' ' -f2) ${RESULT[@]}")
-    done
-
-    echo "${RESULT[@]}"
+    if tmux list-windows -t "$session" -F '#W' | grep -qx "delete-me"; then
+        tmux kill-window -t "$session:delete-me"
+    fi
 }
 
 function open_project_in_vim() {
-    PROJECT_PATH="$1"
-    PROJECT_NAME="$2"
-    tmux new-window -t "$SESSION_NAME_CODE:" -n "$PROJECT_NAME" -c "$PROJECT_PATH" \
-        "fish -i -C \"nvim --listen $PROJECT_NAME"\"
+    local project_path="$1"
+    local project_name="$2"
+    tmux_new_window_once "$SESSION_CODE" "$project_name" -c "$project_path" \
+        "fish -i -C \"nvim --listen $project_name\""
 }
 
 function open_recent_subdir_projects() {
-    PROJECTS_DIR="$1"
-    NUMBER_OF_PROJECTS="$2"
+    local projects_dir="$1"
+    local number_of_projects="$2"
     if [[ -d "$PROJECTS_DIR" ]]; then
         for PROJECT in $(get_recent_git_projects "$PROJECTS_DIR" "$NUMBER_OF_PROJECTS"); do
-            echo "$PROJECT"
+            # echo "$PROJECT"
             open_project_in_vim "$PROJECTS_DIR/$PROJECT" "$PROJECT"
         done
     fi
 }
 
-function create_session_main() {
-    if ! (tmux has-session -t $SESSION_NAME_MAIN 2>/dev/null); then
+# For a given directory, return a list of the most recently updated git projects within it
+function get_recent_git_projects() {
+    local projects_dir="$1"
+    local search_depth=2
+    local number_of_projects="$2"
+    projects_dir=${projects_dir%/} # remove trailing slash if any
 
-        tmux new-session -d -s $SESSION_NAME_MAIN -n "delete-me" # can't create a session without window
-        tmux new-window -t $SESSION_NAME_MAIN: -n "top" "bpytop || htop"
-        tmux new-window -t $SESSION_NAME_MAIN: -n "spotify" "spotify_player"
-        tmux kill-window -t "$SESSION_NAME_MAIN:delete-me"
-
-        if has_internet_connection; then
-            if [[ -d $HOME/.local/share/mail/ ]]; then
-                tmux new-window -t $SESSION_NAME_MAIN: -n mail "mail --mode sync --disable-tmux-rename --disable-tail-logs"
-            fi
+    # get list of git projects and their last commit timestamp
+    local projects=()
+    while IFS= read -r -d '' child; do
+        if [[ -d "$child/.git" ]]; then
+            local project_name="${child#"$projects_dir/"}"
+            projects+=("$(git -C "$child" log -1 --format=%ct) $project_name")
         fi
+    done <  <(find "$projects_dir" -maxdepth "$search_depth" -type d -print0)
+
+    # sort by timestamp
+    # shellcheck disable=SC2207
+    IFS=$'\n' projects=($(sort --reverse <<<"${projects[*]}"))
+    unset IFS
+
+    # get the first $number_of_projects entries and throw away timestamp
+    local result=()
+    for project in "${projects[@]:0:$number_of_projects}"; do
+        result+=("$(echo "$project" | cut -d' ' -f2)")
+    done
+
+    echo "${result[@]}"
+}
+
+function create_session_main() {
+    tmux_new_window_once "$SESSION_MAIN" "top" "bpytop || htop"
+    tmux_new_window_once "$SESSION_MAIN" "spotify" "spotify_player"
+
+    # email
+    if has_internet_connection && [[ -d "$HOME/.local/share/mail/" ]]; then
+        # FIXME: invoke keychain, or is that not necessary anymore?
+        # local email_cmd='fish -c "keychain --eval --quiet --timeout 48000 --shell fish ~/.ssh/id_* | source && mail --mode sync --disable-rename-window --disable-tail-logs"'
+        local email_cmd="fish -c 'mail --mode sync --disable-rename-window --disable-tail-logs'"
+        tmux_new_window_once "$SESSION_MAIN" "mail" "$email_cmd"
     fi
+
+    tmux_new_window_once "$SESSION_MAIN" "tmp" "fish" "$HOME/tmp"
 }
 
 function create_session_code() {
-    if ! (tmux has-session -t $SESSION_NAME_CODE 2>/dev/null); then
-
-        tmux new-session -d -s $SESSION_NAME_CODE -n "delete-me" # can't create a session without window
-
-        if [[ "$HOSTNAME" = "nott" ]]; then
-            open_project_in_vim "$HOME/src-projects/dotfiles" "dotfiles"
-            open_project_in_vim "$HOME/src-projects/shellscripts" "shellscripts"
-            open_recent_subdir_projects "$HOME/work-projects" 7
-        else
-            open_recent_subdir_projects "$HOME/src-projects" 5
-        fi
-
-        tmux kill-window -t "$SESSION_NAME_CODE:delete-me"
-
+    if [[ "$HOSTNAME" = "nott" ]]; then
+        open_project_in_vim "$HOME/src-projects/dotfiles" "dotfiles"
+        open_project_in_vim "$HOME/src-projects/shellscripts" "shellscripts"
+        open_recent_subdir_projects "$HOME/work-projects" 7
+    else
+        open_recent_subdir_projects "$HOME/src-projects" 5
     fi
 }
 
 function set_state()
 {
 
-    tmux switch-client -t $SESSION_NAME_MAIN
-    tmux select-window -t $SESSION_NAME_MAIN:2 # (set 'last' window)
-    tmux select-window -t $SESSION_NAME_MAIN:1 # (set active window)
+    tmux switch-client -t $SESSION_MAIN
+    tmux select-window -t $SESSION_MAIN:2 # (set 'last' window)
+    tmux select-window -t $SESSION_MAIN:1 # (set active window)
 }
 
 if (tmux has-session -t init 2>/dev/null); then
