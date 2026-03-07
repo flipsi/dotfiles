@@ -2561,7 +2561,7 @@ if has('nvim')
     Plug 'williamboman/mason.nvim'
     Plug 'williamboman/mason-lspconfig.nvim'
 
-    " Plug 'mfussenegger/nvim-jdtls' " Java LSP
+    Plug 'mfussenegger/nvim-jdtls' " Java LSP
     " IMPORTANT: If you want all the features jdtls has to offer, [nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls)
     " is highly recommended. If all you need is diagnostics, completion, imports, gotos and formatting and some code actions
     " you can keep reading here.
