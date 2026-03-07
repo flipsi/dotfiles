@@ -116,7 +116,7 @@ function autostart_keychain_on_some_hosts
     if in_X
         # keychain takes care of ssh-agent and gpg-agent
         function keychain_start
-            eval (command keychain --eval --quiet --timeout 5000 ~/.ssh/id_*)
+            eval (command keychain --eval --quiet --timeout 48000 ~/.ssh/id_*)
         end
         if command -v keychain >/dev/null
             set -l host_where_to_start_keychain_automatically 'falbala' 'mimir' 'frey' 'nott'
