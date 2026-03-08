@@ -95,6 +95,16 @@ vim.lsp.config('jdtls', {
   },
 })
 
+-- Groovy
+-- TODO: fix import, see https://www.reddit.com/r/groovy/comments/1eruc6o/comment/lyo20xh/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+vim.lsp.config('groovyls', {
+    capabilities = capabilities,
+    filetypes = { "groovy" },
+    -- cmd = { "groovy-language-server" }, -- installed via AUR in this case
+    cmd = { "java", "-jar", "/usr/share/java/groovy-language-server/groovy-language-server-all.jar" },
+    root_markers = { ".git" }
+})
+
 local lua_settings = {
   Lua = {
     diagnostics = { globals = { 'vim' } },
@@ -154,6 +164,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         context = { only = { "source.organizeImports" } },
       })
     end, opts)
+
   end,
 })
 
