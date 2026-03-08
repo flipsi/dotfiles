@@ -2791,6 +2791,11 @@ Plug 'sheerun/vim-polyglot'
 " markdown is disabled to use and configure the latest version explicitly
 let g:polyglot_disabled = ['helm', 'markdown']
 
+" fix Java filetype startup error:
+" syntax/java.vim: Vim(syntax):E28: No such highlight group name: markdownLineStart markdownH1 markdownH2 markdownHeadingRule markdownRule markdownCode markdownCodeBlock markdownIdDeclaration
+" https://github.com/vim/vim/issues/16349#issuecomment-2566662793
+let g:java_ignore_javadoc = 1
+
 
 " Language: Clojure {{{
 
