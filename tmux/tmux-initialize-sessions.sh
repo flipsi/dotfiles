@@ -55,17 +55,19 @@ function tmux_new_window_once() {
 function open_project_in_vim() {
     local project_path="$1"
     local project_name="$2"
-    tmux_new_window_once "$SESSION_CODE" "$project_name" -c "$project_path" \
-        "fish -i -C \"nvim --listen $project_name\""
+    tmux_new_window_once \
+        "$SESSION_CODE" \
+        "$project_name" \
+        "fish -i -C \"nvim --listen $project_name\"" \
+        "$project_path"
 }
 
 function open_recent_subdir_projects() {
     local projects_dir="$1"
     local number_of_projects="$2"
-    if [[ -d "$PROJECTS_DIR" ]]; then
-        for PROJECT in $(get_recent_git_projects "$PROJECTS_DIR" "$NUMBER_OF_PROJECTS"); do
-            # echo "$PROJECT"
-            open_project_in_vim "$PROJECTS_DIR/$PROJECT" "$PROJECT"
+    if [[ -d "$projects_dir" ]]; then
+        for project in $(get_recent_git_projects "$projects_dir" "$number_of_projects"); do
+            open_project_in_vim "$projects_dir/$project" "$project"
         done
     fi
 }
