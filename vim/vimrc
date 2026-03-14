@@ -7191,7 +7191,7 @@ function! Tig(from_current_file)
         let l:command = 'fish -c ''' . l:command . ''''
         " execute 'Shell fish -c ''' . l:command . ''''
     else
-        let l:command = 'tig status'
+        let l:command = 'tig status && exit'
     endif
     if exists("g:neovide") || !exists("$TMUX")
         call RunCommandInTerminal(l:command)
