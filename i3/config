@@ -1030,6 +1030,7 @@ assign [class="(?i)vivaldi-stable"]                                             
 assign [class="(?i)gimp"]                                                                           Gimp
 for_window [class="(?i)libreoffice"] move to workspace                                              Doc
 for_window [class="(?i)gnome-session-failed"] move to workspace                                     GnomeSessionFailed
+assign [class="(?i)camunda modeler"]                                                                Camunda
 
 ## workspaces with window always on specific output
 set $PRIMARY_OUTPUT DP-1
