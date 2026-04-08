@@ -20,7 +20,8 @@
     prune = true
 
 [pull]
-    rebase = true
+    ; rebase = true
+    rebase = false ; required for Maven JGitFlow plugin
 
 [push]
     default = simple
@@ -68,7 +69,7 @@
     file-decoration-style = none
 
 [diff]
-    algorithm = patience
+    ; algorithm = patience ; breaks Maven JGitFlow plugin
     tool = vimdiff
     guitool = sublimerge
     colorMoved = plain
