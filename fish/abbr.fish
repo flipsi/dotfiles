@@ -137,9 +137,9 @@ abbr $args kc     kubectl
 abbr $args i      nsxiv-rifle
 abbr $args j      joshuto
 abbr $args l      less
-abbr $args ll     exa_or_ls -l
-abbr $args lla    exa_or_ls -l -a
-abbr $args lll    exa_or_ls -l -a
+abbr $args ll     eza_or_ls -l
+abbr $args lla    eza_or_ls -l -a
+abbr $args lll    eza_or_ls -l -a
 abbr $args lsl    ls -l
 abbr $args lt     exa_or_tree -l
 abbr $args m      man
