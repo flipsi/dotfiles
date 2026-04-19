@@ -84,7 +84,7 @@ echo 'Choose action: [c]opy filepath
             case '-r' '--ranger'
                 set action ranger
             case '-j' '--joshuto'
-                set action ranger
+                set action joshuto
             case '*'
                 set pattern $pattern $argv[1]
         end
@@ -132,6 +132,9 @@ echo 'Choose action: [c]opy filepath
             case ranger
                 ranger --selectfile=$file
             case joshuto
+                if test -f "$file"
+                    set file (dirname "$file")
+                end
                 joshuto "$file"
         end
     end
