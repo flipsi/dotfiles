@@ -117,6 +117,10 @@ function create_session_main() {
     fi
 
     tmux_new_window_once "$SESSION_MAIN" "tmp" "fish" "$HOME/tmp"
+
+    if [[ "$HOSTNAME" = "nott" ]]; then
+        tmux_new_window_once "$SESSION_MAIN" "notes" "nvim -- TODOs.md *" "$HOME/work/reply/notes"
+    fi
 }
 
 function create_session_code() {
