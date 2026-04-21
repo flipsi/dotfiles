@@ -55,10 +55,12 @@ function tmux_new_window_once() {
 function open_project_in_vim() {
     local project_path="$1"
     local project_name="$2"
+    local project_basename
+    project_basename=$(basename "$project_name")
     tmux_new_window_once \
         "$SESSION_CODE" \
         "$project_name" \
-        "fish -i -C \"nvim --listen $project_name\"" \
+        "fish -i -C \"nvim --listen $project_basename\"" \
         "$project_path"
 }
 
