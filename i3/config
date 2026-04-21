@@ -1026,6 +1026,7 @@ assign [class="(?i)neovide"]                                                    
 for_window [class="(?i)outlook-for-linux"] move to workspace                                        Outlook
 for_window [class="(?i)microsoft teams"] move to workspace                                          Teams
 for_window [class="(?i)chrom" instance="crx_cifhbcnohmdccbgoicgdjpfamggdegmo"]  move to workspace   Teams
+for_window [class="FFPWA-01KPEJVWCGC7RW8NAHDFSF71R0"]                           move to workspace   Teams
 assign [class="code-oss"]                                                                           VS Code
 assign [class="(?i)pale moon"]                                                                      Web
 assign [class="(?i)qutebrowser"]                                                                    Web
