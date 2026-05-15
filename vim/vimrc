@@ -647,11 +647,11 @@ nnoremap <leader>gdm  :exe ':Shell git diff ' . GitRepoMainOrMaster() . ' \| del
 nnoremap <leader>gdM  :GitRemoteDiffMergeRequest<cr>
 
 " checkout/create/rename branches
-nnoremap <leader>gee  :Git checkout<space>
+nnoremap <leader>gee  :Git switch<space>
 nnoremap <leader>geo  :GitCheckoutInteractively<cr>
-nnoremap <leader>gem  :exe ':Confirm Git checkout ' . GitRepoMainOrMaster()<cr>
-nnoremap <leader>ge-  :Confirm Git checkout -<cr>
-nnoremap <leader>geb  :silent! exe ':Git checkout -b ' . input('Branch name: ')<cr>
+nnoremap <leader>gem  :exe ':Confirm Git switch ' . GitRepoMainOrMaster()<cr>
+nnoremap <leader>ge-  :Confirm Git switch -<cr>
+nnoremap <leader>gen  :silent! exe ':Git switch -c ' . input('Branch name: ')<cr>
 nnoremap <leader>gbm  :silent! exe ':Confirm Git branch -m ' . input('Renaming branch to: ')<cr>
 
 " merge and rebase

@@ -137,10 +137,9 @@ bind stage   as  ?git save %(prompt)
 bind refs    ap  ?git pop-prefix %(branch)
 
 # checkout/merge refs
-bind generic geb ?git checkout -b %(prompt)
-bind refs c      ?git checkout %(branch)
+bind generic gen ?git switch -c %(prompt)
+bind refs c      ?git switch %(branch)
 bind refs m      ?git merge %(branch)
-bind refs b      !git checkout -b %(prompt)
 bind refs d      ?git branch -d %(branch)
 
 # rename branch
