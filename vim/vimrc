@@ -5311,6 +5311,7 @@ function! ToggleHighlightInterestingWord(n)
         windo call matchadd("InterestingWord" . a:n, pattern, 1, match_id)
     endif
     RestoreCursorAndWindowPosition
+    stopinsert
 endfunction
 
 function! RemoveAllInterestingWordHighlights()
@@ -5325,6 +5326,7 @@ function! RemoveAllInterestingWordHighlights()
     silent! windo call matchdelete(g:match_id_base + 8)<cr>
     silent! windo call matchdelete(g:match_id_base + 9)<cr>
     call win_gotoid(l:win_id)
+    stopinsert
 endfunction
 
 " Mappings
