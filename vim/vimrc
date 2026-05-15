@@ -5585,8 +5585,8 @@ function! PasteFromGUI()
     elseif primary == clipbrd
         normal "*Pl
     else
-        ec "Paste (c)lipboard (default)    " . strtrans(strpart(clipbrd, 0, 50))
-        ec "or    (p)rimary selection?     " . strtrans(strpart(primary, 0, 50))
+        echo "Paste (c)lipboard (default)    " . strtrans(strpart(clipbrd, 0, 90))
+        echo "or    (p)rimary selection?     " . strtrans(strpart(primary, 0, 90))
         let c = getchar()
         if nr2char(c) == 'q' || c == 27 || c == 3 || c == 7
             redraw
@@ -5600,10 +5600,15 @@ function! PasteFromGUI()
     endif
 endfunction
 " }}}
+
+" paste as is
 noremap <silent> <c-v><c-v> :call PasteFromGUI()<cr>
-imap <c-v><c-v> <c-o><c-v><c-v>
+imap  <c-v><c-v> <c-o><c-v><c-v>
+" paste as line above or below
 noremap <silent> <c-v>j o<esc>:call PasteFromGUI()<cr>
 noremap <silent> <c-v>k O<esc>:call PasteFromGUI()<cr>
+" paste with removed line break
+noremap <silent> <c-v>i :let @+ = substitute(@+, "\n", "", "") <bar> normal "+Pl<cr>
 
 
 " Convert Unix timestamp to datetime
