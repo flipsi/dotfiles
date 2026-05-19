@@ -359,6 +359,7 @@ mode "$mode_clipboard" {
     bindsym       p exec --no-startup-id "rofi-pass || $SHELLSCRIPT_PATH/rofi-pass.sh"; mode "default";
     bindsym Shift+p exec --no-startup-id "passmenu $DMENU_OPTIONS"; mode "default";
     bindsym       r exec --no-startup-id "fish -c 'xdotool type (pass-pick reply/microsoft/main username:) && xdotool key Tab && xdotool type (pass reply/microsoft/main | head -n1) && xdotool key Enter'"; mode "default";
+    bindsym       k exec --no-startup-id "fish -c 'xdotool type (pass-pick reply/keycloak/main email:) && xdotool key Tab && xdotool type (pass reply/keycloak/main | head -n1) && xdotool key Enter'"; mode "default";
     # cancel
     bindsym $mod+Escape mode "default"
     bindsym Return mode "default"
