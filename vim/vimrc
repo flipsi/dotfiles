@@ -630,7 +630,8 @@ nnoremap <leader>gU   :Gread<cr>
 nnoremap <leader>gcc  :Git commit<cr>
 nnoremap <leader>gca  :Git commit --amend<cr>
 " stage all and commit (Mnemonic: commit quick)
-nnoremap <leader>gcq  :Git add --all <bar> Git commit<cr> 
+nnoremap <leader>gcq  :Gwrite <bar> Git commit<cr>
+nnoremap <leader>gcQ  :Git add --all <bar> Git commit<cr>
 
 " reset
 nnoremap <leader>grH        :Confirm Git reset --hard HEAD~1<cr>
