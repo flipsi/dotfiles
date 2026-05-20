@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 function is_at_home
-    xrandr | grep -E -q 'DisplayPort-. connected'
+    xrandr | grep -E -q 'HDMI-1 connected'
 end
 
 function setup_power_and_lock_management
