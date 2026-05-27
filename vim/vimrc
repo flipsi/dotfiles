@@ -2579,12 +2579,24 @@ if has('nvim')
     nnoremap <leader>iii :LspInstall<space>
     nnoremap <leader>iim :Mason<cr>
 
-    nnoremap <leader>iis :LspInfo<cr>
-    nnoremap <leader>iia :LspStart<cr>
-    nnoremap <leader>iio :LspStop<cr>
+    if v:version > 800
+        " native lsp commands
+        nnoremap <leader>iis :checkhealth vim.lsp<cr>
+        nnoremap <leader>iia :lsp enable<cr>
+        nnoremap <leader>iio :lsp disable<cr>
+    else
+        " nvim-lspconfig commands
+        nnoremap <leader>iis :LspInfo<cr>
+        nnoremap <leader>iia :LspStart<cr>
+        nnoremap <leader>iio :LspStop<cr>
+    endif
 
-    " nnoremap <leader>idd    :lua vim.diagnostic.disable()<cr>
-    nnoremap <leader>idd    :lua vim.diagnostic.enable(false)<cr>
+    if v:version > 800
+        nnoremap <leader>idd    :lua vim.diagnostic.enable(false)<cr>
+    else
+        nnoremap <leader>idd    :lua vim.diagnostic.disable()<cr>
+    endif
+
     nnoremap <leader>ide    :lua vim.diagnostic.enable()<cr>
     nnoremap <leader>in     :lua vim.diagnostic.goto_next()<cr>
     nnoremap <leader>iN     :lua vim.diagnostic.goto_prev()<cr>
