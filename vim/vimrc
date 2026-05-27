@@ -6985,6 +6985,10 @@ nnoremap <silent> <leader><c-s> :vertical split<cr>
 nnoremap <silent> <c-w>> <c-w>r
 nnoremap <silent> <c-w>< <c-w>R
 
+" move terminal window quickly
+tnoremap <silent> <c-y>J <c-\><c-n><c-w>Ji
+tnoremap <silent> <c-y>L <c-\><c-n><c-w>Li
+
 " resize windows to equal size, even when in terminal
 nnoremap <silent> <c-y>=           <c-w>=
 tnoremap <silent> <c-y>= <c-\><c-n><c-w>=
