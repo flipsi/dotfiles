@@ -2583,7 +2583,8 @@ if has('nvim')
     nnoremap <leader>iia :LspStart<cr>
     nnoremap <leader>iio :LspStop<cr>
 
-    nnoremap <leader>idd    :lua vim.diagnostic.disable()<cr>
+    " nnoremap <leader>idd    :lua vim.diagnostic.disable()<cr>
+    nnoremap <leader>idd    :lua vim.diagnostic.enable(false)<cr>
     nnoremap <leader>ide    :lua vim.diagnostic.enable()<cr>
     nnoremap <leader>in     :lua vim.diagnostic.goto_next()<cr>
     nnoremap <leader>iN     :lua vim.diagnostic.goto_prev()<cr>
