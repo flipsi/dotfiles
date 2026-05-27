@@ -46,6 +46,7 @@ set refresh-interval = 2
 
 
 # 'unbindings'
+bind generic o none
 bind generic g none
 bind main    G none
 bind generic p none
@@ -113,7 +114,7 @@ bind stage  C    ?git checkout -- %(file)
 bind status R    ?git reset --hard
 bind stage  R    ?git reset --hard
 bind status xr   ?rm -r %(file)
-bind status xt   !trash-put %(file)
+bind status xt   @trash-put %(file)
 bind status af   ?autoformat.sh %(file)
 
 # amend to last commit
@@ -148,9 +149,11 @@ bind refs d      ?git branch -d %(branch)
 # rename branch
 bind refs R ?git branch -m %(branch) %(prompt)
 
-# copy commit details to clipboard
-bind generic y !bash -c "printf %(commit) | xsel -b"
-bind generic Y !bash -c "printf %(commit) | git log --format=%B -n 1 --stdin | xsel -b"
+# copy commit hash to clipboard
+bind generic y @bash -c "printf %(commit) | xsel -b"
+# copy commit web URL to clipboard or open in browser
+bind generic oy @bash -c "echo $(git remote get-url $(git remote | head -n1)) XfindmeX %(commit) | sed 's/git@\\(.*\\):\\(.*\\) XfindmeX \\(.*\\)/https:\\/\\/\\1\\/\\2\\/commits\\/\\3/' | xsel -b"
+bind generic oo @bash -c "echo $(git remote get-url $(git remote | head -n1)) XfindmeX %(commit) | sed 's/git@\\(.*\\):\\(.*\\) XfindmeX \\(.*\\)/https:\\/\\/\\1\\/\\2\\/commits\\/\\3/' | xargs xdg-open"
 
 # remote commands
 bind generic f   !git fetch
@@ -158,7 +161,6 @@ bind generic pl  !git pull
 bind generic ps  !git push
 bind generic pf  !git push --force-with-lease
 bind generic pu  !bash -c "git push -u $(git remote | head -n1) $(git rev-parse --abbrev-ref HEAD)"
-
 
 # more/less context
 bind diff  + :toggle diff-context +1
