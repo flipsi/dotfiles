@@ -72,6 +72,7 @@ abbr $args gdc    git diff --cached
 abbr $args gdm    git diff \(git-main-or-master\)
 abbr $args ge     git switch
 abbr $args ge-    git switch -
+abbr $args gee    git checkout
 abbr $args gem    git switch \(git-main-or-master\)
 abbr $args gen    git switch -c
 abbr $args ged    git switch develop
