@@ -312,7 +312,8 @@ let g:neoterm_size_horizontally = '20'
 let g:neoterm_size_vertically = ''
 
 let g:neoterm_shell = 'fish'
-let g:neoterm_autoinsert = 1
+let g:neoterm_autoinsert = 1 " start in insert mode when opening terminal buffer
+let g:neoterm_autoinsert_switch = 0 " switch in insert mode when focussing. custom variable by me, not neoterm
 let g:neoterm_autoscroll = 1
 let g:neoterm_automap_keys = '' " don't add default mapping (,tt)
 
@@ -5739,7 +5740,7 @@ if has('nvim')
 
         " enter insert mode when switching to terminal
         " autocmd BufEnter term://* startinsert
-        autocmd BufEnter term://* if !exists('g:suppress_terminal_autoinsert') | startinsert | endif
+        autocmd BufEnter term://* if g:neoterm_autoinsert_switch && !exists('g:suppress_terminal_autoinsert') | startinsert | endif
 
         " don't show line numbers
         autocmd TermOpen * setlocal nonumber
