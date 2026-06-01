@@ -88,7 +88,7 @@ end
 
 # to autostart applications, use dex
 
-initialize-tmux-sessions
+# initialize-tmux-sessions # don't want that because of gpg agent password prompt in every shell
 desktop_session
 setup_musicserver
 toggle_redshift
