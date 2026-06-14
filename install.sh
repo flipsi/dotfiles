@@ -126,9 +126,9 @@ function create_link() {
         elif [[ $INTERACTIVE = true ]]; then
             ln -nsi "$DESTPATH" "$LINKPATH"
         else
-            # empty dirs can be replaced, otherwise abort
-            if [ -z "$(ls -A "$LINKPATH")" ]; then
-                rmdir "$LINKPATH"
+            # empty dirs can be replaced, otherwise abort (fails if not empty)
+            if rmdir "$LINKPATH" 2>/dev/null; then
+                echo "Replacing empty dir..."
             fi
             ln -ns "$DESTPATH" "$LINKPATH"
         fi
