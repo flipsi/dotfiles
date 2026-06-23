@@ -117,6 +117,7 @@ function create_session_main() {
     fi
 
     tmux_new_window_once "$SESSION_MAIN" "tmp" "fish" "$HOME/tmp"
+    tmux_new_window_once "$SESSION_MAIN" "screenshots" "fish -c 'joshuto'" "$HOME/img-screenshots"
 
     if [[ "$HOSTNAME" = "nott" ]]; then
         tmux_new_window_once "$SESSION_MAIN" "notes" "nvim -- TODOs.md *" "$HOME/work/reply/notes"
