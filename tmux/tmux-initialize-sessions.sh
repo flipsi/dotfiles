@@ -14,14 +14,14 @@ HOSTNAME=$(hostname)
 
 function has_internet_connection() {
     if [ -z "$INTERNET_CONNECTION" ]; then
-        for SLEEP in {0,1,3,5}; do
+        for SLEEP in {0,1}; do
             sleep "$SLEEP"
             ping -c 1 8.8.8.8 >/dev/null 2>&1
             INTERNET_CONNECTION=$?
             if [ $INTERNET_CONNECTION -eq 0 ]; then
                 return 0
             else
-                echo "No internet!!!"
+                echo "Seems like we're offline."
             fi
         done
     fi
@@ -56,6 +56,10 @@ function open_project_in_vim() {
     local project_path="$1"
     local project_name="$2"
     local project_basename
+    if [[ ! -d "$project_path" ]]; then
+        echo "WARN: $project_path doesn't exist!"
+        return
+    fi
     project_basename=$(basename "$project_name")
     tmux_new_window_once \
         "$SESSION_CODE" \
@@ -84,11 +88,20 @@ function get_recent_git_projects() {
     # get list of git projects and their last commit timestamp
     local projects=()
     while IFS= read -r -d '' child; do
-        if [[ -d "$child/.git" ]]; then
-            local project_name="${child#"$projects_dir/"}"
-            projects+=("$(git -C "$child" log -1 --format=%ct) $project_name")
-        fi
-    done <  <(find "$projects_dir" -maxdepth "$search_depth" -type d -print0)
+        [[ -d "$child/.git" ]] || continue
+        local parent="${child%/*}"
+        local is_submodule=0
+        while [[ "$parent" != "$projects_dir" && "$parent" != "/" ]]; do
+            if [[ -d "$parent/.git" ]]; then
+                is_submodule=1
+                break
+            fi
+            parent="${parent%/*}"
+        done
+        (( is_submodule )) && continue
+        local project_name="${child#"$projects_dir/"}"
+        projects+=("$(git -C "$child" log -1 --format=%ct) $project_name")
+    done < <(find "$projects_dir" -maxdepth "$search_depth" -type d -print0)
 
     # sort by timestamp
     # shellcheck disable=SC2207
