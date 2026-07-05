@@ -125,12 +125,16 @@ function create_link() {
             ln -nsf "$DESTPATH" "$LINKPATH"
         elif [[ $INTERACTIVE = true ]]; then
             ln -nsi "$DESTPATH" "$LINKPATH"
-        else
+        else 
             # empty dirs can be replaced, otherwise abort (fails if not empty)
             if rmdir "$LINKPATH" 2>/dev/null; then
                 echo "Replacing empty dir..."
             fi
-            ln -ns "$DESTPATH" "$LINKPATH"
+            if [[ -f "$LINKPATH" ]]; then
+                echo "File already exists: $LINKPATH [skipping]"
+            else
+                ln -ns "$DESTPATH" "$LINKPATH"
+            fi
         fi
 
     else
