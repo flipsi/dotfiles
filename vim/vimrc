@@ -6808,6 +6808,8 @@ function! WebSearch(query)
     call system("$BROWSER 'https://google.com/search?q=" . UrlEncode(a:query) . "'")
 endfunction
 
+" search the web for word under cursor
+nnoremap <leader>ws yiw:call WebSearch(@")<cr>
 " search the web for selection
 vnoremap <leader>ws y:call WebSearch(@")<cr>gv
 
