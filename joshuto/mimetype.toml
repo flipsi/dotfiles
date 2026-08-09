@@ -168,6 +168,7 @@ sh.inherit = "text_default"
 sql.inherit = "text_default"
 srt.inherit = "text_default"
 svelte.inherit = "text_default"
+tex.inherit = "text_default"
 toml.inherit = "text_default"
 tsx.inherit = "text_default"
 txt.inherit = "text_default"
@@ -266,6 +267,7 @@ kra.app_list = [{ command = "krita", fork = true, silent = true }]
 kdenlive.app_list = [{ command = "kdenlive", fork = true, silent = true }]
 
 tex.app_list = [
+  { command = "nvim" },
   { command = "micro" },
   { command = "gedit", fork = true, silent = true },
   { command = "bat", pager = true },
