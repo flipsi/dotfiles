@@ -2186,6 +2186,7 @@ let g:toggle_words_dict = {
             \     ['fat', 'thin'],
             \     ['first', 'last'],
             \     ['forward', 'backward'],
+            \     ['from', 'to'],
             \     ['get', 'set'],
             \     ['good', 'bad'],
             \     ['happy', 'sad'],
