@@ -5945,8 +5945,9 @@ nnoremap <silent> <leader>ya :ToggleListChars <cr>
 command! ChangeSpellChecking :call ChangeSpellChecking() " Disable, enable or change spell checking
 function! ChangeSpellChecking()
 ec "<space>  Toggle spell checking"
-ec "<e>      Set language to 'en'"
-ec "<d>      Set language to 'de'"
+ec "<e>      Set language to 'en' and enable spell checking"
+ec "<d>      Set language to 'de' and enable spell checking"
+ec "?        Show keybindings"
 ec ""
 let c = getchar()
 if nr2char(c) == 'q' || c == 27 || c == 3 || c == 7
@@ -5955,16 +5956,28 @@ elseif nr2char(c) == ' ' || nr2char(c) == 'p'
     redraw
     set spell!
     redraw
+    set spell?
 elseif nr2char(c) == 'e'
     set spelllang=en
+    set spell
     redraw
 elseif nr2char(c) == 'd'
     set spelllang=de
+    set spell
     redraw
+elseif nr2char(c) == '?'
+    redraw
+    echo   "]s      -   jump to next misspelled word"
+    echo   "[s      -   jump to previous misspelled word"
+    echo   "zg      -   add word under cursor to dictionary"
+    echo   "zw      -   remove word under cursor from dictionary"
+    echo   "zug     -   undo zg or zw action"
+    echo   "z=      -   show correction suggestions"
+    echo   "1z=     -   accept first suggestion"
 endif
-set spell?
 endfunction
 " }}}
+
 nnoremap <leader>ysp :ChangeSpellChecking <cr>
 
 " ... but ignore typos
@@ -6009,6 +6022,8 @@ function! JumpDownSoToSpeak()
     elseif g:gitguttermode == 1
         GitGutterNextHunk
         normal zz9<c-e>zv
+    elseif &spell == 1
+        normal ]s
     else
         normal 8j
     endif
@@ -6022,6 +6037,8 @@ function! JumpUpSoToSpeak()
     elseif g:gitguttermode == 1
         GitGutterPrevHunk
         normal zz9<c-e>zv
+    elseif &spell == 1
+        normal [s
     else
         normal 8k
     endif
