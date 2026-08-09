@@ -6827,8 +6827,10 @@ endfunction
 
 " search the web for word under cursor
 nnoremap <leader>ws yiw:call WebSearch(@")<cr>
+nmap     <leader>ww <leader>ws
 " search the web for selection
 vnoremap <leader>ws y:call WebSearch(@")<cr>gv
+vmap     <leader>ww <leader>ws
 
 
 " execute shell script
