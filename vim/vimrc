@@ -6976,8 +6976,8 @@ nnoremap <silent> <leader>sL :lopen<cr>
 " BUFFERS, WINDOWS AND TABS {{{
 
 " open new scratchpad file
-nnoremap <leader>en :exe "e" . system("mktemp $HOME/scratchpad/XXXXX.txt")<cr>
-nnoremap <leader>eN :exe "e" . system("mktemp /tmp/XXXXX.txt")<cr>
+nnoremap <leader>en :exe "e " . trim(system("mkdir -p $HOME/scratchpad && mktemp $HOME/scratchpad/XXXXX.txt"))<cr>
+nnoremap <leader>eN :exe "e " . trim(system("mktemp /tmp/XXXXX.txt"))<cr>
 
 " change or open new buffer by searching for file name
 if s:MyMode == 'stripped'
