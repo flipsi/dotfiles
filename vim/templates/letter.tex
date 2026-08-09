@@ -58,15 +58,15 @@ foldmarks=true
 
 \setkomavar{location}{%
     \raggedright\footnotesize{%
-    \usekomavar{fromname}\\
+    \usekomavar{fromname}
     \usekomavar{fromaddress}\\
-    \usekomavar*{fromphone}\usekomavar{fromphone}\\
-    \usekomavar*{fromfax}\usekomavar{fromfax}\\
+    \usekomavar*{fromphone}\usekomavar{fromphone}
+    \usekomavar*{fromfax}\usekomavar{fromfax}
     \usekomavar*{fromemail}\usekomavar{fromemail}
     \usekomavar*{fromurl}\usekomavar{fromurl}}
 }
 
-\setkomavar{signature}{\usekomavar{fromname}\\}
+\setkomavar{signature}{\usekomavar{fromname}}
 \renewcommand*{\raggedsignature}{\raggedright}
 
 % Geschäftszeichenzeile
@@ -95,19 +95,7 @@ foldmarks=true
 
 % Add closing } after letter!
 
-\begin{letter}
-
-% % Zielanschrift
-% {%
-%     \Title \\
-%     \Name \\
-%     \Street \\
-%     \Zip\\
-%     \City
-% }
-
-% Zielanschrift
-{%
+\begin{letter}{%
     So ein Typ\\
     Lustigstraße 123\\
     80538 München\\
