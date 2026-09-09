@@ -481,6 +481,18 @@ process_group() {
     return 1
 }
 
+process_groups() {
+    if ! process_group "wired" "${ETHERNET_PROFILES[@]}"; then
+        log ERROR "Wired group recovery failed"
+        rc=1
+    fi
+
+    if ! process_group "wireless" "${WIFI_PROFILES[@]}"; then
+        log ERROR "Wireless group recovery failed"
+        rc=1
+    fi
+}
+
 main() {
     local rc=0
 
@@ -491,16 +503,8 @@ main() {
 
     log INFO "Starting interface-aware netctl failover logic"
 
-    if ! process_group "wired" "${ETHERNET_PROFILES[@]}"; then
-        log ERROR "Wired group recovery failed"
-        rc=1
-    fi
-
-    if ! process_group "wireless" "${WIFI_PROFILES[@]}"; then
-        log ERROR "Wireless group recovery failed"
-        rc=1
-    fi
-
+    process_groups
+    
     log INFO "Completed interface-aware netctl failover logic"
     return "$rc"
 }
