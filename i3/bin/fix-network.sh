@@ -14,11 +14,20 @@ STOP_WAIT_SECONDS=5
 
 WIFI_PROFILES=(
     "wifi-GALLISCHES"
-    "wifi-reply-N"
+    "wifi-reply-N-ignore-cert"
 )
 
 ETHERNET_PROFILES=(
     "ethernet-home"
+    "ethernet-port-right"
+)
+
+HOME_PROFILES=(
+    "ethernet-home"
+    "wifi-GALLISCHES"
+)
+
+WORK_PROFILES=(
     "ethernet-port-right"
 )
 
@@ -414,8 +423,13 @@ start_profile_and_verify_once() {
 
 start_profile_with_retries() {
     local profile="$1"
-    local iface="$2"
+    local iface="$(profile_interface "$profile" || true)"
     local attempt
+
+    if [[ -z "$iface" ]]; then
+        log WARN "Cannot start profile '$profile' in group '$group_name': unable to determine interface"
+        return 1
+    fi
 
     for ((attempt = 1; attempt <= PROFILE_RETRIES; attempt++)); do
         log INFO "Attempt ${attempt}/${PROFILE_RETRIES} for profile '$profile'"
@@ -471,7 +485,7 @@ process_group() {
         log INFO "Group '$group_name': trying profile '$profile' on interface '$iface'"
         stop_other_profiles_in_group "$profile" "${profiles[@]}"
 
-        if start_profile_with_retries "$profile" "$iface"; then
+        if start_profile_with_retries "$profile"; then
             log INFO "Group '$group_name': selected working profile '$profile'"
             return 0
         fi
@@ -493,6 +507,36 @@ process_groups() {
     fi
 }
 
+start_work_profiles() {
+    for profile in "${WORK_PROFILES[@]}"; do
+        start_profile_with_retries "$profile"
+    done
+}
+
+start_home_profile() {
+    for profile in "${HOME_PROFILES[@]}"; do
+        start_profile_with_retries "$profile"
+    done
+}
+
+ask_which_to_start () {
+    local choice
+    read -r -n 1 -p "Which network profile group to start? (w)ork or (h)ome? " choice || choice=""
+    echo
+    case "$choice" in
+        w|W)
+            start_work_profiles
+            ;;
+        h|H)
+            start_home_profile
+            ;;
+        *)
+            log WARN "Aborted."
+            exit 1
+            ;;
+    esac
+}
+
 main() {
     local rc=0
 
@@ -503,8 +547,9 @@ main() {
 
     log INFO "Starting interface-aware netctl failover logic"
 
-    process_groups
-    
+    # process_groups
+    ask_which_to_start
+
     log INFO "Completed interface-aware netctl failover logic"
     return "$rc"
 }
