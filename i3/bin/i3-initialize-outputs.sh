@@ -117,11 +117,8 @@ function arrange_outputs() {
         EXTERNAL_SCREEN="$(get_external_screen)"
         LAPTOP_SCREEN="$(get_laptop_screen)"
         if [[ -n "$EXTERNAL_SCREEN" ]] ; then
-            if ! is_screen_enabled "$EXTERNAL_SCREEN"; then
-                xrandr \
-                    --output "$LAPTOP_SCREEN" --auto \
-                    --output "$EXTERNAL_SCREEN" --primary --auto --right-of "$LAPTOP_SCREEN"
-            elif [[ -n "$PREFER_ABOVE" ]]; then
+            if [[ -n "$PREFER_ABOVE" ]]; then
+                # external screen above
                 xrandr \
                     --output "$LAPTOP_SCREEN" --auto \
                     --output "$EXTERNAL_SCREEN" --primary --auto --above "$LAPTOP_SCREEN"
