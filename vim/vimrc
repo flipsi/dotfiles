@@ -3713,6 +3713,8 @@ function! SetupSQLShellMappings()
     nnoremap <buffer> <m-enter>     :call RunCurrentOrParagraph()<cr>
     nnoremap <buffer> <leader>bp    yip:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
     nnoremap <buffer> <leader>br    :call RunSQLFileInShell()<cr>
+    nnoremap <buffer> <leader>eqsd  :call RunCommand("SHOW DATABASES;")<cr>
+    nnoremap <buffer> <leader>eqst  :call RunCommand("SHOW TABLES;")<cr>
 endfunction
 command! SetupSQLShellMappings :call SetupSQLShellMappings() " add mappings for development with SQL (Vimux)
 
