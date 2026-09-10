@@ -9,8 +9,11 @@ SYNOPSIS
 DESCRIPTION
     fzf allows it to quickly and fuzzily search stdin.
     This wrapper is just the way i personally use it to find files and directories.
+
     PATTERN is mandatory for locate mode, while optional for find mode.
     If ACTION is omitted, it will be prompted interactively.
+
+    You might want to ignore paths with locate by adding them to PRUNEPATHS in /etc/updatedb.conf.
 
 OPTIONS
     MODE can be one of:
