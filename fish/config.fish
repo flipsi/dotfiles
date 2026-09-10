@@ -229,7 +229,7 @@ if status --is-login; and just_booted; and in_X
     set_xdg_default_apps # this takes rather long
 end
 
-if status --is-interactive; 
+if status --is-interactive;
     if in_X
         eval_keychain_on_some_hosts
     else if just_booted
@@ -239,7 +239,6 @@ if status --is-interactive;
 end
 
 if status --is-interactive; and status --is-login; and just_booted; and not in_X
-    fix_network_if_offline; and pull_dotfiles_etc
-    pull_dotfiles_etc
+    sleep 1; fix_network_if_offline; and pull_dotfiles_etc
 end
 
