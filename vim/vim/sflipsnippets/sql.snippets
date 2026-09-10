@@ -1,0 +1,343 @@
+snippet desc
+DESCRIBE
+endsnippet
+
+snippet sel
+SELECT
+    *
+FROM
+    ;
+endsnippet
+
+snippet sea
+SELECT
+    ${1:alias}.*
+FROM
+    ${2:table} ${1:alias}
+;
+endsnippet
+
+snippet sew
+SELECT
+    *
+FROM
+    ${1:table}
+WHERE
+    ${2:condition}
+;
+endsnippet
+
+snippet seb
+SELECT
+    *
+FROM
+    ${1:table}
+WHERE
+    ${2:column} BETWEEN ${3:value1} AND ${4:value2}
+;
+endsnippet
+
+snippet sei
+SELECT
+    *
+FROM
+    ${1:table}
+WHERE
+    ${2:column} IN (${3:value1}, ${4:value2})
+;
+endsnippet
+
+snippet sen
+SELECT
+    *
+FROM
+    ${1:table}
+WHERE
+    ${2:column} IS NULL
+;
+endsnippet
+
+snippet sj
+SELECT
+    ${1:t1}.*,
+    ${2:t2}.*
+FROM
+    ${3:table1} ${1:t1}
+    JOIN ${4:table2} ${2:t2} ON ${1:t1}.${5:id} = ${2:t2}.${5:id}
+;
+endsnippet
+
+snippet slj
+SELECT
+    ${1:t1}.*,
+    ${2:t2}.*
+FROM
+    ${3:table1} ${1:t1}
+    LEFT JOIN ${4:table2} ${2:t2} ON ${1:t1}.${5:id} = ${2:t2}.${5:id}
+;
+endsnippet
+
+snippet sc
+SELECT
+    COUNT(*) AS ${1:cnt}
+FROM
+    ${2:table}
+;
+endsnippet
+
+snippet scw
+SELECT
+    COUNT(*) AS ${1:cnt}
+FROM
+    ${2:table}
+WHERE
+    ${3:condition}
+;
+endsnippet
+
+snippet sgb
+SELECT
+    ${1:column},
+    COUNT(*) AS ${2:cnt}
+FROM
+    ${3:table}
+GROUP BY
+    ${1:column}
+;
+endsnippet
+
+snippet sob
+SELECT
+    *
+FROM
+    ${1:table}
+ORDER BY
+    ${2:column} DESC
+;
+endsnippet
+
+snippet sl
+SELECT
+    *
+FROM
+    ${1:table}
+LIMIT
+    ${2:100}
+;
+endsnippet
+
+snippet swl
+SELECT
+    *
+FROM
+    ${1:table}
+WHERE
+    ${2:condition}
+LIMIT
+    ${3:100}
+;
+endsnippet
+
+snippet ex
+EXPLAIN
+SELECT
+    *
+FROM
+    ${1:table}
+WHERE
+    ${2:condition}
+;
+endsnippet
+
+snippet exf
+EXPLAIN FORMAT=JSON
+SELECT
+    *
+FROM
+    ${1:table}
+WHERE
+    ${2:condition}
+;
+endsnippet
+
+snippet ins
+INSERT INTO ${1:table} (
+    ${2:column1},
+    ${3:column2}
+) VALUES (
+    ${4:value1},
+    ${5:value2}
+);
+endsnippet
+
+snippet inu
+INSERT INTO ${1:table} (
+    ${2:column1},
+    ${3:column2}
+) VALUES (
+    ${4:value1},
+    ${5:value2}
+)
+ON DUPLICATE KEY UPDATE
+    ${2:column1} = ${6:value},
+    ${3:column2} = ${7:value}
+;
+endsnippet
+
+snippet upd
+UPDATE
+    ${1:table}
+SET
+    ${2:column} = ${3:value}
+WHERE
+    ${4:condition}
+;
+endsnippet
+
+snippet upm
+UPDATE
+    ${1:table}
+SET
+    ${2:column1} = ${3:value1},
+    ${4:column2} = ${5:value2}
+WHERE
+    ${6:condition}
+;
+endsnippet
+
+snippet del
+DELETE FROM
+    ${1:table}
+WHERE
+    ${2:condition}
+;
+endsnippet
+
+snippet crt
+CREATE TABLE ${1:table_name} (
+    id BIGINT PRIMARY KEY,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL
+);
+endsnippet
+
+snippet alt
+ALTER TABLE
+    ${1:table}
+ADD COLUMN
+    ${2:column} ${3:VARCHAR(255)} ${4:NOT NULL}
+;
+endsnippet
+
+snippet idx
+CREATE INDEX ${1:idx_name}
+ON ${2:table} (
+    ${3:column}
+);
+endsnippet
+
+snippet uidx
+CREATE UNIQUE INDEX ${1:idx_name}
+ON ${2:table} (
+    ${3:column}
+);
+endsnippet
+
+snippet drt
+DROP TABLE
+    ${1:table}
+;
+endsnippet
+
+snippet trn
+START TRANSACTION;
+
+${1:-- statements}
+
+COMMIT;
+endsnippet
+
+snippet rb
+ROLLBACK;
+endsnippet
+
+snippet sct
+SHOW CREATE TABLE ${1:table};
+endsnippet
+
+snippet st
+SHOW TABLES;
+endsnippet
+
+snippet sd
+SHOW DATABASES;
+endsnippet
+
+snippet sci
+SHOW COLUMNS FROM ${1:table};
+endsnippet
+
+snippet sidx
+SHOW INDEX FROM ${1:table};
+endsnippet
+
+snippet eng
+SHOW ENGINE INNODB STATUS;
+endsnippet
+
+snippet vars
+SHOW VARIABLES LIKE '${1:%}';
+endsnippet
+
+snippet proc
+SHOW PROCESSLIST;
+endsnippet
+
+snippet kill
+KILL ${1:process_id};
+endsnippet
+
+snippet dup
+SELECT
+    ${1:column},
+    COUNT(*) AS cnt
+FROM
+    ${2:table}
+GROUP BY
+    ${1:column}
+HAVING
+    COUNT(*) > 1
+;
+endsnippet
+
+snippet recent
+SELECT
+    *
+FROM
+    ${1:table}
+ORDER BY
+    ${2:created_at} DESC
+LIMIT
+    ${3:50}
+;
+endsnippet
+
+snippet wh
+WHERE
+endsnippet
+
+snippet ord
+ORDER BY
+endsnippet
+
+snippet grp
+GROUP BY
+endsnippet
+
+snippet lim
+LIMIT
+endsnippet
+
+snippet drt
+DROP TABLE
+endsnippet
