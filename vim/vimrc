@@ -2931,6 +2931,11 @@ Plug 'Olical/conjure'
 " Use :ConjureSchool to get started
 " See `:vertical help conjure-mappings` for (default) mappings
 
+let g:conjure#filetypes = [
+            \ "clojure", "elixir", "fennel", "janet", "hy", "julia", "racket",
+            \ "scheme", "lisp", "python", "ruby", "rust", "picolisp"
+            \ ]
+
 let g:conjure#mapping#prefix = "<leader>l"
 
 let g:conjure#log#hud#ignore_low_priority = v:true
