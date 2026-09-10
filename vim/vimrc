@@ -4100,6 +4100,7 @@ augroup SET_FILETYPE
     au BufNewFile,BufReadPost *.conf        set ft=conf
     au BufNewFile,BufReadPost *.yaml.tpl    set ft=yaml
     au BufNewFile,BufReadPost *.dmn         set ft=xml
+    au BufNewFile,BufReadPost gitconfig     set ft=gitconfig
 augroup END
 
 
