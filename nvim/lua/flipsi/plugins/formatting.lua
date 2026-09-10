@@ -22,6 +22,7 @@ conform.setup({
         rust = { "ast-grep", lsp_format = "fallback" },
         -- scala = { "scalafmt" },
         svelte = { "prettier" },
+        sql = { "sql_formatter", "pg_format" },
         typescript = { "prettier" },
         typescriptreact = { "prettier" },
         yaml = { "prettier" },
