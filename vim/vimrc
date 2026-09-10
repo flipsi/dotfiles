@@ -326,7 +326,7 @@ function! ExecuteInNeoTerminal(vimcommand)
     if index(['Tkill','Tclear'], a:vimcommand) >= 0
         execute a:vimcommand
     else
-        execute "T " . a:vimcommand
+        execute "T " . escape(a:vimcommand, '%')
     endif
     sleep 50m
     unlet g:suppress_terminal_autoinsert
