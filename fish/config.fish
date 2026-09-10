@@ -112,21 +112,15 @@ function setup_exit_status_printing
     end
 end
 
-function autostart_keychain_on_some_hosts
-    if in_X
-        # keychain takes care of ssh-agent and gpg-agent
-        function keychain_start
-            eval (command keychain --eval --quiet --timeout 48000 ~/.ssh/id_*)
+function eval_keychain_on_some_hosts
+    function keychain_start
+        eval (command keychain --eval --quiet --timeout 2010000 ~/.ssh/id_*)
+    end
+    if command -v keychain >/dev/null
+        set -l host_where_to_start_keychain_automatically 'falbala' 'mimir' 'frey' 'nott'
+        if contains $hostname $host_where_to_start_keychain_automatically
+            keychain_start
         end
-        if command -v keychain >/dev/null
-            set -l host_where_to_start_keychain_automatically 'falbala' 'mimir' 'frey' 'nott'
-            if contains $hostname $host_where_to_start_keychain_automatically
-                keychain_start
-            end
-        end
-    else
-        # something starts ssh-agent before I start my window manager, I don't know what, so let's get rid of the password prompt like this:
-        pkill ssh-agent
     end
 end
 
@@ -235,8 +229,13 @@ if status --is-login; and just_booted; and in_X
     set_xdg_default_apps # this takes rather long
 end
 
-if status --is-interactive; and status --is-login; and just_booted
-    autostart_keychain_on_some_hosts
+if status --is-interactive; 
+    if in_X
+        eval_keychain_on_some_hosts
+    else if just_booted
+        # something starts ssh-agent before I start my window manager, I don't know what, so let's get rid of the password prompt like this:
+        pkill ssh-agent
+    end
 end
 
 if status --is-interactive; and status --is-login; and just_booted; and not in_X
