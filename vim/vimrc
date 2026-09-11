@@ -3724,6 +3724,7 @@ endfunction
 command! SetupSQLShellMappings :call SetupSQLShellMappings() " add mappings for development with SQL (Vimux)
 
 function! RunCurrentOrParagraph()
+    SaveCursorAndWindowPosition
     if getline('.') =~ ';\s*$'
         call RunCommand(getline('.'))
     else
@@ -3732,6 +3733,7 @@ function! RunCurrentOrParagraph()
         call RunCommand(substitute(@", "\n", "\r", "g"))
         let @" = l:save_reg
     endif
+    RestoreCursorAndWindowPosition
 endfunction
 
 nnoremap <buffer> <M-Enter> :call RunCurrentOrParagraph()<CR>
