@@ -630,6 +630,8 @@ mode "$mode_kill" {
 bindsym $mod+Shift+BackSpace mode "$mode_kill_app"
 set $mode_kill_app Kill app: (f) Firefox (g) Chrome (i) Vivaldi (j) Java (s) Sbt (o) Output windows (d) dialog windows (z) zathura
 mode "$mode_kill_app" {
+    bindsym b       exec --no-startup-id "pkill    brave"; mode "default"
+    bindsym B       exec --no-startup-id "pkill -9 brave"; mode "default"
     bindsym g       exec --no-startup-id "pkill    chrome"; mode "default"
     bindsym G       exec --no-startup-id "pkill -9 chrome"; mode "default"
     bindsym f       exec --no-startup-id "pkill    firefox"; mode "default"
@@ -848,7 +850,7 @@ mode "$move_workspace_to_output" {
 
 ## start an application
 bindsym $mod+Shift+o mode "$launch"
-set $launch Launch: (o) Terminal (n) GUI file manager (f) Firefox (g) Chrome (r) Chromium (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram (u) Outlook (e) Teams
+set $launch Launch: (o) Terminal (n) GUI file manager (b) Brave (f) Firefox (g) Chrome (r) Chromium (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram (u) Outlook (e) Teams
 mode "$launch" {
     bindsym o               mode "$terminal"
     bindsym Shift+o         mode "$terminal"
@@ -860,6 +862,7 @@ mode "$launch" {
     # bindsym e       exec --no-startup-id "chromium --profile-directory=Default --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo "; mode "default"
     # bindsym e       exec --no-startup-id "/usr/bin/firefoxpwa site launch 01KPEJVWCGC7RW8NAHDFSF71R0 --protocol \%u"; mode "default"
     bindsym e       exec --no-startup-id "/usr/bin/firefoxpwa site launch 01KPEJVWCGC7RW8NAHDFSF71R0"; mode "default"
+    bindsym b       exec --no-startup-id "brave"; mode "default
     bindsym r       exec --no-startup-id "chromium || chromium-browser"; mode "default
     bindsym f       exec --no-startup-id "firefox"; mode "default"
     bindsym g       exec --no-startup-id "google-chrome-stable"; mode "default"
@@ -904,10 +907,12 @@ mode "$terminal" {
 
 ## switch to a specific window or workspace
 bindsym $mod+o mode "$goto"
-set $goto Goto: (o) Terminal (i) Vivaldi (f) Firefox (g) Chrome (r) Chromium (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram (a) Audacity (w) Wine (u) Outlook (e) Teams
+set $goto Goto: (o) Terminal (b) Brave (i) Vivaldi (f) Firefox (g) Chrome (r) Chromium (q) Qutebrowser (m) Music (j) IntelliJ (s) Slack (t) Telegram (a) Audacity (w) Wine (u) Outlook (e) Teams
 mode "$goto" {
   bindsym a         [class="(?i)audacity"]              focus; mode "default"
   bindsym $mod+a    exec --no-startup-id "$HOME/.i3/bin/i3-swap-workspaces.sh Recording"; mode "default"
+  bindsym b         [class="(?i)brave-browser"]              focus; mode "default"
+  bindsym $mod+b    exec --no-startup-id "$HOME/.i3/bin/i3-swap-workspaces.sh Brave"; mode "default"
   bindsym o         [class="(?i)alacritty"]             focus; mode "default"
   bindsym $mod+o    exec --no-startup-id "$HOME/.i3/bin/i3-swap-workspaces.sh Terminal"; mode "default"
   bindsym f         [class="(?i)firefox"]               focus; mode "default"
@@ -1036,6 +1041,7 @@ assign [class="(?i)pale moon"]                                                  
 assign [class="(?i)qutebrowser"]                                                                    Web
 assign [class="mysql-workbench-bin"]                                                                MySQL Workbench
 assign [class="(?i)vivaldi-stable"]                                                                 Vivaldi
+assign [class="(?i)brave-browser"]                                                                  Brave
 assign [class="(?i)gimp"]                                                                           Gimp
 for_window [class="(?i)libreoffice"] move to workspace                                              Doc
 for_window [class="(?i)gnome-session-failed"] move to workspace                                     GnomeSessionFailed
