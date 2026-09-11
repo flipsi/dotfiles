@@ -114,11 +114,16 @@ end
 
 function eval_keychain_on_some_hosts
     function keychain_start
-        eval (command keychain --eval --quiet --timeout 2010000 ~/.ssh/id_*)
+        for key in ~/.ssh/id_*
+            if test -f "$key"
+                string match -q "*.pub" -- "$key"; and continue
+                eval (command keychain --eval --quiet --timeout 201000 "$key")
+            end
+        end
     end
     if command -v keychain >/dev/null
         set -l host_where_to_start_keychain_automatically 'falbala' 'mimir' 'frey' 'nott'
-        if contains $hostname $host_where_to_start_keychain_automatically
+        if contains -- $hostname $host_where_to_start_keychain_automatically
             keychain_start
         end
     end
