@@ -43,61 +43,65 @@ local mason_opts = {
 }
 
 require('mason').setup(mason_opts)
-require('mason-lspconfig').setup({
-    ensure_installed,
-    handlers = {
-      function(server_name)
-        require('lspconfig')[server_name].setup({})
-        require'lspconfig'.bashls.setup{}
-      end,
+-- require('mason-lspconfig').setup({
+--     ensure_installed,
+--     handlers = {
+--       function(server_name)
+--         require('lspconfig')[server_name].setup({})
+--         require'lspconfig'.bashls.setup{}
+--       end,
 
-      -- custom config per language server
-      --
-      -- rename `example_server` to name of LS
-      -- example_server = function()
-      --   require('lspconfig').example_server.setup({
-      --       ---
-      --       -- in here you can add your own
-      --       -- custom configuration
-      --       ---
-      --     })
-      -- end,
-    },
-})
+--       -- custom config per language server
+--       -- rename `example_server` to name of LS
+--       -- example_server = function()
+--       --   require('lspconfig').example_server.setup({
+--       --       ---
+--       --       -- in here you can add your own
+--       --       -- custom configuration
+--       --       ---
+--       --     })
+--       -- end,
+--     },
+-- })
 
 -- Setup language servers (should happen *exactly* once per LS):
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+local default_config = {
+    capabilities = capabilities,
+    autostart = false,
+}
+
 -- Native server configs (these names must match Neovim's built-in server names)
-vim.lsp.config('bashls',   { capabilities = capabilities })
-vim.lsp.config('cssls',    { capabilities = capabilities })
-vim.lsp.config('html',     { capabilities = capabilities })
-vim.lsp.config('jsonls',   { capabilities = capabilities })
-vim.lsp.config('gopls',    { capabilities = capabilities })
-vim.lsp.config('clojure_lsp', { capabilities = capabilities })
-vim.lsp.config('kotlin_language_server', { capabilities = capabilities })
+vim.lsp.config('bashls', default_config)
+vim.lsp.config('html', default_config)
+vim.lsp.config('jsonls', default_config)
+vim.lsp.config('clojure_lsp', default_config)
+vim.lsp.config('kotlin_language_server', default_config)
 
 local lombok_jar = vim.fn.expand("~/.local/share/nvim/mason/share/jdtls/lombok.jar") -- adjust to your path
 
 vim.lsp.config('jdtls', {
-  capabilities = capabilities,
-  cmd = {
-    'jdtls',
-    '--jvm-arg=-javaagent:' .. lombok_jar,
-  },
-  settings = {
-    java = {
-      configuration = {
-        annotationProcessing = { enabled = true },
+    autostart = false,
+    capabilities = capabilities,
+    cmd = {
+      'jdtls',
+      '--jvm-arg=-javaagent:' .. lombok_jar,
+    },
+    settings = {
+      java = {
+        configuration = {
+          annotationProcessing = { enabled = true },
+        },
       },
     },
-  },
-})
+  })
 
 -- Groovy
 -- TODO: fix import, see https://www.reddit.com/r/groovy/comments/1eruc6o/comment/lyo20xh/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 vim.lsp.config('groovyls', {
+    autostart = false,
     capabilities = capabilities,
     filetypes = { "groovy" },
     -- cmd = { "groovy-language-server" }, -- installed via AUR in this case
@@ -132,10 +136,11 @@ vim.lsp.config('pylsp', {
   settings = pylsp_settings,
 })
 
--- Enable servers (do this once)
-for _, server in ipairs(ensure_installed) do
-  vim.lsp.enable(server)
-end
+-- Disable on startup
+-- -- Enable servers (do this once)
+-- for _, server in ipairs(ensure_installed) do
+--   vim.lsp.enable(server)
+-- end
 
 -- Keymaps on attach (your existing ones are fine)
 vim.api.nvim_create_autocmd('LspAttach', {
