@@ -6058,6 +6058,9 @@ function! JumpDownSoToSpeak()
     elseif g:gitguttermode == 1
         GitGutterNextHunk
         normal zz9<c-e>zv
+    elseif luaeval("next(vim.diagnostic.count(0)) != nil")
+        lua vim.diagnostic.jump({count = 1})
+        call ShowLineDiagnostic()
     elseif &spell == 1
         normal ]s
     else
@@ -6073,6 +6076,9 @@ function! JumpUpSoToSpeak()
     elseif g:gitguttermode == 1
         GitGutterPrevHunk
         normal zz9<c-e>zv
+    elseif luaeval("next(vim.diagnostic.count(0)) != nil")
+        lua vim.diagnostic.jump({count = -1})
+        call ShowLineDiagnostic()
     elseif &spell == 1
         normal [s
     else
