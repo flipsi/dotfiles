@@ -2593,17 +2593,31 @@ if has('nvim')
         nnoremap <leader>iio :LspStop<cr>
     endif
 
+    nnoremap <leader>ide    :lua vim.diagnostic.enable()<cr>
+
     if v:version > 800
         nnoremap <leader>idd    :lua vim.diagnostic.enable(false)<cr>
     else
         nnoremap <leader>idd    :lua vim.diagnostic.disable()<cr>
     endif
 
-    nnoremap <leader>ide    :lua vim.diagnostic.enable()<cr>
-    nnoremap <leader>in     :lua vim.diagnostic.goto_next()<cr>
-    nnoremap <leader>iN     :lua vim.diagnostic.goto_prev()<cr>
-    nnoremap <leader>igg  gg:lua vim.diagnostic.goto_next()<cr>
-    nnoremap <leader>iG    G:lua vim.diagnostic.goto_prev()<cr>
+    if v:version > 800
+        nnoremap <leader>in <cmd>lua vim.diagnostic.jump({count =  1})<cr><cmd>call ShowLineDiagnostic()<cr>
+        nnoremap <leader>iN <cmd>lua vim.diagnostic.jump({count = -1})<cr><cmd>call ShowLineDiagnostic()<cr>
+        nnoremap <leader>ip <cmd>lua vim.diagnostic.jump({count = -1})<cr><cmd>call ShowLineDiagnostic()<cr>
+        nnoremap <leader>igg  gg:lua vim.diagnostic.jump({count =  1})<cr><cmd>call ShowLineDiagnostic()<cr>
+        nnoremap <leader>iG    G:lua vim.diagnostic.jump({count = -1})<cr><cmd>call ShowLineDiagnostic()<cr>
+        nnoremap <leader>iq     :lua vim.diagnostic.open_float()<cr>
+    else
+        nnoremap <leader>in     :lua vim.diagnostic.goto_next()<cr>
+        nnoremap <leader>iN     :lua vim.diagnostic.goto_prev()<cr>
+        nnoremap <leader>igg  gg:lua vim.diagnostic.goto_next()<cr>
+        nnoremap <leader>iG    G:lua vim.diagnostic.goto_prev()<cr>
+    endif
+
+    function! ShowLineDiagnostic()
+        echo luaeval("(function() local d=vim.diagnostic.get(0,{lnum=vim.api.nvim_win_get_cursor(0)[1]-1}); return #d > 0 and d[1].message or '' end)()")
+    endfunction
 
     " for more (dynamic/buffer local) mappings also see lsp.lua
 
