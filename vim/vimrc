@@ -2616,7 +2616,7 @@ if has('nvim')
     endif
 
     function! ShowLineDiagnostic()
-        echo luaeval("(function() local d=vim.diagnostic.get(0,{lnum=vim.api.nvim_win_get_cursor(0)[1]-1}); return #d > 0 and d[1].message or '' end)()")
+        echo luaeval("(function() local d=vim.diagnostic.get(0,{lnum=vim.api.nvim_win_get_cursor(0)[1]-1}); if #d == 0 then return '' end; local sev=({ [vim.diagnostic.severity.ERROR]='E', [vim.diagnostic.severity.WARN]='W', [vim.diagnostic.severity.INFO]='I', [vim.diagnostic.severity.HINT]='H' })[d[1].severity] or '?'; return '[' .. sev .. '] ' .. d[1].message end)()")
     endfunction
 
     " for more (dynamic/buffer local) mappings also see lsp.lua
