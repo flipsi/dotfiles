@@ -39,6 +39,10 @@ case "$1" in
         gimp "${FILES[@]}"
         ;;
 
+    "k" )
+        krita "${FILES[@]}"
+        ;;
+
     "j" )
         for f in "${FILES[@]}"; do
             local basename=$(echo "$f" | sed 's/\.[^.]*$//')
