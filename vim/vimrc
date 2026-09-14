@@ -1391,7 +1391,7 @@ Plug 'stsewd/fzf-checkout.vim'
 let g:fzf_command_prefix = 'Fzf'
 
 " how/where to open fzf
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'options': { 'cursorline': 1 } } }
 
 " extra interactive key bindings
 " (scroll with <c-k> and <c-j>
