@@ -3758,7 +3758,6 @@ function! RunCurrentOrParagraph()
     RestoreCursorAndWindowPosition
 endfunction
 
-nnoremap <buffer> <M-Enter> :call RunCurrentOrParagraph()<CR>
 function! RunSQLFileInShell()
     " Detect SQL dialect by running client process and assume it is running in a vim-managed terminal. Most of the time, that's good enough for me.
     call system('pgrep psql')
@@ -6894,13 +6893,18 @@ function! ExecuteShellscript()
         exec '!' . ExpandPrependThisDir('%')
     endif
 endfunction
+
 augroup shellscript_on_read
     au!
     au FileType sh      call SetupShellscript()
     au FileType fish    call SetupShellscript()
 augroup END
+
+command! SetupShellscript :call SetupShellscript() " Execute shellscript (current file) in a new tmux pane
 function! SetupShellscript()
-    nnoremap <leader>br :call ExecuteShellscript()<cr>
+    nnoremap <buffer> <M-Enter> :call RunCommand(getline('.'))<CR>
+    nnoremap <buffer> <leader>bp yip:call RunCommand(substitute(@", "\n", "\r", "g"))<cr>
+    nnoremap <buffer> <leader>br :call ExecuteShellscript()<cr>
 endfunction
 
 
