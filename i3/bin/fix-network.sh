@@ -521,13 +521,13 @@ start_home_profile() {
 
 ask_which_to_start () {
     local choice
-    read -r -n 1 -p "Which network profile group to start? (w)ork or (h)ome? " choice || choice=""
+    read -r -n 1 -p "Which network profile group to start? (w)ork or (ho)me? " choice || choice=""
     echo
     case "$choice" in
         w|W)
             start_work_profiles
             ;;
-        h|H)
+        h|H|o|O)
             start_home_profile
             ;;
         *)
