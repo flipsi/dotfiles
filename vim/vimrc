@@ -1425,13 +1425,14 @@ command! -bang -nargs=* FzfAg
 " open files by name
 nnoremap <leader>fl :FzfLocate<space>
 nnoremap <leader>fi :FzfFiles<cr>
+nnoremap <leader>ee :call OpenProjectFiles()<cr>
 nnoremap <leader>ef :FzfFiles<cr>
 nnoremap <leader>eo :FzfGFiles<cr>
 nnoremap <leader>eg :FzfGFiles?<cr>
 nnoremap <leader>er :FzfHistory<cr>
 nnoremap <leader>eb :FzfBuffers<cr>
-nnoremap <leader><leader> :call OpenProjectFiles()<cr>
-vnoremap <leader><leader> :call OpenProjectFiles()<cr>
+nnoremap <leader><leader> :FzfBuffers<cr>
+vnoremap <leader><leader> :FzfBuffers<cr>
 
 function! OpenProjectFiles()
     if IsGitRepository(getcwd())
