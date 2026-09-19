@@ -7040,8 +7040,9 @@ if s:MyMode == 'stripped'
 endif
 
 " change to LRU buffer
-nnoremap <leader>e<leader> :buffer #<cr>
-nnoremap <leader><tab>     :buffer #<cr>
+nnoremap <leader>e<leader>  :buffer #<cr>
+nnoremap <leader><tab>      :buffer #<cr>
+vnoremap <leader><tab> <esc>:buffer #<cr>
 
 " navigate through buffers
 nnoremap <m-n>  :bnext<cr>
