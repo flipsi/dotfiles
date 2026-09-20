@@ -862,7 +862,7 @@ mode "$launch" {
     # bindsym e       exec --no-startup-id "chromium --profile-directory=Default --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo "; mode "default"
     # bindsym e       exec --no-startup-id "/usr/bin/firefoxpwa site launch 01KPEJVWCGC7RW8NAHDFSF71R0 --protocol \%u"; mode "default"
     bindsym e       exec --no-startup-id "/usr/bin/firefoxpwa site launch 01KPEJVWCGC7RW8NAHDFSF71R0"; mode "default"
-    bindsym b       exec --no-startup-id "brave"; mode "default
+    bindsym b       exec --no-startup-id "flatpak run com.brave.Browser || brave"; mode "default
     bindsym r       exec --no-startup-id "chromium || chromium-browser"; mode "default
     bindsym f       exec --no-startup-id "firefox"; mode "default"
     bindsym g       exec --no-startup-id "google-chrome-stable"; mode "default"
