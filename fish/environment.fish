@@ -61,7 +61,7 @@ end
 
 # web browser
 if ! cat /etc/os-release | grep -q Fedora
-    set -x BROWSER vivaldi-stable
+    set -x BROWSER brave
 end
 
 # setup fzf to use ag instead of find
