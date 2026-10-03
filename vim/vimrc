@@ -481,8 +481,8 @@ else
 
     augroup rainbow_disable_in_terminal_buffers
         au!
-        " au TermOpen * echo "zack" " TODO: delete this debugging statement
         " TODO: FIX
+        " au TermOpen * echo "zack" " TODO: delete this debugging statement
         " au TermOpen * RainbowToggleOff
         " au TermOpen * if exists(":RainbowToggleOff") | RainbowToggleOff | endif
     augroup END
@@ -1570,16 +1570,6 @@ EOF
 
 
 " endif
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" file searching and much more {{{
-" http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
-" TODO CONFIGURE AND TEST
-
-"Plug 'Shougo/vimproc.vim'
-"Plug 'Shougo/unite.vim'
-
 
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -3338,10 +3328,6 @@ command! SetupTsuquyomi :call SetupTsuquyomi() " add mappings for development wi
 " }}}
 " Language: LaTeX {{{
 
-" TODO: use neovim builtin X window and window manager support to open pdf within vim
-" https://www.reddit.com/r/neovim/s/gmyYf84Ydq
-" https://github.com/altermo/nwm
-
 Plug 'lervag/vimtex'
 
 " let g:tex_flavor = 'latex'
@@ -3685,7 +3671,7 @@ function! CalculateSbtTestOnlyCommand()
 endfunction
 
 function! IsSbtRunning()
-    " This only checks if SBT is running globally, not in the adjacent tmux pane # TODO: improve
+    " This only checks if SBT is running globally, not in the adjacent tmux pane
     " the space before 'java' is important (to match pure sbt but ignore IntelliJ's sbt)
     call system('ps -ef | grep -v grep | grep " java.*sbt-launch.jar"')
     " call system('ps -ef | grep -v grep | grep sbt-launch.jar')
@@ -3697,8 +3683,6 @@ endfunction
     " au BufWritePost *.scala Dispatch! sbt -Dsbt.log.noformat=true parse
 " augroup END
 
-
-" TODO: find fzf scala docs
 
 " }}}
 " Language: Smarty {{{
@@ -3732,7 +3716,6 @@ augroup sql_on_read
     au FileType sql setlocal commentstring=--\ %s
     au FileType sql if !IsScalaProject() | call SetupSQLShellMappings() | endif
     au FileType sql if !IsScalaProject() | call SetupSQLDadBod() | endif
-    " TODO: set to hugsql if WHAT CONDITION ???
 augroup END
 
 command! SetupSQL :call SetupSQLDadBod()<bar> call SetupSQLShellMappings() " add mappings for development with SQL
@@ -4201,7 +4184,6 @@ set termguicolors
 
 let g:light_or_dark_theme = 'dark'
 
-" TODO: use this in custom hugsql syntax file
 function! SynStack()
     if !exists("*synstack")
         return
@@ -4209,7 +4191,6 @@ function! SynStack()
     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunction
 
-" TODO: use this in custom hugsql syntax file
 function! SynGroup()
     let l:s = synID(line('.'), col('.'), 1)
     echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
@@ -4903,7 +4884,6 @@ endfunction
 " Check wether current buffer is Terminal buffer or not. Returns 0 (false) if not, 1 (true) otherwise {{{
 function! IsTerminalBuffer()
     if !has('nvim')
-        " TODO: make this work in regular vim
         echoerr "Sorry, this is only implemented in neovim (right now)."
         return
     endif
@@ -4915,7 +4895,6 @@ endfunction
 " find buffers with a running terminal (returns list of bufnum) {{{
 function! GetTerminalBuffers()
     if !has('nvim')
-        " TODO: make this work in regular vim
         echoerr "Sorry, this is only implemented in neovim (right now)."
         return
     endif
@@ -4984,7 +4963,6 @@ endfunction
 
 " Show a temporary message in a floating window with a border {{{
 " From https://www.statox.fr/posts/2021/03/breaking_habits_floating_window/
-" TODO: debug
 function! ShowMessageInFloatingWindow(msg) abort
     " Define the size of the floating window
     let width = 50
@@ -7052,7 +7030,6 @@ nnoremap <esc>p :bprevious<cr>
 
 "" change window - via directions
 " NOTE that I use vim-tmux-navigator now (CTRL-<arrow>)
-" TODO: now that <leader><arrow> mappings are free, I could use them for jumping quickfixlist/LSP errors etc.
 "nnoremap <silent> <leader><right>      :wincmd l<cr>
 "vnoremap <silent> <leader><right> <c-c>:wincmd l<cr>
 "nnoremap <silent> <leader><left>       :wincmd h<cr>
@@ -7127,7 +7104,6 @@ function! ClearScreenAndModes()
     lclose
     cclose
     redraw!
-    " <Plug>(coc-float-hide) " TODO
     DisableGitConflictMode
     DisableGitGutterMode
     FixHighlighting
@@ -7158,7 +7134,7 @@ tnoremap <c-y><c-t> <c-\><c-n>:NewTab<cr>
 tnoremap <c-y>t     <c-\><c-n>:NewTab<cr>
 
 " open current buffer in a new tab
-" TODO: optionally remove window from original tab
+" TODO: remove window from original tab
 nnoremap <leader><c-t>        :tab split<cr>
 nnoremap <c-y>!               :tab split<cr>
 tnoremap <c-y>!     <c-\><c-n>:tab split<cr>i
