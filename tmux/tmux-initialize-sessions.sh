@@ -119,7 +119,7 @@ function get_recent_git_projects() {
 
 function create_session_main() {
     tmux_new_window_once "$SESSION_MAIN" "top" "bpytop || htop"
-    tmux_new_window_once "$SESSION_MAIN" "spotify" "spotify_player"
+    # tmux_new_window_once "$SESSION_MAIN" "spotify" "spotify_player"
 
     # email
     if has_internet_connection && [[ -d "$HOME/.local/share/mail/" ]]; then
