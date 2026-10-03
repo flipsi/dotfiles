@@ -6247,10 +6247,8 @@ nmap <leader>fj [I:let nr = input("Which one: ")
             \   <bar> exe "normal " . nr ."[\t"<cr>
 
 " find git merge conflict markers
-command! FindGitConflictMarkers /\v^[<|=>]{7}( .*|$)
-" TODO fix
-" nnoremap <leader>fc :FindGitConflictMarkers<bar>EnableGitConflictMode<cr>
-nnoremap <leader>fc :FindGitConflictMarkers<cr>
+command! -bar FindGitConflictMarkers /\v^[<|=>]{7}( .*|$)
+nnoremap <leader>fc :FindGitConflictMarkers <bar> EnableGitConflictMode<cr>
 
 " find errors and stuff
 nnoremap <leader>fe /\v(error\|fail)<cr>
