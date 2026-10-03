@@ -1082,6 +1082,7 @@ for_window [class="(?i)slack" title="^slack$"]                                  
 for_window [class="(?i)Microsoft Teams"]                                        move container to output $TERNARY_OUTPUT
 for_window [class="(?i)chrom" instance="crx_cifhbcnohmdccbgoicgdjpfamggdegmo"]  move container to output $TERNARY_OUTPUT
 for_window [class="(?i)spotify"]                                                move workspace to output $SECONDARY_OUTPUT
+for_window [class="(?i)zathura"]                                                move workspace to output $SECONDARY_OUTPUT
 for_window [class="(?i)telegram-desktop" title="^Telegram"]                     move workspace to output $TERNARY_OUTPUT
 for_window [class="(?i)signal"]                                                 move workspace to output $TERNARY_OUTPUT
 for_window [class="(?i)libreoffice-writer"]                                     move workspace to output $SECONDARY_OUTPUT
