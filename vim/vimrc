@@ -2534,18 +2534,6 @@ nnoremap 'cch :ConvertColorTo hex<cr>
 nnoremap 'ccr :ConvertColorTo rgb<cr>
 nnoremap 'cca :ConvertColorTo rgba<cr>
 
-" launch colorpicker and insert color code
-" TODO: find something that is not old and broken
-Plug 'blindFS/vim-colorpicker'
-nnoremap <leader>icp :ColorPicker<cr>
-
-" alternative colorpicker
-" (readme is looking good, but throws errors)
-"Plug 'KabbAmine/vCoolor.vim'
-"nnoremap <leader>cp :VCoolor<cr>
-
-
-
 " }}}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Completion and other smart IDE features via LSP {{{
