@@ -9,6 +9,7 @@ sublime/User/Package Control.*
 sublime/User/Package Control.cache
 sublime/User/SublimeLinter/
 vim/template_values
+vim/vim/spellfile.utf-8.add
 xfce4/terminal/accels.scm
 xfce4/xfconf/xfce-perchannel-xml/displays.xml
 xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
