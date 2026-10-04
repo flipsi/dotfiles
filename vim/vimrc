@@ -778,6 +778,61 @@ augroup FugitiveBlameRemoteUrl
 augroup END
 
 
+" prevent fugitive buffers from becoming the alternate buffer (#)
+let s:recent_normal_buffers = []
+
+function! s:IsFugitiveBuffer(buf) abort
+    if a:buf <= 0
+        return 0
+    endif
+    let l:name = bufname(a:buf)
+    if l:name =~# '^fugitive:' || l:name =~# '^fugitive://'
+        return 1
+    endif
+    let l:ft = getbufvar(a:buf, '&filetype')
+    if l:ft =~# '^fugitive'
+        return 1
+    endif
+    return 0
+endfunction
+
+function! s:MaintainNonFugitiveAlternateBuffer() abort
+    let l:cur = bufnr('%')
+    if !s:IsFugitiveBuffer(l:cur) && bufexists(l:cur) && buflisted(l:cur) && getbufvar(l:cur, '&buftype') ==# ''
+        call filter(s:recent_normal_buffers, 'v:val != l:cur && bufexists(v:val) && buflisted(v:val)')
+        call insert(s:recent_normal_buffers, l:cur)
+        if len(s:recent_normal_buffers) > 50
+            call remove(s:recent_normal_buffers, 50, -1)
+        endif
+    endif
+
+    let l:alt = bufnr('#')
+    if l:alt > 0 && s:IsFugitiveBuffer(l:alt)
+        let l:target = -1
+        for l:b in s:recent_normal_buffers
+            if l:b != l:cur && bufexists(l:b) && buflisted(l:b)
+                let l:target = l:b
+                break
+            endif
+        endfor
+        if l:target > 0
+            try
+                let @# = l:target
+            catch
+            endtry
+        else
+            let @# = ''
+        endif
+    endif
+endfunction
+
+augroup fugitive_prevent_alternate_buffer
+    autocmd!
+    autocmd BufEnter,WinEnter,BufWinEnter * call s:MaintainNonFugitiveAlternateBuffer()
+augroup END
+
+
+
 " resolve 3-way merge conflicts (diff view)
 nnoremap <leader>g<down>    ]c
 nnoremap <leader>g<up>      [c
