@@ -143,11 +143,40 @@ function arrange_outputs() {
     fi
 }
 
+function move_all_workspaces_to_output() {
+    local target_output="$1"
+    if ! command -v i3-msg >/dev/null 2>&1 || ! command -v jq >/dev/null 2>&1; then
+        return 0
+    fi
+
+    local focused_ws
+    focused_ws=$(i3-msg -t get_workspaces 2>/dev/null | jq -r '.[] | select(.focused).name' 2>/dev/null) || true
+
+    mapfile -t workspaces < <(i3-msg -t get_workspaces 2>/dev/null | jq -r --arg out "$target_output" '.[] | select(.output != $out) | .name' 2>/dev/null) || true
+
+    local cmd=""
+    for ws in "${workspaces[@]}"; do
+        if [[ -n "$ws" ]]; then
+            cmd="${cmd:+$cmd; }workspace \"$ws\"; move workspace to output \"$target_output\""
+        fi
+    done
+
+    if [[ -n "$focused_ws" ]]; then
+        cmd="${cmd:+$cmd; }workspace \"$focused_ws\""
+    fi
+
+    if [[ -n "$cmd" ]]; then
+        i3-msg "$cmd" >/dev/null 2>&1 || true
+    fi
+}
+
 function disable_all_but_one_output() {
     if ! xrandr | grep -q "^$OUTPUT_TO_KEEP connected"; then
         echo "Only output $OUTPUT_TO_KEEP seems unavailable. Aborting."
         exit 1
     fi
+
+    xrandr --output "$OUTPUT_TO_KEEP" --auto --primary
 
     mapfile -t MONITOR_LIST < <(xrandr | grep ' connected' | cut -d' ' -f1)
     for MONITOR in "${MONITOR_LIST[@]}"; do
@@ -156,7 +185,8 @@ function disable_all_but_one_output() {
         fi
     done
 
-    xrandr --output "$OUTPUT_TO_KEEP" --auto
+    sleep 0.5
+    move_all_workspaces_to_output "$OUTPUT_TO_KEEP"
 }
 
 function fix_resolution() {
@@ -203,7 +233,10 @@ function main() {
     esac
 
     if test -n "$ONLY"; then
-        OUTPUT_TO_KEEP="$(get_laptop_screen)"
+        OUTPUT_TO_KEEP="${LAPTOP_SCREEN:-$(get_laptop_screen)}"
+        if [[ -z "$OUTPUT_TO_KEEP" ]] || ! xrandr | grep -q "^$OUTPUT_TO_KEEP connected"; then
+            OUTPUT_TO_KEEP="$(get_remaining_screen)"
+        fi
         disable_all_but_one_output
     else
         arrange_outputs
