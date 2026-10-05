@@ -117,6 +117,12 @@ bind status xr   ?rm -r %(file)
 bind status xt   @trash-put %(file)
 bind status af   ?autoformat.sh %(file)
 
+# checkout/merge refs
+bind generic gen ?git switch -c %(prompt)
+bind refs c      ?git switch %(branch)
+bind refs m      ?git merge %(branch)
+bind refs d      ?git branch -d %(branch)
+
 # amend to last commit
 bind status A ?git commit --amend
 # amend to older commit
@@ -139,12 +145,6 @@ bind diff    aP  ?git stash pop %(stash)
 bind status  as  ?git save %(prompt)
 bind stage   as  ?git save %(prompt)
 bind refs    ap  ?git pop-prefix %(branch)
-
-# checkout/merge refs
-bind generic gen ?git switch -c %(prompt)
-bind refs c      ?git switch %(branch)
-bind refs m      ?git merge %(branch)
-bind refs d      ?git branch -d %(branch)
 
 # rename branch
 bind refs R ?git branch -m %(branch) %(prompt)
