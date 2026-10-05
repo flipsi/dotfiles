@@ -193,7 +193,7 @@ abbr $args u      unison
 abbr $args v      nvim
 # abbr $args vs     vim --servername \(basename \(pwd\)\)
 abbr $args vs     nvim --listen \(basename \(pwd\)\)
-abbr $args vd     neovide
+abbr $args vd     nvim -d
 abbr $args x      xrandr
 abbr $args xi     startx ~/.xinitrc
 abbr $args xo     xrandr --output
