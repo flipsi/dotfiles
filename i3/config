@@ -662,7 +662,12 @@ for_window [class="Blueman-applet" window_type="dialog"] exec --no-startup-id $H
 default_orientation vertical
 
 ## new workspaces have this layout
-workspace_layout stacked
+## (stacked, tabbed, splitv, splith)
+workspace_layout tabbed
+
+## TODO: layout per workspace
+## https://faq.i3wm.org/question/2570/different-layout-an-a-specified-workspace/index.html
+## https://github.com/JulienTant/i3-layout-per-workspace
 
 ## launch an application (that has a .desktop-file)
 # bindsym $mod+Return exec --no-startup-id "i3-dmenu-desktop -dmenu='dmenu $DMENU_OPTIONS'"
