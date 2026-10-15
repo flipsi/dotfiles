@@ -23,7 +23,7 @@ exec "$HOME/.i3/bin/i3-initialize.sh >> /tmp/i3-initialize.log 2>&1"
 exec "$HOME/.i3/bin/i3-initialize-outputs.sh >> /tmp/i3-initialize-outputs.log 2>&1"
 
 ## set keyboard layout
-exec "$SHELLSCRIPT_PATH/set-keyboard-layout.sh"
+exec "sleep 5; $SHELLSCRIPT_PATH/set-keyboard-layout.sh"
 
 ## turn on num block
 exec --no-startup-id "numlockx"
