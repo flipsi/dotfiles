@@ -864,8 +864,9 @@ mode "$launch" {
     # get from ~/.local/share/applications *.desktop files or so
     # bindsym e       exec --no-startup-id "teams"; mode "default"
     # bindsym e       exec --no-startup-id "chromium --profile-directory=Default --app-id=cifhbcnohmdccbgoicgdjpfamggdegmo "; mode "default"
+    bindsym e       exec --no-startup-id "/opt/brave-bin/brave --profile-directory=Default --app-id=ompifgpmddkgmclendfeacglnodjjndh "; mode "default"
     # bindsym e       exec --no-startup-id "/usr/bin/firefoxpwa site launch 01KPEJVWCGC7RW8NAHDFSF71R0 --protocol \%u"; mode "default"
-    bindsym e       exec --no-startup-id "/usr/bin/firefoxpwa site launch 01KPEJVWCGC7RW8NAHDFSF71R0"; mode "default"
+    # bindsym e       exec --no-startup-id "/usr/bin/firefoxpwa site launch 01KPEJVWCGC7RW8NAHDFSF71R0"; mode "default"
     # bindsym i       exec --no-startup-id "flatpak run com.vivaldi.Vivaldi || vivaldi-stable || vivaldi"; mode "default"
     bindsym i       exec --no-startup-id "flatpak run com.brave.Browser || brave"; mode "default
     bindsym r       exec --no-startup-id "chromium || chromium-browser"; mode "default
@@ -949,7 +950,9 @@ mode "$goto" {
   bindsym $mod+u    exec --no-startup-id "$HOME/.i3/bin/i3-swap-workspaces.sh Outlook"; mode "default"
   # bindsym e         [class="(?i)microsoft teams - preview"] focus; mode "default"
   # bindsym e         [class="(?i)chrom" instance="crx_cifhbcnohmdccbgoicgdjpfamggdegmo"] focus; mode "default"
-  bindsym e         [class="FFPWA-01KPEJVWCGC7RW8NAHDFSF71R0"] focus; mode "default"
+  bindsym e         [class="(?i)brave" instance="crx_ompifgpmddkgmclendfeacglnodjjndh"] focus; mode "default"
+  # bindsym e         [class="FFPWA-01KPEJVWCGC7RW8NAHDFSF71R0"] focus; mode "default"
+  bindsym $mod+e    exec --no-startup-id "$HOME/.i3/bin/i3-swap-workspaces.sh Teams"; mode "default" # FIXME 
   # cancel
   bindsym Return mode "default"
   bindsym Escape mode "default"
@@ -1041,6 +1044,7 @@ assign [class="(?i)neovide"]                                                    
 for_window [class="(?i)outlook-for-linux"] move to workspace                                        Outlook
 for_window [class="(?i)microsoft teams"] move to workspace                                          Teams
 for_window [class="(?i)chrom" instance="crx_cifhbcnohmdccbgoicgdjpfamggdegmo"]  move to workspace   Teams
+for_window [class="(?i)brave" instance="crx_ompifgpmddkgmclendfeacglnodjjndh"]  move to workspace   Teams
 for_window [class="FFPWA-01KPEJVWCGC7RW8NAHDFSF71R0"]                           move to workspace   Teams
 assign [class="code-oss"]                                                                           VS Code
 assign [class="(?i)pale moon"]                                                                      Web
