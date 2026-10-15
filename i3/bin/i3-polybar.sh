@@ -128,7 +128,7 @@ function set_env_vars() {
             ;;
     esac
     BAR_DPI=108
-    BAR_HEIGHT=24
+    BAR_HEIGHT=25
     BAR_TRAY_SIZE=16
 
     if [[ -n "$BAR_THIRD_MONITOR" ]]; then
