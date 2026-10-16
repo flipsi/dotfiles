@@ -5761,14 +5761,19 @@ noremap <esc><up>   <c-b>
 command! -nargs=1 -bang Terminal :call Terminal(<bang>0, <q-args>)
 " with bang == 0: keep terminal open after exit
 " with bang == 1: close terminal automatically after exit
-" TODO: argument for keeping focus on current window
-function! Terminal(bang, commandline)
+" additional arg: don't focus terminal window
+function! Terminal(bang, commandline, ...)
+    let l:keep_focus = a:0 > 0 ? a:1 : 0
+    let l:current_window = win_getid()
     if !has('nvim')
         let l:open_or_close = a:bang ? "++close " : "++open "
         execute 'vertical terminal ' . l:open_or_close . a:commandline
     else
         let g:terminal_close_after_exit = a:bang
         execute 'vsplit | terminal ' . a:commandline
+    endif
+    if l:keep_focus
+        call win_gotoid(l:current_window)
     endif
 endfunction
 
