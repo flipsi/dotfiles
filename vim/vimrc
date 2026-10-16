@@ -4661,8 +4661,12 @@ function! s:RemoteCommitLink(sha) abort
 
   let l:base = s:NormalizeRemoteToHttps(l:raw)
 
-  " GitHub/GitLab/Bitbucket all accept /commit/<sha> for the common case.
-  return l:base . '/commit/' . a:sha
+  " GitHub/GitLab use /commit/<sha>; Bitbucket uses /commits/<sha>.
+  if l:base =~# '://bitbucket\.org/'
+      return l:base . '/commits/' . a:sha
+  else
+      return l:base . '/commit/' . a:sha
+  endif
 endfunction
 
 function! GitChooseBranchInteractively(sink_function_name)
