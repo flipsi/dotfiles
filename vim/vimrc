@@ -4620,25 +4620,28 @@ function! GitRepoMainOrMaster()
 endfunction
 
 function! s:NormalizeRemoteToHttps(url) abort
- let l:u = substitute(a:url, '\n\+$', '', '')
+    let l:u = substitute(a:url, '\n\+$', '', '')
 
- " Handle scp-style: user@host:path
- if l:u =~# '^[^@]\+@[^:]\+:.'
- let l:host = matchstr(l:u, '^[^@]\+@\zs[^:]\+\ze:')
- let l:path = matchstr(l:u, '^[^@]\+@[^:]\+:\zs.*$')
- let l:u = 'https://' . l:host . '/' . l:path
- endif
+    " Handle scp-style: user@host:path
+    if l:u =~# '^[^@]\+@[^:]\+:.'
+        let l:host = matchstr(l:u, '^[^@]\+@\zs[^:]\+\ze:')
+        let l:host = substitute(l:host, '^ssh\.', '', '')
+        let l:path = matchstr(l:u, '^[^@]\+@[^:]\+:\zs.*$')
+        let l:u = 'https://' . l:host . '/' . l:path
+    endif
 
- " Handle ssh://[user@]host/path
- if l:u =~# '^ssh://'
- let l:u = substitute(l:u, '^ssh://', '', '')
- " drop optional user@
- let l:u = substitute(l:u, '^[^@/]\+@', '', '')
- let l:u = 'https://' . l:u
- endif
+    " Handle ssh://[user@]host/path
+    if l:u =~# '^ssh://'
+        let l:u = substitute(l:u, '^ssh://', '', '')
+        " drop optional user@
+        let l:u = substitute(l:u, '^[^@/]\+@', '', '')
+        " drop optional ssh. at start of host
+        let l:u = substitute(l:u, '^ssh\.', '', '')
+        let l:u = 'https://' . l:u
+    endif
 
- let l:u = substitute(l:u, '\.git$', '', '')
- return l:u
+    let l:u = substitute(l:u, '\.git$', '', '')
+    return l:u
 endfunction
 
 function! s:RemoteCommitLink(sha) abort
