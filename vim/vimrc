@@ -5229,10 +5229,9 @@ command! -nargs=1 -bang Replace :call Replace(<bang>0, <q-args>)
 " }}}
 
 " comment the current line / form (without a plugin) {{{
-" TODO: integrate ToggleHTMLComment (does not do filetype detection which is a feature, so filetype should maybe be an optional parameter)
-function! ToggleComment(mode)
+function! ToggleComment(mode, ...)
 
-    let l:filetype = &filetype
+    let l:filetype = a:0 > 0 ? a:1 : &filetype
     if l:filetype == 'clojure'
         let l:left_marker   = '#_'
         let l:right_marker  = ''
@@ -5270,34 +5269,7 @@ endfunction
 
 " comment the current line / visual selection with html syntax {{{
 function! ToggleHTMLComment(mode)
-
-    " visual mode
-    if a:mode == "v"
-        let lineFrom = getpos("'<")[1]
-        let lineTo   = getpos("'>")[1]
-        let range    = lineFrom . "," . lineTo
-        let text     = join(getline(lineFrom, lineTo))
-
-    " normal mode
-    elseif a:mode == "n"
-        let range = "."
-        let text = getline(".")
-
-    endif
-
-    " do the toggle
-    if matchstr(text, '\V<!--') == ""
-        " comment
-        " .substitute:\v^(\s*)(.*)$:\1<!-- \2 -->:
-        " execute range . escape("substitute:\v^(\s*)(.*)$:\1<!-- \2 -->:", '\')
-        execute range . "substitute:\\v^(\\s*)(.*)$:\\1<!-- \\2 -->:"
-    else
-        " uncomment
-        " .substitute:\v\<!--\s*(.*\s)\s*--\>:\1:
-        " execute range . escape("substitute:\v\<!--\s*(.*\s)\s*--\>:\1:", '\')
-        execute range . "substitute:\\v\\<!--\\s*(.*\\s)\\s*--\\>:\\1:"
-    endif
-
+    call ToggleComment(a:mode, 'html')
 endfunction
 " }}}
 
