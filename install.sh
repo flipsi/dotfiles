@@ -477,6 +477,7 @@ function create_link_for_target() {
             mkdir -p "$HOME/bin"
             create_link "$PWD/tmux/tmux-initialize-sessions.sh" "$HOME/bin/tmux-initialize-sessions.sh"
             create_link "$PWD/tmux/tmux-project-session.sh" "$HOME/bin/tmux-project-session.sh"
+            create_link "$PWD/tmux/tmux-cycle-sessions.sh" "$HOME/bin/tmux-cycle-sessions.sh"
             ;;
 
         turses )
