@@ -136,7 +136,8 @@ abbr $args gwr    git worktree remove
 abbr $args h      bpytop \|\| htop
 abbr $args kc     kubectl
 abbr $args i      nsxiv-rifle
-abbr $args j      joshuto
+abbr $args j      junie
+abbr $args jo     joshuto
 abbr $args l      less
 abbr $args ll     eza_or_ls -l
 abbr $args lla    eza_or_ls -l -a
