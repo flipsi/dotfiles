@@ -66,6 +66,7 @@ SUPPORTED_TARGETS=(\
     redshift \
     screen \
     sbt \
+    sdkman \
     sublime-text-3 \
     sxiv \
     taskwarrior \
@@ -433,6 +434,11 @@ function create_link_for_target() {
             create_link "$PWD/sbt/sbtconfig" "$HOME/.sbtconfig"
             mkdir -p "$HOME/.sbt/1.0/plugins"
             create_link "$PWD/sbt/plugins.sbt" "$HOME/.sbt/1.0/plugins/plugins.sbt"
+            ;;
+
+        sdkman )
+            mkdir -p "$HOME/.sdkman/etc"
+            create_link "$PWD/sdkman/config" "$HOME/.sdkman/etc/config"
             ;;
 
         screen )
