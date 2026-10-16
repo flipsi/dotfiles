@@ -8,6 +8,7 @@ set -e
 
 SESSION_MAIN="main"
 SESSION_CODE="code"
+SESSION_AGENTS="agents"
 
 HOSTNAME=$(hostname)
 
@@ -141,9 +142,17 @@ function create_session_code() {
     if [[ "$HOSTNAME" = "nott" ]]; then
         open_project_in_vim "$HOME/src-projects/dotfiles" "dotfiles"
         open_project_in_vim "$HOME/src-projects/shellscripts" "shellscripts"
-        open_recent_subdir_projects "$HOME/work-projects" 7
+        open_recent_subdir_projects "$HOME/work-projects" 5
     else
         open_recent_subdir_projects "$HOME/src-projects" 5
+    fi
+}
+
+function create_session_agents() {
+    if [[ "$HOSTNAME" = "nott" ]]; then
+        tmux_new_window_once "$SESSION_AGENTS" "assistant" "junie" "$HOME"
+    else
+        tmux_new_window_once "$SESSION_AGENTS" "dotfiles" "gemini" "$HOME/dotfiles"
     fi
 }
 
@@ -161,4 +170,5 @@ fi
 
 create_session_main
 create_session_code
+create_session_agents
 set_state
