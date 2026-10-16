@@ -4602,9 +4602,9 @@ endfunction
 
 function! s:GitRemoteUrl(remote) abort
   " Prefer git's own URL resolution; fall back to config
-  let l:url = system('git remote get-url ' . shellescape(a:remote) . ' | tr -d "\n"')
+  let l:url = system('git remote get-url ' . shellescape(a:remote) . ' | sed "s/\.git//" | tr -d "\n"')
   if v:shell_error
-    let l:url = system('git config --get remote.' . shellescape(a:remote) . '.url | tr -d "\n"')
+    let l:url = system('git config --get remote.' . shellescape(a:remote) . '.url | sed "s/\.git//" | tr -d "\n"')
   endif
   return l:url
 endfunction
