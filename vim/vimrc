@@ -3299,13 +3299,39 @@ function! SetupMaven()
     nnoremap <buffer> <leader>bp  :call RunCommand("sdk env && mvn package")<cr>
     nnoremap <buffer> <leader>blc :call RunCommand("sdk env && mvn checkstyle:check")<cr>
     nnoremap <buffer> <leader>btt :call RunCommand("sdk env && mvn test verify")<cr>
-    " TODO: implement
-    nnoremap <buffer> <leader>bto :call RunCommand("sdk env && mvn test -Dtest=FIXME")<cr>
-    nnoremap <buffer> <leader>btf :call RunCommand("sdk env && mvn test -Dtest=FIXME")<cr>
+    nnoremap <buffer> <leader>bto :call RunCommand(CalculateMavenTestCommand('singletest'))<cr>
+    nnoremap <buffer> <leader>btf :call RunCommand(CalculateMavenTestCommand('file'))<cr>
     " FIXME: this is customer/project specific:
     nnoremap <buffer> <leader>btc :call RunCommand("bash -c 'cd tqg-wms-configuration && rm -rf ./target && mvn test'")<cr>
 endfunction
 command! SetupMaven :call SetupMaven()
+
+function! CalculateMavenTestCommand(scope)
+    let l:class = expand('%:t:r')
+    if empty(l:class)
+        let l:lines = GetMatches('^\s*\(public\s\+\|abstract\s\+\|final\s\+\)*class\s\+\(\w\+\)', 1, line('$'))
+        if len(l:lines) > 0
+            let l:class = substitute(l:lines[0], '^\s*\(public\s\+\|abstract\s\+\|final\s\+\)*class\s\+\(\w\+\).*', '\2', '')
+        endif
+    endif
+    if empty(l:class)
+        throw "Could not find test class name."
+    endif
+
+    if a:scope == 'file' || a:scope == 'class'
+        return "sdk env && mvn test -Dtest=" . l:class
+    elseif a:scope == 'singletest' || a:scope == 'single' || a:scope == 'method'
+        let l:method_pattern = '^\s*\(public\|protected\|private\|static\|final\|synchronized\|default\)\?\s*\([A-Za-z0-9_<>\[\], ?]\+\s\+\)\([A-Za-z0-9_]\+\)\s*([^;=]*\({\|\s*$\|throws\)'
+        let l:matching_line = GetMostPreviousMatchingLine(l:method_pattern)
+        if l:matching_line == 0
+            throw "Could not find test method name."
+        endif
+        let l:method_name = substitute(getline(l:matching_line), l:method_pattern . '.*', '\3', '')
+        return "sdk env && mvn test -Dtest=" . l:class . "#" . l:method_name
+    else
+        throw "Invalid scope for CalculateMavenTestCommand: " . a:scope
+    endif
+endfunction
 
 " }}}
 " Language: javascript {{{
