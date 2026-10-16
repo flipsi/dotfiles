@@ -3291,14 +3291,14 @@ augroup java_on_read
 augroup END
 
 function! SetupMaven()
-    nnoremap <buffer> <leader>bC  :call RunCommand("sdk env && mvn clean")<cr>
-    nnoremap <buffer> <leader>bI  :call RunCommand("sdk env && mvn install")<cr>
-    nnoremap <buffer> <leader>bi  :call RunCommand("sdk env && mvn install -DskipTests")<cr>
-    nnoremap <buffer> <leader>bv  :call RunCommand("sdk env && mvn validate")<cr>
-    nnoremap <buffer> <leader>bc  :call RunCommand("sdk env && mvn compile")<cr>
-    nnoremap <buffer> <leader>bp  :call RunCommand("sdk env && mvn package")<cr>
-    nnoremap <buffer> <leader>blc :call RunCommand("sdk env && mvn checkstyle:check")<cr>
-    nnoremap <buffer> <leader>btt :call RunCommand("sdk env && mvn test verify")<cr>
+    nnoremap <buffer> <leader>bC  :call RunCommand("mvn clean")<cr>
+    nnoremap <buffer> <leader>bI  :call RunCommand("mvn install")<cr>
+    nnoremap <buffer> <leader>bi  :call RunCommand("mvn install -DskipTests")<cr>
+    nnoremap <buffer> <leader>bv  :call RunCommand("mvn validate")<cr>
+    nnoremap <buffer> <leader>bc  :call RunCommand("mvn compile")<cr>
+    nnoremap <buffer> <leader>bp  :call RunCommand("mvn package")<cr>
+    nnoremap <buffer> <leader>blc :call RunCommand("mvn checkstyle:check")<cr>
+    nnoremap <buffer> <leader>btt :call RunCommand("mvn test verify")<cr>
     nnoremap <buffer> <leader>bto :call RunCommand(CalculateMavenTestCommand('singletest'))<cr>
     nnoremap <buffer> <leader>btf :call RunCommand(CalculateMavenTestCommand('file'))<cr>
     " FIXME: this is customer/project specific:
@@ -3319,7 +3319,7 @@ function! CalculateMavenTestCommand(scope)
     endif
 
     if a:scope == 'file' || a:scope == 'class'
-        return "sdk env && mvn test -Dtest=" . l:class
+        return "mvn test -Dtest=" . l:class
     elseif a:scope == 'singletest' || a:scope == 'single' || a:scope == 'method'
         let l:method_pattern = '^\s*\(public\|protected\|private\|static\|final\|synchronized\|default\)\?\s*\([A-Za-z0-9_<>\[\], ?]\+\s\+\)\([A-Za-z0-9_]\+\)\s*([^;=]*\({\|\s*$\|throws\)'
         let l:matching_line = GetMostPreviousMatchingLine(l:method_pattern)
@@ -3327,7 +3327,7 @@ function! CalculateMavenTestCommand(scope)
             throw "Could not find test method name."
         endif
         let l:method_name = substitute(getline(l:matching_line), l:method_pattern . '.*', '\3', '')
-        return "sdk env && mvn test -Dtest=" . l:class . "#" . l:method_name
+        return "mvn test -Dtest=" . l:class . "#" . l:method_name
     else
         throw "Invalid scope for CalculateMavenTestCommand: " . a:scope
     endif
