@@ -30,6 +30,7 @@ SUPPORTED_TARGETS=(\
     bash \
     cmus \
     dircolors \
+    dunst \
     elinks \
     fish \
     gcalcli \
@@ -39,6 +40,7 @@ SUPPORTED_TARGETS=(\
     gtk \
     i3 \
     intellij\
+    junie \
     k9s \
     kitty \
     kbd \
@@ -202,6 +204,11 @@ function create_link_for_target() {
 
         dircolors )
             create_link "$PWD/dircolors/dircolors" "$HOME/.dircolors"
+            ;;
+
+        dunst )
+            mkdir -p "$HOME/.config/dunst"
+            create_link "$PWD/dunst/dunstrc" "$HOME/.config/dunst/dunstrc"
             ;;
 
         elinks )
