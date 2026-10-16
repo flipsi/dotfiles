@@ -15,6 +15,7 @@
 .ensime
 .ensime_cache
 .idea/
+.factorypath
 .lsp/
 .metals/
 .session.vim
