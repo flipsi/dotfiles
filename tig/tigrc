@@ -152,9 +152,8 @@ bind refs R ?git branch -m %(branch) %(prompt)
 # copy commit hash to clipboard
 bind generic y @bash -c "printf %(commit) | xsel -b"
 # copy commit web URL to clipboard or open in browser
-# TODO remove '.git'
-bind generic oy @bash -c "echo $(git remote get-url $(git remote | head -n1)) XfindmeX %(commit) | sed 's/git@\\(ssh\.\\)\\{0,1\\}\\(.*\\):\\(.*\\) XfindmeX \\(.*\\)/https:\\/\\/\\2\\/\\3\\/commits\\/\\4/' | xsel -b"
-bind generic oo @bash -c "echo $(git remote get-url $(git remote | head -n1)) XfindmeX %(commit) | sed 's/git@\\(ssh\.\\)\\{0,1\\}\\(.*\\):\\(.*\\) XfindmeX \\(.*\\)/https:\\/\\/\\2\\/\\3\\/commits\\/\\4/' | xargs xdg-open"
+bind generic oy @bash -c "echo $(git remote get-url $(git remote | head -n1) | sed 's/\\.git//'| tr -d '\\n') XfindmeX %(commit) | sed 's/git@\\(ssh\.\\)\\{0,1\\}\\(.*\\):\\(.*\\) XfindmeX \\(.*\\)/https:\\/\\/\\2\\/\\3\\/commits\\/\\4/' | xsel -b"
+bind generic oo @bash -c "echo $(git remote get-url $(git remote | head -n1) | sed 's/\\.git//'| tr -d '\\n') XfindmeX %(commit) | sed 's/git@\\(ssh\.\\)\\{0,1\\}\\(.*\\):\\(.*\\) XfindmeX \\(.*\\)/https:\\/\\/\\2\\/\\3\\/commits\\/\\4/' | xargs xdg-open"
 
 # remote commands
 bind generic f   !git fetch
