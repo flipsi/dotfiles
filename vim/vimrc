@@ -820,8 +820,6 @@ function! s:MaintainNonFugitiveAlternateBuffer() abort
                 let @# = l:target
             catch
             endtry
-        else
-            let @# = ''
         endif
     endif
 endfunction
