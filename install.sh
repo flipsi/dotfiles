@@ -262,6 +262,10 @@ function create_link_for_target() {
             done
             ;;
 
+        junie )
+            create_link "$PWD/junie/AGENTS.md" "$HOME/.junie/AGENTS.md"
+            ;;
+
         joshuto )
             create_link "$PWD/joshuto" "$HOME/.config/joshuto"
             ;;
