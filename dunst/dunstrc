@@ -8,7 +8,7 @@
     ### Geometry ###
     width = 300
     height = (0, 300)
-    origin = top-right
+    origin = bottom-right
     offset = (10, 50)
     scale = 0
     notification_limit = 20
