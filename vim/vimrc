@@ -3283,11 +3283,11 @@ Plug 'dag/vim-fish'
 
 
 " }}}
-" Language: java {{{
+" Language: java, groovy {{{
 
 augroup java_on_read
     au!
-    au FileType java call SetupMaven()
+    au FileType java,groovy call SetupMaven()
 augroup END
 
 function! SetupMaven()
@@ -3309,9 +3309,9 @@ command! SetupMaven :call SetupMaven()
 function! CalculateMavenTestCommand(scope)
     let l:class = expand('%:t:r')
     if empty(l:class)
-        let l:lines = GetMatches('^\s*\(public\s\+\|abstract\s\+\|final\s\+\)*class\s\+\(\w\+\)', 1, line('$'))
+        let l:lines = GetMatches('^\s*\%(public\s\+\|abstract\s\+\|final\s\+\)*\%(class\|trait\|record\)\s\+\(\w\+\)', 1, line('$'))
         if len(l:lines) > 0
-            let l:class = substitute(l:lines[0], '^\s*\(public\s\+\|abstract\s\+\|final\s\+\)*class\s\+\(\w\+\).*', '\2', '')
+            let l:class = substitute(l:lines[0], '^\s*\%(public\s\+\|abstract\s\+\|final\s\+\)*\%(class\|trait\|record\)\s\+\(\w\+\).*', '\1', '')
         endif
     endif
     if empty(l:class)
@@ -3321,13 +3321,28 @@ function! CalculateMavenTestCommand(scope)
     if a:scope == 'file' || a:scope == 'class'
         return "mvn test -Dtest=" . l:class
     elseif a:scope == 'singletest' || a:scope == 'single' || a:scope == 'method'
-        let l:method_pattern = '^\s*\(public\|protected\|private\|static\|final\|synchronized\|default\)\?\s*\([A-Za-z0-9_<>\[\], ?]\+\s\+\)\([A-Za-z0-9_]\+\)\s*([^;=]*\({\|\s*$\|throws\)'
+        let l:quoted_pattern = '^\s*\%(\%(public\|protected\|private\|static\|final\|synchronized\|default\|def\|void\|[A-Za-z0-9_<>\[\],]\+\)\s\+\)*\(["'']\)\(.\{-}\)\1\s*([^;=]*\%({\|\s*$\|throws\)'
+        let l:ident_pattern = '^\s*\%(\%(public\|protected\|private\|static\|final\|synchronized\|default\|def\|void\|[A-Za-z0-9_<>\[\],]\+\)\s\+\)\+\([A-Za-z0-9_]\+\)\s*([^;=]*\%({\|\s*$\|throws\)'
+        let l:method_pattern = '^\s*\%(\%(\%(public\|protected\|private\|static\|final\|synchronized\|default\|def\|void\|[A-Za-z0-9_<>\[\],]\+\)\s\+\)*\(["'']\)\(.\{-}\)\1\|\%(\%(public\|protected\|private\|static\|final\|synchronized\|default\|def\|void\|[A-Za-z0-9_<>\[\],]\+\)\s\+\)\+\([A-Za-z0-9_]\+\)\)\s*([^;=]*\%({\|\s*$\|throws\)'
+
         let l:matching_line = GetMostPreviousMatchingLine(l:method_pattern)
         if l:matching_line == 0
             throw "Could not find test method name."
         endif
-        let l:method_name = substitute(getline(l:matching_line), l:method_pattern . '.*', '\3', '')
-        return "mvn test -Dtest=" . l:class . "#" . l:method_name
+
+        let l:line_str = getline(l:matching_line)
+        if match(l:line_str, l:quoted_pattern) != -1
+            let l:method_name = substitute(l:line_str, l:quoted_pattern . '.*', '\2', '')
+        else
+            let l:method_name = substitute(l:line_str, l:ident_pattern . '.*', '\1', '')
+        endif
+
+        let l:test_spec = l:class . '#' . l:method_name
+        if l:test_spec =~ '\s'
+            return 'mvn test -Dtest="' . l:test_spec . '"'
+        else
+            return 'mvn test -Dtest=' . l:test_spec
+        endif
     else
         throw "Invalid scope for CalculateMavenTestCommand: " . a:scope
     endif
