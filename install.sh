@@ -128,7 +128,7 @@ function create_link() {
             ln -nsf "$DESTPATH" "$LINKPATH"
         elif [[ $INTERACTIVE = true ]]; then
             ln -nsi "$DESTPATH" "$LINKPATH"
-        else 
+        else
             # empty dirs can be replaced, otherwise abort (fails if not empty)
             if rmdir "$LINKPATH" 2>/dev/null; then
                 echo "Replacing empty dir..."
@@ -271,7 +271,9 @@ function create_link_for_target() {
             ;;
 
         junie )
+            mkdir -p "$HOME/.junie"
             create_link "$PWD/junie/AGENTS.md" "$HOME/.junie/AGENTS.md"
+            create_link "$PWD/junie/config.json" "$HOME/.junie/config.json"
             ;;
 
         joshuto )

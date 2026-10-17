@@ -1,0 +1,34 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "notify-send -u low \"Junie\" \"Task completed in $PWD\""
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "notify-send -u critical \"Junie\" \"Task encountered an error in $PWD\""
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "notify-send -u normal \"Junie\" \"Permission confirmation required in $PWD\"; exit 1"
+          }
+        ]
+      }
+    ]
+  }
+}
