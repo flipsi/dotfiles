@@ -76,8 +76,15 @@ case "$1" in
     #     done
     #     ;;
 
+    "w" )
+        # set as wallpaper
+        FILE=${FILES[0]}
+        feh --bg-scale "$FILE"
+        ;;
+
+
     "C-c" )
-        FILE=${FILES[1]}
+        FILE=${FILES[0]}
         TYPE=$(file -i "$FILE" | sed -r 's|.*(image/[a-z]+);.*|\1|')
         xclip -sel clip -t "$TYPE" -i "$FILE"
         ;;
