@@ -151,8 +151,9 @@ function create_session_code() {
 function create_session_agents() {
     if [[ "$HOSTNAME" = "nott" ]]; then
         tmux_new_window_once "$SESSION_AGENTS" "assistant" "junie" "$HOME"
+        tmux_new_window_once "$SESSION_AGENTS" "dotfiles" "junie" "$HOME/dotfiles"
     else
-        tmux_new_window_once "$SESSION_AGENTS" "dotfiles" "gemini" "$HOME/dotfiles"
+        tmux_new_window_once "$SESSION_AGENTS" "dotfiles" "agy" "$HOME/dotfiles"
     fi
 }
 
