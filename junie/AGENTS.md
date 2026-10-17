@@ -23,4 +23,3 @@
 - Do not initiate git commits unless explicitly requested.
 - Do not delete or rename existing files without a clear technical reason.
 - Avoid introducing new external dependencies unless strictly necessary.
-- Clean up any temporary files or debug scripts created during investigation.
