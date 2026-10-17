@@ -42,17 +42,15 @@ function set_xdg_default_apps
     if command -v xdg-settings >/dev/null
         if test -z "$BROWSER"
             set_xdg_default_app 'default-web-browser' 'org.mozilla.firefox.desktop'
-            set_xdg_default_app 'default-web-browser' 'com.vivaldi.Vivaldi.desktop'
+            set_xdg_default_app 'default-web-browser' 'brave-browser.desktop'
         end
     end
     if command -v xdg-mime >/dev/null
         set_xdg_default_app_for_mimetime 'application/pdf'           'org.pwmt.zathura.desktop'
         set_xdg_default_app_for_mimetime 'image/jpeg'                'sxiv.desktop'
         set_xdg_default_app_for_mimetime 'image/png'                 'sxiv.desktop'
-        set_xdg_default_app_for_mimetime 'x-scheme-handler/http'     'vivaldi-stable.desktop'
-        set_xdg_default_app_for_mimetime 'x-scheme-handler/https'    'vivaldi-stable.desktop'
-        set_xdg_default_app_for_mimetime 'x-scheme-handler/http'     'com.vivaldi.Vivaldi.desktop'
-        set_xdg_default_app_for_mimetime 'x-scheme-handler/https'    'com.vivaldi.Vivaldi.desktop'
+        set_xdg_default_app_for_mimetime 'x-scheme-handler/http'     'brave-browser.desktop'
+        set_xdg_default_app_for_mimetime 'x-scheme-handler/https'    'brave-browser.desktop'
     end
 end
 
