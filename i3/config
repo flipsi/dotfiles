@@ -1021,6 +1021,7 @@ assign [class="(?i)krita"]                                                      
 assign [class="(?i)jamulus"]                                                                        Jam
 assign [class="(?i)audacity"]                                                                       Recording
 assign [class="(?i)ardour"]                                                                         Recording
+assign [class="(?i)hydrogen"]                                                                       Drums
 assign [class="(?i)skype"]                                                                          Skype
 assign [class="(?i)slack"]                                                                          Slack
 # for_window [class="(?i)slack" title=".*Huddle"] move to workspace                                   Huddle
