@@ -23,14 +23,15 @@ done
 function setup_wallpaper() {
     local wallpapers=( "$HOME"/.i3/wallpaper.* )
     local wallpaper="${wallpapers[0]}"
-    local wallpaper_fallback="$HOME/.i3/wallpaper/gray_3A3A3A_1920x1080.png"
+    local wallpaper_gray="$HOME/.i3/wallpaper/gray_3A3A3A_1920x1080.png"
 
     if [[ -f "$wallpaper" ]]; then
         echo "Setting wallpaper $wallpaper"
-        feh --bg-scale "$wallpaper"
+        # TODO: determine correct screen order programmatically
+        feh --bg-scale "$wallpaper" "$wallpaper_gray" "$wallpaper_gray"
     else
-        echo "WARNING: Wallpaper $wallpaper is not a regular file! Using $wallpaper_fallback now."
-        feh --bg-scale "$wallpaper_fallback"
+        echo "WARNING: Wallpaper $wallpaper is not a regular file! Using $wallpaper_gray now."
+        feh --bg-scale "$wallpaper_gray"
     fi
 }
 
