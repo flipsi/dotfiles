@@ -1,5 +1,7 @@
 {
   "colorScheme": "solarized dark",
+  "editorMode": "vim",
+  "vimInsertFirst": true,
   "permissions": {
     "allow": [
       "command(agy)",
@@ -14,7 +16,8 @@
       "command(wc -l $(git ls-files) | sort -n | tail -n 20)",
       "command(which)",
       "read_url(antigravity.google)",
-      "command(diff)"
+      "command(diff)",
+      "command(file)"
     ]
   },
   "trustedWorkspaces": [
