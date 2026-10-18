@@ -21,9 +21,16 @@ while true ; do
 done
 
 function setup_wallpaper() {
-    WALLPAPER="$HOME/.i3/wallpaper/gray_3A3A3A_1920x1080.png"
-    if [[ -f "$WALLPAPER" ]]; then
-        feh --bg-scale "$WALLPAPER"
+    local wallpapers=( "$HOME"/.i3/wallpaper.* )
+    local wallpaper="${wallpapers[0]}"
+    local wallpaper_fallback="$HOME/.i3/wallpaper/gray_3A3A3A_1920x1080.png"
+
+    if [[ -f "$wallpaper" ]]; then
+        echo "Setting wallpaper $wallpaper"
+        feh --bg-scale "$wallpaper"
+    else
+        echo "WARNING: Wallpaper $wallpaper is not a regular file! Using $wallpaper_fallback now."
+        feh --bg-scale "$wallpaper_fallback"
     fi
 }
 
