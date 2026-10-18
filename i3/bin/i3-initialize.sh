@@ -88,7 +88,12 @@ end
 
 # to autostart applications, use dex
 
+function start_handy_whisper
+    handy --start-hidden
+end
+
 # initialize-tmux-sessions # don't want that because of gpg agent password prompt in every shell
 desktop_session
 setup_musicserver
 toggle_redshift
+start_handy_whisper
