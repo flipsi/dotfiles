@@ -77,10 +77,18 @@ case "$1" in
     #     ;;
 
     "w" )
-        # set as wallpaper
+        # set as wallpaper temporarily
         FILE=${FILES[0]}
         feh --bg-scale "$FILE"
         ;;
+
+    "W" )
+        # set as wallpaper permanently
+        FILE=${FILES[0]}
+        feh --bg-scale "$FILE"
+        cp "$FILE" "$HOME/.i3/wallpaper.png-or-jpeg"
+        ;;
+
 
 
     "C-c" )
