@@ -53,6 +53,7 @@ SUPPORTED_TARGETS=(\
     mplayer \
     mutt \
     muttator \
+    nchat \
     ncmpcpp \
     ncspot \
     neovim \
@@ -360,6 +361,14 @@ function create_link_for_target() {
 
         muttator )
             create_link "$PWD/muttator/muttatorrc" "$HOME/.muttatorrc"
+            ;;
+
+        nchat )
+            mkdir -p "$HOME/.config/nchat"
+            create_link "$PWD/nchat/app.conf" "$HOME/.config/nchat/app.conf"
+            create_link "$PWD/nchat/color.conf" "$HOME/.config/nchat/color.conf"
+            create_link "$PWD/nchat/ui.conf" "$HOME/.config/nchat/ui.conf"
+            create_link "$PWD/nchat/key.conf" "$HOME/.config/nchat/key.conf"
             ;;
 
         ncmpcpp )
