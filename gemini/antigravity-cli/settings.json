@@ -1,0 +1,27 @@
+{
+  "colorScheme": "solarized dark",
+  "permissions": {
+    "allow": [
+      "command(agy)",
+      "command(find)",
+      "command(git diff)",
+      "command(git log)",
+      "command(git show)",
+      "command(git status)",
+      "command(grep)",
+      "command(ls)",
+      "command(shellcheck)",
+      "command(wc -l $(git ls-files) | sort -n | tail -n 20)",
+      "command(which)",
+      "read_url(antigravity.google)",
+      "command(diff)"
+    ]
+  },
+  "trustedWorkspaces": [
+    "/home/flipsi/Sync/src-playground/latex/letter",
+    "/home/flipsi/src-projects/dotfiles",
+    "/home/flipsi/src-projects/shellscripts",
+    "/home/flipsi/shellscripts",
+    "/home/flipsi/dotfiles"
+  ]
+}

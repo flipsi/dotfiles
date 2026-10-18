@@ -34,6 +34,7 @@ SUPPORTED_TARGETS=(\
     elinks \
     fish \
     gcalcli \
+    gemini \
     ghci \
     git \
     gnupg \
@@ -230,6 +231,16 @@ function create_link_for_target() {
 
         gcalcli )
             create_link "$PWD/gcalcli/gcalclirc" "$HOME/.gcalclirc"
+            ;;
+
+        gemini )
+            mkdir -p "$HOME/.gemini/config"
+            mkdir -p "$HOME/.gemini/antigravity-cli"
+            create_link "$PWD/gemini/GEMINI.md" "$HOME/.gemini/GEMINI.md"
+            create_link "$PWD/gemini/settings.json" "$HOME/.gemini/settings.json"
+            create_link "$PWD/gemini/antigravity-cli/settings.json" "$HOME/.gemini/antigravity-cli/settings.json"
+            create_link "$PWD/gemini/hooks.json" "$HOME/.gemini/config/hooks.json"
+            create_link "$PWD/gemini/notify.sh" "$HOME/.gemini/config/notify.sh"
             ;;
 
         ghci )

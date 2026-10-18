@@ -4,6 +4,7 @@
 - Make minimal, focused, and targeted changes; avoid unsolicited large-scale refactors.
 - Adhere strictly to existing codebase conventions, architecture, and coding style.
 - Ask for clarification when requirements or architectural decisions are ambiguous.
+- Do not ask for confirmation before making file changes within the project; apply them directly.
 
 ### Execution & Scripting Rules
 - Do not use inline heredocs (`<< 'EOF'` or `<< EOF`) or multi-line python/bash execution commands.
@@ -20,6 +21,6 @@
 - Respect `.gitignore` and keep sensitive environment files (e.g., `.env`) untracked.
 
 ### Git & Workspace Hygiene
-- Do not initiate git commits unless explicitly requested.
+- Never git commit.
 - Do not delete or rename existing files without a clear technical reason.
 - Avoid introducing new external dependencies unless strictly necessary.

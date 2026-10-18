@@ -1,0 +1,10 @@
+{
+  "notifications": {
+    "Stop": [
+      {
+        "type": "command",
+        "command": "~/.gemini/config/notify.sh"
+      }
+    ]
+  }
+}
