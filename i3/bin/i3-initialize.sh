@@ -89,7 +89,7 @@ end
 # to autostart applications, use dex
 
 function start_handy_whisper
-    handy --start-hidden
+    handy --start-hidden >> /tmp/handy.log 2>&1
 end
 
 # initialize-tmux-sessions # don't want that because of gpg agent password prompt in every shell
