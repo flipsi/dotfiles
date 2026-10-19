@@ -502,7 +502,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id "playerctl -p spotify volume 0
 
 ## audio control
 bindsym $mod+0 mode "$audio"
-set $audio Audio (+/-) Volume (m) Mute (e) Mute Video Call (f/t) Fix/Toggle output (s) ... of Spotify (h) transcribe (b) Soundboard (g) GUI
+set $audio Audio (+/-) Volume (m) Mute (e) Mute Video Call (f/t) Fix/Toggle output (s) ... of Spotify (i) transcribe (b) Soundboard (g) GUI
 mode "$audio" {
     bindsym plus            exec --no-startup-id "pactl set-sink-volume 0 +1%"; exec "$UPDATE_STATUSBAR"
     bindsym minus           exec --no-startup-id "pactl set-sink-volume 0 -1%"; exec "$UPDATE_STATUSBAR"
@@ -518,7 +518,7 @@ mode "$audio" {
     bindsym s               exec --no-startup-id "$SHELLSCRIPT_PATH/switch-audio-output --toggle --app Spotify"; mode "default"
     bindsym b               exec --no-startup-id "~/.i3/bin/soundboard.sh"; mode "default"
     bindsym e               exec --no-startup-id "~/.i3/bin/mute-video-call.sh"; mode "default"
-    bindsym h               exec --no-startup-id "handy --toggle-transcription"; mode "default"
+    bindsym i               exec --no-startup-id "handy --toggle-transcription"; mode "default"
     bindsym g               exec --no-startup-id "pavucontrol"; mode "default"
     bindsym $mod+0          exec --no-startup-id "pavucontrol"; mode "default"
     # cancel
@@ -528,7 +528,7 @@ mode "$audio" {
 
 # easy to type keys on ZSA keyboards
 bindsym $mod+Control+e       exec --no-startup-id "~/.i3/bin/mute-video-call.sh"
-bindsym $mod+Control+h       exec --no-startup-id "handy --toggle-transcription"
+bindsym $mod+Control+i       exec --no-startup-id "handy --toggle-transcription"
 
 ## music control
 bindsym XF86AudioPlay        exec --no-startup-id "playerctl -p spotify play-pause"; exec "$UPDATE_STATUSBAR"
