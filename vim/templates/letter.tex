@@ -22,6 +22,9 @@
 \usepackage[T1]{fontenc} % T1 font encoding for high quality font output
 \usepackage{xcolor}
 
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+
 \renewcommand{\familydefault}{\sfdefault} % Latin Modern's sans serif font family as default
 
 % \enlargethispage{4cm}   % frühzeitigen Seitenumbruch verhindern
@@ -66,7 +69,16 @@ foldmarks=true
     \usekomavar*{fromurl}\usekomavar{fromurl}}
 }
 
+% Ohne Unterschrift als Bild
 \setkomavar{signature}{\usekomavar{fromname}}
+
+% % Mit Unterschrift als Bild
+% \setplength{sigbeforevskip}{1.5pt}
+% \setkomavar{signature}{%
+%     \includegraphics[scale=0.8]{signature/signature.png}\\[-5ex]
+%     \usekomavar{fromname}%
+% }
+
 \renewcommand*{\raggedsignature}{\raggedright}
 
 % Geschäftszeichenzeile
