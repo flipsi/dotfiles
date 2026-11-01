@@ -5,7 +5,7 @@
       "maxAge": "30d",
       "warningAcknowledged": true
     },
-    "vimMode": false
+    "vimMode": true
   },
   "security": {
     "auth": {
