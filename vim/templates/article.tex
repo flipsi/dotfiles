@@ -1,0 +1,53 @@
+% Author: Philipp Moers <soziflip@gmail.com>
+%
+\documentclass
+[
+    a4paper,
+    fontsize=11pt, % Schriftgröße
+    parskip=half,  % Absatzgröße e.g. 'full' or 'half'
+    titlepage=false % Verhindert eigene Titelseite
+]
+{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{csquotes} % Deutsche Anführungszeichen mit \enquote{}
+\usepackage[a4paper]{geometry}
+\usepackage{lmodern} % Latin Modern typeface (font)
+\usepackage[T1]{fontenc} % T1 font encoding for high quality font output
+\usepackage{xcolor}
+\usepackage{scrtime} % KOMA-Script Zeitpaket für \thistime
+
+\renewcommand{\familydefault}{\sfdefault} % Latin Modern's sans serif font family as default
+
+% \enlargethispage{4cm}   % frühzeitigen Seitenumbruch verhindern
+% \geometry{a4paper, left=30mm, right=20mm, top=85mm, bottom=20mm}
+
+% Abstand über dem Titel entfernen (KOMA-Script setzt standardmäßig \null\vskip 2em vor den Titel):
+\makeatletter
+\patchcmd{\@maketitle}{\null\vskip 2em}{\vspace*{-1.5cm}}{}{}
+\makeatother
+
+% Titel linksbündig statt zentriert setzen:
+\addtokomafont{title}{\raggedright}
+\addtokomafont{author}{\raggedright\setlength{\tabcolsep}{0pt}}
+\addtokomafont{date}{\raggedright}
+
+\date{\textcolor{red}{Entwurf vom \today, \thistime~Uhr}}
+
+\author{Philipp Moers}
+\title{Titel}
+
+
+\begin{document}
+
+\maketitle
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+
+
+\end{document}
+
+
+
