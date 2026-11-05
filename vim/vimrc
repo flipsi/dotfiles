@@ -3841,6 +3841,61 @@ endfunction
 command! RunSQLFileInShell :call RunSQLFileInShell()
 
 
+function! ConvertMySQLTableUnderCursorToCSV() abort
+  let l:cur_line = line('.')
+  " Validate that the cursor is positioned on a table row (supports optional comment prefix)
+  if getline(l:cur_line) !~# '^\s*\(--\s*\)\?[+|]'
+    echohl WarningMsg | echo "Cursor is not on a MySQL table row." | echohl None
+    return
+  endif
+  " Identify contiguous table boundaries (start and end lines)
+  let l:first_line = l:cur_line
+  while l:first_line > 1 && getline(l:first_line - 1) =~# '^\s*\(--\s*\)\?[+|]'
+    let l:first_line -= 1
+  endwhile
+  let l:last_line = l:cur_line
+  while l:last_line < line('$') && getline(l:last_line + 1) =~# '^\s*\(--\s*\)\?[+|]'
+    let l:last_line += 1
+  endwhile
+  " Expand selection boundary to absorb trailing MySQL result count footer if present
+  if l:last_line < line('$') && getline(l:last_line + 1) =~# '^\s*\(--\s*\)\?\d\+\s\+row\(s\)\?\s\+in\s\+set'
+    let l:last_line += 1
+  endif
+  let l:lines = getline(l:first_line, l:last_line)
+  let l:csv_lines = []
+  for l:line in l:lines
+    " Discard horizontal border dividers and summary footer lines
+    if l:line =~# '^\s*\(--\s*\)\?+[+-]\+' || l:line =~# '^\s*\(--\s*\)\?\d\+\s\+row\(s\)\?\s\+in\s\+set'
+      continue
+    endif
+    " Extract and format table column data
+    if l:line =~# '^\s*\(--\s*\)\?|.*|\s*$'
+      let l:content = substitute(l:line, '^\s*\(--\s*\)\?|\s*\(.\{-}\)\s*|\s*$', '\2', '')
+      let l:cols = split(l:content, '\s*|\s*', 1)
+      let l:escaped_cols = []
+      for l:col in l:cols
+        let l:val = substitute(l:col, '^\s*\|\s*$', '', 'g')
+        " Ensure CSV integrity by escaping quotes and wrapping cells with commas/quotes
+        if l:val =~# '[,"]'
+          let l:val = '"' . substitute(l:val, '"', '""', 'g') . '"'
+        endif
+        call add(l:escaped_cols, l:val)
+      endfor
+      call add(l:csv_lines, join(l:escaped_cols, ','))
+    endif
+  endfor
+  " Atomically substitute table and footer with clean CSV rows
+  if !empty(l:csv_lines)
+    execute l:first_line . ',' . l:last_line . 'delete _'
+    call append(l:first_line - 1, l:csv_lines)
+    call cursor(l:first_line, 1)
+  endif
+endfunction
+
+nnoremap <silent> 'tc           :call ConvertMySQLTableUnderCursorToCSV()<CR>
+
+
+
 " more advanced syntax highlighting for PostgreSQL dialect and auto-completion
 Plug 'lifepillar/pgsql.vim'
 
