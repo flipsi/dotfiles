@@ -3462,7 +3462,7 @@ endfunction
 
 if has('nvim')
 
-    Plug 'MeanderingProgrammer/render-markdown.nvim'
+    " Plug 'MeanderingProgrammer/render-markdown.nvim'
 
     " commands:
     " :RenderMarkdown enable
@@ -3475,11 +3475,12 @@ endif
 " " depends on 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'
 
-" Remember :Toc command
+" Remember :Toc command (table of contents)
 
 let g:vim_markdown_folding_style_pythonic = 1
 let g:vim_markdown_folding_level = 0 " does not do what I want
 let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
 let g:vim_markdown_strikethrough = 1
 
 
