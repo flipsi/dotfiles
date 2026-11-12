@@ -42,7 +42,7 @@ function set_xdg_default_apps
     if command -v xdg-settings >/dev/null
         if test -z "$BROWSER"
             set_xdg_default_app 'default-web-browser' 'org.mozilla.firefox.desktop'
-            set_xdg_default_app 'default-web-browser' 'brave-browser.desktop'
+            set_xdg_default_app 'default-web-browser' 'com.brave.Browser.desktop'
         end
     end
     if command -v xdg-mime >/dev/null
