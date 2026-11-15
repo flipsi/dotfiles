@@ -485,6 +485,12 @@ function create_link_for_target() {
             mkdir -p "$HOME/bin"
             # create_link "$PWD/sxiv/nsxiv-extra/scripts/nsxiv-rifle/nsxiv-rifle" "$HOME/bin/nsxiv" sadly, the script doesn't use env to invoke nsxiv
             create_link "$PWD/sxiv/nsxiv-extra/scripts/nsxiv-rifle/nsxiv-rifle" "$HOME/bin/nsxiv-rifle"
+            mkdir -p "$HOME/.local/share/applications"
+            create_link "$PWD/sxiv/nsxiv-rifle.desktop" "$HOME/.local/share/applications/nsxiv-rifle.desktop"
+            create_link "$PWD/sxiv/nsxiv-rifle.desktop" "$HOME/.local/share/applications/sxiv.desktop"
+            if command -v update-desktop-database >/dev/null 2>&1; then
+                update-desktop-database "$HOME/.local/share/applications"
+            fi
             install_xresources_inclusion  "$PWD/sxiv/Xresources"
             mkdir -p "$HOME/.config/nsxiv/exec"
             create_link "$PWD/sxiv/key-handler" "$HOME/.config/nsxiv/exec/key-handler"
