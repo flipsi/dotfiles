@@ -16,7 +16,7 @@ function mime_app_available
     set -l MIME_TYPE $argv[1]
     set -l APP $argv[2]
     # Apparently, the xdg-mime command can't be used to do this. How disappointing is that?
-    for FILE in $HOME/.config/mimeapps.list /usr/share/applications/mimeinfo.cache /usr/local/share/applications/mimeapps.list /usr/share/applications/mimeapps.list
+    for FILE in $HOME/.config/mimeapps.list $HOME/.local/share/applications/mimeinfo.cache /usr/share/applications/mimeinfo.cache /usr/local/share/applications/mimeapps.list /usr/share/applications/mimeapps.list
         if test -f "$FILE"
             if grep -q -E "^$MIME_TYPE=.*$APP" "$FILE"
                 return 0
@@ -47,10 +47,11 @@ function set_xdg_default_apps
     end
     if command -v xdg-mime >/dev/null
         set_xdg_default_app_for_mimetime 'application/pdf'           'org.pwmt.zathura.desktop'
-        set_xdg_default_app_for_mimetime 'image/jpeg'                'sxiv.desktop'
-        set_xdg_default_app_for_mimetime 'image/png'                 'sxiv.desktop'
-        set_xdg_default_app_for_mimetime 'x-scheme-handler/http'     'brave-browser.desktop'
-        set_xdg_default_app_for_mimetime 'x-scheme-handler/https'    'brave-browser.desktop'
+        set_xdg_default_app_for_mimetime 'image/jpeg'                'nsxiv-rifle.desktop'
+        set_xdg_default_app_for_mimetime 'image/png'                 'nsxiv-rifle.desktop'
+        set_xdg_default_app_for_mimetime 'x-scheme-handler/http'     'com.brave.Browser.desktop'
+        set_xdg_default_app_for_mimetime 'x-scheme-handler/https'    'com.brave.Browser.desktop'
+        set_xdg_default_app_for_mimetime 'text/html'                 'com.brave.Browser.desktop'
     end
 end
 
