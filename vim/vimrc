@@ -3008,6 +3008,9 @@ function! ConjureLogsToggleWrap()
 endfunction
 
 
+" remember default mappings
+" see :help conjure-mappings
+
 " additional mappings
 " TODO: run this in clj buffers after sourcing vimrc so that it overwrites the default mapping again
 command! SetupConjure :call SetupConjure() " add Conjure mappings
