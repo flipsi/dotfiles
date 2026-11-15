@@ -208,6 +208,15 @@ function source_asdf_version_manager
     end
 end
 
+function active_mise
+    if test -f $HOME/.local/bin/mise
+        $HOME/.local/bin/mise activate fish | source
+    else if test -f /usr/bin/mise
+        /usr/bin/mise activate fish | source
+    end
+end
+
+
 #############################################################
 
 set fish_greeting "" # don't show welcome message
@@ -216,6 +225,7 @@ load_environment
 
 if status --is-interactive
     load_abbreviations
+    active_mise
 end
 
 if status --is-interactive; and status --is-login
