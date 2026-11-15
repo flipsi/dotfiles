@@ -27,6 +27,13 @@
 
 \renewcommand{\familydefault}{\sfdefault} % Latin Modern's sans serif font family as default
 
+% Numerisches Datum
+\makeatletter
+\AtBeginDocument{%
+  \renewcommand{\today}{\two@digits{\day}.\two@digits{\month}.\the\year}%
+}
+\makeatother
+
 % \enlargethispage{4cm}   % frühzeitigen Seitenumbruch verhindern
 % \geometry{a4paper, left=30mm, right=20mm, top=85mm, bottom=20mm}
 
