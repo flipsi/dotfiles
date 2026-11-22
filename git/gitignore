@@ -18,6 +18,7 @@
 .factorypath
 .lsp/
 .metals/
+.nrepl-port
 .session.vim
 .tags
 /project/metals.sbt
