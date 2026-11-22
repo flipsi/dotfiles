@@ -2968,8 +2968,9 @@ endfunction
 Plug 'clojure-vim/vim-jack-in'
 " Start an nREPL server with all of the appropriate middleware inside your Neovim instance
 nnoremap <leader>la   <nop>
+nnoremap <leader>laa  :ConjureCljAutoReplRestart<cr>
 nnoremap <leader>laA  :Clj -M:ci-dev:repl
-nnoremap <leader>laa  :Clj -M:ci-dev:repl<cr>
+nnoremap <leader>lao  :Clj -M:ci-dev:repl<cr>
 nnoremap <leader>lap  :Clj -M:ci-dev:repl:portal<cr>
 nnoremap <leader>lac  :Clj -M:ci-dev:repl:clerk<cr>
 nnoremap <leader>lxp  :ConjureEval (require '[portal.api :as portal]) (portal/open {:theme :portal.colors/zerodark})<cr>
@@ -2977,13 +2978,27 @@ nnoremap <leader>lxd  :ConjureEval (require '[clojure.repl :refer [doc]])<cr>
 nnoremap <leader>lxc  :ConjureEval (require '[clojure.clerk :as :clerk])<cr>
 nnoremap <leader>lcc  :ConjureConnect<cr>
 
+command! -nargs=0 ConjureCljAutoReplRestart lua require("conjure.client.clojure.nrepl"); require("conjure.client.clojure.nrepl.auto-repl")["restart-auto-repl-proc"]()
+
 " Yet another alternative to Fireplace
 " Multi-language Interactive evaluation
 " (uses the REPL started above for evaluation)
 Plug 'Olical/conjure'
-" Quick start for Clojure: https://github.com/Olical/conjure/wiki/Quick-start:-Clojure
 " Use :ConjureSchool to get started
+" Quick start for Clojure: https://github.com/Olical/conjure/wiki/Quick-start:-Clojure
+"
 " See `:vertical help conjure-mappings` for (default) mappings
+" remember default mappings:
+" ee: eval form under cursor
+" er: eval root form under cursor
+" ei: eval interrupt
+" em: eval form under cursor at mark
+" eb: eval buffer
+" eo: eval what I type
+" ls: open log buffer
+" lv: open log buffer
+" lt: open log buffer
+" lq: close log buffer
 
 let g:conjure#filetypes = [
             \ "clojure", "elixir", "fennel", "janet", "hy", "julia", "racket",
@@ -2991,6 +3006,7 @@ let g:conjure#filetypes = [
             \ ]
 
 let g:conjure#mapping#prefix = "<leader>l"
+" let g:conjure#client#clojure#nrepl#mapping#auto_repl_restart = "aa"
 
 let g:conjure#log#hud#ignore_low_priority = v:true
 let g:conjure#log#jump_to_latest#enabled = v:false
